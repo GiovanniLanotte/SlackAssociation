@@ -29,6 +29,7 @@ class TokenAccess:
         return len(self.__tokens)
 
     def get_issues_and_commits(self, index, repo, name_file_issue, name_file_comment):
+        
         return self._g.get_issues_and_commits(index, repo, name_file_issue, name_file_comment)
 
     def get_pull_request(self, repo, index, name_file_pull_request, name_file_comment_pull_request):
