@@ -82,18 +82,6 @@ class Organizations:
         print('ricerca delle issue e pull request')
         self._search_issue_and_pull_request()
 
-    def get_name_file_issue(self):
-        return self._name_file_issue
-
-    def get_name_file_comments_issue(self):
-        return self._name_file_comments_issue
-
-    def get_name_file_pull_request(self):
-        return self._name_file_pull_request
-
-    def get_name_file_comments_pull_request(self):
-        return self._name_file_comments_pull_request
-
     def _search_issue_and_pull_request(self):
         multi_threading: dict = dict()
         num = 0
@@ -416,7 +404,7 @@ class Organizations:
                 remaining = None
 
     def __question_max(self, index):
-        while self.get_remaining(index) < 2000:
+        while self.get_remaining(index) <= 4000:
             self.__sleep(index)
 
     def __sleep(self, index):
