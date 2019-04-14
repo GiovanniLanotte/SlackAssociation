@@ -81,6 +81,7 @@ class Containers:
         file = open('association channel-repository.csv', 'wt')
         try:
             writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
+            writer.writerow(('name channel', 'name repository'))
             for association in self._associations:
                 repository: Repositories = association.get_repository()
                 channel: Channels = association.get_channel()
