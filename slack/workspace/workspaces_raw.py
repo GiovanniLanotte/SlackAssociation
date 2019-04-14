@@ -1,5 +1,4 @@
 import os
-
 from slack.element_slack.channels_files import ChannelsFiles
 from slack.element_slack.users import Users
 from slack.element_slack.messages import Messages
