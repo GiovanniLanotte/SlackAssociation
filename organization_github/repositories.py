@@ -5,8 +5,8 @@ from organization_github.element_github.pull_request import PullRequest
 class Repositories:
 
     def __init__(self, name, url, contributors, fork, number_commits, update_at_least_in_2018, use_pull_request_merged,
-                 has_issue_for_tracking, percentage_programming_files, dir, name_file_issue, name_file_comment_issue,
-                 name_file_pull_request, name_file_comment_pull_request):
+                 has_issue_for_tracking, percentage_programming_files, directory, name_file_issue,
+                 name_file_comment_issue, name_file_pull_request, name_file_comment_pull_request):
         self._name = name
         self._url = url
         self._contributors = contributors
@@ -19,10 +19,10 @@ class Repositories:
         self._have_pull_request_merged = use_pull_request_merged
         self._use_issue_for_tracking = has_issue_for_tracking
         self._percentage_programming_files = percentage_programming_files
-        self._name_file_issue = dir + '/' + self._name + '/' + name_file_issue
-        self._name_file_comment_issue = dir + '/' + self._name + '/' + name_file_comment_issue
-        self._name_file_pull_request = dir + '/' + self._name + '/' + name_file_pull_request
-        self._name_file_comment_pull_request = dir + '/' + self._name + '/' + name_file_comment_pull_request
+        self._name_file_issue = directory + '/' + self._name + '/' + name_file_issue
+        self._name_file_comment_issue = directory + '/' + self._name + '/' + name_file_comment_issue
+        self._name_file_pull_request = directory + '/' + self._name + '/' + name_file_pull_request
+        self._name_file_comment_pull_request = directory + '/' + self._name + '/' + name_file_comment_pull_request
 
     def get_repository_name(self):
         return self._name
