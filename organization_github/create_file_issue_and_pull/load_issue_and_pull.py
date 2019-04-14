@@ -18,9 +18,7 @@ class LoadIssueAndPull:
         self._name_file_comments_pull_request = name_file_comments_pull_request
         token_access.get_issues_and_commits(index, repo, organization, self._name_file_issue,
                                             self._name_file_comments_issue)
-        print('finish loading {} issues'.format(self._repo))
         self._list_pull_request: dict = dict()
         self._list_pull_request = token_access.get_pull_request(index, repo, organization, self._name_file_pull_request,
                                                                 self._name_file_comments_pull_request)
-        print('finish loading {} pull request'.format(self._repo))
         self._token_access.unlock_token(index)
