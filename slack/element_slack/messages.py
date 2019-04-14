@@ -1,19 +1,12 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Sep 19 13:22:38 2018
-
-@author: giovanni
-"""
 
 
 class Messages:
     """definire il costruttore"""
 
-    def __init__(self, index, teamName: str, channelName: str, sender: str, message: str, time: str):
+    def __init__(self, index, team_name: str, channel_name: str, sender: str, message: str, time: str):
         self.id: str = index
-        self.teamName: str = teamName
-        self.channelName: str = channelName
+        self.teamName: str = team_name
+        self.channelName: str = channel_name
         self.sender: str = sender
         self.message: str = message
         self.time: str = time
@@ -58,6 +51,7 @@ class Messages:
                    self.sender == other.sender and self.message == other.message and self.time == other.time
         else:
             return False
+
     def __hash__(self):
         return self.time.__hash__() + self.message.__hash__() + self.get_channel_name().__hash__()
 
@@ -75,12 +69,3 @@ class Messages:
                 if sub_string != "":
                     self.mentions.append(sub_string)
             message_index = message_index + 1
-
-
-def main():
-    mex = Messages("", "kubernetes", "kubernetes-users", "roffe", """and a login app i wrote""", "Oct 25, 2017 05:41")
-    print(mex)
-
-
-if __name__ == "__main__":
-    main()
