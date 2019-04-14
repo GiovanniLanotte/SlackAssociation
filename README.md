@@ -45,4 +45,3 @@ in "path\workspace_Organization" possiamo inserire:
     - Time: orario del messaggio
 2) cartella contenente i file strutturati in formato SlackArchive;
 3) cartella contenente i file strutturati in formato RAW.
-    - 
