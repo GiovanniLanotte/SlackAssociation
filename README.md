@@ -1,6 +1,7 @@
 # SlackAssociation
 # Setup
-Questo progetto utilizza Virtual Environments per eseguire il progetto. Esegui gli step successivi per eseguirlo:
+Questo progetto utilizza Virtual Environments per l'esecuzione. 
+Per configurare l'ambiente eseguire i seguenti step:
 - Creare una cartella che ospitera la macchina virtuale:
 ```
 mkdir slackassociation
@@ -31,17 +32,17 @@ cd SlackAssociation
 # Esecuzione
 - Creare i file dove contiene tutti i Token, dove ogni riga vengono inseriti i vari Token GitHub
 
-- Eseguire il programma
+- Lanciare il programma
 ```
-python3.6 main.py organization "path/workspace_Organization" tokens.csv
+python3.6 main.py organization "path/workspace_Organization" tokens.txt
 ```
 in "path/workspace_Organization" possiamo inserire:
-1) file csv strutturata dalle seguenti colonne:
-    - id: dell'utente
-    - team channel: nome del workspace
-    - Channel: nome del Channel
-    - Sender: Il mittente del messaggio
-    - Message: messaggio dove la menzione è effettuata trami @Sender
-    - Time: orario del messaggio
+1) file csv costituito dalle seguenti colonne:
+    - id: contiene dell'utente
+    - team channel: contiene il nome del workspace
+    - Channel: contiene il nome del Channel
+    - Sender: contiene il mittente del messaggio
+    - Message: contiene il messaggio dove la menzione è effettuata inserendo la @ seguito dal nome del Sender (esepio: @Sender)
+    - Time: contiene l'orario del messaggio
 2) cartella contenente i file strutturati in formato SlackArchive;
 3) cartella contenente i file strutturati in formato RAW.
