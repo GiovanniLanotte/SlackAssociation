@@ -48,7 +48,6 @@ class Organizations:
         self.average_commit = 0
         self.average_contributor = 0
         self.average_file_programming = 0
-        print('controllo delle repository')
         for repo in org.get_repos():
             cfr = ControlFilesRepository(org.name, repo)
             cfr.start()
@@ -72,11 +71,9 @@ class Organizations:
             self.average_contributor = self.average_contributor + len(repository.get_contributors())
             self.__repositories[repo.name] = repository
             self.average_file_programming = self.average_file_programming + percentage
-        print('fine controllo')
         self.average_commit = self.average_commit / len(self.get_repositories())
         self.average_contributor = self.average_contributor / len(self.get_repositories())
         self.average_file_programming = self.average_file_programming / len(self.get_repositories())
-        print('ricerca delle issue e pull request')
         self._search_issue_and_pull_request()
 
     def _search_issue_and_pull_request(self):
@@ -90,7 +87,6 @@ class Organizations:
                 os.makedirs(self._dir)
             for repo in self.get_repositories():
                 repo_name = repo.get_repository_name()
-                print("start thread")
                 create_contributor = ThreadIssueAndPull(self._dir, repo_name, self.__organization, self._token_access,
                                                         num % self._token_access.len_tokens(),
                                                         repo.get_name_file_issue(), repo.get_name_file_comments_issue(),
