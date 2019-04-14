@@ -133,7 +133,6 @@ class Channels(abc.ABC):
                             index_commits = index + len('/commits')
                             sub_text_files = text[index_text:index_files]
                             sub_text_commits = text[index_text:index_commits]
-                            print(sub_text_files)
                             if sub_text_files.find('/files') == -1 and sub_text_commits.find('/commits') == -1:
                                 message_user = MessagesUsers(self._users, text, message, url, name_file_issue,
                                                              name_file_comments_issue, name_file_pull_request,
@@ -147,13 +146,11 @@ class Channels(abc.ABC):
         index_show = 0
         threads = list()
         for thread in thread_list:
-            print('{} on {}'.format(index_show, len(thread_list)))
             index = index + 1
             if index != 10:
                 thread.start()
                 threads.append(thread)
             else:
-                print("now ran")
                 for thread_join in threads:
                     ris = thread_join.join()
                     messages_list.add(ris)
