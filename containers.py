@@ -1,7 +1,7 @@
-from GitHub.organizations import Organizations
+from organization_github.organizations import Organizations
 from pathlib import Path
-from GitHub.element_github.pull_request import PullRequest
-from GitHub.repositories import Repositories
+from organization_github.element_github.pull_request import PullRequest
+from organization_github.repositories import Repositories
 from associations.associations import Associations
 from slack.element_slack.channels import Channels
 from slack.element_slack.messages import Messages
@@ -22,15 +22,16 @@ class Containers:
 
     def add_association(self, name_organization, path, tokens):
         print('creazione classe Organization')
-        organization: Organizations = Organizations(name_organization, tokens)
+        directory = 'issue&pull ' + name_organization
+        organization: Organizations = Organizations(directory, name_organization, tokens)
         print('creazione dei file repository')
         organization.get_scv_repositories()
-        organization.get_average_percentage_file_programming()
-        organization.get_average_percentage_file_programming_and_repositories_merged()
-        organization.get_average_percentage_file_programming_and_repositories_merged_and_use_tracking_issue()
-        organization.get_average_percentage_file_programming_and_repositories_merged_and_use_tracking_issue_and_more_average_contributors()
-        organization.get_average_percentage_file_programming_and_repositories_merged_and_use_tracking_issue_and_more_average_contributors_and_more_average_commits()
-        organization.get_average_percentage_file_programming_and_repositories_merged_and_use_tracking_issue_and_more_average_contributors_and_more_average_commits_and_last_update_in_2018()
+        organization.get_first_filter()
+        organization.get_second_filter()
+        organization.get_third_filter()
+        organization.get_fourth_filter()
+        organization.get_fifth_filter()
+        organization.get_sixth_filter()
         print('conclusa la creazione dei file repository')
         p = Path(path)
         workspace = None
@@ -40,15 +41,16 @@ class Containers:
             try:
                 workspace = WorkspacesSlackArchive(path, name_organization)
             except FileNotFoundError:
-                print("sono qui.........")
                 workspace = WorkspacesRaw(path, name_organization)
         if workspace is not None:
+            workspace.get_csv_channel_organization()
             for name_channel in workspace.get_names_channel():
                 if organization.contain_association(name_channel):
                     repositories = organization.get_association(name_channel)
                     workspace.get_channel(name_channel)
                     for repository in repositories:
-                        association: Associations = Associations(repository, workspace.get_channel(name_channel),
+                        association: Associations = Associations(directory, repository,
+                                                                 workspace.get_channel(name_channel),
                                                                  name_organization, organization.get_name_file_issue(),
                                                                  organization.get_name_file_comments_issue(),
                                                                  organization.get_name_file_pull_request(),
@@ -57,13 +59,12 @@ class Containers:
 
     def messages_for_channel(self):
         for association in self._associations:
-            association: Associations
             channel: Channels = association.get_channel()
             file = open(
                 "messages for channel " + channel.get_name_channel() + " of " + association.get_name_organization() + ".csv",
                 "wt")
             try:
-                writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC, delimiter='|')
+                writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
                 writer.writerow(("Workspace", "Channel", "Id", "Sender", "text", "time", "mention"))
                 name_workspace = association.get_name_organization()
                 senders = channel.get_users()
@@ -83,7 +84,6 @@ class Containers:
 
     def print_organization(self):
         for association in self._associations:
-            association: Associations
             repository: Repositories = association.get_repository()
             channel: Channels = association.get_channel()
             print('channel: {} repository: {}'.format(channel.get_name_channel(), repository.get_repository_name()))
@@ -101,9 +101,8 @@ class Containers:
         for thread in list_thread:
             thread.join()
 
-    def _create_file_pull(self, channel, repository):
-        channel: Channels
-        repository: Repositories
+    @staticmethod
+    def _create_file_pull(channel, repository):
         file = open(
             'pull request url in message in ' + channel.get_name_channel() + ' ' +
             repository.get_repository_name() + '.csv', 'w')
@@ -151,26 +150,23 @@ class Containers:
 
     def messages_slack_url_github(self):
         for association in self._associations:
-            association: Associations
             channel: Channels = association.get_channel()
             repository: Repositories = association.get_repository()
-            if repository.get_repository_name() == 'kubernetes' and channel.get_name_channel() == 'kubernetes-users':
-                channel: Channels = association.get_channel()
-                path = 'message url ' + association.get_name_organization()
-                if os.path.isdir(path) is not True:
-                    os.makedirs(path)
-                print('channel: {} repository: {}'.format(channel.get_name_channel(), repository.get_repository_name()))
-                url_message_slack = UrlMessagesSlack(association)
-                url_message_slack.generic_url_github()
-                url_message_slack.issue_open_in_this_repository()
-                url_message_slack.issue_open_not_in_this_repository()
-                url_message_slack.issue_closed_in_this_repository()
-                url_message_slack.issue_closed_not_in_this_repository()
-                url_message_slack.pull_open_in_this_repository()
-                url_message_slack.pull_open_not_in_this_repository()
-                url_message_slack.pull_closed_in_this_repository()
-                url_message_slack.pull_closed_not_in_this_repository()
-                url_message_slack.dif_message_date()
+            path = 'message url ' + association.get_name_organization()
+            if os.path.isdir(path) is not True:
+                os.makedirs(path)
+            print('channel: {} repository: {}'.format(channel.get_name_channel(), repository.get_repository_name()))
+            url_message_slack = UrlMessagesSlack(association)
+            url_message_slack.generic_url_github()
+            url_message_slack.issue_open_in_this_repository()
+            url_message_slack.issue_open_not_in_this_repository()
+            url_message_slack.issue_closed_in_this_repository()
+            url_message_slack.issue_closed_not_in_this_repository()
+            url_message_slack.pull_open_in_this_repository()
+            url_message_slack.pull_open_not_in_this_repository()
+            url_message_slack.pull_closed_in_this_repository()
+            url_message_slack.pull_closed_not_in_this_repository()
+            url_message_slack.dif_message_date()
 
     def correspondence_channel_to_archive(self):
         name_file = 'correspondence channel to archive in the workspace.csv'
