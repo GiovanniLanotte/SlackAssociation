@@ -1,8 +1,8 @@
 
 class Associations:
 
-    def __init__(self, repository, channel, name_organization, name_file_issue, name_file_comments_issue, name_file_pull_request,
-                 name_file_comments_pull_request):
+    def __init__(self, repository, channel, name_organization, name_file_issue, name_file_comments_issue,
+                 name_file_pull_request, name_file_comments_pull_request):
         self._repository = repository
         self._channel = channel
         self._name_organization = name_organization
