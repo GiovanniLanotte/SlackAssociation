@@ -1,7 +1,6 @@
 from slack.element_slack.messages import Messages
 
 
-
 class Users:
     def __init__(self, name, id_user):
         self._sender = name
@@ -21,11 +20,9 @@ class Users:
     def show_messages(self):
         return self._messages
 
-    ##questo metodo conta su tutti i messaggi dell'utente le menzioni di un determinato utente dato in input.
     def mention_user(self, name_login):
         if name_login in self._mention_messages:
             cont = 0
-            message: Messages
             for message in self._messages:
                 for mention in message.get_mentions():
                     if mention == name_login:
