@@ -1,7 +1,7 @@
 import sys
 import csv
 import os
-from organization_github.element_github.issue_comments import IssueComments
+from organization_github.element_github.issues_comments import IssuesComments
 
 
 class Issues:
@@ -52,7 +52,7 @@ class Issues:
     def get_updated_at(self):
         return self.__updated_at
 
-    def add_comment(self, comment: IssueComments):
+    def add_comment(self, comment: IssuesComments):
         self.__list_comments.append(comment)
 
     def len_comments(self):
@@ -95,7 +95,7 @@ class Issues:
                     issue = Issues(row_issue[0], row_issue[1], row_issue[2], row_issue[3], row_issue[4],
                                    row_issue[5], row_issue[6], row_issue[7], row_issue[8], row_issue[9])
                     if issue.get_name_repository() == repo_name:
-                        issue = IssueComments.read_comment_of_issue(name_file_comments_issue, issue)
+                        issue = IssuesComments.read_comment_of_issue(name_file_comments_issue, issue)
                         list_issue.append(issue)
                     else:
                         return list_issue
@@ -126,6 +126,6 @@ class Issues:
             file.close()
         index = 0
         while index < self.len_comments():
-            comment: IssueComments = self.get_comment_index(index)
+            comment: IssuesComments = self.get_comment_index(index)
             comment.write_comment_issue(self.__url, name_file_comment)
             index = index + 1
