@@ -31,7 +31,7 @@ class Workspaces:
             writer.writerow(
                 ('name', "# users"))
             for key in self._channels:
-                channel:Channels = self._channels.get(key)
+                channel: Channels = self._channels.get(key)
                 writer.writerow((channel.get_name_channel(), len(channel.get_users())))
         finally:
             file.close()
