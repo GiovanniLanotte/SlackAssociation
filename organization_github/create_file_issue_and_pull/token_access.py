@@ -218,7 +218,6 @@ class TokenAccess:
                 num_tot = None
         name_file_log = 'log/pull ' + repo.name + ' ' + name_organization + '.log'
         num, state = Log.search_file_log(name_file_log)
-        print("index start workspace {}  :{}".format(repo_name, num))
         try:
             while True:
                 request_exception = False
