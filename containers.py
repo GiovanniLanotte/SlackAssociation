@@ -46,7 +46,7 @@ class Containers:
                     repositories = organization.get_association(name_channel)
                     workspace.get_channel(name_channel)
                     for repository in repositories:
-                        association: Associations = Associations(repository,
+                        association: Associations = Associations(directory, repository,
                                                                  workspace.get_channel(name_channel),
                                                                  name_organization, organization.get_name_file_issue(),
                                                                  organization.get_name_file_comments_issue(),
