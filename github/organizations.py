@@ -3,14 +3,11 @@ import csv
 from github import Github, Commit, GitCommit, GitAuthor
 from github import Organization
 from github import Repository
-
 from GitHub.create_file_issue_and_pull.thread_issue_and_pull import ThreadIssueAndPull
 from GitHub.create_file_issue_and_pull.token_access import TokenAccess
-from GitHub.element_github.issues import Issues
 from github import RateLimit
 from github import Rate
 from github import PullRequest
-from github import PullRequestComment
 from github import GithubException
 from github import PaginatedList
 from requests import exceptions
@@ -19,17 +16,16 @@ import datetime
 import time
 from math import ceil
 from GitHub.control_files_repository import ControlFilesRepository
-from GitHub.element_github.issue_comments import IssueComments
 from GitHub.element_github.pull_request import PullRequest
-from GitHub.element_github.pull_request_comments import PullRequestComments
 import os
-
+from log import Log
 from GitHub.repositories import Repositories
 
 
 class Organizations:
 
-    def __init__(self, organization, tokens):
+    def __init__(self,dir, organization, tokens):
+        self._dir =dir
         self.__organization = organization
         self._rate_limit: list = list()
         self.__github: list = list()
@@ -69,7 +65,7 @@ class Organizations:
                                                     self.has_committed_in_excess_of_the_year_2017(repo.name),
                                                     self.has_pull_request_merged(repo.name),
                                                     self.has_issue_for_tracking(repo.name),
-                                                    percentage, self._name_file_issue, self._name_file_comments_issue,
+                                                    percentage, self._dir, self._name_file_issue, self._name_file_comments_issue,
                                                     self._name_file_pull_request, self._name_file_comments_pull_request)
             self.average_commit = self.average_commit + repository.get_number_of_commits()
             self.average_contributor = self.average_contributor + len(repository.get_contributors())
@@ -89,14 +85,16 @@ class Organizations:
         self._token_access = TokenAccess(self)
         file_finish = 'log/finish ' + self.__organization + '.log'
         if not (os.path.exists(file_finish)):
+            if not os.path.isdir(self._dir):
+                os.makedirs(self._dir)
             for repo in self.get_repositories():
                 repo_name = repo.get_repository_name()
                 print("start thread")
-                create_contributor = ThreadIssueAndPull(repo_name, self._token_access,
+                create_contributor = ThreadIssueAndPull(self._dir, repo_name,self.__organization, self._token_access,
                                                         num % self._token_access.len_tokens(),
-                                                        self._name_file_issue, self._name_file_comments_issue,
-                                                        self._name_file_pull_request,
-                                                        self._name_file_comments_pull_request)
+                                                        repo.get_name_file_issue(), repo.get_name_file_comments_issue(),
+                                                        repo.get_name_file_pull_request(),
+                                                        repo.get_name_file_comments_pull_request())
                 create_contributor.setName(repo_name)
                 create_contributor.start()
                 multi_threading[repo_name] = create_contributor
@@ -106,6 +104,18 @@ class Organizations:
                 multi_threading[key].join()
             file = open(file_finish, 'w')
             file.close()
+
+    def get_name_file_issue(self):
+        return self._name_file_issue
+
+    def get_name_file_comments_issue(self):
+        return self._name_file_comments_issue
+
+    def get_name_file_pull_request(self):
+        return self._name_file_pull_request
+
+    def get_name_file_comments_pull_request(self):
+        return self._name_file_comments_pull_request
 
     def get_scv_repositories(self):
         name_file = 'repositories ' + self.__organization + '.csv'
@@ -275,7 +285,8 @@ class Organizations:
                             self.average_file_programming and \
                             repository.has_pull_request_merged() and repository.use_issue_for_tracking() and \
                             repository.len_contributors() > self.average_contributor and \
-                            repository.get_number_of_commits() > self.average_commit:
+                            repository.get_number_of_commits() > self.average_commit and \
+                            repository.last_update_at_least_in_2018():
                         writer.writerow((
                             repository.get_repository_name(), repository.get_url_html(),
                             repository.get_percentage_programming_files(),
@@ -310,7 +321,7 @@ class Organizations:
             except exceptions.RequestException:
                 num_tot = None
         name_file_log = 'log/pull request is merged ' + repo.name + ' ' + self.__organization + '.log'
-        num, value = self.search_file_log(name_file_log)
+        num, value = Log.search_file_log(name_file_log)
         if value:
             return True
         else:
@@ -329,7 +340,7 @@ class Organizations:
                     finally:
                         if request_exception is False:
                             num = num + 1
-                        self.control_write_log(name_file_log, num, False)
+                        Log.control_write_log(name_file_log, num, False)
             except IndexError:
                 return False
 
@@ -380,7 +391,7 @@ class Organizations:
         return contributors_login_list
 
     def get_tokens(self):
-        return self.__tokens
+        return self.__github
 
     def is_remaining_zero(self, index) -> bool:
         g: Github = self.__github[index]
@@ -469,7 +480,7 @@ class Organizations:
                 pass
             except exceptions.RequestException:
                 pass
-    #da sistemare
+
     def has_committed_in_excess_of_the_year_2017(self, repo_name):
         index: int = random.randint(0, len(self.__github) - 1)
         remaining = self.get_remaining(index)
@@ -535,179 +546,6 @@ class Organizations:
                 num_tot = None
         return num_tot
 
-    def get_pull_request(self, repo_name, index, name_file_pull_request, name_file_comment_pull_request):
-        remaining = self.get_remaining(index)
-        g: Github = self.__github[index]
-        org, remaining = self.get_organization(g, self.__organization, index, remaining)
-        repo, remaining = self._get_repository(repo_name, org, index, remaining)
-        self._get_pull_request(repo, repo_name, index, remaining, name_file_pull_request,
-                               name_file_comment_pull_request)
-
-    def _get_pull_request(self, repo, repo_name, index, remaining, name_file_pull_request,
-                          name_file_comment_pull_request):
-        num_tot = None
-        pulls = None
-        while num_tot is None:
-            try:
-                remaining = self.__question_min(index, remaining, 1)
-                pulls: PaginatedList.PaginatedList = repo.get_pulls(state='all')
-                remaining = self.__question_min(index, remaining, 1)
-                num_tot = pulls.totalCount
-            except GithubException:
-                num_tot = None
-            except exceptions.RequestException:
-                num_tot = None
-        name_file_log = 'log/pull ' + repo.name + ' ' + self.__organization + '.log'
-        num, state = self.search_file_log(name_file_log)
-        print("index start workspace {}  :{}".format(repo_name, num))
-        try:
-            while True:
-                request_exception = False
-                pull_request_user = None
-                try:
-                    remaining = self.__question_min(index, remaining, 1)
-                    pull_request: PullRequest.PullRequest = pulls[num]
-                    assignees: list = list()
-                    for assignee in pull_request.assignees:
-                        assignees.append(assignee.login)
-                    labels: list = list()
-                    for label in pull_request.labels:
-                        labels.append(label.name)
-                    if assignees is None:
-                        remaining = self.__question_min(index, remaining, 1)
-                        if pull_request.is_merged():
-                            remaining = self.__question_min(index, remaining, 1)
-                            if pull_request.merged_by is not None:
-                                remaining = self.__question_min(index, remaining, 4)
-                                pull_request_user = PullRequest(repo_name, pull_request.url,
-                                                                pull_request.html_url,
-                                                                pull_request.user.login, pull_request.title,
-                                                                pull_request.body, list(pull_request.assignee.login),
-                                                                pull_request.commits,
-                                                                pull_request.created_at, pull_request.updated_at,
-                                                                pull_request.closed_at,
-                                                                pull_request.is_merged(), pull_request.merged_at,
-                                                                pull_request.merged_by.login,
-                                                                pull_request.mergeable_state,
-                                                                pull_request.mergeable, pull_request.state)
-                            else:
-                                remaining = self.__question_min(index, remaining, 4)
-                                pull_request_user = PullRequest(repo_name, pull_request.url,
-                                                                pull_request.html_url,
-                                                                pull_request.user.login, pull_request.title,
-                                                                pull_request.body, list(pull_request.assignee.login),
-                                                                pull_request.commits,
-                                                                pull_request.created_at, pull_request.updated_at,
-                                                                pull_request.closed_at,
-                                                                '', pull_request.merged_at,
-                                                                pull_request.merged_by.login,
-                                                                pull_request.mergeable_state,
-                                                                pull_request.mergeable, pull_request.state)
-                        else:
-                            remaining = self.__question_min(index, remaining, 3)
-                            pull_request_user = PullRequest(repo_name, pull_request.url,
-                                                            pull_request.html_url,
-                                                            pull_request.user.login, pull_request.title,
-                                                            pull_request.body, list(pull_request.assignee.login),
-                                                            pull_request.commits,
-                                                            pull_request.created_at, pull_request.updated_at,
-                                                            pull_request.closed_at,
-                                                            pull_request.is_merged(), '',
-                                                            '', pull_request.mergeable_state,
-                                                            pull_request.mergeable, pull_request.state)
-                    else:
-                        remaining = self.__question_min(index, remaining, 1)
-                        if pull_request.is_merged():
-                            remaining = self.__question_min(index, remaining, 1)
-                            if pull_request.merged_by is not None:
-                                remaining = self.__question_min(index, remaining, 3)
-                                pull_request_user = PullRequest(repo_name, pull_request.url,
-                                                                pull_request.html_url, pull_request.user.login,
-                                                                pull_request.title,
-                                                                pull_request.body, assignees, pull_request.commits,
-                                                                pull_request.created_at, pull_request.updated_at,
-                                                                pull_request.closed_at,
-                                                                pull_request.is_merged(), pull_request.merged_at,
-                                                                pull_request.merged_by.login,
-                                                                pull_request.mergeable_state,
-                                                                pull_request.mergeable, pull_request.state)
-                            else:
-                                pull_request_user = PullRequest(repo_name, pull_request.url,
-                                                                pull_request.html_url, pull_request.user.login,
-                                                                pull_request.title,
-                                                                pull_request.body, assignees, pull_request.commits,
-                                                                pull_request.created_at, pull_request.updated_at,
-                                                                pull_request.closed_at,
-                                                                pull_request.is_merged(), pull_request.merged_at,
-                                                                '',
-                                                                pull_request.mergeable_state,
-                                                                pull_request.mergeable, pull_request.state)
-                        else:
-                            remaining = self.__question_min(index, remaining, 2)
-                            pull_request_user = PullRequest(repo_name, pull_request.url,
-                                                            pull_request.html_url, pull_request.user.login,
-                                                            pull_request.title,
-                                                            pull_request.body, assignees, pull_request.commits,
-                                                            pull_request.created_at, pull_request.updated_at,
-                                                            pull_request.closed_at,
-                                                            pull_request.is_merged(), '',
-                                                            '', pull_request.mergeable_state,
-                                                            pull_request.mergeable, pull_request.state)
-                    pull_request_user, remaining = self._comments_pull(pull_request, pull_request_user, index,
-                                                                       remaining)
-                except GithubException:
-                    request_exception = True
-                except exceptions.RequestException:
-                    request_exception = True
-                finally:
-                    if pull_request_user is not None and request_exception is False:
-                        num = num + 1
-                        pull_request_user.write_pull_request(name_file_pull_request, name_file_comment_pull_request)
-                    self.control_write_log(name_file_log, num)
-        except IndexError:
-            return remaining
-
-    def _comments_pull(self, pull_request, pull_request_users, index, remaining):
-        n_comments = None
-        comments: PaginatedList.PaginatedList = None
-        while n_comments is None:
-            try:
-                remaining = self.__question_min(index, remaining, 1)
-                comments: PaginatedList.PaginatedList = pull_request.get_comments()
-                remaining = self.__question_min(index, remaining, 1)
-                n_comments = comments.totalCount
-            except GithubException:
-                n_comments = None
-        index_comment = 0
-        while True:
-            except_github = False
-            try:
-                remaining = self.__question_min(index, remaining, 1)
-                comment: PullRequestComment = comments[index_comment]
-                remaining = self.__question_min(index, remaining, 1)
-                if comment.user is not None:
-                    comment_pull_request = PullRequestComments(comment.body, comment.commit_id,
-                                                               comment.created_at, comment.id,
-                                                               comment.diff_hunk, comment.position,
-                                                               comment.updated_at, comment.url,
-                                                               comment.html_url, comment.user.login)
-                    pull_request_users.add_comment(comment_pull_request)
-            except GithubException:
-                except_github = True
-            except IndexError:
-                return pull_request_users, remaining
-            finally:
-                if except_github is False:
-                    index_comment = index_comment + 1
-
-    def get_issues_and_commits(self, index, repo, name_file_issue, name_file_comment):
-        g: Github = self.__github[index]
-        remaining = self.get_remaining(index)
-        org, remaining = self.get_organization(g, self.__organization, index, remaining)
-        repository, remaining = self._get_repository(repo, org, index, remaining)
-        self.__list_issue_and_comments(repository, index, remaining, name_file_issue,
-                                       name_file_comment)
-
     def get_organization(self, g, organization, index, remaining):
         org = None
         while org is None:
@@ -727,148 +565,6 @@ class Organizations:
             except GithubException:
                 repo = None
         return repo, remaining
-
-    def __list_issue_and_comments(self, repo: Repository.Repository, index, remaining, name_file, name_file_comment):
-        num_tot = None
-        issues = None
-        while num_tot is None:
-            try:
-                remaining = self.__question_min(index, remaining, 1)
-                issues = repo.get_issues(state='all')
-                num_tot = issues.totalCount
-            except GithubException:
-                num_tot = None
-            except exceptions.RequestException:
-                num_tot = None
-        remaining = self.__question_min(index, remaining, 1)
-        name_file_log = 'log/issue ' + repo.name + ' ' + self.__organization + '.log'
-        num, state = self.search_file_log(name_file_log)
-        try:
-            while True:
-                request_exception = False
-                issue_user = None
-
-                try:
-                    remaining = self.__question_min(index, remaining, 1)
-                    issue = issues[num]
-                    remaining = self.__question_min(index, remaining, 1)
-                    if issue.pull_request is not None:
-                        remaining = self.__question_min(index, remaining, 2)
-                        if type(issue.created_at) is not None:
-                            issue_user: Issues = Issues(repo.name, issue.user.login, issue.html_url, issue.url,
-                                                        issue.title,
-                                                        issue.body, issue.state, issue.as_pull_request(),
-                                                        issue.created_at,
-                                                        issue.updated_at)
-                        else:
-                            issue_user: Issues = Issues(repo.name, issue.user.login, issue.html_url, issue.url,
-                                                        issue.title,
-                                                        issue.body, issue.state, issue.as_pull_request(), None,
-                                                        None)
-                    else:
-                        remaining = self.__question_min(index, remaining, 2)
-                        if type(issue.created_at) is not None:
-                            issue_user: Issues = Issues(repo.name, issue.user.login, issue.html_url, issue.url,
-                                                        issue.title,
-                                                        issue.body, issue.state, None, issue.created_at,
-                                                        issue.updated_at)
-                        else:
-                            issue_user: Issues = Issues(repo.name, issue.user.login, issue.html_url, issue.url,
-                                                        issue.title,
-                                                        issue.body, issue.state, None, None,
-                                                        None)
-                    remaining = self.__question_min(index, remaining, 1)
-                    comments = issue.get_comments()
-                    if comments is not None:
-                        for comment in comments:
-                            remaining = self.__question_min(index, remaining, 1)
-                            comment_user: IssueComments = IssueComments(comment.url, comment.html_url,
-                                                                        comment.user.login, comment.body,
-                                                                        comment.created_at, comment.updated_at)
-                            issue_user.add_comment(comment_user)
-                except GithubException:
-                    request_exception = True
-                except exceptions.RequestException:
-                    request_exception = True
-                finally:
-                    if issue_user is not None and request_exception is False:
-                        issue_user.write_issue(name_file, name_file_comment)
-                        num = num + 1
-                    self.control_write_log(name_file_log, num)
-        except IndexError:
-            return remaining
-
-    def comments_issue(self, issue, issue_user, index, remaining):
-        n_comments = None
-        comments: PaginatedList.PaginatedList = None
-        while n_comments is None:
-            try:
-                remaining = self.__question_min(index, remaining, 1)
-                comments: PaginatedList.PaginatedList = issue.get_comments()
-                remaining = self.__question_min(index, remaining, 1)
-                n_comments = comments.totalCount
-            except GithubException:
-                n_comments = None
-        index_comment = 0
-        while True:
-            except_github = False
-            try:
-                comment = comments[index_comment]
-                remaining = self.__question_min(index, remaining, 1)
-                comment_user: IssueComments = IssueComments(comment.url, comment.html_url,
-                                                            comment.user.login, comment.body,
-                                                            comment.created_at, comment.updated_at)
-                issue_user.add_comment(comment_user)
-            except GithubException:
-                except_github = True
-            except IndexError:
-                return issue_user, remaining
-            finally:
-                if except_github is False:
-                    index_comment = index_comment + 1
-
-    @staticmethod
-    def read_log(name_file):
-        file = open(name_file, 'r')
-        try:
-            index = int(file.readline())
-            line = file.readline()
-            if line != "":
-                value = bool(line)
-            else:
-                value = None
-        finally:
-            file.close()
-
-        return index, value
-
-    def control_write_log(self, name_file, index, value=None):
-        if os.path.exists(name_file):
-            index_prev = self.read_log(name_file)
-            if index != index_prev:
-                self.write_log(name_file, index, value)
-        else:
-            self.write_log(name_file, index, value)
-
-    @staticmethod
-    def write_log(name_file, index, value=None):
-        os.makedirs(os.path.dirname(name_file), exist_ok=True)
-        file = open(name_file, 'w')
-        try:
-            if value is None:
-                file.write(str(index) + '\n')
-            else:
-                file.write(str(index) + '\n' + str(value))
-        finally:
-            file.close()
-
-    def search_file_log(self, name_file):
-        if os.path.exists(name_file):
-            num, value = self.read_log(name_file)
-        else:
-            num = 0
-            value = False
-        return num, value
 
     def __repr__(self):
         out = ""

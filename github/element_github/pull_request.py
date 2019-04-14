@@ -160,8 +160,8 @@ class PullRequest:
                                                row_pull_request[12], row_pull_request[13], row_pull_request[14],
                                                row_pull_request[15], row_pull_request[16])
                     if pull_request.get_name_repository() == repo_name:
-                        #pull_request = PullRequestComments.read_comment_pull_request(name_file_comments_pull_request,
-                        #                                                             pull_request)
+                        pull_request = PullRequestComments.read_comment_pull_request(name_file_comments_pull_request,
+                                                                                     pull_request)
                         list_pull.append(pull_request)
         finally:
             file_pull_request.close()
@@ -179,8 +179,8 @@ class PullRequest:
             try:
                 write_csv: csv.DictWriter = csv.writer(file)
                 write_csv.writerow(('name repository', 'url', 'url html', 'created by', 'title', 'body', 'assignees',
-                                    '# commit', 'created at', 'updated at', 'closed at','is merged', 'merged at', 'merged by',
-                                    'mergeable state', 'mergeable', 'state'))
+                                    '# commit', 'created at', 'updated at', 'closed at', 'is merged', 'merged at',
+                                    'merged by', 'mergeable state', 'mergeable', 'state'))
             finally:
                 file.close()
         file = open(name_pull_request, 'a')

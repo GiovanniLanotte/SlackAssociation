@@ -82,26 +82,6 @@ class Issues:
         return None
 
     @classmethod
-    def load_issues(cls, name_file_issue, name_file_comments_issue, url):
-        file = open(name_file_issue, "rt")
-        try:
-            csv.field_size_limit(sys.maxsize)
-            reader_issue: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
-            index_issue = 0
-            for row_issue in reader_issue:
-                if index_issue == 0:
-                    index_issue = 1
-                else:
-                    issue = Issues(row_issue[0], row_issue[1], row_issue[2], row_issue[3], row_issue[4],
-                                   row_issue[5], row_issue[6], row_issue[7], row_issue[8], row_issue[9])
-                    if issue.get_html_url() == url:
-                        issue = IssueComments.read_comment(name_file_comments_issue, issue)
-                        return issue
-        finally:
-            file.close()
-        return None
-
-    @classmethod
     def load_issue_of_repository(cls, repo_name,name_file_issue, name_file_comments_issue):
         list_issue: list = list()
         file = open(name_file_issue, "rt")
@@ -116,8 +96,10 @@ class Issues:
                     issue = Issues(row_issue[0], row_issue[1], row_issue[2], row_issue[3], row_issue[4],
                                    row_issue[5], row_issue[6], row_issue[7], row_issue[8], row_issue[9])
                     if issue.get_name_repository() == repo_name:
-                        #issue = IssueComments.read_comment(name_file_comments_issue, issue)
+                        issue = IssueComments.read_comment_of_issue(name_file_comments_issue, issue)
                         list_issue.append(issue)
+                    else:
+                        return list_issue
         finally:
             file.close()
         return list_issue

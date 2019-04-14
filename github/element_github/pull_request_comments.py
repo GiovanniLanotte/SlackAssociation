@@ -48,15 +48,48 @@ class PullRequestComments:
 
     @classmethod
     def read_comment_pull_request(cls, name_file_comments_pull_request, pull_request):
-        file = open(name_file_comments_pull_request, 'rt')
-        try:
-            reader_comments_pull_request: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
-            index_comments_pull_request = 0
-            for row_comments_pull_request in reader_comments_pull_request:
-                if index_comments_pull_request == 0:
-                    index_comments_pull_request = 1
-                else:
-                    if row_comments_pull_request[0] == pull_request.get_html_url():
+        if os.path.isfile(name_file_comments_pull_request):
+            file = open(name_file_comments_pull_request, 'rt')
+            eq = False
+            try:
+                reader_comments_pull_request: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
+                index_comments_pull_request = 0
+                for row_comments_pull_request in reader_comments_pull_request:
+                    if index_comments_pull_request == 0:
+                        index_comments_pull_request = 1
+                    else:
+                        if row_comments_pull_request[0] == pull_request.get_html_url():
+                            pull_request_comment = PullRequestComments(row_comments_pull_request[2],
+                                                                       row_comments_pull_request[3],
+                                                                       row_comments_pull_request[4],
+                                                                       row_comments_pull_request[5],
+                                                                       row_comments_pull_request[6],
+                                                                       row_comments_pull_request[7],
+                                                                       row_comments_pull_request[8],
+                                                                       row_comments_pull_request[9],
+                                                                       row_comments_pull_request[10],
+                                                                       row_comments_pull_request[11])
+                            pull_request.add_comment(pull_request_comment)
+                            eq = True
+                        elif eq:
+                            return pull_request
+            finally:
+                file.close()
+            return pull_request
+        else:
+            return pull_request
+
+    @classmethod
+    def read_comment_of_url(cls, name_file_comments_pull_request, url):
+        if os.path.isfile(name_file_comments_pull_request):
+            file = open(name_file_comments_pull_request, 'rt')
+            try:
+                reader_comments_pull_request: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
+                index_comments_pull_request = 0
+                for row_comments_pull_request in reader_comments_pull_request:
+                    if index_comments_pull_request == 0:
+                        index_comments_pull_request = 1
+                    else:
                         pull_request_comment = PullRequestComments(row_comments_pull_request[2],
                                                                    row_comments_pull_request[3],
                                                                    row_comments_pull_request[4],
@@ -67,36 +100,13 @@ class PullRequestComments:
                                                                    row_comments_pull_request[9],
                                                                    row_comments_pull_request[10],
                                                                    row_comments_pull_request[11])
-                        pull_request.add_comment(pull_request_comment)
-        finally:
-            file.close()
-        return pull_request
-
-    @classmethod
-    def read_comment_of_url(cls, name_file_comments_pull_request, url):
-        file = open(name_file_comments_pull_request, 'rt')
-        try:
-            reader_comments_pull_request: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
-            index_comments_pull_request = 0
-            for row_comments_pull_request in reader_comments_pull_request:
-                if index_comments_pull_request == 0:
-                    index_comments_pull_request = 1
-                else:
-                    pull_request_comment = PullRequestComments(row_comments_pull_request[2],
-                                                               row_comments_pull_request[3],
-                                                               row_comments_pull_request[4],
-                                                               row_comments_pull_request[5],
-                                                               row_comments_pull_request[6],
-                                                               row_comments_pull_request[7],
-                                                               row_comments_pull_request[8],
-                                                               row_comments_pull_request[9],
-                                                               row_comments_pull_request[10],
-                                                               row_comments_pull_request[11])
-                    if pull_request_comment.get_html_url() == url:
-                        return pull_request_comment
-        finally:
-            file.close()
-        return None
+                        if pull_request_comment.get_html_url() == url:
+                            return pull_request_comment
+            finally:
+                file.close()
+            return None
+        else:
+            return None
 
     def write_comment_pull_request(self, pull_request, name_file):
         if not (os.path.exists(name_file)):

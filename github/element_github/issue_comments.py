@@ -32,35 +32,45 @@ class IssueComments:
         return self.__updated_at
 
     @classmethod
-    def read_comment(cls, name_file_comments_issue, issue):
-        file = open(name_file_comments_issue, 'rt')
-        try:
-            csv.field_size_limit(sys.maxsize)
-            reader_comments: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
-            for row_comment in reader_comments:
+    def read_comment_of_issue(cls, name_file_comments_issue, issue):
+        if os.path.isfile(name_file_comments_issue):
+            file = open(name_file_comments_issue, 'rt')
+            eq = False
+            try:
+                csv.field_size_limit(sys.maxsize)
+                reader_comments: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
+                for row_comment in reader_comments:
 
-                if issue.get_url() == row_comment[0]:
-                    comment_issue = IssueComments(row_comment[1], row_comment[2], row_comment[3], row_comment[4],
-                                                  row_comment[5], row_comment[6])
-                    issue.add_comment(comment_issue)
-        finally:
-            file.close()
-        return issue
+                    if issue.get_url() == row_comment[0]:
+                        comment_issue = IssueComments(row_comment[1], row_comment[2], row_comment[3], row_comment[4],
+                                                      row_comment[5], row_comment[6])
+                        issue.add_comment(comment_issue)
+                        eq = True
+                    elif eq:
+                        return issue
+            finally:
+                file.close()
+            return issue
+        else:
+            return issue
 
     @classmethod
     def read_comment_of_url(cls, name_file_comments_issue, url):
-        file = open(name_file_comments_issue, 'rt')
-        try:
-            csv.field_size_limit(sys.maxsize)
-            reader_comments: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
-            for row_comment in reader_comments:
-                comment_issue = IssueComments(row_comment[1], row_comment[2], row_comment[3], row_comment[4],
-                                              row_comment[5], row_comment[6])
-                if url == comment_issue.get_html_url():
-                    return comment_issue
-        finally:
-            file.close()
-        return None
+        if os.path.isfile(name_file_comments_issue):
+            file = open(name_file_comments_issue, 'rt')
+            try:
+                csv.field_size_limit(sys.maxsize)
+                reader_comments: csv.DictReader = csv.reader(x.replace('\0', '') for x in file)
+                for row_comment in reader_comments:
+                    comment_issue = IssueComments(row_comment[1], row_comment[2], row_comment[3], row_comment[4],
+                                                  row_comment[5], row_comment[6])
+                    if url == comment_issue.get_html_url():
+                        return comment_issue
+            finally:
+                file.close()
+            return None
+        else:
+            return None
 
     def write_comment_issue(self, url_issue, name_file_comment):
         if not (os.path.exists(name_file_comment)):
