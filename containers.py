@@ -80,21 +80,24 @@ class Containers:
                 file.close()
 
     def print_organization(self):
-        for association in self._associations:
-            repository: Repositories = association.get_repository()
-            channel: Channels = association.get_channel()
-            print('channel: {} repository: {}'.format(channel.get_name_channel(), repository.get_repository_name()))
+        file = open('association channel-repository.csv', 'wt')
+        try:
+            writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
+            for association in self._associations:
+                repository: Repositories = association.get_repository()
+                channel: Channels = association.get_channel()
+                writer.writerow((channel.get_name_channel(), repository.get_repository_name()))
+        finally:
+            file.close()
 
     def pull_request_on_message_slack(self):
         list_thread = list()
         for association in self._associations:
             channel: Channels = association.get_channel()
             repository: Repositories = association.get_repository()
-            print('channel: {} repository: {}'.format(channel.get_name_channel(), repository.get_repository_name()))
             thread = threading.Thread(target=self._create_file_pull, args=(channel, repository))
             thread.start()
             list_thread.append(thread)
-            print("sto eseguendo")
         for thread in list_thread:
             thread.join()
 
@@ -109,13 +112,11 @@ class Containers:
             pulls = repository.get_pulls()
             for pull in pulls:
                 count_pr_url = 0
-                pull: PullRequest
                 if pull.get_state() == 'closed':
                     users = channel.get_users()
                     for user_key in users:
                         user = users.get(user_key)
                         for message in user.show_messages():
-                            message: Messages
                             text = message.get_message()
                             if text.find(pull.get_html_url()) != -1:
                                 length = len(pull.get_html_url()) + text.find(pull.get_html_url())
@@ -147,12 +148,9 @@ class Containers:
 
     def messages_slack_url_github(self):
         for association in self._associations:
-            channel: Channels = association.get_channel()
-            repository: Repositories = association.get_repository()
             path = 'message url ' + association.get_name_organization()
             if os.path.isdir(path) is not True:
                 os.makedirs(path)
-            print('channel: {} repository: {}'.format(channel.get_name_channel(), repository.get_repository_name()))
             url_message_slack = UrlMessagesSlack(association)
             url_message_slack.generic_url_github()
             url_message_slack.issue_open_in_this_repository()
