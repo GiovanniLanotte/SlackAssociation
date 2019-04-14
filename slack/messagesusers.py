@@ -1,13 +1,13 @@
-from GitHub.element_github.issues import Issues
+from organization_github.element_github.issues import Issues
 from threading import Thread
-from GitHub.element_github.pull_request import PullRequest
-from GitHub.element_github.issue_comments import IssueComments
-from GitHub.element_github.pull_request_comments import PullRequestComments
+from organization_github.element_github.pull_request import PullRequest
+from organization_github.element_github.issues_comments import IssuesComments
+from organization_github.element_github.pull_request_comments import PullRequestComments
 
 
 class MessagesUsers(Thread):
 
-    def __init__(self, users, text, massage, url, name_file_issue,name_file_comments_issue, name_file_pull_request,
+    def __init__(self, users, text, massage, url, name_file_issue, name_file_comments_issue, name_file_pull_request,
                  name_file_comments_pull_request):
         Thread.__init__(self)
         self._users = users
@@ -35,7 +35,7 @@ class MessagesUsers(Thread):
             index_comment = self._url.find('#issuecomment-')
             if index_comment != -1:
                 url = self._url
-                comment = IssueComments.read_comment_of_url(self._name_file_comments_issue, url)
+                comment = IssuesComments.read_comment_of_url(self._name_file_comments_issue, url)
                 if comment is not None:
                     tuple_value = (self._massage, comment)
                 else:
@@ -64,7 +64,7 @@ class MessagesUsers(Thread):
                 url = self._url
                 index_comment = self._url.find('#issuecomment-')
                 if index_comment != -1:
-                    comment = IssueComments.read_comment_of_url(self._name_file_comments_issue, url)
+                    comment = IssuesComments.read_comment_of_url(self._name_file_comments_issue, url)
                     if comment is not None:
                         tuple_value = (self._massage, comment)
                     else:
