@@ -21,10 +21,8 @@ class Containers:
         self._associations: list = list()
 
     def add_association(self, name_organization, path, tokens):
-        print('creazione classe Organization')
         directory = 'issue&pull ' + name_organization
         organization: Organizations = Organizations(directory, name_organization, tokens)
-        print('creazione dei file repository')
         organization.get_scv_repositories()
         organization.get_first_filter()
         organization.get_second_filter()
@@ -32,7 +30,6 @@ class Containers:
         organization.get_fourth_filter()
         organization.get_fifth_filter()
         organization.get_sixth_filter()
-        print('conclusa la creazione dei file repository')
         p = Path(path)
         workspace = None
         if p.is_file() and p.suffix == ".csv":
@@ -49,7 +46,7 @@ class Containers:
                     repositories = organization.get_association(name_channel)
                     workspace.get_channel(name_channel)
                     for repository in repositories:
-                        association: Associations = Associations(directory, repository,
+                        association: Associations = Associations(repository,
                                                                  workspace.get_channel(name_channel),
                                                                  name_organization, organization.get_name_file_issue(),
                                                                  organization.get_name_file_comments_issue(),
