@@ -25,19 +25,16 @@ class ControlFilesRepository(Thread):
     @staticmethod
     def is_programming(ext_file):
         with open("languages.yml", 'r') as stream:
-            try:
-                load = yaml.load(stream)
-                keys = list()
-                for key in load:
-                    keys.append(key)
-                for key in keys:
-                    if load[key].get('extensions') is not None:
-                        if load[key]['type'] == 'programming':
-                            extensions = load[key]['extensions']
-                            if ext_file in extensions:
-                                return True
-            except yaml.YAMLError as exc:
-                print(exc)
+            load = yaml.load(stream)
+            keys = list()
+            for key in load:
+                keys.append(key)
+            for key in keys:
+                if load[key].get('extensions') is not None:
+                    if load[key]['type'] == 'programming':
+                        extensions = load[key]['extensions']
+                        if ext_file in extensions:
+                            return True
         return False
 
     def contain_programming(self, path):
