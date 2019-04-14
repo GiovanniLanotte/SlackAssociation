@@ -1,12 +1,7 @@
-""""
-Created on Wed Sep 19 13:51:07 2018
-@author: giovanni
-"""
 from slack.element_slack.channels import Channels
 from slack.element_slack.channels_csv import ChannelsCSV
 from slack.element_slack.messages import Messages
 import csv
-
 from slack.workspace.workspaces import Workspaces
 
 
