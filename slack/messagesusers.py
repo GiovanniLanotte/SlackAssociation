@@ -74,7 +74,6 @@ class MessagesUsers(Thread):
                     pull_request = PullRequest.load_pull_request_without_comments(
                         self._name_file_pull_request, url)
                     if pull_request is not None:
-                        print("url: {} pull request: {}".format(url, pull_request.get_html_url()))
                         tuple_value = (self._massage, pull_request)
                         return tuple_value
                     else:
