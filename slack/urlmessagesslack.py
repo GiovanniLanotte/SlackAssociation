@@ -24,8 +24,6 @@ class UrlMessagesSlack:
         self._messages_github = self._channel.get_messages_github(self._name_file_issue, self._name_file_comments_issue,
                                                                   self._name_file_pull_request,
                                                                   self._name_file_comments_pull_request)
-        print('channel: {} repository: {}'.format(self._channel.get_name_channel(),
-                                                  self._repository.get_repository_name()))
 
     def generic_url_github(self):
         name_file = self._path + '/messages url github ' + self._channel.get_name_channel() + ' ' + self._organization \
