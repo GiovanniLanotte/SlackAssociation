@@ -35,7 +35,7 @@ cd SlackAssociation
 ```
 python3.6 main.py organization "path\workspace_Organization" tokens.csv
 ```
-in "path\workspace_Organization" possiamo inserire:
+in "path/workspace_Organization" possiamo inserire:
 1) file csv strutturata dalle seguenti colonne:
     - id: dell'utente
     - team channel: nome del workspace
