@@ -1,5 +1,4 @@
 import time
-
 from slack.element_slack.messages import Messages
 from slack.workspace.workspaces import Workspaces
 from slack.element_slack.channels_files import ChannelsFiles
@@ -60,6 +59,3 @@ class WorkspacesSlackArchive(Workspaces):
                 channel.add_message_user(m)
             index = index + 1
         self._channels[channel_name] = channel
-
-
-
