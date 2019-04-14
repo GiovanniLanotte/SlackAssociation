@@ -77,7 +77,7 @@ class Containers:
             finally:
                 file.close()
 
-    def print_organization(self):
+    def get_association_channel_repository(self):
         file = open('association channel-repository.csv', 'wt')
         try:
             writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
