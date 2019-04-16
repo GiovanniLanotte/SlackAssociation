@@ -78,19 +78,19 @@ class Containers:
             finally:
                 file.close()
 
-    def get_association_channel_repository(self, workspace):
-        name_file = 'correspondence channel to archive in the workspace ' + workspace + '.csv'
+    def correspondence_channel_to_archive(self, organization):
+        name_file = 'correspondence channel to archive in ' + organization + '.csv'
         file = open(name_file, 'wt')
         try:
-            writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
+            writer: csv.DictWriter = csv.writer(file)
             writer.writerow(
                 ('Name Channel', 'Name Repository', 'url html', 'percentage programming file',
                  'has pull request merged',
                  'use issue for tracking',
                  '# contributors', '# commits', 'last update at least in 2018'))
             for association in self._associations:
-                repository: Repositories = association.get_repository()
                 channel: Channels = association.get_channel()
+                repository: Repositories = association.get_repository()
                 writer.writerow((channel.get_name_channel(),
                                  repository.get_repository_name(), repository.get_url_html(),
                                  repository.get_percentage_programming_files(),
@@ -139,9 +139,9 @@ class Containers:
         finally:
             file.close()
 
-    def get_len_message_for_channel(self):
+    def get_len_message_for_channel(self, organization):
         file = open(
-            'number of messages of channel.csv', 'w')
+            'number of messages ' + organization + '.csv', 'w')
         try:
             writer: csv.DictWriter = csv.writer(file)
             writer.writerow(('organization', 'channel slack', '# messages'))
@@ -173,24 +173,4 @@ class Containers:
             url_message_slack.pull_closed_not_in_this_repository()
             url_message_slack.dif_message_date()
 
-    def correspondence_channel_to_archive(self):
-        name_file = 'correspondence channel to archive in the workspace.csv'
-        file = open(name_file, 'wt')
-        try:
-            writer: csv.DictWriter = csv.writer(file)
-            writer.writerow(
-                ('Name Channel', 'Name Repository', 'url html', 'percentage programming file',
-                 'has pull request merged',
-                 'use issue for tracking',
-                 '# contributors', '# commits', 'last update at least in 2018'))
-            for association in self._associations:
-                channel: Channels = association.get_channel()
-                repository: Repositories = association.get_repository()
-                writer.writerow((channel.get_name_channel(),
-                                 repository.get_repository_name(), repository.get_url_html(),
-                                 repository.get_percentage_programming_files(),
-                                 repository.has_pull_request_merged(), repository.use_issue_for_tracking(),
-                                 len(repository.get_contributors()), repository.get_number_of_commits(),
-                                 repository.last_update_at_least_in_2018()))
-        finally:
-            file.close()
+
