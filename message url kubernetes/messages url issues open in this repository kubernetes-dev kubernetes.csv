@@ -1,0 +1,34 @@
+Sender,channel,text,url_html
+mhausenblas,kubernetes-dev,"Also, given that ATM runtimes in general can’t update cgroups of running containers, see <https://github.com/kubernetes/kubernetes/issues/5774> that means that we’ll always create a new pod, for now",https://github.com/kubernetes/kubernetes/issues/5774
+herrsebi,kubernetes-dev,"hi there! I'm looking at an issue for the node e2e tests, is that still of interest to you? <https://github.com/kubernetes/kubernetes/issues/46310>",https://github.com/kubernetes/kubernetes/issues/46310
+luxas,kubernetes-dev,"I haven't checked in a while, but <https://github.com/kubernetes/kubernetes/issues/26093>",https://github.com/kubernetes/kubernetes/issues/26093
+hazim,kubernetes-dev,"Hi,
+Is there a way to change `logging driver` of containers in the pods to `fluentd`?
+I read that kubernetes does not support this: <https://github.com/kubernetes/kubernetes/issues/15478>
+
+I know i can change the logging driver on the host docker daemon, but `fluentd` itself would be running as a pod, would such configuration work?",https://github.com/kubernetes/kubernetes/issues/15478
+chrishiestand,kubernetes-dev,"This thread <https://github.com/kubernetes/kubernetes/issues/48938> makes it sound like  `iptables-save | grep -E '^-A KUBE-SERVICES' | wc -l` is the factor you care about, being less than 10k? And that in my context you’d want `n` number of nodes times `p` number of ports in the NodePort service to be less than 10k, i.e. `n*p &lt; 10k`.  Or do you only care about `p &lt; 10k` and not about `n` in this case?",https://github.com/kubernetes/kubernetes/issues/48938
+aveshagarwal,kubernetes-dev,"<@U762JN8RG> i think sig-apps would be faster to get response on this, but may be this issue is related: <https://github.com/kubernetes/kubernetes/issues/42649>",https://github.com/kubernetes/kubernetes/issues/42649
+mhausenblas,kubernetes-dev,"Anyways, <https://github.com/kubernetes/kubernetes/issues/5774> says it all …",https://github.com/kubernetes/kubernetes/issues/5774
+shyamjvs,kubernetes-dev,Some earlier discussion wrt this - <https://github.com/kubernetes/kubernetes/issues/48938>,https://github.com/kubernetes/kubernetes/issues/48938
+bacongobbler,kubernetes-dev,"<@U7EJ5USD6> there is an open ticket for supporting user-defined deployment strategies, though it hasn’t seen any activity since April. <https://github.com/kubernetes/kubernetes/issues/14510>",https://github.com/kubernetes/kubernetes/issues/14510
+fish,kubernetes-dev,<@U0LK5J4NQ> I've filled <https://github.com/kubernetes/kubernetes/issues/57660> for this,https://github.com/kubernetes/kubernetes/issues/57660
+robocop,kubernetes-dev,<@U0TH372DT> open issue still? <https://github.com/kubernetes/kubernetes/issues/45419>,https://github.com/kubernetes/kubernetes/issues/45419
+ixdy,kubernetes-dev,add <https://github.com/kubernetes/kubernetes/issues/8830> to 2018 goals,https://github.com/kubernetes/kubernetes/issues/8830
+kowens,kubernetes-dev,<https://github.com/kubernetes/kubernetes/issues/14188>,https://github.com/kubernetes/kubernetes/issues/14188
+shyamjvs,kubernetes-dev,"<@U0Q3RNQBC> Yes, we do have some limitations with services. There's an issue discussing it - <https://github.com/kubernetes/kubernetes/issues/48938>",https://github.com/kubernetes/kubernetes/issues/48938
+portdirect,kubernetes-dev,<https://github.com/kubernetes/kubernetes/issues/35062>,https://github.com/kubernetes/kubernetes/issues/35062
+vdemeester,kubernetes-dev,"not sure who to ping to help on <https://github.com/kubernetes/kubernetes/issues/53221>, but I can help (after christmas break :stuck_out_tongue:)",https://github.com/kubernetes/kubernetes/issues/53221
+ianlewis,kubernetes-dev,I'm assuming based on <https://github.com/kubernetes/kubernetes/issues/28610> that it doesn't do anything smart currently,https://github.com/kubernetes/kubernetes/issues/28610
+hazim,kubernetes-dev,"Hi,
+Is there a way to change `logging driver` of containers in the pods to `fluentd`?
+I read that kubernetes does not support this: <https://github.com/kubernetes/kubernetes/issues/15478>
+
+I know i can change the logging driver on the host docker daemon, but `fluentd` itself would be running as a pod, would such configuration work?",https://github.com/kubernetes/kubernetes/issues/15478
+naveenkumarsangi,kubernetes-dev,I want to work on this issue <https://github.com/kubernetes/kubernetes/issues/47668>,https://github.com/kubernetes/kubernetes/issues/47668
+outcoldman,kubernetes-dev,Opened the ticket <https://github.com/kubernetes/kubernetes/issues/53533> please revisit decision on failing when swap is enabled,https://github.com/kubernetes/kubernetes/issues/53533
+shyamjvs,kubernetes-dev,"&gt; Has anyone tested how many services are supported with the IPVS base in-cluster service load balancing added for 1.8
+
+<@U34FY5S2W> Not that I know of. It might be worth checking with sig-network once. Also see- <https://github.com/kubernetes/kubernetes/issues/48938>",https://github.com/kubernetes/kubernetes/issues/48938
+dims,kubernetes-dev,points <@U6UB5V4TX|tpepper> to <https://github.com/kubernetes/kubernetes/issues/36858>,https://github.com/kubernetes/kubernetes/issues/36858
+mikebrow,kubernetes-dev,<https://github.com/kubernetes/kubernetes/issues/53533>,https://github.com/kubernetes/kubernetes/issues/53533

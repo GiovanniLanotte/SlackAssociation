@@ -1,0 +1,213 @@
+Sender,channel,text,url_html
+jobridgwater,kubernetes-users,"Hi there! I am a college student and my partner and I need to contribute to an open source project for a class on Virtualization. We'd love to work on something in Kubernetes and we have about a month (5-6h/week). Do any of these issues look like they would be good for us? We are open to any suggestions!
+<https://github.com/kubernetes/kubernetes/issues/46172>
+<https://github.com/kubernetes/kubernetes/issues/48926>
+<https://github.com/kubernetes/kubernetes/issues/49673>
+<https://github.com/kubernetes/kubernetes/issues/49586>",https://github.com/kubernetes/kubernetes/issues/49673
+jberkus,kubernetes-users,"hey, can anyone do a status update on <https://github.com/kubernetes/kubernetes/issues/56686> ? <@U0YJS6LHL> <@U4H2924GN>  I realize people are in transit to Kubecon, but if someone could take a look at that, it would be great",https://github.com/kubernetes/kubernetes/issues/56686
+roffe,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/52973>,https://github.com/kubernetes/kubernetes/issues/52973
+ixdy,kubernetes-users,it's probably similar to <https://github.com/kubernetes/kubernetes/issues/56516>,https://github.com/kubernetes/kubernetes/issues/56516
+spiffxp,kubernetes-users,FYI <https://github.com/kubernetes/kubernetes/issues/56416>,https://github.com/kubernetes/kubernetes/issues/56416
+squeed,kubernetes-users,thoughts on <https://github.com/kubernetes/kubernetes/issues/56794> ?,https://github.com/kubernetes/kubernetes/issues/56794
+patricklang,kubernetes-users,"<@U4NELQ5QS> mentioned this might be a problem <https://github.com/kubernetes/kubernetes/issues/52419> because relative symlinks aren't working on Windows, but I thought secrets were working in 1.7 without symlinks",https://github.com/kubernetes/kubernetes/issues/52419
+spiffxp,kubernetes-users,"<https://github.com/kubernetes/kubernetes/issues/47820> - this is listed as a release-blocker issue for v1.8, is anyone from sig-apps actively working on this?",https://github.com/kubernetes/kubernetes/issues/47820
+puneetguptanitj,kubernetes-users,"Hi all we are observing a strange behvaiour where rbac/v1 apis are getting available only after ~5-6 mins on api-server start up, had raised an issue <https://github.com/kubernetes/kubernetes/issues/56899> is anyone else also seeing this? It happens only when we migrate 1.7.7 to 1.8.4. After moving to 1.8.4 even if we restart API server, rbac/v1 apis are immediately available",https://github.com/kubernetes/kubernetes/issues/56899
+ichekrygin,kubernetes-users,"Hello, I want to follow up on <https://github.com/kubernetes/kubernetes/issues/23008>. It appears this issue was resolved. 
+I am running into similar issue with high `kubelet` CPU usage, and as it seems due to `cAdviser`. I am on `kubelet` `v1.7.6`",https://github.com/kubernetes/kubernetes/issues/23008
+ichekrygin,kubernetes-users,"Hello, it seems i am running into `Kubelet` + `cAdvisor` + High CPU issue similar to the one reported in: <https://github.com/kubernetes/kubernetes/issues/23008>",https://github.com/kubernetes/kubernetes/issues/23008
+jamie.poole,kubernetes-users,"Running version 1.9.0-alpha.2 of kubelet on a fresh Windows 1709 build, and think I'm running into this: <https://github.com/kubernetes/kubernetes/issues/55031> . Has anyone else experienced this?",https://github.com/kubernetes/kubernetes/issues/55031
+luiz.toledo,kubernetes-users,"And if it is, how made it, how are you dealing with the Client-ID and Client-secret in the kubectl, do you that is a security issue? I read carefully this discussion: `<https://github.com/kubernetes/kubernetes/issues/37822>`, but I still don't get it",https://github.com/kubernetes/kubernetes/issues/37822
+3dinfluence,kubernetes-users,looks like someone reported a similar bug driven by the same behavior but for different causes <https://github.com/kubernetes/kubernetes/issues/37414>,https://github.com/kubernetes/kubernetes/issues/37414
+ieugen,kubernetes-users,attached issue <https://github.com/kubernetes/kubernetes/issues/57280>,https://github.com/kubernetes/kubernetes/issues/57280
+mbohlool,kubernetes-users,<@U0BGPQ6DS> here you are: <https://github.com/kubernetes/kubernetes/issues/57769>,https://github.com/kubernetes/kubernetes/issues/57769
+quinton_hoole,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/50761>,https://github.com/kubernetes/kubernetes/issues/50761
+oomichi,kubernetes-users,"happy holiday :slightly_smiling_face:
+Can somebody close <https://github.com/kubernetes/kubernetes/issues/24763> ?
+That can be closed because test-infra one(<https://github.com/kubernetes/test-infra/issues/5701>) is merged instead",https://github.com/kubernetes/kubernetes/issues/24763
+slack1539,kubernetes-users,"Hi, I was wondering if I could get some feedback on <https://github.com/kubernetes/kubernetes/issues/56304> thanks",https://github.com/kubernetes/kubernetes/issues/56304
+lctung,kubernetes-users,"hi, is there a way to get memory request for a container from prometheus metrics? something similar to this: <https://github.com/kubernetes/kubernetes/issues/40214>",https://github.com/kubernetes/kubernetes/issues/40214
+ericchiang,kubernetes-users,"<@U8B9K1ZPG> <https://github.com/kubernetes/kubernetes/issues/37822> is a good summary of the state of things. it depends on your provider, which may have some concept of ""public clients"" where the client-secret isn't secret",https://github.com/kubernetes/kubernetes/issues/37822
+lazypower,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/44418>,https://github.com/kubernetes/kubernetes/issues/44418
+slack1539,kubernetes-users,"Hi all, if someone could comment on my problems in this defect: <https://github.com/kubernetes/kubernetes/issues/56304> that would be really helpful, thanks",https://github.com/kubernetes/kubernetes/issues/56304
+rjmorse,kubernetes-users,"<@U79S69E11> You should take a look at this PR for windows stats, which is merged for 1.9: <https://github.com/kubernetes/kubernetes/pull/50396>
+It also has discussion around CRI in the related issue: <https://github.com/kubernetes/kubernetes/issues/49398>",https://github.com/kubernetes/kubernetes/issues/49398
+rmt,kubernetes-users,"<@U69QYR4TV>.. did you have any luck with the etcd open connections issue? <@U6S1GQY1H> and I are colleagues.
+ <https://github.com/kubernetes/kubernetes/issues/54138/> is the issue we are following, but it appears to be ignored, so we might be alone. Custom deployment on your end?
+
+ApiServers seem to be maintaining the connections to etcd, reconnecting them if etcd goes down. I guess it's a leak of goroutines.",https://github.com/kubernetes/kubernetes/issues/54138
+melserngawy,kubernetes-users,"hi all, 
+is this issue  <https://github.com/kubernetes/kubernetes/issues/20112>  has been solved or just closed ? I cannot find away to get the endpoint from service object",https://github.com/kubernetes/kubernetes/issues/20112
+tomciaaa,kubernetes-users,"hi guys, I'm struggling to schedule a kube-router daemon set on a newly created set of 1.8.2 k8s nodes in a NotReady state. It seems to be very similar effect to <https://github.com/kubernetes/kubernetes/issues/23013>, but recreating the daemonset doesn't help: it still says 0 Desired nodes . Is this something that's changed in 1.8.2 (I was able to do this in 1.7.5 just fine)?",https://github.com/kubernetes/kubernetes/issues/23013
+quinton_hoole,kubernetes-users,"<https://github.com/kubernetes/kubernetes/issues/44160> is the closest thing we have to that design document right now, as far as I know.",https://github.com/kubernetes/kubernetes/issues/44160
+daviey,kubernetes-users,"How is federation / multicluster upgrades currently handled?  Is there a guarantee of N-1 support, or do all clusters need to be upgraded concurrently?  Saw this, but it seems to have gone offtopic? <https://github.com/kubernetes/kubernetes/issues/44160>  Thanks",https://github.com/kubernetes/kubernetes/issues/44160
+jberkus,kubernetes-users,<@U0B93RF4N> <@U4723UJL8> <@U6DN3CFF1> can we have an update on the horizontal pod autoscaler test failure?  <https://github.com/kubernetes/kubernetes/issues/54574>,https://github.com/kubernetes/kubernetes/issues/54574
+jobridgwater,kubernetes-users,"Hi there! I am a college student and my partner and I need to contribute to an open source project for a class on Virtualization. We'd love to work on something in Kubernetes and we have about a month (5-6h/week). Do any of these issues look like they would be good for us? We are open to any suggestions!
+<https://github.com/kubernetes/kubernetes/issues/46172>
+<https://github.com/kubernetes/kubernetes/issues/48926>
+<https://github.com/kubernetes/kubernetes/issues/49673>
+<https://github.com/kubernetes/kubernetes/issues/49586>",https://github.com/kubernetes/kubernetes/issues/49586
+thomas115,kubernetes-users,"Hi, is this the right sig group for <https://github.com/kubernetes/kubernetes/issues/52336> ?",https://github.com/kubernetes/kubernetes/issues/52336
+bentheelder,kubernetes-users,"I think kubernetes as well, EG <https://github.com/kubernetes/kubernetes/issues/1806>",https://github.com/kubernetes/kubernetes/issues/1806
+chaosaffe,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/341>,https://github.com/kubernetes/kubernetes/issues/341
+rphillips,kubernetes-users,anybody know if this issue is fixed with the new spec.selector? <https://github.com/kubernetes/kubernetes/issues/26202>,https://github.com/kubernetes/kubernetes/issues/26202
+jhorwit2,kubernetes-users,np! There's also a vault provider impl WIP <https://github.com/kubernetes/kubernetes/issues/49817>,https://github.com/kubernetes/kubernetes/issues/49817
+fejta,kubernetes-users,Bot vs bot <https://github.com/kubernetes/kubernetes/issues/57585>,https://github.com/kubernetes/kubernetes/issues/57585
+jhorwit2,kubernetes-users,"<https://github.com/kubernetes/kubernetes/issues/54070>
+
+^ Pretty serious regression in 1.8.x that will cause all non-in-tree cloud providers (baremetal, custom zone labels, CCM) to lose the zone labels on kubelet upgrade / subsequent restarts.",https://github.com/kubernetes/kubernetes/issues/54070
+dims,kubernetes-users,<@U0AH4GABW> <@U15P41DRC> <https://github.com/kubernetes/kubernetes/issues/56522> seems to be a blocker for 1.9 but <https://github.com/kubernetes/kubernetes/pull/56529> for it needs milestone/approvals etc can you please take a look?,https://github.com/kubernetes/kubernetes/issues/56522
+shyamjvs,kubernetes-users,<@U4VMZKRD0> Failing correctness tests are being tracked under <https://github.com/kubernetes/kubernetes/issues/55194>,https://github.com/kubernetes/kubernetes/issues/55194
+slack1539,kubernetes-users,"Hi, I was wondering if I could get some feedback on <https://github.com/kubernetes/kubernetes/issues/56304> thanks",https://github.com/kubernetes/kubernetes/issues/56304
+frobware,kubernetes-users,Last week (mostly Monday) I looked into <https://github.com/kubernetes/kubernetes/issues/54574> a bit but even there got sidetracked.,https://github.com/kubernetes/kubernetes/issues/54574
+maciekpytel,kubernetes-users,and <https://github.com/kubernetes/kubernetes/issues/54637>?,https://github.com/kubernetes/kubernetes/issues/54637
+random-liu,kubernetes-users,You can take a look at this issue: <https://github.com/kubernetes/kubernetes/issues/52032>,https://github.com/kubernetes/kubernetes/issues/52032
+arto,kubernetes-users,"On the Kubernetes side this is IMO the main one: <https://github.com/kubernetes/kubernetes/issues/57382> , it has backlinks to a bunch of the reports on the kops side.",https://github.com/kubernetes/kubernetes/issues/57382
+erhudy,kubernetes-users,"<@U0B4CS1GF> hey, i wanted to check in with you again on <https://github.com/kubernetes/kubernetes/issues/47538> per our conversation last week",https://github.com/kubernetes/kubernetes/issues/47538
+dineshgovindasamy,kubernetes-users,<@U4BSEP55K> <@U2X7ARA79> <@U0BC5M36Y> Many people are blocked by this issue <https://github.com/kubernetes/kubernetes/issues/55031>,https://github.com/kubernetes/kubernetes/issues/55031
+roffe,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/54476>,https://github.com/kubernetes/kubernetes/issues/54476
+jannis,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/53644>,https://github.com/kubernetes/kubernetes/issues/53644
+spotter,kubernetes-users,<@U0AD37EP6> <https://github.com/kubernetes/kubernetes/issues/49398>,https://github.com/kubernetes/kubernetes/issues/49398
+ericchiang,kubernetes-users,<@U4SFZAMPC> what version of kubernetes are you using? might be <https://github.com/kubernetes/kubernetes/issues/45353> ?,https://github.com/kubernetes/kubernetes/issues/45353
+quinton_hoole,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/52643>,https://github.com/kubernetes/kubernetes/issues/52643
+vinhags,kubernetes-users,I believe this is related to this issues: <https://github.com/kubernetes/kubernetes/issues/53566>,https://github.com/kubernetes/kubernetes/issues/53566
+bentheelder,kubernetes-users,"the flakes are too high: <http://velodrome.k8s.io/dashboard/db/bigquery-metrics?orgId=1>
+filed <https://github.com/kubernetes/kubernetes/issues/57342> and poked <https://github.com/kubernetes/kubernetes/issues/56121> :confused:",https://github.com/kubernetes/kubernetes/issues/57342
+gustavoatt,kubernetes-users,Thanks! I think I found the issue <https://github.com/kubernetes/kubernetes/issues/56261>. Is the workaround just restarting the scheduler?,https://github.com/kubernetes/kubernetes/issues/56261
+artmr,kubernetes-users,"Federated service discovery failed in hybrid cloud: OpenStack + GKE:
+<https://github.com/kubernetes/kubernetes/issues/55326>",https://github.com/kubernetes/kubernetes/issues/55326
+thermi,kubernetes-users,"kubefed can't set up federation correctly, because it does stupid things:
+```
+r}   Warning   InspectFailed   kubelet, gke-kubernetes-cluster-pool-1-76a09ebd-b587   Failed to apply default image tag ""<http://gcr.io/google_containers/hyperkube-amd64:v1.8.0+0b9efaeb34a2f|gcr.io/google_containers/hyperkube-amd64:v1.8.0+0b9efaeb34a2f>"": couldn't parse image reference ""<http://gcr.io/google_containers/hyperkube-amd64:v1.8.0+0b9efaeb34a2f|gcr.io/google_containers/hyperkube-amd64:v1.8.0+0b9efaeb34a2f>"": invalid reference format
+2017-10-04 14:07:14 +0200 CEST   2017-10-04 14:00:47 +0200 CEST   31        fed-zone-europe-controller-manager-4130961042-m9c3z.14ea5c3e2a63466e   Pod                 Warning   FailedSync   kubelet, gke-kubernetes-cluster-pool-1-76a09ebd-b587   Error syncing pod
+```
+
+How do people work around that? Information is here: <https://github.com/kubernetes/kubernetes/issues/53430>",https://github.com/kubernetes/kubernetes/issues/53430
+djsly,kubernetes-users,"Just dropping this here. Goes on my list of what breaks when you lockdown your VNet. 
+<https://github.com/kubernetes/kubernetes/issues/56086>",https://github.com/kubernetes/kubernetes/issues/56086
+shyamjvs,kubernetes-users,"Guess you're referring to these:
+<https://github.com/kubernetes/kubernetes/issues/47865>
+<https://github.com/kubernetes/kubernetes/issues/47899>",https://github.com/kubernetes/kubernetes/issues/47899
+dbhanushali,kubernetes-users,Can someone please take a look at this one please? <https://github.com/kubernetes/kubernetes/issues/54129>,https://github.com/kubernetes/kubernetes/issues/54129
+afirth.work,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/3312> might be a good place to start,https://github.com/kubernetes/kubernetes/issues/3312
+danmace,kubernetes-users,<@U0A4MJ62V> <@U09R2P666> <https://github.com/kubernetes/kubernetes/issues/52428>,https://github.com/kubernetes/kubernetes/issues/52428
+shyamjvs,kubernetes-users,There's one performance regression which is what is causing scale-performance to fail (<https://github.com/kubernetes/kubernetes/issues/54651>) and the fix is on its way,https://github.com/kubernetes/kubernetes/issues/54651
+jake.livewyer,kubernetes-users,"just reading back, statefulsets don't appear to schedule correctly, <https://github.com/kubernetes/kubernetes/issues/54370>",https://github.com/kubernetes/kubernetes/issues/54370
+pires,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/55117>,https://github.com/kubernetes/kubernetes/issues/55117
+roffe,kubernetes-users,issue created: <https://github.com/kubernetes/kubernetes/issues/57321>,https://github.com/kubernetes/kubernetes/issues/57321
+mattfarina,kubernetes-users,<@U2LF3NQ93> Can you take a look at <https://github.com/kubernetes/kubernetes/issues/56416>. I don’t think this belongs with SIG Apps.,https://github.com/kubernetes/kubernetes/issues/56416
+dims,kubernetes-users,"<@U0A69N5GQ> <@U09R2LQ8Y> looks like we need a decision if <https://github.com/kubernetes/kubernetes/issues/57005> is blocking 1.9 or not. there are 2 possible PR(s) for it (first one fails building kubeadm for some reason, the second one duplicates a constant to avoid the problem with the first one)",https://github.com/kubernetes/kubernetes/issues/57005
+caesarxuchao,kubernetes-users,<@U34HHEWE4> why do you think it's caused by garbage collector? could you share your thoughts in <https://github.com/kubernetes/kubernetes/issues/49956>?,https://github.com/kubernetes/kubernetes/issues/49956
+quinton_hoole,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/50734>,https://github.com/kubernetes/kubernetes/issues/50734
+resouer,kubernetes-users,I just have a community doc fix: <https://github.com/kubernetes/community/pull/985> which is part of <https://github.com/kubernetes/kubernetes/issues/53236>,https://github.com/kubernetes/kubernetes/issues/53236
+bsalamat,kubernetes-users,"<@U0JBRP4Q7> As a starter project, you may want to take a look at: <https://github.com/kubernetes/kubernetes/issues/53908>",https://github.com/kubernetes/kubernetes/issues/53908
+chen-li,kubernetes-users,"hi, I think this one should stay open: <https://github.com/kubernetes/kubernetes/issues/43788>, anyone can help ?",https://github.com/kubernetes/kubernetes/issues/43788
+marun,kubernetes-users,<@U09R342HM>: Any update on <https://github.com/kubernetes/kubernetes/issues/47344> ?,https://github.com/kubernetes/kubernetes/issues/47344
+jobridgwater,kubernetes-users,"Hi there! I am a college student and my partner and I need to contribute to an open source project for a class on Virtualization. We'd love to work on something in Kubernetes and we have about a month (5-6h/week). Do any of these issues look like they would be good for us? We are open to any suggestions!
+<https://github.com/kubernetes/kubernetes/issues/46172>
+<https://github.com/kubernetes/kubernetes/issues/48926>
+<https://github.com/kubernetes/kubernetes/issues/49673>
+<https://github.com/kubernetes/kubernetes/issues/49586>",https://github.com/kubernetes/kubernetes/issues/48926
+sokoow,kubernetes-users,can somebody tell me whether this is something I need to be worried about  please? <https://github.com/kubernetes/kubernetes/issues/55867>,https://github.com/kubernetes/kubernetes/issues/55867
+shyamjvs,kubernetes-users,<@U09R2P666> scale-correctness doesn't look healthy due to few e2e's that are pending on the SIGs to be fixed (ref - <https://github.com/kubernetes/kubernetes/issues/55194>),https://github.com/kubernetes/kubernetes/issues/55194
+claytonc,kubernetes-users,<@U2G8FRBAT> this is the production issue we’re seeing <https://github.com/kubernetes/kubernetes/issues/48610>,https://github.com/kubernetes/kubernetes/issues/48610
+shyamjvs,kubernetes-users,For e.g we noticed it was being OOM-killed under high load when the system pods generate more than usual logs (ref: <https://github.com/kubernetes/kubernetes/issues/47865>),https://github.com/kubernetes/kubernetes/issues/47865
+frobware,kubernetes-users,<@U4723UJL8> I am now going to take a look at <https://github.com/kubernetes/kubernetes/issues/54574>,https://github.com/kubernetes/kubernetes/issues/54574
+liggitt,kubernetes-users,looks like <https://github.com/kubernetes/kubernetes/issues/50345>,https://github.com/kubernetes/kubernetes/issues/50345
+rupsky,kubernetes-users,I am looking to use Hashicorp Vault as backend for Kuberneters Secretes. Has anyone tried this ?   I found this old open ticket <https://github.com/kubernetes/kubernetes/issues/10439> . Not sure if any progress has been made there,https://github.com/kubernetes/kubernetes/issues/10439
+mhausenblas,kubernetes-users,"(it’s <https://github.com/kubernetes/kubernetes/issues/44407> I was referring to ^^^, FWIW)",https://github.com/kubernetes/kubernetes/issues/44407
+spiffxp,kubernetes-users,and <https://github.com/kubernetes/kubernetes/issues/34255> (/me waves to <@U15E5E538>),https://github.com/kubernetes/kubernetes/issues/34255
+ravig,kubernetes-users,<@U09R2P666> <https://github.com/kubernetes/kubernetes/issues/49384> - issue on missing ut's for some fn's,https://github.com/kubernetes/kubernetes/issues/49384
+arungupta,kubernetes-users,"Hello there, I created a federated cluster using kops as explained at <https://github.com/arun-gupta/kubernetes-federated-cluster>. But  a simple ReplicaSet is not getting deployed, this is explained at <https://github.com/kubernetes/kubernetes/issues/51591>. Any idea?",https://github.com/kubernetes/kubernetes/issues/51591
+lazypower,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/46054>,https://github.com/kubernetes/kubernetes/issues/46054
+jobridgwater,kubernetes-users,"Hi there! I am a college student and my partner and I need to contribute to an open source project for a class on Virtualization. We'd love to work on something in Kubernetes and we have about a month (5-6h/week). Do any of these issues look like they would be good for us? We are open to any suggestions!
+<https://github.com/kubernetes/kubernetes/issues/46172>
+<https://github.com/kubernetes/kubernetes/issues/48926>
+<https://github.com/kubernetes/kubernetes/issues/49673>
+<https://github.com/kubernetes/kubernetes/issues/49586>",https://github.com/kubernetes/kubernetes/issues/46172
+erik.oshaughnessy,kubernetes-users,"Thoughts on this? A google found an issue <https://github.com/kubernetes/kubernetes/issues/51179> but no resolution.
+
+# kubectl logs spark-master-0
+Error from server: Get <https://1.1.1.202:10250/containerLogs/default/spark-master-0/spark-master>: EOF",https://github.com/kubernetes/kubernetes/issues/51179
+presnall,kubernetes-users,keep in mind there are currently issues with a lot of services due to iptables <https://github.com/kubernetes/kubernetes/issues/44063>,https://github.com/kubernetes/kubernetes/issues/44063
+shyamjvs,kubernetes-users,"Guess you're referring to these:
+<https://github.com/kubernetes/kubernetes/issues/47865>
+<https://github.com/kubernetes/kubernetes/issues/47899>",https://github.com/kubernetes/kubernetes/issues/47865
+jberkus,kubernetes-users,"hey, I urgently need to talk to someone about <https://github.com/kubernetes/kubernetes/issues/56261> and <https://github.com/kubernetes/kubernetes/pull/56622>",https://github.com/kubernetes/kubernetes/issues/56261
+shyamjvs,kubernetes-users,<@U4VMZKRD0> This was discussed in the sig-scale meeting yesterday. The performance tests are passing - the red was just due to an artificial check that we fixed now (ref <https://github.com/kubernetes/kubernetes/issues/51433>),https://github.com/kubernetes/kubernetes/issues/51433
+jhorwit2,kubernetes-users,"Found the ticket for the change: <https://github.com/kubernetes/kubernetes/issues/47222>
+
+This broke backwards compatibility :disappointed:",https://github.com/kubernetes/kubernetes/issues/47222
+ericchiang,kubernetes-users,wanted to bring <https://github.com/kubernetes/kubernetes/issues/53066> to this channel's attention,https://github.com/kubernetes/kubernetes/issues/53066
+mkumatag,kubernetes-users,"There are few image deps for conformance test from kubernetes/kubernetes.github.io repo, created a issue to discuss further on this - <https://github.com/kubernetes/kubernetes/issues/48530>",https://github.com/kubernetes/kubernetes/issues/48530
+b0rk,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/50916>,https://github.com/kubernetes/kubernetes/issues/50916
+gustavoatt,kubernetes-users,"I’m hitting this bug <https://github.com/kubernetes/kubernetes/issues/56261> — It seems like restarting the scheduler would help, but how can I restart the scheduler if its running as a standalone Pod. If I delete it, how would it get rescheduled?",https://github.com/kubernetes/kubernetes/issues/56261
+euank,kubernetes-users,"it looks like you already found a issue for this though in <https://github.com/kubernetes/kubernetes/issues/24576>, or is this not covered?",https://github.com/kubernetes/kubernetes/issues/24576
+spiffxp,kubernetes-users,do folks have things to discuss during today's sig-scale? I know <@U34HHEWE4> is hunting down <https://github.com/kubernetes/kubernetes/issues/51899>,https://github.com/kubernetes/kubernetes/issues/51899
+nicolaiskogheim,kubernetes-users,<@U76N7FJ3D> There is a long discussion here that may be relevant <https://github.com/kubernetes/kubernetes/issues/43805>,https://github.com/kubernetes/kubernetes/issues/43805
+tianshapjq,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/54381>,https://github.com/kubernetes/kubernetes/issues/54381
+feisky,kubernetes-users,that is the issue <https://github.com/kubernetes/kubernetes/issues/56898>,https://github.com/kubernetes/kubernetes/issues/56898
+mauilion,kubernetes-users,<@U45JX5RPA> <https://github.com/kubernetes/kubernetes/issues/54039>,https://github.com/kubernetes/kubernetes/issues/54039
+wenlxie,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/57692>,https://github.com/kubernetes/kubernetes/issues/57692
+jell,kubernetes-users,be aware that hyperkube not always passes all flags to underlying commands. i mean - hyperkube binary. (e.g. <https://github.com/kubernetes/kubernetes/issues/54424> ),https://github.com/kubernetes/kubernetes/issues/54424
+tennis,kubernetes-users,"<@U34HHEWE4> Hi guy.  FYI. I’m running into a problem starting kubemark.  Thought you’d want to know about it.
+<https://github.com/kubernetes/kubernetes/issues/47736>",https://github.com/kubernetes/kubernetes/issues/47736
+clewis,kubernetes-users,I submitted my issue: <https://github.com/kubernetes/kubernetes/issues/53670>,https://github.com/kubernetes/kubernetes/issues/53670
+jpbetz,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/57822>,https://github.com/kubernetes/kubernetes/issues/57822
+shyamjvs,kubernetes-users,<@U09SJ9AH0> There's an issue with PATCH'ing for endpoints object. Could you take a look at <https://github.com/kubernetes/kubernetes/issues/47787>? Thanks.,https://github.com/kubernetes/kubernetes/issues/47787
+erwanmas,kubernetes-users,"<@U1A47TVPZ> , ma perception c’est que kubeadm , n’est la que pour amorcer la configuration , il n’intervient plus apres  . 
+j’ai crée un bug report ( <https://github.com/kubernetes/kubernetes/issues/42946> )",https://github.com/kubernetes/kubernetes/issues/42946
+squeed,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/56794>,https://github.com/kubernetes/kubernetes/issues/56794
+ronald.petty,kubernetes-users,"Hello, not sure if this is the spot.  I would like to start my first PR, specifically, would like to start working on/around the scheduler.  I found this one <https://github.com/kubernetes/kubernetes/issues/43788;> is this valid and worth doing?   If this is wrong channel, can you punt me to the right one?",https://github.com/kubernetes/kubernetes/issues/43788
+wizard,kubernetes-users,It seems it can't. see issue <https://github.com/kubernetes/kubernetes/issues/57933>,https://github.com/kubernetes/kubernetes/issues/57933
+pires,kubernetes-users,<@U4F6A88AX> <https://github.com/kubernetes/kubernetes/issues/53532>,https://github.com/kubernetes/kubernetes/issues/53532
+maciekpytel,kubernetes-users,"<@U6DN3CFF1> interestingly it looks like the tests in <https://github.com/kubernetes/kubernetes/issues/54574> magically started passing in the last 3 days..
+the diff between last failing and first passing run yields a single PR that looks potentially relevant: <https://github.com/kubernetes/kubernetes/pull/55413>",https://github.com/kubernetes/kubernetes/issues/54574
+jhorwit2,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/54070>,https://github.com/kubernetes/kubernetes/issues/54070
+kasper,kubernetes-users,"Hey guys!
+
+I am trying to solve this issue: <https://github.com/kubernetes/kubernetes/issues/45140>
+It's tagged with sig/node, so I thought I might ask here. :slightly_smiling_face:
+
+I threw a comment on it, maybe anyone can point me in the right direction? It's my first time fiddling with kubernetes source. :slightly_smiling_face:",https://github.com/kubernetes/kubernetes/issues/45140
+mhausenblas,kubernetes-users,<@U1A5ZGBLM> you aware of <https://github.com/kubernetes/kubernetes/issues/26120>?,https://github.com/kubernetes/kubernetes/issues/26120
+guangxuli,kubernetes-users,hi <@U3Z60K88M> these days i am working on <https://github.com/kubernetes/kubernetes/issues/55333>. but there are some confusing i 'd like to confirm.,https://github.com/kubernetes/kubernetes/issues/55333
+spiffxp,kubernetes-users,some github-label related stuff I'd like to help out with (and could really use the group's help in making a 1.10 priority) <https://github.com/kubernetes/kubernetes/issues/57911>,https://github.com/kubernetes/kubernetes/issues/57911
+cris,kubernetes-users,"there’s <https://github.com/kubernetes/kubernetes/issues/53333>, where this is addressed down on the thread, and apparently restarting kubelet with that flag solves the issue",https://github.com/kubernetes/kubernetes/issues/53333
+maciekpytel,kubernetes-users,is anyone looking at <https://github.com/kubernetes/kubernetes/issues/54574> while he's out?,https://github.com/kubernetes/kubernetes/issues/54574
+sdlarsen,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/57382> is really nagging me. Happens for around half my nodes. Suggestions welcome,https://github.com/kubernetes/kubernetes/issues/57382
+cynthia.sacramento,kubernetes-users,"I think it is related to this: <https://github.com/kubernetes/kubernetes/issues/42594> - now delete replicaset waits for resources to be deleted, but on the federation it cannot obtain the pods, could be because of this I guess...",https://github.com/kubernetes/kubernetes/issues/42594
+cdhunt,kubernetes-users,I guess that's not just me: <https://github.com/kubernetes/kubernetes/issues/55816>,https://github.com/kubernetes/kubernetes/issues/55816
+jberkus,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/55978>,https://github.com/kubernetes/kubernetes/issues/55978
+erhudy,kubernetes-users,"does anyone have any thoughts on <https://github.com/kubernetes/kubernetes/issues/47538>? the idea i had was to add another field to CronJobSpec like `triggerOnCreation` to signal the controller to immediately run a Job instead of waiting for the scheduled time, but modifying the API for something in beta seems unlikely",https://github.com/kubernetes/kubernetes/issues/47538
+marun,kubernetes-users,<@U0ADD3KAN>: do you have a timeline on getting <https://github.com/kubernetes/kubernetes/issues/54638> merged?,https://github.com/kubernetes/kubernetes/issues/54638
+theobolo,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/23896>,https://github.com/kubernetes/kubernetes/issues/23896
+patricklang,kubernetes-users,yeah - symptom looks like this <https://github.com/kubernetes/kubernetes/issues/56902>,https://github.com/kubernetes/kubernetes/issues/56902
+ichekrygin,kubernetes-users,i opened <https://github.com/kubernetes/kubernetes/issues/54448>,https://github.com/kubernetes/kubernetes/issues/54448
+vikasc,kubernetes-users,<@U3PEZ4X1T> <https://github.com/kubernetes/kubernetes/issues/57273>,https://github.com/kubernetes/kubernetes/issues/57273
+ieugen,kubernetes-users,see my case here <https://github.com/kubernetes/kubernetes/issues/57280>,https://github.com/kubernetes/kubernetes/issues/57280
+bentheelder,kubernetes-users,"the flakes are too high: <http://velodrome.k8s.io/dashboard/db/bigquery-metrics?orgId=1>
+filed <https://github.com/kubernetes/kubernetes/issues/57342> and poked <https://github.com/kubernetes/kubernetes/issues/56121> :confused:",https://github.com/kubernetes/kubernetes/issues/56121
+b0rk,kubernetes-users,also <https://github.com/kubernetes/kubernetes/issues/49314>,https://github.com/kubernetes/kubernetes/issues/49314
+3dinfluence,kubernetes-users,In case anyone here wants to participate <https://github.com/kubernetes/kubernetes/issues/57518>,https://github.com/kubernetes/kubernetes/issues/57518
+luxas,kubernetes-users,PTAL at <https://github.com/kubernetes/kubernetes/issues/48841>,https://github.com/kubernetes/kubernetes/issues/48841
+gekudray,kubernetes-users,Not sure how aware the maintainers are but kubelet is broken on Core SKUs. I've opened <https://github.com/kubernetes/kubernetes/issues/55031> with the details.,https://github.com/kubernetes/kubernetes/issues/55031
+typositoire,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/32839>,https://github.com/kubernetes/kubernetes/issues/32839
+shyamjvs,kubernetes-users,"&gt; the run time of the last successful run and the earlier failed runs was almost identical
+Yes, that's true and the reason is known. <https://github.com/kubernetes/kubernetes/issues/47419>",https://github.com/kubernetes/kubernetes/issues/47419
+ramon.ruettimann,kubernetes-users,"Hi guys,
+I opened an issue two weeks ago; 
+<https://github.com/kubernetes/kubernetes/issues/57505>
+Can someone confirm this ""bug""?",https://github.com/kubernetes/kubernetes/issues/57505
+justaugustus,kubernetes-users,"It looks like it's being worked by <@U0ASA4398>, who has also been tackling the initial Scale Sets work:
+- <https://github.com/kubernetes/kubernetes/issues/43287>
+- <https://github.com/kubernetes/autoscaler/issues/449>
+
+Perhaps he can provide a little more context?",https://github.com/kubernetes/kubernetes/issues/43287
+maciekpytel,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/54574>,https://github.com/kubernetes/kubernetes/issues/54574
+mhausenblas,kubernetes-users,"Up to 1.6 it was indeed 3 and 5 min, see for example <https://github.com/kubernetes/kubernetes/issues/44202>",https://github.com/kubernetes/kubernetes/issues/44202
+liggitt,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/43409> was opened as a feature request a while ago,https://github.com/kubernetes/kubernetes/issues/43409
+christopher376,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/49270>,https://github.com/kubernetes/kubernetes/issues/49270
+tianshapjq,kubernetes-users,<https://github.com/kubernetes/kubernetes/issues/16435>,https://github.com/kubernetes/kubernetes/issues/16435
+cmluciano,kubernetes-users,<@U0GBTV9DY> Is this the blocking issue <https://github.com/kubernetes/kubernetes/issues/49480>,https://github.com/kubernetes/kubernetes/issues/49480
+mattjmcnaughton,kubernetes-users,"Hi all :slightly_smiling_face: just syncing re anyone had thoughts on <https://github.com/kubernetes/kubernetes/issues/52989> ? If other’s dont feel the same way, I’ll go ahead and close the issue",https://github.com/kubernetes/kubernetes/issues/52989
+jberkus,kubernetes-users,"<@U3F6LNYLS> what's the status of <https://github.com/kubernetes/kubernetes/issues/56052>?  You haven't updated it, and there still is no ETA.",https://github.com/kubernetes/kubernetes/issues/56052

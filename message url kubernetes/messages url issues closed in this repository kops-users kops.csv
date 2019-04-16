@@ -1,0 +1,5 @@
+Sender,channel,text,url_html
+4nishantkumar,kops-users,"i got my cluster working using bastation. 
+actually i got confused becz when i created cluster kops said, ssh to the master: ssh -i ~/.ssh/id_rsa admin@api.cluster.k8s.local . unfortunately this won’t work in my case(now i know) i was thinking that there is someting wrong in my config :slightly_smiling_face: also when tried to create cluster using --bastation flag it failed. due to <https://github.com/kubernetes/kops/issues/2881> . it was a mesh situation for me. thanks <@U65H6P4PM> for helping me out.",https://github.com/kubernetes/kops/issues/2881
+sdlarsen,kops-users,<@U3DLQ64KT> Using the workaround mentioned here <https://github.com/kubernetes/kops/issues/3605> solves the issue for now. So probably this is a race condition rather than an AWS issue.,https://github.com/kubernetes/kops/issues/3605
+justinsb,kops-users,Thanks for the tips on CNI <@U7S8MD5G8>... will have to spin this up in kops <https://github.com/kubernetes/kops/issues/3964>,https://github.com/kubernetes/kops/issues/3964

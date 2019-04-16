@@ -1,0 +1,68 @@
+Sender,channel,text,url_html,is issue,is comment's issue,is pull request,is comment's pull request,issue or pull another repository,is other issue or pull of another organization,url not found
+mauilion,kubernetes-careers,<https://github.com/kubernetes/kubernetes/pull/53324>,https://github.com/kubernetes/kubernetes/pull/53324,False,False,True,False,False,False,False
+rupsky,kubernetes-careers,I am looking to use Hashicorp Vault as backend for Kuberneters Secretes. Has anyone tried this ?   I found this old open ticket <https://github.com/kubernetes/kubernetes/issues/10439> . Not sure if any progress has been made there,https://github.com/kubernetes/kubernetes/issues/10439,True,False,False,False,False,False,False
+ericchiang,kubernetes-careers,"<@U8B9K1ZPG> <https://github.com/kubernetes/kubernetes/issues/37822> is a good summary of the state of things. it depends on your provider, which may have some concept of ""public clients"" where the client-secret isn't secret",https://github.com/kubernetes/kubernetes/issues/37822,True,False,False,False,False,False,False
+mkumatag,kubernetes-careers,Submitted one more PR for multi arch image catalog - <https://github.com/kubernetes/kubernetes/pull/45074>,https://github.com/kubernetes/kubernetes/pull/45074,False,False,True,False,False,False,False
+liggitt,kubernetes-careers,"FYI, <https://github.com/kubernetes/kubernetes/pull/56358> Will do something similar for role creation, checking for super user permissions with the active authorizer",https://github.com/kubernetes/kubernetes/pull/56358,False,False,True,False,False,False,False
+mikedanese,kubernetes-careers,also i would like to get this one into 1.9 <https://github.com/kubernetes/kubernetes/pull/56444>,https://github.com/kubernetes/kubernetes/pull/56444,False,False,True,False,False,False,False
+jbguerraz,kubernetes-careers,"We're facing an issue with authorization mode ""allow all"" and some manifests that uses RBAC resources.
+
+As far as we understood, the RBAC API is enabled by default but not the RBAC authorizer (<https://github.com/kubernetes/features/issues/2#issuecomment-330569468>).
+
+So a manifest using RBAC resources should works (RBAC API would create unused stuff as there is not the RBAC authorizer to use them).
+
+But we get a message ""<http://clusterroles.rbac.authorization.k8s.io|clusterroles.rbac.authorization.k8s.io> ""xxx"" is forbidden: attempt to grant extra privileges"" like there is an authorizer doing its authorization job (but we're yet using the flag `--authorization-mode=AlwaysAllow`).
+
+Does one have an idea about it ? do we miss something ? or is that some kind of bug with authz system ?",https://github.com/kubernetes/features/issues/2#issuecomment-330569468,False,False,False,False,True,False,False
+mhausenblas,kubernetes-careers,"(it’s <https://github.com/kubernetes/kubernetes/issues/44407> I was referring to ^^^, FWIW)",https://github.com/kubernetes/kubernetes/issues/44407,True,False,False,False,False,False,False
+luxas,kubernetes-careers,Feel free to comment on: <https://github.com/kubernetes/features/issues/288>,https://github.com/kubernetes/features/issues/288,False,False,False,False,True,False,False
+jhorwit2,kubernetes-careers,np! There's also a vault provider impl WIP <https://github.com/kubernetes/kubernetes/issues/49817>,https://github.com/kubernetes/kubernetes/issues/49817,True,False,False,False,False,False,False
+mhausenblas,kubernetes-careers,<@U1A5ZGBLM> you aware of <https://github.com/kubernetes/kubernetes/issues/26120>?,https://github.com/kubernetes/kubernetes/issues/26120,True,False,False,False,False,False,False
+rmt,kubernetes-careers,"<@U69QYR4TV>.. did you have any luck with the etcd open connections issue? <@U6S1GQY1H> and I are colleagues.
+ <https://github.com/kubernetes/kubernetes/issues/54138/> is the issue we are following, but it appears to be ignored, so we might be alone. Custom deployment on your end?
+
+ApiServers seem to be maintaining the connections to etcd, reconnecting them if etcd goes down. I guess it's a leak of goroutines.",https://github.com/kubernetes/kubernetes/issues/54138,True,False,False,False,False,False,False
+robocop,kubernetes-careers,<@U0TH372DT> open issue still? <https://github.com/kubernetes/kubernetes/issues/45419>,https://github.com/kubernetes/kubernetes/issues/45419,True,False,False,False,False,False,False
+liggitt,kubernetes-careers,(c.f. <https://github.com/kubernetes/kubernetes/issues/16543#issuecomment-157091086>),https://github.com/kubernetes/kubernetes/issues/16543#issuecomment-157091086,False,True,False,False,False,False,False
+ericchiang,kubernetes-careers,<@U18NMV9D0> have you looked at <https://github.com/coreos/dex/issues/1110>,https://github.com/coreos/dex/issues/1110,False,False,False,False,False,True,False
+sszuecs,kubernetes-careers,anyone having problems with docker as shown in <https://github.com/moby/moby/issues/33820> ?,https://github.com/moby/moby/issues/33820,False,False,False,False,False,True,False
+mkumatag,kubernetes-careers,submitted the PR - <https://github.com/kubernetes/kubernetes/pull/44910> for multi architecture k8s test docker images. PTAL..,https://github.com/kubernetes/kubernetes/pull/44910,False,False,True,False,False,False,False
+jhorwit2,kubernetes-careers,"<@U6N42AE8G> 
+<https://github.com/kubernetes/features/issues/92>
+<https://github.com/kubernetes/features/issues/460>
+<https://github.com/kubernetes/features/issues/370>",https://github.com/kubernetes/features/issues/370,False,False,False,False,True,False,False
+puneetguptanitj,kubernetes-careers,"Hi all we are observing a strange behvaiour where rbac/v1 apis are getting available only after ~5-6 mins on api-server start up, had raised an issue <https://github.com/kubernetes/kubernetes/issues/56899> is anyone else also seeing this? It happens only when we migrate 1.7.7 to 1.8.4. After moving to 1.8.4 even if we restart API server, rbac/v1 apis are immediately available",https://github.com/kubernetes/kubernetes/issues/56899,True,False,False,False,False,False,False
+typositoire,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/32839>,https://github.com/kubernetes/kubernetes/issues/32839,True,False,False,False,False,False,False
+lazypower,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/46054>,https://github.com/kubernetes/kubernetes/issues/46054,True,False,False,False,False,False,False
+dbhanushali,kubernetes-careers,<@U0E40F05R> <@U5TFNBM42> <https://github.com/kubernetes/kubernetes/pull/44344>,https://github.com/kubernetes/kubernetes/pull/44344,False,False,True,False,False,False,False
+lazypower,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/44418>,https://github.com/kubernetes/kubernetes/issues/44418,True,False,False,False,False,False,False
+puneetguptanitj,kubernetes-careers,"Hi I am not sure if this is the right channel but saw <@U0BGPQ6DS> your comments on <https://github.com/openshift/origin/issues/8070>, our usecase is to compose API servers where one server handles certain API groups while delegates rest to the next server in the chain. Would genericapiserver be a good starting point for that?",https://github.com/openshift/origin/issues/8070,False,False,False,False,False,True,False
+qasim.sarfraz,kubernetes-careers,"I am assuming I was hitting this, <https://github.com/kubernetes/minikube/issues/2199>, before I restarted the control plane components!",https://github.com/kubernetes/minikube/issues/2199,False,False,False,False,True,False,False
+liggitt,kubernetes-careers,Opened <https://github.com/kubernetes-incubator/kubespray/issues/2121>,https://github.com/kubernetes-incubator/kubespray/issues/2121,False,False,False,False,False,True,False
+cmceniry,kubernetes-careers,"ah - it was in the community notes for today:
+<https://docs.google.com/document/d/1VQDIAB0OqiSjIHI8AWMvSdceWhnz56jNpZrLs6o7NJY/#heading=h.bvg9w8qwsmq0>
+[0:35] Known issue when upgrading from &lt;1.6.4 to 1.6.4 or 1.6.5 when using GCLB
+<https://github.com/kubernetes/ingress/issues/842> - GCP HealthCheck customizations lost upgrading to GLBC 0.9.3",https://github.com/kubernetes/ingress/issues/842,False,False,False,False,True,False,False
+liggitt,kubernetes-careers,"if it is pre-1.7.x, <https://github.com/kubernetes/kubernetes/pull/44076> would be relevant",https://github.com/kubernetes/kubernetes/pull/44076,False,False,True,False,False,False,False
+jdetiber,kubernetes-careers,luxas: question on <https://github.com/kubernetes/features/issues/288#issuecomment-317968541> is GCR a hard requirement? Would it be possible to use a different public registry that supports Image manifest V2 schema 2?,https://github.com/kubernetes/features/issues/288#issuecomment-317968541,False,False,False,False,True,False,False
+deads2k,kubernetes-careers,@tamalsaha does the explanation in <https://github.com/kubernetes/kubeadm/issues/642> make sense?  It's important to understand why you shouldn't re-use that certificate,https://github.com/kubernetes/kubeadm/issues/642,False,False,False,False,True,False,False
+liggitt,kubernetes-careers,<https://github.com/kubernetes/kubernetes/pull/56358> will address it by asking the current authorizer if you are a superuser and allowing role/clusterrole creation in that case,https://github.com/kubernetes/kubernetes/pull/56358,False,False,True,False,False,False,False
+ed759,kubernetes-careers,Hi <@U0AHWBL3U> - I chimed in at <https://github.com/heptio/sonobuoy/issues/181>,https://github.com/heptio/sonobuoy/issues/181,False,False,False,False,False,True,False
+mkumatag,kubernetes-careers,PR - <https://github.com/kubernetes/kubernetes/pull/53598>,https://github.com/kubernetes/kubernetes/pull/53598,False,False,True,False,False,False,False
+jhorwit2,kubernetes-careers,"<@U6N42AE8G> 
+<https://github.com/kubernetes/features/issues/92>
+<https://github.com/kubernetes/features/issues/460>
+<https://github.com/kubernetes/features/issues/370>",https://github.com/kubernetes/features/issues/460,False,False,False,False,True,False,False
+notjames,kubernetes-careers,"at first we thought that it might have been because we were using an unsanctioned version of etcd with 1.8.x. The sanctioned IE tested version is 3.0.17, but I just had a minimal cluster die last night while using 3.0.17 — although I failed to check the file descriptor usage so this issue might be a different one. I’m spinning up a new cluster and will be keeping an eye on it. We were tracking this issue <https://github.com/samsung-cnct/kraken/issues/203> and <https://github.com/samsung-cnct/kraken/issues/206>",https://github.com/samsung-cnct/kraken/issues/203,False,False,False,False,False,True,False
+jhorwit2,kubernetes-careers,"<@U6N42AE8G> 
+<https://github.com/kubernetes/features/issues/92>
+<https://github.com/kubernetes/features/issues/460>
+<https://github.com/kubernetes/features/issues/370>",https://github.com/kubernetes/features/issues/92,False,False,False,False,True,False,False
+jbguerraz,kubernetes-careers,and also I'll then be able to provide feedback on <https://github.com/rook/rook/issues/1221> :wink:,https://github.com/rook/rook/issues/1221,False,False,False,False,False,True,False
+ericchiang,kubernetes-careers,<@U4SFZAMPC> what version of kubernetes are you using? might be <https://github.com/kubernetes/kubernetes/issues/45353> ?,https://github.com/kubernetes/kubernetes/issues/45353,True,False,False,False,False,False,False
+mkumatag,kubernetes-careers,"There are few image deps for conformance test from kubernetes/kubernetes.github.io repo, created a issue to discuss further on this - <https://github.com/kubernetes/kubernetes/issues/48530>",https://github.com/kubernetes/kubernetes/issues/48530,True,False,False,False,False,False,False
+liggitt,kubernetes-careers,Take a look at <https://github.com/kubernetes/community/pull/1503>,https://github.com/kubernetes/community/pull/1503,False,False,False,False,True,False,False
+liggitt,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/43409> was opened as a feature request a while ago,https://github.com/kubernetes/kubernetes/issues/43409,True,False,False,False,False,False,False
+ericchiang,kubernetes-careers,Might want to take a look at <https://github.com/kubernetes/community/pull/1503>,https://github.com/kubernetes/community/pull/1503,False,False,False,False,True,False,False
+notjames,kubernetes-careers,"at first we thought that it might have been because we were using an unsanctioned version of etcd with 1.8.x. The sanctioned IE tested version is 3.0.17, but I just had a minimal cluster die last night while using 3.0.17 — although I failed to check the file descriptor usage so this issue might be a different one. I’m spinning up a new cluster and will be keeping an eye on it. We were tracking this issue <https://github.com/samsung-cnct/kraken/issues/203> and <https://github.com/samsung-cnct/kraken/issues/206>",https://github.com/samsung-cnct/kraken/issues/206,False,False,False,False,False,True,False
+luiz.toledo,kubernetes-careers,"And if it is, how made it, how are you dealing with the Client-ID and Client-secret in the kubectl, do you that is a security issue? I read carefully this discussion: `<https://github.com/kubernetes/kubernetes/issues/37822>`, but I still don't get it",https://github.com/kubernetes/kubernetes/issues/37822,True,False,False,False,False,False,False

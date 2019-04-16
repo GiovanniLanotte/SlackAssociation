@@ -1,0 +1,37 @@
+Sender,channel,text,url_html
+ericchiang,kubernetes-pm,"<@U8B9K1ZPG> <https://github.com/kubernetes/kubernetes/issues/37822> is a good summary of the state of things. it depends on your provider, which may have some concept of ""public clients"" where the client-secret isn't secret",https://github.com/kubernetes/kubernetes/issues/37822
+jhorwit2,kubernetes-pm,np! There's also a vault provider impl WIP <https://github.com/kubernetes/kubernetes/issues/49817>,https://github.com/kubernetes/kubernetes/issues/49817
+rmt,kubernetes-pm,"<@U69QYR4TV>.. did you have any luck with the etcd open connections issue? <@U6S1GQY1H> and I are colleagues.
+ <https://github.com/kubernetes/kubernetes/issues/54138/> is the issue we are following, but it appears to be ignored, so we might be alone. Custom deployment on your end?
+
+ApiServers seem to be maintaining the connections to etcd, reconnecting them if etcd goes down. I guess it's a leak of goroutines.",https://github.com/kubernetes/kubernetes/issues/54138
+rupsky,kubernetes-pm,I am looking to use Hashicorp Vault as backend for Kuberneters Secretes. Has anyone tried this ?   I found this old open ticket <https://github.com/kubernetes/kubernetes/issues/10439> . Not sure if any progress has been made there,https://github.com/kubernetes/kubernetes/issues/10439
+fejta,kubernetes-pm,Bot vs bot <https://github.com/kubernetes/kubernetes/issues/57585>,https://github.com/kubernetes/kubernetes/issues/57585
+erwanmas,kubernetes-pm,"<@U1A47TVPZ> , ma perception c’est que kubeadm , n’est la que pour amorcer la configuration , il n’intervient plus apres  . 
+j’ai crée un bug report ( <https://github.com/kubernetes/kubernetes/issues/42946> )",https://github.com/kubernetes/kubernetes/issues/42946
+mhausenblas,kubernetes-pm,"(it’s <https://github.com/kubernetes/kubernetes/issues/44407> I was referring to ^^^, FWIW)",https://github.com/kubernetes/kubernetes/issues/44407
+chaosaffe,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/341>,https://github.com/kubernetes/kubernetes/issues/341
+theobolo,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/23896>,https://github.com/kubernetes/kubernetes/issues/23896
+mkumatag,kubernetes-pm,"There are few image deps for conformance test from kubernetes/kubernetes.github.io repo, created a issue to discuss further on this - <https://github.com/kubernetes/kubernetes/issues/48530>",https://github.com/kubernetes/kubernetes/issues/48530
+lazypower,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/46054>,https://github.com/kubernetes/kubernetes/issues/46054
+afirth.work,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/3312> might be a good place to start,https://github.com/kubernetes/kubernetes/issues/3312
+ixdy,kubernetes-pm,it's probably similar to <https://github.com/kubernetes/kubernetes/issues/56516>,https://github.com/kubernetes/kubernetes/issues/56516
+bentheelder,kubernetes-pm,"the flakes are too high: <http://velodrome.k8s.io/dashboard/db/bigquery-metrics?orgId=1>
+filed <https://github.com/kubernetes/kubernetes/issues/57342> and poked <https://github.com/kubernetes/kubernetes/issues/56121> :confused:",https://github.com/kubernetes/kubernetes/issues/57342
+sdlarsen,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/57382> is really nagging me. Happens for around half my nodes. Suggestions welcome,https://github.com/kubernetes/kubernetes/issues/57382
+bentheelder,kubernetes-pm,"the flakes are too high: <http://velodrome.k8s.io/dashboard/db/bigquery-metrics?orgId=1>
+filed <https://github.com/kubernetes/kubernetes/issues/57342> and poked <https://github.com/kubernetes/kubernetes/issues/56121> :confused:",https://github.com/kubernetes/kubernetes/issues/56121
+puneetguptanitj,kubernetes-pm,"Hi all we are observing a strange behvaiour where rbac/v1 apis are getting available only after ~5-6 mins on api-server start up, had raised an issue <https://github.com/kubernetes/kubernetes/issues/56899> is anyone else also seeing this? It happens only when we migrate 1.7.7 to 1.8.4. After moving to 1.8.4 even if we restart API server, rbac/v1 apis are immediately available",https://github.com/kubernetes/kubernetes/issues/56899
+bentheelder,kubernetes-pm,"I think kubernetes as well, EG <https://github.com/kubernetes/kubernetes/issues/1806>",https://github.com/kubernetes/kubernetes/issues/1806
+lazypower,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/44418>,https://github.com/kubernetes/kubernetes/issues/44418
+euank,kubernetes-pm,"it looks like you already found a issue for this though in <https://github.com/kubernetes/kubernetes/issues/24576>, or is this not covered?",https://github.com/kubernetes/kubernetes/issues/24576
+liggitt,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/43409> was opened as a feature request a while ago,https://github.com/kubernetes/kubernetes/issues/43409
+jannis,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/53644>,https://github.com/kubernetes/kubernetes/issues/53644
+typositoire,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/32839>,https://github.com/kubernetes/kubernetes/issues/32839
+mhausenblas,kubernetes-pm,<@U1A5ZGBLM> you aware of <https://github.com/kubernetes/kubernetes/issues/26120>?,https://github.com/kubernetes/kubernetes/issues/26120
+jpbetz,kubernetes-pm,<https://github.com/kubernetes/kubernetes/issues/57822>,https://github.com/kubernetes/kubernetes/issues/57822
+luiz.toledo,kubernetes-pm,"And if it is, how made it, how are you dealing with the Client-ID and Client-secret in the kubectl, do you that is a security issue? I read carefully this discussion: `<https://github.com/kubernetes/kubernetes/issues/37822>`, but I still don't get it",https://github.com/kubernetes/kubernetes/issues/37822
+oomichi,kubernetes-pm,"happy holiday :slightly_smiling_face:
+Can somebody close <https://github.com/kubernetes/kubernetes/issues/24763> ?
+That can be closed because test-infra one(<https://github.com/kubernetes/test-infra/issues/5701>) is merged instead",https://github.com/kubernetes/kubernetes/issues/24763
+ericchiang,kubernetes-pm,<@U4SFZAMPC> what version of kubernetes are you using? might be <https://github.com/kubernetes/kubernetes/issues/45353> ?,https://github.com/kubernetes/kubernetes/issues/45353

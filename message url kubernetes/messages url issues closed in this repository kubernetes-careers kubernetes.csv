@@ -1,0 +1,18 @@
+Sender,channel,text,url_html
+rupsky,kubernetes-careers,I am looking to use Hashicorp Vault as backend for Kuberneters Secretes. Has anyone tried this ?   I found this old open ticket <https://github.com/kubernetes/kubernetes/issues/10439> . Not sure if any progress has been made there,https://github.com/kubernetes/kubernetes/issues/10439
+ericchiang,kubernetes-careers,"<@U8B9K1ZPG> <https://github.com/kubernetes/kubernetes/issues/37822> is a good summary of the state of things. it depends on your provider, which may have some concept of ""public clients"" where the client-secret isn't secret",https://github.com/kubernetes/kubernetes/issues/37822
+mhausenblas,kubernetes-careers,"(it’s <https://github.com/kubernetes/kubernetes/issues/44407> I was referring to ^^^, FWIW)",https://github.com/kubernetes/kubernetes/issues/44407
+jhorwit2,kubernetes-careers,np! There's also a vault provider impl WIP <https://github.com/kubernetes/kubernetes/issues/49817>,https://github.com/kubernetes/kubernetes/issues/49817
+mhausenblas,kubernetes-careers,<@U1A5ZGBLM> you aware of <https://github.com/kubernetes/kubernetes/issues/26120>?,https://github.com/kubernetes/kubernetes/issues/26120
+rmt,kubernetes-careers,"<@U69QYR4TV>.. did you have any luck with the etcd open connections issue? <@U6S1GQY1H> and I are colleagues.
+ <https://github.com/kubernetes/kubernetes/issues/54138/> is the issue we are following, but it appears to be ignored, so we might be alone. Custom deployment on your end?
+
+ApiServers seem to be maintaining the connections to etcd, reconnecting them if etcd goes down. I guess it's a leak of goroutines.",https://github.com/kubernetes/kubernetes/issues/54138
+puneetguptanitj,kubernetes-careers,"Hi all we are observing a strange behvaiour where rbac/v1 apis are getting available only after ~5-6 mins on api-server start up, had raised an issue <https://github.com/kubernetes/kubernetes/issues/56899> is anyone else also seeing this? It happens only when we migrate 1.7.7 to 1.8.4. After moving to 1.8.4 even if we restart API server, rbac/v1 apis are immediately available",https://github.com/kubernetes/kubernetes/issues/56899
+typositoire,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/32839>,https://github.com/kubernetes/kubernetes/issues/32839
+lazypower,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/46054>,https://github.com/kubernetes/kubernetes/issues/46054
+lazypower,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/44418>,https://github.com/kubernetes/kubernetes/issues/44418
+ericchiang,kubernetes-careers,<@U4SFZAMPC> what version of kubernetes are you using? might be <https://github.com/kubernetes/kubernetes/issues/45353> ?,https://github.com/kubernetes/kubernetes/issues/45353
+mkumatag,kubernetes-careers,"There are few image deps for conformance test from kubernetes/kubernetes.github.io repo, created a issue to discuss further on this - <https://github.com/kubernetes/kubernetes/issues/48530>",https://github.com/kubernetes/kubernetes/issues/48530
+liggitt,kubernetes-careers,<https://github.com/kubernetes/kubernetes/issues/43409> was opened as a feature request a while ago,https://github.com/kubernetes/kubernetes/issues/43409
+luiz.toledo,kubernetes-careers,"And if it is, how made it, how are you dealing with the Client-ID and Client-secret in the kubectl, do you that is a security issue? I read carefully this discussion: `<https://github.com/kubernetes/kubernetes/issues/37822>`, but I still don't get it",https://github.com/kubernetes/kubernetes/issues/37822
