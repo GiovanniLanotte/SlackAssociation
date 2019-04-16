@@ -20,7 +20,7 @@ def main():
     containers: Containers = Containers()
     containers.add_association(sys.argv[1], sys.argv[2], tokens)
     containers.correspondence_channel_to_archive()
-    containers.print_organization()
+    containers.get_association_channel_repository(sys.argv[1])
     containers.get_len_message_for_channel()
     containers.messages_for_channel()
     containers.messages_slack_url_github()
