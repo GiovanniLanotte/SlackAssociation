@@ -56,7 +56,8 @@ class Containers:
         for association in self._associations:
             channel: Channels = association.get_channel()
             file = open(
-                "messages for channel " + channel.get_name_channel() + " of " + association.get_name_organization() + ".csv",
+                "messages for channel " + channel.get_name_channel() + " of " +
+                association.get_name_organization() + ".csv",
                 "wt")
             try:
                 writer: csv.DictWriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
