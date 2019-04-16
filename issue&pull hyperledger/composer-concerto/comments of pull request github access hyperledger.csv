@@ -1,0 +1,63 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/composer-concerto/pull/28,https://github.com/hyperledger/composer-concerto/pull/28,I notice we've lost the milliseconds by default. Is this an issue?,5f7bb1acef0e49b7a7f906be06e81b235ca3dcba,2019-03-18 12:52:45,266423785,"@@ -98,7 +99,7 @@ describe('Model Tests', function(){
+             assert.throws( function() {resource.setPropertyValue('booleanProperty', 'Foo');}, /.+expected type Boolean/, 'did not throw with expected message');
+ 
+             // o DateTime dateTimeProperty
+-            const dateTime = new Date('2016-10-11T02:30:26.571Z');
++            const dateTime = Moment.parseZone('2016-10-11T02:30:26Z');",,2019-03-18 22:23:35,https://api.github.com/repos/hyperledger/composer-concerto/pulls/comments/266423785,https://github.com/hyperledger/composer-concerto/pull/28#discussion_r266423785,dselman
+https://github.com/hyperledger/composer-concerto/pull/28,https://github.com/hyperledger/composer-concerto/pull/28,Is this different to `Moment.isMoment` ?,5f7bb1acef0e49b7a7f906be06e81b235ca3dcba,2019-03-18 12:53:12,266423932,"@@ -103,8 +104,8 @@ describe('Typed', () => {
+                 const classDecl = modelManager.getType('org.acme.defaults.DefaultAsset');
+                 const typed = new Typed(modelManager, classDecl, 'org.acme.defaults', 'DefaultAsset');
+                 typed.assignFieldDefaults();
+-                if (typed.value instanceof Date) {
+-                    typed.value.toISOString().should.equal(defaultValue);
++                if (typed.value instanceof Moment) {",,2019-03-18 22:23:35,https://api.github.com/repos/hyperledger/composer-concerto/pulls/comments/266423932,https://github.com/hyperledger/composer-concerto/pull/28#discussion_r266423932,dselman
+https://github.com/hyperledger/composer-concerto/pull/28,https://github.com/hyperledger/composer-concerto/pull/28,"About size: there is a significant size difference in the bundle with `moment`. Switching to `moment-mini` shows a more reasonable increase in bundle size, from the initial:
+```$ npm run prepublishOnly
+
+> composer-concerto@0.60.0 prepublishOnly /Users/dselman/dev/composer-concerto
+> webpack --config webpack.config.js --mode production
+
+Hash: 6dabe6228099cceb4565
+Version: webpack 4.20.2
+Time: 620ms
+Built at: 2019-03-18 12:59:24
+      Asset     Size  Chunks             Chunk Names
+concerto.js  236 KiB       0  [emitted]  client
+```
+to
+```
+$ npm run prepublishOnly  
+
+> composer-concerto@0.60.0 prepublishOnly /Users/jeromesimeon/git/composer-concerto
+> webpack --config webpack.config.js --mode production
+
+Hash: f1ceb64cdc8126b192c3
+Version: webpack 4.20.2
+Time: 7626ms
+Built at: 2019-03-18 10:51:05
+      Asset     Size  Chunks                    Chunk Names
+concerto.js  293 KiB       0  [emitted]  [big]  client
+```
+
+
+",5f7bb1acef0e49b7a7f906be06e81b235ca3dcba,2019-03-18 14:55:03,266480185,"@@ -98,7 +99,7 @@ describe('Model Tests', function(){
+             assert.throws( function() {resource.setPropertyValue('booleanProperty', 'Foo');}, /.+expected type Boolean/, 'did not throw with expected message');
+ 
+             // o DateTime dateTimeProperty
+-            const dateTime = new Date('2016-10-11T02:30:26.571Z');
++            const dateTime = Moment.parseZone('2016-10-11T02:30:26Z');",,2019-03-18 22:23:35,https://api.github.com/repos/hyperledger/composer-concerto/pulls/comments/266480185,https://github.com/hyperledger/composer-concerto/pull/28#discussion_r266480185,jeromesimeon
+https://github.com/hyperledger/composer-concerto/pull/28,https://github.com/hyperledger/composer-concerto/pull/28,"I forgot to ask about milliseconds. This is the default behavior for parsing/formatting in moment.js. This could be adjusted to preserves milliseconds if important.
+",5f7bb1acef0e49b7a7f906be06e81b235ca3dcba,2019-03-18 14:56:17,266480858,"@@ -98,7 +99,7 @@ describe('Model Tests', function(){
+             assert.throws( function() {resource.setPropertyValue('booleanProperty', 'Foo');}, /.+expected type Boolean/, 'did not throw with expected message');
+ 
+             // o DateTime dateTimeProperty
+-            const dateTime = new Date('2016-10-11T02:30:26.571Z');
++            const dateTime = Moment.parseZone('2016-10-11T02:30:26Z');",,2019-03-18 22:23:35,https://api.github.com/repos/hyperledger/composer-concerto/pulls/comments/266480858,https://github.com/hyperledger/composer-concerto/pull/28#discussion_r266480858,jeromesimeon
+https://github.com/hyperledger/composer-concerto/pull/28,https://github.com/hyperledger/composer-concerto/pull/28,"Yes. Good catch. Although `instanceof Moment` should work, I have found it is less reliable when testing through multiple dependencies than the `isMoment` call. I will switch to `isMoment` throughout the code for consistency.",5f7bb1acef0e49b7a7f906be06e81b235ca3dcba,2019-03-18 14:58:03,266481828,"@@ -103,8 +104,8 @@ describe('Typed', () => {
+                 const classDecl = modelManager.getType('org.acme.defaults.DefaultAsset');
+                 const typed = new Typed(modelManager, classDecl, 'org.acme.defaults', 'DefaultAsset');
+                 typed.assignFieldDefaults();
+-                if (typed.value instanceof Date) {
+-                    typed.value.toISOString().should.equal(defaultValue);
++                if (typed.value instanceof Moment) {",,2019-03-18 22:23:35,https://api.github.com/repos/hyperledger/composer-concerto/pulls/comments/266481828,https://github.com/hyperledger/composer-concerto/pull/28#discussion_r266481828,jeromesimeon

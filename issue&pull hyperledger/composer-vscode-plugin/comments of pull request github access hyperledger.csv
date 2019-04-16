@@ -1,0 +1,591 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,"I'd recommend using a deeper test folder structure here to help you out further down the line:
+data/valid
+data/valid/cto
+data/valid/acl
+data/valid/project
+
+data/invalid
+
+etc, etc
+
+Otherwise once you build up a large number of resources, it will be unmaintainable",e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:40:59,164143184,"@@ -0,0 +1,41 @@
++/*",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164143184,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164143184,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,"we're not actually testing activate here, we're testing the ability to open a file using the vscode api",e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:42:21,164143574,"@@ -9,14 +9,38 @@ import * as assert from 'assert';
+ // You can import and use all API from the 'vscode' module
+ // as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
++
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+ suite(""Extension Tests"", () => {
+ 
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
++
++	// test validation cto
++	test(""activate"", () => {",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164143574,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164143574,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,Need to remove comments!,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:42:31,164143636,"@@ -9,14 +9,38 @@ import * as assert from 'assert';
+ // You can import and use all API from the 'vscode' module
+ // as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
++
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+ suite(""Extension Tests"", () => {
+ 
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
++
++	// test validation cto
++	test(""activate"", () => {
++		
++		console.log('workspace.rootPath=' + vscode.workspace.workspaceFolders);
++
++		let rootPath = path.dirname(__dirname);		
++		let uri = vscode.Uri.file(path.join(rootPath, '../test/data/test.cto'));
++
++		workspace.openTextDocument(uri).then((document) =>{
++
++			let text = document.getText();
++			console.log('text = ' + text);
++
++		}, (err) =>{
++			assert.ok(false, `error in OpenTextDocument ${err}`);
++            return Promise.reject(err);
++		});
++
++		// let serverOptions: ServerOptions = {",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164143636,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164143636,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,Need to remove console logging,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:42:52,164143739,"@@ -9,14 +9,38 @@ import * as assert from 'assert';
+ // You can import and use all API from the 'vscode' module
+ // as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
++
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+ suite(""Extension Tests"", () => {
+ 
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
++
++	// test validation cto
++	test(""activate"", () => {
++		
++		console.log('workspace.rootPath=' + vscode.workspace.workspaceFolders);
++
++		let rootPath = path.dirname(__dirname);		
++		let uri = vscode.Uri.file(path.join(rootPath, '../test/data/test.cto'));
++
++		workspace.openTextDocument(uri).then((document) =>{
++
++			let text = document.getText();
++			console.log('text = ' + text);
++
++		}, (err) =>{
++			assert.ok(false, `error in OpenTextDocument ${err}`);
++            return Promise.reject(err);
++		});
++
++		// let serverOptions: ServerOptions = {
++		// 	run: { module: serverModule, transport: TransportKind.ipc }
++		// }
++		console.log('is activate called?');",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164143739,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164143739,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,"should not have console logging in the test output, as this will clutter the test file output",e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:43:29,164143909,"@@ -9,14 +9,38 @@ import * as assert from 'assert';
+ // You can import and use all API from the 'vscode' module
+ // as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
++
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+ suite(""Extension Tests"", () => {
+ 
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
++
++	// test validation cto
++	test(""activate"", () => {
++		
++		console.log('workspace.rootPath=' + vscode.workspace.workspaceFolders);
++
++		let rootPath = path.dirname(__dirname);		
++		let uri = vscode.Uri.file(path.join(rootPath, '../test/data/test.cto'));
++
++		workspace.openTextDocument(uri).then((document) =>{
++
++			let text = document.getText();
++			console.log('text = ' + text);",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164143909,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164143909,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,no console logging pls!,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:43:46,164143977,"@@ -9,14 +9,38 @@ import * as assert from 'assert';
+ // You can import and use all API from the 'vscode' module
+ // as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
++
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+ suite(""Extension Tests"", () => {
+ 
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
++
++	// test validation cto
++	test(""activate"", () => {
++		
++		console.log('workspace.rootPath=' + vscode.workspace.workspaceFolders);",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164143977,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164143977,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,Needs copyright statement header,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:46:17,164144654,"@@ -0,0 +1,27 @@
++// ",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164144654,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164144654,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,remove this template part,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:46:44,164144841,"@@ -0,0 +1,27 @@
++// 
++// Note: This example test is leveraging the Mocha test framework.
++// Please refer to their documentation on https://mochajs.org/ for help.",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164144841,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164144841,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,Probably don't want this generic template text either,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:47:15,164144999,"@@ -0,0 +1,27 @@
++// 
++// Note: This example test is leveraging the Mocha test framework.
++// Please refer to their documentation on https://mochajs.org/ for help.
++//
++
++// The module 'assert' provides assertion methods from node
++import * as assert from 'assert';
++
++// You can import and use all API from the 'vscode' module",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164144999,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164144999,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,no console logging in delivered test code as it clutters the logs - use asserts,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:47:54,164145177,"@@ -0,0 +1,27 @@
++// 
++// Note: This example test is leveraging the Mocha test framework.
++// Please refer to their documentation on https://mochajs.org/ for help.
++//
++
++// The module 'assert' provides assertion methods from node
++import * as assert from 'assert';
++
++// You can import and use all API from the 'vscode' module
++// as well as import your extension to test it
++import * as path from 'path';
++import { error } from 'util';
++import * as server from '../src/server';
++
++// Defines a Mocha test suite to group tests of similar kind together
++describe(""Server Tests"", () => {
++
++
++	// test validation cto
++	it(""validateCtoModelFile"", () => {
++		
++		let originatingFileName: string = ""./test/data/test.cto"";
++		console.log('is server called?');",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164145177,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164145177,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,"All mocha tests should follow a specific format if using a 'describe' framework, as shown here: https://mochajs.org/
+
+This is so that the actual test intention is clear to a third party
+
+",e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:51:28,164146249,"@@ -0,0 +1,27 @@
++// 
++// Note: This example test is leveraging the Mocha test framework.
++// Please refer to their documentation on https://mochajs.org/ for help.
++//
++
++// The module 'assert' provides assertion methods from node
++import * as assert from 'assert';
++
++// You can import and use all API from the 'vscode' module
++// as well as import your extension to test it
++import * as path from 'path';
++import { error } from 'util';
++import * as server from '../src/server';
++
++// Defines a Mocha test suite to group tests of similar kind together
++describe(""Server Tests"", () => {
++
++
++	// test validation cto
++	it(""validateCtoModelFile"", () => {",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164146249,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164146249,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,should this be commented out?,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:51:47,164146341,"@@ -0,0 +1,27 @@
++// 
++// Note: This example test is leveraging the Mocha test framework.
++// Please refer to their documentation on https://mochajs.org/ for help.
++//
++
++// The module 'assert' provides assertion methods from node
++import * as assert from 'assert';
++
++// You can import and use all API from the 'vscode' module
++// as well as import your extension to test it
++import * as path from 'path';
++import { error } from 'util';
++import * as server from '../src/server';
++
++// Defines a Mocha test suite to group tests of similar kind together
++describe(""Server Tests"", () => {
++
++
++	// test validation cto
++	it(""validateCtoModelFile"", () => {
++		
++		let originatingFileName: string = ""./test/data/test.cto"";
++		console.log('is server called?');
++		// server.validateCtoModelFile( originatingFileName);",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164146341,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164146341,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,these don't exist in the vscode repository ... why are they here?,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 15:57:18,164147960,"@@ -1,29 +1,53 @@
+-{
+-  ""name"": ""composer-support-server"",
+-  ""description"": ""HyperledgerComposer server"",
+-  ""version"": ""0.16.2"",
+-  ""author"": ""Hyperledger Composer"",
+-  ""publisher"": ""HyperledgerComposer"",
+-  ""license"": ""Apache-2.0"",
+-  ""engines"": {
+-    ""node"": ""*""
+-  },
+-  ""repository"": {
+-    ""type"": ""git"",
+-    ""url"": ""https://github.com/hyperledger/composer-vscode-plugin""
+-  },
+-  ""dependencies"": {
+-    ""vscode-languageserver"": ""3.3.0"",
+-    ""vscode-uri"": ""1.0.1"",
+-    ""composer-common"": ""latest""
+-  },
+-  ""devDependencies"": {
+-    ""@types/node"": ""^6.0.52"",
+-    ""typescript"": ""^2.1.5""
+-  },
+-  ""scripts"": {
+-    ""install:server"": ""installServerIntoExtension ../client ./package.json ./tsconfig.json"",
+-    ""compile:server"": ""installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -p ."",
+-    ""watch:server"": ""installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -w -p .""
+-  }
+-}
++{
++  ""name"": ""composer-support-server"",
++  ""description"": ""HyperledgerComposer server"",
++  ""version"": ""0.16.2"",
++  ""author"": ""Hyperledger Composer"",
++  ""publisher"": ""HyperledgerComposer"",
++  ""license"": ""Apache-2.0"",
++  ""engines"": {
++    ""node"": ""*""
++  },
++  ""repository"": {
++    ""type"": ""git"",
++    ""url"": ""https://github.com/hyperledger/composer-vscode-plugin""
++  },
++  ""dependencies"": {
++    ""composer-common"": ""latest"",
++    ""vscode-languageserver"": ""3.3.0"",
++    ""vscode-uri"": ""1.0.1""
++  },
++  ""devDependencies"": {
++    ""@types/mocha"": ""^2.2.33"",
++    ""@types/node"": ""^6.0.52"",
++    ""chai"": ""^4.1.2"",
++    ""mocha"": ""^5.0.0"",
++    ""nyc"": ""^11.4.1"",
++    ""ts-node"": ""^4.1.0"",
++    ""typescript"": ""^2.6.2""
++  },
++  ""scripts"": {
++    ""install:server"": ""installServerIntoExtension ../client ./package.json ./tsconfig.json"",
++    ""compile:server"": ""installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -p ."",
++    ""watch:server"": ""installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -w -p ."",
++    ""test"": ""nyc ./node_modules/.bin/mocha --compilers ts:ts-node/register ./test/*.spec.ts""
++  },
++  ""nyc"": {
++    ""exclude"": [
++      ""coverage/**"",
++      ""out/**"",",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164147960,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164147960,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,I will add these as needed per our chat.,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-26 16:20:20,164154171,"@@ -0,0 +1,41 @@
++/*",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164154171,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164154171,fenglianxu
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,move the files to data/valid/cto  and data/valid/acl now and will update others as needed. ,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-28 16:39:47,164304478,"@@ -0,0 +1,41 @@
++/*",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164304478,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164304478,fenglianxu
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,@nklincoln I have updated files per your comments.  can you review it again please?,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-28 17:16:30,164305584,"@@ -0,0 +1,27 @@
++// 
++// Note: This example test is leveraging the Mocha test framework.
++// Please refer to their documentation on https://mochajs.org/ for help.
++//
++
++// The module 'assert' provides assertion methods from node
++import * as assert from 'assert';
++
++// You can import and use all API from the 'vscode' module",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/164305584,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r164305584,fenglianxu
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,'s' missing in sensible,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-31 11:40:45,165027299,"@@ -121,27 +130,27 @@ connection.onDidChangeConfiguration((change) => {
+  * @param {ExecuteCommandParams} params - info passed from client - contains file and event names
+  */
+ connection.onExecuteCommand((params) => {
+-  //connection.console.log(`SERVER onExecuteCommand ${JSON.stringify(params)}`); //debug
++  // connection.console.log(`SERVER onExecuteCommand ${JSON.stringify(params)}`); //debug
+ 
+-  //sanity check
+-  if (params.command != 'composer.generateUML') {
++  // sanity check
++  if (params.command !== 'composer.generateUML') {
+     return;
+   }
+ 
+-  //create a title from the event info
+-  let diagramTitle = ""Business Network Definition"" //sensible default
+-  let originatingFileName = """";
+-  //Note: if the command is launched from the keyboard shortcut or the command palette,
+-  //we will not have any arguments passed in so cannot get the filename to use in the diagram.
++  // create a title from the event info
++  let diagramTitle = 'Business Network Definition'; // ensible default",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/165027299,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r165027299,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,this line is redundant as it will fail the test based on the assert above it,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-31 11:51:08,165029578,"@@ -1,22 +1,67 @@
+-// 
+-// Note: This example test is leveraging the Mocha test framework.
+-// Please refer to their documentation on https://mochajs.org/ for help.
+-//
+-
+-// The module 'assert' provides assertion methods from node
++/*
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
+ import * as assert from 'assert';
+-
+-// You can import and use all API from the 'vscode' module
+-// as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+-suite(""Extension Tests"", () => {
+-
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
+-	});
+-});
+\ No newline at end of file
++suite('Extension Tests', () => {
++  const rootPath = path.dirname(__dirname);
++
++  // open a cto document should return the expected document id and line count
++  test('activate should return a cto document when open a cto file', () => {
++
++    // const rootPath = path.dirname(__dirname);
++    const uri = vscode.Uri.file(path.join(rootPath, '../test/data/valid/cto/test.cto'));
++
++    workspace.openTextDocument(uri).then((document) => {
++
++    const text = document.getText();
++    assert.equal(document.languageId, 'composer');
++    assert.ok(document.lineCount === 41);
++
++    }, (err) => {
++      assert.ok(false, `error in OpenTextDocument ${err}`);
++      return Promise.reject(err);
++      });
++    });
++
++  test('activate should return an acl file when open an acl file', () => {
++
++   const uri = vscode.Uri.file(path.join(rootPath, '../test/data/valid/acl/permissions.acl'));
++
++   workspace.openTextDocument(uri).then((document) => {
++
++    const text = document.getText();
++    assert.equal(document.languageId, 'composer-acl');
++    assert.ok(document.lineCount === 34);
++
++    }, (err) => {
++      assert.ok(false, `error in OpenTextDocument ${err}`);
++      return Promise.reject(err);",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/165029578,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r165029578,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,don't need this here as the assert above will fail the test,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-31 11:51:42,165029726,"@@ -1,22 +1,67 @@
+-// 
+-// Note: This example test is leveraging the Mocha test framework.
+-// Please refer to their documentation on https://mochajs.org/ for help.
+-//
+-
+-// The module 'assert' provides assertion methods from node
++/*
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
+ import * as assert from 'assert';
+-
+-// You can import and use all API from the 'vscode' module
+-// as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+-suite(""Extension Tests"", () => {
+-
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
+-	});
+-});
+\ No newline at end of file
++suite('Extension Tests', () => {
++  const rootPath = path.dirname(__dirname);
++
++  // open a cto document should return the expected document id and line count
++  test('activate should return a cto document when open a cto file', () => {
++
++    // const rootPath = path.dirname(__dirname);
++    const uri = vscode.Uri.file(path.join(rootPath, '../test/data/valid/cto/test.cto'));
++
++    workspace.openTextDocument(uri).then((document) => {
++
++    const text = document.getText();
++    assert.equal(document.languageId, 'composer');
++    assert.ok(document.lineCount === 41);
++
++    }, (err) => {
++      assert.ok(false, `error in OpenTextDocument ${err}`);
++      return Promise.reject(err);",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/165029726,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r165029726,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,as above,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-31 11:52:39,165029937,"@@ -1,22 +1,67 @@
+-// 
+-// Note: This example test is leveraging the Mocha test framework.
+-// Please refer to their documentation on https://mochajs.org/ for help.
+-//
+-
+-// The module 'assert' provides assertion methods from node
++/*
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
+ import * as assert from 'assert';
+-
+-// You can import and use all API from the 'vscode' module
+-// as well as import your extension to test it
+ import * as vscode from 'vscode';
++import * as path from 'path';
+ import * as myExtension from '../src/extension';
++import { ExtensionContext, workspace, Uri } from 'vscode';
++import { error } from 'util';
+ 
+ // Defines a Mocha test suite to group tests of similar kind together
+-suite(""Extension Tests"", () => {
+-
+-	// Defines a Mocha unit test
+-	test(""Something 1"", () => {
+-		assert.equal(-1, [1, 2, 3].indexOf(5));
+-		assert.equal(-1, [1, 2, 3].indexOf(0));
+-	});
+-});
+\ No newline at end of file
++suite('Extension Tests', () => {
++  const rootPath = path.dirname(__dirname);
++
++  // open a cto document should return the expected document id and line count
++  test('activate should return a cto document when open a cto file', () => {
++
++    // const rootPath = path.dirname(__dirname);
++    const uri = vscode.Uri.file(path.join(rootPath, '../test/data/valid/cto/test.cto'));
++
++    workspace.openTextDocument(uri).then((document) => {
++
++    const text = document.getText();
++    assert.equal(document.languageId, 'composer');
++    assert.ok(document.lineCount === 41);
++
++    }, (err) => {
++      assert.ok(false, `error in OpenTextDocument ${err}`);
++      return Promise.reject(err);
++      });
++    });
++
++  test('activate should return an acl file when open an acl file', () => {
++
++   const uri = vscode.Uri.file(path.join(rootPath, '../test/data/valid/acl/permissions.acl'));
++
++   workspace.openTextDocument(uri).then((document) => {
++
++    const text = document.getText();
++    assert.equal(document.languageId, 'composer-acl');
++    assert.ok(document.lineCount === 34);
++
++    }, (err) => {
++      assert.ok(false, `error in OpenTextDocument ${err}`);
++      return Promise.reject(err);
++    });
++  });
++
++  test('activate should return an error when open non-supported file', () => {
++    const uri = vscode.Uri.file(path.join(rootPath, '../test/data/invalid/invalid.txt'));
++
++    workspace.openTextDocument(uri).then((err) => {
++      assert.ok(false, `error in OpenTextDocument ${err}`);
++      return Promise.reject(err);",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/165029937,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r165029937,nklincoln
+https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://github.com/hyperledger/composer-vscode-plugin/pull/59,all updated now,e6f2c6c9df8c9b53bca629a42406ba83e8ee12b0,2018-01-31 12:04:27,165032303,"@@ -121,27 +130,27 @@ connection.onDidChangeConfiguration((change) => {
+  * @param {ExecuteCommandParams} params - info passed from client - contains file and event names
+  */
+ connection.onExecuteCommand((params) => {
+-  //connection.console.log(`SERVER onExecuteCommand ${JSON.stringify(params)}`); //debug
++  // connection.console.log(`SERVER onExecuteCommand ${JSON.stringify(params)}`); //debug
+ 
+-  //sanity check
+-  if (params.command != 'composer.generateUML') {
++  // sanity check
++  if (params.command !== 'composer.generateUML') {
+     return;
+   }
+ 
+-  //create a title from the event info
+-  let diagramTitle = ""Business Network Definition"" //sensible default
+-  let originatingFileName = """";
+-  //Note: if the command is launched from the keyboard shortcut or the command palette,
+-  //we will not have any arguments passed in so cannot get the filename to use in the diagram.
++  // create a title from the event info
++  let diagramTitle = 'Business Network Definition'; // ensible default",,2018-01-31 14:44:58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/pulls/comments/165032303,https://github.com/hyperledger/composer-vscode-plugin/pull/59#discussion_r165032303,fenglianxu

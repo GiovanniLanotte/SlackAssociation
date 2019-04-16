@@ -1,0 +1,1333 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"Since you are not adding a new file but rewritting an old one the way we have handled Copyright in the past has been to add the new copyright below the previous for example
+
+# Copyright 2018 Cargill Incorporated
+# Copyright 2018 Intel Corporation",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:15:10,266878651,"@@ -1,4 +1,4 @@
+-# Copyright 2018 Cargill Incorporated
++# Copyright 2018 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266878651,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266878651,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"Since you are not adding a new file but rewriting an old one the way we have handled Copyright in the past has been to add the new copyrrite below the previous for example
+
+Copyright 2018 Cargill Incorporated
+Copyright 2018 Intel Corporation",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:15:44,266878913,"@@ -1,4 +1,4 @@
+-# Copyright 2018 Cargill Incorporated
++# Copyright 2018 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266878913,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266878913,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"This should not be updated to a new year. I believe we either do not update the copyright or change the year to look like 2017, 2019. This would be a good question for @TomBarnes ",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:17:42,266879771,"@@ -1,4 +1,4 @@
+-// Copyright 2017 Intel Corporation
++// Copyright 2019 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266879771,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266879771,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,Should this be 2019?,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:18:05,266879936,"@@ -0,0 +1,53 @@
++# Copyright 2018 Intel Corporation",,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266879936,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266879936,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"you could also use `sawtooth-sdk = ""0.2""` as we have published versions to crates",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:19:30,266880525,"@@ -0,0 +1,53 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++[package]
++name = ""validator-registry-tp""
++version = ""2.0.0""
++authors = [""Intel Corporation""]
++build = ""build.rs""
++description = ""Validator Registry Transaction Processor for sawtooth poet consensus""
++
++[package.metadata.deb]
++maintainer = ""sawtooth""
++depends = ""$auto""
++copyright = ""Copyright 2019 Intel Corporation""
++assets = [
++    [""./packaging/systemd/validator-registry-tp.service"", ""/lib/systemd/system/validator-registry-tp.service"", ""644""],
++    [""./packaging/systemd/validator-registry-tp"", ""/etc/default/validator-registry-tp"", ""644""],
++    [""target/release/validator-registry-tp"", ""/usr/bin/validator-registry-tp"", ""755""],
++]
++
++[dependencies]
++sawtooth-sdk = { git = ""https://github.com/hyperledger/sawtooth-sdk-rust"", branch = ""0-2"" }",,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266880525,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266880525,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,2019?,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:20:13,266880818,"@@ -0,0 +1,91 @@
++/*
++ * Copyright 2018 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266880818,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266880818,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,2019?,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:21:15,266881344,"@@ -0,0 +1,18 @@
++/*
++ * Copyright 2018 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266881344,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266881344,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,2019?,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:21:30,266881452,"@@ -0,0 +1,269 @@
++/*
++ * Copyright 2018 Intel Corporation.",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266881452,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266881452,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"These should be renamed SETTINGS_ADDRESS_PART_SIZE,  SETTING_MAX_KEY_PARTS, and SETTING_NAMESPACE
+
+Config is a holdover from the first name of settings",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:26:11,266883697,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;",35,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266883697,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266883697,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,Is using expect the right thing to do here and below? This will cause the tp to panic.,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:28:46,266884831,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");",55,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266884831,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266884831,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"All of these InternalErrors should be InvalidTransactions. InternalErrors will cause the transaction to be retried over and over again because it is meant to be used when something out of the normal happens, and the transaction would succeed if we retired. We try to avoid using them in most cases. ",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:30:50,266885746,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");
++
++    let public_key = PKey::public_key_from_pem(
++        report_public_key_pem
++            .expect(""Error reading public key information from on-chain setting"")
++            .as_bytes(),
++    )
++    .expect(""Error creating Public Key object"");
++    let decoded_sig = base64::decode(signature).unwrap();
++    if !verify_message_signature(&public_key, verification_report.as_bytes(), &decoded_sig) {
++        error!(""Verification report signature does not match"");
++        return Err(ApplyError::InternalError(
++            ""Verification report signature does not match"".to_string(),
++        ));
++    }
++
++    // Convert verification_report json into HashMap
++    let verification_report_tmp_value: serde_json::Value =
++        serde_json::from_str(verification_report)
++            .expect(""Error reading verification report as Json"");
++    let verification_report_dict = verification_report_tmp_value
++        .as_object()
++        .expect(""Error reading verification report as Key Value pair"");
++    // Verify that the verification report meets the following criteria:
++    // Includes an ID field.
++    if !verification_report_dict.contains_key(""id"") {
++        error!(""Verification report does not contain id field"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain id field"".to_string(),
++        ));
++    }
++    // Includes an EPID psuedonym.
++    if !verification_report_dict.contains_key(""epidPseudonym"") {
++        error!(""Verification report does not contain an EPID psuedonym"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain an EPID psuedonym"".to_string(),
++        ));
++    }
++    // Verify that the verification report EPID pseudonym matches the anti-sybil ID
++    let epid_pseudonym = verification_report_dict
++        .get(""epidPseudonym"")
++        .expect(""Error reading epidPseudonym from verification report"")
++        .as_str()
++        .expect(""Error converting epidPseudonym as string reference"");
++    if epid_pseudonym != signup_info.anti_sybil_id {
++        error!(
++            ""The anti-sybil ID in the verification report {} does not match the one \
++             contained in the signup information {}"",
++            epid_pseudonym, signup_info.anti_sybil_id
++        );
++        return Err(ApplyError::InternalError(
++            ""The anti-sybil ID in the verification report does not match in \
++             the signup information""
++                .to_string(),
++        ));
++    }
++    // Includes an enclave quote.
++    if !verification_report_dict.contains_key(""isvEnclaveQuoteBody"") {
++        error!(""Verification report does not contain enclave quote body"");
++        return Err(ApplyError::InternalError(",114,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266885746,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266885746,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,This will cause the tp to panic,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:31:22,266886033,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");
++
++    let public_key = PKey::public_key_from_pem(
++        report_public_key_pem
++            .expect(""Error reading public key information from on-chain setting"")
++            .as_bytes(),
++    )
++    .expect(""Error creating Public Key object"");
++    let decoded_sig = base64::decode(signature).unwrap();
++    if !verify_message_signature(&public_key, verification_report.as_bytes(), &decoded_sig) {
++        error!(""Verification report signature does not match"");
++        return Err(ApplyError::InternalError(
++            ""Verification report signature does not match"".to_string(),
++        ));
++    }
++
++    // Convert verification_report json into HashMap
++    let verification_report_tmp_value: serde_json::Value =
++        serde_json::from_str(verification_report)
++            .expect(""Error reading verification report as Json"");
++    let verification_report_dict = verification_report_tmp_value
++        .as_object()
++        .expect(""Error reading verification report as Key Value pair"");
++    // Verify that the verification report meets the following criteria:
++    // Includes an ID field.
++    if !verification_report_dict.contains_key(""id"") {
++        error!(""Verification report does not contain id field"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain id field"".to_string(),
++        ));
++    }
++    // Includes an EPID psuedonym.
++    if !verification_report_dict.contains_key(""epidPseudonym"") {
++        error!(""Verification report does not contain an EPID psuedonym"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain an EPID psuedonym"".to_string(),
++        ));
++    }
++    // Verify that the verification report EPID pseudonym matches the anti-sybil ID
++    let epid_pseudonym = verification_report_dict
++        .get(""epidPseudonym"")
++        .expect(""Error reading epidPseudonym from verification report"")
++        .as_str()
++        .expect(""Error converting epidPseudonym as string reference"");
++    if epid_pseudonym != signup_info.anti_sybil_id {
++        error!(
++            ""The anti-sybil ID in the verification report {} does not match the one \
++             contained in the signup information {}"",
++            epid_pseudonym, signup_info.anti_sybil_id
++        );
++        return Err(ApplyError::InternalError(
++            ""The anti-sybil ID in the verification report does not match in \
++             the signup information""
++                .to_string(),
++        ));
++    }
++    // Includes an enclave quote.
++    if !verification_report_dict.contains_key(""isvEnclaveQuoteBody"") {
++        error!(""Verification report does not contain enclave quote body"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain enclave quote body"".to_string(),
++        ));
++    }
++    // The ISV enclave quote body is base 64 encoded
++    let _enclave_quote = verification_report_dict
++        .get(""isvEnclaveQuoteBody"")
++        .expect(""Error reading isvEnclaveQuoteBody from verification report"");",121,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266886033,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266886033,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,This PR should not include TODO. Please implement the missing piece and remove the TODO comment,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:32:20,266886447,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");
++
++    let public_key = PKey::public_key_from_pem(
++        report_public_key_pem
++            .expect(""Error reading public key information from on-chain setting"")
++            .as_bytes(),
++    )
++    .expect(""Error creating Public Key object"");
++    let decoded_sig = base64::decode(signature).unwrap();
++    if !verify_message_signature(&public_key, verification_report.as_bytes(), &decoded_sig) {
++        error!(""Verification report signature does not match"");
++        return Err(ApplyError::InternalError(
++            ""Verification report signature does not match"".to_string(),
++        ));
++    }
++
++    // Convert verification_report json into HashMap
++    let verification_report_tmp_value: serde_json::Value =
++        serde_json::from_str(verification_report)
++            .expect(""Error reading verification report as Json"");
++    let verification_report_dict = verification_report_tmp_value
++        .as_object()
++        .expect(""Error reading verification report as Key Value pair"");
++    // Verify that the verification report meets the following criteria:
++    // Includes an ID field.
++    if !verification_report_dict.contains_key(""id"") {
++        error!(""Verification report does not contain id field"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain id field"".to_string(),
++        ));
++    }
++    // Includes an EPID psuedonym.
++    if !verification_report_dict.contains_key(""epidPseudonym"") {
++        error!(""Verification report does not contain an EPID psuedonym"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain an EPID psuedonym"".to_string(),
++        ));
++    }
++    // Verify that the verification report EPID pseudonym matches the anti-sybil ID
++    let epid_pseudonym = verification_report_dict
++        .get(""epidPseudonym"")
++        .expect(""Error reading epidPseudonym from verification report"")
++        .as_str()
++        .expect(""Error converting epidPseudonym as string reference"");
++    if epid_pseudonym != signup_info.anti_sybil_id {
++        error!(
++            ""The anti-sybil ID in the verification report {} does not match the one \
++             contained in the signup information {}"",
++            epid_pseudonym, signup_info.anti_sybil_id
++        );
++        return Err(ApplyError::InternalError(
++            ""The anti-sybil ID in the verification report does not match in \
++             the signup information""
++                .to_string(),
++        ));
++    }
++    // Includes an enclave quote.
++    if !verification_report_dict.contains_key(""isvEnclaveQuoteBody"") {
++        error!(""Verification report does not contain enclave quote body"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain enclave quote body"".to_string(),
++        ));
++    }
++    // The ISV enclave quote body is base 64 encoded
++    let _enclave_quote = verification_report_dict
++        .get(""isvEnclaveQuoteBody"")
++        .expect(""Error reading isvEnclaveQuoteBody from verification report"");
++    // The report body should be SHA256(SHA256(OPK)|PPK)
++    let hash_input = format!(
++        ""{}{}"",
++        originator_public_key_hash.to_uppercase(),
++        signup_info.poet_public_key.to_uppercase()
++    );
++    let _hash_value = sha256(hash_input.as_bytes());
++    // TODO: Quote verification",129,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266886447,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266886447,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,This will cause the tp to panic,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:32:41,266886585,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");
++
++    let public_key = PKey::public_key_from_pem(
++        report_public_key_pem
++            .expect(""Error reading public key information from on-chain setting"")
++            .as_bytes(),
++    )
++    .expect(""Error creating Public Key object"");
++    let decoded_sig = base64::decode(signature).unwrap();
++    if !verify_message_signature(&public_key, verification_report.as_bytes(), &decoded_sig) {
++        error!(""Verification report signature does not match"");
++        return Err(ApplyError::InternalError(
++            ""Verification report signature does not match"".to_string(),
++        ));
++    }
++
++    // Convert verification_report json into HashMap
++    let verification_report_tmp_value: serde_json::Value =
++        serde_json::from_str(verification_report)
++            .expect(""Error reading verification report as Json"");
++    let verification_report_dict = verification_report_tmp_value
++        .as_object()
++        .expect(""Error reading verification report as Key Value pair"");
++    // Verify that the verification report meets the following criteria:
++    // Includes an ID field.
++    if !verification_report_dict.contains_key(""id"") {
++        error!(""Verification report does not contain id field"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain id field"".to_string(),
++        ));
++    }
++    // Includes an EPID psuedonym.
++    if !verification_report_dict.contains_key(""epidPseudonym"") {
++        error!(""Verification report does not contain an EPID psuedonym"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain an EPID psuedonym"".to_string(),
++        ));
++    }
++    // Verify that the verification report EPID pseudonym matches the anti-sybil ID
++    let epid_pseudonym = verification_report_dict
++        .get(""epidPseudonym"")
++        .expect(""Error reading epidPseudonym from verification report"")
++        .as_str()
++        .expect(""Error converting epidPseudonym as string reference"");
++    if epid_pseudonym != signup_info.anti_sybil_id {
++        error!(
++            ""The anti-sybil ID in the verification report {} does not match the one \
++             contained in the signup information {}"",
++            epid_pseudonym, signup_info.anti_sybil_id
++        );
++        return Err(ApplyError::InternalError(
++            ""The anti-sybil ID in the verification report does not match in \
++             the signup information""
++                .to_string(),
++        ));
++    }
++    // Includes an enclave quote.
++    if !verification_report_dict.contains_key(""isvEnclaveQuoteBody"") {
++        error!(""Verification report does not contain enclave quote body"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain enclave quote body"".to_string(),
++        ));
++    }
++    // The ISV enclave quote body is base 64 encoded
++    let _enclave_quote = verification_report_dict
++        .get(""isvEnclaveQuoteBody"")
++        .expect(""Error reading isvEnclaveQuoteBody from verification report"");
++    // The report body should be SHA256(SHA256(OPK)|PPK)
++    let hash_input = format!(
++        ""{}{}"",
++        originator_public_key_hash.to_uppercase(),
++        signup_info.poet_public_key.to_uppercase()
++    );
++    let _hash_value = sha256(hash_input.as_bytes());
++    // TODO: Quote verification
++    // Verify that the nonce in the verification report matches the nonce in the transaction
++    // payload submitted
++    let nonce = match verification_report_dict.get(""nonce"") {
++        Some(nonce_present) => nonce_present
++            .as_str()
++            .expect(""Error reading nonce as string reference""),",135,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266886585,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266886585,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,InternalError should be InvalidTransaction,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:33:09,266886856,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");
++
++    let public_key = PKey::public_key_from_pem(
++        report_public_key_pem
++            .expect(""Error reading public key information from on-chain setting"")
++            .as_bytes(),
++    )
++    .expect(""Error creating Public Key object"");
++    let decoded_sig = base64::decode(signature).unwrap();
++    if !verify_message_signature(&public_key, verification_report.as_bytes(), &decoded_sig) {
++        error!(""Verification report signature does not match"");
++        return Err(ApplyError::InternalError(
++            ""Verification report signature does not match"".to_string(),
++        ));
++    }
++
++    // Convert verification_report json into HashMap
++    let verification_report_tmp_value: serde_json::Value =
++        serde_json::from_str(verification_report)
++            .expect(""Error reading verification report as Json"");
++    let verification_report_dict = verification_report_tmp_value
++        .as_object()
++        .expect(""Error reading verification report as Key Value pair"");
++    // Verify that the verification report meets the following criteria:
++    // Includes an ID field.
++    if !verification_report_dict.contains_key(""id"") {
++        error!(""Verification report does not contain id field"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain id field"".to_string(),
++        ));
++    }
++    // Includes an EPID psuedonym.
++    if !verification_report_dict.contains_key(""epidPseudonym"") {
++        error!(""Verification report does not contain an EPID psuedonym"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain an EPID psuedonym"".to_string(),
++        ));
++    }
++    // Verify that the verification report EPID pseudonym matches the anti-sybil ID
++    let epid_pseudonym = verification_report_dict
++        .get(""epidPseudonym"")
++        .expect(""Error reading epidPseudonym from verification report"")
++        .as_str()
++        .expect(""Error converting epidPseudonym as string reference"");
++    if epid_pseudonym != signup_info.anti_sybil_id {
++        error!(
++            ""The anti-sybil ID in the verification report {} does not match the one \
++             contained in the signup information {}"",
++            epid_pseudonym, signup_info.anti_sybil_id
++        );
++        return Err(ApplyError::InternalError(
++            ""The anti-sybil ID in the verification report does not match in \
++             the signup information""
++                .to_string(),
++        ));
++    }
++    // Includes an enclave quote.
++    if !verification_report_dict.contains_key(""isvEnclaveQuoteBody"") {
++        error!(""Verification report does not contain enclave quote body"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain enclave quote body"".to_string(),
++        ));
++    }
++    // The ISV enclave quote body is base 64 encoded
++    let _enclave_quote = verification_report_dict
++        .get(""isvEnclaveQuoteBody"")
++        .expect(""Error reading isvEnclaveQuoteBody from verification report"");
++    // The report body should be SHA256(SHA256(OPK)|PPK)
++    let hash_input = format!(
++        ""{}{}"",
++        originator_public_key_hash.to_uppercase(),
++        signup_info.poet_public_key.to_uppercase()
++    );
++    let _hash_value = sha256(hash_input.as_bytes());
++    // TODO: Quote verification
++    // Verify that the nonce in the verification report matches the nonce in the transaction
++    // payload submitted
++    let nonce = match verification_report_dict.get(""nonce"") {
++        Some(nonce_present) => nonce_present
++            .as_str()
++            .expect(""Error reading nonce as string reference""),
++        None => """",
++    };
++    if nonce != signup_info.nonce {
++        error!(
++            ""AVR nonce {} does not match signup info nonce {}"",
++            nonce, signup_info.nonce
++        );
++        return Err(ApplyError::InternalError(",143,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266886856,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266886856,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,Again this will cause the tp to panic.,3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 13:33:51,266887140,"@@ -0,0 +1,212 @@
++/*
++ * Copyright 2018 Intel Corporation.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++extern crate openssl;
++
++use self::openssl::{
++    hash::MessageDigest,
++    pkey::{PKey, Public},
++    sha::sha256,
++    sign::Verifier,
++};
++use crypto::{digest::Digest, sha2::Sha256};
++use protos::validator_registry::{SignUpInfo, SignUpInfoProof, ValidatorRegistryPayload};
++use sawtooth_sdk::{
++    messages::setting::Setting,
++    processor::handler::{ApplyError, TransactionContext},
++};
++
++use validator_registry_tp_handler::{get_state, parse_from};
++
++const _CONFIG_ADDRESS_PART_SIZE: usize = 16;
++const _CONFIG_NAMESPACE: &str = ""000000"";
++const _CONFIG_MAX_KEY_PARTS: usize = 4;
++
++pub fn verify_signup_info(
++    context: &mut TransactionContext,
++    originator_public_key_hash: &str,
++    val_reg_payload: &ValidatorRegistryPayload,
++) -> Result<(), ApplyError> {
++    let signup_info: SignUpInfo = val_reg_payload.get_signup_info().clone();
++    let proof_data: SignUpInfoProof = signup_info.get_proof_data().clone();
++
++    // Verify the attestation verification report signature
++    let verification_report = proof_data.get_verification_report();
++    let signature = &proof_data.get_signature();
++
++    // Try to get the report key from the configuration setting.  If it
++    // is not there or we cannot parse it, fail verification.
++    let report_public_key_pem =
++        get_config_setting(context, &""sawtooth.poet.report_public_key_pem"".to_string())
++            .expect(""Error reading config setting: PoET public key"");
++
++    let public_key = PKey::public_key_from_pem(
++        report_public_key_pem
++            .expect(""Error reading public key information from on-chain setting"")
++            .as_bytes(),
++    )
++    .expect(""Error creating Public Key object"");
++    let decoded_sig = base64::decode(signature).unwrap();
++    if !verify_message_signature(&public_key, verification_report.as_bytes(), &decoded_sig) {
++        error!(""Verification report signature does not match"");
++        return Err(ApplyError::InternalError(
++            ""Verification report signature does not match"".to_string(),
++        ));
++    }
++
++    // Convert verification_report json into HashMap
++    let verification_report_tmp_value: serde_json::Value =
++        serde_json::from_str(verification_report)
++            .expect(""Error reading verification report as Json"");
++    let verification_report_dict = verification_report_tmp_value
++        .as_object()
++        .expect(""Error reading verification report as Key Value pair"");
++    // Verify that the verification report meets the following criteria:
++    // Includes an ID field.
++    if !verification_report_dict.contains_key(""id"") {
++        error!(""Verification report does not contain id field"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain id field"".to_string(),
++        ));
++    }
++    // Includes an EPID psuedonym.
++    if !verification_report_dict.contains_key(""epidPseudonym"") {
++        error!(""Verification report does not contain an EPID psuedonym"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain an EPID psuedonym"".to_string(),
++        ));
++    }
++    // Verify that the verification report EPID pseudonym matches the anti-sybil ID
++    let epid_pseudonym = verification_report_dict
++        .get(""epidPseudonym"")
++        .expect(""Error reading epidPseudonym from verification report"")
++        .as_str()
++        .expect(""Error converting epidPseudonym as string reference"");
++    if epid_pseudonym != signup_info.anti_sybil_id {
++        error!(
++            ""The anti-sybil ID in the verification report {} does not match the one \
++             contained in the signup information {}"",
++            epid_pseudonym, signup_info.anti_sybil_id
++        );
++        return Err(ApplyError::InternalError(
++            ""The anti-sybil ID in the verification report does not match in \
++             the signup information""
++                .to_string(),
++        ));
++    }
++    // Includes an enclave quote.
++    if !verification_report_dict.contains_key(""isvEnclaveQuoteBody"") {
++        error!(""Verification report does not contain enclave quote body"");
++        return Err(ApplyError::InternalError(
++            ""Verification report does not contain enclave quote body"".to_string(),
++        ));
++    }
++    // The ISV enclave quote body is base 64 encoded
++    let _enclave_quote = verification_report_dict
++        .get(""isvEnclaveQuoteBody"")
++        .expect(""Error reading isvEnclaveQuoteBody from verification report"");
++    // The report body should be SHA256(SHA256(OPK)|PPK)
++    let hash_input = format!(
++        ""{}{}"",
++        originator_public_key_hash.to_uppercase(),
++        signup_info.poet_public_key.to_uppercase()
++    );
++    let _hash_value = sha256(hash_input.as_bytes());
++    // TODO: Quote verification
++    // Verify that the nonce in the verification report matches the nonce in the transaction
++    // payload submitted
++    let nonce = match verification_report_dict.get(""nonce"") {
++        Some(nonce_present) => nonce_present
++            .as_str()
++            .expect(""Error reading nonce as string reference""),
++        None => """",
++    };
++    if nonce != signup_info.nonce {
++        error!(
++            ""AVR nonce {} does not match signup info nonce {}"",
++            nonce, signup_info.nonce
++        );
++        return Err(ApplyError::InternalError(
++            ""AVR nonce doesn't match signup info nonce"".to_string(),
++        ));
++    }
++    Ok(())
++}
++
++/// Function to verify if message digest (SHA256 of message) is signed using private key
++/// associated with the public key sent as a input parameter. Accepts message, public key and
++/// signature of the message as input parameters.
++///
++/// Note: Digest of message is calculated using SHA256 algorithm in this function.
++fn verify_message_signature(pub_key: &PKey<Public>, message: &[u8], signature: &[u8]) -> bool {
++    let mut verifier = Verifier::new(MessageDigest::sha256(), pub_key)
++        .expect(""Error creating verifier object for SHA256 algortihm"");",157,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266887140,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266887140,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"We replaced that file with a new one. We've replaced everything in the families directory, except the ""tests"" directory.
+Does the rule above still apply?",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 15:53:49,266963214,"@@ -1,4 +1,4 @@
+-# Copyright 2018 Cargill Incorporated
++# Copyright 2018 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266963214,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266963214,askmish
+https://github.com/hyperledger/sawtooth-poet/pull/23,https://github.com/hyperledger/sawtooth-poet/pull/23,"Ah i see, github makes it looks like you are updating the file, not adding a new one. This is probably a better question @TomBarnes or @vaporos then. ",3ec45c8b381bcb456666641397ac7832b2311323,2019-03-19 15:57:35,266965205,"@@ -1,4 +1,4 @@
+-# Copyright 2018 Cargill Incorporated
++# Copyright 2018 Intel Corporation",2,2019-03-27 09:05:05,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/266965205,https://github.com/hyperledger/sawtooth-poet/pull/23#discussion_r266965205,agunde406
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,This should be replaced with a rust lint check.,09b2e24157fc5296c683b12eb272770eb9084622,2018-12-10 22:32:40,240407262,"@@ -63,52 +62,27 @@ node ('master') {
+             env.ISOLATION_ID = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+             env.COMPOSE_PROJECT_NAME = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+ 
+-            stage(""Build Lint Dependencies"") {
+-                sh 'docker-compose up --abort-on-container-exit --build --force-recreate --renew-anon-volumes --exit-code-from poet-common poet-common'
+-                sh 'docker-compose down'
+-            }
+-
+-            stage(""Run Lint"") {",,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/240407262,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r240407262,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,"Scripts should go into bin/ and not have the .sh extension.
+
+However should this really be done in a build.rs file instead, so it always executed prior to the poet build?",09b2e24157fc5296c683b12eb272770eb9084622,2018-12-10 22:39:24,240409089,"@@ -0,0 +1,16 @@
++#!/bin/bash",1,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/240409089,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r240409089,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,This should probably remain poet-engine?,09b2e24157fc5296c683b12eb272770eb9084622,2018-12-10 22:44:41,240410533,"@@ -11,19 +11,18 @@
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+-# -----------------------------------------------------------------------------
++# ------------------------------------------------------------------------------
+ 
+ [Unit]
+-Description=Sawtooth PoET Engine
++Description=Sawtooth PoET Consensus Engine
+ After=network.target
+ 
+ [Service]
+ User=sawtooth
+ Group=sawtooth
+-EnvironmentFile=-/etc/default/sawtooth-poet-engine
+-ExecStart=/usr/bin/poet-engine $SAWTOOTH_POET_ENGINE_ARGS
++EnvironmentFile=-/etc/default/sawtooth-poet
++ExecStart=/usr/bin/sawtooth-poet $SAWTOOTH_POET_ARGS",18,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/240410533,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r240410533,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,"> Appreciate the work that has gone into more granular commits thus far. Still, though it is easier than it was, the commit messages do not attempt to explain the reasoning for the changes, and it can not be easily inferred.
+> 
+> For example, in this commit:
+> 
+> commit [f6145a2](https://github.com/hyperledger/sawtooth-poet/commit/f6145a2ac23cd8c2c60e3db197024e94b6e5ab4b)
+> Author: Rajeev Ranjan [rajeev2.ranjan@intel.com](mailto:rajeev2.ranjan@intel.com)
+> Date: Thu Nov 15 14:11:53 2018 +0530
+> 
+> ```
+> UTs for ConsensusStateStore & lmdb
+> 
+> Updations in lmdb.rs. Implement new uts in ConsensusStateStore.
+> 
+> Signed-off-by: Rajeev Ranjan <rajeev2.ranjan@intel.com>
+> ```
+> It is not clear the purpose of these changes. Since this change in particular is a change to a file copied from sawtooth-core, I'm curious about the reasoning. Good explanation in the commit message would help. (See https://chris.beams.io/posts/git-commit/)
+
+Will edit the commit message in the commit where this file got introduced. This file was used from sawtooth-core since lmdb was not exposed via sawtooth-sdk. lmdb file is used in consensus state store",09b2e24157fc5296c683b12eb272770eb9084622,2018-12-13 08:49:13,241313245,"@@ -63,52 +62,27 @@ node ('master') {
+             env.ISOLATION_ID = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+             env.COMPOSE_PROJECT_NAME = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+ 
+-            stage(""Build Lint Dependencies"") {
+-                sh 'docker-compose up --abort-on-container-exit --build --force-recreate --renew-anon-volumes --exit-code-from poet-common poet-common'
+-                sh 'docker-compose down'
+-            }
+-
+-            stage(""Run Lint"") {",,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/241313245,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r241313245,manojgop
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,Will add a new commit to handle this,09b2e24157fc5296c683b12eb272770eb9084622,2018-12-13 08:49:32,241313320,"@@ -0,0 +1,16 @@
++#!/bin/bash",1,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/241313320,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r241313320,manojgop
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,"> This should be replaced with a rust lint check.
+
+Will add Rust Lint and Rust fmt as separate commits",09b2e24157fc5296c683b12eb272770eb9084622,2018-12-13 08:51:31,241314001,"@@ -63,52 +62,27 @@ node ('master') {
+             env.ISOLATION_ID = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+             env.COMPOSE_PROJECT_NAME = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+ 
+-            stage(""Build Lint Dependencies"") {
+-                sh 'docker-compose up --abort-on-container-exit --build --force-recreate --renew-anon-volumes --exit-code-from poet-common poet-common'
+-                sh 'docker-compose down'
+-            }
+-
+-            stage(""Run Lint"") {",,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/241314001,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r241314001,manojgop
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,This looks good. Thanks for adding the diagram.,09b2e24157fc5296c683b12eb272770eb9084622,2018-12-13 18:05:47,241504857,"@@ -1,43 +1,83 @@
++High level design
++
++![Photo of Sawtooth POET SGX]( Rust_CPP_SGX.jpg ""Sawtooth POET SGX High Level Design"")",3,2018-12-19 10:35:13,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/241504857,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r241504857,danintel
+https://github.com/hyperledger/sawtooth-poet/pull/10,https://github.com/hyperledger/sawtooth-poet/pull/10,@vaporos Fixed clippy errors and rustfmt and added these checks in Jenkins build,09b2e24157fc5296c683b12eb272770eb9084622,2018-12-19 10:42:36,242868517,"@@ -63,52 +62,27 @@ node ('master') {
+             env.ISOLATION_ID = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+             env.COMPOSE_PROJECT_NAME = sh(returnStdout: true, script: 'printf $BUILD_TAG | sha256sum | cut -c1-64').trim()
+ 
+-            stage(""Build Lint Dependencies"") {
+-                sh 'docker-compose up --abort-on-container-exit --build --force-recreate --renew-anon-volumes --exit-code-from poet-common poet-common'
+-                sh 'docker-compose down'
+-            }
+-
+-            stage(""Run Lint"") {",,2018-12-19 10:42:36,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/242868517,https://github.com/hyperledger/sawtooth-poet/pull/10#discussion_r242868517,manojgop
+https://github.com/hyperledger/sawtooth-poet/pull/7,https://github.com/hyperledger/sawtooth-poet/pull/7,"This should be moved to README.md, similar to what we have in sawtooth-core repo.",75f54378655b85b0cd43e1faa5cbf6de4a3eebeb,2018-10-25 02:15:26,228015711,"@@ -224,3 +224,12 @@ To start an installed development environment for a specific component, do:
+ 
+ These installed images also generate .deb artifacts during build. They can be found
+ in the `/tmp` dir in any of the images.
++",4,2018-11-16 09:43:30,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/228015711,https://github.com/hyperledger/sawtooth-poet/pull/7#discussion_r228015711,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/7,https://github.com/hyperledger/sawtooth-poet/pull/7,This looks unintentional or at least unrelated.,75f54378655b85b0cd43e1faa5cbf6de4a3eebeb,2018-10-25 02:15:53,228015756,"@@ -1 +1,2 @@
+ 1.1.2
++",,2018-11-16 09:43:30,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/228015756,https://github.com/hyperledger/sawtooth-poet/pull/7#discussion_r228015756,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/7,https://github.com/hyperledger/sawtooth-poet/pull/7,"Empty line. But also, this file was auto-generated and the header may not be appropriate.",75f54378655b85b0cd43e1faa5cbf6de4a3eebeb,2018-10-25 02:16:20,228015906,"@@ -1,3 +1,19 @@
++",,2018-11-16 09:43:30,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/228015906,https://github.com/hyperledger/sawtooth-poet/pull/7#discussion_r228015906,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/7,https://github.com/hyperledger/sawtooth-poet/pull/7,make.bat should just be removed.,75f54378655b85b0cd43e1faa5cbf6de4a3eebeb,2018-10-25 02:16:30,228015914,"@@ -1,3 +1,18 @@
++# Copyright 2018 Intel Corporation",,2018-11-16 09:43:30,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/228015914,https://github.com/hyperledger/sawtooth-poet/pull/7#discussion_r228015914,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/7,https://github.com/hyperledger/sawtooth-poet/pull/7,Can you confirm that this and MANIFEST.in have been tested?,75f54378655b85b0cd43e1faa5cbf6de4a3eebeb,2018-10-25 02:17:34,228016021,"@@ -1,2 +1,18 @@
++# Copyright 2018 Intel Corporation",1,2018-11-16 09:43:30,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/228016021,https://github.com/hyperledger/sawtooth-poet/pull/7#discussion_r228016021,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/6,https://github.com/hyperledger/sawtooth-poet/pull/6,"Claims about appropriate environments such as ""production"" have been avoided because they have different meanings to different people. Since PoET/CFT is not BFT, there are a large number of production use cases where PoET/CFT isn't appropriate, for example.",e5f22f2ba416152971d0f284bc2362f9823207d5,2018-10-16 14:07:19,225555077,"@@ -0,0 +1,26 @@
++# Sawtooth PoET
++
++Sawtooth PoET is a consensus engine for Hyperledger Sawtooth based on a
++solution to Byzantine Generals Problem that utilizes
++a “trusted execution environment(TEE)”.
++
++The PoET specification is available in
++[sawtooth documentation]( https://sawtooth.hyperledger.org/docs/core/nightly/master/architecture/poet.html)
++
++Currently, Sawtooth PoET implements the non-sgx simulator mode and is
++production worthy.",,2018-11-13 06:47:33,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/225555077,https://github.com/hyperledger/sawtooth-poet/pull/6#discussion_r225555077,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/6,https://github.com/hyperledger/sawtooth-poet/pull/6,"Here's some text I was working on for the release notes: 
+```
+Sawtooth PoET is deployable as a pure python application using a simulated enclave (poet-simulator) or with a c++ module implementing an SGX enclave (poet-sgx).
+Poet-simulator has been ported to the Consensus Engine interface newly released in Sawtooth v1.1.
+Poet-sgx has not been validated on Sawtooth v1.1.
+Users relying on poet-sgx are recommended to remain on Sawtooth v1.0.5.
+Users relying on poet-simulator are recommended to upgrade to Sawtooth v1.1
+We are working on a new implementation of PoET and its TEE enclave. It is anticipated for a point release in the near future.
+```
+",e5f22f2ba416152971d0f284bc2362f9823207d5,2018-10-16 18:53:28,225666692,"@@ -0,0 +1,26 @@
++# Sawtooth PoET
++
++Sawtooth PoET is a consensus engine for Hyperledger Sawtooth based on a
++solution to Byzantine Generals Problem that utilizes
++a “trusted execution environment(TEE)”.
++
++The PoET specification is available in
++[sawtooth documentation]( https://sawtooth.hyperledger.org/docs/core/nightly/master/architecture/poet.html)
++
++Currently, Sawtooth PoET implements the non-sgx simulator mode and is
++production worthy.",,2018-11-13 06:47:33,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/225666692,https://github.com/hyperledger/sawtooth-poet/pull/6#discussion_r225666692,dcmiddle
+https://github.com/hyperledger/sawtooth-poet/pull/6,https://github.com/hyperledger/sawtooth-poet/pull/6,"How about: ""The Sawtooth PoET consensus engine implements a CFT (Crash Fault Tolerant) variant of PoET which does not use a TEE. A future version of the consensus engine which also implements full BFT (Byzantine Fault Tolerant) features using an SGX enclave is in development."" ",e5f22f2ba416152971d0f284bc2362f9823207d5,2018-11-06 14:34:43,231144637,"@@ -0,0 +1,25 @@
++# Sawtooth PoET
++
++Sawtooth PoET is a consensus engine for Hyperledger Sawtooth based on a
++solution to Byzantine Generals Problem that utilizes
++a “trusted execution environment(TEE)”.
++
++The PoET specification is available in
++[sawtooth documentation]( https://sawtooth.hyperledger.org/docs/core/nightly/master/architecture/poet.html)
++
++Currently, Sawtooth PoET implements the non-sgx simulator mode written as a python application.",,2018-11-13 06:47:33,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/231144637,https://github.com/hyperledger/sawtooth-poet/pull/6#discussion_r231144637,vaporos
+https://github.com/hyperledger/sawtooth-poet/pull/6,https://github.com/hyperledger/sawtooth-poet/pull/6,Updated,e5f22f2ba416152971d0f284bc2362f9823207d5,2018-11-13 06:50:21,232914370,"@@ -0,0 +1,25 @@
++# Sawtooth PoET
++
++Sawtooth PoET is a consensus engine for Hyperledger Sawtooth based on a
++solution to Byzantine Generals Problem that utilizes
++a “trusted execution environment(TEE)”.
++
++The PoET specification is available in
++[sawtooth documentation]( https://sawtooth.hyperledger.org/docs/core/nightly/master/architecture/poet.html)
++
++Currently, Sawtooth PoET implements the non-sgx simulator mode written as a python application.",,2018-11-13 06:50:21,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/232914370,https://github.com/hyperledger/sawtooth-poet/pull/6#discussion_r232914370,askmish
+https://github.com/hyperledger/sawtooth-poet/pull/3,https://github.com/hyperledger/sawtooth-poet/pull/3,Copyright should be 2018,dfb1bd05dfff6c85d1d7b4a71ee14ffeb3091b25,2018-09-11 19:42:55,216796970,"@@ -0,0 +1,44 @@
++# Copyright 2017 Intel Corporation",,2018-09-11 21:14:00,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/216796970,https://github.com/hyperledger/sawtooth-poet/pull/3#discussion_r216796970,aludvik
+https://github.com/hyperledger/sawtooth-poet/pull/1,https://github.com/hyperledger/sawtooth-poet/pull/1,Should these be included?,81f40ced5a69669243baad3c5c39167117ac6742,2018-07-23 21:16:29,204556568,"@@ -0,0 +1,121 @@
++#!/bin/bash
++#
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++if [ ! -e source/conf.py ]; then
++    echo ""Must be run from the sawtooth-core repo docs directory."" 1>&2
++    exit 1
++fi
++
++function save_usage() {
++   safe_string=$(echo ""$*"" | sed -e 's/[^A-Za-z0-9-]/_/g')
++   filename=""source/cli/output/${safe_string}_usage.out""
++   if ! output=$(""$@"" -h); then
++       exit 1
++   fi
++   echo ""Generating: $filename""
++   echo ""$output"" > ""$filename""
++}
++
++export PATH=$PATH:$(pwd)/../bin
++mkdir -p source/cli/output
++
++save_usage sawtooth
++
++save_usage sawtooth batch
++save_usage sawtooth batch list
++save_usage sawtooth batch show
++save_usage sawtooth batch status
++save_usage sawtooth batch submit
++
++save_usage sawtooth block
++save_usage sawtooth block list
++save_usage sawtooth block show
++
++save_usage sawtooth keygen
++
++save_usage sawtooth identity
++save_usage sawtooth identity policy
++save_usage sawtooth identity policy create
++save_usage sawtooth identity policy list
++save_usage sawtooth identity role
++save_usage sawtooth identity role create
++save_usage sawtooth identity role list
++
++save_usage sawtooth peer
++save_usage sawtooth peer list
++
++save_usage sawtooth settings
++save_usage sawtooth settings list
++
++save_usage sawtooth state
++save_usage sawtooth state list
++save_usage sawtooth state show
++save_usage sawtooth transaction
++
++save_usage sawtooth status
++save_usage sawtooth status show
++
++save_usage sawtooth transaction list
++save_usage sawtooth transaction show
++
++save_usage sawset
++save_usage sawset genesis
++save_usage sawset proposal
++save_usage sawset proposal create
++save_usage sawset proposal list
++save_usage sawset proposal vote
++
++save_usage sawadm
++save_usage sawadm genesis
++save_usage sawadm keygen
++
++save_usage sawnet
++save_usage sawnet peers
++save_usage sawnet peers list
++save_usage sawnet peers graph
++save_usage sawnet compare-chains
++
++save_usage sawtooth-validator
++save_usage sawtooth-rest-api
++save_usage settings-tp
++save_usage identity-tp
++
++save_usage poet
++save_usage poet enclave
++save_usage poet registration
++save_usage poet registration create
++
++save_usage intkey",,2018-07-24 00:57:07,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/204556568,https://github.com/hyperledger/sawtooth-poet/pull/1#discussion_r204556568,peterschwarz
+https://github.com/hyperledger/sawtooth-poet/pull/1,https://github.com/hyperledger/sawtooth-poet/pull/1,"They are removed in a later commit. I wanted to include the files as is, and then show the changes separately.",81f40ced5a69669243baad3c5c39167117ac6742,2018-07-23 21:30:32,204560291,"@@ -0,0 +1,121 @@
++#!/bin/bash
++#
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++if [ ! -e source/conf.py ]; then
++    echo ""Must be run from the sawtooth-core repo docs directory."" 1>&2
++    exit 1
++fi
++
++function save_usage() {
++   safe_string=$(echo ""$*"" | sed -e 's/[^A-Za-z0-9-]/_/g')
++   filename=""source/cli/output/${safe_string}_usage.out""
++   if ! output=$(""$@"" -h); then
++       exit 1
++   fi
++   echo ""Generating: $filename""
++   echo ""$output"" > ""$filename""
++}
++
++export PATH=$PATH:$(pwd)/../bin
++mkdir -p source/cli/output
++
++save_usage sawtooth
++
++save_usage sawtooth batch
++save_usage sawtooth batch list
++save_usage sawtooth batch show
++save_usage sawtooth batch status
++save_usage sawtooth batch submit
++
++save_usage sawtooth block
++save_usage sawtooth block list
++save_usage sawtooth block show
++
++save_usage sawtooth keygen
++
++save_usage sawtooth identity
++save_usage sawtooth identity policy
++save_usage sawtooth identity policy create
++save_usage sawtooth identity policy list
++save_usage sawtooth identity role
++save_usage sawtooth identity role create
++save_usage sawtooth identity role list
++
++save_usage sawtooth peer
++save_usage sawtooth peer list
++
++save_usage sawtooth settings
++save_usage sawtooth settings list
++
++save_usage sawtooth state
++save_usage sawtooth state list
++save_usage sawtooth state show
++save_usage sawtooth transaction
++
++save_usage sawtooth status
++save_usage sawtooth status show
++
++save_usage sawtooth transaction list
++save_usage sawtooth transaction show
++
++save_usage sawset
++save_usage sawset genesis
++save_usage sawset proposal
++save_usage sawset proposal create
++save_usage sawset proposal list
++save_usage sawset proposal vote
++
++save_usage sawadm
++save_usage sawadm genesis
++save_usage sawadm keygen
++
++save_usage sawnet
++save_usage sawnet peers
++save_usage sawnet peers list
++save_usage sawnet peers graph
++save_usage sawnet compare-chains
++
++save_usage sawtooth-validator
++save_usage sawtooth-rest-api
++save_usage settings-tp
++save_usage identity-tp
++
++save_usage poet
++save_usage poet enclave
++save_usage poet registration
++save_usage poet registration create
++
++save_usage intkey",,2018-07-24 00:57:07,https://api.github.com/repos/hyperledger/sawtooth-poet/pulls/comments/204560291,https://github.com/hyperledger/sawtooth-poet/pull/1#discussion_r204560291,aludvik

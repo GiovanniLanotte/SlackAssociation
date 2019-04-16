@@ -1,0 +1,2180 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/3,https://github.com/kubernetes/cloud-provider-vsphere/pull/3,frapposelli,Add Fabio and Doug as approvers,Fixes: #1 ,"['imkin', 'BaluDontu', 'divyenpatel']",2,2018-06-04 13:02:14,2018-06-04 16:00:14,2018-06-04 16:00:15,True,2018-06-04 16:00:14,imkin,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/4,https://github.com/kubernetes/cloud-provider-vsphere/pull/4,frapposelli,Add initial repo layout with CCM prototype,"Create scaffolding for repo, with initial CCM prototype (thanks to cloud-provider-openstack)",['BaluDontu'],1,2018-06-06 11:47:10,2018-06-07 18:34:25,2018-06-07 18:34:25,True,2018-06-07 18:34:25,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/12,https://github.com/kubernetes/cloud-provider-vsphere/pull/12,frapposelli,Add refactoring design doc,Add documentation for the refactoring work,['dougm'],1,2018-07-10 13:35:37,2018-07-16 20:43:52,2018-07-16 20:43:52,True,2018-07-16 20:43:52,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/14,https://github.com/kubernetes/cloud-provider-vsphere/pull/14,frapposelli,Initial working CCM prototype,"This is an initial stab at code refactoring, the provider is registering nodes successfully but code requires a lot of cleanup. It also imports code from in-tree as #7 requires.",['dougm'],1,2018-07-16 20:53:48,2018-07-20 17:10:11,2018-07-23 20:22:47,True,2018-07-20 17:10:11,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/16,https://github.com/kubernetes/cloud-provider-vsphere/pull/16,nikhita,Add CONTRIBUTING.md,"Fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/13
+xref https://github.com/kubernetes/community/issues/1832
+
+/assign frapposelli 
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['frapposelli'],1,2018-07-19 05:21:20,2018-07-19 07:55:43,2018-07-19 08:00:45,True,2018-07-19 07:55:43,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/18,https://github.com/kubernetes/cloud-provider-vsphere/pull/18,dvonthenen,RBAC for DS and Pod Deployment of CCM,"**What this PR does / why we need it**:
+Adds a simple pod-based deployment instead of using a DaemonSet.
+Provider roles and bindings for RBAC that support both the DS and POD deployment.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/5
+
+**Special notes for your reviewer**: None",[],3,2018-07-23 18:56:09,2018-07-23 19:48:51,2018-07-23 19:49:22,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/19,https://github.com/kubernetes/cloud-provider-vsphere/pull/19,dvonthenen,RBAC for DS and Pod Deployment of CCM,"**What this PR does / why we need it**:
+Adds a simple pod-based deployment instead of using a DaemonSet.
+Provider roles and bindings for RBAC that support both the DS and POD deployment.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/5
+
+**Special notes for your reviewer**: None
+",[],1,2018-07-23 19:54:23,2018-07-23 19:54:40,2018-07-23 19:54:40,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/20,https://github.com/kubernetes/cloud-provider-vsphere/pull/20,dvonthenen,RBAC for DS and Pod Deployment of CCM,"**What this PR does / why we need it**:
+Adds a simple pod-based deployment instead of using a DaemonSet.
+Provider roles and bindings for RBAC that support both the DS and POD deployment.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/5
+
+**Special notes for your reviewer**: None
+",['frapposelli'],3,2018-07-23 19:55:10,2018-07-24 16:29:56,2018-07-24 16:34:05,True,2018-07-24 16:29:56,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/21,https://github.com/kubernetes/cloud-provider-vsphere/pull/21,dvonthenen,Allow Pushing Images with Latest Tag,"**What this PR does / why we need it**:
+The reason why this is needed is because by not pushing with the latest tag means for each build I need to update my YAML to append the build tag (example 12a86808) to the image name (ie dvonthenen/vsphere-cloud-controller-manager:12a86808). Having latest allows users to deploy the latest cloud provider without having to modify the YAML file in the manifest directory every single time.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/17
+
+**Special notes for your reviewer**: None
+",[],2,2018-07-24 15:22:00,2018-07-24 15:22:15,2018-07-24 15:26:57,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/22,https://github.com/kubernetes/cloud-provider-vsphere/pull/22,dvonthenen,Allow using latest tag for docker push,"**What this PR does / why we need it**:
+The reason why this is needed is by not pushing with the latest tag means for each build I need to update my YAML to append the build tag (example 12a86808) to the image name (ie dvonthenen/vsphere-cloud-controller-manager:12a86808). Having latest allows users to deploy the latest cloud provider without having to modify the YAML file in the manifest directory every single time.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/17
+
+**Special notes for your reviewer**: None
+",['frapposelli'],1,2018-07-24 15:27:54,2018-07-24 16:51:56,2018-07-24 17:00:19,True,2018-07-24 16:51:56,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/25,https://github.com/kubernetes/cloud-provider-vsphere/pull/25,akutz,docs: Update README with build tips,"**What this PR does / why we need it**: This patch updates the README file with a section about building the project locally. The new section outlines the correct location to which to clone the repository and the preferred method to build the provider.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```",['frapposelli'],1,2018-07-26 15:15:12,2018-07-26 15:16:57,2018-07-26 15:17:15,True,2018-07-26 15:16:57,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/26,https://github.com/kubernetes/cloud-provider-vsphere/pull/26,akutz,"fix: Sets Makefile default target to ""all: build""","**What this PR does / why we need it**: This patch updates the default target in the Makefile to be ""all"" which depends on ""build"". This is a standard target graph in Makefiles.
+
+Currently the `Makefile`'s default target is `$(GOBIN)` which is a directory path. For many reasons directory targets do not make the best Makefile targets *or* dependencies (unless order-only), but this is also not a user-friendly choice for the default target. Executing `make` should not yield `nothing to be done` on a clean system with an existing `$GOPATH/bin` directory.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```",['dougm'],1,2018-07-27 20:53:45,2018-07-27 21:57:58,2018-08-09 16:52:00,True,2018-07-27 21:57:58,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/27,https://github.com/kubernetes/cloud-provider-vsphere/pull/27,akutz,Removing dead code,"**What this PR does / why we need it**: This patch fixes #23 and removes dead code. The following command was used to determine the code to remove:
+
+```shell
+$ gometalinter.v2 \
+  --tests \
+  --deadline=300s \
+  --disable-all \
+  --enable=deadcode \
+  --enable=varcheck \
+  --enable=structcheck \
+  --enable=unparam \
+  --enable=unused \
+  $(for d in cluster cmd pkg; \
+    do find ""${d}"" -type d; done | \
+    sed 's~^~./~g' | tr '\n' ' ')
+```
+
+Please note that the above command does not use `./...` to imply all recursive packages. The `gometalinter` tool includes `vendor` when doing this, and that directory should be omitted. The output was as follows:
+
+```shell
+pkg/vclib/constants.go:55:1:warning: testNameNotFound is unused (deadcode)
+pkg/cloudprovider/vsphere/types.go:117:2:warning: unused struct field k8s.io/cloud-provider-vsphere/pkg/cloudprovider/vsphere.NodeDetails.vm (structcheck)
+pkg/cloudprovider/vsphere/instances.go:113:45:warning: parameter ctx is unused (unparam)
+pkg/cloudprovider/vsphere/instances.go:113:66:warning: parameter user is unused (unparam)
+pkg/cloudprovider/vsphere/instances.go:113:79:warning: parameter keyData is unused (unparam)
+pkg/cloudprovider/vsphere/instances.go:119:37:warning: parameter ctx is unused (unparam)
+pkg/cloudprovider/vsphere/instances.go:147:41:warning: parameter ctx is unused (unparam)
+pkg/cloudprovider/vsphere/instances.go:339:47:warning: parameter ctx is unused (unparam)
+pkg/vclib/pbm.go:88:74:warning: parameter dc is unused (unparam)
+pkg/vclib/virtualmachine.go:413:143:warning: parameter result 0 (error) is never used (unparam)
+pkg/cloudprovider/vsphere/types.go:117:2:warning: field vm is unused (U1000) (unused)
+```
+
+The following warnings were ignored as false-positives:
+
+* `testNameNotFound` was listed as unused, but it **is** used in tests. The linters apparently do not all consider Go test sources.
+* The `unparam` warnings were ignored because they refer to altering function signatures that are: required by interfaces but not yet implemented and thus the parameters are unused 
+* Go contexts which may not always be used *yet*, but is good practice to include for the future. 
+
+All in all one change was made:
+
+1. The same issue was discovered twice by different tools:
+    * `pkg/cloudprovider/vsphere/types.go:117:2:warning: unused struct field k8s.io/cloud-provider-vsphere/pkg/cloudprovider/vsphere.NodeDetails.vm (structcheck)`
+    * `pkg/cloudprovider/vsphere/types.go:117:2:warning: field vm is unused (U1000) (unused)`
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #23
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```",['dougm'],1,2018-07-27 21:50:22,2018-07-27 23:00:58,2018-07-27 23:01:31,True,2018-07-27 23:00:58,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/28,https://github.com/kubernetes/cloud-provider-vsphere/pull/28,akutz,Add documentation to Gopkg.toml,"**What this PR does / why we need it**: This patch adds documentation on how to modify Gopkg.toml to the top of the `Gopkg.toml` file.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```",['dougm'],1,2018-07-28 16:56:07,2018-07-30 00:17:57,2018-07-30 00:17:57,True,2018-07-30 00:17:57,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/30,https://github.com/kubernetes/cloud-provider-vsphere/pull/30,akutz,Updates for building the provider locally,"**What this PR does / why we need it**: This PR includes three changes:
+
+1. The `hack/make.sh` script has been updated to accept multiple targets
+2. The `README` now includes information about why `dep` may hang and how to solve the issue
+3. The `README` has been updated to include more detailed information about building the provider locally
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**: Please note that the update to `hack/make.sh` was included in this PR due to not wanting to indicate in the build documentation that running `make` directly can accept multiple targets while using `hack/make.sh` did not.
+
+**Release note**:
+```release-note
+* The ""hack/make.sh"" script now accepts multiple targets.
+* The project's ""README"" now includes information about why the ""dep"" tool may hang and how to solve the issue.
+```",['dougm'],3,2018-07-28 17:56:02,2018-07-31 00:00:38,2018-08-08 17:38:42,True,2018-07-31 00:00:38,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/31,https://github.com/kubernetes/cloud-provider-vsphere/pull/31,fanzhangio,Feature: Create vcpctl tool framework. (Stage 1) ,"- Add command and cli packageAdd vcpctl command and cli pacakge 
+
+#15 
+
+
+",['frapposelli'],1,2018-07-31 10:51:32,2018-08-20 10:13:59,2018-08-20 10:13:59,True,2018-08-20 10:13:59,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/32,https://github.com/kubernetes/cloud-provider-vsphere/pull/32,Rajat-0,Adding code of conduct file,"Adding missing code-of-conduct.md file.
+",['frapposelli'],1,2018-08-02 09:08:22,2018-08-02 09:13:28,2018-08-02 09:13:28,True,2018-08-02 09:13:28,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/33,https://github.com/kubernetes/cloud-provider-vsphere/pull/33,dvonthenen,Implement Kubernetes Secret for Storing vCenter Creds,"**What this PR does / why we need it**:
+This implements the ability to store vCenter credentials (username and password) in a Kubernetes Secret. 
+- Multiple vCenter creds are supported within the secret.
+- Configurable service account supported for multiple cloud-provider-vsphere instances.
+- To maintain backward compatibility, credentials are obtained in the following order: secret, vCenter unique creds, global setting. If the secret doesn't exist, the behavior is to fall back on the old method of conf file.
+- Documentation updated to help the user deploy using a secret.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/6
+
+**Special notes for your reviewer**:
+Tested the following scenarios on a 1.11.1 Kubernetes cluster:
+- Secret containing vCenter creds without setting creds in vsphere.conf
+- Secret containing vCenter creds and also setting creds in vsphere.conf (made sure Secret is used)
+- Secret does not contain vCenter creds but creds set in vsphere.conf (creds from config are used)
+- No Secret set, vCenter creds set within [vcenter ip] block
+- No Secret set, vCenter creds set using Global
+
+**Release note**:
+None",['frapposelli'],2,2018-08-03 15:32:21,2018-08-06 15:10:45,2018-08-06 15:37:29,True,2018-08-06 15:10:45,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/39,https://github.com/kubernetes/cloud-provider-vsphere/pull/39,dvonthenen,Unit Test Coverage and Refactor Obtaining k8s Secret,"**What this PR does / why we need it**:
+This PR implements additional unit test coverage for CCM and also refactors obtaining k8s secret for the credential manager. The refactor was necessary in order to correctly utilize the k8s ""fake"" client for use in the unit tests.
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/34
+
+**Special notes for your reviewer**:
+Tested refactored code for obtaining the k8s secret on a k8s 1.11.1 cluster.
+Made sure the unit tests passed when running `make unit`.
+Will identify if more unit tests can be added to `pkg/cloudprovider/vsphere` and create an additional issue if additional tests are added.
+
+**Release note**:
+None
+",['frapposelli'],2,2018-08-16 16:09:17,2018-08-16 16:37:00,2018-08-16 16:40:23,True,2018-08-16 16:37:00,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/42,https://github.com/kubernetes/cloud-provider-vsphere/pull/42,AdamDang,Fix some grammatical errors to make the doc better,Fix some grammatical errors to make the doc better,"['dougm', 'frapposelli', 'luomiao']",2,2018-08-21 05:53:53,2018-08-24 08:51:38,2018-08-24 08:51:38,True,2018-08-24 08:51:38,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/43,https://github.com/kubernetes/cloud-provider-vsphere/pull/43,dvonthenen,Implements NodeManager and Reconcile Based on UUID,"**What this PR does / why we need it**:
+This implements the NodeManager that handles management of existing nodes in a kubernetes cluster and also handles onboard new nodes. The reconciliation or the booking keeping on nodes has changed from using the DNS name to the SystemUUID (not to be confused with the VMware InstanceUUID).
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/11 and https://github.com/kubernetes/cloud-provider-vsphere/issues/35
+
+**Special notes for your reviewer**:
+The in-tree provider used a single map to store looking up node information based DNS name and UUID. You could potentially craft ways of forcing a collision and possibly highjacking another nodes info. This implements two lookup maps one for DNS and one for UUID.
+
+This also fixes an issue with gathering the creds from the kubernetes secret found in testing this feature.
+
+Also adds a bunch more logging to understand what is going on in the provider both for verification and for future debugging/troubleshooting.
+
+**Release note**:
+Tested on kubernetes 1.11.2 with 3 worker nodes.
+Tested adding a 4th worker node and made sure it was handled correctly.",['frapposelli'],1,2018-08-22 20:10:33,2018-08-23 00:04:05,2018-09-10 22:06:50,True,2018-08-23 00:04:05,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/44,https://github.com/kubernetes/cloud-provider-vsphere/pull/44,fanzhangio,Feature: Implement vcpctl create solution user for CCM (Stage 2),"- Add Client for delegating vim25 and ssoadmin
+- Add Credential for client, session and sso
+- Add CreateUserFunc for creating solution user and person user
+- Implement creating default solution user and granting WSTrust
+permission and Administrator role.
+
+
+
+fixes #15 
+
+
+**Special notes for your reviewer**:
+Stage 2 for **vcpctl** implementation
+
+**Release note**:
+`NONE`
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write .
+-->
+```release-note
+none
+```
+","['dougm', 'frapposelli', 'fanzhangio']",1,2018-08-23 00:57:43,2018-09-04 19:13:09,2018-09-11 17:40:03,True,2018-09-04 19:13:09,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/45,https://github.com/kubernetes/cloud-provider-vsphere/pull/45,dvonthenen,Add NodeManager Unit Tests,"**What this PR does / why we need it**:
+Continue to add unit tests to the project.
+
+**Special notes for your reviewer**:
+Moved around Config initialization code to NodeManager to satisfy test order dependencies
+
+**Release note**:
+None",['dougm'],1,2018-09-10 22:16:31,2018-09-12 15:51:46,2018-09-24 17:29:12,True,2018-09-12 15:51:46,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/46,https://github.com/kubernetes/cloud-provider-vsphere/pull/46,fanzhangio,Feature: Create role and check vms on vSphere for enabling UUID (Stage 3 and 4),"- Add create default role with minimal privileges
+- Traversal vms on vsphere, checking UUID and enable it if not.
+
+#15 ",['dougm'],1,2018-09-11 10:16:50,2018-09-14 19:10:40,2018-09-14 19:10:40,True,2018-09-14 19:10:40,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/49,https://github.com/kubernetes/cloud-provider-vsphere/pull/49,dvonthenen,Documentation clarification for deploying CCM,"**What this PR does / why we need it**:
+Helps clarify certain assumptions made when deploying the CCM using the Pod or DaemonSet YAML.
+
+**Special notes for your reviewer**:
+None
+
+**Release note**:
+None
+",[],1,2018-09-11 15:41:24,2018-09-11 17:58:29,2018-09-12 14:47:15,True,2018-09-11 17:58:29,kerneltime,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/50,https://github.com/kubernetes/cloud-provider-vsphere/pull/50,figo,report node hostname,"both ip address and hostname needed be reported in node status
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+out-of-tree CCM reporting node hostname in node status.
+this is necessary after the upstream change at #67714,
+if not reporting, in the node status, it will only has node ip address, it will break tests and applications.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+https://github.com/kubernetes/kubernetes/issues/67714
+
+**Special notes for your reviewer**:
+we need to add test later similar as this one: 
+https://github.com/kubernetes/kubernetes/pull/68017,
+but since we are building tests for nodemanager, this can be part of nodemanager tests.
+
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+None
+```
+/cc @frapposelli @dougm @dvonthenen 
+",['dougm'],1,2018-09-11 18:15:10,2018-09-12 16:11:38,2018-09-12 16:11:38,True,2018-09-12 16:11:38,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/51,https://github.com/kubernetes/cloud-provider-vsphere/pull/51,figo,remove --tty option when issue docker run,"the --tty option is incompatible with cron job setting.
+will get en error saying: ""the input device is not a TTY"" if doing so.
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+this is to unblock the CI job (as cron job now) to build CCM image and upload to registry
+
+**Which issue this PR fixes**
+no PR filed. but we got the issue to run 'hack/make.sh' at cron job.
+
+**Special notes for your reviewer**:
+None
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+None
+```
+
+/cc @dougm @frapposelli 
+",['dougm'],1,2018-09-14 18:18:20,2018-09-14 18:23:02,2018-09-14 18:23:02,True,2018-09-14 18:23:02,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/54,https://github.com/kubernetes/cloud-provider-vsphere/pull/54,fanzhangio,Add doc for vcpctl,"#52 
+",['frapposelli'],1,2018-09-19 23:28:30,2018-09-24 08:01:16,2018-09-25 04:02:14,True,2018-09-24 08:01:16,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/56,https://github.com/kubernetes/cloud-provider-vsphere/pull/56,dvonthenen,Expose gRPC call to obtain k8s VMs,"**What this PR does / why we need it**:
+Implements a gRPC endpoint to obtain a list of k8s nodes (master+workers) in a vSphere environment. Implemented based on the comment found here: https://github.com/kubernetes/cloud-provider-vsphere/pull/46#discussion_r217589906
+
+These nodes returned are only nodes belonging to a kubernetes cluster. The gRPC call allows obtaining all nodes across all configured vCenters, nodes that belong within a given vCenter, and nodes in a specific Datacenter within a vCenter.
+
+**Special notes for your reviewer**:
+Added go tests for new functionality in node manager and also to test the gRPC server/client functionality.","['figo', 'frapposelli']",1,2018-09-20 17:37:11,2018-09-25 00:46:10,2018-09-25 15:02:48,True,2018-09-25 00:46:10,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/57,https://github.com/kubernetes/cloud-provider-vsphere/pull/57,akutz,Default to gcr.io image registry,"**What this PR does / why we need it**:
+This PR changes the behavior of building and pushing images to use the gcr.io image registry.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**:
+This PR includes a number of small fixes discovered while implementing the primary feature. However, the changes **are** isolated into individual commits.
+
+**Release note**:
+```release-note
+NONE
+```",['frapposelli'],8,2018-09-23 08:59:18,2018-09-25 07:15:21,2018-09-25 07:15:21,True,2018-09-25 07:15:21,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/58,https://github.com/kubernetes/cloud-provider-vsphere/pull/58,akutz,"Adds CCM user; fixes ""watch secret"" errors","**What this PR does / why we need it**:
+This patch binds the user `cloud-controller-manager` to the role `system:cloud-controller-manager` in order to enable the use of a custom Kubernetes user and thus no longer needing to provide the CCM with the controller-manager's kubeconfig.
+
+This patch also fixes the annoying ""watch secret"" failures that populate the logs. Adding the `watch` permission to the `secrets` resource for the `system:cloud-controller-manager` role and using the `cloud-controller-manager` user's `kubeconfig` will result in these errors being a thing of the past.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```",['frapposelli'],1,2018-09-23 10:44:29,2018-09-25 00:59:40,2018-09-25 00:59:40,True,2018-09-25 00:59:40,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/59,https://github.com/kubernetes/cloud-provider-vsphere/pull/59,fanzhangio,"Fix insecure as true by default, pass flag to client option",Quick fix about enable insecure by default. Pass insecure flag to client option,['frapposelli'],1,2018-09-23 22:09:28,2018-09-25 00:59:46,2018-09-25 04:02:26,True,2018-09-25 00:59:46,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/61,https://github.com/kubernetes/cloud-provider-vsphere/pull/61,akutz,Support for building and pushing the CCM via Travis-CI,"**What this PR does / why we need it**:
+This PR builds the CCM on Travis-CI and pushes the image to the GCR registry where the latest image may be pulled with `docker pull gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager`
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA @frapposelli?
+
+**Special notes for your reviewer**:
+Hi reviewers. This PR should be a single commit, but #57 and #58 are not yet merged. Also, I will be removing the `feature/travis-ci` branch under the Travis-CI config's `allowed_branches` list in a separate PR. Until this is merged, that lets my fork work off of my PR branch.
+
+The following secure, environment variable must be added to the project's travisci.com settings: `GCR_KEY_FILE`. This is a gzip'd, base64 encoded version of the key file for service account `gcr-travis-ci-push`, which has permissions to upload images to the GCR registry.
+
+The Travis-CI settings should also define and environment variable called `OWNERS` with a regex of the owners. For example, `'^(frapposelli|akutz)$'`. Please note the enclosing, single quotes are important or else Travis-CI fails exports the environment variable. Only GitHub users in this env var can use the `ci-` commands in a commit message to override the conditions on which the stages depend.
+
+**Release note**:
+```release-note
+NONE
+```",['frapposelli'],1,2018-09-24 21:30:09,2018-09-25 16:27:25,2018-09-25 16:27:25,True,2018-09-25 16:27:25,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/62,https://github.com/kubernetes/cloud-provider-vsphere/pull/62,dvonthenen,Disable the vSphere CCM API,"**What this PR does / why we need it**:
+This disables the vSphere CCM API (default is disabled) until a mechanism to securely connect to the gRPC endpoint exists. This will be implemented in a future PR. Currently, this API should be used for testing purposes only.
+
+**Special notes for your reviewer**:
+This was originally implemented in order to facilitate development for a feature in vcpctl.","['figo', 'frapposelli']",2,2018-09-25 15:39:03,2018-09-25 20:22:28,2018-09-25 21:14:51,True,2018-09-25 20:22:28,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/63,https://github.com/kubernetes/cloud-provider-vsphere/pull/63,dvonthenen,Disable k8s Secret Listener if Secret info is not provided.,"**What this PR does / why we need it**:
+This fixes the secret listener flooding the CCM logs if the secret listener is not configured correctly.
+
+If not configured correctly, you will see the following message in the CCM log repeated over and over:
+```
+2018-09-20T12:09:16.424243246-05:00 stderr F E0920 17:09:16.424030       1 reflector.go:322] k8s.io/cloud-provider-vsphere/vendor/k8s.io/client-go/informers/factory.go:130: Failed to watch *v1.Secret: unknown (get secrets)
+```
+
+**Special notes for your reviewer**:
+Tested on 1.11.2",['frapposelli'],1,2018-09-25 21:35:46,2018-09-26 06:56:18,2018-09-26 14:40:12,True,2018-09-26 06:56:18,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/65,https://github.com/kubernetes/cloud-provider-vsphere/pull/65,fanzhangio,Add generating solution user key pair for login purpose,"#48 
+
+**vcpctl** allows`--cert` flag to receive solution user certificate like`/path/to/certificate/k8s-vcp.crt`
+
+1) if the cert exists, directly return error since VC does not allow multiple solution users use the same cert.
+2) if the cert does not exist, invoke creating certificate function to generate key and cert file with the same id k8s-vcp in the same path directory as `--cert` specified.
+3) the generated `k8s-vcp.crt` file will be decoded and assigned back to u.cert again.",['frapposelli'],1,2018-09-25 22:52:39,2018-09-28 12:15:16,2018-09-28 12:15:16,True,2018-09-28 12:15:16,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/66,https://github.com/kubernetes/cloud-provider-vsphere/pull/66,akutz,Feature/k8s conformance,"**What this PR does / why we need it**:
+This PR enables Kubernetes e2e conformance tests for the CCM on all merges to master and provides the ability to enable e2e via a daily cron job (must be configured) in Travis-CI. 
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #38
+
+**Special notes for your reviewer**:
+The following environment variable must be added to the project's travisci.com settings: 
+
+| Name | Secure | Description |
+|-------|--------|-------------|
+| `E2E_IMAGE` | | The image used to run the e2e workflow.Please set to `gcr.io/kubernetes-conformance-testing/yake2e` |
+| `GCS_KEY_FILE` | ✓ | A Google Cloud JSON key file that has permissions to upload the test results to the GCS buckets `k8s-conformance-vsphere` and `k8s-conformance-cloud-provider-vsphere` |
+| `GCS_EMAIL` | ✓ | The e-mail address associated with the user in the `GCS_KEY_FILE` |
+| `OWNERS` | ✓ | A single-quoted regular expression that lists the GitHub user names of the people that may use commit message keywords to trigger manual e2e runs. For example, `'^(frapposelli|akutz)$'` |
+| `VMC_INFO` | ✓ | A file that contains the credential information used to access VMC and AWS. Please see yake2e's [Quick Start](https://github.com/akutz/yake2e#quick-start) section for an example of the file. The file should be processed with `gzip -9c <FILE | base64` in order to set the environment variable with the file's contents. | 
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+```",['frapposelli'],2,2018-09-26 16:04:29,2018-09-26 16:14:54,2018-09-26 16:14:54,True,2018-09-26 16:14:54,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/67,https://github.com/kubernetes/cloud-provider-vsphere/pull/67,dvonthenen,General housekeeping/cleanup,"**What this PR does / why we need it**:
+This PR contains the following changes:
+- Changed the default port number on the API server to 43001. This was done in order to avoid application protocol collision. Old port was used in the example.
+- Provided a mechanism to change the default binding for the API server. This is required for Helm Chart development
+- Changed ENV variables for API disabling and binding to standardize the names. Now they are VSPHERE_API_DISABLE and VSPHERE_API_BINDING respectively.
+- Fixed logging to standardize on glog. There were some places where fmt.XXXX and log.XXXX were used
+- Fixed the glog.V(X) logging level to appropriate levels
+- Fixed various variable names to standardize on naming in the Config object.
+
+**Special notes for your reviewer**:
+Tested on 1.11.2",['frapposelli'],1,2018-09-26 16:33:51,2018-09-27 07:05:58,2018-11-06 11:15:06,True,2018-09-27 07:05:58,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/68,https://github.com/kubernetes/cloud-provider-vsphere/pull/68,akutz,Fix for non-unique cluster names / disable PR builds in Travis-CI,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+This patch adds a sha1sum'd repo slug to the end of the name of the cluster deployed by the CI process. This patch also disables PR builds in Travis-CI due to the limited jobs available and being used by the conformance tests. Otherwise PR builds will sit in the queue forever.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: NA
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+```
+",['frapposelli'],2,2018-09-26 17:13:19,2018-09-27 07:15:39,2018-09-27 07:15:39,True,2018-09-27 07:15:39,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/69,https://github.com/kubernetes/cloud-provider-vsphere/pull/69,mooncak,Fix typos issue in vsphere_test.go,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+Fix typos issue in vsphere_test.go
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['frapposelli', 'BaluDontu']",1,2018-09-27 16:51:09,2018-09-27 17:35:31,2018-09-27 17:35:31,True,2018-09-27 17:35:31,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/70,https://github.com/kubernetes/cloud-provider-vsphere/pull/70,fanzhangio,Add cli tests for vcpctl,"Add unit tests for client and user 
+Issue #47 
+
+To run these tests, VC_TEST env should be set up
+```
+export VC_TEST_URL=<VC URL>
+export VC_TEST_PASSWORD=<VC password>
+export VC_TEST_USERNAME=<VC username>
+```
+@dougm @frapposelli ",['frapposelli'],1,2018-09-28 05:03:25,2018-10-09 23:21:19,2018-10-10 03:21:16,True,2018-10-09 23:21:19,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/71,https://github.com/kubernetes/cloud-provider-vsphere/pull/71,frapposelli,Fix CCM container location in manifest,"This PR fixes the location for the CCM location in the provider manifests, the new location is pushed automatically through CI.
+
+/kind feature
+/cc @akutz",['akutz'],1,2018-10-01 07:31:56,2018-10-01 09:11:43,2018-10-01 09:11:43,True,2018-10-01 09:11:42,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/72,https://github.com/kubernetes/cloud-provider-vsphere/pull/72,fanzhangio,Fix bug: vsphere/nodemanager.go failed by Error format,"Fix 'Error call has possible formatting directive %+v' error.
+This is a blocking bug in CI
+
+@frapposelli ",['frapposelli'],1,2018-10-09 09:11:14,2018-10-09 23:57:23,2018-10-10 03:20:14,True,2018-10-09 23:57:23,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/82,https://github.com/kubernetes/cloud-provider-vsphere/pull/82,figo,format log explicitly with Errorf() and Infof(),"when run `make test` with go1.11.1, will get error like:
+`pkg/vclib/diskmanagers/vmdm.go:105: Verbose.Info call has possible
+formatting directive %q`, those issues been ignored if using
+go version 1.10.
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+
+
+**Which issue this PR fixes** 
+this will unlock the consistently failing CI test for all pull request
+like #70 
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+```
+
+/cc @frapposelli  @dougm @fanzhangio ",['frapposelli'],1,2018-10-09 22:57:45,2018-10-09 23:03:23,2018-10-09 23:03:23,True,2018-10-09 23:03:23,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/84,https://github.com/kubernetes/cloud-provider-vsphere/pull/84,dvonthenen,Add logo for helm chart,"**What this PR does / why we need it**:
+It is highly recommended that Helm Chart implement having a logo. Adding this logo to be referenced by the vSphere CCM helm chart.",['figo'],1,2018-10-10 16:08:35,2018-10-10 16:52:44,2018-11-06 11:15:05,True,2018-10-10 16:52:44,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/85,https://github.com/kubernetes/cloud-provider-vsphere/pull/85,codenrhoden,Add empty CSI plugin,"This commit adds the structure for implementing the CSI plugin using
+the structure promoted by GoCSI. A 'make vsphere-csi' now produces a
+vsphere-csi binary at the top level, just like the CCM.
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**: Starts the CSI implementation
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #73 
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'frapposelli']",1,2018-10-16 17:38:17,2018-10-22 19:10:24,2018-10-22 20:39:15,True,2018-10-22 19:10:24,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/88,https://github.com/kubernetes/cloud-provider-vsphere/pull/88,codenrhoden,csi: add ability to support multiple backend APIs,"This commit introduces the X_CSI_VSPHERE_APINAME env var, which can be
+used to specify the name of the API to use when talking to vCenter.
+Currently the only supported API name is ""FCD"", and is the default. FCD
+will be used if no API is specified. If one is specified, anything that
+doesn't evaluate to FCD will produce an error.
+
+Right now it is envisioned that alternate APIs will only require changes
+to the Controller portion of the code. Identity and Node are likely to
+remain the same, but this can be re-evaluated in the future.
+
+fixes #86 
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```
+","['dougm', 'frapposelli']",1,2018-10-23 15:42:00,2018-10-24 18:50:55,2019-03-11 20:24:36,True,2018-10-24 18:50:55,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/90,https://github.com/kubernetes/cloud-provider-vsphere/pull/90,dvonthenen,Refactor configuration file for all 3 projects,Junking this...,[],1,2018-10-25 20:26:07,2018-10-25 20:27:14,2018-10-25 20:41:44,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/91,https://github.com/kubernetes/cloud-provider-vsphere/pull/91,dvonthenen,Refactor configuration gathering for all 3 projects,"**What this PR does / why we need it**:
+This PR refactors the vsphere.conf format and parsing in the CCM project. The CSI implementation should leverage the same config file that the CCM project is using. It turns out that the vcpctl project was also using the same config file but was directly importing the entire CCM package just to parse the config. The config parsing code was isolated and this new package was placed in a common area that can be used by all three projects.
+
+This refactor does also include basic capabilities to use ENVARs to configure vCenters. Although this method exists, it is highly discouraged not to be used in a production-like deployment because it can be very error prone. It's only to be used for dev/test purposes if at all.
+
+For CSI to read the config:
+```
+import (
+       vcfg ""k8s.io/cloud-provider-vsphere/pkg/config""
+)
+
+cfg, err := vcfg.ReadConfig(config)
+if err != nil {
+	return nil, err
+}
+```
+
+There is also a helper function to setup up the connection objects used by vclib:
+```
+import (
+       vcfg ""k8s.io/cloud-provider-vsphere/pkg/config""
+)
+
+//genrate connection map
+vsphereInstanceMap := vcfg.GenerateInstanceMap(cfg)
+```
+
+If more things can be moved over, then we can address in a follow on PR. This is a decent foundation though.
+
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/89
+
+**Special notes for your reviewer**:
+Tested CCM on 1.11.3
+Tested CCM Helm Chart on 1.11.3
+make test passes
+
+**Release note**:
+Special note that the [Network] section in the vsphere.conf file was removed since it was no longer being referenced anywhere. Documentation was updated to reflect this change. Existing vsphere.conf will need to remove that section otherwise you will get a parse error in the config file.
+",['frapposelli'],1,2018-10-25 20:34:53,2018-11-06 10:56:56,2018-11-06 11:15:03,True,2018-11-06 10:56:55,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/92,https://github.com/kubernetes/cloud-provider-vsphere/pull/92,yeya24,fix typos overriden -> overriden,"
+**What this PR does / why we need it**:
+fix two typos 
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+fix two typos : docs/deploying_cloud_provider_vsphere_with_rbac.md line 75 and 
+                       manifests/controller-manager/vsphere.conf line 2
+                       overriden -> overridden
+","['dougm', 'frapposelli']",1,2018-11-01 07:11:07,2018-11-01 17:58:46,2018-11-01 17:58:46,True,2018-11-01 17:58:46,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/93,https://github.com/kubernetes/cloud-provider-vsphere/pull/93,mooncak,Fix typos: doesnt -> does not,"Signed-off-by: mooncake <xcoder@tenxcloud.com>
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+Fix typos: doesnt -> does not
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['frapposelli', 'divyenpatel']",1,2018-11-04 09:28:54,2018-11-04 11:20:01,2018-11-04 11:20:01,True,2018-11-04 11:20:01,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/94,https://github.com/kubernetes/cloud-provider-vsphere/pull/94,mooncak,Fix doc typos: folowing->following requried->required,"Signed-off-by: mooncake <xcoder@tenxcloud.com>
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+Fix doc typos: 
+folowing->following 
+requried->required
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['frapposelli'],1,2018-11-04 13:44:32,2018-11-04 15:23:46,2018-11-04 15:23:46,True,2018-11-04 15:23:46,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/95,https://github.com/kubernetes/cloud-provider-vsphere/pull/95,dvonthenen,Move pkg/vclib and pkg/config under pkg/common,"**What this PR does / why we need it**:
+This PR is just an organizational packaging restructuring. We will be adding a couple common pkg in a subsequent future PRs placing 3-4 ""common"" folders under the pkg directory which makes it kind of confusing on what is going on in that folder. Pushing vclib and config under a ""common"" folder then clears up the pkg folder to only contain buildable components (namely vcpctl, CCM, and CSI) plus this ""common"" folder shared between these components.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**:
+`make build` and `make test` works as expected",['frapposelli'],1,2018-11-06 13:02:32,2018-11-06 15:35:42,2018-11-07 10:04:48,True,2018-11-06 15:35:42,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/96,https://github.com/kubernetes/cloud-provider-vsphere/pull/96,frapposelli,Restore Network configuration section and add deprecation notice,"This was causing issues with existing configmaps, this fix should restore continuity and adds a warning that the section has been deprecated
+
+/cc @akutz",['akutz'],1,2018-11-06 21:53:14,2018-11-06 22:00:50,2018-11-06 22:00:50,True,2018-11-06 22:00:50,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/97,https://github.com/kubernetes/cloud-provider-vsphere/pull/97,dvonthenen,"Move CredMgr to pkg/common, add DCOS/generic-CO support","**What this PR does / why we need it**:
+Moved credential manager into pkg/common for CSI to reuse. Also, adds support for other container orchestrators like DCOS.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**:
+Since this is a refactor plus additional implementation to support DCOS and other generic COs, the k8s workflow, docs, and user experience is unchanged.
+
+Tested using k8s on 1.11.3 using k8s secret listener
+Tested by mounting the k8s secret to the filesystem which simulates a DCOS deploy of CSI
+`make test` functions correctly",['dougm'],1,2018-11-07 11:56:24,2018-11-14 04:06:34,2018-11-19 16:53:26,True,2018-11-14 04:06:34,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/98,https://github.com/kubernetes/cloud-provider-vsphere/pull/98,mooncak,Fix typos: genrate -> generate,"Signed-off-by: mooncake <xcoder@tenxcloud.com>
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+Fix typos: genrate -> generate
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['frapposelli', 'luomiao']",1,2018-11-08 15:58:56,2018-11-08 16:04:34,2018-11-08 16:04:34,True,2018-11-08 16:04:34,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/99,https://github.com/kubernetes/cloud-provider-vsphere/pull/99,mooncak,Fix a batch of typos,"
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+Fix typos: attachs -> attaches
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'luomiao']",1,2018-11-08 17:08:55,2018-11-14 16:35:15,2018-11-14 17:21:05,True,2018-11-14 16:35:14,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/100,https://github.com/kubernetes/cloud-provider-vsphere/pull/100,mikeweiwei,fix logging calls,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+f don't use formatted output,fix logging calls
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['dougm'],1,2018-11-13 10:44:03,2018-11-14 04:31:19,2018-11-14 04:31:19,True,2018-11-14 04:31:19,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/101,https://github.com/kubernetes/cloud-provider-vsphere/pull/101,dvonthenen,Refactor vSphere Connection into a Connection Manager for CSI reuse,"**What this PR does / why we need it**:
+This refactors the use of vSphere connections into a connection manager so that CSI can easily reuse creating connections to vCenters. Cleans up common.Config so that it's only responsible for generating the config and moves the vSphereInstanceMap into the ConnMgr.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**:
+Since this is a refactor, the k8s workflow, docs, and user experience are unchanged.
+
+This change should make it super easy to start making API calls to govmomi:
+```
+import (
+       vcfg ""k8s.io/cloud-provider-vsphere/pkg/config""
+       cm ""k8s.io/cloud-provider-vsphere/pkg/connectionmanager""
+)
+
+//read the config
+cfg, err := vcfg.ReadConfig(config)
+if err != nil {
+	return nil, err
+}
+
+//create a connection manager based on the config
+//second param is a k8s secretListener, if nil, use the creds in vsphere.conf
+connMgr := cm.NewConnectionManagerK8s(cfg, nil)
+```
+
+Tested using k8s on 1.11.3 using k8s secret listener
+`make test` functions correctly",['dougm'],2,2018-11-15 15:32:42,2018-11-19 16:49:02,2018-11-19 16:53:25,True,2018-11-19 16:49:02,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/102,https://github.com/kubernetes/cloud-provider-vsphere/pull/102,dvonthenen,Remove dead/stale code,"**What this PR does / why we need it**:
+This removes dead/stale code that was carried/copied over from the in-tree provider which is no longer needed. This removes the networking section from the configuration file because it isn't needed by the out-of-tree provider. 
+
+There was an original attempt to remove this dead/stale code but it broke a couple of projects that were using/deploying the CCM as apart of these other projects. Sorry about that! This is a second attempt to remove code that is no longer needed before we cut a first version/tag of the CCM.
+
+The behavior of `gcfg` was changed such that if extra or missing sections/keyvalues are parsed, they will not produce a fatal error. Only invalid config file syntax are errors. This was tested with the legacy `network` section in the config file, did not produce a fatal error and the CCM was able to run successfully.
+
+**Special notes for your reviewer**:
+When these lines of code were reverted/added back into the CCM, the updates to the documentation, example YAML, the outstanding Helm chart, etc were not reverted along with it. It would be very nice to remove this code/property from the config so we don't create technical debt or legacy issues before we cut the first version.
+
+If we decided not to merge this PR, we can close this PR but we would need to create a new PR to ""revert"" the documentation, example YAML, Helm chart, etc to match the existence of this property in the config file.
+
+CC: @frapposelli @dougm @codenrhoden @akutz ","['dougm', 'frapposelli']",2,2018-11-19 22:29:41,2018-11-20 21:29:54,2018-11-20 21:43:08,True,2018-11-20 21:29:54,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/103,https://github.com/kubernetes/cloud-provider-vsphere/pull/103,dvonthenen, Implements Startup/Setup Functionality for vSphere CSI Driver,"**What this PR does / why we need it**:
+This implements the functionality in the vSphere CSI driver to Startup/Setup the service to:
+- consume a vsphere.conf file and create it's corresponding Config object
+- takes the previous Config object to generates corresponding vSphere connections via ConnectionManager
+- make use of a new common pkg `kubernetes` to create a k8s client and secret listener for cred manager. More info below
+
+Build/Deploy related updates:
+- adds YAML files to conveniently deploy vSphere CSI image to a kubernetes cluster
+- provides starter/WIP documentation to deploy vSphere CSI 
+- updates the Makefile to build the docker CSI image and uploads to said container to the configured registry
+
+CCM updates:
+- makes use of the new InformerManager class that both CCM and CSI now use to generate a secret listener for cred manager.
+
+Common packages updates:
+- removed overlapping roles and role-bindings in the CCM's YAMLs
+- adds a new `kubernetes` pkg which provides helper functions to create a kubernetes client based on various configuration options and implements a wrapper for all Informers
+- the `New` func to create a ConnectionManager was consolidated to generate the specific configuration based on the vsphere.conf Config object.
+
+**Which issue this PR fixes**: NA
+
+**Testing performed**:
+`make test` passes all tests
+Tested vSphere Cloud Controller Manager on Kubernetes 1.11.3
+Tested vSphere CSI on Kubernetes 1.11.3
+- verified the k8s client is created successfully
+- verified the connection manager was able to connect to all configured vcenters
+- k8s secretlistener was used
+
+**Special notes for your reviewer**:
+Some common packages were refactored to be easily consumed by CCM and CSI. These changes do not impact the deployment, configuration files, or user experience for either projects.
+
+The updates to the Makefile includes functionality to upload packages to the configured container registry. I am not sure if anything needs to be configured on the Google Container Registry to allow the vsphere-csi image to be loaded to it.
+","['dougm', 'frapposelli']",1,2018-11-27 17:26:29,2018-11-28 05:16:42,2018-11-28 16:54:03,True,2018-11-28 05:16:42,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/108,https://github.com/kubernetes/cloud-provider-vsphere/pull/108,dvonthenen,Initial Implementation for CSI ListVolumes using FCD,"**What this PR does / why we need it**:
+This PR implements ListVolumes for First Class Disks (FCD) on DatastoreClusters and Datastores.
+- Datastore has a new function to ListDisks which returns all FCD on that datastore
+- New class called DatastoreCluster which gets Properties, Child Datastores comprising the DatastoreCluster, and also ListDisks for FCD on the Datastores comprising the DatastoreCluster
+- Datacenter has a function ListDisks which returns only unique FCDs on all DatastoreClusters and Datastores then sorts them if pagination is used.
+
+NodeManager:
+- Moves DiscoverNode core functionality into ConnectionManager
+
+ConnectionManager:
+- Provides a new function that finds the VC/DC combo that owns a given VM called WhichVCandDCByNodeId
+- Provides a ""mock"" function that finds a VC/DC comobo based on a zone called WhichVCandDCByZone. *NOTE: this is a placeholder until we support multiple VC/DC*
+
+Misc:
+- Moved various constants and etc to a proper location in code.
+
+**Which issue this PR fixes**: NA (does not have an issue for ListVolumes)
+
+**Special notes for your reviewer**:
+- tested CCM because of refactor of nodeManager.DiscoverNode now uses connectionManager. WhichVCandDCByNodeId
+- tested CSI ListVolumes using FCD on a mix of DatastoreClusters and traditional Datastores. Tested: 1) returning all FCD, 2) tested the first pagination of FCD getting 10 out of 11, 3) then tested the remainder pagination getting 11 of 11.
+- `make test` functions normally
+- tested on k8s 1.11.3
+- tested on vSphere 6.7U1
+
+**Release note**:
+Changes to CCM and CSI functionality does not impact the end user, documentation, or etc.",['dougm'],1,2018-12-03 01:37:24,2018-12-04 21:17:07,2018-12-07 02:39:31,True,2018-12-04 21:17:07,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/109,https://github.com/kubernetes/cloud-provider-vsphere/pull/109,akutz,Vendored BitBucket dependency,"**What this PR does / why we need it**:
+This patch commits the vendored BitBucket dependency in order to prevent connection errors that sometimes occur when CI attempts to resolve and fetch the remote dependency using Mercurial.
+
+**Which issue this PR fixes**:
+Unblocks #108 
+
+**Special notes for your reviewer**:
+If this does not work, I will either close this PR or use it to commit all of vendor in order to resolve PR #108.",['frapposelli'],1,2018-12-04 00:03:55,2018-12-04 00:13:19,2018-12-04 00:13:25,True,2018-12-04 00:13:19,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/110,https://github.com/kubernetes/cloud-provider-vsphere/pull/110,dvonthenen,Initial implementation for CSI create/delete,"**What this PR does / why we need it**:
+Initial implementation for Create/Delete for vSphere CSI.
+- Handles DatastoreClusters, VSAN datastores, and ""traditional"" Datastores
+- added a comment/doc idea for how to implement zones
+
+Other:
+- connectiomanager implements WhichVCandDCByFCDId to retrieve which VC/DC owns a given FCD
+- reverted recent changes to nodemanager.DiscoverNode() which was causing the go tests to fail
+- refactored some ctx stuff on nodemanager and connectionmanager to handle some intermittent go test failures
+- changed a few functions on Datacenter to return DatastoreInfo instead of Datastore
+- updated go tests to reflect the above
+- removed some unnecessary loops carried over from the in-tree version
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/78 and https://github.com/kubernetes/cloud-provider-vsphere/issues/104
+
+**Special notes for your reviewer**:
+- tested CSI Create/Delete FCD on DatastoreClusters, VSAN datastores, and ""traditional"" Datastores
+- `make test` functions normally
+- tested on k8s 1.11.3
+- tested on vSphere 6.7U1
+
+**Release note**:
+Changes to CCM and CSI functionality does not impact the end user, documentation, or etc.",['dougm'],1,2018-12-04 22:45:09,2018-12-07 02:32:08,2018-12-07 02:39:32,True,2018-12-07 02:32:08,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/111,https://github.com/kubernetes/cloud-provider-vsphere/pull/111,codenrhoden,Update to CSI 1.0.0 spec,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**: The CSI driver needs to be built of the CSI 1.0.0 spec, and this PR pulls that in along with an updated GoCSI
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: none
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'dvonthenen']",1,2018-12-05 19:51:43,2018-12-05 20:09:29,2018-12-05 21:04:15,True,2018-12-05 20:09:29,dougm,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/112,https://github.com/kubernetes/cloud-provider-vsphere/pull/112,codenrhoden,Implement CSI Node Stage/Unstage,"This patch adds logic for CSI Node staging and unstaging. This takes a
+pre-attached block volume, and mounts it to the given path in the
+staging request. `gofsutil` is used to take care of the formatting,
+mounting, and parsing of the mount tables.
+
+<!-- Thanks for sending a pull request! -->
+
+**Which issue this PR fixes**: fixes #106
+
+**Special notes for your reviewer**: Tested this with node-only funcitonally. An FCD was previously attached to a node, and tested that I could idempotently stage and unstage that volume to a pre-created staging directory.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['dougm'],1,2018-12-06 19:34:10,2018-12-07 21:59:11,2018-12-07 22:09:11,True,2018-12-07 21:59:11,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/113,https://github.com/kubernetes/cloud-provider-vsphere/pull/113,maplain,update KEP link in README.md,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+update kep link in README.md because it's moved from kubernetes/community to kubernetes/enhancements
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+outdated link in README.md
+
+**Special notes for your reviewer**:
+https://github.com/kubernetes/community/blob/master/keps/sig-cloud-provider/0002-cloud-controller-manager.md
+https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/0002-cloud-controller-manager.md
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+```
+",['frapposelli'],1,2018-12-07 00:31:15,2018-12-07 01:06:16,2018-12-07 01:09:13,True,2018-12-07 01:06:16,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/114,https://github.com/kubernetes/cloud-provider-vsphere/pull/114,dvonthenen,Initial implementation for CSI Publish/Unpublish,"**What this PR does / why we need it**:
+Initial implementation for Publish/Unpublish for vSphere CSI.
+- Handles DatastoreClusters, VSAN datastores, and ""traditional"" Datastores
+
+Other:
+- changed existing DetachDisk to be idempotent
+
+**Which issue this PR fixes**: fixes https://github.com/kubernetes/cloud-provider-vsphere/issues/105
+
+**Special notes for your reviewer**:
+- tested CSI Publish/Unpublish FCD on DatastoreClusters, VSAN datastores, and ""traditional"" Datastores
+- `make test` functions normally
+- tested on k8s 1.11.3
+- tested on vSphere 6.7U1
+
+**Release note**:
+Changes to CCM and CSI functionality does not impact the end user, documentation, or etc.",['dougm'],1,2018-12-07 03:21:45,2018-12-07 19:25:21,2018-12-07 19:34:02,True,2018-12-07 19:25:21,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/116,https://github.com/kubernetes/cloud-provider-vsphere/pull/116,codenrhoden,CSI Node Publish/Unpublish,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+This patch implements NodePublishVolume and NodeUnpublishVolume.
+
+The code assumes the volume has already been staged, since we support
+the NODE_STAGE_UNSTAGE capability, and it is up to the CO to ensure
+these semantics are followed. The volume is then bind-mounted from the
+staging target to the target. The SP (storage plugin) does create the
+target dir, and removes it upon unpublish, per the spec.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #107 
+
+**Special notes for your reviewer**:
+This PR needs to be rebased after the PR for node stage/unstage is merged (#112)
+
+Tested on a node that had an FCD attached, then use the `csc` tool to repeated publish and unpublish the volume to various targets (testing for idempotency and ability to publish the same volume to multiple targets).
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'dvonthenen']",1,2018-12-07 19:36:29,2018-12-08 00:13:39,2018-12-08 16:09:57,True,2018-12-08 00:13:39,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/117,https://github.com/kubernetes/cloud-provider-vsphere/pull/117,codenrhoden,Implement NodeGetInfo,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+This patch implements the CSI NodeGetInfo endpoint. For our purposes
+right now, this just needs to return the Node ID, which is actually the
+VM UUID as read from /sysfs with a conversion applied.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+This PR builds off of two prior PRs, #107, and #106. Those will need to be merged first so this can be rebased on top of them.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+Node
+```
+","['dougm', 'dvonthenen']",1,2018-12-07 20:21:48,2018-12-08 23:06:18,2018-12-08 23:15:06,True,2018-12-08 23:06:18,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/118,https://github.com/kubernetes/cloud-provider-vsphere/pull/118,dougm,Fix cloudprovider test races,"GuestFullName is the OS type, which is the same for all VMs. This means the FindByDnsName impl could randomly return the wrong VM.
+Change to using the vm.Name which is unique in these test cases.
+
+DiscoverNode had a race where wg.Done() could be called before wg.Add(), causing wg.Wait() to return earlier than expected.
+",['dvonthenen'],1,2018-12-07 20:23:36,2018-12-07 20:37:48,2018-12-07 20:37:48,True,2018-12-07 20:37:48,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/119,https://github.com/kubernetes/cloud-provider-vsphere/pull/119,dougm,More fixes for cloudprovider test races,"- Protect read/write access to VSphereInstance.Conn field (in-tree does the same)
+
+- Avoid use of runtime.SetFinalizer in tests as it randomly kicks in, logging out client sessions
+
+- Fixup error message when vm search fails
+",['dvonthenen'],1,2018-12-08 17:43:04,2018-12-08 22:44:02,2018-12-08 22:44:02,True,2018-12-08 22:44:02,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/120,https://github.com/kubernetes/cloud-provider-vsphere/pull/120,dougm,Add dvonthenen to OWNERS,,['frapposelli'],1,2018-12-08 20:01:16,2018-12-08 22:31:12,2018-12-08 22:31:12,True,2018-12-08 22:31:12,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/121,https://github.com/kubernetes/cloud-provider-vsphere/pull/121,codenrhoden,Add empty response for ValidateVolumeCapabilities,"
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**: The ValidateVolumeCapabilities is required to be implemented for the
+Controller service. This is the last missing required API. Right now it
+just returns an empty response, which is allowed. Since the ""confirmed""
+value is empty, this tells the CO that it has *not* confirmed that any
+of the requested capabilties for the given volume have been confirmed.
+
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**: This probably isn't strictly necessary for the Alpha version, but it at least brings us in line with all the **required** APIs for CSI. Returning nil here could have caused problems if a CO were to actually call this method.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['dougm'],1,2018-12-09 22:15:23,2018-12-09 22:31:08,2018-12-11 18:36:12,True,2018-12-09 22:31:08,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/122,https://github.com/kubernetes/cloud-provider-vsphere/pull/122,dvonthenen,[WIP] YAML updates for CSI controller/node,"**What this PR does / why we need it**:
+TODO
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**:
+",[],1,2018-12-10 04:03:18,2018-12-14 19:20:03,2018-12-14 21:03:00,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/123,https://github.com/kubernetes/cloud-provider-vsphere/pull/123,codenrhoden,Always create a Controller Service early,"
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**: 
+The previous code would skip creating a Controller Service if one was
+not needed, and if it was needed, the service would would be created at
+the end of BeforeServe. With GoCSI, this was too late because a check
+was done to see that the ControllerService was not nil, and the previous
+code told GoCSI that it was nil.
+
+This patch changes GetController() to instantiate a ControllerService
+struct early and return it, even though it is not initialize. To
+facilitate this, New() not returns a nil struct, and Init() has been
+added to actually configure the controller with the vSphere config file.
+
+This patch also removes the calls for `log.Fatal*` - we need to avoid
+the use of Fatal as it prevents GoCSI from performing automatic sock
+file cleanup.
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['dvonthenen'],1,2018-12-11 19:28:34,2018-12-11 22:57:59,2019-03-11 20:24:38,True,2018-12-11 22:57:59,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/124,https://github.com/kubernetes/cloud-provider-vsphere/pull/124,dvonthenen,Initial release of CSI YAML + Page83Data,"**What this PR does / why we need it**:
+This provides YAML to deploy the vsphere-csi controller and node components for the driver. It also provides documentation updates to guide a user to test a basic pod for reference.
+
+An additional change was made:
+- provide the Page83Data in the PublishContext that will be needed by the node component to mount the appropriate device to the VM.
+- NodeGetInfo was changed to use os.Hostname() and not getSystemUUID() because k8s uses the Hostname to uniquely identify nodes. Please see past PRs on the CCM.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**:
+Was tested on:
+k8s 1.13.0 cluster
+vsphere 6.7u1
+",['dougm'],1,2018-12-17 22:55:55,2018-12-18 19:15:04,2018-12-18 19:16:46,True,2018-12-18 19:15:03,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/125,https://github.com/kubernetes/cloud-provider-vsphere/pull/125,codenrhoden,require page83 data in publish context for FCD,"
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**: 
+When using FCD, the Volume ID does not map to the UUID that shows up for
+the disk in /dev/disk/by-id/wwn-0x*****. Instead, the UUID needs to be
+passed by the controller in the publish context. This patch changes the
+node service to look for that field in the publish context, and requires
+it to work.
+
+Since the Volume ID is no longer sufficient to look up the block device,
+the Unstage and Unpublish methods change to looking up the underyling
+block device by seeing what is mounted to the respective targets. If a
+block device is mounted to the given target, it is assumed that it is
+the block device corresponding to the Volume ID -- we no longer have a
+way to confirm that.
+
+See #124 for more context.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**: This needs a rebase after #124 is merged, as they both add the `page83data` attribute/constant.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'dvonthenen']",1,2018-12-18 18:34:55,2018-12-18 19:27:08,2019-03-11 20:24:46,True,2018-12-18 19:27:08,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/126,https://github.com/kubernetes/cloud-provider-vsphere/pull/126,codenrhoden,Update CSI container image with FS utilities,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+Install utilities for ext2/3/4, XFS, and BtrFS, along with lsblk.
+
+`toybox` has to be uninstalled from Photon 2.0, otherwise it conflicts with `e2fsprogs` and others.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+I considered also installing `ca-certificates`, but chose not to since our YAML examples mount `/etc/ssl/certificates` from the host.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```","['dougm', 'dvonthenen']",2,2018-12-18 20:59:57,2018-12-18 22:41:54,2019-03-11 20:24:52,True,2018-12-18 22:41:54,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/127,https://github.com/kubernetes/cloud-provider-vsphere/pull/127,dvonthenen,Refactor Config package to allow for specialization,"**What this PR does / why we need it**:
+Refactor pkg/common/config to allow for specialization or customization of a config file based on the components need. This allows a component to have a configuration that only pertains to it without requiring other components config to be aware of it.
+
+An example of how this could be done is by creating a Config object that wraps the common one:
+```
+import (
+ vcfg ""k8s.io/cloud-provider-vsphere/pkg/common/config""
+)
+
+struct MyComponent {
+  vcfg.Config
+  OtherField string
+}
+```
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**:
+Tested both the CCM and CSI components on:
+k8s 1.13.1 cluster with 10 worker nodes
+vSphere 6.7u1
+Used a multiple vCenters (2 to be exact) with multiple Datacenters (3 to be exact)
+`make test` passes
+
+**Release note**:
+This is only a refactor of existing code and the changes to CCM and CSI functionality does not impact the end user, documentation, or etc.",['dougm'],1,2019-01-10 22:40:19,2019-01-11 16:26:15,2019-01-11 16:28:00,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/130,https://github.com/kubernetes/cloud-provider-vsphere/pull/130,dvonthenen,Implement Zone Support on CCM,"**What this PR does / why we need it**:
+This implements the zone support that currently exists within the in-tree provider.
+
+Additional notes:
+- Updates to the documentation to note atypical behaviors.
+- Removed sections of YAML that were overriding permissions of the service account used for CCM that was causing the zones functionality to not work. It turns out these sections aren't required anyways.
+- Moved GetUUIDFromProviderID and ConvertK8sUUIDtoNormal out of NodeManager to a common util file so that other code can use without requiring an instance of NodeManager.
+- Fixed bug in NodeManager which was causing intermittent failure of zones discovery in a multi-vCenter configuration. Side effect was that the wrong VC address would be assigned/associated to a given node. Fix is moving the declaration of `var datacenterObjs []*vclib.Datacenter` to adjust its scope. Turns out this issue also exists in the in-tree provider. Will file a separate PR for k/k.
+
+**Which issue this PR fixes**:
+https://github.com/kubernetes/cloud-provider-vsphere/issues/36
+
+**Special notes for your reviewer**:
+Tested CCM on:
+k8s 1.13.2 cluster with 10 worker nodes in 3 zones
+vSphere 6.7u1
+Deployed a test pod which targeted a particular zone
+Used a multiple vCenters (2 to be exact) with multiple Datacenters (3 to be exact)
+`make test` passes
+
+**Release note**:
+For any tests (like e2e or etc), the removal of sections of YAML is important for the zones functionality. Please take note of these changes.","['dougm', 'frapposelli']",1,2019-01-23 15:43:40,2019-01-24 14:56:14,2019-01-24 15:00:02,True,2019-01-24 14:56:14,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/131,https://github.com/kubernetes/cloud-provider-vsphere/pull/131,andrewsykim,fix error handling bug in node discovery,"**What this PR does / why we need it**:
+Due to a bug in how we handle errors in node discovery, the vSphere provider would panic because we try to fetch NodeAddresses from a nil pointer. Panic discovered by @SandeepPissay, thank you! 
+
+**Release note**:
+```release-note
+NONE
+```
+",['dougm'],1,2019-01-25 01:23:50,2019-01-25 14:51:12,2019-01-25 14:51:12,True,2019-01-25 14:51:12,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/132,https://github.com/kubernetes/cloud-provider-vsphere/pull/132,akutz,Fixes ci/latest conformance tests by adding support for custom sk8 URL,"This patch fixes the `ci/latest` conformance tests by adding support for a custom sk8 URL. This URL is the script used by the image that runs the e2e conformance tests.
+
+@frapposelli, prior to merging this PR you need to add the following the projects TravisCI.org settings:
+
+```shell
+SK8_URL=https://raw.githubusercontent.com/vmware/simple-k8s-test-env/v0.1.1/yakity.sh
+```",['frapposelli'],1,2019-01-26 19:00:28,2019-01-26 21:21:27,2019-01-26 21:21:27,True,2019-01-26 21:21:27,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/133,https://github.com/kubernetes/cloud-provider-vsphere/pull/133,akutz,Remove K8s 1.10 / add 1.13 to CI,"This PR removes Kubernetes 1.10 from the list of GA releases tested against `master` and with the nightly cron job. In its place K8s 1.13 has been added. The prevailing CI strategy is to test `ci/latest` and the three, previous GA release trains, which are currently `1.13`, `1.12`, and `1.11`.
+
+cc @figo",['frapposelli'],2,2019-01-28 14:58:30,2019-01-28 17:59:24,2019-01-28 18:01:14,True,2019-01-28 17:59:24,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/136,https://github.com/kubernetes/cloud-provider-vsphere/pull/136,dvonthenen,Initial Implementation for CSI multi-VC/DC Support,"**What this PR does / why we need it**:
+This implements mutli-vCenter and multi-Datacenter support in the CSI driver components.
+This also indirectly implements the second half of Zones support for CSI by way of supporting multi-VC/DC and adding code to support CreateVolume in a particular region/zone through the use of the native kubernetes topology support in CSI/k8s.
+
+Some notable changes:
+- Enables VOLUME_ACCESSIBILITY_CONSTRAINTS to allow the topology to get passed to the CSI driver. Note that the native topology support works for 1.12.X and higher. Capability exists in code to support 1.11.X and below.
+- Moved implementation of nodemanager.DiscoverNode() into the pkg/common/connectionmanager to be reused by other components which is why you see a lot of code deletion in `nodemanager.go`.
+- As a part of the move DiscoverNode() in the CM, add a `list.go` (example: grab all DCs in a config), `search.go` (where DiscoverNode() now lives along with DiscoverFcd()), and `zones.go` (handles object look up, like Datacenters or clusters, based on tags/zones) to be reused by CCM and CSI which is why you see a lot of additional code/files in `connectionmanager.go`
+- refactored the Zones Interface in the CCM to make use of the common code above which is why you see a lot of the deletion of code in `zones.go`
+- implements GLOG logging in the CSI components in `controller.go` based on CSI Debug being enabled. YAML is updated as well.
+- updated CSI YAML to remove unnecessary properties (SSL config, kubeconfig, etc) that were actually interfering with permissions related to the CSI service account 
+- updated CSI YAML to put place holders for zones
+
+**TODOs**:
+I have not created the images I plan on posting in the  docs/deploying_ccm_and_csi_with_multi_dc_vc_aka_zones.md documentation, but I will go back and fill that out later. I thought it was better to get this PR out for review and update with the diagrams/pictures later.
+
+**Which issue this PR fixes**:
+https://github.com/vmware/cna-upstream-planning/issues/323
+
+**Special notes for your reviewer**:
+Tested CCM on:
+k8s 1.13.1 cluster with 10 worker nodes in 3 zones
+vSphere 6.7u1
+Deployed a test pod which targeted a particular zone using a persistent volume
+Used a multiple vCenters (2 to be exact) with multiple Datacenters (3 to be exact)
+`make test` passes
+
+**Release note**:
+The single VC/DC configuration should be backward compatible and all older single VC/DC based vsphere.conf should still work with this updated code.
+","['dougm', 'codenrhoden']",1,2019-01-30 21:33:57,2019-02-07 20:28:32,2019-02-07 20:42:32,True,2019-02-07 20:28:31,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/140,https://github.com/kubernetes/cloud-provider-vsphere/pull/140,dvonthenen,Switch from using glog to klog,"**What this PR does / why we need it**:
+The kubernetes community is moving away from glog to klog. This updates all components (CCM, CSI, CLI) used to klog.
+
+**Which issue this PR fixes**:
+https://github.com/kubernetes/cloud-provider-vsphere/issues/137
+
+**Special notes for your reviewer**:
+Tested CCM and CSI on:
+- k8s 1.13.1 cluster with 10 worker nodes in 3 zones
+- vSphere 6.7u1
+
+**Release note**:
+Internal package change
+","['dougm', 'codenrhoden']",1,2019-02-12 15:32:03,2019-02-12 17:07:55,2019-02-12 19:35:03,True,2019-02-12 17:07:55,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/141,https://github.com/kubernetes/cloud-provider-vsphere/pull/141,dvonthenen,Check for min vCenter version,"**What this PR does / why we need it**:
+This checks the minimum vCenter API version (which is 6.5) on the CSI FCD controller. If unsupported, the controller will print an error message and will fail to start the controller service.
+
+I had hopes that we could check clusters within DCs, but quickly realized that there could be clusters that are being used to manage non-Kubernetes earmarked clusters that can be of an older ESX version. Only check that can be done without going through a bunch of hoops is checking the vCenter API version. Docs already outline the support matrix for the CSI driver.
+
+**Which issue this PR fixes**:
+https://github.com/kubernetes/cloud-provider-vsphere/issues/139
+
+**Special notes for your reviewer**:
+Added go tests to check the boundary cases.
+
+Tested CCM and CSI on:
+- k8s 1.13.1 cluster with 10 worker nodes in 3 zones
+- vSphere 6.7u1
+
+**Release note**:
+NA",['frapposelli'],1,2019-02-12 20:27:50,2019-02-13 15:28:42,2019-02-14 15:26:06,True,2019-02-13 15:28:41,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/143,https://github.com/kubernetes/cloud-provider-vsphere/pull/143,dvonthenen,Bug fix for NodeManager and Photon 2 UUID,"**What this PR does / why we need it**:
+This fixes:
+- a crash in the NodeManager when the VM is not found via UUID introduced accidentally with this PR https://github.com/kubernetes/cloud-provider-vsphere/pull/136 Missing a return statement: https://github.com/kubernetes/cloud-provider-vsphere/pull/143/files#diff-b7f52468613fc2d2fc4b257bed84a46cR138
+- a bug with the way Photon 2 reports the UUID which is then passed from the kubelet to the CCM. It does not conform to the way the RHEL, Ubuntu, and etc reports it. The reporting format of the UUID has been fixed in Photon 3 though.
+
+**Which issue this PR fixes**:
+https://github.com/kubernetes/cloud-provider-vsphere/issues/142
+
+**Special notes for your reviewer**:
+Added go tests to check UUID revert.
+
+Tested CCM and CSI on:
+- k8s 1.13.1 cluster with 10 worker nodes in 3 zones
+- vSphere 6.7u1
+- OS: RHEL
+
+**Release note**:
+NA",['akutz'],1,2019-02-14 19:32:16,2019-02-14 21:41:40,2019-02-14 21:43:19,True,2019-02-14 21:41:40,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/145,https://github.com/kubernetes/cloud-provider-vsphere/pull/145,dvonthenen,Clarification on CCM and CSI Documentation,"**What this PR does / why we need it**:
+This attempts to clarify what setup is required for both the CCM and CSI in order for those components to function properly.
+
+**Which issue this PR fixes**:
+NA
+
+**Special notes for your reviewer**:
+NA
+
+**Release note**:
+NA",['frapposelli'],1,2019-02-19 17:33:10,2019-02-19 17:41:22,2019-02-19 17:42:49,True,2019-02-19 17:41:22,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/147,https://github.com/kubernetes/cloud-provider-vsphere/pull/147,dvonthenen,Part 1: Add CSI go tests,"**What this PR does / why we need it**:
+We need more CSI tests! Tests added:
+- Complete controller go test (Create, List, Publish, Unpublish, Delete)
+- Test ListVolumes boundary conditions mainly around pagination
+- Test ListVoumes order
+- Test for Zones support using 2 Datacenters
+
+Additional changes found while added go tests:
+- updated govmomi to latest to fix a bug in device Key/UnitNumber in the older version
+- Removed some klog.V(X) to always display since they are very useful debug statements to have all the time
+- Changed some klog.V(X) values as some weren't needed as often and others were
+- Found a bug in GetAllDatastoreClusters in which returns an error when no DatastoreClusters exist causing the entire ListVolumes to fail
+- Changed ListVolumes to be on a 0-based index instead of 1-based. This is used for the NextToken when doing pagination of volumes. 1-based was too confusing.
+
+**Which issue this PR fixes**:
+NA
+
+**Special notes for your reviewer**:
+Tested CCM and CSI on:
+k8s 1.13.2 cluster with 10 worker nodes in 3 zones
+vSphere 6.7u1
+Deployed a test pod which targeted a particular zone using a persistent volume
+Used a multiple vCenters (2 to be exact) with multiple Datacenters (3 to be exact)
+`make test` passes
+
+**Release note**:
+NA
+","['dougm', 'codenrhoden']",1,2019-02-22 22:58:38,2019-02-25 19:55:31,2019-02-25 20:06:47,True,2019-02-25 19:55:30,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/148,https://github.com/kubernetes/cloud-provider-vsphere/pull/148,dougm,Use vcsim SearchIndex in nodemanager test,"When this test was written, vcsim did not have a FindByDnsName implementation.
+Now that it does, there's no need to add our own FindByDnsName method, just
+need to set the vm guest.hostName property to the value used in the call to
+vclib's GetVMByDNSName().
+
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+
+/kind cleanup
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+",['dvonthenen'],1,2019-02-25 17:53:15,2019-02-25 19:07:22,2019-02-25 19:07:22,True,2019-02-25 19:07:21,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/149,https://github.com/kubernetes/cloud-provider-vsphere/pull/149,dvonthenen,Part 2: More go tests,"**What this PR does / why we need it**:
+Final PR for go testing. Tests added:
+- Now testing the instances interface
+- Now testing ConnectionManager... testing all the ways we look up or find things. Meaning we test list, search, and zone-based searches. New `_test.go` file for each category. These are used everywhere in both CCM and CSI.
+- configFromEnvOrSim now supported multi-DC environment
+- NodeManager now testing using multi-DC
+- Improved the ListVolumes test for ordering
+- Add ProviderID tests
+
+Refactored:
+- NodeManager and CCM Zones go tests don't need to initialize using newVSphere(). Was overkill and did a bunch of mostly unnecessary stuff.
+
+**Which issue this PR fixes**:
+NA
+
+**Special notes for your reviewer**:
+Since all changes were to `go tests` code only. Just made sure that `make test` passed as excepted.
+
+**Release note**:
+NA
+","['dougm', 'codenrhoden']",1,2019-02-27 16:06:01,2019-02-27 18:56:27,2019-02-27 22:35:26,True,2019-02-27 18:56:27,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/150,https://github.com/kubernetes/cloud-provider-vsphere/pull/150,akutz,Fix broken cron builds that rely on fork=true,"**What this PR does / why we need it**:
+This patch fixes an issue where Travis-CI's conditional ""fork"" no longer is set to ""true"" when a build is triggered by cron.
+
+Many thanks to @imkin and @figo for helping to discover this issue.
+
+The underlying cause appears to be related to https://github.com/bioconda/bioconda-recipes/issues/6809. However, the original configuration was working past the point that the linked problem was discovered. It appears to be a regression in Travis-CI. An issue will be opened with their support team to alert them to the problem.
+
+**Which issue this PR fixes**:
+NA
+
+**Special notes for your reviewer**:
+NA
+
+**Release note**:
+NA","['dougm', 'frapposelli']",1,2019-03-02 23:19:52,2019-03-04 18:16:22,2019-03-04 18:16:22,True,2019-03-04 18:16:22,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/151,https://github.com/kubernetes/cloud-provider-vsphere/pull/151,akutz,e2e: Sonobuoy,"**What this PR does / why we need it**:
+This patch updates the e2e conformance tests to use sk8's Sonobuoy refactor. Before merging the PR, the following environment variables need to be configured in the project's Travis-CI settings:
+
+| Name | Value |
+|-------|------|
+| `SK8_URL` | `https://raw.githubusercontent.com/vmware/simple-k8s-test-env/v0.2.0/sk8.sh` |
+| `E2E_IMAGE` | `gcr.io/kubernetes-conformance-testing/sk8e2e:v20190304-v0.2.0` |
+| `KUBE_CONFORMANCE_IMAGE` | `akutz/kube-conformance:v1.13.4` |
+
+Related to:
+1. https://github.com/vmware/simple-k8s-test-env/issues/9
+2. https://github.com/vmware/simple-k8s-test-env/issues/10
+3. https://github.com/vmware/simple-k8s-test-env/issues/11
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: Hi there. How are you today?
+
+**Release note**: NA",['frapposelli'],1,2019-03-04 20:46:07,2019-03-04 21:06:15,2019-03-04 21:06:15,True,2019-03-04 21:06:14,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/153,https://github.com/kubernetes/cloud-provider-vsphere/pull/153,codenrhoden,CSI ginkgo,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+This patch adds Ginkgo tests for the CSI Plugin that can be exercised
+when the plugin has not been configured (meaning, no vCenter
+interaction).
+
+These tests start an actual CSI plugin and communicate with it over
+gRPC. The connection is in-memory thanks to the memconn package,
+which makes testing simpler and faster.
+
+The reference to ""-tags unit"" has been removed from the Makefile's
+""unit"" target, as no Go source files had a unit build constraint in
+them. This call was ineffective.
+
+In a separate commit, the reference to glog is removed from Gopkg.toml. This is no longer a direct dependency, and does not belong in Gopkg.toml anymore.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+`make test` passes
+
+This is actually a first step on the way to E2E tests. This covers what we can test on a ""real"" CSI plugin without configuring it and deploying it on vSphere infrastructure. Next step will be a set of tests that can be run on any (Linux) node that has access to vCenter and perform the appropriate storage functionality on a single node. After that will come consuming the K8s testing framework to test functionality within K8s for a full E2E test.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'dvonthenen']",2,2019-03-07 23:34:48,2019-03-08 21:28:55,2019-03-11 20:24:53,True,2019-03-08 21:28:55,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/154,https://github.com/kubernetes/cloud-provider-vsphere/pull/154,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,['dougm'],1,2019-03-08 17:52:40,2019-03-08 20:10:54,2019-03-09 00:16:19,True,2019-03-08 20:10:54,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/155,https://github.com/kubernetes/cloud-provider-vsphere/pull/155,akutz,Add e2e integration tests using vcSim and Kind,"**What this PR does / why we need it**:
+This patch adds e2e integration tests that load the CCM image into a Kubernetes cluster turned up with Kind and the vCenter simulator. Execute the tests with:
+
+```shell
+$ make -C test/integration
+```
+
+The tests depend on the following binaries locally: `kind`, `kubectl`, and `docker`. Kind may be installed with `go get -u sigs.k8s.io/kind`.
+
+Many thanks to @BenTheElder, @andrewsykim, @munnerz, and @neolit123.
+
+**TODO**:
+* Migrate all the shell logic into an actual Ginkgo-based Go test using Kind's golang library
+* Refactor the test and the project to use Bazel for caching
+* Have better checks than printing the CCM log at the end
+* Add a README to the root of the `test` directory and perhaps the `integration` directory as well with documentation on how everything works. For now this PR and the default targets of the Makefiles will serve as the documentation.
+* This PR is loosely related to https://github.com/kubernetes/kubernetes/pull/75229. Please note this PR doesn't tell Kind to configure nodes with `--cloud-provider=external`. This is because Kind's CNI plug-in, Weave, won't start properly if the kubelet cannot report the node address. Therefore the cluster is turned up with no cloud provider configured and then the cloud provider taint is manually applied. Whether this solution is long-term is yet to be decided.
+
+**Example Test Run**
+```shell
+$ make -C test/integration
+make build-ccm-image
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+GOOS=linux make -C ../.. image-controller-manager
+make[2]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere'
+make[3]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere'
+dep ensure -v && touch vendor
+make[3]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere'
+CGO_ENABLED=0 GOOS=linux go build \
+	-ldflags ""-w -s -X 'main.version=a0a42c15'"" \
+	-o vsphere-cloud-controller-manager \
+	cmd/vsphere-cloud-controller-manager/main.go
+cp vsphere-cloud-controller-manager cluster/images/controller-manager
+docker build -t gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:a0a42c15 cluster/images/controller-manager
+Sending build context to Docker daemon  54.31MB
+Step 1/3 : FROM photon:2.0
+ ---> 37c525935c86
+Step 2/3 : ADD vsphere-cloud-controller-manager /bin/
+ ---> f9d6d95bd6dc
+Step 3/3 : CMD [""/bin/vsphere-cloud-controller-manager""]
+ ---> Running in 9f62eb9dccd9
+Removing intermediate container 9f62eb9dccd9
+ ---> 6a4cb71b8042
+Successfully built 6a4cb71b8042
+Successfully tagged gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:a0a42c15
+docker tag gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:a0a42c15 gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:latest
+rm cluster/images/controller-manager/vsphere-cloud-controller-manager
+make[2]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere'
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make cluster-up
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+kind create cluster --config ""kind-config.yaml"" --name ""ccm-integration-test""
+Creating cluster ""ccm-integration-test"" ...
+ ✓ Ensuring node image (kindest/node:v1.13.3) 🖼
+ ✓ [control-plane] Creating node container 📦 
+ ✓ [control-plane] Fixing mounts 🗻 
+ ✓ [control-plane] Configuring proxy 🐋
+ ✓ [control-plane] Starting systemd 🖥 
+ ✓ [control-plane] Waiting for docker to be ready 🐋 
+ ✓ [control-plane] Pre-loading images 🐋 
+ ✓ [worker] Creating node container 📦 
+ ✓ [worker] Fixing mounts 🗻 
+ ✓ [worker] Configuring proxy 🐋
+ ✓ [worker] Starting systemd 🖥 
+ ✓ [worker] Waiting for docker to be ready 🐋 
+ ✓ [worker] Pre-loading images 🐋 
+ ✓ [control-plane] Creating the kubeadm config file ⛵ 
+ ✓ [control-plane] Starting Kubernetes (this may take a minute) ☸ 
+ ✓ [worker] Joining worker node to Kubernetes ☸ 
+Cluster creation complete. You can now use the cluster with:
+
+export KUBECONFIG=""$(kind get kubeconfig-path --name=""ccm-integration-test"")""
+kubectl cluster-info
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make load-ccm-image
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+kind load docker-image --name ""ccm-integration-test"" gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:a0a42c15
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make deploy-vcsim
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+export KUBECONFIG=""$(kind get kubeconfig-path --name ""ccm-integration-test"")"" && \
+kubectl -n kube-system apply -f ../vcsim/deployment.yaml
+serviceaccount/vcsim created
+statefulset.apps/vcsim created
+service/vcsim created
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make create-vms
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+./create-vms.sh ""ccm-integration-test""
+waiting for vcsim.......................................ok
+creating vcsim vm:
+  name=ccm-integration-test-control-plane
+  fqdn=ccm-integration-test-control-plane
+  ipv4=172.17.0.2
+   mac=02:42:ac:11:00:02
+  uuid=04f419fe-8688-4066-a16d-cbc4193d5b93
+  suid=fe19f404-8886-6640-a16d-cbc4193d5b93
+creating vcsim vm:
+  name=ccm-integration-test-worker
+  fqdn=ccm-integration-test-worker
+  ipv4=172.17.0.3
+   mac=02:42:ac:11:00:03
+  uuid=04f419fe-8688-4066-a16d-cbc4193d5b94
+  suid=fe19f404-8886-6640-a16d-cbc4193d5b94
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make deploy-ccm
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+export KUBECONFIG=""$(kind get kubeconfig-path --name ""ccm-integration-test"")"" && \
+kubectl -n kube-system create configmap cloud-config --from-file=vsphere.conf && \
+kubectl -n kube-system create -f secrets.yaml && \
+kubectl -n kube-system apply -f ../../manifests/controller-manager/cloud-controller-manager-roles.yaml && \
+kubectl -n kube-system apply -f ../../manifests/controller-manager/cloud-controller-manager-role-bindings.yaml && \
+sed 's~gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:latest~gcr.io/cloud-provider-vsphere/vsphere-cloud-controller-manager:a0a42c15~g' <../../manifests/controller-manager/vsphere-cloud-controller-manager-pod.yaml | kubectl -n kube-system apply -f -
+configmap/cloud-config created
+secret/vccm created
+clusterrole.rbac.authorization.k8s.io/system:cloud-controller-manager created
+clusterrolebinding.rbac.authorization.k8s.io/system:cloud-controller-manager created
+serviceaccount/cloud-controller-manager created
+pod/vsphere-cloud-controller-manager created
+service/vsphere-cloud-controller-manager created
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make taint-nodes
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+export KUBECONFIG=""$(kind get kubeconfig-path --name ""ccm-integration-test"")"" && \
+for name in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}'); do \
+  kubectl taint nodes ""${name}"" node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule; \
+done
+node/ccm-integration-test-control-plane tainted
+node/ccm-integration-test-worker tainted
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make log-ccm
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+export KUBECONFIG=$(kind get kubeconfig-path --name ""ccm-integration-test"") && \
+while ! kubectl -n kube-system logs vsphere-cloud-controller-manager >/dev/null 2>&1; do sleep 1; done && \
+sleep 3 && \
+kubectl -n kube-system logs vsphere-cloud-controller-manager
+I0309 00:48:36.584904       1 flags.go:27] FLAG: --address=""0.0.0.0""
+I0309 00:48:36.584988       1 flags.go:27] FLAG: --allocate-node-cidrs=""false""
+I0309 00:48:36.585010       1 flags.go:27] FLAG: --allow-untagged-cloud=""false""
+I0309 00:48:36.585031       1 flags.go:27] FLAG: --alsologtostderr=""false""
+I0309 00:48:36.585053       1 flags.go:27] FLAG: --bind-address=""0.0.0.0""
+I0309 00:48:36.585095       1 flags.go:27] FLAG: --cert-dir=""/var/run/kubernetes""
+I0309 00:48:36.585110       1 flags.go:27] FLAG: --cidr-allocator-type=""RangeAllocator""
+I0309 00:48:36.585161       1 flags.go:27] FLAG: --cloud-config=""/etc/cloud/vsphere.conf""
+I0309 00:48:36.585182       1 flags.go:27] FLAG: --cloud-provider=""vsphere""
+I0309 00:48:36.585202       1 flags.go:27] FLAG: --cluster-cidr=""""
+I0309 00:48:36.585223       1 flags.go:27] FLAG: --cluster-name=""kubernetes""
+I0309 00:48:36.585243       1 flags.go:27] FLAG: --concurrent-service-syncs=""1""
+I0309 00:48:36.585265       1 flags.go:27] FLAG: --configure-cloud-routes=""true""
+I0309 00:48:36.585281       1 flags.go:27] FLAG: --contention-profiling=""false""
+I0309 00:48:36.585301       1 flags.go:27] FLAG: --controller-start-interval=""0s""
+I0309 00:48:36.585324       1 flags.go:27] FLAG: --feature-gates=""""
+I0309 00:48:36.585357       1 flags.go:27] FLAG: --help=""false""
+I0309 00:48:36.585382       1 flags.go:27] FLAG: --http2-max-streams-per-connection=""0""
+I0309 00:48:36.585403       1 flags.go:27] FLAG: --kube-api-burst=""30""
+I0309 00:48:36.585424       1 flags.go:27] FLAG: --kube-api-content-type=""application/vnd.kubernetes.protobuf""
+I0309 00:48:36.585635       1 flags.go:27] FLAG: --kube-api-qps=""20""
+I0309 00:48:36.585669       1 flags.go:27] FLAG: --kubeconfig=""""
+I0309 00:48:36.585723       1 flags.go:27] FLAG: --leader-elect=""true""
+I0309 00:48:36.585755       1 flags.go:27] FLAG: --leader-elect-lease-duration=""15s""
+I0309 00:48:36.585830       1 flags.go:27] FLAG: --leader-elect-renew-deadline=""10s""
+I0309 00:48:36.585852       1 flags.go:27] FLAG: --leader-elect-resource-lock=""endpoints""
+I0309 00:48:36.585907       1 flags.go:27] FLAG: --leader-elect-retry-period=""2s""
+I0309 00:48:36.585945       1 flags.go:27] FLAG: --log-backtrace-at="":0""
+I0309 00:48:36.585968       1 flags.go:27] FLAG: --log-dir=""""
+I0309 00:48:36.585984       1 flags.go:27] FLAG: --log-flush-frequency=""5s""
+I0309 00:48:36.586005       1 flags.go:27] FLAG: --logtostderr=""true""
+I0309 00:48:36.586020       1 flags.go:27] FLAG: --master=""""
+I0309 00:48:36.586047       1 flags.go:27] FLAG: --min-resync-period=""12h0m0s""
+I0309 00:48:36.586065       1 flags.go:27] FLAG: --node-monitor-period=""5s""
+I0309 00:48:36.586115       1 flags.go:27] FLAG: --node-status-update-frequency=""5m0s""
+I0309 00:48:36.586137       1 flags.go:27] FLAG: --node-sync-period=""0s""
+I0309 00:48:36.586151       1 flags.go:27] FLAG: --port=""10253""
+I0309 00:48:36.586173       1 flags.go:27] FLAG: --profiling=""false""
+I0309 00:48:36.586201       1 flags.go:27] FLAG: --route-reconciliation-period=""10s""
+I0309 00:48:36.586222       1 flags.go:27] FLAG: --secure-port=""0""
+I0309 00:48:36.586264       1 flags.go:27] FLAG: --stderrthreshold=""2""
+I0309 00:48:36.586279       1 flags.go:27] FLAG: --tls-cert-file=""""
+I0309 00:48:36.586293       1 flags.go:27] FLAG: --tls-cipher-suites=""[]""
+I0309 00:48:36.586324       1 flags.go:27] FLAG: --tls-min-version=""""
+I0309 00:48:36.586342       1 flags.go:27] FLAG: --tls-private-key-file=""""
+I0309 00:48:36.586360       1 flags.go:27] FLAG: --tls-sni-cert-key=""[]""
+I0309 00:48:36.586383       1 flags.go:27] FLAG: --use-service-account-credentials=""false""
+I0309 00:48:36.586432       1 flags.go:27] FLAG: --v=""2""
+I0309 00:48:36.586462       1 flags.go:27] FLAG: --version=""false""
+I0309 00:48:36.586543       1 flags.go:27] FLAG: --vmodule=""""
+W0309 00:48:36.586816       1 client_config.go:552] Neither --kubeconfig nor --master was specified.  Using the inClusterConfig.  This might not work.
+W0309 00:48:36.589631       1 authentication.go:55] Authentication is disabled
+I0309 00:48:36.589684       1 insecure_serving.go:49] Serving insecurely on [::]:10253
+I0309 00:48:36.594197       1 leaderelection.go:185] attempting to acquire leader lease  kube-system/cloud-controller-manager...
+I0309 00:48:36.618196       1 leaderelection.go:194] successfully acquired lease kube-system/cloud-controller-manager
+I0309 00:48:36.619512       1 event.go:221] Event(v1.ObjectReference{Kind:""Endpoints"", Namespace:""kube-system"", Name:""cloud-controller-manager"", UID:""129e493d-4205-11e9-9daa-02427a3787a5"", APIVersion:""v1"", ResourceVersion:""626"", FieldPath:""""}): type: 'Normal' reason: 'LeaderElection' ccm-integration-test-worker_129b3356-4205-11e9-b0a1-0242b996fa24 became leader
+I0309 00:48:36.621428       1 node_controller.go:89] Sending events to api server.
+I0309 00:48:36.622495       1 pvlcontroller.go:107] Starting PersistentVolumeLabelController
+I0309 00:48:36.622522       1 controller_utils.go:1025] Waiting for caches to sync for persistent volume label controller
+E0309 00:48:36.623170       1 controllermanager.go:240] Failed to start service controller: the cloud provider does not support external load balancers
+I0309 00:48:36.623220       1 controllermanager.go:264] Will not configure cloud provider routes for allocate-node-cidrs: false, configure-cloud-routes: true.
+E0309 00:48:36.641647       1 connection.go:63] Failed to create govmomi client. err: ServerFaultCode: Login failure
+I0309 00:48:36.673085       1 nodemanager.go:114] Discovered VM using normal UUID format
+I0309 00:48:36.688189       1 node_controller.go:373] Adding node label from cloud provider: beta.kubernetes.io/instance-type=vsphere-vm
+I0309 00:48:36.696186       1 nodemanager.go:114] Discovered VM using normal UUID format
+I0309 00:48:36.722832       1 controller_utils.go:1032] Caches are synced for persistent volume label controller
+I0309 00:48:36.746236       1 node_controller.go:421] Successfully initialized node ccm-integration-test-control-plane with cloud provider
+I0309 00:48:36.750818       1 node_controller.go:373] Adding node label from cloud provider: beta.kubernetes.io/instance-type=vsphere-vm
+I0309 00:48:36.790370       1 node_controller.go:421] Successfully initialized node ccm-integration-test-worker with cloud provider
+I0309 00:48:36.790546       1 node_controller.go:329] This node ccm-integration-test-control-plane is registered without the cloud taint. Will not process.
+I0309 00:48:36.790682       1 node_controller.go:329] This node ccm-integration-test-control-plane is registered without the cloud taint. Will not process.
+I0309 00:48:36.790780       1 node_controller.go:329] This node ccm-integration-test-worker is registered without the cloud taint. Will not process.
+I0309 00:48:36.792137       1 node_controller.go:329] This node ccm-integration-test-worker is registered without the cloud taint. Will not process.
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+make cluster-down
+make[1]: Entering directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+kind delete cluster --name ""ccm-integration-test""
+Deleting cluster ""ccm-integration-test"" ...
+make[1]: Leaving directory '/Users/akutz/Projects/go/src/k8s.io/cloud-provider-vsphere/test/integration'
+```
+
+**Which issue this PR fixes**:
+Related to https://github.com/kubernetes/cloud-provider-vsphere/issues/37#issuecomment-470282003
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA","['dougm', 'dvonthenen']",1,2019-03-09 00:49:41,2019-03-14 17:56:26,2019-03-14 17:56:26,True,2019-03-14 17:56:25,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/156,https://github.com/kubernetes/cloud-provider-vsphere/pull/156,akutz,Go module support; require Go 1.11+; new Makefile,"**What this PR does / why we need it**:
+This patch introduces the following:
+
+* Support for Go modules
+* Requires Go 1.11+
+* A refactored and simplified Makefile
+* Travis-CI now uses Xenial
+* Parallel builds
+
+The project should no longer be cloned to a GOPATH, instead the project can be cloned anywhere and `make` will build the vSphere cloud controller manager and CSI controller binaries.
+
+Several of the older cross-build targets still exist, but no longer require Gox. Instead `make cross-build` and `make x-dist` build the OS/Arch specific binaries and package them.
+
+Building the image is still restricted to ""linux_amd64"", but now the image is also built into a tar file to make testing even simpler using Kind's ability to load image tar streams directly into the Kubernetes cluster.
+
+Travis-CI is now configured to use Xenial images to build the sources. This is necessary due to a change in BitBucket's security restrictions concerning Mercurial - http://bit.ly/hg-on-travis-failing.
+
+Please see [this Travis-CI build](https://travis-ci.com/akutz/cloud-provider-vsphere/jobs/183664542) for an example of the process in action.
+
+The Makefile now fully supports parallel builds. For example, to package distributions for all available build targets with a parallelism of three, simply execute:
+
+```shell
+$ make x-dist -j 3
+```
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA","['frapposelli', 'dvonthenen']",6,2019-03-10 02:07:57,2019-03-11 16:05:31,2019-03-11 16:05:31,True,2019-03-11 16:05:31,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/159,https://github.com/kubernetes/cloud-provider-vsphere/pull/159,codenrhoden,Make Env Vars take precedence over config file,"
+<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+The way that the config file was parsed and loaded previously was done
+in a way that when reading a vSphere.conf file, env vars were checked
+first, all errors from that were ignored, then values were loaded from
+file and the config was validated.
+
+Env vars should take precedence. This patch changes it so that when
+reading a config file, that file is loaded, any valid env vars overwrite
+the values from the file, and then the whole composite config is
+validated.
+
+It was also true (in the case of CSI) that a vsphere.conf file was
+always required. This makes future testing difficult, as for basic
+cases, it should be possible to configure the CSI plugin via Env vars
+only. This patch makes that possible.
+
+It was previously possible that if you did use Env Var only for config,
+that an invalid config was returned without error. This patch fixes that
+as well.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['dougm', 'frapposelli', 'dvonthenen']",1,2019-03-10 18:44:33,2019-03-11 20:10:39,2019-03-11 20:16:39,True,2019-03-11 20:10:39,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/161,https://github.com/kubernetes/cloud-provider-vsphere/pull/161,dvonthenen,Address flaky TestGRPCServerClient in `make test`,"**What this PR does / why we need it**:
+Fixes the flaky gRPC server test. This is done by adding a simple gRPC call `GetVersion()` which will be needed later on anyways to obtain the version of the API and then just after server creation attempts to call that API to verify that the server is actually reachable in the `Start()` call. Also adds functionality to gracefully shutdown the server.
+
+An example of the race condition is shown below in a run of `make test` and also the recovery of it.
+```
+=== RUN   TestGRPCServerNodes
+I0311 09:58:12.297779   28646 server.go:126] API_VERSION: 0.0.1
+--- PASS: TestGRPCServerNodes (0.00s)
+=== RUN   TestGRPCServerVersion
+W0311 09:58:12.299536   28646 server.go:121] could not getversion: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = ""transport: Error while dialing dial tcp :43001: connect: connection refused""
+I0311 09:58:13.301226   28646 server.go:126] API_VERSION: 0.0.1
+--- PASS: TestGRPCServerVersion (1.00s)
+PASS
+```
+
+**Which issue this PR fixes**: https://github.com/kubernetes/cloud-provider-vsphere/issues/160
+
+**Special notes for your reviewer**:
+None
+
+**Release note**:
+None
+",['frapposelli'],1,2019-03-11 17:04:31,2019-03-11 21:50:37,2019-03-12 16:19:59,True,2019-03-11 21:50:37,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/162,https://github.com/kubernetes/cloud-provider-vsphere/pull/162,akutz,Image for building the binaries,"**What this PR does / why we need it**:
+This patch introduces an image that already has a Go module cache produced from a recent execution of ""make deps"" against the ""master"" branch of this repository. This speeds up builds exponentially when executing ""hack/make.sh"" since only delta changes are downloaded for dependencies. For example:
+
+```shell
+$ hack/make.sh build
+latest: Pulling from cloud-provider-vsphere/golang-1.12
+Digest: sha256:8ab7713835daaf7f0e141f355f6f87d40c1fb8f78f46a7a1e7eb056dc069cae9
+Status: Image is up to date for gcr.io/cloud-provider-vsphere/golang-1.12:latest
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags '-extldflags ""-static"" -w -s -X ""main.version=7612a0af""' -o vsphere-cloud-controller-manager.linux_amd64 cmd/vsphere-cloud-controller-manager/main.go
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags '-extldflags ""-static"" -w -s -X ""k8s.io/cloud-provider-vsphere/pkg/csi/service.version=7612a0af""' -o vsphere-csi.linux_amd64 cmd/vsphere-csi/main.go
+```
+
+If a variant of `cloud-provider-vsphere/golang-1.12` isn't available for the requested Golang version, then the default `golang` image is used at the requested version.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA","['dougm', 'frapposelli']",1,2019-03-11 17:27:12,2019-03-15 00:24:57,2019-03-15 00:24:57,True,2019-03-15 00:24:57,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/163,https://github.com/kubernetes/cloud-provider-vsphere/pull/163,akutz,"Fix format, vet, lint, and logic errors","**What this PR does / why we need it**:
+This patch fixes:
+* Outstanding format issues revealed when running `make fmt`
+* Outstanding vet issues revealed when running `make vet` (#158)
+* Over 100 linter issues revealed when running `make lint` (#157)
+* A logic error in the function `ExistsInList`
+
+**Which issue this PR fixes** 
+fixes #157, fixes #158
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA",['frapposelli'],4,2019-03-12 00:05:27,2019-03-12 16:10:40,2019-03-12 16:10:40,True,2019-03-12 16:10:40,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/164,https://github.com/kubernetes/cloud-provider-vsphere/pull/164,codenrhoden,Add env var to disable CSI K8s client,"<!-- Thanks for sending a pull request! -->
+
+**What this PR does / why we need it**:
+This PR will make it possible (may not be all that's needed) to run the [CSI-Sanity test suite](https://github.com/kubernetes-csi/csi-test) against our CSI plugin outside of a K8s pod.
+
+CSI plugins are intended to be CO agnostic. The current CSI plugin was
+always initializing a K8s client and informer, which would cause plugin
+initialization to fail if it was not running within a K8s pod.
+
+This patch adds a new env var, X_CSI_DISABLE_K8S_CLIENT which can be set to
+""true"" (or any other truthy value) to disable said initialization.
+
+This patch also changes some methods around the K8s client and informer
+to no longer use a pointer to a Go interface, as Go interfaces are
+already pointers.
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+
+**Special notes for your reviewer**:
+`pkg/csi/envvars.go` was moved to `pkg/csi/types/envvars.go` to avoid circular imports.
+
+The struct `pkg/csi/service/fcd/controller.controller` no longs holds a reference to the Kubernetes clientset or the informer, as these were never used again outside of the `Init` function.
+
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+NONE
+```
+","['frapposelli', 'dvonthenen']",1,2019-03-12 00:22:37,2019-03-14 15:34:27,2019-03-14 15:39:42,True,2019-03-14 15:34:27,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/165,https://github.com/kubernetes/cloud-provider-vsphere/pull/165,dvonthenen,Only report IPs bound to vNICs,"**What this PR does / why we need it**:
+We only report the IP address bound to the vNIC. As shown below in testing...
+
+```
+[vonthd@k8smaster csi]$ kubectl describe node k8sworker1.local
+Name:               k8sworker1.local
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=vsphere-vm
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=k8s-region-eu
+                    failure-domain.beta.kubernetes.io/zone=k8s-region-eu-all
+                    kubernetes.io/hostname=k8sworker1.local
+...
+Addresses:
+  ExternalIP:  10.160.137.75
+  InternalIP:  10.160.137.75
+  Hostname:    k8sworker1.local
+```
+
+**Which issue this PR fixes**: https://github.com/kubernetes/cloud-provider-vsphere/issues/138
+
+**Special notes for your reviewer**:
+NA
+
+**Release note**:
+NA
+",['dougm'],1,2019-03-12 16:47:15,2019-03-12 17:58:40,2019-03-13 13:34:15,True,2019-03-12 17:58:40,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/166,https://github.com/kubernetes/cloud-provider-vsphere/pull/166,akutz,Enable linting on Prow,"**What this PR does / why we need it**:
+This patch introduces support for linting in a pre-submit, blocking Prow job. The Makefile's `check` target now invokes `hack/check.sh`, which in turn invokes `make fmt`, `make vet`, and `make lint`, translating their results into the JUnit report that is consumable by the K8s test-grid.
+
+This [gist](https://gist.github.com/akutz/42d1dc17d64edab19dbc1c11fc9fbaef) has an example of the `make check` command as well as the JUnit report the command produces.
+
+The report is written to `${ARTIFACTS}/junit_check.xml`.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA","['dougm', 'codenrhoden']",1,2019-03-12 17:30:12,2019-03-14 17:56:32,2019-03-14 17:56:32,True,2019-03-14 17:56:32,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/167,https://github.com/kubernetes/cloud-provider-vsphere/pull/167,akutz,Support for running e2e against the CCM and CSI controllers from Prow,"**What this PR does / why we need it**:
+# Continuous integration
+
+The image `gcr.io/cloud-provider-vsphere/ci` is used by Prow jobs to build, test, and deploy the CCM and CSI providers.
+
+## The CI workflow
+
+Prow jobs are configured to perform the following steps:
+
+| Job type | Linters | Build binaries | Unit test | Build images | Integration test | Deploy images | Conformance test |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Presubmit | ✓ | ✓ | ✓ | ✓ | ✓ | | |
+| Postsubmit | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | |
+| Periodic | ✓ | ✓ | ✓ | ✓ | | | ✓ |
+
+## Up-to-date sources
+
+When running on Prow the jobs map the current sources into the CI container. That may be simulated locally by running the examples from a directory containing the desired sources and providing the `docker run` command with the following flags:
+
+* `-v ""$(pwd)"":/go/src/k8s.io/cloud-provider-vsphere`
+
+## Docker-in-Docker
+
+Several of the jobs require Docker-in-Docker. To mimic that locally there are two options:
+
+1. [Provide the host's Docker to the container](#provide-the-hosts-docker-to-the-container) 
+2. [Run the Docker server inside the container](#run-the-docker-server-inside-the-container)
+
+### Provide the host's Docker to the container
+
+While Prow jobs [run the Docker server inside the container](#run-the-docker-server-inside-the-container), this option provides a low-cost (memory, disk) solution for testing locally. This option is enabled by running the examples from a directory containing the desired sources and providing the `docker run` command with the following flags:
+
+* `-v /var/run/docker.sock:/var/run/docker.sock`
+* `-e ""PROJECT_ROOT=$(pwd)""`
+* `-v ""$(pwd)"":/go/src/k8s.io/cloud-provider-vsphere`
+
+Please note that this option is only available when using a local copy of the sources. This is because all of the paths known to Docker will be of the local host system, not from the container. That's also why it's necessary to provide the `PROJECT_ROOT` environment variable -- it indicates to certain recipes the location of specific files or directories relative to the local sources on the host system.
+
+### Run the Docker server inside the container
+This is option that Prow jobs utilize and is also the method illustrated by the examples below. Please keep in mind that using this option locally requires a large amount of memory and disk space available to Docker:
+
+| Type | Minimum Requirement |
+|------|---------------------|
+| Memory | 8GiB |
+| Disk | 200GiB |
+
+For Windows and macOS systems this means adjusting the size of the Docker VM disk and the amount of memory the Docker VM is allowed to use.
+
+Resources notwithstanding, running the Docker server inside the container also requires providing the `docker run` command with the following flags:
+
+* `--privileged`
+
+## Check the sources
+
+To check the sources run the following command:
+
+```shell
+$ docker run -it --rm \
+  -e ""ARTIFACTS=/out"" -v ""$(pwd)"":/out \
+  gcr.io/cloud-provider-vsphere/ci \
+  make check
+```
+
+The above command will create the following files in the working directory:
+
+* `junit_check.xml`
+
+## Build the CCM and CSI binaries
+
+The CI image is built with Go module and build caches from a recent build of the project's `master` branch. Therefore the CI image can be used to build the CCM and CSI binaries in a matter of seconds:
+
+```shell
+$ docker run -it --rm \
+  -e ""BIN_OUT=/out"" -v ""$(pwd)"":/out \
+  gcr.io/cloud-provider-vsphere/ci \
+  make build
+```
+
+The above command will create the following files in the working directory:
+
+* `vsphere-cloud-controller-manager.linux_amd64`
+* `vsphere-csi.linux_amd64`
+
+## Execute the unit tests
+
+```shell
+$ docker run -it --rm \
+  gcr.io/cloud-provider-vsphere/ci \
+  make unit-test
+```
+
+## Build the CCM and CSI images
+
+Building the CCM and CSI images inside another image requires Docker-in-Docker (DinD):
+
+```shell
+$ docker run -it --rm --privileged \
+  gcr.io/cloud-provider-vsphere/ci \
+  make build-images
+```
+
+## Execute the integration tests
+The project's integration tests leverage Kind, a solution for turning up a Kubernetes cluster using Docker:
+
+```shell
+$ docker run -it --rm --privileged \
+  gcr.io/cloud-provider-vsphere/ci \
+  make integration-test
+```
+
+Running the integration tests with the container providing the Docker server is **severely** taxing on the host system's resources. It is **highly** recommended, for purposes of local development, to opt to provide Docker to the container by bind mounting the host's Docker socket into the container. Please note this also requires using local sources and setting `PROJECT_ROOT`:
+
+```shell
+$ docker run -it --rm \
+  -e ""PROJECT_ROOT=$(pwd)"" \
+  -v ""$(pwd)"":/go/src/k8s.io/cloud-provider-vsphere \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gcr.io/cloud-provider-vsphere/ci \
+  make integration-test
+```
+
+## Deploy the CCM and CSI images
+Pushing the images requires bind mounting a GCR key file into the container and setting the environment variable `GCR_KEY_FILE` to inform the deployment process the location of the key file:
+
+```shell
+$ docker run -it --rm --privileged \
+  -e ""GCR_KEY_FILE=/keyfile.json"" -v ""$(pwd)/keyfile.json"":/keyfile.json \
+  gcr.io/cloud-provider-vsphere/ci \
+  make push-images
+```
+
+## Execute the conformance tests
+Running the e2e conformance suite not only requires DinD but also an environment variable file that provides the information required to turn up a Kubernetes cluster against which the e2e tests are executed. For example:
+
+```shell
+VSPHERE_SERVER='vcenter.com'
+VSPHERE_USERNAME='myuser'
+VSPHERE_PASSWORD='mypass'
+VSPHERE_DATACENTER='/dc1'
+VSPHERE_RESOURCE_POOL=""/dc1/host/Cluster-1/Resources/mypool""
+VSPHERE_DATASTORE=""/dc1/datastore/mydatastore""
+VSPHERE_FOLDER=""/dc1/vm/myfolder""
+```
+
+If the vSphere endpoint is hosted in the VMware Cloud (VMC) on AWS then the file can also contain AWS access credentials to provide external access to the Kubernetes cluster:
+
+```shell
+AWS_ACCESS_KEY_ID='mykey'
+AWS_SECRET_ACCESS_KEY='mysecretkey'
+AWS_DEFAULT_REGION='myregion'
+```
+
+Finally, the configuration file can also include details that define the shape of the Kubernetes cluster as well as influence how and what e2e tests are executed:
+
+```shell
+CLOUD_PROVIDER='external'
+E2E_FOCUS='\\[Conformance\\]'
+E2E_SKIP='Alpha|\\[(Disruptive|Feature:[^\\]]+|Flaky)\\]'
+K8S_VERSION='ci/latest'
+NUM_BOTH='1'
+NUM_CONTROLLERS='1'
+NUM_WORKERS='1'
+KUBE_CONFORMANCE_IMAGE='akutz/kube-conformance:latest'
+```
+
+Once the environment variable file is created, the conformance tests may be executed with:
+
+```shell
+$ docker run -it --rm --privileged \
+  -e ""ARTIFACTS=/out"" -v ""$(pwd)"":/out \
+  --env-file config.env \
+  gcr.io/cloud-provider-vsphere/ci \
+  make conformance-test
+```
+
+The above command will create the following files in the working directory:
+
+```shell
+$ ls -al
+total 1936
+drwxr-xr-x  13 akutz  staff   416B Mar 15 17:26 ./
+drwxr-xr-x   3 akutz  staff    96B Mar 15 17:21 ../
+-rw-r--r--   1 akutz  staff   599B Mar 15 17:21 build-info.json
+-rw-r--r--   1 akutz  staff   8.4K Mar 15 17:26 e2e.log
+drwxr-xr-x@  4 akutz  staff   128B Mar 15 17:26 hosts/
+-rw-r--r--   1 akutz  staff   935K Mar 15 17:26 junit_01.xml
+drwxr-xr-x@  5 akutz  staff   160B Mar 15 17:26 meta/
+drwxr-xr-x@  4 akutz  staff   128B Mar 15 17:26 plugins/
+drwxr-xr-x@  3 akutz  staff    96B Mar 15 17:26 podlogs/
+drwxr-xr-x@  4 akutz  staff   128B Mar 15 17:26 resources/
+-rw-r--r--@  1 akutz  staff   4.0K Mar 15 17:26 servergroups.json
+-rw-r--r--@  1 akutz  staff   253B Mar 15 17:26 serverversion.json
+-rw-r--r--   1 akutz  staff   281B Mar 15 17:25 terraform-output-vars.txt
+```
+
+The `build-info.json` file includes information about the build:
+
+```json
+{
+  ""cluster-name"": ""prow-fb3ba63"",
+  ""k8s-version"": ""ci/latest"",
+  ""num-both"": ""1"",
+  ""num-controllers"": ""1"",
+  ""num-workers"": ""1"",
+  ""cloud-provider"": ""external"",
+  ""e2e-focus"": ""should provide DNS for the cluster[[:space:]]{0,}\\[Conformance\\]"",
+  ""e2e-skip"": ""Alpha|\\[(Disruptive|Feature:[^\\]]+|Flaky)\\]"",
+  ""kube-conformance-image"": ""akutz/kube-conformance:latest"",
+  ""config-env"": ""/config.env"",
+  ""gcr-key-file"": ""/keyfile.json""
+}
+```
+
+The file `terraform-output.txt` includes information about the cluster that was turned up:
+
+```shell
+controllers = [
+    192.168.3.207
+]
+controllers-with-kubelets = 1
+etcd = https://discovery.etcd.io/8c6a3f14571bf6892d370c325a428d9b
+external_fqdn = sk8lb-ee7dff5-6b4c40f39f288cf1.elb.us-west-2.amazonaws.com
+kubeconfig = data/prow-fb3ba63/kubeconfig
+workers = [
+    192.168.3.182
+]
+```
+
+And finally, the files `e2e.log` and `junit_01.xml` are the log for the e2e  execution and the file parsed by the K8s test grid.
+
+The remaining files are created by Sonobuoy during the test execution.
+
+
+cc @figo @frapposelli @dougm @dvonthenen 
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA",['frapposelli'],7,2019-03-15 22:39:49,2019-03-19 22:00:22,2019-03-19 22:00:22,True,2019-03-19 22:00:22,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/168,https://github.com/kubernetes/cloud-provider-vsphere/pull/168,frapposelli,Add descriptive instanceType to nodes,"**What this PR does / why we need it**:
+
+This PR adds support for returning a more descriptive InstanceType for nodes, instead of returning a static string.
+
+**Which issue this PR fixes** 
+
+Fixes: #55
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+```","['dougm', 'dvonthenen']",1,2019-03-18 10:27:51,2019-03-19 00:34:21,2019-03-19 08:26:44,True,2019-03-19 00:34:20,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/169,https://github.com/kubernetes/cloud-provider-vsphere/pull/169,akutz,Updates to CI and conformance work,"**What this PR does / why we need it**:
+This patch includes several changes related to the CI and conformance workflow:
+
+## ci: Require the Docker image registry include
+This patch changes the behavior of including the Docker image registry makefile in the root makefile. If the include is not present an error will occur.
+
+## ci: Simplify the VERSION variable
+This patch simplifies the Makefile VERSION to use ?= instead of ifndef.
+
+## ci: Print CI image version
+This patch adds a target for printing the version of the CI image.
+
+## ci: Rm Makefile from CI build cache; LDFLAGS
+This patch removes the need to copy the Makefile when creating the build cache for the CI image in order to not invalidate the cache due to a Makefile change. To support this the LDFLAGS have been externalized to ""hack/make/ldflags.txt"" so the Makefile and CI Dockerfile both use the same flags.
+
+## ci: Use sk8e2e as a stage instead of copying
+This patch uses sk8e2e as a stage instead of copying directly from it. This allows the setting of the sk8e2e image as a build arg.
+
+## ci: Add clean-d target to remove marker files
+This patch introduces the ""clean-d"" target as a way to quickly remove all of the project's marker files.
+
+## ci: Add deploy target
+This patch adds a new target named ""deploy"" to make it easier to execute the deploy job from Prow.
+
+## e2e: Fix quick-conformance-test target
+This patch fixes the quick-conformance-test target by removing the unnecessary quotes from around E2E_FOCUS.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA",['frapposelli'],9,2019-03-20 16:47:45,2019-03-20 17:15:45,2019-03-20 17:15:45,True,2019-03-20 17:15:45,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/172,https://github.com/kubernetes/cloud-provider-vsphere/pull/172,akutz,[WIP] Test the CI jobs,"/hold
+
+This patch is fake and should not be merged. It's for testing the CI jobs.
+
+**What this PR does / why we need it**: You don't.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: Hi there.
+
+**Release note**: NA",[],1,2019-03-22 20:52:20,2019-03-29 18:15:22,2019-03-29 18:15:22,False,,,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/173,https://github.com/kubernetes/cloud-provider-vsphere/pull/173,akutz,Fix linting issues,"**What this PR does / why we need it**:
+This patch fixes a few outstanding linting issues.
+
+cc @codenrhoden 
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA",['dougm'],1,2019-03-22 21:31:03,2019-03-22 21:36:12,2019-03-22 21:36:12,True,2019-03-22 21:36:12,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/174,https://github.com/kubernetes/cloud-provider-vsphere/pull/174,akutz,ci: Update the version of sk8e2e to fix CI bug,"**What this PR does / why we need it**:
+This patch updates the version of sk8e2e used in the CI image to fix an issue when running conformance tests on Prow. The underlying issue is described at vmware/simple-k8s-test-env@eb10f99.
+
+The CI image for this commit is already built and published at `gcr.io/cloud-provider-vsphere/ci:f2a0d372`.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA",['dougm'],1,2019-03-27 23:01:04,2019-03-27 23:40:49,2019-03-27 23:40:49,True,2019-03-27 23:40:49,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/175,https://github.com/kubernetes/cloud-provider-vsphere/pull/175,akutz,ci: Fix CI conformance with new network ID,"**What this PR does / why we need it**:
+This patch accounts for the changes that occurred as the result of the VMC NSX migration. The networks were relocated, and so the network ID of the network to which VMs are deployed changed.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA","['dougm', 'figo']",1,2019-03-28 19:51:34,2019-03-28 23:29:57,2019-03-28 23:29:57,True,2019-03-28 23:29:57,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/176,https://github.com/kubernetes/cloud-provider-vsphere/pull/176,codenrhoden,Add Block Volume support,"
+
+**What this PR does / why we need it**:
+Adds block volume support for the CSI plugin
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #80 
+
+**Special notes for your reviewer**:
+This patch adds support for CSI's Block Volume access type. There are
+some rough edges around the CSI spec when it comes to working with block
+volumes and NodeStageVolume and NodeUnstageVolume, but these are worked
+around for now.
+
+For NodeStageVolume, we implement this as a noop for Block. The call
+isn't necessary for Block volume, but it is mandated by the spec.
+
+For NodeUnstageVolume, we would also do it as a noop, but there is no
+context with the call to determine whether the volume in question is
+block or mount access. So instead we rely on the requirement on the CO
+to have created a staging-target directory. If that exists but nothing
+is mounted to it, we assume it was block and move on. This is safe
+because it is the CO's job to create and delete the staging target dir,
+whereas it is the SP's job to create and delete the target path.
+
+**Release note**:
+<!--  Steps to write your release note:
+1. Use the release-note-* labels to set the release note state (if you have access)
+2. Enter your extended release note in the below block; leaving it blank means using the PR title as the release note. If no release note is required, just write `NONE`.
+-->
+```release-note
+```
+","['dougm', 'dvonthenen']",1,2019-03-29 20:08:30,2019-04-02 14:38:38,2019-04-02 15:22:12,True,2019-04-02 14:38:38,k8s-ci-robot,unknown,,closed
+cloud-provider-vsphere,https://api.github.com/repos/kubernetes/cloud-provider-vsphere/pulls/177,https://github.com/kubernetes/cloud-provider-vsphere/pull/177,akutz,ci: Update sk8e2e image in CI image,"**What this PR does / why we need it**:
+Updates the sk8e2e image in the CI image.
+
+**Which issue this PR fixes**: NA
+
+**Special notes for your reviewer**: NA
+
+**Release note**: NA","['dougm', 'dvonthenen']",2,2019-03-30 20:14:05,2019-04-02 14:50:36,2019-04-02 14:50:36,True,2019-04-02 14:50:36,k8s-ci-robot,unknown,,closed

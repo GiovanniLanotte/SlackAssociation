@@ -1,0 +1,249 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/indy-anoncreds/pull/84,https://github.com/hyperledger/indy-anoncreds/pull/84,"Please use python scripts instead of bash scripts from now on--and convert bash to python as a refactoring task, over time, so that we are better positioned to support builds on Windows.",21a8c86c1e8b7129e15fd96c259ba7accffc890c,2017-08-02 18:57:01,130965613,"@@ -0,0 +1,45 @@
++#!/bin/bash -xe",1,2017-08-02 18:57:01,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/130965613,https://github.com/hyperledger/indy-anoncreds/pull/84#discussion_r130965613,dhh1128
+https://github.com/hyperledger/indy-anoncreds/pull/64,https://github.com/hyperledger/indy-anoncreds/pull/64,"Where do we have a mapping between Proofs (ProofInfo) and Requested Attribute?
+I think each requested proof (RequestedProof) should be actually a requested attribute, and contain the information like in https://github.com/hyperledger/indy-sdk/blob/master/src/api/anoncreds.rs#L658",6e99ab85e735396cb6d28a20818a168a88fb62a1,2017-07-07 16:23:06,126187773,"@@ -217,31 +232,37 @@ def proverId(self):
+                 m2Tilde = cmod.integer(int(
+                     nonRevocInitProof.TauListParams.m2)) if nonRevocInitProof else None
+                 primaryInitProof = await self._primaryProofBuilder.initProof(
+-                    schemaKey, c1, revealedAttrs, predicates,
+-                    m1Tilde, m2Tilde)
++                    schemaId, c1, revealedAttrs, predicates,
++                    m1Tilde, m2Tilde, claim)
+                 CList += primaryInitProof.asCList()
+                 TauList += primaryInitProof.asTauList()
+ 
+             initProof = InitProof(nonRevocInitProof, primaryInitProof)
+-            initProofs[schemaKey] = initProof
++            initProofs[schemaId] = initProof
+ 
+         # 2. hash
+-        cH = self._get_hash(CList, TauList, nonce)
++        cH = self._get_hash(self._prepare_collection(CList), self._prepare_collection(TauList), nonce)
+ 
+         # 3. finalize proofs
+-        proofs = []
+-        schemaKeys = []
+-        for schemaKey, initProof in initProofs.items():
+-            schemaKeys.append(schemaKey)
++        proofs = {}
++        for schemaId, initProof in initProofs.items():
+             nonRevocProof = None
+             if initProof.nonRevocInitProof:
+                 nonRevocProof = await self._nonRevocProofBuilder.finalizeProof(
+-                    schemaKey, cH, initProof.nonRevocInitProof)
++                    schemaId, cH, initProof.nonRevocInitProof)
+             primaryProof = await self._primaryProofBuilder.finalizeProof(
+-                schemaKey, cH, initProof.primaryInitProof)
+-            proofs.append(Proof(primaryProof, nonRevocProof))
++                schemaId, cH, initProof.primaryInitProof)
+ 
+-        return FullProof(cH, schemaKeys, proofs, CList)
++            schema = await self.wallet.getSchema(ID(schemaId=schemaId))
++
++            proof = Proof(primaryProof, nonRevocProof)
++            proofInfo = ProofInfo(proof=proof, schema_seq_no=schemaId, issuer_did=schema.issuerId)
++
++            proofs[str(schemaId)] = proofInfo
++
++        aggregatedProof = AggregatedProof(cH, self._prepare_collection(CList))
++
++        return FullProof(proofs, aggregatedProof, requestedProof)",232,2017-07-10 08:08:51,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/126187773,https://github.com/hyperledger/indy-anoncreds/pull/64#discussion_r126187773,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/64,https://github.com/hyperledger/indy-anoncreds/pull/64,Exactly the same object here,6e99ab85e735396cb6d28a20818a168a88fb62a1,2017-07-09 06:29:17,126297121,"@@ -217,31 +232,37 @@ def proverId(self):
+                 m2Tilde = cmod.integer(int(
+                     nonRevocInitProof.TauListParams.m2)) if nonRevocInitProof else None
+                 primaryInitProof = await self._primaryProofBuilder.initProof(
+-                    schemaKey, c1, revealedAttrs, predicates,
+-                    m1Tilde, m2Tilde)
++                    schemaId, c1, revealedAttrs, predicates,
++                    m1Tilde, m2Tilde, claim)
+                 CList += primaryInitProof.asCList()
+                 TauList += primaryInitProof.asTauList()
+ 
+             initProof = InitProof(nonRevocInitProof, primaryInitProof)
+-            initProofs[schemaKey] = initProof
++            initProofs[schemaId] = initProof
+ 
+         # 2. hash
+-        cH = self._get_hash(CList, TauList, nonce)
++        cH = self._get_hash(self._prepare_collection(CList), self._prepare_collection(TauList), nonce)
+ 
+         # 3. finalize proofs
+-        proofs = []
+-        schemaKeys = []
+-        for schemaKey, initProof in initProofs.items():
+-            schemaKeys.append(schemaKey)
++        proofs = {}
++        for schemaId, initProof in initProofs.items():
+             nonRevocProof = None
+             if initProof.nonRevocInitProof:
+                 nonRevocProof = await self._nonRevocProofBuilder.finalizeProof(
+-                    schemaKey, cH, initProof.nonRevocInitProof)
++                    schemaId, cH, initProof.nonRevocInitProof)
+             primaryProof = await self._primaryProofBuilder.finalizeProof(
+-                schemaKey, cH, initProof.primaryInitProof)
+-            proofs.append(Proof(primaryProof, nonRevocProof))
++                schemaId, cH, initProof.primaryInitProof)
+ 
+-        return FullProof(cH, schemaKeys, proofs, CList)
++            schema = await self.wallet.getSchema(ID(schemaId=schemaId))
++
++            proof = Proof(primaryProof, nonRevocProof)
++            proofInfo = ProofInfo(proof=proof, schema_seq_no=schemaId, issuer_did=schema.issuerId)
++
++            proofs[str(schemaId)] = proofInfo
++
++        aggregatedProof = AggregatedProof(cH, self._prepare_collection(CList))
++
++        return FullProof(proofs, aggregatedProof, requestedProof)",232,2017-07-10 08:08:51,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/126297121,https://github.com/hyperledger/indy-anoncreds/pull/64#discussion_r126297121,Artemkaaas
+https://github.com/hyperledger/indy-anoncreds/pull/59,https://github.com/hyperledger/indy-anoncreds/pull/59,"Is the value type really Sequence[str]? Looks like it's a sequence of Tuples, isn't it?",4c3ad3c499e11c23ef6cfd49a7066d317446b155,2017-06-23 16:49:53,123795418,"@@ -73,7 +74,7 @@ def _genPrime(cls):
+         return prime
+ 
+     async def issuePrimaryClaim(self, schemaId: ID, attributes: Attribs,
+-                                U) -> PrimaryClaim:
++                                U) -> (PrimaryClaim, Dict[str, Sequence[str]]):",,2017-06-26 08:49:59,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/123795418,https://github.com/hyperledger/indy-anoncreds/pull/59#discussion_r123795418,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/59,https://github.com/hyperledger/indy-anoncreds/pull/59,"Let's declare a type for this attributes Dict, since it's used in many places",4c3ad3c499e11c23ef6cfd49a7066d317446b155,2017-06-23 16:51:19,123795682,"@@ -73,7 +74,7 @@ def _genPrime(cls):
+         return prime
+ 
+     async def issuePrimaryClaim(self, schemaId: ID, attributes: Attribs,
+-                                U) -> PrimaryClaim:
++                                U) -> (PrimaryClaim, Dict[str, Sequence[str]]):",,2017-06-26 08:49:59,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/123795682,https://github.com/hyperledger/indy-anoncreds/pull/59#discussion_r123795682,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/59,https://github.com/hyperledger/indy-anoncreds/pull/59,It should probably be submitPrimaryClaimSignature?,4c3ad3c499e11c23ef6cfd49a7066d317446b155,2017-06-23 16:59:45,123797373,"@@ -85,6 +92,9 @@ def __init__(self, schemaId, repo: PublicRepo):
+ 
+     # SUBMIT
+ 
++    async def submitClaim(self, schemaId: ID, claims: Dict[str, Sequence[str]]):
++        await self._cacheValueForId(self._claims, schemaId, claims)
++
+     async def submitPrimaryClaim(self, schemaId: ID, claim: PrimaryClaim):",,2017-06-26 08:49:59,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/123797373,https://github.com/hyperledger/indy-anoncreds/pull/59#discussion_r123797373,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/59,https://github.com/hyperledger/indy-anoncreds/pull/59,We should have a test to check that claims received by the prover are equal to the ones from issuer (similar to this deleted test),4c3ad3c499e11c23ef6cfd49a7066d317446b155,2017-06-23 17:02:55,123797953,"@@ -121,26 +121,15 @@
+ 
+ 
+ @pytest.mark.skipif('sys.platform == ""win32""', reason='SOV-86')
+-def testAttrsInClaims(claimsProver1Gvt, attrsProver1Gvt):",,2017-06-26 08:49:59,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/123797953,https://github.com/hyperledger/indy-anoncreds/pull/59#discussion_r123797953,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/59,https://github.com/hyperledger/indy-anoncreds/pull/59,Should we use` crypto_int_to_str` for `v`?,4c3ad3c499e11c23ef6cfd49a7066d317446b155,2017-06-23 17:04:17,123798199,"@@ -311,17 +310,24 @@ def from_str_dict(cls, data, n):
+ 
+ # Accumulator = namedtuple('Accumulator', ['iA', 'acc', 'V', 'L'])
+ 
+-class PrimaryClaim(
+-    namedtuple('PrimaryClaim', 'attrs, encodedAttrs, m2, A, e, v'),
+-    NamedTupleStrSerializer):
+-    pass
++class PrimaryClaim(namedtuple('PrimaryClaim', 'm2, A, e, v'), NamedTupleStrSerializer):
+ 
+-    def __str__(self):
+-        rtn = ['Attributes:']
+-        for key, value in self.attrs.items():
+-            rtn.append('    {}: {}'.format(str(key), str(value)))
++    def to_str_dict(self):
++        return {
++            'm2': str(crypto_int_to_str(self.m2)),
++            'a': str(crypto_int_to_str(self.A)),
++            'e': str(self.e),
++            'v': str(self.v)",,2017-06-26 08:49:59,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/123798199,https://github.com/hyperledger/indy-anoncreds/pull/59#discussion_r123798199,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/59,https://github.com/hyperledger/indy-anoncreds/pull/59,"We use `attrs` in some cases, and `claims` in others. Please us the same name.
+I think we can use the term ClaimAttributes. It means that the wallet method should be renamed to `submitClaimAttributes`",4c3ad3c499e11c23ef6cfd49a7066d317446b155,2017-07-07 10:27:39,126116853,"@@ -106,12 +106,12 @@ def __init__(self, wallet: ProverWallet):
+                                      unrevealedAttrs.keys(), revealedAttrs)
+ 
+     async def _initGeProof(self, schemaKey, eqProof: PrimaryEqualInitProof,
+-                           c1: PrimaryClaim, predicate: Predicate) \
++                           c1: PrimaryClaim, predicate: Predicate, claim: Dict[str, AttributeValues]) \",63,2017-07-07 10:31:51,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/126116853,https://github.com/hyperledger/indy-anoncreds/pull/59#discussion_r126116853,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,I think we can remove NamedTupleStrSerializer from here,75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-08 19:17:58,120975723,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)",11,2017-06-16 09:02:25,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/120975723,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r120975723,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,"- Please add tests that these two new methods work (for example, similar to testPKFromToDict)
+- Please add a test to check that serialization equals to libsovrin's format",75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-08 19:19:42,120976034,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)
+ 
++    def to_str_dict(self):",13,2017-06-16 09:02:25,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/120976034,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r120976034,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,"not yet, because of this code in jsonpickle_util.py
+class CommonIntegerElementHandler(jsonpickle.handlers.BaseHandler):
+    def flatten(self, obj, data):
+        data[DATA_KEY] = obj.toStrDict()
+        return data
+
+Revocation part also uses this code",75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-09 09:09:35,121081596,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)",11,2017-06-16 09:02:25,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/121081596,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r121081596,MRJCrunch
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,done,75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-09 09:14:06,121082522,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)
+ 
++    def to_str_dict(self):",13,2017-06-16 09:02:25,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/121082522,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r121082522,MRJCrunch
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,"Please create a method for such serialization:
+- a field 'x' and 'n' on input;
+strToCryptoInteger(x + 'mod' + n) on output",75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-15 15:22:51,122231822,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)
+ 
++    def to_str_dict(self):
++        public_key = {
++            'n': str(crypto_int_to_str(self.N)),
++            's': str(crypto_int_to_str(self.S)),
++            'rms': str(crypto_int_to_str(self.Rms)),
++            'rctxt': str(crypto_int_to_str(self.Rctxt)),
++            'z': str(crypto_int_to_str(self.Z)),
++            'r': {}
++        }
++
++        for key in self.R:
++            public_key['r'][key] = str(crypto_int_to_str(self.R[key]))
++
++        return public_key
++
++    @classmethod
++    def from_str_dict(cls, data):
++        N = strToCryptoInteger(data['n'])
++        Rms = strToCryptoInteger(data['rms'] + 'mod' + data['n'])
++        Rctxt = strToCryptoInteger(data['rctxt'] + 'mod' + data['n'])
++        S = strToCryptoInteger(data['s'] + 'mod' + data['n'])
++        Z = strToCryptoInteger(data['z'] + 'mod' + data['n'])",,2017-06-16 09:02:25,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/122231822,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r122231822,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,Do we have tests for the second item?,75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-15 15:26:06,122232656,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)
+ 
++    def to_str_dict(self):",13,2017-06-16 09:02:25,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/122232656,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r122232656,ashcherbakov
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,done,75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-16 09:17:08,122399900,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)
+ 
++    def to_str_dict(self):
++        public_key = {
++            'n': str(crypto_int_to_str(self.N)),
++            's': str(crypto_int_to_str(self.S)),
++            'rms': str(crypto_int_to_str(self.Rms)),
++            'rctxt': str(crypto_int_to_str(self.Rctxt)),
++            'z': str(crypto_int_to_str(self.Z)),
++            'r': {}
++        }
++
++        for key in self.R:
++            public_key['r'][key] = str(crypto_int_to_str(self.R[key]))
++
++        return public_key
++
++    @classmethod
++    def from_str_dict(cls, data):
++        N = strToCryptoInteger(data['n'])
++        Rms = strToCryptoInteger(data['rms'] + 'mod' + data['n'])
++        Rctxt = strToCryptoInteger(data['rctxt'] + 'mod' + data['n'])
++        S = strToCryptoInteger(data['s'] + 'mod' + data['n'])
++        Z = strToCryptoInteger(data['z'] + 'mod' + data['n'])",,2017-06-16 09:17:08,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/122399900,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r122399900,MRJCrunch
+https://github.com/hyperledger/indy-anoncreds/pull/57,https://github.com/hyperledger/indy-anoncreds/pull/57,"yes, we have a test for claim_request serializator too",75a40a5a5da455b728da57c5499984cc5f0b782b,2017-06-16 09:17:50,122400049,"@@ -193,6 +193,35 @@ def __eq__(self, other):
+                and self.Z == other.Z and self.seqId == other.seqId \
+                and dict(self.R) == dict(other.R)
+ 
++    def to_str_dict(self):",13,2017-06-16 09:17:50,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/122400049,https://github.com/hyperledger/indy-anoncreds/pull/57#discussion_r122400049,MRJCrunch
+https://github.com/hyperledger/indy-anoncreds/pull/25,https://github.com/hyperledger/indy-anoncreds/pull/25,Looks good. Will we have to do same changes in setup-charm-homebrew.sh file as well?,0701369286f6867b8be3c98a26c66d5e92f6dfd0,2017-02-03 10:11:49,99307902,"@@ -59,3 +59,6 @@ if [ -f ""requirements.txt"" ]; then
+   pip install -r requirements.txt
+ fi
+ 
++# configure dynamic linker run-time bindings
++sudo ldconfig",5,2017-02-03 10:11:49,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/99307902,https://github.com/hyperledger/indy-anoncreds/pull/25#discussion_r99307902,rajeshkalaria80
+https://github.com/hyperledger/indy-anoncreds/pull/25,https://github.com/hyperledger/indy-anoncreds/pull/25,"@rajeshkalaria80 No, not needed for mac.",0701369286f6867b8be3c98a26c66d5e92f6dfd0,2017-02-03 12:12:14,99325948,"@@ -59,3 +59,6 @@ if [ -f ""requirements.txt"" ]; then
+   pip install -r requirements.txt
+ fi
+ 
++# configure dynamic linker run-time bindings
++sudo ldconfig",5,2017-02-03 14:26:32,https://api.github.com/repos/hyperledger/indy-anoncreds/pulls/comments/99325948,https://github.com/hyperledger/indy-anoncreds/pull/25#discussion_r99325948,pradeep1991singh

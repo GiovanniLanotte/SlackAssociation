@@ -1,0 +1,1352 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/1,https://github.com/kubernetes/node-problem-detector/pull/1,Random-Liu,Add initial version of node problem detector,"Here is a simple implementation of NodeProblemDetector for https://github.com/kubernetes/kubernetes/issues/23028.
+
+The node problem detector is mainly composed of two parts:
+- **ProblemDetector**. It is responsible for:
+  - Collecting and consolidating events and conditions from different problem daemons;
+  - Translating and aggregating them into `Event`s and `NodeCondition`s;
+  - Syncing with apiserver.
+- **KernelMonitor** is a simple kernel log monitor for demonstrating the Node Problem API. It is one (the only one for now) of the problem daemons. It monitors the kernel log and reports problems to ProblemDetector.
+  - KernelMonitor is in charge of the ""kernel condition"" node condition.
+  - If there is a permanent kernel error detected, it will report ""kernel condition"" (only `KernelDeadlock` for now) with corresponding reason and message to the problem detector.
+  - If there is a temporary error detected, it will report an event to the problem detector.
+  - KernelMonitor uses https://github.com/hpcloud/tail to monitor the kernel log, and uses regular expression to match problems in the kernel log. The patterns of problems are configured in the config file `config/kernel-monitor.json`. Now some known kernel bugs (https://github.com/kubernetes/kubernetes/issues/20096, https://github.com/kubernetes/kubernetes/issues/19986) have been added, and it would be easy to support other issue only if the pattern is stable and can be expressed in regular expression.
+  - A lot of TODOs:
+    - Support more flexible pattern match such as only matching start&end line etc.
+    - Support journald.
+    - ...
+
+The node problem detector is a DaemonSet. It needs a ConfigMap `node-problem-detector-config` generated from `config/` directory. The bootstrapping is dumb now. To start the node problem detector, you need to:
+1. Make sure the config mount, kernel log mount and apiserver endpoint in node-problem-detector.yaml are properly configured.
+2. Make sure the log path and issue patterns `config/kernel-monitor.json` are properly configured.
+3. Create ConfigMap `node-problem-detector-config` from directory `config/`.
+4. Create DaemonSet `node-problem-detector.yaml`.
+
+Now ProblemDetector and KernelMonitor are running in the same container and of course the same DaemonSet. In the future, we may want to:
+- Option 1: Move the logic of ProblemDetector into kubelet, and leave problem daemons (such as KernelMonitor) as separate DaemonSets reporting directly to kubelet.
+- Option 2: Move ProblemDetector into a DaemonSet, all problem daemons run as separate DaemonSets reporting to ProblemDetector.
+- Option 3: Run ProblemDetector and problem daemons in separate containers, but wrap them in one DaemonSet.
+
+This has not been decided yet, and may need more discussion. :)
+
+@dchen1107 
+/cc @kubernetes/sig-node 
+",['dchen1107'],2,2016-05-17 23:01:23,2016-05-19 00:30:59,2016-05-19 01:47:27,True,2016-05-19 00:30:59,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/6,https://github.com/kubernetes/node-problem-detector/pull/6,Random-Liu,Change gcr project to official google_containers,"This update the gcr project to the official one.
+I've already upload an image `node-problem-detector:0.1` to google_containers, will send a PR to kubernetes to add it as an add-on pod soon.
+
+@dchen1107 
+",['Random-Liu'],1,2016-05-19 22:25:59,2016-05-19 22:26:57,2016-05-20 00:15:58,True,2016-05-19 22:26:57,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/8,https://github.com/kubernetes/node-problem-detector/pull/8,Random-Liu,Add godep dependency golang.org/x/sys/unix,"Fix #7 
+
+I've tried this in a brand new GOPATH.
+
+Both ""godep restore + godep build"" and ""go build"" work.
+
+@derekwaynecarr @eparis We don't have enough reviewer for this repo yet, are you ok with this PR? If so, I'll manually merge it. :)
+
+/cc @dchen1107 
+",[],1,2016-05-23 18:29:17,2016-05-23 19:32:25,2016-05-23 19:32:40,True,2016-05-23 19:32:24,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/10,https://github.com/kubernetes/node-problem-detector/pull/10,freeformz,"Vendor the ""right"" fsnotify","This is the version that hpcloud/tail vendors
+",['Random-Liu'],4,2016-05-26 22:10:29,2016-05-26 23:57:11,2016-05-26 23:57:11,True,2016-05-26 23:57:11,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/11,https://github.com/kubernetes/node-problem-detector/pull/11,Random-Liu,Use patch instead of update status,"Fix https://github.com/kubernetes/node-problem-detector/issues/9.
+
+Change node-problem-detector to use `Patch` instead of `UpdateStatus`.
+
+@caesarxuchao There is no good fake for [`unversioned.Client`](https://github.com/kubernetes/kubernetes/blob/master/pkg/client/unversioned/client.go#L118), so I can't write proper test for `unversioned.Client` related operations. [`testclient.Fake`](https://github.com/kubernetes/kubernetes/blob/master/pkg/client/unversioned/testclient/testclient.go#L56) is a fake for [`unversioned.Interface`](https://github.com/kubernetes/kubernetes/blob/master/pkg/client/unversioned/client.go#L30), but there is no `Patch` in `unversioned.Interface`, so I have to use `unversioned.Client`. Is there any way to test `unversioned.Client`?
+
+@dchen1107 @saad-ali 
+",['dchen1107'],2,2016-05-31 01:30:26,2016-06-01 23:26:07,2016-06-01 23:39:45,True,2016-06-01 23:26:07,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/12,https://github.com/kubernetes/node-problem-detector/pull/12,Random-Liu,Make condition and source configurable,"Based on #11, only the last commit is new.
+
+This PR:
+1. makes node condition and source configurable.
+2. adds multiple events and conditions support in problem interface.
+
+We make this change mainly for extensibility, testability and performance.
+- Testability: The PR makes it possible to write e2e test which generates test only conditions and events without affecting real node problem detector.
+- Extensibility: The PR makes it possible to extend condition types (we only support `KernelDeadlock` before) by just updating configuration.
+- Performance: The PR makes it possible to batch reporting events and condition updates.
+
+@dchen1107 
+/cc @kubernetes/sig-node 
+",['dchen1107'],1,2016-06-01 09:25:45,2016-06-03 00:42:13,2016-06-03 00:51:34,True,2016-06-03 00:42:13,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/13,https://github.com/kubernetes/node-problem-detector/pull/13,Random-Liu,Hack for unsupported OS distros.,"This is a hack for unsupported OS distros.
+KernelMonitor doesn't support some OS distros for now e.g. GCI. Ideally, we should only run KernelMonitor on nodes on supported OS distro. However, NodeProblemDetector is running as DaemonSet, it has to be deployed on each node:
+- There is no node affinity support for DaemonSet now https://github.com/kubernetes/kubernetes/issues/22205
+- There is no node label for OS Distro, so we can't use node selector, either
+
+If some nodes have unsupported OS distro e.g. the OS distro of master node in gke/gce is GCI, KernelMonitor will throw out error, and NodeProblemDetector will be restarted again and again because it's a DaemonSet.
+
+To avoid this, we decide to add this temporarily hack. When KernelMonitor can't find the kernel log file, it will print a log and then return nil channel and no error. Since nil channel will always be blocked, the NodeProblemDetector will block forever.
+
+I've tried to schedule the NodeProblemDetector on GCI image, the cpu usage is `0.01% core` and memory usage is `< 5MB`.
+
+TODOs:
+1. Add journald support to support GCI. Consider reusing [the code in cadvisor](https://github.com/google/cadvisor/blob/master/utils/oomparser/oomparser.go#L168), and maybe replace hpcloud/tail with the simpler implementation in cadvisor https://github.com/kubernetes/node-problem-detector/issues/3
+2. Schedule KernelMonitor only on nodes with supported OS distros. (with node label+selector or affinity)
+
+@dchen1107 
+/cc @kubernetes/sig-node 
+",['dchen1107'],1,2016-06-03 18:17:44,2016-06-03 18:32:34,2016-06-03 18:33:08,True,2016-06-03 18:32:34,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/15,https://github.com/kubernetes/node-problem-detector/pull/15,Random-Liu,Add entrypoint and copy kernel monitor config into docker image,"Add entrypoint and config into docker image, so as to simplify node problem detector deployment in Kubernetes.
+
+Addon manager doesn't support ConfigMap now. We could change addon manager to support ConfigMap and also add ConfigMap in addon manifests, but that is not necessary and we should not make that big change before cutting release.
+Even though we added entrypoint and config into the docker image, we can always overwrite them in the yaml file in the future.
+",['dchen1107'],1,2016-06-03 20:45:21,2016-06-04 00:17:33,2016-06-04 00:20:06,True,2016-06-04 00:17:33,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/16,https://github.com/kubernetes/node-problem-detector/pull/16,Random-Liu,Add initial README.md for node-problem-detector.,"Fix #4.
+
+This PR updated README.md of node-problem-detector.
+
+@dchen1107 
+/cc @kubernetes/sig-node 
+",['dchen1107'],1,2016-06-06 00:01:15,2016-06-09 15:46:45,2016-06-09 16:10:48,True,2016-06-09 15:46:45,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/17,https://github.com/kubernetes/node-problem-detector/pull/17,girishkalele,Containerize the nethealth bandwidth measurement utility,"```
+$ docker run -it --rm gcr.io/google_containers/kube-nethealth-amd64:1.0
+2016/06/08 01:04:47 HTTP HEAD reports content length: 67108864 - running GET
+2016/06/08 01:04:53 DOWNLOAD: 67108864 bytes 5956 ms Bandwidth ~ 11003 KiB/sec
+2016/06/08 01:04:53 Hash Matches expected value
+```
+",['Random-Liu'],1,2016-06-08 00:59:08,2016-06-08 21:53:34,2016-06-08 21:54:30,True,2016-06-08 21:53:34,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/18,https://github.com/kubernetes/node-problem-detector/pull/18,Random-Liu,Remove unnecessary ENV configuration.,"Thanks for @mikedanese's suggestion.
+
+This PR removed the manually configuration of apiserver ip and port.
+
+Double checked with @freehan. The pod in host network should be able to use the cluster ip in the ENV value to access apiserver directly.
+
+I've no idea what was wrong when I tried that before :(. It didn't work for me at that time...
+
+@dchen1107 
+",['mikedanese'],1,2016-06-09 22:53:26,2016-06-10 00:59:50,2016-06-10 00:59:52,True,2016-06-10 00:59:50,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/20,https://github.com/kubernetes/node-problem-detector/pull/20,Random-Liu,Add README.md for kernel monitor,"Fix #5.
+
+This is part of https://github.com/kubernetes/kubernetes.github.io/pull/702.
+
+This PR added a README.md for kernel monitor.
+
+@dchen1107 
+",['dchen1107'],1,2016-06-20 23:35:24,2016-06-25 00:08:11,2016-06-25 00:08:11,True,2016-06-25 00:08:11,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/22,https://github.com/kubernetes/node-problem-detector/pull/22,Random-Liu,Kernel Monitor: Add look back support and kernel panic handling,"This helps https://github.com/kubernetes/kubernetes/issues/27885.
+
+This PR:
+1) Add lookback support in kernel monitor. After started, Kernel monitor will check some old logs to detect old problems which happened before last node reboot.
+
+2) Add `lookback` and `startPattern` in kernel monitor configuration.
+- `lookback` specifies how long time kernel monitor should look back.
+- `startPattern` specifies which log indicates the node is started. kernel monitor will clear all current node conditions once it finds a node start log. This makes sure that old problems won't change the node condition.
+
+3) Add support for kernel panic monitoring, the null pointer and divide 0 kernel panic will be surfaced as event. Usually kernel monitor will report these events during looking back phase.
+
+I've cut a branch v0.1 before this PR, and bump up the image version to v0.2 in this PR.
+@dchen1107 
+/cc @kubernetes/sig-node 
+",['dchen1107'],1,2016-06-24 06:33:11,2016-08-24 00:13:58,2017-01-11 08:18:22,True,2016-08-24 00:13:58,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/24,https://github.com/kubernetes/node-problem-detector/pull/24,Random-Liu,Add --insecure-connection and --hostname-override flag in node problem detector,"Fix https://github.com/kubernetes/node-problem-detector/issues/23.
+Fix https://github.com/kubernetes/node-problem-detector/issues/21.
+
+This PR added 2 node problem detector flags:
+- `--insecure-connection`: This flag will let node problem detector skip TLS verification when talking with apiserver.
+- `--hostname-override`: The user could override the host name with this flag. Notice that if you want to override the hostname, you may have to run node problem detector as static pod on each node, and render the flag accordingly with your deployment tool (or manually) to make sure that every node problem detector is properly configured.
+
+@sols1 @ApsOps can any of you help me verify the `--insecure-connection`? I don't have a cluster with no admission control in hand. The image version is v0.2.
+
+@sols1 @ApsOps @wangyumi
+/cc @dchen1107 
+",['dchen1107'],1,2016-07-11 21:21:56,2016-08-05 17:42:48,2016-08-05 17:42:48,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/29,https://github.com/kubernetes/node-problem-detector/pull/29,Random-Liu,NPD: Get node name from pod,"Fixes https://github.com/kubernetes/node-problem-detector/issues/28.
+Suggested in https://github.com/kubernetes/kubernetes/pull/27880#issuecomment-238776172.
+
+This PR makes node problem detector to get node name from the pod where it is on, so that the node name should always be consistent with kubelet.
+",['dchen1107'],1,2016-08-11 19:11:07,2016-08-11 21:23:46,2016-08-11 21:23:50,True,2016-08-11 21:23:46,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/30,https://github.com/kubernetes/node-problem-detector/pull/30,Random-Liu,NPD: Get node name from the downward api.,"Fixes https://github.com/kubernetes/node-problem-detector/issues/25.
+Fixes https://github.com/kubernetes/node-problem-detector/issues/23.
+
+https://github.com/kubernetes/kubernetes/pull/27880 has been merged. This PR changes node problem detector to get node name from the downward api.
+
+@dchen1107 
+",['dchen1107'],1,2016-08-21 02:05:30,2016-08-23 23:57:26,2016-12-13 10:55:40,True,2016-08-23 23:57:26,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/31,https://github.com/kubernetes/node-problem-detector/pull/31,Random-Liu,NPD: Enable travis test,"For lack of continuous integration test, there are some errors introduced in the code base.
+This PR:
+- fixed a failing unit test
+- fix a missing godep
+- add travis ci
+",['dchen1107'],3,2016-09-10 03:10:47,2016-09-12 21:03:30,2016-09-12 21:03:49,True,2016-09-12 21:03:30,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/32,https://github.com/kubernetes/node-problem-detector/pull/32,Random-Liu,NPD: Remove get start point,"Based on https://github.com/kubernetes/node-problem-detector/pull/31 to enable the presubmit test.
+
+This PR addressed https://github.com/kubernetes/node-problem-detector/issues/3#issuecomment-246431485 to remove the unnecessary `getStartPoint` function.
+
+With this change @AdoHe should be able to use simple tail library directly.
+",[],1,2016-09-12 18:57:21,2016-09-12 21:08:27,2016-09-12 21:08:41,True,2016-09-12 21:08:27,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/33,https://github.com/kubernetes/node-problem-detector/pull/33,adohe,add journal support,"needs to fix dependency and add test.
+",['Random-Liu'],5,2016-09-16 07:48:25,2016-11-03 05:27:43,2016-11-03 13:05:47,True,2016-11-03 05:27:43,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/34,https://github.com/kubernetes/node-problem-detector/pull/34,johscheuer,Fix typo in Readme,"Fix a small typo in Readme.
+",[],1,2016-09-29 15:33:13,2016-09-29 18:58:56,2016-09-29 19:04:41,True,2016-09-29 18:58:56,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/36,https://github.com/kubernetes/node-problem-detector/pull/36,Random-Liu,Share time with the host,"Kernel monitor discard old kernel log based on the timestamp.
+
+However, usually kernel log timestamp doesn't contain year and timezone information, e.g. `Oct 23 16:59:23`. There is no way to apply the right timezone, if the timezone inside the pod is different from the host.
+
+This PR mount the `/etc/localtime` inside the container to make sure the container in the same zone with the host.
+
+Sometimes `/etc/localtime` may be a symlink file. I've tested that both docker and kubernetes mount will follow the symlink and mount the real content.
+
+@dchen1107
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/36)
+<!-- Reviewable:end -->
+",['dchen1107'],1,2016-10-27 23:22:25,2017-02-01 20:45:45,2017-02-01 20:45:50,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/38,https://github.com/kubernetes/node-problem-detector/pull/38,roboll,modify checks to enable journald support,"No longer defaults kernel log file when it is empty.
+
+Currently, the journald support will never trigger because an empty path is always defaulted [here](https://github.com/kubernetes/node-problem-detector/blob/master/pkg/kernelmonitor/kernel_log_watcher.go#L84), but journald support checks for empty path [here](https://github.com/kubernetes/node-problem-detector/blob/master/pkg/kernelmonitor/kernel_log_watcher.go#L171).
+
+The default config ships with a path in it, so this change shouldn't disrupt existing deployments. When the path is empty, will try journal. When the path is non-empty, existing behavior is intact.
+
+",[],1,2016-11-10 15:11:52,2016-11-10 19:58:03,2016-11-10 20:00:39,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/39,https://github.com/kubernetes/node-problem-detector/pull/39,Random-Liu,Journald support,"Fixes #3.
+Fixes #14.
+This PR depends on https://github.com/google/cadvisor/pull/1531. I'll remove the 3rd commit and update Godeps after the cadvisor patch is merged.
+
+This PR finished the journald support.
+
+Building `sdjournal` needs `libsystemd-dev` or `libsystemd-journal-dev` which may not be easy to get on some os distros. So I added a knob to disable it:
+```
+make # wil build journald support by default
+ENABLE_JOURNALD=0 make # will not build journald support, thus no libsystemd needed
+```
+
+@AdoHe @dchen1107 
+/cc @kubernetes/sig-node
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/39)
+<!-- Reviewable:end -->
+","['adohe', 'dchen1107']",4,2016-11-10 19:41:02,2017-02-01 20:41:52,2017-02-03 12:17:32,True,2017-02-01 20:41:51,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/40,https://github.com/kubernetes/node-problem-detector/pull/40,apatil,Support getting node name from k8s API,"Hi @Random-Liu, I noticed that you were grabbing the node name from the downward API, which isn't supported in k8s 1.3.7 and below. This patch adds a fallback to using the k8s API at runtime. What do you think?
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/40)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-11-10 20:31:48,2018-02-17 09:19:00,2018-02-17 09:19:00,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/41,https://github.com/kubernetes/node-problem-detector/pull/41,euank,logwatchers: add new kmsg-based kernel log watcher,"All the other loggers (afaik), like rsyslog and journald and what have you, simply read `/dev/kmsg`.
+
+It's probably easier for everyone if we just read that directly too!
+
+I put together a bit of code doing so [over here](https://github.com/euank/go-kmsg-parser/blob/v1.0.0/kmsgparser/kmsgparser.go), and this commit leverages that code for the node-problem-detector.
+
+I plan to replace cadvisor's similar hacky log parsing with the same code as well.
+
+So, what are the implications?
+Well, one thing this can't do as well is read far into the past. This can't read further back than the ring buffer extends, so on startup it's quite possible it won't get as many old messages. That means really large lookback values will behave differently now because they'll read less.
+
+That could have already happened depending on logrotation policy, but now it's a lot harder for the user to control (kernel dmesg size is much harder to change :).
+
+However, I think the significant simplicity and cross-distro gains by doing this are worth it.
+
+~~I also preemptively removed the old integrations as I think this makes them fully redundant, as well as the translators thingy since why would you want to translate when you're reading the one and only true source?~~
+
+Edit: I added this as an additional plugin, but didn't change any defaults or such.
+
+Fixes #14 #39 
+
+cc @Random-Liu @AdoHe @derekwaynecarr
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/41)
+<!-- Reviewable:end -->
+",['Random-Liu'],3,2016-11-14 06:55:50,2017-05-30 22:53:25,2017-05-30 23:56:29,True,2017-05-30 22:53:25,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/42,https://github.com/kubernetes/node-problem-detector/pull/42,euank,makefile: Make misc improvements,"* Add test target and re-use in travis
+* Add timeout test target
+* Build binary into ./bin folder
+* Phony everything
+
+I thought I had made a PR with this, but nope, it was just sitting around in my branch for the last week.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/42)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-11-21 23:46:21,2016-11-22 00:50:49,2016-12-22 09:06:08,True,2016-11-22 00:50:49,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/49,https://github.com/kubernetes/node-problem-detector/pull/49,andyxning,add support for running standalone,"Add support for running `node-problem-detector` standalone. 
+
+This PR adds two command line options
+* `in-cluster-config` configures whether we deploy `NPD` in cluster as a daemon set or on a bare metal standalone. Default to be `true`, i.e., running in cluster as a daemon set.
+* `apiserver-addr` is used to specify the apiserver address when `in-cluster-config` is set to `false`.
+
+Finally, we can run `NPD` in standalone like this
+```
+node-problem-detector -in-cluster-config=false -apiserver-addr=APISERVER_ADDRESS -kernel-monitor=KERNEL_MONITOR_CONFIG_FILE
+```
+
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/49)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-12-14 14:51:44,2017-01-10 07:35:16,2017-01-11 01:20:09,True,2017-01-10 07:35:16,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/51,https://github.com/kubernetes/node-problem-detector/pull/51,shyamjvs,"Added functionality for ""hollow""-node-problem-detector","This PR fixes issue #50 
+Made the following changes in order to incorporate creation and pushing of a hollow-node-problem-detector image to gcr:
+1. Created a hollow KernelMonitor config with empty rule and condition lists
+2. Converted Dockerfile to a template which can take path to kernelMonitor config as input
+3. Added new targets to Makefile for hollow-node-problem-detector
+
+cc @kubernetes/sig-scalability @wojtek-t @gmarek @Random-Liu
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/51)
+<!-- Reviewable:end -->
+",[],1,2016-12-15 18:27:19,2016-12-16 13:02:02,2016-12-16 13:03:23,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/52,https://github.com/kubernetes/node-problem-detector/pull/52,andyxning,bump kubernetes version to v1.4.0-beta.3,"bump kubernetes version to v1.4.0-beta.3. This is partially a former PR for #49 .
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/52)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-12-18 10:11:36,2016-12-20 19:14:58,2016-12-20 23:47:42,True,2016-12-20 19:14:58,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/53,https://github.com/kubernetes/node-problem-detector/pull/53,andyxning,add fmt and vet make target,"Add `fmt` and `vet` make target. And, add `fmt` and `vet` dependencies for `node-problem-detector` target.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/53)
+<!-- Reviewable:end -->
+",[],1,2016-12-21 05:57:22,2016-12-22 01:47:34,2017-01-18 02:24:16,True,2016-12-22 01:47:34,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/54,https://github.com/kubernetes/node-problem-detector/pull/54,andyxning,change travis config script,"Currently, `make node-problem-detector` error with the following message: 
+
+```
+CGO_ENABLED=0 GOOS=linux godep go build -a -installsuffix cgo -ldflags '-w' -o node-problem-detector
+vendor/github.com/coreos/go-systemd/sdjournal/functions.go:19:2: no buildable Go source files in /home/xiening/go/src/k8s.io/node-problem-detector/vendor/github.com/coreos/pkg/dlopen
+godep: go exit status 1
+Makefile:15: recipe for target 'bin/node-problem-detector' failed
+make: *** [bin/node-problem-detector] Error 1
+```
+
+`dlopen` uses cgo to compile. So, we should turn on `CGO_ENABLED`. 
+
+In order to make node-problem-detector statically linked. We can use `-extldflags ""-static"" `
+
+* remove `./bin/node-problem-detector` target. IMO, it will not work as expected. It will not generate node-problem-detector binary under `bin` directory.
+* change `go build -race` script to `make node-problem-detector`
+* add `dep` target, it seems travis ci does not add godep binary automatically. So, we will check it and if it does not exist, we will manually download it.
+* Enable cgo, because we dlopen uses it to compile. 
+* In order to compile a statically linked binary. we may should use `-extldflags ""-static""`.
+
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/54)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-12-21 06:02:28,2016-12-21 09:11:50,2017-01-05 19:18:25,True,2016-12-21 09:11:50,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/55,https://github.com/kubernetes/node-problem-detector/pull/55,andyxning,Remove dead code in kernel monitor,"Check for `linux` os with `runtime.GOOS` instead of `syscall.Sysinfo_t` which is not available on MacOS.
+
+This will is possible to develop and `make node-problem-detector` on MacOS when #39 is merged with supporting disable `systemd` with an environment variable.
+
+All available `runtime.GOOS` values can be found in [this page](https://golang.org/doc/install/source#environment).
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/55)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-12-21 11:54:16,2016-12-22 09:00:32,2016-12-22 09:55:36,True,2016-12-22 09:00:32,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/56,https://github.com/kubernetes/node-problem-detector/pull/56,Random-Liu,Fix the dockerfile to use the right binary.,"@andyxning Could you help me review this?
+
+I found we missed the Dockerfile in https://github.com/kubernetes/node-problem-detector/pull/54.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/56)
+<!-- Reviewable:end -->
+",[],1,2016-12-21 19:59:14,2016-12-22 03:01:51,2016-12-22 03:01:55,True,2016-12-22 03:01:51,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/57,https://github.com/kubernetes/node-problem-detector/pull/57,kewubenduben,Update README.md,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/57)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2016-12-27 09:57:36,2017-01-05 19:22:23,2017-01-05 19:22:23,True,2017-01-05 19:22:23,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/63,https://github.com/kubernetes/node-problem-detector/pull/63,shyamjvs,Fixing minor bug in kernel monitor filepath,"Fixes #62 (kernel monitor filepath change)
+Ref #60 (bumping version to v0.3)
+
+@Random-Liu Can you PTAL?
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/63)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-10 20:08:03,2017-01-10 23:18:34,2017-01-13 14:32:12,True,2017-01-10 23:18:34,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/64,https://github.com/kubernetes/node-problem-detector/pull/64,ApsOps,"Fix ""Flags usage"" in README","cc: @Random-Liu
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/64)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-10 20:08:24,2017-01-11 22:35:56,2017-01-11 22:35:56,True,2017-01-11 22:35:56,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/66,https://github.com/kubernetes/node-problem-detector/pull/66,Random-Liu,Add CHANGELOG.md for NPD repo.,"Fixes https://github.com/kubernetes/node-problem-detector/issues/45.
+For https://github.com/kubernetes/node-problem-detector/issues/58.
+
+This PR adds a CHANGELOG.md for NPD repo.
+
+The format follows http://keepachangelog.com/.
+@jfilak Thanks for your awesome suggestion! :)
+
+@jfilak @andyxning Can you help me review this PR? Thanks a lot!
+
+/cc @dchen1107 
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/66)
+<!-- Reviewable:end -->
+",[],1,2017-01-11 09:29:01,2017-01-12 00:33:07,2017-01-12 00:33:10,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/70,https://github.com/kubernetes/node-problem-detector/pull/70,Random-Liu,Add CHANGELOG.md for NPD repo.,"Fixes https://github.com/kubernetes/node-problem-detector/issues/45.
+For https://github.com/kubernetes/node-problem-detector/issues/58.
+
+This PR adds a CHANGELOG.md for NPD repo.
+
+The format follows http://keepachangelog.com/.
+@jfilak Thanks for your awesome suggestion! :)
+
+@jfilak @andyxning Can you help me review this PR? Thanks a lot!
+
+/cc @dchen1107
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/70)
+<!-- Reviewable:end -->
+",[],1,2017-01-12 00:34:38,2017-01-12 07:38:28,2017-01-12 07:38:31,True,2017-01-12 07:38:28,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/71,https://github.com/kubernetes/node-problem-detector/pull/71,Random-Liu,Add --version flag.,"Add `--version` flag, which is useful for standalone NPD.
+
+The version format is using `git describe --tags --dirty`.
+
+Current version is like this:
+```
+$ make version
+v0.2.0-39-gaedb371
+
+$ ./node-problem-detector --version
+v0.2.0-39-gaedb371
+```
+
+/cc @dchen1107 
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/71)
+<!-- Reviewable:end -->
+","['shyamjvs', 'dchen1107']",1,2017-01-12 10:08:04,2017-01-13 18:52:05,2017-01-13 18:52:08,True,2017-01-13 18:52:05,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/72,https://github.com/kubernetes/node-problem-detector/pull/72,andyxning,detail how node-problem-detector get node name in README,"Ref: #68
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/72)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-12 14:02:23,2017-01-18 19:02:57,2017-01-18 23:53:52,True,2017-01-18 19:02:57,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/74,https://github.com/kubernetes/node-problem-detector/pull/74,Random-Liu,Add release tarball,"Based on #71.
+
+Add release tarball and more command in the Makefile. The name of the tarball is `node-problem-detector-$(VERSION).tar.gz`.
+
+For my local dirty directory, it's `node-problem-detector-v0.2.0-40-gb3b72c5-dirty.tar.gz`. For a newly tagged release, it should be `node-problem-detector-v0.3.0.tar.gz`.
+
+```
+make build-container # Build the container
+make build-tar # Build the tarball
+make build # Build both the container and the tarball.
+make push-container # Push the container to image registry
+make push-tar # Push the tarball to cloud storage
+make push # Push both the container and the tarball
+```
+
+The tarball will be used to deploy standalone NPD in kubernetes cluster.
+
+@andyxning Could you help me review this? Since you are quite familiar with the Makefile. :)
+/cc @dchen1107
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/74)
+<!-- Reviewable:end -->
+",[],1,2017-01-13 01:40:01,2017-01-14 00:36:42,2017-01-14 00:36:44,True,2017-01-14 00:36:42,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/75,https://github.com/kubernetes/node-problem-detector/pull/75,shyamjvs,Made authFile override logic not fallback to in-cluster config,"Fixes #73 
+
+Changed the function `GetKubeClientConfig`  to use `NewNonInteractiveClientConfig` instead of `NewNonInteractiveDeferredLoadingClientConfig` as we do not want to fallback to in-cluster-config if authFile is specified.
+(Inspired from this example https://github.com/kubernetes/kubernetes/blob/master/cmd/kubelet/app/bootstrap.go#L149)
+We would also want to have such a similar change in heapster.
+
+cc @Random-Liu @andyxning
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/75)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-13 17:09:16,2017-01-13 19:19:45,2017-01-16 16:21:05,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/77,https://github.com/kubernetes/node-problem-detector/pull/77,fate-grand-order,"fix misspell ""initialize"" in problem_client.go","
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/77)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-17 07:14:24,2017-01-17 16:00:12,2017-01-17 16:00:43,True,2017-01-17 16:00:12,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/78,https://github.com/kubernetes/node-problem-detector/pull/78,andyxning,change apiserver-override argument from long option format to short o…,"change apiserver-override from long option format to short option format. I.e.:
+`--apiserver-override` -> `-apiserver-override`
+
+This makes README being coherent with the output of `node-problem-detector -h`.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/78)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-17 16:14:52,2017-01-17 16:29:28,2017-01-18 00:07:30,True,2017-01-17 16:29:28,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/79,https://github.com/kubernetes/node-problem-detector/pull/79,Random-Liu,Update NPD to only do forcibly sync every 1 minutes.,"This PR:
+1) Change the condition manager to do resync every 10s. Every 10s condition manager will check whether there is a previously failed update, and update again if there is. This also fixes a bug that once apiserver is down more than `resyncPeriod` (30s), NPD will keep retrying every 1s and print a log of error logs.
+2) Add 1m heartbeat period. Every 1m condition manager will sync with apiserver no matter what, we need this to:
+  * Avoid other components changing the condition unexpectedly.
+  * Update `LastHeartbeatTime` to indicate that NPD is still alive and current conditions are valid.
+
+For https://github.com/kubernetes/node-problem-detector/issues/76.
+Fixes https://github.com/kubernetes/node-problem-detector/issues/19.
+
+/cc @andyxning Would you like to take a look at this PR? Thanks!
+/cc @wojtek-t This PR changes NPD to `PATCH` every 1 minute.
+/cc @dchen1107 
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/79)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-01-18 02:17:18,2017-01-24 08:39:51,2017-01-24 08:39:54,True,2017-01-24 08:39:51,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/80,https://github.com/kubernetes/node-problem-detector/pull/80,Random-Liu,Add doc for `-kernel-monitor` and `-version` flags.,"This PR added documentation about the flags `-version` and `-kernel-monitor` in README.md.
+
+@andyxning Could you help me review this 3 line change? Thanks!
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/80)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-01-19 23:33:38,2017-01-20 07:38:35,2017-01-20 07:38:37,True,2017-01-20 07:38:35,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/81,https://github.com/kubernetes/node-problem-detector/pull/81,Random-Liu,Fix kernel monitor issues,"Based on https://github.com/kubernetes/node-problem-detector/pull/39. Will rebase after https://github.com/kubernetes/node-problem-detector/pull/39 gets merged.
+
+Only the last commit is new.
+
+This PR:
+* Change `unregister_netdevice` to be an event to fix #47. /cc @euank 
+* Change `KernelPanic` to `KernelOops` because we can't really handle kernel panic by simply parsing kernel log.
+  * We can consider supporting [`ramoops`](http://lxr.free-electrons.com/source/Documentation/ramoops.txt), but GCE doesn't support it now.
+  * Other options are to use `serial console` or `PVPANIC`, but it could not be achieved inside the node scope. We may introduce a cluster level node health monitoring component in the future.
+* Use system boot time instead of [`StartPattern`](https://github.com/kubernetes/node-problem-detector/blob/master/config/kernel-monitor.json#L4) to fix #48 /cc @euank . Since `KernelPanic` is not in the scope any more, we can only care about current boot now.
+
+/cc @dchen1107 @jfilak
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/81)
+<!-- Reviewable:end -->
+",['dchen1107'],1,2017-01-21 02:24:56,2017-02-10 19:17:17,2017-02-10 19:17:23,True,2017-02-10 19:17:17,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/82,https://github.com/kubernetes/node-problem-detector/pull/82,fate-grand-order,correct spelling error in kernel_monitor.go,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/82)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-01-22 14:21:49,2017-01-23 18:39:01,2017-01-23 18:39:01,True,2017-01-23 18:39:01,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/83,https://github.com/kubernetes/node-problem-detector/pull/83,Random-Liu,"Add NPD endpoints: /debug/pprof, /healthz, /conditions.","For https://github.com/kubernetes/node-problem-detector/issues/76.
+
+This PR:
+* Added `/healthz` for health checking. Currently it always returns 200.
+* Added `/conditions` to list all internal conditions inside the NPD. This is mainly used for debugging.
+* Added `/debug/pprof` pprof endpoint. This will be used for following performance benchmark and optimization.
+
+Note that to get more debug information, we removed the `-w` ldflag. The binary size only increased from 40MB+ to 60MB+, which should be fine.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/83)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-01-25 00:18:51,2017-02-04 04:41:12,2017-02-04 04:41:15,True,2017-02-04 04:41:12,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/84,https://github.com/kubernetes/node-problem-detector/pull/84,Random-Liu,Only change transition timestamp when condition is changed.,"Previously, we update transition timestamp whenever a new problem is matched from the log.
+However, the kernel problem sometimes shows up for multiple even infinity times, for example the hung task problem. This will cause a lot of unnecessary condition updates.
+
+This PR changes kernel monitor to only update the transition timestamp and message when problem status or reason is changed. This makes sure that we only update condition when it actually changes.
+
+This change is also for scalability (Ref https://github.com/kubernetes/node-problem-detector/issues/58)
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/84)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-01-27 22:50:31,2017-02-07 18:41:52,2017-02-08 18:53:44,True,2017-02-07 18:41:52,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/87,https://github.com/kubernetes/node-problem-detector/pull/87,andyxning,change long option prefix to short option prefix,"This PR change long command line option prefix to short command line option prefix. I.e., `--` -> `-`.
+
+@Random-Liu PTAL.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/87)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-02-03 10:41:05,2017-02-04 09:21:10,2017-02-04 09:53:14,True,2017-02-04 09:21:10,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/88,https://github.com/kubernetes/node-problem-detector/pull/88,Random-Liu,Add arbitray system log support,"For https://github.com/kubernetes/node-problem-detector/issues/44.
+
+Based on https://github.com/kubernetes/node-problem-detector/pull/81.
+
+This PR:
+* Add `PluginConfig` for plugin specific configuration.
+* Add `source` in journald plugin configuration to make sdjournal `SYSTEM_IDENTIFIER` configurable.
+* Add `timestamp` regular expression, `message` regular expression and `timestampFormat` configuration in syslog plugin configuration. (We plan to change this to be `filelog`, because it can handle not only syslog)
+
+TODOs for this work:
+* Add multiple configuration files support. NPD should start a system log monitor for each passed in configurtion, so that it can monitor different services at the same time.
+* Rename `syslog` to `filelog`.
+* Rename `kernel monitor` to `system log monitor`, change all ""kernel"" reference in the code.
+* Optimize the efficiency to make the system log monitor more light weight.
+* Add document for the new behavior.
+* Update kubernetes e2e test to test the new behavior.
+
+/cc @dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/88)
+<!-- Reviewable:end -->
+",['dchen1107'],3,2017-02-03 11:22:08,2017-02-15 20:58:17,2017-02-16 00:01:27,True,2017-02-15 20:58:17,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/89,https://github.com/kubernetes/node-problem-detector/pull/89,andyxning,fix npd binary generation,"This PR fix [#39(discussion1)](https://github.com/kubernetes/node-problem-detector/pull/39#discussion_r89067352), [#39(discussion2)](https://github.com/kubernetes/node-problem-detector/pull/39#discussion_r99326431).
+
+Way to repreduce(adjusted from [#39(discussion1)](https://github.com/kubernetes/node-problem-detector/pull/39#discussion_r89067352))
+
+```
+make
+# The ./bin/node-problem-detector file didn't exist and make created it.
+# systemd-journal is enabled.
+make ENABLE_JOURNALD=0
+# The ./bin/node-problem-detector file already exists and make skipped the ./bin/node-problem-detector target. 
+# However the user believes that node-problem-detector is compiled with systemd-journal disabled.
+```
+
+/cc @dchen1107 @jfilak @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/89)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-02-03 12:29:32,2018-03-09 11:11:36,2018-03-09 11:11:36,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/90,https://github.com/kubernetes/node-problem-detector/pull/90,andyxning,change flag to pflag,"This PR is followed by #87 .
+
+This PR will replace `flag` package with `spf13/pflag`. The output of `./bin/node-problem-detector -h` will like below:
+```
+Usage of ./bin/node-problem-detector:
+      --address=""127.0.0.1"": The address to bind the node problem detector server.
+      --alsologtostderr[=false]: log to standard error as well as files
+      --apiserver-override="""": Custom URI used to connect to Kubernetes ApiServer
+      --hostname-override="""": Custom node name used to override hostname
+      --kernel-monitor=""/config/kernel-monitor.json"": The path to the kernel monitor config file
+      --log_backtrace_at=:0: when logging hits line file:N, emit a stack trace
+      --log_dir="""": If non-empty, write log files in this directory
+      --logtostderr[=false]: log to standard error instead of files
+      --port=10256: The port to bind the node problem detector server. Use 0 to disable.
+      --stderrthreshold=2: logs at or above this threshold go to stderr
+      --v=0: log level for V logs
+      --version[=false]: Print version information and quit
+      --vmodule=: comma-separated list of pattern=N settings for file-filtered logging
+```
+
+At the same time, this PR also changes command line argument usage info in docs and configuration. :)
+
+/cc @dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/90)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-02-05 15:33:47,2017-02-07 02:44:09,2017-02-07 02:45:29,True,2017-02-07 02:44:09,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/91,https://github.com/kubernetes/node-problem-detector/pull/91,andyxning,add options pkg,"This PR refactor npd with adding `options` package and moving all command line arguments to it.
+
+This makes node problem detector more modular and clear. :)
+
+/cc @dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/91)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-02-06 12:45:18,2017-02-07 18:38:50,2017-02-08 00:26:31,True,2017-02-07 18:38:50,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/92,https://github.com/kubernetes/node-problem-detector/pull/92,Random-Liu,Generalize the kernel monitor code.,"For https://github.com/kubernetes/node-problem-detector/issues/44.
+Based on https://github.com/kubernetes/node-problem-detector/pull/81 and https://github.com/kubernetes/node-problem-detector/pull/88.
+
+his PR:
+* Change kernel monitor to system log monitor, because we want to generalize kernel monitor to detect problems of different system daemons.
+* Change `syslog` to `filelog`, because actually it does not only support syslog now, it should be able to support most file based logs.
+* Update the README.md.
+
+/cc @dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/92)
+<!-- Reviewable:end -->
+",['dchen1107'],2,2017-02-07 01:21:59,2017-02-15 21:14:40,2017-02-15 21:14:43,True,2017-02-15 21:14:40,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/93,https://github.com/kubernetes/node-problem-detector/pull/93,Random-Liu,Create a goroutine for the http server.,"The original goroutine is removed by mistake when addressing comments in https://github.com/kubernetes/node-problem-detector/pull/83.
+
+An e2e test is really needed now. :(
+
+@andyxning Could you help me review this?
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/93)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-02-08 03:14:28,2017-02-08 08:04:39,2017-02-08 08:04:42,True,2017-02-08 08:04:39,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/94,https://github.com/kubernetes/node-problem-detector/pull/94,Random-Liu,Add multiple system log monitor support,"For #44.
+Based on #81, #88 and #92.
+
+Only the last commit is new.
+
+This PR change the `--log-monitor` flag to `--log-monitors`. Multiple log monitor config separated by comma can be passed through `--log-monitors`, NPD will start a separate log monitor for each of them.
+
+This makes it possible to use NPD to monitor different system log at the same time.
+
+/cc @dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/94)
+<!-- Reviewable:end -->
+",['dchen1107'],2,2017-02-08 23:24:08,2017-02-17 01:30:42,2017-02-17 02:38:19,True,2017-02-17 01:30:42,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/95,https://github.com/kubernetes/node-problem-detector/pull/95,fate-grand-order,"fix misspell ""timestamp""","
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/95)
+<!-- Reviewable:end -->
+",[],1,2017-02-21 15:01:38,2017-02-21 21:33:56,2017-02-21 21:33:56,True,2017-02-21 21:33:56,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/96,https://github.com/kubernetes/node-problem-detector/pull/96,andyxning,refactor options pkg,"Refactor `options` package to `cmd` directory.
+
+
+/cc @Random-Liu @dchen1107
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/96)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-02-22 13:44:21,2017-02-23 01:34:57,2017-02-23 02:19:33,True,2017-02-23 01:34:57,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/97,https://github.com/kubernetes/node-problem-detector/pull/97,andyxning,fix heapster reference to master branch,"Fix heapster document reference from commit to master branch. 
+
+
+/cc @random-liu
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/97)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-02-22 13:51:18,2017-02-22 21:52:54,2017-02-23 00:10:18,True,2017-02-22 21:52:54,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/98,https://github.com/kubernetes/node-problem-detector/pull/98,Random-Liu,Fix journald plugin to only look at the current boot.,"Previously I thought `go-system/sdjournal` will only look at current boot by default.
+
+However, it turns out that is not the case when I verified npd with some reboot test.
+
+Ideally we should use [`sd_journal_seek_monotonic_usec`](https://www.freedesktop.org/software/systemd/man/sd_journal_seek_head.html), or [`sd_journal_seek_cursor`](https://www.freedesktop.org/software/systemd/man/sd_journal_seek_head.html), but sdjournal doesn't support it very well. So in this PR, we use the system uptime to make sure we npd only looks at current boot.
+
+@dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/98)
+<!-- Reviewable:end -->
+",['dchen1107'],1,2017-03-02 22:06:54,2017-03-14 03:24:06,2017-03-14 03:40:22,True,2017-03-14 03:24:06,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/99,https://github.com/kubernetes/node-problem-detector/pull/99,Random-Liu,Add test kernel log generator.,"Add a ""kernel log generator"" container for test purpose.
+
+I'm going to use this test container in npd cluster e2e functionality test and performance test.
+
+Note that currently kernel log generator only works with journald.
+
+@dchen1107 @kubernetes/node-problem-detector-reviewers
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/99)
+<!-- Reviewable:end -->
+",['dchen1107'],1,2017-03-02 22:59:04,2017-03-15 20:28:40,2017-03-15 20:43:33,True,2017-03-15 20:28:40,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/100,https://github.com/kubernetes/node-problem-detector/pull/100,euank,gitignore: ignore the release tarball,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/100)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-03-10 04:43:44,2017-03-10 22:13:35,2017-03-10 22:25:21,True,2017-03-10 22:13:35,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/101,https://github.com/kubernetes/node-problem-detector/pull/101,Random-Liu,Fix journald plugin to only look at the current boot.,"Cherrypick #98 into v0.3 branch.
+
+After this is merged. We need to cut a new release, update Kubernetes main repo, and possibly merge https://github.com/kubernetes/kubernetes/pull/42454.
+
+@dchen1107
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/101)
+<!-- Reviewable:end -->
+",['dchen1107'],1,2017-03-15 18:28:17,2017-03-15 20:27:22,2017-03-15 21:23:11,True,2017-03-15 20:27:22,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/103,https://github.com/kubernetes/node-problem-detector/pull/103,zhangxiaoyu-zidif,update README.md,"add ""which"" into the document.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/103)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-03-19 10:46:41,2017-03-27 17:55:44,2017-03-27 17:55:44,True,2017-03-27 17:55:44,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/104,https://github.com/kubernetes/node-problem-detector/pull/104,juliusmilan,Add detailed build information to README.md,"Your build information provided in README.md is not comprehensive.
+For disinterested person without experience with go it may take too long to build it.
+This patch adds the missing information.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/104)
+<!-- Reviewable:end -->
+",[],1,2017-03-20 09:55:52,2018-02-20 15:36:00,2018-02-20 15:36:00,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/105,https://github.com/kubernetes/node-problem-detector/pull/105,juliusmilan,Add ABRT adaptor config,"This config allows NPD to catch problems detected by ABRT, ABRT can find various problems (see the link) and log them to journalctl in format described here:
+https://github.com/abrt/abrt/wiki/systemd-journal-catalog-messages
+
+Work sequence:
+1. ABRT processes problem and logs to journal
+2. NDP catches ABRT logs and report them to upper layer
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/105)
+<!-- Reviewable:end -->
+",[],1,2017-03-23 15:45:06,2017-03-29 17:44:42,2017-03-29 17:45:06,True,2017-03-29 17:44:42,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/111,https://github.com/kubernetes/node-problem-detector/pull/111,juliusmilan,Abrt readme and ccpp fix,"This PR contains 2 changes.
+
+* First is README update, that contains documented use of ABRT by NPD, my leader asked me to do.
+* Second is abrt-adaptor ccpp pattern fix, I found it didn't catch all possible cpp problem messages produced by ABRT.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/111)
+<!-- Reviewable:end -->
+",['Random-Liu'],2,2017-05-10 06:45:28,2017-05-15 15:58:22,2017-05-15 15:58:22,True,2017-05-15 15:58:22,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/112,https://github.com/kubernetes/node-problem-detector/pull/112,Random-Liu,Cleanup kmsg log watcher,"Address comments in https://github.com/kubernetes/node-problem-detector/pull/41.
+
+@dchen1107
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/112)
+<!-- Reviewable:end -->
+",['dchen1107'],1,2017-05-30 22:59:37,2017-05-30 23:45:37,2017-05-30 23:46:15,True,2017-05-30 23:45:37,dchen1107,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/116,https://github.com/kubernetes/node-problem-detector/pull/116,jdfless,Update documentation to recommended practices in v0.4.0,"Per the issues I ran into in #114, I have created this pull request to bring the docs up to date with the recommended practices for version 0.4.0.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/116)
+<!-- Reviewable:end -->
+",[],1,2017-06-14 21:52:21,2017-06-14 22:13:14,2017-06-14 22:13:14,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/117,https://github.com/kubernetes/node-problem-detector/pull/117,ajitak,Add rule for docker image pull error,"Add a new rule which catches docker image corruption. It will address https://github.com/kubernetes/kubernetes/issues/47219
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/117)
+<!-- Reviewable:end -->
+","['Random-Liu', 'dchen1107']",1,2017-06-14 23:58:26,2017-06-21 21:08:18,2017-06-21 23:33:46,True,2017-06-21 21:08:18,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/119,https://github.com/kubernetes/node-problem-detector/pull/119,Random-Liu,Clarify the limitation of log matching pattern.,"@ajitak
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/119)
+<!-- Reviewable:end -->
+",['ajitak'],1,2017-06-21 01:11:50,2017-06-27 16:15:15,2017-06-27 16:15:27,True,2017-06-27 16:15:15,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/122,https://github.com/kubernetes/node-problem-detector/pull/122,ajitak,Add a new rule which catches docker image corruption (cherrypick #117 to v0.4),"It will address https://github.com/kubernetes/kubernetes/issues/47219
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/122)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-06-21 21:37:32,2017-06-21 22:43:35,2017-06-21 23:33:51,True,2017-06-21 22:43:35,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/123,https://github.com/kubernetes/node-problem-detector/pull/123,Random-Liu,Now gcloud enforce `--` before docker args.,"Fixes
+```
+gcloud docker push gcr.io/google_containers/node-problem-detector:v0.4.1
+ERROR: gcloud crashed (ArgumentError): argument DOCKER_ARGS: unrecognized args: push gcr.io/google_containers/node-problem-detector:v0.4.1
+The '--' argument must be specified between gcloud specific args on the left and DOCKER_ARGS on the right.
+```
+Signed-off-by: Random-Liu <lantaol@google.com>
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/123)
+<!-- Reviewable:end -->
+",['ajitak'],1,2017-06-21 23:15:30,2017-06-27 16:15:09,2017-06-27 16:15:21,True,2017-06-27 16:15:09,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/128,https://github.com/kubernetes/node-problem-detector/pull/128,ajitak,change NPD port as there is a port collision with kube-proxy,"See https://github.com/kubernetes/kubernetes/issues/49263 for more context.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/128)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-07-20 17:39:40,2017-07-27 14:46:29,2017-07-27 14:46:29,True,2017-07-27 14:46:29,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/129,https://github.com/kubernetes/node-problem-detector/pull/129,asifdxtreme,Add Build Status and GoReportCard badge,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/129)
+<!-- Reviewable:end -->
+",[],1,2017-08-04 10:33:02,2017-08-04 17:10:42,2017-08-04 17:10:50,True,2017-08-04 17:10:42,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/130,https://github.com/kubernetes/node-problem-detector/pull/130,fisherxu,fix typo,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/130)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-08-04 17:07:16,2017-08-04 17:18:27,2017-08-04 17:18:27,True,2017-08-04 17:18:27,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/131,https://github.com/kubernetes/node-problem-detector/pull/131,mbssaiakhil,Fixed Typo in README of node-problem-detecter,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/131)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-08-06 03:32:56,2017-08-07 17:05:53,2017-08-07 17:05:53,True,2017-08-07 17:05:53,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/132,https://github.com/kubernetes/node-problem-detector/pull/132,asifdxtreme,Split Test and Build in Different Stages,"Split UT and Build Stages in different jobs of travis CI so that it's easy for user to traces what went wrong in CI
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/132)
+<!-- Reviewable:end -->
+",[],1,2017-08-07 08:44:31,2017-08-07 17:06:58,2017-08-08 01:04:03,True,2017-08-07 17:06:58,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/133,https://github.com/kubernetes/node-problem-detector/pull/133,mhristof,given the daemonset a name in the docs,"otherwise, `kubectl create -f` was complaining with
+
+```
+The DaemonSet ""node-problem-detector"" is invalid: spec.template.metadata.labels: Invalid value: map[string]string(nil): `selector` does not match template `labels`
+```
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/133)
+<!-- Reviewable:end -->
+",[],1,2017-08-10 16:10:22,2018-03-09 22:22:34,2018-03-09 22:22:34,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/134,https://github.com/kubernetes/node-problem-detector/pull/134,CaoShuFeng,return an error when error happens in SetConditions(),"@Random-Liu
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/134)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-08-23 09:57:50,2017-08-23 18:01:25,2017-08-23 18:01:25,True,2017-08-23 18:01:25,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/136,https://github.com/kubernetes/node-problem-detector/pull/136,CaoShuFeng,introduce boilerplate test,"This change is introduced because I found that some copyritht headers are different from each other.
+
+This change add boilerplate test copyed from:
+https://github.com/kubernetes/kubernetes/tree/master/hack/boilerplate
+
+I found that most file in node-problem-detector has a different
+copyright format from kubernetes/kubernetes:
+
+node-problem-detector:
+```
+Copyright 2017 The Kubernetes Authors All rights reserved.
+```
+
+kubernetes:
+```
+Copyright 2017 The Kubernetes Authors.
+```
+
+@Random-Liu should we use the same copyright with kubernetes?
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/136)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-08-29 03:25:49,2018-03-11 23:10:33,2018-03-11 23:10:33,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/137,https://github.com/kubernetes/node-problem-detector/pull/137,cstuntz,Adding in prometheus exporter for events and conditions,"**Reason for Pull**
+
+Prometheus is becoming more and more popular to track metrics in Kubernetes clusters, and it is a very lightweight method of tracking node problems across a cluster. This PR adds in basic prometheus exporter for all events and conditions tracked by node problem detector, which makes tracking problems much easier.
+
+**Three Main Changes**
+
+- Add new file that is used to contain the map of counters.
+-- This lets us dynamically add Prometheus counters from events and conditions as they appear, instead of needing to hard-code all of them.
+- Using the Fetch method from the containers file, I add new counters or increment existing ones as the events are processed in problem_detector.go.
+- Update the reason names so there aren't any duplicates.
+-- Prometheus can't have any duplicate metric names registered.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/137)
+<!-- Reviewable:end -->
+",[],30,2017-08-29 21:09:59,2018-03-11 01:49:33,2018-04-10 20:46:25,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/139,https://github.com/kubernetes/node-problem-detector/pull/139,CaoShuFeng,update README,"update description about `Build Image`. When running `make`, it will
+not push image to registry.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/139)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-09-19 07:06:38,2017-09-22 17:38:55,2017-09-22 17:38:56,True,2017-09-22 17:38:55,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/140,https://github.com/kubernetes/node-problem-detector/pull/140,andyxning,update golang to 1.8 and 1.9,"This PR will update travisCI golang version from `1.6` and `1.7` to `1.8` and `1.9`. Since golang `1.9` has been released for a while.
+
+/cc @Random-Liu
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/140)
+<!-- Reviewable:end -->
+",[],1,2017-10-11 05:26:45,2017-10-11 06:14:26,2017-10-11 06:26:00,True,2017-10-11 06:14:26,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/144,https://github.com/kubernetes/node-problem-detector/pull/144,andyxning,add setup readme,"partially fix #142 
+
+This PR adds description about how to get the node-problem-detector repo and systemd build dependency.
+
+Note: This PR should be merged only after [k8s.io #85](https://github.com/kubernetes/k8s.io/pull/85) is merged as description in this PR has `go get k8s.io/node-problem-detector` which is only valid after [k8s.io #85](https://github.com/kubernetes/k8s.io/pull/85) has been merged.
+@Spellchaser
+
+/cc @Random-Liu
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/144)
+<!-- Reviewable:end -->
+",['zouyee'],1,2017-10-16 03:27:32,2018-06-04 02:14:56,2018-06-04 02:21:03,True,2018-06-04 02:14:55,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/145,https://github.com/kubernetes/node-problem-detector/pull/145,andyxning,add custom problem detector plugin,"This PR will add custom plugin problem detector interface to node-problem-detector.
+
+Proposal: [https://docs.google.com/document/d/1jK_5YloSYtboj-DtfjmYKxfNnUxCAvohLnsH5aGCAYQ/edit#](https://docs.google.com/document/d/1jK_5YloSYtboj-DtfjmYKxfNnUxCAvohLnsH5aGCAYQ/edit#)
+
+Major changes:
+* move `ApplyDefaultConfiguration` for `MonitorConfig` from function to method. [Ref]()
+* move `ValidateRules ` for `MonitorConfig` from function to method for. [Ref](https://github.com/kubernetes/node-problem-detector/pull/145/files#diff-ae34550839d4dd21f93fdb2193f0798f)
+* move `k8s.io/node-problem-detector/pkg/systemlogmonitor/util` to `k8s.io/node-problem-detector/pkg/util/tomb`. [Ref](https://github.com/kubernetes/node-problem-detector/pull/145/files#diff-fbf4ff688541f0b6d6243de3c50245cb)
+* move `Rule` type for system log config to pkg `k8s.io/node-problem-detector/pkg/types`. [Ref](https://github.com/kubernetes/node-problem-detector/pull/145/files#diff-34dfcb9f9c18e85cfeb1525b94b82572)
+* move `LogMonitor` interface to `k8s.io/node-problem-detector/pkg/types` and rename it to `Monitor`. [Ref](https://github.com/kubernetes/node-problem-detector/pull/145/files#diff-6d10bcbde757a47bc5d87ac0510e0215)
+* Code clean. [Ref](https://github.com/kubernetes/node-problem-detector/pull/145/files#diff-6d10bcbde757a47bc5d87ac0510e0215L147)
+
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/145)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2017-10-18 08:45:22,2017-11-22 18:53:06,2017-11-22 18:53:06,True,2017-11-22 18:53:06,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/146,https://github.com/kubernetes/node-problem-detector/pull/146,mkumatag,Add multiarch support,"This will enable to build `node-problem-detector` project for multiarch like amd64, arm, arm64 and ppc64le.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/146)
+<!-- Reviewable:end -->
+",['mkumatag'],1,2017-10-20 10:10:20,2019-01-22 17:36:28,2019-01-22 17:36:28,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/148,https://github.com/kubernetes/node-problem-detector/pull/148,Starefossen,Update Docker Image tag reference to v0.4.1,"Upgrade references to the node-problem-detector Docker Image to latest available version on gcr.io v0.4.1.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/148)
+<!-- Reviewable:end -->
+",[],1,2017-11-07 11:47:24,2018-02-14 11:46:56,2018-02-14 11:46:56,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/151,https://github.com/kubernetes/node-problem-detector/pull/151,Random-Liu,Improve cpm,"Based on https://github.com/kubernetes/node-problem-detector/pull/145.
+
+Addressed part of https://github.com/kubernetes/node-problem-detector/issues/150.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/151)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-11-21 23:29:56,2018-06-22 08:10:06,2018-06-22 08:10:06,True,2018-06-22 08:10:06,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/152,https://github.com/kubernetes/node-problem-detector/pull/152,rramkumar1,Network problem script,"Added a script that checks for important networking events. This script will be run by the custom plugin monitor. 
+
+Currently the script only checks if the conntrack table is full and sends a temporary event if it is. More checks will be added in the future.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/152)
+<!-- Reviewable:end -->
+",['Random-Liu'],3,2017-11-27 19:37:16,2018-01-03 03:54:10,2018-06-14 21:01:37,True,2018-01-03 03:54:10,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/153,https://github.com/kubernetes/node-problem-detector/pull/153,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/153)
+<!-- Reviewable:end -->
+",['cblecker'],1,2017-12-20 18:39:42,2018-01-03 01:15:36,2018-01-03 02:18:22,True,2018-01-03 01:15:35,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/154,https://github.com/kubernetes/node-problem-detector/pull/154,thockin,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/154)
+<!-- Reviewable:end -->
+",['andyxning'],1,2017-12-22 18:01:11,2018-01-03 01:16:55,2018-01-03 01:16:55,True,2018-01-03 01:16:55,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/155,https://github.com/kubernetes/node-problem-detector/pull/155,r4j4h,Changed unknown status echo to exit in network_problem custom plugin,"My comment was eaten by github in #152 and wanted to raise attention incase this was meant to be an exit instead of an echo, otherwise feel free to close!
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/155)
+<!-- Reviewable:end -->
+","['andyxning', 'Random-Liu']",1,2018-01-05 18:26:25,2018-04-20 00:09:00,2018-04-20 00:09:00,True,2018-04-20 00:09:00,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/156,https://github.com/kubernetes/node-problem-detector/pull/156,thockin,Pushes go to staging-k8s.gcr.io,"Context: https://github.com/kubernetes/kubernetes/pull/57824
+
+xref kubernetes/release#281
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/156)
+<!-- Reviewable:end -->
+",['dashpole'],1,2018-01-17 22:23:45,2018-02-08 22:38:47,2018-02-08 22:38:47,True,2018-02-08 22:38:47,thockin,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/157,https://github.com/kubernetes/node-problem-detector/pull/157,hangyan,Fix broken ConfigMap usage links,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/157)
+<!-- Reviewable:end -->
+",[],1,2018-01-22 14:35:16,2018-02-05 02:27:26,2018-02-05 02:27:26,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/158,https://github.com/kubernetes/node-problem-detector/pull/158,cimomo,Use camelCase instead of snake_case per Golang convention,"Use camelCase instead of snake_case per Golang convention.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/158)
+<!-- Reviewable:end -->
+","['andyxning', 'thockin', 'Random-Liu']",1,2018-01-22 15:44:39,2018-02-23 06:18:18,2018-02-23 06:18:18,True,2018-02-23 06:18:18,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/159,https://github.com/kubernetes/node-problem-detector/pull/159,Rcluoyi,Fix doc links for ConfigMap in README,"This link seems to have been updated.
+Signed-off-by: renchao <renchao@chinacloud.com.cn>
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/159)
+<!-- Reviewable:end -->
+","['andyxning', 'Random-Liu']",1,2018-01-25 07:17:53,2018-02-23 06:24:41,2018-02-23 06:24:41,True,2018-02-23 06:24:41,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/160,https://github.com/kubernetes/node-problem-detector/pull/160,filbranden,Use debian-base image from kubernetes repository as base for NPD.,"This image is based on Debian Stretch (9) which has a recent version of systemd libraries that includes all necessary compression algorithms.
+
+I propose using that image unconditionally (instead of Alpine when journald is disabled) since the image size with debian-base is not that much of a concern anymore.
+
+FTR, I didn't really test this...
+
+This is analogous to a change we're pushing to fluentd-gcp container in GoogleCloudPlatform/k8s-stackdriver#101
+
+@Random-Liu 
+
+Cheers,
+Filipe
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/160)
+<!-- Reviewable:end -->
+",['Random-Liu'],1,2018-02-14 21:06:09,2018-02-26 22:06:04,2018-02-26 22:06:04,True,2018-02-26 22:06:04,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/162,https://github.com/kubernetes/node-problem-detector/pull/162,gkGaneshR,Unit testing for SetNodeNameOrDie in package cmd/options,"1. Why is this change necessary ?
+fixes: kubernetes/node-problem-detector#161
+
+2. How does this change address the issue ?
+Under package cmd/options, the testing for SetNodeNameOrDie need
+to decide Nodename based on environment variable ""NODE_NAME"" or
+hostname or hostnameoverride variable.
+
+3. How to verify this change ?
+Run ""go test"" with admin privilege i.e., ""make test""
+
+Signed-off-by: gkGaneshR <gkganesh126@gmail.com>
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/node-problem-detector/162)
+<!-- Reviewable:end -->
+","['andyxning', 'Random-Liu']",6,2018-03-02 15:39:40,2018-03-09 10:15:50,2018-03-09 10:15:50,True,2018-03-09 10:15:50,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/164,https://github.com/kubernetes/node-problem-detector/pull/164,jsenon,Update Readme,Update yaml file with new daemonset definition introduce by kubernetes 1.9,['andyxning'],4,2018-03-22 15:05:52,2018-05-02 11:17:18,2018-05-02 11:54:42,True,2018-05-02 11:17:18,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/166,https://github.com/kubernetes/node-problem-detector/pull/166,andyxning,add OWNERS,"Fix #165 
+
+This PR adds OWNERS to node-problem-detector.
+
+/cc @Random-Liu @dchen1107 ",['Random-Liu'],1,2018-03-25 14:02:34,2018-04-16 05:48:57,2018-04-16 06:01:04,True,2018-04-16 05:48:57,Random-Liu,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/168,https://github.com/kubernetes/node-problem-detector/pull/168,thockin,Pass 2: k8s GCR vanity URL,,['andyxning'],1,2018-04-06 15:19:21,2018-04-16 05:49:58,2018-04-16 05:49:58,True,2018-04-16 05:49:58,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/169,https://github.com/kubernetes/node-problem-detector/pull/169,zhangxiaoyu-zidif,update example,the original ds example could not be created.,['andyxning'],1,2018-04-08 08:03:33,2018-04-12 10:23:55,2018-04-13 00:54:41,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/176,https://github.com/kubernetes/node-problem-detector/pull/176,andyxning,add SECURITY_CONTACTS,"Fixes #175
+
+This PR will adds a SECURITY_CONTACTS file under the root directory.
+",['jessfraz'],1,2018-05-28 07:49:59,2018-05-29 02:32:32,2018-05-29 05:07:44,True,2018-05-29 02:32:32,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/177,https://github.com/kubernetes/node-problem-detector/pull/177,rlguarino,fix typo in daemonset labelSelector,"The label on the pod is `app: node-problem-detector` while the
+label in the `labelSelector` was `name: node-problem-detector`.
+This CL updates the `labelSelector` to use `app` rather than `name`.",['andyxning'],1,2018-05-30 00:22:35,2018-05-30 03:52:54,2018-05-30 03:52:54,True,2018-05-30 03:52:53,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/180,https://github.com/kubernetes/node-problem-detector/pull/180,dashpole,Add log-counter plugin written in go,"This PR adds a new binary to the node-problem-detector repository: log-counter.
+The new binary uses the kmsg log watcher to get kmsg log events, and checks the number of events that occurred.
+The binary accepts command-line flags for the pattern, count, and period of time to look back.
+It sets the condition `NodeRecreationRequired` when it sees the unregister_netdevice error 3 times in 20 minutes, and runs every 10 minutes.
+
+/assign @Random-Liu ",['Random-Liu'],1,2018-06-18 19:37:06,2018-06-21 16:43:28,2018-06-21 16:46:35,True,2018-06-21 16:43:28,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/182,https://github.com/kubernetes/node-problem-detector/pull/182,AdamDang,Typo fix: encounts->encounters,Line 34: encounts->encounters,"['andyxning', 'dchen1107']",1,2018-06-22 06:05:07,2018-06-22 06:51:09,2018-06-22 06:51:09,True,2018-06-22 06:51:09,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/183,https://github.com/kubernetes/node-problem-detector/pull/183,andyxning,adjust client-go User-Agent,"Fix #181 
+
+This PR will customize client-go, node-problem-detector uses, User-Agent to `node-problem-detector/VERSION`.",['Random-Liu'],1,2018-06-24 02:41:43,2018-06-26 01:15:52,2018-06-26 02:12:28,True,2018-06-26 01:15:52,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/186,https://github.com/kubernetes/node-problem-detector/pull/186,andyxning,make VERSION value more flexible,"Fix #179 
+
+This PR will make the `VERSION` value in Makefile more flexible and the build output less error info log.
+It will first check whether this is a git repo by checking whether a `.git` directory exists or not. If it is a git repo then `VERSION` value will be `git describe --tags --dirty`, otherwise it will use a default value `UNKNOWN`",['Random-Liu'],1,2018-07-08 04:15:52,2018-08-22 01:25:23,2018-08-22 02:09:44,True,2018-08-22 01:25:23,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/187,https://github.com/kubernetes/node-problem-detector/pull/187,andyxning,bump kubernetes to 1.9,"Fix #143 
+
+This PR will bump Kubernetes version to 1.9.
+
+/cc @Random-Liu ",['Random-Liu'],1,2018-07-09 06:06:46,2018-08-20 17:57:16,2018-08-21 02:34:15,True,2018-08-20 17:57:15,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/188,https://github.com/kubernetes/node-problem-detector/pull/188,andyxning,support go 1.10 in travis ci,"Since Golang 1.10 has been released for a long time, it should be tested in travis ci. :)
+
+/cc @Random-Liu ",['Random-Liu'],1,2018-07-09 08:16:21,2018-08-20 17:58:27,2018-08-21 02:40:12,True,2018-08-20 17:58:27,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/189,https://github.com/kubernetes/node-problem-detector/pull/189,chadswen,Add bash to Dockerfile for custom-plugin-monitors,"Utilizes the clean-install script from the debian-base image
+
+Fixes #185",['andyxning'],1,2018-07-13 23:05:35,2018-07-16 03:03:57,2018-07-17 20:59:36,True,2018-07-16 03:03:56,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/191,https://github.com/kubernetes/node-problem-detector/pull/191,andyxning,add CONTRIBUTING.md,"Fix #190 
+
+This PR adds CONTRIBUTING.md to node-problem-detector.
+",['Random-Liu'],1,2018-07-17 10:35:21,2018-08-20 17:56:03,2018-08-21 02:34:04,True,2018-08-20 17:56:03,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/192,https://github.com/kubernetes/node-problem-detector/pull/192,poothia,Adding Missing CONTRIBUTING.md,"It adds Contribution Guideline document for node-problem-detector
+fixes #190 ",[],1,2018-07-17 10:36:52,2018-07-17 10:41:45,2018-07-17 10:41:45,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/193,https://github.com/kubernetes/node-problem-detector/pull/193,poothia,Adding missing CONTRIBUTING.md,"It adds contribution guidelines for node-problem-detector
+fixes #190 ",[],1,2018-07-17 10:44:31,2018-07-19 06:15:30,2018-07-19 06:15:30,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/194,https://github.com/kubernetes/node-problem-detector/pull/194,wangzhen127,Add required package for Debian in README and ignore entire /bin/ dir,Add required package for Debian in README and ignore entire /bin/ dir,"['andyxning', 'Random-Liu']",1,2018-07-19 21:18:35,2018-07-22 10:24:18,2018-07-23 22:24:31,True,2018-07-22 10:24:18,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/195,https://github.com/kubernetes/node-problem-detector/pull/195,wangzhen127,Include some concrete usage examples in the README,"Add a ""Try It Out"" section to include some concrete usage examples in the README file.",['andyxning'],1,2018-07-24 00:08:53,2018-07-31 02:35:39,2018-07-31 16:40:40,True,2018-07-31 02:35:39,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/196,https://github.com/kubernetes/node-problem-detector/pull/196,jheidbrink,Adapt OOMKilling pattern to current kernels,"[commit eca56ff9](https://github.com/torvalds/linux/commit/eca56ff906bdd0239485e8b47154a6e73dd9a2f3#diff-c14acc69885a24f354bc607686800e23) in the Linux Kernel repository added a column for shared memory to the `Killed process` message. As the patterns in the `kernel-monitor(-filelog).json` have to match full lines, they don't match the OOMKilling messages of current Kernels anymore.
+
+This PR fixes this by simply adding a '.*' to the pattern.",['andyxning'],1,2018-07-30 12:13:33,2018-08-01 01:51:39,2018-08-01 01:51:39,True,2018-08-01 01:51:39,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/201,https://github.com/kubernetes/node-problem-detector/pull/201,negz,Document Draino remedy system,CC @andyxning. Fixes #199.,['andyxning'],1,2018-09-05 08:55:16,2018-09-05 09:22:34,2018-09-05 09:22:34,True,2018-09-05 09:22:34,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/203,https://github.com/kubernetes/node-problem-detector/pull/203,andyxning,fix custom plugin monitor condition change,"Fix #202 
+
+/cc @aga20",['Random-Liu'],1,2018-09-10 06:17:11,2018-11-27 18:37:43,2018-12-10 02:57:53,True,2018-11-27 18:37:42,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/204,https://github.com/kubernetes/node-problem-detector/pull/204,hercynium,Enable building the NPD in a docker container,"This has several benefits. For example, now I can develop and build linux binaries of the NPD on my mac. Also other devs don't need to make sure they have the systemd headers installed.",['andyxning'],4,2018-09-11 20:48:37,2018-09-13 02:15:50,2018-09-13 14:14:15,True,2018-09-13 02:15:50,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/205,https://github.com/kubernetes/node-problem-detector/pull/205,zadoryzsolt,Always update the message field of custom conditions,,[],1,2018-09-12 08:46:00,2018-09-12 08:47:11,2018-09-12 08:47:11,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/208,https://github.com/kubernetes/node-problem-detector/pull/208,AdamDang,Typo fix in systemlogmonitor/README.md,Line 78: configurtion->configuration,"['andyxning', 'Random-Liu']",1,2018-09-25 02:14:14,2018-10-08 02:42:14,2018-10-08 02:42:14,True,2018-10-08 02:42:14,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/210,https://github.com/kubernetes/node-problem-detector/pull/210,duffqiu,Fix error path for plugin,"remove the "".""",[],1,2018-10-09 05:58:30,2018-10-10 01:44:58,2018-10-10 01:44:58,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/212,https://github.com/kubernetes/node-problem-detector/pull/212,hchenxa,update the deployment file and use configmap,Edit the deployment file and add the configmap sample,[],1,2018-10-22 10:06:37,2018-10-22 10:19:31,2018-10-22 10:19:31,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/213,https://github.com/kubernetes/node-problem-detector/pull/213,hchenxa,update the deployment file and use configmap,update the deployment file and add the sample configmap,['andyxning'],1,2018-10-22 10:20:34,2018-11-12 06:49:55,2018-11-12 06:52:07,True,2018-11-12 06:49:55,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/217,https://github.com/kubernetes/node-problem-detector/pull/217,max-rocket-internet,Adding helm chart info to readme and fixing some formatting,"Now the a helm chart is available in the stable repo, I think we should include it here in the installation instructions. Especially since the YAML files in here are quite out of date.
+
+https://github.com/helm/charts/tree/master/stable/node-problem-detector",['andyxning'],3,2018-11-02 10:08:25,2018-11-14 02:14:45,2018-11-14 08:37:53,True,2018-11-14 02:14:45,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/219,https://github.com/kubernetes/node-problem-detector/pull/219,andyxning,fix broken link for draino,"Fix #218
+
+/cc @Random-Liu ",['Random-Liu'],1,2018-11-12 10:22:32,2018-11-21 08:47:05,2018-11-21 09:37:57,True,2018-11-21 08:47:05,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/221,https://github.com/kubernetes/node-problem-detector/pull/221,wangzhen127,Detect readonly filesystem,"The PR adds one more rule to kernel monitor to detect read-only filesystem. It also changes the plugin from journald to kmsg, because when filessystem becomes readonly, no new logs can be saved into `/var/log`. Then journald does not have new data for problem detection.",['Random-Liu'],1,2018-11-20 00:27:34,2018-11-20 20:37:29,2018-11-20 21:26:15,True,2018-11-20 20:37:29,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/222,https://github.com/kubernetes/node-problem-detector/pull/222,jstangroome,Fix the spelling of monitor in the error message,,['andyxning'],1,2018-11-20 03:01:10,2018-11-20 04:25:42,2018-11-20 04:25:42,True,2018-11-20 04:25:42,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/223,https://github.com/kubernetes/node-problem-detector/pull/223,wangzhen127,Detect kubelet and container runtime frequent restarts,"This PR adds customer plugin that watch systemd logs for frequent kubelet and container runtime restarts. It reuses log counter for frequent restart detection. Notice that kubelet and container runtime restart logs are actually in systemd logs, not in kubelet or container runtime logs.
+
+Noticeable changes:
+- Add delay option to log watchers, so that they can delay watching until the node is stable.
+- Change log counter to watch journald instead of kmsg.
+- Update docker monitor to use `dockerd` as the source name.
+- Fix vet errors
+- Update README on injecting systemd logs",['Random-Liu'],1,2018-11-20 21:53:31,2018-11-27 08:34:38,2018-11-27 08:35:24,True,2018-11-27 08:34:38,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/224,https://github.com/kubernetes/node-problem-detector/pull/224,wangzhen127,Detect corrupt docker overlay2,This PR adds one more custom plugin that can detect corrupt docker overlay2 issue.,['Random-Liu'],1,2018-11-21 00:18:57,2018-11-27 08:49:29,2018-11-27 08:49:29,True,2018-11-27 08:49:29,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/225,https://github.com/kubernetes/node-problem-detector/pull/225,SataQiu,"Fix typos: NDDE -> NODE, permenantly -> permanently","Fix typos: NDDE -> NODE, permenantly -> permanently","['andyxning', 'Random-Liu']",1,2018-11-21 09:37:03,2018-11-21 09:47:27,2018-11-21 09:47:27,True,2018-11-21 09:47:27,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/228,https://github.com/kubernetes/node-problem-detector/pull/228,wangzhen127,More fix to custom plugin monitor condition change,"When `condition.Status` does not change, we should check `condition.Reason` instead of `condition.Message` because Message could be spammy and change a lot. 
+
+This is part of #202.",['Random-Liu'],1,2018-11-27 18:57:14,2018-11-27 19:35:18,2018-12-10 03:15:04,True,2018-11-27 19:35:18,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/229,https://github.com/kubernetes/node-problem-detector/pull/229,Random-Liu,Add wangzhen127 as a maintainer.,"Add @wangzhen127 as a new maintainer of NPD. 
+/cc @andyxning @wangzhen127 
+Signed-off-by: Lantao Liu <lantaol@google.com>","['wangzhen127', 'andyxning']",1,2018-11-28 02:29:43,2018-11-28 14:34:42,2018-11-28 18:50:55,True,2018-11-28 14:34:42,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/231,https://github.com/kubernetes/node-problem-detector/pull/231,Random-Liu,Update base image for CVE fix.,"There are several CVEs in `k8s.gcr.io/debian-base-amd64:0.3`.
+![image](https://user-images.githubusercontent.com/5821883/49189677-30543f80-f324-11e8-9078-5469a6378b60.png)
+
+Update the base image to fix those CVEs.
+![image](https://user-images.githubusercontent.com/5821883/49189702-42ce7900-f324-11e8-976a-43b36733cb0d.png)
+",['wangzhen127'],1,2018-11-28 23:42:51,2018-11-29 00:07:15,2018-11-29 00:07:15,True,2018-11-29 00:07:15,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/233,https://github.com/kubernetes/node-problem-detector/pull/233,Random-Liu,Explicitly include libsystemd0 in the image.,"Fixes https://github.com/kubernetes/node-problem-detector/issues/232.
+
+`libsystemd0` was excluded from the base image https://github.com/kubernetes/kubernetes/pull/69995
+
+Explicitly include libsystemd0 because we need it for npd.",['wangzhen127'],1,2018-11-29 22:16:43,2018-11-29 22:23:23,2019-01-07 19:35:45,True,2018-11-29 22:23:23,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/238,https://github.com/kubernetes/node-problem-detector/pull/238,andyxning,enable codnition updaet when message change for custom plugin,"Fix #200 
+
+This PR adds a custom global config to control whether NPD should update condition status when message changes.",['Random-Liu'],1,2018-12-10 04:12:32,2018-12-11 10:15:10,2018-12-12 02:24:26,True,2018-12-11 10:15:09,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/239,https://github.com/kubernetes/node-problem-detector/pull/239,andyxning,add docs about custom plugin,Fix #237,['wangzhen127'],1,2018-12-10 06:02:39,2018-12-10 21:12:32,2018-12-11 01:37:00,True,2018-12-10 21:12:32,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/244,https://github.com/kubernetes/node-problem-detector/pull/244,andyxning,bump NPD image version to 0.6.1,/cc @Random-Liu @wangzhen127 ,['wangzhen127'],1,2018-12-25 07:34:58,2018-12-26 02:21:24,2018-12-26 03:44:16,True,2018-12-26 02:21:24,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/245,https://github.com/kubernetes/node-problem-detector/pull/245,andyxning,add resource,"Fix #240 
+
+The requests and limits are only references. They have no requirements. End users can adjust this themselves. 
+
+/cc @Random-Liu @wangzhen127 ",['wangzhen127'],1,2018-12-25 07:39:07,2018-12-27 03:55:49,2018-12-27 07:08:13,True,2018-12-27 03:55:49,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/246,https://github.com/kubernetes/node-problem-detector/pull/246,chotiwat,Add log-counter to the Dockerfile,"Hi, I'm getting the `rule path ""/home/kubernetes/bin/log-counter"" does not exist` when trying to use the `systemd-monitor-counter.json` as a custom plugin monitor. Below is the full log line.
+
+```
+F1227 00:23:30.513039       1 custom_plugin_monitor.go:64] Failed to validate custom plugin config {Plugin:custom PluginGlobalConfig:{InvokeIntervalString:0xc0002d7fb0 TimeoutString:0xc0002d7fc0 InvokeInterval:5m0s Timeout:1m0s MaxOutputLength:0xc000133b18 Concurrency:0xc000133b48} Source:systemd-monitor DefaultConditions:[{Type:FrequentKubeletRestart Status: Transition:0001-01-01 00:00:00 +0000 UTC Reason:NoFrequentKubeletRestart Message:kubelet is functioning properly} {Type:FrequentDockerRestart Status: Transition:0001-01-01 00:00:00 +0000 UTC Reason:NoFrequentDockerRestart Message:docker is functioning properly} {Type:FrequentContainerdRestart Status: Transition:0001-01-01 00:00:00 +0000 UTC Reason:NoFrequentContainerdRestart Message:containerd is functioning properly}] Rules:[0xc000118c40 0xc000118d90 0xc000118e00]}: rule path ""/home/kubernetes/bin/log-counter"" does not exist. Rule: &amp;{Type:permanent Condition:FrequentKubeletRestart Reason:FrequentKubeletRestart Path:/home/kubernetes/bin/log-counter Args:[--journald-source=systemd --log-path=/var/log/journal --lookback=20m --delay=5m --count=5 --pattern=Started Kubernetes kubelet.] TimeoutString:0xc000300000 Timeout:1m0s}
+```
+
+This pr adds the missing binary, as required by all the `*-counter.json`, to the container.
+
+
+","['andyxning', 'Random-Liu']",1,2018-12-27 01:11:24,2018-12-27 03:06:23,2018-12-27 03:17:29,True,2018-12-27 03:06:23,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/248,https://github.com/kubernetes/node-problem-detector/pull/248,nak3,Add validation for the required flag,"If `--system-log-monitors` or `--custom-plugin-monitors` are not
+specified, npd gave us unclear message.
+
+This patch adds the validation and clear error message.
+
+BEFORE
+```
+$ ./bin/node-problem-detector --apiserver-override=http://$APISERVER_IP:$APISERVER_INSECURE_PORT?inClusterConfig=false
+F0117 13:15:02.298876   12161 node_problem_detector.go:99] Problem detector failed with error: no log monitor is successfully setup
+goroutine 1 [running]:
+k8s.io/node-problem-detector/vendor/github.com/golang/glog.stacks(0xc000412900, 0xc0002b6000, 0x84, 0xc8)
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/vendor/github.com/golang/glog/glog.go:766 +0xd4
+k8s.io/node-problem-detector/vendor/github.com/golang/glog.(*loggingT).output(0x1d320a0, 0xc000000003, 0xc00011a630, 0x1a9f55c, 0x18, 0x63, 0x0)
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/vendor/github.com/golang/glog/glog.go:717 +0x306
+k8s.io/node-problem-detector/vendor/github.com/golang/glog.(*loggingT).printf(0x1d320a0, 0x3, 0x10e4868, 0x26, 0xc00051ff38, 0x1, 0x1)
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/vendor/github.com/golang/glog/glog.go:655 +0x14b
+k8s.io/node-problem-detector/vendor/github.com/golang/glog.Fatalf(0x10e4868, 0x26, 0xc00051ff38, 0x1, 0x1)
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/vendor/github.com/golang/glog/glog.go:1145 +0x67
+main.main()
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/cmd/node_problem_detector.go:99 +0x4a2
+```
+
+AFTER:
+```
+$ ./bin/node-problem-detector --apiserver-override=http://$APISERVER_IP:$APISERVER_INSECURE_PORT?inClusterConfig=false
+panic: Either --system-log-monitors or --custom-plugin-monitors is required
+
+goroutine 1 [running]:
+k8s.io/node-problem-detector/cmd/options.(*NodeProblemDetectorOptions).ValidOrDie(0xc00052bc80)
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/cmd/options/options.go:84 +0xff
+main.main()
+	/home/knakayam/.go/src/k8s.io/node-problem-detector/cmd/node_problem_detector.go:65 +0x82
+```",['andyxning'],1,2019-01-17 04:39:04,2019-01-17 05:42:18,2019-01-17 05:42:29,True,2019-01-17 05:42:18,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/249,https://github.com/kubernetes/node-problem-detector/pull/249,nak3,Run travis against go v1.10 and v1.11,"Currently travis is failing on `TestGoroutineLeak` test but it is only
+on Go v1.9.
+
+Go v1.9 is not so new version, hence this patch updates to run travis
+against v1.10 and v1.11.
+
+ref:
+https://travis-ci.org/kubernetes/node-problem-detector/builds/472040385
+https://travis-ci.org/kubernetes/node-problem-detector/builds/465834849
+https://travis-ci.org/kubernetes/node-problem-detector/builds/465809562
+
+```
+--- FAIL: TestGoroutineLeak (0.00s)
+	Error Trace:	log_monitor_test.go:154
+	Error:		Not equal: 4 (expected)
+			        != 3 (actual)
+```",[],1,2019-01-18 01:42:18,2019-03-05 15:38:51,2019-03-05 17:22:49,False,,,dirty,False,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/250,https://github.com/kubernetes/node-problem-detector/pull/250,mkumatag,Add multiarch support and push fat manifest,"This will enable to build node-problem-detector project for multiarch like amd64, arm, arm64 and ppc64le and push the fat manifest.
+
+Fixes: https://github.com/kubernetes/kubernetes/issues/73364","['andyxning', 'Random-Liu']",1,2019-01-22 17:34:44,,2019-03-22 20:43:19,False,,,dirty,False,open
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/253,https://github.com/kubernetes/node-problem-detector/pull/253,stribb,Empty LogPath will use journald's default path.,"At present, the empty LogPath will use the _code's_ default journal path, without regard for the _host's_ default journal path.
+
+This code changes the default to use the host's path.",['Random-Liu'],1,2019-01-30 11:14:28,,2019-03-21 18:01:56,False,,,blocked,True,open
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/254,https://github.com/kubernetes/node-problem-detector/pull/254,wangzhen127,Add script for presubmit and CI jobs,"This PR adds a script for presubmit and CI jobs. It is needed by the presubmit and CI setup on test-infra side. This is part of https://github.com/kubernetes/node-problem-detector/issues/236.
+
+This PR needs to work with the test-infra side PR https://github.com/kubernetes/test-infra/pull/11208.",['Random-Liu'],1,2019-02-09 00:28:28,2019-03-13 18:09:37,2019-03-13 18:09:37,True,2019-03-13 18:09:37,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/256,https://github.com/kubernetes/node-problem-detector/pull/256,wangzhen127,dummy,For testing. Do not submit,[],5,2019-03-01 22:26:23,2019-03-02 00:14:05,2019-03-02 00:14:05,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/257,https://github.com/kubernetes/node-problem-detector/pull/257,wangzhen127,Fix travis ci file,"This PR fixes the travis CI file. Previous problems:
+1. There is always a default build step before jobs, which does not include the journald build tag.
+2. The jobs only inherit the first golang version, which is 1.9. Version 1.10 is never tested.
+
+Due to constraint on travis, now we combine `make` and `make test` and override the default script. We also add more golang versions here.
+
+Part of https://github.com/kubernetes/node-problem-detector/issues/236.",['Random-Liu'],1,2019-03-02 00:17:16,2019-03-02 00:37:31,2019-03-14 05:00:18,True,2019-03-02 00:37:31,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/260,https://github.com/kubernetes/node-problem-detector/pull/260,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['spiffxp', 'andyxning']",1,2019-03-08 17:49:40,2019-03-11 06:23:27,2019-03-11 06:23:28,True,2019-03-11 06:23:27,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/261,https://github.com/kubernetes/node-problem-detector/pull/261,wangzhen127,Install system lib in build.sh,"Install journald system lib in build.sh
+
+Part of https://github.com/kubernetes/node-problem-detector/issues/236.",['Random-Liu'],1,2019-03-13 23:37:57,2019-03-19 02:00:27,2019-03-19 02:00:27,True,2019-03-19 02:00:27,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/262,https://github.com/kubernetes/node-problem-detector/pull/262,wangzhen127,Fix CI job race condition,"Current CI job has race condition. The related CI jobs are:
+- [ci-npd-build](https://k8s-testgrid.appspot.com/sig-node-node-problem-detector#ci-npd-build): Build and push NPD to staging, push `ci.env` file to staging.
+- [ci-npd-e2e-kubernetes-gce-gci](https://k8s-testgrid.appspot.com/sig-node-node-problem-detector#ci-npd-e2e-kubernetes-gce-gci): Download `ci.env` and export the env; then start to run E2E test; when creating the cluster, use the env exported in `ci.env` to download the NPD builds.
+- [ci-npd-e2e-kubernetes-gce-ubuntu](https://k8s-testgrid.appspot.com/sig-node-node-problem-detector#ci-npd-e2e-kubernetes-gce-ubuntu): Similar to the gci one, just running against ubuntu.
+
+The CI jobs are configured to run every 2 hours. The race condition happens as follows:
+1. Time `t`:  All 3 CI jobs run. `ci-npd-build` push the new builds to staging (with new sha1 value).
+2. Time `t+2hour`: All 3 CI jobs run again. `ci-npd-build` starts to run, but hasn't finished the build. `ci-npd-e2e-kubernetes-gce-gci` downloads the `ci.env` pushed in step 1 at time `t`.
+3. Time `t+2hour+2min`: `ci-npd-build` finishes building and pushes a new build to staging.
+4. Time `t+2hour+5min`: `ci-npd-e2e-kubernetes-gce-gci` created the cluster and try to download NPD build. It used the old `ci.env` as downloaded in step 2, but the NPD build on staging has been updated to the new build in step 3. Then the sha1 value does not match. NPD installation fails with following error:
+```
+Mar 19 14:51:37.716008 e2e-69-7abb6-minion-group-23dx configure.sh[787]: Downloading node-problem-detector-v0.6.2-10-g796c8d0.tar.gz.
+Mar 19 14:51:37.738122 e2e-69-7abb6-minion-group-23dx configure.sh[787]:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+Mar 19 14:51:37.738404 e2e-69-7abb6-minion-group-23dx configure.sh[787]:                                  Dload  Upload   Total   Spent    Left  Speed
+Mar 19 14:51:38.062481 e2e-69-7abb6-minion-group-23dx configure.sh[787]: [237B blob data]
+Mar 19 14:51:38.124829 e2e-69-7abb6-minion-group-23dx configure.sh[787]: == node-problem-detector-v0.6.2-10-g796c8d0.tar.gz corrupted, sha1 f815d9b7fdec53a0363bb77c19b575c8296dc1fe doesn't match expected 2b7e70b122f338bf75c4beb909f6ded0a569c042 ==
+Mar 19 14:51:38.125255 e2e-69-7abb6-minion-group-23dx configure.sh[787]: == Hash validation of https://storage.googleapis.com/node-problem-detector-staging/ci/node-problem-detector/node-problem-detector-v0.6.2-10-g796c8d0.tar.gz failed. Retrying. ==
+```
+
+This PR adds current time to version and tag, so that the NPD builds will not be overridden. The GCS bucket is configured to only keep the builds for 7 days, so old files will be cleaned up.
+
+Part of https://github.com/kubernetes/node-problem-detector/issues/236.",['Random-Liu'],1,2019-03-19 16:31:31,2019-03-19 21:58:22,2019-03-19 22:34:36,True,2019-03-19 21:58:22,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/263,https://github.com/kubernetes/node-problem-detector/pull/263,wangzhen127,Register gcloud as a Docker credential in Makefile,"`gcloud docker` is deprecated. This PR updates the Makefile to register gcloud as docker credential.
+
+Part of https://github.com/kubernetes/node-problem-detector/issues/236.",['Random-Liu'],1,2019-03-22 18:50:54,2019-03-22 19:21:12,2019-03-22 19:58:54,True,2019-03-22 19:21:12,k8s-ci-robot,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/264,https://github.com/kubernetes/node-problem-detector/pull/264,yuwenma,Support building NPD images in different arch,Test: `make` generates a .tar.gz file and the exec file node-problem-detector can be upstarted. ,['Random-Liu'],1,2019-03-30 02:09:23,2019-04-01 21:44:36,2019-04-01 21:44:36,False,,,unknown,,closed
+node-problem-detector,https://api.github.com/repos/kubernetes/node-problem-detector/pulls/265,https://github.com/kubernetes/node-problem-detector/pull/265,wangzhen127,Disable glog writing to files for log-counter,"On GKE, we encountered issues where NPD creates high amount of log files on node for log-counter with NPD v0.6.0, where we added more custom plugins that are using log counter. 
+
+Log counter is a custom plugin, it is configured to run once per few minutes (e.g. 5min). Every time it runs, it will generate a tmp file. Eventually it can fill the tmp directory. We should just redirect the logs to stderr. Custom plugins are just using stdout as the interface to talk to NPD, so it should be fine.
+
+This problem is similar to https://github.com/kubernetes-sigs/cri-tools/pull/291.",['Random-Liu'],1,2019-04-03 20:16:58,2019-04-03 22:00:50,2019-04-03 22:01:00,True,2019-04-03 22:00:50,k8s-ci-robot,unknown,,closed

@@ -1,0 +1,508 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+iroha-android,kenkan921,https://github.com/hyperledger/iroha-android/issues/147,https://api.github.com/repos/hyperledger/iroha-android/issues/147,"Transaction meet ""CommandService Stateless invalid tx"" warining message","Hi, I am new in both android app developing and hyperledger iroha. I am now designing an app with hyperledger iroha. When I was sending transaction request through the app to iroha server, the server-side showed below message: 
+`[2018-11-30 05:46:16.131450474][th:118][warning] CommandService Stateless invalid tx: Signature: [[Wrong signature [073920b66487c3e6196db291cba7815236c24f9629a82a785bf9c852a79befbc13382e2939797b4683d68e88cf0adb2c35908b02ef41c5da67cfac02649b0505;313a07e6384776ed95447710d15e59148473ccfc052a681317a72a69f2a49910] ]]
+Transaction: [[Transaction should contain at least one command Wrongly formed creator_account_id, passed value: ''. Field should match regex '[a-z_0-9]{1,32}\@([a-zA-Z]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?' bad timestamp: too old, timestamp: 0, now: 1543556776120 Quorum should be within range (0, 128] ]]
+, hash: 708713afdb215a7fdd1b3246ec662a3d992648dc262ca1d5360be94b6d75313b
+`
+
+The error returned from my app is ""Error: java.lang.RuntimeException: Transaction failed "" and without any other information. 
+
+The code transaction part in my app is simply copied from iroha-android-sample, i.e. 
+
+    protected  Completable TransferAsset(String[] data){
+        return Completable.create(emitter -> {
+           long currentTime = System.currentTimeMillis();
+           Keypair userKeys = crypto.convertFromExisting(PUB_KEY, PRIV_KEY);
+           String username = ""admin"";
+
+           UnsignedTx sendAssetTx = txBuilder.creatorAccountId(username + ""@"" + DOMAIN_ID)
+                   .createdTime(BigInteger.valueOf(currentTime))
+                   .transferAsset(username + ""@"" + DOMAIN_ID,
+                           data[0] + ""@"" + DOMAIN_ID, ""hkd#test"", ""initail"", data[1])
+                   .build();
+
+           protoTxHelper = new ModelProtoTransaction(sendAssetTx);
+           ByteVector txblob = protoTxHelper.signAndAddSignature(userKeys).finish().blob();
+           byte[] bsq = toByteArray(txblob);
+           TransactionOuterClass.Transaction protoTx = null;
+
+           try{
+               protoTx = TransactionOuterClass.Transaction.parseFrom(bsq);
+           }catch (InvalidProtocolBufferException e){
+               emitter.onError(e);
+           }
+
+            CommandServiceGrpc.CommandServiceBlockingStub stub = CommandServiceGrpc.newBlockingStub(channel)
+                    .withDeadlineAfter(CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+           stub.torii(protoTx);
+
+           if (!isTransactionSuccessful(stub, sendAssetTx)){
+               emitter.onError(new RuntimeException(""Transaction failed""));
+           } else {
+               emitter.onComplete();
+           }
+
+        });
+    }
+
+I found same issue was reported by truongnmt but no one answered. Can anyone tell what is this issue and teach me how to solve it?",open,False,2018-11-30 06:01:15,2018-11-30 06:01:15
+iroha-android,AnkitDroidGit,https://github.com/hyperledger/iroha-android/issues/146,https://api.github.com/repos/hyperledger/iroha-android/issues/146,Not able to clone this repo on my mac,"error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54
+
+git clone https://github.com/hyperledger/iroha-android.git
+Cloning into 'iroha-android'...
+remote: Enumerating objects: 6320, done.
+error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54
+fatal: The remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+",open,False,2018-11-01 08:39:13,2018-11-01 08:39:13
+iroha-android,adonnini,https://github.com/hyperledger/iroha-android/issues/145,https://api.github.com/repos/hyperledger/iroha-android/issues/145,iroha-android sample app - missing module?,"Hi,
+
+As I am trying to understand how the sample iroha-android app works I have come across the following:
+
+in SendFragment.java there is the following import statement:
+
+import jp.co.soramitsu.iroha.android.sample.databinding.FragmentSendBinding;
+
+I cannot find FragementSendBinding
+
+Where is it located?
+
+Thanks for your help,
+
+Alex",open,False,2018-10-23 12:05:47,2018-10-24 17:09:14
+iroha-android,adonnini,https://github.com/hyperledger/iroha-android/issues/144,https://api.github.com/repos/hyperledger/iroha-android/issues/144,Asset payload,"Hi I am new to Iroha hyperledger. 
+
+In my android app integrated with Bigchaindb blockchain, I can include a number of different data structures as asset payload
+
+What are the limitations regarding asset payload in the Iroha blockchain?
+
+I looked at the Iroha-androd sample application. I could not find an example of asset creation and transaction creation and transmission. Could you please point me in the right direction?
+
+Is the Iroha-android sample application broken?
+
+Thanks,
+
+Alex Donnini",open,False,2018-10-22 19:19:09,2018-10-24 13:17:54
+iroha-android,dmitriyTarasov,https://github.com/hyperledger/iroha-android/issues/143,https://api.github.com/repos/hyperledger/iroha-android/issues/143,Sample app crashed on ZTE Blade v7 lite,"Hello,
+I tried run app on ZTE Blade v7 Lite and got crash on native library initialization, on emulator it works fine.
+
+Log:
+10-13 12:47:13.379 8359-8359/jp.co.soramitsu.iroha.android.sample E/AndroidRuntime: FATAL EXCEPTION: main
+    Process: jp.co.soramitsu.iroha.android.sample, PID: 8359
+    java.lang.UnsatisfiedLinkError: dlopen failed: cannot locate symbol ""__aeabi_atexit"" referenced by ""/data/app/jp.co.soramitsu.iroha.android.sample-1/lib/arm/libirohajava.so""...
+        at java.lang.Runtime.loadLibrary(Runtime.java:372)
+        at java.lang.System.loadLibrary(System.java:1076)
+        at jp.co.soramitsu.iroha.android.sample.SampleApplication.<clinit>(SampleApplication.java:17)
+        at java.lang.Class.newInstance(Native Method)
+        at android.app.Instrumentation.newApplication(Instrumentation.java:1001)
+        at android.app.Instrumentation.newApplication(Instrumentation.java:986)
+        at android.app.LoadedApk.makeApplication(LoadedApk.java:582)
+        at android.app.ActivityThread.handleBindApplication(ActivityThread.java:4932)
+        at android.app.ActivityThread.access$1600(ActivityThread.java:175)
+        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1549)
+        at android.os.Handler.dispatchMessage(Handler.java:111)
+        at android.os.Looper.loop(Looper.java:207)
+        at android.app.ActivityThread.main(ActivityThread.java:5728)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:789)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:679)",open,False,2018-10-13 09:57:43,2018-10-13 14:03:35
+iroha-android,Bo3o2S,https://github.com/hyperledger/iroha-android/issues/142,https://api.github.com/repos/hyperledger/iroha-android/issues/142,app crash in android api 16,"i'm trying to control iroha in Android POS device. this device support android 4.4.4 from api 16 to 19. but i tested sample(develop version) in android studio, api level 16, it crashed when i started app. how can i apply iroha to android api level 16?",open,False,2018-08-21 02:22:01,2018-08-29 04:24:53
+iroha-android,truongnmt,https://github.com/hyperledger/iroha-android/issues/141,https://api.github.com/repos/hyperledger/iroha-android/issues/141,"CommandService Stateless invalid tx - Wrongly formed creator_account_id, passed value: ''","I'm trying to create an Android app with Hyperledger Iroha. So first user will type `Username` and `Account details` to register an account. 
+
+[![enter image description here][1]][1]
+
+Here is my [IrohaConnection.kt](https://github.com/truongnmt/iroha-glowing-octo-carnival/blob/master/app/src/main/java/com/example/nguyenmanhtruong/irohatx/IrohaConnection.kt) file to form a request to send to Iroha server. Basically, I just copy and port from Java to Kotlin from this [iroha-android-sample repo](https://github.com/hyperledger/iroha-android/blob/master/iroha-android-sample/src/main/java/jp/co/soramitsu/iroha/android/sample/interactor/CreateAccountInteractor.java). 
+
+This is the message I get from Iroha console:
+
+    [2018-08-08 01:57:17.221326506][th:35][warning] CommandService Stateless invalid tx: Transaction: [[Transaction should contain at least one command Wrongly formed creator_account_id, passed value: ''. Field should match regex '[a-z_0-9]{1,32}\@([a-zA-Z]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?' bad timestamp: too old, timestamp: 0, now: 1533693437216 Quorum should be within range (0, 128] ]]
+    , hash: 2526b8c49021a34172deb7255509e34b45822c07c822808176498bec1f0cb1fe
+    [2018-08-08 01:57:17.270612531][th:38][warning] CommandService Stateless invalid tx: Transaction: [[Transaction should contain at least one command Wrongly formed creator_account_id, passed value: ''. Field should match regex '[a-z_0-9]{1,32}\@([a-zA-Z]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)*[a-zA-Z]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?' bad timestamp: too old, timestamp: 0, now: 1533693437270 Quorum should be within range (0, 128] ]]
+    , hash: 2526b8c49021a34172deb7255509e34b45822c07c822808176498bec1f0cb1fe
+    [2018-08-08 01:57:18.274183120][th:35][warning] CommandService StatusStream request processing timeout, hash: 7e184190581756a5d7192e9491b4f9bf9a33f077ecb0044782a5057aa8212eea
+
+It's said that:
+
+* CommandService Stateless invalid tx
+* Transaction should contain at least one command
+* Wrongly formed creator_account_id, passed value: ''
+* bad timestamp: too old, timestamp: 0, now: 1533693437270
+* Quorum should be within range (0, 128] ]]
+
+I'm not really understand how Iroha receive variables but when debug I see:
+
+[![enter image description here][2]][2]
+
+`createdTime_` , `creatorAccountId_`, `quorum_` these 3 vars has value which is kind of what Iroha ask for, but somehow the server not get it.
+
+Another weird things is, on this sample Iroha-android repo: [build.gradle](https://github.com/hyperledger/iroha-android/blob/master/iroha-android-sample/build.gradle#L22):
+
+    release {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue ""string"", ""iroha_url"", ""199.247.26.56""
+            resValue ""integer"", ""iroha_port"", ""50051""
+        }
+        debug {
+            resValue ""string"", ""iroha_url"", ""199.247.26.56""
+            resValue ""integer"", ""iroha_port"", ""50051""
+        }
+
+You see those IP? When using this default IP `199.247.26.56`, the app work, but when I change to my local IP, which is the same PC - my own Iroha deployment, it's not. I think that on this IP `199.247.26.56`, you guys have deployed Iroha correctly. 
+
+So on that though, I have deploy Iroha following these:
+
+* https://iroha.readthedocs.io/en/latest/getting_started/index.html#starting-iroha-node
+* https://iroha.readthedocs.io/en/latest/guides/deployment.html#docker
+* Build from source: https://hyperledger.github.io/iroha-api/#docker
+
+But still the same error:
+
+* CommandService Stateless invalid tx
+* Transaction should contain at least one command
+* Wrongly formed creator_account_id, passed value: ''
+* bad timestamp: too old, timestamp: 0, now: 1533693437270
+* Quorum should be within range (0, 128] ]]
+
+  [1]: https://i.stack.imgur.com/ysyjw.png
+  [2]: https://i.stack.imgur.com/BycD0.png",open,False,2018-08-08 02:11:42,2018-08-30 01:28:51
+iroha-android,truongnmt,https://github.com/hyperledger/iroha-android/issues/140,https://api.github.com/repos/hyperledger/iroha-android/issues/140,*.proto files structure different with README - No implementation found for long jp.co.soramitsu.iroha.android.irohaJNI.new_ModelCrypto(),"I'm implement Iroha into my Android project with the first way:
+```kotlin
+implementation 'jp.co.soramitsu.iroha.android:iroha-android-bindings:+'
+```
+But where to copy `*.proto` files from? From this repo: iroha-android-sample/src/main/proto ?
+
+> Copy the latest version of *.proto files from develop branch of Iroha [repository] into app/src/main/proto/ folder inside your project in Android Studio.
+
+Also the *.proto files structure in README is different from `iroha-android-sample/src/main/proto` structure.
+
+Also on include `*.proto` from `iroha-android-sample/src/main/proto` I got this error:
+```
+E/htruong.irohat: No implementation found for long jp.co.soramitsu.iroha.android.irohaJNI.new_ModelCrypto() (tried Java_jp_co_soramitsu_iroha_android_irohaJNI_new_1ModelCrypto and Java_jp_co_soramitsu_iroha_android_irohaJNI_new_1ModelCrypto__)
+D/AndroidRuntime: Shutting down VM
+E/AndroidRuntime: FATAL EXCEPTION: main
+                  Process: com.example.nguyenmanhtruong.irohatx, PID: 3476
+                  java.lang.UnsatisfiedLinkError: No implementation found for long jp.co.soramitsu.iroha.android.irohaJNI.new_ModelCrypto() (tried Java_jp_co_soramitsu_iroha_android_irohaJNI_new_1ModelCrypto and Java_jp_co_soramitsu_iroha_android_irohaJNI_new_1ModelCrypto__)
+                      at jp.co.soramitsu.iroha.android.irohaJNI.new_ModelCrypto(Native Method)
+                      at jp.co.soramitsu.iroha.android.ModelCrypto.<init>(ModelCrypto.java:51)
+                      at com.example.nguyenmanhtruong.irohatx.IrohaConnection.<init>(IrohaConnection.kt:16)
+                      at com.example.nguyenmanhtruong.irohatx.MainActivity.onCreate(MainActivity.kt:13)
+                      at android.app.Activity.performCreate(Activity.java:7136)
+                      at android.app.Activity.performCreate(Activity.java:7127)
+                      at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1271)
+                      at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2893)
+                      at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3048)
+                      at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:78)
+                      at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:108)
+                      at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:68)
+                      at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1808)
+                      at android.os.Handler.dispatchMessage(Handler.java:106)
+                      at android.os.Looper.loop(Looper.java:193)
+                      at android.app.ActivityThread.main(ActivityThread.java:6669)
+                      at java.lang.reflect.Method.invoke(Native Method)
+                      at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
+                      at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)
+```",closed,False,2018-08-07 08:59:14,2018-08-08 01:56:35
+iroha-android,TranBaVinhSon,https://github.com/hyperledger/iroha-android/issues/139,https://api.github.com/repos/hyperledger/iroha-android/issues/139,[Help] Where is iroha-android-bindings folder come from ?,Where is iroha-android-bindings folder come from ?,open,False,2018-07-29 18:16:37,2018-10-23 12:17:53
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/138,https://api.github.com/repos/hyperledger/iroha-android/issues/138,Develop,Merge stable develop to master,closed,True,2018-06-13 09:23:16,2018-06-13 09:23:25
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/137,https://api.github.com/repos/hyperledger/iroha-android/issues/137,Develop,Merge develop to master,closed,True,2018-06-08 15:45:51,2018-06-09 09:25:44
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/136,https://api.github.com/repos/hyperledger/iroha-android/issues/136,Bulat mukhutdinov patch 1,,closed,True,2018-05-24 08:54:11,2018-05-24 08:55:47
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/135,https://api.github.com/repos/hyperledger/iroha-android/issues/135,logo images fix,Signed-off-by: mrZizik <mrfreezzzer@mail.ru>,closed,True,2018-05-13 23:03:48,2018-05-13 23:03:58
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/134,https://api.github.com/repos/hyperledger/iroha-android/issues/134,Registration tests,Ui and integration tests are added for registration flow,closed,True,2018-05-11 18:47:11,2018-05-13 17:56:36
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/133,https://api.github.com/repos/hyperledger/iroha-android/issues/133,getting iroha-android master to iroha master state,Signed-off-by: mrZizik <mrfreezzzer@mail.ru>,closed,True,2018-05-10 17:35:38,2018-05-10 17:35:49
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/132,https://api.github.com/repos/hyperledger/iroha-android/issues/132,getting iroha-android master to iroha master state,Signed-off-by: mrZizik <mrfreezzzer@mail.ru>,closed,True,2018-05-10 17:33:09,2018-05-10 17:33:40
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/131,https://api.github.com/repos/hyperledger/iroha-android/issues/131,Update README.md,,closed,True,2018-05-08 07:10:48,2018-05-11 18:42:40
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/130,https://api.github.com/repos/hyperledger/iroha-android/issues/130,fixed crash when server is not reached,Signed-off-by: mrZizik <mrfreezzzer@mail.ru>,closed,True,2018-05-07 07:55:53,2018-05-13 17:56:58
+iroha-android,haroonhassan,https://github.com/hyperledger/iroha-android/issues/129,https://api.github.com/repos/hyperledger/iroha-android/issues/129,DaggerApplicationComponent,"Hi there, trying to emulate the sample app, and Android Studio can't resolve the DaggerApplicationComponent. Any advice would be much appreciated, thank you.",closed,False,2018-04-29 12:24:33,2018-05-03 13:11:40
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/128,https://api.github.com/repos/hyperledger/iroha-android/issues/128,bug_fixes_2,Signed-off-by: mrZizik <mrfreezzzer@mail.ru>,closed,True,2018-04-25 13:37:38,2018-04-30 15:21:50
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/127,https://api.github.com/repos/hyperledger/iroha-android/issues/127,qr scanner fix,Signed-off-by: mrZizik <mrfreezzzer@mail.ru>,closed,True,2018-04-24 22:18:08,2018-04-25 13:38:01
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/126,https://api.github.com/repos/hyperledger/iroha-android/issues/126,update readme,Signed-off-by: bulatmukhutdinov <Bulatmm@yandex.ru>,closed,True,2018-04-24 13:54:33,2018-04-24 18:51:08
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/125,https://api.github.com/repos/hyperledger/iroha-android/issues/125,Update README.md,Update README.md,closed,True,2018-04-24 08:15:35,2018-04-24 13:57:47
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/124,https://api.github.com/repos/hyperledger/iroha-android/issues/124,Develop backup,Iroha Android bindings,closed,True,2018-04-24 07:55:37,2018-04-24 13:57:37
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/123,https://api.github.com/repos/hyperledger/iroha-android/issues/123,Iroha Android bindings,Signed-off-by: bulatmukhutdinov <Bulatmm@yandex.ru>,closed,True,2018-04-24 07:44:07,2018-04-24 07:51:17
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/122,https://api.github.com/repos/hyperledger/iroha-android/issues/122,Develop,Iroha Android bindings,closed,True,2018-04-24 07:28:14,2018-04-24 07:57:55
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/121,https://api.github.com/repos/hyperledger/iroha-android/issues/121,Develop,,closed,True,2018-04-24 07:22:53,2018-04-24 07:23:04
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/120,https://api.github.com/repos/hyperledger/iroha-android/issues/120,Bindings,Android Iroha bindings,closed,True,2018-04-24 07:01:25,2018-04-24 07:09:53
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/119,https://api.github.com/repos/hyperledger/iroha-android/issues/119,Bindings,Android Iroha bindings,closed,True,2018-04-24 06:35:20,2018-04-24 06:49:49
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/118,https://api.github.com/repos/hyperledger/iroha-android/issues/118,340 qr generation; qr check; permission managment; history interactor,,closed,True,2018-04-24 01:47:48,2018-04-24 06:34:36
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/117,https://api.github.com/repos/hyperledger/iroha-android/issues/117,339 send screen,,closed,True,2018-04-12 22:55:32,2018-04-23 00:16:13
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/116,https://api.github.com/repos/hyperledger/iroha-android/issues/116,338 iroha registration,,closed,True,2018-04-05 14:06:37,2018-04-09 06:05:46
+iroha-android,mrZizik,https://github.com/hyperledger/iroha-android/pull/115,https://api.github.com/repos/hyperledger/iroha-android/issues/115,338 iroha registration,,closed,True,2018-04-04 07:36:49,2018-04-05 14:05:57
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/114,https://api.github.com/repos/hyperledger/iroha-android/issues/114,[sample-history] history of transactions,History of transactions with sample data,closed,True,2018-04-02 13:26:44,2018-04-02 13:58:37
+iroha-android,BulatMukhutdinov,https://github.com/hyperledger/iroha-android/pull/113,https://api.github.com/repos/hyperledger/iroha-android/issues/113,[IA-4] KeyManager is with static Encryptor,KeyManager has been replaced with static Encryptor because KeyManager's decode method always returned empty strings. + it is more convenient to make encryption class static,closed,True,2017-10-17 17:27:33,2017-11-28 05:56:55
+iroha-android,uehara1414,https://github.com/hyperledger/iroha-android/pull/112,https://api.github.com/repos/hyperledger/iroha-android/issues/112,fix typo Requirement => Requirements,,closed,True,2017-10-12 03:04:34,2018-04-17 07:40:08
+iroha-android,ryjones,https://github.com/hyperledger/iroha-android/pull/111,https://api.github.com/repos/hyperledger/iroha-android/issues/111,Create DCO,DO NOT MERGE,closed,True,2017-10-03 21:27:54,2017-10-03 21:36:40
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/110,https://api.github.com/repos/hyperledger/iroha-android/issues/110,Refactoring,,closed,True,2017-07-02 10:43:33,2017-07-02 10:45:17
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/109,https://api.github.com/repos/hyperledger/iroha-android/issues/109,Replace hard cording to final variable,,closed,True,2017-07-02 09:33:44,2017-07-02 09:38:50
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/108,https://api.github.com/repos/hyperledger/iroha-android/issues/108,Fix Copyright,"Fix Copyright format.
+Also added one to file that didn't have this.",closed,True,2017-07-02 08:27:11,2017-07-02 10:43:46
+iroha-android,rjones-lf,https://github.com/hyperledger/iroha-android/pull/107,https://api.github.com/repos/hyperledger/iroha-android/issues/107,Create cla.md,,closed,True,2017-06-17 08:18:16,2017-06-17 08:21:01
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/106,https://api.github.com/repos/hyperledger/iroha-android/issues/106,Merge to develop,,closed,True,2017-05-29 10:37:49,2017-05-29 10:37:55
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/105,https://api.github.com/repos/hyperledger/iroha-android/issues/105,Release/v1.4.1,,closed,True,2017-05-29 09:29:56,2017-05-29 10:35:09
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/104,https://api.github.com/repos/hyperledger/iroha-android/issues/104,Add unit test,This is #38 's PR.,closed,True,2017-05-29 05:11:38,2017-05-29 09:27:20
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/103,https://api.github.com/repos/hyperledger/iroha-android/issues/103,Merge to develop,,closed,True,2017-05-25 15:09:32,2017-05-25 15:09:42
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/102,https://api.github.com/repos/hyperledger/iroha-android/issues/102,Release/v1.4.0,"# Change Log
+- Remove REST API
+- Add awesome libraries(retrolambda, RxJava2, Retrofit, etc...) on sample app
+- Refactoring",closed,True,2017-05-25 14:58:58,2017-05-25 15:07:52
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/101,https://api.github.com/repos/hyperledger/iroha-android/issues/101,Delete REST(Web) API,,closed,True,2017-05-25 13:53:53,2017-05-25 13:58:43
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/100,https://api.github.com/repos/hyperledger/iroha-android/issues/100,Merge to develop,,closed,True,2017-05-21 12:11:02,2017-05-21 12:11:13
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/99,https://api.github.com/repos/hyperledger/iroha-android/issues/99,Fixed register,I fix #97 's problem!,closed,True,2017-05-21 10:56:46,2017-05-21 12:05:36
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/98,https://api.github.com/repos/hyperledger/iroha-android/issues/98,Welcome to lambda in sample app🎉,"```java
+class IrohaAndroidSample {
+    public static final main(String[] args) {
+        iroha.welcome(new AnonymousClass() {
+            public void run() {
+                System.out.println(""Here is anonymous world."");
+            }
+        });
+        useRetrolambda(); // Lambda came down from (not pure) Java8.
+        iroha.welcome(lambda -> {
+            System.out.println(""Welcome to ようこそ"" + lambda + ""park!!🐯🐻😼🐧🐧🐧🐧🐧"");
+        });
+    }
+}
+```
+",closed,True,2017-05-21 10:22:03,2017-05-21 12:17:31
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/97,https://api.github.com/repos/hyperledger/iroha-android/issues/97,Can NOT register account,"# Description
+After uninstalling the application on Android that has been registered once, I try to reinstall and register the account. However it had failed and returned to the registration screen.
+
+Actually, the registration process is successful, and account information can be obtained from the server. This is a local problem.
+
+# Cause
+The cause is that specified file already existed and file writing did not start. Because FileManager check the existence of this file in writeToFile.
+
+# Solution
+The solution is to delete the specified directory and to re-save it in Account#save or KeyPair#save.",closed,False,2017-05-21 10:20:39,2017-05-21 12:03:45
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/96,https://api.github.com/repos/hyperledger/iroha-android/issues/96,Feature/update gradle,,closed,True,2017-05-12 11:09:05,2017-05-12 11:09:40
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/95,https://api.github.com/repos/hyperledger/iroha-android/issues/95,Create new REST API 🆕,,closed,False,2017-05-12 10:50:34,2017-05-25 15:10:31
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/94,https://api.github.com/repos/hyperledger/iroha-android/issues/94,Update gradle version,,closed,True,2017-05-09 09:52:06,2017-05-12 11:09:40
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/93,https://api.github.com/repos/hyperledger/iroha-android/issues/93,[WIP] Fix REST API,This is #95 's PR.,closed,True,2017-05-09 09:16:19,2017-07-02 10:44:07
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/92,https://api.github.com/repos/hyperledger/iroha-android/issues/92,Merge to develop,,closed,True,2017-04-14 08:36:55,2017-04-14 08:37:00
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/91,https://api.github.com/repos/hyperledger/iroha-android/issues/91,Release/v1.3.1,,closed,True,2017-04-14 08:30:58,2017-04-14 08:35:58
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/90,https://api.github.com/repos/hyperledger/iroha-android/issues/90,Deleted beep sound,,closed,True,2017-04-10 09:47:49,2017-04-14 01:49:41
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/89,https://api.github.com/repos/hyperledger/iroha-android/issues/89,Summarised function,,closed,True,2017-04-10 04:59:01,2017-04-10 05:01:18
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/88,https://api.github.com/repos/hyperledger/iroha-android/issues/88,Merge to develop from master,,closed,True,2017-04-10 04:23:18,2017-04-10 04:23:23
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/87,https://api.github.com/repos/hyperledger/iroha-android/issues/87,Added lib description on AboutLibraries,,closed,True,2017-04-10 04:22:51,2017-04-10 04:23:00
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/86,https://api.github.com/repos/hyperledger/iroha-android/issues/86,Release/v1.3.0,"# Fixes
+- Summarize function to Iroha(createKeyPair, sign, verify...)
+- Deleted related qr from this library(zxing-android-embedded is used instead of it in sample-app)",closed,True,2017-04-10 03:57:04,2017-04-10 04:07:47
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/85,https://api.github.com/repos/hyperledger/iroha-android/issues/85,Feature/delete qr reader,,closed,True,2017-04-10 03:33:52,2017-04-10 03:38:13
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/84,https://api.github.com/repos/hyperledger/iroha-android/issues/84,Merge to develop from master,,closed,True,2017-03-27 10:29:18,2017-03-27 10:29:30
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/83,https://api.github.com/repos/hyperledger/iroha-android/issues/83,Feature/summarize iroha function,,closed,True,2017-03-27 10:28:00,2017-03-27 10:38:29
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/82,https://api.github.com/repos/hyperledger/iroha-android/issues/82,Used KeyGenerator#sign when call operateAsset,,closed,True,2017-03-22 03:37:13,2017-03-22 03:46:05
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/81,https://api.github.com/repos/hyperledger/iroha-android/issues/81,Fixed sample app,,closed,True,2017-03-04 08:45:57,2017-03-04 09:36:02
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/80,https://api.github.com/repos/hyperledger/iroha-android/issues/80,Merge to master from develop,,closed,True,2017-03-04 08:26:08,2017-03-04 08:33:08
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/79,https://api.github.com/repos/hyperledger/iroha-android/issues/79,Fix encrypt and decrypt in KeyStoreManager,,closed,True,2017-03-04 08:18:21,2017-03-04 08:25:17
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/78,https://api.github.com/repos/hyperledger/iroha-android/issues/78,Merge to master from develop,"# Issues
+This PR solve #69 and #70 and #71 and #74 and #75.
+
+# Change log
+My modify and fixed list is this↓
+- Add CI for CircleCI
+- Add awesome dialog!(on sample app)
+- Fix transfer command(on sample app)
+- Fix display sender public key(on sample app)",closed,True,2017-03-03 05:14:04,2017-03-03 06:53:36
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/77,https://api.github.com/repos/hyperledger/iroha-android/issues/77,Feature/fix asset send,"This is #75 's PR.
+I fixed send command from 'Transfer' to 'transfer'.
+And I fixed sender public key on wallet screen. Originally the receiver's public key was displayed.",closed,True,2017-03-03 05:08:24,2017-03-03 05:10:13
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/76,https://api.github.com/repos/hyperledger/iroha-android/issues/76,Feature/sweet alert,"This is #69 and #70 's PR.
+We use SweetAlertDialog. Change seamless from progress to success or error. It's looks like very awesome!!",closed,True,2017-03-03 04:53:44,2017-03-03 05:02:44
+iroha-android,Gelassen,https://github.com/hyperledger/iroha-android/issues/75,https://api.github.com/repos/hyperledger/iroha-android/issues/75,Can not share money beetwen two devices ,"### The issue 
+From physical device scan QR code of app on emulator and make a transfer. However even after half an hour app on emulator hasn't receive the money
+
+### Environment
+Nexus 7, Android 4.4.
+Genymotion emulator, Android 5.0
+
+### Steps to reproduce
+1. Run application on both devices
+2. Register users with two different names
+3. Take a physical device and sent money to app on emulator
+4. Get a confirmation dialog that;s transfer pass well
+5. Wait some period of time to let devices sync up (up to 30 minutes)
+
+### Observed behavior 
+Amount of money on both devices remain the same
+
+### Expected behavior
+In a few minutes amount of money on physical device reduce on value equal to value in transaction and amount of money on emulator increase on the value equal to value in transaction",closed,False,2017-03-02 12:41:19,2017-03-03 07:12:34
+iroha-android,Gelassen,https://github.com/hyperledger/iroha-android/issues/74,https://api.github.com/repos/hyperledger/iroha-android/issues/74,App crashes on Android 6.0,"### The issue
+Can not run android application on Android 6.0 (crash in runtime), but it works correctly on Android 5.0
+
+### Environment
+Android Nexus, Android 6.0
+
+### Steps to reproduce
+1. Clone the repo
+2. Run the application on Android 6.0
+
+### Observed result
+App mingles with screen and Android return back to launcher window 
+
+### Expected result
+App shows registration screen
+
+Stacketrace from unit test: 
+```
+
+java.io.IOException: Error while finalizing cipher
+at javax.crypto.CipherInputStream.fillBuffer(CipherInputStream.java:104)
+at javax.crypto.CipherInputStream.read(CipherInputStream.java:130)
+at io.soramitsu.irohaandroid.security.KeyStoreManager.decrypt(KeyStoreManager.java:172)
+at io.soramitsu.iroha.CipherTest.testDecryptionOnEmptyString(CipherTest.java:21)
+at android.test.InstrumentationTestCase.runMethod(InstrumentationTestCase.java:214)
+at android.test.InstrumentationTestCase.runTest(InstrumentationTestCase.java:199)
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:191)
+at android.test.AndroidTestRunner.runTest(AndroidTestRunner.java:176)
+at android.test.InstrumentationTestRunner.onStart(InstrumentationTestRunner.java:555)
+at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1879)
+Caused by: javax.crypto.IllegalBlockSizeException
+at android.security.keystore.AndroidKeyStoreCipherSpiBase.engineDoFinal(AndroidKeyStoreCipherSpiBase.java:486)
+at android.security.keystore.AndroidKeyStoreCipherSpiBase.engineDoFinal(AndroidKeyStoreCipherSpiBase.java:498)
+at javax.crypto.Cipher.doFinal(Cipher.java:1476)
+at javax.crypto.CipherInputStream.fillBuffer(CipherInputStream.java:102)
+... 15 more
+Caused by: android.security.KeyStoreException: Unknown error
+at android.security.KeyStore.getKeyStoreException(KeyStore.java:632)
+at android.security.keystore.KeyStoreCryptoOperationChunkedStreamer.doFinal(KeyStoreCryptoOperationChunkedStreamer.java:224)
+at android.security.keystore.AndroidKeyStoreCipherSpiBase.engineDoFinal(AndroidKeyStoreCipherSpiBase.java:473)
+... 18 more
+```
+
+",closed,False,2017-03-02 12:31:15,2018-04-17 07:39:44
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/73,https://api.github.com/repos/hyperledger/iroha-android/issues/73,Fixed bug when start app if not registered yet,,closed,True,2017-03-02 08:54:53,2017-03-02 09:00:40
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/72,https://api.github.com/repos/hyperledger/iroha-android/issues/72,Fix visibility of bottom nav on sample app,This is #71 's PR.,closed,True,2017-03-02 08:51:25,2017-03-02 09:25:20
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/71,https://api.github.com/repos/hyperledger/iroha-android/issues/71,Could NOT look at us navigation bottom view in main screen👀,,closed,False,2017-03-02 08:45:02,2017-03-10 09:38:16
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/70,https://api.github.com/repos/hyperledger/iroha-android/issues/70,No confirm when importance action👮,,closed,False,2017-03-02 08:42:50,2017-03-10 09:38:21
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/69,https://api.github.com/repos/hyperledger/iroha-android/issues/69,Dialog design sooo bad👿,I think we use [sweet-alert-dialog](https://github.com/pedant/sweet-alert-dialog),closed,False,2017-03-02 08:36:13,2017-03-10 09:38:04
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/68,https://api.github.com/repos/hyperledger/iroha-android/issues/68,Added CI status badge on README,,closed,True,2017-03-02 06:53:25,2017-03-02 07:03:20
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/67,https://api.github.com/repos/hyperledger/iroha-android/issues/67,Fix sample app name,,closed,True,2017-02-14 11:25:33,2017-02-14 11:26:59
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/66,https://api.github.com/repos/hyperledger/iroha-android/issues/66,Merge from master to develop,,closed,True,2017-02-14 00:50:42,2017-02-14 00:50:48
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/65,https://api.github.com/repos/hyperledger/iroha-android/issues/65,Feature/circle ci,,closed,True,2017-02-14 00:49:07,2017-02-14 01:16:24
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/64,https://api.github.com/repos/hyperledger/iroha-android/issues/64,Hotfix/fix parallel error handling,,closed,True,2017-01-18 12:21:33,2017-01-18 12:21:40
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/63,https://api.github.com/repos/hyperledger/iroha-android/issues/63,Merge develop to master,,closed,True,2017-01-18 10:49:08,2017-01-18 10:49:14
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/62,https://api.github.com/repos/hyperledger/iroha-android/issues/62,Feature/fix error response handling,,closed,True,2017-01-18 10:48:01,2017-01-18 10:48:18
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/61,https://api.github.com/repos/hyperledger/iroha-android/issues/61,Merge master to develop,,closed,True,2017-01-18 08:31:35,2017-01-18 08:31:43
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/60,https://api.github.com/repos/hyperledger/iroha-android/issues/60,Added circle.yml,,closed,True,2017-01-16 09:52:19,2017-03-04 09:36:09
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/59,https://api.github.com/repos/hyperledger/iroha-android/issues/59,Hotfix/qr layout lower than api level 19,,closed,True,2017-01-12 07:09:15,2017-01-12 07:09:20
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/58,https://api.github.com/repos/hyperledger/iroha-android/issues/58,Hotfix/qr reader,,closed,True,2017-01-12 05:56:54,2017-01-12 05:57:03
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/57,https://api.github.com/repos/hyperledger/iroha-android/issues/57,Release/v1.2.2,,closed,True,2017-01-11 11:22:11,2017-01-11 11:22:17
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/56,https://api.github.com/repos/hyperledger/iroha-android/issues/56,Release/v1.2.2,,closed,True,2017-01-11 11:21:46,2017-01-11 11:21:53
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/55,https://api.github.com/repos/hyperledger/iroha-android/issues/55,Merge to develop,,closed,True,2017-01-11 11:18:36,2017-01-11 11:18:47
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/54,https://api.github.com/repos/hyperledger/iroha-android/issues/54,Release/v1.2.1,"# Contents
+- Fixed cipher algorithm(from RSA/ECB/OAEPWithSHA-256AndMGF1Padding to RSA/ECB/PKCS1Padding)",closed,True,2017-01-11 09:20:31,2017-01-11 09:20:43
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/53,https://api.github.com/repos/hyperledger/iroha-android/issues/53,release v1.2.1,,closed,True,2017-01-11 09:17:38,2017-01-11 09:18:09
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/52,https://api.github.com/repos/hyperledger/iroha-android/issues/52,Fixed cipher algorithm,,closed,True,2017-01-11 09:10:24,2017-01-11 09:15:31
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/51,https://api.github.com/repos/hyperledger/iroha-android/issues/51,throw UnsupportedOperationException on Xperia,,closed,False,2017-01-11 08:17:25,2017-01-25 03:45:42
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/50,https://api.github.com/repos/hyperledger/iroha-android/issues/50,Release/v1.2,,closed,True,2016-12-30 12:16:28,2016-12-30 12:16:34
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/49,https://api.github.com/repos/hyperledger/iroha-android/issues/49,Release/v1.2,"# Updated item
+- (Dramatically) Changed interface
+- Added parallel networking
+- Fixed tx params",closed,True,2016-12-30 12:15:38,2016-12-30 12:16:11
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/48,https://api.github.com/repos/hyperledger/iroha-android/issues/48,Feature/fix bugs,"# Contents
+- Fixed base url
+- Fixed transfer command from lower to upper",closed,True,2016-12-30 07:53:56,2016-12-30 07:54:02
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/47,https://api.github.com/repos/hyperledger/iroha-android/issues/47,Fixed transaction params,,closed,True,2016-12-30 07:29:33,2016-12-30 07:29:43
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/46,https://api.github.com/repos/hyperledger/iroha-android/issues/46,Fixed reusing async task logic,This is #45 's PR.,closed,True,2016-12-30 07:25:57,2016-12-30 07:26:05
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/45,https://api.github.com/repos/hyperledger/iroha-android/issues/45,Cannot execute task: the task has already been executed (a task can be executed only once),"AsyncTask is disposable task. but now, we are reusing AsyncTask.",closed,False,2016-12-30 06:57:16,2016-12-30 07:26:21
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/44,https://api.github.com/repos/hyperledger/iroha-android/issues/44,Feature/parallel networking,,closed,True,2016-12-30 06:00:19,2016-12-30 06:01:09
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/43,https://api.github.com/repos/hyperledger/iroha-android/issues/43,Updated build.gradle version,,closed,True,2016-12-24 13:30:00,2016-12-24 13:30:06
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/42,https://api.github.com/repos/hyperledger/iroha-android/issues/42,Parallel networking,networking should be processed in parallel.,closed,False,2016-12-24 12:51:02,2016-12-30 06:50:40
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/41,https://api.github.com/repos/hyperledger/iroha-android/issues/41,Removed comment out at Transaction.java,,closed,True,2016-12-24 06:34:00,2016-12-24 06:34:15
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/40,https://api.github.com/repos/hyperledger/iroha-android/issues/40,Release/v1.1,,closed,True,2016-12-23 11:18:43,2016-12-23 11:20:31
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/39,https://api.github.com/repos/hyperledger/iroha-android/issues/39,Release/v2.0,,closed,True,2016-12-23 06:17:39,2016-12-23 11:17:47
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/38,https://api.github.com/repos/hyperledger/iroha-android/issues/38,Unit tests for library,,closed,False,2016-12-20 15:34:45,2017-05-29 10:35:55
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/37,https://api.github.com/repos/hyperledger/iroha-android/issues/37,Added copylight on all files,#32 's PR,closed,True,2016-12-20 15:33:12,2016-12-20 15:37:51
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/36,https://api.github.com/repos/hyperledger/iroha-android/issues/36,Added argument type,Added argument(timestamp and signature) on library.,closed,True,2016-12-20 11:10:54,2016-12-20 11:12:00
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/35,https://api.github.com/repos/hyperledger/iroha-android/issues/35,Feature/fix readme,,closed,True,2016-12-20 10:26:10,2016-12-20 10:52:55
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/34,https://api.github.com/repos/hyperledger/iroha-android/issues/34,Update README,Fix README.md with library update.,closed,False,2016-12-20 04:24:35,2016-12-20 10:53:09
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/33,https://api.github.com/repos/hyperledger/iroha-android/issues/33,Fixed send and receive icon,,closed,True,2016-12-19 06:11:34,2016-12-19 06:11:39
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/32,https://api.github.com/repos/hyperledger/iroha-android/issues/32,Add Copyright into all source files,"Add copyright to the top of all files.
+```
+/*
+Copyright Soramitsu Co., Ltd. 2016 All Rights Reserved.
+http://soramitsu.co.jp
+
+Licensed under the Apache License, Version 2.0 (the ""License"");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an ""AS IS"" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+```",closed,False,2016-12-18 15:39:31,2016-12-23 06:26:21
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/31,https://api.github.com/repos/hyperledger/iroha-android/issues/31,Feature/clean archtecture,,closed,True,2016-12-18 15:32:18,2016-12-19 06:09:13
+iroha-android,takemiyamakoto,https://github.com/hyperledger/iroha-android/issues/30,https://api.github.com/repos/hyperledger/iroha-android/issues/30,.jar file release,"For xamarin projects, it would help to have a .jar file under the releases.",closed,False,2016-12-15 00:22:06,2017-02-21 00:22:05
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/29,https://api.github.com/repos/hyperledger/iroha-android/issues/29,Added circle.yml,,closed,True,2016-12-14 05:47:28,2016-12-14 07:15:33
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/28,https://api.github.com/repos/hyperledger/iroha-android/issues/28,Feature/fix library,,closed,True,2016-12-08 12:49:16,2016-12-08 12:52:17
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/27,https://api.github.com/repos/hyperledger/iroha-android/issues/27,Fixed README.md,,closed,True,2016-11-01 01:50:44,2016-11-01 01:50:49
+iroha-android,takemiyamakoto,https://github.com/hyperledger/iroha-android/pull/26,https://api.github.com/repos/hyperledger/iroha-android/issues/26,add license,,closed,True,2016-10-26 01:22:06,2016-12-08 12:57:15
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/25,https://api.github.com/repos/hyperledger/iroha-android/issues/25,Fixed installation description in README.md,,closed,True,2016-10-25 13:12:16,2016-10-25 13:15:18
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/24,https://api.github.com/repos/hyperledger/iroha-android/issues/24,Release/v1.0,"- [x] @takemiyamakoto 
+- [x] @MizukiSonoko 
+",closed,True,2016-10-24 11:24:10,2016-10-25 09:49:19
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/23,https://api.github.com/repos/hyperledger/iroha-android/issues/23,IrohaAndroid is ed25519 library,,closed,True,2016-10-23 09:00:44,2016-10-23 09:02:51
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/22,https://api.github.com/repos/hyperledger/iroha-android/issues/22,Fixed library,,closed,True,2016-10-16 04:57:18,2016-10-16 05:03:09
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/21,https://api.github.com/repos/hyperledger/iroha-android/issues/21,Fixed JNI,"Ed25519を別ライブラリに切り出した
+",closed,True,2016-10-16 03:49:00,2016-10-16 03:50:36
+iroha-android,MizukiSonoko,https://github.com/hyperledger/iroha-android/pull/20,https://api.github.com/repos/hyperledger/iroha-android/issues/20,"Revert ""【WIP】Fixed JNI""","Reverts soramitsu/iroha-android#19
+",closed,True,2016-10-13 09:04:39,2016-10-19 04:53:00
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/19,https://api.github.com/repos/hyperledger/iroha-android/issues/19,【WIP】Fixed JNI,,closed,True,2016-10-13 07:19:07,2016-10-13 07:27:54
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/18,https://api.github.com/repos/hyperledger/iroha-android/issues/18,Welcome to JNI🍣,,closed,True,2016-10-07 07:40:40,2016-10-10 16:29:08
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/17,https://api.github.com/repos/hyperledger/iroha-android/issues/17,Added controller unit test,,closed,True,2016-10-07 07:22:54,2016-10-07 07:23:55
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/16,https://api.github.com/repos/hyperledger/iroha-android/issues/16,Added iroha api controller,"いろはAPIの呼び出し口作成
+",closed,True,2016-09-27 19:43:34,2016-10-07 07:24:25
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/15,https://api.github.com/repos/hyperledger/iroha-android/issues/15,Solved endpoint problem,,closed,True,2016-09-27 19:36:58,2016-09-27 19:39:08
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/14,https://api.github.com/repos/hyperledger/iroha-android/issues/14,Fixed user client for updated documentation,,closed,True,2016-09-27 18:09:09,2016-09-27 18:09:56
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/13,https://api.github.com/repos/hyperledger/iroha-android/issues/13,Added transaction client unit test,,closed,True,2016-09-25 20:26:25,2016-09-27 13:53:44
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/12,https://api.github.com/repos/hyperledger/iroha-android/issues/12,Fixed unit test,,closed,True,2016-09-25 20:04:12,2016-09-25 20:04:18
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/11,https://api.github.com/repos/hyperledger/iroha-android/issues/11,Added model for transaction,"# 概要
+#2 のPR。
+",closed,True,2016-09-25 14:12:09,2016-09-27 14:40:52
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/10,https://api.github.com/repos/hyperledger/iroha-android/issues/10,OSSに向けての準備,"# 概要
+
+OSSにするために必要な準備をする。
+# 項目
+- [x] README.mdの完成
+- [x] LICENSEの追加
+- [x] JavaDocの作成(クラスやメソッド等にJavaDocが記述されているか確認)
+",closed,False,2016-09-25 12:52:39,2016-11-01 01:52:36
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/9,https://api.github.com/repos/hyperledger/iroha-android/issues/9,Introduce CI,"# 概要
+
+CIを導入したい。
+他のプロジェクトでCIしてたらそれを参考に。
+",closed,False,2016-09-25 12:44:32,2017-02-21 07:11:43
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/8,https://api.github.com/repos/hyperledger/iroha-android/issues/8,APIとの連携,"# 概要
+
+APIとの紐付けをする。
+# 項目
+- [ ] NetworkUtilのENDPOINT_URLを対応させる。
+",closed,False,2016-09-25 12:02:38,2016-09-27 19:42:48
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/7,https://api.github.com/repos/hyperledger/iroha-android/issues/7,Added unit test for IrohaUserClient,,closed,True,2016-09-25 11:58:13,2016-09-25 11:59:00
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/6,https://api.github.com/repos/hyperledger/iroha-android/issues/6,Added unit test for BaseClient,,closed,True,2016-09-24 19:55:44,2016-09-24 20:01:26
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/5,https://api.github.com/repos/hyperledger/iroha-android/issues/5,Added model for member service,"#1 のPR。
+",closed,True,2016-09-24 00:21:30,2016-09-25 12:43:24
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/4,https://api.github.com/repos/hyperledger/iroha-android/issues/4,Open IrohaAndroid Library to Bintray,"# 概要
+Bintrayにライブラリをアップロードする。
+
+# コメント
+BintrayへのアップロードのためのAPIキーが必要。
+Bintray経由でjCenterに登録。
+",closed,False,2016-09-23 23:02:12,2016-12-23 09:54:44
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/pull/3,https://api.github.com/repos/hyperledger/iroha-android/issues/3,Renamed package name,"Renamed package name for irohaapiwrapper to iroha.
+",closed,True,2016-09-23 22:59:32,2016-09-23 22:59:44
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/2,https://api.github.com/repos/hyperledger/iroha-android/issues/2,取引系のモデル作成,"# 概要
+
+取引系のモデルを作成する。
+",closed,False,2016-09-23 22:53:13,2016-09-27 14:41:07
+iroha-android,kobaken0029,https://github.com/hyperledger/iroha-android/issues/1,https://api.github.com/repos/hyperledger/iroha-android/issues/1,Member Service系のBaseモデル作成,"# 概要
+
+Member Service系のBaseとなるモデルを作成する。
+",closed,False,2016-09-23 22:51:54,2016-09-25 12:45:19

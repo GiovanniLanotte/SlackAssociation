@@ -1,0 +1,1746 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/indy-agent/pull/80,https://github.com/hyperledger/indy-agent/pull/80,"Good idea, I think this was causing a JS error when looking at the routes and messages for their @id ",681c7c5f474ce848865565a45fc18eb797b8fef9,2019-02-18 23:47:30,257852891,"@@ -22,7 +22,8 @@ def __init__(self, *args, **kwargs):
+         UserDict.__init__(self,*args, **kwargs)
+         self.context = {}
+         # Assign it an ID
+-        self.data['@id'] = str(uuid.uuid4())
++        if '@id' not in self.data:
++            self.data['@id'] = str(uuid.uuid4())",6,2019-02-18 23:47:47,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/257852891,https://github.com/hyperledger/indy-agent/pull/80#discussion_r257852891,blhagadorn
+https://github.com/hyperledger/indy-agent/pull/67,https://github.com/hyperledger/indy-agent/pull/67,Would it make sense to use `service_endpoint` instead of `serviceEndpoint` to keep consistent with other field names? Or should we start following camelCase elsewhere?,f94677fd178e975632bda3a1ca54173333974d94,2019-02-11 18:44:46,255641655,"@@ -97,8 +97,9 @@ def __init__(self, agent):
+         invite_msg = Message({
+             '@type': Connection.INVITE,
+             'label': self.agent.owner,
+-            'key': connection_key,
+-            'endpoint': self.agent.endpoint,
++            'recipient_keys': [connection_key],
++            'serviceEndpoint': self.agent.endpoint,",7,2019-02-11 18:48:04,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/255641655,https://github.com/hyperledger/indy-agent/pull/67#discussion_r255641655,dbluhm
+https://github.com/hyperledger/indy-agent/pull/67,https://github.com/hyperledger/indy-agent/pull/67,I'm seeing now that `serviceEndpoint` is what the DID Doc uses. I think it makes sense to use the camelCase version but now I'm wondering if we should make all of our attribute names camelCase...,f94677fd178e975632bda3a1ca54173333974d94,2019-02-11 21:47:21,255706872,"@@ -97,8 +97,9 @@ def __init__(self, agent):
+         invite_msg = Message({
+             '@type': Connection.INVITE,
+             'label': self.agent.owner,
+-            'key': connection_key,
+-            'endpoint': self.agent.endpoint,
++            'recipient_keys': [connection_key],
++            'serviceEndpoint': self.agent.endpoint,",7,2019-02-11 21:47:21,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/255706872,https://github.com/hyperledger/indy-agent/pull/67#discussion_r255706872,dbluhm
+https://github.com/hyperledger/indy-agent/pull/61,https://github.com/hyperledger/indy-agent/pull/61,"We need a comment in here indicating that we ignored signature checking for now, but this is the proper place to perform that check.",2e93766ce1c0304f89155ac0e685a02d0f5ab1fa,2019-01-22 16:35:56,249861635,"@@ -175,133 +318,112 @@ class Connection(Module):
+     def __init__(self, agent):
+         self.agent = agent
+         self.router = SimpleRouter()
+-        self.router.register(Connection.INVITE, self.invite_received)
+         self.router.register(Connection.REQUEST, self.request_received)
+         self.router.register(Connection.RESPONSE, self.response_received)
+ 
+     async def route(self, msg: Message) -> Message:
+         return await self.router.route(msg)
+ 
++    async def request_received(self, msg: Message) -> Message:
++        """""" Received connection request.
++
++            Request format:
++
++                {
++                  ""@type"": ""did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request"",
++                  ""label"": ""Bob"",
++                  ""DID"": ""B.did@B:A"",
++                  ""DIDDoc"": {
++                    ""key"": ""1234"",
++                    ""endpoint"": ""asdf""
++                  }
++                }
++        """"""
++        my_did = msg.context['to_did']
++        label = msg['label']
++        their_did = msg['DID']
++        their_vk = msg['DIDDoc']['key']
++        their_endpoint = msg['DIDDoc']['endpoint']
+ 
+-    async def invite_received(self, msg: Message) -> Message:
+-        conn_name = msg['content']['name']
+-        their_endpoint = msg['content']['endpoint']
+-        their_connection_key = msg['content']['connection_key']
++        # change verkey passed via send_invite to the agent without encryption
++        my_new_vk = await did.replace_keys_start(self.agent.wallet_handle, my_did, '{}')
++        await did.replace_keys_apply(self.agent.wallet_handle, my_did)
+ 
+-        # store invite in the wallet
+-        await non_secrets.add_wallet_record(self.agent.wallet_handle,
+-            ""invitation"", uuid.uuid4().hex,
++        # Store their information from request
++        await did.store_their_did(
++            self.agent.wallet_handle,
+             json.dumps({
+-            'name': conn_name,
+-            'endpoint': their_endpoint,
+-            'connection_key': their_connection_key
+-        }), json.dumps({}))
+-
+-        await self.agent.send_admin_message(
+-            Message({
+-                '@type': AdminConnection.INVITE_RECEIVED,
+-                'content': {
+-                    'name': conn_name,
+-                    'endpoint': their_endpoint,
+-                    'connection_key': their_connection_key,
+-                    'history': msg
+-                }
++                'did': their_did,
++                'verkey': their_vk,
+             })
+         )
+-
+-
+-    async def request_received(self, msg: Message) -> Message:
+-        their_endpoint_uri = msg['endpoint']
+-
+-        my_did_str = msg.context['to_did']
+-        their_did_str = msg['did']
+-        their_key_str = msg.context['from_key']
+-
+-        my_did_info_str = await did.get_my_did_with_meta(self.agent.wallet_handle, my_did_str)
+-        my_did_info_json = json.loads(my_did_info_str)
+-        metadata_str = my_did_info_json['metadata']
+-        metadata_dict = json.loads(metadata_str)
+-
+-        conn_name = metadata_dict['conn_name']
+-
+-        # change verkey passed via send_invite to the agent without encryption
+-        my_new_verkey = await did.replace_keys_start(self.agent.wallet_handle, my_did_str, '{}')
+-        await did.replace_keys_apply(self.agent.wallet_handle, my_did_str)
+-
+-        identity_json = json.dumps(
+-            {
+-                ""did"": their_did_str,
+-                ""verkey"": their_key_str
+-            }
++        await did.set_did_metadata(
++            self.agent.wallet_handle,
++            their_did,
++            json.dumps({
++                'label': label,
++                'endpoint': their_endpoint
++            })
+         )
+ 
+-        meta_json = json.dumps(
+-            {
+-                ""conn_name"": conn_name,
+-                ""their_endpoint"": their_endpoint_uri,
+-                ""their_verkey"": their_key_str,
+-                ""my_verkey"": my_new_verkey
+-            }
++        # Create pairwise relationship between my did and their did
++        await pairwise.create_pairwise(
++            self.agent.wallet_handle,
++            their_did,
++            my_did,
++            json.dumps({
++                'label': label,
++                'their_endpoint': their_endpoint,
++                'their_vk': their_vk,
++                'my_vk': my_new_vk
++            })
+         )
+ 
+-        await did.store_their_did(self.agent.wallet_handle, identity_json)
+-        await pairwise.create_pairwise(self.agent.wallet_handle, their_did_str, my_did_str, meta_json)
+-
+         await self.agent.send_admin_message(
+             Message({
+                 '@type': AdminConnection.REQUEST_RECEIVED,
+-                'content': {
+-                    'name': conn_name,
+-                    'endpoint_did': their_did_str,
+-                    'history': msg
+-                }
++                'label': label,
++                'did': their_did,
++                'endpoint': their_endpoint,
++                'history': msg
+             })
+         )
+ 
+ 
+     async def response_received(self, msg: Message) -> Message:
+-        my_did_str = msg.context['to_did']
+-        their_did_str = msg['did']
+-        their_key_str = msg.context['from_key']
+-
+-        my_did_info_str = await did.get_my_did_with_meta(self.agent.wallet_handle, my_did_str)
+-        my_did_info_json = json.loads(my_did_info_str)
+-
+-        my_verkey = my_did_info_json['verkey']
+-        metadata_str = my_did_info_json['metadata']
+-        metadata_dict = json.loads(metadata_str)
+-
+-        conn_name = metadata_dict['conn_name']
+-        their_endpoint = metadata_dict['their_endpoint']
+-
+-        identity_json = json.dumps(
+-            {
+-                ""did"": their_did_str,
+-                ""verkey"": their_key_str
+-            }
+-        )
+-
+-        meta_json = json.dumps(
+-            {
+-                ""conn_name"": conn_name,
+-                ""their_endpoint"": their_endpoint,
+-                ""their_verkey"": their_key_str,
+-                ""my_verkey"": my_verkey
+-            }
++        """""" Process response
++
++            Response format:
++                {
++                  ""@type"": ""did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response"",
++                  ""DID"":""A.did@A:B"",
++                  ""DIDDoc"": {
++                      //did doc
++                  }
++                }
++        """"""
++        my_did = msg.context['to_did']
++        their_did = msg['DID']
++        their_new_vk = msg.context['from_key'] # equivalent to msg['DIDDoc']['key']?
++",517,2019-01-22 22:27:12,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/249861635,https://github.com/hyperledger/indy-agent/pull/61#discussion_r249861635,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/61,https://github.com/hyperledger/indy-agent/pull/61,Comment added. Let me know what you think of the wording.,2e93766ce1c0304f89155ac0e685a02d0f5ab1fa,2019-01-22 16:55:17,249870204,"@@ -175,133 +318,112 @@ class Connection(Module):
+     def __init__(self, agent):
+         self.agent = agent
+         self.router = SimpleRouter()
+-        self.router.register(Connection.INVITE, self.invite_received)
+         self.router.register(Connection.REQUEST, self.request_received)
+         self.router.register(Connection.RESPONSE, self.response_received)
+ 
+     async def route(self, msg: Message) -> Message:
+         return await self.router.route(msg)
+ 
++    async def request_received(self, msg: Message) -> Message:
++        """""" Received connection request.
++
++            Request format:
++
++                {
++                  ""@type"": ""did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request"",
++                  ""label"": ""Bob"",
++                  ""DID"": ""B.did@B:A"",
++                  ""DIDDoc"": {
++                    ""key"": ""1234"",
++                    ""endpoint"": ""asdf""
++                  }
++                }
++        """"""
++        my_did = msg.context['to_did']
++        label = msg['label']
++        their_did = msg['DID']
++        their_vk = msg['DIDDoc']['key']
++        their_endpoint = msg['DIDDoc']['endpoint']
+ 
+-    async def invite_received(self, msg: Message) -> Message:
+-        conn_name = msg['content']['name']
+-        their_endpoint = msg['content']['endpoint']
+-        their_connection_key = msg['content']['connection_key']
++        # change verkey passed via send_invite to the agent without encryption
++        my_new_vk = await did.replace_keys_start(self.agent.wallet_handle, my_did, '{}')
++        await did.replace_keys_apply(self.agent.wallet_handle, my_did)
+ 
+-        # store invite in the wallet
+-        await non_secrets.add_wallet_record(self.agent.wallet_handle,
+-            ""invitation"", uuid.uuid4().hex,
++        # Store their information from request
++        await did.store_their_did(
++            self.agent.wallet_handle,
+             json.dumps({
+-            'name': conn_name,
+-            'endpoint': their_endpoint,
+-            'connection_key': their_connection_key
+-        }), json.dumps({}))
+-
+-        await self.agent.send_admin_message(
+-            Message({
+-                '@type': AdminConnection.INVITE_RECEIVED,
+-                'content': {
+-                    'name': conn_name,
+-                    'endpoint': their_endpoint,
+-                    'connection_key': their_connection_key,
+-                    'history': msg
+-                }
++                'did': their_did,
++                'verkey': their_vk,
+             })
+         )
+-
+-
+-    async def request_received(self, msg: Message) -> Message:
+-        their_endpoint_uri = msg['endpoint']
+-
+-        my_did_str = msg.context['to_did']
+-        their_did_str = msg['did']
+-        their_key_str = msg.context['from_key']
+-
+-        my_did_info_str = await did.get_my_did_with_meta(self.agent.wallet_handle, my_did_str)
+-        my_did_info_json = json.loads(my_did_info_str)
+-        metadata_str = my_did_info_json['metadata']
+-        metadata_dict = json.loads(metadata_str)
+-
+-        conn_name = metadata_dict['conn_name']
+-
+-        # change verkey passed via send_invite to the agent without encryption
+-        my_new_verkey = await did.replace_keys_start(self.agent.wallet_handle, my_did_str, '{}')
+-        await did.replace_keys_apply(self.agent.wallet_handle, my_did_str)
+-
+-        identity_json = json.dumps(
+-            {
+-                ""did"": their_did_str,
+-                ""verkey"": their_key_str
+-            }
++        await did.set_did_metadata(
++            self.agent.wallet_handle,
++            their_did,
++            json.dumps({
++                'label': label,
++                'endpoint': their_endpoint
++            })
+         )
+ 
+-        meta_json = json.dumps(
+-            {
+-                ""conn_name"": conn_name,
+-                ""their_endpoint"": their_endpoint_uri,
+-                ""their_verkey"": their_key_str,
+-                ""my_verkey"": my_new_verkey
+-            }
++        # Create pairwise relationship between my did and their did
++        await pairwise.create_pairwise(
++            self.agent.wallet_handle,
++            their_did,
++            my_did,
++            json.dumps({
++                'label': label,
++                'their_endpoint': their_endpoint,
++                'their_vk': their_vk,
++                'my_vk': my_new_vk
++            })
+         )
+ 
+-        await did.store_their_did(self.agent.wallet_handle, identity_json)
+-        await pairwise.create_pairwise(self.agent.wallet_handle, their_did_str, my_did_str, meta_json)
+-
+         await self.agent.send_admin_message(
+             Message({
+                 '@type': AdminConnection.REQUEST_RECEIVED,
+-                'content': {
+-                    'name': conn_name,
+-                    'endpoint_did': their_did_str,
+-                    'history': msg
+-                }
++                'label': label,
++                'did': their_did,
++                'endpoint': their_endpoint,
++                'history': msg
+             })
+         )
+ 
+ 
+     async def response_received(self, msg: Message) -> Message:
+-        my_did_str = msg.context['to_did']
+-        their_did_str = msg['did']
+-        their_key_str = msg.context['from_key']
+-
+-        my_did_info_str = await did.get_my_did_with_meta(self.agent.wallet_handle, my_did_str)
+-        my_did_info_json = json.loads(my_did_info_str)
+-
+-        my_verkey = my_did_info_json['verkey']
+-        metadata_str = my_did_info_json['metadata']
+-        metadata_dict = json.loads(metadata_str)
+-
+-        conn_name = metadata_dict['conn_name']
+-        their_endpoint = metadata_dict['their_endpoint']
+-
+-        identity_json = json.dumps(
+-            {
+-                ""did"": their_did_str,
+-                ""verkey"": their_key_str
+-            }
+-        )
+-
+-        meta_json = json.dumps(
+-            {
+-                ""conn_name"": conn_name,
+-                ""their_endpoint"": their_endpoint,
+-                ""their_verkey"": their_key_str,
+-                ""my_verkey"": my_verkey
+-            }
++        """""" Process response
++
++            Response format:
++                {
++                  ""@type"": ""did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/response"",
++                  ""DID"":""A.did@A:B"",
++                  ""DIDDoc"": {
++                      //did doc
++                  }
++                }
++        """"""
++        my_did = msg.context['to_did']
++        their_did = msg['DID']
++        their_new_vk = msg.context['from_key'] # equivalent to msg['DIDDoc']['key']?
++",517,2019-01-22 22:27:12,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/249870204,https://github.com/hyperledger/indy-agent/pull/61#discussion_r249870204,dbluhm
+https://github.com/hyperledger/indy-agent/pull/55,https://github.com/hyperledger/indy-agent/pull/55,"This will alert of failure, but if we move it inside the `while True:` loop, then it will continue to process messages.",ac6708c077e8180d530de8d1efaada422f058362,2019-01-10 20:27:15,246909558,"@@ -34,6 +38,33 @@ def register_module(self, module):
+     async def route_message_to_module(self, message):
+         return await self.family_router.route(message)
+ 
++    async def start(self):
++        """""" Message processing loop task.
++        """"""
++        try:",,2019-01-10 21:28:58,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246909558,https://github.com/hyperledger/indy-agent/pull/55#discussion_r246909558,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/55,https://github.com/hyperledger/indy-agent/pull/55,"Ah, my bad.",ac6708c077e8180d530de8d1efaada422f058362,2019-01-10 21:24:57,246926242,"@@ -34,6 +38,33 @@ def register_module(self, module):
+     async def route_message_to_module(self, message):
+         return await self.family_router.route(message)
+ 
++    async def start(self):
++        """""" Message processing loop task.
++        """"""
++        try:",,2019-01-10 21:28:58,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246926242,https://github.com/hyperledger/indy-agent/pull/55#discussion_r246926242,dbluhm
+https://github.com/hyperledger/indy-agent/pull/54,https://github.com/hyperledger/indy-agent/pull/54,"How do you feel about having the register_module() method instantiate the module internally, passing itself (the agent) as the arg? Would look like this on the outside:
+`AGENT.register_module(Admin)`",b3e7b9cb29a259729c9fec8c1e8274848373b277,2019-01-09 19:20:29,246507035,"@@ -51,27 +49,23 @@
+ 
+ aiohttp_jinja2.setup(WEBAPP, loader=jinja2.FileSystemLoader('view'))
+ 
+-WEBAPP['msg_router'] = Router()
+ WEBAPP['msg_receiver'] = Receiver()
+ 
+ WEBAPP['ui_event_queue'] = UIEventQueue(LOOP)
+-WEBAPP['ui_router'] = Router()
+ 
+-WEBAPP['conn_router'] = Router()
+ WEBAPP['conn_receiver'] = Receiver()
+ 
+-WEBAPP['agent'] = Agent()
+-WEBAPP['modules'] = {
+-    'connection': Connection(WEBAPP['agent']),
+-    'admin': Admin(WEBAPP['agent']),
+-    'admin_walletconnection': AdminWalletConnection(WEBAPP['agent']),
+-    'basicmessage': BasicMessage(WEBAPP['agent']),
+-    'admin_basicmessage': AdminBasicMessage(WEBAPP['agent'])
+-}
+-WEBAPP['agent'].modules = WEBAPP['modules']
++AGENT = Agent()
++
++WEBAPP['agent'] = AGENT
++
++AGENT.register_module(Admin(AGENT))",,2019-01-09 21:50:45,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246507035,https://github.com/hyperledger/indy-agent/pull/54#discussion_r246507035,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/54,https://github.com/hyperledger/indy-agent/pull/54,"I think we've made a past mistake here, and we are routing messages by just the family name, and not version or base DID. We should probably use module.BASE.",b3e7b9cb29a259729c9fec8c1e8274848373b277,2019-01-09 19:22:00,246507535,"@@ -24,6 +25,14 @@ def __init__(self):
+         self.ui_socket = None
+         self.initialized = False
+         self.modules = []
++        self.family_router = FamilyRouter()
++
++    def register_module(self, module):
++        self.modules.append(module)
++        self.family_router.register(module.FAMILY, module)",,2019-01-09 21:50:45,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246507535,https://github.com/hyperledger/indy-agent/pull/54#discussion_r246507535,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/54,https://github.com/hyperledger/indy-agent/pull/54,"should BASE be FAMILY, and FAMILY be FAMILY_NAME?",b3e7b9cb29a259729c9fec8c1e8274848373b277,2019-01-09 19:22:58,246507853,"@@ -6,15 +6,20 @@
+ from router.simple_router import SimpleRouter
+ from agent import Agent
+ from message import Message
+-from message_types import ADMIN
+ from . import Module
+ 
+ class Admin(Module):
++    FAMILY = ""admin""
++    VERSION = ""1.0""
++    BASE = ""did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/"" + FAMILY + ""/"" + VERSION + ""/""",,2019-01-09 21:50:45,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246507853,https://github.com/hyperledger/indy-agent/pull/54#discussion_r246507853,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/54,https://github.com/hyperledger/indy-agent/pull/54,I had that thought as well. I think that makes sense.,b3e7b9cb29a259729c9fec8c1e8274848373b277,2019-01-09 19:28:23,246509605,"@@ -51,27 +49,23 @@
+ 
+ aiohttp_jinja2.setup(WEBAPP, loader=jinja2.FileSystemLoader('view'))
+ 
+-WEBAPP['msg_router'] = Router()
+ WEBAPP['msg_receiver'] = Receiver()
+ 
+ WEBAPP['ui_event_queue'] = UIEventQueue(LOOP)
+-WEBAPP['ui_router'] = Router()
+ 
+-WEBAPP['conn_router'] = Router()
+ WEBAPP['conn_receiver'] = Receiver()
+ 
+-WEBAPP['agent'] = Agent()
+-WEBAPP['modules'] = {
+-    'connection': Connection(WEBAPP['agent']),
+-    'admin': Admin(WEBAPP['agent']),
+-    'admin_walletconnection': AdminWalletConnection(WEBAPP['agent']),
+-    'basicmessage': BasicMessage(WEBAPP['agent']),
+-    'admin_basicmessage': AdminBasicMessage(WEBAPP['agent'])
+-}
+-WEBAPP['agent'].modules = WEBAPP['modules']
++AGENT = Agent()
++
++WEBAPP['agent'] = AGENT
++
++AGENT.register_module(Admin(AGENT))",,2019-01-09 21:50:45,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246509605,https://github.com/hyperledger/indy-agent/pull/54#discussion_r246509605,dbluhm
+https://github.com/hyperledger/indy-agent/pull/54,https://github.com/hyperledger/indy-agent/pull/54,That's a good point. I think I'll have to tweak the family router a little to support that.,b3e7b9cb29a259729c9fec8c1e8274848373b277,2019-01-09 19:30:25,246510308,"@@ -24,6 +25,14 @@ def __init__(self):
+         self.ui_socket = None
+         self.initialized = False
+         self.modules = []
++        self.family_router = FamilyRouter()
++
++    def register_module(self, module):
++        self.modules.append(module)
++        self.family_router.register(module.FAMILY, module)",,2019-01-09 21:50:45,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/246510308,https://github.com/hyperledger/indy-agent/pull/54#discussion_r246510308,dbluhm
+https://github.com/hyperledger/indy-agent/pull/45,https://github.com/hyperledger/indy-agent/pull/45,this part broke.... should be a quick fix.,7b6779e581dfd93671bfc1a021ddd040f3477abf,2018-12-03 20:20:31,238422508,"@@ -52,75 +52,48 @@
+ 
+ LOOP = asyncio.get_event_loop()
+ 
+-AGENT = web.Application()
++WEBAPP = web.Application()
+ 
+-aiohttp_jinja2.setup(AGENT, loader=jinja2.FileSystemLoader('view'))
++aiohttp_jinja2.setup(WEBAPP, loader=jinja2.FileSystemLoader('view'))
+ 
+-AGENT['msg_router'] = Router()
+-AGENT['msg_receiver'] = Receiver()
++WEBAPP['msg_router'] = Router()
++WEBAPP['msg_receiver'] = Receiver()
+ 
+-AGENT['ui_event_queue'] = UIEventQueue(LOOP)
+-AGENT['ui_router'] = Router()
++WEBAPP['ui_event_queue'] = UIEventQueue(LOOP)
++WEBAPP['ui_router'] = Router()
+ 
+-AGENT['conn_router'] = Router()
+-AGENT['conn_receiver'] = Receiver()
++WEBAPP['conn_router'] = Router()
++WEBAPP['conn_receiver'] = Receiver()
+ 
+-AGENT['agent'] = Agent()
+-AGENT['modules'] = {
+-    'connection': Connection(AGENT['agent']),
+-    'ui': Ui(AGENT['agent']),
+-    'admin_walletconnection': AdminWalletConnection(AGENT['agent'])
++WEBAPP['agent'] = Agent()
++WEBAPP['modules'] = {
++    'connection': Connection(WEBAPP['agent']),
++    'ui': Ui(WEBAPP['agent']),
++    'admin_walletconnection': AdminWalletConnection(WEBAPP['agent'])
+ }
+-AGENT['agent'].modules = AGENT['modules']
++WEBAPP['agent'].modules = WEBAPP['modules']
+ 
+ UI_TOKEN = uuid.uuid4().hex
+-AGENT['agent'].ui_token = UI_TOKEN
++WEBAPP['agent'].ui_token = UI_TOKEN
+ 
+ ROUTES = [
+     web.get('/', modules.ui.root),
+-    web.get('/ws', AGENT['ui_event_queue'].ws_handler),
++    web.get('/ws', WEBAPP['ui_event_queue'].ws_handler),
+     web.static('/res', 'view/res'),
+-    web.post('/indy', AGENT['msg_receiver'].handle_message),
+-    web.post('/offer', AGENT['conn_receiver'].handle_message)
++    web.post('/indy', WEBAPP['msg_receiver'].handle_message),
++    web.post('/offer', WEBAPP['conn_receiver'].handle_message)
+ ]
+ 
+-AGENT.add_routes(ROUTES)
++WEBAPP.add_routes(ROUTES)
+ 
+-RUNNER = web.AppRunner(AGENT)
++RUNNER = web.AppRunner(WEBAPP)
+ LOOP.run_until_complete(RUNNER.setup())
+ 
+ SERVER = web.TCPSite(runner=RUNNER, port=PORT)
+ 
+-async def connect_wallet(agent_name, passphrase):
+-    #set wallet name from msg contents
+-
+-    AGENT['agent'].owner = agent_name
+-    wallet_name = '%s-wallet' % AGENT['agent'].owner
+-
+-    wallet_config = json.dumps({""id"": wallet_name})
+-    wallet_credentials = json.dumps({""key"": passphrase})
+-
+-    # pylint: disable=bare-except
+-    # TODO: better handle potential exceptions.
+-    try:
+-        await wallet.create_wallet(wallet_config, wallet_credentials)
+-    except Exception as e:
+-        print(e)
+-
+-    try:
+-        AGENT['agent'].wallet_handle = await wallet.open_wallet(wallet_config,
+-                                                       wallet_credentials)
+-    except Exception as e:
+-        print(e)
+-        print(""Could not open wallet!"")
+-    AGENT['agent'].initialized = True
+-    (_, AGENT['agent'].endpoint_vk) = await did.create_and_store_my_did(
+-        AGENT['agent'].wallet_handle, ""{}"")
+-
+-
+-if AGENTINITINCLI:
++if WEBAPPINITINCLI:",,2018-12-03 20:59:49,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/238422508,https://github.com/hyperledger/indy-agent/pull/45#discussion_r238422508,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/45,https://github.com/hyperledger/indy-agent/pull/45,Thanks for the catch,7b6779e581dfd93671bfc1a021ddd040f3477abf,2018-12-03 21:00:10,238434946,"@@ -52,75 +52,48 @@
+ 
+ LOOP = asyncio.get_event_loop()
+ 
+-AGENT = web.Application()
++WEBAPP = web.Application()
+ 
+-aiohttp_jinja2.setup(AGENT, loader=jinja2.FileSystemLoader('view'))
++aiohttp_jinja2.setup(WEBAPP, loader=jinja2.FileSystemLoader('view'))
+ 
+-AGENT['msg_router'] = Router()
+-AGENT['msg_receiver'] = Receiver()
++WEBAPP['msg_router'] = Router()
++WEBAPP['msg_receiver'] = Receiver()
+ 
+-AGENT['ui_event_queue'] = UIEventQueue(LOOP)
+-AGENT['ui_router'] = Router()
++WEBAPP['ui_event_queue'] = UIEventQueue(LOOP)
++WEBAPP['ui_router'] = Router()
+ 
+-AGENT['conn_router'] = Router()
+-AGENT['conn_receiver'] = Receiver()
++WEBAPP['conn_router'] = Router()
++WEBAPP['conn_receiver'] = Receiver()
+ 
+-AGENT['agent'] = Agent()
+-AGENT['modules'] = {
+-    'connection': Connection(AGENT['agent']),
+-    'ui': Ui(AGENT['agent']),
+-    'admin_walletconnection': AdminWalletConnection(AGENT['agent'])
++WEBAPP['agent'] = Agent()
++WEBAPP['modules'] = {
++    'connection': Connection(WEBAPP['agent']),
++    'ui': Ui(WEBAPP['agent']),
++    'admin_walletconnection': AdminWalletConnection(WEBAPP['agent'])
+ }
+-AGENT['agent'].modules = AGENT['modules']
++WEBAPP['agent'].modules = WEBAPP['modules']
+ 
+ UI_TOKEN = uuid.uuid4().hex
+-AGENT['agent'].ui_token = UI_TOKEN
++WEBAPP['agent'].ui_token = UI_TOKEN
+ 
+ ROUTES = [
+     web.get('/', modules.ui.root),
+-    web.get('/ws', AGENT['ui_event_queue'].ws_handler),
++    web.get('/ws', WEBAPP['ui_event_queue'].ws_handler),
+     web.static('/res', 'view/res'),
+-    web.post('/indy', AGENT['msg_receiver'].handle_message),
+-    web.post('/offer', AGENT['conn_receiver'].handle_message)
++    web.post('/indy', WEBAPP['msg_receiver'].handle_message),
++    web.post('/offer', WEBAPP['conn_receiver'].handle_message)
+ ]
+ 
+-AGENT.add_routes(ROUTES)
++WEBAPP.add_routes(ROUTES)
+ 
+-RUNNER = web.AppRunner(AGENT)
++RUNNER = web.AppRunner(WEBAPP)
+ LOOP.run_until_complete(RUNNER.setup())
+ 
+ SERVER = web.TCPSite(runner=RUNNER, port=PORT)
+ 
+-async def connect_wallet(agent_name, passphrase):
+-    #set wallet name from msg contents
+-
+-    AGENT['agent'].owner = agent_name
+-    wallet_name = '%s-wallet' % AGENT['agent'].owner
+-
+-    wallet_config = json.dumps({""id"": wallet_name})
+-    wallet_credentials = json.dumps({""key"": passphrase})
+-
+-    # pylint: disable=bare-except
+-    # TODO: better handle potential exceptions.
+-    try:
+-        await wallet.create_wallet(wallet_config, wallet_credentials)
+-    except Exception as e:
+-        print(e)
+-
+-    try:
+-        AGENT['agent'].wallet_handle = await wallet.open_wallet(wallet_config,
+-                                                       wallet_credentials)
+-    except Exception as e:
+-        print(e)
+-        print(""Could not open wallet!"")
+-    AGENT['agent'].initialized = True
+-    (_, AGENT['agent'].endpoint_vk) = await did.create_and_store_my_did(
+-        AGENT['agent'].wallet_handle, ""{}"")
+-
+-
+-if AGENTINITINCLI:
++if WEBAPPINITINCLI:",,2018-12-03 21:00:10,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/238434946,https://github.com/hyperledger/indy-agent/pull/45#discussion_r238434946,dbluhm
+https://github.com/hyperledger/indy-agent/pull/25,https://github.com/hyperledger/indy-agent/pull/25,"These message type strings are not consistent with the Message Types Indy HIPE. Should this be updated now, or is it using this older style string for compatibility?",2a0818fe767baa6746774137a9819acdf9593f2e,2018-10-02 19:31:08,222082971,"@@ -0,0 +1,36 @@
++"""""" Message Type Definitions, organized by class
++""""""
++
++
++class CONN:
++    """""" Connetion Class of Message Types.
++
++        This type notation is still being discussed and may change.
++    """"""
++
++
++class UI:
++    STATE = ""urn:sovrin:agent:message_type:sovrin.org/ui/state""",,2018-10-11 20:19:49,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/222082971,https://github.com/hyperledger/indy-agent/pull/25#discussion_r222082971,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/25,https://github.com/hyperledger/indy-agent/pull/25,Good catch. I think we ought to update this now. I can't think of any reason to keep it around for compatibility purposes. I'll bring this up to @trthhrtz.,2a0818fe767baa6746774137a9819acdf9593f2e,2018-10-02 19:32:46,222083444,"@@ -0,0 +1,36 @@
++"""""" Message Type Definitions, organized by class
++""""""
++
++
++class CONN:
++    """""" Connetion Class of Message Types.
++
++        This type notation is still being discussed and may change.
++    """"""
++
++
++class UI:
++    STATE = ""urn:sovrin:agent:message_type:sovrin.org/ui/state""",,2018-10-11 20:19:49,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/222083444,https://github.com/hyperledger/indy-agent/pull/25#discussion_r222083444,dbluhm
+https://github.com/hyperledger/indy-agent/pull/25,https://github.com/hyperledger/indy-agent/pull/25,"For consistency, these types should be referenced in the same way the other type names have been.",2a0818fe767baa6746774137a9819acdf9593f2e,2018-10-02 19:37:18,222084677,"@@ -4,220 +4,222 @@
+ # pylint: disable=import-error
+ 
+ import json
+-import datetime
++import base64
+ import aiohttp
+-from aiohttp import web
+-import aiohttp_jinja2
+-from indy import crypto, did, pairwise
+-import serializer.json_serializer as Serializer
+-
+-async def handle_request_received(msg, agent):
+-    """""" Handle reception of request, storing to be accepted later.
+-    """"""
+-    agent.received_requests[msg.did] = Serializer.pack(msg)
+-
+-
+-async def handle_response(msg, agent):
+-    """""" Handle reception of connection response.
+-
+-        Currently this relies on the did sent with the request being returned
+-        with the response as an identifier so we can decrypt the message.
+-
+-        Relying on a nonce instead would be better.
+-    """"""
+-    wallet_handle = agent.wallet_handle
+-
+-    # Get my did and verkey
+-    my_did = msg.did
+-    my_vk = await did.key_for_local_did(wallet_handle, my_did)
++from indy import crypto, did
+ 
+-    # Anon Decrypt and decode the message
+-    decrypted_data = await crypto.anon_decrypt(wallet_handle, my_vk, msg.data)
+-
+-    json_str = decrypted_data.decode(""utf-8"")
+-    resp_data = json.loads(json_str)
++import serializer.json_serializer as Serializer
++from model import Message
++from message_types import UI_NEW, CONN_NEW
++from helpers import serialize_bytes_json, bytes_to_str, str_to_bytes
++
++
++async def send_invite(msg: Message, agent) -> Message:
++    receiver_endpoint = msg.content['endpoint']
++    conn_name = msg.content['name']
++
++    msg = Message(
++        type=CONN_NEW.SEND_INVITE,
++        content={
++            'name': conn_name,
++            'endpoint': {
++                'url': agent.endpoint,
++                'verkey': agent.endpoint_vk,
++            },
++        }
++    )
++    serialized_msg = Serializer.pack(msg)
++    async with aiohttp.ClientSession() as session:
++        async with session.post(receiver_endpoint, data=serialized_msg) as resp:
++            print(resp.status)
++            print(await resp.text())
+ 
+-    # Get their did and vk and store in wallet
+-    their_did = resp_data[""did""]
+-    their_vk = resp_data[""verkey""]
++    return Message(
++        type=UI_NEW.INVITE_SENT,
++        id=agent.ui_token,
++        content={'name': conn_name})
+ 
+-    identity_json = json.dumps({
+-        ""did"": their_did,
+-        ""verkey"": their_vk
+-    })
+ 
+-    await did.store_their_did(wallet_handle, identity_json)
+-    #TODO: Do we want to store the metadata of owner and endpoint with their did?
++async def invite_received(msg: Message, agent) -> Message:
++    conn_name = msg.content['name']
+ 
+-    # Create pairwise identifier
+-    await pairwise.create_pairwise(
+-        wallet_handle,
+-        their_did,
+-        my_did,
+-        json.dumps({""test"": ""this is metadata""})
++    return Message(
++        type=UI_NEW.INVITE_RECEIVED,
++        content={'name': conn_name,
++                 'endpoint': msg.content['endpoint'],
++                 'history': msg}
+     )
+ 
+ 
++async def send_request(msg: Message, agent) -> Message:
++    their_endpoint = msg.content['endpoint']
++    conn_name = msg.content['name']
++    connection_key = msg.content['key']
+ 
++    my_endpoint_uri = agent.endpoint
+ 
+-async def handle_request_accepted(request):
+-    """""" Handle reception of accept connection request message.
+-    """"""
+-    accept_did = request.match_info['did']
+-    agent = request.app['agent']
+-    wallet_handle = agent.wallet_handle
+-
+-    if accept_did not in agent.received_requests:
+-        raise web.HTTPNotFound()
+-
+-    msg = Serializer.unpack(agent.received_requests[accept_did])
++    (endpoint_did_str, endpoint_key) = await did.create_and_store_my_did(agent.wallet_handle, ""{}"")
+ 
+-    #TODO: validate correct format for incoming data
+-    data = msg.data
+-    endpoint = data['endpoint']
+-    verkey = data['verkey']
+-    owner = data['owner']
+-
+-    ident_json = json.dumps(
++    #  workaround to pass conn_name securely back to the invite sender, otherwise we could just send the did
++    data_to_send = json.dumps(
+         {
+-            ""did"": accept_did,
+-            ""verkey"": verkey
++            ""did"": endpoint_did_str,
++            ""conn_name"": conn_name
+         }
+     )
+ 
++    endpoint_did_bytes = str_to_bytes(data_to_send)
++
+     meta_json = json.dumps(
+         {
+-            ""owner"": owner,
+-            ""endpoint"": endpoint
++            ""conn_name"": conn_name
+         }
+     )
+ 
+-    (my_did, _) = await did.create_and_store_my_did(wallet_handle, ""{}"")
+-
+-    await did.store_their_did(wallet_handle, ident_json)
++    await did.set_did_metadata(agent.wallet_handle, endpoint_did_str, meta_json)
+ 
+-    await did.set_endpoint_for_did(wallet_handle, accept_did, endpoint, verkey)
++    inner_msg = Message(
++        type= ""did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request"",",,2018-10-11 20:19:49,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/222084677,https://github.com/hyperledger/indy-agent/pull/25#discussion_r222084677,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/25,https://github.com/hyperledger/indy-agent/pull/25,"This needs a little more depth. which path are we expected to be in here? Obviously we won't know the full path, but we can reference something like where the code was checked out, or some other path the user has created for a specific purpose.",2a0818fe767baa6746774137a9819acdf9593f2e,2018-10-02 19:48:38,222088249,"@@ -4,3 +4,30 @@ indy-agent implementation in Python
+ This is an implementation of indy-agent written in Python.
+ 
+ This agent seeks to be as simple as possible while accurately representing the Sovrin protocol.
++
++Requirements
++------------
++- Python 3.6
++- Latest `libindy` from https://github.com/hyperledger/indy-sdk
++
++Quickstart
++----------
++
++First, create a virtual environment to install indy-agent dependencies:
++
++```sh
++cd python/",,2018-10-11 20:19:49,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/222088249,https://github.com/hyperledger/indy-agent/pull/25#discussion_r222088249,TelegramSam
+https://github.com/hyperledger/indy-agent/pull/23,https://github.com/hyperledger/indy-agent/pull/23,please fix incorrect merge,8bfc6928162ea913f70bee80134fb638bce3ecf1,2018-12-27 10:39:56,244127806,"@@ -0,0 +1,63 @@
++#!/usr/bin/env python3.6
++from indy import pool, wallet
++from indy.error import ErrorCode, IndyError
++from aiohttp import web
++from getpass import getpass
++from src.utils import get_config, exit_handler, health_handler
++from src.handler import http_handler
++import logging, sys, yaml, json, time, asyncio, code, signal
++
++# Globals
++POOL_PROTOCOL_VERSION = 2
++wallet_handle = None
++pool_handle = None
++port = None
++
++# Configure Logger
++logger = logging.getLogger(__name__)
++logging.basicConfig(level=logging.INFO)
++
++config = get_config()
++
++
++async def main():
++    global pool_handle, wallet_handle, port
++    # Get Wallet Key and Open Wallet
++    wallet_key = getpass('Enter Wallet Key: ')
++    wallet_config = json.dumps({""id"": config['wallet']['name']})
++    wallet_credentials = json.dumps({""key"": wallet_key})
++    wallet_handle = await wallet.open_wallet(wallet_config, wallet_credentials)
++    
++    # Open Pool
++    try:
++        await pool.set_protocol_version(POOL_PROTOCOL_VERSION)
++        pool_handle = await pool.open_pool_ledger(config['pool']['name'], None)
++    except IndyError as ex:
++        if ex.error_code == ErrorCode.PoolLedgerTimeout:
++            print(""Pool Ledger timed out. Please check your pool config and try again"")
++            exit(1)
++
++    # Configure Web Server Port
++    port = config['agent']['port']
++
++    # FIXME: Setup Active Modules
++    #for mod in config['modules']['active']:
++
++
++if __name__ == '__main__':
++    signal.signal(signal.SIGINT, exit_handler)
++    loop = asyncio.get_event_loop()
++    loop.run_until_complete(main())
++
++    app = web.Application()
++    app.add_routes([
++        web.get('/', health_handler),
++        web.post('/', http_handler)
++    ])
++<<<<<<< HEAD",57,2018-12-27 10:39:56,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/244127806,https://github.com/hyperledger/indy-agent/pull/23#discussion_r244127806,jovfer
+https://github.com/hyperledger/indy-agent/pull/17,https://github.com/hyperledger/indy-agent/pull/17,Here we will also have to wait for indy-sdk 1.6 support in the node.js wrapper.,92124ef1ba97147de5f36b99eae60fcd4e281801,2018-07-18 22:18:23,203547909,"@@ -78,17 +78,20 @@ exports.getTheirEndpointDid = async function (theirDid) {
+     return metadata.theirEndpointDid;
+ };
+ 
++//TODO: replace whatever with real user password
+ async function setupSteward() {
+     let stewardWalletName = `stewardWalletFor:${config.walletName}`;
+     try {
+-        await sdk.createWallet(config.poolName, stewardWalletName);
++        await sdk.createWallet({""id"": stewardWalletName}, {""key"": ""whatever""});",9,2018-07-18 22:18:23,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203547909,https://github.com/hyperledger/indy-agent/pull/17#discussion_r203547909,saholman
+https://github.com/hyperledger/indy-agent/pull/17,https://github.com/hyperledger/indy-agent/pull/17,yes,92124ef1ba97147de5f36b99eae60fcd4e281801,2018-07-20 13:24:12,204042278,"@@ -78,17 +78,20 @@ exports.getTheirEndpointDid = async function (theirDid) {
+     return metadata.theirEndpointDid;
+ };
+ 
++//TODO: replace whatever with real user password
+ async function setupSteward() {
+     let stewardWalletName = `stewardWalletFor:${config.walletName}`;
+     try {
+-        await sdk.createWallet(config.poolName, stewardWalletName);
++        await sdk.createWallet({""id"": stewardWalletName}, {""key"": ""whatever""});",9,2018-07-20 13:24:12,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/204042278,https://github.com/hyperledger/indy-agent/pull/17#discussion_r204042278,vitalrev
+https://github.com/hyperledger/indy-agent/pull/17,https://github.com/hyperledger/indy-agent/pull/17,"other question... if you look in the dockerfile... I clone indy-sdk (master), build libindy and build (npm install) indy node's wrapper. After that i install the builded indy-sdk wrapper into indy-agent. The idea is to use latest version of indy-sdk wrapper and libindy... Good for development, but bad from version management point of view",92124ef1ba97147de5f36b99eae60fcd4e281801,2018-07-20 13:30:35,204044248,"@@ -78,17 +78,20 @@ exports.getTheirEndpointDid = async function (theirDid) {
+     return metadata.theirEndpointDid;
+ };
+ 
++//TODO: replace whatever with real user password
+ async function setupSteward() {
+     let stewardWalletName = `stewardWalletFor:${config.walletName}`;
+     try {
+-        await sdk.createWallet(config.poolName, stewardWalletName);
++        await sdk.createWallet({""id"": stewardWalletName}, {""key"": ""whatever""});",9,2018-07-20 13:30:35,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/204044248,https://github.com/hyperledger/indy-agent/pull/17#discussion_r204044248,vitalrev
+https://github.com/hyperledger/indy-agent/pull/17,https://github.com/hyperledger/indy-agent/pull/17,"What we can do is, checkout a stable version of indy-sdk (eg 1.5) and build linindy and wrapper for this version... this is a good solution for a stable version (release) of indy-agent",92124ef1ba97147de5f36b99eae60fcd4e281801,2018-07-20 13:34:34,204045484,"@@ -78,17 +78,20 @@ exports.getTheirEndpointDid = async function (theirDid) {
+     return metadata.theirEndpointDid;
+ };
+ 
++//TODO: replace whatever with real user password
+ async function setupSteward() {
+     let stewardWalletName = `stewardWalletFor:${config.walletName}`;
+     try {
+-        await sdk.createWallet(config.poolName, stewardWalletName);
++        await sdk.createWallet({""id"": stewardWalletName}, {""key"": ""whatever""});",9,2018-07-20 13:34:35,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/204045484,https://github.com/hyperledger/indy-agent/pull/17#discussion_r204045484,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,"When I try this commented out version, I just get a `Bus Error` but I don't know that line 18's syntax is supported.",ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 19:22:50,203499821,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 19:22:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203499821,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203499821,saholman
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,Have you gotten this part working?  We need to specify a pool name somewhere don't we?  ,ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 19:24:33,203500305,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 19:24:34,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203500305,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203500305,saholman
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,"the problem is, the indy-sdk npm package is old, you nee a new version of that",ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 19:29:00,203501517,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 19:29:00,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203501517,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203501517,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,"i wrote in indy-sdk channel, that we need a new version of indy-sdk npm package here: https://www.npmjs.com/package/indy-sdk",ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 19:31:07,203502105,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 19:31:08,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203502105,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203502105,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,"the new version of createWallet has only 2 params:
+[https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/api/wallet.rs](https://github.com/hyperledger/indy-sdk/blob/master/libindy/src/api/wallet.rs)",ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 19:35:09,203503102,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 19:35:09,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203503102,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203503102,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,"the second pull request changes Dockerfile so that the indy-sdk will be downloaded, libindy compiled and indy-sdk wrapper for nodejs will be linked/installed in indy-agent",ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 19:37:31,203503695,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 19:37:31,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203503695,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203503695,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,"ok, your right, it""s a feature of indy-sdk > 1.5",ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 20:02:42,203510912,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 20:02:43,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203510912,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203510912,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,we can merge this PR after tagging agent,ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 20:04:44,203511418,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 20:04:44,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203511418,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203511418,vitalrev
+https://github.com/hyperledger/indy-agent/pull/16,https://github.com/hyperledger/indy-agent/pull/16,Ok. I will take a look at the other pull request for now.,ec165aa6d11291743f57ced39a33758552f7e326,2018-07-18 22:17:02,203547640,"@@ -11,15 +11,19 @@ exports.get = async function() {
+     return wallet;
+ };
+ 
++//TODO: replace whatever with real user password
+ exports.setup = async function () {
+     try {
+-        await sdk.createWallet(config.poolName, config.walletName);
++        //await sdk.createWallet(config.poolName, config.walletName, ""default"", null, {""key"": ""whatever""});",8,2018-07-18 22:17:02,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/203547640,https://github.com/hyperledger/indy-agent/pull/16#discussion_r203547640,saholman
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"The lines following seem to call this an ""Institution Edge Agent"" instead of an ""Enterprise Edge Agent""",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 17:54:09,196168974,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196168974,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196168974,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"Small typo: ""Based our core..."" should be ""Based on our core"" or something else?",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 17:56:38,196169793,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196169793,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196169793,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"""Mobile Edge Agents will *by* definition""",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 17:58:09,196170291,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196170291,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196170291,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"""expect to be sent anon-crypt messages with (*a* omitted) transport instructions and an encrypted payload"" or some other wording? It reads a little funny at the moment.",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 18:00:14,196170994,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196170994,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196170994,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"I'm interested to hear what others in the community think about the idea of ""Hubs"" and including them in our agent definitions; mostly regarding the following line:
+
+> the Hub also stores and shares data (potentially including Verifiable Credentials), on behalf of its owner.
+
+Personally, I'm a little uncomfortable about the idea of a cloud agent/hub having control over aspects of someone's identity (Verifiable Credentials) but I definitely see cloud agents potentially having more functionality beyond just message relaying. For instance, acting as a remote storage solution or the example given here of an online music service.
+
+In general, I think anything that isn't under an individual's direct control should not be trusted with anything more than providing a basic service. But, again, I'm interested in what others have to say on this.
+
+Pinging @nage and @dhh1128 specifically for comment.",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 18:34:49,196181562,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.
++
++### Hubs",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196181562,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196181562,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,Secure transport of messages from source agent to destination agent is possible without a DID written to the ledger.,051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 18:52:04,196186728,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.
++
++### Hubs
++A Hub is much like a Cloud Agent, but rather than focusing only on messaging (transport) as defined above for a Cloud Agent, the Hub also stores and shares data (potentially including Verifiable Credentials), on behalf of its owner. All of the data held by the Hub is en/decrypted by the Edge Agent, so it is the data that moves between the Edge and Hub, and not keys.  The Hub storage can (kind of) be thought of as a remote version of a Wallet without the keys, but is intended to hold more than just the Verifiable Credentials of an Edge Agent wallet. The idea is that the user can push lots of, for example, app-related data to the Hub, and a Service would be granted permission by the Owner to directly access the data without having to go to the Edge Agent. For example, a Hub-centric music service would store the owner’s config information and playlists on the Hub, and the Service would fetch the data from the Hub on use instead of storing it on it’s own servers.
++
++## Messaging Protocol
++### Transport Payload - Message Packaging/Unpackaging
++The process of handling messages should be consistent and independent of the transport mechanism of an agent implementation. The payload put onto the transport should be created in the following way:
++* Anon-encrypt the base message structure
++* [Base64](https://tools.ietf.org/html/rfc4648) encode the encrypted message
++
++The point in the process after the transport mechanism has delivered the payload should also be consistent and follow these steps:
++
++* [Base64](https://tools.ietf.org/html/rfc4648) decode the string
++* Anon-decrypt the bytes
++
++In order to anon encrypt/decrypt the payload, the endpoint (transport) mechanism MUST use a well known DID/VerKey associated with that endpoint called an Endpoint DID. No matter what kind of transport is used, the Endpoint DID should be used to package/unpackage the payload through/from the transport by following the steps outlined above.",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196186728,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196186728,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"I may be mistaken but I thought that the exact form of message types had not yet been decided. If it has been, I think having a reference to that decision somewhere would be good to back up the use of an all capital ""MUST.""",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-18 18:54:13,196187379,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.
++
++### Hubs
++A Hub is much like a Cloud Agent, but rather than focusing only on messaging (transport) as defined above for a Cloud Agent, the Hub also stores and shares data (potentially including Verifiable Credentials), on behalf of its owner. All of the data held by the Hub is en/decrypted by the Edge Agent, so it is the data that moves between the Edge and Hub, and not keys.  The Hub storage can (kind of) be thought of as a remote version of a Wallet without the keys, but is intended to hold more than just the Verifiable Credentials of an Edge Agent wallet. The idea is that the user can push lots of, for example, app-related data to the Hub, and a Service would be granted permission by the Owner to directly access the data without having to go to the Edge Agent. For example, a Hub-centric music service would store the owner’s config information and playlists on the Hub, and the Service would fetch the data from the Hub on use instead of storing it on it’s own servers.
++
++## Messaging Protocol
++### Transport Payload - Message Packaging/Unpackaging
++The process of handling messages should be consistent and independent of the transport mechanism of an agent implementation. The payload put onto the transport should be created in the following way:
++* Anon-encrypt the base message structure
++* [Base64](https://tools.ietf.org/html/rfc4648) encode the encrypted message
++
++The point in the process after the transport mechanism has delivered the payload should also be consistent and follow these steps:
++
++* [Base64](https://tools.ietf.org/html/rfc4648) decode the string
++* Anon-decrypt the bytes
++
++In order to anon encrypt/decrypt the payload, the endpoint (transport) mechanism MUST use a well known DID/VerKey associated with that endpoint called an Endpoint DID. No matter what kind of transport is used, the Endpoint DID should be used to package/unpackage the payload through/from the transport by following the steps outlined above.
++
++### Base/Core Message Structure
++To maintain consistency of message handling, the following defines the structure of every message before it is packaged and sent over the transport layer or after it is received through the transport layer and unpackaged:
++```json
++{
++  ""id"": ""identifier/DID/nonce"",
++  ""type"": ""URN message type"",
++  ""message"": {}
++}
++```
++* The `id` attribute is required and needs to be either the DID of the sender that is a pairwise identifier in an established connection, a nonce used in establishing a connection, or another similar identifier used in a different custom message exchange.
++* The `type` attribute is required and MUST be a recognized message type.
++* The `message` attribute is required or optional depending upon the value of the type attribute and would contain the contents specified in the definition of the message type.
++ 
++### Message Types
++Message types MUST be in the form of a URN. For example, Sovrin implementations of Indy agents follow the structure of the URN as:",96,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196187379,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196187379,dbluhm
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,Hubs are another description of agents according to the Decentralized Identity Foundation (DIF) https://github.com/decentralized-identity/hubs/blob/master/explainer.md,051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-19 21:26:12,196584038,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.
++
++### Hubs",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196584038,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196584038,mhailstone
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"That's true. I'm using the phrase ""well known"" here to convey that you could either lookup the DID on the ledger, or share the Endpoint DIDs between two endpoints out of band. Either way, both agent endpoints need to ""know"" the Endpoint DID details in order to send messages back and forth.",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-19 21:29:02,196584821,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.
++
++### Hubs
++A Hub is much like a Cloud Agent, but rather than focusing only on messaging (transport) as defined above for a Cloud Agent, the Hub also stores and shares data (potentially including Verifiable Credentials), on behalf of its owner. All of the data held by the Hub is en/decrypted by the Edge Agent, so it is the data that moves between the Edge and Hub, and not keys.  The Hub storage can (kind of) be thought of as a remote version of a Wallet without the keys, but is intended to hold more than just the Verifiable Credentials of an Edge Agent wallet. The idea is that the user can push lots of, for example, app-related data to the Hub, and a Service would be granted permission by the Owner to directly access the data without having to go to the Edge Agent. For example, a Hub-centric music service would store the owner’s config information and playlists on the Hub, and the Service would fetch the data from the Hub on use instead of storing it on it’s own servers.
++
++## Messaging Protocol
++### Transport Payload - Message Packaging/Unpackaging
++The process of handling messages should be consistent and independent of the transport mechanism of an agent implementation. The payload put onto the transport should be created in the following way:
++* Anon-encrypt the base message structure
++* [Base64](https://tools.ietf.org/html/rfc4648) encode the encrypted message
++
++The point in the process after the transport mechanism has delivered the payload should also be consistent and follow these steps:
++
++* [Base64](https://tools.ietf.org/html/rfc4648) decode the string
++* Anon-decrypt the bytes
++
++In order to anon encrypt/decrypt the payload, the endpoint (transport) mechanism MUST use a well known DID/VerKey associated with that endpoint called an Endpoint DID. No matter what kind of transport is used, the Endpoint DID should be used to package/unpackage the payload through/from the transport by following the steps outlined above.",,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196584821,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196584821,mhailstone
+https://github.com/hyperledger/indy-agent/pull/11,https://github.com/hyperledger/indy-agent/pull/11,"The discussion we had in the Friday, June 15, 2018 agent call had consensus to follow this outlined message protocol.",051ad38ef8720ce69923d0234c2c31fbf0f14b7f,2018-06-19 21:44:08,196588611,"@@ -0,0 +1,208 @@
++# Agent Protocol Specification
++
++## Agent Types
++Agents are a combination of functionality and storage that communicate via messages with other Agents. The functionality enables interacting with other Agents via business rules that may involve asking their controlling identity - e.g. a person. The primary storage is a wallet that holds the keys owned by the Agent, the DIDs of other Identities that have Agents, and the information necessary to manage Verifiable Credentials.
++
++There are at least four types of Agents: Mobile and Institution Edge Agents, Cloud Agents, and Hubs, which are a variation on Cloud Agents. All four types have the ability to interact with the Ledger, a Wallet (data store) and can perform Identity-related actions - which is what makes it a bit tricky talking about Agent types. Since all of the types can perform all of the identity-related functions, what differentiates the types?
++
++In this section we’ll try to define the canonical uses of the different Agent types, understanding that a specific instance of an Agent may blur the lines between these types. This picture from the Sovrin White Paper shows the relationships between Edge and Cloud agents.
++
++![Agents](Agents.png)
++
++### Mobile Edge Agents
++Mobile Edge Agents directly interact with an owner Identity - a person - to manage interactions with other Edge Agents and their Identities. The classic Edge Agent is the mobile agent on a smartphone supporting the smartphone Owner. A Mobile Edge Agent is primarily a Holder/Prover - receiving VerCreds from other entities, and using those VerCreds to prove attributes of its Subject (Owner) Identity. However, there may be reasons for an Edge Agent Identity to want to issue VerCreds - such as to delegate authority to another Identity using VerCreds.
++
++Mobile Edge Agents hold the keys and Link Secret for the Subject Identity, enabling it to establish Edge-to-Edge connections with other Identities. Put another way, Edge Agents hold application level data - the DIDs (and related keys) and Verifiable Credentials for it’s owners end-to-end relationships.  Mobile Edge Agents use Cloud Agents to handle transport between Edge Agents - not for Application level purposes.
++
++But for two reasons, a Mobile Edge Agent could be the only Agent needed by an Identity:
++
++* Since smartphones are not always online, a Cloud Agent can supplement the Mobile Edge Agent so that an Identity endpoint is always available.
++* If the endpoint for an Identity is it’s Edge Agent internet address for all relationships, the single endpoint creates a public point of correlation. If the Edge Agent is accessed through an Agency’s Cloud Agent, the endpoint appears to be identical to all of the Agency’s other users.
++
++### Enterprise Edge Agent
++An Institution Edge Agent (IEA) is comparable to a Mobile Edge Agent but used to manage the Identity of an Organization in an Institution environment. IEA is not a mobile app, but an app running in an institutional environment - e.g. a private or public cloud, and extends the stereotypical Edge Agent by having a messaging API for configuring the business rules of the IEA.
++
++As with any Edge Agent, it holds the private keys of the Organizational Identity. Where the typical Edge Agent goes to the user to ask how to respond to inputs from other agents, an IEA is configured to have access to a component that injects that “business knowledge” - potentially by connecting with the Edge Agent of user.  There are a number of suggestions for names for that component:
++* Telegram Sam suggested “Static Agent” on the HL Indy call (June 7, 2018).
++* BC Gov has talked about “Agent Owner” (as in the owner of the Agent) or Adaptor.
++
++The proposed key aspects of Spot (see how I did that?) are that:
++* It controls the Institution Edge Agent (a generic capability) with business specific configuration and control.
++* It can be integrated with the existing Institution environment - reading from and potentially writing to the backend systems.
++  * BC Gov is going to use it first as a Verifiable Credentials publisher to publish to TheOrgBook public registrations, licenses and permits.  No backend systems changes needed - just access to an event stream.
++* It communicates with the IEA via encrypted messages, but will not itself have Indy Agent capabilities - Wallet, DIDs, etc. Mutual encryption will be configured (injected into) the Agent Owner and it’s IEA vs. dynamically created.
++* It initiates actions to be performed by the IEA - “Create Schema”, “Create Credential Definition”, “Publish Credential”, etc.
++* It registers message handlers for IEA to contact when it receives messages. These are optional and are used to add business rules into IEA’s flow. IEA should be configurable so as to do “the right thing” to reduce the complexity of the Agent Owner for simple scenarios.
++* It configures the IEA through a Config API to do things like register handlers for messages, setting policies and defining default behaviours.
++
++### Cloud Agents
++One description of a Cloud Agent is an Agent that is used primarily for message transport, providing an Edge Agent with a persistent endpoint. This is shown in the canonical figure above from the Sovrin White Paper. Although a Cloud Agent could have many variations, the following assumes that model, with some variations documented at the end of this section.
++
++#### Agencies and Agency Endpoints
++A Cloud Agent is within an Agency - a multi-tenant, cloud-hosted Service. The endpoint for all Agents in the Agency is a high-availability Agency message queue based on a known protocol - most often HTTPS.  The endpoint knows only enough to decrypt the message it receives, and based on the decrypted message, what to do next with the message.  Most often, the next step will be to pass the payload of the decrypted message (which is likely also encrypted) to the Cloud Agent of the message Addressee. Within an Agency, each Cloud Agent is a configured instance of an Agent that communicates directly with the Edge Agent(s) of an Identity Owner. Since the Agency Endpoint decrypts an incoming message, it must have the private keys related to the public used to encrypt the message.
++
++As such, there must be enough information implied or in the message passed to the endpoint to allow the Agency to decrypt the message.  Further, there must be enough information after the decryption for the Agency to be able to determine what Cloud Agent should handle the message further.
++
++#### Cloud Agent Message Handling
++The Cloud Agent must be able to respond to the payload of the message and be able to contact as necessary its associated Edge Agent(s). There are several classes of messages for the Cloud Agent to handle:
++
++* Messages from other Agents to be forwarded to the Edge Agent. Such messages may be have to be queued for the Edge Agent to receive when they are online.
++* Messages from the Edge Agent to the Agent of other Identities. Such messages need to be forwarded to the endpoint of the of the other Identity. The Cloud Agent may hold the necessary information for that action, or receive that with the message from the Edge Agent.
++* Messages from the Edge Agent for administrative purposes. These are used for things like configuring the Cloud Agent, backups, restores and so on.
++
++#### Cloud Agent Keys and Endpoints
++The Cloud and Edge Agents must have keypairs so that two Agents can auth-crypt (encrypt and sign) messages to one another. Based our core definition of the Cloud Agent being primarily for message transport, the Cloud Agent does not have keys for accessing the Application Layer content of messages - only the Edge Agents have those keys.
++
++Mobile Edge Agents will be definition have a non-persistent endpoint and the Cloud Agent must have a way to message the Mobile Agent Agent, including queuing messages when the Edge Agent is offline. <<<How does this happen in the mobile world?  The Edge Agent maintains the connection with the Cloud Agent?>>>
++
++#### Other Cloud Agent Functions
++A Cloud Agent may have other functions beyond message transport. 
++
++A key feature might be providing Wallet backup and restore functionality - holding an encrypted version of an Edge Agent’s wallet. The encryption and encryption key handling would be on the Agent side, but the encrypted data could be stored with the Cloud Agent. The encryption key handling would involve all of the DKMS mechanisms described in the [Evernym/DHS document](https://github.com/hyperledger/indy-sdk/blob/677a0439487a1b7ce64c2e62671ed3e0079cc11f/doc/design/005-dkms/DKMS%20Design%20and%20Architecture%20V3.md). So many details to be added…
++
++#### Variations
++In an Institution environment, a Cloud Agent is less important since the Edge Agent is likely a persistent end point using on-premise or Cloud hosting. It may still be useful to have a Cloud Agent to prevent correlation. Regardless, an IEA without a Cloud Agent should still look to the rest of the world like any other Agent, so it should have endpoint message handling like that of a Cloud Agent - e.g. expect to be sent anon-crypt messages with a transport instructions and an encrypted payload.
++
++### Hubs
++A Hub is much like a Cloud Agent, but rather than focusing only on messaging (transport) as defined above for a Cloud Agent, the Hub also stores and shares data (potentially including Verifiable Credentials), on behalf of its owner. All of the data held by the Hub is en/decrypted by the Edge Agent, so it is the data that moves between the Edge and Hub, and not keys.  The Hub storage can (kind of) be thought of as a remote version of a Wallet without the keys, but is intended to hold more than just the Verifiable Credentials of an Edge Agent wallet. The idea is that the user can push lots of, for example, app-related data to the Hub, and a Service would be granted permission by the Owner to directly access the data without having to go to the Edge Agent. For example, a Hub-centric music service would store the owner’s config information and playlists on the Hub, and the Service would fetch the data from the Hub on use instead of storing it on it’s own servers.
++
++## Messaging Protocol
++### Transport Payload - Message Packaging/Unpackaging
++The process of handling messages should be consistent and independent of the transport mechanism of an agent implementation. The payload put onto the transport should be created in the following way:
++* Anon-encrypt the base message structure
++* [Base64](https://tools.ietf.org/html/rfc4648) encode the encrypted message
++
++The point in the process after the transport mechanism has delivered the payload should also be consistent and follow these steps:
++
++* [Base64](https://tools.ietf.org/html/rfc4648) decode the string
++* Anon-decrypt the bytes
++
++In order to anon encrypt/decrypt the payload, the endpoint (transport) mechanism MUST use a well known DID/VerKey associated with that endpoint called an Endpoint DID. No matter what kind of transport is used, the Endpoint DID should be used to package/unpackage the payload through/from the transport by following the steps outlined above.
++
++### Base/Core Message Structure
++To maintain consistency of message handling, the following defines the structure of every message before it is packaged and sent over the transport layer or after it is received through the transport layer and unpackaged:
++```json
++{
++  ""id"": ""identifier/DID/nonce"",
++  ""type"": ""URN message type"",
++  ""message"": {}
++}
++```
++* The `id` attribute is required and needs to be either the DID of the sender that is a pairwise identifier in an established connection, a nonce used in establishing a connection, or another similar identifier used in a different custom message exchange.
++* The `type` attribute is required and MUST be a recognized message type.
++* The `message` attribute is required or optional depending upon the value of the type attribute and would contain the contents specified in the definition of the message type.
++ 
++### Message Types
++Message types MUST be in the form of a URN. For example, Sovrin implementations of Indy agents follow the structure of the URN as:",96,2018-06-19 21:45:50,https://api.github.com/repos/hyperledger/indy-agent/pulls/comments/196588611,https://github.com/hyperledger/indy-agent/pull/11#discussion_r196588611,mhailstone

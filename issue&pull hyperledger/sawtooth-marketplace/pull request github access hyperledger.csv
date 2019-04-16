@@ -1,0 +1,204 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/84,https://github.com/hyperledger/sawtooth-marketplace/pull/84,rbuysse,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,['rbuysse'],1,2019-02-07 16:32:46,2019-02-09 04:42:02,2019-02-09 04:42:02,True,2019-02-09 04:42:02,rbuysse,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/83,https://github.com/hyperledger/sawtooth-marketplace/pull/83,rbuysse,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,['rbuysse'],1,2019-01-22 22:10:09,2019-01-22 22:41:09,2019-01-22 22:41:09,True,2019-01-22 22:41:09,rbuysse,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/82,https://github.com/hyperledger/sawtooth-marketplace/pull/82,ryjones,Add Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,['boydjohnson'],1,2018-08-17 23:41:27,2018-08-21 16:14:14,2018-08-21 16:14:14,True,2018-08-21 16:14:14,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/81,https://github.com/hyperledger/sawtooth-marketplace/pull/81,varasudha194,"Added UI for View Offers, modified README","
+
+Signed-off-by: test <varalakshmi.ka@intel.com>",['dplumb94'],2,2018-05-24 04:58:37,2019-03-22 19:54:21,2019-03-22 19:54:21,False,,,blocked,True,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/80,https://github.com/hyperledger/sawtooth-marketplace/pull/80,askmish,Add proxy support for default docker compose file,"Add proxy variables args for market-shell container dockerfile
+
+Signed-off-by: Ashish Kumar Mishra <ashish.k.mishra@intel.com>","['vaporos', 'delventhalz']",1,2018-04-09 06:10:52,2018-04-26 03:15:47,2018-04-26 03:15:47,True,2018-04-26 03:15:47,vaporos,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/79,https://github.com/hyperledger/sawtooth-marketplace/pull/79,boydjohnson,Changes based on feedback from demo + change to .example tld,,['boydjohnson'],7,2017-12-28 15:46:08,2017-12-28 16:02:31,2017-12-28 16:02:31,True,2017-12-28 16:02:31,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/78,https://github.com/hyperledger/sawtooth-marketplace/pull/78,dplumb94,Fix lint errors,"Based on #74 
+
+The update to pylint 1.8.1 caused some new lint errors to be detected.",['dplumb94'],2,2017-12-27 19:14:49,2017-12-27 21:12:56,2017-12-27 21:12:56,True,2017-12-27 21:12:56,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/77,https://github.com/hyperledger/sawtooth-marketplace/pull/77,delventhalz,Implement SawbuckManager fixes raised at demo,"Fixes Implemented:
+- Remove references to USD
+- default AcceptOffers to count of 1
+- add 1 line of instructions to modals
+- truncate labels at 10 char (""New Holding"" needs to be shorter)
+- validate that you don't go over the Offer owner's quantities
+- find a way to make sure data has updated before redirecting on modal close
+
+In addition, one bug was noted during the demo which was actually already implemented:
+- don't allow non-owners to offer non-transferable assets",['delventhalz'],7,2017-12-26 20:54:02,2017-12-28 15:47:22,2017-12-28 15:47:22,False,,,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/76,https://github.com/hyperledger/sawtooth-marketplace/pull/76,dplumb94,Fix UI count calculation bug,,['dplumb94'],1,2017-12-26 18:09:51,2017-12-27 15:28:12,2017-12-27 15:28:12,True,2017-12-27 15:28:12,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/75,https://github.com/hyperledger/sawtooth-marketplace/pull/75,delventhalz,Add Design Docs to Repo,Also includes a small update to the numbering of the PayloadType enum to better allow for future expansion.,['delventhalz'],3,2017-12-26 18:00:22,2017-12-27 21:42:40,2017-12-27 21:42:40,True,2017-12-27 21:42:40,peterschwarz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/74,https://github.com/hyperledger/sawtooth-marketplace/pull/74,boydjohnson,EXCHANGE_LIMITED_TO_ACCOUNTS functionality,~~This is based on #69 and #71. Only the last commit is of this PR. If there are multiple EXCHANGE_LIMITED_TO_ACCOUNTS rules -- if one is from an asset and one is from the offer -- the rule is that it is limited to the union of the accounts.~~   If there are multiple EXCHANGE_LIMITED_TO_ACCOUNTS rules the intersection of the values is taken.,['boydjohnson'],3,2017-12-22 18:16:57,2017-12-27 21:10:49,2017-12-27 21:10:49,True,2017-12-27 21:10:49,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/73,https://github.com/hyperledger/sawtooth-marketplace/pull/73,delventhalz,Add error handing to Sawbuck app,"Errors on background API requests will be logged, but otherwise ignored, and API requests triggered by user actions (i.e. form submissions) will trigger an alert, and then clear the form.
+
+A common example would be to attempting to login with bad credentials, or trying to load any page when the api is down. You can kill the API with:
+
+```bash
+docker container stop sawtoothmarketplace_market-rest-api_1
+```",['delventhalz'],1,2017-12-21 17:50:29,2017-12-21 19:55:03,2017-12-21 19:55:03,True,2017-12-21 19:55:03,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/72,https://github.com/hyperledger/sawtooth-marketplace/pull/72,delventhalz,Cleanup and streamline deployment,"This PR cleans up a number of loose threads with deployment, especially:
+- Creating a `market-shell` container from which all commands can be run
+- Using the market-shell to generate protobufs and client files as part of `docker-compose up`
+- Update the README to reflect current practices
+
+On any machine, with any OS, running Docker, you should be able to clone a 100% fresh copy of this branch, follow the instructions in the README, and get a running web app. If any command described in the README does not work as described in any environment, that is a bug.",['delventhalz'],6,2017-12-21 07:08:06,2017-12-21 19:55:20,2017-12-21 19:55:21,True,2017-12-21 19:55:20,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/71,https://github.com/hyperledger/sawtooth-marketplace/pull/71,dplumb94,Implement API Not Transferable rule functionality,Based on #68 ,['dplumb94'],2,2017-12-21 01:56:54,2017-12-22 21:58:24,2017-12-22 21:58:24,True,2017-12-22 21:58:24,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/70,https://github.com/hyperledger/sawtooth-marketplace/pull/70,delventhalz,Validate offer and request buttons,"Offer button will now be disabled if:
+- user is logged out
+- user has no quantity of the asset
+- asset is not transferable and user is not the owner
+
+Request button is disabled if user is not logged in.",['delventhalz'],3,2017-12-21 01:55:40,2017-12-21 17:40:52,2017-12-21 17:40:52,True,2017-12-21 17:40:52,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/69,https://github.com/hyperledger/sawtooth-marketplace/pull/69,boydjohnson,EXCHANGE_ONCE and EXCHANGE_ONCE_PER_ACCOUNT Offer Rules,This PR is built off of PR #68 and will be rebased once that PR goes in to master. Only the last 4 commits are part of this PR.,['boydjohnson'],6,2017-12-21 00:13:49,2017-12-22 22:03:28,2017-12-22 22:03:28,True,2017-12-22 22:03:28,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/68,https://github.com/hyperledger/sawtooth-marketplace/pull/68,dplumb94,Implement API and TP holdings infinite rules,,['dplumb94'],2,2017-12-20 23:59:23,2017-12-21 19:51:55,2017-12-21 19:51:55,True,2017-12-21 19:51:55,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/67,https://github.com/hyperledger/sawtooth-marketplace/pull/67,delventhalz,Add Accept Offer modal to Offer pages,"Adds an Accept Offer Modal, which also allows for Holding creation. Also reverse the direction of the bifold arrow in most contexts. The direction of the arrow no reflects the direction of the flow of assets, relative to the user.
+
+_Screenshots:_
+![screen shot 2017-12-20 at 1 17 32 pm](https://user-images.githubusercontent.com/8889580/34222138-8a028dca-e588-11e7-9bbc-c28c31f4fce4.png)
+
+",['delventhalz'],5,2017-12-20 18:12:13,2017-12-20 22:12:08,2017-12-20 22:12:08,True,2017-12-20 22:12:08,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/66,https://github.com/hyperledger/sawtooth-marketplace/pull/66,dplumb94,Fix holding and race condition bugs,,['dplumb94'],3,2017-12-20 17:47:13,2017-12-20 18:39:17,2017-12-20 18:39:17,True,2017-12-20 18:39:17,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/65,https://github.com/hyperledger/sawtooth-marketplace/pull/65,dplumb94,Implement API Rule value parsing,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-19 22:10:45,2017-12-21 15:54:08,2017-12-21 15:54:08,True,2017-12-21 15:54:08,peterschwarz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/64,https://github.com/hyperledger/sawtooth-marketplace/pull/64,delventhalz,Add automatic daily offers to admin CLI,"Adds two commands to the admin cli:
+
+**Command:** `mktadm renew`
+
+Similar to `seed` (formerly known as `submit`), `renew` takes a url and a data file and submits data to the REST API. Specifically, it will submit any `RENEWABLE` Offers, after first closing any open offers that match. This effectively resets rules like `EXCHANGE_ONCE_PER_ACCOUNT`.
+
+**Usage:**
+
+```
+bin/mktadm renew -u localhost:8040 -d sawbuck_app/app_data.yaml
+```
+
+**Command:** `mktadm schedule`
+
+Uses `cron` to execute other `mktadm` commands on a regular schedule. Can be run hourly, daily, weekly, or monthly. Resubmitting the same command (with the same parameters), will reschedule it. Can also use the `--remove`flag to unschedule a command.
+
+**Usage**
+```
+bin/mktadm schedule -H ""renew -u localhost:8040 -d sawbuck_app/app_data.yaml""
+bin/mktadm schedule -D ""renew -u localhost:8040 -d sawbuck_app/app_data.yaml""
+bin/mktadm schedule --remove ""renew -u localhost:8040 -d sawbuck_app/app_data.yaml""
+```
+
+You can check your existing cron jobs using:
+```
+crontab -l
+```
+
+Or remove them with:
+```
+crontab -r
+```",['delventhalz'],7,2017-12-19 04:25:32,2017-12-20 20:01:09,2017-12-20 20:01:09,True,2017-12-20 20:01:09,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/63,https://github.com/hyperledger/sawtooth-marketplace/pull/63,boydjohnson,Add CloseOffer TP functionality,Only the last 2 commits are this PR. The prior 2 will be rebased when #62 goes into master.,['boydjohnson'],2,2017-12-18 19:19:05,2017-12-19 22:05:34,2017-12-19 22:05:34,True,2017-12-19 22:05:34,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/62,https://github.com/hyperledger/sawtooth-marketplace/pull/62,boydjohnson,Implement AcceptOffer TP functionality,,['boydjohnson'],2,2017-12-18 18:40:57,2017-12-19 22:03:58,2017-12-19 22:03:58,True,2017-12-19 22:03:58,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/61,https://github.com/hyperledger/sawtooth-marketplace/pull/61,delventhalz,Add Create Offer Modal,"Adds a modal which can be accessed from the Asset list and detail pages. Allows you to create an Offer as well as a new Holding if desired. Should be mostly complete, including a section for rules.
+
+Built on #59 
+
+_Screenshots:_
+![screen shot 2017-12-18 at 1 07 41 am](https://user-images.githubusercontent.com/8889580/34093848-2ab4c9e0-e390-11e7-8b51-ae587ac49d76.png)
+",['delventhalz'],5,2017-12-18 07:10:38,2017-12-18 22:31:12,2017-12-18 22:31:13,True,2017-12-18 22:31:12,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/60,https://github.com/hyperledger/sawtooth-marketplace/pull/60,dplumb94,Implement API accept and close Offers,"This PR adds functionality for the `POST /offers/<offer_id>/accept` and `POST /offers/<offer_id>/close` routes.
+
+To test the API responses without TP functionality, comment out lines 109-114 and 141-146 in `offers.py`.",['dplumb94'],2,2017-12-15 23:19:58,2017-12-18 22:32:05,2017-12-18 22:32:05,True,2017-12-18 22:32:05,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/59,https://github.com/hyperledger/sawtooth-marketplace/pull/59,delventhalz,Add Offer Detail Page,"Does not yet have a working Accept button.
+
+_Screenshots:_
+![screen shot 2017-12-15 at 2 47 54 pm](https://user-images.githubusercontent.com/8889580/34059938-07990592-e1a7-11e7-8496-ea73af969a9f.png)
+",['delventhalz'],5,2017-12-15 20:49:20,2017-12-18 22:12:12,2017-12-18 22:12:12,True,2017-12-18 22:12:12,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/58,https://github.com/hyperledger/sawtooth-marketplace/pull/58,boydjohnson,"AcceptOffer, CloseOffer txn encoding",,['boydjohnson'],3,2017-12-15 18:58:42,2017-12-15 21:48:13,2017-12-15 21:48:13,True,2017-12-15 21:48:13,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/57,https://github.com/hyperledger/sawtooth-marketplace/pull/57,delventhalz,Add Offer List Page,"Accept button will be implemented when modals are complete. Currently logs to console.
+
+_Screenshots:_
+![screen shot 2017-12-15 at 12 13 22 am](https://user-images.githubusercontent.com/8889580/34029237-0da60022-e12d-11e7-959a-41b63be0a0c8.png)
+![screen shot 2017-12-15 at 12 14 07 am](https://user-images.githubusercontent.com/8889580/34029241-1292868c-e12d-11e7-8a96-198559dcce54.png)
+",['delventhalz'],5,2017-12-15 06:15:45,2017-12-15 21:44:52,2017-12-15 21:44:52,True,2017-12-15 21:44:52,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/56,https://github.com/hyperledger/sawtooth-marketplace/pull/56,dplumb94,Refactor Account and Asset creation,This PR refactors Account and Asset POST routes so that all resource creation methods follow a similar pattern. It also fixes a bug where some resource properties would be displayed with the wrong casing.,['dplumb94'],2,2017-12-14 23:53:19,2017-12-15 18:23:06,2017-12-15 18:23:06,True,2017-12-15 18:23:06,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/55,https://github.com/hyperledger/sawtooth-marketplace/pull/55,delventhalz,Add Offers to Sawbuck data submission,Also includes an implementation of a simple reference language which can be used to fetch data from previously submitted resources. In this case it is used to get ids from Holdings.,['delventhalz'],3,2017-12-14 20:19:27,2017-12-15 18:05:21,2017-12-15 18:05:21,True,2017-12-15 18:05:21,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/54,https://github.com/hyperledger/sawtooth-marketplace/pull/54,dplumb94,Implement API Fetch Offers,,['dplumb94'],2,2017-12-13 22:53:26,2017-12-15 15:56:30,2017-12-15 15:56:30,True,2017-12-15 15:56:30,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/53,https://github.com/hyperledger/sawtooth-marketplace/pull/53,dplumb94,Remove unused import,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-13 18:26:40,2017-12-14 18:45:49,2017-12-14 18:45:49,True,2017-12-14 18:45:49,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/52,https://github.com/hyperledger/sawtooth-marketplace/pull/52,dplumb94,Remove stack trace for errors handled by API,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-12 22:38:31,2017-12-13 18:09:45,2017-12-13 18:09:45,True,2017-12-13 18:09:45,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/51,https://github.com/hyperledger/sawtooth-marketplace/pull/51,boydjohnson,CreateOffer TP functionality,This PR is based on #50 and will be rebased once that PR goes into master.,['boydjohnson'],3,2017-12-12 21:45:17,2017-12-13 21:21:16,2017-12-13 21:21:16,True,2017-12-13 21:21:16,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/50,https://github.com/hyperledger/sawtooth-marketplace/pull/50,dplumb94,Implement API Create Offer,,['dplumb94'],4,2017-12-12 19:42:15,2017-12-13 17:57:03,2017-12-13 17:57:03,True,2017-12-13 17:57:02,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/49,https://github.com/hyperledger/sawtooth-marketplace/pull/49,delventhalz,Improve mktadm HTTP requests,`mktadm` will now default to http and recover from bad requests. Also includes an improvement to API error messages.,['delventhalz'],3,2017-12-12 19:07:16,2017-12-12 22:20:56,2017-12-12 22:20:57,True,2017-12-12 22:20:56,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/48,https://github.com/hyperledger/sawtooth-marketplace/pull/48,dplumb94,Include holding objects on account resource,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-12 17:38:58,2017-12-12 22:17:00,2017-12-12 22:17:00,True,2017-12-12 22:17:00,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/47,https://github.com/hyperledger/sawtooth-marketplace/pull/47,delventhalz,Add holdings to Sawbuck seed data,,['delventhalz'],1,2017-12-12 16:35:07,2017-12-12 19:35:16,2017-12-12 19:35:16,True,2017-12-12 19:35:16,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/46,https://github.com/hyperledger/sawtooth-marketplace/pull/46,delventhalz,Update Sawbuck seed data,Fixes a typo and replaces copy/pasted Asset descriptions.,['delventhalz'],2,2017-12-12 16:04:26,2017-12-12 19:35:01,2017-12-12 19:35:01,True,2017-12-12 19:35:01,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/45,https://github.com/hyperledger/sawtooth-marketplace/pull/45,delventhalz,Remove CORS middleware from REST API,The CORS handlers are insecure and a workaround we don't need.,['delventhalz'],1,2017-12-12 15:56:41,2017-12-12 22:20:34,2017-12-12 22:20:34,True,2017-12-12 22:20:34,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/44,https://github.com/hyperledger/sawtooth-marketplace/pull/44,dplumb94,Fix holdings lint errors,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-12 00:06:45,2017-12-12 16:18:20,2017-12-12 16:18:20,True,2017-12-12 16:18:20,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/43,https://github.com/hyperledger/sawtooth-marketplace/pull/43,dplumb94,Implement update account functionality,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-11 21:17:00,2017-12-12 16:53:25,2017-12-12 16:53:25,True,2017-12-12 16:53:25,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/42,https://github.com/hyperledger/sawtooth-marketplace/pull/42,delventhalz,Add REST API route to create new holdings,,['delventhalz'],4,2017-12-11 06:42:43,2017-12-11 20:36:59,2017-12-11 20:36:59,True,2017-12-11 20:36:59,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/41,https://github.com/hyperledger/sawtooth-marketplace/pull/41,delventhalz,Add client data submit CLI,Add a marketplace admin CLI with a command for seeding the blockchain with the data necessary for the Sawbuck App. Currently only submits accounts and asset types. Will need to add holdings and offers as those submit routes get implemented.,['delventhalz'],2,2017-12-11 03:47:56,2017-12-11 22:35:42,2017-12-11 22:35:43,True,2017-12-11 22:35:42,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/40,https://github.com/hyperledger/sawtooth-marketplace/pull/40,delventhalz,Fix broken reference in API spec,,['delventhalz'],1,2017-12-08 21:18:21,2017-12-08 21:25:34,2017-12-08 21:25:34,False,,,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/39,https://github.com/hyperledger/sawtooth-marketplace/pull/39,delventhalz,Add Asset Detail page to the Sawbuck Manager,"Adds an Asset Detail page. The styling for Rules may change once they are more hashed out and better implemented. How they are displayed will likely change on a rule-by-rule basis. The Offer/Request buttons are not currently hooked up to anything other than a console log.
+
+Screenshot:
+![screen shot 2017-12-08 at 2 38 16 pm](https://user-images.githubusercontent.com/8889580/33784971-9e6a1580-dc28-11e7-9a0d-f510d7f8e74b.png)
+_*Shown with placeholder data not included in PR_",['delventhalz'],1,2017-12-08 21:01:52,2017-12-11 23:15:06,2017-12-11 23:15:07,True,2017-12-11 23:15:06,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/38,https://github.com/hyperledger/sawtooth-marketplace/pull/38,dplumb94,Implement Fetch Assets API functionality,,['dplumb94'],4,2017-12-08 20:28:59,2017-12-11 23:08:36,2017-12-11 23:08:37,True,2017-12-11 23:08:36,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/37,https://github.com/hyperledger/sawtooth-marketplace/pull/37,boydjohnson,Fix missing reference in Api Spec,"Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>
+
+With this fix we have 4 passing Dredd tests. Without it the Swagger yaml can't be parsed.",['boydjohnson'],1,2017-12-08 19:44:53,2017-12-08 21:30:30,2017-12-08 21:30:30,True,2017-12-08 21:30:30,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/36,https://github.com/hyperledger/sawtooth-marketplace/pull/36,dplumb94,Implement Create Asset API functionality,,['dplumb94'],2,2017-12-08 18:40:53,2017-12-08 21:34:39,2017-12-08 21:34:39,True,2017-12-08 21:34:39,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/35,https://github.com/hyperledger/sawtooth-marketplace/pull/35,boydjohnson,Refactor TransactionPayload to use payload_type Enum,"Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>
+
+This is built off of master. To test run `./bin/dev-tools -p` and then `./binrun_integration_tests blockchain`.",['boydjohnson'],1,2017-12-08 16:59:40,2017-12-08 19:10:54,2017-12-08 19:10:54,True,2017-12-08 19:10:54,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/34,https://github.com/hyperledger/sawtooth-marketplace/pull/34,delventhalz,Add Asset List Page,"Lists assets with buttons to create offers based on them. Buttons will eventually create a modal, currently just log to the console. Tough to test until `GET /assets` is implemented (and even then there will be no test data). Should work fine once those pieces are brought online.
+
+Screenshot:
+![screen shot 2017-12-07 at 5 28 25 pm](https://user-images.githubusercontent.com/8889580/33744033-e298afc8-db74-11e7-83d9-600f95bc981f.png)
+_*Pictured with placeholder data not included in PR_",['delventhalz'],2,2017-12-07 23:34:56,2017-12-11 23:08:29,2017-12-11 23:08:29,True,2017-12-11 23:08:29,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/33,https://github.com/hyperledger/sawtooth-marketplace/pull/33,boydjohnson,TP CreateHolding functionality,"Only the last 4 commits are from this PR. This PR will be rebased after #35 is merged into master.
+To test run `./bin/dev-tools -a` and then `./bin/run_integration_tests blockchain`",['boydjohnson'],4,2017-12-07 20:54:44,2017-12-08 19:12:03,2017-12-08 19:12:03,True,2017-12-08 19:12:03,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/32,https://github.com/hyperledger/sawtooth-marketplace/pull/32,delventhalz,Clarify when auth info is sent with accounts in spec,,['delventhalz'],1,2017-12-07 20:31:08,2017-12-08 17:14:51,2017-12-08 17:14:51,True,2017-12-08 17:14:51,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/31,https://github.com/hyperledger/sawtooth-marketplace/pull/31,delventhalz,Add account detail page,"Adds an account detail page to the client which logged-in users can view for their own account.
+
+Includes a number of other updates to help enable this page. Test with `docker-compose up`, and then navigating to `http://localhost:8041`. Signup and then click on the `Account` button in the navbar.
+
+_Screenshot:_
+![screen shot 2017-12-08 at 11 10 03 am](https://user-images.githubusercontent.com/8889580/33776973-b50c3a7c-dc08-11e7-9574-666898ee93c9.png)
+_*Shown with placeholder data not included in PR_
+",['delventhalz'],7,2017-12-07 17:18:16,2017-12-08 19:10:23,2017-12-08 19:10:23,True,2017-12-08 19:10:23,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/30,https://github.com/hyperledger/sawtooth-marketplace/pull/30,boydjohnson,Change docker-compose validator commands to allow restart,"This allows for docker-compose up then ctl^c and docker-compose up again.
+The data files don't get destroyed.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>",['boydjohnson'],1,2017-12-07 16:53:35,2017-12-07 20:24:16,2017-12-07 20:24:16,True,2017-12-07 20:24:16,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/29,https://github.com/hyperledger/sawtooth-marketplace/pull/29,delventhalz,Iron out integration wrinkles,"Fixes some final integration bugs. Once merged:
+1. The client will signup and login correctly
+2. Two REST API integration tests will pass (POST /authorization and POST /accounts)
+2b. As new routes come online, the assumption should be that the appropriate tests will pass. If they need some massaging, that should ideally be done in the same PR as the new route.",['delventhalz'],4,2017-12-06 21:55:05,2017-12-07 00:28:12,2017-12-07 00:28:12,True,2017-12-07 00:28:12,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/28,https://github.com/hyperledger/sawtooth-marketplace/pull/28,dplumb94,Handle improper JSON in request body,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-06 21:28:11,2017-12-07 19:34:16,2017-12-07 19:34:16,True,2017-12-07 19:34:16,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/27,https://github.com/hyperledger/sawtooth-marketplace/pull/27,dplumb94,Implement account fetch routes,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],2,2017-12-06 21:08:19,2017-12-07 19:33:59,2017-12-07 19:33:59,True,2017-12-07 19:33:59,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/26,https://github.com/hyperledger/sawtooth-marketplace/pull/26,dplumb94,Implement auth route,,['dplumb94'],3,2017-12-06 19:03:41,2017-12-06 23:11:23,2017-12-06 23:11:23,True,2017-12-06 23:11:23,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/25,https://github.com/hyperledger/sawtooth-marketplace/pull/25,delventhalz,Unify default command line arguments,"Previously, command line arguments with networking settings might point to the host settings or docker-compose settings. Now they all default to what is would be expected without docker.",['delventhalz'],1,2017-12-06 18:01:15,2017-12-06 19:53:46,2017-12-06 19:53:46,True,2017-12-06 19:53:46,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/24,https://github.com/hyperledger/sawtooth-marketplace/pull/24,boydjohnson,TP Create Asset Functionality,Based on #17 and #19. To test run `./bin/run_integration_test blockchain`.,['boydjohnson'],3,2017-12-06 17:21:55,2017-12-06 21:21:43,2017-12-06 21:21:43,True,2017-12-06 21:21:43,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/23,https://github.com/hyperledger/sawtooth-marketplace/pull/23,delventhalz,Update installed docker-compose to match default,,['delventhalz'],1,2017-12-06 16:27:45,2017-12-06 18:02:48,2017-12-06 18:02:48,True,2017-12-06 18:02:48,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/22,https://github.com/hyperledger/sawtooth-marketplace/pull/22,delventhalz,Remove unnecessary protobuf generation,,['delventhalz'],1,2017-12-05 23:10:33,2017-12-06 18:02:36,2017-12-06 18:02:36,True,2017-12-06 18:02:36,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/21,https://github.com/hyperledger/sawtooth-marketplace/pull/21,delventhalz,Add component commands to rest api test compose file,,['delventhalz'],1,2017-12-05 23:00:22,2017-12-06 18:02:22,2017-12-06 18:02:22,True,2017-12-06 18:02:22,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/20,https://github.com/hyperledger/sawtooth-marketplace/pull/20,delventhalz,Fix bug where ledger sync would crash when no state delta sent,,['delventhalz'],1,2017-12-05 22:59:54,2017-12-06 18:01:43,2017-12-06 18:01:43,True,2017-12-06 18:01:43,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/19,https://github.com/hyperledger/sawtooth-marketplace/pull/19,boydjohnson,Fix txn creation return value,This PR is based on #17.,['boydjohnson'],1,2017-12-05 22:31:25,2017-12-06 19:06:15,2017-12-06 19:06:15,True,2017-12-06 19:06:15,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/18,https://github.com/hyperledger/sawtooth-marketplace/pull/18,boydjohnson,TP CreateAsset Functionality,,['boydjohnson'],3,2017-12-05 20:48:14,2017-12-05 22:15:44,2017-12-05 22:15:44,False,,,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/17,https://github.com/hyperledger/sawtooth-marketplace/pull/17,dplumb94,Add account creation functionality,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-05 20:04:04,2017-12-06 18:02:56,2017-12-06 18:02:56,True,2017-12-06 18:02:56,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/16,https://github.com/hyperledger/sawtooth-marketplace/pull/16,delventhalz,Remove references to Agent in SawbuckManager,,['delventhalz'],1,2017-12-04 22:20:32,2017-12-04 22:42:49,2017-12-04 22:42:49,True,2017-12-04 22:42:49,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/15,https://github.com/hyperledger/sawtooth-marketplace/pull/15,delventhalz,Add ledger sync,"This ledger sync is feature complete, but untested. There is no transaction family to run it against, and a number of bugs that need to be fixed with ClientEvents in Sawtooth 1.0.",['delventhalz'],2,2017-12-04 06:58:05,2017-12-04 20:59:47,2017-12-04 20:59:47,True,2017-12-04 20:59:47,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/14,https://github.com/hyperledger/sawtooth-marketplace/pull/14,boydjohnson,TP create account,This PR is built off of #12. To test it run `./bin/run_integration_test blockchain`. It adds the functionality to the Transaction Processor to handle a create account transaction.,['boydjohnson'],2,2017-12-02 00:11:37,2017-12-04 21:30:42,2017-12-04 21:30:42,True,2017-12-04 21:30:42,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/13,https://github.com/hyperledger/sawtooth-marketplace/pull/13,dplumb94,Initial server setup,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-01 23:24:58,2017-12-04 22:07:05,2017-12-04 22:07:05,True,2017-12-04 22:07:05,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/12,https://github.com/hyperledger/sawtooth-marketplace/pull/12,delventhalz,Update protogen and setup_db scripts,"Update `bin/protogen` to properly handle imports.
+
+Update `bin/setup_db` with the primary/secondary indexes that the ledger_sync will need.
+
+Based on #11.",['delventhalz'],2,2017-12-01 22:21:47,2017-12-02 14:58:33,2017-12-02 14:58:33,True,2017-12-02 14:58:33,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/11,https://github.com/hyperledger/sawtooth-marketplace/pull/11,dplumb94,Add setup db script,Signed-off-by: Darian Plumb <dplumb@bitwise.io>,['dplumb94'],1,2017-12-01 20:12:08,2017-12-01 22:21:30,2017-12-01 22:21:30,True,2017-12-01 22:21:30,dplumb94,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/10,https://github.com/hyperledger/sawtooth-marketplace/pull/10,delventhalz,Fix CreateAccount payload to match current Account object,,['delventhalz'],1,2017-12-01 20:09:50,2017-12-01 21:51:46,2017-12-01 21:51:46,True,2017-12-01 21:51:46,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/9,https://github.com/hyperledger/sawtooth-marketplace/pull/9,delventhalz,Add Integration Tests,"Adds integration tests based on `api-spec.yaml`. Will not run without a REST API, TP, and LedgerSync to test against, but should correctly test both the `POST /authorization` and `POST /accounts` routes once those components are merged.",['delventhalz'],3,2017-12-01 19:54:09,2017-12-02 14:57:48,2017-12-02 14:57:48,True,2017-12-02 14:57:48,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/8,https://github.com/hyperledger/sawtooth-marketplace/pull/8,boydjohnson,Add output to protogen script,Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>,['boydjohnson'],1,2017-12-01 17:02:23,2017-12-01 20:25:32,2017-12-01 20:25:32,True,2017-12-01 20:25:32,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/7,https://github.com/hyperledger/sawtooth-marketplace/pull/7,delventhalz,"Change family name to ""marketplace""",,['delventhalz'],1,2017-12-01 16:59:31,2017-12-01 17:31:23,2017-12-01 17:31:23,True,2017-12-01 17:31:23,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/6,https://github.com/hyperledger/sawtooth-marketplace/pull/6,boydjohnson,Implement skeleton transaction processor,"The TP can at this point register with the validator
+but do nothing else.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>",['boydjohnson'],1,2017-12-01 16:22:27,2017-12-01 20:27:02,2017-12-01 20:27:02,True,2017-12-01 20:27:02,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/5,https://github.com/hyperledger/sawtooth-marketplace/pull/5,boydjohnson,Fixup changed directory name in script,Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>,['boydjohnson'],1,2017-11-30 22:27:47,2017-11-30 23:01:33,2017-11-30 23:01:33,True,2017-11-30 23:01:33,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/4,https://github.com/hyperledger/sawtooth-marketplace/pull/4,delventhalz,Create initial Sawbuck app,"Creates a front-end with Login/Signup pages. These are fully functional and should create new Accounts once the REST API is running.
+
+Also includes docker components to serve the front-end using a simple Apache server.",['delventhalz'],4,2017-11-30 22:14:50,2017-12-01 17:50:34,2017-12-01 17:50:34,True,2017-12-01 17:50:34,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/3,https://github.com/hyperledger/sawtooth-marketplace/pull/3,boydjohnson,"Add addressing package and scripts to run tests, lint, and protogen","This is based off of #2 and will be rebased when that PR goes into master. To test `./bin/dev-tools -a` which runs protogen, lint, and the unit tests of the addressing package.",['boydjohnson'],3,2017-11-30 20:20:57,2017-11-30 22:05:53,2017-11-30 22:05:53,True,2017-11-30 22:05:53,boydjohnson,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/2,https://github.com/hyperledger/sawtooth-marketplace/pull/2,delventhalz,Initial Project Setup,"Adds initial Docker components, Protobuf files, and OpenAPI spec for server",['delventhalz'],4,2017-11-29 19:35:47,2017-11-30 21:15:20,2017-12-01 16:34:29,True,2017-11-30 21:15:20,delventhalz,unknown,,closed
+sawtooth-marketplace,https://api.github.com/repos/hyperledger/sawtooth-marketplace/pulls/1,https://github.com/hyperledger/sawtooth-marketplace/pull/1,ryjones,Create DCO,,[],1,2017-11-21 01:59:43,2017-11-21 02:00:07,2017-11-21 02:00:07,False,,,unknown,,closed

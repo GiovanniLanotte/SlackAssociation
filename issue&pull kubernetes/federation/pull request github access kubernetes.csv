@@ -1,0 +1,422 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+federation,https://api.github.com/repos/kubernetes/federation/pulls/1,https://github.com/kubernetes/federation/pull/1,irfanurrehman,WIP: Federation move out of core,"First PR on kubernetes/federation :)
+cc @marun @shashidharatd ",[],10000,2017-09-23 14:02:07,2017-11-03 13:03:42,2017-11-03 13:03:42,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/2,https://github.com/kubernetes/federation/pull/2,marun,WIP: Enable build and test,"This PR is based on a [filtered branch](https://github.com/marun/federation/tree/fed-filter-branch/) of [k8s.io/kubernetes](https://github.com/kubernetes/kubernetes).  From that filtered branch, it adds commits to enable build and test of federation artifacts.
+
+See [README](https://github.com/marun/federation/blob/fed-move-out/migration-tools/README.md) for details of what was done and how to use it.
+
+cc: @irfanurrehman @shashidharatd ",['irfanurrehman'],10000,2017-09-27 04:31:02,2017-10-25 23:10:50,2017-10-25 23:10:50,False,,,blocked,True,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/3,https://github.com/kubernetes/federation/pull/3,marun,Add OWNERS from k8s.io/kubernetes/federation,This is required to enable the submit queue.,[],1,2017-10-25 16:24:47,2017-10-25 16:38:12,2017-10-25 16:38:12,True,2017-10-25 16:38:12,irfanurrehman,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/112,https://github.com/kubernetes/federation/pull/112,marun,Enable build and test,Dependencies vendored with [glide](https://glide.readthedocs.io/en/latest/).,"['shashidharatd', 'irfanurrehman']",13,2017-11-01 00:08:27,2017-11-03 12:15:53,2017-11-03 12:15:53,True,2017-11-03 12:15:53,irfanurrehman,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/113,https://github.com/kubernetes/federation/pull/113,shashidharatd,wip: test pre-submit e2e job,This pr is just to test if the federation pre-submit e2e job works fine.,[],24,2017-11-03 03:12:53,2017-11-03 13:15:58,2017-11-03 13:15:58,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/114,https://github.com/kubernetes/federation/pull/114,irfanurrehman,Updates to make federation e2e CI jobs work ,"Updates to ensure e2e jobs can run ok on this repo.
+cc @shashidharatd @marun 
+cc @kubernetes/sig-multicluster-pr-reviews ",['shashidharatd'],13,2017-11-03 13:11:32,2017-11-15 06:54:47,2017-11-15 06:54:47,True,2017-11-15 06:54:47,irfanurrehman,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/115,https://github.com/kubernetes/federation/pull/115,shashidharatd,Enable running e2e tests on federation from k/f repo,"This PR adds the get-federation.sh scripts equivalent to get-kube.sh. These are needed by the `kubetest` in test-infra to download and run the federation binaries.
+This PR also pushes fcp image to registry before bringing up federation.
+
+/assign @irfanurrehman  ",['irfanurrehman'],3,2017-11-06 04:46:50,2017-11-06 06:21:28,2017-11-06 06:21:28,True,2017-11-06 06:21:28,irfanurrehman,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/142,https://github.com/kubernetes/federation/pull/142,marun,WIP Enable make verify,"Fix ``make verify`` to allow the pre-submit job added by https://github.com/kubernetes/test-infra/pull/5369 to pass.
+
+/cc irfanurrehman shashidharatd",['shashidharatd'],11,2017-11-07 00:21:13,2017-11-15 10:05:32,2017-11-15 10:05:33,True,2017-11-15 10:05:32,irfanurrehman,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/144,https://github.com/kubernetes/federation/pull/144,irfanurrehman,Fed move out cleanup - part 1,"This pull request is not yet complete.
+The PR is to get comprehensive test signals, rather then running everything locally.
+
+cc @marun @shashidharatd 
+/assign","['shashidharatd', 'irfanurrehman']",4,2017-11-10 19:09:02,2017-11-20 10:09:24,2017-11-20 10:09:24,True,2017-11-20 10:09:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/145,https://github.com/kubernetes/federation/pull/145,jianhuiz,[auth] add last updated by admission control,"This is part of federation per-user cluster auth (https://github.com/kubernetes/kubernetes/issues/35254)
+
+This PR add a admission control that insert an annotation with the username (service account currently excluded) so later the federation controllers will read the username and find the correct credential accordingly to update objects in the underlying clusters.
+
+@quinton-hoole @deepak-vij ",[],2,2017-11-10 20:22:41,2018-07-20 22:02:46,2018-07-20 22:02:46,False,,,dirty,False,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/146,https://github.com/kubernetes/federation/pull/146,jianhuiz,[WIP][auth] Federation auth identity provider,"requires https://github.com/kubernetes/federation/pull/145
+This is part of federation per-user cluster auth (kubernetes/kubernetes#35254)
+
+Federation controllers use identity provider to find per-user-cluster credential to update objects in the underlying clusters; they still always use the controller accounts (per-cluster in `cluster.spec.secretRef`) for reading/watching
+
+- [x] define identity provider interface
+- [x] update federation informer and updater to use identity provider
+- [ ] cache clients in informer?
+- [x] single identity provider that always use identity in cluster spec
+- [x] CRD for per-user-cluster identity store
+- [ ] CRD validation (wait for openapi v3 support in k8s)
+- [x] per-user-cluster identity provider
+- [x] cache and index per-user identities?
+- [ ] handle duplication per-user identities in CRD
+- [x] add command line parameters to select identity provider
+- [ ] external (webhook) identity provider?
+- [x] should FCP do impersonate or not?
+- [ ] testing
+
+@quinton-hoole @deepak-vij ",[],8,2017-11-10 20:30:36,2018-05-08 00:04:30,2018-05-08 00:04:30,False,,,dirty,False,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/147,https://github.com/kubernetes/federation/pull/147,jianhuiz,[auth] add RBAC support,"This is part of federation per-user cluster auth (kubernetes/kubernetes#35254)
+
+This installs the same RBAC in kubernetes, including the build-in roles and bindings
+There will be following PRs for pulling and enforcing clusters' RBAC roles @irfanurrehman @shashidharatd 
+
+@quinton-hoole @deepak-vij ",[],3,2017-11-10 21:00:15,2018-05-22 02:35:15,2018-05-22 02:35:15,False,,,dirty,False,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/149,https://github.com/kubernetes/federation/pull/149,onyiny-ang,Integration test verifies replicasets are deleted when namespace is deleted,"**What this PR does / why we need it:**
+Provides integration tests to test:
+- Replicasets created in a namespace are deleted when a namespace is deleted
+- Events created in a namespace are deleted when a namespace is deleted
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Not aware of any
+
+Special notes for your reviewer:
+I believe this is complete for testing replicasets but I am still working on events. I'm unsure how to create a test event to be created in a namespace for this purpose.","['marun', 'irfanurrehman']",0,2017-11-17 16:20:45,2017-11-29 16:48:37,2017-11-29 16:48:45,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/150,https://github.com/kubernetes/federation/pull/150,shashidharatd,Modifications from running hack/update-bazel.sh,"This is simple change produced by running `hack/update-bazel.sh`. I am doing this as a separate PR to trigger the build ci job `https://k8s-testgrid.appspot.com/sig-multicluster-federation-gce#build` which has been fixed yesterday but no commits in k/f repo to trigger the build.
+if this pr is accepted, the new commit will trigger the build job.
+
+/assign @irfanurrehman 
+/cc @kubernetes/sig-multicluster-pr-reviews 
+
+",['irfanurrehman'],1,2017-11-18 02:58:21,2017-11-20 07:12:24,2017-11-20 07:19:42,True,2017-11-20 07:12:23,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/151,https://github.com/kubernetes/federation/pull/151,shashidharatd,Revamp dns-controller unit testing,"This PR is reraised to k/f from k/k. The original PR is here https://github.com/kubernetes/kubernetes/pull/46606
+
+This is just test improvement.
+
+/cc @kubernetes/sig-multicluster-pr-reviews ","['marun', 'irfanurrehman']",4,2017-11-18 03:07:19,2018-01-17 11:54:35,2018-01-17 11:54:35,True,2018-01-17 11:54:35,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/152,https://github.com/kubernetes/federation/pull/152,shashidharatd,Remove obsolete deploy mechanism,We are no longer maintaining the interim deployment mechanism for federation and hence cleaning it up.,"['madhusudancs', 'irfanurrehman']",1,2017-11-21 08:54:24,2017-11-21 13:46:24,2017-11-21 13:46:24,True,2017-11-21 13:46:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/153,https://github.com/kubernetes/federation/pull/153,shashidharatd,Disable running ingress e2e tests,"DIsable running ingress e2e tests for now which have been failing for ever.
+https://k8s-testgrid.appspot.com/sig-multicluster-federation-gce#gce-serial
+
+/cc @kubernetes/sig-multicluster-bugs ",['irfanurrehman'],1,2017-11-21 18:05:10,2017-11-22 07:06:24,2017-11-22 07:06:24,True,2017-11-22 07:06:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/154,https://github.com/kubernetes/federation/pull/154,csbell,Update Federation OWNERS,"As discussed during the 11/21/2017 SIG Multicluster meeting,
+update OWNERS in the federation repo. Highlights here are pruning
+the contributor list to reflect availability of contributors for
+reviews. Also, this PR nominates Maru and Shashi as approvers.",['irfanurrehman'],1,2017-11-21 21:34:23,2017-11-29 12:14:24,2017-11-29 12:14:24,True,2017-11-29 12:14:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/155,https://github.com/kubernetes/federation/pull/155,nikox94,ISS-35637: Mock out the internet,This abstracts away the internet through an interface and tests the hostname resolving for AWS LBs,['quinton-hoole-zz'],1,2017-11-26 09:48:48,2017-12-15 20:03:29,2017-12-15 20:03:29,True,2017-12-15 20:03:29,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/157,https://github.com/kubernetes/federation/pull/157,marun,Fix generation of api reference docs,This PR is in response to a request from @steveperry-53 to source api reference docs from the new repo.,['shashidharatd'],1,2017-11-28 05:56:01,2017-11-28 15:29:24,2017-11-28 15:29:24,True,2017-11-28 15:29:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/158,https://github.com/kubernetes/federation/pull/158,marun,Fix hack/generate-docs.sh,"This PR is in response to a request from @steveperry-53 to source cli docs from the new repo.
+
+/cc @irfanurrehman @shashidharatd ",['shashidharatd'],1,2017-11-28 06:14:53,2017-11-28 13:10:24,2017-11-28 13:10:24,True,2017-11-28 13:10:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/159,https://github.com/kubernetes/federation/pull/159,onyiny-ang,Integration test verifies replicasets are deleted when namespace is deleted 2,"Accidentally pushed upstream/master to the previous PR #149  which closed it. This includes the squashed commits that @irfanurrehman requested.
+
+For reference:
+**What this PR does / why we need it:**
+Provides integration tests to test:
+- Replicasets created in a namespace are deleted when a namespace is deleted
+- Events created in a namespace are deleted when a namespace is deleted
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Not aware of any
+
+Special notes for your reviewer:
+I believe this is complete for testing replicasets but I am still working on events. I'm unsure how to create a test event to be created in a namespace for this purpose.",['irfanurrehman'],1,2017-11-29 17:04:42,2017-11-30 10:37:25,2018-01-09 14:00:31,True,2017-11-30 10:37:25,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/161,https://github.com/kubernetes/federation/pull/161,onyiny-ang,[WIP] Agnostic namespace test for integration/e2e,"**What this PR does / why we need it:**
+This is a follow-up test to #159 that:
+Allows for integration as well as e2e tests to ensure replicasets created in a namespace are deleted when a namespace is deleted
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Not aware of any
+
+Special notes for your reviewer:
+make tests are failing when trying to test with integration. I'm not sure why.",[],0,2017-11-30 16:33:40,2017-12-11 18:34:05,2017-12-11 18:34:20,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/162,https://github.com/kubernetes/federation/pull/162,ggaaooppeenngg,Fix make help cmds absence,,"['spxtr', 'irfanurrehman']",1,2017-12-01 05:46:34,2017-12-20 10:03:35,2017-12-20 10:03:35,True,2017-12-20 10:03:35,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/164,https://github.com/kubernetes/federation/pull/164,ggaaooppeenngg,Set jobs as default resource,Signed-off-by: Peng Gao <peng.gao.dut@gmail.com>,[],1,2017-12-05 10:22:29,2017-12-19 02:35:27,2017-12-19 02:35:28,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/165,https://github.com/kubernetes/federation/pull/165,perotinus,Improve the tests for Federation API validation,"The parts of the tests that checked for errors will always succeed, because there will always be an error related to `ObjectMeta.ResourceVersion`. Adding the scaffolding from the success cases ensures that that error is not returned, and that the check for some errors is triggered by actual errors.","['marun', 'irfanurrehman']",1,2017-12-06 00:41:44,2017-12-22 01:49:36,2017-12-22 01:49:36,True,2017-12-22 01:49:36,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/167,https://github.com/kubernetes/federation/pull/167,onyiny-ang,[WIP] Agnostic namespace test for integration/e2e,"**What this PR does / why we need it:**
+This is a follow-up test to #159 that:
+Allows for integration as well as e2e tests to ensure replicasets created in a namespace are deleted when a namespace is deleted
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Not aware of any
+
+Special notes for your reviewer:
+make tests are failing when trying to test with integration. I'm not sure why.",[],0,2017-12-11 18:37:53,2017-12-27 04:54:13,2017-12-27 04:54:20,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/168,https://github.com/kubernetes/federation/pull/168,font,Convert the Job controller to a sync controller,,"['jianhuiz', 'irfanurrehman']",1,2017-12-13 06:00:01,2018-07-02 13:50:12,2018-07-02 13:50:12,False,,,dirty,False,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/171,https://github.com/kubernetes/federation/pull/171,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",['cblecker'],1,2017-12-20 18:32:14,2017-12-26 12:55:37,2017-12-26 16:58:23,True,2017-12-26 12:55:37,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/172,https://github.com/kubernetes/federation/pull/172,spiffxp,Workaround gazelle moving to a new repo,"Keep using the same version of gazelle instead of following to
+a later version at a new repo.  Same approach as kubernetes/kubernetes#57564
+
+ref: kubernetes/test-infra#6075",['ixdy'],1,2017-12-22 20:15:08,2018-01-26 22:14:32,2018-01-26 22:14:32,True,2018-01-26 22:14:32,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/173,https://github.com/kubernetes/federation/pull/173,onyiny-ang,[WIP] Agnostic namespace test for integration/e2e,"**What this PR does / why we need it:**
+This is a follow-up test to #159 that:
+Allows for integration as well as e2e tests to ensure replicasets created in a namespace are deleted when a namespace is deleted
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Not aware of any
+
+Special notes for your reviewer:
+namespace tests are failing due to timeout waiting for namespace deletion. Increasing time in ""waitForNamespaceDeletion"" function (test/common/namespace.go) does not seem to help. ",[],3,2017-12-27 05:02:34,2017-12-27 05:22:06,2017-12-27 05:28:05,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/174,https://github.com/kubernetes/federation/pull/174,onyiny-ang,Agnostic namespace test for integration/e2e,"**What this PR does / why we need it:**
+This is a follow-up test to #159 that:
+Allows for integration as well as e2e tests to ensure replicasets created in a namespace are deleted when a namespace is deleted
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Not aware of any
+
+Special notes for your reviewer:
+namespace tests are failing due to timeout waiting for namespace deletion. Increasing time in ""waitForNamespaceDeletion"" function (test/common/namespace.go) does not seem to help. ",['marun'],2,2017-12-27 05:23:44,2018-01-09 04:40:12,2018-01-09 14:00:41,True,2018-01-09 04:40:12,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/178,https://github.com/kubernetes/federation/pull/178,gyliu513,Used REGISTRY env in hyperkube Makefile.,This can make the local build successes if the local build machine cannot access internet.,[],1,2018-01-03 03:58:59,2018-06-02 05:58:19,2018-06-02 05:58:19,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/180,https://github.com/kubernetes/federation/pull/180,shashidharatd,Add option to kubefed to use external etcd server,"Currently etcd is deployed in the same pod as federation apiserver and this may not be desirable for some deployments. So adding an option to kubefed wherein user can pass the pre-deployed etcd-server to be used as federation backend.
+
+Note: We need to secure the communication between api-server and etcd using tls, which would be done in follow up pr's.
+
+/cc @kubernetes/sig-multicluster-feature-requests ",['irfanurrehman'],1,2018-01-04 09:37:32,2018-01-30 19:38:09,2018-01-30 19:38:09,True,2018-01-30 19:38:09,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/182,https://github.com/kubernetes/federation/pull/182,onyiny-ang,ran ./hack/update-all to address failing verify tests,"**What this PR does / why we need it:**
+This PR addresses the failing verify tests performed by the k8s-ci-robot
+./hack/verify-codegen.sh seems to be failing due to Boilerplate date set to 2017 instead of 2018.
+
+**Which issue(s) this PR fixes (optional, in fixes #<issue number>(, fixes #<issue_number>, ...) format, will close the issue(s) when PR gets merged):**
+Fixes: #181  
+Fixes verify tests for: #174 #178 #180 
+
+**Special notes for your reviewer:**
+Happy New Year~
+  
+  ","['pmorie', 'shashidharatd', 'irfanurrehman']",2,2018-01-05 17:49:31,2018-01-08 14:38:11,2018-01-09 14:01:00,True,2018-01-08 14:38:11,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/183,https://github.com/kubernetes/federation/pull/183,shashidharatd,Bump vendored code to match that of kubernetes-v1.10.0-alpha.3,"- Add versions in glide.yaml file to match the corresponding version from kubernetes-1.10.0-alpha.3 ~~1.9.2-beta.0~~
+- Updated vendor code to match kubernetes-1.10.0-alpha.3 ~~1.9.2-beta.0~~ and fix the usage in federation code
+
+/cc @kubernetes/sig-multicluster-pr-reviews @irfanurrehman @marun ",[],13,2018-01-08 14:57:24,2018-02-20 05:23:34,2018-02-20 05:23:35,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/184,https://github.com/kubernetes/federation/pull/184,marun,Fix openshift compat for kubefed join and e2e,"Openshift >= 1.7 needs the included changes to support ``kubefed join`` (since openshift creates an extra secret per service account) and e2e (since secrets no longer contain ``kubeconfig`` as of 1.7).
+
+/assign irfanurrehman shashidharatd 
+
+cc: @onyiny-ang @font   ","['font', 'shashidharatd', 'irfanurrehman']",1,2018-01-08 16:48:41,2018-01-10 16:51:13,2018-01-10 16:51:13,True,2018-01-10 16:51:13,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/186,https://github.com/kubernetes/federation/pull/186,nikox94,ISSUE-185: Init e2e README.md,https://github.com/kubernetes/federation/issues/185,['shashidharatd'],2,2018-01-08 20:02:27,2018-12-30 15:26:33,2018-12-30 15:26:34,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/190,https://github.com/kubernetes/federation/pull/190,irfanurrehman,Script to initialise Release 1.9.0,"I have used the default project name as `kubernetes-federation-release`, because not sure which project will host the fcp image, yet. On the other hand the same name bucket `kubernetes-federation-release` is hosted in `k8s-jkns-e2e-gce-federation`.
+We further need to figure out, if this can be triggered from one of the CI jobs.
+@shashidharatd @marun 
+
+PS: once this is accepted I will add a v1.9.0 tag on the latest commit, post which if this is run as 
+`hack/release.sh v1.9.0`, will build and push the release.",['shashidharatd'],2,2018-01-15 19:41:20,2018-01-20 06:57:27,2018-01-20 06:57:28,True,2018-01-20 06:57:27,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/191,https://github.com/kubernetes/federation/pull/191,shashidharatd,Allow fcp deployment in pre-existing federation namespace,"Fixes: https://github.com/kubernetes/federation/issues/19
+
+/assign @irfanurrehman ",['irfanurrehman'],1,2018-01-16 10:32:51,2018-01-17 13:10:28,2018-01-17 13:10:28,True,2018-01-17 13:10:27,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/193,https://github.com/kubernetes/federation/pull/193,shashidharatd,Reduce length of apiserver credential secret name,"Recent PR builds started failing with error as follows.
+```
+W0124 04:32:04.366] F0124 04:32:04.212763    1370 helpers.go:119] The Deployment ""e2e-f8n-d2c00c37-00ba-11e8-b7d5-0a580a6c0311-0-apiserver"" is invalid: 
+W0124 04:32:04.366] * spec.template.spec.volumes[0].name: Invalid value: ""e2e-f8n-d2c00c37-00ba-11e8-b7d5-0a580a6c0311-0-apiserver-credentials"": must be no more than 63 characters
+W0124 04:32:04.366] * spec.template.spec.containers[0].volumeMounts[0].name: Not found: ""e2e-f8n-d2c00c37-00ba-11e8-b7d5-0a580a6c0311-0-apiserver-credentials""
+```
+So reduced the name of the apiserver credential secret. the name is still unique as we create it within namespace having unique name.
+",['irfanurrehman'],1,2018-01-24 07:56:27,2018-01-24 14:46:33,2018-01-24 14:46:33,True,2018-01-24 14:46:33,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/194,https://github.com/kubernetes/federation/pull/194,irfanurrehman,Update/Correct bazel release bins to be used in release job,"Update the build scripts to generate sane release tars and image tar for release.
+",['shashidharatd'],4,2018-01-31 07:02:53,2018-02-02 10:19:13,2018-02-02 10:19:13,True,2018-02-02 10:19:13,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/195,https://github.com/kubernetes/federation/pull/195,irfanurrehman,Fix release version,The PR is on top of https://github.com/kubernetes/federation/pull/194,['shashidharatd'],5,2018-01-31 13:36:26,2018-02-02 10:19:14,2018-02-02 10:19:14,True,2018-02-02 10:19:14,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/196,https://github.com/kubernetes/federation/pull/196,irfanurrehman,Update release script to make it work with bazel,The PR is on top of https://github.com/kubernetes/federation/pull/195,['shashidharatd'],6,2018-01-31 18:53:19,2018-02-02 10:19:11,2018-02-02 10:19:11,True,2018-02-02 10:19:11,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/197,https://github.com/kubernetes/federation/pull/197,lukaszo,Do not delete ExternalIPs,"**What this PR does / why we need it**: ExternalIPs are not managed by Kubernetes and should not be touched.
+
+This is copy of PR from k8s repo https://github.com/kubernetes/kubernetes/pull/51894
+```release-note
+NONE
+```
+/kind bug
+
+cc @quinton-hoole
+",['shashidharatd'],1,2018-01-31 22:12:03,2018-02-02 11:44:06,2018-02-02 11:44:06,True,2018-02-02 11:44:06,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/219,https://github.com/kubernetes/federation/pull/219,xtophs,Federation Provider for Azuredns,"**What this PR does / why we need it**:
+Adds Azure DNS support to federation
+
+**Which issue this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close that issue when PR gets merged)*: fixes #
+Fixes Issue #44874 
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+
+The federation provider for AzureDNS allows for using AzureDNS to manage DNS records for federated kubernetes clusters. The clusters do not have to run in Azure.
+
+Running the provider requires
+
+	• an active Azure subscription with a DNS zone configured. See Azure Docs on how to [configure a DNS Zone](https://docs.microsoft.com/en-us/azure/dns/dns-zones-records).
+	• Service Principal credentials with permissions to manage the DNS Zone
+
+To configure federation, you follow the steps at: https://kubernetes.io/docs/tasks/federation/set-up-cluster-federation-kubefed/
+
+Note, that at this time, a cluster created with acs-engine may need kubernetes RBAC (not Azure RBAC) configured first. See detailed instructions link below.
+
+The DNS provider needs a configuration file with the information to access the Azure Subscription. The format of the config file is:
+
+[Global]
+subscription-id = [Azure Subscription ID]
+tenant-id = [Azure Tenant ID where the Service Principal is created]
+client-id = [Service Principal Client ID]
+secret = [Service Principal Secret]
+resourceGroup = [Azure Resource Group where the DNS Zone is provisioned]
+
+You can get Subscription ID and Tenant ID by running the following Azure CLI 2.0 command:
+
+`az account show`
+
+
+You can create a Service Principal with write access to the resource group:
+
+`az ad sp create-for-rbac -n ""http://MyApp"" --role contributor --scopes /subscriptions/[subscription id]/resourceGroups/[resource group name]`
+
+With the provider config file, you can initialize a federation:
+
+`kubefed init myfederation --host-cluster-context=[cluster name] --dns-provider=""azure-azuredns"" --dns-zone-name=""[dns Zone]"" --dns-provider-config=[path to provider config file]`
+
+Join a federation:
+
+`kubefed join [your cluster name] --host-cluster-context=[your cluster name] --cluster-context=[your cluster name]`
+
+And verify that the cluster was joined:
+
+kubectl get clusters
+NAME STATUS AGE
+fed-west Ready 13s
+
+For complete instructions setting up federated clusters in Azure see: https://github.com/xtophs/k8s-setup-federation-cluster
+```",['irfanurrehman'],4,2018-02-02 17:04:50,2018-03-18 19:59:00,2018-03-18 19:59:00,True,2018-03-18 19:58:59,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/223,https://github.com/kubernetes/federation/pull/223,xtophs,Clarified how to run container from make quick-release,Added clarification on how to run build output to README.md,['irfanurrehman'],1,2018-02-08 00:46:12,2018-03-16 09:01:24,2018-03-16 09:01:24,True,2018-03-16 09:01:24,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/224,https://github.com/kubernetes/federation/pull/224,irfanurrehman,Fix for non matching api defaults for deployment api,"Deployment defaults were not updated in extensions deployment as proposed in https://github.com/kubernetes/kubernetes/pull/34339, but updated in https://github.com/kubernetes/kubernetes/pull/39683 as part of new deployment endpoint.
+
+Recently, after merging https://github.com/kubernetes/kubernetes/pull/58832 and https://github.com/kubernetes/kubernetes/pull/58854, federation builds break for example https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/ci-federation-e2e-gce/3080.
+
+A better mechanism to avoid running into this problem is that federation also updates all the apis that it uses to talk to k8s and to store in its registry. This will eventually happen and while we chalk out a plan for that, the current fix is to use an api type with same defaulting values in federation to store the deployment object in federation registry.",['shashidharatd'],2,2018-02-11 13:33:55,2018-02-13 08:43:51,2018-02-13 08:43:51,True,2018-02-13 08:43:51,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/229,https://github.com/kubernetes/federation/pull/229,irfanurrehman,Update the image url to use the gce ci project.,"Apparantly the test-infra service account also does not have
+permissions to push to gcr.io/google_containers.
+
+/assign @shashidharatd ",['shashidharatd'],1,2018-02-13 11:42:03,2018-02-13 15:41:51,2018-02-13 15:41:51,True,2018-02-13 15:41:51,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/231,https://github.com/kubernetes/federation/pull/231,jeis2497052,Propose fix some typos,are these changes OK?,[],1,2018-02-13 16:31:48,2018-06-04 14:49:23,2018-06-04 14:49:23,False,,,dirty,False,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/232,https://github.com/kubernetes/federation/pull/232,irfanurrehman,Update the default image name to fcp,"As the image now is available at the release location.
+/assign @shashidharatd ",['shashidharatd'],1,2018-02-14 10:55:27,2018-02-14 12:44:52,2018-02-14 12:44:52,True,2018-02-14 12:44:51,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/233,https://github.com/kubernetes/federation/pull/233,leahnp,Added timeout flag and default 5 minute timeout ,"Added flag `--timeout` for users to control length of federation control plane initialization. Default is 5 minutes but can be overrode by passing `--timeout=<int representing minutes>` with `kubefed init`. 
+
+Leveraged information and code from: https://github.com/kubernetes/kubernetes/pull/42296
+
+Fixes: #118 ",['irfanurrehman'],1,2018-02-15 02:54:19,2018-07-19 19:36:45,2018-07-19 19:36:45,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/235,https://github.com/kubernetes/federation/pull/235,shashidharatd,Fix deploy/cluster/log-dump.sh,"Fixes the failure in federation logging script caused due to changes in k/k.
+
+https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/ci-federation-e2e-gce/3298
+
+/assign @irfanurrehman 
+/cc @kubernetes/sig-multicluster-bugs ",['irfanurrehman'],1,2018-02-19 13:45:14,2018-02-19 18:04:38,2018-02-19 18:04:38,True,2018-02-19 18:04:38,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/237,https://github.com/kubernetes/federation/pull/237,shashidharatd,Migrate from glide to golang/dep and also bump vendor,"This PR does following things.
+- Migrate from glide to golang/dep as dependency management tool
+- Bump the k8s dependency to v1.10.0-alpha.3 and adapt the usage in federation
+- Refactor the test codes to not use `k8s.io/kubernetes/test/e2e/framework` (as it is one huge package and lot many unnecessary stuff gets imported. So pulled in only necessary funcs into a reusable package within federation).
+- Few other miscellaneous stuff.
+
+/cc @kubernetes/sig-multicluster-pr-reviews 
+/assign @irfanurrehman 
+
+p.s: Even though the PR is huge, most of it is either generated code or vendored code. So request to review commit by commit which is much easier.",['irfanurrehman'],15,2018-02-19 19:28:30,2018-03-01 10:35:11,2018-03-01 13:56:36,True,2018-03-01 10:35:11,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/239,https://github.com/kubernetes/federation/pull/239,shashidharatd, Fix broken DNS CNAME chain for cross-cluster service discovery,"Partly addresses the issue in https://github.com/kubernetes/federation/issues/175
+
+CNAME records were missed for the federated cluster without healthy service shards. This pr fixes the missing CNAME records issue.
+
+/cc @kubernetes/sig-multicluster-bugs 
+/assign @irfanurrehman ",['irfanurrehman'],2,2018-02-27 15:29:12,2018-03-07 04:51:52,2018-03-07 04:51:53,True,2018-03-07 04:51:52,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/241,https://github.com/kubernetes/federation/pull/241,irfanurrehman,Federation bazel fix,"Fixes the issues creeping into `pull-federation-verify` because of the updates in latest `bazel tools and rules`.
+/assign @shashidharatd ",['shashidharatd'],3,2018-02-28 05:00:34,2018-03-07 03:35:22,2018-03-07 03:35:22,False,,,dirty,False,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/243,https://github.com/kubernetes/federation/pull/243,JoshuaAndrew,Update kubefed.go,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/devel/pull-requests.md#the-pr-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/devel/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/devel/pull-requests.md#write-release-notes-if-needed
+4. If the PR is unfinished, see how to mark it: https://github.com/kubernetes/community/blob/master/contributors/devel/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What this PR does / why we need it**:
+
+ move https://github.com/kubernetes/kubernetes repo to https://github.com/kubernetes/federation repo
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #
+
+**Special notes for your reviewer**:
+     
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+   NONE
+```
+
+",[],1,2018-03-05 08:02:54,2018-03-05 08:14:36,2018-03-05 08:14:36,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/244,https://github.com/kubernetes/federation/pull/244,JoshuaAndrew,Update kubefed.go,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/devel/pull-requests.md#the-pr-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/devel/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/devel/pull-requests.md#write-release-notes-if-needed
+4. If the PR is unfinished, see how to mark it: https://github.com/kubernetes/community/blob/master/contributors/devel/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What this PR does / why we need it**:
+
+ Change https://github.com/kubernetes/kubernetes repo name to https://github.com/kubernetes/federation in kubefed help.
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #
+
+**Special notes for your reviewer**:
+     
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+   NONE
+```
+
+",['irfanurrehman'],1,2018-03-05 08:16:01,2018-03-14 07:52:34,2018-03-14 07:52:34,True,2018-03-14 07:52:34,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/245,https://github.com/kubernetes/federation/pull/245,shashidharatd,Fix deepcopy invocation of federated ingress spec to cluster ingress …,"…spec
+
+Fixes: https://github.com/kubernetes/federation/issues/242
+
+Surprising that this bug existed for so long time. 
+Have updated the testcase to cover this scenario.
+
+/cc @quinton-hoole @kubernetes/sig-multicluster-bugs 
+/assign @irfanurrehman ","['irfanurrehman', 'quinton-hoole-zz']",1,2018-03-06 18:04:46,2018-03-13 17:42:11,2018-03-13 17:42:11,True,2018-03-13 17:42:10,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/246,https://github.com/kubernetes/federation/pull/246,fr0stbyte,Fix comparison of golang versions,"Change hack/lib/golang.sh to compare golang
+version properly with ""sort -s -t. -k 1,1 -k 2,2n -k 3,3n"",
+which sorts key by key and not as strings.","['perotinus', 'shashidharatd']",2,2018-03-07 21:35:45,2018-03-08 13:10:57,2018-03-08 13:10:57,True,2018-03-08 13:10:57,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/247,https://github.com/kubernetes/federation/pull/247,irfanurrehman,Alternative path (then default usage of RBAC) for kubefed cluster access,"Implements functionality as discussed in https://github.com/kubernetes/federation/issues/210.
+kubefed gets a new flag `--use-credentials-kubeconfig`. 
+/assign @shashidharatd ",['shashidharatd'],4,2018-03-13 15:16:55,2018-03-26 05:38:01,2018-03-26 05:38:01,True,2018-03-26 05:38:01,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/248,https://github.com/kubernetes/federation/pull/248,irfanurrehman,Fix for deployment/replicaset delete problems,"Fixes #215 
+/assign @shashidharatd ",['shashidharatd'],1,2018-03-14 12:40:15,2018-03-19 07:47:59,2018-03-19 07:47:59,True,2018-03-19 07:47:59,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/249,https://github.com/kubernetes/federation/pull/249,chenpengdev,fix broken link,fix broken link,['quinton-hoole-zz'],1,2018-03-15 07:36:30,2018-03-20 00:09:00,2018-03-21 10:37:21,True,2018-03-20 00:09:00,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/253,https://github.com/kubernetes/federation/pull/253,irfanurrehman,Enable test to check cross cluster federated service discovery,Enable to check the flakiness of this test in current setup.,[],1,2018-03-18 16:34:13,2018-08-15 18:10:39,2018-08-15 18:10:39,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/256,https://github.com/kubernetes/federation/pull/256,nikox94,[WIP]ISSUE-185: Set up DNS tests,Followup to #186 ,[],1,2018-04-04 01:23:34,2018-09-01 03:36:54,2018-09-01 03:36:54,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/257,https://github.com/kubernetes/federation/pull/257,shashidharatd,Update Bazel build files,"Due to recent updates in bazel job, the generated BUILD files have changed. It is causing the PR tests on this repo to fail, hence this fix
+
+/assign @irfanurrehman ",['irfanurrehman'],3,2018-04-06 04:11:08,2018-09-17 05:01:58,2018-09-17 05:01:59,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/262,https://github.com/kubernetes/federation/pull/262,AdamDang,"some typo fixes: duplicated ""to to""->""to""","""to to""->""to""",['gmarek'],3,2018-04-22 15:23:55,2018-08-24 05:16:26,2018-08-24 05:16:26,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/263,https://github.com/kubernetes/federation/pull/263,mahuihuang,fix typo,Fix typo.,['ixdy'],1,2018-04-23 02:37:07,2018-06-19 01:54:21,2018-06-19 01:54:21,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/265,https://github.com/kubernetes/federation/pull/265,AdamDang,Typo fix: distriubted->distributed/kuberentes->kubernetes,"distriubted->distributed
+kuberentes->kubernetes",['shashidharatd'],3,2018-04-29 07:28:29,2018-05-10 13:31:38,2018-05-10 13:31:38,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/266,https://github.com/kubernetes/federation/pull/266,AdamDang,Typo fix: commited->committed,Line 117: commited->committed,"['idealhack', 'irfanurrehman']",1,2018-04-30 15:28:34,2018-08-24 05:16:48,2018-08-24 05:16:49,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/267,https://github.com/kubernetes/federation/pull/267,AdamDang,Typo fix in echo message : checkpiont->checkpoint,Line 845: checkpiont->checkpoint,"['idealhack', 'vishh', 'shashidharatd']",1,2018-05-09 15:49:55,2018-08-24 05:17:35,2018-08-24 05:17:36,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/268,https://github.com/kubernetes/federation/pull/268,AdamDang,Typo fix: directy->directory,Line 26: directy->directory,"['idealhack', 'mikedanese']",1,2018-05-17 13:29:59,2018-08-24 05:18:31,2018-08-24 05:18:31,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/270,https://github.com/kubernetes/federation/pull/270,AdamDang,Typo fix: occurence->occurrence,line 5444: occurence->occurrence,[],2,2018-05-31 14:53:41,2018-08-24 05:18:47,2018-08-24 05:18:47,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/271,https://github.com/kubernetes/federation/pull/271,AdamDang,Typo fix contianer->container,Line 17: contianer->container,"['idealhack', 'mikedanese']",1,2018-06-02 10:36:40,2018-08-24 05:19:04,2018-08-24 05:19:04,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/272,https://github.com/kubernetes/federation/pull/272,mirake,Typo fix: checkpiont -> checkpoint,,['idealhack'],1,2018-06-05 08:34:09,2018-07-12 10:33:38,2018-09-16 10:49:21,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/273,https://github.com/kubernetes/federation/pull/273,AdamDang,Typo fix: sepcified->specified,Line 43: sepcified->specified,['idealhack'],1,2018-06-12 10:02:39,2018-08-24 05:20:19,2018-08-24 05:20:19,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/279,https://github.com/kubernetes/federation/pull/279,RA489,Adding Contribution guidelines,"Adding Contribution guidelines for kubernetes federation.
+fixes #278",['quinton-hoole-zz'],1,2018-07-19 05:18:03,2018-11-16 06:24:07,2018-11-16 06:24:08,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/283,https://github.com/kubernetes/federation/pull/283,mirake,Fix some typos,"continously -> continuously
+occurence -> occurrence
+identifer -> identifier
+
+Signed-off-by: Rui Cao <ruicao@alauda.io>",['idealhack'],1,2018-09-16 10:58:10,2019-01-09 07:16:03,2019-01-09 07:16:03,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/284,https://github.com/kubernetes/federation/pull/284,mooncak,Remove duplicated words,"Remove duplicated words in below files to make it more clearly:
+1. pkg/dnsprovider/providers/aws/route53/interface.go
+2. pkg/federation-controller/cluster/clustercontroller_test.go
+3. test/k8s/e2e/framework/framework.go","['marun', 'quinton-hoole']",1,2018-10-04 16:06:39,2018-10-19 18:12:18,2018-10-19 18:12:18,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/285,https://github.com/kubernetes/federation/pull/285,mooncak,Fix typos issues in master-helper.sh,"Fix typos issues in below files:
+1. build/README.md
+2. cluster/gce/container-linux/master-helper.sh","['lavalamp', 'yifan-gu']",2,2018-10-07 01:17:21,2018-11-11 01:38:44,2018-11-11 01:38:44,True,2018-11-11 01:38:44,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/286,https://github.com/kubernetes/federation/pull/286,SataQiu,fix code format,fix code format,['cblecker'],1,2018-10-07 03:18:44,2018-10-07 08:04:39,2018-10-09 08:20:02,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/287,https://github.com/kubernetes/federation/pull/287,xichengliudui,Delete repeated 'to',Delete repeated 'to',[],1,2018-10-17 07:29:34,2018-10-17 07:29:54,2018-10-17 07:31:27,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/288,https://github.com/kubernetes/federation/pull/288,xichengliudui,Delete repeated 'to',Delete repeated 'to',"['fabianofranz', 'cblecker']",1,2018-10-17 07:33:04,2018-10-17 07:41:07,2018-10-17 07:41:07,True,2018-10-17 07:41:07,k8s-ci-robot,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/289,https://github.com/kubernetes/federation/pull/289,xichengliudui,Delete duplicate 'with',Delete duplicate 'with',"['shashidharatd', 'irfanurrehman', 'quinton-hoole-zz']",1,2018-10-18 02:00:52,2018-11-02 14:20:16,2018-11-02 14:20:16,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/290,https://github.com/kubernetes/federation/pull/290,xichengliudui,Delete repeated 'of',Delete repeated 'of',"['shashidharatd', 'quinton-hoole-zz']",1,2018-10-19 02:32:48,2018-11-02 14:33:37,2018-11-02 14:33:37,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/291,https://github.com/kubernetes/federation/pull/291,AdamDang,Fix the typo in echo message of Update upgrade.sh,line 43: sepcified->specified,['jszczepkowski'],2,2018-10-19 03:41:56,2018-12-20 10:50:14,2018-12-20 10:50:14,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/292,https://github.com/kubernetes/federation/pull/292,xichengliudui,Remove duplicate words,Remove duplicate words,"['marun', 'shashidharatd', 'irfanurrehman', 'csbell']",1,2018-10-24 12:19:20,2018-11-21 06:02:54,2018-11-21 06:02:54,False,,,unknown,,closed
+federation,https://api.github.com/repos/kubernetes/federation/pulls/299,https://github.com/kubernetes/federation/pull/299,nikhita,Add CONTRIBUTING.md,"Ref: https://github.com/kubernetes/steering/issues/28
+
+The content is as per https://github.com/kubernetes/kubernetes-template-project.
+
+/assign @shashidharatd  @marun ","['marun', 'shashidharatd']",1,2018-12-27 09:24:51,2019-01-17 06:42:18,2019-01-17 06:45:03,True,2019-01-17 06:42:18,k8s-ci-robot,unknown,,closed

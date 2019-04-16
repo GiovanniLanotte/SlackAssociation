@@ -1,0 +1,1817 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/1,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/1,Import azure cloud provider code,"- Import azure cloud provider code, synced with k8s v1.11.0-alpha.0
+- Add build and test tool
+- Add doc",closed,True,2018-03-27 09:52:50,2018-04-04 02:34:39
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/2,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/2,[DO NOT MERGE] Verify ci test,"This PR is to verify CI test only.
+
+/hold",closed,True,2018-04-04 01:39:16,2018-04-23 09:50:16
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/3,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/3,Update package import path,"Change 'github.com/kubernetes' to 'k8s.io'.
+
+/assign @feiskyer ",closed,True,2018-04-04 02:21:12,2018-04-04 02:34:50
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/4,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/4,Enable e2e tests for Azure,"We should set up an e2e tests for this repo
+
+- [x] Setup e2e tests infra on Azure
+- [x] Enable e2e tests for PRs
+- [x] Switch to test-infra for presubmit e2e tests (presubmit tests are running for pull requests in cloud-provider-azure repo) @ritazh 
+  - [x] Add e2e steps to setup test-infra via Makefile
+  - [x] Update presubmit tests to the new way
+  - [ ] Remove current perl scripts
+- [ ] Enable full periodic e2e tests for stable releases (periodic tests are running in backgroud for each release braches)
+  - [ ] Add more test scenarios, e.g. conformance, correctness, alpha-features, autoscaling, scalability, multi-zone, slow and serial
+  - [ ] Enable e2e for more releases, e.g. v1.13 and v1.12
+  - [ ] Setup prow jobs for new test scenarios
+- [ ] Add Azure features e2e testings #7
+  - [ ] LoadBalancer service tests with various annotations
+  - [ ] ACR image pulling tests without docker secrets setting explicitly
+  - [ ] Multi availability zones tests
+  - [ ] Cloud provider configuration options tests (e.g. Standard LoadBalancer and VMSS)
+  - [ ] Upgrading tests (e.g. cloud-provider version updates)
+- [ ] Documentation for e2e @ritazh 
+",open,False,2018-04-04 07:43:09,2019-04-04 14:56:23
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/5,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/5,Add documentations for Azure cloud provider config file,"All params are listed [here](https://github.com/kubernetes/kubernetes/blob/98e89770c6fd57448b50c2e14f2dd14c96999927/pkg/cloudprovider/providers/azure/azure.go#L64-L129)
+
+- [ ]  The meaning of each params
+- [ ]  Different auth methods
+  - [ ] clientId/clientSecret
+  - [ ] clientCert
+  - [ ] UseManagedIdentityExtension
+
+
+
+",closed,False,2018-04-04 07:46:10,2018-04-10 02:14:09
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/6,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/6,Add documentation of kube-controller-manager,"Add documentation of how to use Azure in kube-controller-manager, e.g.
+
+- [x] What should be configured when provisioning kube-controller-manager
+- [x] Docuement kubelet/kube-apiserver should also be configured with same
+- [x] Link to docs created in #5 for cloud-config
+",closed,False,2018-04-04 09:10:53,2018-05-15 07:05:37
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/7,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/7,Add more e2e test cases,"Azure related features should be tested in e2e tests, which includes
+
+- [ ] Different authz methods
+- [ ] Different load balancer behavior with annotations
+- [ ] Verification of various resources
+  - [ ] Routes
+  - [ ] Node's externalID
+  - [ ] Node's publicIP
+  - [ ] NSGs
+- [ ] ACR image pulling tests without docker secrets setting explicitly
+- [ ] Multi availability zones tests
+- [ ] Cloud provider configuration options tests (e.g. Standard LoadBalancer and VMSS)
+- [ ] Upgrading tests (e.g. cloud-provider version updates)
+
+Also add tests for Azure persistent storages, e.g.
+
+- [ ] AzureFile
+- [ ] AzureDisk
+",open,False,2018-04-04 09:16:58,2019-03-24 15:20:57
+cloud-provider-azure,mahuihuang,https://github.com/kubernetes/cloud-provider-azure/pull/8,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/8,Fix grammar mistake,Fix grammar mistake,closed,True,2018-04-06 07:55:42,2018-04-09 15:29:11
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/9,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/9,Add cloud provider config doc,Fixes #5 ,closed,True,2018-04-09 08:06:00,2018-04-10 02:22:26
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/10,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/10,Document known issues of each release,"We should add documentation of known issues of each release, e.g.
+
+- [ ] load balancer and nsg issues
+- [ ] AzureDisk issues
+- [ ] AzureFile issues
+
+To begin with, we could add `SourceAddressPrefixes` issue first (Refer https://github.com/Azure/AKS/issues/199).
+
+/cc @khenidak @andyzhangx @karataliu ",closed,False,2018-04-19 07:46:17,2018-07-23 07:34:23
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/11,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/11,Add documentation for azure service annotations,"Azure cloud provider supports a lot of annotations: https://github.com/kubernetes/kubernetes/blob/master/pkg/cloudprovider/providers/azure/azure_loadbalancer.go#L36-L83, we should document them.
+
+Also refer https://github.com/kubernetes/website/issues/8154
+
+",closed,False,2018-04-23 05:20:24,2018-06-09 09:19:02
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/12,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/12,E2es,,closed,True,2018-04-23 09:49:41,2018-04-23 09:49:54
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/13,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/13,Typo fix: kuberentes->kubernetes,Line 74: kuberentes->kubernetes,closed,True,2018-04-29 07:19:19,2018-05-01 02:02:31
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/14,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/14,Typo fix: skiped->skipped,skiped->skipped,closed,True,2018-04-30 15:39:27,2018-05-01 02:00:35
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/15,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/15,E2e t3 arti,,closed,True,2018-05-09 06:01:25,2018-05-09 06:01:42
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/16,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/16,Add e2e in makefile,"Add e2e target. Pending upstream setup.
+
+/hold",closed,True,2018-05-14 09:44:26,2018-05-21 09:18:54
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/17,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/17,Update doc for cloud-controller-manager,Fixes #6,closed,True,2018-05-15 06:11:40,2018-05-15 08:29:57
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/18,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/18,Update test acs-engine version,,closed,True,2018-05-22 03:37:13,2018-05-24 09:34:26
+cloud-provider-azure,jessfraz,https://github.com/kubernetes/cloud-provider-azure/issues/19,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/19,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:17,2018-07-10 18:48:26
+cloud-provider-azure,caruccio,https://github.com/kubernetes/cloud-provider-azure/issues/20,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/20,Typo,"docs/cloud-provider-config.md
+s/Descriiption/Description/",closed,False,2018-05-28 21:57:22,2018-05-29 04:33:31
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/21,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/21,Fix typo,Close #20,closed,True,2018-05-29 01:41:26,2018-05-29 04:36:34
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/22,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/22,Typo fix: descibe->describe,Line 25: descibe->describe,closed,True,2018-06-02 12:16:58,2018-06-03 09:22:53
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/23,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/23,Import loadbalancer document,"Import azure_loadbalancer.md and update annotation section.
+
+Move loadbalancer doc from https://github.com/kubernetes/kubernetes/blob/v1.12.0-alpha.0/pkg/cloudprovider/providers/azure/azure_loadbalancer.md
+
+Fixes #11 
+",closed,True,2018-06-08 06:26:25,2018-06-11 05:08:06
+cloud-provider-azure,mirake,https://github.com/kubernetes/cloud-provider-azure/pull/24,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/24,Typo fix: configruation -> configuration,,closed,True,2018-06-08 09:57:25,2018-06-11 14:13:41
+cloud-provider-azure,mirake,https://github.com/kubernetes/cloud-provider-azure/pull/25,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/25,Typo fix: refered -> referred,,closed,True,2018-06-11 14:17:42,2018-09-26 14:49:20
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/26,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/26,Sync with k8s v1.12.0-alpha.0,,closed,True,2018-06-12 05:20:56,2018-06-13 02:48:07
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/27,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/27,Test refinement,"1. Add test-check target, which will cover lint and some more test in future.
+Will update 'pull-cloud-provider-azure-lint ' job to 'pull-cloud-provider-azure-check' then.
+2. Update doc for e2e test.",closed,True,2018-06-13 02:53:27,2018-06-20 02:09:29
+cloud-provider-azure,liyongxin,https://github.com/kubernetes/cloud-provider-azure/pull/28,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/28,typo fix for docs,,closed,True,2018-06-13 03:27:35,2018-06-13 04:01:29
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/29,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/29,add conformance test,,closed,True,2018-06-13 04:54:09,2018-06-13 08:36:29
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/30,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/30,add azuredisk-issues.md & azurefile-issues.md,@karataliu @feiskyer ,closed,True,2018-06-21 07:38:12,2018-07-05 01:36:21
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/31,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/31,Typo fix: refere->refer,Line 42: refere->refer,closed,True,2018-06-25 14:50:21,2018-06-26 02:30:53
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/32,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/32,add Azure specific e2e test,"Initialize the test framework for Azure specific e2e tests</br></br>
+**Usage:</br>**
+cd tests/azure-test</br>
+ginkgo</br>
+",closed,True,2018-07-02 06:55:43,2018-07-16 01:52:57
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/33,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/33,[WIP]add skip validation," # Skip Validation
+
+ ## How to run locally
+1. If there is no e2e test report, follow [E2E tests](https://github.com/kubernetes/cloud-provider-azure/master/docs/e2e-tests.md) to generate one.</br>
+2. Set environment variable `CLUSTER_NAME=<name of cluster or report directory path>` </br>
+3. `go run tests/skip-validation/main.go`",closed,True,2018-07-06 10:34:42,2018-11-23 05:25:54
+cloud-provider-azure,justaugustus,https://github.com/kubernetes/cloud-provider-azure/pull/34,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/34,Add `SECURITY_CONTACTS`,"Closes: #19 
+/sig azure
+
+Signed-off-by: Stephen Augustus <foo@agst.us>",closed,True,2018-07-09 08:14:07,2018-07-10 18:48:26
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/35,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/35,Update azuredisk-issues.md,,closed,True,2018-07-10 03:01:54,2018-07-10 05:10:05
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/36,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/36,Fix test-check,,closed,True,2018-07-12 06:23:42,2018-07-13 22:37:57
+cloud-provider-azure,cpuguy83,https://github.com/kubernetes/cloud-provider-azure/pull/37,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/37,Add docs for LB idle timeouts,Docs are for kubernetes/kubernetes@55569494d64dd93777ca42437055884d6a99c46d,closed,True,2018-07-13 23:49:46,2018-07-16 01:16:56
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/issues/38,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/38,Enable lint check for tests/e2e,,closed,False,2018-07-16 02:04:46,2018-07-20 07:49:06
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/39,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/39,e2e lint check,,closed,True,2018-07-16 04:31:27,2018-07-20 07:48:57
+cloud-provider-azure,aojea,https://github.com/kubernetes/cloud-provider-azure/issues/40,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/40,Missing CONTRIBUTING.md file,"All K8s subrepositories should have a CONTRIBUTING.md file, which at the minimum should point to https://github.com/kubernetes/community/blob/master/contributors/guide/README.md. Care should be taken that all information is in sync with the contributor guide.
+
+Subrepositories may also have contributing guidelines specific to that repository. They should be explicitly documented and explained in the CONTRIBUTING.md
+
+Ref:  https://github.com/kubernetes/community/issues/1832",closed,False,2018-07-16 09:23:21,2018-07-19 05:46:42
+cloud-provider-azure,nikhita,https://github.com/kubernetes/cloud-provider-azure/pull/41,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/41,Add CONTRIBUTING.md,"Fixes #40 
+xref https://github.com/kubernetes/community/issues/1832
+
+/assign jdumars feiskyer ",closed,True,2018-07-19 05:04:22,2018-07-20 04:28:39
+cloud-provider-azure,nagarjunac,https://github.com/kubernetes/cloud-provider-azure/issues/42,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/42,Updated load balancer configuration by Service Controller,"Hi,
+We have a kubernetes cluster version 1.9.2 deployed using acs engine template. 
+And we are using nginx ingress as a load balancer for our services.
+Few times we have observed that all the services are going down at once and come back within few seconds. No pod restarts observed during that time.
+When we checked the kubernetes events, we stumbled upon something which read "" Load balancer configuration updated by Service Controller"". 
+Please help us understand if this is the one which is making all the services go down or there might be some other reason .",closed,False,2018-07-19 07:05:25,2018-12-22 10:12:31
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/43,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/43,update docs,/assign @karataliu ,closed,True,2018-07-26 08:32:29,2018-07-27 07:31:58
+cloud-provider-azure,poothia,https://github.com/kubernetes/cloud-provider-azure/pull/44,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/44,adding code-of-conduct.md file,Adding missing code-of-conduct.md as suggested in kubernetes-template-project.,closed,True,2018-08-02 09:24:09,2018-08-03 01:46:27
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/45,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/45,[WIP] Sync with k8s v1.13.0-alpha.0,,closed,True,2018-08-08 09:01:30,2018-09-03 08:11:33
+cloud-provider-azure,justaugustus,https://github.com/kubernetes/cloud-provider-azure/pull/46,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/46,Update OWNERS / SECURITY_CONTACTS,"* Remove Jaice
+* Remove Cole
+* Add Stephen as reviewer
+
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+/sig azure
+/assign @khenidak @feiskyer ",closed,True,2018-08-09 02:57:41,2018-08-10 01:48:23
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/47,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/47,add azure internal and subnet service annotation test,"Add tests for load balancer annotations
+Add azure resource framework
+Rename some of the functions",closed,True,2018-08-15 02:32:32,2018-08-17 05:26:13
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/48,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/48,Fix some typos,Fix some typos to make this doc better.,closed,True,2018-08-20 11:54:04,2018-08-21 03:21:06
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/49,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/49,default disable conformance  parallel,,closed,True,2018-08-23 03:01:13,2018-08-23 06:19:23
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/50,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/50,add NSGs verification e2e test,,closed,True,2018-08-24 04:35:56,2018-09-04 04:41:53
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/51,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/51,Fix small typos in release-versioning.md,"versionging->versioning
+increse->increase",closed,True,2018-09-01 07:16:47,2018-09-02 12:53:30
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/52,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/52,Sync with k8s v1.13.0-alpha.0,cc @andyzhangx @feiskyer ,closed,True,2018-09-03 08:10:55,2018-09-04 02:19:04
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/issues/53,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/53,Update testing resource group name for pull-cloud-provider-azure-e2e ,"Should add time stamp into group name. Currently it only contains pr number and commit, a '/retest' usually wouldn't pass because previous resource group is not deleted yet.",closed,False,2018-09-04 02:59:51,2018-09-19 12:54:29
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/54,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/54,update disk issues,"/assign @feiskyer @karataliu 
+
+cc @weherdh I put the azure disk & azure file issues here
+",closed,True,2018-09-04 06:35:47,2018-09-05 03:47:17
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/55,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/55,Fix some typos in doc dependency-management.md,"Fix some typo :
+Line 7: preovide->provided
+Line 47: thers->there",closed,True,2018-09-04 11:29:01,2018-09-04 13:11:57
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/56,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/56,Update TOC for docs,Update TOC for docs and fix various format issues.,closed,True,2018-09-06 07:37:38,2018-09-06 08:22:21
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/57,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/57,Add documentation for Azure availability zones,"Add docs for AZ: https://github.com/kubernetes/features/issues/586.
+
+/assign @justaugustus ",closed,True,2018-09-06 08:25:16,2018-09-11 18:20:23
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/58,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/58,Add documentation for cross resource group nodes,"Add docs for cross-RG nodes: https://github.com/kubernetes/features/issues/604
+
+/assign @justaugustus
+",closed,True,2018-09-06 08:50:07,2018-09-06 08:54:56
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/59,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/59,Add timestamp in testing resource group name,"Fixes #53 
+
+Will first try verify against a failure deployment, do not view/merge before WIP flag removed.",closed,True,2018-09-19 07:46:14,2018-09-20 06:35:34
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/pull/60,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/60,Update skip.txt,"Remove legacy skip entry
++93 cases cover ",closed,True,2018-09-21 07:50:42,2018-10-08 05:42:10
+cloud-provider-azure,mirake,https://github.com/kubernetes/cloud-provider-azure/pull/61,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/61,Fix typo: dependecies -> dependencies,Signed-off-by: Rui Cao <ruicao@alauda.io>,closed,True,2018-09-26 14:53:55,2018-09-29 13:46:04
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/62,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/62,Fix a typo in returned message,Line 50: does not exists->does not exist,closed,True,2018-10-16 05:00:55,2018-10-16 05:23:18
+cloud-provider-azure,ahaeber,https://github.com/kubernetes/cloud-provider-azure/pull/63,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/63,Change azure to Azure in README.md,Fix that Azure is spelled with uppercase A.,closed,True,2018-10-22 21:27:31,2018-10-23 07:14:40
+cloud-provider-azure,AdamDang,https://github.com/kubernetes/cloud-provider-azure/pull/64,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/64,Update service_annotations.go,Fix typo in the returned message,closed,True,2018-10-24 08:41:24,2018-10-31 05:43:28
+cloud-provider-azure,xiezongzhe,https://github.com/kubernetes/cloud-provider-azure/pull/65,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/65,fix typo,kuberentes->kubernetes,closed,True,2018-11-01 08:05:23,2018-11-01 08:10:51
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/issues/66,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/66,Add disk attach/detach e2e case,,open,False,2018-11-06 03:05:01,2019-03-05 08:26:58
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/67,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/67,Add more configuration options for e2e tests,"This PR adds more configuration options for e2e tests, which enables to run the e2e tests with kube-controller-manager mode, e.g.
+
+```sh
+export IMAGE_REGISTRY=<registry>
+export K8S_BRANCH=release-1.12
+export TEST_MANIFEST=linux-kcm
+make test-e2e
+```
+
+",closed,True,2018-11-08 05:28:16,2018-11-22 07:05:53
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/68,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/68,Update kubernetes version to 1.13.0 alpha.3,"This PR
+
+- Update kubernetes version to 1.13.0 alpha.3
+- Update acs-engine to v0.25.0
+- Make their version configurable by env variables ",closed,True,2018-11-08 08:26:06,2018-11-12 06:42:45
+cloud-provider-azure,mikeweiwei,https://github.com/kubernetes/cloud-provider-azure/pull/69,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/69,fix typos,,closed,True,2018-11-09 08:23:06,2018-11-09 12:20:42
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/70,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/70,Enable intree volume e2e tests,"PR #68 disables intree volume (AzureDisk) e2e tests because azure cloud config is required to pass them.
+
+We should figure out how to get azure cloud config for e2e clusters and enable those tests after that.",open,False,2018-11-09 12:14:35,2019-03-22 03:35:08
+cloud-provider-azure,mooncak,https://github.com/kubernetes/cloud-provider-azure/pull/71,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/71,"Fix typos: levae->levae, pulic->public","Fix typos: levae->levae, pulic->public",closed,True,2018-11-10 17:15:22,2018-11-11 02:53:40
+cloud-provider-azure,huangqg,https://github.com/kubernetes/cloud-provider-azure/pull/72,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/72,Fix log message: virtural->virtual,"
+Fix log message: virtural -> virtual",closed,True,2018-11-11 14:16:39,2018-11-12 06:26:31
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/73,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/73,[DO NOT MERGE] test only,Test only.,closed,True,2018-11-22 08:07:02,2018-11-23 05:24:55
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/74,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/74,Add more skip tests,"Sig azure page on test grid is on now (https://testgrid.k8s.io/sig-azure-master), but some features added in v1.13 are failing now.
+
+Since acs-engine doesn't support 1.13 yet, let's add those tests into skip list now.
+
+",closed,True,2018-12-04 08:50:33,2018-12-04 08:56:30
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/75,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/75,Reduce e2e logs file size,"> isn't a job failure, however that file is quite large (47MB gzipped it looks like!) which is probably an issue for our log viewer.
+
+gubernator.k8s.io is running on a like 250mb app engine instance, it can't do > 30 MB log files very well. See https://github.com/kubernetes/test-infra/pull/10214#issuecomment-444721915.
+
+Also, junit output is missing from http://gcsweb.k8s.io/gcs/kubernetes-jenkins/logs/ci-cloud-provider-azure-master/2/, hence no results is shown in the page.",closed,False,2018-12-06 02:20:23,2018-12-18 06:56:25
+cloud-provider-azure,sharkymcdongles,https://github.com/kubernetes/cloud-provider-azure/issues/76,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/76,Please allow loadbalancer SKU to be set via an annotation instead of only cloud_config,Currently the only way to set this is by setting the cloud_config to have the sku set to standard. I'd like to be able to set this as an annotation instead of globally only.,closed,False,2018-12-11 21:08:09,2019-03-05 06:40:50
+cloud-provider-azure,karataliu,https://github.com/kubernetes/cloud-provider-azure/issues/77,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/77,Support external-cloud-volume-plugin in acs-engine,Verify if it helps on transition.,closed,False,2018-12-12 08:41:46,2019-03-20 07:18:29
+cloud-provider-azure,sharkymcdongles,https://github.com/kubernetes/cloud-provider-azure/issues/78,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/78,Improve Attach Detach Disk Performance,On my cluster disks can take up to 10 min to attach to my node after a failover because it takes too long to detach from old node before attaching to new one. Is there anything that can be done to fix this performance issue?,closed,False,2018-12-12 09:09:48,2019-03-14 00:15:56
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/79,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/79,Put results into $ARTIFACTS and reduce hyperkube build logs,"Refer #75
+
+> Junit output should be stored in the directory specified by the $ARTIFACTS environment variable and in files with names that match the regexp: junit.*\.xml",closed,True,2018-12-13 07:27:10,2018-12-13 08:51:48
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/80,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/80,Setup artifacts volume for runner,This is required because artifacts path is different from workspace path: `/log/artifacts` vs `/workspace`.,closed,True,2018-12-17 03:11:35,2018-12-17 06:24:43
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/81,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/81,update azuredisk/azurefile issues,,closed,True,2018-12-21 07:47:30,2018-12-21 08:00:37
+cloud-provider-azure,huydinhle,https://github.com/kubernetes/cloud-provider-azure/issues/82,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/82,Can't create a Persistent Volumes (Standard_LRS or Premium_LRS) with size that's greater than 1000Gi,"We tried to spin up a statefulset that has a persistentVolumeClaimTemplate that is bigger than 1000Gi and we could never mount it to the pod
+
+Our Kubernetes version is `v1.10.7` and we use acs-engine to boostrap the cluster
+
+Let us know if you need any info from us. 
+
+Steps to reproduce: Create any pod with PVC that is 2000Gi",closed,False,2018-12-22 03:26:31,2019-02-18 12:27:13
+cloud-provider-azure,huangyingting,https://github.com/kubernetes/cloud-provider-azure/issues/83,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/83,"""excludeMasterFromStandardLB"": false doesn't work","When setting ""excludeMasterFromStandardLB"": false for 3 nodes K8s 1.13.1 cluster deployment in azure, the load balancer created from azure will never include master node.
+
+Noted, I have removed taint from master node as well but still doesn't work
+kubectl taint nodes --all node-role.kubernetes.io/master-
+
+Repro steps:
+1. Use newest kubeadm deploy a multiple zones cluster with 3 VMs, k8s-01 is master node and k8s-02 and k8s-03 are agent nodes.
+2. Use helm deploy a nginx-ingress controller with 3 replicas
+D:\>kubectl get pod -o wide
+NAME                                                    READY   STATUS    RESTARTS   AGE     IP            NODE     NOMINATED NODE   READINESS GATES
+k8ssea-nginx-ingress-controller-5b665b585d-k5r82        1/1     Running   0          5m18s   192.168.2.8   k8s-03   <none>           <none>
+k8ssea-nginx-ingress-controller-5b665b585d-l4lvh        1/1     Running   0          5m18s   192.168.1.9   k8s-02   <none>           <none>
+k8ssea-nginx-ingress-controller-5b665b585d-vxv4z        1/1     Running   0          5m18s   192.168.0.9   k8s-01   <none>           <none>
+k8ssea-nginx-ingress-default-backend-79b9979997-ljvh7   1/1     Running   0          5m18s   192.168.2.7   k8s-03   <none>           <none>
+3. Checked loadbalancer resource from azure portal, it shows only k8s-02 and k8s-03 as backend pool",closed,False,2018-12-30 12:49:49,2019-03-05 10:40:44
+cloud-provider-azure,JoeWrightss,https://github.com/kubernetes/cloud-provider-azure/pull/84,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/84,Fix some typos in docs,"1: ""opertions"" to ""operations"" in line 40.
+2. ""untli"" to ""until"" in line 77.
+3. ""PersistantVolumeClaims"" to ""PersistentVolumeClaims"" in line 125.
+4. ""accessiable"" to ""accessible"" in line 298.
+5. ""parellel"" to ""parallel"" in line 499.
+6. ""permsision"" to ""permission"" in line 8.",closed,True,2019-01-02 15:37:59,2019-01-03 05:27:55
+cloud-provider-azure,jbayer,https://github.com/kubernetes/cloud-provider-azure/pull/85,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/85,Update cloud-provider-config.md,"fixed a typo for ""false""",closed,True,2019-01-08 16:05:49,2019-01-22 02:16:58
+cloud-provider-azure,djsly,https://github.com/kubernetes/cloud-provider-azure/issues/86,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/86,A storageAccount API call blocks kubelet from becoming Ready when there isn't any outbound IP,"Running k8s `v1.11.5`
+following this flow, it was discovered that an API call to the ARM API will block kubelet from properly registering the node as `Ready` for 10mins.
+
+1) we create an AS with 10 VM, they all get a outbound IP defined by the AS outbound IP.
+2) we install kubelet, kubelet starts registering to the ARM API using the public IP (outbound IP)
+3) Eventually, all nodes are registered in k8s. 
+4) A user creates a Service of Type LoadBalancer, the outboundIP if the nodes changes to the frontEnd IP of that LoadBalancer service.
+5) Deallocate a VM, the node disappear from the backend pool and become NotReady. It doesn't have an outboundIP defined anymore
+6) The VM is started again. The kubelet service gets stuck trying to talk to the ARM API
+```
+.222271    2413 azure_auth.go:59] azure: using managed identity extension to retrieve the access token
+.222303    2413 azure.go:219] Azure cloudprovider (read ops) using rate limit config: QPS=25, bucket=200
+.222370    2413 azure.go:223] Azure cloud provider (write ops) using rate limit config: QPS=10, bucket=100
+.222483    2413 azure.go:280] Azure cloud provider using retry backoff: retries=6, exponent=1.500000, duration=6, jitter=1.000000
+```
+7) eventually (after 10mins), the kubelet registers again... there is a call to the ARM API done by `azure_blobDiskController.go:70` which blocks for 10mins, before letting kubelet complete with its starting logic and making the node as `Ready`
+```
+70    2413 azure.go:223] Azure cloud provider (write ops) using rate limit config: QPS=10, bucket=100
+.222483    2413 azure.go:280] Azure cloud provider using retry backoff: retries=6, exponent=1.500000, duration=6, jitter=1.000000
+```
+```
+azure_blobDiskController.go:70] azureDisk - getAllStorageAccounts error: storage.AccountsClient#ListByResourceGroup: Failure sending request: StatusCode=0 -- Original Error: Get https://management.azure.com/subscriptions/<subID>/resourceGroups/<resourceGroup>/providers/Microsoft.Storage/storageAccounts?api-version=2017-10-01:  dial tcp 52.232.180.115:443: i/o timeout
+```
+```
+.610372    2413 server.go:526] Successfully initialized cloud provider: ""azure"" from the config file: ""/etc/kubernetes/azure.json""
+.610414    2413 server.go:772] cloud provider determined the current node name to be kn-es-11
+.661299    2413 bootstrap.go:52] Kubeconfig /var/lib/kubelet/kubeconfig exists and is valid, skipping bootstrap
+```
+8) after that, the Kube-Controller-Manager, adds the node back to the SLB backend pool since it has become `Ready`. giving back the outbound IP for the VM
+```
+I0131 03:25:26.425690       1 node_lifecycle_controller.go:808] ReadyCondition for Node kn-es-11 transitioned from &NodeCondition{Type:Ready,Status:False,LastHeartbeatTime:2019-01-31 03:24:18 +0000 UTC,LastTransitionTime:2019-01-31 03:24:18 +0000 UTC,Reason:KubeletNotReady,Message:container runtime is down,runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: Kubenet does not have netConfig. This is most likely due to lack of PodCIDR,} to &NodeCondition{Type:Ready,Status:True,LastHeartbeatTime:2019-01-31 03:25:18 +0000 UTC,LastTransitionTime:2019-01-31 03:25:18 +0000 UTC,Reason:KubeletReady,Message:kubelet is posting ready status,}
+I0131 03:25:26.425755       1 node_lifecycle_controller.go:816] Node kn-es-11 ReadyCondition updated. Updating timestamp.
+I0131 03:25:33.377721       1 service_controller.go:639] Detected change in list of current cluster nodes. New node set: map[kn-es-11:{} kn-default-5:{} kn-default-9:{} kn-default-4:{} kn-default-7:{} kn-es-14:{} kn-es-16:{} kn-infra-1:{} kn-es-15:{} kn-default-10:{} kn-default-6:{} kn-default-2:{} kn-es-12:{} kn-default-12:{} kn-default-11:{} kn-infra-2:{} kn-default-1:{} kn-default-3:{} kn-infra-0:{} kn-default-0:{} kn-default-8:{} kn-es-13:{}]
+```
+
+",closed,False,2019-01-31 11:56:02,2019-02-25 07:01:27
+cloud-provider-azure,djsly,https://github.com/kubernetes/cloud-provider-azure/issues/87,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/87,Pre existing Nodes will be removed from the LB's backend on deallocation causing them to loose outbound IP at boot up,"Running k8s `v1.11.5`
+Following this flow
+
+1) we create an AS with 10 VM, they all get a outbound IP defined by the AS outbound IP.
+2) we install kubelet, kubelet starts registering to the ARM API using the public IP (outbound IP)
+3) Eventually, all nodes are registered in k8s. 
+4) A user creates a Service of Type LoadBalancer, the outboundIP if the nodes changes to the frontEnd IP of that LoadBalancer service.
+5) Deallocate a VM, the node disappear from the backend pool and become NotReady. It doesn't have an outboundIP defined anymore
+
+The step above takes some time.  > 24h I would say. 
+
+here's a snapshot of the k8s LB backend pool after a while, as you can see, we should have `kn-es-0`, `kn-es-1`, `kn-es-2`, ect, in the list and many more. Maybe this is the expected behavior, but it causes the node to not have a valid Outbound IP when it gets allocated again. 
+
+<img width=""871"" alt=""screen shot 2019-01-31 at 06 59 56"" src=""https://user-images.githubusercontent.com/4981802/52053114-77c69a00-2526-11e9-8c5c-72de7db34bbe.png"">",closed,False,2019-01-31 12:06:04,2019-03-12 07:40:39
+cloud-provider-azure,djsly,https://github.com/kubernetes/cloud-provider-azure/issues/88,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/88,Expanding a node pool with new nodes fails when there is a Public LB associated to some members of the node pools' AS,"Running k8s `v1.11.5`
+Following this flow, 
+
+1) we create an AS with 10 VM, they all get an outbound IP defined by the AS outbound IP.
+2) we install kubelet, kubelet starts registering to the ARM API using the public IP (outbound IP)
+3) Eventually, all nodes are registered in k8s. 
+4) A user creates a Service of Type LoadBalancer, the outboundIP if the nodes changes to the frontEnd IP of that LoadBalancer service.
+5) We add a new VM to the AS (total count 11 vms), the VM comes up with no outbound IP since it isn't part of the LB's backend pool.
+6) Kubelet will fail to communicate with the ARM API preventing the node from ever becoming healthy.
+
+I'm not sure if there could be a way to allow all traffic to the ARM API and other required URI used by Kubelet to not use the Public IP and simply route internally within the Azure Network. like we can do with https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview  ",closed,False,2019-01-31 12:13:32,2019-03-22 03:39:40
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/89,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/89,update azuredisk issues,,closed,True,2019-02-01 08:29:40,2019-02-02 02:41:06
+cloud-provider-azure,dharmab,https://github.com/kubernetes/cloud-provider-azure/pull/90,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/90,Update documentation on multiple scale set support,"Correct an error in the documentation stating that you cannot add multiple scale sets to a load balancer. You can in fact do this as long as you are using the Load Balancer Standard SKU.
+
+```release-note
+NONE
+```",closed,True,2019-02-03 18:17:37,2019-02-07 14:35:08
+cloud-provider-azure,enver,https://github.com/kubernetes/cloud-provider-azure/issues/91,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/91,How to replace aadClientSecret?,"Out current aadClientSecret expired and we have created a new one. However after updating cloud config file and restarting kubelets we still an error:
+```
+Failed to provision volume with StorageClass ""standard"": azure.BearerAuthorizer#WithAuthorization: Failed to refresh the Token for request to https://xxxx/disks/kubernetes-dynamic-pvc-....?api-version=2017-03-30: StatusCode=401 -- Original Error: adal: Refresh request failed. Status Code = '401'. Response body: {""error"":""invalid_client"",""error_description"":""AADSTS7000215: Invalid client secret is provided....}
+``` 
+
+Manually logging with credentials from cloud config works fine. It there any kind of cache that needs to be cleared?",closed,False,2019-02-08 20:08:29,2019-02-09 08:04:08
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/92,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/92,Update tests and docs to use aks-engine,"- Update e2e test to use aks-engine release v0.31.0 with https://github.com/Azure/aks-engine/pull/492 to fix broken prow job: https://testgrid.k8s.io/sig-azure-master#azure-master-conformance
+- Update the apimodel manifest to v1.14 so that aks-engine can remove deprecated flag
+- Update docs where applicable
+
+NOTE: The long term fix to point aks-engine release to a url from storage blob, instead of updating releases, will be in a followup PR after the prow job issue has been fixed.
+
+cc @feiskyer @PatrickLang 
+
+**Notes**:
+```release-note
+Update tests and docs to use aks-engine v0.31.0 to fix e2e tests
+```",closed,True,2019-02-14 02:09:59,2019-02-14 04:38:47
+cloud-provider-azure,justaugustus,https://github.com/kubernetes/cloud-provider-azure/issues/93,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/93,Move repo to use dep + bazel for dependency mgmt,/help,closed,False,2019-02-15 20:50:47,2019-03-05 14:12:07
+cloud-provider-azure,justaugustus,https://github.com/kubernetes/cloud-provider-azure/issues/94,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/94,Add / update issue and PR templates,"/help
+/sig azure",closed,False,2019-02-15 20:51:38,2019-02-20 06:29:11
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/95,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/95,Bump aks-engine to v0.31.1 to support private ACR,"Incorporate aks-engine update: https://github.com/Azure/aks-engine/pull/523
+
+**Notes**:
+
+```release-note
+Update tests and docs to use aks-engine v0.31.1 to support private ACR to fix e2e tests
+```",closed,True,2019-02-17 21:17:11,2019-02-19 19:40:33
+cloud-provider-azure,andyzhangx,https://github.com/kubernetes/cloud-provider-azure/pull/96,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/96,add Issue and PR templates,"/assign @justaugustus 
+**Release note**:
+```
+none
+```",closed,True,2019-02-18 12:16:59,2019-02-19 05:34:05
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/97,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/97,Update README,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+/kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+Refine readme, add more documents in the readme.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-02-22 09:12:21,2019-02-23 02:38:23
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/98,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/98,prow test,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+
+```
+",closed,True,2019-03-01 06:40:09,2019-03-01 06:40:28
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/99,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/99,Upgrade kubernetes version to V1.14.0 beta.1,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+First step of #93: Upgrade kubernetes version to V1.14.0 beta.1.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+Upgrade kubernetes version to V1.14.0 beta.1
+```
+
+",closed,True,2019-03-04 03:20:42,2019-03-05 06:32:28
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/100,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/100,Add missing options into documents,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+/kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+Add missing options into our documentation. Also added more docs about excludeMasterFromStandardLB from #83.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #83
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-05 09:07:26,2019-03-05 13:39:59
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/101,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/101,Switch glide to go modules for dependency management,"We should switch ~glide~ go modules to dep for vendors management. Kubernetes's staging packages should be handled carefully (e.g. refer scripts/update-dependencies.sh)
+
+- [ ] Replace glide with ~dep~ go modules
+- [ ] Update scripts/update-dependencies.sh
+- [ ] Update docs dependency-management.md
+
+/help",open,False,2019-03-05 14:08:47,2019-03-28 15:05:33
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/102,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/102,Build binaries with Bazel,"
+- [ ] Add bazel support
+- [ ] Add auto-generation scritps
+- [ ] Add documention",open,False,2019-03-05 14:10:53,2019-03-22 03:35:29
+cloud-provider-azure,jaybatra26,https://github.com/kubernetes/cloud-provider-azure/pull/103,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/103,WIP: Use dep instead of glide for vendors management,"
+
+Signed off by Jay Batra <jaybatra73@gmail.com>
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes # https://github.com/kubernetes/cloud-provider-azure/issues/101
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+This change will let users use go dep instead of glide from now on
+```
+",closed,True,2019-03-05 17:30:59,2019-03-11 14:44:22
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/104,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/104,make TestAzureTest report dir configurable,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Part of #4 to run ccm specific e2e tests
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes # 
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+make TestAzureTest report dir configurable
+```
+",closed,True,2019-03-06 21:15:13,2019-03-06 23:45:03
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/105,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/105,add timeout to ccm e2e,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Add timeout to ccm e2e test suite
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+Add timeout to ccm e2e test suite
+```
+cc @feiskyer ",closed,True,2019-03-07 03:39:30,2019-03-07 03:56:58
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/106,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/106,Add boilerplate checking,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+/kind cleanup
+
+**What this PR does / why we need it**:
+
+Add boilerplate checking and moving scritps into hack dir.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-07 08:04:57,2019-03-07 13:59:31
+cloud-provider-azure,joelsmith,https://github.com/kubernetes/cloud-provider-azure/pull/107,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/107,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:52:25,2019-03-09 00:15:30
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/108,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/108, Refine load balancer annotations and SLB docs,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+/kind documentation
+
+**What this PR does / why we need it**:
+
+ Refine load balancer annotations and SLB docs.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #87
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+
+/hold",closed,True,2019-03-11 09:09:41,2019-03-12 07:58:07
+cloud-provider-azure,jaybatra26,https://github.com/kubernetes/cloud-provider-azure/pull/109,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/109,Use gomodules instead of glide for vendors management,"Signed off by Jay Batra <jaybatra73@gmail.com>
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+
+```
+",closed,True,2019-03-11 14:43:18,2019-04-04 13:31:16
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/110,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/110,add run-e2e-tests script,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Adding this script so we can call `control.FinishRunning(exec.Command(""./hack/run-e2e-tests.sh"", testArgs...))` from test-infra to use `--test_args=` to pass in `--ginkgo.skip=` and `--ginkgo.focus`.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+add run-e2e-tests script
+
+```
+",closed,True,2019-03-12 02:26:33,2019-03-12 11:42:40
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/111,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/111,move run e2e script to hack,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+- move run e2e script to hack and append arg
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+move run e2e script to hack
+```
+",closed,True,2019-03-12 19:06:11,2019-03-13 04:59:33
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/112,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/112,Fix resource group name for the cluster,"
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+/kind bug
+
+**What this PR does / why we need it**:
+
+The prefix from DNS is not always same with resource group name. We need
+to get it from providerID.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-13 07:21:46,2019-03-13 15:04:18
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/113,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/113, Add CCM_E2E_ARGS for customizing ccm test cases,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-13 15:40:44,2019-03-13 15:55:39
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/114,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/114,Update OWNERS,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+Add Rita to OWNERS.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-13 15:59:36,2019-03-14 00:03:25
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/115,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/115,[e2e] Switch current perl based presumit e2e tests to kubetest,"The current e2e tests (job name: pull-cloud-provider-azure-e2e) we are running for cloud-provider presubmit PRs is based on perl scripts. We should switch it to kubetest.
+
+Work items:
+
+* [ ] Replace the current perl script with kubetest in `make test-e2e`
+* [ ] Update docs of how to run it locally in e2e-tests.md
+* [x] Add a new page for `pull-cloud-provider-azure-e2e` in [testgrid](https://testgrid.k8s.io/sig-azure-master#Summary)
+",open,False,2019-03-14 05:12:01,2019-03-25 07:14:33
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/116,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/116,[e2e] Add presumit e2e jobs for cloud provider," Add new jobs for e2e test from cloud-provider-azure repo. The test cases are under [tests/e2e](https://github.com/kubernetes/cloud-provider-azure/tree/master/tests/e2e).
+
+* [x] Add a new job in prow named `pull-cloud-provider-azure-e2e-ccm`
+* [x] Add the job to testgrid page (also named `pull-cloud-provider-azure-e2e-ccm`)
+
+
+/assign @ritazh ",closed,False,2019-03-14 05:15:57,2019-03-22 03:29:21
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/117,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/117,[e2e]  Refine periodic job for basic conformance tests,"The current periodic job azure-master-conformance is also based on perl scripts. We should switch to kubetest. 
+
+> Note: the job is running e2e conformance tests from Kubernetes repo.
+
+* [x]  Switch current perf script method to kubetest
+* [x]  Rename current job `azure-master-conformance` to `cloud-provider-azure-conformance`",closed,False,2019-03-14 05:20:58,2019-03-22 03:30:00
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/118,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/118,Setup MCR for cloud-provider-azure image,"As the external cloud provider is actually used as a container image, we should setup MCR for publishing it publicly when doing our first release.
+
+The image should probably be built from some automatic pipelines (e.g. jenkins).",closed,False,2019-03-14 05:23:57,2019-04-04 13:37:14
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/119,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/119,Set timeout to a larger value,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+/kind failing-test
+
+**What this PR does / why we need it**:
+
+The current e2e tests are pretty flaky, set the timeouts to large values for reducing the failing tests.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-14 06:09:27,2019-03-17 15:09:28
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/120,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/120,[e2e] Add periodic jobs for Kubernetes conformance tests,"The core codes of Azure cloud provider is still hosted in kubernetes repo (we vendored the codes here), hence we should setup periodic jobs for it.
+
+Work items:
+
+- [ ]  Add new job 'ci-kubernetes-e2e-conformance' (kube-controller-manager should be used in this case)
+- [ ]  Add the job to testgrid pages",open,False,2019-03-14 06:15:43,2019-03-22 03:32:16
+cloud-provider-azure,ritazh,https://github.com/kubernetes/cloud-provider-azure/pull/121,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/121,Update test manifest to only build for ccm,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+- Update the test manifests (apimodels) used by aks-engine to create the test cluster
+- Update the manifest to set custom image to ccm only as we are not building our own hyperkube image
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+Update test manifest to only set image for ccm
+```
+",closed,True,2019-03-19 23:21:38,2019-03-20 01:38:25
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/122,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/122,Document versions for load balancer annotations,"**Is your feature request related to a problem?/Why is this needed**
+<!-- A clear and concise description of what the problem is. Ex. I'm always frustrated when [...] -->
+
+/kind docs
+
+**Describe the solution you'd like in detail**
+<!-- A clear and concise description of what you want to happen. -->
+
+Not all annotations are available for all versions, we should document the kubernetes versions for each annotation.
+
+**Describe alternatives you've considered**
+<!-- A clear and concise description of any alternative solutions or features you've considered. -->
+
+**Additional context**
+<!-- Add any other context or screenshots about the feature request here. -->
+",open,False,2019-03-20 02:01:39,2019-04-02 04:21:22
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/123,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/123,Update k8s 1.14,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+* Upgrade kuberntes vendors to v1.14.0-rc.1
+* Upgrade go version to 1.12.1 (both aks-engine and kubernetes have been upgraded to 1.12.1)
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-20 06:05:15,2019-03-22 03:25:22
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/124,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/124,External kubernetes dependencies,"This is the meta-issue for tracking all the external dependencies, which are blockers for full standalone azure cloud provider.
+
+cross reference https://github.com/kubernetes/kubernetes/issues/50752.
+
+## Credential provider
+
+Azure credential provider is still required (set by `kubelet --azure-container-registry-config`)
+
+- On tracking at https://github.com/kubernetes/kubernetes/issues/58034
+- Would be addressed in v1.14 togather with https://github.com/kubernetes/cloud-provider/issues/13.
+
+## AzureDisk and AzureFile
+
+AzureDisk and AzureFile volume plugins are still in-tree, but even with `--external-cloud-volume-plugin=azure` configured on kube-controller-manager, AzureDisk and AzureFile are still not working. See https://github.com/kubernetes/kubernetes/issues/71018 for explanations.
+
+So to use with CCM, CSI drivers should always be used. The CSI drivers for them are tracking on the separate repos:
+  - https://github.com/kubernetes-sigs/azuredisk-csi-driver
+  - https://github.com/kubernetes-sigs/azurefile-csi-driver",open,False,2019-03-20 06:43:09,2019-03-20 07:14:00
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/125,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/125,Make autoscaler e2e test more stable,"**Which issue(s) this PR fixes**:
+Autoscaler e2e test exceeds time or returns 'Unexpected EOF' error
+
+```release-note
+NONE
+```",closed,True,2019-03-22 09:47:46,2019-03-24 18:20:09
+cloud-provider-azure,jchauncey,https://github.com/kubernetes/cloud-provider-azure/pull/126,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/126,fix: Allow IMAGE_TAG to be overridden,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Allows the user to override the IMAGE_TAG value in the Makefile. This is useful when building ccm in a CI environment.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+Allow user to override the IMAGE_TAG var in the Makefile
+```
+",closed,True,2019-03-22 19:43:53,2019-03-23 01:40:59
+cloud-provider-azure,Abhik1998,https://github.com/kubernetes/cloud-provider-azure/pull/127,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/127,Patch 2,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+ failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Remove glide files and update it using dep.
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #101 
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+action required: testing required
+```
+",closed,True,2019-03-23 22:52:20,2019-03-24 06:01:00
+cloud-provider-azure,Abhik1998,https://github.com/kubernetes/cloud-provider-azure/pull/128,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/128,Patch 3,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+kind bug
+>
+> /kind api-change
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Updatind using dep ,removing glide for go module management
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #101 
+
+**Special notes for your reviewer**:
+All conditions have been checked and the vendors folder has been updated
+
+**Release note**:
+```
+action required=test
+
+```
+",closed,True,2019-03-24 05:55:50,2019-03-24 14:18:52
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/129,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/129,Make autoscaler e2e test more stable,"**Which issue(s) this PR fixes**:
+Autoscaler e2e test exceeds time or returns 'Unexpected EOF' error
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+**Release note**:
+```
+none
+```
+",closed,True,2019-03-24 18:24:34,2019-03-25 02:16:03
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/130,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/130,[sig-storage] CSI mock volume CSI volume limit information using mock driver should report attach limit when limit is bigger than 0 7m57s,"<!-- Please use this template while reporting a bug and provide as much info as possible. Not doing so may result in your bug not being addressed in a timely manner. Thanks!
+-->
+
+/kind failing-tests
+
+**What happened**:
+
+The following tests are failing constantly:
+
+[sig-storage] CSI mock volume CSI volume limit information using mock driver should report attach limit when limit is bigger than 0 7m57s
+
+```
+test/e2e/storage/csi_mock_volume.go:352
+while waiting for max volume condition on pod : &Pod{ObjectMeta:k8s_io_apimachinery_pkg_apis_meta_v1.ObjectMeta{Name:pvc-volume-tester-nwdfn,GenerateName:pvc-volume-tester-,Namespace:csi-mock-volumes-8517,SelfLink:/api/v1/namespaces/csi-mock-volumes-8517/pods/pvc-volume-tester-nwdfn,UID:4a27f9f3-4e2f-11e9-b579-000d3a0385b1,ResourceVersion:7235,Generation:0,CreationTimestamp:2019-03-24 12:21:02 +0000 UTC,DeletionTimestamp:<nil>,DeletionGracePeriodSeconds:nil,Labels:map[string]string{},Annotations:map[string]string{},OwnerReferences:[],Finalizers:[],ClusterName:,Initializers:nil,ManagedFields:[],},Spec:PodSpec{Volumes:[{my-volume {nil nil nil nil nil nil nil nil nil PersistentVolumeClaimVolumeSource{ClaimName:pvc-kbvbc,ReadOnly:false,} nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil}} {default-token-z4d92 {nil nil nil nil nil &SecretVolumeSource{SecretName:default-token-z4d92,Items:[],DefaultMode:*420,Optional:nil,} nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil}}],Containers:[{volume-tester k8s.gcr.io/pause:3.1 [] []  [] [] [] {map[] map[]} [{my-volume false /mnt/test  <nil> } {default-token-z4d92 true /var/run/secrets/kubernetes.io/serviceaccount  <nil> }] [] nil nil nil /dev/termination-log File Always nil false false false}],RestartPolicy:Never,TerminationGracePeriodSeconds:*30,ActiveDeadlineSeconds:nil,DNSPolicy:ClusterFirst,NodeSelector:map[string]string{attach-limit-csi-csi-mock-volumes-8517: csi-mock-volumes-8517,},ServiceAccountName:default,DeprecatedServiceAccount:default,NodeName:,HostNetwork:false,HostPID:false,HostIPC:false,SecurityContext:&PodSecurityContext{SELinuxOptions:nil,RunAsUser:nil,RunAsNonRoot:nil,SupplementalGroups:[],FSGroup:nil,RunAsGroup:nil,Sysctls:[],},ImagePullSecrets:[],Hostname:,Subdomain:,Affinity:nil,SchedulerName:default-scheduler,InitContainers:[],AutomountServiceAccountToken:nil,Tolerations:[{node.kubernetes.io/not-ready Exists  NoExecute 0xc001a2eff0} {node.kubernetes.io/unreachable Exists  NoExecute 0xc001a2f010}],HostAliases:[],PriorityClassName:,Priority:*0,DNSConfig:nil,ShareProcessNamespace:nil,ReadinessGates:[],RuntimeClassName:nil,EnableServiceLinks:*true,},Status:PodStatus{Phase:Pending,Conditions:[],Message:,Reason:,HostIP:,PodIP:,StartTime:<nil>,ContainerStatuses:[],QOSClass:BestEffort,InitContainerStatuses:[],NominatedNodeName:,},}
+Unexpected error:
+    <*errors.errorString | 0xc0002bd3e0>: {
+        s: ""timed out waiting for the condition"",
+    }
+    timed out waiting for the condition
+occurred
+test/e2e/storage/csi_mock_volume.go:382
+```
+
+See logs at https://gubernator.k8s.io/build/kubernetes-jenkins/pr-logs/pull/cloud-provider-azure/125/pull-cloud-provider-azure-e2e/79#sig-storage-csi-mock-volume-csi-volume-limit-information-using-mock-driver-should-report-attach-limit-when-limit-is-bigger-than-0. 
+
+**What you expected to happen**:
+
+**How to reproduce it**:
+
+**Anything else we need to know?**:
+
+**Environment**:
+- Kubernetes version (use `kubectl version`):
+- OS (e.g. from /etc/os-release):
+- Kernel (e.g. `uname -a`):
+- Install tools:
+- Others:
+",closed,False,2019-03-25 02:20:31,2019-03-25 09:43:11
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/131,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/131,Enable feature gate CSIInlineVolume for kube-controller-manager,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+Enable feature gate CSIInlineVolume for kube-controller-manager. 
+
+/kind failing-test
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #130 
+
+**Special notes for your reviewer**:
+
+The other two feature flags are already enabled in aks-engine, we should preserve them too.
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-25 07:44:21,2019-03-25 12:03:48
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/132,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/132,Update kubernetes version to 1.14.0,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+
+Update kubernetes version to 1.14.0. This is the last thing to do before alpha release.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+NONE
+```
+",closed,True,2019-03-26 03:12:33,2019-03-26 04:48:16
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/133,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/133,Add release information and update documentation,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+/kind documentation
+
+**What this PR does / why we need it**:
+
+Add release information and update documentation.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #
+
+**Special notes for your reviewer**:
+
+
+**Release note**:
+```
+Add release information and update documentation.
+```
+",closed,True,2019-03-28 07:42:52,2019-03-28 23:24:58
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/134,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/134,add ensure load balancer e2e test,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What this PR does / why we need it**:
+Add tests when updating service load balancer including:
+
+1. assigning to specific IP when updating public service
+2. updating internal IP when updating internal service
+3. updating an internal service to a public service with assigned IP
+4. no operation since no change in service when update
+
+**Release note**:
+```
+none
+```
+",closed,True,2019-03-28 08:47:06,2019-04-02 03:32:51
+cloud-provider-azure,WebSpider,https://github.com/kubernetes/cloud-provider-azure/pull/135,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/135,Improve loadbalancer docs,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+
+/kind documentation
+
+**What this PR does / why we need it**:
+
+This improves the grammar in the documentation for Azure LoadBalancer
+
+**Which issue(s) this PR fixes**:
+
+Fixes # None
+",closed,True,2019-03-28 10:49:49,2019-03-28 12:16:45
+cloud-provider-azure,fseldow,https://github.com/kubernetes/cloud-provider-azure/pull/136,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/136,add ensure load balancer e2e test,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What this PR does / why we need it**:
+Add tests when updating service load balancer including:
+
+1. assigning to specific IP when updating public service
+2. updating internal IP when updating internal service
+3. updating an internal service to a public service with assigned IP
+4. no operation since no change in service when update
+
+**Release note**:
+```
+none
+```
+",closed,True,2019-04-02 03:33:34,2019-04-03 12:47:43
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/137,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/137,Document routeTableResourceGroup,"New cloud provider option `routeTableResourceGroup` is added from https://github.com/kubernetes/kubernetes/pull/75580 (in master branch).
+
+We should update documents for it.
+
+/kind documentation",open,False,2019-04-02 04:23:11,2019-04-02 04:23:12
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/issues/138,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/138,Document disableOutboundSNAT,"`disableOutboundSNAT` is added from PR https://github.com/kubernetes/kubernetes/pull/75282, which is used together with standard load balancer:
+
+```
+Allow disable outbound SNAT when Azure standard load balancer is used together with outbound rules. 
+```
+
+It is supported in v1.11.9, v1.12.7, v1.13.5 and v1.14.0.
+
+We should update the docs for it.",open,False,2019-04-02 04:30:36,2019-04-02 04:30:46
+cloud-provider-azure,Abhik1998,https://github.com/kubernetes/cloud-provider-azure/pull/139,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/139,Created shell script for cluster deployment,"A simple extension to make deployment easier.I tested it in my system .
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+  kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+This PR creates shell script to make deployment of clusters much easier.
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #4 
+
+**Special notes for your reviewer**:
+This can be modified and will be updated if required.Since it passes the tests, this can be approved.
+
+
+**Release note**:
+```
+
+```
+",closed,True,2019-04-02 05:02:33,2019-04-03 10:08:30
+cloud-provider-azure,Abhik1998,https://github.com/kubernetes/cloud-provider-azure/pull/140,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/140,Sample file to test in same directory,"A simple extension to make deployment easier.I tested it in my system .
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+  kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+This PR creates shell script to make deployment of clusters much easier.
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #4 
+
+**Special notes for your reviewer**:
+This can be modified and will be updated if required.Since it passes the tests, this can be approved.
+
+
+**Release note**:
+```
+
+```
+",closed,True,2019-04-02 05:03:15,2019-04-03 10:09:36
+cloud-provider-azure,Abhik1998,https://github.com/kubernetes/cloud-provider-azure/pull/141,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/141,Create deploy-cluster.sh,"This is the updated file.
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+**What this PR does / why we need it**:
+Creates a new shell script to make deployment of clusters easy
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #4 
+
+**Special notes for your reviewer**:
+Adding this file target to Makefile , once it is verified.
+
+**Release note**:
+```
+action: test
+```
+",closed,True,2019-04-03 09:47:58,2019-04-04 14:44:53
+cloud-provider-azure,feiskyer,https://github.com/kubernetes/cloud-provider-azure/pull/142,https://api.github.com/repos/kubernetes/cloud-provider-azure/issues/142,Switch glide to go modules for dependency management,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+
+1. If this is your first time, please read our contributor guidelines: https://git.k8s.io/community/contributors/guide#your-first-contribution and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. Please label this pull request according to what type of issue you are addressing, especially if this is a release targeted pull request. For reference on required PR/issue labels, read here:
+https://git.k8s.io/community/contributors/devel/release.md#issue-kind-label
+3. Ensure you have added or ran the appropriate tests for your PR: https://git.k8s.io/community/contributors/devel/testing.md
+4. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+5. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+6. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+-->
+
+**What type of PR is this?**
+> Uncomment only one ` /kind <>` line, hit enter to put that in a new line, and remove leading whitespaces from that line:
+>
+> /kind api-change
+> /kind bug
+> /kind cleanup
+> /kind design
+> /kind documentation
+> /kind failing-test
+> /kind feature
+> /kind flake
+
+/kind feature
+
+**What this PR does / why we need it**:
+
+Kubernetes master branch has been switched to go modules. This PR switches current glide to go modules for dependency management.
+
+**Which issue(s) this PR fixes**:
+<!-- 
+*Automatically closes linked issue when PR is merged.
+Usage: `Fixes #<issue number>`, or `Fixes (paste link of issue)`.
+_If PR is about `failing-tests or flakes`, please post the related issues/tests in a comment and do not use `Fixes`_*
+-->
+Fixes #101
+
+**Special notes for your reviewer**:
+
+Refer https://github.com/kubernetes/kubernetes/pull/74877 and https://github.com/kubernetes/enhancements/blob/master/keps/sig-architecture/2019-03-19-go-modules.md.
+
+**Release note**:
+```
+Switch glide to go modules for dependency management.
+```
+",open,True,2019-04-04 13:27:01,2019-04-04 15:03:39

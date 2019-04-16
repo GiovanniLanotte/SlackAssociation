@@ -1,0 +1,635 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/126,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/126,Rename on-chain peers list,"Rename the on-chain list of PBFT nodes from
+`sawtooth.conensus.pbft.peers` to `sawtooth.consensus.pbft.members`.
+This is to reduce confusion when using the term ""peer"" to refer to nodes
+that may not be an accepted PBFT member based on the on-chain setting.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",open,True,2019-04-02 15:26:02,2019-04-02 15:28:47
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/125,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/125,Enable restarting whole network with existing chain,"When the whole network is starting ""fresh"" from a non-genesis block,
+none of the nodes will have the `Commit` messages necessary to build the
+consensus seal for the last committed block (the chain head). To
+bootstrap the network in this scenario, all nodes will send a `Commit`
+message for their chain head whenever one of the PBFT members connects;
+when > 2f + 1 nodes have connected and received these `Commit` messages,
+the nodes will be able to build a seal using the messages.
+
+This commit includes a shell script to verify the ability to restart a
+network with an existing chain using the adhoc docker compose files.
+Also adds this test to CI.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",open,True,2019-03-28 19:46:12,2019-04-02 19:33:44
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/124,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/124,Fix terminology for PBFT member nodes (was peers),"Sawtooth already uses the term ""peer"" for static/dynamic peering, so the
+PBFT doc was overloading this term. This PR changes ""peer"" to ""(PBFT) member node""
+and adds a glossary definition for ""member node"".
+
+Note: The Sawtooth documentation will be fixed in a related-but-separate PR for
+the hyperledger/sawtooth repo.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",open,True,2019-03-28 18:27:15,2019-04-02 19:26:10
+sawtooth-pbft,rberg2,https://github.com/hyperledger/sawtooth-pbft/pull/123,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/123,Update Cargo.toml to version 0.1.2,"This should match the VERSION file, and be incremented after release.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2019-03-26 21:47:00,2019-03-26 21:48:16
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/122,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/122,Fix from_self value of ParsedMessages from peers,"Previously, when a PeerMessage was parsed, it was assumed that the
+message came from another node. However, it is possible for a node to
+send a message back to the node that created the message, in which case
+the ParsedMessage.from_self field should actually be true.
+
+This commit fixes that assumption by explicitly checking if the
+message's signer ID matches the node's own ID.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-21 20:34:11,2019-03-28 20:26:56
+sawtooth-pbft,rberg2,https://github.com/hyperledger/sawtooth-pbft/pull/121,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/121,Make aborted and failed builds more obvious,"The devmode Jenkinsfile does this already.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2019-03-21 18:53:50,2019-03-22 20:06:35
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/120,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/120,Implement node unit tests,"This commit adds a large number of unit tests for the PbftNode and its
+various functions. It also includes some added test-only methods for
+other structs to aid this testing, as well as some minor alterations to
+test helper functions.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-19 16:00:18,2019-03-28 20:26:54
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/119,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/119,Fix ParsedMessage type vulnerability,"This commit fixes a vulnerability that would allow a malicious node to
+arbitrarily crash another node's PBFT engine.
+
+When parsing messages from peers, nodes use the type indicated in the
+header of the PeerMessage; however, this type field can be set
+arbitrarily and could be set to a different value than the contained
+PBFT message's type. Some of the accessors for ParsedMessages panic if
+called on the wrong type of ParsedMessage (e.g. calling get_seal on a
+ParsedMessage containing a NewView), so there must be a mechanism to
+guard against a bad message triggering a panic.
+
+This is fixed by simply checking and ensuring that the ParsedMessage's
+type matches the type of the PeerMessage. An alternative would be to
+remove the panics in the accessors, but those are useful for ensuring
+that no programmer error occurs; we should be able to guarantee proper
+parsing of messages, and once those messages are parsed they should only
+be handled as the appropriate type.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-18 20:22:53,2019-03-28 20:26:57
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/118,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/118,Update algorithm name and version,"Updates the name and version that the PBFT consensus engine reports to
+the validator match the conventions used in other Sawtooth projects.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-18 16:48:18,2019-03-28 20:26:58
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/117,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/117,Fix bug with view change while waiting for commit,"This fixes a bug where while a node is waiting for a BlockCommit update
+from the validator, it switches views and resets the phase to
+`PrePreparing`. Even after a view change is completed, the node should
+still wait for the BlockCommit notification before attempting to process
+other blocks.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-07 19:54:32,2019-03-28 20:26:59
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/116,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/116, Replace MockService for PbftNode unit tests,"Replaces the existing `MockService` with a new one that, instead of just
+doing nothing or returning hard-coded values, logs calls to its methods
+and allows for greater flexibility of return values. Currently, it only
+allows for configuration of the return values for the `get_settings` and
+`summarize_block` methods, since these are the only methods where this
+functionality is needed for the planned tests.
+
+Also updates the existing node unit tests to use the `src/test_helpers.rs`.",closed,True,2019-03-06 14:43:25,2019-03-28 20:27:00
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/115,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/115,Fix signer verification bug,"This bug fixes a serious security issue caused by a bug in the way the
+signers of messages and votes are verified.
+
+Previously, when messages were received, the PbftMessage's signer_id was
+compared with the ID of the node that sent the message; however, the
+node that sent the message may not be the node that signed it, so this
+is the wrong thing to compare it to; instead, it should be comparing the
+PbftMessage's signer_id with the PeerMessageHeader's signer_id (this is
+the ID that is used by the validator to verify the proper signing of the
+consensus message).
+
+Furthermore, when votes are verified for the consensus seal and view
+changes, the IDs used to check membership and uniqueness are the IDs in
+the PbftMessages themselves, and they were previously not compared with
+the IDs that are used to actually sign the messages (again, indicated by
+the signer_id of the ConsensusPeerMessageHeader). They should be
+compared with the actual signing ID to be sure they match.
+
+These changes break existing unit tests, since signing of messages in
+these tests was just done with a random public public key that did not
+match IDs in the or the IDs of the actual messages. Since these unit
+tests are being replaced, they are not fixed but instead removed.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-04 19:21:05,2019-03-28 20:27:01
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/114,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/114,Add nightly dockerfile,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-03-01 21:49:31,2019-03-04 15:19:39
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/113,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/113,Allow updating view backwards on catchup commit,"When a node starts up and needs to catch-up from a long way back, it may
+trigger view changes such that it is on a later view than the one the
+blocks it commits were committed at. In this case, the node should be
+able to correct itself and adopt the views in which the blocks were
+committed.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-01 14:39:33,2019-03-28 20:27:02
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/112,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/112,Add auxiliary tests,"Add message parsing, log, state, and initialization tests",closed,True,2019-02-28 16:20:24,2019-03-28 20:27:00
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/111,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/111,Fix primary prepare voting,"Fixes the Prepare voting by not allowing the primary to broadcast a
+Prepare message; the primary's PrePrepare message counts as its ""vote""
+for the Preparing phase. If the primary were allowed to broadcast a
+Prepare, it could cause nodes to diverge on the blocks they commit for a
+given sequence number when the network is a certain size.
+
+Now, a non-faulty primary will not broadcast a Prepare message, and
+non-faulty secondaries will not accept Prepare messages from the
+primary. This reflects the behavior of the original PBFT definition.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-27 17:40:19,2019-03-28 20:27:03
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/110,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/110,Generalize membership changes,"Generalizes membership updates to account for ordering of the on-chain
+list (`sawtooth.consensus.pbft.peers`). Previously, if the order
+changed, the local list would not be updated.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-27 16:47:23,2019-03-28 20:27:04
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/109,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/109,Update msg log methods,,closed,True,2019-02-26 20:22:02,2019-03-28 20:27:04
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/108,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/108,Remove PbftState::switch_phase,"Remove guarded phase switching from the state struct; this is
+unnecessary since phase switches are already checked by the node
+itself.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-26 18:12:38,2019-03-28 20:27:06
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/107,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/107,Update message parsing,,closed,True,2019-02-26 18:11:06,2019-03-28 20:27:07
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/106,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/106,Rename faulty_primary_timeout to idle_timeout,"The timeout was originally called the `idle_timeout`, but was changed in
+commit 65466d when the timeouts were changed; the timeouts have
+essentially been reverted to their previous behavior however (with only
+minor changes), so the name should be updated to more accurately reflect
+its behavior again.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-26 17:14:32,2019-03-28 20:27:08
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/105,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/105,Update new view handling,Fix log message and don't view change when an invalid NewView is received,closed,True,2019-02-26 17:03:38,2019-03-28 20:27:08
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/104,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/104,Update block commit handling,Don't update view when membership is changed and remove BlockCommit ignoring,closed,True,2019-02-26 17:01:30,2019-03-28 20:27:09
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/103,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/103,Update broadcasting,Rename broadcasting messages and refactor for easier message parsing,closed,True,2019-02-26 17:00:40,2019-03-28 20:27:10
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/102,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/102,Minor improvements (part 1),Lots and lots of simplifications and enhancements,closed,True,2019-02-21 22:21:35,2019-03-28 20:28:04
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/101,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/101,Add log pruning/garbage collection info to Arch doc,Signed-off-by: Anne Chenette <chenette@bitwise.io>,closed,True,2019-02-21 22:11:00,2019-02-26 17:18:59
+sawtooth-pbft,agunde406,https://github.com/hyperledger/sawtooth-pbft/pull/100,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/100,Update PBFT to use Sawtooth Rust SDK 0.2,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2019-02-20 19:12:38,2019-02-21 20:51:06
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/99,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/99,Fix state reset on commit,"This commit fixes a bug where a node wouldn't be able to complete the
+final block catch-up procedure because it didn't update it's phase
+before requesting the seal (it would still be in the Finishing phase,
+but when it receives the requested seal it checks if its in the
+Finishing phase to make sure it doesn't commit the block twice).
+
+Also removes the `PbftState::reset_to_start` method since it is very
+simple and only used in one place now.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-20 15:02:45,2019-03-28 20:28:07
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/98,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/98,Fix double-broadcasting bug for NewViews,"Fixes a bug where NewView messages would be broadcasted twice; this
+happened when a new primary of a 4 node network started a view change
+early when it received f + 1 ViewChange messages. Because it's a 4 node
+network, f=1, so f + 1 == 2f. This means that it would self-send a
+ViewChange message which would trigger a NewView broadcast, then trigger
+a NewView broadcast as a result of the original message that made the
+count f + 1.
+
+This is fixed by simply returning when a view change is started early;
+the NewView message will still be triggered (if necessary) by the
+self-sent message without sending it twice.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-19 20:11:50,2019-03-28 20:28:07
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/97,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/97,Enforce block number <-> sequence number equivalence,"Enforces that any block committed at sequence number n has block_num = n. This is enforced by requiring that:
+1. The previous block of block n has block_num = n - 1 (this means that the block numbers of all blocks in the chain, just like sequence numbers, are strictly monotonically increasing by one)
+2. The block referenced by a PrePrepare for sequence number n has block_num = n (this means that there is a strict one-to-one correlation between the sequence number and the block number)
+
+Also updates the methods used to retrieve blocks from the log.",closed,True,2019-02-19 17:57:24,2019-03-28 20:28:08
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/96,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/96,Improve seal verification,"- Add message info (message type, view, sequence number, and signer ID) to consensus seal
+- Get rid of `PbftSealResponse` in favor of using the `PbftSeal` itself
+- Verify implicit seal vote, view, and sequence number using the info in a seal",closed,True,2019-02-19 15:11:33,2019-03-28 20:28:05
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/95,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/95,Add signed bytes when parsing messages from seal,"As part of the catch-up procedure, the node extracts all of the votes
+from a valid consensus seal and adds them to its log. If the node does
+this for the last block and then becomes the leader through a view
+change, it will need to produce a valid consensus seal for this block.
+Previously, the messages were parsed and added to the log without the
+signed components, so the new seal wouldn't contain validly signed
+votes. To fix this, `ParsedMessage`s can now be constructed from
+`PbftSignedVote`s using the `ParsedMessage::from_signed_vote` method,
+which sets the signed components of the `ParsedMessage`. The
+`PbftNode::catchup` method now uses this constructor when parsing
+messages from the seal.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-18 20:01:04,2019-03-28 20:28:09
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/94,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/94,Re-implement guarded PrePrepare broadcasting,"This re-implements commit 52a5f3, which was inadvertently reverted.
+
+Before broadcasting a PrePrepare to the network when a BlockNew for the
+current sequence number is received, the primary must check to make sure
+that the block was the one it just created (the `signer_id` of the block
+should match the node's own ID). This prevents the primary from
+incorrectly broadcasting a PrePrepare if another node were to publish a
+block.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-18 19:24:24,2019-03-28 20:28:10
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/93,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/93,Remove Checkpointing from PBFT doc,"Sawtooth PBFT does not include checkpointing.
+
+- Remove all contents about checkpointing and high/low water marks
+
+- Add note to explain that Sawtooth PBFT doesn't have a checkpointing mode
+  and that log pruning is controlled by sawtooth.consensus.pbft.max_log_size
+
+- Remove Checkpointing from the Algorithm Phases diagram (PNG version)
+
+  Note: This PR deletes the SVG version of the diagram because it's not being
+  used. Plus, it's out of date in several places (to be fixed in a separate PR).
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-02-13 23:11:36,2019-02-18 20:40:05
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/92,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/92,Build improvements,,closed,True,2019-02-13 20:06:45,2019-02-14 16:19:53
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/91,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/91,Build improvements,,closed,True,2019-02-13 20:05:03,2019-02-13 20:05:11
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/90,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/90,Fix bug causing node to get stuck in ViewChanging,"This fixes a bug where a node would get stuck in the `ViewChanging`
+mode. The node would be able to continue to commit blocks using
+catch-up, but would ignore all normal PBFT messages since it was in the
+`ViewChanging` mode. This is fixed by always making sure the mode is set
+to `Normal` when a block gets committed.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-13 15:38:05,2019-03-28 20:28:11
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/89,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/89,Add PBFT architecture intro and network overview,"- Add intro text to summarize Sawtooth PBFT architecture at a high level
+
+- Add ""Network Overview"" section to describe fault tolerance (max number of
+  faulty nodes), view changes, sequence numbers, and info stored by each node.
+  Also, summarize on-chain settings with a link to that section.
+
+- Delete the last section, ""Node Information Storage"", because that information
+  is now in ""Network Overview""
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-02-11 00:51:11,2019-02-18 20:38:52
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/88,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/88,Doc: Rewrite PBFT introduction,"- Describe PBFT at a higher level
+- List the general characteristics of PBFT consensus
+- Explain that PBFT networks don't allow open enrollment but admins can add nodes
+- Mention some Sawtooth PBFT extensions (consensus seal and regular view changes)
+- Clarify rustdoc wording
+
+The math-heavy details will move to the Architecture section in a separate commit.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-02-08 05:21:27,2019-02-18 20:40:19
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/87,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/87,Fix liveness bug,"This commit essentially reverts some of the changes in 65466d. The
+`commit_timeout`, which ensures the a block gets committed within a
+specified time, allows the network to get itself ""unstuck"" if something
+goes wrong during the commit process. This differs slightly from the
+`commit_timeout` that was removed in commit 65466d; specifically, the
+timer is stopped when the node decides to commit the block rather than
+after the block has been committed and the engine receives the
+notificaiton from the validator.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-02-06 17:09:44,2019-03-28 20:28:12
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/86,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/86,Fix seal voters list,"To verify the consensus seal, we need to make sure that the votes in the
+seal are all from nodes that were members of the network at the time the
+block was voted on. Specifically, this means that all voters should be
+in the on-chain list of peers in the block prior to the one the seal
+verifies.
+
+Before this commit, the list of voters was being taken from the block
+the seal verifies itself, which is incorrect. To fix this, we add the
+`previous_id` field to the consensus seal when it is built, verify that
+the previous ID matches the previous ID of the block when validating the
+seal, and get the list of peers using the previous ID.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>
+
+Also includes some other fixes that support this change.
+
+Based on #85 ",closed,True,2019-02-05 19:42:27,2019-03-28 20:28:11
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/85,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/85,Try again service calls,"Adds the `retry_until_ok` function to the timing module, which takes a callback, a base `Duration`, and a max `Duration` as arguments; the function will repeatedly call the callback until it returns successfully (`Ok` result) using exponential backoff (the base timeout is doubled every time the callback fails, up to the maximum timeout).
+
+The `retry_until_ok` method is used whenever `service.get_settings` is called. The base value is determined by the `exponential_retry_base` config/state field (milliseconds) and max is determined by `exponential_retry_max` (seconds); these can be configured using the `sawtooth.consensus.pbft.exponential_retry_base` and `sawtooth.consensus.pbft.exponential_retry_max` on-chain settings, respectively.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-01-31 19:06:00,2019-03-28 20:28:13
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/84,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/84,Fix pre preparing,"Fixes a bug where, when a new block and its PrePrepare
+message are received before the previous block gets committed, the node
+will never switch to Preparing that block. To fix this, the node will
+now try to switch to Preparing when one of three things happens:
+- A PrePrepare is received; if the PrePrepare is for the current
+sequence number and the node already has the block the message is for,
+it can switch to Preparing
+- A new block is received; if the block is for the current sequence
+number and the node already has the PrePrepare for the block, it can
+switch to Preparing.
+- A block was just committed; if the node already has a block for its
+next sequence number and a PrePrepare for that block, it can switch to
+Preparing.",closed,True,2019-01-29 17:04:43,2019-03-28 20:28:13
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/83,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/83,Reorganize PBFT architecture documentation,"- Combine ""Technical information"" and ""Architecture Operation"" into a single
+  ""Architecture"" section (the architecture.rst file)
+
+- Reorganize for clarity and flow: Put the message info first (because it's used
+  on the later sections), include Initialization in the operation section, move
+  the complex ""phases"" diagram (changed from ""states"") after the description of
+  the modes, and put Node Information Storage last.
+
+- Rewrite for clarity only where absolutely necessary (another edit pass is
+  needed)
+
+- Move ""On-chain Settings"" out of the architecture section
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-01-29 06:04:46,2019-02-06 19:52:39
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/82,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/82,Implement final block catchup,"Implement a procedure to commit the final block in the chain when
+catching up. The standard catchup procedure does not work for this,
+because it requires the seal in the next block; when the node needs to
+commit the last block in the chain, there is no next block yet. The
+procedure works as follows:
+- When a node as caught up to the 2nd-to-last block, it broadcasts a
+`SealRequest` message to the network.
+- When the up-to-date nodes receive the `SealRequest`, they build a
+seal, package it up in a `SealResponse` message, and send the message
+directly to the node that requested it.
+- When the requesting node receives a `SealResponse` (it only needs one
+and will ignore the others), it validates the seal and uses it to commit
+the final block.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-01-25 22:26:14,2019-03-28 20:28:15
+sawtooth-pbft,rberg2,https://github.com/hyperledger/sawtooth-pbft/pull/81,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/81,Update Jenkinsfile to schedule a build at 3AM CST,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-01-23 21:38:12,2019-01-25 16:46:11
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/80,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/80,More misc fixes,,closed,True,2019-01-23 17:39:29,2019-03-28 20:28:16
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/79,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/79,Fix PBFT glossary format,"Use the sphinx ""glossary"" directive instead of an RST table, which doesn't display properly in the HTML output.
+
+This change allows the PBFT docs to use the ""term"" directive to link to a glossary term in the future.
+
+Note: This PR simply changes the formatting. There are no changes to the terms or definitions.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-01-22 00:34:05,2019-01-24 22:30:31
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/78,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/78,Remove sphinxcontrib.openapi from doc build,"The PBFT docs do not need ""sphinxcontrib.openapi"" (it's for generating the Sawtooth REST API docs).
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-01-22 00:09:02,2019-02-06 19:55:16
+sawtooth-pbft,peterschwarz,https://github.com/hyperledger/sawtooth-pbft/pull/77,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/77,Unpin Sphinx Dependency,"Unpin the sphinx doc dependency and add latexmk for pdf builds under the latest release
+",closed,True,2019-01-21 19:22:01,2019-01-21 20:58:19
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/76,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/76,Miscellaneous fixes,Collection of fixes and enhancements for PBFT,closed,True,2019-01-21 16:17:07,2019-03-28 20:28:19
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/75,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/75,Update block management,"Improvements to PBFT's block management, including:
+- Bug fixes for the catch-up procedure
+- Update to make primary always initialize a new block and not try to re-use old ones
+- Removal of `state.working_block`
+- Updates to uphold contract with the validator that the engine will make a decision on all blocks that are sent to it",closed,True,2019-01-16 21:39:16,2019-03-28 20:28:17
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/74,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/74,Update Cargo.toml with new sawtooth-sdk repo,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-16 19:06:03,2019-01-16 21:58:47
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/73,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/73,Update logging and errors,"Numerous improvements to comments, docstrings, log messages, and error handling",closed,True,2019-01-14 23:02:26,2019-03-28 20:28:20
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/72,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/72,Add links to published PBFT docs and rustdocs,"Also add link to main repo README for current project status.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-01-09 04:01:38,2019-02-06 19:57:55
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/71,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/71,Remove block checking,"Remove call to the consensus service's `check_blocks` method, as well as
+the `BlockValid` and `BlockInvalid` update handlers. All blocks sent
+to the consensus engine by the validator have already been validated, so
+there is no need to explicitly check the blocks from the consensus
+engine.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>
+
+Based on #70 ",closed,True,2019-01-08 18:53:25,2019-03-28 20:28:21
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/70,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/70,General refactor,"General cleanup and refactoring of the existing code
+
+Based on #69",closed,True,2019-01-08 16:40:07,2019-03-28 20:27:32
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/69,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/69,Fix view changes,"A variety of feature implementations, fixes, and improvements for view changing in PBFT.",closed,True,2019-01-04 18:45:54,2019-03-28 20:27:32
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/68,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/68, Replace idle and commit timeouts with one timeout,"Replace the `idle_timeout` and the `commit_timeout` with a single
+`view_change_timeout`; this is a departure from the PBFT definition and
+the view change RFC
+(https://github.com/hyperledger/sawtooth-rfcs/pull/29/files).
+
+The new timeout is roughly equivalent to the `idle_timeout`, but with
+the key difference that it is stopped when a node has both a BlockNew
+and a corresponding PrePrepare for the next block rather than just a
+BlockNew.
+
+This timeout will guarantee liveness in the presence of a faulty primary
+by ensuring that the primary cannot indefinitely halt the network by
+failing to produce a block or a PrePrepare. However, we do not need to
+use a full commit timeout to ensure that a block is actually committed
+on time, because whether or not a block is committed does not depend on
+the primary. Once the primary has produced a block and a PrePrepare, the
+network as a whole is responsible for validating the block and sending
+the required messages to actually commit it; a faulty primary cannot
+prevent this on its own. This means that if there is a failure to commit
+a block, then there are more than f faulty nodes, and therefore a view
+change will not be able to provide liveness.
+
+This change provides the same liveness guarantees as before, but
+prevents the network from unnecessarily starting a view change when it
+will not help the network continue progress.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>
+
+Based on #67",closed,True,2018-12-27 17:00:11,2019-03-28 20:27:33
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/67,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/67,Enhancements and fixes,"Contains multiple improvements including:
+- Remove WorkingBlockOption struct and replace it with a simple Option<PbftBlock>
+- Get rid of unnecessary calls to service.get_chain_head when they can be replaced by using the node's state or message log
+- Clean up and fix the on_block_new, on_block_commit, and catchup procedures
+
+Based on #66 ",closed,True,2018-12-21 20:29:44,2019-03-28 20:27:34
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/66,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/66,Remove checkpointing,"Removes the checkpointing procedure and all of its associated code. This
+is no longer needed with the consensus seal and the guarantees that are
+provided by the state management of the blockchain. Because the
+blockchain stores all state history and each block is verified by a
+consensus seal that consists of PBFT messages that prove the block
+commit, we are never truly garbage collecting; the blockchain will
+always have these messages and state changes. This makes checkpointing
+unnecessary.
+
+The following is a summary of the changes that are made by this shift:
+- When a seal is verified, it's stored in the log for potential use in a
+view change message
+- If a view change is required, the seal for the last committed block is
+included in the view change message as the equivalent to the proof of
+the last stable checkpoint.
+- Consensus seals are garbage collected after each block is committed.
+Once a block commits we only keep the last valid consensus seal, since
+that's all we need to provide for a view change message.
+- Garbage collection now happens once the number of messages in the log
+is greater than or equal to the value specified in the `max_log_size`
+configuration variable.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>
+
+Based on #65 ",closed,True,2018-12-21 20:27:15,2019-03-28 20:27:34
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/65,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/65,Remove hinting and watermarks,"Removes the hinting mechanism since it prevents the node from adding
+valid messages to the log unnecessarily; as long as a message is valid
+and follows the rules necessary for being added to the log, we do not
+need to backlog messages until we are at the right sequence number or
+phase.
+
+Removes the water marking component of PBFT since it is not necessary.
+This mechanism was designed to prevent a primary for selecting a
+sequence number that was so high it exhausted the space of sequence
+numbers. Because the primary does not decide the sequence number (it is
+determined by the block number), it can't violate this anyway.",closed,True,2018-12-21 20:23:21,2019-03-28 20:27:35
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/64,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/64,C029 bionic upgrade,,closed,True,2018-12-20 21:09:18,2018-12-21 16:05:32
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/63,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/63,Update PBFT README,"- Edit content and link text for clarity
+- Update the Motivation section to reflect the current 1.1 release
+  and PoET information (because PoET-SGX is BFT).
+- Correct the RFC links
+- Add Documentation section with a link to the docs subdirectory in the repo
+- Add License information
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-12-18 15:41:42,2019-03-28 20:27:36
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/62,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/62,Build docs in Jenkins,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-12-17 19:20:20,2018-12-18 15:04:08
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/61,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/61,Update testing,Fix typos and other minor improvements to tests; also add dynamic membership test to Jenkinsfile.,closed,True,2018-12-14 21:03:07,2019-03-28 20:27:38
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/60,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/60,"Updates to PrePrepare + Commit processes, sequence number ordering",Simplifies and corrects checked conditions in the PrePrepare and Commit phases; also updates the way the sequence number is tracked by basing it off of the current chain head.,closed,True,2018-12-14 20:59:39,2019-03-28 20:27:37
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/59,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/59,2018 edition fixes,"Runs the `cargo fix --edition` command on the codebase, which updates code to be idiomatic for Rust 2018. Also applies a few manual 2018 updates to the codebase.",closed,True,2018-12-11 15:21:19,2018-12-18 15:28:24
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/58,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/58,Message log improvements,"Various improvements to the message log and related code. Most notably:
+- Updates the check_prepared and check_committable methods to:
+  * Be easier to read and understand
+  * Return a bool in their returned Results instead of a () to
+    distinguish between actual errors and the predicate simply being false
+  * Perform all necessary checks and verifications (i.e. did not check
+    if blocks matched between messages before)
+- Replaces the check_msg_against_log method with a more understandable
+  and flexible method log_has_required_msgs",closed,True,2018-12-10 17:13:49,2019-03-28 20:27:39
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/57,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/57,Add build discarding to Jenkinsfile,"Mirrors the BuildDiscarderProperty bit from the other, older-syntax Jenkinsfiles that we have.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-10 17:11:03,2018-12-12 20:50:22
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/56,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/56,Display working block number for PbftState,"Helps when viewing PBFT output to include block number in addition to block ID.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-10 16:54:33,2018-12-10 22:16:51
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/55,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/55,More verbose liveness test logging,"To help diagnose the non-deterministic build failures
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-07 21:16:14,2018-12-12 20:50:42
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/54,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/54, Check view number matches when adding msg to log,"Updates `add_message` to check all messages that aren't Checkpoints or
+ViewChanges to see if the view number matches the node's current view;
+if it does not, do not add the message to the log. This is guarantee of
+the PBFT algorithm that was not previously implemented. Also requires
+passing state to `add_message`.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-12-07 19:49:02,2019-03-28 20:27:38
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/53,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/53,Updating code formatting with cargo fmt,"`cargo fmt` updated recently and introduced new formatting. This updates PBFT to match the new formatting. Also fixes clippy lints.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-07 15:53:14,2018-12-07 16:51:52
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/52,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/52,Handle no working block in node catchup,"Handles the case where a node doesn't have a working block and gets a blocknew message that it could catch up from.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-05 23:25:47,2018-12-07 20:53:55
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/51,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/51,Fix view number lookup issue,"Forced view changes were causing issues with looking up votes for publishing by view number. The previous fix looked back a single view number, this provides a more general solution.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-05 19:32:58,2018-12-07 19:09:25
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/50,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/50,Vet documentation for inaccuracy,,closed,True,2018-12-04 18:06:27,2019-03-28 20:27:40
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/49,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/49,Change PBFT test script to bin/run_docker_test,"Make related changes in the Tips list (was called ""Optional Changes""),
+including:
+
+- Mention script options; suggest using --help for more info
+
+- Remove the ""adding docker-compose options"" tip because it doesn't work
+  with run_docker_test
+
+- Reword for clarity
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-12-03 19:10:28,2019-02-06 19:58:16
+sawtooth-pbft,chenette,https://github.com/hyperledger/sawtooth-pbft/pull/48,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/48,Edit and retitle PBFT install+test procedure,"- Change title and add intro text to clarify that this procedure describes how
+  to run PBFT tests
+
+- Reorganize and expand several steps to clarify what's being done
+
+- Move the optional items under ""Optional Changes"" and expand with specific
+  information for each
+
+- Fix the link to the PBFT on-chain settings
+
+- Reword and reformat to match Sawtooth doc standards
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-11-27 19:51:42,2019-02-06 19:58:50
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/47,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/47,Update settings for validator enforcement rules,"Updates the consensus settings in all integration tests to be compatible with
+the new validator enforcement rules.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-11-26 21:01:00,2018-11-27 18:04:29
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/46,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/46,Update CFT tests and add them to the Jenkinsfile,"Allows running the script that controls the CFT tests locally, and adds them to the Jenkinsfile.",closed,True,2018-11-20 16:28:14,2018-11-29 20:23:19
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/45,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/45,Move PbftLog to PbftState,Lets PbftLog be revived after a crash. Currently requires `Block` from the Rust SDK to have `Serialize`/`Deserialize` derived.,closed,True,2018-11-19 19:05:53,2018-12-07 16:46:08
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/44,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/44,Implement dynamic membership,"Implements membership changes for PBFT according to the following
+procedure:
+
+1. When a block is committed, check the list of peers in the
+`sawtooth.consensus.pbft.peers` setting to see if it matches the current
+list of peers stored in PBFT state.
+2. If the 2 lists of peers differ, update the PBFT state's list of
+peers, recalculate the value of f (max number of faulty nodes), and
+force a view change.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-11-19 17:44:04,2019-03-28 20:27:41
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/43,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/43,Move CFT services to separate compose file,"Moves sawtooth services defined in CFT compose file to separate compose file. This will let us reuse the compose file in any new tests, as well as avoid having to specify `--no-abort` when running the CFT compose file.",closed,True,2018-11-16 21:27:09,2018-11-19 17:55:46
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/42,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/42,Implement node catchup RFC,"Adds a try_catchup method to PbftNode that is called on BlockNew that will attempt to catch the node up if it has fallen behind.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-11-16 17:44:30,2018-11-19 22:41:09
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/41,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/41,Dynamic membership tests,"Adds a dynamic membership test that starts a network, adds/removes
+nodes, and makes sure that all nodes in the network make progress.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-11-16 16:57:10,2019-03-28 20:27:42
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/40,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/40,Create a new workspace for each build,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-15 20:23:45,2018-11-15 21:08:26
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/39,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/39,Chown artifacts to jenkins uid,"Jenkins is unable to properly cleanup if this isn't done.
+
+Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>",closed,True,2018-11-15 19:46:53,2018-11-16 17:11:31
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/38,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/38,Add consensus seal to PBFT,Includes refactoring of the stored messages to include metadata used in construction of the consensus seal,closed,True,2018-11-10 16:47:10,2018-11-14 21:36:44
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/37,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/37,Add retry clause to Jenkinsfile,"The liveness tests have a non-deterministic failure that occasionally breaks builds. Try the failing step a few times, in case that's why it broke.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-11-09 22:21:56,2018-12-07 16:45:37
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/36,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/36,Add CFT integration test,"This adds, but does not enable, a CFT integration test. We are currently working on the known issues that must be resolved for this test.",closed,True,2018-11-09 17:41:08,2018-11-12 18:02:00
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/35,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/35,Update Cargo.toml to use crates for sdk,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-09 00:52:55,2018-11-09 17:37:09
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/34,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/34,Always run docker compose down in Jenkinsfile,"Ensures that resources are cleaned up, even if the liveness tests fail
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-11-02 14:50:25,2018-11-02 16:01:36
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/33,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/33,Upgrade Docker images to Bionic,"Bleeding edge packages are no longer getting published for xenial, and PBFT needs those packages due to https://github.com/hyperledger/sawtooth-core/pull/1933. Includes some temporary Dockerfile changes to pull in Go SDK PR code that will go away once that code is merged/published.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-11-01 16:05:29,2018-11-01 18:10:13
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/32,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/32,Unpin rust-protobuf dependency,"Followup to #31. The maintainer of rust-protobuf helpfully pushed out a patched version with the breaking commit removed, so unpinning the version.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-31 18:33:40,2018-11-01 19:13:33
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/31,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/31,Pin protobuf dependency,"`rust-protobuf` recently switched to using `clippy::all`, which breaks things on stable. Pinning PBFT to previous version until that gets sorted out.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-31 15:04:51,2018-10-31 18:35:12
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/30,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/30,Handle Consensus SDK updates,"The Consensus API was recently updated, and most importantly, the PeerMessage type should now be treated as opaque. This commit eliminates construction of PeerMessages in PBFT, and instead passes around the raw bytes from the received PeerMessage.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-31 14:56:24,2018-11-01 18:31:51
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/29,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/29,Pin Sawtooth SDK revision,"A recent change was merged into the Sawtooth Rust SDK that broke PBFT. Fixing PBFT is non-trivial, so until those changes can be made, pin PBFT to use the revision before those changes were introduced.
+
+The SDK PR can be found here:
+
+https://github.com/hyperledger/sawtooth-core/pull/1923
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-30 21:35:10,2018-10-31 17:22:37
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/28,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/28,Update predicate names for PbftLog,"Updates method names in PbftLog for clarity. The current names sound like imperative methods with side effects, when in fact the methods are checking that certain conditions are true. The renaming scheme of `check_` was chosen over `is_` due to the traditional nature of `is_` returning actual booleans, vs us returning a `Result` for convenience with `?` handling.",closed,True,2018-10-30 19:51:12,2018-11-01 19:23:29
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/27,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/27,Update name of clippy rustfmt argument,"Denying `clippy` warnings is now deprecated in favor of denying `clippy::all` warnings
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-30 19:25:42,2018-11-01 18:58:26
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/26,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/26,Fix assert_eq! lint,"`assert!(a == b)` can be written as `assert_eq!(a, b)`
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-30 19:17:53,2018-11-01 19:14:40
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/25,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/25,Convert bare usize subtraction to checked version,"Attempting to subtract a number on a usize that results in a negative number will cause a panic in Rust. That was happening in a test case, and getting caught with `catch_unwind`. We can convert that to `checked_sub` usage, and avoid dealing with panics.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-30 19:14:34,2018-11-01 19:14:52
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/24,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/24,Move action_from_hint logic to PbftLog method,"Moves logic that handles conditionally adding messages to PbftLog to be inside a method of PbftLog
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-30 16:43:00,2018-11-01 19:22:39
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/23,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/23,Move PbftGetInfo trait lifetime to method lifetime,"Moves lifetime specification from parameterized for the trait to parameterized by the `get_msg_info` method. We weren't relying on behavior specific to either style, and this lets us elide some lifetimes in code that uses the trait.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-30 15:55:42,2018-11-01 19:22:19
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/22,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/22,Remove duplicates from test peering configuration,"Update the peering configuration in the liveness test to eliminate the chance
+of creating duplicate connections between nodes. Because connections are
+bi-directional, only one node per pair of nodes needs to list the other node as
+a peer.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-10-30 15:52:22,2018-10-31 15:38:06
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/21,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/21,007 bumper updates,,closed,True,2018-10-29 16:07:18,2018-11-09 20:19:18
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/20,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/20,Refactor PbftState block discard logic into method,"Moves free-floating function that takes only `PbftState` as parameter to method of `PbftState`.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-29 14:21:17,2018-10-29 19:35:50
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/19,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/19,Merge regular and installed Dockerfiles,"Merges two different dockerfiles into one that can be used by two different docker compose files. This allows us the flexibility of having a ""heavy"" container with build dependencies (`docker-compose.yml`), and a ""light"" container with just runtime dependencies (`docker-compose-installed.yml`), all defined in the same Dockerfile. The advantage to having a single Dockerfile comes from preventing code drift between two separate files.
+
+@rbuysse pointed out that this violates the pattern used in other Hyperledger repos, and suggested that this pattern get some wider feedback to see if its usefulness outweighs the change.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-25 19:21:57,2018-12-07 16:45:50
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/18,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/18,Add metadata for cargo deb,"`cargo deb` was complaining about missing fields in Cargo.toml, this adds in those missing fields
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-24 16:06:10,2018-10-24 19:07:38
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/17,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/17,Order dependencies in Cargo.toml for readability,"Alphabetizes dependencies listed in Cargo.toml to improve readability.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-24 15:18:43,2018-10-25 15:49:32
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/16,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/16,Reformat imports to improve readability,"Groups imports into `std`, external, and internal dependencies
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-24 15:15:51,2018-11-01 19:53:48
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/15,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/15,Regular view changes,Implements this RFC: https://github.com/hyperledger/sawtooth-rfcs/pull/29,closed,True,2018-10-23 16:44:51,2018-10-25 19:41:34
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/14,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/14,Build PBFT on Jenkins nodes matching label,"Jenkins restricts builds to particular labels, and `agent any` doesn't override that. This change makes PBFT build on nodes matching the `master` label.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-23 16:06:24,2018-10-23 16:40:10
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/13,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/13,Add configurable logging,,closed,True,2018-10-22 21:43:44,2019-03-28 20:27:43
+sawtooth-pbft,rbuysse,https://github.com/hyperledger/sawtooth-pbft/pull/12,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/12,Bumper updates,,closed,True,2018-10-22 19:02:04,2018-10-22 19:52:06
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/11,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/11,Fix Rust formatting,"Runs `cargo fmt` to catch formatting lints, since there's been some drift without Jenkins automatically checking it for us
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-22 18:18:15,2018-10-22 21:21:31
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/10,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/10,Make PBFT work on Jenkins,"This PR gets PBFT building properly on Jenkins once more, and includes various fixes to enable that.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-22 14:21:53,2018-10-23 13:59:30
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/9,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/9,Adhoc Networking Tools,,closed,True,2018-10-18 22:14:38,2018-10-22 16:33:13
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/8,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/8,Return Result in Engine::start,"Corresponds to [sawtooth-core#1903](https://github.com/hyperledger/sawtooth-core/pull/1903)
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-18 14:08:22,2018-10-18 15:50:14
+sawtooth-pbft,ltseeley,https://github.com/hyperledger/sawtooth-pbft/pull/7,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/7,Update message signing usage,"Adds a verification step for all PBFT messages that compares the
+signer_id of the message with the sender_id provided by the validator;
+if they do not match, the message is ignored. Since the validator
+verifies all peer messages it receives, we can use the sender_id as a
+guarantee of who sent the message.",closed,True,2018-10-16 16:10:12,2019-03-28 20:27:44
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/6,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/6,"Refactor long functions into smaller, descriptive functions",,closed,True,2018-10-16 15:47:47,2018-10-16 18:35:21
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/5,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/5,"Refactor long functions into smaller, descriptive functions",,closed,True,2018-10-15 17:37:47,2018-10-15 17:40:05
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/4,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/4,Move to stable clippy,"Nightly moves too quickly
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-12 21:12:27,2018-10-15 14:37:08
+sawtooth-pbft,knkski,https://github.com/hyperledger/sawtooth-pbft/pull/3,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/3,Add Storage trait for PbftState,"Introduces `Storage` trait that ensures that modifications to an object are synced to a backing store using RAII, and wraps `PbftState` in that. Also moves `PbftState` to be state managed by the engine, for two reasons:
+
+ * `PbftNode` requiring `&mut self` on its methods and also having it hand out references to a contained `PbftState` didn't play nicely with lifetimes
+ *  Syncing changes only at the end of each engine loop means we don't have to worry about whether or not any state changes within an engine loop need to be atomic, each loop either gets synced or not",closed,True,2018-10-12 15:54:50,2018-10-23 21:45:24
+sawtooth-pbft,aludvik,https://github.com/hyperledger/sawtooth-pbft/pull/2,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/2,"Refactor long functions into smaller, descriptive functions ",Copied from here: https://github.com/bitwiseio/sawtooth-pbft/pull/22,closed,True,2018-10-10 18:39:31,2018-10-10 20:47:23
+sawtooth-pbft,ryjones,https://github.com/hyperledger/sawtooth-pbft/pull/1,https://api.github.com/repos/hyperledger/sawtooth-pbft/issues/1,Create dco,,closed,True,2018-10-08 19:29:51,2018-10-08 19:30:17

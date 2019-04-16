@@ -1,0 +1,1064 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/195,https://api.github.com/repos/hyperledger/quilt/issues/195,Fix readme,Signed-off-by: David Fuelling <sappenin@gmail.com>,closed,True,2019-03-28 14:43:30,2019-03-28 14:45:30
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/194,https://api.github.com/repos/hyperledger/quilt/issues/194,Update badges with DCO,Signed-off-by: David Fuelling <sappenin@gmail.com>,closed,True,2019-03-27 15:24:48,2019-03-28 14:44:10
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/193,https://api.github.com/repos/hyperledger/quilt/issues/193,Update badges,,closed,True,2019-03-27 15:22:46,2019-03-27 15:25:05
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/192,https://api.github.com/repos/hyperledger/quilt/issues/192,Implement STREAM Primitives,"The Quilt project currently has primitives for operating a Connector in the Interledge stack, but it needs additional primitives to allow developers to implement a Sender and Receiver, as well as flows that support payments between these two.
+
+- [ ] Implement [STREAM](https://github.com/interledger/rfcs/blob/master/0034-connector-requirements/0034-connector-requirements.md) packets (see Rust implementation [here](https://github.com/emschwartz/interledger-rs/tree/master/crates/interledger-stream/src))
+- [ ] Implement SPSP protocol primitives
+- [ ] Implement SPSP sender
+- [ ] Implement SPSP receiver
+- [ ] Implement SPSP Pull payments",open,False,2019-03-27 14:12:32,2019-03-27 15:17:45
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/191,https://api.github.com/repos/hyperledger/quilt/issues/191,Update Checkstyle version,Signed-off-by: David Fuelling <sappenin@gmail.com>,closed,True,2019-03-26 14:13:58,2019-03-28 14:38:15
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/190,https://api.github.com/repos/hyperledger/quilt/issues/190,Update checkstyle for security-alert,Signed-off-by: David Fuelling <sappenin@gmail.com>,closed,True,2019-03-26 14:12:37,2019-03-26 14:12:43
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/189,https://api.github.com/repos/hyperledger/quilt/issues/189,Update Checkstyle version for security-alert,Signed-off-by: David Fuelling sappenin@gmail.com,closed,True,2019-03-26 14:10:10,2019-03-28 18:17:40
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/188,https://api.github.com/repos/hyperledger/quilt/issues/188,Update license files,Signed-off-by: David Fuelling <sappenin@gmail.com>,closed,True,2019-03-17 00:44:31,2019-03-26 13:40:24
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/187,https://api.github.com/repos/hyperledger/quilt/issues/187,Fixes #185,Signed-off-by: David Fuelling <sappenin@gmail.com>,closed,True,2019-03-15 15:37:04,2019-03-17 00:14:29
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/186,https://api.github.com/repos/hyperledger/quilt/issues/186,Implement AmountTooLarge Error Data,See https://github.com/interledger/rfcs/blob/master/asn1/InterledgerErrorData.asn,open,False,2019-03-15 15:15:22,2019-03-15 15:15:22
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/185,https://api.github.com/repos/hyperledger/quilt/issues/185,Update ILP Error codes,The error codes should conform to [IL-RFC-0027](https://github.com/interledger/rfcs/blob/master/0027-interledger-protocol-4/0027-interledger-protocol-4.md#error-codes),closed,False,2019-03-15 15:06:15,2019-03-17 00:14:27
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/184,https://api.github.com/repos/hyperledger/quilt/issues/184,Feature/reject packet conformance,"Update RejectPacket to conform to [IL-RFC-27](https://github.com/interledger/rfcs/blob/master/0027-interledger-protocol-4/0027-interledger-protocol-4.md#ilp-reject):
+
+* Make `triggeredBy` optional.",closed,True,2019-03-14 13:58:40,2019-03-14 14:49:39
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/183,https://api.github.com/repos/hyperledger/quilt/issues/183,Enhancements to support IL-DCP (new & improved),"* Update to 0.16.0-SNAPSHOT
+* Fix Jackson security (see [security alerts](https://github.com/hyperledger/quilt/network/alert/jackson-datatypes/pom.xml/com.fasterxml.jackson.core:jackson-databind/open)) 
+* Add unit tests for all IL-DCP classes
+* Improve Javadoc in various classes
+* Remove deprecated InterledgerPacketMapper.
+* Fixes #144 
+* Fixes #145
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2019-03-09 02:52:34,2019-03-17 00:18:39
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/182,https://api.github.com/repos/hyperledger/quilt/issues/182,Enhancements to support IL-DCP,"* Update to 0.16.0-SNAPSHOT
+* Fix Jackson security (see [security alerts](https://github.com/hyperledger/quilt/network/alert/jackson-datatypes/pom.xml/com.fasterxml.jackson.core:jackson-databind/open)) 
+* Add unit tests for all IL-DCP classes
+* Improve Javadoc in various classes
+* Remove deprecated InterledgerPacketMapper.
+* Fixes #144 
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2019-03-04 01:07:06,2019-03-17 00:21:14
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/181,https://api.github.com/repos/hyperledger/quilt/issues/181,Misc Updates for ILPv4,This PR introduces misc updates and minor tweaks in order to better support ILPv4.,closed,True,2019-02-21 15:02:05,2019-02-24 21:27:38
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/180,https://api.github.com/repos/hyperledger/quilt/issues/180,Fix broken build in CircleCI,"* See https://discuss.circleci.com/t/circleci-build-failure-on-openjdk-image/26104/2
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-11-21 16:29:22,2018-11-21 16:31:27
+quilt,dvrajitha,https://github.com/hyperledger/quilt/pull/179,https://api.github.com/repos/hyperledger/quilt/issues/179,fix java doc as mention in spec,Please check this,closed,True,2018-11-21 14:08:45,2018-11-21 17:01:42
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/178,https://api.github.com/repos/hyperledger/quilt/issues/178,Feature/enhance btp,"Misc fixes for BTP implementation
+
+* Update to 0.14.0-SNAPSHOT
+* Added Codec for BTP Timestamps, which are slightly different from Interledger Timestamps.
+* Update BtpErrorCode to have code, name, and description.
+* Create new factory for BTP OER codec access
+* Improved Javadoc
+* Improved units test coverage",closed,True,2018-09-30 22:13:47,2018-10-10 14:21:22
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/177,https://api.github.com/repos/hyperledger/quilt/issues/177,Fixes #176,"* Change `<id>` to `<serverId`>
+* Update immutables version to 2.7.1
+* Update maven-gpg-plugin to 1.6
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-09-29 17:30:08,2018-10-10 13:41:53
+quilt,gccrpm,https://github.com/hyperledger/quilt/issues/176,https://api.github.com/repos/hyperledger/quilt/issues/176,element Id is not allow here?,"
+![err](https://user-images.githubusercontent.com/25718696/46245592-af132600-c422-11e8-84c0-904e820fbb4a.png)
+
+
+
+
+
+i download the project ,opened it using intellij idea ,which occurs an error as in the picture. what's rong with the pom.xml file.",closed,False,2018-09-29 12:04:03,2018-10-08 02:06:12
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/175,https://api.github.com/repos/hyperledger/quilt/issues/175,Fix AsnIldcpResponseCodec,The implementation is incomplete.,closed,False,2018-09-17 00:03:18,2019-02-24 21:32:45
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/174,https://api.github.com/repos/hyperledger/quilt/issues/174,Misc Packet Cleanup,"* Revert InterledgerAddress.value to `getValue`.
+* Add `InterledgerAddressPrefix` that can be an address or allocation scheme, plus unit test.
+* Add Codec for `InterledgerAddressPrefix`, plus unit tests.
+* Move `data` to `InterlederPacket` parent interface.
+* Set default value of Prepare packet to ZERO.
+* Add Javadoc to InterledgerFulfillPacket.
+* Make BtpSubProtocolContentTypeTest use the proper type (Short).
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-09-16 23:57:32,2018-10-10 13:46:01
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/173,https://api.github.com/repos/hyperledger/quilt/issues/173,Fixes #172,"Make the interal value of `BtpMessagetype` into a `short` instead of an `int`.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-08-19 23:04:24,2018-08-20 14:29:49
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/172,https://api.github.com/repos/hyperledger/quilt/issues/172,BtpMessageType is typed as an `int` but should be typed as a `short`,"In order to work properly with the new default Codec/Serializer mappings, 8-bit values (like the value inside of `BtpMessageType` MUST be typed as a `short`. ",closed,False,2018-08-19 23:00:21,2018-08-20 14:29:46
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/171,https://api.github.com/repos/hyperledger/quilt/issues/171,Fixes #170,"* Make `AsnUint8Codec` extend the correct interface (`AsnOctetStringBasedObjectCodec `)
+* Use `AsnOctetStringOerSerializer` for `AsnUint8Codec`
+* Remove AsnUint8OerSerializer
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-08-19 22:55:08,2018-08-20 14:19:11
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/170,https://api.github.com/repos/hyperledger/quilt/issues/170,Align AsnUint8Codec with other fixed-number codecs,"All of the fixed-byte number codecs extend `AsnOctetStringBasedObjectCodec`, but the recently introduced `AsnUint8Codec` does not. We should adjust `AsnUint8Codec` to conform and also remove the `AsnUint8OerSerializer`.",closed,False,2018-08-19 22:49:44,2018-08-20 14:19:09
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/169,https://api.github.com/repos/hyperledger/quilt/issues/169,Fixes #168,"Change `InterlederAddress#value` to `InterledgerAddress#getValue` per [the discussion in this PR](https://github.com/hyperledger/quilt/pull/165#discussion_r207726244).
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-08-18 22:17:43,2018-08-20 14:08:21
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/168,https://api.github.com/repos/hyperledger/quilt/issues/168,Restore `get` syntax to InterledgerAddress.,,closed,False,2018-08-18 22:09:09,2018-08-20 14:08:18
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/167,https://api.github.com/repos/hyperledger/quilt/issues/167,Testing/ilpv4 enhancements,"This PR primarily fixes #166, but also contains other minor cleanups for ILPv4, including slightly enhanced abstract unit test classes for the Codec classes.",closed,True,2018-08-08 18:58:45,2018-08-18 22:10:33
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/166,https://api.github.com/repos/hyperledger/quilt/issues/166,Change number-type-mapping for AsnUint8Codec and AsnUint16Codec,"In order to (de)serialize the [CCP](https://github.com/interledgerjs/ilp-protocol-ccp) to/from ASN.1 OER, it is necessary for the Java codecs to support Uint16 datatypes (in order to (d)encode the identifier of a `route-property`).
+
+This ticket proposes to do this by modifying the underlying Java data-type of `AsnUint8Codec` and `AsnUint16Codec` to be `Short` and `Integer` respectively.
+
+In this way, if we want to write Java code (using the current codec framework) that emits an 8-bit number (in a single octet), we would use a `Short`. If we wanted to write Java code that emits a 16-bit number (2 octets), we would use an `Integer`, and so on. The following illustrates the new proposed mapping of ASN.1 OER datatypes to Java number types:
+
+*  8-bit **Fixed** Length Number (1 octet) --> `Short` [**_changed_**]
+* 16-bit **Fixed** Length Number (2 octets) --> `Integer` [**_changed_**]
+* 32-bit **Fixed** Length Number (4 octet) --> `Long` [_unchanged_]
+* 64-bit **Fixed** Length Number (8 octet) --> `BigInteger` (if X <= `2^64-1`) [_unchanged_]
+* Var Octets Number --> `BigInteger` (if X > `2^64-1`) [_unchanged_]
+",closed,False,2018-08-05 22:43:13,2018-08-18 22:10:28
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/165,https://api.github.com/repos/hyperledger/quilt/issues/165,Fixes #139,"* Update `InterledgerAddress` for ILPv4 compatibility.
+* Add `AllocationScheme` as first-class object.
+* Makle InterlederAddress parsing an internal concern of the InterledgerAddress object since this logic is only used for validating an ILP address.
+* Update unit tests.
+* Update Immutables dependencies
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-08-04 18:10:45,2018-08-18 22:08:45
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/164,https://api.github.com/repos/hyperledger/quilt/issues/164,Refactor Codec/Serializers to reduce new object contstruction,"There are three problems with the codec/serializer framework as it stands now.
+
+**First**, the codecs rely upon holding ""state"" until the Serializer can write (or the inverse in the case of a read). The net effect of this is that for every serialization operation, there is at least `1` new object construction operation (to create a new codec), but in general it's much worse that this. 
+
+For example, consider the [AsnInterledgerPreparePacketDataCodec](https://github.com/hyperledger/quilt/blob/b53a0511007c005c1f5455ec7f59639fb935e5b6/ilp-core-codecs/src/main/java/org/interledger/core/asn/codecs/AsnInterledgerPreparePacketDataCodec.java), which is engaged for every `prepare` packet. Here, we have at least 5 new object instantiations for every deserialize operation. So, if we process 5m payments (prepare[5] + fulfill[2]), we would expect at least 35 million new object creations, which wastes memory, cpu cycles, etc. 
+
+**Second**, the current system attempts to automatically map from Java objects to ASN.1 OER. For the most part, this is a fine default setting, but creates complexity inside of the framework when we need to create custom mappings. For example, currently the [CodecContextFactory](https://github.com/hyperledger/quilt/blob/b53a0511007c005c1f5455ec7f59639fb935e5b6/codec-framework/src/main/java/org/interledger/encoding/asn/framework/CodecContextFactory.java#L64) maps a `BigInteger` to `AsnUint64Codec`, which makes sense for the ILP codecs. However, for some [CCP](https://github.com/interledger/rfcs/blob/master/0010-connector-to-connector-protocol/0010-connector-to-connector-protocol.md) codecs, BigInteger can sometimes be required to map to `AsnUintCodec` instead. This is not a showstopper -- we might simply try to create a more intelligent Codec perhaps, but this new codec would likely not suit all use-cases. A better system would be one where a developer can have more fine-grained control over the Codec/Serializer that should be used, despite what the default factory has configured.
+
+**Third**, is clarity of code. There appears to be overlap between the Serializers and the Codecs. For example, it's nearly impossible to create a good unit test of a serializer because it's tightly coupled to its codec (a proper unit test here can be quite complicated, typically because creating a codec-mock is non-trivial). Additionally, it can be unclear which layer is responsible for what.
+
+This ticket proposes to solve both performance and clarity issues by combining the codecs and serializers into a single layer, with an API that allows for simple encoding/decoding functionality (like the current API) but also allows for fine-grained `read...` and `write...` methods, similar to how an `InputStream`/`OutputStream` would allow by providing direct access to read/write methods.",open,False,2018-07-30 15:30:15,2018-08-01 11:56:48
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/163,https://api.github.com/repos/hyperledger/quilt/issues/163,Fixes #162,"* Only strip leading bytes if the byte-length is < 1
+* Add unit test for AsnUintCodec
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-07-22 21:17:39,2018-07-30 15:05:51
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/162,https://api.github.com/repos/hyperledger/quilt/issues/162,VarUInt with value zero is encoded incorrectly,"Bug is here:
+https://github.com/hyperledger/quilt/blob/master/codec-framework/src/main/java/org/interledger/encoding/asn/codecs/AsnUintCodec.java#L52
+
+This needs to exclude the case where the value == 0
+
+```java
+if (bytes[0] == 0x00 && bytes.length > 1) {
+```",closed,False,2018-07-18 20:28:58,2018-07-30 15:05:17
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/161,https://api.github.com/repos/hyperledger/quilt/issues/161,Update README.md,Update gradle version to `0.12.0-SNAPSHOT`,closed,True,2018-07-18 15:33:48,2018-07-28 20:58:41
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/160,https://api.github.com/repos/hyperledger/quilt/issues/160,Bugfix/155 condense conditions,"* Remove `Condition.java` and `Fulfillment.java` in-favor of `InterledgerCondition.java` and `InterledgerFulfillment.java`
+* Update all references
+* Update unit tests.",closed,True,2018-07-14 22:24:33,2018-07-23 17:23:15
+quilt,sublimator,https://github.com/hyperledger/quilt/pull/159,https://api.github.com/repos/hyperledger/quilt/issues/159,Fix typos,,closed,True,2018-07-13 07:28:53,2018-07-18 15:15:54
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/158,https://api.github.com/repos/hyperledger/quilt/issues/158,Clarify the difference between AsnUintCodec and AsnUint64Codec,"What's the difference between `AsnUint64Codec` and `AsnUintCodec`? Since both map to a `BigInteger`, they both can't be used at the same time. Should perhaps `AsnUintCodec` be removed?",closed,False,2018-07-12 06:30:19,2018-07-12 06:31:04
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/157,https://api.github.com/repos/hyperledger/quilt/issues/157,Fixes #24,"Update README
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-07-12 05:49:13,2018-07-14 17:15:32
+quilt,sublimator,https://github.com/hyperledger/quilt/issues/156,https://api.github.com/repos/hyperledger/quilt/issues/156,jackson-datatypes tests not being run by maven/CI,"No tests in the output: https://circleci.com/gh/hyperledger/quilt/166
+
+I don't really have much experience with mvn but it seems a `<packaging>pom</packaging>` element seems to throw it: https://github.com/hyperledger/quilt/blob/master/jackson-datatypes/pom.xml#L11
+
+No idea why",closed,False,2018-07-10 13:53:26,2018-07-21 21:09:13
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/155,https://api.github.com/repos/hyperledger/quilt/issues/155,Condense org.interledger.core.Condition/Fulfillment to InterledgerCondition/InterledgerFulfillment,,closed,False,2018-06-24 17:20:38,2018-07-21 21:09:13
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/154,https://api.github.com/repos/hyperledger/quilt/issues/154,Fixes #24 (Update wiki/README from old project),* Add Maven coordinates to main README.,closed,True,2018-06-24 17:06:43,2018-07-12 05:54:22
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/153,https://api.github.com/repos/hyperledger/quilt/issues/153,Add intelligent defaults to BtpSubProtocol,Signed-off-by: sappenin <sappenin@gmail.com>,closed,True,2018-06-24 16:53:24,2018-07-12 05:44:37
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/152,https://api.github.com/repos/hyperledger/quilt/issues/152,Fixes #151,"Allow BtpTransfer to be constructed.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-06-24 16:40:49,2018-07-11 08:54:32
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/151,https://api.github.com/repos/hyperledger/quilt/issues/151,Fix bug in BtpTransfer.decode,,closed,False,2018-06-24 16:39:15,2018-07-11 08:54:26
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/150,https://api.github.com/repos/hyperledger/quilt/issues/150,Add CONTRIBUTING.md,"Fixes #61
+
+Signed-off-by: adrianhopebailie <adrian@hopebailie.com>",closed,True,2018-06-21 16:04:23,2018-07-11 09:31:16
+quilt,chuck1991,https://github.com/hyperledger/quilt/pull/149,https://api.github.com/repos/hyperledger/quilt/issues/149,Fixes #147 : Changed hard code module groupId and version dependency,Signed-off-by: Kai Chu <chuck.chu.liu@gmail.com>,closed,True,2018-06-05 18:26:02,2018-06-11 15:41:19
+quilt,chuck1991,https://github.com/hyperledger/quilt/pull/148,https://api.github.com/repos/hyperledger/quilt/issues/148,Fixes #147:Changed hard code module groupId and version dependency,,closed,True,2018-06-05 18:11:45,2018-06-05 18:19:12
+quilt,chuck1991,https://github.com/hyperledger/quilt/issues/147,https://api.github.com/repos/hyperledger/quilt/issues/147,Failure to find org.interledger:dev-ops:jar:0.2.0-SNAPSHOT,"clone the codes and `mvn clean install` get build failure error
+
+`Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:2.17:check (default) on project quilt-parent: Execution default of goal org.apache.maven.plugins:maven-checkstyle-plugin:2.17:check failed: Plugin org.apache.maven.plugins:maven-checkstyle-plugin:2.17 or one of its dependencies could not be resolved: Failure to find org.interledger:dev-ops:jar:0.2.0-SNAPSHOT in http://repository.apache.org/snapshots was cached in the local repository, resolution will not be reattempted until the update interval of apache.snapshots has elapsed or updates are forced -> [Help 1]`",closed,False,2018-06-05 17:46:59,2018-06-11 15:41:20
+quilt,Gregvh,https://github.com/hyperledger/quilt/pull/146,https://api.github.com/repos/hyperledger/quilt/issues/146,Fixes #135 : Ready for review,"The command mentioned in issue #135 does not work unless I add an organization name to the pom. This name will appear in the license headers. What name should I use ?
+
+Also the dev-ops module has no reference to the parent pom, is it OK if I add it so that it inherits the organization name and inceptionYear (both needed by the plugin) ?
+
+Thanks in advance for the feedback !",closed,True,2018-05-18 14:27:46,2018-06-18 08:45:01
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/145,https://api.github.com/repos/hyperledger/quilt/issues/145,Unit tests for ildcp-core-codecs,Required for v1,closed,False,2018-05-09 15:58:49,2019-03-17 00:18:36
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/144,https://api.github.com/repos/hyperledger/quilt/issues/144,Unit tests for ildcp-core,Required for v1,closed,False,2018-05-09 15:57:32,2019-03-17 00:18:36
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/143,https://api.github.com/repos/hyperledger/quilt/issues/143,Unit tests for btp-core-codecs,Required for v1 release,open,False,2018-05-09 15:53:20,2018-05-09 15:53:20
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/142,https://api.github.com/repos/hyperledger/quilt/issues/142,Implement test vectors for the OER codec-framework,Similar to the vectors for crypto-conditions we need some known good test values to run through any codecs,open,False,2018-05-09 15:47:21,2018-05-09 15:47:21
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/141,https://api.github.com/repos/hyperledger/quilt/issues/141,Implement Routing logic from JS Connector in Java,"This should be in its own module called ilp-routing.
+
+See JS impl here: https://github.com/interledgerjs/ilp-connector/pull/416",closed,False,2018-05-09 15:40:40,2019-02-24 21:28:57
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/140,https://api.github.com/repos/hyperledger/quilt/issues/140,Fixes #133,Signed-off-by: adrianhopebailie <adrian@hopebailie.com>,closed,True,2018-05-09 15:32:30,2018-05-09 15:46:56
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/139,https://api.github.com/repos/hyperledger/quilt/issues/139,Update InterledgerAddress for ILPv4,"Update ILP Address implementation per the changes for ILPv4.
+
+The changes in the RFCs are in this PR: https://github.com/interledger/rfcs/pull/426
+
+Related Issues:
+
+* https://github.com/interledger/rfcs/issues/386
+* https://github.com/interledger/rfcs/issues/422
+* https://github.com/hyperledger/quilt/issues/128
+* https://github.com/interledger/rfcs/issues/410
+",closed,False,2018-05-09 15:10:22,2018-08-05 22:01:23
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/138,https://api.github.com/repos/hyperledger/quilt/issues/138,Add BTP and ILDCP modules,"Fix sub-module versioning (all inherit from parent)
+Add core libs and codecs
+Drop submodules file (relic of crypto-conditions)",closed,True,2018-05-08 14:05:28,2018-06-01 19:08:31
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/137,https://api.github.com/repos/hyperledger/quilt/issues/137,Fixes #136,"* Remove crypto-conditions and rely on a simple hashlock.
+* Bump versions of all dependencies
+* Bump version of Kotlin
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-04-29 00:17:55,2018-05-08 09:32:36
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/136,https://api.github.com/repos/hyperledger/quilt/issues/136,Remove CryptoConditions from Project,Crypto-Conditions has moved to https://github.com/ripple/crypto-conditions and should be removed from this project.,closed,False,2018-04-29 00:13:21,2018-05-08 09:32:29
+quilt,tkuhrt,https://github.com/hyperledger/quilt/issues/135,https://api.github.com/repos/hyperledger/quilt/issues/135,Resolve licensing issues discovered by Fossology scan,"## Context
+Hyperledger Quilt source files (from April 3, 2018) were scanned by The Linux Foundation utilizing Fossology to determine license for files contained in the following repositories:
+  * https://github.com/hyperledger/quilt
+  * https://github.com/hyperledger/quilt-crypto-conditions
+
+From the Hyperledger Charter (https://www.hyperledger.org/about/charter) Section 13, all files that are included in Hyperledger projects should either be licensed with the Apache License, Version 2.0 for source code or Creative Commons Attribution 4.0 International License for documentation.
+
+## Expected Behavior
+All files should have license text included either directly or via a LICENSE file in the directory for files that cannot be modified to include a comment with the license text (think binary files).
+
+## Actual Behavior
+See results of scan: [quilt-2018-04.xlsx](https://github.com/hyperledger/quilt/files/1881025/quilt-2018-04.xlsx)
+
+## Possible Fix
+_ALL_ files that do not have a license included, the first step is to check with the contributor to ensure that the file can be released as Apache 2.0 or CC-BY-4.0.  If the contributor agrees, the file should be modified to include the license. You can utilize [SPDX Identifiers](https://spdx.org/) to represent the correct license.
+
+For those non-modifiable files, you will need to include a LICENSE file in the directory containing the license that the files are covered by.  Here are a few examples of how this might be done:
+* [OPNFV Apex](https://github.com/opnfv/apex/blob/master/LICENSE.rst) -- this is an example of explicitly calling out Apache 2.0 for source code and CC-BY-4.0 for docs.  
+* [containerd](https://github.com/containerd/containerd/blob/master/README.md) -- see notice at bottom.  This also calls out the separate Apache / CC-BY-4.0 docs, and explicitly references the ""docs"" directory.
+
+## Steps to Reproduce
+Run code through Fossology (contact tkuhrt at linuxfoundation dot org) to have the source re-run after the modifications.
+
+",closed,False,2018-04-05 17:14:08,2018-06-14 17:28:13
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/134,https://api.github.com/repos/hyperledger/quilt/issues/134,Address comment in PR #99,See Adrian's comment in #99 [here](https://github.com/hyperledger/quilt/pull/99#discussion_r166477518),closed,False,2018-03-24 23:30:39,2018-06-20 15:49:52
+quilt,dora-gt,https://github.com/hyperledger/quilt/issues/133,https://api.github.com/repos/hyperledger/quilt/issues/133,AsnUintCodec can not accept zero.,"https://github.com/hyperledger/quilt/blob/b0497ff75136a16e32a0336950c88d36e590e39e/codec-framework/src/main/java/org/interledger/encoding/asn/codecs/AsnUintCodec.java#L24
+
+Isn't it `if (value.compareTo(BigInteger.ZERO) < 0) {` ?
+
+This can not accept `0`.",closed,False,2018-03-21 18:28:11,2018-05-09 15:46:53
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/132,https://api.github.com/repos/hyperledger/quilt/issues/132,Fix onValueChanged behaviour,"The onEncoded event is not sufficient to catch all deserialization events.
+
+Currently this is used when reading in a UInt8 value which is the packet type for an InterledgerPacket. This allows the packet codec to set the correct internal codecs for the rest of the read operation.
+
+This only worked for UIn8 as it depended on the serializer calling `decode`.
+
+The new behaviour causes the event to be fired for all codecs even if the serializer calls `setChars(String)` or `setBytes(byte[])` for more complex codecs such as the UInt64 or Utf8String etc.
+
+The InterledgerPacket is also updated to use the new event.
+
+Signed-off-by: adrianhopebailie <adrian@hopebailie.com>",closed,True,2018-03-19 13:01:53,2018-05-08 13:35:02
+quilt,dora-gt,https://github.com/hyperledger/quilt/pull/131,https://api.github.com/repos/hyperledger/quilt/issues/131,Fixed pom versioning,"- mvn build fails because of pom setting, version mismatch.
+  - `dev-ops` is `0.1.1-SNAPSHOT` but specified `0.1.0-SNAPSHOT` in `pom.xml`
+  - `ilp-annotations ` is `0.1.1-SNAPSHOT` but specified `0.1.0-SNAPSHOT` in `pom.xml` and `ilp-annotations/pom.xml`",closed,True,2018-03-18 18:19:17,2018-05-08 15:17:49
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/130,https://api.github.com/repos/hyperledger/quilt/issues/130,Feature/npe enforcements,"_**NOTE: This PR incorporates #129, which is purely Javadoc and formatting, so it might be easier to review that PR first before looking at this one.**_
+
+This PR simplifies the AddressParser by restoring all null-input invariant checks back into the InterledgerAddress. By not allowing `null` into the AddressParser by design, it no longer must account for multi-error conditions related to `null` values, and can focus on its core purpose, which is validity checks on non-null input.
+
+A more detailed rationale:
+1. AddressParser should not be doing any null-check enforcement, because InterledgerAddress itself should enforce the non-use of `null` as a developer error. In other words, there is a distinction between `null` making its way into an `InterledgerAddress` and some non-null String input that simply doesn't rise to the bar enforced by IL-RFC-15.
+
+2. Once the parser becomes responsible for address content and formation checking only, it is somewhat simplified. The 4 `InterledgerAddress#require` methods no longer need to delegate to `AddressParser` because the logic is not complicated enough to justify the delegation.
+
+3. Once moved back into InterledgerAddress, these implementations do not share any code between themselves (i.e., the two `requireAddressPrefix` methods are slightly duplicative, and the two `requireNotAddressPrefix` methods are also slightly duplicative). In each case, this is for performance reasons -- for example, we might be tempted to have `requireAddressPrefix(address)` delegate to `requireAddressPrefix(address, message)` with a default `message`. However, the happy-path usage of this call-chain would compute a new String for the error message, which would be different for every check of every ILP address in a system, and 99% of the time this String allocation would be unnecessary. In other words, we only want to assemble an error-string (with an ILP address inside) _if_ the method will actually throw an Exception. Thus, we optimize for the happy-path and duplicate the `if` check.
+
+@pascalav @adrianhopebailie 
+",closed,True,2018-03-17 19:33:58,2018-03-19 12:43:32
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/129,https://api.github.com/repos/hyperledger/quilt/issues/129,Javadoc Cleanup,Signed-off-by: sappenin <sappenin@gmail.com>,closed,True,2018-03-17 18:37:04,2018-03-19 12:42:30
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/128,https://api.github.com/repos/hyperledger/quilt/issues/128,Error in InterledgerAddress Regex,"The DESTINATION_ADDRESS regex appears to be too restrictive:
+ `(?=^.{1,1023}$)^(g|private|example|peer|self|test[1-3]?)[.]([a-zA-Z0-9_~-]+[.])+[a-zA-Z0-9_~-]+$` 
+
+This forces the address to have at least 2 segments after the scheme which means a valid address like `peer.config` is considered invalid.
+
+I believe this would be sufficient:
+ `(?=^.{1,1023}$)^(g|private|example|peer|self|test[1-3]?)([.][a-zA-Z0-9_~-]+)+$` 
+
+",closed,False,2018-03-16 11:43:22,2018-06-20 15:59:49
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/127,https://api.github.com/repos/hyperledger/quilt/issues/127,Feature/#56 allow overridden error message in interledger address checks,,closed,True,2018-03-12 19:21:16,2018-03-17 20:11:14
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/126,https://api.github.com/repos/hyperledger/quilt/issues/126,Fixes #119,"* Eases the ILP v4 packets impl usage by initializing their 'data' field to empty.
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-03-12 17:30:09,2018-03-14 22:03:51
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/125,https://api.github.com/repos/hyperledger/quilt/issues/125,Fixes #59,"* Allows InterledgerProtocolException to accept an error message (for logging purpose)
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-03-06 17:46:10,2018-03-12 15:53:20
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/124,https://api.github.com/repos/hyperledger/quilt/issues/124,Add support for ASN.1 SEQUENCE OF SEQUENCE,Required for BTP,closed,True,2018-03-06 10:43:51,2018-03-12 15:57:38
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/123,https://api.github.com/repos/hyperledger/quilt/issues/123,Fixes #104,"* Enhances the ILP address error check into a parser class
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-02-25 11:28:57,2018-03-12 15:43:05
+quilt,reedrosenbluth,https://github.com/hyperledger/quilt/pull/122,https://api.github.com/repos/hyperledger/quilt/issues/122,Fix ThresholdSha256Condition#calculateCost,"...to accept an Immutable list
+
+Addresses #67 ",closed,True,2018-02-21 21:50:39,2018-02-27 21:07:24
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/121,https://api.github.com/repos/hyperledger/quilt/issues/121,RequestRejectedException should extend InterledgerProtocolException,"Currently, RequestRejectedException extends Exception. We should consider extending InterledgerProtocolException instead.",closed,False,2018-02-21 05:48:41,2019-02-24 21:33:15
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/120,https://api.github.com/repos/hyperledger/quilt/issues/120,Javadoc for InterledgerRejectPacket.getMessage() is incorrect,See ILP RFCs for proper definition.,closed,False,2018-02-21 05:43:37,2018-11-25 17:21:26
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/119,https://api.github.com/repos/hyperledger/quilt/issues/119,Make InterledgerRejectPacket.getData return empty array by default.,"The default value of the immutable should be an empty byte array so developers constructing a new InterledgerRejectPacket don't have to specify the data field.
+
+```
+InterledgerRejectPacket.builder()
+              .code(InterledgerErrorCode.F02_UNREACHABLE)
+              .message(""No Route to Destination!"")
+              .triggeredBy(...)
+              .data(new byte[]{})
+              .build()
+```
+
+can become this:
+
+```java
+InterledgerRejectPacket.builder()
+              .code(InterledgerErrorCode.F02_UNREACHABLE)
+              .message(""No Route to Destination!"")
+              .triggeredBy(...)
+              .build()
+```
+",closed,False,2018-02-21 05:42:53,2018-03-14 22:03:52
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/118,https://api.github.com/repos/hyperledger/quilt/issues/118,ILP-Node: Misc Accounts/Channels/Counterparty Questions,"An `Account` consists of the Connector, and a single `CounterParty`. This begs the following questions:
+
+1. **How many `Channels` can exist per account, possibly at the same time?**
+
+1. **Should there be N Accounts per Counterparty?**
+For example, it seems like there should possibly be _at least_ one Account per supported currency for a given Counterparty? Like, I might have one USD Account with you, and 3 EUR accounts with you?
+
+1. **What is the Primary Identifier of an Account?**
+I _think_ this is just a UUID (or String identifier) chosen by the datastore backing the account manager? 
+
+1. **What is the Primary Identifier of an CounterParty?**
+Seems like this is just a random identifier possibly that allows a Connector implementation lookup a Counterparty by Id (and this id is actually stored in the Account?). 
+
+1. **What is the Primary Identifier of a Channel?**
+In my LPI Java implementation, I was using an ILP address as a primary identifier for each LedgerPlugin, so should a `Channel` be likewise identified by ILP address?",closed,False,2018-02-21 04:10:19,2019-02-24 21:29:41
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/117,https://api.github.com/repos/hyperledger/quilt/issues/117,ILP-Node: Make AccountManager an Interface,"I wanted to create my own version of `AccountManager` that wasn't in-memory, but instead backed by an in-memory datastore like H2. In order to do this, we would need to make `AccountManager` an interface, like this:
+
+```java
+/**
+ * <p>Manages Connector accounts for a given Interledger address prefix.</p>
+ *
+ * <p>A connector might have multiple accounts with the same {@link Counterparty}, each of which may
+ * have a different or identical currency code.</p>
+ */
+public interface AccountManager {
+
+  /**
+   * An optionlly-present parent account. //TODO: Add pointer to an overview of parent/child/peer
+   * relationships.
+   */
+  Optional<Account> getParentAccount();
+
+  /**
+   * Add a peer account to this manager.
+   */
+  boolean add(Account account);
+
+  /**
+   * Remove an account from this manager by its id.
+   */
+  void remove(AccountId accountId);
+
+  /**
+   * Get the Ledger Layer2Plugin for the specified {@code ledgerPrefix}.
+   *
+   * @param accountId The {@link AccountId} of the account to retrieve. ¬   * @return The requested
+   *                  {@link Account}, if present.
+   */
+  Optional<Account> getAccount(AccountId accountId);
+
+  // TODO: Determine if and how a Manager should expose bulk/stream operations.
+
+  /**
+   * Creates a {@code Spliterator} over the elements in this set. The {@code Spliterator} reports
+   * {@link Spliterator#DISTINCT}. Implementations should document the reporting of additional
+   * characteristic values.
+   *
+   * @return a {@code Spliterator} over the elements in this set
+   */
+  Stream<Account> stream();
+
+  /**
+   * Gets or creates the channel that can be used to transfer value to the counterparty of the
+   * specified account.
+   *
+   * @throws IllegalStateException if no account is found.// TODO: Change this to account not found
+   *                               exception?
+   */
+  Channel getChannel(AccountId accountId);
+
+}
+```
+
+Notice that this doesn't extend `java.util.Set` on purpose, because this is an implementation detail.",closed,False,2018-02-21 03:58:53,2019-02-24 21:30:58
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/116,https://api.github.com/repos/hyperledger/quilt/issues/116,ILP-Node: De-couple Channel from Account,"@adrianhopebailie I finally had some time over the weekend to look at building a Springified version of ILP-node, and have a few questions/suggestions. Here's the first one.
+
+What do you think about de-coupling the Account from the Channel? Currently, `Account` has a `getChannel`, but this makes it difficult to both store an account, as well as reason about the interplay between an Account and a Channel. 
+
+Instead, it seems like the `AccountManager` should be in charge of getting (or creating) the `Channel` for any given account.
+
+So, what do you think about moving `getChannel` into `AccountManager`, something like this:
+
+```java
+  /**
+   * Gets or creates the channel that can be used to transfer value to the counterparty of the
+   * specified account.
+   *
+   * @throws AccountNotFoundException if no account is found.
+   */
+  Channel getChannel(AccountId accountId);
+
+```",closed,False,2018-02-21 03:56:47,2018-06-24 17:08:41
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/115,https://api.github.com/repos/hyperledger/quilt/issues/115,Fixes #109,Signed-off-by: sappenin <sappenin@gmail.com>,closed,True,2018-02-17 18:57:41,2018-03-12 15:51:10
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/114,https://api.github.com/repos/hyperledger/quilt/issues/114,Cleanup Quilt Root Folder,"We should simplify the project a bit by restructuring the root folder. I propose that we move [ilp-annotations](https://github.com/hyperledger/quilt/tree/master/ilp-annotations), [ilp-core-codecs](https://github.com/hyperledger/quilt/tree/master/ilp-core-codecs), [jackson-datatypes](https://github.com/hyperledger/quilt/tree/master/jackson-datatypes), and [dev-ops](https://github.com/hyperledger/quilt/tree/master/dev-ops) into a folder called `support-libraries`.
+
+In this way, the quilt project will have the following folders:
+
+* ilp-core
+* support-libraries",closed,False,2018-02-17 18:56:35,2018-06-20 16:05:24
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/113,https://api.github.com/repos/hyperledger/quilt/issues/113,Update the project's README.md to include links to example implementations of ILP Connectors.,,open,False,2018-02-17 18:53:52,2018-08-08 18:56:01
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/112,https://api.github.com/repos/hyperledger/quilt/issues/112,Fix README for JCE encryption requirements,Signed-off-by: sappenin <sappenin@gmail.com>,closed,True,2018-02-17 18:39:39,2018-03-12 15:47:47
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/111,https://api.github.com/repos/hyperledger/quilt/issues/111,Add support for ASN.1 Open Types,"Fixes #110
+
+Signed-off-by: adrianhopebailie <adrian@hopebailie.com>",closed,True,2018-02-13 15:58:34,2018-03-12 16:00:19
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/110,https://api.github.com/repos/hyperledger/quilt/issues/110,[ilp-core-codecs] Fix OER encoding of packet,"See comment at https://github.com/interledger/rfcs/pull/387#discussion_r167688168
+
+The current encoding does not include the length prefix.",closed,False,2018-02-13 09:45:39,2018-03-12 16:00:16
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/109,https://api.github.com/repos/hyperledger/quilt/issues/109,Remove Connector-Examples Folder,"#88 introduced a new connector folder into the project, but @earizon had a good point [here](https://github.com/hyperledger/quilt/pull/88#issuecomment-364960992) that the project is becoming a bit crowded.
+
+We should remove the `connector-example`.",closed,False,2018-02-12 17:24:14,2018-03-12 15:51:08
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/108,https://api.github.com/repos/hyperledger/quilt/issues/108,Create boolean-circuit representations and factories,"This is a tracking ticket for the concept of ""boolean circuits"" in the crypto-conditions library.
+
+The idea would be to create an interface called `BooleanCircuit` that would have various imlementations. For example:
+
+* **OrGate**: Contains a 1-of-2 Threshold condition, allowing it to operate like an `OR` gate.
+* **AndGate**: Contains a 2-of-2 Threshold condition, allowing it to operate like an `AND` gate.
+
+Use something like `BooleanCircuitFactory`, this library could be used to construct boolean logic circuit based upon crypto-condition primitives.
+
+**References**
+* Inspiring Issue Discussion: https://github.com/bigchaindb/cryptoconditions/issues/94
+* Gist containing some sample code (but containing incorrect interfaces): https://gist.github.com/sappenin/fade24278f1a90df22a9e05409a14e91",closed,False,2018-02-12 01:43:05,2018-04-28 23:07:32
+quilt,reedrosenbluth,https://github.com/hyperledger/quilt/pull/107,https://api.github.com/repos/hyperledger/quilt/issues/107,Rename Fulfillment.getCondition to Fulfillment.getDerivedCondition,resolves #98 ,closed,True,2018-02-09 22:45:53,2018-02-09 23:11:59
+quilt,reedrosenbluth,https://github.com/hyperledger/quilt/pull/106,https://api.github.com/repos/hyperledger/quilt/issues/106,Rename Fulfillment.getCondition to Fulfillment.getDerivedCondition,resolves #98 ,closed,True,2018-02-09 22:00:09,2018-02-09 22:39:08
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/105,https://api.github.com/repos/hyperledger/quilt/issues/105,Node Framework,"A framework for new ILP nodes.
+Lots of features and tests to still add.
+
+TestNode provides a clue as to how to use it.
+Next step is to see if it is framework-agnostic enough to be used within Spring and VertX.",closed,True,2018-02-08 22:40:41,2018-03-06 08:55:54
+quilt,pascalav,https://github.com/hyperledger/quilt/issues/104,https://api.github.com/repos/hyperledger/quilt/issues/104,Improve the error output in `InterledgerAddress#check()`,"As suggested by @sappenin , regarding enforcement of RFC-15 in `InterledgerAddress#check()`: 
+
+> we might consider improving the error output instead of just saying, ""reference ILP-RFC-15.""
+
+Reference: https://github.com/hyperledger/quilt/issues/57#issue-277115537",closed,False,2018-02-08 20:48:56,2018-03-12 15:43:06
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/103,https://api.github.com/repos/hyperledger/quilt/issues/103,Ignores the projects files of the eclipse IDE in SCM,Signed-off-by: Pascal Avondes <pavondes@gmail.com>,closed,True,2018-02-07 22:50:09,2018-02-12 11:29:34
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/102,https://api.github.com/repos/hyperledger/quilt/issues/102,Fixes #57,"* Enforce the RFC-15 regular expressions for address prefixes and destination addresses respectively
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-02-07 22:12:36,2018-02-08 20:57:19
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/101,https://api.github.com/repos/hyperledger/quilt/issues/101,Use correct Crypto-Condition Test Vectors,"Currently, the Java implementation of `crypto-conditions` runs its tests on a corrected, [forked version](https://github.com/hyperledger/quilt/tree/master/crypto-conditions/src/test/resources/org/interledger/cryptoconditions/vectors/valid) of the RFC's test vectors.
+
+We need to instead [update the test-vectors in the RFC](https://github.com/rfcs/crypto-conditions/issues/32) per draft-4, and then update the test harness to point to these vectors instead.
+
+",closed,False,2018-02-07 17:48:15,2018-04-28 23:23:30
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/100,https://api.github.com/repos/hyperledger/quilt/issues/100,"In this library, what is the ""best"" default encoding for Fulfillment.getEncodedPreimage and other byte-array data?","@adrianhopebailie @earizon @michielbdejong 
+
+This issue arises from the[discussion](https://github.com/hyperledger/quilt/pull/89#discussion_r165421147) in #89.
+
+Currently, `Fulfillment.getEncodedPreimage` produces output in [Base64Url](https://en.wikipedia.org/wiki/Base64) encoding. However, in [ILP-over-HTTP](https://github.com/interledger/rfcs/blob/ilp-over-http/0000-ilp-over-http.md), the encoding is specified as being Base64.
+
+If we leave things alone, then anyone using the ILP-Testnet's `ILP-over-HTTP` functionality will have to re-encode from Base64Url to Base64 in order to pass fulfillment data.
+
+Thus, we have (at least) three choices here:
+
+1. Do nothing. Have any code that needs to interface with both `ilp-over-http` and this `crypto-conditions` library just do the double-conversion. This may not be a bad choice because 1.) ilp-over-http is deprecated in favor of ILPv4-over-http, and 2) There's a case to be made that this encoding _should_ be Base64Url, so that anyone putting this data into a URL won't have to double-encode it.
+1. Change the TestNet code to use Base64Url. I will defer to @michielbdejong on this, but I think this is a non-starter because the testnet has certain deprecation guarantees that would make this impractical.
+1. Change this library to use `Base64` encoding in all places. Overall, this is not a bad choice, but would force anyone putting crypto-condition primitives into URLs to possibly have to re-encode them. This is probably more likely than any of the use-cases from 1 or 2 above.
+
+I would be curious to hear pros/cons for picking either Base64 vs. Base64Url as a general choice. Thoughts anyone?",closed,False,2018-02-07 16:45:37,2018-04-28 23:09:39
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/99,https://api.github.com/repos/hyperledger/quilt/issues/99,Earizon pr85 review,"""Bugs"" found during testing with java connector
+
+Reopened from #89 to target`master`",closed,True,2018-02-06 23:31:24,2018-03-24 23:31:29
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/98,https://api.github.com/repos/hyperledger/quilt/issues/98,Rename Fulfillment.getCondition to Fulfillment.getDerivedCondition,"The [RFC](https://tools.ietf.org/html/draft-thomas-crypto-conditions-04) commonly labels the derived condition of a Fulfillment as `(D)`. Thus, we should rename the method `Fulfillment#getCondition` to `Fulfillment#getDerivedCondition` ",closed,False,2018-02-06 23:24:31,2018-02-09 23:11:59
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/97,https://api.github.com/repos/hyperledger/quilt/issues/97,Fixes #93,"* Fix the RocketChat link in the crypto-conditions module documentation
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-02-06 23:15:34,2018-02-08 19:51:55
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/96,https://api.github.com/repos/hyperledger/quilt/issues/96,Improve unit test coverage following refactor,https://github.com/hyperledger/quilt/pull/85 introduced some technical debt in terms of unit test coverage.,closed,False,2018-02-06 16:34:02,2018-05-09 15:56:37
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/95,https://api.github.com/repos/hyperledger/quilt/issues/95,Formalize versioning and release process,"@earizon and @sappenin initiated a discussion around this in #90 
+
+Having read through [the blog](https://www.dontpanicblog.co.uk/2011/12/13/maven-release-plugin/) linked in the thread I found the following to be interesting and need our attention:
+
+> The version of all sub-modules should be the same as the version of the parent pom and all sub-modules should be released together.
+
+I suggest we fix this in all our sub-modules but consider pulling some sub-modules out into their own project like crypto-conditions and the codec-framework as these don't make sense as modules that will be re-released with each new version of the Interledger components.
+
+Also, given the changes with ILPv4 we may consider changing `ilp-core` to no longer depend on `crypto-conditions`...
+
+I think part of our problem is that we are in a very experimental stage and are making breaking changes to the APIs regularly. The sooner we get out of that the better then we can follow a better release process.
+
+On the one hand I agree with @earizon that SNAPSHOT releases are supposed to indicate that they are an interim state but I also think that if we change the API from one commit to another then that will break any applications that use the API and so this needs to be signaled by a version number change.
+
+I propose that we say:
+
+1. If you submit a change that breaks any API then the version number must increment
+2. If you submit a change that doesn't break an API then it's okay to leave the version number unchanged if the change is being made on a SNAPSHOT.
+
+## Proposal
+
+Let me know what you think of doing each of these:
+
+1. Put crypto-conditions in it's own repo and leave version at `0.5.0-SNAPSHOT`
+2. Set versions of all modules and submodules to `1.0.0-SNAPSHOT` with a goal of making a release following our call on 14 February
+3. Get the repo setup to use the `maven-release` plugin correctly and aim to make formal releases after our bi-weekly call unless there is an important bug-fix.
+4. Setup the CI to make a SNAPSHOT release every time we merge into `master`
+",closed,False,2018-02-06 15:32:33,2018-06-20 15:37:28
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/94,https://api.github.com/repos/hyperledger/quilt/issues/94,Feature/#11 improve threshold constructors,,closed,True,2018-02-05 20:05:12,2018-02-17 18:11:12
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/93,https://api.github.com/repos/hyperledger/quilt/issues/93,Fix RocketChat link in CryptoConditions README.,See comments in https://github.com/hyperledger/quilt/pull/75. The RocketChat link is currently broken in the `Contributors` section.,closed,False,2018-02-05 17:49:30,2018-02-06 23:35:32
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/92,https://api.github.com/repos/hyperledger/quilt/issues/92,Fix Javadoc for PreimageSha256Fulfillment.getEncodedPreimage,"The JavaDoc for `PreimageSha256Fulfillment#getEncodedPreimage` is incorrect. This field has nothing todo with the OER encoding of a `PreimageSha256Fulfillment` (which is generated using the `CryptoConditionsWriter`).
+
+Instead, this is just an attempt to help make `PreimageSha256Fulfillment` more immutable, because returning the actual underlying byte[] allows external actors to mutate the state of a `PreimageSha256Fulfillment`. ",closed,False,2018-02-05 17:15:13,2018-04-28 23:14:32
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/91,https://api.github.com/repos/hyperledger/quilt/issues/91,Switch project to be 120 lines instead of 100,See https://github.com/hyperledger/quilt/blob/master/dev-ops/src/main/resources/org/interledger/dev-ops/checkstyle.xml#L50,closed,False,2018-02-02 05:38:20,2018-02-08 20:46:57
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/90,https://api.github.com/repos/hyperledger/quilt/issues/90,Fixes #83,"https://github.com/interledger/rfcs/pull/376 allows for a slightly different prefix of just “test.” in an ILP address. This PR adjusts the allowed prefixes to conform to this change.
+
+Also adds unit test coverage.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-02-02 05:00:09,2018-02-17 18:28:00
+quilt,earizon,https://github.com/hyperledger/quilt/pull/89,https://api.github.com/repos/hyperledger/quilt/issues/89,Earizon pr85 review,"""Bugs"" found during testing with java connector",closed,True,2018-01-31 16:53:25,2018-02-07 16:57:11
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/88,https://api.github.com/repos/hyperledger/quilt/issues/88,Add connector example folders,"During the quilt call, we all agreed it would be ideal to locate various connector implementations _in_ the Quilt project. This commit provides some scaffolding to organize that effort.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-01-31 16:16:41,2018-02-12 17:15:59
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/87,https://api.github.com/repos/hyperledger/quilt/issues/87,Add connector folders,"During the quilt call, we all agreed it would be ideal to locate various connector implementations _in_ the Quilt project. This commit provides some scaffolding to organize that effort.",closed,True,2018-01-31 16:14:33,2018-01-31 16:19:33
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/86,https://api.github.com/repos/hyperledger/quilt/issues/86,Use Quilt @Immutable annotation for all crypto-conditions.,"There is a custom `Immutable` attribute defined in the `ilp-annotations` module that we should use in the crypto-conditions project instead of using the default annotation defined in the immutables project.
+
+This change should be as simple as changing package-names in each interface, and then updating the rest of the code to compile properly.
+
+This will change the style of the generated implementations and Builders slightly. So, instead of the builder being defined like `ImmutablePreimageSha256Condition.Builder`, the code will probably look something like `PreimageSha256Condition.Builder`. 
+
+We should experiment with this a bit before committing to ensure that the static builder methods in each interface still work after this change.",closed,False,2018-01-30 17:41:30,2018-02-08 18:21:37
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/85,https://api.github.com/repos/hyperledger/quilt/issues/85,Refactor for ILPv4 and split codecs,"Major refactor to:
+
+- Create custom annotation for consistent use of Immutables
+- Split out codec framework
+- Split out core lib codecs
+- Split out transport layer protocols (to be added in a future commit)
+- Support new packet types for ILPv4
+
+Incorporates changes from:
+ - PR #81 from @sappenin (Immutables for crypto-conditions)
+ - PR #77 from @earizon (New ILPv4 packets)
+ - PR #65 from @sappenin (Jackson serializers)
+",closed,True,2018-01-26 20:23:39,2018-02-17 18:32:00
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/84,https://api.github.com/repos/hyperledger/quilt/issues/84,Align CryptoConditionType enum name with .name(),"Is there a good reason the enum values in `CryptoConditionType` use an underscore, but the `name` property uses hyphens?",closed,False,2018-01-25 19:51:44,2018-02-28 00:31:05
+quilt,michielbdejong,https://github.com/hyperledger/quilt/pull/83,https://api.github.com/repos/hyperledger/quilt/issues/83,fix: allow Interledger testnet addresses,Interledger testnet addresses all start with `test.`.,closed,True,2018-01-25 11:40:16,2018-02-05 17:22:17
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/82,https://api.github.com/repos/hyperledger/quilt/issues/82,Discuss Fulfillment#verify() and how it should work with prefix conditions...,"I'm unclear on the interplay between the `prefix` of a PrefixSha256Fulfillment/Condition and the `message` of its subcondition/fulfillment. I would have expected `prefix` and `message` to be able to vary independently, but I'm wondering if they reduce to the same thing, in practice?
+
+As an example, I expected the following code to work (where the `message` and `prefix` are non-empty and distinct):
+
+```
+  final String message = ""message"";
+  final String prefix = ""prefix"";
+
+  // Construct an Ed25519 Fulfillment (which signs ""message"")
+  KeyPair ed25519KeyPair = constructEdDsaKeyPair();
+  Signature edDsaSigner = new EdDSAEngine(sha512Digest);
+  edDsaSigner.initSign(ed25519KeyPair.getPrivate());
+  edDsaSigner.update(message.getBytes());
+  byte[] edDsaSignature = edDsaSigner.sign();
+  Ed25519Sha256Fulfillment signatureFulfillment = Ed25519Sha256Fulfillment((EdDSAPublicKey) ed25519KeyPair.getPublic(), edDsaSignature);
+
+  // Construct a Prefix Fulfillment
+  PrefixSha256Fulfillment prefixFulfillment = new PrefixSha256Fulfillment(
+            prefix.getBytes(), 100, signatureFulfillment
+   );
+  PrefixSha256Condition prefixCondition = prefixFulfillment.getCondition();
+
+  assertTrue(prefixFulfillment.verify(prefixCondition, message.getBytes());  
+```
+
+The assertion in the code above does not pass. In the Java implementation at least, it appears that the `prefix` for a PrefixSha256Fulfillment must be used as the message for an Ed25519Sha256Fulfillment so that verification can pass. For example, this passes:
+
+```
+  // These must match...
+  final String message = ""message"";
+  final String prefix = message;
+
+  // Construct an Ed25519 Fulfillment.
+  Ed25519Sha256Fulfillment signatureFulfillment = ... (same as above)
+
+  // Construct a Prefix Fulfillment
+  PrefixSha256Fulfillment prefixFulfillment = new PrefixSha256Fulfillment(
+            prefix.getBytes(), 100, signatureFulfillment
+   );
+  PrefixSha256Condition prefixCondition = prefixFulfillment.getCondition();
+
+  // Only works with an empty `message`, and the message equaling the prefix (see above)
+  assertTrue(prefixFulfillment.verify(prefixCondition, """".getBytes());  
+```
+
+Either this is a flaw in the Java implementation, or something assumed/omitted in the RFC?",closed,False,2018-01-24 20:58:23,2018-04-28 23:32:50
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/81,https://api.github.com/repos/hyperledger/quilt/issues/81,Use Immutables in CryptoConditions (Fixes #5 and #8),"* Make all conditions/fulfillments into interfaces.
+* Use immutables library to generate all implemenations of conditions/fulfillments
+* Improve unit tests
+* Update all users of conditions/fulfillments to use the new construction method.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2018-01-21 22:07:57,2018-01-26 17:50:27
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/80,https://api.github.com/repos/hyperledger/quilt/issues/80,Feature/crypto condition immutables2,,closed,True,2018-01-21 22:05:08,2018-01-21 22:08:23
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/79,https://api.github.com/repos/hyperledger/quilt/issues/79,Feature/crypto condition immutables,,closed,True,2018-01-21 22:00:53,2018-01-21 22:08:22
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/78,https://api.github.com/repos/hyperledger/quilt/issues/78,Verify ThresholdSha256Fulfillment#constructCondition,"The code to construct a derived Threshold Condition from a Threshold Fulfillment does not de-duplicate the subconditions or subfulfillments. This behavior was copied from the JS implementation, and is tested in `ValidVectorTest.java`.
+
+One problem with this lack of deduplication is that in order for the Threshold verification to work, callers need to setup their ThresholdCondition and Fulfillment in a weird way. See the comments in `ThresholdSha256FulfillmentTest#testOneOfTwoThreshold` and `ThresholdSha256FulfillmentTest#testTwoOfTwoThreshold`.
+
+Effectively, if we use a `Set` in `ThresholdSha256Condition#constructCondition`, then the behavior is correct, but the tests in `ValidVectorTest.java` (taken from the JS impl) fail. 
+
+Perhaps another way around this would be to clarify the constructors for Threshold Conditions and Fulfillments, especially M-of-N variants.",closed,False,2018-01-21 21:10:27,2018-02-17 15:45:04
+quilt,earizon,https://github.com/hyperledger/quilt/pull/77,https://api.github.com/repos/hyperledger/quilt/issues/77,WIP: Add missing packet types,"Signed-off-by: Enrique Arizón Benito <enrique.arizon.benito@everis.com>
+
+Adding some missing packet types.
+PENDING: Not sure how to complete all the (en|de)coding OER stuff with the new code layout. ",closed,True,2018-01-17 09:03:13,2018-01-30 16:01:05
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/76,https://api.github.com/repos/hyperledger/quilt/issues/76,Verify Comparable Interface for Threshold Conditions,"Currently, the RFC mandates that Threshold sub-conditions be sorted/ordered [according to their byte-values](https://tools.ietf.org/html/draft-thomas-crypto-conditions-03#section-8.3.4):
+
+> The SET of DER encoded sub-conditions is sorted according to the DER encoding rules for a SET, in lexicographic (big-endian) order, smallest first as defined in section 11.6 of [itu.X690.2015](http://handle.itu.int/11.1002/1000/12483).
+
+Doing this properly potentially involves padding certain octets, per [itu.X690.2015](http://handle.itu.int/11.1002/1000/12483):
+
+> <b>11.6 Set-of components</b>
+> The encodings of the component values of a set-of value shall appear in ascending order, the encodings being compared as octet strings with the shorter components being padded at their trailing end with 0-octets.
+> NOTE – The padding octets are for comparison purposes only and do not appear in the encodings.
+
+
+This places quite a burden on various implementations of the spec since in order to perform the comparison, under certain circumstances, all of the bytes of a Condition/Fulfillment might be compared.
+
+First, we should validate that the Java implementation properly implements this (see `ConditionBase#compareTo`). Second, we should consider perhaps a different ordering in the RFC, such as possibly by cost/type, or some other cheaper, yet properly ordered, mechanism.
+
+",closed,False,2018-01-14 22:45:53,2018-04-28 23:24:25
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/75,https://api.github.com/repos/hyperledger/quilt/issues/75,Update CryptoConditions README,,closed,True,2018-01-13 06:58:10,2018-02-17 18:31:16
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/74,https://api.github.com/repos/hyperledger/quilt/issues/74,Update README,"* Add Maven & Gradle SNAPSHOT usage.
+
+Signed-off-by: sappenin sappenin@gmail.com",closed,True,2018-01-13 06:28:41,2018-01-13 06:42:38
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/73,https://api.github.com/repos/hyperledger/quilt/issues/73,Update README,* Add Maven & Gradle SNAPSHOT usage.,closed,True,2018-01-13 06:24:45,2018-01-13 06:28:00
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/72,https://api.github.com/repos/hyperledger/quilt/issues/72,Fixes #71,"* Ensure no sub-conditions underflow (towards threshold) in the THRESHOLD-SHA-256 condition class
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-01-10 20:06:06,2018-02-08 19:51:40
+quilt,pascalav,https://github.com/hyperledger/quilt/issues/71,https://api.github.com/repos/hyperledger/quilt/issues/71,`ThresholdSha256Condition#calculateCost` doesn't check that the number of its sub-conditions is greater or equal to its threshold,"In draft-03 is told: 
+
+> in the case of the THRESHOLD-SHA-256 type the number of valid sub-fulfillments must be equal or greater than the threshold
+
+In sources, providing less sub-conditions than the provided threshold throws an `IndexOutOfBoundsException`.
+
+Semantically, throwing an `IllegalArgumentException` would better describe the situation.",closed,False,2018-01-10 19:55:46,2018-02-05 17:20:58
+quilt,pascalav,https://github.com/hyperledger/quilt/pull/70,https://api.github.com/repos/hyperledger/quilt/issues/70,Fixes #10,"* Add unit-tests covering the cost computation of a THRESHOLD-SHA-256 crypto-condition
+
+Signed-off-by: Pascal Avondes <pavondes@gmail.com>",closed,True,2018-01-10 19:31:18,2018-02-08 19:49:19
+quilt,nathanawmk,https://github.com/hyperledger/quilt/pull/69,https://api.github.com/repos/hyperledger/quilt/issues/69,Update README.md," Add Unlimited Strength Encryption Policy Files Note, Symptoms, Cause and detailed steps for Resolution",closed,True,2018-01-09 17:23:58,2018-02-17 18:40:19
+quilt,jcatino,https://github.com/hyperledger/quilt/issues/68,https://api.github.com/repos/hyperledger/quilt/issues/68,Problem in tests classes,"Having problems compiling ilp-core I commented some lines to run the test classes and build packages.
+
+Classes are:
+InterledgerErrorOerCodecTests (lines 122 and 137)
+IlqpCodecTests (line 95(
+
+(line like: assertThat(error, is(packet)); )
+
+I had to comment this line to run the test. Is any problem with that ?
+
+I'm using Eclipse, compiling with java 9.01 with Maven 3.5.2
+",closed,False,2018-01-08 03:02:02,2018-02-08 20:48:03
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/67,https://api.github.com/repos/hyperledger/quilt/issues/67,ThresholdSha256Condition#calculateCost doesn't accept an Immutable list,"`ThresholdSha256Condition#calculateCost` performs a sort operation on the list, which fails if the supplied List is immutable. We should copy the list into a mutable variant before trying to sort it.",closed,False,2017-12-29 21:03:21,2018-02-27 21:27:27
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/issues/66,https://api.github.com/repos/hyperledger/quilt/issues/66,Review GeneralizedTime codec,See https://github.com/interledger/rfcs/pull/361#discussion_r158607195,closed,False,2017-12-24 19:47:21,2018-02-08 20:48:43
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/65,https://api.github.com/repos/hyperledger/quilt/issues/65,Initial Commit of jackson-datatypes module,"* Add support for serialization/deserialization of Conditions and Fulfillments using Jackson.
+* Configurable Encoding (HEX, Base64, Base64Url, with and without padding)
+* Full unit test coverage.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2017-12-23 16:00:20,2018-02-07 17:52:57
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/64,https://api.github.com/repos/hyperledger/quilt/issues/64,Feature/jackson datatypes 2,,closed,True,2017-12-23 15:56:47,2017-12-23 16:00:52
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/63,https://api.github.com/repos/hyperledger/quilt/issues/63,Feature/jackson datatypes,"* Add support for serialization/deserialization of Conditions and Fulfillments using Jackson.
+* Configurable Encoding (HEX, Base64, Base64Url, with and without padding)
+* Full unit test coverage.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2017-12-20 03:06:39,2017-12-23 16:00:52
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/62,https://api.github.com/repos/hyperledger/quilt/issues/62,Feature/jackson datatypes,"Add Jackson serializers and deserializers for common Interledger and CryptoCondition classes to enable Conditions, Fulfillments, and InterledgerAddresses to be easily used in JSON representations.",closed,True,2017-12-20 03:03:54,2017-12-23 16:00:52
+quilt,tkuhrt,https://github.com/hyperledger/quilt/issues/61,https://api.github.com/repos/hyperledger/quilt/issues/61,Create a CONTRIBUTING file,I could not locate a CONTRIBUTING file in the latest Hyperledger Quilt code. Please add a CONTRIBUTING file that contains information on how to contribute to the development of Hyperledger Quilt.,closed,False,2017-12-14 22:36:25,2018-07-11 09:31:12
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/60,https://api.github.com/repos/hyperledger/quilt/issues/60,WIP: Chore/codecs,"Refactored to split out codec framework and codec libs from core
+Also split out transport layer protocols
+",closed,True,2017-12-12 23:08:23,2018-03-19 12:42:42
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/59,https://api.github.com/repos/hyperledger/quilt/issues/59,[ILP-Core] Allow InterledgerProtocolException to accept an error message for logging purpose.,"This error message generally isn't propagated outside of an ILP node, but would be useful for error logging purposes.",closed,False,2017-12-09 20:31:35,2018-03-12 15:53:21
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/58,https://api.github.com/repos/hyperledger/quilt/issues/58,Create new ilp-core,"We need to pull some things out of ilp-core into their own modules. For example, codecs, ilqp, psk, spsp, etc should not be in ilp-core. See [this commentary here](https://gist.github.com/sappenin/386900a769318eeda56c16d8a5a49e5e) for some more guidance:
+
+",closed,False,2017-12-09 19:06:52,2018-02-17 18:43:02
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/57,https://api.github.com/repos/hyperledger/quilt/issues/57,[ilp-core] Enforce Regexes from RFC-15,"From [RFC-0015](https://github.com/interledger/rfcs/blob/master/0015-ilp-addresses/0015-ilp-addresses.md#address-requirements)
+
+>  5.) Destination addresses [...] MUST contain at least two segments after the allocation scheme prefix.
+
+Currently, `InterledgerAddress.java` doesn't enforce that a destination address have at least 2 segements (i.e., `g.foo` is allowed in the `InterledgerAddress` implementation, but should not be).
+
+We should update `#isValidInterledgerAddress` to utlilize a different regex depending on whether or not the String ends with a period [.]. Additionally, we might consider improving the error output instead of just saying, ""reference ILP-RFC-15.""",closed,False,2017-11-27 18:10:15,2018-02-08 16:58:19
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/56,https://api.github.com/repos/hyperledger/quilt/issues/56,[ilp-core] Allow InterledgerAddress#requireNotAddressPrefix to accept overridden error message.,We should create overridden versions of `InterledgerAddress#requireNotAddressPrefix` and `#requireAddressPrefix` that allow the error message to be overridden.,closed,False,2017-11-24 22:33:25,2018-03-17 18:11:58
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/55,https://api.github.com/repos/hyperledger/quilt/issues/55,Use immutable,"Using Immutable for InterledgerAddress
+Fixed a lot of Checkstyle violations",closed,True,2017-11-21 10:57:52,2017-12-11 14:03:18
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/54,https://api.github.com/repos/hyperledger/quilt/issues/54,Fixes #52,"* Enforce NPE on InterledgerAddress#require methods.
+* Add unit-test coverage.
+* Start rename described in #53.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2017-11-20 19:46:47,2017-12-18 17:10:28
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/53,https://api.github.com/repos/hyperledger/quilt/issues/53,"[ilp-core] rename ""LedgerPrefix"" to ""AddressPrefix""",Not every prefix is a _Ledger_ prefix. We should instead be calling prefixes _address_ prefixes.,closed,False,2017-11-20 19:37:26,2018-06-20 15:57:29
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/52,https://api.github.com/repos/hyperledger/quilt/issues/52,[ilp-core] Add NPE check to InterledgerAddress#require Functions,,closed,False,2017-11-20 19:33:16,2017-11-21 09:13:20
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/51,https://api.github.com/repos/hyperledger/quilt/issues/51,[ilp-core] Update PSK implementation per changes to ILP-RFC-16,We need to see if we need to update the PSK implementation for the changes in https://github.com/interledger/rfcs/pull/336,closed,False,2017-11-14 21:14:45,2018-06-20 15:40:00
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/50,https://api.github.com/repos/hyperledger/quilt/issues/50,[ilp-plugin]: Change RejectionMessage to match ILP (RFC-3),We need to ensure that the Java ilp-plugin conforms to https://github.com/interledger/rfcs/issues/332.,closed,False,2017-11-14 21:11:22,2018-06-20 15:56:46
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/49,https://api.github.com/repos/hyperledger/quilt/issues/49,"Fixes #45, Fixes #46, Fixes #47","* Fixes #45.
+* Fixes #46.
+* Fixes #47.
+* Fixes checkstyle configuration, and actually runs checkstyle during the build.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2017-11-14 17:43:52,2017-11-18 16:51:30
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/48,https://api.github.com/repos/hyperledger/quilt/issues/48,"Fixes #45, Fixes #46, Fixes #47","* Fixes #45.
+* Fixes #46.
+* Fixes #47.
+* Fixes checkstyle configuration, and actually runs checkstyle during the build.",closed,True,2017-11-14 17:34:22,2017-11-20 19:29:39
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/47,https://api.github.com/repos/hyperledger/quilt/issues/47,Implement InterledgerAddress#hasPrefix,"It would be convenient to have a method `InterledgerAddress#hasParentPrefix` which returns true if an address has a parent prefix. The address `g.` would return false.
+
+Alternatively, we could implement `InterledgerAddress#isRootPrefix`.",closed,False,2017-11-13 21:11:26,2017-11-18 16:51:26
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/46,https://api.github.com/repos/hyperledger/quilt/issues/46,Add InterledgerAddress#getParentPrefix,"`InterledgerAddress.of(""g.b."").getPrefix()` should return `InterledgerAddress.of(""g."")` but instead returns `InterledgerAddress.of(""g.b."").getPrefix()`.",closed,False,2017-11-13 21:08:58,2017-11-18 16:51:26
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/45,https://api.github.com/repos/hyperledger/quilt/issues/45,InterledgerAddress#getPrefix Fails on a root prefix,"We need to tweak InterledgerAddress#getPrefix to work properly on something like `g.` or any other root prefix. In this case, the method should probably return `Optional#empty`.",closed,False,2017-11-13 20:54:19,2017-11-14 00:47:00
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/44,https://api.github.com/repos/hyperledger/quilt/issues/44,"[crypto-conditions] Use the term ""Validate"" instead of ""Verify""?","Per https://github.com/rfcs/crypto-conditions/issues/28, the question of whether to use the term `verify` vs `validate` was raised. The [spec](https://tools.ietf.org/html/draft-thomas-crypto-conditions-03) and the JS implementation use the term `validate` when referring to the evaluation of a fulfillment.
+
+What does everyone think about changing the name of `Fulfillment#verify` to be `Fulfillment#validate` to align with the spec and the JS implementation.
+
+I realize that, at first glance, this might take us away from the goal of being able to treat crypto-conditions as generic JCA code (best example is `java.security.Signature#verify`), but considering our previous discussions, perhaps it might be a good idea to use a different term like `Validate` so we don't confuse the difference between Signature verification and a CryptoCondition validation/verification?
+
+Additionally, would we be better off designing some sort of wrapper interface for crypto-conditions to allow them to more pluggably be used in Java/JCA systems?
+
+(I'm not entirely sure about this proposal, so feel free to push back with alternative ideas).",closed,False,2017-11-06 21:12:30,2018-04-28 23:12:29
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/43,https://api.github.com/repos/hyperledger/quilt/issues/43,[ilp-connector] Transition from Interledger to Quilt...,,closed,False,2017-11-06 17:19:19,2018-06-20 15:56:05
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/42,https://api.github.com/repos/hyperledger/quilt/issues/42,[ilp-plugin] Transition ILP Plugin to quilt...,,closed,False,2017-11-06 17:18:56,2018-06-20 15:55:24
+quilt,controlsurface,https://github.com/hyperledger/quilt/pull/41,https://api.github.com/repos/hyperledger/quilt/issues/41,(22) Restricted Line Feed Characters in PskMessage Headers,Updated PskMessageBinaryCode to reject encoding or decoding PskMessages with headers containing line feeds.  ,closed,True,2017-11-05 09:58:01,2018-02-02 05:35:07
+quilt,controlsurface,https://github.com/hyperledger/quilt/pull/40,https://api.github.com/repos/hyperledger/quilt/issues/40,(22) Restricted Line Feed Characters in PskMessage Headers,"I have added filtering in PskMessageBinaryCode to restrict line feed characters in public and private headers, both in encoding and decoding.",closed,True,2017-11-05 09:41:09,2017-11-05 09:42:20
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/39,https://api.github.com/repos/hyperledger/quilt/issues/39,Revisit ExchangeRateProvider instead of LiquidityCurve and LiquidityPoints,"We need to revist the ILQP implementation and determine a proper interface for the LiquidityQuoteResponse. 
+
+Some options: 
+
+1. Create a more general interface for `org.interledger.ilqp.LiquidityCurve` that has functionality on it like `getAmountFor(BigInteger sourceAmount)`. This would allow us to replace the implementation with either an `ExchangeRateProvider` or just a curve of `BigInteger`.
+1. Move to ExchangeRateProvider in the actual interface, and use that for LiquidityCurves.
+1. Don't use ExchangeRateProvider at all.",closed,False,2017-10-27 20:19:33,2018-02-17 18:48:08
+quilt,sappenin,https://github.com/hyperledger/quilt/issues/38,https://api.github.com/repos/hyperledger/quilt/issues/38,Determine if ILQP should contain SubConditions,"Currently, ILQP packets don't allow extensions per [ILQP-RFC-0008](https://github.com/interledger/rfcs/blob/master/0008-interledger-quoting-protocol/0008-interledger-quoting-protocol.md). We need to determine if this can be relaxed (I have a question pending in the [Interledger Gitter Lobby](https://gitter.im/interledger/Lobby) channel).
+
+One use-case here would be to be able to add a FeeCurve, but as an optionally returned piece of data in a quote response.",closed,False,2017-10-27 20:16:04,2018-02-17 18:45:27
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/37,https://api.github.com/repos/hyperledger/quilt/issues/37,Fixes codecov.org integration,"* Update circleci to work properly with codcov.io
+* Update .gitignore
+* Cleanup some pom versions.
+
+Signed-off-by: sappenin <sappenin@gmail.com>",closed,True,2017-10-27 16:22:38,2017-10-27 16:24:59
+quilt,adrianhopebailie,https://github.com/hyperledger/quilt/pull/36,https://api.github.com/repos/hyperledger/quilt/issues/36,Fix Jacoco tests,"Moved plugin config to pluginManagement
+Added .gitignore
+
+Signed-off-by: adrianhopebailie <adrian@hopebailie.com>",closed,True,2017-10-27 12:52:32,2017-10-31 09:13:14
+quilt,michielbdejong,https://github.com/hyperledger/quilt/pull/35,https://api.github.com/repos/hyperledger/quilt/issues/35,docs: ilp-core hyperlink and nits in readme,"* hyperlink to ilp-core and dev-ops
+* It's its, not it's
+* Remove trailing whitespace",closed,True,2017-10-26 17:00:03,2017-10-27 09:25:08
+quilt,earizon,https://github.com/hyperledger/quilt/pull/34,https://api.github.com/repos/hyperledger/quilt/issues/34,"Add utility mvn wrapper scripts for fast local install, unit tests, ...","wrappers scripts around common maven tasks. 
+
+Hopefully the same or similar scripts can be reused by CI/dev-ops tasks. 
+
+See example usage in `dev-ops/utils/README.md`",closed,True,2017-10-26 13:56:05,2017-11-06 12:48:45
+quilt,rizwantanoli,https://github.com/hyperledger/quilt/pull/33,https://api.github.com/repos/hyperledger/quilt/issues/33,[crypto-conditions] Fix Javadoc errors #5,"Cleaned-up Javadoc warnings in build for crypto-conditions. See #5.
+Signed-off-by: Rizwan Tanoli <contact@rizwantanoli.com>",closed,True,2017-10-26 02:29:37,2018-02-08 17:53:09
+quilt,rizwantanoli,https://github.com/hyperledger/quilt/pull/32,https://api.github.com/repos/hyperledger/quilt/issues/32,[crypto-conditions] Fix Javadoc errors #5,"Cleaned-up Javadoc warnings, #5, in maven build for crypto-conditions.",closed,True,2017-10-25 15:21:56,2017-10-27 19:13:38
+quilt,sappenin,https://github.com/hyperledger/quilt/pull/31,https://api.github.com/repos/hyperledger/quilt/issues/31,Fix code coverage…,,closed,True,2017-10-24 18:53:56,2017-10-27 16:23:17
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/30,https://api.github.com/repos/hyperledger/quilt/issues/30,[ilp-core] Fix Javadoc warnings,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Sunday Oct 15, 2017 at 17:15 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/96_
+
+----
+
+There are > 70 javadoc warnings that should be cleaned up.
+",closed,False,2017-10-24 10:14:34,2017-10-24 13:25:48
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/29,https://api.github.com/repos/hyperledger/quilt/issues/29,[ilp-core] Update ILQP per rfc/272,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Oct 07, 2017 at 21:55 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/92_
+
+----
+
+See changes in https://github.com/interledger/rfcs/pull/272
+",closed,False,2017-10-24 10:14:33,2018-02-17 18:45:05
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/28,https://api.github.com/repos/hyperledger/quilt/issues/28,[ilp-core] Align ILP Error with rfcs/204,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Oct 07, 2017 at 18:21 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/91_
+
+----
+
+See https://github.com/interledger/rfcs/pull/204
+",closed,False,2017-10-24 10:14:31,2018-06-20 15:54:35
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/27,https://api.github.com/repos/hyperledger/quilt/issues/27,[ilp-core] Questions about readme,"<a href=""https://github.com/michielbdejong""><img src=""https://avatars2.githubusercontent.com/u/408412?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [michielbdejong](https://github.com/michielbdejong)**
+_Tuesday Oct 03, 2017 at 07:47 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/89_
+
+----
+
+What is/are the allowed type(s) for 'hash' in `Condition condition1 = Condition.of(hash)`? 32-bytes, just like for `Fulfillment.of(preimage)`, I guess?
+
+What is/are the allowed type(s) for 'destinationAmount' and for 'data' in `InterledgerPayment.builder().destinationAmount`? And I guess 'address' there has to be an InterledgerAddress object? Or can it also be a String?
+",closed,False,2017-10-24 10:10:53,2017-10-24 13:27:34
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/26,https://api.github.com/repos/hyperledger/quilt/issues/26,[ilp-core] Switch to using Maven only?,"<a href=""https://github.com/adrianhopebailie""><img src=""https://avatars2.githubusercontent.com/u/49902?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [adrianhopebailie](https://github.com/adrianhopebailie)**
+_Friday Sep 29, 2017 at 18:47 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/88_
+
+----
+
+We currently have an overly complex build system with both Maven and Gradle.
+
+The majority of contributors use Maven and it has proven to be better supported by plugins. It would be helpful to switch but I propose we take a contributor vote.
+",closed,False,2017-10-24 10:10:48,2017-10-24 13:28:53
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/25,https://api.github.com/repos/hyperledger/quilt/issues/25,[ilp-core] Add BTP codecs (using Immutables),"<a href=""https://github.com/adrianhopebailie""><img src=""https://avatars2.githubusercontent.com/u/49902?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [adrianhopebailie](https://github.com/adrianhopebailie)**
+_Thursday Sep 28, 2017 at 00:45 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/pull/87_
+
+----
+
+Replaces #86 
+
+----
+
+_**[adrianhopebailie](https://github.com/adrianhopebailie)** included the following code: https://github.com/interledger/java-ilp-core/pull/87/commits_
+",closed,False,2017-10-24 10:10:46,2018-06-20 15:53:39
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/24,https://api.github.com/repos/hyperledger/quilt/issues/24,[ilp-core] Update README to point to WIKI,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Sep 02, 2017 at 13:35 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/79_
+
+----
+
+The wiki now has Usage and Maven coordinates, so we should reduce the size of the README and just point people to the Wiki links.
+",closed,False,2017-10-24 10:10:43,2018-07-14 17:15:29
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/23,https://api.github.com/repos/hyperledger/quilt/issues/23,[ilp-core] Capture Setup Service code in new project,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Sep 02, 2017 at 12:41 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/78_
+
+----
+
+Various non-core code was removed in this PR (https://github.com/interledger/java-ilp-core/pull/74/files), so we should probably capture that in a separate project. For example, see the SetupService.
+",closed,False,2017-10-24 10:10:41,2018-06-20 15:51:21
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/22,https://api.github.com/repos/hyperledger/quilt/issues/22,[ilp-core] Restrict allowed chars in headers for PSK,"<a href=""https://github.com/adrianhopebailie""><img src=""https://avatars2.githubusercontent.com/u/49902?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [adrianhopebailie](https://github.com/adrianhopebailie)**
+_Monday Aug 07, 2017 at 14:17 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/69_
+
+----
+
+See https://github.com/interledger/rfcs/pull/257 for context
+",closed,False,2017-10-24 10:10:37,2018-06-20 15:44:36
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/21,https://api.github.com/repos/hyperledger/quilt/issues/21,[ilp-core] Add Final Zero byte to all Extensible ILP Packets,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday Jul 26, 2017 at 17:09 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/65_
+
+----
+
+This is related to #63.
+",closed,False,2017-10-24 10:10:35,2018-06-20 15:41:48
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/20,https://api.github.com/repos/hyperledger/quilt/issues/20,[ilp-core] Replicate JS Test vectors for PSK encodings,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday Jul 26, 2017 at 17:07 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/64_
+
+----
+
+
+",closed,False,2017-10-24 10:10:33,2018-06-20 15:41:20
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/19,https://api.github.com/repos/hyperledger/quilt/issues/19,[ilp-core] Replicate JS Test Vectors for binary encodings,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday Jul 26, 2017 at 17:06 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/63_
+
+----
+
+See https://github.com/interledgerjs/ilp-packet/tree/master/test/data
+",closed,False,2017-10-24 10:10:32,2018-06-20 15:41:07
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/18,https://api.github.com/repos/hyperledger/quilt/issues/18,[ilp-core] Add Unlimited Strength Encryption Policy Files Note in README,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday Jul 26, 2017 at 15:44 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/62_
+
+----
+
+In order for this project to compile, a user will need to install the [Java JCE Unlimited Strength](http://www.oracle.com/technetwork/java/javase/downloads/jce8-download-2133166.html) encryption policies from Oracle. 
+
+For example, the main problem building the project in #60 was probably due to not having this installed.
+
+We should update the README to list this as a project dependency.
+",closed,False,2017-10-24 10:10:31,2018-03-12 16:02:50
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/17,https://api.github.com/repos/hyperledger/quilt/issues/17,"[ilp-core] Improve README to explain/link-to concepts like ""Condition"" and ""Fulfillment"", etc.","<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday Jul 26, 2017 at 13:45 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/61_
+
+----
+
+Much of the language in our README and Javadoc assumes people know what ""Conditions"" and ""Fulfillments"" are and other jargon are. We should not make this assumption, and always provides links or small explanations of various concepts.
+
+One helpful source of truth is the [glossary](https://github.com/interledger/rfcs/blob/master/0019-glossary/0019-glossary.md).
+
+Also, see [this comment](https://github.com/interledger/java-ilp-core/pull/58#discussion_r129572488) here for another example.
+
+
+",closed,False,2017-10-24 10:10:29,2018-02-17 18:47:09
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/16,https://api.github.com/repos/hyperledger/quilt/issues/16,[ilp-core] Add unit test coverage to CodecContext,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Tuesday May 23, 2017 at 17:12 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/48_
+
+----
+
+
+",closed,False,2017-10-24 10:10:25,2017-10-24 13:28:03
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/15,https://api.github.com/repos/hyperledger/quilt/issues/15,[ilp-core] PSK: PskMessage does not contain an Encryption header until after its written,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday May 10, 2017 at 00:30 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/29_
+
+----
+
+Should instances of `PskMessage` built by the `PskMessageBuilder.java` contain the Encryption header before the PSK data is actually written via `PskWriterFactory`?  
+
+As it stands now, that header is only written by the PskWriterFactory, and so doesn't show up in Java until the PskMessage is written, and then read back into a PskMessage.  
+
+As an example, consider the following snippet...
+
+```
+final PskMessage pskMessage = new PskMessageBuilder().withNonce()
+      .addPrivateHeader(privateHeader1)
+      .addPublicHeader(publicHeader1)
+      .setApplicationData(applicationData)
+      .toMessage();
+
+// This is always false (until the message is written, and then read back into a PskMessage
+    boolean isPresent = decodedPskMessage.getPublicHeaders()
+          .stream()
+          .filter(header -> header.getName().equalsIgnoreCase(""Encryption""))
+          .findFirst().isPresent();
+```
+
+...`isPresent` is always `false`, which was unexpected.
+",closed,False,2017-10-24 10:10:16,2018-06-20 15:38:59
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/14,https://api.github.com/repos/hyperledger/quilt/issues/14,[ilp-core] Publish artifacts to Maven Central,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Wednesday Apr 12, 2017 at 17:32 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/25_
+
+----
+
+As discussed on the Java ILP community call, we need to make it easier for new developers to checkout, build, and use Java ILP code.
+
+To that end, we should be releasing versions of each library (java-ilp-core, crypto-conditions, etc) and pushing those to [Maven Central](https://search.maven.org/#search).
+
+1. Create account at Sonatype for the organization org.interledger (this will allow us to create any modules under that).
+1. Configure CircleCI to deploy artifacts to maven central.
+",closed,False,2017-10-24 10:10:12,2018-06-20 15:38:03
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/13,https://api.github.com/repos/hyperledger/quilt/issues/13,[ilp-core] Update README,"<a href=""https://github.com/adrianhopebailie""><img src=""https://avatars2.githubusercontent.com/u/49902?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [adrianhopebailie](https://github.com/adrianhopebailie)**
+_Wednesday Aug 24, 2016 at 08:04 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/9_
+
+----
+
+- Project details
+- Build instructions
+- Contributor instructions
+
+",closed,False,2017-10-24 10:10:09,2018-03-12 16:03:15
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/12,https://api.github.com/repos/hyperledger/quilt/issues/12,[ilp-core] Add LICENSE and CONTRIBUTOR agreement files,"<a href=""https://github.com/adrianhopebailie""><img src=""https://avatars2.githubusercontent.com/u/49902?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [adrianhopebailie](https://github.com/adrianhopebailie)**
+_Thursday Aug 18, 2016 at 10:44 GMT_
+_Originally opened as https://github.com/interledger/java-ilp-core/issues/7_
+
+----
+
+We should be using Apache 2.0 and have a license file and a contributor agreement file
+
+",closed,False,2017-10-24 10:10:08,2018-06-20 15:23:40
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/11,https://api.github.com/repos/hyperledger/quilt/issues/11,[crypto-conditions] Re-think Threshold Condition/Fulfillment Constructors per ,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Oct 21, 2017 at 15:42 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/79_
+
+----
+
+We need to re-think the Threshold Condition/Fulfillment Constructors per https://github.com/bigchaindb/cryptoconditions/issues/94.
+
+Once that's done, I think we can better reason about #80.
+",closed,False,2017-10-24 10:09:24,2018-02-17 18:12:54
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/10,https://api.github.com/repos/hyperledger/quilt/issues/10,[crypto-conditions] Add this unit test to threshold cost test,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Oct 21, 2017 at 15:28 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/78_
+
+----
+
+```
+ For example, if a threshold crypto-condition contains 5 sub-
+   conditions with costs of 64, 64, 82, 84 and 84 and has a threshold of
+   3, the cost is equal to the sum of the largest three sub-condition
+   costs (82 + 84 + 84 = 250) plus 1024 times the number of sub-
+   conditions (1024 * 5 = 5120): 5370
+```
+",closed,False,2017-10-24 10:09:22,2018-02-08 18:24:15
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/9,https://api.github.com/repos/hyperledger/quilt/issues/9,[crypto-conditions] Consider Removing Condtion.getFingerprintBase64Url,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Thursday Oct 19, 2017 at 18:39 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/76_
+
+----
+
+See discussion in this PR: https://github.com/interledger/java-ilp-core/pull/102#issuecomment-337885767
+
+The reason `Condtion#getFingerprintBase64Url` was introduced was to try and create a truly immutable implementation of each condition. However, this encoding is a bit ambiguous (e.g., is padding used, or not, etc), and while this ambiguity could be cleared-up in Javadoc, perhaps it's better to simply remove this method entirely, and return a copy of the bytes in any implementation of `Condition#getFingerprint`.
+
+The downside of this is possibly performance, but as @adrianhopebailie  indicated, these are only 32 bytes, and if somebody encounters a perf problem, we could potentially add a new method to just return a reference to the array. The reason we aren't doing that now is mutability -- returning a reference to the array would allow an external caller to mutate the array (though this is likely already possible via Reflection, so until Java introduces an immutable byte array, there's probably not much use in trying to guard against this -- unless we want to _only_ store a String, but that has its own downsides due to potential encoding/decoding mistakes on the part of a developer).
+",closed,False,2017-10-24 10:09:21,2018-02-27 21:31:16
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/8,https://api.github.com/repos/hyperledger/quilt/issues/8,[crypto-conditions] Make each concrete Condition/Fufillment into an Interface so they can have alternate implementations,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Thursday Oct 19, 2017 at 18:33 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/75_
+
+----
+
+We should make each concrete Condition/Fufillment class (e.g., `PreimageSha256Condition` into an Interface instead of a class so it can have alternate implementations.
+
+This suggestion is based upon feedback in this PR: https://github.com/interledger/java-ilp-core/pull/102#issuecomment-337885767 
+
+For example:
+> We should probably define an interface for each type so that alternative implementations can exist and still expose things like PreimageSha256Fulfillment.getPreimage().
+
+
+
+",closed,False,2017-10-24 10:09:14,2018-01-26 17:50:23
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/7,https://api.github.com/repos/hyperledger/quilt/issues/7,[crypto-conditions] Fix Condition Constructor modifiers,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Thursday Oct 19, 2017 at 18:23 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/74_
+
+----
+
+See [this comment](https://github.com/interledger/java-crypto-conditions/pull/73/files#r145783281) for more details, but we should inspect the Constructor of each Condition and make sure it's modifier is correct. For example, in `PreimageSha256` in the PR linked above, the public constructor should be package-private, and the package-private constructor should be public.
+",closed,False,2017-10-24 10:09:11,2018-02-02 07:01:35
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/6,https://api.github.com/repos/hyperledger/quilt/issues/6,[crypto-conditions] Test the Java implementation against https://github.com/rfcs/crypto-conditions/issues/30,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Tuesday Oct 17, 2017 at 18:04 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/72_
+
+----
+
+Test the Java implementation against https://github.com/rfcs/crypto-conditions/issues/30
+",closed,False,2017-10-24 10:09:10,2018-04-28 23:26:15
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/5,https://api.github.com/repos/hyperledger/quilt/issues/5,[crypto-conditions] Fix Javadoc errors,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Saturday Aug 05, 2017 at 16:16 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/66_
+
+----
+
+Javadoc errors need to be fixed, and then should fail the build per the javadoc plugin.
+",closed,False,2017-10-24 10:09:07,2018-01-26 17:50:23
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/4,https://api.github.com/repos/hyperledger/quilt/issues/4,[crypto-conditions] Clarify Threshold Fingerprint Generation,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Monday Jul 24, 2017 at 15:52 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/63_
+
+----
+
+While investing the Java test failures, I noticed that some of the ThresholdCondition's fingerprint generation results don't line-up with the [TestVectors](https://github.com/rfcs/crypto-conditions/blob/master/test-vectors/valid) published in the CryptoCondition RFC project.
+
+For example, looking at the `fingerprintContents` binary in [0008_test-basic-threshold.json](https://github.com/rfcs/crypto-conditions/blob/master/test-vectors/valid/0008_test-basic-threshold.json), I see the following:
+
+```
+308184800102A17FA12B8020451FE15F16299D495993FE692DB989E56A5230A90476F77392A3CD3213C0733F810302040382020308A32780204DD2EA7F85B3EACB8F19058E8360955C32E74C124392A1F44660739709C539C38103040000A4278020799239ABA8FC4FF7EABFBC4C44E69E8BDFED993324E12ED64792ABE289CF1D5F8103020000
+```
+However, in the Java code, the following call...
+
+```
+BaseEncoding.base16().encode(CryptoConditionReader .readFulfillment(BaseEncoding.base16().decode(testVector.getFulfillment())).getCondition().getFingerprint());
+```
+
+yields the only following `fingerprint` value:
+
+```
+31AF10E168BA56AB38BEBF27065413C76896A6683C53D746F15A6438FD2A6C66
+```
+
+I think the source of the problem is that method `ThresholdSha256Condition.getFingerprintContents()` only looks at the subconditions when computing the fingerprint. When CryptoConditionsReader reads the binary of the fulfillment in the test vector, it yields a ThresholdFulfillment with one subcondition and two subfulfillments (one `RsaSha256Condition` and then one `PrefixSha256Fulfillment` and a `Ed25519Fulfillment`).
+
+Is it possible that the implementation is wrong, and should somehow be considering the genrated Condition of each subfulfillment, too?
+
+As it stands, the `fingerprint` in the TestVector seems to have much more data than anything I can generate using the Java library.
+",closed,False,2017-10-24 10:09:00,2018-04-28 23:27:23
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/3,https://api.github.com/repos/hyperledger/quilt/issues/3,[crypto-conditions] Update test vectors per the RFC README,"<a href=""https://github.com/sappenin""><img src=""https://avatars1.githubusercontent.com/u/323659?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [sappenin](https://github.com/sappenin)**
+_Friday Jul 14, 2017 at 15:41 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/55_
+
+----
+
+The cryptocondition spec's README has some test vectors for library validation. There is a PR (rfcs/crypto-conditions/pull/14) that adds some additional vectors. We should ensure that the java library has full support for all test vectors.
+",closed,False,2017-10-24 10:08:58,2018-04-28 23:30:42
+quilt,hyperledger-quilt,https://github.com/hyperledger/quilt/issues/2,https://api.github.com/repos/hyperledger/quilt/issues/2,Publish Quilt JavaDocs,"<a href=""https://github.com/adrianhopebailie""><img src=""https://avatars2.githubusercontent.com/u/49902?v=4"" align=""left"" width=""96"" height=""96"" hspace=""10""></img></a> **Issue by [adrianhopebailie](https://github.com/adrianhopebailie)**
+_Tuesday May 23, 2017 at 07:49 GMT_
+_Originally opened as https://github.com/interledger/java-crypto-conditions/issues/48_
+
+----
+
+Need to add build script that publishes JavaDoc to /docs folder
+",open,False,2017-10-24 10:08:57,2019-01-29 08:52:45
+quilt,ryjones,https://github.com/hyperledger/quilt/pull/1,https://api.github.com/repos/hyperledger/quilt/issues/1,Create DCO,,closed,True,2017-10-19 14:06:37,2017-10-19 14:07:02

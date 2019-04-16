@@ -1,0 +1,16 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-sdk-python,arsulegai,https://github.com/hyperledger/sawtooth-sdk-python/pull/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-python/issues/4,Python SDK changes for TP to get serialized txn header,"RFC text/0000-raw-txn-header.md describes in brief the need to
+have serialized transaction header sent to transaction processor.
+Introduces a new method for setting transaction header style.
+
+Transaction processor would unregister itself from validator if
+its requested header style cannot be served by current version
+of validator to which it tries to register.
+
+Please refer to hyperledger/sawtooth-rfcs#23 for detailed
+description.
+
+Signed-off-by: S m, Aruna <aruna.s.m@intel.com>",open,True,2019-03-31 12:55:43,2019-04-01 13:48:08
+sawtooth-sdk-python,rbuysse,https://github.com/hyperledger/sawtooth-sdk-python/pull/3,https://api.github.com/repos/hyperledger/sawtooth-sdk-python/issues/3,Package signing module with the python sdk,,closed,True,2019-03-06 21:18:01,2019-03-12 15:51:23
+sawtooth-sdk-python,rbuysse,https://github.com/hyperledger/sawtooth-sdk-python/pull/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-python/issues/2,Fix lint,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-27 17:40:58,2019-02-27 20:02:13
+sawtooth-sdk-python,jwagantall,https://github.com/hyperledger/sawtooth-sdk-python/pull/1,https://api.github.com/repos/hyperledger/sawtooth-sdk-python/issues/1,Create DCO,,closed,True,2019-01-02 18:03:06,2019-01-02 18:03:30

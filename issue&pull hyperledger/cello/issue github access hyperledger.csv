@@ -1,0 +1,24 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+cello,inaciosadovski,https://github.com/hyperledger/cello/pull/11,https://api.github.com/repos/hyperledger/cello/issues/11,Update .gitignore,,closed,True,2019-03-29 01:29:43,2019-03-30 02:40:27
+cello,jprogram,https://github.com/hyperledger/cello/pull/10,https://api.github.com/repos/hyperledger/cello/issues/10,Fix domain param to a value in cluster.domain,"when create a kubedns container in the kube-dns pod, domain name is hardcoded as ""fabricnet"". This part makes kube network not working properly, when developers set the domain value as they like. To approve flexibilities, kube domain value needed to set to cluster.domain value in the file like cello/src/agent/ansible/vars/aws.yml.",closed,True,2018-10-15 02:17:56,2018-10-17 13:24:44
+cello,luckydogchina,https://github.com/hyperledger/cello/pull/9,https://api.github.com/repos/hyperledger/cello/issues/9,Lyra,这是更具需求独立开发的一部分，具有动态拓展的功能。,closed,True,2018-09-05 07:32:17,2018-09-05 07:41:51
+cello,pengisgood,https://github.com/hyperledger/cello/pull/8,https://api.github.com/repos/hyperledger/cello/issues/8,fix typo,,closed,True,2018-08-22 07:14:52,2018-08-22 07:45:46
+cello,jverhoelen,https://github.com/hyperledger/cello/pull/7,https://api.github.com/repos/hyperledger/cello/issues/7,Provide more master-setup information to MacOS users,"Hi everyone,
+I'm a MacOS user and got the master installation working. However, I added useful information to make it easier for MacOS users.
+
+Documented how to install envsubst as MacOS user in order to get the master running
+More concrete instructions on how to handle /opt/cello on MacOS",closed,True,2018-05-25 13:31:25,2018-05-25 14:19:45
+cello,jordandearsley,https://github.com/hyperledger/cello/pull/6,https://api.github.com/repos/hyperledger/cello/issues/6,Added ability to redeploy bna archive on existing fabric network via ansible play,"There was originally no way to redeploy a bna on an existing network through the command line without reconfiguring the entire network which I thought was a bit overkill. Trying to follow the name format, I created upgradecomposer.yml which runs the plays.yml in roles/upgrade_compose. Inside upgrade_compose I added the apply.yml, making use of `composer network install` and `composer network upgrade`, I added two plays using those two commands.
+
+After exporting NETWORKNAME and project_version as environment variables, running this line should do the trick, given the bna in secrets/network has been replaced with the newest version, and it's under the same filename.
+
+`ansible-playbook -i run/runhosts -e ""mode=apply env=bc1st NETWORKNAME=empty-business-network project_version=0.0.2-deploy.36"" upgradecomposer.yml`
+
+This is my first time contributing to an open source project, so feel free to suggest changes.",closed,True,2018-05-24 19:29:59,2018-05-25 14:17:28
+cello,jverhoelen,https://github.com/hyperledger/cello/pull/5,https://api.github.com/repos/hyperledger/cello/issues/5,Update setup_master.md (more info for Mac users),"Hi everyone,
+I'm a MacOS user and got the master installation working. However, I added useful information to make it easier for MacOS users.
+
+* Documented how to install `envsubst` as MacOS user in order to get the master running
+* More concrete instructions on how to handle `/opt/cello` on MacOS",closed,True,2018-05-23 13:05:23,2018-05-25 13:30:19
+cello,needkane,https://github.com/hyperledger/cello/pull/4,https://api.github.com/repos/hyperledger/cello/issues/4,Update db.md,,closed,True,2018-03-15 10:11:19,2018-03-15 13:45:59
+cello,AyushyaChitransh,https://github.com/hyperledger/cello/pull/3,https://api.github.com/repos/hyperledger/cello/issues/3,Grammatical Corrections,Few grammatical corrections,closed,True,2017-12-26 08:38:23,2018-03-15 13:45:45

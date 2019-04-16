@@ -1,0 +1,95 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-sdk-go,rberg2,https://github.com/hyperledger/sawtooth-sdk-go/pull/27,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/27,Go 1.10 Update,Mocgen no longer supports go 1.9. This PR updates go to 1.10 as this is in both the xenial and bionic repositories.,open,True,2019-03-20 21:41:16,2019-03-20 22:13:14
+sawtooth-sdk-go,ijazfx,https://github.com/hyperledger/sawtooth-sdk-go/issues/26,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/26,go generate fails on MacOS,"The gen.sh fails when we run ""go generate"" because on Mac the ""`sed -i`"" command should be like ""`sed -i ''`  """,open,False,2019-03-11 13:12:50,2019-03-11 13:12:50
+sawtooth-sdk-go,hitarshi,https://github.com/hyperledger/sawtooth-sdk-go/issues/25,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/25,Sawtooth go-sdk setup does not work,"When I try go generate command the following error is thrown.
+
+Traceback (most recent call last):
+  File ""./protogen"", line 25, in <module>
+    from grpc.tools.protoc import main as _protoc
+ImportError: No module named 'grpc'
+gen.sh: line 24: mockgen: command not found
+gen.go:1: running ""bash"": exit status 127
+",open,False,2019-03-07 05:17:25,2019-03-07 05:50:13
+sawtooth-sdk-go,rbuysse,https://github.com/hyperledger/sawtooth-sdk-go/pull/24,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/24,Add nightly dockerfiles,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,open,True,2019-03-01 20:28:24,2019-03-01 20:46:31
+sawtooth-sdk-go,rbuysse,https://github.com/hyperledger/sawtooth-sdk-go/pull/23,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/23,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-07 16:34:36,2019-02-09 05:59:07
+sawtooth-sdk-go,donalddewulf,https://github.com/hyperledger/sawtooth-sdk-go/issues/22,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/22,sdk logger,"Hi,
+
+I would like to replace the default sdk logger with a logger that can output JSON. Is there any easy way to do it?",open,False,2019-01-31 15:51:49,2019-01-31 15:51:49
+sawtooth-sdk-go,rbuysse,https://github.com/hyperledger/sawtooth-sdk-go/pull/21,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/21,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-22 22:28:34,2019-02-04 18:26:13
+sawtooth-sdk-go,rberg2,https://github.com/hyperledger/sawtooth-sdk-go/pull/20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/20,Fix jenkins whitelist check,,closed,True,2019-01-14 16:18:51,2019-01-14 16:30:26
+sawtooth-sdk-go,arsulegai,https://github.com/hyperledger/sawtooth-sdk-go/pull/19,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/19,Refactor folder structure,"1. Move binaries to /bin directory
+2. Remove unused script file
+3. Add .gitignore file
+
+Signed-off-by: S m, Aruna <aruna.s.m@intel.com>",open,True,2019-01-13 12:43:18,2019-02-17 08:27:31
+sawtooth-sdk-go,rbuysse,https://github.com/hyperledger/sawtooth-sdk-go/pull/18,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/18,001 bionic upgrade,,closed,True,2018-10-29 15:44:26,2018-11-07 17:42:23
+sawtooth-sdk-go,arsulegai,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,Intkey go client,"This PR has commits related to ""intkey"" Go client application. Implementation here is ready for 'set', 'inc', 'dec', 'show' and 'list', workload related sub-commands are not implemented yet. Please review and suggest edits,",closed,True,2018-10-26 14:31:44,2019-02-06 13:00:59
+sawtooth-sdk-go,Kaixinguoer210,https://github.com/hyperledger/sawtooth-sdk-go/issues/16,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/16,Is intkey-go code done?,"I have understood **intkey-python** code  in **sawtooth-core** project. After that, I glance over **intkey-go** code in this project and I don't know where I can find those code which is used to encapsulate transaction and batcher. ",closed,False,2018-10-26 08:27:34,2019-02-13 13:37:08
+sawtooth-sdk-go,RealDeanZhao,https://github.com/hyperledger/sawtooth-sdk-go/pull/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/15,Fix finding the handler,"Comparing to the Javascript SDK, we should not breaking the loop when the family name not match.
+```
+let handler = this._handlers.find(
+            (candidate) =>
+              candidate.transactionFamilyName === txnHeader.familyName &&
+              candidate.versions.includes(txnHeader.familyVersion))
+```",closed,True,2018-09-27 05:32:36,2018-11-12 14:10:24
+sawtooth-sdk-go,wkatsak,https://github.com/hyperledger/sawtooth-sdk-go/pull/14,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/14,Update README.md to match current Dockerfile,"The instructions for building the protos / mocks using Docker were
+out of sync with the current Dockerfile.
+
+Signed-off-by: William Katsak <bill@taekion.com>",open,True,2018-09-14 15:58:28,2018-09-14 15:58:28
+sawtooth-sdk-go,ailisp,https://github.com/hyperledger/sawtooth-sdk-go/pull/13,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/13,fix sed errors when build on Mac,"This fix is from @oatmealraisin . On Mac OS X 10.13.4, `go generate` will give a list of errors:
+```
+sed: 1: ""protobuf//consensus_pb2 ..."": extra characters at the end of p command
+sed: 1: ""protobuf//setting_pb2/s ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_receip ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_peers_ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//network_pb2/n ..."": extra characters at the end of p command
+sed: 1: ""protobuf//authorization ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_transa ..."": extra characters at the end of p command
+sed: 1: ""protobuf//genesis_pb2/g ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_event_ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//identity_pb2/ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_batch_ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//processor_pb2 ..."": extra characters at the end of p command
+sed: 1: ""protobuf//block_pb2/blo ..."": extra characters at the end of p command
+sed: 1: ""protobuf//merkle_pb2/me ..."": extra characters at the end of p command
+sed: 1: ""protobuf//transaction_r ..."": extra characters at the end of p command
+sed: 1: ""protobuf//events_pb2/ev ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_batch_ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_list_c ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_state_ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_block_ ..."": extra characters at the end of p command
+sed: 1: ""protobuf//transaction_p ..."": extra characters at the end of p command
+sed: 1: ""protobuf//batch_pb2/bat ..."": extra characters at the end of p command
+sed: 1: ""protobuf//client_status ..."": extra characters at the end of p command
+sed: 1: ""protobuf//validator_pb2 ..."": extra characters at the end of p command
+sed: 1: ""protobuf//state_context ..."": extra characters at the end of p command
+```
+And this fix works on both Linux (gnu sed) and Mac (bsd sed)",open,True,2018-09-07 16:20:23,2018-09-07 17:15:36
+sawtooth-sdk-go,rbuysse,https://github.com/hyperledger/sawtooth-sdk-go/pull/12,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/12,Add examples,,closed,True,2018-08-15 20:05:45,2018-08-24 16:07:05
+sawtooth-sdk-go,paulwizviz,https://github.com/hyperledger/sawtooth-sdk-go/issues/11,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/11,Protos,"I notice that there is a `protos` folder in this project. Would it be better to just share the one in sawtooth-core? After all the projects can easily access each other via $GOPATH.
+
+This will ensure consistent versioning?
+
+For example:
+
+SRC_DIR=$GOPATH/src/github.com/hyperledger-sawtooth-core/protos
+DST_DIR=$GOPATH/src/github.com/hyperledger-sawtooth-sdk
+
+protoc -I=$SRC_DIR --go_out=$DST_DIR $SRC_DIR/addressbook.proto",open,False,2018-05-25 14:41:17,2018-05-25 14:41:17
+sawtooth-sdk-go,danielcooperxyz,https://github.com/hyperledger/sawtooth-sdk-go/issues/10,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/10,No response from validator when submitting golang batchlist,I have an issue where the validator silently ignores my batch list. Is this is an issue with the batchlist / signing that the sdk produces?,closed,False,2018-05-16 11:46:21,2018-05-17 07:40:49
+sawtooth-sdk-go,dplumb94,https://github.com/hyperledger/sawtooth-sdk-go/pull/9,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/9,Fix unkeyed literals in protobuf initialization,"The golang/protobuf dependency update on 4/30 forces users to use keyed literals (e.g., foopb.Message{Name: ""Golang"", Age: 8} as opposed to foopb.Message{""Golang"", 8}). There were a few examples of the latter that had to be updated.
+
+https://groups.google.com/forum/#!topic/protobuf/N-elvFu4dFM
+golang/protobuf#591
+
+Signed-off-by: Darian Plumb dplumb@bitwise.io",closed,True,2018-05-01 16:34:58,2018-05-01 20:06:07
+sawtooth-sdk-go,aludvik,https://github.com/hyperledger/sawtooth-sdk-go/pull/8,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/8,Add Jenkinsfile for CI,Signed-off-by: Adam Ludvik <ludvik@bitwise.io>,closed,True,2018-04-25 18:32:09,2018-04-27 16:42:11
+sawtooth-sdk-go,aludvik,https://github.com/hyperledger/sawtooth-sdk-go/pull/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/7,Add ci,,closed,True,2018-04-25 18:26:44,2018-04-25 18:31:54
+sawtooth-sdk-go,aludvik,https://github.com/hyperledger/sawtooth-sdk-go/pull/6,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/6,Add CI,,closed,True,2018-04-25 17:32:36,2018-04-25 18:26:04
+sawtooth-sdk-go,dcmiddle,https://github.com/hyperledger/sawtooth-sdk-go/pull/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/5,Remove COMMITTERS file from repo,"and update Jenkinsfile accordingly
+
+Signed-off-by: Dan Middleton <dan.middleton@intel.com>",closed,True,2018-04-10 22:34:17,2018-04-11 14:30:59
+sawtooth-sdk-go,rberg2,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/4,Publish go sdk,"See https://github.com/rberg2/sawtooth-sdk-go for local testing, the only difference in this PR is the path to github.com/hyperledger instead of github.com/rberg2.",closed,True,2018-04-10 20:19:45,2018-04-23 21:15:20
+sawtooth-sdk-go,rberg2,https://github.com/hyperledger/sawtooth-sdk-go/pull/3,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/3,publish sawtooth-sdk-go,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2018-03-26 21:59:48,2018-04-06 21:14:09
+sawtooth-sdk-go,danielcooperxyz,https://github.com/hyperledger/sawtooth-sdk-go/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/2,Migrate sdk from core project,Are there any plans to do this?,closed,False,2018-03-26 14:28:44,2018-04-25 17:33:22
+sawtooth-sdk-go,ryjones,https://github.com/hyperledger/sawtooth-sdk-go/pull/1,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/1,Create dco,,closed,True,2018-03-16 23:17:35,2018-03-16 23:18:45

@@ -1,0 +1,746 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/1,https://api.github.com/repos/kubernetes/publishing-bot/issues/1,Update README and add example config,Update and fix the instructions.,closed,True,2017-12-07 16:51:56,2017-12-08 02:40:24
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/2,https://api.github.com/repos/kubernetes/publishing-bot/issues/2,Fix README.md typos,,closed,True,2017-12-08 04:57:15,2017-12-11 19:57:19
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/3,https://api.github.com/repos/kubernetes/publishing-bot/issues/3,Switch committer email to k8s-publishing-bot,,closed,True,2017-12-08 20:16:42,2017-12-08 20:21:11
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/4,https://api.github.com/repos/kubernetes/publishing-bot/issues/4,Add tokens with git-crypt,https://github.com/AGWA/git-crypt,closed,True,2017-12-08 20:58:55,2017-12-09 00:19:54
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/5,https://api.github.com/repos/kubernetes/publishing-bot/issues/5,"Add smoke tests for sample-{apiserver,controller}","The godep tests from my manual test script.
+
+TODO:
+- [ ] let the bot run with this",closed,True,2017-12-08 23:53:45,2017-12-09 04:53:38
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/6,https://api.github.com/repos/kubernetes/publishing-bot/issues/6,"WIP: Run 'dep init' to create Gopkg.{toml,lock}","Golang/dep does not support picking up these dependencies yet properly. But at least
+dep will warn the user when he chooses incompatible dependencies (so did @munnerz report, but with `dep init --gopath` I did not even get warnings, but it picked up master which it shouldn't).
+
+A test run was published to https://github.com/kubernetes-dep-experiment/client-go
+
+**The goal is to vendor k8s.io/client-go, api, apimachinery and all other direct and transistive dependencies of client-go in the versions that are specified in  https://github.com/kubernetes-dep-experiment/client-go's Gopkg.{toml,lock} with only specifying the right branch or tag of client-go, i.e.**
+
+```
+[[constraint]]
+  name = ""k8s.io/client-go""
+  version = ""5.0.1""
+```
+
+For testing purposes one has to define the source for client-go, api and apimachinery to be in the kubernetes-dep-experiment org:
+
+```
+[[constraint]]
+  name = ""k8s.io/client-go""
+  version = ""5.0.1""
+  source = ""https://github.com/kubernetes-dep-experiment/client-go.git""
+
+[[constraint]]
+  name = ""k8s.io/api""
+  source = ""https://github.com/kubernetes-dep-experiment/api.git""
+
+[[constraint]]
+  name = ""k8s.io/apimachinery""
+  source = ""https://github.com/kubernetes-dep-experiment/apimachinery.git""
+```
+
+Compare https://github.com/sttts/kube-dep-test/blob/master/Gopkg.toml for a test project.",closed,True,2017-12-09 04:57:56,2018-05-18 15:14:13
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/7,https://api.github.com/repos/kubernetes/publishing-bot/issues/7,Makefile: wait for old pod to terminate,,closed,True,2017-12-09 12:19:01,2018-01-05 15:08:39
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/8,https://api.github.com/repos/kubernetes/publishing-bot/issues/8,Add config for github.com/kubernetes target-org,"This is the ""production"" config for the bot pushing directly into github.com/kubernetes.",closed,True,2017-12-09 12:27:12,2017-12-12 08:04:14
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/9,https://api.github.com/repos/kubernetes/publishing-bot/issues/9,Fix example config typo,,closed,True,2017-12-13 13:05:23,2017-12-13 13:16:24
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/10,https://api.github.com/repos/kubernetes/publishing-bot/issues/10,PAUSED: Only delete k8s.io dependencies from vendor/ on master branch,"We deleted also k8s.io/gengo and kube-openapi. Latest kube-openapi is not compatible with kube.
+
+Fixes https://github.com/kubernetes/kubernetes/issues/57147",closed,True,2017-12-13 13:15:32,2018-06-18 14:22:57
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/11,https://api.github.com/repos/kubernetes/publishing-bot/issues/11,Add healthz server,To have a simple monitoring.,closed,True,2017-12-13 17:17:23,2017-12-15 08:13:12
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/issues/12,https://api.github.com/repos/kubernetes/publishing-bot/issues/12,Version skew on tagging,"Our tagging algorithm is not 100% precise:
+
+Assume we have the following commits in k/k (latest to earliest):
+
+- commit **A** modifying `staging/src/k8s.io/api` only, tagged as `v1.9.0` in k/k
+- commit **B** modifying `staging/src/k8s.io/client-go` only
+
+The pubilshing bot cherry-picks these as:
+
+- commit **A'** in `k8s.io/api`, tagged as `kubernetes-1.9.0` in `k8s.io/api`
+- commit **B'** in `k8s.io/client-go`, tagged as `kubernetes-1.9.0` in `k8s.io/client-go 
+
+The problem: Godeps/Godeps.json in k8s.io/client-go is generated assuming **B'** belongs to **B** in k/k. **B** maps to **A'^** in `k8s.io/api`. Hence, client-go's Godeps.json at **B'** points to **A'^** of `k8s.io/api`.
+
+In [https://github.com/kubernetes/client-go/releases/tag/v6.0.0](v6.0.0) this leads to one PR (kubernetes/kubernetes#57075) being missed from `k8s.io/api`, compare the following `k8s.io/api` release-1.9 branch screenshot. The hightlighted version appears in client-go's Godeps.json, while the `kubernetes-1.9.0` is one PR merge further up:
+
+<img width=""949"" alt=""bildschirmfoto 2017-12-18 um 13 59 58"" src=""https://user-images.githubusercontent.com/730123/34107227-bfb904aa-e3fb-11e7-86d8-607ea2a0ab17.png"">
+
+**For v6.0.0 this is not critical as this is only a documentation PR.** But we have to find a solution for this Godeps version skew soon and do a similar analysis before each new tag (and hope that no important PR is skipped).
+",closed,False,2017-12-18 13:05:01,2018-02-10 15:38:53
+publishing-bot,spiffxp,https://github.com/kubernetes/publishing-bot/pull/13,https://api.github.com/repos/kubernetes/publishing-bot/issues/13,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:39:49,2018-01-03 00:46:57
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/14,https://api.github.com/repos/kubernetes/publishing-bot/issues/14,WIP: Make publisher-bot usable for non-kube repos,"This pull attempts to remove all hardcoded kube variables which should allow to use the publisher bot for repositories other than kubernetes/kubernetes.
+The defaulting should be preserved, so if SourceRepo is not specified it will default to ""kubernetes"", thus no changes in how the publisher bot is currently deployed are needed.",closed,True,2018-01-05 13:37:15,2018-01-12 11:20:19
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/15,https://api.github.com/repos/kubernetes/publishing-bot/issues/15,Re-enable kube 1.7,"TODO:
+- [x] update all 1.7 staging branch: https://github.com/kubernetes/kubernetes/pull/57796
+- [x] do a test run of the bot: https://github.com/sttts/client-go",closed,True,2018-01-05 13:38:07,2018-01-10 09:22:51
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/16,https://api.github.com/repos/kubernetes/publishing-bot/issues/16,Add skipGodeps flag to repo rules,"TODO:
+
+- [ ] test",closed,True,2018-01-05 13:39:50,2018-01-22 12:36:30
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/17,https://api.github.com/repos/kubernetes/publishing-bot/issues/17,Externalize the rule definition into a YAML file,"The second commit removes hard-coded Kubernetes rules and move them into a separate YAML file that has to be provided for the publishing-bot via `--rules-file` argument. This argument is required.
+This can be either a local filesystem path or an URL form (for easier ""fetch from repo directly ;)"")...
+
+Other changes:
+
+* Moved the `SkippedSourceBranches` into the rules config
+* Removed `./` defaulting for the destination directory
+
+Original rules before this change are available under `cmd/publisher-bot/config/rules_example.yaml`.",closed,True,2018-01-08 11:10:36,2018-01-19 12:40:08
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/18,https://api.github.com/repos/kubernetes/publishing-bot/issues/18,Fix panic with nil github issue number in config,,closed,True,2018-01-10 12:44:36,2018-01-11 06:34:34
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/19,https://api.github.com/repos/kubernetes/publishing-bot/issues/19,With interval != 0 don't be fatal on Github API errors,"If the github API returns error when updating the issue, this is not critical for the bot itself. We have other monitoring mechanism (healthz) in place.",closed,True,2018-01-11 06:34:08,2018-01-11 14:19:02
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/20,https://api.github.com/repos/kubernetes/publishing-bot/issues/20,Remove hardcoded kube,"Reopened https://github.com/kubernetes/publishing-bot/pull/14 seems like GH screwed up or wrong rebase...
+
+his pull attempts to remove all hardcoded kube variables which should allow to use the publisher bot for repositories other than kubernetes/kubernetes.
+The defaulting should be preserved, so if SourceRepo is not specified it will default to ""kubernetes"", thus no changes in how the publisher bot is currently deployed are needed.",closed,True,2018-01-12 11:55:15,2018-01-15 13:19:43
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/21,https://api.github.com/repos/kubernetes/publishing-bot/issues/21,"Return github errors, don't call glog.Fatalf",,closed,True,2018-01-15 18:17:58,2018-01-22 11:22:49
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/22,https://api.github.com/repos/kubernetes/publishing-bot/issues/22,Rename upstream->source in flags and pass commit-msg-tag directly,,closed,True,2018-01-15 18:39:31,2018-01-22 12:36:17
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/23,https://api.github.com/repos/kubernetes/publishing-bot/issues/23,Add init-repo command,"This will replace the init_repositories.sh script that only works for kube staging dirs.
+The init-repo command will read the config and external rules. Based on rules it will determine what fork repositories it should clone. 
+
+(only last commit is interesting, the first two are part of different PR)",closed,True,2018-01-17 20:02:40,2018-01-22 11:24:56
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/24,https://api.github.com/repos/kubernetes/publishing-bot/issues/24,Re-add accidently skipped 1.7 branch,,closed,True,2018-01-19 12:36:21,2018-01-22 11:10:13
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/25,https://api.github.com/repos/kubernetes/publishing-bot/issues/25,Split Source and Dependency,,closed,True,2018-01-19 12:39:59,2018-01-22 11:25:15
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/issues/26,https://api.github.com/repos/kubernetes/publishing-bot/issues/26,Get rid of these scripts and put the smoke tests into the rules,"Now that the rules are external, we should move the publish script into rules (YAML) and get rid of specific scripts in artifacts/scripts.",closed,False,2018-01-22 11:04:44,2018-02-12 19:05:17
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/27,https://api.github.com/repos/kubernetes/publishing-bot/issues/27,use source repo name as a prefix for sync-tags,,closed,True,2018-01-23 10:03:52,2018-01-23 10:05:30
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/28,https://api.github.com/repos/kubernetes/publishing-bot/issues/28,add /run endpoint that force the bot to run immediately,,closed,True,2018-01-23 10:23:23,2018-01-23 13:00:17
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/issues/29,https://api.github.com/repos/kubernetes/publishing-bot/issues/29,Handle unexpected container shutdowns,In case the container is killed (quota/node down/etc.) we might end up in weird state if the scripts crash in wrong time (?). We should probably handle the SIGINT and try to gracefully exit any critical operation that bot is currently doing.,closed,False,2018-01-23 12:17:00,2018-06-22 13:56:32
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/30,https://api.github.com/repos/kubernetes/publishing-bot/issues/30,Fix rules typo,,closed,True,2018-01-23 16:00:48,2018-01-23 16:00:56
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/31,https://api.github.com/repos/kubernetes/publishing-bot/issues/31,silence git filter-branch,"@sttts small change, improves the container logs ;-)",closed,True,2018-01-25 11:43:14,2018-01-25 14:41:54
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/32,https://api.github.com/repos/kubernetes/publishing-bot/issues/32,do not fail when Godeps/Godeps.json is removed,"start from a given Kubernetes-commit and do not try to move to a merge
+commit.",closed,True,2018-01-25 18:17:59,2018-07-13 15:11:11
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/33,https://api.github.com/repos/kubernetes/publishing-bot/issues/33,Update Godeps.json during tagging to point to tags,Fixes https://github.com/kubernetes/publishing-bot/issues/12,closed,True,2018-01-26 22:41:47,2018-02-10 15:38:58
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/34,https://api.github.com/repos/kubernetes/publishing-bot/issues/34,Switch publish script into smoke tests in rules yaml,Fixes https://github.com/kubernetes/publishing-bot/issues/26,closed,True,2018-02-10 12:46:54,2018-02-12 19:05:21
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/35,https://api.github.com/repos/kubernetes/publishing-bot/issues/35,Add required-packages field to include code-generator,Fixes https://github.com/kubernetes/sample-controller/issues/6.,closed,True,2018-02-10 13:23:00,2018-02-27 13:18:04
+publishing-bot,yank1,https://github.com/kubernetes/publishing-bot/pull/36,https://api.github.com/repos/kubernetes/publishing-bot/issues/36,fix typo in readme,fix typo in readme,closed,True,2018-02-10 13:56:21,2018-02-10 14:24:48
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/37,https://api.github.com/repos/kubernetes/publishing-bot/issues/37,Fix typo in configs/kubernetes-rules-configmap.yaml,,closed,True,2018-02-10 15:37:39,2018-02-10 15:37:46
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/38,https://api.github.com/repos/kubernetes/publishing-bot/issues/38,Switch to golang/dep,,closed,True,2018-02-11 19:20:05,2018-02-13 12:55:09
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/39,https://api.github.com/repos/kubernetes/publishing-bot/issues/39,Fix namespace in delete wait loop,,closed,True,2018-02-12 21:45:27,2018-02-13 12:47:25
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/40,https://api.github.com/repos/kubernetes/publishing-bot/issues/40,allow to fetch rules from URL,Detects the URL in `-rule-file` value and fetch the rules from remote URL.,closed,True,2018-02-13 11:14:07,2018-02-13 12:36:26
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/41,https://api.github.com/repos/kubernetes/publishing-bot/issues/41,Skip all slow steps if there are no commits against the subdirectory,,closed,True,2018-02-13 12:46:23,2019-01-04 08:01:10
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/42,https://api.github.com/repos/kubernetes/publishing-bot/issues/42,Fix time of extra tag commit,The date was 1/1/1970. Git push failed.,closed,True,2018-02-15 11:00:26,2018-02-19 11:56:48
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/43,https://api.github.com/repos/kubernetes/publishing-bot/issues/43,Add 1.10 branches,1.10 branches are created.,closed,True,2018-02-15 11:08:22,2018-02-16 12:50:37
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/44,https://api.github.com/repos/kubernetes/publishing-bot/issues/44,fix rule loading,@sttts critical fix :( Without this it will always fallback to downloading from URL which will result in 0 rules.,closed,True,2018-02-16 11:08:05,2018-02-16 13:06:20
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/45,https://api.github.com/repos/kubernetes/publishing-bot/issues/45,Make reset-godeps() consistently create one commit,For `PUBLISHER_BOT_SKIP_GODEPS == true` we incorrectly squashed because there was not godeps reset commit.,closed,True,2018-02-19 16:42:27,2018-03-06 08:57:54
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/46,https://api.github.com/repos/kubernetes/publishing-bot/issues/46,Cope with extra files in Godeps/ directory,Fixes issues due to https://github.com/kubernetes/kubernetes/pull/59587#issuecomment-368575420.,closed,True,2018-02-26 17:32:51,2018-02-26 18:22:04
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/47,https://api.github.com/repos/kubernetes/publishing-bot/issues/47,Update docs for rules files,,closed,True,2018-02-26 18:06:55,2018-03-06 09:55:06
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/48,https://api.github.com/repos/kubernetes/publishing-bot/issues/48,Simplify is-merge check,"While this makes the code easier to read, I also have the suspicioun that the `if ! cmd1 | cmd2 || cmd3; then`
+syntax did not work properly inside the script, while it work in an interactive shell. Maybe
+a shell bug.",closed,True,2018-02-26 20:45:20,2018-02-27 13:28:58
+publishing-bot,jayconrod,https://github.com/kubernetes/publishing-bot/issues/49,https://api.github.com/repos/kubernetes/publishing-bot/issues/49,Fix or update build files when syncing,"A build failure was originally reported in bazelbuild/rules_go#1356. It appears that Bazel BUILD files in `api`, `apimachinery`, and `client-go` refer to non-existent packages.
+
+### Steps to reproduce
+
+* In an empty workspace, create an empty BUILD file and a WORKSPACE file like below:
+
+```
+http_archive(
+    name = ""io_bazel_rules_go"",
+    sha256 = ""4b14d8dd31c6dbaf3ff871adcd03f28c3274e42abc855cb8fb4d01233c0154dc"",
+    url = ""https://github.com/bazelbuild/rules_go/releases/download/0.10.1/rules_go-0.10.1.tar.gz"",
+)
+
+http_archive(
+    name = ""bazel_gazelle"",
+    sha256 = ""6228d9618ab9536892aa69082c063207c91e777e51bd3c5544c9c060cafe1bd8"",
+    url = ""https://github.com/bazelbuild/bazel-gazelle/releases/download/0.10.0/bazel-gazelle-0.10.0.tar.gz"",
+)
+
+load(""@io_bazel_rules_go//go:def.bzl"", ""go_rules_dependencies"", ""go_register_toolchains"")
+
+go_rules_dependencies()
+
+go_register_toolchains()
+
+load(""@bazel_gazelle//:deps.bzl"", ""gazelle_dependencies"")
+
+gazelle_dependencies()
+
+load(""@bazel_gazelle//:def.bzl"", ""go_repository"")
+
+git_repository(
+    name = ""io_k8s_api"",
+    remote = ""https://github.com/kubernetes/api"",
+    tag = ""kubernetes-1.9.3"",
+)
+
+git_repository(
+    name = ""io_k8s_apimachinery"",
+    remote = ""https://github.com/kubernetes/apimachinery"",
+    tag = ""kubernetes-1.9.3"",
+)
+
+git_repository(
+    name = ""io_k8s_client_go"",
+    remote = ""https://github.com/kubernetes/client-go"",
+    tag = ""v6.0.0"",
+)
+```
+
+* Run this command:
+
+```
+$ bazel build @io_k8s_client_go//kubernetes/typed/core/v1:go_default_library
+ERROR: /usr/local/google/home/jayconrod/.cache/bazel/_bazel_jayconrod/533bcca7b8c77451fbaf7e2a9f7692b3/external/io_k8s_client_go/kubernetes/typed/core/v1/BUILD:8:1: no such package '@io_k8s_client_go//vendor/k8s.io/apimachinery/pkg/types': BUILD file not found on package path and referenced by '@io_k8s_client_go//kubernetes/typed/core/v1:go_default_library'.
+ERROR: Analysis of target '@io_k8s_client_go//kubernetes/typed/core/v1:go_default_library' failed; build aborted: no such package '@io_k8s_client_go//vendor/k8s.io/apimachinery/pkg/types': BUILD file not found on package path.
+```
+
+### Analysis
+
+The [BUILD file](https://github.com/kubernetes/client-go/blob/d902e7da4bfa28d901dca2cb81b76e40ee7703ae/kubernetes/typed/core/v1/BUILD) for the package `@io_k8s_client_go//kubernetes/typed/core/v1` refers to rules in `//vendor/k8s.io/...`. That directory doesn't exist in this repository.
+
+I suspect this bot may have copied the source files from k/k without updating the build files. Not sure what the right answer is. If the bot removes build files during sync, it may be possible to regenerate them correctly with Gazelle via `go_repository`. If the bot updates build files using Gazelle during sync, all dependencies will need to be vendored or declared using external repositories in WORKSPACE.",closed,False,2018-02-28 18:07:52,2018-03-14 15:41:14
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/50,https://api.github.com/repos/kubernetes/publishing-bot/issues/50,Implement RecursiveDeletePatterns and delete BUILD files in kube rules,"Fixes https://github.com/kubernetes/publishing-bot/issues/49
+Fixes https://github.com/kubernetes/client-go/issues/189
+
+- [x] test this with a full run against kube",closed,True,2018-02-28 19:58:27,2018-03-14 15:41:17
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/51,https://api.github.com/repos/kubernetes/publishing-bot/issues/51,Allow fix-godeps to make commits empty,"If a commit only included godep changes, fix-godeps might make it empty which is ok.
+
+This happened yesterday due to a merge of the apiserver release-1.10 branch with master that had no changes other than godep for k8s.io/apiserver.",closed,True,2018-03-02 08:23:36,2018-03-02 18:14:21
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/52,https://api.github.com/repos/kubernetes/publishing-bot/issues/52,Set TERM and PS1 env in Dockerfile,,closed,True,2018-03-02 10:51:23,2018-03-06 10:08:43
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/53,https://api.github.com/repos/kubernetes/publishing-bot/issues/53,WIP: add support for rules-file-branches argument,This add support for `--rules-file-branches` argument that the bot will use to read the rules file from. This allow to have separate rule file per branch.,closed,True,2018-03-06 09:42:14,2018-08-04 13:48:28
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/54,https://api.github.com/repos/kubernetes/publishing-bot/issues/54,Fix delete pattern escaping in filter-branch,"Before this the space-sparated list of patterns came out as one string, e.g. ""'BUILD */BUILD'"",
+although ""'BUILD' '*/BUILD'"" is correct.",closed,True,2018-03-17 09:24:50,2018-03-19 14:11:54
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/55,https://api.github.com/repos/kubernetes/publishing-bot/issues/55,WIP: Ship Gopkg.toml via Godeps.json conversion,"This adds conversion of Godeps/Godeps.json into Gopkg.toml. It constraints the k8s.io peer dirs by branch in case of normal branch commits, and to tags in case of `kubernetes-x.y.z` tags.
+
+Here is a test project: https://github.com/sttts/kube-vendor-test.
+
+Current status: `dep ensure` is failing:
+- in the release-1.8 branch:  https://gist.github.com/sttts/11ab31d30639dac60ce1e384588c15f0
+- in the kubernetes-v1.9.4 branch (corresponding to the kubernetes-1.9.4 tag): https://gist.github.com/sttts/c41318d5fc580d63b22b93b8dc9d8a63",closed,True,2018-03-19 12:53:31,2018-08-16 15:31:38
+publishing-bot,cblecker,https://github.com/kubernetes/publishing-bot/pull/56,https://api.github.com/repos/kubernetes/publishing-bot/issues/56,Bump godep version to v80,ref: https://github.com/kubernetes/kubernetes/pull/62037,closed,True,2018-04-03 16:23:36,2018-04-04 08:14:24
+publishing-bot,youhonglian,https://github.com/kubernetes/publishing-bot/pull/57,https://api.github.com/repos/kubernetes/publishing-bot/issues/57, Grammatical errors,line 35,closed,True,2018-04-05 13:21:01,2018-04-09 08:47:40
+publishing-bot,youhonglian,https://github.com/kubernetes/publishing-bot/pull/58,https://api.github.com/repos/kubernetes/publishing-bot/issues/58,typo fix,line 33,closed,True,2018-04-05 13:25:15,2018-04-09 08:47:38
+publishing-bot,youhonglian,https://github.com/kubernetes/publishing-bot/pull/59,https://api.github.com/repos/kubernetes/publishing-bot/issues/59,typo fix,line 38,closed,True,2018-04-05 13:28:07,2018-04-05 13:36:08
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/60,https://api.github.com/repos/kubernetes/publishing-bot/issues/60,Indent godep output with tabs,Now we get ugly re-indention commit in certain situation. Godeps.json should always be indented with tabs.,closed,True,2018-04-06 10:54:32,2018-04-09 07:45:10
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/61,https://api.github.com/repos/kubernetes/publishing-bot/issues/61,Squash godep commits or skip all of them if nothing changed,"This stops the commit loop visible in https://github.com/kubernetes/apiextensions-apiserver/commits/master.
+
+We had a number of steps, each avoiding commits if nothing changed, but without a check for all of them in a row (leading to the loop):
+- remove bazel BUILD files
+- run godep save/restore
+- add expicitly required packages (like k8s.io/code-generator).
+
+Each of these alone creates a diff, but all 3 squashed are empty.",closed,True,2018-04-09 08:27:15,2018-04-09 10:15:40
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/62,https://api.github.com/repos/kubernetes/publishing-bot/issues/62,Keep 7 days full log history in (rotated) run.log,"Logs are in `<repoBasePath>/run.log`, rotated on each run, kept for 7 days.",closed,True,2018-04-09 09:54:39,2018-06-08 07:20:51
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/63,https://api.github.com/repos/kubernetes/publishing-bot/issues/63,Allow old-branch upstream commit to point to non-mainline commit,"If the base commit is not on the upstream mainline, we first enumerate the
+commits up from the base commit to its merge (including the merge). Then we
+continue with the real mainline commits.",closed,True,2018-04-09 15:08:07,2018-09-06 16:47:56
+publishing-bot,AdamDang,https://github.com/kubernetes/publishing-bot/pull/64,https://api.github.com/repos/kubernetes/publishing-bot/issues/64,Typo fix: paramter->parameter,Line 124: paramter->parameter,closed,True,2018-04-30 16:04:40,2018-05-07 13:56:23
+publishing-bot,jessfraz,https://github.com/kubernetes/publishing-bot/issues/65,https://api.github.com/repos/kubernetes/publishing-bot/issues/65,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:15,2018-06-08 07:19:23
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/66,https://api.github.com/repos/kubernetes/publishing-bot/issues/66,Create SECURITY_CONTACTS,Fixes https://github.com/kubernetes/publishing-bot/issues/65,closed,True,2018-05-29 10:16:07,2018-06-08 07:19:24
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/67,https://api.github.com/repos/kubernetes/publishing-bot/issues/67,Add 1.11 branches,/assign sttts ,closed,True,2018-06-08 07:11:11,2018-06-08 10:23:58
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/68,https://api.github.com/repos/kubernetes/publishing-bot/issues/68,Remove Gopkg.toml file,In preparation of https://github.com/kubernetes/kubernetes/pull/64731.,closed,True,2018-06-18 12:05:03,2018-06-18 15:38:03
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/69,https://api.github.com/repos/kubernetes/publishing-bot/issues/69,Replace non-existing clone flag --no-tags in git 2.1.4 with bash tag removal,Fixes https://github.com/openshift/origin/issues/20144,closed,True,2018-06-29 10:48:20,2018-06-29 14:20:56
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/70,https://api.github.com/repos/kubernetes/publishing-bot/issues/70,Add requests+limits for memory and lower cpu requests,,closed,True,2018-07-02 11:00:16,2018-07-04 12:15:20
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/71,https://api.github.com/repos/kubernetes/publishing-bot/issues/71,README: remove reporting issues from Known Issues,"We have https://github.com/kubernetes/kubernetes/issues/56876 now. \o/
+
+/assign sttts ",closed,True,2018-07-05 11:28:58,2018-07-05 11:58:20
+publishing-bot,aojea,https://github.com/kubernetes/publishing-bot/issues/72,https://api.github.com/repos/kubernetes/publishing-bot/issues/72,Missing CONTRIBUTING.md file,"All K8s subrepositories should have a CONTRIBUTING.md file, which at the minimum should point to https://github.com/kubernetes/community/blob/master/contributors/guide/README.md. Care should be taken that all information is in sync with the contributor guide.
+
+Subrepositories may also have contributing guidelines specific to that repository. They should be explicitly documented and explained in the CONTRIBUTING.md
+
+Ref:  https://github.com/kubernetes/community/issues/1832",closed,False,2018-07-16 09:23:37,2018-07-18 08:46:19
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/73,https://api.github.com/repos/kubernetes/publishing-bot/issues/73,Add CONTRIBUTING.md,"Fixes #72 
+
+xref https://github.com/kubernetes/community/issues/1832
+/assign sttts ",closed,True,2018-07-18 06:08:07,2018-07-18 08:47:05
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/74,https://api.github.com/repos/kubernetes/publishing-bot/issues/74,Update to go 1.10.2,"The publishing bot is currently broken because `strings.Builder is undefined`: https://github.com/kubernetes/kubernetes/issues/56876#issuecomment-408741947.
+
+`strings.Builder` was introduced in Go 1.10. We use 1.10.2 in k/k (https://github.com/kubernetes/kubernetes/pull/63412, https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#external-dependencies).
+
+This PR updates the go version to 1.10.2 for publishing bot so that it starts working again.",closed,True,2018-07-30 05:30:55,2018-08-27 13:52:49
+publishing-bot,zhouhaibing089,https://github.com/kubernetes/publishing-bot/issues/75,https://api.github.com/repos/kubernetes/publishing-bot/issues/75,make build-image broken,"It seems like something wrong about gce_debian_mirror.
+
+```console
+$ make build-image push-image CONFIG=configs/xxx
+mkdir -p _output && GOOS=linux go build -o _output/collapsed-kube-commit-mapper ./cmd/collapsed-kube-commit-mapper
+mkdir -p _output && GOOS=linux go build -o _output/publishing-bot ./cmd/publishing-bot
+mkdir -p _output && GOOS=linux go build -o _output/sync-tags ./cmd/sync-tags
+mkdir -p _output && GOOS=linux go build -o _output/init-repo ./cmd/init-repo
+docker build -t xxx/haibzhou/tess-publishing-bot .
+Sending build context to Docker daemon 51.18 MB
+Step 1 : FROM google/debian:jessie
+ ---> ab02b1698e6d
+Step 2 : MAINTAINER Chao Xu <xuchao@google.com>
+ ---> Using cache
+ ---> 7fe4490a0937
+Step 3 : RUN apt-get update  && apt-get install -y -qq git=1:2.1.4-2.1+deb8u5  && apt-get install -y -qq mercurial  && apt-get install -y -qq ca-certificates wget jq vim tmux bsdmainutils tig  && wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz  && tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz  && rm -rf /var/lib/apt/lists/*
+ ---> Running in 68ef5b37e925
+Get:1 http://security.debian.org jessie/updates InRelease [44.9 kB]
+Ign http://gce_debian_mirror.storage.googleapis.com jessie InRelease
+Get:2 http://gce_debian_mirror.storage.googleapis.com jessie-updates InRelease [145 kB]
+Get:3 http://gce_debian_mirror.storage.googleapis.com jessie Release.gpg [2434 B]
+Get:4 http://gce_debian_mirror.storage.googleapis.com jessie Release [148 kB]
+Get:5 http://security.debian.org jessie/updates/main amd64 Packages [507 kB]
+E: Release file for http://gce_debian_mirror.storage.googleapis.com/dists/jessie-updates/InRelease is expired (invalid since 34d 5h 21min 5s). Updates for this repository will not be applied.
+The command '/bin/sh -c apt-get update  && apt-get install -y -qq git=1:2.1.4-2.1+deb8u5  && apt-get install -y -qq mercurial  && apt-get install -y -qq ca-certificates wget jq vim tmux bsdmainutils tig  && wget https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz  && tar -C /usr/local -xzf go1.9.2.linux-amd64.tar.gz  && rm -rf /var/lib/apt/lists/*' returned a non-zero code: 100
+make: *** [build-image] Error 1
+```",closed,False,2018-07-31 07:25:53,2018-08-02 11:32:46
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/76,https://api.github.com/repos/kubernetes/publishing-bot/issues/76,Switch to debian:jessie image away from google/debian,"The latter was broken.
+
+Fixes https://github.com/kubernetes/publishing-bot/issues/75",closed,True,2018-07-31 07:58:31,2018-08-02 11:32:46
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/77,https://api.github.com/repos/kubernetes/publishing-bot/issues/77,Fix 1.10 go cache,,closed,True,2018-07-31 08:46:04,2018-07-31 09:13:38
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/78,https://api.github.com/repos/kubernetes/publishing-bot/issues/78,Disable publishing of 1.8 and older,"We don't support anything equal or older than 1.8. Go 1.10 is not compatible with v4.0.0 anymore, link errors.",closed,True,2018-07-31 13:41:08,2018-08-02 12:14:28
+publishing-bot,zhouhaibing089,https://github.com/kubernetes/publishing-bot/issues/79,https://api.github.com/repos/kubernetes/publishing-bot/issues/79,Generalizing publishing-bot,"At least for now, publishing-bot is designed to work with kubernetes/kubernetes repo. However, as we are encouraging people to have their own apiserver repo, I believe it makes sense to export their own api and client-go repo from their own apiserver.
+
+I have tried to use this repo to export api and client-go for my own apiserver, though there are some places to tweak, but finally I get it working for me.
+
+So probably a question(or a feature request) here, could we make this bot general enough to handle any repo which has similar `staging/src` setup like kubernetes/kubernetes.
+",closed,False,2018-08-03 04:40:43,2018-08-17 07:49:59
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/80,https://api.github.com/repos/kubernetes/publishing-bot/issues/80,Add branch rule go version value,"Kube 1.9 and 1.10 need Go 1.9, especially because go vet was extended in Go 1.10. So we better make this configurable.",closed,True,2018-08-06 07:22:58,2018-08-06 10:50:45
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/81,https://api.github.com/repos/kubernetes/publishing-bot/issues/81,Add memory request+limit config vars,,closed,True,2018-08-06 11:03:25,2018-08-06 13:04:45
+publishing-bot,yue9944882,https://github.com/kubernetes/publishing-bot/pull/82,https://api.github.com/repos/kubernetes/publishing-bot/issues/82,Report better logs for github issue,"@sttts 
+
+Plus some minor refactor 😃
+
+Showing log in a better way for the bot. ",closed,True,2018-08-07 08:16:06,2018-08-08 16:44:30
+publishing-bot,zhouhaibing089,https://github.com/kubernetes/publishing-bot/pull/83,https://api.github.com/repos/kubernetes/publishing-bot/issues/83,cmd/*: add github-host and package flag,"In case people are running github on-premise, they should be able
+to tweak the github address.
+
+the second case is: people might not be using the traditional name
+convention like github.com/xxx/yyy as the package base, we should
+allow them to specify the package name when cloning the code into
+GOPATH.",closed,True,2018-08-09 06:10:29,2018-08-16 08:02:56
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/84,https://api.github.com/repos/kubernetes/publishing-bot/issues/84,Fix github issue cleanup,,closed,True,2018-08-16 10:11:48,2018-08-17 06:58:53
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/85,https://api.github.com/repos/kubernetes/publishing-bot/issues/85,Fix base package script passing,,closed,True,2018-08-16 11:43:30,2018-08-16 15:33:01
+publishing-bot,yue9944882,https://github.com/kubernetes/publishing-bot/pull/86,https://api.github.com/repos/kubernetes/publishing-bot/issues/86,Tighten log stdout/err order via lineWriter & syncWriter,"resolving bad format lines in logs:
+
+```
+	+ read dep branch
+	+ jq '.Deps |= map(select(.ImportPath | (startswith(""k8s.io/client-go/"") or . == ""k8s.io/client-go"") | not))' Godeps/Godeps.json
+	+ indent-godeps
+	+ unexpand --first-only --tabs=2
+	+ mv Godeps/Godeps.json.clean Godeps/Godeps.json
+		R+u necho 'Running godep restore.'
+	+ godepn restore
+ing godep restore.
+	+ checkout-deps-to-kube-commit Kubernetes-commit apimachinery:master,api:master
+	+ local commit_msg_tag=Kubernetes-commit
+	+ deps=()
+```
+
+`cmd.Stdout` and `cmd.Stderr` is writting logs per chars, which is the cause of bad outputting as above shown. so we use a `lineWriter` to buffer chars and flush them on `\n`. and a `syncWriter` will prevent dirty write into `bytes.Buffer` because it's not thread-safe.",closed,True,2018-08-17 04:48:33,2018-08-17 08:31:10
+publishing-bot,zhouhaibing089,https://github.com/kubernetes/publishing-bot/pull/87,https://api.github.com/repos/kubernetes/publishing-bot/issues/87,init-repo: set Dir for go installation,"the cmd to install go version should setup a dir explictly, or it
+would fail like `chdir /go-workspace/x: no such file or directory`.
+
+1. `run` setup `Dir` to be `BaseRepoPath` if it is empty at https://github.com/kubernetes/publishing-bot/blob/master/cmd/init-repo/main.go#L255
+1. the invocation of [installGoVersion](https://github.com/kubernetes/publishing-bot/blob/master/cmd/init-repo/main.go#L137) sits before the [mkdir of BaseRepoPath](https://github.com/kubernetes/publishing-bot/blob/master/cmd/init-repo/main.go#L145)",closed,True,2018-08-17 10:37:23,2018-08-20 09:55:23
+publishing-bot,yue9944882,https://github.com/kubernetes/publishing-bot/pull/88,https://api.github.com/repos/kubernetes/publishing-bot/issues/88,Fixes missing license ,as the title,closed,True,2018-08-20 04:52:16,2018-08-20 09:56:40
+publishing-bot,yliaog,https://github.com/kubernetes/publishing-bot/pull/89,https://api.github.com/repos/kubernetes/publishing-bot/issues/89,added bootstrap repo.,added bootstrap repo per https://github.com/kubernetes/kubernetes/pull/67356#issuecomment-414250981,closed,True,2018-08-20 17:24:44,2018-10-04 09:50:36
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/90,https://api.github.com/repos/kubernetes/publishing-bot/issues/90,allow to skip tag synchronization,The `skip-tags: true` option in configuration will prevent the publisher bot from synchronizing the repository tags in case the tags are not required.,closed,True,2018-08-29 10:16:54,2018-09-07 06:57:21
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/91,https://api.github.com/repos/kubernetes/publishing-bot/issues/91,run git gc --auto before syncing repos,Running `git gc --auto` should speed up the sync a little and keep the repository in clean state.,closed,True,2018-08-29 10:22:08,2018-08-29 10:39:42
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/92,https://api.github.com/repos/kubernetes/publishing-bot/issues/92,fix args count check,,closed,True,2018-08-29 10:49:24,2018-08-29 11:14:40
+publishing-bot,saad-ali,https://github.com/kubernetes/publishing-bot/pull/93,https://api.github.com/repos/kubernetes/publishing-bot/issues/93,Add csi-api repo to publish bot,"We have a new https://github.com/kubernetes/csi-api repo that should be populated from https://github.com/kubernetes/kubernetes/tree/master/staging/src/k8s.io/csi-api
+
+I would like to turn on auto publishing.
+
+/assign @sttts ",closed,True,2018-09-01 01:33:42,2018-09-04 10:35:07
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/94,https://api.github.com/repos/kubernetes/publishing-bot/issues/94,Add Kubernetes 1.12 rules,,closed,True,2018-09-05 10:17:07,2018-09-05 13:21:51
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/issues/95,https://api.github.com/repos/kubernetes/publishing-bot/issues/95,New branch forked before a staging dir was populated the first time break publishing,"That branch (1.12 in this case) was merged again and again with master, until the staging dir was created.
+
+I assume that the filtered branch of the staging dir (here csi-api) does not have a proper corresponding commit for the fork point of the branch. We have to handle this case in addition.",closed,False,2018-09-05 18:53:52,2018-09-06 17:16:56
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/96,https://api.github.com/repos/kubernetes/publishing-bot/issues/96,Handle branching points for new branches which do not contain subdir,"Fixes https://github.com/kubernetes/publishing-bot/issues/95.
+
+We solve this by looking for the first (time-wise) fast-forward merge which introduced the subdirectory. The second-parent (on master) is the branching point for the new branch.
+
+We do not support (yet) a publishing subdirectory that was actually created on a releaes branch.",closed,True,2018-09-06 08:41:34,2018-09-06 17:16:56
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/pull/97,https://api.github.com/repos/kubernetes/publishing-bot/issues/97,Add new repositories for component config and cli,"New repos requested in:
+https://github.com/kubernetes/org/issues/58
+https://github.com/kubernetes/org/issues/56
+
+Change-Id: I2e71a998db2e53b8d8827a59a7b35198f52e3e13",closed,True,2018-09-07 00:21:27,2018-09-08 19:11:19
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/98,https://api.github.com/repos/kubernetes/publishing-bot/issues/98,Fix SKIP_TAGS logic,,closed,True,2018-09-07 06:58:30,2018-09-07 14:18:20
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/99,https://api.github.com/repos/kubernetes/publishing-bot/issues/99,Add 1.12 branches to new staging repos,Based on https://github.com/kubernetes/publishing-bot/pull/97,closed,True,2018-09-07 07:13:09,2018-09-08 19:10:38
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/100,https://api.github.com/repos/kubernetes/publishing-bot/issues/100,Fix smoketest branch comparison,We never skipped the smoke tests due to missing commits because the Sprintf pattern was wrong.,closed,True,2018-09-07 08:38:45,2018-09-07 14:23:20
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/101,https://api.github.com/repos/kubernetes/publishing-bot/issues/101,Speed up if nothing changed on a branch,"- skip cherry-picking if published hash matches last upstream hash
+- skip commit mapping computation if no new tag is found",closed,True,2018-09-07 20:06:05,2018-09-07 20:33:02
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/102,https://api.github.com/repos/kubernetes/publishing-bot/issues/102,Fix rules typo,,closed,True,2018-09-07 22:08:33,2018-09-07 23:56:40
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/103,https://api.github.com/repos/kubernetes/publishing-bot/issues/103,Clean up updateSourceRepo and checkout branch before rule loading,"We did not checkout master before reading the rules file, potentially from the source repo.
+
+Also the source repo branch logic gave dirty output.",closed,True,2018-09-08 09:45:58,2018-09-08 19:56:14
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/104,https://api.github.com/repos/kubernetes/publishing-bot/issues/104,Delete new Godeps file not on the branch,"In the kube-proxy staging dir the Godeps/README was forgotten originally and added in a later PR. But our godep run in the bot creates it and we left it in the working dir, making the cherry-pick which adds the file fail.",closed,True,2018-09-08 13:21:22,2018-09-08 14:13:13
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/105,https://api.github.com/repos/kubernetes/publishing-bot/issues/105,Fix source repo remote branch loop,"- `repo.Branches()` only return local branches, but we have to loop over remote origin branches.
+- We stored only the master head during publishing. Though the branch head is what counts. This PR fixes this.",closed,True,2018-09-09 08:56:29,2018-09-09 12:53:14
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/106,https://api.github.com/repos/kubernetes/publishing-bot/issues/106,Fix go-git ref name,Go-git is strict about ref names. It does not prepend `refs/heads/` automatically. So this PR adds that.,closed,True,2018-09-09 16:56:59,2018-09-09 19:15:13
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/107,https://api.github.com/repos/kubernetes/publishing-bot/issues/107,Speed-up branch fetch by not deleting remote first,,closed,True,2018-09-09 18:00:39,2018-09-09 20:04:51
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/108,https://api.github.com/repos/kubernetes/publishing-bot/issues/108,Fix kube-controller-manager repo to point to its staging dir,It had the staging dir of the scheduler.,closed,True,2018-09-09 18:30:46,2018-09-09 18:37:14
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/109,https://api.github.com/repos/kubernetes/publishing-bot/issues/109,Speed-up no-op tagging,Delete tags not on source branch early. Don't compute source-target map if no new tag is found.,closed,True,2018-09-09 19:52:39,2018-09-09 20:35:43
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/110,https://api.github.com/repos/kubernetes/publishing-bot/issues/110,Fix branch-name-hash map to be used on publish,"We switch to refs/heads/branch like branch names in https://github.com/kubernetes/publishing-bot/pull/106, but forgot to use the short name as key for the branch name hash map.",closed,True,2018-09-09 20:04:00,2018-09-09 20:35:57
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/111,https://api.github.com/repos/kubernetes/publishing-bot/issues/111,sync-tags: support speed-up for annotated and non-annotated tags,,closed,True,2018-09-09 20:56:46,2018-09-09 21:31:41
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/112,https://api.github.com/repos/kubernetes/publishing-bot/issues/112,Misc fixes,"- fix sync-tags npe
+- fix source fetch of tags (go-git fetch default is not fetch them)
+- prune upstream and origin fetch in sync repo to allow branch regeneration",closed,True,2018-09-10 08:38:40,2018-09-10 08:56:53
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/113,https://api.github.com/repos/kubernetes/publishing-bot/issues/113,Add apiextensions as a dependency to csi-api,"publishing-bot is currently broken: https://github.com/kubernetes/kubernetes/issues/56876
+
+https://github.com/kubernetes/kubernetes/pull/68579 added apiextensions-apiserver as a dependency to csi-api but it is not listed as a dependency here, which breaks publishing-bot while reconstructing godeps.json.
+
+This is the relevant part of the error log:
+
+```sh
+++ git commit-tree -p 2966180a4e54fab57c98153a33cf018cc4017ba3 -p HEAD -m 'Merge pull request #68579 from verult/adc-crd-access
+
+    	Updating CSI e2e test to create CSI CRDs
+
+...
+
++ update_full_godeps apimachinery:master,api:master,client-go:master k8s.io true Kubernetes-commit
+    	+ local deps=apimachinery:master,api:master,client-go:master
+    	+ local base_package=k8s.io
+    	+ local is_library=true
+    	+ local commit_msg_tag=Kubernetes-commit
+    	+ ensure-clean-working-dir
+    	+ git diff HEAD --exit-code
+    	+ for d in '$../*'
+    	+ '[' '!' -d '$../*' ']'
+    	+ continue
+    	+ '[' '!' -f Godeps/Godeps.json ']'
+    	+ echo 'Removing k8s.io/* dependencies from Godeps.json'
+    	+ local dep=
+    	+ local branch=
+    	+ local depbranch=
+    	++ basename /go-workspace/src/k8s.io/csi-api
+    	+ for depbranch in '${deps//,/ }' '$(basename ""${PWD}"")'
+    	+ IFS=:
+    	+ read dep branch
+    	+ jq '.Deps |= map(select(.ImportPath | (startswith(""k8s.io/apimachinery/"") or . == ""k8s.io/apimachinery"") | not))' Godeps/Godeps.json
+    	+ indent-godeps
+    	+ unexpand --first-only --tabs=2
+    	+ mv Godeps/Godeps.json.clean Godeps/Godeps.json
+    	+ for depbranch in '${deps//,/ }' '$(basename ""${PWD}"")'
+    	+ IFS=:
+    	+ read dep branch
+    	+ jq '.Deps |= map(select(.ImportPath | (startswith(""k8s.io/api/"") or . == ""k8s.io/api"") | not))' Godeps/Godeps.json
+    	+ indent-godeps
+    	+ unexpand --first-only --tabs=2
+    	+ mv Godeps/Godeps.json.clean Godeps/Godeps.json
+    	+ for depbranch in '${deps//,/ }' '$(basename ""${PWD}"")'
+    	+ IFS=:
+    	+ read dep branch
+    	+ jq '.Deps |= map(select(.ImportPath | (startswith(""k8s.io/client-go/"") or . == ""k8s.io/client-go"") | not))' Godeps/Godeps.json
+    	+ indent-godeps
+    	+ unexpand --first-only --tabs=2
+    	+ mv Godeps/Godeps.json.clean Godeps/Godeps.json
+    	+ for depbranch in '${deps//,/ }' '$(basename ""${PWD}"")'
+    	+ IFS=:
+    	+ read dep branch
+    	+ jq '.Deps |= map(select(.ImportPath | (startswith(""k8s.io/csi-api/"") or . == ""k8s.io/csi-api"") | not))' Godeps/Godeps.json
+    	+ indent-godeps
+    	+ unexpand --first-only --tabs=2
+    	+ mv Godeps/Godeps.json.clean Godeps/Godeps.json
+    	+ echo 'Running godep restore.'
+    	+ godep restore
+    	# cd /go-workspace/src/k8s.io/apiextensions-apiserver; git checkout xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    	error: pathspec 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' did not match any file(s) known to git.
+    	godep: error restoring dep (k8s.io/apiextensions-apiserver/pkg/apis/apiextensions): exit status 1
+    	# cd /go-workspace/src/k8s.io/apiextensions-apiserver; git checkout xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    	error: pathspec 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' did not match any file(s) known to git.
+    	godep: error restoring dep (k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1): exit status 1
+    	# cd /go-workspace/src/k8s.io/apiextensions-apiserver; git checkout xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    	error: pathspec 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' did not match any file(s) known to git.
+    	godep: error restoring dep (k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/scheme): exit status 1
+    	godep: Error restoring some deps. Aborting check.
+
+[21 Sep 18 11:02 UTC]: exit status 1```
+```
+
+
+
+",closed,True,2018-09-21 13:03:49,2018-11-26 19:31:51
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/114,https://api.github.com/repos/kubernetes/publishing-bot/issues/114,sync-tags: make post-failure debugging easier,,closed,True,2018-09-27 11:33:58,2018-09-27 11:41:36
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/115,https://api.github.com/repos/kubernetes/publishing-bot/issues/115,sync-tags: fix mapping file output,,closed,True,2018-09-27 14:10:29,2018-09-27 14:14:45
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/116,https://api.github.com/repos/kubernetes/publishing-bot/issues/116,Fix merge point calculation for repeated merges with same branch commit,"A commit might be ancestor of multiple merges into the mainline. Only the first of those merges is considered the merge point of that commit. To find it we have to traverse mainline merges from oldest to newest, storing the first appearance of a commit as ancestor of a merge.
+
+All credit goes to @nikhita for uncovering this.",closed,True,2018-10-04 07:54:30,2018-10-04 09:26:42
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/117,https://api.github.com/repos/kubernetes/publishing-bot/issues/117,Bump go-git to private branch to fix commit messages,Compare https://github.com/src-d/go-git/pull/976.,closed,True,2018-10-04 09:58:07,2018-10-04 10:27:37
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/118,https://api.github.com/repos/kubernetes/publishing-bot/issues/118,"Revert ""added bootstrap repo.""","Reverts kubernetes/publishing-bot#89
+
+The target repository is not ready. It has to be empty. And the publishing-bot needs permissions, compare https://github.com/kubernetes/org/issues/56#issue-356711512.
+
+",closed,True,2018-10-04 10:36:17,2018-10-04 10:43:46
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/119,https://api.github.com/repos/kubernetes/publishing-bot/issues/119,Add cluster-bootstrap repo,"Take two of https://github.com/kubernetes/publishing-bot/pull/89.
+
+Ref: https://github.com/kubernetes/org/issues/137#issuecomment-426981734
+
+/cc @sttts @yliaog 
+/assign @sttts 
+
+/hold
+until permissions for https://github.com/kubernetes/cluster-bootstrap are updated.",closed,True,2018-10-04 14:59:39,2018-10-05 10:19:17
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/120,https://api.github.com/repos/kubernetes/publishing-bot/issues/120,Bump default go version to 1.11.1,"Also update the go versions of:
+
+- v1.11 branch to 1.10.2
+- v1.12 branch to 1.10.4
+
+Ref:
+
+- v1.11 used go version 1.10.2: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.11.md#external-dependencies
+- v1.12 used go version 1.10.4: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.12.md#external-dependencies
+- Bump of go version from 1.10.4 to 1.11.1 on k/k master: https://github.com/kubernetes/kubernetes/pull/69386
+",closed,True,2018-10-06 07:54:57,2018-10-08 12:52:35
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/121,https://api.github.com/repos/kubernetes/publishing-bot/issues/121,Add cloud-provider repo,"- Repo creation request: https://github.com/kubernetes/org/issues/147
+- Repo with initial empty commit: https://github.com/kubernetes/cloud-provider
+- PR against test-infra for branch protection: https://github.com/kubernetes/test-infra/pull/9739
+- Dependencies: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/cloud-provider/Godeps/Godeps.json
+
+/cc @dims @sttts 
+/assign @sttts 
+",closed,True,2018-10-09 04:53:12,2018-10-09 10:10:08
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/122,https://api.github.com/repos/kubernetes/publishing-bot/issues/122,Bump go-git to official release 4.7.1,,closed,True,2018-10-22 06:45:40,2018-10-23 07:14:36
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/123,https://api.github.com/repos/kubernetes/publishing-bot/issues/123,Handle degenerated non-mainline merge,"Handling merges on feature branches is tricky, especially when the feature branch
+is degenerated to single commits on the filtered mainline. Here were add such a
+merge commit that is very seldom as non-overlapping feature branches with
+intermediate master merges do not happen often.
+
+The respective merge is from https://github.com/kubernetes/kubernetes/pull/69946.",closed,True,2018-10-26 14:09:16,2018-10-26 14:34:50
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/124,https://api.github.com/repos/kubernetes/publishing-bot/issues/124,Handle degenerated non-mainline merge - part 2,"Handling merges on feature branches is tricky, especially when the feature branch
+is degenerated to single commits on the filtered mainline. Here were add such a
+merge commit that is very seldom as non-overlapping feature branches with
+intermediate master merges do not happen often.
+
+The respective merge is from https://github.com/kubernetes/kubernetes/pull/69946.",closed,True,2018-10-26 14:40:54,2018-10-29 09:01:33
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/125,https://api.github.com/repos/kubernetes/publishing-bot/issues/125,README: remove tagging as a Known Issue,"https://github.com/kubernetes/kubernetes/issues/49011 has also been closed.
+
+/kind cleanup
+/assign @sttts ",closed,True,2018-11-01 13:22:46,2018-11-01 18:16:17
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/126,https://api.github.com/repos/kubernetes/publishing-bot/issues/126,go-git workaround: force checkout,"In case of spurious ""dirty workspace"" errors: ""worktree contains unstaged changes"".",closed,True,2018-11-01 14:58:41,2018-12-17 11:29:05
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/127,https://api.github.com/repos/kubernetes/publishing-bot/issues/127,[DO NOT MERGE] Test ProwJobs,,closed,True,2018-11-02 05:41:10,2018-11-02 05:47:51
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/128,https://api.github.com/repos/kubernetes/publishing-bot/issues/128,Remove travis in favor of Prow,"Ref: https://github.com/kubernetes/test-infra/pull/9895
+
+Made sure that introducing a compilation error fails and that master is green in https://github.com/kubernetes/publishing-bot/pull/127.
+
+/assign @sttts ",closed,True,2018-11-02 05:52:12,2018-11-05 10:53:20
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/129,https://api.github.com/repos/kubernetes/publishing-bot/issues/129,Override end-of-line attributes in gitattributes files,"If a repo contains `.gitattributes` files and contains special attributes for line endings, they are not respected while fetching using go-git  because it doesn't support `.gitattributes`. So default configuration values are followed. This leads to a dirty workspace.
+
+To avoid this, we need to instruct git to not attempt any line ending conversions. The only way to override the config in `.gitattributes` files is through a `.git/info/attributes` file
+
+This PR adds such a file and prevents any end-of-line conversions.
+
+---
+
+Ref: https://git-scm.com/docs/gitattributes
+
+> When deciding what attributes are assigned to a path, Git consults $GIT_DIR/info/attributes file (which has the highest precedence), .gitattributes file in the same directory as the path in question, and its parent directories up to the toplevel of the work tree (the further the directory that contains .gitattributes is from the path in question, the lower its precedence). Finally global and system-wide files are considered (they have the lowest precedence).
+
+---
+
+I also double checked that this works in k/k:
+
+1. Added `* text eol=lf` in `.gitattributes`.
+2. `git add --renormalize .` and then `git status` shows a lot of files changed.
+3. `echo ""* -text"" > .git/info/attributes` and then `git add --renormalize .` removes all those changes
+4. `rm .git/info/attributes && git add --renormalize .` adds them back
+
+
+
+",closed,True,2018-11-02 09:11:15,2018-11-02 10:02:11
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/130,https://api.github.com/repos/kubernetes/publishing-bot/issues/130,Recheckout when text conversion mode is changed,,closed,True,2018-11-02 14:09:38,2018-11-05 13:46:12
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/131,https://api.github.com/repos/kubernetes/publishing-bot/issues/131,Bump default go version to 1.11.2,"Ref: https://github.com/kubernetes/kubernetes/pull/70665
+
+/assign @sttts ",closed,True,2018-11-06 13:36:58,2018-11-06 15:56:06
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/132,https://api.github.com/repos/kubernetes/publishing-bot/issues/132,Add 1.13 branches and disable publishing of 1.9,"Ref: https://groups.google.com/d/topic/kubernetes-dev/8D_ea0xw3BQ/discussion
+
+1.13 branch has been created in k/k and with that we stop supporting 1.9 and older.
+
+/assign @sttts ",closed,True,2018-11-08 03:16:45,2018-11-09 08:03:23
+publishing-bot,mfojtik,https://github.com/kubernetes/publishing-bot/pull/133,https://api.github.com/repos/kubernetes/publishing-bot/issues/133,report more useful data via healthz endpoint,"@sttts the idea here is to get more useful info from the publisher bot runtime, so we can have some simple dashboard to display the history of runs and the status for different runs (instead of digging in GH issue ;-)
+
+The data I would like to see are:
+
+* Last publisher bot error
+* The HEAD SHA256 for every branch (not just ""master"")
+* The HEAD of the branches in rules (so I can fetch the commit message from GH and make sure the commit went to repo it should) (TBD)
+* Duration of each run (so we can see if we are getting faster or slower ;-)
+* etc...
+
+WDYT?",open,True,2018-11-11 17:55:25,2019-02-20 09:20:26
+publishing-bot,SataQiu,https://github.com/kubernetes/publishing-bot/pull/134,https://api.github.com/repos/kubernetes/publishing-bot/issues/134,Fix bug: shell syntax error,"Fix bug: shell syntax error, ${1-k8s.io}  -> ${1:-k8s.io}",closed,True,2018-11-14 08:28:50,2018-11-14 10:05:09
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/135,https://api.github.com/repos/kubernetes/publishing-bot/issues/135,Add node-api repo,"- Repo creation request: https://github.com/kubernetes/org/issues/38
+- Repo with initial empty commit: https://github.com/kubernetes/node-api
+- PR against test-infra for branch protection: https://github.com/kubernetes/test-infra/pull/10194
+- Dependencies: https://github.com/kubernetes/kubernetes/blob/31e2ba9f38bf950476fcaab01f7b0f9f5baf9fe7/staging/src/k8s.io/node-api/Godeps/Godeps.json
+
+/cc @tallclair @sttts  
+/assign @sttts 
+",closed,True,2018-11-21 04:51:58,2018-12-21 10:37:40
+publishing-bot,SataQiu,https://github.com/kubernetes/publishing-bot/pull/136,https://api.github.com/repos/kubernetes/publishing-bot/issues/136,Fix typo: corresonding -> corresponding,Fix typo: corresonding -> corresponding,closed,True,2018-11-21 09:43:27,2018-11-22 08:40:48
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/137,https://api.github.com/repos/kubernetes/publishing-bot/issues/137,Add mfojtik and nikhita as reviewers,"We have been working/reviewing on publishing-bot for a while.
+
+/cc @mfojtik @sttts 
+/assign @sttts ",closed,True,2018-11-21 10:31:34,2018-11-22 08:37:34
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/138,https://api.github.com/repos/kubernetes/publishing-bot/issues/138,Dockerfile: add gcc dep due to cgo,,closed,True,2018-12-03 11:26:36,2018-12-03 13:06:37
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/139,https://api.github.com/repos/kubernetes/publishing-bot/issues/139,Bump default go version to 1.11.4,"Ref: https://github.com/kubernetes/kubernetes/issues/72032
+
+/hold
+until it has been actually updated in k/k (https://github.com/kubernetes/kubernetes/pull/72084)
+
+/assign @sttts @cblecker ",closed,True,2018-12-13 23:49:26,2018-12-19 10:30:54
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/140,https://api.github.com/repos/kubernetes/publishing-bot/issues/140,Switch to ReplicaSet,ReplicationControllers have been replaced by RSs long ago.,closed,True,2018-12-20 20:06:53,2019-01-02 10:46:54
+publishing-bot,jmhodges,https://github.com/kubernetes/publishing-bot/issues/141,https://api.github.com/repos/kubernetes/publishing-bot/issues/141,proto files being copied redux,"This is the same bug as https://github.com/kubernetes/publishing-bot/issues/49 but now the .proto files are in k8s.io/api. Specifically, files like https://github.com/kubernetes/api/blob/173ce66c1e39d1d0f56e0b3347ff2988068aecd0/authentication/v1/generated.proto
+
+I'm having to fork k8s.io/api again to fix this.",closed,False,2019-01-03 14:23:24,2019-01-05 03:06:34
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/142,https://api.github.com/repos/kubernetes/publishing-bot/issues/142,Add component-base repo,"- Repo creation request: https://github.com/kubernetes/org/issues/330
+- Repo with initial empty commit: https://github.com/kubernetes/component-base
+- PR against test-infra for branch protection: https://github.com/kubernetes/test-infra/pull/10635
+- PR for staging against k/k: https://github.com/kubernetes/kubernetes/pull/72569
+- Dependencies: As per PR [`Godeps.json`](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/component-base/Godeps/Godeps.json),
+  -  only apimachinery is a dependency.
+  - `component-base` is a dependency to `kube-proxy`, `kube-scheduler` and `kube-controller-manager`.
+  - it is safe to add future dependencies per https://github.com/kubernetes/publishing-bot/pull/142#discussion_r245485117 as well, so they have been added too.
+
+
+/cc @luxas @sttts 
+/assign @sttts 
+
+/hold 
+
+I'll consider it safe to cancel the hold when:
+- [x] The published repo has been created and has an initial empty commit: https://github.com/kubernetes/component-base.
+- [x] The PR against staging (https://github.com/kubernetes/kubernetes/pull/72569) has merged.
+- [x] Dependencies are verified after the above PR is merged (just to double check). Note: future dependencies have also been added.
+- [x] The PR against test-infra for branch protection is merged (https://github.com/kubernetes/test-infra/pull/10635)
+
+
+
+",closed,True,2019-01-04 20:06:40,2019-01-22 12:34:56
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/143,https://api.github.com/repos/kubernetes/publishing-bot/issues/143,Add rules validation,,closed,True,2019-01-08 13:30:30,2019-01-08 13:38:28
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/144,https://api.github.com/repos/kubernetes/publishing-bot/issues/144,Fix publishing of component-base,"Fixed a number of things (see commits), including bumping the base image to debian stretch (because some mercurial based dependencies couldn't be downloaded anymore due to old SSL errors) and new git. Went through fine in my sttts org.",closed,True,2019-01-09 17:24:28,2019-01-11 03:37:11
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/145,https://api.github.com/repos/kubernetes/publishing-bot/issues/145,Add csi-translation-lib repo,"- Repo creation request: https://github.com/kubernetes/org/issues/321
+- Repo with initial empty commit: https://github.com/kubernetes/csi-translation-lib
+- PR against test-infra for branch protection: https://github.com/kubernetes/test-infra/pull/10676
+- PR for staging against k/k: https://github.com/kubernetes/kubernetes/pull/72770
+- Dependencies: As per the [`Godeps.json`](https://github.com/kubernetes/kubernetes/blob/ab2e26386f9a309feda55e735b28db8919921c3f/staging/src/k8s.io/csi-translation-lib/Godeps/Godeps.json) in the PR, the csi-translation-lib depends on `api` and `apimachinery` and no other staging repos depend on it.
+ 
+/cc @ddebroy @sttts 
+/assign @sttts 
+
+/hold 
+
+until:
+- [x] The PR against staging (https://github.com/kubernetes/kubernetes/pull/72770) has merged.
+- [x] Dependencies are verified after the above PR is merged.",closed,True,2019-01-11 03:49:39,2019-01-17 04:08:53
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/146,https://api.github.com/repos/kubernetes/publishing-bot/issues/146,util.sh: fix rev-parse typo,,closed,True,2019-01-14 11:02:44,2019-01-14 11:08:22
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/147,https://api.github.com/repos/kubernetes/publishing-bot/issues/147,Add dims ,"New collaborators:
+
+	6103BF59 Davanum Srinivas <dims@apache.org>",closed,True,2019-01-17 13:25:20,2019-01-17 13:28:14
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/148,https://api.github.com/repos/kubernetes/publishing-bot/issues/148,configs: get kubernetes rules from k/k repo,Prequisite: https://github.com/kubernetes/kubernetes/pull/73023,closed,True,2019-01-17 14:03:11,2019-01-24 21:59:05
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/149,https://api.github.com/repos/kubernetes/publishing-bot/issues/149,Fix smoke test old-HEAD vs. new-HEAD comparison,,closed,True,2019-01-17 17:57:49,2019-01-17 18:05:16
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/150,https://api.github.com/repos/kubernetes/publishing-bot/issues/150,Increase memory limits to survive smoke-test,The linker gets killed due to memory with 1.5Gi.,closed,True,2019-01-17 19:50:02,2019-01-17 19:54:23
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/151,https://api.github.com/repos/kubernetes/publishing-bot/issues/151,rules: add component-base dep to apiextensions-apiserver and kubelet,Both (will) use component-base. apiextensions-apiserver even does today (and publishing breaks).,closed,True,2019-01-17 21:16:02,2019-01-17 21:46:30
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/152,https://api.github.com/repos/kubernetes/publishing-bot/issues/152,bump(github.com/src-d/go-git/releases): 4.8.1,To get pack file fixes.,closed,True,2019-01-18 13:21:05,2019-01-18 13:31:26
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/153,https://api.github.com/repos/kubernetes/publishing-bot/issues/153,Skip godeps generation for commits containing incorrect godep changes,"This commit adds an exception list for commits containing bad godep changes
+(eg client-go depending on apiserver) and skips godeps generation for these
+commits.
+
+Note that we will still reset godeps for each commit (including the bad commit).
+And the correct godep generation will take place once it encounters a good commit.
+
+This is a temporary fix and should probably be reverted because it is not always
+true that there will be a commit having the correct godep changes after a bad one
+_immediately_. If there isn't a good commit after a bad one immediately, the commits
+between them will have bad Godeps.json.
+
+---
+
+This is the bad commit that needs to skip godeps generation - https://github.com/kubernetes/kubernetes/commit/e2a017327c1af628f4f0069cbd49865ad1e81975 and this is the good commit that reverts the bad change - https://github.com/kubernetes/kubernetes/commit/c8d89b34cc692c4b477fe40ac4511be73a581629.",closed,True,2019-01-25 12:51:53,2019-01-26 19:02:09
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/154,https://api.github.com/repos/kubernetes/publishing-bot/issues/154,Fix deployment with rules from the repo,Forgot to commit some changes.,closed,True,2019-01-25 16:28:05,2019-01-25 16:35:50
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/155,https://api.github.com/repos/kubernetes/publishing-bot/issues/155,Bump default go version to 1.11.5,"Ref: https://github.com/kubernetes/kubernetes/pull/73326
+
+/assign @sttts ",closed,True,2019-01-26 19:08:39,2019-01-26 20:28:08
+publishing-bot,andrewsykim,https://github.com/kubernetes/publishing-bot/issues/156,https://api.github.com/repos/kubernetes/publishing-bot/issues/156,Support publishing staging directories to subdirectories of external repos,"As part of the cloud provider removal efforts, it may be beneficial for us to support publishing staged directories to only subdirectories of external repos. This gives us the flexibility to publish the cloud provider implementations developed in k8s.io/kubernetes into their respective external repos without forcing the entire repository to reflect what is in staging. 
+
+An example of this would be to publish `k8s.io/kubernetes/staging/src/k8s.io/cloud-provider/gce` to `k8s.io/cloud-provider-gce/provider/`. This would keep only `k8s.io/cloud-provider-gce/provider/` in sync with what is staged but allow us to freely update any other directory in that repo. 
+
+Happy to pick up any work required for this (will need some guidance though).
+
+cc @nikhita @cheftako @mcrute @dims ",open,False,2019-01-30 16:58:15,2019-04-04 15:01:42
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/157,https://api.github.com/repos/kubernetes/publishing-bot/issues/157,Move golang download to construction time,Necessary if the rules file comes from a repo.,closed,True,2019-02-01 13:05:57,2019-02-01 13:52:47
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/pull/158,https://api.github.com/repos/kubernetes/publishing-bot/issues/158,Fixes for running kubernetes-nightly config in CNCF cluster,"- fix apiversion
+- add missing file
+- fix source-org
+- run git config with user.email and user.name
+- install default golang in init-repo itself
+
+Change-Id: I102b0ae11aa141bc338fcfcea9b9913c600cc745",closed,True,2019-02-07 13:23:54,2019-02-12 22:07:35
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/issues/159,https://api.github.com/repos/kubernetes/publishing-bot/issues/159,publishing-bot needs too much memory,"- sync-tags gets oom killed occasionally
+- pod gets evicted with the following
+```
+  Type     Reason   Age   From                                                 Message
+  ----     ------   ----  ----                                                 -------
+  Warning  Evicted  37m   kubelet, gke-development-default-pool-9fede538-zrl7  The node was low on resource: memory. Container publisher was using 2560344Ki, which exceeds its request of 2Gi.
+  Normal   Killing  37m   kubelet, gke-development-default-pool-9fede538-zrl7  Killing container with id docker://publisher:Need to kill Pod
+[dims@dims-mac 15:
+```",closed,False,2019-02-08 20:54:17,2019-02-11 09:55:37
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/pull/160,https://api.github.com/repos/kubernetes/publishing-bot/issues/160,Update to go-git.v4 4.9.1,"There are performance optimizations that help with the problem with OOM
+and pod eviction. Please see:
+https://github.com/src-d/go-git/compare/v4.8.1...v4.9.1
+
+Fixes #159
+
+Change-Id: I92860f875aa178199f161a3604c4662e0d3e0e5b",closed,True,2019-02-09 03:45:48,2019-02-11 09:55:41
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/pull/161,https://api.github.com/repos/kubernetes/publishing-bot/issues/161,Make validate-rules command a bit more verbose,Change-Id: I3e9c8eb2542b50f81ba7cc1ea594f2a12384f9dd,closed,True,2019-02-11 00:19:17,2019-02-11 14:37:11
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/issues/162,https://api.github.com/repos/kubernetes/publishing-bot/issues/162,"During git pull of k/k if the references changes, try again sooner","Currently when we encounter the issue below ... we end up waiting for `interval` worth of time before trying again. We should try sooner than that as this is just an intermittent issue.
+
+```
+E0213 19:10:04.033361       1 publisher.go:396] failed to fetch at /go-workspace/src/k8s.io/kubernetes: reference has changed concurrently
+I0213 19:10:04.043938       1 main.go:181] Failed to run publisher: failed to fetch at /go-workspace/src/k8s.io/kubernetes: reference has changed concurrently
+```",open,False,2019-02-13 20:43:04,2019-03-12 12:51:27
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/163,https://api.github.com/repos/kubernetes/publishing-bot/issues/163,Update OWNERS to current reviewers,"This PR updates OWNERS to current reviewers.
+
+/assign @dims @sttts 
+
+@apelisse @marun @munnerz Let me know if you'd like to stay and I can add you back. :)
+
+I'll keep this open till EOW so that everyone can chime in.",closed,True,2019-02-27 17:00:07,2019-03-04 12:47:12
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/164,https://api.github.com/repos/kubernetes/publishing-bot/issues/164,Bump default go version to 1.12,"Ref: https://github.com/kubernetes/kubernetes/pull/74632
+
+/cc @dims @sttts ",closed,True,2019-03-04 13:45:08,2019-03-06 10:40:55
+publishing-bot,joelsmith,https://github.com/kubernetes/publishing-bot/pull/165,https://api.github.com/repos/kubernetes/publishing-bot/issues/165,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:12:54,2019-03-14 12:36:25
+publishing-bot,dims,https://github.com/kubernetes/publishing-bot/pull/166,https://api.github.com/repos/kubernetes/publishing-bot/issues/166,Retry quickly when references changed,"Lets not wait 4 hours and retry quickly. If this works, we can add another parameter instead of hardcoding 5 mins.
+
+Change-Id: I2ab92772f417124c4684bb5fb17bc5437923812d",closed,True,2019-03-11 15:12:59,2019-03-11 16:31:31
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/167,https://api.github.com/repos/kubernetes/publishing-bot/issues/167,Don't set healthz on dry run,"Ref: https://github.com/kubernetes/publishing-bot/pull/133#discussion_r232567955
+
+/cc @dims @mfojtik @sttts ",closed,True,2019-03-12 12:20:00,2019-03-14 12:28:24
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/168,https://api.github.com/repos/kubernetes/publishing-bot/issues/168,Bump to private branch to display more info in error messages,"Ref: https://github.com/nikhita/go-git/pull/1
+
+For https://github.com/kubernetes/publishing-bot/issues/162
+
+/assign @dims @sttts ",closed,True,2019-03-20 09:41:59,2019-04-04 08:38:52
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/169,https://api.github.com/repos/kubernetes/publishing-bot/issues/169,go-mod support,"This removes godeps support and adds generation of go.mod+sum. No vendor/ is generated anymore.
+
+In parallel, there is a godeps branch forked off before this PR. We will keep running a second instance for all pre-1.15 versions.",closed,True,2019-03-21 15:12:33,2019-04-03 21:50:49
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/170,https://api.github.com/repos/kubernetes/publishing-bot/issues/170,Add new staging repo: cri-api,"Ref:
+
+- Repo creation request: https://github.com/kubernetes/org/issues/642
+- Repo with initial empty commit: https://github.com/kubernetes/cri-api
+- PR against test-infra for branch protection: https://github.com/kubernetes/test-infra/pull/11941
+- PR for to add repo to staging against k/k: https://github.com/kubernetes/kubernetes/pull/75531
+- PR for updating publishing-bot rules against k/k: https://github.com/kubernetes/kubernetes/pull/75531
+
+/hold
+This needs to be added to staging and the rules need to be updated
+
+/assign @dims @sttts ",closed,True,2019-03-26 08:44:55,2019-03-27 03:35:35
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/issues/171,https://api.github.com/repos/kubernetes/publishing-bot/issues/171,Move cloning to main publisher process,"To not require changes to https://github.com/kubernetes/publishing-bot/blob/master/hack/fetch-all-latest-and-push.sh each time a new repo is added. Ref: https://github.com/kubernetes/publishing-bot/pull/170#discussion_r268992071
+
+/assign
+/cc @sttts @dims ",open,False,2019-03-27 03:35:01,2019-03-27 03:35:02
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/172,https://api.github.com/repos/kubernetes/publishing-bot/issues/172,Switch branch to godeps rules file and issue,,closed,True,2019-04-01 13:18:18,2019-04-01 13:20:38
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/173,https://api.github.com/repos/kubernetes/publishing-bot/issues/173,Change godeps Docker image,,closed,True,2019-04-02 06:42:31,2019-04-02 06:56:35
+publishing-bot,nikhita,https://github.com/kubernetes/publishing-bot/pull/174,https://api.github.com/repos/kubernetes/publishing-bot/issues/174,Fix waitFor calculation,Ref: https://kubernetes.slack.com/archives/C2C40FMNF/p1554206338033300?thread_ts=1554125684.027900&cid=C2C40FMNF,closed,True,2019-04-02 12:05:34,2019-04-03 01:18:28
+publishing-bot,sttts,https://github.com/kubernetes/publishing-bot/pull/175,https://api.github.com/repos/kubernetes/publishing-bot/issues/175,Cherry-pick of #174: Fix waitFor calculation,,closed,True,2019-04-02 17:41:01,2019-04-02 17:43:19

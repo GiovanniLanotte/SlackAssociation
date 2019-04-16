@@ -1,0 +1,1261 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/401,https://github.com/hyperledger/caliper/pull/401,Ram-srini,Added compose files for fabric 1.4 with kafka consensus with golevel db,"Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-caliper)
+- [ ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/caliper)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],1,2019-04-02 07:04:58,,2019-04-03 10:26:59,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/400,https://github.com/hyperledger/caliper/pull/400,feihujiang,Fix undefined error,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+Fix the error: ""error: [monitor-docker.js]: TypeError: Cannot read property 'id' of undefined"".",[],1,2019-04-01 11:37:13,,2019-04-01 11:37:13,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/399,https://github.com/hyperledger/caliper/pull/399,panyu4,Fix TPS computation for batch mode,"Signed-off-by: panyu2 <PY.panyu@huawei.com>
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+When the  transactions are not sent evenly eg. sending several transactions with one workload, current TPS may give some strange throughtput since in some situations the time used for transactions is not accurately computed. 
+
+
+## Existing issues
+#226 
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+1. record the maximum final time of all successful and failed transactions;
+2. modify the computation of successful transactions time to the all transactions used time 
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+1. start Caliper normally with 'open' test module and 'txnPerBatch' set larger than TPS ;
+2. open another terminal and stop the running blockchain network.",[],1,2019-04-01 11:11:31,,2019-04-01 11:11:32,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/398,https://github.com/hyperledger/caliper/pull/398,feihujiang,Throw new error when query but no committed transaction,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+",[],1,2019-04-01 07:49:08,,2019-04-01 07:49:09,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/397,https://github.com/hyperledger/caliper/pull/397,houqinghui,add environment check script,"The script `env_check.sh`  can check whethe the pre-requisites of Caliper have been installed and gives the version. @panyu4 @aklenik 
+#376 ",[],1,2019-04-01 02:16:34,,2019-04-02 05:55:59,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/395,https://github.com/hyperledger/caliper/pull/395,quangtdn,Fix conflicts between smallbank benchmark and fabric-ccp configuration ,"Signed-off-by: quangtdn <nmquang229@yahoo.com.vn>
+
+This is just to fix the issue #394 . 
+
+In the benchmarking methods smallbankOperations.js and query.js, for fabric-ccp type the test should convert transactions' arguments into Strings before sending the transactions. ",[],1,2019-03-30 15:50:16,,2019-03-31 09:44:49,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/383,https://github.com/hyperledger/caliper/pull/383,nklincoln,Modify report template to list based on test label,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Suggested fix for #382
+
+Following the generation of some Caliper reports, I noticed that the report structure could be enhanced. I have changed the template and associated report code to follow the config file more closely and make the report more readable by:
+- Group test rounds under each test label, with each round starting at zero for each label.
+- Link to test labels instead of test rounds from the metadata side navigation (this is a more meaningful link)
+- Enable the provision of a description for each test label that is taken from the config file.
+
+I have attached a file that is generated by the code.
+
+
+[report-20190320T153655.html.zip](https://github.com/hyperledger/caliper/files/2991612/report-20190320T153655.html.zip)
+",[],1,2019-03-21 10:23:21,2019-03-21 12:03:31,2019-03-22 16:07:23,True,2019-03-21 12:03:30,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/381,https://github.com/hyperledger/caliper/pull/381,hnan1118,Update js-yaml version,"With js-yaml@3.12.0, benchmarks for Fabric-v1.4 fails while
+instantiating chaincode.
+
+Signed-off-by: Jinwoo Hwang <hnan1118@ajou.ac.kr>",[],1,2019-03-21 05:34:18,2019-03-23 04:17:21,2019-03-23 04:17:22,False,,,blocked,True,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/380,https://github.com/hyperledger/caliper/pull/380,nklincoln,enable test round spec if runDuration,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+Fix for #379 ",[],1,2019-03-19 16:49:03,2019-03-19 22:37:59,2019-03-22 16:07:25,True,2019-03-19 22:37:59,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/378,https://github.com/hyperledger/caliper/pull/378,nklincoln,Update network model function name,"The Network Model API name had a function name change from the beta to 1.4 release, this update reflects that change
+
+Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Resolves #377 ",[],1,2019-03-18 13:47:44,2019-03-21 09:02:33,2019-03-22 16:07:29,True,2019-03-21 09:02:33,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/373,https://github.com/hyperledger/caliper/pull/373,aklenik,Update rate controller documentation with the new API,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Documentation for the new features of PR #372 ",[],1,2019-03-14 14:36:08,2019-03-20 10:28:13,2019-03-20 10:28:13,True,2019-03-20 10:28:13,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/372,https://github.com/hyperledger/caliper/pull/372,aklenik,Added factory functions to the rate controllers,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Resolves enhancement issue #340 as suggested.
+Also consolidates the API/implmenetations of existing rate controllers.",[],1,2019-03-14 14:34:58,2019-03-20 10:33:50,2019-03-20 10:33:50,True,2019-03-20 10:33:50,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/370,https://github.com/hyperledger/caliper/pull/370,feihujiang,Fix CI composer test failure,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+The CI test had the error ```composer.getBusNetConnection() failed for cardName [PerfNetworkAdmin@basic-sample-network] with error: Error: Error trying to ping. SyntaxError: Unexpected end of JSON input```, https://travis-ci.org/hyperledger/caliper/jobs/505204991
+
+The error is because using composer 0.19 with a fabric 1.2 environment and they are mismatch. ",[],1,2019-03-13 02:40:16,2019-03-13 10:41:29,2019-03-13 10:41:29,True,2019-03-13 10:41:29,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/369,https://github.com/hyperledger/caliper/pull/369,aklenik,Add logging control documentation,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Corresponding documentation for PR #368 ",[],1,2019-03-12 12:53:25,2019-03-14 03:40:11,2019-03-14 14:36:31,True,2019-03-14 03:40:11,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/368,https://github.com/hyperledger/caliper/pull/368,aklenik,Enhance logging mechanism,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Resolves Issue #338 in the recommended way.",[],1,2019-03-12 12:52:13,2019-03-14 03:37:54,2019-03-14 14:36:32,True,2019-03-14 03:37:54,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/367,https://github.com/hyperledger/caliper/pull/367,feihujiang,Using user tmp dir,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+When multi-users in one host use caliper to test, the directory '/tmp/hfc/ ' permission is denied for the sake of using the same directory.
+",[],1,2019-03-12 07:57:18,2019-03-12 13:27:21,2019-03-12 13:27:22,True,2019-03-12 13:27:21,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/366,https://github.com/hyperledger/caliper/pull/366,aklenik,Fix project path for Sawtooth example build,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+The Docker build script assumes that the Caliper repo is cloned into a `caliper` folder. But actually, the last `../caliper/` directory change is unnecessary. 
+
+## Steps to Reproduce
+```
+git clone https://github.com/hyperledger/caliper.git caliper-fork
+# remove the previous image to trigger a rebuild
+docker rmi simple-tp-python
+npm i
+npm run sawtooth-deps
+npm run bench -- -c benchmark/simple/config-sawtooth.yaml -n network/sawtooth/simplenetwork/sawtooth.json
+```
+
+## Design of the fix
+The path reference is simplified in the build script, thus completely avoiding the Caliper directory name.
+
+## Validation of the fix
+Repeat the above steps to reproduce.
+",[],1,2019-03-11 12:57:02,2019-03-12 09:09:27,2019-03-13 21:39:35,True,2019-03-12 09:09:27,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/364,https://github.com/hyperledger/caliper/pull/364,feihujiang,Fix the versions of composer and fabric mismatch,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+When I did a composer test, The error ""SyntaxError: Unexpected end of JSON input"" occured. The error  is  because I'm using composer 0.19 with a fabric 1.2 environment and they are mismatch. So we need to fix this.
+
+
+",[],1,2019-03-11 07:55:43,2019-03-11 13:17:51,2019-03-11 13:17:51,True,2019-03-11 13:17:51,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/363,https://github.com/hyperledger/caliper/pull/363,clumsky,Provide error information,"#310  TaoChen <clumsky@163.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-caliper)
+- [ ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/caliper)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],1,2019-03-11 06:42:21,2019-03-11 12:46:12,2019-03-11 12:46:12,True,2019-03-11 12:46:12,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/362,https://github.com/hyperledger/caliper/pull/362,Arucald,Translate arch md,"<!--- translate the architecture.md files into CH version -->
+
+",[],2,2019-03-11 02:45:25,,2019-03-18 10:43:27,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/361,https://github.com/hyperledger/caliper/pull/361,panyu4,Specify the supported sawtooth version,"Signed-off-by: panyu2 <PY.panyu@huawei.com>
+",[],1,2019-03-11 02:21:05,2019-03-11 03:29:57,2019-03-11 03:29:57,True,2019-03-11 03:29:57,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/356,https://github.com/hyperledger/caliper/pull/356,Arucald,Transtlate the architecture.md to CH version ," Signed-off-by: Arucald dadacheerup@163.com
+
+This PR has update the architecture.md to the CH version. Hope it is helpful for Chinese  developer
+
+
+",[],0,2019-03-08 07:49:04,2019-03-08 08:13:44,2019-03-08 08:20:13,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/354,https://github.com/hyperledger/caliper/pull/354,Arucald,Modify docker rm error,"Try to resolve docker rm error
+#352 
+
+I am a fresh man on github who use the Github Client to pull request , so it doesn't show the sign-off procedure. 
+
+However , the PR has been submitted successfully. ",[],1,2019-03-08 07:25:32,,2019-04-02 09:23:05,False,,,blocked,True,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/349,https://github.com/hyperledger/caliper/pull/349,gregdhill,update docs with bench cmd,Signed-off-by: Gregory Hill <greg.hill@monax.io>,[],1,2019-03-07 16:22:23,2019-03-07 17:05:12,2019-03-14 17:23:32,True,2019-03-07 17:05:12,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/348,https://github.com/hyperledger/caliper/pull/348,Arucald,Transtlate the architecture.md to CH version,"Signed-off-by: Arucald <dadacheerup@163.com>
+
+This PR has update the architecture.md to the CH version. Hope it is helpful for Chinese developer 
+
+
+
+",[],1,2019-03-07 09:25:10,2019-03-08 08:11:03,2019-03-08 08:11:03,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/346,https://github.com/hyperledger/caliper/pull/346,aklenik,Fixed Fabric CCP network configs and package.json,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Resolves issues #344 and #345 (since both relate to Fabric versioning).",[],1,2019-03-06 13:28:50,2019-03-11 03:04:17,2019-03-11 12:40:08,True,2019-03-11 03:04:17,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/343,https://github.com/hyperledger/caliper/pull/343,aklenik,Update Fabric-CCP install instruction,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Added the example `npm run` scripts for v1.3 and v1.4.
+Preview: https://aklenik.github.io/caliper/docs/Fabric_Ccp_Configuration.html#installing-the-required-dependencies",[],1,2019-03-06 12:15:05,2019-03-11 03:04:52,2019-03-11 03:04:52,True,2019-03-11 03:04:52,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/337,https://github.com/hyperledger/caliper/pull/337,panyu4,change CA names for customdomain,"Change CA names of the customdomain networks for the fabric-ccp adapter
+Signed-off-by: panyu2 <PY.panyu@huawei.com>",[],1,2019-03-04 09:19:50,2019-03-04 12:30:36,2019-03-04 12:30:36,True,2019-03-04 12:30:36,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/332,https://github.com/hyperledger/caliper/pull/332,houqinghui,modify package.json,"
+1. Delete the dependences package: fabric-ca-client, fabric-client, fabric-network. in the package.json.",[],1,2019-02-26 10:39:24,2019-02-27 08:53:44,2019-02-27 08:53:44,True,2019-02-27 08:53:44,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/330,https://github.com/hyperledger/caliper/pull/330,clumsky,Providing a argv to control whether create default fabric network,"Signed-off-by: TaoChen <clumsky@163.com>
+
+## Issue/User story
+#329 
+
+after this PR
+node main.js -n ../../network/fabric-v1.1/2org1peergoleveldb/fabric-go.json -d false
+bench-flows.js will not call execAsync(command) to create default fabric network.
+
+",['aklenik'],2,2019-02-22 07:07:27,2019-03-04 15:30:13,2019-03-04 15:30:13,True,2019-03-04 15:30:13,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/328,https://github.com/hyperledger/caliper/pull/328,feihujiang,Fix fabric1.4 customdomain CA name errors,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+",[],1,2019-02-22 03:55:56,2019-02-22 08:27:41,2019-02-22 08:27:41,True,2019-02-22 08:27:41,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/325,https://github.com/hyperledger/caliper/pull/325,panyu4,Add customdomain network for fabric1.4,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+",[],1,2019-02-20 10:21:21,2019-02-21 02:00:05,2019-02-21 02:00:05,True,2019-02-21 02:00:05,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/323,https://github.com/hyperledger/caliper/pull/323,houqinghui,add fabric v1.3 network file,"I add the remaining fabric v1.3 network files. @aklenik @panyu4 please review it.
+",[],1,2019-02-20 03:08:50,2019-02-27 11:14:04,2019-02-27 11:14:04,True,2019-02-27 11:14:04,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/310,https://github.com/hyperledger/caliper/pull/310,clumsky,Provide error information,"Signed-off-by: TaoChen <clumsky@163.com>
+
+",[],1,2019-02-15 10:54:59,2019-02-15 12:44:37,2019-02-15 12:44:37,True,2019-02-15 12:44:37,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/303,https://github.com/hyperledger/caliper/pull/303,feihujiang,Provie debug info for channel,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+",[],1,2019-02-14 09:56:09,2019-02-14 15:55:17,2019-02-14 15:55:17,True,2019-02-14 15:55:17,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/297,https://github.com/hyperledger/caliper/pull/297,aklenik,Documentation for the Fabric CCP adapter,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Documentation for the new Fabric CCP adapter #296 
+Preview: https://aklenik.github.io/caliper/docs/Fabric_Ccp_Configuration.html",[],1,2019-02-04 20:57:18,2019-03-04 09:11:09,2019-03-04 09:11:09,True,2019-03-04 09:11:09,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/296,https://github.com/hyperledger/caliper/pull/296,aklenik,Add connection profile-based Fabric adapter,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+## Issue/User story
+Changes related to the adapter:
+* Updated the sample benchmarks to also support the new adapter API
+* Added settings for the new adapter in the default Caliper configuration file
+* Added sample network configurations for the new adapter (from v1.0 to v1.2, including mutual TLS networks from v1.1). Most of the additions originate from these example configurations, which are easy to check/test
+* Added lightweight Caliper-level dependecies (for general use, not Fabric-specific packages), like `tmp` and `version-compare`
+* Changed some `require` calls to YAML parsing for reading network configuration files in `bench-flow.js`
+* Integrated the new adapter into `blockchain.js`
+* Added general utility functions for checking/asserting property and version-related information
+
+## Directly related issues (and many more regarding the other adapter)
+#37 #115 #139 #185 #227 #292
+## Validation of the fix
+For each sample benchmark, pick a configuration file (like the linear rate config), and run it with every network version/topology/`fabric-ccp*` configuration combination.
+
+## What documentation has been provided for this pull request
+#297 
+
+@hyperledger/caliper-committers @nklincoln Any help with the review if appreciated!",[],2,2019-02-04 20:55:41,2019-03-04 07:46:53,2019-03-04 11:21:50,True,2019-03-04 07:46:53,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/295,https://github.com/hyperledger/caliper/pull/295,panyu4,Fix query chaincode ，create channel and file mode bugs,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+Resolve PR #279  bugs, including querying chaincode bug， creating channel bug and file mode bug.
+",[],1,2019-02-03 09:28:19,2019-02-03 09:35:04,2019-02-11 01:10:14,True,2019-02-03 09:35:04,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/294,https://github.com/hyperledger/caliper/pull/294,panyu4,Fix page format's mistakes,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+resolve the pr #283 format mistakes",[],1,2019-02-02 02:55:47,2019-02-02 07:07:17,2019-02-11 01:10:31,True,2019-02-02 07:07:17,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/293,https://github.com/hyperledger/caliper/pull/293,panyu4,Add remote docker's disk monitor information,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+",[],2,2019-02-01 08:12:00,2019-02-22 13:33:28,2019-02-22 13:33:28,True,2019-02-22 13:33:28,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/291,https://github.com/hyperledger/caliper/pull/291,feihujiang,Add large number tests,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+
+",[],1,2019-01-24 08:01:11,,2019-02-15 12:54:42,False,,,dirty,False,open
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/290,https://github.com/hyperledger/caliper/pull/290,Ram-srini,Changes to support the latest fabric 1.4 release,"Signed-off-by: Ramakrishna S 
+
+Changes to support the latest fabric 1.4 release and also has the backward compatibility to <1.2 release as well.
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-caliper)
+- [ ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/caliper)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],2,2019-01-22 10:51:59,2019-02-20 07:32:56,2019-02-20 07:32:57,True,2019-02-20 07:32:56,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/289,https://github.com/hyperledger/caliper/pull/289,feihujiang,Fix file mode for Fabric not supporting sendSignedTransaction,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+To implement file mode need Fabric supporting sendSignedTransaction function.
+",[],1,2019-01-21 02:02:53,2019-01-21 02:12:11,2019-01-21 02:12:11,True,2019-01-21 02:12:11,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/287,https://github.com/hyperledger/caliper/pull/287,gregdhill,extract separate benchmark starters into common test.js script,"Signed-off-by: greg <greg.hill@monax.io>
+
+This PR de-duplicates each `main.js` within the benchmark directories by loading the relevant configs through `./scripts/test.js`. The config & network arguments are now required to ensure DLT neutrality and the `npm test` script can now directly take these arguments (appended after `--`). The next step will be to revise some of the documentation.",[],1,2019-01-19 10:37:36,2019-03-06 10:53:35,2019-03-06 12:21:01,True,2019-03-06 10:53:35,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/286,https://github.com/hyperledger/caliper/pull/286,feihujiang,Add a transactions' file generation mode,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+   Add a transactions' file generation mode, The `file` generation mode, which means the transactions generated by the clients will be buffered, and saved into files before they are sent to the backend systems. PR #283 has the detailed documentation. This PR has done part of the work. This mode is added for supporting large scale transactions' tests. And now it only support for fabric.
+
+## Issue/User story
+- [ #281] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+
+",[],1,2019-01-18 06:34:16,2019-01-19 02:00:17,2019-01-19 02:00:17,True,2019-01-19 02:00:17,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/283,https://github.com/hyperledger/caliper/pull/283,panyu4,Add documentation about adapters and test mode,"
+Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+## Issue/User story
+Add a documentation about how to write your own adapter 
+Add some specifications about testing with different txMode. The txMode is added for supporting the long time or large scale transactions' tests. 
+
+## Existing issues
+- [ #281 #270 ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+",[],1,2019-01-16 07:49:22,2019-02-01 07:47:55,2019-02-11 01:11:51,True,2019-02-01 07:47:55,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/282,https://github.com/hyperledger/caliper/pull/282,gregdhill,burrow query,"Signed-off-by: greg <greg.hill@monax.io>
+
+Provides the ability for the Burrow adaptor to query the installed contract.",[],1,2019-01-15 20:52:28,2019-01-31 12:30:54,2019-01-31 12:30:54,True,2019-01-31 12:30:54,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/279,https://github.com/hyperledger/caliper/pull/279,nklincoln,Enable use of 1.3+ client and retain legacy code for fabric 1.0 and 1.1 benchmarks,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Resolves #277 
+
+Changes:
+- Move to use of channel events, since the event hub has been removed
+- Retained ability to benchmark older fabric versions (v1.0 and v1.1) by inspecting the config.info.Version information and introduction of a `isLegacy` flag in the e2e utils
+- Code introduced to enable a non-default use of fabric-network testing via contract APIs
+- Update required in the fabric networks to ensure naming consistency for the ca names, with a change from ca-orgX to the fully qualified name
+- Updated the package for `fabric-deps`
+
+Tests:
+- Local tests for v1.0, 1.1, 1.2 and 1.3 networks simple benchmark (2peer, 1 org)
+- Passes the Travis build",[],1,2019-01-03 14:41:31,2019-02-03 07:20:43,2019-03-14 16:56:35,True,2019-02-03 07:20:42,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/277,https://github.com/hyperledger/caliper/pull/277,houqinghui,add fabric v1.3 network,add the fabric v1.3 network.,[],1,2019-01-01 11:11:07,2019-02-03 07:37:36,2019-02-03 07:37:36,True,2019-02-03 07:37:36,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/276,https://github.com/hyperledger/caliper/pull/276,houqinghui,fix the tps calculation,fix the tps calculation,[],1,2019-01-01 09:16:57,2019-02-15 03:03:09,2019-02-15 03:03:09,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/274,https://github.com/hyperledger/caliper/pull/274,panyu4,fix the tps's bug,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+This pr is trying to fix the the issue #273 , which appears the tps is much larger than the sending rate and equals to the success number.
+
+",[],1,2018-12-26 07:49:22,2018-12-26 08:38:42,2018-12-26 09:19:47,True,2018-12-26 08:38:41,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/270,https://github.com/hyperledger/caliper/pull/270,panyu4,Add adapters' documentation and change the adapters' file structures,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Issue/User story
+Now Caliper is lack of adapters' documentation and the file structure is not clear enough for user that make user is unable to know where are the adapters. 
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+- Movethe folders corresponding to the 5 blockchain (fabric, composer, iroha, sawtooth, burrow) adapters into the dir `src/adapters/`.
+- Add a file `README.md`.
+",[],1,2018-12-24 08:54:24,2019-01-15 10:20:43,2019-01-15 10:20:43,True,2019-01-15 10:20:43,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/269,https://github.com/hyperledger/caliper/pull/269,houqinghui,add caliper FAQ,add caliper FAQ.,[],1,2018-12-24 06:18:52,2019-02-19 06:15:08,2019-02-19 06:15:08,True,2019-02-19 06:15:08,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/265,https://github.com/hyperledger/caliper/pull/265,panyu4,fix the total send transactions according to configuration file,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+When txNumber set in the configuration file can't be divisible by clients' number, the total transactions' quantity is less than txNumber which the user expected. 
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+Add the remainder transactions to one client.
+",[],1,2018-12-19 03:19:35,2018-12-20 10:30:50,2018-12-20 10:30:51,True,2018-12-20 10:30:50,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/261,https://github.com/hyperledger/caliper/pull/261,aklenik,Modify install instructions for Fabric dependencies,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Aligned the documentation according to PR #260 
+Preview at: https://aklenik.github.io/caliper/docs/Fabric_Configuration.html",[],1,2018-12-16 19:55:49,2018-12-17 07:41:07,2018-12-17 07:41:08,True,2018-12-17 07:41:07,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/260,https://github.com/hyperledger/caliper/pull/260,aklenik,Consolidate and extend Fabric network examples,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+Addresses #259 
+
+The PR includes:
+1. Added example networks for Fabric 1.0, 1.1 and 1.2
+1. Added separate examples for CouchDB and GoLevelDB backends
+1. Added setup scripts for each version
+1. Enhanced the Readme files for each network
+1. Removed the `Xorg3peer` networks, since they're too resource consuming. For testing purposes the max 2 peer networks are enough
+1. Each sample network (Composer or Fabric) is deployed with every available chaincodes (golang and node configs separately). See the network Readme files
+1. Changed the default network configs to lightweight defaults (2 orgs, 1 peer with GoLevelDB)
+
+Additional necessary fixes:
+1. Parse the config directly in the Fabric adapter, since SDK@1.2 fails to add the file to the Client config
+1. Check the type of the peers returned when querying installed chaincodes, since SDK@1.2 returns ChannelPeer instances instead of Peer instances that are required for the query
+
+## Validation of the fix
+Test the sample benchmarks with the compatible sample networks. E.g., in the Caliper root folder:
+```
+npm install
+npm run fabric-v1.1-deps
+node benchmark/simple/main.js -c config-linear-rate.yaml -n network/fabric-v1.1/2org1peergoleveldb/fabric-node-tls.json
+node benchmark/smallbank/main.js -c config.yaml -n network/fabric-v1.1/2org1peergoleveldb/fabric-node-tls.json
+# etc.
+```
+
+@panyu4 @nklincoln Could you review the PR?",[],1,2018-12-16 19:41:36,2018-12-17 07:40:44,2018-12-17 07:42:27,True,2018-12-17 07:40:44,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/258,https://github.com/hyperledger/caliper/pull/258,gregdhill,Burrow Smart Contract Init,"Signed-off-by: greg <greg.hill@monax.io>
+
+This provides a sample solidity contract which is now deployed after chain initialization.",[],1,2018-12-15 12:19:38,2018-12-22 15:05:54,2019-01-15 16:59:21,True,2018-12-22 15:05:54,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/257,https://github.com/hyperledger/caliper/pull/257,gregdhill,cleanup docs & add burrow,"Signed-off-by: greg <greg.hill@monax.io>
+
+Few spelling & grammatical tidy-ups, along with burrow introductory information.",[],1,2018-12-14 15:58:45,2018-12-22 15:08:34,2019-01-15 16:59:23,True,2018-12-22 15:08:34,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/256,https://github.com/hyperledger/caliper/pull/256,nklincoln,Assign target peers based on client index,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Addresses #255 ",[],1,2018-12-14 14:15:53,2018-12-16 20:14:49,2019-03-14 16:56:19,True,2018-12-16 20:14:49,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/248,https://github.com/hyperledger/caliper/pull/248,feihujiang,Check whether a chaincode has been installed and instantiated,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+Check whether a chaincode has been installed and instantiated, if it has, not throw an error, to enable repeated tests.
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-caliper)
+- [ ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/caliper)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],1,2018-12-04 11:02:56,2018-12-06 03:11:15,2018-12-06 03:11:15,True,2018-12-06 03:11:15,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/246,https://github.com/hyperledger/caliper/pull/246,gregdhill,Burrow Support,"Signed-off-by: greg <greg.hill@monax.io>
+
+Provides basic [Hyperledger Burrow](https://github.com/hyperledger/burrow) support for Caliper based on the official (Alpha) [JavaScript API](https://www.npmjs.com/package/@monax/burrow). This PR includes a basic two node network and support for transactional based tests.
+
+Installation: `npm i @monax/burrow@0.20.8`",[],5,2018-12-02 17:48:57,2018-12-11 13:41:01,2019-01-15 16:59:30,True,2018-12-11 13:41:01,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/244,https://github.com/hyperledger/caliper/pull/244,feihujiang,Add fixed feedback rate doc,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-caliper)
+- [ ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/caliper)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],1,2018-11-30 09:12:37,2018-11-30 11:13:47,2018-11-30 11:13:47,True,2018-11-30 11:13:47,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/239,https://github.com/hyperledger/caliper/pull/239,houqinghui,modify config file format from json to yaml ,"modify config file format from json to yaml 
+1. modify the config file format from to yaml.
+2. change the config parsing codes.
+@panyu4 @aklenik ",[],1,2018-11-28 04:49:49,2018-11-30 11:36:32,2018-11-30 11:36:32,True,2018-11-30 11:36:32,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/238,https://github.com/hyperledger/caliper/pull/238,panyu4,Move the network configuration files into  network folders,"
+Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+## Issue/User story
+1. move the network configuration files into the related network folder.
+2. rename the network configuration files by adding a test name(such as: simple) into the file's name.
+3. modify the default network configuration files' path in benchmark tests.
+
+## Existing issues
+#218 
+#",[],1,2018-11-28 01:52:07,2018-11-28 11:44:15,2019-02-11 01:12:32,True,2018-11-28 11:44:15,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/237,https://github.com/hyperledger/caliper/pull/237,nklincoln,Enable display of disc r/w,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Targets #140 
+
+This PR enables hooking into the the disc r/w portion of dockerstats output for local tests, and updates the output tables in the console.
+
+It was not needed to update the html file for test output as the template deals with the additional column.
+
+I have noticed in the output that disc read remains at zero, but this corresponds to the actual dockerstats output during the test run
+",[],1,2018-11-27 17:06:50,2018-11-29 11:30:23,2019-03-14 16:56:13,True,2018-11-29 11:30:23,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/236,https://github.com/hyperledger/caliper/pull/236,nitesh7sid,Split caliper into transaction sender and event listener,"Signed-off-by: Nitesh Solanki <nitesh_solanki@persistent.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+PR for spitting caliper process into transaction sender and event listener.
+
+Short Description
+Current version of the caliper relies on a single threaded process to send the transactions as well as to listen for the transaction confirmation event. This can cause an issue for clients with higher send rates since node.js is itself a single threaded. The callback of the eventhub may get queued in the event loop and hence may result in incorrect confirmation time or drop in events
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [GitHub Issues](https://github.com/hyperledger/caliper/issues)
+
+https://github.com/hyperledger/caliper/issues/9
+
+## Design of the fix
+To tackle this issue, caliper can be split into 2 sub processes namely,
+
+sender who is just responsible for generating the transaction load
+listener which connects to the event peer, listens for the block event, note the timestamp and then publish it to Apache Kafka MQ.
+A persistence layer is required so that after the sender has finished generating the load, it can then consume blocks and associated confirmation time from the Queue and compute time_final property for every transaction.
+
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],2,2018-11-27 15:46:03,2019-01-30 12:35:10,2019-01-30 12:35:10,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/233,https://github.com/hyperledger/caliper/pull/233,nklincoln,Delete duplicated docs files,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+With the delivery of the gh-pages website, the docs folder is now redundant ... this PR deletes the docs folder and modifies the Readme file to redirect users to the gh-pages",[],1,2018-11-27 11:07:34,2018-11-27 12:25:25,2019-03-14 16:56:51,True,2018-11-27 12:25:25,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/232,https://github.com/hyperledger/caliper/pull/232,nklincoln,update docs to use npm script shortcut,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Final component to #229 
+- edits to the gh-pages to point out to users how to use the npm scripts
+
+Also includes a change to the favicon location to make sure it appears on all pages",[],1,2018-11-27 10:30:06,2018-11-27 10:49:02,2019-03-14 16:57:11,True,2018-11-27 10:49:02,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/230,https://github.com/hyperledger/caliper/pull/230,nklincoln,add config scripts to setup target test platform,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+Part1 for #229 
+- addition of npm scripts to package file
+- modification of travis build file to use the npm script to configure for baseline test runs in build
+
+Pending addition(s):
+- website doc guide changes to indicate the presence/use of the scripts ",[],1,2018-11-26 13:54:10,2018-11-26 21:37:34,2018-11-27 11:15:37,True,2018-11-26 21:37:34,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/228,https://github.com/hyperledger/caliper/pull/228,panyu4,move config files' platform related properties into network config files,"## Issue/User story
+<!--- What issue / user story is this for -->
+This PR consolidates network-related configuration files:
+1. Removed the blockchain section and command section which were in the config.json files.
+2. Added Caliper section which included blockchain subsection and command subsection into the network configuration files.
+3. As the network related configurations   were removed from those configuration files,  there were many reduplicated configuration files. So removed the configuration files ended with -tls.json. 
+
+## Existing issues
+-  #218 
+",[],1,2018-11-26 11:45:43,2018-11-27 10:52:15,2018-11-27 10:52:15,True,2018-11-27 10:52:15,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/224,https://github.com/hyperledger/caliper/pull/224,houqinghui,fix invalid CPU statistics,"Using percpu_usage.length can cause invalid CPU statistics
+See the docker documentation:
+""If either precpu_stats.online_cpus or cpu_stats.online_cpus is nil then for compatibility with older daemons the length of the corresponding cpu_usage.percpu_usage array should be used.""
+#114 
+@panyu4 ",[],1,2018-11-21 03:51:19,2018-11-21 07:27:06,2018-11-21 07:27:06,True,2018-11-21 07:27:06,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/223,https://github.com/hyperledger/caliper/pull/223,aklenik,Refactored Promise chains in core/client/blockchain/Fabric parts,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+## Issue/User story
+Refactored the `Promise` chains to the `async/await` pattern in the following components:
+* Core benchmark code
+* General blockchain classes
+* Client classes (except for ZooKeeper-related code)
+* Fabric adapter
+* `main.js` files of the sample benchmarks
+
+## Existing issues
+#192 ",[],1,2018-11-20 13:53:07,2018-11-22 10:48:11,2018-11-30 11:50:35,True,2018-11-22 10:48:11,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/221,https://github.com/hyperledger/caliper/pull/221,houqinghui,add the  Caliper FAQ.md,"add the  Caliper FAQ.md 
+@panyu4 @feihujiang  @aklenik ",[],4,2018-11-18 14:59:28,2018-11-21 02:05:21,2018-11-21 02:05:21,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/220,https://github.com/hyperledger/caliper/pull/220,aklenik,Consolidated network artifacts and configs,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+## Issue/User story
+This PR consolidates network-related configuration files and samples targeting Fabric and Composer. The changes include:
+
+1. Removed the `simplenetwork` example network, since it's basically the `2org2peer` network. Changed the configuration files where needed.
+1. Renamed the Fabric network directories, so they don't contain dashes. Relates to Issue #198 
+1. Added TLS and no-TLS versions for every Fabric-based config (see the design of the fix). This should solve many SSL-related errors (like the bogus request from client error in the orderer) that resulted from incompatible settings on client and network side.
+1. Changed some TPS rates in the configs to lower values.
+1. Fixed the cert paths in the Composer dev network config.
+
+N.B.: Once Issue #218 is resolved, many of the configs can be deleted, but until that, this explicit separation of TLS and no-TLS configs is the less error-prone way to specify the configs. (The number of current configs is the main motivation behind Issue #218 ).
+
+## Existing issues
+* #198 
+
+## Design of the fix
+For every sample benchmark and for every configuration (`config*.json`) that target Fabric there are now two versions: without and with TLS (e.g., `config.json` and `config-tls.json`). The different versions start a different kind of network: without and with TLS, respectively (e.g., `fabric.json` and `fabric-tls.json`).
+
+## Validation of the fix
+Run every sample benchmark with every Fabric-based configuration (`config*.json`).
+
+@panyu4 @nklincoln Can you please review these changes? The core Caliper code is unchanged, only the samples have been modified.",[],1,2018-11-18 13:21:00,2018-11-19 10:47:59,2018-11-19 13:09:05,True,2018-11-19 10:47:59,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/217,https://github.com/hyperledger/caliper/pull/217,aklenik,Removed tape-related code,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+## Issue/User story
+Resolves Issue #193 
+",[],1,2018-11-15 21:06:38,2018-11-17 02:11:52,2018-11-17 09:51:03,True,2018-11-17 02:11:52,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/216,https://github.com/hyperledger/caliper/pull/216,aklenik,Add Google Analytics and privacy policy,"Signed-off-by: Attila Klenik <a.klenik@gmail.com>
+
+The PR adds:
+* Google Analytics to every page of the site (through `_includes/head.html`)
+* Privacy policy link to TLF privacy policy (through `_includes/header.html`)
+* The GitHub and Privacy Policy links open in a new tab.
+
+Modified site: https://aklenik.github.io/caliper/",[],1,2018-11-09 22:00:10,2018-11-11 01:58:36,2018-11-11 01:58:36,True,2018-11-11 01:58:36,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/215,https://github.com/hyperledger/caliper/pull/215,feihujiang,Add fixed feedback rate controller,"The fixed feedback rate controller will send input transactions at a fixed interval, but when too many transactions are unfinished, it will sleep a period of time.
+",[],1,2018-11-09 02:51:23,2018-11-23 11:02:09,2018-11-23 11:03:08,True,2018-11-23 11:02:09,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/213,https://github.com/hyperledger/caliper/pull/213,nklincoln,Add readme and faviocon to github pages,"Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>
+
+This PR is to complete the initial GitHub pages site drop, and provides the following:
+- A README.md file that explains the site structure and how to add/edit pages, as well as how to host them locally to ensure changes are good prior to raising a PR
+- A favicon for the site pages
+- removal of unnecessary files (related to travis builds on the master branch)
+
+",[],1,2018-11-07 14:52:51,2018-11-07 17:34:52,2018-11-27 11:16:29,True,2018-11-07 17:34:51,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/212,https://github.com/hyperledger/caliper/pull/212,feihujiang,Fix sawtooth test not exit normally,"Signed-off-by: feihujiang <jiangfeihu@huawei.com>
+",[],1,2018-11-06 06:05:58,2018-11-06 06:56:24,2018-11-06 06:56:24,True,2018-11-06 06:56:24,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/209,https://github.com/hyperledger/caliper/pull/209,winslet,New caliper website - replaces #200,"<!--- Provide a general summary of the pull request in the Title above -->
+
+Apologies if im going about this the wrong way, but working with @nklincoln to put together a new site for Caliper.
+
+You can see a live demo at https://winslet.github.io/caliper/
+
+Overview of updates:
+- New homepage
+- New docs structure (see https://winslet.github.io/caliper/docs/1_Getting_Started.html)
+- Docs have been moved out of the master branch into separate gh-pages branch, uses Jekyll to build a site from .md files.
+- Updates to text, consolidating the docs into a smaller number of pages, now with direct links!
+
+To see what you're getting:
+
+_Homepage_
+![image](https://user-images.githubusercontent.com/13980028/47445155-2b91ee00-d7b0-11e8-8d77-5fa92f64d8e6.png)
+
+_Example docs page_
+![image](https://user-images.githubusercontent.com/13980028/47445182-449a9f00-d7b0-11e8-8794-e24457897987.png)
+
+Cheers! 🌮 
+",[],5,2018-10-31 10:48:55,2018-11-05 17:09:20,2018-11-05 17:09:20,True,2018-11-05 17:09:20,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/208,https://github.com/hyperledger/caliper/pull/208,panyu4,Add unified logging framework,"Signed-off-by: panyu4 <PY.panyu@huawei.com>
+
+",[],1,2018-10-31 01:26:08,2018-11-12 23:05:25,2018-11-22 01:22:48,True,2018-11-12 23:05:25,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/203,https://github.com/hyperledger/caliper/pull/203,bitpeng,fix a bug of monitor.js,"in line 112 of file `src/comm/monitor.js`, it should check whether  `monitorTypes` is not defined, not the `m` which has been checked in line 107.",[],1,2018-10-29 06:02:14,2018-10-30 10:00:46,2018-10-30 11:56:43,True,2018-10-30 10:00:46,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/202,https://github.com/hyperledger/caliper/pull/202,feihujiang,Use unified config framework,"Using nconf to adopt a unified configuration system.
+",[],1,2018-10-27 03:21:07,2018-11-06 10:13:53,2018-11-06 10:13:53,True,2018-11-06 10:13:53,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/200,https://github.com/hyperledger/caliper/pull/200,winslet,New website for Caliper (including docs),"<!--- Provide a general summary of the pull request in the Title above -->
+
+Apologies if im going about this the wrong way, but working with @nklincoln to put together a new site for Caliper.
+
+You can see a live demo at https://winslet.github.io/caliper/
+
+Overview of updates:
+- New homepage
+- New docs structure (see https://winslet.github.io/caliper/docs/1_Getting_Started.html)
+- Docs have been moved out of the master branch into separate gh-pages branch, uses Jekyll to build a site from .md files.
+- Updates to text, consolidating the docs into a smaller number of pages, now with direct links!
+
+To see what you're getting:
+
+_Homepage_
+![image](https://user-images.githubusercontent.com/13980028/47445155-2b91ee00-d7b0-11e8-8d77-5fa92f64d8e6.png)
+
+_Example docs page_
+![image](https://user-images.githubusercontent.com/13980028/47445182-449a9f00-d7b0-11e8-8794-e24457897987.png)
+
+Cheers! 🌮 
+",[],21,2018-10-24 16:14:46,2018-10-31 10:49:47,2018-10-31 10:49:47,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/196,https://github.com/hyperledger/caliper/pull/196,panyu4,Fix not exited normally,Signed-off-by: panyu4 <PY.panyu@huawei.com>,[],1,2018-10-18 02:30:12,2018-10-25 02:03:30,2018-11-22 01:33:09,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/194,https://github.com/hyperledger/caliper/pull/194,nklincoln,add issue and PR templates,"Add two templates:
+- Issue
+- PR
+
+The two templates must be named accordingly and delivered into the project root directory, docs directory, or hidden `.github` dir .... I chose the first option!
+
+Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>",[],1,2018-10-17 09:33:30,2018-10-19 11:08:11,2018-11-27 11:15:29,True,2018-10-19 11:08:11,aklenik,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/191,https://github.com/hyperledger/caliper/pull/191,mtrubs,Moved the batch builder factory configuration into the sawtooth.json configuration files,https://github.com/hyperledger/caliper/issues/189,[],1,2018-10-15 14:57:45,2018-10-18 07:56:45,2018-10-18 07:56:45,True,2018-10-18 07:56:45,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/190,https://github.com/hyperledger/caliper/pull/190,Ram-srini,Changed the sawtooth adapter to take multiple rest end points,Signed-off-by: Ramakrishna Srinivasamurthy ramakrishna.srinivasamurthy@intel.com,[],1,2018-10-15 10:10:29,2018-10-16 06:49:14,2018-10-16 06:49:14,True,2018-10-16 06:49:14,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/188,https://github.com/hyperledger/caliper/pull/188,panyu4,Fix length undefined,Signed-off-by: panyu4 <PY.panyu@huawei.com>,[],1,2018-10-12 06:25:58,2018-10-12 07:00:10,2018-11-22 01:32:04,True,2018-10-12 07:00:10,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/187,https://github.com/hyperledger/caliper/pull/187,aklenik,Fixed composite rate controller logic and docs.,"Adjusted the composite rate controller to the new environment semantics as detailed by Issue #142.
+The virtualization mechanism is not totally transparent now, but without passing more information to the rate controllers, this is the only way. Updated the docs accordingly.
+
+@panyu4 since Nick has already fixed the PID controller, if this PR is accepted, then the issue can be closed.
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-10-11 21:16:47,2018-10-15 06:59:16,2018-10-15 10:52:20,True,2018-10-15 06:59:16,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/186,https://github.com/hyperledger/caliper/pull/186,aklenik,Clarified Fabric SDK install instructions in docs,Signed-off-by: Attila Klenik <a.klenik@gmail.com>,[],1,2018-10-11 09:42:11,2018-10-11 11:16:33,2018-10-11 12:53:10,True,2018-10-11 11:16:33,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/184,https://github.com/hyperledger/caliper/pull/184,panyu4,Fix typo and eslint error,Signed-off-by: panyu4 <PY.panyu@huawei.com>,[],1,2018-10-10 09:05:05,2018-10-10 09:14:21,2018-11-22 01:31:37,True,2018-10-10 09:14:21,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/182,https://github.com/hyperledger/caliper/pull/182,panyu4,Set txnPerBatch default value,Signed-off-by: panyu4 <PY.panyu@huawei.com>,[],1,2018-10-09 08:08:35,2018-10-09 09:13:48,2018-11-22 01:31:21,True,2018-10-09 09:13:48,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/180,https://github.com/hyperledger/caliper/pull/180,modood,Replace EventHub by the much improved Channel Event Service,"Since 'old' event hub is removed in fabric v1.3.0, The EventHub functionality was replaced by the much improved Channel Event Service in fabric v1.1.0. (Refer to [FAB-11122](https://jira.hyperledger.org/browse/FAB-11122))
+
+So we must switch to the channel event service before upgrading peers or sdk.
+
+Signed-off-by: modood <modood@qq.com>",[],1,2018-09-28 02:06:55,2018-09-30 01:15:58,2018-09-30 01:15:58,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/179,https://github.com/hyperledger/caliper/pull/179,panyu4,Add empty line,Signed-off-by: panyu4 <PY.panyu@huawei.com>,[],1,2018-09-27 09:09:16,2018-09-27 09:11:28,2018-11-22 01:31:00,True,2018-09-27 09:11:28,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/170,https://github.com/hyperledger/caliper/pull/170,modood,Resolve absolute path of config file for fabric simple network,"Resolve absolute path of config file for fabric simple network
+
+This should be valid:
+
+```
+$ node benchmark/simple/main.js -c /path/to/yourconfig.json -n /path/to/yournetwork.json
+```
+benchmark/simple/config.json:
+```
+{
+  ""blockchain"": {
+    ""type"": ""fabric"",
+    ""config"": ""/path/to/yournetwork.json""
+  }
+}
+```
+
+Signed-off-by: modood <modood@qq.com>",[],1,2018-08-29 04:14:30,2018-10-08 11:45:35,2018-10-08 11:45:35,True,2018-10-08 11:45:35,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/167,https://github.com/hyperledger/caliper/pull/167,Nidhiintel,Changed simple benchmark to have multiple transactions in a batch,Signed-off-by: Nidhi Kumari <nidhisolanki44@gmail.com>,[],1,2018-08-24 09:56:09,2018-10-09 03:01:58,2018-10-09 03:01:59,True,2018-10-09 03:01:58,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/164,https://github.com/hyperledger/caliper/pull/164,nklincoln,fix PID rate controller for new client test mechanism,"Required fix for PID rate controller as part of #142 
+
+-> change to use the current backlog directly
+-> update unit tests to reflect change
+-> add PID to the composer 'standard' test set config
+
+Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>",[],1,2018-08-20 15:09:44,2018-10-10 08:35:23,2018-11-27 11:15:25,True,2018-10-10 08:35:23,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/162,https://github.com/hyperledger/caliper/pull/162,ski2per,Enable repeated test,"Currently we are using Caliper as our performance test tool. Our environment is in Docker Swarm, I think this feature will be convenient for us to test same chaincode repeatly",[],2,2018-08-16 08:31:17,2019-01-31 02:26:36,2019-01-31 02:26:36,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/161,https://github.com/hyperledger/caliper/pull/161,ski2per,Add a small feature for repeating test without reinstall chaincode,Signed-off-by: zhangpeng <ski2per@163.com>,[],5,2018-08-16 03:30:47,2018-08-16 08:04:44,2018-08-16 08:04:44,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/160,https://github.com/hyperledger/caliper/pull/160,push1st1k,add the possibility to specify query function name,In some cases it might be useful to query the ledger by function different from the 'query'.,[],2,2018-08-15 11:58:31,2018-10-09 09:29:01,2018-10-09 09:29:01,True,2018-10-09 09:29:01,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/159,https://github.com/hyperledger/caliper/pull/159,Ram-srini,Added event subscription approach to get block commit status instead …,"Added event subscription approach to get block commit status instead of rest get batch status query.
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-08-14 06:19:21,2018-10-10 08:46:13,2018-10-10 08:46:13,True,2018-10-10 08:46:13,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/158,https://github.com/hyperledger/caliper/pull/158,nklincoln,Drop code coverage limit to enable build pass,"In order to enforce travis build requirement for PRs, we need the build to pass! 
+
+This PR reduces the code coverage requirements for tests to get us past the code coverage check.
+
+Signed-off-by: nkl199@yahoo.co.uk <nkl199@yahoo.co.uk>",[],2,2018-08-09 19:24:13,2018-08-20 03:22:53,2018-11-27 11:15:24,True,2018-08-20 03:22:53,jiangyaoguo,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/157,https://github.com/hyperledger/caliper/pull/157,modood,Reject an error instead of undefined,"Reject an error instead of undefined, otherwise it will log like this:
+
+```
+Failed to complete transaction [8c3b9...]:undefined
+```
+
+This got me confused.
+
+Signed-off-by: modood <modood@qq.com>",[],1,2018-08-07 15:12:55,2018-08-20 03:32:15,2018-08-20 03:32:15,True,2018-08-20 03:32:15,jiangyaoguo,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/156,https://github.com/hyperledger/caliper/pull/156,modood,Reject an error instead of undefined,"Reject an error instead of undefined, otherwise it will log like this:
+
+```
+Failed to complete transaction [8c3b9...]:undefined
+```
+
+This got me confused.
+
+Signed-off-by: modood modood@qq.com",[],1,2018-08-07 10:43:15,2018-08-07 14:02:54,2018-08-07 14:02:54,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/151,https://github.com/hyperledger/caliper/pull/151,anfimovoleh,Feature/btsd quering,,[],3,2018-08-01 14:17:55,2019-02-14 16:00:41,2019-02-14 16:00:42,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/148,https://github.com/hyperledger/caliper/pull/148,jiangyaoguo,Close coverage check,"Now we havn't implemented enough tests. Close coverage check to make travis-ci passed. Should open it once we write enough tests.
+
+Signed-off-by: jiangyaoguo <jiangyaoguo@gmail.com>",[],1,2018-07-30 01:57:57,2018-08-16 03:04:35,2018-08-16 03:05:18,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/147,https://github.com/hyperledger/caliper/pull/147,jiangyaoguo,Fix benchmark drm,"fixes #146 
+
+Signed-off-by: jiangyaoguo <jiangyaoguo@gmail.com>",[],1,2018-07-28 10:28:29,2018-07-30 02:41:57,2018-07-30 02:41:57,True,2018-07-30 02:41:57,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/144,https://github.com/hyperledger/caliper/pull/144,aklenik,Added lightweight dev network,"Experimenting with benchmarks on a locally run multi-node network requires considerable resources. This PR adds a lightweight development network with an orderer node, a CA and a peer (and not using CouchDB). Corresponding config files are also added for the simple benchmark.
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-26 18:40:23,2018-07-30 08:38:08,2018-08-23 16:24:22,True,2018-07-30 08:38:08,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/135,https://github.com/hyperledger/caliper/pull/135,king-jam,Updated Sawtooth Simple Example to Work,Signed-off-by: Justin Kenney <justin.kenney@emc.com>,[],1,2018-07-17 15:27:21,2018-07-23 09:00:25,2018-07-23 14:10:35,True,2018-07-23 09:00:25,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/134,https://github.com/hyperledger/caliper/pull/134,Nidhiintel,Remove SmallBank Round-Robin approach for Transaction Scheduling in Caliper,,[],1,2018-07-17 06:46:03,2018-07-23 02:43:56,2018-07-23 02:43:56,True,2018-07-23 02:43:56,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/133,https://github.com/hyperledger/caliper/pull/133,aklenik,Use common utility for path resolution,"Related to Issue #95, this PR unifies the path resolution of different modules, by using [the following](https://github.com/hyperledger/caliper/blob/6cf2891736c60dfd5c0a3221f36b1841dc79318d/src/comm/util.js#L51) utility function.
+
+Now every path in the config files can be set either as a relative path to the Caliper root directory or as an absolute path.
+
+@nklincoln I successfully run a Composer sample benchmark, but could you review the Composer-related part just in case?
+@haojun Can you tag someone from the Iroha contributors to review the Iroha-related part? Although those were (I hope) straightforward modifications.
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-16 19:53:22,2018-07-30 08:37:17,2018-08-23 16:24:24,True,2018-07-30 08:37:16,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/132,https://github.com/hyperledger/caliper/pull/132,scealiontach,Minor fix: pidRate should return the Sleep promise not just create it. ,"This is a minor problem I spotted well taking the pidRate controller for a spin.  Obviously the pidRate controller should return the Sleep promise rather than just leaving it, otherwise the test goes into a very tight loop and the rate isn't controlled at all.
+
+Signed-off-by: Kevin O'Donnell <kevin@blockchaintp.com>",[],1,2018-07-16 14:58:14,2018-07-23 02:56:59,2018-07-23 02:56:59,True,2018-07-23 02:56:59,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/129,https://github.com/hyperledger/caliper/pull/129,aklenik,Add domain attribute to docs,"Added description in the Fabric network documentation about the `domain` attribute introduced by PR #126 
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-13 09:54:36,2018-07-16 01:29:30,2018-07-16 08:31:09,True,2018-07-16 01:29:30,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/128,https://github.com/hyperledger/caliper/pull/128,Ram-srini,Config file path is corrected,"Config file path is corrected
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-07-13 08:52:38,2018-07-16 01:30:08,2018-07-16 01:30:08,True,2018-07-16 01:30:08,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/126,https://github.com/hyperledger/caliper/pull/126,aklenik,Fixed hardcoded domain names,"Fixed the hardcoded domain names and orderer MSP ID (Issue #98 ), and added a network example with a custom domain name.
+
+Fabric network configurations now contain a domain property for each org and orderer.
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-12 15:19:16,2018-07-13 01:22:47,2018-07-13 09:37:34,True,2018-07-13 01:22:47,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/125,https://github.com/hyperledger/caliper/pull/125,aklenik,Fix cross-process error message format,"If an unhandled exception occurred in a client process, the main process printed the received error object as the following, obscuring the original error. Set an invalid callback name to reproduce it:
+
+```
+not ok 5 failed 'open' testing, Error: Client encountered error:[object Object] at ChildProcess.<anonymous>
+```
+
+Now it receives the `string` version of the error and prints it correctly:
+
+```
+not ok 5 failed 'open' testing, Error: Client encountered error:Error: Cannot find module '/home/klenik/projects/caliper-single-org/benchmark/simple/opennn.js' at ChildProcess.<anonymous>
+```
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-12 14:34:38,2018-07-13 01:19:33,2018-07-13 06:46:30,True,2018-07-13 01:19:33,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/124,https://github.com/hyperledger/caliper/pull/124,nitesh7sid,Split caliper into transaction sender and event listener,"PR for spitting caliper process into transaction sender and event listener.
+## Short Description
+Current version of the caliper relies on a single threaded process to send the transactions as well as listen for the transaction confirmation event. This can cause an issue for clients with higher send rates since node.js is itself a single threaded. The callback of the eventhub may get queued in the event loop and hence may result in incorrect confirmation time.
+
+To tackle this issue, caliper can be split into 2 sub processes namely,
+* sender who is just responsible for generating the transaction load
+* listener which connects to the event peer, listens for the block event, note the timestamp and then publish it to Apache Kafka MQ. 
+
+A persistence layer is required so that after the sender has finished generating the load, it can then consume blocks and associated confirmation time from the Queue and compute `time_final` property for every transaction.",[],34,2018-07-12 06:44:40,2018-11-27 15:51:44,2018-11-27 15:51:44,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/122,https://github.com/hyperledger/caliper/pull/122,haojun,define common TxStatus Class,"This PR is related to #119 and #110 
+1. Define a common TxStatus class and modify all adapters accordingly.
+2. Reduce memory usage of local-client.js
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],5,2018-07-10 07:09:20,2018-07-16 03:06:27,2018-07-23 03:09:01,True,2018-07-16 03:06:27,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/121,https://github.com/hyperledger/caliper/pull/121,haojun,fix issue#120: limit size of tmp demo log,"close #120 
+
+This PR limits the length of x-axis to prevent oversized log files.
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>
+
+modify max x-axis length
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-07-10 03:31:55,2018-07-10 06:11:01,2018-07-10 06:11:01,True,2018-07-10 06:11:01,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/117,https://github.com/hyperledger/caliper/pull/117,aklenik,"Add linear, record and replay rate controllers","This PR adds three additional rate controller to Caliper:
+1. Linear rate controller for gradually increasing the TPS rate
+2. Record rate controller for recording the timings of a rate controller
+3. Replay rate controller for replaying an arbitrary timing trace
+
+For details, see the documentation.
+Another minor change: the clients now receive the round index in the message, which is propagated to the controllers (and soon also for the callbacks, but that's an other PR).
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-05 15:11:30,2018-07-11 01:55:37,2018-07-11 10:44:19,True,2018-07-11 01:55:37,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/116,https://github.com/hyperledger/caliper/pull/116,aklenik,"Node CC and metadata support, node CC examples","This PR addresses the following shortcomings:
+* Proper support for Node.js chaincodes (CC)
+* Support for CC metadata (CouchDB indices)
+* Lack of Node.js CC examples
+
+Contribution details:
+* Correctly resolving CC path (relative or absolute) in case of Node CC
+* Processing `metadataPath` attribute for CC install requests
+* Added Node version of the `simple` benchmark (restructured the `src/contract/fabric/simple` folder a bit, changed configs accordingly)
+* Added Node and Golang versions of the `marbles` CC from the `fabric-samples` repo (included a NOTE about this derivative work and a reference to the original, hopefully, this makes it license-compatible)
+* Added `marbles` benchmark files for testing the corresponding CCs
+* Fixed some bugs/typos in the `simple` Golang CC
+* Updated chaincode-related documentation accordingly
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-07-03 17:56:19,2018-07-11 06:48:35,2018-07-11 10:44:24,True,2018-07-11 06:48:35,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/113,https://github.com/hyperledger/caliper/pull/113,stinger112,Update Iroha to v1.0 beta-3,"This PR introduces the new release of Iroha [v1.0 beta-3](https://github.com/hyperledger/iroha/releases/tag/v1.0.0_beta-3)
+
+I actualized used containers in **docker-compose.yml**, simple benchmark code (we slightly changed our API) and node configs.
+
+### PLEASE PAY ATTENTION: 
+
+I removed grpc@1.10.1 from the main **package.json** because:
+1. It sufficiently increases dependencies installing time by `npm install`. grpc _of this version_ compiles from sources, despite I have a very widespread system (Ubuntu 18.04, x86_64).
+2. This grpc package conflicts with the version from **iroha-lib** package.
+
+So I removed both dependencies and specify in README.md additional dependency iroha-lib@0.1.7 in Iroha's section and grpc@1.10.1 in Fabric's section. It's not the best solution, but I couldn't think of a better one
+
+Also
+We are planning to use Caliper in our CI to benchmark new versions of Iroha from this version. :+1: 
+",[],4,2018-06-30 15:48:04,2018-07-02 03:21:51,2018-07-02 03:21:51,True,2018-07-02 03:21:51,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/103,https://github.com/hyperledger/caliper/pull/103,aklenik,Fix rejected Fabric proposal handling,"The error handling part of a rejected Fabric Tx proposal referenced an undefined attribute of the response.
+In case of rejected proposal, an explicit `Error` object is returned as result (see [this SDK code](https://github.com/hyperledger/fabric-sdk-node/blob/bc7d7db22e209f3c2477a0023ba0e8a0201cebe6/fabric-client/lib/client-utils.js#L103)).
+
+@haojun can you review this quick-fix?",[],1,2018-06-20 13:51:56,2018-06-29 01:39:52,2018-07-06 08:52:17,True,2018-06-29 01:39:52,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/100,https://github.com/hyperledger/caliper/pull/100,ynamiki,Fix File Name in Composer Document,"`benchmark/composer/runner.js` has been renamed to `main.js` at 3259d0a4f6bb2a5300c8c9986e472870481ef351.
+",[],1,2018-06-17 23:38:11,2018-06-29 01:39:11,2018-08-31 11:33:45,True,2018-06-29 01:39:11,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/99,https://github.com/hyperledger/caliper/pull/99,ynamiki,Merge network/fabric-v11 and network/fabric directories,"As mentioned in #88, now we don't to need separate the directories.
+
+This patch moves contents of `network/fabric-v11` directory to `network/fabric` and update file paths in configuration files.",[],1,2018-06-17 23:22:54,2018-07-03 07:41:40,2018-07-20 08:50:27,True,2018-07-03 07:41:40,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/94,https://github.com/hyperledger/caliper/pull/94,ski2per,add transfer to simple benchmark and fix transfer issue in chaincode,add transfer to simple benchmark and fix transfer issue in chaincode,[],1,2018-06-14 09:43:33,2018-07-03 07:11:05,2018-07-03 07:11:05,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/90,https://github.com/hyperledger/caliper/pull/90,ynamiki,Simplify docker-compose.yaml,"`network/fabric/simplenetwork/docker-compose.yaml` has many ""copy & paste"" lines. This patch deletes copied lines by using `extends` feature of Docker Compose.",[],1,2018-06-07 03:03:46,2018-06-12 08:45:20,2018-08-31 11:31:54,True,2018-06-12 08:45:20,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/89,https://github.com/hyperledger/caliper/pull/89,huikang,Change the profile section in fabric configtx.yaml file,"To make it work with the latest fabric code, while still being
+compatible with v1.0/1.1
+
+Signed-off-by: Hui Kang <kangh@us.ibm.com>",[],1,2018-06-06 02:45:25,2018-06-12 08:42:23,2018-06-12 08:42:23,True,2018-06-12 08:42:23,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/87,https://github.com/hyperledger/caliper/pull/87,ynamiki,Delete Unused Container,In `network/fabric/simplenetwork/docker-compose.yaml` the container `couchdb` is defined but not used.,[],1,2018-06-05 04:31:04,2018-06-12 08:11:59,2018-08-31 11:32:33,True,2018-06-12 08:11:59,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/86,https://github.com/hyperledger/caliper/pull/86,haojun,update the version of iroha-lib,"Minor change in package.json
+1. udpate the minimally required version of iroha-lib
+2. rollback the version of grpc, which was updated by accident
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-06-05 02:07:07,2018-06-13 09:23:32,2018-06-13 09:23:32,True,2018-06-13 09:23:32,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/85,https://github.com/hyperledger/caliper/pull/85,JulienGuo,keep fabric images version in configuration same with docker-compose.yaml version,keep fabric images version in configuration same with docker-compose.yaml version,[],1,2018-06-04 09:20:35,2018-06-13 02:20:47,2018-06-13 02:20:47,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/84,https://github.com/hyperledger/caliper/pull/84,ynamiki,Fix typo in Document,This patch fixes a typo in the document.,[],1,2018-06-04 07:45:55,2018-06-04 08:50:23,2018-06-04 08:58:06,True,2018-06-04 08:50:23,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/83,https://github.com/hyperledger/caliper/pull/83,haojun,support smallbank benchmark with fabric,"Main updates:
+
+1. Add chaincode of smallbank
+2. Update fabric adaptor to support submit multiple txns using invokesmartcontract()
+3. Minor changes for smallbankOperations.js, using round-robin instead of random algorithm for account selection in workload generation to avoid conflicting txns 
+4. Add fabric related configuration files
+5. Add a Readme doc in the smallbank folder
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-05-30 06:45:03,2018-06-01 06:26:24,2018-06-01 06:26:24,True,2018-06-01 06:26:24,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/77,https://github.com/hyperledger/caliper/pull/77,feihujiang,Support batch for the simple benchmark,"Support batch for the simple benchmark and fix the args bug.
+Signed-off-by: feihujiang <jiangfeihu@huawei.com>",[],1,2018-05-23 09:57:15,2018-05-28 07:35:28,2018-05-28 07:35:28,True,2018-05-28 07:35:28,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/76,https://github.com/hyperledger/caliper/pull/76,feihujiang,Fix amalgamate payload,Signed-off-by: feihujiang <jiangfeihu@huawei.com>,[],1,2018-05-22 08:57:12,2018-05-24 02:08:22,2018-05-24 02:08:22,True,2018-05-24 02:08:22,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/75,https://github.com/hyperledger/caliper/pull/75,Hatuw,fix: Incorrect use of parameters,Fix a bug in the `simpletest.go`.,[],1,2018-05-22 07:13:46,2018-10-08 11:14:54,2018-10-08 11:14:54,False,,,dirty,False,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/74,https://github.com/hyperledger/caliper/pull/74,Ram-srini,Removed hard coded rest api end point in sawtooth adapter,"Removed hard coded rest api end point in sawtooth adapter
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-05-22 04:58:09,2018-05-22 08:22:01,2018-05-22 08:22:01,True,2018-05-22 08:22:01,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/72,https://github.com/hyperledger/caliper/pull/72,haojun,save report's after test,"This change modified the demo.js to save report's path after testing
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-05-21 06:41:37,2018-05-21 10:45:39,2018-05-21 10:45:40,True,2018-05-21 10:45:39,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/71,https://github.com/hyperledger/caliper/pull/71,haojun,support smallbank with fabric,"Main updates:
+1. Add chaincode of smallbank
+2. Update fabric adaptor to support submit multiple txns using invokesmartcontract()
+3. Minor changes for smallbankOperations.js, removing the test of amalgamate txn (Amalgamating causes subsequent operations on this account to fail, which is not suitable from the point of performance test)
+4. Add fabric related configuration files for smallbank test
+5. Add a Readme doc in the smallbank folder
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>
+
+add small bank config for fabric
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>
+
+Bugfix and add readme for smallbank benchmark
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",['feihujiang'],1,2018-05-18 03:55:04,2018-05-30 06:50:35,2018-05-30 06:50:35,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/69,https://github.com/hyperledger/caliper/pull/69,Hatuw,extract main.js,Extract the `main.js` in different benchmarks.,[],1,2018-05-14 11:21:13,2018-10-09 11:37:41,2018-10-09 11:37:41,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/68,https://github.com/hyperledger/caliper/pull/68,Hatuw,extract main.js,Extract the `main.js` in different benchmarks.,[],1,2018-05-14 10:41:10,2018-05-14 11:19:24,2018-05-14 11:19:24,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/66,https://github.com/hyperledger/caliper/pull/66,haojun,Support batch in framework,"1. Update blockchain interfaces and txns count calculation to support batch
+2. Update sawtooth code to follow linting rules",[],2,2018-05-09 06:02:47,2018-05-17 03:26:12,2018-05-17 03:26:12,True,2018-05-17 03:26:11,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/63,https://github.com/hyperledger/caliper/pull/63,Ram-srini,Updated the sawtooth version in Readme doc file,Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>,[],1,2018-05-08 08:21:23,2018-05-08 09:12:31,2018-05-08 09:12:31,True,2018-05-08 09:12:31,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/62,https://github.com/hyperledger/caliper/pull/62,aklenik,Fix Fabric-related lint errors and warnings.,"Part of the solution for #48 
+The Fabric subfolder is now lint-error/warning free.
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-05-07 22:33:57,2018-05-08 02:59:15,2018-05-08 02:59:15,True,2018-05-08 02:59:15,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/61,https://github.com/hyperledger/caliper/pull/61,aklenik,"Add rate controllers and related extensions, update docs","The aim of this PR is to pave the road for advanced workload modelling. Contributions include:
+
+* Added `end` method to the rate controller proxy to signal the end of a round (in a backward compatible/optional way).
+* Modified round execution workflow to call this `end` method.
+* Added a composite rate controller implementation.
+* Added a zero rate controller implementation.
+* Extended the rate controller documentation.
+* Added a sample configuration to demonstrate the usage of the new controllers.
+* Propagate client index to _local_ clients.
+
+Signed-off-by: Attila Klenik <a.klenik@gmail.com>",[],1,2018-05-07 22:05:33,2018-05-08 06:40:55,2018-05-08 06:40:55,True,2018-05-08 06:40:55,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/60,https://github.com/hyperledger/caliper/pull/60,haojun,add specific version of grpc in package.json,"closes #56
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-05-07 06:45:19,2018-05-08 07:21:57,2018-05-08 07:21:57,True,2018-05-08 07:21:57,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/59,https://github.com/hyperledger/caliper/pull/59,nklincoln,enable multi-client and multi-round tests in Composer benchmarks,"Currently the Composer benchmark tests are in single client and single round mode only. This PR enables the benchmarks to be run in multi-client mode with multiple test rounds.
+
+This was enabled by using the OS hostname and process id as a UUID within each test for the creation and manipulation of assets in each benchmark test.
+
+Changes include:
+- benchmarks edited to enable multi client/round
+- config file changed so that travis test is in multi-client/round for composer
+- docs updated to remove limitation on modes
+
+PR checks made:
+- eslint compliant
+- each benchmark passes in multi-client/round mode
+- travis build passes in multi-client/round mode
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2018-05-04 11:56:23,2018-05-14 03:51:51,2018-07-17 10:11:55,True,2018-05-14 03:51:51,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/58,https://github.com/hyperledger/caliper/pull/58,haojun,add specific version of grpc in package.json,"closes #56 
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-05-04 03:45:43,2018-05-07 06:40:04,2018-05-07 06:40:17,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/57,https://github.com/hyperledger/caliper/pull/57,haojun,specify grpc version,"closes #56 
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-05-04 03:25:13,2018-05-04 03:25:40,2018-05-04 03:25:54,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/55,https://github.com/hyperledger/caliper/pull/55,subhodi,Eslint compatible: Fabric and drm benchmark files,"Regarding issue #48 , updated  benchmark/fabric and benchmark/drm config files to adhere to eslint rules.
+Changes:
+1. prefer `const` and `let ` over `var`.
+2. prefer `'` over `""`.
+3. Add missing semicolons.
+4. JS-doc for main.js
+
+",[],3,2018-05-03 07:01:59,2018-05-07 06:12:15,2018-05-07 06:12:15,True,2018-05-07 06:12:15,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/54,https://github.com/hyperledger/caliper/pull/54,haojun,Eslint compatible,"This PR is related to issue #48 
+1. Update files of benchmark engine, client, monitor, report, etc. to follow the eslint rules
+2. Update log to accept unspecified number of arguments",[],3,2018-05-03 03:37:43,2018-05-03 07:30:12,2018-05-03 07:30:12,True,2018-05-03 07:30:12,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/53,https://github.com/hyperledger/caliper/pull/53,davidkhala,Document updates,"This patch includes
+- Add section 'How to contribute' in readme.md
+- simplify install guide for fabric-sdk-node
+- type fix: benchmark engineer -> benchmark engine
+
+Signed-off-by: davidliu <david-khala@hotmail.com>",[],1,2018-05-02 15:38:16,2018-05-03 07:21:08,2018-05-03 07:21:08,True,2018-05-03 07:21:08,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/52,https://github.com/hyperledger/caliper/pull/52,davidkhala,Simplify install document,"`npm install` of fabric-sdk-node can fits for most cases.
+And seemingly there is some duplicated documents in benchmark/simple/main",[],3,2018-04-30 08:37:30,2018-05-02 15:15:02,2018-05-02 15:15:02,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/51,https://github.com/hyperledger/caliper/pull/51,haojun,Fix issue #39,"This PR fix the issue #39 
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>
+",[],2,2018-04-28 03:20:29,2018-10-08 07:15:36,2018-10-08 07:15:36,True,2018-10-08 07:15:36,panyu4,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/50,https://github.com/hyperledger/caliper/pull/50,haojun,Bug fix for runDuration,"Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>
+
+Replace the wrong promise.all array in runDuration",[],1,2018-04-28 02:17:34,2018-04-28 02:59:05,2018-04-28 02:59:05,True,2018-04-28 02:59:05,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/47,https://github.com/hyperledger/caliper/pull/47,Ram-srini,Adding smallbank benchmark use case which simulates bank operations,"Adding smallbank benchmark use case which simulates bank operations
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-04-26 17:15:46,2018-05-08 07:14:00,2018-05-08 07:14:00,True,2018-05-08 07:14:00,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/46,https://github.com/hyperledger/caliper/pull/46,nklincoln,add travis build configuration,"closes #33 
+
+This PR provides the required folders and scripts to enable Travis CI against the Caliper project.
+
+**Please note that I cannot perform the Travis enablement and enforcement on the project as I do not have the required privileges; it will have to be completed by a Caliper admin if/when merged**
+
+The PR delivers the following:
+- provides Travis configuration files to build and run the specified tests
+- specified tests include:
+-- lint checking
+-- unit test checking (rate controllers) with code coverage
+-- e2e code run
+
+The lint checker is based from the main lint checking specification, which currently has some files excluded (these file exclusions are being worked on)
+
+The unit tests are mocha based and driven using nyc to provide code coverage reports. An example test is provided for the fixed rate controller. All other files are currently excluded and I would suggest issues being raised to fill these holes.
+
+The e2e code run represents the *actual* running of all existing Caliper benchmarks. This is currently only for locally hosted (not zookeeper) benchmarks, but goes a long way to ensure that nothing is broken within the framework. Due to the nature of running benchmarks on a CI machine, the TPS listed in some of the benchmarks has been reduced, since timeouts will cause a build failure.
+",[],2,2018-04-26 15:31:03,2018-05-04 02:53:42,2018-11-27 11:15:22,True,2018-05-04 02:53:42,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/45,https://github.com/hyperledger/caliper/pull/45,nklincoln,ensure consistent namespace in sample,"Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>
+
+closes #44 
+
+PR includes:
+- updates to all test resources (contract resources and test runner script) to ensure consistency in model namespace used.",[],1,2018-04-26 12:07:33,2018-04-28 03:39:43,2018-07-17 10:11:57,True,2018-04-28 03:39:43,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/42,https://github.com/hyperledger/caliper/pull/42,aklenik,Extend the rate controller repertoire,"The aim of this PR is to pave the road for advanced workload modelling. Contributions include:
+
+* Rate control related:
+    * Added `end` method to the rate controller proxy to signal the end of a round (in a backward compatible/optional way).
+    * Modified round execution workflow to call this `end` method.
+    * Added a composite rate controller implementation.
+    * Added a zero rate controller implementation.
+    * Extended the rate controller documentation.
+    * Added a sample configuration to demonstrate the usage of the new controllers.
+
+* Modified `end` script of config files (for Fabric) to also remove the chaincode images.
+
+* Fixed linting errors for Fabric subsystem (Issue #48 ).",[],5,2018-04-25 22:02:06,2018-05-07 20:50:23,2018-05-07 20:50:23,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/41,https://github.com/hyperledger/caliper/pull/41,nklincoln,"add linting rules, ignore file and update Composer code to follow rules","Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>
+
+This PR is the first in a series of PRs aimed at resolving #22 
+
+This PR contains changes that:
+- add a linting rules file (common rule file selected)
+- add eslint to devDependancies
+- add package script to run lint checker (via `npm run lint`)
+- update all Composer code to follow linting rules
+- update rate controllers to follow linting rules
+- add an eslint-ignore file to ignore lint checking on all other files
+- renamed `src/comm/sleep` to be a common utility file `src/comm/util` and refactored all code to use the sleep method in the common code
+
+The reason for the expansion of the common util to include 'sleep' and 'log' is the `no-console' linting rule, which is most elegantly eliminated using a single point of use and a single `eslint-diable` call. It is probable that this common utility will expand as more common code is identified and eliminated.
+",[],1,2018-04-24 15:27:49,2018-04-26 06:09:49,2018-04-26 12:15:24,True,2018-04-26 06:09:49,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/40,https://github.com/hyperledger/caliper/pull/40,michielmulders,Small fix markdown,,[],1,2018-04-24 13:33:19,2018-10-08 07:49:48,2018-10-08 07:49:48,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/35,https://github.com/hyperledger/caliper/pull/35,stinger112,Added official Iroha Library package compatible with Iroha 1.0 beta-2,"### Description
+
+Iroha contributors have created NPM package with Iroha Connector Library, so this PR adds [**iroha-lib**](https://www.npmjs.com/package/iroha-lib) into Caliper and update Iroha's docker container to latest develop version.
+",[],20,2018-04-23 10:13:28,2018-06-04 08:48:41,2018-06-05 01:53:30,True,2018-06-04 08:48:41,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/34,https://github.com/hyperledger/caliper/pull/34,Ram-srini,Redesign sawtooth adapter to make it easy to add new use uses,"1. Generalize the sawtooth adapter
+2. Move use case specific code like batch creation and adddress creation to application adapter
+3. Each application has to implement batch builder interface.
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-04-23 04:23:09,2018-04-26 06:22:53,2018-04-26 06:22:53,True,2018-04-26 06:22:53,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/32,https://github.com/hyperledger/caliper/pull/32,Ram-srini,Redesign sawtooth adapter to make it easy to add new use uses,"1. Generalize the sawtooth adapter
+2. Move use case specific code like batch creation and adddress creation to application adapter
+3. Each application has to implement batch builder interface.
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-04-17 06:46:02,2018-04-23 03:49:39,2018-04-23 03:49:39,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/31,https://github.com/hyperledger/caliper/pull/31,nklincoln,Update Composer query test to use precompiled VL query,"Composer 0.19.x now automatically creates indexes within CouchDB for any queries listed within the queries file of a business network that is deployed, in order to maximise the performance of queries.
+
+This PR changes the example query test to use a query within the vehicle lifecycle network queries file so that the query tests being run are running at their maximum performance, as per the recommended best practise for Composer business networks. 
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2018-04-14 10:29:02,2018-04-19 07:00:57,2018-04-19 14:59:37,True,2018-04-19 07:00:57,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/30,https://github.com/hyperledger/caliper/pull/30,nklincoln,add PID rate controller,"I have been using this controller to avoid timeouts during transactions; I suspect it will be useful for others too!
+
+The controller mechanism acts to maintain a fixed level of backlog transactions, using a basic PID control mechanism to modify the driven transaction rate to achieve a fixed backlog. A user must prescribe control gains, as well as a starting TPS to seed the controller. There is an option to view controller output to assist tuning the controller for a specific system.
+
+Contribution includes:
+
+New rate controller with header description
+Update of fixed-rate controller to add header description
+Docs modification to indicate availability of controller
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2018-04-13 10:52:48,2018-04-25 01:09:00,2018-07-17 10:12:01,True,2018-04-25 01:09:00,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/29,https://github.com/hyperledger/caliper/pull/29,haojun,add license declaration,"This is a fix for issue #20 
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-04-13 01:43:27,2018-04-13 06:21:17,2018-04-13 06:21:17,True,2018-04-13 06:21:17,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/28,https://github.com/hyperledger/caliper/pull/28,aklenik,Fixed Fabric Tx life-cycle handling,"@haojun Here is the PR addressing issue #24 
+
+Notable changes:
+* Using async/await
+* Added verified and error-related properties to the Tx status object
+
+Regarding unverified failures:
+Since it is not straightforward how to incorporate (if at all) the extra time needed to verify a Tx status through a query (and when to do that), I think the best option, for now, is to leave this to the callback module. It still has access to the configured context (except the event hubs) in the `end` callback, so if needed, verification can happen there.",[],1,2018-04-12 00:00:10,2018-04-12 02:30:51,2018-04-12 02:30:51,True,2018-04-12 02:30:51,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/26,https://github.com/hyperledger/caliper/pull/26,nklincoln,update composer docs for creating own tests,"Closes #25 
+
+Changes include:
+- Update the named directory to match the required folder structure.
+- Provides more guidance in creating the required test files
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2018-04-10 08:35:20,2018-04-11 01:53:33,2018-04-19 14:59:48,True,2018-04-11 01:53:33,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/23,https://github.com/hyperledger/caliper/pull/23,nklincoln,add discrete time rate controller,"I have been using this controller to avoid timeouts during transactions; I suspect it will be useful for others too!
+
+The controller mechanism acts to maintain a fixed level of backlog transactions, using a discrete time PID control mechanism to modify the driven transaction rate to achieve a fixed backlog. A user must prescribe control gains, as well as a starting TPS to seed the controller. 
+
+Contribution includes:
+- New rate controller with header description
+- Update of fixed-rate controller to add header description
+- Docs modification to indicate availability of controller
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2018-04-09 14:41:57,2018-04-11 14:51:26,2018-07-17 10:12:14,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/21,https://github.com/hyperledger/caliper/pull/21,haojun,Remove 3rd party source files & update GUI source codes accordingly,Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>,[],1,2018-04-08 06:58:43,2018-04-08 07:18:17,2018-04-08 07:18:17,True,2018-04-08 07:18:17,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/19,https://github.com/hyperledger/caliper/pull/19,Ram-srini,Changes to use the latest sawtooth 1.0 version,"1. Changed the sawtooth adapter to use sawtooth 1.0 sdk changes
+2. changed simple benchmark to use sawtooth 1.0
+
+Signed-off-by: Ramakrishna Srinivasamurthy <ramakrishna.srinivasamurthy@intel.com>",[],1,2018-04-03 16:01:29,2018-04-11 08:00:17,2018-04-11 08:00:17,True,2018-04-11 08:00:17,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/18,https://github.com/hyperledger/caliper/pull/18,feihujiang,remove compiled python files of simple example,Signed-off-by: feihujiang <jiangfeihu@huawei.com>,[],1,2018-04-03 07:25:35,2018-04-03 07:59:23,2018-04-03 07:59:23,True,2018-04-03 07:59:23,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/17,https://github.com/hyperledger/caliper/pull/17,feihujiang,Remove redundant files of simple,Signed-off-by: feihujiang <jiangfeihu@huawei.com>,[],1,2018-04-03 06:52:09,2018-04-03 07:07:46,2018-04-03 07:07:46,True,2018-04-03 07:07:45,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/16,https://github.com/hyperledger/caliper/pull/16,haojun,update with fabric v1.1.0,"Minor change after testing with fabric v1.1.0:
+1. force pure GO resolver for fabric/simplenetwork
+2. fix wrong prompts
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],2,2018-04-02 08:47:25,2018-04-08 07:12:13,2018-04-08 07:12:13,True,2018-04-08 07:12:13,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/14,https://github.com/hyperledger/caliper/pull/14,haojun,Initiate CONTRIBUTING doc,Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>,[],2,2018-04-02 06:34:53,2018-04-03 08:10:30,2018-04-03 08:10:30,True,2018-04-03 08:10:30,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/13,https://github.com/hyperledger/caliper/pull/13,nklincoln,Add perf test framework for Hyperledger Composer,"This PR contains a plugin to run performance tests on Fabric 1.1.0 using Hyperledger Composer v0.19.0
+
+PR includes:
+- Composer plugin, with sample networks to test against
+- Readme, for using and creating own tests
+- Fabric 1.1.0 crypto-material for multiple org/peer configurations
+
+
+
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2018-03-28 19:34:11,2018-04-02 01:53:22,2018-04-09 10:30:31,True,2018-04-02 01:53:22,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/12,https://github.com/hyperledger/caliper/pull/12,haojun,Support define key and certification path in fabric configuration,"Now Caliper search cryptographic materials in `cryptodir` with hard-coded path format. 
+
+This patch allows users to define key and certification paths explicitly 
+
+Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>",[],1,2018-03-28 06:46:42,2018-03-31 07:17:28,2018-03-31 07:17:28,True,2018-03-31 07:17:28,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/11,https://github.com/hyperledger/caliper/pull/11,haojun,remove obsolete txNumbandTps from config files,Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>,[],1,2018-03-28 03:27:01,2018-03-28 03:38:57,2018-03-28 03:38:57,True,2018-03-28 03:38:57,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/7,https://github.com/hyperledger/caliper/pull/7,aklenik,Added configuration support for chaincode Init parameters.,"Added configuration support for providing parameters for the chaincode's Init method during instantiation.
+If not provided, the parameter array defaults to an empty array for backward compatibility reason.
+Extended Fabric configuration documentation accordingly.",[],1,2018-03-23 00:34:26,2018-03-23 02:00:49,2018-03-23 02:00:49,True,2018-03-23 02:00:49,haojun,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/6,https://github.com/hyperledger/caliper/pull/6,aklenik,Configuration support for chaincode Init parameters,"Added configuration support for providing parameters for the chaincode's Init method during instantiation.  
+If not provided, the parameter array defaults to an empty array for backward compatibility reason.
+Extended Fabric configuration documentation accordingly.",[],1,2018-03-23 00:05:24,2018-03-23 00:14:29,2018-03-23 00:14:29,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/5,https://github.com/hyperledger/caliper/pull/5,nklincoln,Add perf test framework for Hyperledger Composer,"Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>
+
+This pull request adds a test framework for Hyperledger Composer.
+
+It enables the performance testing of a Fabric blockchain platform through the Composer abstractions.
+
+The code within this PR is currently being used by the Hyperledger Composer team for performance testing.
+
+The PR includes:
+ - Readme on how to use the Composer plugin
+ - Composer sample networks for testing
+ - Example tests targeting the sample networks
+ - Composer Utilities for setting up Fabric (uses the docker exec commands to join peers etc, instead of current API)
+ - Composer main file
+ - Docker files to use for creating various Fabric configurations using the Fabric 1.1.0 ",[],1,2018-03-21 16:33:38,2018-03-26 15:51:22,2018-03-26 15:51:22,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/3,https://github.com/hyperledger/caliper/pull/3,haojun,reject create-channel if no channel information found,Signed-off-by: Haojun Zhou <zhouhaojun@huawei.com>,[],1,2018-03-20 08:54:06,2018-03-20 08:58:24,2018-03-20 09:20:11,True,2018-03-20 08:58:24,feihujiang,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/2,https://github.com/hyperledger/caliper/pull/2,haojun,Bugfix,,[],3,2018-03-20 08:30:19,2018-03-20 08:32:41,2018-03-20 08:32:47,False,,,unknown,,closed
+caliper,https://api.github.com/repos/hyperledger/caliper/pulls/1,https://github.com/hyperledger/caliper/pull/1,ryjones,Create DCO,,[],1,2018-03-20 01:50:32,2018-03-20 01:51:59,2018-03-20 01:51:59,False,,,unknown,,closed

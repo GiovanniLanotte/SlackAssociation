@@ -1,0 +1,212 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/48,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/48,Jenkinsfile 0-1 branch updates.,,closed,True,2019-04-03 14:18:38,2019-04-03 15:39:21
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/47,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/47,BACKPORT: Add Missing Isolation ID to docker compose files,"This will fix an issue with colliding images when
+running the build in Jenkins.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2019-04-03 14:04:44,2019-04-03 16:49:38
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/46,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/46,Add Missing Isolation ID to docker compose files,"This will fix an issue with colliding images when
+running the build in Jenkins.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2019-04-03 13:27:00,2019-04-03 14:02:23
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/45,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/45,Increase Sabre version to 0.2,"Sabre is going to be updated to work with the
+newer version of the Sawtooth Rust SDK. As such
+the version needs to be increased because it will
+no longer be compatible with 0.1 version of Sabre.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2019-04-02 19:53:02,2019-04-03 17:16:45
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/44,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/44,Run cargo fmt on sabre sdk,,closed,True,2019-04-02 18:21:44,2019-04-02 19:06:04
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/43,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/43,add COMPOSE_PROJECT_NAME to Jenkinsfile,"This variable prevents naming collisions in containers created by
+docker-compose. This variable was missing from the Jenkinsfile rewrite.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2019-03-28 19:08:37,2019-04-02 19:30:53
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/42,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/42,Declarative Jenkinsfile rewrite.,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-03-21 16:36:09,2019-03-27 05:05:39
+sawtooth-sabre,scealiontach,https://github.com/hyperledger/sawtooth-sabre/pull/41,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/41,Add an apt-get upgrade to address a series of High risk CVE's discovered.,"Running Anchore scans versus the installed docker images turned up some high risk vulnerabilities.  This will usually prevent the images being deployed in any highly locked down environments. 
+
+Signed-off-by: Kevin O'Donnell <kodonnel@gmail.com>",open,True,2019-02-26 14:06:01,2019-02-27 15:15:00
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/40,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/40,Update Sabre to use Sawtooth Rust SDK 0.2,,closed,True,2019-02-20 16:35:46,2019-02-21 21:26:05
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/39,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/39,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-07 16:33:46,2019-02-11 17:45:32
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/38,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/38,Update Jenkinsfile to schedule a build at 3AM CST,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-01-23 21:53:04,2019-01-24 19:59:48
+sawtooth-sabre,rranjan3,https://github.com/hyperledger/sawtooth-sabre/pull/37,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/37,Documentation typo fix,"1) Minor typo fix in Sabre Transaction Family
+2) Sphinx warnings fix
+
+Signed-off-by: Rajeev Ranjan <rajeev2.ranjan@intel.com>",closed,True,2019-01-23 08:48:58,2019-01-30 20:16:16
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/36,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/36,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-22 22:19:07,2019-02-04 18:30:43
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/35,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/35,Unpin Sphinx version,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-21 20:19:25,2019-01-22 22:37:29
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/34,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/34,045 bionic upgrade,,closed,True,2018-12-06 19:29:57,2019-03-14 21:10:32
+sawtooth-sabre,chenette,https://github.com/hyperledger/sawtooth-sabre/pull/33,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/33,Add macro_use to main.rs example in App Dev Guide,"Change for ""Converting a Transaction Processor to a Smart Contract"".
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-11-20 21:57:37,2018-11-26 21:45:50
+sawtooth-sabre,chenette,https://github.com/hyperledger/sawtooth-sabre/pull/32,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/32,Fix Sabre typo,Signed-off-by: Anne Chenette <chenette@bitwise.io>,closed,True,2018-11-20 21:52:32,2018-11-26 21:45:36
+sawtooth-sabre,chenette,https://github.com/hyperledger/sawtooth-sabre/pull/31,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/31,Update Running a Sabre Smart Contract doc,"Rewrite to expand, clarify, update, edit, and format information. Changes include:
+
+- Rewrite throughout to clarify information, make consistent with procedures in
+  the Sawtooth core docs, and format as a procedure
+
+- Add introduction and prerequisites sections
+
+- Summarize what the Docker Compose files do (describe containers, key generation,
+  Sawtooth administrator setting, and volume setup/key sharing between containers)
+
+- Consistently show which container is used for each step
+
+- Clarify that ""sabre upload"" uploads a contract definition file (not a
+  contract) and that ""sabre ns"" creates a namespace registry (not a namespace)
+
+- Update the example contract definition file, with explanations of the Sabre
+  and Pike namespaces (in source but not shown in the previous doc)
+
+- Delete hard-coded, out-of-date CLI help; replace with info on running the
+  command with the --help option
+
+- Summarize what items must be in place before running ""sabre exec""
+
+- Add final step to shut down the Sawtooth Sabre environment
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-11-20 21:42:04,2018-11-26 21:45:02
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/30,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/30,Update dockerfiles to use bumper/stable apt repo,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2018-11-13 20:46:24,2018-11-13 21:37:08
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/29,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/29,Update Cargo.toml files to use crates for sdk and zmq,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-09 21:17:26,2018-11-12 19:52:44
+sawtooth-sabre,RyanLassigBanks,https://github.com/hyperledger/sawtooth-sabre/pull/28,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/28,Move Smart Permission documentation to sabre,Signed-off-by: Ryan Banks <rbanks@bitwise.io>,closed,True,2018-11-08 19:01:25,2018-11-08 19:45:47
+sawtooth-sabre,RyanLassigBanks,https://github.com/hyperledger/sawtooth-sabre/pull/27,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/27,Remove Duplicate sp Command,,closed,True,2018-11-08 14:35:00,2018-11-08 19:01:50
+sawtooth-sabre,chenette,https://github.com/hyperledger/sawtooth-sabre/pull/26,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/26,Fix DeleteContractRegistryAction inputs/outputs,"Corrected the Sabre Transaction Family documentation:
+sawtooth.swa.administrators is an input (not output).
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-11-05 17:20:21,2018-11-21 16:34:56
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/25,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/25, 037 bumper updates,,closed,True,2018-10-31 21:15:40,2018-11-09 20:37:54
+sawtooth-sabre,RyanLassigBanks,https://github.com/hyperledger/sawtooth-sabre/pull/24,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/24,Fix sdk paths,Signed-off-by: Ryan Banks <rbanks@bitwise.io>,closed,True,2018-10-19 13:29:17,2018-10-19 16:27:06
+sawtooth-sabre,dcmiddle,https://github.com/hyperledger/sawtooth-sabre/pull/23,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/23,Fix ambiguity in License label.,"Update Cargo.toml to explicitly list Apache 2.0 rather than just Apache.
+
+Signed-off-by: Dan Middleton <dan.middleton@intel.com>",closed,True,2018-10-12 14:07:40,2018-10-18 19:24:59
+sawtooth-sabre,RyanLassigBanks,https://github.com/hyperledger/sawtooth-sabre/pull/22,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/22,C033 sabre pike integration,"PR Accomplishes the following
+
+1) Integration Smart Permissions into sabre (closes [issue 217](https://git.cglcloud.com/DigitalSupplyChain/product-core/issues/217))
+
+2) Converts Pike into a smart contract (closes [issue 216](https://git.cglcloud.com/DigitalSupplyChain/product-core/issues/216))
+
+### Testing
+
+1) spin up containers
+```
+docker-compose -f docker-compose.yaml -f example/intkey_multiply/docker-compose.yaml up -V
+```
+
+2) Create intkey data
+
+```
+docker exec -it sabre-shell bash
+intkey set B 5 --url http://rest-api:9708
+intkey set C 10 --url http://rest-api:9708
+intkey list --url http://rest-api:9708
+exit
+```
+
+3) Create inteky multiply payload
+
+```
+docker exec -it intkey-multiply-cli bash
+intkey-multiply multiply A B C --output payload
+exit
+```
+
+4) Create Webassembly artifacts
+
+```
+docker exec -it sabre-cli bash
+rustup target add wasm32-unknown-unknown --toolchain nightly
+cd /project/example/intkey_multiply/processor
+cargo +nightly build --target wasm32-unknown-unknown --release
+cd /project/contracts/sawtooth-pike/tp
+cargo +nightly build --target wasm32-unknown-unknown --release
+cd /project/contracts/sawtooth-pike/examples/intkey/
+cargo +nightly build --target wasm32-unknown-unknown --release
+cd /project/cli
+```
+
+5) Upload and configure pike smart contract
+
+```
+sabre upload --filename ../contracts/sawtooth-pike/pike.yaml --url http://rest-api:9708 --wait 100
+sabre ns --create cad11d --owner $(cat /root/.sawtooth/keys/root.pub) --url http://rest-api:9708 --wait 100
+sabre perm cad11d pike --read --write --url http://rest-api:9708 --wait 100
+```
+
+6) Upload and configure intkey multiply smart contract
+
+```
+sabre upload --filename ../example/intkey_multiply/intkey_multiply.yaml --url http://rest-api:9708 --wait 100
+sabre ns --create 1cf126 --owner $(cat /root/.sawtooth/keys/root.pub) --url http://rest-api:9708 --wait 100
+sabre ns --create 00ec03 --owner $(cat /root/.sawtooth/keys/root.pub) --url http://rest-api:9708 --wait 100
+sabre perm 1cf126 intkey_multiply --read --write --url http://rest-api:9708 --wait 100
+sabre perm cad11d intkey_multiply --read --write --url http://rest-api:9708 --wait 100
+sabre perm 00ec03 intkey_multiply --read --write --url http://rest-api:9708 --wait 100
+```
+
+7) Create organization in pike
+
+```
+../contracts/sawtooth-pike/cli/target/debug/pike-cli org create Cargill000 Cargill Address --output create_org
+sabre exec --contract pike:1.0 --payload ./create_org --inputs cad11d  --outputs cad11d  --url http://rest-api:9708 --wait 100
+```
+
+8) Create intkey smart permission
+
+```
+sabre sp --url http://rest-api:9708 --wait 100 create Cargill000 test --filename /project/contracts/sawtooth-pike/examples/intkey/target/wasm32-unknown-unknown/release/intkey.wasm
+```
+
+9) Send intkey multiply payload
+
+```
+sabre exec --contract intkey_multiply:1.0 --payload /project/example/intkey_multiply/cli/payload  --inputs 1cf126 cad11d 00ec03  --outputs 1cf126  --url http://rest-api:9708 --wait 100
+```",closed,True,2018-10-10 20:50:13,2018-10-18 15:45:51
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/21,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/21,Update build.rs files to use Customize::default(),"Protobuf updated and removed Default::default() and
+instead we need to use Customize::default()
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>
+
+Note sabre will not build until sawtooth core is updated. ",closed,True,2018-10-08 15:02:28,2018-10-08 20:54:30
+sawtooth-sabre,benoitrazet,https://github.com/hyperledger/sawtooth-sabre/pull/20,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/20,Run tutorial in installed mode and docs updates,This PR updates the docker-compose-installed.yaml file to be able to run the tutorial of the documentation in `installed` mode. It makes it closer to the non-installed docker-compose.yaml file. The PR also includes separate commits for some minor documentation revisions and typos in comments or error message in rust files.,closed,True,2018-10-02 16:18:25,2018-12-11 20:17:45
+sawtooth-sabre,RyanLassigBanks,https://github.com/hyperledger/sawtooth-sabre/pull/19,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/19,Update wasmi dependency,"https://git.cglcloud.com/DigitalSupplyChain/sawtooth-sabre/pull/32
+
+Signed-off-by: Ryan Banks <rbanks@bitwise.io>",closed,True,2018-08-28 18:51:39,2018-09-26 13:49:48
+sawtooth-sabre,RyanLassigBanks,https://github.com/hyperledger/sawtooth-sabre/pull/18,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/18,Update wasmi dependency,Signed-off-by: Ryan Banks <rbanks@bitwise.io>,closed,True,2018-08-28 18:31:07,2018-08-28 18:52:15
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/17,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/17,Fixups to the build system,"Jenkins runs each sh command in a separate sub-shell, this caused the
+wrong docker-compose file to run during the ""Build documentation"" stage.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-16 15:03:20,2018-07-16 20:23:32
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/16,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/16,Fix bug where set error was not being handled,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2018-07-13 20:17:03,2018-07-13 21:11:14
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/15,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/15,Fix two typos,,closed,True,2018-07-10 16:11:31,2018-07-10 18:16:32
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/14,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/14,Fetch git tags in Jenkinsfile,"Tags are required to get the dev version number and JJB multibranch
+fetches without tags.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-09 15:41:46,2018-07-09 21:35:00
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/13,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/13,Add get_signature to Sabre TpProcessRequest,Also updates the version numbers to 0.1.1 for dockerhub publishing.,closed,True,2018-07-09 15:24:45,2018-07-09 20:51:40
+sawtooth-sabre,rbuysse,https://github.com/hyperledger/sawtooth-sabre/pull/12,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/12,Sabre packaging,Adds files for building and packaging the sabre tp and cli.,closed,True,2018-07-05 18:27:39,2018-07-09 14:38:04
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/11,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/11, Contract Registries can only be created by admins,This PR address several comments left by @dcmiddle during the Sabre RFC process. ,closed,True,2018-07-03 17:42:15,2018-09-26 19:43:45
+sawtooth-sabre,knkski,https://github.com/hyperledger/sawtooth-sabre/pull/10,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/10,Bump protobuf version to 2 globally ,"Fixes internal Sabre consistency issue, where some parts of the code had
+`protobuf = ""1.4""` and some had `protobuf = ""2""`.
+
+Specifying both versions leads to conflicts when building due to some
+changes in the library between those two versions (""Perhaps two
+different versions of crate `protobuf` are being used?"").
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-06-20 22:14:02,2018-06-26 20:28:14
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/9,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/9,Update Sabre to work with the new get_state/set_state,"Also updates the cli to accept multiple inputs and outputs.
+
+Adds delete_state to the sabre sdk.
+
+This should not be merged until https://github.com/hyperledger/sawtooth-core/pull/1722 is merged into sawtooth core. ",closed,True,2018-06-19 18:45:59,2018-06-20 20:17:36
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/8,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/8,Update the conf.py file for the sabre docs.,,closed,True,2018-05-21 21:28:50,2018-05-22 15:12:35
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/7,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/7,Update protobuf to version 2,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2018-05-21 15:19:12,2018-05-21 15:31:26
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/6,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/6,Make sabre compatible with protoc 1.6,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2018-05-14 13:02:32,2018-05-14 14:18:34
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/5,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/5,Add README to sabre,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2018-05-10 22:20:44,2018-05-10 22:38:12
+sawtooth-sabre,agunde406,https://github.com/hyperledger/sawtooth-sabre/pull/4,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/4,Make --wait optional in sabre cli,"Before if you tried to use the cli without --wait
+it would panic. Now it defaults to 0 if wait
+is not provided and returns a UserError if wait is
+not an integer.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2018-05-10 22:01:45,2018-05-10 22:37:54
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/3,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/3,Update sphinx theme to match the other docs.,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2018-05-08 20:11:00,2018-05-09 15:36:31
+sawtooth-sabre,rberg2,https://github.com/hyperledger/sawtooth-sabre/pull/2,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/2,Add pkg-config to docs/Dockerfile,"This prevents a build error.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-05-08 19:26:58,2018-05-08 23:05:54
+sawtooth-sabre,ryjones,https://github.com/hyperledger/sawtooth-sabre/pull/1,https://api.github.com/repos/hyperledger/sawtooth-sabre/issues/1,Create DCO,,closed,True,2018-05-08 01:52:35,2018-05-11 21:19:38

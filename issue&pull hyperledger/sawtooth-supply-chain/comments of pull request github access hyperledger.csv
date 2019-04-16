@@ -1,0 +1,562 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-supply-chain/pull/69,https://github.com/hyperledger/sawtooth-supply-chain/pull/69,I'm not sure this is necessary - it may be a holdover from a previous state of the Sawtooth SDK.,986bf3eba91d22b721b80109bdfd54f586a37744,2018-11-09 21:35:20,232400729,"@@ -20,10 +20,10 @@ description = ""Sawtooth Supply Chain Transaction Processor""
+ homepage = ""https://github.com/hyperledger/sawtooth-supply-chain""
+ 
+ [dependencies]
+-sawtooth_sdk = { git = ""https://github.com/hyperledger/sawtooth-core.git"" }
++sawtooth-sdk = ""^0.1""
+ rust-crypto = ""0.2.36""
+ rustc-serialize = ""0.3.22""
+-zmq = { git = ""https://github.com/erickt/rust-zmq"", branch = ""release/v0.8"" }
++sawtooth-zmq = ""0.8.2-dev5""",9,2018-11-09 21:35:24,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/232400729,https://github.com/hyperledger/sawtooth-supply-chain/pull/69#discussion_r232400729,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/60,https://github.com/hyperledger/sawtooth-supply-chain/pull/60,Why 20?,4a9ad556f78eafe8b23befa5963f801ae4201dfa,2018-07-24 21:52:05,204923527,"@@ -71,6 +71,9 @@ message Property {
+ 
+   // Used with STRUCT data types, defines the properties a struct must contain
+   repeated PropertySchema struct_properties = 12;
++
++  // This optional metadata describes the unit a Property is measured in
++  string unit = 20;",6,2018-07-24 21:52:18,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/204923527,https://github.com/hyperledger/sawtooth-supply-chain/pull/60#discussion_r204923527,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/60,https://github.com/hyperledger/sawtooth-supply-chain/pull/60,Just providing some space for future `Property` and `PropertySchema` properties. Unit is a metadata string with no significance to TP logic at all. So it goes after other properties that are more important. Future metadata type properties might go in 21+.,4a9ad556f78eafe8b23befa5963f801ae4201dfa,2018-07-26 17:28:17,205539435,"@@ -71,6 +71,9 @@ message Property {
+ 
+   // Used with STRUCT data types, defines the properties a struct must contain
+   repeated PropertySchema struct_properties = 12;
++
++  // This optional metadata describes the unit a Property is measured in
++  string unit = 20;",6,2018-07-26 17:28:17,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/205539435,https://github.com/hyperledger/sawtooth-supply-chain/pull/60#discussion_r205539435,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"By the logic of the commit message, shouldn't this be `supply-rethink`?",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-08 22:41:14,160275675,"@@ -47,15 +48,15 @@ services:
+       - '3000:3000'
+     depends_on:
+       - validator
+-      - rethinkdb
++      - rethink
+     command: |
+       bash -c ""
+         set -x &&
+-        DB_HOST=rethinkdb npm run init &&
+-        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb node index.js
++        DB_HOST=rethink npm run init &&
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethink node index.js
+       ""
+ 
+-  rethinkdb:
++  rethink:",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160275675,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160275675,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"Likewise, `supply-validator`?",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-08 22:41:30,160275728,"@@ -65,7 +66,7 @@ services:
+       - '28015:28015'
+ 
+   validator:",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160275728,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160275728,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"Seems like this could be pulled out into a library file, for all the of the server code.",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-08 22:47:45,160276957,"@@ -29,25 +39,37 @@ if (DATA.indexOf('.json') === -1) {
+ }
+ 
+ const { records, agents } = require(`./${DATA}`)
+-let batcherPubkey = null
++const context = new secp256k1.Secp256k1Context()
++let batcherPublicKey = null
++
++const encodeHeader = (signerPublicKey, payload) => {",29,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160276957,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160276957,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"It's an external component, not a part of the repo, analogous to the Sawtooth components. An argument could be made for `rethink-db` or whatever, but I think considering there will only ever be one rethink component, this is appropriate.",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 16:55:45,160463873,"@@ -47,15 +48,15 @@ services:
+       - '3000:3000'
+     depends_on:
+       - validator
+-      - rethinkdb
++      - rethink
+     command: |
+       bash -c ""
+         set -x &&
+-        DB_HOST=rethinkdb npm run init &&
+-        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb node index.js
++        DB_HOST=rethink npm run init &&
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethink node index.js
+       ""
+ 
+-  rethinkdb:
++  rethink:",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160463873,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160463873,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"Perhaps we need to have a larger conversation about service/image/container naming conventions. The naming convention I was using was is `{library name}-{component name}`. In this, that would mean `sawtooth-validator`, though I skipped it because there will never be any other kind of validator, and so it felt like an extraneous change.
+
+I don't believe we need to worry about external conflicts with service names, just within the compose file itself. However, I should probably modify the container names, as I neglected to change those.",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 17:01:04,160465444,"@@ -65,7 +66,7 @@ services:
+       - '28015:28015'
+ 
+   validator:",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160465444,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160465444,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"Yeah, I think I was equating service names and container names.  I think just ensuring that the container names won't conflict with the other sawtooth docker compose files would be a good idea.",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 17:25:15,160471798,"@@ -65,7 +66,7 @@ services:
+       - '28015:28015'
+ 
+   validator:",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160471798,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160471798,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,We should probably have all exposed ports have the same prefix (280xx for example) so it's easy to determine they don't conflict with other apps which we have given different prefixes.,daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 19:41:29,160506383,"@@ -96,24 +42,81 @@ services:
+     container_name: supply-chain-server-default
+     expose:
+       - 3000
+-      - 28015
+-      - 4004
+     ports:
+-      - ""3000:3000""
++      - '8020:3000'
+     depends_on:
+       - validator
+-      - rethinkdb
+-    command: ""bash -c \"" \
+-        set -x && \
+-        DB_HOST=rethinkdb npm run init && \
+-        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb node index.js
+-    \""""
++      - rethink
++    command: |
++      bash -c ""
++        set -x &&
++        DB_HOST=rethink npm run init &&
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethink node index.js
++      ""
+ 
+-  rethinkdb:
++  rethink:
+     image: rethinkdb
+     expose:
+       - 8080
+       - 28015
+     ports:
+-      - ""18080:8080""
+-      - ""28015:28015""
++      - '8021:8080'
++      - '28020:28015'
++
++  validator:
++    image: hyperledger/sawtooth-validator:1.0
++    container_name: sawtooth-validator-default
++    expose:
++      - 4004",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160506383,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160506383,vaporos
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"With Marketplace it maintains the initial 2-3 digits of whatever the default is:
+- TCP (validator): 40xx
+- HTTP (clients, API, etc): 80xx
+- Database connection (rethink): 280xx
+
+I was sticking to this scheme. No reason we couldn't simplify it further to 280xx (or whatever) for everything though, if people prefer.
+  ",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 23:22:53,160552821,"@@ -96,24 +42,81 @@ services:
+     container_name: supply-chain-server-default
+     expose:
+       - 3000
+-      - 28015
+-      - 4004
+     ports:
+-      - ""3000:3000""
++      - '8020:3000'
+     depends_on:
+       - validator
+-      - rethinkdb
+-    command: ""bash -c \"" \
+-        set -x && \
+-        DB_HOST=rethinkdb npm run init && \
+-        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb node index.js
+-    \""""
++      - rethink
++    command: |
++      bash -c ""
++        set -x &&
++        DB_HOST=rethink npm run init &&
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethink node index.js
++      ""
+ 
+-  rethinkdb:
++  rethink:
+     image: rethinkdb
+     expose:
+       - 8080
+       - 28015
+     ports:
+-      - ""18080:8080""
+-      - ""28015:28015""
++      - '8021:8080'
++      - '28020:28015'
++
++  validator:
++    image: hyperledger/sawtooth-validator:1.0
++    container_name: sawtooth-validator-default
++    expose:
++      - 4004",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160552821,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160552821,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"Expose ports aren't reachable by the host machine, so they don't need to be changed.  Only ports under the ""ports:"" setting would need to be exposed, which in this case would be the Web App, and maybe the rethink console.",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 23:32:09,160554500,"@@ -96,24 +42,81 @@ services:
+     container_name: supply-chain-server-default
+     expose:
+       - 3000
+-      - 28015
+-      - 4004
+     ports:
+-      - ""3000:3000""
++      - '8020:3000'
+     depends_on:
+       - validator
+-      - rethinkdb
+-    command: ""bash -c \"" \
+-        set -x && \
+-        DB_HOST=rethinkdb npm run init && \
+-        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb node index.js
+-    \""""
++      - rethink
++    command: |
++      bash -c ""
++        set -x &&
++        DB_HOST=rethink npm run init &&
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethink node index.js
++      ""
+ 
+-  rethinkdb:
++  rethink:
+     image: rethinkdb
+     expose:
+       - 8080
+       - 28015
+     ports:
+-      - ""18080:8080""
+-      - ""28015:28015""
++      - '8021:8080'
++      - '28020:28015'
++
++  validator:
++    image: hyperledger/sawtooth-validator:1.0
++    container_name: sawtooth-validator-default
++    expose:
++      - 4004",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160554500,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160554500,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/34,https://github.com/hyperledger/sawtooth-supply-chain/pull/34,"Although the comment is on a line with an `expose` command I took it to be about the ports actually exposed to the host machine with `ports` a few lines below.
+  ",daae0c2f6ba7901f5bc84368570a762c85e0c830,2018-01-09 23:45:23,160556466,"@@ -96,24 +42,81 @@ services:
+     container_name: supply-chain-server-default
+     expose:
+       - 3000
+-      - 28015
+-      - 4004
+     ports:
+-      - ""3000:3000""
++      - '8020:3000'
+     depends_on:
+       - validator
+-      - rethinkdb
+-    command: ""bash -c \"" \
+-        set -x && \
+-        DB_HOST=rethinkdb npm run init && \
+-        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb node index.js
+-    \""""
++      - rethink
++    command: |
++      bash -c ""
++        set -x &&
++        DB_HOST=rethink npm run init &&
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethink node index.js
++      ""
+ 
+-  rethinkdb:
++  rethink:
+     image: rethinkdb
+     expose:
+       - 8080
+       - 28015
+     ports:
+-      - ""18080:8080""
+-      - ""28015:28015""
++      - '8021:8080'
++      - '28020:28015'
++
++  validator:
++    image: hyperledger/sawtooth-validator:1.0
++    container_name: sawtooth-validator-default
++    expose:
++      - 4004",,2018-01-10 00:16:16,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/160556466,https://github.com/hyperledger/sawtooth-supply-chain/pull/34#discussion_r160556466,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/28,https://github.com/hyperledger/sawtooth-supply-chain/pull/28,Nice. When did we get this?,335f0fd9273a6566693a9338646d31cad5a9929d,2017-11-13 18:38:54,150627154,"@@ -58,7 +58,7 @@ services:
+     entrypoint: sawtooth-rest-api --connect tcp://validator:4004 --bind rest-api:8008 -vv
+ 
+   client:
+-    image: hyperledger/sawtooth-all:0.8
++    image: hyperledger/sawtooth-shell:0.8",,2017-12-05 15:21:57,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/150627154,https://github.com/hyperledger/sawtooth-supply-chain/pull/28#discussion_r150627154,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/27,https://github.com/hyperledger/sawtooth-supply-chain/pull/27,I would suggest having this be step 6,66fb74a51962982be2cb18b58dd06d94e93e89fc,2017-11-09 02:00:12,149850095,"@@ -43,22 +45,34 @@ Setup Instructions:
+ 9. $ npm run seed-sample-assets
+ 10. Navigate your browser to localhost:3000/asset
+ 
++Optionally run data feeds to update the assets (watch maps and graphs update in the browser):
++11. $ npm run update-sample-assets
++
++Shutdown Instructions:
++1. Navigate to sawtooth-supply-chain directory 
++2. $ docker-compose down
++
++Subsequent Runs:
++1. $ docker-compose up
++2. Open a new terminal
++3. Navigate to sawtooth-supply-chain/server
++4. $ npm run make-asset
++5. $ npm run seed-sample-assets
++6. Navigate your browser to localhost:3000/asset
++7. $ npm run update-sample-assets",51,2017-11-09 02:00:19,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/149850095,https://github.com/hyperledger/sawtooth-supply-chain/pull/27#discussion_r149850095,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/27,https://github.com/hyperledger/sawtooth-supply-chain/pull/27,> dApp,66fb74a51962982be2cb18b58dd06d94e93e89fc,2017-11-13 18:33:49,150625824,"@@ -1,14 +1,16 @@
+ 
+ ![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)  
+ 
+-Hyperledger Sawtooth
+--------------
++Sawtooth Supply Chain
++-----------------
++
++This is a distributed application to help you trace the provenance and other contextual information of any asset.
++ It can be used as-is or customized for different usages.
++This supply chain dApp runs on top of Hyperledger Sawtooth, an enterprise blockchain. ",11,2017-11-13 18:34:54,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/150625824,https://github.com/hyperledger/sawtooth-supply-chain/pull/27#discussion_r150625824,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/27,https://github.com/hyperledger/sawtooth-supply-chain/pull/27,"If you wanted to view the assets updating live, you would want to navigate there first",66fb74a51962982be2cb18b58dd06d94e93e89fc,2017-11-13 18:34:41,150626041,"@@ -43,22 +45,34 @@ Setup Instructions:
+ 9. $ npm run seed-sample-assets
+ 10. Navigate your browser to localhost:3000/asset
+ 
++Optionally run data feeds to update the assets (watch maps and graphs update in the browser):
++11. $ npm run update-sample-assets
++
++Shutdown Instructions:
++1. Navigate to sawtooth-supply-chain directory 
++2. $ docker-compose down
++
++Subsequent Runs:
++1. $ docker-compose up
++2. Open a new terminal
++3. Navigate to sawtooth-supply-chain/server
++4. $ npm run make-asset
++5. $ npm run seed-sample-assets
++6. Navigate your browser to localhost:3000/asset
++7. $ npm run update-sample-assets",51,2017-11-13 18:34:54,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/150626041,https://github.com/hyperledger/sawtooth-supply-chain/pull/27#discussion_r150626041,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/27,https://github.com/hyperledger/sawtooth-supply-chain/pull/27,"Not sure what your feedback is. Do you not like the term dApp? I know I don't, but there it is anyway.  :)",66fb74a51962982be2cb18b58dd06d94e93e89fc,2017-11-14 15:25:14,150864738,"@@ -1,14 +1,16 @@
+ 
+ ![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)  
+ 
+-Hyperledger Sawtooth
+--------------
++Sawtooth Supply Chain
++-----------------
++
++This is a distributed application to help you trace the provenance and other contextual information of any asset.
++ It can be used as-is or customized for different usages.
++This supply chain dApp runs on top of Hyperledger Sawtooth, an enterprise blockchain. ",11,2017-11-14 15:25:15,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/150864738,https://github.com/hyperledger/sawtooth-supply-chain/pull/27#discussion_r150864738,dcmiddle
+https://github.com/hyperledger/sawtooth-supply-chain/pull/27,https://github.com/hyperledger/sawtooth-supply-chain/pull/27,"I'm going to leave the order as-is (go to browser first, then launch live updates), unless someone has a strong objection?",66fb74a51962982be2cb18b58dd06d94e93e89fc,2017-11-14 15:26:13,150865047,"@@ -43,22 +45,34 @@ Setup Instructions:
+ 9. $ npm run seed-sample-assets
+ 10. Navigate your browser to localhost:3000/asset
+ 
++Optionally run data feeds to update the assets (watch maps and graphs update in the browser):
++11. $ npm run update-sample-assets
++
++Shutdown Instructions:
++1. Navigate to sawtooth-supply-chain directory 
++2. $ docker-compose down
++
++Subsequent Runs:
++1. $ docker-compose up
++2. Open a new terminal
++3. Navigate to sawtooth-supply-chain/server
++4. $ npm run make-asset
++5. $ npm run seed-sample-assets
++6. Navigate your browser to localhost:3000/asset
++7. $ npm run update-sample-assets",51,2017-11-14 15:26:13,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/150865047,https://github.com/hyperledger/sawtooth-supply-chain/pull/27#discussion_r150865047,dcmiddle
+https://github.com/hyperledger/sawtooth-supply-chain/pull/23,https://github.com/hyperledger/sawtooth-supply-chain/pull/23,This should come before docker-compose up,8b70d44371097d1bf9f680d4f35c060cf6c02fba,2017-11-01 20:16:42,148371882,"@@ -10,13 +10,39 @@ It provides an extremely modular and flexible platform for implementing
+ transaction-based updates to shared state between
+ untrusted parties coordinated by consensus algorithms.
+ 
+-Incubation Notice
++Getting Started with Sawtooth Supply Chain
+ -----------------
+ 
+-This project is an _active_ Hyperledger project. It was proposed to the 
+-community and documented [here](http://bit.ly/1T6eVBH). Information on what 
+-_Active_ entails can be found in the 
+-[Hyperledger Project Lifecycle document](https://goo.gl/4edNRc).
++These instructions will enable you to launch a supply chain focused blockchain with web interface, and seed it with some sample assets.
++
++Requirements:
++
++Git - https://git-scm.com/download/mac
++
++Docker - https://www.docker.com/docker-mac 
++
++NPM - https://nodejs.org/en/download/ 
++
++Python3 - https://www.python.org/downloads/mac-osx/ 
++
++GRPC - $ python3 -m pip install grpcio 
++
++GRPC Tools - $ python3 -m pip install grpcio-tools
++
++
++Setup Instructions:
++
++1. $ git clone https://github.com/hyperledger/sawtooth-supply-chain.git
++2. Navigate to sawtooth-supply-chain folder
++3. $ docker-compose up
++4. Open a new terminal
++5. Navigate to sawtooth-supply-chain
++6. $ ./bin/protogen",36,2017-11-01 20:17:01,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/148371882,https://github.com/hyperledger/sawtooth-supply-chain/pull/23#discussion_r148371882,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/15,https://github.com/hyperledger/sawtooth-supply-chain/pull/15,Should be called supply-chain-server now,383e2814ca4a5f708afe1ff843033e6c35c87513,2017-10-23 18:31:40,146354442,"@@ -58,7 +58,7 @@ main() {
+     # Start in project directory
+     cd $top_dir
+ 
+-    docker_build docker/track-and-trade-server docker/ track-and-trade-server
++    docker_build server/Dockerfile server/ track-and-trade-server",,2018-01-17 18:50:25,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/146354442,https://github.com/hyperledger/sawtooth-supply-chain/pull/15#discussion_r146354442,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/15,https://github.com/hyperledger/sawtooth-supply-chain/pull/15,"My understanding is that because of how Docker cache's each step, it is better to separate out dependency installs into pairs of `COPY` + `RUN`. This way if a change was made to the server dependencies, you wouldn't have to go back and reinstall the client dependencies again.
+
+With all of the installs in one command, I believe you will have to reinstall client dependencies every time a server dependency changes.",383e2814ca4a5f708afe1ff843033e6c35c87513,2017-11-13 18:17:56,150621677,"@@ -41,19 +41,18 @@ WORKDIR /usr/src/supply-chain
+ 
+ # Install Dependencies
+ COPY asset_client/package.json asset_client/
+-RUN cd asset_client/ && npm install && cd ..
+-
+ COPY fish_client/package.json fish_client/
+-RUN cd fish_client/ && npm install && cd ..
+-
+ COPY server/package.json server/
+-RUN cd server/ && npm install && cd ..
++
++RUN cd asset_client/ && npm install && cd .. \
++ && cd fish_client/ && npm install && cd .. \
++ && cd server/ && npm install && cd ..",,2018-01-17 18:50:25,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/150621677,https://github.com/hyperledger/sawtooth-supply-chain/pull/15#discussion_r150621677,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/14,https://github.com/hyperledger/sawtooth-supply-chain/pull/14,I don't think this port should be mapped via the host.,12269801c80b346d950aa1776bd9c15d27c45097,2017-10-23 18:05:58,146347442,"@@ -0,0 +1,85 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++version: ""2.1""
++
++services:
++
++  settings-tp:
++    image: hyperledger/sawtooth-tp_settings:latest
++    container_name: sawtooth-settings-tp-default
++    expose:
++      - 4004
++    depends_on:
++      - validator
++    entrypoint: settings-tp -vv tcp://validator:4004
++
++  validator:
++    image: hyperledger/sawtooth-validator:latest
++    container_name: sawtooth-validator-default
++    expose:
++      - 4004
++    ports:
++      - ""4004:4004""
++    # start the validator with an empty genesis batch
++    entrypoint: ""bash -c \""\
++        sawtooth admin keygen && \
++        sawtooth keygen my_key && \
++        sawtooth config genesis -k /root/.sawtooth/keys/my_key.priv && \
++        sawtooth admin genesis config-genesis.batch && \
++        sawtooth-validator -vv \
++          --endpoint tcp://validator:8800 \
++          --bind component:tcp://eth0:4004 \
++          --bind network:tcp://eth0:8800 \
++        \""""
++
++  supply-chain-tp:
++    container_name: supply-chain-tp
++    entrypoint: /sawtooth-supply-chain/bin/supply_chain_tp -vv tcp://validator:4004
++    depends_on:
++      - validator
++    build:
++      context: processor/
++      dockerfile: processor/Dockerfile-installed
++
++  server:
++    build:
++      context: .
++      dockerfile: server/Dockerfile-installed
++    container_name: supply-chain-server-default
++    expose:
++      - 3000
++      - 28015
++      - 4004
++    ports:
++      - ""3000:3000""
++    depends_on:
++      - validator
++      - rethinkdb
++    command: ""bash -c \"" \
++        set -x && \
++        cd server/ && \
++        DB_HOST=rethinkdb npm run init && \
++        VALIDATOR_URL=tcp://validator:4004 DB_HOST=rethinkdb PRIVATE_KEY='1111111111111111111111111111111111111111111111111111111111111111' node index.js
++    \""""
++
++  rethinkdb:
++    image: rethinkdb
++    expose:
++      - 8080
++      - 28015
++    ports:
++      - ""18080:8080""
++      - ""28015:28015""",84,2017-10-23 18:26:29,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/146347442,https://github.com/hyperledger/sawtooth-supply-chain/pull/14#discussion_r146347442,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/13,https://github.com/hyperledger/sawtooth-supply-chain/pull/13,"So every time there is an error when a user accesses the API (including things like attempts at unauthorized access, or missing email addresses), we want to log the entire stack? That seems wrong.",44cc0e5f67f731ef5edf4d2661efbd0b959cd7b2,2017-10-23 17:32:00,146338717,"@@ -132,6 +132,7 @@ const restrict = (req, res, next) => {
+ // Send back a simple JSON error with an HTTP status code
+ const errorHandler = (err, req, res, next) => {
+   if (err) {
++    console.error(err.stack)",4,2017-10-23 17:32:06,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/146338717,https://github.com/hyperledger/sawtooth-supply-chain/pull/13#discussion_r146338717,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/13,https://github.com/hyperledger/sawtooth-supply-chain/pull/13,Perhaps we should have different error handlers then? There are definitely times when you want the stack trace logged for debug purposes. ,44cc0e5f67f731ef5edf4d2661efbd0b959cd7b2,2017-10-23 17:56:55,146345022,"@@ -132,6 +132,7 @@ const restrict = (req, res, next) => {
+ // Send back a simple JSON error with an HTTP status code
+ const errorHandler = (err, req, res, next) => {
+   if (err) {
++    console.error(err.stack)",4,2017-10-23 17:56:55,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/146345022,https://github.com/hyperledger/sawtooth-supply-chain/pull/13#discussion_r146345022,RyanLassigBanks
+https://github.com/hyperledger/sawtooth-supply-chain/pull/13,https://github.com/hyperledger/sawtooth-supply-chain/pull/13,A quick fix to this would be logging the stack trace when the status is 500 or undefined.,44cc0e5f67f731ef5edf4d2661efbd0b959cd7b2,2017-10-23 20:14:53,146380673,"@@ -132,6 +132,7 @@ const restrict = (req, res, next) => {
+ // Send back a simple JSON error with an HTTP status code
+ const errorHandler = (err, req, res, next) => {
+   if (err) {
++    console.error(err.stack)",4,2017-10-23 20:14:53,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/146380673,https://github.com/hyperledger/sawtooth-supply-chain/pull/13#discussion_r146380673,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/10,https://github.com/hyperledger/sawtooth-supply-chain/pull/10,This will also need port 28015 for Rethink,7baf65b424f867a6516fdcc741f1e8058c6f17e6,2017-10-20 16:20:51,146007471,"@@ -72,6 +72,36 @@ services:
+         tail -f /dev/null \
+         \""""
+ 
++  supply-chain-server:
++    image: supply-chain-server:latest
++    volumes:
++      - .:/sawtooth-supply-chain
++    expose:
++      - 8080
++      - 3000",20,2017-10-20 16:21:41,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/146007471,https://github.com/hyperledger/sawtooth-supply-chain/pull/10#discussion_r146007471,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/7,https://github.com/hyperledger/sawtooth-supply-chain/pull/7,"If we leave the fish ui in the server, is that going to require the AMI adds both the fish type and the new basic asset type to the genesis block?",ff97eeaaae5c4b4bb8a10453dc2eb1ee1e3b702d,2017-10-18 17:18:05,145482440,"@@ -33,6 +33,7 @@ Promise.all([
+     blockchain.subscribe()
+ 
+     app.use('/fish', express.static('../fish_client/public'))",,2017-10-19 17:58:00,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/145482440,https://github.com/hyperledger/sawtooth-supply-chain/pull/7#discussion_r145482440,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/7,https://github.com/hyperledger/sawtooth-supply-chain/pull/7,This will eventually be configurable. Probably this week.,ff97eeaaae5c4b4bb8a10453dc2eb1ee1e3b702d,2017-10-18 18:26:46,145501491,"@@ -33,6 +33,7 @@ Promise.all([
+     blockchain.subscribe()
+ 
+     app.use('/fish', express.static('../fish_client/public'))",,2017-10-19 17:58:00,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/145501491,https://github.com/hyperledger/sawtooth-supply-chain/pull/7#discussion_r145501491,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,This should be `supply_chain`,74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 14:52:51,144575884,"@@ -20,7 +20,7 @@ const m = require('mithril')
+ const _ = require('lodash')
+ const sjcl = require('sjcl')
+ 
+-const STORAGE_KEY = 'tnt.authorization'
++const STORAGE_KEY = 'fishnet.authorization'",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144575884,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144575884,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,ditto,74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 14:53:19,144576007,"@@ -23,11 +23,11 @@ const { signer, TransactionEncoder } = require('sawtooth-sdk/client')
+ const modals = require('../components/modals')
+ const api = require('../services/api')
+ 
+-const STORAGE_KEY = 'tnt.encryptedKey'
++const STORAGE_KEY = 'fishnet.encryptedKey'",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144576007,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144576007,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,"Should this get updated to `supply_chain`?  If not, perhaps this should be noted that it is `track_and_trade`, for historical reasons.",74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 14:58:56,144577671,"@@ -404,7 +404,7 @@ first six characters of the SHA-512 hash of the string
+    >>> get_hash('track_and_trade')[:6]",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144577671,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144577671,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,"This should be the full word for the db name: `supply_chain`, no reason this should be short - it's not informative enough.",74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 15:01:18,144578304,"@@ -22,7 +22,7 @@ const jsSchema = require('js-schema')
+ 
+ const HOST = process.env.DB_HOST || 'localhost'
+ const PORT = process.env.DB_PORT || 28015
+-const NAME = process.env.DB_NAME || 'tnt'
++const NAME = process.env.DB_NAME || 'sc'",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144578304,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144578304,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,`supply_chain`,74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 15:10:35,144580725,"@@ -20,7 +20,7 @@ const r = require('rethinkdb')
+ 
+ const HOST = process.env.DB_HOST || 'localhost'
+ const PORT = process.env.DB_PORT || 28015
+-const NAME = process.env.DB_NAME || 'tnt'
++const NAME = process.env.DB_NAME || 'sc'",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144580725,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144580725,peterschwarz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,"It's part of the client, with runs on Sawtooth Supply Chain, but there could be than one client per Supply Chain server. So `fish_net.authorization`, `asset_track.authorization`, etc. I am feeling the underscores though . . .",74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 15:51:25,144591433,"@@ -20,7 +20,7 @@ const m = require('mithril')
+ const _ = require('lodash')
+ const sjcl = require('sjcl')
+ 
+-const STORAGE_KEY = 'tnt.authorization'
++const STORAGE_KEY = 'fishnet.authorization'",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144591433,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144591433,delventhalz
+https://github.com/hyperledger/sawtooth-supply-chain/pull/6,https://github.com/hyperledger/sawtooth-supply-chain/pull/6,"Ah, I see.  This is the storage key in `localStorage`. ",74e038155d87cdb6418b88986ef7ac8f222eb772,2017-10-13 18:20:09,144624631,"@@ -20,7 +20,7 @@ const m = require('mithril')
+ const _ = require('lodash')
+ const sjcl = require('sjcl')
+ 
+-const STORAGE_KEY = 'tnt.authorization'
++const STORAGE_KEY = 'fishnet.authorization'",,2017-10-14 15:34:12,https://api.github.com/repos/hyperledger/sawtooth-supply-chain/pulls/comments/144624631,https://github.com/hyperledger/sawtooth-supply-chain/pull/6#discussion_r144624631,peterschwarz

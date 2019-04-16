@@ -1,0 +1,112 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/28,https://github.com/hyperledger/blockchain-explorer/pull/28,posa88,create database automatically when the db container is up,"the script, 'createdb.sh' is written for manually execution in 'app/persistence/fabric/postgreSQL/db/'.
+It doesn't work in the docker container(created by docker-compose) at all even though we already put it at '/docker-entrypoint-initdb.d/'.
+This PR makes it work well.",[],1,2019-03-13 12:05:10,2019-03-16 13:27:32,2019-03-16 13:27:32,False,,,clean,True,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/27,https://github.com/hyperledger/blockchain-explorer/pull/27,edisinovcic,Update deploy_explorer.sh,"For docker deployment exposed port is 8090 instead of mentioned 8080.
+
+Change in README or in deploy_explorer.sh is needed.
+
+I've updated deploy_run_explorer function to 8080:8080 so internal and external port is the same and it's the one used in documentation.",[],1,2019-02-19 13:12:46,2019-02-19 14:01:11,2019-02-19 14:01:11,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/26,https://github.com/hyperledger/blockchain-explorer/pull/26,FlorianBoyaka,Update explorerpg.sql,Removed all the : (colons) before each variable name.,[],1,2019-02-17 18:28:18,2019-02-17 19:00:38,2019-02-18 04:59:11,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/25,https://github.com/hyperledger/blockchain-explorer/pull/25,Durairaj,Removed [.] Dot.,When copying its causing inconvenience to clone repo,[],1,2019-02-06 00:50:40,2019-02-09 08:02:19,2019-02-09 08:02:19,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/24,https://github.com/hyperledger/blockchain-explorer/pull/24,sunyoubo,Update TROUBLESHOOT.md,add troubleshoot,[],1,2018-12-13 11:24:22,2018-12-14 02:43:43,2018-12-14 02:44:19,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/23,https://github.com/hyperledger/blockchain-explorer/pull/23,sunyoubo,Update TROUBLESHOOT.md,add troubleshoot,[],1,2018-12-13 10:12:32,2018-12-13 10:32:49,2018-12-13 10:32:49,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/22,https://github.com/hyperledger/blockchain-explorer/pull/22,ddemydenko,Unzipping feature,Unzipping feature,[],22,2018-12-11 13:59:34,2018-12-11 14:04:11,2018-12-11 16:37:06,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/21,https://github.com/hyperledger/blockchain-explorer/pull/21,mffrench,Improve explorer db image config...,"... by using Postgre entrypoint feature as described here : https://hub.docker.com/_/postgres/ (How to extend this image)
+
+Then I'm able to run Hyperledger Explorer as follow : 
+
+```
+version: '2.1'
+
+networks:
+  mynetwork.com:
+    name: mynetwork.com
+
+services:
+
+  explorerdb.mynetwork.com:
+    image: mffrench/explorer-db:0.3.5.1
+    container_name: explorerdb.mynetwork.com
+    hostname: explorerdb.mynetwork.com
+    environment:
+      - DATABASE_DATABASE=fabricexplorer
+      - DATABASE_USERNAME=hppoc
+      - DATABASE_PASSWORD=password
+    command: bash -c ""cp /opt/createdb.sh /docker-entrypoint-initdb.d && /docker-entrypoint.sh postgres""
+    networks:
+      - mynetwork.com
+
+  explorer.mynetwork.com:
+    image: mffrench/explorer:0.3.5.1
+    container_name: explorer.mynetwork.com
+    hostname: explorer.mynetwork.com
+    environment:
+      - DATABASE_HOST=explorerdb.mynetwork.com
+      - DATABASE_USERNAME=hppoc
+      - DATABASE_PASSWD=password
+    volumes:
+      - ./explorer-config/config.json:/opt/explorer/app/platform/fabric/config.json
+      - ./crypto-config:/tmp/crypto
+    command: sh -c ""sleep 16 && node /opt/explorer/main.js && tail -f /dev/null""
+    ports:
+      - 8090:8080
+    networks:
+     - mynetwork.com
+```",[],2,2018-11-21 18:24:24,2018-11-23 09:13:22,2018-11-23 13:08:58,False,,,unstable,True,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/20,https://github.com/hyperledger/blockchain-explorer/pull/20,CsterKuroi,Update FabricVerison.js,,[],1,2018-09-13 09:08:38,2018-09-20 01:49:55,2018-09-20 01:49:55,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/19,https://github.com/hyperledger/blockchain-explorer/pull/19,Park-Kevin,getBlockTimeStamp return date depends on timezone.,getBlockTimeStamp will be maintain utc+0,[],3,2018-09-13 07:03:15,2018-09-20 01:49:43,2018-09-20 01:49:43,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/18,https://github.com/hyperledger/blockchain-explorer/pull/18,Park-Kevin,Request PR for syncing Get Postgres DB data with correct Timezone Offset,I have edited the code so that the Timezone will correctly express the the data in the postgresDB in the case where the Timezone in the postgresDB is different from the Fabric Network UTC+0.,[],1,2018-09-11 07:19:37,2018-09-13 06:42:27,2018-09-13 06:43:51,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/17,https://github.com/hyperledger/blockchain-explorer/pull/17,BenShen98,Jiajia,translate all pages to Chinese,[],6,2018-09-05 07:27:39,2018-09-05 07:54:38,2018-09-05 08:08:19,False,,,dirty,False,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/16,https://github.com/hyperledger/blockchain-explorer/pull/16,penghaijie,Update chaincodeService.js,"be sure of the last character of  path is '/',which ensure the following codes working correct. 
+locate_cmd + path + regXgo
+locate_cmd + path + regXjs",[],1,2018-08-29 09:08:54,2018-09-20 01:49:25,2018-09-20 01:49:25,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/15,https://github.com/hyperledger/blockchain-explorer/pull/15,aviralwal,Update CONFIG-COMPOSER-HLEXPLORER.md,Signed-off-by: Aviral Agrawal <aviralwal@users.noreply.github.com>,[],1,2018-08-02 09:16:30,2018-08-22 07:47:02,2018-08-22 07:47:03,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/14,https://github.com/hyperledger/blockchain-explorer/pull/14,aviralwal,Updated CONFIG-COMPOSER-HLEXPLORER.md,Signed-off-by: Aviral Agrawal <aviralagrawal260@gmail.com>,[],2,2018-08-02 09:13:00,2018-08-02 09:15:12,2018-08-02 09:15:18,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/13,https://github.com/hyperledger/blockchain-explorer/pull/13,aviralwal,Update CONFIG-COMPOSER-HLEXPLORER.md,Signed-off-by: Aviral Agrawal <aviralagrawal260@gmail.com>,[],1,2018-08-02 09:08:04,2018-08-02 09:11:21,2018-08-02 09:11:21,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/12,https://github.com/hyperledger/blockchain-explorer/pull/12,ghdalsrldi,fixed babel-node compile error,"fixed babel-node compile error
+Signed-off-by: mkhong <ghdalsrldi@gmail.com>",[],1,2018-08-02 09:05:08,2018-08-22 07:46:51,2018-08-22 07:46:51,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/11,https://github.com/hyperledger/blockchain-explorer/pull/11,ghdalsrldi,fixed babel-node compile error,fixed babel-node compile error,[],3,2018-08-02 08:44:53,2018-08-22 07:46:39,2018-08-22 07:46:39,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/10,https://github.com/hyperledger/blockchain-explorer/pull/10,feiqihang,Fix notifyCount variable reset problem,"Problem Description: When the NotificationsPanel is displayed, the notifyCount variable is set to zero, then the item in the notify list is always increasing, but the notifyCount variable is also incremented. When the NotificationsPanel is hidden, the notify corresponding to the notifyCount variable has already been read.
+
+Solution: Set the notifyCount variable to zero when hiding the NotificationsPanel.",[],1,2018-07-23 09:04:26,2018-08-22 07:46:27,2018-08-22 07:46:28,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/9,https://github.com/hyperledger/blockchain-explorer/pull/9,javapriyan,Update README.md,Unable to run test in the given order as the new dependencies (such as log4js) are only install during main/npm install. Then running tests are passed. May be this is not the case for all of the node devs as they might have installed most of them already,[],3,2018-06-25 04:22:20,2018-07-17 04:01:13,2018-07-17 04:01:13,False,,,dirty,False,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/8,https://github.com/hyperledger/blockchain-explorer/pull/8,uchihamalolan,changed navigation ui,"Made the navigation items into buttons    ``\_(x_x)_/``
+Earlier it was recognized as text :P
+The UI looks cleaner now",[],1,2018-06-14 11:59:17,2018-06-15 13:29:19,2018-06-15 13:29:19,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/7,https://github.com/hyperledger/blockchain-explorer/pull/7,ravijaviya,Update README.md,"
+<img width=""899"" alt=""screen shot 2018-06-14 at 2 22 33 pm"" src=""https://user-images.githubusercontent.com/19855892/41401927-a84b449e-6fde-11e8-80b3-e372f198b93f.png"">
+fix to remove error coming when you run ""npm run test"" before installing modules at blockchain-explorer.",[],1,2018-06-14 08:55:03,2018-06-21 12:40:23,2018-06-21 12:40:39,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/6,https://github.com/hyperledger/blockchain-explorer/pull/6,sallykeating,24 sally logo change,Changes to a lot of file to make the explorer more DIID customized,[],28,2018-06-01 21:24:10,2018-06-04 12:49:27,2018-06-04 12:50:50,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/5,https://github.com/hyperledger/blockchain-explorer/pull/5,mychewcents,Added the payload field to the Transaction Table.,"### Ref: 
+#1 
+
+### Description: 
+Added the field of `payload` in the transaction table to store payload of the transaction being queried.
+
+### Blocking:
+Yes
+
+### Documentation:
+Not needed for the moment.
+",[],2,2018-05-14 13:40:09,2018-05-14 13:44:08,2018-05-14 13:49:42,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/4,https://github.com/hyperledger/blockchain-explorer/pull/4,cammachusa,BE-136 add channel backend implementation,,[],1,2018-03-27 19:55:36,2018-07-17 04:01:00,2018-07-17 04:01:00,False,,,dirty,False,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/3,https://github.com/hyperledger/blockchain-explorer/pull/3,walmon,"Server_hostname missing, iterative insertion of peers in MySQL","When the server_hostname is not present, each time the database refreshes a new row for each peer is inserted in the database.
+
+This fix avoids this to prevent the database from growing without even noticing and the UI to get freeze from loading too much registries.
+
+A simple fix in the SQL query. 
+![Uploading Screen Shot 2017-12-28 at 16.24.06.png…]()
+",[],1,2017-12-28 22:42:09,2018-01-05 23:53:11,2018-01-06 10:56:28,False,,,dirty,False,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/2,https://github.com/hyperledger/blockchain-explorer/pull/2,zerjioang,Bugfix: comma missing on app/network-config-tls.json file causing an …,"Invalid JSON fixed at TLS network configuration file
+
+## Before 
+
+![jsonerror](https://user-images.githubusercontent.com/6706342/31167268-ceda4948-a8f1-11e7-93d7-bd0bbe8ab687.png)
+
+## After
+
+![imagen](https://user-images.githubusercontent.com/6706342/31167307-f399b318-a8f1-11e7-830c-9a884db52d23.png)
+
+",[],1,2017-10-04 08:51:33,2017-10-12 04:30:45,2017-10-12 04:30:45,False,,,unknown,,closed
+blockchain-explorer,https://api.github.com/repos/hyperledger/blockchain-explorer/pulls/1,https://github.com/hyperledger/blockchain-explorer/pull/1,jjmiranda,Some blocks has no transactions.,,[],3,2016-10-30 00:45:22,2016-11-01 01:10:25,2016-11-01 01:10:25,False,,,unknown,,closed

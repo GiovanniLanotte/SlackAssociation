@@ -1,0 +1,3952 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/grid/pull/31,https://github.com/hyperledger/grid/pull/31,the line about messages can also be removed,08bf903eac11cd51c43cecb608b3e079a46ce121,2019-04-03 12:42:37,271721801,"@@ -12,56 +12,67 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-FROM rust:1
+-
+-RUN apt-get update && apt-get install -y unzip libzmq3-dev
+-
+-RUN \
+- if [ ! -z $HTTP_PROXY ] && [ -z $http_proxy ]; then \
+-  http_proxy=$HTTP_PROXY; \
+- fi; \
+- if [ ! -z $HTTPS_PROXY ] && [ -z $https_proxy ]; then \
+-  https_proxy=$HTTPS_PROXY; \
+- fi; \
+- if [ ! -z $http_proxy ]; then \
+-  http_proxy_host=$(printf $http_proxy | sed 's|http.*://\(.*\):\(.*\)$|\1|');\
+-  http_proxy_port=$(printf $http_proxy | sed 's|http.*://\(.*\):\(.*\)$|\2|');\
+-  mkdir -p $HOME/.cargo \
+-  && echo ""[http]"" >> $HOME/.cargo/config \
+-  && echo 'proxy = ""'$http_proxy_host:$http_proxy_port'""' >> $HOME/.cargo/config \
+-  && cat $HOME/.cargo/config; \
+- fi; \
+- if [ ! -z $https_proxy ]; then \
+-  https_proxy_host=$(printf $https_proxy | sed 's|http.*://\(.*\):\(.*\)$|\1|');\
+-  https_proxy_port=$(printf $https_proxy | sed 's|http.*://\(.*\):\(.*\)$|\2|');\
+-  mkdir -p $HOME/.cargo \
+-  && echo ""[https]"" >> $HOME/.cargo/config \
+-  && echo 'proxy = ""'$https_proxy_host:$https_proxy_port'""' >> $HOME/.cargo/config \
+-  && cat $HOME/.cargo/config; \
+- fi;
++FROM ubuntu:bionic as GRID-TNT-BUILDER
++
++# Install base dependencies
++RUN apt-get update \
++    && apt-get install -y -q \
++        build-essential \
++        curl \
++        gcc \
++        g++ \
++        libpq-dev \
++        libssl-dev \
++        libsasl2-dev \
++        libzmq3-dev \
++        openssl \
++        pkg-config \
++        unzip \
++    && apt-get clean \
++    && rm -rf /var/lib/apt/lists/*
++
++# Install Rust
++RUN curl https://sh.rustup.rs -sSf > /usr/bin/rustup-init \
++ && chmod +x /usr/bin/rustup-init \
++ && rustup-init -y
+ 
+ # For Building Protobufs
+ RUN curl -OLsS https://github.com/google/protobuf/releases/download/v3.5.1/protoc-3.5.1-linux-x86_64.zip \
+- && unzip protoc-3.5.1-linux-x86_64.zip -d protoc3 \
+- && rm protoc-3.5.1-linux-x86_64.zip
+-RUN apt-get update && apt-get install -y protobuf-compiler
++    && unzip -o protoc-3.5.1-linux-x86_64.zip -d /usr/local \
++    && rm protoc-3.5.1-linux-x86_64.zip
++
++ENV PATH=$PATH:/protoc3/bin:/root/.cargo/bin
+ 
+ # Build TP with dummy source in order to cache dependencies in Docker image.
+ # Make sure not to use the `volumes` command to overwrite:
+ #   - /grid/contracts/track_and_trace/target/
+ #   - /grid/contracts/track_and_trace/src/messages/",,2019-04-03 14:02:55,https://api.github.com/repos/hyperledger/grid/pulls/comments/271721801,https://github.com/hyperledger/grid/pull/31#discussion_r271721801,agunde406
+https://github.com/hyperledger/grid/pull/31,https://github.com/hyperledger/grid/pull/31,Removed,08bf903eac11cd51c43cecb608b3e079a46ce121,2019-04-03 14:03:07,271758265,"@@ -12,56 +12,67 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-FROM rust:1
+-
+-RUN apt-get update && apt-get install -y unzip libzmq3-dev
+-
+-RUN \
+- if [ ! -z $HTTP_PROXY ] && [ -z $http_proxy ]; then \
+-  http_proxy=$HTTP_PROXY; \
+- fi; \
+- if [ ! -z $HTTPS_PROXY ] && [ -z $https_proxy ]; then \
+-  https_proxy=$HTTPS_PROXY; \
+- fi; \
+- if [ ! -z $http_proxy ]; then \
+-  http_proxy_host=$(printf $http_proxy | sed 's|http.*://\(.*\):\(.*\)$|\1|');\
+-  http_proxy_port=$(printf $http_proxy | sed 's|http.*://\(.*\):\(.*\)$|\2|');\
+-  mkdir -p $HOME/.cargo \
+-  && echo ""[http]"" >> $HOME/.cargo/config \
+-  && echo 'proxy = ""'$http_proxy_host:$http_proxy_port'""' >> $HOME/.cargo/config \
+-  && cat $HOME/.cargo/config; \
+- fi; \
+- if [ ! -z $https_proxy ]; then \
+-  https_proxy_host=$(printf $https_proxy | sed 's|http.*://\(.*\):\(.*\)$|\1|');\
+-  https_proxy_port=$(printf $https_proxy | sed 's|http.*://\(.*\):\(.*\)$|\2|');\
+-  mkdir -p $HOME/.cargo \
+-  && echo ""[https]"" >> $HOME/.cargo/config \
+-  && echo 'proxy = ""'$https_proxy_host:$https_proxy_port'""' >> $HOME/.cargo/config \
+-  && cat $HOME/.cargo/config; \
+- fi;
++FROM ubuntu:bionic as GRID-TNT-BUILDER
++
++# Install base dependencies
++RUN apt-get update \
++    && apt-get install -y -q \
++        build-essential \
++        curl \
++        gcc \
++        g++ \
++        libpq-dev \
++        libssl-dev \
++        libsasl2-dev \
++        libzmq3-dev \
++        openssl \
++        pkg-config \
++        unzip \
++    && apt-get clean \
++    && rm -rf /var/lib/apt/lists/*
++
++# Install Rust
++RUN curl https://sh.rustup.rs -sSf > /usr/bin/rustup-init \
++ && chmod +x /usr/bin/rustup-init \
++ && rustup-init -y
+ 
+ # For Building Protobufs
+ RUN curl -OLsS https://github.com/google/protobuf/releases/download/v3.5.1/protoc-3.5.1-linux-x86_64.zip \
+- && unzip protoc-3.5.1-linux-x86_64.zip -d protoc3 \
+- && rm protoc-3.5.1-linux-x86_64.zip
+-RUN apt-get update && apt-get install -y protobuf-compiler
++    && unzip -o protoc-3.5.1-linux-x86_64.zip -d /usr/local \
++    && rm protoc-3.5.1-linux-x86_64.zip
++
++ENV PATH=$PATH:/protoc3/bin:/root/.cargo/bin
+ 
+ # Build TP with dummy source in order to cache dependencies in Docker image.
+ # Make sure not to use the `volumes` command to overwrite:
+ #   - /grid/contracts/track_and_trace/target/
+ #   - /grid/contracts/track_and_trace/src/messages/",,2019-04-03 14:03:08,https://api.github.com/repos/hyperledger/grid/pulls/comments/271758265,https://github.com/hyperledger/grid/pull/31#discussion_r271758265,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"We should consider splitting this error up into something that is for the overall rest api component (i.e. starting, stopping, etc) and handling requests. ",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-02 15:16:19,271359077,"@@ -12,20 +12,32 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
++use actix::MailboxError;
++use actix_web::error::PayloadError;
++use actix_web::{error::ResponseError, HttpResponse};
+ use std::error::Error;
++
+ use std::fmt;
+ 
+ #[derive(Debug)]
+ pub enum RestApiError {
+     StartUpError(String),
+     StdError(std::io::Error),
++    InternalServerError,",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271359077,https://github.com/hyperledger/grid/pull/30#discussion_r271359077,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"The parse error should be handled here, not below:
+```
+let batch_list: BatchList = match protobuf::parse_from_bytes(&*body) {
+    Ok(list) => list,
+    Err(err) => return Box::new(future::err(RestApiError::BadRequest(format!(
+                    ""Protobuf message was badly formatted. {}"",
+                    err.to_string()
+                ))));
+};
+```
+This keeps all the error result creation close to the originator of the error.  
+",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-02 15:24:41,271363186,"@@ -12,8 +12,158 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
+-use actix_web::{HttpRequest, HttpResponse};
++use crate::rest_api::{AppState, RestApiError};
+ 
+-pub fn index(_req: &HttpRequest) -> HttpResponse {
+-    HttpResponse::Ok().body(""Hello world!"")
++use actix::{Actor, Context, Handler, Message};
++use actix_web::{HttpMessage, HttpRequest, HttpResponse, State};
++use futures::future;
++use futures::future::Future;
++use protobuf;
++use serde::Serialize;
++use std::time::Duration;
++use url::form_urlencoded::byte_serialize;
++use url::Url;
++use uuid::Uuid;
++
++use sawtooth_sdk::messages::batch::BatchList;
++use sawtooth_sdk::messages::client_batch_submit::{
++    ClientBatchSubmitRequest, ClientBatchSubmitResponse, ClientBatchSubmitResponse_Status,
++};
++use sawtooth_sdk::messages::validator::Message_MessageType;
++use sawtooth_sdk::messaging::stream::{MessageConnection, MessageReceiver, MessageSender};
++use sawtooth_sdk::messaging::zmq_stream::{ZmqMessageConnection, ZmqMessageSender};
++
++const DEFAULT_TIME_OUT: u64 = 30;
++
++pub struct ZmqConnection {
++    sender: ZmqMessageSender,
++    _receiver: MessageReceiver,
++}
++
++impl Actor for ZmqConnection {
++    type Context = Context<Self>;
++}
++
++impl ZmqConnection {
++    pub fn new(validator_address: String) -> ZmqConnection {
++        let zmq_connection = ZmqMessageConnection::new(&validator_address);
++        let (sender, receiver) = zmq_connection.create();
++        ZmqConnection {
++            sender,
++            _receiver: receiver,
++        }
++    }
++}
++
++struct SubmitBatches {
++    batch_list: BatchList,
++    response_url: Url,
++}
++
++impl Message for SubmitBatches {
++    type Result = Result<BatchStatusLink, RestApiError>;
++}
++
++#[derive(Serialize)]
++pub struct BatchStatusLink {
++    pub link: String,
++}
++
++impl Handler<SubmitBatches> for ZmqConnection {
++    type Result = Result<BatchStatusLink, RestApiError>;
++
++    fn handle(&mut self, msg: SubmitBatches, _: &mut Context<Self>) -> Self::Result {
++        let mut client_submit_request = ClientBatchSubmitRequest::new();
++        client_submit_request.set_batches(protobuf::RepeatedField::from_vec(
++            msg.batch_list.get_batches().to_vec(),
++        ));
++        let content = protobuf::Message::write_to_bytes(&client_submit_request)
++            .map_err(|_| RestApiError::InternalServerError)?;
++        let correlation_id = Uuid::new_v4().to_string();
++        let mut response_future = self
++            .sender
++            .send(
++                Message_MessageType::CLIENT_BATCH_SUBMIT_REQUEST,
++                &correlation_id,
++                &content,
++            )
++            .map_err(|err| {
++                RestApiError::ZmqConnectionError(format!(
++                    ""Failed to send message to validator. {}"",
++                    err.to_string()
++                ))
++            })?;
++        let response_status: ClientBatchSubmitResponse = protobuf::parse_from_bytes(
++            response_future
++                .get_timeout(Duration::new(DEFAULT_TIME_OUT, 0))
++                .map_err(|err| RestApiError::ZmqConnectionError(err.to_string()))?
++                .get_content(),
++        )
++        .map_err(|_| RestApiError::InternalServerError)?;
++
++        match response_status.get_status() {
++            ClientBatchSubmitResponse_Status::OK => {
++                let mut batch_query = String::new();
++                for (i, batch) in msg.batch_list.get_batches().iter().enumerate() {
++                    batch_query.push_str(batch.get_header_signature());
++                    if msg.batch_list.get_batches().len() > 1
++                        && i <= msg.batch_list.get_batches().len() - 2
++                    {
++                        batch_query.push(',');
++                    }
++                }
++                let encoded_query: String = byte_serialize(batch_query.as_bytes()).collect();
++                let mut response_url = msg.response_url.clone();
++                response_url.set_query(Some(&format!(""id={}"", encoded_query)));
++
++                Ok(BatchStatusLink {
++                    link: response_url.to_string(),
++                })
++            }
++            _ => Err(RestApiError::SawtoothValidatorResponseError(format!(
++                ""Sawtooth Validator responded with status {:?}"",
++                response_status.get_status()
++            ))),
++        }
++    }
++}
++
++pub fn submit_batches(
++    (req, state): (HttpRequest<AppState>, State<AppState>),
++) -> impl Future<Item = HttpResponse, Error = RestApiError> {
++    req.body().from_err().and_then(
++        move |body| -> Box<Future<Item = HttpResponse, Error = RestApiError>> {
++            let batch_list: Result<BatchList, _> = protobuf::parse_from_bytes(&*body);",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271363186,https://github.com/hyperledger/grid/pull/30#discussion_r271363186,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"Some of the errors may imply poorly formed batches, which can be communicated back to the user.",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-02 15:28:38,271365059,"@@ -12,8 +12,158 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
+-use actix_web::{HttpRequest, HttpResponse};
++use crate::rest_api::{AppState, RestApiError};
+ 
+-pub fn index(_req: &HttpRequest) -> HttpResponse {
+-    HttpResponse::Ok().body(""Hello world!"")
++use actix::{Actor, Context, Handler, Message};
++use actix_web::{HttpMessage, HttpRequest, HttpResponse, State};
++use futures::future;
++use futures::future::Future;
++use protobuf;
++use serde::Serialize;
++use std::time::Duration;
++use url::form_urlencoded::byte_serialize;
++use url::Url;
++use uuid::Uuid;
++
++use sawtooth_sdk::messages::batch::BatchList;
++use sawtooth_sdk::messages::client_batch_submit::{
++    ClientBatchSubmitRequest, ClientBatchSubmitResponse, ClientBatchSubmitResponse_Status,
++};
++use sawtooth_sdk::messages::validator::Message_MessageType;
++use sawtooth_sdk::messaging::stream::{MessageConnection, MessageReceiver, MessageSender};
++use sawtooth_sdk::messaging::zmq_stream::{ZmqMessageConnection, ZmqMessageSender};
++
++const DEFAULT_TIME_OUT: u64 = 30;
++
++pub struct ZmqConnection {
++    sender: ZmqMessageSender,
++    _receiver: MessageReceiver,
++}
++
++impl Actor for ZmqConnection {
++    type Context = Context<Self>;
++}
++
++impl ZmqConnection {
++    pub fn new(validator_address: String) -> ZmqConnection {
++        let zmq_connection = ZmqMessageConnection::new(&validator_address);
++        let (sender, receiver) = zmq_connection.create();
++        ZmqConnection {
++            sender,
++            _receiver: receiver,
++        }
++    }
++}
++
++struct SubmitBatches {
++    batch_list: BatchList,
++    response_url: Url,
++}
++
++impl Message for SubmitBatches {
++    type Result = Result<BatchStatusLink, RestApiError>;
++}
++
++#[derive(Serialize)]
++pub struct BatchStatusLink {
++    pub link: String,
++}
++
++impl Handler<SubmitBatches> for ZmqConnection {
++    type Result = Result<BatchStatusLink, RestApiError>;
++
++    fn handle(&mut self, msg: SubmitBatches, _: &mut Context<Self>) -> Self::Result {
++        let mut client_submit_request = ClientBatchSubmitRequest::new();
++        client_submit_request.set_batches(protobuf::RepeatedField::from_vec(
++            msg.batch_list.get_batches().to_vec(),
++        ));
++        let content = protobuf::Message::write_to_bytes(&client_submit_request)
++            .map_err(|_| RestApiError::InternalServerError)?;
++        let correlation_id = Uuid::new_v4().to_string();
++        let mut response_future = self
++            .sender
++            .send(
++                Message_MessageType::CLIENT_BATCH_SUBMIT_REQUEST,
++                &correlation_id,
++                &content,
++            )
++            .map_err(|err| {
++                RestApiError::ZmqConnectionError(format!(
++                    ""Failed to send message to validator. {}"",
++                    err.to_string()
++                ))
++            })?;
++        let response_status: ClientBatchSubmitResponse = protobuf::parse_from_bytes(
++            response_future
++                .get_timeout(Duration::new(DEFAULT_TIME_OUT, 0))
++                .map_err(|err| RestApiError::ZmqConnectionError(err.to_string()))?
++                .get_content(),
++        )
++        .map_err(|_| RestApiError::InternalServerError)?;
++
++        match response_status.get_status() {
++            ClientBatchSubmitResponse_Status::OK => {
++                let mut batch_query = String::new();
++                for (i, batch) in msg.batch_list.get_batches().iter().enumerate() {
++                    batch_query.push_str(batch.get_header_signature());
++                    if msg.batch_list.get_batches().len() > 1
++                        && i <= msg.batch_list.get_batches().len() - 2
++                    {
++                        batch_query.push(',');
++                    }
++                }
++                let encoded_query: String = byte_serialize(batch_query.as_bytes()).collect();
++                let mut response_url = msg.response_url.clone();
++                response_url.set_query(Some(&format!(""id={}"", encoded_query)));
++
++                Ok(BatchStatusLink {
++                    link: response_url.to_string(),
++                })
++            }
++            _ => Err(RestApiError::SawtoothValidatorResponseError(format!(
++                ""Sawtooth Validator responded with status {:?}"",
++                response_status.get_status()
++            ))),
++        }
++    }
++}
++
++pub fn submit_batches(
++    (req, state): (HttpRequest<AppState>, State<AppState>),
++) -> impl Future<Item = HttpResponse, Error = RestApiError> {
++    req.body().from_err().and_then(
++        move |body| -> Box<Future<Item = HttpResponse, Error = RestApiError>> {
++            let batch_list: Result<BatchList, _> = protobuf::parse_from_bytes(&*body);
++            let response_url = match req.url_for_static(""batch_statuses"") {
++                Ok(url) => url,
++                Err(_) => return Box::new(future::err(RestApiError::InternalServerError)),
++            };
++            match batch_list {
++                Ok(batch_list) => {
++                    let res = state
++                        .zmq_connection
++                        .send(SubmitBatches {
++                            batch_list,
++                            response_url,
++                        })
++                        .from_err()
++                        .and_then(|res| match res {
++                            Ok(link) => Ok(HttpResponse::Ok().json(link)),
++                            Err(_) => Ok(HttpResponse::InternalServerError().into()),",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271365059,https://github.com/hyperledger/grid/pull/30#discussion_r271365059,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"How will this be closed?  This object can probably make due with just the sender, and we should consider pulling up the sawtooth connectivity that can be shared between the event processor and the rest API.",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-02 15:30:22,271365939,"@@ -12,8 +12,158 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
+-use actix_web::{HttpRequest, HttpResponse};
++use crate::rest_api::{AppState, RestApiError};
+ 
+-pub fn index(_req: &HttpRequest) -> HttpResponse {
+-    HttpResponse::Ok().body(""Hello world!"")
++use actix::{Actor, Context, Handler, Message};
++use actix_web::{HttpMessage, HttpRequest, HttpResponse, State};
++use futures::future;
++use futures::future::Future;
++use protobuf;
++use serde::Serialize;
++use std::time::Duration;
++use url::form_urlencoded::byte_serialize;
++use url::Url;
++use uuid::Uuid;
++
++use sawtooth_sdk::messages::batch::BatchList;
++use sawtooth_sdk::messages::client_batch_submit::{
++    ClientBatchSubmitRequest, ClientBatchSubmitResponse, ClientBatchSubmitResponse_Status,
++};
++use sawtooth_sdk::messages::validator::Message_MessageType;
++use sawtooth_sdk::messaging::stream::{MessageConnection, MessageReceiver, MessageSender};
++use sawtooth_sdk::messaging::zmq_stream::{ZmqMessageConnection, ZmqMessageSender};
++
++const DEFAULT_TIME_OUT: u64 = 30;
++
++pub struct ZmqConnection {
++    sender: ZmqMessageSender,
++    _receiver: MessageReceiver,
++}
++
++impl Actor for ZmqConnection {
++    type Context = Context<Self>;
++}
++
++impl ZmqConnection {
++    pub fn new(validator_address: String) -> ZmqConnection {
++        let zmq_connection = ZmqMessageConnection::new(&validator_address);",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271365939,https://github.com/hyperledger/grid/pull/30#discussion_r271365939,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"I'll work on the shutdown logic for this.  And yes, it would be good to be able to share the connection between the the event processor and the rest API. Earlier, I misspoke when I said it would be easy with this current implementation. It is easy to create new message types and implement more handlers for the zmq actor, like [here](https://github.com/hyperledger/grid/blob/1c05fc11e4271fe5d982ee7aaaa35cf6a8354d0c/daemon/src/rest_api/route_handler.rs#L63). But that would not help with sharing connections with the event processor. 
+",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-02 15:52:04,271376459,"@@ -12,8 +12,158 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
+-use actix_web::{HttpRequest, HttpResponse};
++use crate::rest_api::{AppState, RestApiError};
+ 
+-pub fn index(_req: &HttpRequest) -> HttpResponse {
+-    HttpResponse::Ok().body(""Hello world!"")
++use actix::{Actor, Context, Handler, Message};
++use actix_web::{HttpMessage, HttpRequest, HttpResponse, State};
++use futures::future;
++use futures::future::Future;
++use protobuf;
++use serde::Serialize;
++use std::time::Duration;
++use url::form_urlencoded::byte_serialize;
++use url::Url;
++use uuid::Uuid;
++
++use sawtooth_sdk::messages::batch::BatchList;
++use sawtooth_sdk::messages::client_batch_submit::{
++    ClientBatchSubmitRequest, ClientBatchSubmitResponse, ClientBatchSubmitResponse_Status,
++};
++use sawtooth_sdk::messages::validator::Message_MessageType;
++use sawtooth_sdk::messaging::stream::{MessageConnection, MessageReceiver, MessageSender};
++use sawtooth_sdk::messaging::zmq_stream::{ZmqMessageConnection, ZmqMessageSender};
++
++const DEFAULT_TIME_OUT: u64 = 30;
++
++pub struct ZmqConnection {
++    sender: ZmqMessageSender,
++    _receiver: MessageReceiver,
++}
++
++impl Actor for ZmqConnection {
++    type Context = Context<Self>;
++}
++
++impl ZmqConnection {
++    pub fn new(validator_address: String) -> ZmqConnection {
++        let zmq_connection = ZmqMessageConnection::new(&validator_address);",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271376459,https://github.com/hyperledger/grid/pull/30#discussion_r271376459,eloaverona
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,Not sure that you need this `clone` here,2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 17:58:54,271863379,"@@ -52,9 +67,13 @@ pub fn run(
+         .name(""GridRestApi"".into())
+         .spawn(move || {
+             let sys = actix::System::new(""Grid-Rest-API"");
++            let zmq_connection_addr =
++                SawtoothMessageSender::create(move |_ctx: &mut Context<SawtoothMessageSender>| {
++                    SawtoothMessageSender::new(zmq_sender)
++                });
+ 
+             info!(""Starting Rest API at {}"", &bind_url);
+-            let addr = server::new(create_app)
++            let addr = server::new(move || create_app(zmq_connection_addr.clone()))",69,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271863379,https://github.com/hyperledger/grid/pull/30#discussion_r271863379,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"I think this should be split into a `RestApiServerError` (for errors related to starting/shutting down), and `RestApiResponseError`",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 18:00:52,271864169,"@@ -35,6 +47,16 @@ impl fmt::Display for RestApiError {
+         match self {
+             RestApiError::StartUpError(e) => write!(f, ""Start-up Error: {}"", e),
+             RestApiError::StdError(e) => write!(f, ""Std Error: {}"", e),
++            RestApiError::BadRequest(ref s) => write!(f, ""Bad Request: {}"", s),",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271864169,https://github.com/hyperledger/grid/pull/30#discussion_r271864169,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"This can be reduced to:
+```
+    let batch_query = msg.batch_list
+        .get_batches()
+        .iter()
+        .map(|batch| batch.get_header_signature())
+        .collect::<Vec<_>>()
+        .join("","");
+```",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 18:08:06,271866758,"@@ -34,6 +46,86 @@ impl SawtoothMessageSender {
+         SawtoothMessageSender { sender }
+     }
+ }
++
++struct SubmitBatches {
++    batch_list: BatchList,
++    response_url: Url,
++}
++
++impl Message for SubmitBatches {
++    type Result = Result<BatchStatusLink, RestApiError>;
++}
++
++#[derive(Serialize)]
++pub struct BatchStatusLink {
++    pub link: String,
++}
++
++impl Handler<SubmitBatches> for SawtoothMessageSender {
++    type Result = Result<BatchStatusLink, RestApiError>;
++
++    fn handle(&mut self, msg: SubmitBatches, _: &mut Context<Self>) -> Self::Result {
++        let mut client_submit_request = ClientBatchSubmitRequest::new();
++        client_submit_request.set_batches(protobuf::RepeatedField::from_vec(
++            msg.batch_list.get_batches().to_vec(),
++        ));
++        let content = protobuf::Message::write_to_bytes(&client_submit_request).map_err(|err| {
++            RestApiError::RequestHandlerError(format!(
++                ""Failed to serialize batch submit request. {}"",
++                err.to_string()
++            ))
++        })?;
++        let correlation_id = Uuid::new_v4().to_string();
++        let mut response_future = self
++            .sender
++            .send(
++                Message_MessageType::CLIENT_BATCH_SUBMIT_REQUEST,
++                &correlation_id,
++                &content,
++            )
++            .map_err(|err| {
++                RestApiError::SawtoothConnectionError(format!(
++                    ""Failed to send message to validator. {}"",
++                    err.to_string()
++                ))
++            })?;
++        let response_status: ClientBatchSubmitResponse = protobuf::parse_from_bytes(
++            response_future
++                .get_timeout(Duration::new(DEFAULT_TIME_OUT, 0))
++                .map_err(|err| RestApiError::RequestHandlerError(err.to_string()))?
++                .get_content(),
++        )
++        .map_err(|err| {
++            RestApiError::RequestHandlerError(format!(
++                ""Failed to parse validator response from bytes. {}"",
++                err.to_string()
++            ))
++        })?;
++
++        match process_validator_response(response_status.get_status()) {
++            Ok(_) => {
++                let mut batch_query = String::new();",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271866758,https://github.com/hyperledger/grid/pull/30#discussion_r271866758,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"Not sure I understand the need for this. Its already a comma-delimited hex string, which is url-safe",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 18:08:29,271866907,"@@ -34,6 +46,86 @@ impl SawtoothMessageSender {
+         SawtoothMessageSender { sender }
+     }
+ }
++
++struct SubmitBatches {
++    batch_list: BatchList,
++    response_url: Url,
++}
++
++impl Message for SubmitBatches {
++    type Result = Result<BatchStatusLink, RestApiError>;
++}
++
++#[derive(Serialize)]
++pub struct BatchStatusLink {
++    pub link: String,
++}
++
++impl Handler<SubmitBatches> for SawtoothMessageSender {
++    type Result = Result<BatchStatusLink, RestApiError>;
++
++    fn handle(&mut self, msg: SubmitBatches, _: &mut Context<Self>) -> Self::Result {
++        let mut client_submit_request = ClientBatchSubmitRequest::new();
++        client_submit_request.set_batches(protobuf::RepeatedField::from_vec(
++            msg.batch_list.get_batches().to_vec(),
++        ));
++        let content = protobuf::Message::write_to_bytes(&client_submit_request).map_err(|err| {
++            RestApiError::RequestHandlerError(format!(
++                ""Failed to serialize batch submit request. {}"",
++                err.to_string()
++            ))
++        })?;
++        let correlation_id = Uuid::new_v4().to_string();
++        let mut response_future = self
++            .sender
++            .send(
++                Message_MessageType::CLIENT_BATCH_SUBMIT_REQUEST,
++                &correlation_id,
++                &content,
++            )
++            .map_err(|err| {
++                RestApiError::SawtoothConnectionError(format!(
++                    ""Failed to send message to validator. {}"",
++                    err.to_string()
++                ))
++            })?;
++        let response_status: ClientBatchSubmitResponse = protobuf::parse_from_bytes(
++            response_future
++                .get_timeout(Duration::new(DEFAULT_TIME_OUT, 0))
++                .map_err(|err| RestApiError::RequestHandlerError(err.to_string()))?
++                .get_content(),
++        )
++        .map_err(|err| {
++            RestApiError::RequestHandlerError(format!(
++                ""Failed to parse validator response from bytes. {}"",
++                err.to_string()
++            ))
++        })?;
++
++        match process_validator_response(response_status.get_status()) {
++            Ok(_) => {
++                let mut batch_query = String::new();
++                for (i, batch) in msg.batch_list.get_batches().iter().enumerate() {
++                    batch_query.push_str(batch.get_header_signature());
++                    if msg.batch_list.get_batches().len() > 1
++                        && i <= msg.batch_list.get_batches().len() - 2
++                    {
++                        batch_query.push(',');
++                    }
++                }
++                let encoded_query: String = byte_serialize(batch_query.as_bytes()).collect();",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271866907,https://github.com/hyperledger/grid/pull/30#discussion_r271866907,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,Perhaps guard this behind a an accessor: `fn get_receiver(&sefl) -> &MessageReceiver`,2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 18:13:58,271868929,"@@ -20,17 +20,14 @@ use sawtooth_sdk::messaging::zmq_stream::{ZmqMessageConnection, ZmqMessageSender
+ 
+ pub struct SawtoothConnectionHandler {
+     sender: ZmqMessageSender,
+-    _receiver: MessageReceiver,
++    pub receiver: MessageReceiver,",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271868929,https://github.com/hyperledger/grid/pull/30#discussion_r271868929,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"Even better, 
+```
+...
+        .map(Batch::get_header_signature)
+...
+```
+as long as `Batch` is in your `use` statements",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 18:16:29,271869937,"@@ -34,6 +46,86 @@ impl SawtoothMessageSender {
+         SawtoothMessageSender { sender }
+     }
+ }
++
++struct SubmitBatches {
++    batch_list: BatchList,
++    response_url: Url,
++}
++
++impl Message for SubmitBatches {
++    type Result = Result<BatchStatusLink, RestApiError>;
++}
++
++#[derive(Serialize)]
++pub struct BatchStatusLink {
++    pub link: String,
++}
++
++impl Handler<SubmitBatches> for SawtoothMessageSender {
++    type Result = Result<BatchStatusLink, RestApiError>;
++
++    fn handle(&mut self, msg: SubmitBatches, _: &mut Context<Self>) -> Self::Result {
++        let mut client_submit_request = ClientBatchSubmitRequest::new();
++        client_submit_request.set_batches(protobuf::RepeatedField::from_vec(
++            msg.batch_list.get_batches().to_vec(),
++        ));
++        let content = protobuf::Message::write_to_bytes(&client_submit_request).map_err(|err| {
++            RestApiError::RequestHandlerError(format!(
++                ""Failed to serialize batch submit request. {}"",
++                err.to_string()
++            ))
++        })?;
++        let correlation_id = Uuid::new_v4().to_string();
++        let mut response_future = self
++            .sender
++            .send(
++                Message_MessageType::CLIENT_BATCH_SUBMIT_REQUEST,
++                &correlation_id,
++                &content,
++            )
++            .map_err(|err| {
++                RestApiError::SawtoothConnectionError(format!(
++                    ""Failed to send message to validator. {}"",
++                    err.to_string()
++                ))
++            })?;
++        let response_status: ClientBatchSubmitResponse = protobuf::parse_from_bytes(
++            response_future
++                .get_timeout(Duration::new(DEFAULT_TIME_OUT, 0))
++                .map_err(|err| RestApiError::RequestHandlerError(err.to_string()))?
++                .get_content(),
++        )
++        .map_err(|err| {
++            RestApiError::RequestHandlerError(format!(
++                ""Failed to parse validator response from bytes. {}"",
++                err.to_string()
++            ))
++        })?;
++
++        match process_validator_response(response_status.get_status()) {
++            Ok(_) => {
++                let mut batch_query = String::new();",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271869937,https://github.com/hyperledger/grid/pull/30#discussion_r271869937,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,I get a compiler error without the clone there ,2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 20:32:52,271919891,"@@ -52,9 +67,13 @@ pub fn run(
+         .name(""GridRestApi"".into())
+         .spawn(move || {
+             let sys = actix::System::new(""Grid-Rest-API"");
++            let zmq_connection_addr =
++                SawtoothMessageSender::create(move |_ctx: &mut Context<SawtoothMessageSender>| {
++                    SawtoothMessageSender::new(zmq_sender)
++                });
+ 
+             info!(""Starting Rest API at {}"", &bind_url);
+-            let addr = server::new(create_app)
++            let addr = server::new(move || create_app(zmq_connection_addr.clone()))",69,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271919891,https://github.com/hyperledger/grid/pull/30#discussion_r271919891,eloaverona
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"Ah, it might change what type the closure is (Fn, vs FnOnce vs FnMut)",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 20:38:29,271922093,"@@ -52,9 +67,13 @@ pub fn run(
+         .name(""GridRestApi"".into())
+         .spawn(move || {
+             let sys = actix::System::new(""Grid-Rest-API"");
++            let zmq_connection_addr =
++                SawtoothMessageSender::create(move |_ctx: &mut Context<SawtoothMessageSender>| {
++                    SawtoothMessageSender::new(zmq_sender)
++                });
+ 
+             info!(""Starting Rest API at {}"", &bind_url);
+-            let addr = server::new(create_app)
++            let addr = server::new(move || create_app(zmq_connection_addr.clone()))",69,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271922093,https://github.com/hyperledger/grid/pull/30#discussion_r271922093,peterschwarz
+https://github.com/hyperledger/grid/pull/30,https://github.com/hyperledger/grid/pull/30,"Handler is a bit of an overloaded term.  I would just call this thing a ""SawtoothConnection""",2e46aa2df93ee69a880ee24477436dfffb664db5,2019-04-03 21:03:53,271931810,"@@ -0,0 +1,40 @@
++/*
++ * Copyright 2019 Cargill Incorporated
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++use sawtooth_sdk::messaging::stream::{MessageConnection, MessageReceiver, MessageSender};
++use sawtooth_sdk::messaging::zmq_stream::{ZmqMessageConnection, ZmqMessageSender};
++
++pub struct SawtoothConnectionHandler {",,2019-04-03 21:10:48,https://api.github.com/repos/hyperledger/grid/pulls/comments/271931810,https://github.com/hyperledger/grid/pull/30#discussion_r271931810,peterschwarz
+https://github.com/hyperledger/grid/pull/28,https://github.com/hyperledger/grid/pull/28,s/handl/handle/,08789871a311abcdf7b9b02819a89b79eb131c56,2019-04-03 14:12:03,271762352,"@@ -0,0 +1,277 @@
++/*
++ * Copyright 2019 Cargill Incorporated
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++pub mod block;
++mod error;
++
++use std::cell::RefCell;
++use std::thread;
++use std::time::{Duration, SystemTime, UNIX_EPOCH};
++
++use protobuf::Message as _;
++
++use sawtooth_sdk::{
++    messages::client_event::{
++        ClientEventsSubscribeRequest, ClientEventsSubscribeResponse,
++        ClientEventsSubscribeResponse_Status,
++    },
++    messages::events::{Event, EventFilter, EventFilter_FilterType, EventList, EventSubscription},
++    messages::validator::{Message, Message_MessageType},
++    messaging::{
++        stream::{MessageConnection, MessageSender, ReceiveError, SendError},
++        zmq_stream,
++    },
++};
++
++pub use super::event::error::{EventError, EventProcessorError};
++
++const SHUTDOWN_TIMEOUT: u64 = 2;
++
++pub trait EventHandler: Send {
++    fn event_type(&self) -> &str;
++
++    fn handle_event(&self, event: &Event) -> Result<(), EventError>;
++}
++
++#[macro_export]
++macro_rules! event_handlers {
++    [$($handler:expr),*] => {
++        vec![$(Box::new($handler),)*]
++    };
++}
++
++pub struct EventProcessor {
++    join_handle: thread::JoinHandle<Result<(), EventProcessorError>>,
++    message_sender: Box<dyn MessageSender + Send>,
++}
++
++pub struct EventProcessorShutdownHandle {
++    message_sender: RefCell<Box<dyn MessageSender + Send>>,
++}
++
++impl EventProcessorShutdownHandle {
++    pub fn shutdown(&self) -> Result<(), EventProcessorError> {
++        let mut message_sender = self.message_sender.borrow_mut();
++
++        debug!(""Sending unsubscribe request"");
++        match message_sender
++            .send(
++                Message_MessageType::CLIENT_EVENTS_UNSUBSCRIBE_REQUEST,
++                &correlation_id(),
++                &[], // An unsubscribe request has no content
++            )
++            .map_err(|err| {
++                EventProcessorError(format!(""Unable to send unsubscribe request: {}"", err))
++            })?
++            .get_timeout(Duration::from_secs(SHUTDOWN_TIMEOUT))
++        {
++            Ok(msg) => {
++                if msg.get_message_type() == Message_MessageType::CLIENT_EVENTS_UNSUBSCRIBE_RESPONSE
++                {
++                    debug!(""Successfully unsubscribed"");
++                } else {
++                    debug!(""During unsubscribe, received {:?}"", msg.get_message_type());
++                }
++            }
++            Err(ReceiveError::TimeoutError) => {
++                debug!(""Timeout occurred while waiting for unsubscribe response; ignoring"")
++            }
++            Err(err) => return Err(EventProcessorError::from(err)),
++        }
++
++        debug!(""Closing message sender"");
++        message_sender.close();
++
++        Ok(())
++    }
++}
++
++impl EventProcessor {
++    pub fn start(
++        address: &str,
++        last_known_block_id: &str,
++        event_handlers: Vec<Box<dyn EventHandler>>,
++    ) -> Result<Self, EventProcessorError> {
++        info!(""Connecting to validator at {}"", address);
++        let connection = zmq_stream::ZmqMessageConnection::new(address);
++
++        let (message_sender, receiver) = connection.create();
++
++        let last_known_block_id = last_known_block_id.to_owned();
++        let request = create_subscription_request(last_known_block_id);
++        let mut future = message_sender.send(
++            Message_MessageType::CLIENT_EVENTS_SUBSCRIBE_REQUEST,
++            &correlation_id(),
++            &request.write_to_bytes()?,
++        )?;
++
++        let response: ClientEventsSubscribeResponse = content_of_type(
++            Message_MessageType::CLIENT_EVENTS_SUBSCRIBE_RESPONSE,
++            future.get()?,
++        )?;
++
++        if response.get_status() != ClientEventsSubscribeResponse_Status::OK {
++            return Err(EventProcessorError(format!(
++                ""Failed to subscribe for events: {:?} {}"",
++                response.get_status(),
++                response.get_response_message()
++            )));
++        }
++
++        let join_handle = thread::Builder::new()
++            .name(""EventProcessor"".into())
++            .spawn(move || {
++                while let Ok(msg_result) = receiver.recv() {
++                    match msg_result {
++                        Ok(msg) => handle_message(msg, &event_handlers)?,
++                        Err(ReceiveError::DisconnectedError) => break,
++                        Err(err) => {
++                            return Err(EventProcessorError(format!(
++                                ""Failed to receive events; aborting: {}"",
++                                err
++                            )));
++                        }
++                    }
++                }
++
++                info!(""Disconnected from validator; terminating Event Processor"");
++                Ok(())
++            })
++            .map_err(|err| {
++                EventProcessorError(format!(""Unable to start EventProcessor thread: {}"", err))
++            })?;
++
++        Ok(Self {
++            join_handle,
++            message_sender: Box::new(message_sender),
++        })
++    }
++
++    pub fn take_shutdown_controls(
++        self,
++    ) -> (
++        EventProcessorShutdownHandle,
++        thread::JoinHandle<Result<(), EventProcessorError>>,
++    ) {
++        (
++            EventProcessorShutdownHandle {
++                message_sender: RefCell::new(self.message_sender),
++            },
++            self.join_handle,
++        )
++    }
++}
++
++fn handle_message(
++    msg: Message,
++    event_handlers: &[Box<dyn EventHandler>],
++) -> Result<(), EventProcessorError> {
++    if msg.get_message_type() != Message_MessageType::CLIENT_EVENTS {
++        warn!(""Received unexpected message: {:?}"", msg.get_message_type());
++        return Ok(());
++    }
++
++    let mut event_list: EventList = match protobuf::parse_from_bytes(msg.get_content()) {
++        Ok(event_list) => event_list,
++        Err(err) => {
++            warn!(""Unable to parse event list; ignoring: {}"", err);
++            return Ok(());
++        }
++    };
++
++    for event in event_list.take_events().into_iter() {
++        let event_handler = event_handlers
++            .iter()
++            .find(|handler| handler.event_type() == event.get_event_type());
++
++        if let Some(event_handler) = event_handler {
++            if let Err(err) = event_handler.handle_event(&event) {
++                error!(""Unable to handle event {}: {}"", event.get_event_type(), err);
++            }
++        } else {
++            warn!(""Unable to handl event {}"", event.get_event_type());",,2019-04-03 15:14:51,https://api.github.com/repos/hyperledger/grid/pulls/comments/271762352,https://github.com/hyperledger/grid/pull/28#discussion_r271762352,jsmitchell
+https://github.com/hyperledger/grid/pull/28,https://github.com/hyperledger/grid/pull/28,"This should probably be process::exit(1). This should maybe print something out to stderr prior to exiting like ""Aborting due to multiple Ctrl-C events..."".",08789871a311abcdf7b9b02819a89b79eb131c56,2019-04-03 14:21:37,271767107,"@@ -53,18 +58,45 @@ fn run() -> Result<(), DaemonError> {
+     let (rest_api_shutdown_handle, rest_api_join_handle) =
+         rest_api::run(config.rest_api_endpoint())?;
+ 
+-    info!(""Connecting to validator at {}"", config.validator_endpoint());
++    let evt_processor = EventProcessor::start(
++        config.validator_endpoint(),
++        ""0000000000000000"",
++        event_handlers![BlockEventHandler::new()],
++    )
++    .map_err(|err| DaemonError::EventProcessorError(Box::new(err)))?;
++
++    let (event_processor_shutdown_handle, event_processor_join_handle) =
++        evt_processor.take_shutdown_controls();
+ 
++    let ctrlc_triggered = AtomicBool::new(false);
+     ctrlc::set_handler(move || {
++        if ctrlc_triggered.load(Ordering::SeqCst) {
++            process::exit(0);",,2019-04-03 15:14:51,https://api.github.com/repos/hyperledger/grid/pulls/comments/271767107,https://github.com/hyperledger/grid/pull/28#discussion_r271767107,vaporos
+https://github.com/hyperledger/grid/pull/28,https://github.com/hyperledger/grid/pull/28,Typo,08789871a311abcdf7b9b02819a89b79eb131c56,2019-04-03 14:22:32,271767575,"@@ -55,21 +54,31 @@ pub fn run(
+             let sys = actix::System::new(""Grid-Rest-API"");
+ 
+             info!(""Starting Rest API at {}"", &bind_url);
+-            let addr = server::new(create_app).bind(bind_url)?.start();
++            let addr = server::new(create_app)
++                .bind(bind_url)?
++                .disable_signals()
++                .system_exit()
++                .start();
+ 
+             tx.send(addr).map_err(|err| {
+                 RestApiError::StartUpError(format!(""Unable to send Server Addr: {}"", err))
+             })?;
+ 
+-            Ok(sys.run())
++            sys.run();
++
++            info!(""Rest API terminiating"");",,2019-04-03 15:14:51,https://api.github.com/repos/hyperledger/grid/pulls/comments/271767575,https://github.com/hyperledger/grid/pull/28#discussion_r271767575,vaporos
+https://github.com/hyperledger/grid/pull/28,https://github.com/hyperledger/grid/pull/28,We are probably going to want to create our own grid shell instead and install sawtooth and grid CLIs into it.,08789871a311abcdf7b9b02819a89b79eb131c56,2019-04-03 14:24:08,271768326,"@@ -97,11 +97,21 @@ services:
+         --bind rest-api:8008
+ 
+   gridd:
++    container_name: gridd
+     build:
+       context: .
+       dockerfile: daemon/Dockerfile
+     expose:
+       - 8080
+     ports:
+       - '8080:8080'
+-    entrypoint: ""/gridd -v -b gridd:8080""
++    entrypoint: /gridd -vv -b gridd:8080 -C tcp://validator:4004
++
++  sawtooth-shell:",15,2019-04-03 15:14:51,https://api.github.com/repos/hyperledger/grid/pulls/comments/271768326,https://github.com/hyperledger/grid/pull/28#discussion_r271768326,vaporos
+https://github.com/hyperledger/grid/pull/28,https://github.com/hyperledger/grid/pull/28,I'll leave that to a future PR. ,08789871a311abcdf7b9b02819a89b79eb131c56,2019-04-03 15:05:23,271789373,"@@ -97,11 +97,21 @@ services:
+         --bind rest-api:8008
+ 
+   gridd:
++    container_name: gridd
+     build:
+       context: .
+       dockerfile: daemon/Dockerfile
+     expose:
+       - 8080
+     ports:
+       - '8080:8080'
+-    entrypoint: ""/gridd -v -b gridd:8080""
++    entrypoint: /gridd -vv -b gridd:8080 -C tcp://validator:4004
++
++  sawtooth-shell:",15,2019-04-03 15:14:51,https://api.github.com/repos/hyperledger/grid/pulls/comments/271789373,https://github.com/hyperledger/grid/pull/28#discussion_r271789373,peterschwarz
+https://github.com/hyperledger/grid/pull/23,https://github.com/hyperledger/grid/pull/23,We are using Rust edition 2018 so i don't think you need these extern crates. ,e3eecd91cbca6ad2a9d920ef4015e84f06b37792,2019-03-26 18:30:08,269255909,"@@ -0,0 +1,57 @@
++// Copyright 2019 Bitwise IO, Inc.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++extern crate actix;",,2019-03-26 20:11:27,https://api.github.com/repos/hyperledger/grid/pulls/comments/269255909,https://github.com/hyperledger/grid/pull/23#discussion_r269255909,agunde406
+https://github.com/hyperledger/grid/pull/23,https://github.com/hyperledger/grid/pull/23,Addressed,e3eecd91cbca6ad2a9d920ef4015e84f06b37792,2019-03-26 18:35:39,269258201,"@@ -0,0 +1,57 @@
++// Copyright 2019 Bitwise IO, Inc.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++extern crate actix;",,2019-03-26 20:11:27,https://api.github.com/repos/hyperledger/grid/pulls/comments/269258201,https://github.com/hyperledger/grid/pull/23#discussion_r269258201,shannynalayna
+https://github.com/hyperledger/grid/pull/23,https://github.com/hyperledger/grid/pull/23,The bind string should be a configuration setting.,e3eecd91cbca6ad2a9d920ef4015e84f06b37792,2019-03-26 18:40:29,269260095,"@@ -0,0 +1,54 @@
++// Copyright 2019 Bitwise IO, Inc.
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++mod error;
++mod route_handler;
++
++use actix_web::{http::Method, server, App};
++
++pub use crate::rest_api::error::RestApiError;
++use crate::rest_api::route_handler::index;
++
++fn create_app() -> App {
++    App::new().resource(""/"", |r| r.method(Method::GET).f(index))
++}
++
++pub fn run() -> Result<i32, RestApiError> {
++    let sys = actix::System::new(""Grid-Rest-API"");
++
++    server::new(create_app).bind(""127.0.0.1:8080"")?.start();",,2019-03-26 20:11:27,https://api.github.com/repos/hyperledger/grid/pulls/comments/269260095,https://github.com/hyperledger/grid/pull/23#discussion_r269260095,peterschwarz
+https://github.com/hyperledger/grid/pull/23,https://github.com/hyperledger/grid/pull/23,"this should probably be ""bind"", with the short name ""B"".",e3eecd91cbca6ad2a9d920ef4015e84f06b37792,2019-03-26 19:52:30,269286829,"@@ -86,20 +101,29 @@ mod test {
+     fn build_with_args() {
+         let matches = clap::App::new(""testapp"")
+             .arg(clap::Arg::with_name(""connect"").short(""C"").takes_value(true))
+-            .get_matches_from(vec![""testapp"", ""-C"", ""validator:4004""]);
++            .arg(clap::Arg::with_name(""url"").short(""u"").takes_value(true))",,2019-03-26 20:11:27,https://api.github.com/repos/hyperledger/grid/pulls/comments/269286829,https://github.com/hyperledger/grid/pull/23#discussion_r269286829,peterschwarz
+https://github.com/hyperledger/grid/pull/23,https://github.com/hyperledger/grid/pull/23,"Should be ""Starting Rest API at...""",e3eecd91cbca6ad2a9d920ef4015e84f06b37792,2019-03-26 19:53:57,269287429,"@@ -51,7 +52,8 @@ fn run() -> Result<(), DaemonError> {
+ 
+     info!(""Connecting to validator at {}"", config.validator_endpoint());
+ 
+-    let _ = rest_api::run()?;
++    let _ = rest_api::run(config.rest_api_endpoint())?;
++    info!(""Connecting to Rest API at {}"", config.rest_api_endpoint());",,2019-03-26 20:11:27,https://api.github.com/repos/hyperledger/grid/pulls/comments/269287429,https://github.com/hyperledger/grid/pull/23#discussion_r269287429,peterschwarz
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,"Since Grid could be used without a blockchain, we should remove the mention here.",715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:21:37,268635986,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268635986,https://github.com/hyperledger/grid/pull/20#discussion_r268635986,agunde406
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,Mention Sawtooth Validator instead of just validator,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:22:11,268636289,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common
++    HTTP/JSON standards._
++
++paths:
++  /batches:
++    post:
++      tags:
++      - sawtooth_validator
++      summary: Sends a BatchList to the validator",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268636289,https://github.com/hyperledger/grid/pull/20#discussion_r268636289,agunde406
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,replace https://api.sawtooth.com with https://api.grid.com,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:25:47,268637916,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common
++    HTTP/JSON standards._
++
++paths:
++  /batches:
++    post:
++      tags:
++      - sawtooth_validator
++      summary: Sends a BatchList to the validator
++      description: |
++        Accepts a protobuf formatted `BatchList` as an octet-stream binary
++        file and submits it to the validator to be committed.
++
++        The API will return immediately with a status of `202`. There will be
++        no `data` object, only a `link` to a `/batch_statuses` endpoint to be
++        polled to check the status of submitted batches.
++      consumes:
++        - application/octet-stream
++      operationId: ""post_batches""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: BatchList
++          in: body
++          description: A binary encoded protobuf BatchList
++          schema:
++            $ref: ""#/definitions/BatchList""
++          required: true
++      responses:
++        202:
++          description: Batches submitted for validation, but not yet committed
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /batch_statuses:
++    get:
++      tags:
++      - sawtooth_validator
++      summary: Fetches the committed statuses for a set of batches
++      description: |
++        Fetches an array of objects with a status and id for each batch
++        requested. There are four possible statuses with string values
++        `'COMMITTED'`, `'INVALID'`, `'PENDING'`, and `'UNKNOWN'`.
++
++        The batch(es) you want to check can be specified using the `id` filter
++        parameter. If a `wait` time is specified in the URL, the API will wait
++        to respond until all batches are committed, or the time in seconds has
++        elapsed. If the value of `wait` is not set (i.e., `?wait&id=...`), or
++        it is set to any non-integer value other than `false`, the wait time
++        will be just under the API's specified timeout (usually 300).
++
++        Note that because this route does not return full resources, the
++        response will not be paginated, and there will be no `head` or
++        `paging` properties.
++      operationId: ""get_batch_statuses_by_id""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: id
++          in: query
++          description: A comma-separated list of batch ids
++          type: string
++          required: true
++        - $ref: ""#/parameters/wait""
++      responses:
++        200:
++          description: Successfully retrieved statuses
++          schema:
++            properties:
++              data:
++                $ref: ""#/definitions/BatchStatuses""
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /schema:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Get a list of schemas""
++      description: ""Fetches a list of schemas from the reporting database""
++      operationId: ""get_schemas""
++      produces:
++      - ""application/json""
++      responses:
++        202:
++          description: ""List of schemas""
++          schema:
++            properties:
++              data:
++                type: array
++                items:
++                 $ref: ""#/definitions/Schema""
++
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++  /schema/{schema_name}:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Find schema by schema name""
++      description: ""Returns a single schema""
++      operationId: ""get_schema_by_name""
++      produces:
++      - ""application/json""
++      parameters:
++      - name: ""schema_name""
++        in: ""path""
++        description: ""Name of the schema to return""
++        required: true
++        type: ""string""
++      responses:
++        202:
++          description: Successful operation
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Schema""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        404:
++          $ref: ""#/responses/404NotFound""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++responses:
++  400BadRequest:
++    description: Request was malformed
++    schema:
++      $ref: ""#/definitions/Error""
++  404NotFound:
++    description: Address or id did not match any resource
++    schema:
++      $ref: ""#/definitions/Error""
++  429TooManyRequests:
++    description: Too many requests have been made to process batches
++    schema:
++      $ref: ""#/definitions/Error""
++  500ServerError:
++    description: Something went wrong within the validator
++    schema:
++      $ref: ""#/definitions/Error""
++  503ServiceUnavailable:
++    description: API is unable to reach the validator
++    schema:
++      $ref: ""#/definitions/Error""
++
++parameters:
++  batch_id:
++    name: batch_id
++    in: path
++    type: string
++    required: true
++    description: Batch id
++  wait:
++    name: wait
++    in: query
++    type: integer
++    description: A time in seconds to wait for commit
++
++definitions:
++  Link:
++    type: string
++    example: https://api.sawtooth.com/state?head=65cd3a3ce088b265b626f704b7f3db97b6f12e848dccb35d7806f3d0324c71b709ed360d602b8b658b94695374717e3bdb4b76f77886953777d5d008558247dd",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268637916,https://github.com/hyperledger/grid/pull/20#discussion_r268637916,agunde406
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,if we want to match the rfc this could be philips001,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:27:46,268638751,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common
++    HTTP/JSON standards._
++
++paths:
++  /batches:
++    post:
++      tags:
++      - sawtooth_validator
++      summary: Sends a BatchList to the validator
++      description: |
++        Accepts a protobuf formatted `BatchList` as an octet-stream binary
++        file and submits it to the validator to be committed.
++
++        The API will return immediately with a status of `202`. There will be
++        no `data` object, only a `link` to a `/batch_statuses` endpoint to be
++        polled to check the status of submitted batches.
++      consumes:
++        - application/octet-stream
++      operationId: ""post_batches""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: BatchList
++          in: body
++          description: A binary encoded protobuf BatchList
++          schema:
++            $ref: ""#/definitions/BatchList""
++          required: true
++      responses:
++        202:
++          description: Batches submitted for validation, but not yet committed
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /batch_statuses:
++    get:
++      tags:
++      - sawtooth_validator
++      summary: Fetches the committed statuses for a set of batches
++      description: |
++        Fetches an array of objects with a status and id for each batch
++        requested. There are four possible statuses with string values
++        `'COMMITTED'`, `'INVALID'`, `'PENDING'`, and `'UNKNOWN'`.
++
++        The batch(es) you want to check can be specified using the `id` filter
++        parameter. If a `wait` time is specified in the URL, the API will wait
++        to respond until all batches are committed, or the time in seconds has
++        elapsed. If the value of `wait` is not set (i.e., `?wait&id=...`), or
++        it is set to any non-integer value other than `false`, the wait time
++        will be just under the API's specified timeout (usually 300).
++
++        Note that because this route does not return full resources, the
++        response will not be paginated, and there will be no `head` or
++        `paging` properties.
++      operationId: ""get_batch_statuses_by_id""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: id
++          in: query
++          description: A comma-separated list of batch ids
++          type: string
++          required: true
++        - $ref: ""#/parameters/wait""
++      responses:
++        200:
++          description: Successfully retrieved statuses
++          schema:
++            properties:
++              data:
++                $ref: ""#/definitions/BatchStatuses""
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /schema:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Get a list of schemas""
++      description: ""Fetches a list of schemas from the reporting database""
++      operationId: ""get_schemas""
++      produces:
++      - ""application/json""
++      responses:
++        202:
++          description: ""List of schemas""
++          schema:
++            properties:
++              data:
++                type: array
++                items:
++                 $ref: ""#/definitions/Schema""
++
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++  /schema/{schema_name}:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Find schema by schema name""
++      description: ""Returns a single schema""
++      operationId: ""get_schema_by_name""
++      produces:
++      - ""application/json""
++      parameters:
++      - name: ""schema_name""
++        in: ""path""
++        description: ""Name of the schema to return""
++        required: true
++        type: ""string""
++      responses:
++        202:
++          description: Successful operation
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Schema""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        404:
++          $ref: ""#/responses/404NotFound""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++responses:
++  400BadRequest:
++    description: Request was malformed
++    schema:
++      $ref: ""#/definitions/Error""
++  404NotFound:
++    description: Address or id did not match any resource
++    schema:
++      $ref: ""#/definitions/Error""
++  429TooManyRequests:
++    description: Too many requests have been made to process batches
++    schema:
++      $ref: ""#/definitions/Error""
++  500ServerError:
++    description: Something went wrong within the validator
++    schema:
++      $ref: ""#/definitions/Error""
++  503ServiceUnavailable:
++    description: API is unable to reach the validator
++    schema:
++      $ref: ""#/definitions/Error""
++
++parameters:
++  batch_id:
++    name: batch_id
++    in: path
++    type: string
++    required: true
++    description: Batch id
++  wait:
++    name: wait
++    in: query
++    type: integer
++    description: A time in seconds to wait for commit
++
++definitions:
++  Link:
++    type: string
++    example: https://api.sawtooth.com/state?head=65cd3a3ce088b265b626f704b7f3db97b6f12e848dccb35d7806f3d0324c71b709ed360d602b8b658b94695374717e3bdb4b76f77886953777d5d008558247dd
++
++  Error:
++    properties:
++      code:
++        type: integer
++        example: 34
++      title:
++          type: string
++          example: No Batches Submitted
++      message:
++        type: string
++        example: >
++          The protobuf BatchList you submitted was empty and contained no
++          Batches. You must submit at least one Batch.
++
++  BatchStatuses:
++    type: array
++    items:
++      properties:
++        id:
++          type: string
++          example: 89807bfc9089e37e00d87d97357de14cfbc455cd608438d426a625a30a0da9a31c406983803c4aa27e1f32a3ff61709e8ec4b56abbc553d7d330635b5d27029c
++        status:
++          type: string
++          example: INVALID
++          enum:
++            - COMMITTED
++            - INVALID
++            - PENDING
++            - UNKNOWN
++        invalid_transactions:
++          type: array
++          items:
++            properties:
++              id:
++                type: string
++                example: 540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a
++              message:
++                type: string
++                example: Verb is \""inc\"" but name \""foo\"" not in state
++              extended_data:
++                type: string
++                format: byte
++                example: ZXJyb3IgZGF0YQ==
++
++  TransactionHeader:
++    properties:
++      batcher_public_key:
++        type: string
++        example: 02d260a46457a064733153e09840c322bee1dff34445d7d49e19e60abd18fd0758
++      dependencies:
++        type: array
++        items:
++          type: string
++          example: 1baee350bdb60bcee60e3d325d43283cf830b4c23b2cb17d3bb43935bd7af3761c2bee79847c72a9e396a9ae58f48add4e43f94eb83f84442c6085c1dd5d4dbe
++      family_name:
++        type: string
++        example: intkey
++      family_version:
++        type: string
++        example: ""1.0""
++      inputs:
++        type: array
++        items:
++          type: string
++          example: 1cf12650d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
++      nonce:
++        type: string
++        example: QAApS4L
++      outputs:
++        type: array
++        items:
++          type: string
++          example: 1cf12650d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
++      payload_sha512:
++        type: string
++        example: fb6135ef73f4fe77367f9384b3bbbb158f4b8603c9d612157108e5c271868fce2242ee4abd7a29397ba63780c3ccab13783dfd4d9f0167beda03cdb0e37b87f4
++      signer_public_key:
++        type: string
++        example: 038bba5708acc262464c9fe30d3de9e905a9a5fa30cedd151dd9cd09ea26d46d00
++  Transaction:
++    properties:
++      header:
++        $ref: ""#/definitions/TransactionHeader""
++      header_signature:
++        type: string
++        example: 540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a
++      payload:
++        type: string
++        format: binary
++
++  BatchHeader:
++    properties:
++      signer_public_key:
++        type: string
++        example: 038bba5708acc262464c9fe30d3de9e905a9a5fa30cedd151dd9cd09ea26d46d00
++      transaction_ids:
++        type: array
++        items:
++          type: string
++          example: 540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a
++  Batch:
++    properties:
++      header:
++        $ref: ""#/definitions/BatchHeader""
++      header_signature:
++        type: string
++        example:  89807bfc9089e37e00d87d97357de14cfbc455cd608438d426a625a30a0da9a31c406983803c4aa27e1f32a3ff61709e8ec4b56abbc553d7d330635b5d27029c
++      transactions:
++        type: array
++        items:
++          $ref: ""#/definitions/Transaction""
++  BatchList:
++    properties:
++      batches:
++        type: array
++        items:
++          $ref: ""#/definitions/Batch""
++  Schema:
++    properties:
++      name:
++        type: string
++        example: ""Lightbulb""
++      description:
++        type: string
++        example: ""Example Lightbulb schema""
++      owener:
++        type: string
++        example: ""philips""",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268638751,https://github.com/hyperledger/grid/pull/20#discussion_r268638751,agunde406
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,Addressed ,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:55:55,268651577,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268651577,https://github.com/hyperledger/grid/pull/20#discussion_r268651577,eloaverona
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,Addressed,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:56:03,268651641,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common
++    HTTP/JSON standards._
++
++paths:
++  /batches:
++    post:
++      tags:
++      - sawtooth_validator
++      summary: Sends a BatchList to the validator",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268651641,https://github.com/hyperledger/grid/pull/20#discussion_r268651641,eloaverona
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,Addressed,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:56:05,268651667,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common
++    HTTP/JSON standards._
++
++paths:
++  /batches:
++    post:
++      tags:
++      - sawtooth_validator
++      summary: Sends a BatchList to the validator
++      description: |
++        Accepts a protobuf formatted `BatchList` as an octet-stream binary
++        file and submits it to the validator to be committed.
++
++        The API will return immediately with a status of `202`. There will be
++        no `data` object, only a `link` to a `/batch_statuses` endpoint to be
++        polled to check the status of submitted batches.
++      consumes:
++        - application/octet-stream
++      operationId: ""post_batches""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: BatchList
++          in: body
++          description: A binary encoded protobuf BatchList
++          schema:
++            $ref: ""#/definitions/BatchList""
++          required: true
++      responses:
++        202:
++          description: Batches submitted for validation, but not yet committed
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /batch_statuses:
++    get:
++      tags:
++      - sawtooth_validator
++      summary: Fetches the committed statuses for a set of batches
++      description: |
++        Fetches an array of objects with a status and id for each batch
++        requested. There are four possible statuses with string values
++        `'COMMITTED'`, `'INVALID'`, `'PENDING'`, and `'UNKNOWN'`.
++
++        The batch(es) you want to check can be specified using the `id` filter
++        parameter. If a `wait` time is specified in the URL, the API will wait
++        to respond until all batches are committed, or the time in seconds has
++        elapsed. If the value of `wait` is not set (i.e., `?wait&id=...`), or
++        it is set to any non-integer value other than `false`, the wait time
++        will be just under the API's specified timeout (usually 300).
++
++        Note that because this route does not return full resources, the
++        response will not be paginated, and there will be no `head` or
++        `paging` properties.
++      operationId: ""get_batch_statuses_by_id""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: id
++          in: query
++          description: A comma-separated list of batch ids
++          type: string
++          required: true
++        - $ref: ""#/parameters/wait""
++      responses:
++        200:
++          description: Successfully retrieved statuses
++          schema:
++            properties:
++              data:
++                $ref: ""#/definitions/BatchStatuses""
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /schema:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Get a list of schemas""
++      description: ""Fetches a list of schemas from the reporting database""
++      operationId: ""get_schemas""
++      produces:
++      - ""application/json""
++      responses:
++        202:
++          description: ""List of schemas""
++          schema:
++            properties:
++              data:
++                type: array
++                items:
++                 $ref: ""#/definitions/Schema""
++
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++  /schema/{schema_name}:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Find schema by schema name""
++      description: ""Returns a single schema""
++      operationId: ""get_schema_by_name""
++      produces:
++      - ""application/json""
++      parameters:
++      - name: ""schema_name""
++        in: ""path""
++        description: ""Name of the schema to return""
++        required: true
++        type: ""string""
++      responses:
++        202:
++          description: Successful operation
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Schema""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        404:
++          $ref: ""#/responses/404NotFound""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++responses:
++  400BadRequest:
++    description: Request was malformed
++    schema:
++      $ref: ""#/definitions/Error""
++  404NotFound:
++    description: Address or id did not match any resource
++    schema:
++      $ref: ""#/definitions/Error""
++  429TooManyRequests:
++    description: Too many requests have been made to process batches
++    schema:
++      $ref: ""#/definitions/Error""
++  500ServerError:
++    description: Something went wrong within the validator
++    schema:
++      $ref: ""#/definitions/Error""
++  503ServiceUnavailable:
++    description: API is unable to reach the validator
++    schema:
++      $ref: ""#/definitions/Error""
++
++parameters:
++  batch_id:
++    name: batch_id
++    in: path
++    type: string
++    required: true
++    description: Batch id
++  wait:
++    name: wait
++    in: query
++    type: integer
++    description: A time in seconds to wait for commit
++
++definitions:
++  Link:
++    type: string
++    example: https://api.sawtooth.com/state?head=65cd3a3ce088b265b626f704b7f3db97b6f12e848dccb35d7806f3d0324c71b709ed360d602b8b658b94695374717e3bdb4b76f77886953777d5d008558247dd",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268651667,https://github.com/hyperledger/grid/pull/20#discussion_r268651667,eloaverona
+https://github.com/hyperledger/grid/pull/20,https://github.com/hyperledger/grid/pull/20,Addressed,715c52cba8aa9768809e47dc0ba4cca27ffe1061,2019-03-25 13:56:08,268651697,"@@ -0,0 +1,393 @@
++# Copyright 2017 Intel Corporation
++# Copyright 2019 Bitwise IO, Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++swagger: '2.0'
++
++info:
++  version: ""0.1.0""
++  title: Grid REST API
++  description:
++    _An API providing HTTP/JSON interface to Hyperledger Grid simplifying client
++    interaction with the blockchain by exposing endpoints that use common
++    HTTP/JSON standards._
++
++paths:
++  /batches:
++    post:
++      tags:
++      - sawtooth_validator
++      summary: Sends a BatchList to the validator
++      description: |
++        Accepts a protobuf formatted `BatchList` as an octet-stream binary
++        file and submits it to the validator to be committed.
++
++        The API will return immediately with a status of `202`. There will be
++        no `data` object, only a `link` to a `/batch_statuses` endpoint to be
++        polled to check the status of submitted batches.
++      consumes:
++        - application/octet-stream
++      operationId: ""post_batches""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: BatchList
++          in: body
++          description: A binary encoded protobuf BatchList
++          schema:
++            $ref: ""#/definitions/BatchList""
++          required: true
++      responses:
++        202:
++          description: Batches submitted for validation, but not yet committed
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /batch_statuses:
++    get:
++      tags:
++      - sawtooth_validator
++      summary: Fetches the committed statuses for a set of batches
++      description: |
++        Fetches an array of objects with a status and id for each batch
++        requested. There are four possible statuses with string values
++        `'COMMITTED'`, `'INVALID'`, `'PENDING'`, and `'UNKNOWN'`.
++
++        The batch(es) you want to check can be specified using the `id` filter
++        parameter. If a `wait` time is specified in the URL, the API will wait
++        to respond until all batches are committed, or the time in seconds has
++        elapsed. If the value of `wait` is not set (i.e., `?wait&id=...`), or
++        it is set to any non-integer value other than `false`, the wait time
++        will be just under the API's specified timeout (usually 300).
++
++        Note that because this route does not return full resources, the
++        response will not be paginated, and there will be no `head` or
++        `paging` properties.
++      operationId: ""get_batch_statuses_by_id""
++      produces:
++      - ""application/json""
++      parameters:
++        - name: id
++          in: query
++          description: A comma-separated list of batch ids
++          type: string
++          required: true
++        - $ref: ""#/parameters/wait""
++      responses:
++        200:
++          description: Successfully retrieved statuses
++          schema:
++            properties:
++              data:
++                $ref: ""#/definitions/BatchStatuses""
++              link:
++                $ref: ""#/definitions/Link""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        500:
++          $ref: ""#/responses/500ServerError""
++        503:
++          $ref: ""#/responses/503ServiceUnavailable""
++
++  /schema:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Get a list of schemas""
++      description: ""Fetches a list of schemas from the reporting database""
++      operationId: ""get_schemas""
++      produces:
++      - ""application/json""
++      responses:
++        202:
++          description: ""List of schemas""
++          schema:
++            properties:
++              data:
++                type: array
++                items:
++                 $ref: ""#/definitions/Schema""
++
++        400:
++          $ref: ""#/responses/400BadRequest""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++  /schema/{schema_name}:
++    get:
++      tags:
++      - ""schema""
++      summary: ""Find schema by schema name""
++      description: ""Returns a single schema""
++      operationId: ""get_schema_by_name""
++      produces:
++      - ""application/json""
++      parameters:
++      - name: ""schema_name""
++        in: ""path""
++        description: ""Name of the schema to return""
++        required: true
++        type: ""string""
++      responses:
++        202:
++          description: Successful operation
++          schema:
++            properties:
++              link:
++                $ref: ""#/definitions/Schema""
++        400:
++          $ref: ""#/responses/400BadRequest""
++        404:
++          $ref: ""#/responses/404NotFound""
++        429:
++          $ref: ""#/responses/429TooManyRequests""
++        500:
++          description: Something went wrong within the database
++          schema:
++            $ref: ""#/definitions/Error""
++        503:
++          description: API is unable to reach the database
++          schema:
++            $ref: ""#/definitions/Error""
++
++responses:
++  400BadRequest:
++    description: Request was malformed
++    schema:
++      $ref: ""#/definitions/Error""
++  404NotFound:
++    description: Address or id did not match any resource
++    schema:
++      $ref: ""#/definitions/Error""
++  429TooManyRequests:
++    description: Too many requests have been made to process batches
++    schema:
++      $ref: ""#/definitions/Error""
++  500ServerError:
++    description: Something went wrong within the validator
++    schema:
++      $ref: ""#/definitions/Error""
++  503ServiceUnavailable:
++    description: API is unable to reach the validator
++    schema:
++      $ref: ""#/definitions/Error""
++
++parameters:
++  batch_id:
++    name: batch_id
++    in: path
++    type: string
++    required: true
++    description: Batch id
++  wait:
++    name: wait
++    in: query
++    type: integer
++    description: A time in seconds to wait for commit
++
++definitions:
++  Link:
++    type: string
++    example: https://api.sawtooth.com/state?head=65cd3a3ce088b265b626f704b7f3db97b6f12e848dccb35d7806f3d0324c71b709ed360d602b8b658b94695374717e3bdb4b76f77886953777d5d008558247dd
++
++  Error:
++    properties:
++      code:
++        type: integer
++        example: 34
++      title:
++          type: string
++          example: No Batches Submitted
++      message:
++        type: string
++        example: >
++          The protobuf BatchList you submitted was empty and contained no
++          Batches. You must submit at least one Batch.
++
++  BatchStatuses:
++    type: array
++    items:
++      properties:
++        id:
++          type: string
++          example: 89807bfc9089e37e00d87d97357de14cfbc455cd608438d426a625a30a0da9a31c406983803c4aa27e1f32a3ff61709e8ec4b56abbc553d7d330635b5d27029c
++        status:
++          type: string
++          example: INVALID
++          enum:
++            - COMMITTED
++            - INVALID
++            - PENDING
++            - UNKNOWN
++        invalid_transactions:
++          type: array
++          items:
++            properties:
++              id:
++                type: string
++                example: 540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a
++              message:
++                type: string
++                example: Verb is \""inc\"" but name \""foo\"" not in state
++              extended_data:
++                type: string
++                format: byte
++                example: ZXJyb3IgZGF0YQ==
++
++  TransactionHeader:
++    properties:
++      batcher_public_key:
++        type: string
++        example: 02d260a46457a064733153e09840c322bee1dff34445d7d49e19e60abd18fd0758
++      dependencies:
++        type: array
++        items:
++          type: string
++          example: 1baee350bdb60bcee60e3d325d43283cf830b4c23b2cb17d3bb43935bd7af3761c2bee79847c72a9e396a9ae58f48add4e43f94eb83f84442c6085c1dd5d4dbe
++      family_name:
++        type: string
++        example: intkey
++      family_version:
++        type: string
++        example: ""1.0""
++      inputs:
++        type: array
++        items:
++          type: string
++          example: 1cf12650d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
++      nonce:
++        type: string
++        example: QAApS4L
++      outputs:
++        type: array
++        items:
++          type: string
++          example: 1cf12650d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
++      payload_sha512:
++        type: string
++        example: fb6135ef73f4fe77367f9384b3bbbb158f4b8603c9d612157108e5c271868fce2242ee4abd7a29397ba63780c3ccab13783dfd4d9f0167beda03cdb0e37b87f4
++      signer_public_key:
++        type: string
++        example: 038bba5708acc262464c9fe30d3de9e905a9a5fa30cedd151dd9cd09ea26d46d00
++  Transaction:
++    properties:
++      header:
++        $ref: ""#/definitions/TransactionHeader""
++      header_signature:
++        type: string
++        example: 540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a
++      payload:
++        type: string
++        format: binary
++
++  BatchHeader:
++    properties:
++      signer_public_key:
++        type: string
++        example: 038bba5708acc262464c9fe30d3de9e905a9a5fa30cedd151dd9cd09ea26d46d00
++      transaction_ids:
++        type: array
++        items:
++          type: string
++          example: 540a6803971d1880ec73a96cb97815a95d374cbad5d865925e5aa0432fcf1931539afe10310c122c5eaae15df61236079abbf4f258889359c4d175516934484a
++  Batch:
++    properties:
++      header:
++        $ref: ""#/definitions/BatchHeader""
++      header_signature:
++        type: string
++        example:  89807bfc9089e37e00d87d97357de14cfbc455cd608438d426a625a30a0da9a31c406983803c4aa27e1f32a3ff61709e8ec4b56abbc553d7d330635b5d27029c
++      transactions:
++        type: array
++        items:
++          $ref: ""#/definitions/Transaction""
++  BatchList:
++    properties:
++      batches:
++        type: array
++        items:
++          $ref: ""#/definitions/Batch""
++  Schema:
++    properties:
++      name:
++        type: string
++        example: ""Lightbulb""
++      description:
++        type: string
++        example: ""Example Lightbulb schema""
++      owener:
++        type: string
++        example: ""philips""",,2019-03-26 15:33:07,https://api.github.com/repos/hyperledger/grid/pulls/comments/268651697,https://github.com/hyperledger/grid/pull/20#discussion_r268651697,eloaverona
+https://github.com/hyperledger/grid/pull/19,https://github.com/hyperledger/grid/pull/19,2019,eccc646602400b454f45422ff3a281855907edfa,2019-03-22 17:14:53,268263531,"@@ -0,0 +1,69 @@
++# Copyright 2018 Cargill Incorporated",,2019-03-25 14:34:11,https://api.github.com/repos/hyperledger/grid/pulls/comments/268263531,https://github.com/hyperledger/grid/pull/19#discussion_r268263531,agunde406
+https://github.com/hyperledger/grid/pull/16,https://github.com/hyperledger/grid/pull/16,Use grid-daemon and add a [[bin]] section to make the binary 'gridd'.,ce005b27e7b7c254a037665d6d35c95e03f697cf,2019-03-21 16:56:42,267859316,"@@ -0,0 +1,21 @@
++# Copyright 2019 Bitwise, IO Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#    http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++[package]
++name = ""daemon""",,2019-03-21 17:57:05,https://api.github.com/repos/hyperledger/grid/pulls/comments/267859316,https://github.com/hyperledger/grid/pull/16#discussion_r267859316,vaporos
+https://github.com/hyperledger/grid/pull/16,https://github.com/hyperledger/grid/pull/16,"Use ""Contributors to Hyperledger Grid"".",ce005b27e7b7c254a037665d6d35c95e03f697cf,2019-03-21 16:56:59,267859466,"@@ -0,0 +1,21 @@
++# Copyright 2019 Bitwise, IO Inc.
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#    http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++[package]
++name = ""daemon""
++version = ""0.1.0""
++authors = [""Bitwise IO, Inc.""]",,2019-03-21 17:57:05,https://api.github.com/repos/hyperledger/grid/pulls/comments/267859466,https://github.com/hyperledger/grid/pull/16#discussion_r267859466,vaporos
+https://github.com/hyperledger/grid/pull/16,https://github.com/hyperledger/grid/pull/16,"We could put some boilerplate code here from the CLI command re: argument parsing, logging setup, initial top-level error handling.",ce005b27e7b7c254a037665d6d35c95e03f697cf,2019-03-21 17:18:12,267869252,"@@ -0,0 +1,20 @@
++/*
++ * Copyright 2019 Bitwise IO, Inc.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++fn main() {",50,2019-03-21 17:57:05,https://api.github.com/repos/hyperledger/grid/pulls/comments/267869252,https://github.com/hyperledger/grid/pull/16#discussion_r267869252,vaporos
+https://github.com/hyperledger/grid/pull/16,https://github.com/hyperledger/grid/pull/16,Addressed,ce005b27e7b7c254a037665d6d35c95e03f697cf,2019-03-21 17:58:33,267887250,"@@ -0,0 +1,20 @@
++/*
++ * Copyright 2019 Bitwise IO, Inc.
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * -----------------------------------------------------------------------------
++ */
++
++fn main() {",50,2019-03-21 17:58:34,https://api.github.com/repos/hyperledger/grid/pulls/comments/267887250,https://github.com/hyperledger/grid/pull/16#discussion_r267887250,shannynalayna
+https://github.com/hyperledger/grid/pull/15,https://github.com/hyperledger/grid/pull/15,"Typos in commit message:
+componets
+definations
+",b9fd1dfa89a64484f1536a226467aa618ff29b11,2019-03-20 16:24:33,267428984,"@@ -12,4 +12,5 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
++pub mod protocol;",4,2019-03-21 18:00:42,https://api.github.com/repos/hyperledger/grid/pulls/comments/267428984,https://github.com/hyperledger/grid/pull/15#discussion_r267428984,peterschwarz
+https://github.com/hyperledger/grid/pull/15,https://github.com/hyperledger/grid/pull/15,"fixed
+",b9fd1dfa89a64484f1536a226467aa618ff29b11,2019-03-20 16:27:50,267430613,"@@ -12,4 +12,5 @@
+ // See the License for the specific language governing permissions and
+ // limitations under the License.
+ 
++pub mod protocol;",4,2019-03-21 18:00:42,https://api.github.com/repos/hyperledger/grid/pulls/comments/267430613,https://github.com/hyperledger/grid/pull/15#discussion_r267430613,agunde406
+https://github.com/hyperledger/grid/pull/15,https://github.com/hyperledger/grid/pull/15,"Should we do protocol::schema::payload and protocol::schema::state instead? I think we should avoid underscores in module names unless the alternatives doesn't make sense.
+
+One advantage would be doing ""pub use"" in the schema module so we can do ""use protocol::schema::SchemaPayload"" but still have the payload code in the separate module.",b9fd1dfa89a64484f1536a226467aa618ff29b11,2019-03-21 14:35:27,267786692,"@@ -0,0 +1,16 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++pub mod schema_payload;",,2019-03-21 18:00:42,https://api.github.com/repos/hyperledger/grid/pulls/comments/267786692,https://github.com/hyperledger/grid/pull/15#discussion_r267786692,vaporos
+https://github.com/hyperledger/grid/pull/15,https://github.com/hyperledger/grid/pull/15,"I'm fine with that, will update. ",b9fd1dfa89a64484f1536a226467aa618ff29b11,2019-03-21 17:46:55,267882455,"@@ -0,0 +1,16 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++pub mod schema_payload;",,2019-03-21 18:00:42,https://api.github.com/repos/hyperledger/grid/pulls/comments/267882455,https://github.com/hyperledger/grid/pull/15#discussion_r267882455,agunde406
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,missing license ,1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-20 13:09:06,267328276,"@@ -0,0 +1,14 @@
++[package]",15,2019-03-21 16:35:23,https://api.github.com/repos/hyperledger/grid/pulls/comments/267328276,https://github.com/hyperledger/grid/pull/14#discussion_r267328276,agunde406
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,"This `SetLoggerError` only happens if the `init_with_level` has been called more than once.  The user can't do anything about that, and so it's fundamentally a programming error.
+
+See [SetLoggerError](https://docs.rs/log/0.4.6/log/struct.SetLoggerError.html), which is ultimately used [here](https://github.com/borntyping/rust-simple_logger/blob/master/src/lib.rs#L49) in simple logger.",1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-20 16:40:39,267436793,"@@ -0,0 +1,45 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++use std::error::Error;
++use std::fmt;
++
++use log;
++
++#[derive(Debug)]
++pub enum CliError {
++    LoggerError(Box<log::SetLoggerError>),",,2019-03-21 16:35:23,https://api.github.com/repos/hyperledger/grid/pulls/comments/267436793,https://github.com/hyperledger/grid/pull/14#discussion_r267436793,peterschwarz
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,"Are you advocating that any programming error should cause an immediate panic, or that the message output should be better?",1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-21 16:19:08,267841272,"@@ -0,0 +1,45 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++use std::error::Error;
++use std::fmt;
++
++use log;
++
++#[derive(Debug)]
++pub enum CliError {
++    LoggerError(Box<log::SetLoggerError>),",,2019-03-21 16:35:23,https://api.github.com/repos/hyperledger/grid/pulls/comments/267841272,https://github.com/hyperledger/grid/pull/14#discussion_r267841272,vaporos
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,"I'm advocating a panic in this particular case.  If the user were to receive this, they would always receive it.  I.e. they can't fix this error through any combination of flags.  Since this sort of error would be caught at programming time (for the same reason) a panic makes more sense than adding an value to the enum.",1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-21 16:24:13,267843759,"@@ -0,0 +1,45 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++use std::error::Error;
++use std::fmt;
++
++use log;
++
++#[derive(Debug)]
++pub enum CliError {
++    LoggerError(Box<log::SetLoggerError>),",,2019-03-21 16:35:23,https://api.github.com/repos/hyperledger/grid/pulls/comments/267843759,https://github.com/hyperledger/grid/pull/14#discussion_r267843759,peterschwarz
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,"For other programming errors, I would consider evaluating it on a case-by-case basis.",1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-21 16:24:52,267844111,"@@ -0,0 +1,45 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++use std::error::Error;
++use std::fmt;
++
++use log;
++
++#[derive(Debug)]
++pub enum CliError {
++    LoggerError(Box<log::SetLoggerError>),",,2019-03-21 16:35:23,https://api.github.com/repos/hyperledger/grid/pulls/comments/267844111,https://github.com/hyperledger/grid/pull/14#discussion_r267844111,peterschwarz
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,"Fixed
+",1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-21 16:39:57,267851435,"@@ -0,0 +1,14 @@
++[package]",15,2019-03-21 16:39:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/267851435,https://github.com/hyperledger/grid/pull/14#discussion_r267851435,vaporos
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,"I get your point, but I think we shoudn't fall into the pattern of scattering panics throughout the code. In this case, it is easy to avoid the panic. In the case of locking-related panics, I think we are using excepts because propagating up the unlikely errors have a big impact on the code overall, and so its a trade-off. There is no trade-off here though - the code looks cleaner ""?"" and is more technically correct (prints error in main() and exits with a status code).
+
+After logging is setup, we should actively avoid panics because they will not get logged appropriately. Obviously, not justification for this particular case. But if in every other instance we are avoiding panics so that errors get logged appropriately, then I don't think we should deviate here, we should just follow the more correct pattern of turning errors (whether they be user-caused or not) into CliErrors and let it get handled appropriately in main().",1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-21 16:46:32,267854373,"@@ -0,0 +1,45 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++use std::error::Error;
++use std::fmt;
++
++use log;
++
++#[derive(Debug)]
++pub enum CliError {
++    LoggerError(Box<log::SetLoggerError>),",,2019-03-21 16:46:32,https://api.github.com/repos/hyperledger/grid/pulls/comments/267854373,https://github.com/hyperledger/grid/pull/14#discussion_r267854373,vaporos
+https://github.com/hyperledger/grid/pull/14,https://github.com/hyperledger/grid/pull/14,I updated this from LoggingError to LoggingInitializationError to make it clearer.,1368f94afc21cc7d5a07f1bf9667f800a9959776,2019-03-21 16:47:56,267855017,"@@ -0,0 +1,45 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++use std::error::Error;
++use std::fmt;
++
++use log;
++
++#[derive(Debug)]
++pub enum CliError {
++    LoggerError(Box<log::SetLoggerError>),",,2019-03-21 16:47:56,https://api.github.com/repos/hyperledger/grid/pulls/comments/267855017,https://github.com/hyperledger/grid/pull/14#discussion_r267855017,vaporos
+https://github.com/hyperledger/grid/pull/13,https://github.com/hyperledger/grid/pull/13,Add some doc comments to these.,b7ae6f66922bb080063b86c3fcb926b49a7dc55e,2019-03-19 15:12:19,266940571,"@@ -0,0 +1,40 @@
++// Copyright 2019 Cargill Incorporated
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//     http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++// -----------------------------------------------------------------------------
++
++syntax = ""proto3"";
++
++import ""schema_state.proto"";
++
++message SchemaPayload {",21,2019-03-19 15:26:25,https://api.github.com/repos/hyperledger/grid/pulls/comments/266940571,https://github.com/hyperledger/grid/pull/13#discussion_r266940571,peterschwarz
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,"How about ""Hyperleddger Grid is a platform for building supply chain solutions that contain blockchain and distributed ledger components.""?",c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:07:59,264840446,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264840446,https://github.com/hyperledger/grid/pull/9#discussion_r264840446,vaporos
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,Incorrect link.,c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:08:05,264840487,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for
++blockchain platforms. It provides a growing set of tools that accelerate
++development for supply chain smart contracts and client interfaces.
+ 
+-Documentation
+--------------
++This project is not a blockchain platform or distributed ledger application.
++Instead, Hyperledger Grid provides supply-chain-focused libraries, data models,
++and software development kits (SDKs) as modular, reusable middleware between
++existing blockchain platforms and client applications.
+ 
+-Information on how to run and extend Hyperledger Grid is available at
+-https://grid.hyperledger.org/docs/.
++The Hyperledger Grid project includes several repositories:
+ 
+-Project Status
+---------------
++- [This repository](https://github.com/hyperledger/grid) contains core
++  components such as supply-chain-centric data types and smart permissioning
++  code.
+ 
+-This Hyperledger project is in _incubation_. It was proposed to the community
+-and documented in this [Hyperledger Grid
+-Proposal](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
+-Information on what _incubation_ means can be found in the [Hyperledger
+-Project Lifecycle
+-document](https://wiki.hyperledger.org/community/project-lifecycle).
++- The [grid-contrib](https://github.com/hyperledger/grid-contrib) repository
++  contains example middleware tools and reference implementations for smart
++  contracts (also called ""transaction families"").
++
++- The [grid-rfcs](https://github.com/hyperledger/grid-contrib) repository",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264840487,https://github.com/hyperledger/grid/pull/9#discussion_r264840487,peterschwarz
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,s/blockchain/distributed ledger/,c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:09:04,264840873,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for
++blockchain platforms. It provides a growing set of tools that accelerate",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264840873,https://github.com/hyperledger/grid/pull/9#discussion_r264840873,jsmitchell
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,s/blockchain/distributed ledger/,c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:09:46,264841138,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for
++blockchain platforms. It provides a growing set of tools that accelerate
++development for supply chain smart contracts and client interfaces.
+ 
+-Documentation
+--------------
++This project is not a blockchain platform or distributed ledger application.
++Instead, Hyperledger Grid provides supply-chain-focused libraries, data models,
++and software development kits (SDKs) as modular, reusable middleware between
++existing blockchain platforms and client applications.",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264841138,https://github.com/hyperledger/grid/pull/9#discussion_r264841138,jsmitchell
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,"Let's get rid of the word ""middleware"" here.",c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:10:10,264841304,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for
++blockchain platforms. It provides a growing set of tools that accelerate
++development for supply chain smart contracts and client interfaces.
+ 
+-Documentation
+--------------
++This project is not a blockchain platform or distributed ledger application.
++Instead, Hyperledger Grid provides supply-chain-focused libraries, data models,
++and software development kits (SDKs) as modular, reusable middleware between
++existing blockchain platforms and client applications.
+ 
+-Information on how to run and extend Hyperledger Grid is available at
+-https://grid.hyperledger.org/docs/.
++The Hyperledger Grid project includes several repositories:
+ 
+-Project Status
+---------------
++- [This repository](https://github.com/hyperledger/grid) contains core
++  components such as supply-chain-centric data types and smart permissioning
++  code.
+ 
+-This Hyperledger project is in _incubation_. It was proposed to the community
+-and documented in this [Hyperledger Grid
+-Proposal](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
+-Information on what _incubation_ means can be found in the [Hyperledger
+-Project Lifecycle
+-document](https://wiki.hyperledger.org/community/project-lifecycle).
++- The [grid-contrib](https://github.com/hyperledger/grid-contrib) repository
++  contains example middleware tools and reference implementations for smart",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264841304,https://github.com/hyperledger/grid/pull/9#discussion_r264841304,vaporos
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,"Proposed: ""Hyperledger Grid is a platform for building supply chain solutions that include distributed ledger components.""",c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:26:00,264847162,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264847162,https://github.com/hyperledger/grid/pull/9#discussion_r264847162,chenette
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,"Proposed:
+
+""This project is not an implementation of a distributed ledger or a client       
+application. Instead, Hyperledger Grid provides supply-chain-focused libraries, data models, and software development kits (SDKs) as modular, reusable components.""",c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:27:24,264847655,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for
++blockchain platforms. It provides a growing set of tools that accelerate
++development for supply chain smart contracts and client interfaces.
+ 
+-Documentation
+--------------
++This project is not a blockchain platform or distributed ledger application.
++Instead, Hyperledger Grid provides supply-chain-focused libraries, data models,
++and software development kits (SDKs) as modular, reusable middleware between
++existing blockchain platforms and client applications.",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264847655,https://github.com/hyperledger/grid/pull/9#discussion_r264847655,chenette
+https://github.com/hyperledger/grid/pull/9,https://github.com/hyperledger/grid/pull/9,"How about this?
+
+""... example domain models and reference implementations for smart contracts ...""",c703408b14f066db55c6559febd4d997eb90fc57,2019-03-12 19:29:08,264848216,"@@ -1,25 +1,55 @@
+-Hyperledger Grid
+-----------------
++# Hyperledger Grid
+ 
+-Hyperledger Grid is a project for building supply chain solutions. It includes
+-a set of libraries, data models, and SDKs to accelerate development for supply
+-chain smart contracts and client interfaces.
++Hyperledger Grid is a framework for building supply chain solutions for
++blockchain platforms. It provides a growing set of tools that accelerate
++development for supply chain smart contracts and client interfaces.
+ 
+-Documentation
+--------------
++This project is not a blockchain platform or distributed ledger application.
++Instead, Hyperledger Grid provides supply-chain-focused libraries, data models,
++and software development kits (SDKs) as modular, reusable middleware between
++existing blockchain platforms and client applications.
+ 
+-Information on how to run and extend Hyperledger Grid is available at
+-https://grid.hyperledger.org/docs/.
++The Hyperledger Grid project includes several repositories:
+ 
+-Project Status
+---------------
++- [This repository](https://github.com/hyperledger/grid) contains core
++  components such as supply-chain-centric data types and smart permissioning
++  code.
+ 
+-This Hyperledger project is in _incubation_. It was proposed to the community
+-and documented in this [Hyperledger Grid
+-Proposal](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
+-Information on what _incubation_ means can be found in the [Hyperledger
+-Project Lifecycle
+-document](https://wiki.hyperledger.org/community/project-lifecycle).
++- The [grid-contrib](https://github.com/hyperledger/grid-contrib) repository
++  contains example middleware tools and reference implementations for smart",,2019-03-12 19:34:57,https://api.github.com/repos/hyperledger/grid/pulls/comments/264848216,https://github.com/hyperledger/grid/pull/9#discussion_r264848216,chenette
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,This needs to stay supply_chain because otherwise the hash would not be  '3400de'. ,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 13:54:28,258490438,"@@ -392,20 +392,20 @@ then by ``timestamp`` (earliest to latest).
+ Addressing
+ ----------
+ 
+-Supply Chain objects are stored under the namespace obtained by taking the
+-first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++Grid Track and Trace objects are stored under the namespace obtained by taking
++the first six characters of the SHA-512 hash of the string
++``grid_track_and_trace``:",50,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258490438,https://github.com/hyperledger/grid/pull/7#discussion_r258490438,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,"Again needs to stay ""supply_chain""",c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 13:54:41,258490520,"@@ -392,20 +392,20 @@ then by ``timestamp`` (earliest to latest).
+ Addressing
+ ----------
+ 
+-Supply Chain objects are stored under the namespace obtained by taking the
+-first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++Grid Track and Trace objects are stored under the namespace obtained by taking
++the first six characters of the SHA-512 hash of the string
++``grid_track_and_trace``:
+ 
+ .. code-block:: pycon
+ 
+    >>> def get_hash(string):
+    ...     return hashlib.sha512(string.encode('utf-8')).hexdigest()
+    ...
+-   >>> get_hash('supply_chain')[:6]
++   >>> get_hash('grid_track_and_trace')[:6]",59,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258490520,https://github.com/hyperledger/grid/pull/7#discussion_r258490520,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,needs to stay supply_chain,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 13:55:00,258490656,"@@ -450,7 +450,7 @@ PropertyPage is:
+ 
+ .. code-block:: pycon
+ 
+-    >>> get_hash('supply_chain')[:6] + 'ea'  + get_hash('fish-456')[:36] + get_hash('temperature')[:22] + hex(28)[2:].zfill(4)
++    >>> get_hash('grid_track_and_trace')[:6] + 'ea'  + get_hash('fish-456')[:36] + get_hash('temperature')[:22] + hex(28)[2:].zfill(4)",75,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258490656,https://github.com/hyperledger/grid/pull/7#discussion_r258490656,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,"This commit should be dropped. Changing the namespace requires code changes, so it should remain ""supply_chain""",c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 13:58:21,258492192,"@@ -394,14 +394,14 @@ Addressing
+ 
+ Grid Track and Trace objects are stored under the namespace obtained by taking
+ the first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++``grid_track_and_trace``:",50,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258492192,https://github.com/hyperledger/grid/pull/7#discussion_r258492192,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,We should have a discussion about the copyright for the Grid documentation. ,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 14:01:41,258493640,"@@ -60,7 +60,7 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth Supply Chain'
++project = u'Hyperledger Grid'
+ copyright = u'2015-2017, Intel Corporation'",14,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258493640,https://github.com/hyperledger/grid/pull/7#discussion_r258493640,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,"The code has already changed to `grid_track_and_trace` in `contracts/track_and_trace/src` - `addressing.rs` and `handler.rs`. See:  
+
+https://github.com/hyperledger/grid/commit/664879a7d652f3aa28df4343740becdf6fbdd28c
+",c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 15:11:41,258526749,"@@ -392,20 +392,20 @@ then by ``timestamp`` (earliest to latest).
+ Addressing
+ ----------
+ 
+-Supply Chain objects are stored under the namespace obtained by taking the
+-first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++Grid Track and Trace objects are stored under the namespace obtained by taking
++the first six characters of the SHA-512 hash of the string
++``grid_track_and_trace``:",50,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258526749,https://github.com/hyperledger/grid/pull/7#discussion_r258526749,chenette
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,"Ah yes, well, in that case, the namespace needs to be changed to the new hash  (it will not be '3400de' anymore) and the final address needs to be updated",c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 15:15:52,258528777,"@@ -392,20 +392,20 @@ then by ``timestamp`` (earliest to latest).
+ Addressing
+ ----------
+ 
+-Supply Chain objects are stored under the namespace obtained by taking the
+-first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++Grid Track and Trace objects are stored under the namespace obtained by taking
++the first six characters of the SHA-512 hash of the string
++``grid_track_and_trace``:",50,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258528777,https://github.com/hyperledger/grid/pull/7#discussion_r258528777,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,"OK. 
+
+@vaporos - can you supply the new hash and final address for grid_track_and_trace, please? ",c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 15:25:12,258533262,"@@ -392,20 +392,20 @@ then by ``timestamp`` (earliest to latest).
+ Addressing
+ ----------
+ 
+-Supply Chain objects are stored under the namespace obtained by taking the
+-first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++Grid Track and Trace objects are stored under the namespace obtained by taking
++the first six characters of the SHA-512 hash of the string
++``grid_track_and_trace``:",50,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258533262,https://github.com/hyperledger/grid/pull/7#discussion_r258533262,chenette
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,Agreed. But any changes to the copyrights (and dates) should probably be a separate PR.,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 15:27:06,258534185,"@@ -60,7 +60,7 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth Supply Chain'
++project = u'Hyperledger Grid'
+ copyright = u'2015-2017, Intel Corporation'",14,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258534185,https://github.com/hyperledger/grid/pull/7#discussion_r258534185,chenette
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,yep just putting it on people radar,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-20 15:30:37,258536000,"@@ -60,7 +60,7 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth Supply Chain'
++project = u'Hyperledger Grid'
+ copyright = u'2015-2017, Intel Corporation'",14,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/258536000,https://github.com/hyperledger/grid/pull/7#discussion_r258536000,agunde406
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,Fixed - changed to `a43b46`. (My thanks to @rbuysse and @agunde406 .) ,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-25 16:44:34,259914623,"@@ -392,20 +392,20 @@ then by ``timestamp`` (earliest to latest).
+ Addressing
+ ----------
+ 
+-Supply Chain objects are stored under the namespace obtained by taking the
+-first six characters of the SHA-512 hash of the string
+-``supply_chain``:
++Grid Track and Trace objects are stored under the namespace obtained by taking
++the first six characters of the SHA-512 hash of the string
++``grid_track_and_trace``:",50,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/259914623,https://github.com/hyperledger/grid/pull/7#discussion_r259914623,chenette
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,"WebAssembly is an implementation detail. Suggest simply ""Framework for building supply chain solutions.""",c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-26 15:07:44,260328084,"@@ -293,8 +293,9 @@
+ # (source start file, target name, title, author,
+ #  dir menu entry, description, category)
+ texinfo_documents = [
+-  (master_doc, 'SawtoothSupplyChain', u'Sawtooth Supply Chain Documentation',
+-   author, 'SawtoothSupplyChain', 'One line description of project.',
++  (master_doc, 'HyperledgerGrid', u'Hyperledger Grid Documentation',
++   author, 'HyperledgerGrid',
++   'WebAssembly-based framework for building supply chain solutions.',",,2019-02-26 17:13:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/260328084,https://github.com/hyperledger/grid/pull/7#discussion_r260328084,vaporos
+https://github.com/hyperledger/grid/pull/7,https://github.com/hyperledger/grid/pull/7,Done.,c1a2bce4192ebb3a3145bfa3bbe82783ab118f77,2019-02-26 17:16:58,260394997,"@@ -293,8 +293,9 @@
+ # (source start file, target name, title, author,
+ #  dir menu entry, description, category)
+ texinfo_documents = [
+-  (master_doc, 'SawtoothSupplyChain', u'Sawtooth Supply Chain Documentation',
+-   author, 'SawtoothSupplyChain', 'One line description of project.',
++  (master_doc, 'HyperledgerGrid', u'Hyperledger Grid Documentation',
++   author, 'HyperledgerGrid',
++   'WebAssembly-based framework for building supply chain solutions.',",,2019-02-26 17:16:58,https://api.github.com/repos/hyperledger/grid/pulls/comments/260394997,https://github.com/hyperledger/grid/pull/7#discussion_r260394997,chenette
+https://github.com/hyperledger/grid/pull/6,https://github.com/hyperledger/grid/pull/6,Need to add `--bind consensus:tcp://eth0:5050`,bc67ff1f2587fba2b3a1148a3d730ea796b54908,2019-03-26 14:37:34,269136449,"@@ -56,23 +56,35 @@ services:
+           sawadm keygen &&
+           sawtooth keygen my_key &&
+           sawset genesis -k /root/.sawtooth/keys/my_key.priv &&
+-          sawadm genesis config-genesis.batch
++          sawset proposal create \
++            -k /root/.sawtooth/keys/my_key.priv \
++            sawtooth.consensus.algorithm.name=Devmode \
++            sawtooth.consensus.algorithm.version=0.1 \
++            -o config.batch && 
++          sawadm genesis config-genesis.batch config.batch
+         fi;
+         sawtooth-validator -vv \
+           --endpoint tcp://validator:8800 \
+           --bind component:tcp://eth0:4004 \
+           --bind network:tcp://eth0:8800",,2019-03-26 15:22:33,https://api.github.com/repos/hyperledger/grid/pulls/comments/269136449,https://github.com/hyperledger/grid/pull/6#discussion_r269136449,peterschwarz
+https://github.com/hyperledger/grid/pull/6,https://github.com/hyperledger/grid/pull/6,Need to add `--bind consensus:tcp://eth0:5050`,bc67ff1f2587fba2b3a1148a3d730ea796b54908,2019-03-26 14:37:58,269136667,"@@ -43,16 +43,28 @@ services:
+           sawadm keygen &&
+           sawtooth keygen my_key &&
+           sawset genesis -k /root/.sawtooth/keys/my_key.priv &&
+-          sawadm genesis config-genesis.batch
++          sawset proposal create \
++            -k /root/.sawtooth/keys/my_key.priv \
++            sawtooth.consensus.algorithm.name=Devmode \
++            sawtooth.consensus.algorithm.version=0.1 \
++            -o config.batch && 
++          sawadm genesis config-genesis.batch config.batch
+         fi;
+         sawtooth-validator -v \
+           --endpoint tcp://validator:8800 \
+           --bind component:tcp://eth0:4004 \
+           --bind network:tcp://eth0:8800",,2019-03-26 15:22:33,https://api.github.com/repos/hyperledger/grid/pulls/comments/269136667,https://github.com/hyperledger/grid/pull/6#discussion_r269136667,peterschwarz
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"It's against best practices to turn a product name (a noun) into an hyphenated adjective (WebAssembly-based). Instead, I recommend ""... a project based on WebAssembly for building..."".",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 22:47:04,248870484,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248870484,https://github.com/hyperledger/grid/pull/2#discussion_r248870484,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Also, consider adding a link to WebAssembly.org.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 22:48:23,248870820,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248870820,https://github.com/hyperledger/grid/pull/2#discussion_r248870820,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Change ""here:"" to ""at"" (without the colon).
+
+(Best practice for online writing: Do not use ""here"" to introduce a link or act as the link text.)",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 22:53:55,248872297,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248872297,https://github.com/hyperledger/grid/pull/2#discussion_r248872297,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Change to a lower-case ""i"" for ""incubation"".",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 22:54:28,248872444,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248872444,https://github.com/hyperledger/grid/pull/2#discussion_r248872444,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Change the link text from ""here"" to something descriptively specific, such as:
+
+ ""in this [Hyperledger Grid Proposal](..."" 
+
+Also, should the link to the doc go straight to edit mode?  I recommend deleting `/edit` from the URL.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 22:59:41,248873750,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248873750,https://github.com/hyperledger/grid/pull/2#discussion_r248873750,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,s/entails/means/,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 23:00:38,248873973,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
++Information on what _Incubation_ entails can be found in the",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248873973,https://github.com/hyperledger/grid/pull/2#discussion_r248873973,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"I noticed that Hyperledger's own project life cycle document uses a capital I (and italics) for _Incubation_, even in the middle of a sentence.  Although I disagree with their style choice, you could choose to follow their convention for this term.  Or you could  follow best practices for writing and grammar.  I leave this decision up to you.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 23:03:35,248874657,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248874657,https://github.com/hyperledger/grid/pull/2#discussion_r248874657,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Also, if you change to ""incubation"" above, make the same change here.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 23:07:40,248875600,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
++Information on what _Incubation_ entails can be found in the",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248875600,https://github.com/hyperledger/grid/pull/2#discussion_r248875600,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"This sentence seems malformed at first. To smooth it out, I'd start this sentence with ""The"".",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 23:09:35,248875996,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
++Information on what _Incubation_ entails can be found in the
++[Hyperledger Project Lifecycle document](https://wiki.hyperledger.org/community/project-lifecycle).
+ 
+-## Components
+-
+-Running alongside the core components from Hyperledger Sawtooth, Supply Chain
+-includes a number of elements customizing the blockchain and user interaction
+-with it:
+-
+-- a **transaction processor** which handles Supply Chain transaction logic
+-- a **server** which provides an HTTP/JSON API for Supply Chain actions
+-- a **ledger sync** which syncs blockchain data to a local database
+-- the **AssetTrack** example client for tracking generic assets
+-- the **FishNet** example client for tracking fish from catch to table
+-- a **shell** container with the dependencies to run any commands and scripts
+-
+-
+-## Usage
+-
+-This project utilizes [Docker](https://www.docker.com/what-docker) to simplify
+-dependencies and deployment. After cloning this repo, follow the instructions
+-specific to your OS to install and run whatever components are required to use
+-`docker` and `docker-compose` from your command line. This is only dependency
+-required to run Supply Chain components.
+-
+-### Start Up
+-
+-Once Docker is installed and you've cloned this repo, navigate to the root
+-project directory and run:
+-
+-```bash
+-docker-compose up
+-```
+-
+-This will take awhile the first time it runs, but when complete will be running
+-all required components in separate containers. Many of the components will be
+-available through HTTP endpoints, including:
+-
+-- The Supply Chain REST API will be at **http://localhost:8020**
+-- AssetTrack will be at **http://localhost:8021**
+-- FishNet will be at **http://localhost:8022**
+-- RethinkDB's admin panel will be available at **http://localhost:8023**
+-- Sawtooth's blockchain REST API will be available at **http://localhost:8024**
+-
+-In bash you can shutdown these components with the key combination: `ctrl-C`.
+-You can shutdown _and_ remove the containers (destroying their data), with the
+-command:
+-
+-```bash
+-docker-compose down
+-```
+-
+-### Running Scripts in the Shell
+-
+-Running `docker-compose up`, will automatically run all scripts necessary to
+-use all Supply Chain components. However if you want to run any additional
+-scripts, such as scripts to automatically update sample blockchain data, a shell
+-container is provided with all necessary dependencies installed. To enter the
+-shell, simply open a terminal window and run:
+-
+-```bash
+-docker exec -it supply-shell bash
+-```
+-
+-Once inside the shell, you might try running the one of the update scripts to
+-see live updates populate in an example web app. First navigate to the server
+-directory:
+-
+-```bash
+-cd server/
+-```
+-
+-Then run one of the two provided npm scripts:
+-
+-```bash
+-npm run update-sample-assets
+-npm run update-sample-fish
+-```
+-
+-You can customize how many updates are submitted per minute with the `RATE`
+-environment variable (default 6), and use `LIMIT` to stop the updates after a
+-certain number are submitted (default 25):
+-
+-```bash
+-RATE=3 LIMIT=10 npm run update-sample-assets
+-```
+-
+-If you just want to exit the shell, you can simply run:
+-
+-```bash
+-exit
+-```
+-
+-### Configuring API Keys and Secrets
+-
+-While the Server runs out of the box with sensible defaults, there are a number
+-of secrets and API keys which will not be secure unless set explicitly. While
+-this is fine for demo purposes, any actual deployment set the following
+-properties:
+-
+-- **JWT_SECRET**: can be any random string
+-- **PRIVATE_KEY**: must be 64 random hexadecimal characters
+-- **MAPS_API_KEY**: provided by [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key)
+-
+-These properties can be set one of two ways, through an environment variable,
+-or (preferably) by creating a file named `config.json` file in the `server/`
+-directory. A file named `config.json.example` is provided which should provide
+-a template to follow.
+-
+-## Development
+-
+-### Restarting Components
+-
+-The default Docker containers use the `volumes` command to link directly to the
+-source code on your host machine. As a result any changes you make will
+-immediately be reflected in Supply Chain components without having to rebuild
+-them. However, typically you _will_ have to restart a component before it can
+-take advantage of any changes. Rather than restarting every container, you can
+-restart a single component from separate terminal using the container name. For
+-example:
+-
+-```bash
+-docker restart supply-server
+-```
+-
+-The available container names include:
+-- supply-shell
+-- supply-processor
+-- supply-server
+-- supply-asset-client
+-- supply-fish-client
+-- supply-rethink
+-- supply-validator
+-- supply-settings-tp
+-- supply-rest-api
+-
+-### Manually Building Generated Files
+-
+-The example clients are based on static files generated by build scripts. Any
+-time changes are made to their source code they will need to be rebuilt. This
+-is done automatically on `up`, but if you make changes to these files and wish
+-to rebuild the generated files immediately, you can do so from within the
+-Supply Chain Shell:
+-
+-```bash
+-docker exec -it supply-shell bash
+-```
+-
+-Once in the shell, you can generate the necessary JS files by navigating to a
+-client's directory and running its build script:
+-
+-```bash
+-cd asset_client/
+-npm run build
+-```
+-
+-```bash
+-cd fish_client/
+-npm run build
+-```
+-
+-Unlike other components, the clients do _not_ typically need to be restarted in
+-order to reflect changes, just rebuild the static files and refresh your
+-browser (the browser cache may have to be emptied).
+-
+-#### Building Protobuf Files
+-
+-Files in the `protos/` directory are used to generate classes for all of the
+-other components. If any changes are made in this directory, these classes will
+-need to be rebuilt for all components. While this can be done manually, the
+-necessary commands are included in `docker-compose.yaml`, so simply stop all
+-containers with `ctrl-C` and then `docker-compose up` again.
+-
+-## Documentation
+-
+-The latest documentation for Sawtooth Supply Chain is available within this
+-repo in the [docs](docs) subdirectory.
+ 
+ ## License
+ 
+-Hyperledger Sawtooth software is licensed under the
++Hyperledger Grid software is licensed under the
+ [Apache License Version 2.0](LICENSE) software license.
+ 
+-Hyperledger Sawtooth Supply Chain documentation in the [docs](docs)
++Hyperledger Grid documentation in the [docs](docs)",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248875996,https://github.com/hyperledger/grid/pull/2#discussion_r248875996,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Also, I suggest changing ""Documentation for"" to ""Information on"" (to avoid duplicating the word ""Documentation).",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 23:14:29,248877021,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248877021,https://github.com/hyperledger/grid/pull/2#discussion_r248877021,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"Say ""Hyperledger Grid"" instead of ""Grid"" here and elsewhere.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-17 23:15:12,248877179,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It",,2019-01-18 06:01:39,https://api.github.com/repos/hyperledger/grid/pulls/comments/248877179,https://github.com/hyperledger/grid/pull/2#discussion_r248877179,chenette
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"This was just pulled from the proposal. I removed WebAssembly-based, as it places too much of the emphasis on a specific underlying technology.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:03:17,248935424,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It",,2019-01-18 06:03:17,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935424,https://github.com/hyperledger/grid/pull/2#discussion_r248935424,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,Done.,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:03:30,248935454,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:",,2019-01-18 06:03:31,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935454,https://github.com/hyperledger/grid/pull/2#discussion_r248935454,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,Done.,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:03:41,248935467,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the",,2019-01-18 06:03:42,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935467,https://github.com/hyperledger/grid/pull/2#discussion_r248935467,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,Done.,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:03:50,248935485,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).",,2019-01-18 06:03:50,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935485,https://github.com/hyperledger/grid/pull/2#discussion_r248935485,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,Done.,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:03:59,248935495,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
++Information on what _Incubation_ entails can be found in the",,2019-01-18 06:03:59,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935495,https://github.com/hyperledger/grid/pull/2#discussion_r248935495,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,Done.,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:04:05,248935510,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).
++Information on what _Incubation_ entails can be found in the
++[Hyperledger Project Lifecycle document](https://wiki.hyperledger.org/community/project-lifecycle).
+ 
+-## Components
+-
+-Running alongside the core components from Hyperledger Sawtooth, Supply Chain
+-includes a number of elements customizing the blockchain and user interaction
+-with it:
+-
+-- a **transaction processor** which handles Supply Chain transaction logic
+-- a **server** which provides an HTTP/JSON API for Supply Chain actions
+-- a **ledger sync** which syncs blockchain data to a local database
+-- the **AssetTrack** example client for tracking generic assets
+-- the **FishNet** example client for tracking fish from catch to table
+-- a **shell** container with the dependencies to run any commands and scripts
+-
+-
+-## Usage
+-
+-This project utilizes [Docker](https://www.docker.com/what-docker) to simplify
+-dependencies and deployment. After cloning this repo, follow the instructions
+-specific to your OS to install and run whatever components are required to use
+-`docker` and `docker-compose` from your command line. This is only dependency
+-required to run Supply Chain components.
+-
+-### Start Up
+-
+-Once Docker is installed and you've cloned this repo, navigate to the root
+-project directory and run:
+-
+-```bash
+-docker-compose up
+-```
+-
+-This will take awhile the first time it runs, but when complete will be running
+-all required components in separate containers. Many of the components will be
+-available through HTTP endpoints, including:
+-
+-- The Supply Chain REST API will be at **http://localhost:8020**
+-- AssetTrack will be at **http://localhost:8021**
+-- FishNet will be at **http://localhost:8022**
+-- RethinkDB's admin panel will be available at **http://localhost:8023**
+-- Sawtooth's blockchain REST API will be available at **http://localhost:8024**
+-
+-In bash you can shutdown these components with the key combination: `ctrl-C`.
+-You can shutdown _and_ remove the containers (destroying their data), with the
+-command:
+-
+-```bash
+-docker-compose down
+-```
+-
+-### Running Scripts in the Shell
+-
+-Running `docker-compose up`, will automatically run all scripts necessary to
+-use all Supply Chain components. However if you want to run any additional
+-scripts, such as scripts to automatically update sample blockchain data, a shell
+-container is provided with all necessary dependencies installed. To enter the
+-shell, simply open a terminal window and run:
+-
+-```bash
+-docker exec -it supply-shell bash
+-```
+-
+-Once inside the shell, you might try running the one of the update scripts to
+-see live updates populate in an example web app. First navigate to the server
+-directory:
+-
+-```bash
+-cd server/
+-```
+-
+-Then run one of the two provided npm scripts:
+-
+-```bash
+-npm run update-sample-assets
+-npm run update-sample-fish
+-```
+-
+-You can customize how many updates are submitted per minute with the `RATE`
+-environment variable (default 6), and use `LIMIT` to stop the updates after a
+-certain number are submitted (default 25):
+-
+-```bash
+-RATE=3 LIMIT=10 npm run update-sample-assets
+-```
+-
+-If you just want to exit the shell, you can simply run:
+-
+-```bash
+-exit
+-```
+-
+-### Configuring API Keys and Secrets
+-
+-While the Server runs out of the box with sensible defaults, there are a number
+-of secrets and API keys which will not be secure unless set explicitly. While
+-this is fine for demo purposes, any actual deployment set the following
+-properties:
+-
+-- **JWT_SECRET**: can be any random string
+-- **PRIVATE_KEY**: must be 64 random hexadecimal characters
+-- **MAPS_API_KEY**: provided by [Google Maps](https://developers.google.com/maps/documentation/javascript/get-api-key)
+-
+-These properties can be set one of two ways, through an environment variable,
+-or (preferably) by creating a file named `config.json` file in the `server/`
+-directory. A file named `config.json.example` is provided which should provide
+-a template to follow.
+-
+-## Development
+-
+-### Restarting Components
+-
+-The default Docker containers use the `volumes` command to link directly to the
+-source code on your host machine. As a result any changes you make will
+-immediately be reflected in Supply Chain components without having to rebuild
+-them. However, typically you _will_ have to restart a component before it can
+-take advantage of any changes. Rather than restarting every container, you can
+-restart a single component from separate terminal using the container name. For
+-example:
+-
+-```bash
+-docker restart supply-server
+-```
+-
+-The available container names include:
+-- supply-shell
+-- supply-processor
+-- supply-server
+-- supply-asset-client
+-- supply-fish-client
+-- supply-rethink
+-- supply-validator
+-- supply-settings-tp
+-- supply-rest-api
+-
+-### Manually Building Generated Files
+-
+-The example clients are based on static files generated by build scripts. Any
+-time changes are made to their source code they will need to be rebuilt. This
+-is done automatically on `up`, but if you make changes to these files and wish
+-to rebuild the generated files immediately, you can do so from within the
+-Supply Chain Shell:
+-
+-```bash
+-docker exec -it supply-shell bash
+-```
+-
+-Once in the shell, you can generate the necessary JS files by navigating to a
+-client's directory and running its build script:
+-
+-```bash
+-cd asset_client/
+-npm run build
+-```
+-
+-```bash
+-cd fish_client/
+-npm run build
+-```
+-
+-Unlike other components, the clients do _not_ typically need to be restarted in
+-order to reflect changes, just rebuild the static files and refresh your
+-browser (the browser cache may have to be emptied).
+-
+-#### Building Protobuf Files
+-
+-Files in the `protos/` directory are used to generate classes for all of the
+-other components. If any changes are made in this directory, these classes will
+-need to be rebuilt for all components. While this can be done manually, the
+-necessary commands are included in `docker-compose.yaml`, so simply stop all
+-containers with `ctrl-C` and then `docker-compose up` again.
+-
+-## Documentation
+-
+-The latest documentation for Sawtooth Supply Chain is available within this
+-repo in the [docs](docs) subdirectory.
+ 
+ ## License
+ 
+-Hyperledger Sawtooth software is licensed under the
++Hyperledger Grid software is licensed under the
+ [Apache License Version 2.0](LICENSE) software license.
+ 
+-Hyperledger Sawtooth Supply Chain documentation in the [docs](docs)
++Hyperledger Grid documentation in the [docs](docs)",,2019-01-18 06:04:05,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935510,https://github.com/hyperledger/grid/pull/2#discussion_r248935510,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,"I did this, though I'm not sure I agree with it, as it changes the tone.",9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:06:08,248935740,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It",,2019-01-18 06:06:08,https://api.github.com/repos/hyperledger/grid/pulls/comments/248935740,https://github.com/hyperledger/grid/pull/2#discussion_r248935740,vaporos
+https://github.com/hyperledger/grid/pull/2,https://github.com/hyperledger/grid/pull/2,I did not strip /edit off the URL. This just causes an additional redirect.,9832f94cec7f54a77c896e2e7ca745b259c0ce68,2019-01-18 06:08:14,248936018,"@@ -1,212 +1,31 @@
++Hyperledger Grid
++----------------
+ 
+-![Hyperledger Sawtooth](images/sawtooth_logo_light_blue-small.png)
++Grid is a WebAssembly-based project for building supply chain solutions. It
++includes a set of libraries, data models, and SDKs to accelerate development
++for supply chain smart contracts and client interfaces.
+ 
+-# Sawtooth Supply Chain
++Documentation
++-------------
+ 
+-This is a distributed application to help you trace the provenance and other
+-contextual information of any asset. It can be used as-is or customized for
+-different use cases. This distributed application runs on top of Hyperledger
+-Sawtooth, an enterprise blockchain. To learn more about Hyperledger Sawtooth
+-please see its
+-[sawtooth-core repo](https://github.com/hyperledger/sawtooth-core) or its
+-[published docs](https://sawtooth.hyperledger.org/docs/).
++Documentation for how to run and extend Grid is available here:
++https://grid.hyperledger.org/docs/
+ 
+-## Contents
++Project Status
++--------------
+ 
+-- [Components](#components)
+-- [Usage](#usage)
+-  - [Start Up](#start-up)
+-  - [Running Scripts in the Shell](#running-scripts-in-the-shell)
+-  - [Configuring API Keys and Secrets](#configuring-api-keys-and-secrets)
+-- [Development](#development)
+-  - [Restarting Components](#restarting-components)
+-  - [Manually Building Generated Files](#manually-building-generated-files)
+-- [Documentation](#documentation)
+-- [License](#license)
++This Hyperledger project is in _Incubation_. It was proposed to the
++community and documented [here](https://docs.google.com/document/d/1b6ES0bKUK30E2iZizy3vjVEhPn7IvsW5buDo7nFXBE0/edit).",,2019-01-18 06:08:16,https://api.github.com/repos/hyperledger/grid/pulls/comments/248936018,https://github.com/hyperledger/grid/pull/2#discussion_r248936018,vaporos

@@ -1,0 +1,60 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,A newline is missing at the end of this line.,5a158019b1b81f2cdb82ec649ac52f96db80743b,2019-02-12 15:14:35,255998783,"@@ -9,16 +9,15 @@
+ #   > dotnet run Processor tcp://127.0.0.1:4004
+ #   > dotnet run Client mykey set 42
+ 
+-FROM microsoft/dotnet
++FROM microsoft/dotnet:sdk
+ 
+-COPY . /sawtooth/sdk
++WORKDIR /sdk
++COPY . .
++RUN dotnet restore src/
+ 
+-EXPOSE 4004 8008
++WORKDIR /core
++RUN git clone https://github.com/hyperledger/sawtooth-core.git
+ 
+-WORKDIR /sawtooth/sdk/src
+-
+-RUN dotnet restore \
+-    && /sawtooth/sdk/bin/build_protos \
+-    && dotnet publish -c Release -f netstandard2.0 Sdk \
+-    && dotnet pack -o . --runtime netstandard2.0 Sdk \
+-    && dotnet test Test
++ENTRYPOINT find /core/sawtooth-core/protos/ -name '*.proto' -print0 \
++    | xargs -r0 ~/.nuget/packages/google.protobuf.tools/3.5.1/tools/linux_x64/protoc \
++    --csharp_out=/sdk/src/Protobuf --proto_path=/core/sawtooth-core/protos/ ",25,2019-02-12 15:14:35,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/comments/255998783,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6#discussion_r255998783,vaporos
+https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,"Instead of cloning sawtooth-core, it would be better to copy the necessary protobuf files to this repository.
+
+Primarily, we do this because we do not want a strict dependency between the SDK repositories and the sawtooth-core repository. Instead, we rely on binary compatibility of the protocol. So, for example, if we renamed a field in sawtooth-core proto files, which we can do based on how protobuf works without breaking ABI compatibility, we do not want SDKs to break because of a change in the generated source code which would result. Instead, we want the SDKs to change only when the changes are adopted explicitly.",5a158019b1b81f2cdb82ec649ac52f96db80743b,2019-02-12 15:21:11,256001952,"@@ -9,16 +9,15 @@
+ #   > dotnet run Processor tcp://127.0.0.1:4004
+ #   > dotnet run Client mykey set 42
+ 
+-FROM microsoft/dotnet
++FROM microsoft/dotnet:sdk
+ 
+-COPY . /sawtooth/sdk
++WORKDIR /sdk
++COPY . .
++RUN dotnet restore src/
+ 
+-EXPOSE 4004 8008
++WORKDIR /core
++RUN git clone https://github.com/hyperledger/sawtooth-core.git",14,2019-02-12 15:21:12,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/comments/256001952,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6#discussion_r256001952,vaporos
+https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,"@vaporos Sounds good. If the protos are in the SDK repo, should we also keep a copy of the generated source code files in the repo? This would make the project build out of the box, while still leaving the option to the dev to generate them.
+The docker file can then be repurposed to just generate a Nuget package or run the sample project.",5a158019b1b81f2cdb82ec649ac52f96db80743b,2019-02-12 15:44:42,256013739,"@@ -9,16 +9,15 @@
+ #   > dotnet run Processor tcp://127.0.0.1:4004
+ #   > dotnet run Client mykey set 42
+ 
+-FROM microsoft/dotnet
++FROM microsoft/dotnet:sdk
+ 
+-COPY . /sawtooth/sdk
++WORKDIR /sdk
++COPY . .
++RUN dotnet restore src/
+ 
+-EXPOSE 4004 8008
++WORKDIR /core
++RUN git clone https://github.com/hyperledger/sawtooth-core.git",14,2019-02-12 15:44:42,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/comments/256013739,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6#discussion_r256013739,tmarkovski

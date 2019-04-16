@@ -1,0 +1,74 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/23,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/475765557,https://github.com/hyperledger/sawtooth-poet/pull/23#issuecomment-475765557,vaporos,"Is this a compatible replacement for the python one? If so, it could go directly into master.",2019-03-22 20:14:22,2019-03-22 20:14:22
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/23,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/476963906,https://github.com/hyperledger/sawtooth-poet/pull/23#issuecomment-476963906,askmish,This PR currently is using the protobuf file and infrastructure very similar to poet1's VRTP all in rust. Work in AVR verification parts is in progress and would be uploaded as a new commit/separate PR.,2019-03-27 04:05:11,2019-03-27 04:05:11
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/23,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/476965449,https://github.com/hyperledger/sawtooth-poet/pull/23#issuecomment-476965449,askmish,"The code is missing all pse related code, but all core logic is still intact and can be made compatible with poet1 code with additional effort. Currently, the primary scope is on compatibility with poet2's engine code.",2019-03-27 04:12:57,2019-03-27 04:12:57
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/22,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/473398053,https://github.com/hyperledger/sawtooth-poet/pull/22#issuecomment-473398053,vaporos,Looks like we need to update the poet2 branch to remove the build errors (which are not related to changes in this PR). I'll work on that.,2019-03-15 18:34:53,2019-03-15 18:34:53
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/22,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/473498435,https://github.com/hyperledger/sawtooth-poet/pull/22#issuecomment-473498435,manojgop,"Reviewers ->  POET2 will remove the python components and will replace it with Rust and C++. So this PR doesn't make any related changes to existing python code
+
+",2019-03-16 04:29:04,2019-03-16 04:29:04
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/20,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/474444972,https://github.com/hyperledger/sawtooth-poet/pull/20#issuecomment-474444972,arsulegai,I think the pylint issue seen here is marked as not required check in sawtooth-core?,2019-03-19 16:04:26,2019-03-19 16:04:26
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/20,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/475767182,https://github.com/hyperledger/sawtooth-poet/pull/20#issuecomment-475767182,vaporos,I will refresh this once master builds again.,2019-03-22 20:18:49,2019-03-22 20:19:00
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/14,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/440524206,https://github.com/hyperledger/sawtooth-poet/pull/14#issuecomment-440524206,manojgop,"Most of the files in sawtooth-poet master branch in this PR will not be present in poet2 branch if we merge https://github.com/hyperledger/sawtooth-poet/pull/10. After https://github.com/hyperledger/sawtooth-poet/pull/10 is merged, poet2 branch will have a different directory structure.  We may have to manually pick the changes an update the Dockerfiles from master branch to poet2 branch
+",2018-11-21 04:17:42,2018-11-21 04:23:53
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/12,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/437593163,https://github.com/hyperledger/sawtooth-poet/pull/12#issuecomment-437593163,dcmiddle,github isn't letting me add @ltseeley as a reviewer.  ,2018-11-10 15:49:11,2018-11-10 15:49:11
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/12,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/438712739,https://github.com/hyperledger/sawtooth-poet/pull/12#issuecomment-438712739,dcmiddle,Rebased to pickup required CI change using bumper/nightly artifacts,2018-11-14 15:55:17,2018-11-14 15:55:17
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/11,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/438713195,https://github.com/hyperledger/sawtooth-poet/pull/11#issuecomment-438713195,dcmiddle,Rebased to pickup required CI change using bumper/nightly artifacts,2018-11-14 15:56:21,2018-11-14 15:56:21
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/11,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/438781989,https://github.com/hyperledger/sawtooth-poet/pull/11#issuecomment-438781989,dcmiddle,re-rebased,2018-11-14 19:10:10,2018-11-14 19:10:10
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/435816245,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-435816245,manojgop,"@dcmiddle @vaporos 
+Just FYI - The code is in https://github.com/manojgop/sawtooth-poet
+",2018-11-05 09:53:37,2018-11-05 09:57:47
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/438238169,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-438238169,manojgop,@vaporos @dcmiddle updated PR with multiple commits,2018-11-13 11:46:38,2018-11-13 11:46:38
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/445995847,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-445995847,vaporos,DCO check is failing.,2018-12-10 22:18:25,2018-12-10 22:18:25
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/445998869,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-445998869,vaporos,"Appreciate the work that has gone into more granular commits thus far. Still, though it is easier than it was, the commit messages do not attempt to explain the reasoning for the changes, and it can not be easily inferred.
+
+For example, in this commit:
+
+commit f6145a2ac23cd8c2c60e3db197024e94b6e5ab4b
+Author: Rajeev Ranjan <rajeev2.ranjan@intel.com>
+Date:   Thu Nov 15 14:11:53 2018 +0530
+
+    UTs for ConsensusStateStore & lmdb
+
+    Updations in lmdb.rs. Implement new uts in ConsensusStateStore.
+
+    Signed-off-by: Rajeev Ranjan <rajeev2.ranjan@intel.com>
+
+It is not clear the purpose of these changes. Since this change in particular is a change to a file copied from sawtooth-core, I'm curious about the reasoning. Good explanation in the commit message would help. (See https://chris.beams.io/posts/git-commit/)
+
+",2018-12-10 22:29:10,2018-12-10 22:29:10
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/446889817,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-446889817,manojgop,"> DCO check is failing.
+
+Will fix this",2018-12-13 08:53:30,2018-12-13 08:53:30
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/446890750,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-446890750,manojgop,"@vaporos For cargo clippy and cargo fmt, we will raise a new PR/commit
+For src directory we will raise a new PR/commit
+cargo test is fixed in later commits in this same PR",2018-12-13 08:56:53,2018-12-13 08:56:53
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/446905760,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-446905760,vaporos,"@manojgop Please address cargo/fmt and src directory in this PR by updating the commits. After these basic items are addressed, will re-review.",2018-12-13 09:46:10,2018-12-13 09:46:10
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/446906540,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-446906540,manojgop,"> @manojgop Please address cargo/fmt and src directory in this PR by updating the commits. After these basic items are addressed, will re-review.
+
+@vaporos ok. We will raise a new commit in same PR to address this",2018-12-13 09:48:45,2018-12-13 09:49:08
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/475767983,https://github.com/hyperledger/sawtooth-poet/pull/10#issuecomment-475767983,vaporos,Closing in favor of more specific PRs like #22 and #23.,2019-03-22 20:20:58,2019-03-22 20:20:58
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/9,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/436319353,https://github.com/hyperledger/sawtooth-poet/pull/9#issuecomment-436319353,dcmiddle,I understand that #10 outmodes this PR. ,2018-11-06 16:36:28,2018-11-06 16:36:28
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/430231274,https://github.com/hyperledger/sawtooth-poet/pull/6#issuecomment-430231274,dcmiddle,@askmish you probably need a rebase,2018-10-16 13:11:01,2018-10-16 13:11:01
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/436255870,https://github.com/hyperledger/sawtooth-poet/pull/6#issuecomment-436255870,dcmiddle,@vaporos can you see if the updates satisfy your feedback? ,2018-11-06 13:40:42,2018-11-06 13:40:42
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/457946985,https://github.com/hyperledger/sawtooth-poet/pull/6#issuecomment-457946985,MelodyHuibo,"I want to build sawtooth poet by myself, is there any document or Readme I can use? I did not find one.",2019-01-27 19:34:49,2019-01-27 19:34:49
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/458804015,https://github.com/hyperledger/sawtooth-poet/pull/6#issuecomment-458804015,arsulegai,"@MelodyHuibo Docker compose files available in root directory can be used to build the PoET locally. For debian packages it'll be docker-compose-installed.yaml, docker-compose.yaml for docker images.",2019-01-30 04:03:53,2019-01-30 04:03:53
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/459232621,https://github.com/hyperledger/sawtooth-poet/pull/6#issuecomment-459232621,MelodyHuibo,@arsulegai  Is this build for the hardware SGX or simulator?,2019-01-31 06:33:31,2019-01-31 06:33:31
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/459238013,https://github.com/hyperledger/sawtooth-poet/pull/6#issuecomment-459238013,MelodyHuibo,"Hi also i want to ask, after i build the sawtooth poet, how could I use it? is there any document for it?????",2019-01-31 07:00:55,2019-01-31 07:00:55
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/2,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/407890634,https://github.com/hyperledger/sawtooth-poet/pull/2#issuecomment-407890634,aludvik,@peterschwarz pushed up commits to fix,2018-07-25 20:49:18,2018-07-25 20:49:18
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/1,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/407245652,https://github.com/hyperledger/sawtooth-poet/pull/1#issuecomment-407245652,aludvik,@dcmiddle Added a commit with BUILD.md and dropped the commands from `docker-compose.yaml`.,2018-07-24 00:58:10,2018-07-24 00:58:10
+https://api.github.com/repos/hyperledger/sawtooth-poet/issues/1,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/comments/407271284,https://github.com/hyperledger/sawtooth-poet/pull/1#issuecomment-407271284,dcmiddle,"Thanks for the quick patch @aludvik. Unfortunately got another odd build error from `docker-compose-installed.yaml`
+```
+Step 5/30 : RUN cd /project/common/  && /project/bin/protogen  && if [ -d ""debian"" ]; then rm -rf debian; fi  && python3 setup.py clean --all  && python3 setup.py --command-packages=stdeb.command debianize  && if [ -d ""packaging/ubuntu"" ]; then cp -R packaging/ubuntu/* debian/; fi  && dpkg-buildpackage -b -rfakeroot -us -uc
+ ---> Running in 27e5471f070b
+ERROR: VERSION file and (bumped?) git describe versions differ: 1.1.2 != 1.1.1
+Traceback (most recent call last):
+  File ""setup.py"", line 25, in <module>
+    ['../bin/get_version']).decode('utf-8').strip(),
+  File ""/usr/lib/python3.5/subprocess.py"", line 626, in check_output
+    **kwargs).stdout
+  File ""/usr/lib/python3.5/subprocess.py"", line 708, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['../bin/get_version']' returned non-zero exit status 1
+ERROR: Service 'poet-engine' failed to build: The command '/bin/sh -c cd /project/common/  && /project/bin/protogen  && if [ -d ""debian"" ]; then rm -rf debian; fi  && python3 setup.py clean --all  && python3 setup.py --command-packages=stdeb.command debianize  && if [ -d ""packaging/ubuntu"" ]; then cp -R packaging/ubuntu/* debian/; fi  && dpkg-buildpackage -b -rfakeroot -us -uc' returned a non-zero code: 1
+```
+Disregard... tags were not in sync",2018-07-24 03:42:59,2018-07-24 12:48:05

@@ -1,0 +1,1763 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+education-sawtooth-simple-supply,danintel,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/28,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/28,Fix apt-key/gpg Proxy on Bionic,"gpg (through ""apt-key adv"") now ignores http_proxy and
+https_proxy settings on Bionic.
+The solution is to use http with curl instead to download keys.
+
+Remove unused http_proxy and https_proxy initialization.
+
+Signed-off-by: danintel <daniel.anderson@intel.com>",open,True,2019-04-03 22:26:15,2019-04-03 22:26:15
+education-sawtooth-simple-supply,pdxjohnny,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/27,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/27,bcrypt compilation error,"Possible lack of gcc when compiling bcrypt?
+
+```log
+pdxjohnny@rza education-sawtooth-simple-supply $ docker-compose up
+Creating network ""education-sawtooth-simple-supply_default"" with the default driver
+Building simple-supply-shell
+Step 1/9 : FROM ubuntu:xenial
+ ---> f975c5035748
+Step 2/9 : RUN echo ""deb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD""  && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list  && apt-get update
+ ---> Running in 7ce9bf01854a
+deb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD
+Get:1 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Get:2 http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease [3271 B]
+Get:3 http://archive.ubuntu.com/ubuntu xenial InRelease [247 kB]
+Get:4 http://security.ubuntu.com/ubuntu xenial-security/universe Sources [128 kB]
+Ign:2 http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease
+Get:5 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [803 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:7 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [12.7 kB]
+Get:8 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 Packages [61.1 kB]
+Get:9 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [549 kB]
+Get:10 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [6117 B]
+Get:11 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/universe Sources [9802 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial/main amd64 Packages [1558 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial/restricted amd64 Packages [14.1 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial/universe amd64 Packages [9827 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial/multiverse amd64 Packages [176 kB]
+Get:17 http://archive.ubuntu.com/ubuntu xenial-updates/universe Sources [319 kB]
+Get:18 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [1197 kB]
+Get:19 http://archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [13.1 kB]
+Get:20 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [958 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [19.1 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [7942 B]
+Get:23 http://archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [8532 B]
+Fetched 26.0 MB in 3s (6763 kB/s)
+Reading package lists...
+W: GPG error: http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 8AA7AF1F1091A5FD
+W: The repository 'http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease' is not signed.
+Removing intermediate container 7ce9bf01854a
+ ---> a3183c48d6ff
+Step 3/9 : RUN apt-get install -y --allow-unauthenticated -q     curl     python3-pip     python3-sawtooth-cli     python3-sawtooth-sdk     python3-sawtooth-rest-api
+ ---> Running in a7a9c0994230
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  binutils build-essential bzip2 ca-certificates cpp cpp-5 dh-python dpkg-dev
+  fakeroot file g++ g++-5 gcc gcc-5 gcc-5-base ifupdown iproute2
+  isc-dhcp-client isc-dhcp-common krb5-locales libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan2 libasn1-8-heimdal
+  libatm1 libatomic1 libc-dev-bin libc6 libc6-dev libcc1-0 libcilkrts5
+  libcurl3-gnutls libdns-export162 libdpkg-perl libexpat1 libexpat1-dev
+  libfakeroot libffi6 libfile-fcntllock-perl libgcc-5-dev libgdbm3 libgmp10
+  libgnutls30 libgomp1 libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal
+  libheimbase1-heimdal libheimntlm0-heimdal libhogweed4 libhx509-5-heimdal
+  libidn11 libisc-export160 libisl15 libitm1 libk5crypto3 libkeyutils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 liblsan0
+  libmagic1 libmnl0 libmpc3 libmpdec2 libmpfr4 libmpx0 libnettle6 libp11-kit0
+  libperl5.22 libprotobuf12 libpython3-dev libpython3-stdlib libpython3.5
+  libpython3.5-dev libpython3.5-minimal libpython3.5-stdlib libquadmath0
+  libroken18-heimdal librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+  libsecp256k1-0 libsodium18 libsqlite3-0 libssl1.0.0 libstdc++-5-dev
+  libstdc++6 libtasn1-6 libtsan0 libubsan0 libwind0-heimdal libxtables11
+  libyaml-0-2 libzmq5 linux-libc-dev make manpages manpages-dev mime-support
+  netbase openssl patch perl perl-base perl-modules-5.22 python-pip-whl
+  python3 python3-aiodns python3-aiohttp python3-async-timeout
+  python3-cchardet python3-cffi-backend python3-chardet python3-colorlog
+  python3-dev python3-minimal python3-multidict python3-pkg-resources
+  python3-protobuf python3-pycares python3-pyformance python3-requests
+  python3-sawtooth-signing python3-secp256k1 python3-setuptools python3-six
+  python3-toml python3-urllib3 python3-wheel python3-yaml python3-yarl
+  python3-zmq python3.5 python3.5-dev python3.5-minimal rename xz-utils
+Suggested packages:
+  binutils-doc bzip2-doc cpp-doc gcc-5-locales debian-keyring g++-multilib
+  g++-5-multilib gcc-5-doc libstdc++6-5-dbg gcc-multilib autoconf automake
+  libtool flex bison gdb gcc-doc gcc-5-multilib libgcc1-dbg libgomp1-dbg
+  libitm1-dbg libatomic1-dbg libasan2-dbg liblsan0-dbg libtsan0-dbg
+  libubsan0-dbg libcilkrts5-dbg libmpx0-dbg libquadmath0-dbg ppp rdnssd
+  iproute2-doc resolvconf avahi-autoipd isc-dhcp-client-ddns apparmor
+  glibc-doc locales gnutls-bin krb5-doc krb5-user libsasl2-modules-otp
+  libsasl2-modules-ldap libsasl2-modules-sql libsasl2-modules-gssapi-mit
+  | libsasl2-modules-gssapi-heimdal libstdc++-5-doc make-doc man-browser ed
+  diffutils-doc perl-doc libterm-readline-gnu-perl
+  | libterm-readline-perl-perl python3-doc python3-tk python3-venv
+  python3-ndg-httpsclient python3-openssl python3-pyasn1 python-setuptools-doc
+  python3.5-venv python3.5-doc binfmt-support
+The following NEW packages will be installed:
+  binutils build-essential bzip2 ca-certificates cpp cpp-5 curl dh-python
+  dpkg-dev fakeroot file g++ g++-5 gcc gcc-5 ifupdown iproute2 isc-dhcp-client
+  isc-dhcp-common krb5-locales libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan2 libasn1-8-heimdal
+  libatm1 libatomic1 libc-dev-bin libc6-dev libcc1-0 libcilkrts5
+  libcurl3-gnutls libdns-export162 libdpkg-perl libexpat1 libexpat1-dev
+  libfakeroot libffi6 libfile-fcntllock-perl libgcc-5-dev libgdbm3 libgmp10
+  libgnutls30 libgomp1 libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal
+  libheimbase1-heimdal libheimntlm0-heimdal libhogweed4 libhx509-5-heimdal
+  libidn11 libisc-export160 libisl15 libitm1 libk5crypto3 libkeyutils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 liblsan0
+  libmagic1 libmnl0 libmpc3 libmpdec2 libmpfr4 libmpx0 libnettle6 libp11-kit0
+  libperl5.22 libprotobuf12 libpython3-dev libpython3-stdlib libpython3.5
+  libpython3.5-dev libpython3.5-minimal libpython3.5-stdlib libquadmath0
+  libroken18-heimdal librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+  libsecp256k1-0 libsodium18 libsqlite3-0 libssl1.0.0 libstdc++-5-dev
+  libtasn1-6 libtsan0 libubsan0 libwind0-heimdal libxtables11 libyaml-0-2
+  libzmq5 linux-libc-dev make manpages manpages-dev mime-support netbase
+  openssl patch perl perl-modules-5.22 python-pip-whl python3 python3-aiodns
+  python3-aiohttp python3-async-timeout python3-cchardet python3-cffi-backend
+  python3-chardet python3-colorlog python3-dev python3-minimal
+  python3-multidict python3-pip python3-pkg-resources python3-protobuf
+  python3-pycares python3-pyformance python3-requests python3-sawtooth-cli
+  python3-sawtooth-rest-api python3-sawtooth-sdk python3-sawtooth-signing
+  python3-secp256k1 python3-setuptools python3-six python3-toml
+  python3-urllib3 python3-wheel python3-yaml python3-yarl python3-zmq
+  python3.5 python3.5-dev python3.5-minimal rename xz-utils
+The following packages will be upgraded:
+  gcc-5-base libc6 libstdc++6 perl-base
+4 upgraded, 142 newly installed, 0 to remove and 29 not upgraded.
+Need to get 106 MB of archives.
+After this operation, 316 MB of additional disk space will be used.
+WARNING: The following packages cannot be authenticated!
+  libprotobuf12 libsecp256k1-0 python3-pycares python3-aiodns
+  python3-async-timeout python3-multidict python3-yarl python3-aiohttp
+  python3-cchardet python3-protobuf python3-pyformance python3-secp256k1
+  python3-sawtooth-signing python3-sawtooth-cli python3-sawtooth-sdk
+  python3-sawtooth-rest-api
+Authentication warning overridden.
+Get:1 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 libprotobuf12 amd64 3.4.1-0~maarten0 [700 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl-base amd64 5.22.1-9ubuntu0.6 [1283 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc6 amd64 2.23-0ubuntu11 [2577 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial/main amd64 libatm1 amd64 1:2.5.1-1.5 [24.2 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmnl0 amd64 1.0.3-5 [12.0 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libssl1.0.0 amd64 1.0.2g-1ubuntu4.15 [1084 kB]
+Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5-minimal amd64 3.5.2-2ubuntu0~16.04.5 [524 kB]
+Get:8 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libexpat1 amd64 2.1.0-7ubuntu0.16.04.3 [71.2 kB]
+Get:9 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3.5-minimal amd64 3.5.2-2ubuntu0~16.04.5 [1598 kB]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-minimal amd64 3.5.1-3 [23.3 kB]
+Get:11 http://archive.ubuntu.com/ubuntu xenial/main amd64 mime-support all 3.59ubuntu1 [31.0 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmpdec2 amd64 2.4.2-1 [82.6 kB]
+Get:13 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsqlite3-0 amd64 3.11.0-1ubuntu1.1 [396 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5-stdlib amd64 3.5.2-2ubuntu0~16.04.5 [2134 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3.5 amd64 3.5.2-2ubuntu0~16.04.5 [165 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpython3-stdlib amd64 3.5.1-3 [6818 B]
+Get:17 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dh-python all 2.20151103ubuntu1.1 [74.1 kB]
+Get:18 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3 amd64 3.5.1-3 [8710 B]
+Get:19 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgdbm3 amd64 1.8.3-13.1 [16.9 kB]
+Get:20 http://archive.ubuntu.com/ubuntu xenial/main amd64 libyaml-0-2 amd64 0.1.6-3 [47.6 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl-modules-5.22 all 5.22.1-9ubuntu0.6 [2629 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libperl5.22 amd64 5.22.1-9ubuntu0.6 [3405 kB]
+Get:23 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl amd64 5.22.1-9ubuntu0.6 [237 kB]
+Get:24 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgmp10 amd64 2:6.1.0+dfsg-2 [240 kB]
+Get:25 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmpfr4 amd64 3.1.4-1 [191 kB]
+Get:26 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmpc3 amd64 1.0.3-1 [39.7 kB]
+Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 gcc-5-base amd64 5.4.0-6ubuntu1~16.04.11 [17.3 kB]
+Get:28 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 libsecp256k1-0 amd64 0.1~20161228-1 [108 kB]
+Get:29 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libstdc++6 amd64 5.4.0-6ubuntu1~16.04.11 [393 kB]
+Get:30 http://archive.ubuntu.com/ubuntu xenial/main amd64 bzip2 amd64 1.0.6-8 [32.7 kB]
+Get:31 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmagic1 amd64 1:5.25-2ubuntu1.2 [216 kB]
+Get:32 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 file amd64 1:5.25-2ubuntu1.2 [21.2 kB]
+Get:33 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 iproute2 amd64 4.3.0-1ubuntu3.16.04.4 [521 kB]
+Get:34 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 ifupdown amd64 0.8.10ubuntu1.4 [54.9 kB]
+Get:35 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libisc-export160 amd64 1:9.10.3.dfsg.P4-8ubuntu1.12 [153 kB]
+Get:36 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdns-export162 amd64 1:9.10.3.dfsg.P4-8ubuntu1.12 [666 kB]
+Get:37 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 isc-dhcp-client amd64 4.3.3-5ubuntu12.10 [224 kB]
+Get:38 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 isc-dhcp-common amd64 4.3.3-5ubuntu12.10 [105 kB]
+Get:39 http://archive.ubuntu.com/ubuntu xenial/main amd64 libffi6 amd64 3.2.1-4 [17.8 kB]
+Get:40 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libnettle6 amd64 3.2-1ubuntu0.16.04.1 [93.5 kB]
+Get:41 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhogweed4 amd64 3.2-1ubuntu0.16.04.1 [136 kB]
+Get:42 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libidn11 amd64 1.32-3ubuntu1.2 [46.5 kB]
+Get:43 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libp11-kit0 amd64 0.23.2-5~ubuntu16.04.1 [105 kB]
+Get:44 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libtasn1-6 amd64 4.7-3ubuntu0.16.04.3 [43.5 kB]
+Get:45 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgnutls30 amd64 3.4.10-4ubuntu1.4 [548 kB]
+Get:46 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxtables11 amd64 1.6.0-2ubuntu3 [27.2 kB]
+Get:47 http://archive.ubuntu.com/ubuntu xenial/main amd64 netbase all 5.3 [12.9 kB]
+Get:48 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 openssl amd64 1.0.2g-1ubuntu4.15 [492 kB]
+Get:49 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 ca-certificates all 20170717~16.04.2 [167 kB]
+Get:50 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 krb5-locales all 1.13.2+dfsg-5ubuntu2.1 [13.6 kB]
+Get:51 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libroken18-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [41.4 kB]
+Get:52 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libasn1-8-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [174 kB]
+Get:53 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5support0 amd64 1.13.2+dfsg-5ubuntu2.1 [31.2 kB]
+Get:54 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libk5crypto3 amd64 1.13.2+dfsg-5ubuntu2.1 [81.3 kB]
+Get:55 http://archive.ubuntu.com/ubuntu xenial/main amd64 libkeyutils1 amd64 1.5.9-8ubuntu1 [9904 B]
+Get:56 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5-3 amd64 1.13.2+dfsg-5ubuntu2.1 [273 kB]
+Get:57 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgssapi-krb5-2 amd64 1.13.2+dfsg-5ubuntu2.1 [120 kB]
+Get:58 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhcrypto4-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [85.0 kB]
+Get:59 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libheimbase1-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [29.3 kB]
+Get:60 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libwind0-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [47.8 kB]
+Get:61 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhx509-5-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [107 kB]
+Get:62 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5-26-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [202 kB]
+Get:63 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libheimntlm0-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [15.1 kB]
+Get:64 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgssapi3-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [96.1 kB]
+Get:65 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsasl2-modules-db amd64 2.1.26.dfsg1-14ubuntu0.1 [14.5 kB]
+Get:66 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsasl2-2 amd64 2.1.26.dfsg1-14ubuntu0.1 [48.6 kB]
+Get:67 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libldap-2.4-2 amd64 2.4.42+dfsg-2ubuntu3.4 [160 kB]
+Get:68 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d-1ubuntu0.1 [54.4 kB]
+Get:69 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcurl3-gnutls amd64 7.47.0-1ubuntu2.12 [185 kB]
+Get:70 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsasl2-modules amd64 2.1.26.dfsg1-14ubuntu0.1 [47.5 kB]
+Get:71 http://archive.ubuntu.com/ubuntu xenial/main amd64 manpages all 4.04-2 [1087 kB]
+Get:72 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 binutils amd64 2.26.1-1ubuntu1~16.04.8 [2312 kB]
+Get:73 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc-dev-bin amd64 2.23-0ubuntu11 [68.5 kB]
+Get:74 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 linux-libc-dev amd64 4.4.0-143.169 [870 kB]
+Get:75 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-pycares amd64 2.1.1-1 [46.5 kB]
+Get:76 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc6-dev amd64 2.23-0ubuntu11 [2086 kB]
+Get:77 http://archive.ubuntu.com/ubuntu xenial/main amd64 libisl15 amd64 0.16.1-1 [524 kB]
+Get:78 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 cpp-5 amd64 5.4.0-6ubuntu1~16.04.11 [7660 kB]
+Get:79 http://archive.ubuntu.com/ubuntu xenial/main amd64 cpp amd64 4:5.3.1-1ubuntu1 [27.7 kB]
+Get:80 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcc1-0 amd64 5.4.0-6ubuntu1~16.04.11 [38.8 kB]
+Get:81 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgomp1 amd64 5.4.0-6ubuntu1~16.04.11 [55.0 kB]
+Get:82 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libitm1 amd64 5.4.0-6ubuntu1~16.04.11 [27.4 kB]
+Get:83 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libatomic1 amd64 5.4.0-6ubuntu1~16.04.11 [8896 B]
+Get:84 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libasan2 amd64 5.4.0-6ubuntu1~16.04.11 [264 kB]
+Get:85 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 liblsan0 amd64 5.4.0-6ubuntu1~16.04.11 [105 kB]
+Get:86 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libtsan0 amd64 5.4.0-6ubuntu1~16.04.11 [244 kB]
+Get:87 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libubsan0 amd64 5.4.0-6ubuntu1~16.04.11 [95.4 kB]
+Get:88 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcilkrts5 amd64 5.4.0-6ubuntu1~16.04.11 [40.1 kB]
+Get:89 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmpx0 amd64 5.4.0-6ubuntu1~16.04.11 [9748 B]
+Get:90 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libquadmath0 amd64 5.4.0-6ubuntu1~16.04.11 [131 kB]
+Get:91 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgcc-5-dev amd64 5.4.0-6ubuntu1~16.04.11 [2229 kB]
+Get:92 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 gcc-5 amd64 5.4.0-6ubuntu1~16.04.11 [8417 kB]
+Get:93 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-aiodns all 1.1.1-1 [4794 B]
+Get:94 http://archive.ubuntu.com/ubuntu xenial/main amd64 gcc amd64 4:5.3.1-1ubuntu1 [5244 B]
+Get:95 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libstdc++-5-dev amd64 5.4.0-6ubuntu1~16.04.11 [1426 kB]
+Get:96 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 g++-5 amd64 5.4.0-6ubuntu1~16.04.11 [8310 kB]
+Get:97 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-async-timeout all 1.2.0-1 [3448 B]
+Get:98 http://archive.ubuntu.com/ubuntu xenial/main amd64 g++ amd64 4:5.3.1-1ubuntu1 [1504 B]
+Get:99 http://archive.ubuntu.com/ubuntu xenial/main amd64 make amd64 4.1-6 [151 kB]
+Get:100 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdpkg-perl all 1.18.4ubuntu1.5 [195 kB]
+Get:101 http://archive.ubuntu.com/ubuntu xenial/main amd64 xz-utils amd64 5.1.1alpha+20120614-2ubuntu2 [78.8 kB]
+Get:102 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 patch amd64 2.7.5-1ubuntu0.16.04.1 [90.5 kB]
+Get:103 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dpkg-dev all 1.18.4ubuntu1.5 [584 kB]
+Get:104 http://archive.ubuntu.com/ubuntu xenial/main amd64 build-essential amd64 12.1ubuntu2 [4758 B]
+Get:105 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 curl amd64 7.47.0-1ubuntu2.12 [139 kB]
+Get:106 http://archive.ubuntu.com/ubuntu xenial/main amd64 libfakeroot amd64 1.20.2-1ubuntu1 [25.5 kB]
+Get:107 http://archive.ubuntu.com/ubuntu xenial/main amd64 fakeroot amd64 1.20.2-1ubuntu1 [61.8 kB]
+Get:108 http://archive.ubuntu.com/ubuntu xenial/main amd64 libalgorithm-diff-perl all 1.19.03-1 [47.6 kB]
+Get:109 http://archive.ubuntu.com/ubuntu xenial/main amd64 libalgorithm-diff-xs-perl amd64 0.04-4build1 [11.0 kB]
+Get:110 http://archive.ubuntu.com/ubuntu xenial/main amd64 libalgorithm-merge-perl all 0.08-3 [12.0 kB]
+Get:111 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libexpat1-dev amd64 2.1.0-7ubuntu0.16.04.3 [115 kB]
+Get:112 http://archive.ubuntu.com/ubuntu xenial/main amd64 libfile-fcntllock-perl amd64 0.22-3 [32.0 kB]
+Get:113 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-multidict amd64 2.1.4-1 [115 kB]
+Get:114 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5 amd64 3.5.2-2ubuntu0~16.04.5 [1360 kB]
+Get:115 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-yarl amd64 0.10.0-1 [65.0 kB]
+Get:116 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5-dev amd64 3.5.2-2ubuntu0~16.04.5 [37.3 MB]
+Get:117 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-aiohttp amd64 2.3.2-1 [238 kB]
+Get:118 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-cchardet amd64 2.0a3-1 [80.0 kB]
+Get:119 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-protobuf amd64 3.4.1-0~maarten0 [292 kB]
+Get:120 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-pyformance all 0.4-1 [14.3 kB]
+Get:121 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-secp256k1 amd64 0.13.2-1 [13.4 kB]
+Get:122 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-sawtooth-signing all 1.0.5-1 [4214 B]
+^CGracefully stopping... (press Ctrl+C again to force)
+Sun Mar 31 13:32:18 PDT 2019 johnsa1@johnsa1-desk:education-sawtooth-simple-supply $ docker-compose up
+Building simple-supply-shell
+Step 1/9 : FROM ubuntu:xenial
+ ---> f975c5035748
+Step 2/9 : RUN echo ""deb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD""  && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list  && apt-get update
+ ---> Using cache
+ ---> a3183c48d6ff
+Step 3/9 : RUN apt-get install -y --allow-unauthenticated -q     curl     python3-pip     python3-sawtooth-cli     python3-sawtooth-sdk     python3-sawtooth-rest-api
+ ---> Running in c33c38ba99a8
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  binutils build-essential bzip2 ca-certificates cpp cpp-5 dh-python dpkg-dev
+  fakeroot file g++ g++-5 gcc gcc-5 gcc-5-base ifupdown iproute2
+  isc-dhcp-client isc-dhcp-common krb5-locales libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan2 libasn1-8-heimdal
+  libatm1 libatomic1 libc-dev-bin libc6 libc6-dev libcc1-0 libcilkrts5
+  libcurl3-gnutls libdns-export162 libdpkg-perl libexpat1 libexpat1-dev
+  libfakeroot libffi6 libfile-fcntllock-perl libgcc-5-dev libgdbm3 libgmp10
+  libgnutls30 libgomp1 libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal
+  libheimbase1-heimdal libheimntlm0-heimdal libhogweed4 libhx509-5-heimdal
+  libidn11 libisc-export160 libisl15 libitm1 libk5crypto3 libkeyutils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 liblsan0
+  libmagic1 libmnl0 libmpc3 libmpdec2 libmpfr4 libmpx0 libnettle6 libp11-kit0
+  libperl5.22 libprotobuf12 libpython3-dev libpython3-stdlib libpython3.5
+  libpython3.5-dev libpython3.5-minimal libpython3.5-stdlib libquadmath0
+  libroken18-heimdal librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+  libsecp256k1-0 libsodium18 libsqlite3-0 libssl1.0.0 libstdc++-5-dev
+  libstdc++6 libtasn1-6 libtsan0 libubsan0 libwind0-heimdal libxtables11
+  libyaml-0-2 libzmq5 linux-libc-dev make manpages manpages-dev mime-support
+  netbase openssl patch perl perl-base perl-modules-5.22 python-pip-whl
+  python3 python3-aiodns python3-aiohttp python3-async-timeout
+  python3-cchardet python3-cffi-backend python3-chardet python3-colorlog
+  python3-dev python3-minimal python3-multidict python3-pkg-resources
+  python3-protobuf python3-pycares python3-pyformance python3-requests
+  python3-sawtooth-signing python3-secp256k1 python3-setuptools python3-six
+  python3-toml python3-urllib3 python3-wheel python3-yaml python3-yarl
+  python3-zmq python3.5 python3.5-dev python3.5-minimal rename xz-utils
+Suggested packages:
+  binutils-doc bzip2-doc cpp-doc gcc-5-locales debian-keyring g++-multilib
+  g++-5-multilib gcc-5-doc libstdc++6-5-dbg gcc-multilib autoconf automake
+  libtool flex bison gdb gcc-doc gcc-5-multilib libgcc1-dbg libgomp1-dbg
+  libitm1-dbg libatomic1-dbg libasan2-dbg liblsan0-dbg libtsan0-dbg
+  libubsan0-dbg libcilkrts5-dbg libmpx0-dbg libquadmath0-dbg ppp rdnssd
+  iproute2-doc resolvconf avahi-autoipd isc-dhcp-client-ddns apparmor
+  glibc-doc locales gnutls-bin krb5-doc krb5-user libsasl2-modules-otp
+  libsasl2-modules-ldap libsasl2-modules-sql libsasl2-modules-gssapi-mit
+  | libsasl2-modules-gssapi-heimdal libstdc++-5-doc make-doc man-browser ed
+  diffutils-doc perl-doc libterm-readline-gnu-perl
+  | libterm-readline-perl-perl python3-doc python3-tk python3-venv
+  python3-ndg-httpsclient python3-openssl python3-pyasn1 python-setuptools-doc
+  python3.5-venv python3.5-doc binfmt-support
+The following NEW packages will be installed:
+  binutils build-essential bzip2 ca-certificates cpp cpp-5 curl dh-python
+  dpkg-dev fakeroot file g++ g++-5 gcc gcc-5 ifupdown iproute2 isc-dhcp-client
+  isc-dhcp-common krb5-locales libalgorithm-diff-perl
+  libalgorithm-diff-xs-perl libalgorithm-merge-perl libasan2 libasn1-8-heimdal
+  libatm1 libatomic1 libc-dev-bin libc6-dev libcc1-0 libcilkrts5
+  libcurl3-gnutls libdns-export162 libdpkg-perl libexpat1 libexpat1-dev
+  libfakeroot libffi6 libfile-fcntllock-perl libgcc-5-dev libgdbm3 libgmp10
+  libgnutls30 libgomp1 libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal
+  libheimbase1-heimdal libheimntlm0-heimdal libhogweed4 libhx509-5-heimdal
+  libidn11 libisc-export160 libisl15 libitm1 libk5crypto3 libkeyutils1
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 liblsan0
+  libmagic1 libmnl0 libmpc3 libmpdec2 libmpfr4 libmpx0 libnettle6 libp11-kit0
+  libperl5.22 libprotobuf12 libpython3-dev libpython3-stdlib libpython3.5
+  libpython3.5-dev libpython3.5-minimal libpython3.5-stdlib libquadmath0
+  libroken18-heimdal librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+  libsecp256k1-0 libsodium18 libsqlite3-0 libssl1.0.0 libstdc++-5-dev
+  libtasn1-6 libtsan0 libubsan0 libwind0-heimdal libxtables11 libyaml-0-2
+  libzmq5 linux-libc-dev make manpages manpages-dev mime-support netbase
+  openssl patch perl perl-modules-5.22 python-pip-whl python3 python3-aiodns
+  python3-aiohttp python3-async-timeout python3-cchardet python3-cffi-backend
+  python3-chardet python3-colorlog python3-dev python3-minimal
+  python3-multidict python3-pip python3-pkg-resources python3-protobuf
+  python3-pycares python3-pyformance python3-requests python3-sawtooth-cli
+  python3-sawtooth-rest-api python3-sawtooth-sdk python3-sawtooth-signing
+  python3-secp256k1 python3-setuptools python3-six python3-toml
+  python3-urllib3 python3-wheel python3-yaml python3-yarl python3-zmq
+  python3.5 python3.5-dev python3.5-minimal rename xz-utils
+The following packages will be upgraded:
+  gcc-5-base libc6 libstdc++6 perl-base
+4 upgraded, 142 newly installed, 0 to remove and 29 not upgraded.
+Need to get 106 MB of archives.
+After this operation, 316 MB of additional disk space will be used.
+WARNING: The following packages cannot be authenticated!
+  libprotobuf12 libsecp256k1-0 python3-pycares python3-aiodns
+  python3-async-timeout python3-multidict python3-yarl python3-aiohttp
+  python3-cchardet python3-protobuf python3-pyformance python3-secp256k1
+  python3-sawtooth-signing python3-sawtooth-cli python3-sawtooth-sdk
+  python3-sawtooth-rest-api
+Authentication warning overridden.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl-base amd64 5.22.1-9ubuntu0.6 [1283 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc6 amd64 2.23-0ubuntu11 [2577 kB]
+Get:3 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 libprotobuf12 amd64 3.4.1-0~maarten0 [700 kB]
+Get:4 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 libsecp256k1-0 amd64 0.1~20161228-1 [108 kB]
+Get:5 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-pycares amd64 2.1.1-1 [46.5 kB]
+Get:6 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-aiodns all 1.1.1-1 [4794 B]
+Get:7 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-async-timeout all 1.2.0-1 [3448 B]
+Get:8 http://archive.ubuntu.com/ubuntu xenial/main amd64 libatm1 amd64 1:2.5.1-1.5 [24.2 kB]
+Get:9 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmnl0 amd64 1.0.3-5 [12.0 kB]
+Get:10 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-multidict amd64 2.1.4-1 [115 kB]
+Get:11 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libssl1.0.0 amd64 1.0.2g-1ubuntu4.15 [1084 kB]
+Get:12 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-yarl amd64 0.10.0-1 [65.0 kB]
+Get:13 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-aiohttp amd64 2.3.2-1 [238 kB]
+Get:14 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-cchardet amd64 2.0a3-1 [80.0 kB]
+Get:15 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-protobuf amd64 3.4.1-0~maarten0 [292 kB]
+Get:16 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5-minimal amd64 3.5.2-2ubuntu0~16.04.5 [524 kB]
+Get:17 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-pyformance all 0.4-1 [14.3 kB]
+Get:18 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-secp256k1 amd64 0.13.2-1 [13.4 kB]
+Get:19 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-sawtooth-signing all 1.0.5-1 [4214 B]
+Get:20 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libexpat1 amd64 2.1.0-7ubuntu0.16.04.3 [71.2 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3.5-minimal amd64 3.5.2-2ubuntu0~16.04.5 [1598 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-minimal amd64 3.5.1-3 [23.3 kB]
+Get:23 http://archive.ubuntu.com/ubuntu xenial/main amd64 mime-support all 3.59ubuntu1 [31.0 kB]
+Get:24 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmpdec2 amd64 2.4.2-1 [82.6 kB]
+Get:25 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsqlite3-0 amd64 3.11.0-1ubuntu1.1 [396 kB]
+Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5-stdlib amd64 3.5.2-2ubuntu0~16.04.5 [2134 kB]
+Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3.5 amd64 3.5.2-2ubuntu0~16.04.5 [165 kB]
+Get:28 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpython3-stdlib amd64 3.5.1-3 [6818 B]
+Get:29 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dh-python all 2.20151103ubuntu1.1 [74.1 kB]
+Get:30 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3 amd64 3.5.1-3 [8710 B]
+Get:31 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgdbm3 amd64 1.8.3-13.1 [16.9 kB]
+Get:32 http://archive.ubuntu.com/ubuntu xenial/main amd64 libyaml-0-2 amd64 0.1.6-3 [47.6 kB]
+Get:33 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl-modules-5.22 all 5.22.1-9ubuntu0.6 [2629 kB]
+Get:34 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-sawtooth-cli all 1.0.5-1 [44.5 kB]
+Get:35 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libperl5.22 amd64 5.22.1-9ubuntu0.6 [3405 kB]
+Get:36 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 perl amd64 5.22.1-9ubuntu0.6 [237 kB]
+Get:37 http://archive.ubuntu.com/ubuntu xenial/main amd64 libgmp10 amd64 2:6.1.0+dfsg-2 [240 kB]
+Get:38 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmpfr4 amd64 3.1.4-1 [191 kB]
+Get:39 http://archive.ubuntu.com/ubuntu xenial/main amd64 libmpc3 amd64 1.0.3-1 [39.7 kB]
+Get:40 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 gcc-5-base amd64 5.4.0-6ubuntu1~16.04.11 [17.3 kB]
+Get:41 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libstdc++6 amd64 5.4.0-6ubuntu1~16.04.11 [393 kB]
+Get:42 http://archive.ubuntu.com/ubuntu xenial/main amd64 bzip2 amd64 1.0.6-8 [32.7 kB]
+Get:43 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmagic1 amd64 1:5.25-2ubuntu1.2 [216 kB]
+Get:44 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 file amd64 1:5.25-2ubuntu1.2 [21.2 kB]
+Get:45 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 iproute2 amd64 4.3.0-1ubuntu3.16.04.4 [521 kB]
+Get:46 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 ifupdown amd64 0.8.10ubuntu1.4 [54.9 kB]
+Get:47 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libisc-export160 amd64 1:9.10.3.dfsg.P4-8ubuntu1.12 [153 kB]
+Get:48 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdns-export162 amd64 1:9.10.3.dfsg.P4-8ubuntu1.12 [666 kB]
+Get:49 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 isc-dhcp-client amd64 4.3.3-5ubuntu12.10 [224 kB]
+Get:50 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 isc-dhcp-common amd64 4.3.3-5ubuntu12.10 [105 kB]
+Get:51 http://archive.ubuntu.com/ubuntu xenial/main amd64 libffi6 amd64 3.2.1-4 [17.8 kB]
+Get:52 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libnettle6 amd64 3.2-1ubuntu0.16.04.1 [93.5 kB]
+Get:53 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhogweed4 amd64 3.2-1ubuntu0.16.04.1 [136 kB]
+Get:54 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libidn11 amd64 1.32-3ubuntu1.2 [46.5 kB]
+Get:55 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libp11-kit0 amd64 0.23.2-5~ubuntu16.04.1 [105 kB]
+Get:56 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libtasn1-6 amd64 4.7-3ubuntu0.16.04.3 [43.5 kB]
+Get:57 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgnutls30 amd64 3.4.10-4ubuntu1.4 [548 kB]
+Get:58 http://archive.ubuntu.com/ubuntu xenial/main amd64 libxtables11 amd64 1.6.0-2ubuntu3 [27.2 kB]
+Get:59 http://archive.ubuntu.com/ubuntu xenial/main amd64 netbase all 5.3 [12.9 kB]
+Get:60 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 openssl amd64 1.0.2g-1ubuntu4.15 [492 kB]
+Get:61 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 ca-certificates all 20170717~16.04.2 [167 kB]
+Get:62 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 krb5-locales all 1.13.2+dfsg-5ubuntu2.1 [13.6 kB]
+Get:63 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libroken18-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [41.4 kB]
+Get:64 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libasn1-8-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [174 kB]
+Get:65 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5support0 amd64 1.13.2+dfsg-5ubuntu2.1 [31.2 kB]
+Get:66 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libk5crypto3 amd64 1.13.2+dfsg-5ubuntu2.1 [81.3 kB]
+Get:67 http://archive.ubuntu.com/ubuntu xenial/main amd64 libkeyutils1 amd64 1.5.9-8ubuntu1 [9904 B]
+Get:68 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5-3 amd64 1.13.2+dfsg-5ubuntu2.1 [273 kB]
+Get:69 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgssapi-krb5-2 amd64 1.13.2+dfsg-5ubuntu2.1 [120 kB]
+Get:70 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhcrypto4-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [85.0 kB]
+Get:71 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libheimbase1-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [29.3 kB]
+Get:72 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libwind0-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [47.8 kB]
+Get:73 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libhx509-5-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [107 kB]
+Get:74 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libkrb5-26-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [202 kB]
+Get:75 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libheimntlm0-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [15.1 kB]
+Get:76 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgssapi3-heimdal amd64 1.7~git20150920+dfsg-4ubuntu1.16.04.1 [96.1 kB]
+Get:77 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsasl2-modules-db amd64 2.1.26.dfsg1-14ubuntu0.1 [14.5 kB]
+Get:78 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsasl2-2 amd64 2.1.26.dfsg1-14ubuntu0.1 [48.6 kB]
+Get:79 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libldap-2.4-2 amd64 2.4.42+dfsg-2ubuntu3.4 [160 kB]
+Get:80 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d-1ubuntu0.1 [54.4 kB]
+Get:81 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcurl3-gnutls amd64 7.47.0-1ubuntu2.12 [185 kB]
+Get:82 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libsasl2-modules amd64 2.1.26.dfsg1-14ubuntu0.1 [47.5 kB]
+Get:83 http://archive.ubuntu.com/ubuntu xenial/main amd64 manpages all 4.04-2 [1087 kB]
+Get:84 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 binutils amd64 2.26.1-1ubuntu1~16.04.8 [2312 kB]
+Get:85 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-sawtooth-sdk all 1.0.5-1 [33.2 kB]
+Get:86 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc-dev-bin amd64 2.23-0ubuntu11 [68.5 kB]
+Get:87 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 linux-libc-dev amd64 4.4.0-143.169 [870 kB]
+Get:88 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libc6-dev amd64 2.23-0ubuntu11 [2086 kB]
+Get:89 http://archive.ubuntu.com/ubuntu xenial/main amd64 libisl15 amd64 0.16.1-1 [524 kB]
+Get:90 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 cpp-5 amd64 5.4.0-6ubuntu1~16.04.11 [7660 kB]
+Get:91 http://archive.ubuntu.com/ubuntu xenial/main amd64 cpp amd64 4:5.3.1-1ubuntu1 [27.7 kB]
+Get:92 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcc1-0 amd64 5.4.0-6ubuntu1~16.04.11 [38.8 kB]
+Get:93 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgomp1 amd64 5.4.0-6ubuntu1~16.04.11 [55.0 kB]
+Get:94 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libitm1 amd64 5.4.0-6ubuntu1~16.04.11 [27.4 kB]
+Get:95 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libatomic1 amd64 5.4.0-6ubuntu1~16.04.11 [8896 B]
+Get:96 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libasan2 amd64 5.4.0-6ubuntu1~16.04.11 [264 kB]
+Get:97 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 liblsan0 amd64 5.4.0-6ubuntu1~16.04.11 [105 kB]
+Get:98 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libtsan0 amd64 5.4.0-6ubuntu1~16.04.11 [244 kB]
+Get:99 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libubsan0 amd64 5.4.0-6ubuntu1~16.04.11 [95.4 kB]
+Get:100 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libcilkrts5 amd64 5.4.0-6ubuntu1~16.04.11 [40.1 kB]
+Get:101 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libmpx0 amd64 5.4.0-6ubuntu1~16.04.11 [9748 B]
+Get:102 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libquadmath0 amd64 5.4.0-6ubuntu1~16.04.11 [131 kB]
+Get:103 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libgcc-5-dev amd64 5.4.0-6ubuntu1~16.04.11 [2229 kB]
+Get:104 http://repo.sawtooth.me/ubuntu/1.0/stable xenial/universe amd64 python3-sawtooth-rest-api all 1.0.5-1 [37.8 kB]
+Get:105 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 gcc-5 amd64 5.4.0-6ubuntu1~16.04.11 [8417 kB]
+Get:106 http://archive.ubuntu.com/ubuntu xenial/main amd64 gcc amd64 4:5.3.1-1ubuntu1 [5244 B]
+Get:107 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libstdc++-5-dev amd64 5.4.0-6ubuntu1~16.04.11 [1426 kB]
+Get:108 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 g++-5 amd64 5.4.0-6ubuntu1~16.04.11 [8310 kB]
+Get:109 http://archive.ubuntu.com/ubuntu xenial/main amd64 g++ amd64 4:5.3.1-1ubuntu1 [1504 B]
+Get:110 http://archive.ubuntu.com/ubuntu xenial/main amd64 make amd64 4.1-6 [151 kB]
+Get:111 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libdpkg-perl all 1.18.4ubuntu1.5 [195 kB]
+Get:112 http://archive.ubuntu.com/ubuntu xenial/main amd64 xz-utils amd64 5.1.1alpha+20120614-2ubuntu2 [78.8 kB]
+Get:113 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 patch amd64 2.7.5-1ubuntu0.16.04.1 [90.5 kB]
+Get:114 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 dpkg-dev all 1.18.4ubuntu1.5 [584 kB]
+Get:115 http://archive.ubuntu.com/ubuntu xenial/main amd64 build-essential amd64 12.1ubuntu2 [4758 B]
+Get:116 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 curl amd64 7.47.0-1ubuntu2.12 [139 kB]
+Get:117 http://archive.ubuntu.com/ubuntu xenial/main amd64 libfakeroot amd64 1.20.2-1ubuntu1 [25.5 kB]
+Get:118 http://archive.ubuntu.com/ubuntu xenial/main amd64 fakeroot amd64 1.20.2-1ubuntu1 [61.8 kB]
+Get:119 http://archive.ubuntu.com/ubuntu xenial/main amd64 libalgorithm-diff-perl all 1.19.03-1 [47.6 kB]
+Get:120 http://archive.ubuntu.com/ubuntu xenial/main amd64 libalgorithm-diff-xs-perl amd64 0.04-4build1 [11.0 kB]
+Get:121 http://archive.ubuntu.com/ubuntu xenial/main amd64 libalgorithm-merge-perl all 0.08-3 [12.0 kB]
+Get:122 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libexpat1-dev amd64 2.1.0-7ubuntu0.16.04.3 [115 kB]
+Get:123 http://archive.ubuntu.com/ubuntu xenial/main amd64 libfile-fcntllock-perl amd64 0.22-3 [32.0 kB]
+Get:124 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5 amd64 3.5.2-2ubuntu0~16.04.5 [1360 kB]
+Get:125 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython3.5-dev amd64 3.5.2-2ubuntu0~16.04.5 [37.3 MB]
+Get:126 http://archive.ubuntu.com/ubuntu xenial/main amd64 libpython3-dev amd64 3.5.1-3 [6926 B]
+Get:127 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libsodium18 amd64 1.0.8-5 [144 kB]
+Get:128 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libzmq5 amd64 4.1.4-7 [149 kB]
+Get:129 http://archive.ubuntu.com/ubuntu xenial/main amd64 manpages-dev all 4.04-2 [2048 kB]
+Get:130 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 python-pip-whl all 8.1.1-2ubuntu0.4 [1110 kB]
+Get:131 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-pkg-resources all 20.7.0-1 [79.0 kB]
+Get:132 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-chardet all 2.3.0-2 [96.2 kB]
+Get:133 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-cffi-backend amd64 1.5.2-1ubuntu1 [59.1 kB]
+Get:134 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python3-colorlog all 2.6.0-1 [7912 B]
+Get:135 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3.5-dev amd64 3.5.2-2ubuntu0~16.04.5 [413 kB]
+Get:136 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-dev amd64 3.5.1-3 [1186 B]
+Get:137 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 python3-pip all 8.1.1-2ubuntu0.4 [109 kB]
+Get:138 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-six all 1.10.0-3 [11.0 kB]
+Get:139 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3-urllib3 all 1.13.1-2ubuntu0.16.04.2 [58.1 kB]
+Get:140 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python3-requests all 2.9.1-3ubuntu0.1 [55.8 kB]
+Get:141 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python3-toml all 0.9.1-1 [7932 B]
+Get:142 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-yaml amd64 3.11-3build1 [95.6 kB]
+Get:143 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python3-zmq amd64 15.2.0-0ubuntu4 [202 kB]
+Get:144 http://archive.ubuntu.com/ubuntu xenial/main amd64 python3-setuptools all 20.7.0-1 [88.0 kB]
+Get:145 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python3-wheel all 0.29.0-1 [48.1 kB]
+Get:146 http://archive.ubuntu.com/ubuntu xenial/main amd64 rename all 0.20-4 [12.0 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 106 MB in 6s (17.1 MB/s)
+(Reading database ... 4768 files and directories currently installed.)
+Preparing to unpack .../perl-base_5.22.1-9ubuntu0.6_amd64.deb ...
+Unpacking perl-base (5.22.1-9ubuntu0.6) over (5.22.1-9ubuntu0.2) ...
+Setting up perl-base (5.22.1-9ubuntu0.6) ...
+(Reading database ... 4768 files and directories currently installed.)
+Preparing to unpack .../libc6_2.23-0ubuntu11_amd64.deb ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Unpacking libc6:amd64 (2.23-0ubuntu11) over (2.23-0ubuntu10) ...
+Setting up libc6:amd64 (2.23-0ubuntu11) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Selecting previously unselected package libatm1:amd64.
+(Reading database ... 4768 files and directories currently installed.)
+Preparing to unpack .../libatm1_1%3a2.5.1-1.5_amd64.deb ...
+Unpacking libatm1:amd64 (1:2.5.1-1.5) ...
+Selecting previously unselected package libmnl0:amd64.
+Preparing to unpack .../libmnl0_1.0.3-5_amd64.deb ...
+Unpacking libmnl0:amd64 (1.0.3-5) ...
+Selecting previously unselected package libssl1.0.0:amd64.
+Preparing to unpack .../libssl1.0.0_1.0.2g-1ubuntu4.15_amd64.deb ...
+Unpacking libssl1.0.0:amd64 (1.0.2g-1ubuntu4.15) ...
+Selecting previously unselected package libpython3.5-minimal:amd64.
+Preparing to unpack .../libpython3.5-minimal_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking libpython3.5-minimal:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../libexpat1_2.1.0-7ubuntu0.16.04.3_amd64.deb ...
+Unpacking libexpat1:amd64 (2.1.0-7ubuntu0.16.04.3) ...
+Selecting previously unselected package python3.5-minimal.
+Preparing to unpack .../python3.5-minimal_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking python3.5-minimal (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package python3-minimal.
+Preparing to unpack .../python3-minimal_3.5.1-3_amd64.deb ...
+Unpacking python3-minimal (3.5.1-3) ...
+Selecting previously unselected package mime-support.
+Preparing to unpack .../mime-support_3.59ubuntu1_all.deb ...
+Unpacking mime-support (3.59ubuntu1) ...
+Selecting previously unselected package libmpdec2:amd64.
+Preparing to unpack .../libmpdec2_2.4.2-1_amd64.deb ...
+Unpacking libmpdec2:amd64 (2.4.2-1) ...
+Selecting previously unselected package libsqlite3-0:amd64.
+Preparing to unpack .../libsqlite3-0_3.11.0-1ubuntu1.1_amd64.deb ...
+Unpacking libsqlite3-0:amd64 (3.11.0-1ubuntu1.1) ...
+Selecting previously unselected package libpython3.5-stdlib:amd64.
+Preparing to unpack .../libpython3.5-stdlib_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking libpython3.5-stdlib:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package python3.5.
+Preparing to unpack .../python3.5_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking python3.5 (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package libpython3-stdlib:amd64.
+Preparing to unpack .../libpython3-stdlib_3.5.1-3_amd64.deb ...
+Unpacking libpython3-stdlib:amd64 (3.5.1-3) ...
+Selecting previously unselected package dh-python.
+Preparing to unpack .../dh-python_2.20151103ubuntu1.1_all.deb ...
+Unpacking dh-python (2.20151103ubuntu1.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Setting up libssl1.0.0:amd64 (1.0.2g-1ubuntu4.15) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.22.1 /usr/local/share/perl/5.22.1 /usr/lib/x86_64-linux-gnu/perl5/5.22 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl/5.22 /usr/share/perl/5.22 /usr/local/lib/site_perl /usr/lib/x86_64-linux-gnu/perl-base .) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up libpython3.5-minimal:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Setting up libexpat1:amd64 (2.1.0-7ubuntu0.16.04.3) ...
+Setting up python3.5-minimal (3.5.2-2ubuntu0~16.04.5) ...
+Setting up python3-minimal (3.5.1-3) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Selecting previously unselected package python3.
+(Reading database ... 5754 files and directories currently installed.)
+Preparing to unpack .../python3_3.5.1-3_amd64.deb ...
+Unpacking python3 (3.5.1-3) ...
+Selecting previously unselected package libgdbm3:amd64.
+Preparing to unpack .../libgdbm3_1.8.3-13.1_amd64.deb ...
+Unpacking libgdbm3:amd64 (1.8.3-13.1) ...
+Selecting previously unselected package libyaml-0-2:amd64.
+Preparing to unpack .../libyaml-0-2_0.1.6-3_amd64.deb ...
+Unpacking libyaml-0-2:amd64 (0.1.6-3) ...
+Selecting previously unselected package perl-modules-5.22.
+Preparing to unpack .../perl-modules-5.22_5.22.1-9ubuntu0.6_all.deb ...
+Unpacking perl-modules-5.22 (5.22.1-9ubuntu0.6) ...
+Selecting previously unselected package libperl5.22:amd64.
+Preparing to unpack .../libperl5.22_5.22.1-9ubuntu0.6_amd64.deb ...
+Unpacking libperl5.22:amd64 (5.22.1-9ubuntu0.6) ...
+Selecting previously unselected package perl.
+Preparing to unpack .../perl_5.22.1-9ubuntu0.6_amd64.deb ...
+Unpacking perl (5.22.1-9ubuntu0.6) ...
+Selecting previously unselected package libgmp10:amd64.
+Preparing to unpack .../libgmp10_2%3a6.1.0+dfsg-2_amd64.deb ...
+Unpacking libgmp10:amd64 (2:6.1.0+dfsg-2) ...
+Selecting previously unselected package libmpfr4:amd64.
+Preparing to unpack .../libmpfr4_3.1.4-1_amd64.deb ...
+Unpacking libmpfr4:amd64 (3.1.4-1) ...
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack .../libmpc3_1.0.3-1_amd64.deb ...
+Unpacking libmpc3:amd64 (1.0.3-1) ...
+Preparing to unpack .../gcc-5-base_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking gcc-5-base:amd64 (5.4.0-6ubuntu1~16.04.11) over (5.4.0-6ubuntu1~16.04.9) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Setting up gcc-5-base:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+(Reading database ... 7574 files and directories currently installed.)
+Preparing to unpack .../libstdc++6_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libstdc++6:amd64 (5.4.0-6ubuntu1~16.04.11) over (5.4.0-6ubuntu1~16.04.9) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Setting up libstdc++6:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Selecting previously unselected package bzip2.
+(Reading database ... 7574 files and directories currently installed.)
+Preparing to unpack .../bzip2_1.0.6-8_amd64.deb ...
+Unpacking bzip2 (1.0.6-8) ...
+Selecting previously unselected package libmagic1:amd64.
+Preparing to unpack .../libmagic1_1%3a5.25-2ubuntu1.2_amd64.deb ...
+Unpacking libmagic1:amd64 (1:5.25-2ubuntu1.2) ...
+Selecting previously unselected package file.
+Preparing to unpack .../file_1%3a5.25-2ubuntu1.2_amd64.deb ...
+Unpacking file (1:5.25-2ubuntu1.2) ...
+Selecting previously unselected package iproute2.
+Preparing to unpack .../iproute2_4.3.0-1ubuntu3.16.04.4_amd64.deb ...
+Unpacking iproute2 (4.3.0-1ubuntu3.16.04.4) ...
+Selecting previously unselected package ifupdown.
+Preparing to unpack .../ifupdown_0.8.10ubuntu1.4_amd64.deb ...
+Unpacking ifupdown (0.8.10ubuntu1.4) ...
+Selecting previously unselected package libisc-export160.
+Preparing to unpack .../libisc-export160_1%3a9.10.3.dfsg.P4-8ubuntu1.12_amd64.deb ...
+Unpacking libisc-export160 (1:9.10.3.dfsg.P4-8ubuntu1.12) ...
+Selecting previously unselected package libdns-export162.
+Preparing to unpack .../libdns-export162_1%3a9.10.3.dfsg.P4-8ubuntu1.12_amd64.deb ...
+Unpacking libdns-export162 (1:9.10.3.dfsg.P4-8ubuntu1.12) ...
+Selecting previously unselected package isc-dhcp-client.
+Preparing to unpack .../isc-dhcp-client_4.3.3-5ubuntu12.10_amd64.deb ...
+Unpacking isc-dhcp-client (4.3.3-5ubuntu12.10) ...
+Selecting previously unselected package isc-dhcp-common.
+Preparing to unpack .../isc-dhcp-common_4.3.3-5ubuntu12.10_amd64.deb ...
+Unpacking isc-dhcp-common (4.3.3-5ubuntu12.10) ...
+Selecting previously unselected package libffi6:amd64.
+Preparing to unpack .../libffi6_3.2.1-4_amd64.deb ...
+Unpacking libffi6:amd64 (3.2.1-4) ...
+Selecting previously unselected package libnettle6:amd64.
+Preparing to unpack .../libnettle6_3.2-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking libnettle6:amd64 (3.2-1ubuntu0.16.04.1) ...
+Selecting previously unselected package libhogweed4:amd64.
+Preparing to unpack .../libhogweed4_3.2-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking libhogweed4:amd64 (3.2-1ubuntu0.16.04.1) ...
+Selecting previously unselected package libidn11:amd64.
+Preparing to unpack .../libidn11_1.32-3ubuntu1.2_amd64.deb ...
+Unpacking libidn11:amd64 (1.32-3ubuntu1.2) ...
+Selecting previously unselected package libp11-kit0:amd64.
+Preparing to unpack .../libp11-kit0_0.23.2-5~ubuntu16.04.1_amd64.deb ...
+Unpacking libp11-kit0:amd64 (0.23.2-5~ubuntu16.04.1) ...
+Selecting previously unselected package libtasn1-6:amd64.
+Preparing to unpack .../libtasn1-6_4.7-3ubuntu0.16.04.3_amd64.deb ...
+Unpacking libtasn1-6:amd64 (4.7-3ubuntu0.16.04.3) ...
+Selecting previously unselected package libgnutls30:amd64.
+Preparing to unpack .../libgnutls30_3.4.10-4ubuntu1.4_amd64.deb ...
+Unpacking libgnutls30:amd64 (3.4.10-4ubuntu1.4) ...
+Selecting previously unselected package libxtables11:amd64.
+Preparing to unpack .../libxtables11_1.6.0-2ubuntu3_amd64.deb ...
+Unpacking libxtables11:amd64 (1.6.0-2ubuntu3) ...
+Selecting previously unselected package netbase.
+Preparing to unpack .../archives/netbase_5.3_all.deb ...
+Unpacking netbase (5.3) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_1.0.2g-1ubuntu4.15_amd64.deb ...
+Unpacking openssl (1.0.2g-1ubuntu4.15) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20170717~16.04.2_all.deb ...
+Unpacking ca-certificates (20170717~16.04.2) ...
+Selecting previously unselected package krb5-locales.
+Preparing to unpack .../krb5-locales_1.13.2+dfsg-5ubuntu2.1_all.deb ...
+Unpacking krb5-locales (1.13.2+dfsg-5ubuntu2.1) ...
+Selecting previously unselected package libroken18-heimdal:amd64.
+Preparing to unpack .../libroken18-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libroken18-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libasn1-8-heimdal:amd64.
+Preparing to unpack .../libasn1-8-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libasn1-8-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../libkrb5support0_1.13.2+dfsg-5ubuntu2.1_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../libk5crypto3_1.13.2+dfsg-5ubuntu2.1_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../libkeyutils1_1.5.9-8ubuntu1_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.5.9-8ubuntu1) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../libkrb5-3_1.13.2+dfsg-5ubuntu2.1_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../libgssapi-krb5-2_1.13.2+dfsg-5ubuntu2.1_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Selecting previously unselected package libhcrypto4-heimdal:amd64.
+Preparing to unpack .../libhcrypto4-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libhcrypto4-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libheimbase1-heimdal:amd64.
+Preparing to unpack .../libheimbase1-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libheimbase1-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libwind0-heimdal:amd64.
+Preparing to unpack .../libwind0-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libwind0-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libhx509-5-heimdal:amd64.
+Preparing to unpack .../libhx509-5-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libhx509-5-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libkrb5-26-heimdal:amd64.
+Preparing to unpack .../libkrb5-26-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libkrb5-26-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libheimntlm0-heimdal:amd64.
+Preparing to unpack .../libheimntlm0-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libheimntlm0-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libgssapi3-heimdal:amd64.
+Preparing to unpack .../libgssapi3-heimdal_1.7~git20150920+dfsg-4ubuntu1.16.04.1_amd64.deb ...
+Unpacking libgssapi3-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../libsasl2-modules-db_2.1.26.dfsg1-14ubuntu0.1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.26.dfsg1-14ubuntu0.1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../libsasl2-2_2.1.26.dfsg1-14ubuntu0.1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.26.dfsg1-14ubuntu0.1) ...
+Selecting previously unselected package libldap-2.4-2:amd64.
+Preparing to unpack .../libldap-2.4-2_2.4.42+dfsg-2ubuntu3.4_amd64.deb ...
+Unpacking libldap-2.4-2:amd64 (2.4.42+dfsg-2ubuntu3.4) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../librtmp1_2.4+20151223.gitfa8646d-1ubuntu0.1_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d-1ubuntu0.1) ...
+Selecting previously unselected package libcurl3-gnutls:amd64.
+Preparing to unpack .../libcurl3-gnutls_7.47.0-1ubuntu2.12_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.47.0-1ubuntu2.12) ...
+Selecting previously unselected package libsasl2-modules:amd64.
+Preparing to unpack .../libsasl2-modules_2.1.26.dfsg1-14ubuntu0.1_amd64.deb ...
+Unpacking libsasl2-modules:amd64 (2.1.26.dfsg1-14ubuntu0.1) ...
+Selecting previously unselected package manpages.
+Preparing to unpack .../manpages_4.04-2_all.deb ...
+Unpacking manpages (4.04-2) ...
+Selecting previously unselected package binutils.
+Preparing to unpack .../binutils_2.26.1-1ubuntu1~16.04.8_amd64.deb ...
+Unpacking binutils (2.26.1-1ubuntu1~16.04.8) ...
+Selecting previously unselected package libc-dev-bin.
+Preparing to unpack .../libc-dev-bin_2.23-0ubuntu11_amd64.deb ...
+Unpacking libc-dev-bin (2.23-0ubuntu11) ...
+Selecting previously unselected package linux-libc-dev:amd64.
+Preparing to unpack .../linux-libc-dev_4.4.0-143.169_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (4.4.0-143.169) ...
+Selecting previously unselected package libc6-dev:amd64.
+Preparing to unpack .../libc6-dev_2.23-0ubuntu11_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.23-0ubuntu11) ...
+Selecting previously unselected package libisl15:amd64.
+Preparing to unpack .../libisl15_0.16.1-1_amd64.deb ...
+Unpacking libisl15:amd64 (0.16.1-1) ...
+Selecting previously unselected package cpp-5.
+Preparing to unpack .../cpp-5_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking cpp-5 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package cpp.
+Preparing to unpack .../cpp_4%3a5.3.1-1ubuntu1_amd64.deb ...
+Unpacking cpp (4:5.3.1-1ubuntu1) ...
+Selecting previously unselected package libcc1-0:amd64.
+Preparing to unpack .../libcc1-0_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libcc1-0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libgomp1:amd64.
+Preparing to unpack .../libgomp1_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libgomp1:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack .../libitm1_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libitm1:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../libatomic1_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libatomic1:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libasan2:amd64.
+Preparing to unpack .../libasan2_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libasan2:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package liblsan0:amd64.
+Preparing to unpack .../liblsan0_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking liblsan0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libtsan0:amd64.
+Preparing to unpack .../libtsan0_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libtsan0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libubsan0:amd64.
+Preparing to unpack .../libubsan0_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libubsan0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libcilkrts5:amd64.
+Preparing to unpack .../libcilkrts5_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libcilkrts5:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libmpx0:amd64.
+Preparing to unpack .../libmpx0_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libmpx0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../libquadmath0_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libquadmath0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package libgcc-5-dev:amd64.
+Preparing to unpack .../libgcc-5-dev_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libgcc-5-dev:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package gcc-5.
+Preparing to unpack .../gcc-5_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking gcc-5 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package gcc.
+Preparing to unpack .../gcc_4%3a5.3.1-1ubuntu1_amd64.deb ...
+Unpacking gcc (4:5.3.1-1ubuntu1) ...
+Selecting previously unselected package libstdc++-5-dev:amd64.
+Preparing to unpack .../libstdc++-5-dev_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking libstdc++-5-dev:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package g++-5.
+Preparing to unpack .../g++-5_5.4.0-6ubuntu1~16.04.11_amd64.deb ...
+Unpacking g++-5 (5.4.0-6ubuntu1~16.04.11) ...
+Selecting previously unselected package g++.
+Preparing to unpack .../g++_4%3a5.3.1-1ubuntu1_amd64.deb ...
+Unpacking g++ (4:5.3.1-1ubuntu1) ...
+Selecting previously unselected package make.
+Preparing to unpack .../archives/make_4.1-6_amd64.deb ...
+Unpacking make (4.1-6) ...
+Selecting previously unselected package libdpkg-perl.
+Preparing to unpack .../libdpkg-perl_1.18.4ubuntu1.5_all.deb ...
+Unpacking libdpkg-perl (1.18.4ubuntu1.5) ...
+Selecting previously unselected package xz-utils.
+Preparing to unpack .../xz-utils_5.1.1alpha+20120614-2ubuntu2_amd64.deb ...
+Unpacking xz-utils (5.1.1alpha+20120614-2ubuntu2) ...
+Selecting previously unselected package patch.
+Preparing to unpack .../patch_2.7.5-1ubuntu0.16.04.1_amd64.deb ...
+Unpacking patch (2.7.5-1ubuntu0.16.04.1) ...
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack .../dpkg-dev_1.18.4ubuntu1.5_all.deb ...
+Unpacking dpkg-dev (1.18.4ubuntu1.5) ...
+Selecting previously unselected package build-essential.
+Preparing to unpack .../build-essential_12.1ubuntu2_amd64.deb ...
+Unpacking build-essential (12.1ubuntu2) ...
+Selecting previously unselected package curl.
+Preparing to unpack .../curl_7.47.0-1ubuntu2.12_amd64.deb ...
+Unpacking curl (7.47.0-1ubuntu2.12) ...
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack .../libfakeroot_1.20.2-1ubuntu1_amd64.deb ...
+Unpacking libfakeroot:amd64 (1.20.2-1ubuntu1) ...
+Selecting previously unselected package fakeroot.
+Preparing to unpack .../fakeroot_1.20.2-1ubuntu1_amd64.deb ...
+Unpacking fakeroot (1.20.2-1ubuntu1) ...
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack .../libalgorithm-diff-perl_1.19.03-1_all.deb ...
+Unpacking libalgorithm-diff-perl (1.19.03-1) ...
+Selecting previously unselected package libalgorithm-diff-xs-perl.
+Preparing to unpack .../libalgorithm-diff-xs-perl_0.04-4build1_amd64.deb ...
+Unpacking libalgorithm-diff-xs-perl (0.04-4build1) ...
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack .../libalgorithm-merge-perl_0.08-3_all.deb ...
+Unpacking libalgorithm-merge-perl (0.08-3) ...
+Selecting previously unselected package libexpat1-dev:amd64.
+Preparing to unpack .../libexpat1-dev_2.1.0-7ubuntu0.16.04.3_amd64.deb ...
+Unpacking libexpat1-dev:amd64 (2.1.0-7ubuntu0.16.04.3) ...
+Selecting previously unselected package libfile-fcntllock-perl.
+Preparing to unpack .../libfile-fcntllock-perl_0.22-3_amd64.deb ...
+Unpacking libfile-fcntllock-perl (0.22-3) ...
+Selecting previously unselected package libprotobuf12:amd64.
+Preparing to unpack .../libprotobuf12_3.4.1-0~maarten0_amd64.deb ...
+Unpacking libprotobuf12:amd64 (3.4.1-0~maarten0) ...
+Selecting previously unselected package libpython3.5:amd64.
+Preparing to unpack .../libpython3.5_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking libpython3.5:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package libpython3.5-dev:amd64.
+Preparing to unpack .../libpython3.5-dev_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking libpython3.5-dev:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package libpython3-dev:amd64.
+Preparing to unpack .../libpython3-dev_3.5.1-3_amd64.deb ...
+Unpacking libpython3-dev:amd64 (3.5.1-3) ...
+Selecting previously unselected package libsecp256k1-0:amd64.
+Preparing to unpack .../libsecp256k1-0_0.1~20161228-1_amd64.deb ...
+Unpacking libsecp256k1-0:amd64 (0.1~20161228-1) ...
+Selecting previously unselected package libsodium18:amd64.
+Preparing to unpack .../libsodium18_1.0.8-5_amd64.deb ...
+Unpacking libsodium18:amd64 (1.0.8-5) ...
+Selecting previously unselected package libzmq5:amd64.
+Preparing to unpack .../libzmq5_4.1.4-7_amd64.deb ...
+Unpacking libzmq5:amd64 (4.1.4-7) ...
+Selecting previously unselected package manpages-dev.
+Preparing to unpack .../manpages-dev_4.04-2_all.deb ...
+Unpacking manpages-dev (4.04-2) ...
+Selecting previously unselected package python-pip-whl.
+Preparing to unpack .../python-pip-whl_8.1.1-2ubuntu0.4_all.deb ...
+Unpacking python-pip-whl (8.1.1-2ubuntu0.4) ...
+Selecting previously unselected package python3-pycares.
+Preparing to unpack .../python3-pycares_2.1.1-1_amd64.deb ...
+Unpacking python3-pycares (2.1.1-1) ...
+Selecting previously unselected package python3-aiodns.
+Preparing to unpack .../python3-aiodns_1.1.1-1_all.deb ...
+Unpacking python3-aiodns (1.1.1-1) ...
+Selecting previously unselected package python3-async-timeout.
+Preparing to unpack .../python3-async-timeout_1.2.0-1_all.deb ...
+Unpacking python3-async-timeout (1.2.0-1) ...
+Selecting previously unselected package python3-pkg-resources.
+Preparing to unpack .../python3-pkg-resources_20.7.0-1_all.deb ...
+Unpacking python3-pkg-resources (20.7.0-1) ...
+Selecting previously unselected package python3-chardet.
+Preparing to unpack .../python3-chardet_2.3.0-2_all.deb ...
+Unpacking python3-chardet (2.3.0-2) ...
+Selecting previously unselected package python3-multidict.
+Preparing to unpack .../python3-multidict_2.1.4-1_amd64.deb ...
+Unpacking python3-multidict (2.1.4-1) ...
+Selecting previously unselected package python3-yarl.
+Preparing to unpack .../python3-yarl_0.10.0-1_amd64.deb ...
+Unpacking python3-yarl (0.10.0-1) ...
+Selecting previously unselected package python3-aiohttp.
+Preparing to unpack .../python3-aiohttp_2.3.2-1_amd64.deb ...
+Unpacking python3-aiohttp (2.3.2-1) ...
+Selecting previously unselected package python3-cchardet.
+Preparing to unpack .../python3-cchardet_2.0a3-1_amd64.deb ...
+Unpacking python3-cchardet (2.0a3-1) ...
+Selecting previously unselected package python3-cffi-backend.
+Preparing to unpack .../python3-cffi-backend_1.5.2-1ubuntu1_amd64.deb ...
+Unpacking python3-cffi-backend (1.5.2-1ubuntu1) ...
+Selecting previously unselected package python3-colorlog.
+Preparing to unpack .../python3-colorlog_2.6.0-1_all.deb ...
+Unpacking python3-colorlog (2.6.0-1) ...
+Selecting previously unselected package python3.5-dev.
+Preparing to unpack .../python3.5-dev_3.5.2-2ubuntu0~16.04.5_amd64.deb ...
+Unpacking python3.5-dev (3.5.2-2ubuntu0~16.04.5) ...
+Selecting previously unselected package python3-dev.
+Preparing to unpack .../python3-dev_3.5.1-3_amd64.deb ...
+Unpacking python3-dev (3.5.1-3) ...
+Selecting previously unselected package python3-pip.
+Preparing to unpack .../python3-pip_8.1.1-2ubuntu0.4_all.deb ...
+Unpacking python3-pip (8.1.1-2ubuntu0.4) ...
+Selecting previously unselected package python3-six.
+Preparing to unpack .../python3-six_1.10.0-3_all.deb ...
+Unpacking python3-six (1.10.0-3) ...
+Selecting previously unselected package python3-protobuf.
+Preparing to unpack .../python3-protobuf_3.4.1-0~maarten0_amd64.deb ...
+Unpacking python3-protobuf (3.4.1-0~maarten0) ...
+Selecting previously unselected package python3-pyformance.
+Preparing to unpack .../python3-pyformance_0.4-1_all.deb ...
+Unpacking python3-pyformance (0.4-1) ...
+Selecting previously unselected package python3-urllib3.
+Preparing to unpack .../python3-urllib3_1.13.1-2ubuntu0.16.04.2_all.deb ...
+Unpacking python3-urllib3 (1.13.1-2ubuntu0.16.04.2) ...
+Selecting previously unselected package python3-requests.
+Preparing to unpack .../python3-requests_2.9.1-3ubuntu0.1_all.deb ...
+Unpacking python3-requests (2.9.1-3ubuntu0.1) ...
+Selecting previously unselected package python3-secp256k1.
+Preparing to unpack .../python3-secp256k1_0.13.2-1_amd64.deb ...
+Unpacking python3-secp256k1 (0.13.2-1) ...
+Selecting previously unselected package python3-sawtooth-signing.
+Preparing to unpack .../python3-sawtooth-signing_1.0.5-1_all.deb ...
+Unpacking python3-sawtooth-signing (1.0.5-1) ...
+Selecting previously unselected package python3-toml.
+Preparing to unpack .../python3-toml_0.9.1-1_all.deb ...
+Unpacking python3-toml (0.9.1-1) ...
+Selecting previously unselected package python3-yaml.
+Preparing to unpack .../python3-yaml_3.11-3build1_amd64.deb ...
+Unpacking python3-yaml (3.11-3build1) ...
+Selecting previously unselected package python3-sawtooth-cli.
+Preparing to unpack .../python3-sawtooth-cli_1.0.5-1_all.deb ...
+Unpacking python3-sawtooth-cli (1.0.5-1) ...
+Selecting previously unselected package python3-zmq.
+Preparing to unpack .../python3-zmq_15.2.0-0ubuntu4_amd64.deb ...
+Unpacking python3-zmq (15.2.0-0ubuntu4) ...
+Selecting previously unselected package python3-sawtooth-sdk.
+Preparing to unpack .../python3-sawtooth-sdk_1.0.5-1_all.deb ...
+Unpacking python3-sawtooth-sdk (1.0.5-1) ...
+Selecting previously unselected package python3-sawtooth-rest-api.
+Preparing to unpack .../python3-sawtooth-rest-api_1.0.5-1_all.deb ...
+Unpacking python3-sawtooth-rest-api (1.0.5-1) ...
+Selecting previously unselected package python3-setuptools.
+Preparing to unpack .../python3-setuptools_20.7.0-1_all.deb ...
+Unpacking python3-setuptools (20.7.0-1) ...
+Selecting previously unselected package python3-wheel.
+Preparing to unpack .../python3-wheel_0.29.0-1_all.deb ...
+Unpacking python3-wheel (0.29.0-1) ...
+Selecting previously unselected package rename.
+Preparing to unpack .../archives/rename_0.20-4_all.deb ...
+Unpacking rename (0.20-4) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Processing triggers for systemd (229-4ubuntu21.1) ...
+Setting up libatm1:amd64 (1:2.5.1-1.5) ...
+Setting up libmnl0:amd64 (1.0.3-5) ...
+Setting up mime-support (3.59ubuntu1) ...
+Setting up libmpdec2:amd64 (2.4.2-1) ...
+Setting up libsqlite3-0:amd64 (3.11.0-1ubuntu1.1) ...
+Setting up libpython3.5-stdlib:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Setting up python3.5 (3.5.2-2ubuntu0~16.04.5) ...
+Setting up libpython3-stdlib:amd64 (3.5.1-3) ...
+Setting up libgdbm3:amd64 (1.8.3-13.1) ...
+Setting up libyaml-0-2:amd64 (0.1.6-3) ...
+Setting up perl-modules-5.22 (5.22.1-9ubuntu0.6) ...
+Setting up libperl5.22:amd64 (5.22.1-9ubuntu0.6) ...
+Setting up perl (5.22.1-9ubuntu0.6) ...
+update-alternatives: using /usr/bin/prename to provide /usr/bin/rename (rename) in auto mode
+Setting up libgmp10:amd64 (2:6.1.0+dfsg-2) ...
+Setting up libmpfr4:amd64 (3.1.4-1) ...
+Setting up libmpc3:amd64 (1.0.3-1) ...
+Setting up bzip2 (1.0.6-8) ...
+Setting up libmagic1:amd64 (1:5.25-2ubuntu1.2) ...
+Setting up file (1:5.25-2ubuntu1.2) ...
+Setting up iproute2 (4.3.0-1ubuntu3.16.04.4) ...
+Setting up ifupdown (0.8.10ubuntu1.4) ...
+Creating /etc/network/interfaces.
+Setting up libisc-export160 (1:9.10.3.dfsg.P4-8ubuntu1.12) ...
+Setting up libdns-export162 (1:9.10.3.dfsg.P4-8ubuntu1.12) ...
+Setting up isc-dhcp-client (4.3.3-5ubuntu12.10) ...
+Setting up isc-dhcp-common (4.3.3-5ubuntu12.10) ...
+Setting up libffi6:amd64 (3.2.1-4) ...
+Setting up libnettle6:amd64 (3.2-1ubuntu0.16.04.1) ...
+Setting up libhogweed4:amd64 (3.2-1ubuntu0.16.04.1) ...
+Setting up libidn11:amd64 (1.32-3ubuntu1.2) ...
+Setting up libp11-kit0:amd64 (0.23.2-5~ubuntu16.04.1) ...
+Setting up libtasn1-6:amd64 (4.7-3ubuntu0.16.04.3) ...
+Setting up libgnutls30:amd64 (3.4.10-4ubuntu1.4) ...
+Setting up libxtables11:amd64 (1.6.0-2ubuntu3) ...
+Setting up netbase (5.3) ...
+Setting up openssl (1.0.2g-1ubuntu4.15) ...
+Setting up ca-certificates (20170717~16.04.2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Setting up krb5-locales (1.13.2+dfsg-5ubuntu2.1) ...
+Setting up libroken18-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libasn1-8-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libkrb5support0:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Setting up libk5crypto3:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Setting up libkeyutils1:amd64 (1.5.9-8ubuntu1) ...
+Setting up libkrb5-3:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Setting up libgssapi-krb5-2:amd64 (1.13.2+dfsg-5ubuntu2.1) ...
+Setting up libhcrypto4-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libheimbase1-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libwind0-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libhx509-5-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libkrb5-26-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libheimntlm0-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libgssapi3-heimdal:amd64 (1.7~git20150920+dfsg-4ubuntu1.16.04.1) ...
+Setting up libsasl2-modules-db:amd64 (2.1.26.dfsg1-14ubuntu0.1) ...
+Setting up libsasl2-2:amd64 (2.1.26.dfsg1-14ubuntu0.1) ...
+Setting up libldap-2.4-2:amd64 (2.4.42+dfsg-2ubuntu3.4) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d-1ubuntu0.1) ...
+Setting up libcurl3-gnutls:amd64 (7.47.0-1ubuntu2.12) ...
+Setting up libsasl2-modules:amd64 (2.1.26.dfsg1-14ubuntu0.1) ...
+Setting up manpages (4.04-2) ...
+Setting up binutils (2.26.1-1ubuntu1~16.04.8) ...
+Setting up libc-dev-bin (2.23-0ubuntu11) ...
+Setting up linux-libc-dev:amd64 (4.4.0-143.169) ...
+Setting up libc6-dev:amd64 (2.23-0ubuntu11) ...
+Setting up libisl15:amd64 (0.16.1-1) ...
+Setting up cpp-5 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up cpp (4:5.3.1-1ubuntu1) ...
+Setting up libcc1-0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libgomp1:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libitm1:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libatomic1:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libasan2:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up liblsan0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libtsan0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libubsan0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libcilkrts5:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libmpx0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libquadmath0:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up libgcc-5-dev:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up gcc-5 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up gcc (4:5.3.1-1ubuntu1) ...
+Setting up libstdc++-5-dev:amd64 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up g++-5 (5.4.0-6ubuntu1~16.04.11) ...
+Setting up g++ (4:5.3.1-1ubuntu1) ...
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+Setting up make (4.1-6) ...
+Setting up libdpkg-perl (1.18.4ubuntu1.5) ...
+Setting up xz-utils (5.1.1alpha+20120614-2ubuntu2) ...
+update-alternatives: using /usr/bin/xz to provide /usr/bin/lzma (lzma) in auto mode
+Setting up patch (2.7.5-1ubuntu0.16.04.1) ...
+Setting up dpkg-dev (1.18.4ubuntu1.5) ...
+Setting up build-essential (12.1ubuntu2) ...
+Setting up curl (7.47.0-1ubuntu2.12) ...
+Setting up libfakeroot:amd64 (1.20.2-1ubuntu1) ...
+Setting up fakeroot (1.20.2-1ubuntu1) ...
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up libalgorithm-diff-perl (1.19.03-1) ...
+Setting up libalgorithm-diff-xs-perl (0.04-4build1) ...
+Setting up libalgorithm-merge-perl (0.08-3) ...
+Setting up libexpat1-dev:amd64 (2.1.0-7ubuntu0.16.04.3) ...
+Setting up libfile-fcntllock-perl (0.22-3) ...
+Setting up libprotobuf12:amd64 (3.4.1-0~maarten0) ...
+Setting up libpython3.5:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Setting up libpython3.5-dev:amd64 (3.5.2-2ubuntu0~16.04.5) ...
+Setting up libpython3-dev:amd64 (3.5.1-3) ...
+Setting up libsecp256k1-0:amd64 (0.1~20161228-1) ...
+Setting up libsodium18:amd64 (1.0.8-5) ...
+Setting up libzmq5:amd64 (4.1.4-7) ...
+Setting up manpages-dev (4.04-2) ...
+Setting up python-pip-whl (8.1.1-2ubuntu0.4) ...
+Setting up python3-colorlog (2.6.0-1) ...
+Setting up python3.5-dev (3.5.2-2ubuntu0~16.04.5) ...
+Setting up rename (0.20-4) ...
+update-alternatives: using /usr/bin/file-rename to provide /usr/bin/rename (rename) in auto mode
+Setting up python3 (3.5.1-3) ...
+running python rtupdate hooks for python3.5...
+running python post-rtupdate hooks for python3.5...
+Setting up python3-pycares (2.1.1-1) ...
+Setting up python3-aiodns (1.1.1-1) ...
+Setting up python3-async-timeout (1.2.0-1) ...
+Setting up python3-pkg-resources (20.7.0-1) ...
+Setting up python3-chardet (2.3.0-2) ...
+Setting up python3-multidict (2.1.4-1) ...
+Setting up python3-yarl (0.10.0-1) ...
+Setting up python3-aiohttp (2.3.2-1) ...
+Setting up python3-cchardet (2.0a3-1) ...
+Setting up python3-cffi-backend (1.5.2-1ubuntu1) ...
+Setting up python3-dev (3.5.1-3) ...
+Setting up python3-pip (8.1.1-2ubuntu0.4) ...
+Setting up python3-six (1.10.0-3) ...
+Setting up python3-protobuf (3.4.1-0~maarten0) ...
+Setting up python3-pyformance (0.4-1) ...
+Setting up python3-urllib3 (1.13.1-2ubuntu0.16.04.2) ...
+Setting up python3-requests (2.9.1-3ubuntu0.1) ...
+Setting up python3-secp256k1 (0.13.2-1) ...
+Setting up python3-sawtooth-signing (1.0.5-1) ...
+Setting up python3-toml (0.9.1-1) ...
+Setting up python3-yaml (3.11-3build1) ...
+Setting up python3-sawtooth-cli (1.0.5-1) ...
+Setting up python3-zmq (15.2.0-0ubuntu4) ...
+Setting up python3-sawtooth-sdk (1.0.5-1) ...
+Setting up python3-sawtooth-rest-api (1.0.5-1) ...
+Setting up python3-setuptools (20.7.0-1) ...
+Setting up python3-wheel (0.29.0-1) ...
+Setting up dh-python (2.20151103ubuntu1.1) ...
+Processing triggers for libc-bin (2.23-0ubuntu10) ...
+Processing triggers for systemd (229-4ubuntu21.1) ...
+Processing triggers for ca-certificates (20170717~16.04.2) ...
+Updating certificates in /etc/ssl/certs...
+148 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Removing intermediate container c33c38ba99a8
+ ---> cfbfa27c17dc
+Step 4/9 : RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -     && apt-get install -y nodejs
+ ---> Running in 4e9b9aec01c2
+
+## Installing the NodeSource Node.js 6.x LTS Boron repo...
+
+
+## Populating apt-get cache...
+
++ apt-get update
+Get:1 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Get:2 http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease [3271 B]
+Hit:3 http://archive.ubuntu.com/ubuntu xenial InRelease
+Ign:2 http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease
+Get:4 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Fetched 328 kB in 1s (255 kB/s)
+Reading package lists...
+W: GPG error: http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 8AA7AF1F1091A5FD
+W: The repository 'http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease' is not signed.
+
+## Installing packages required for setup: apt-transport-https lsb-release...
+
++ apt-get install -y apt-transport-https lsb-release > /dev/null 2>&1
+
+## Confirming ""xenial"" is supported...
+
++ curl -sLf -o /dev/null 'https://deb.nodesource.com/node_6.x/dists/xenial/Release'
+
+## Adding the NodeSource signing key to your keyring...
+
++ curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+OK
+
+## Creating apt sources list file for the NodeSource Node.js 6.x LTS Boron repo...
+
++ echo 'deb https://deb.nodesource.com/node_6.x xenial main' > /etc/apt/sources.list.d/nodesource.list
++ echo 'deb-src https://deb.nodesource.com/node_6.x xenial main' >> /etc/apt/sources.list.d/nodesource.list
+
+## Running `apt-get update` for you...
+
++ apt-get update
+Get:1 http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease [3271 B]
+Hit:2 http://archive.ubuntu.com/ubuntu xenial InRelease
+Get:3 http://security.ubuntu.com/ubuntu xenial-security InRelease [109 kB]
+Ign:1 http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease
+Get:4 https://deb.nodesource.com/node_6.x xenial InRelease [4634 B]
+Get:5 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [109 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [107 kB]
+Get:7 https://deb.nodesource.com/node_6.x xenial/main amd64 Packages [1009 B]
+Fetched 334 kB in 0s (469 kB/s)
+Reading package lists...
+W: GPG error: http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 8AA7AF1F1091A5FD
+W: The repository 'http://repo.sawtooth.me/ubuntu/1.0/stable xenial InRelease' is not signed.
+
+## Run `sudo apt-get install -y nodejs` to install Node.js 6.x LTS Boron and npm
+## You may also need development tools to build native addons:
+     sudo apt-get install gcc g++ make
+## To install the Yarn package manager, run:
+     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+     echo ""deb https://dl.yarnpkg.com/debian/ stable main"" | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update && sudo apt-get install yarn
+
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libpython-stdlib libpython2.7-minimal libpython2.7-stdlib python
+  python-minimal python2.7 python2.7-minimal
+Suggested packages:
+  python-doc python-tk python2.7-doc binfmt-support
+The following NEW packages will be installed:
+  libpython-stdlib libpython2.7-minimal libpython2.7-stdlib nodejs python
+  python-minimal python2.7 python2.7-minimal
+0 upgraded, 8 newly installed, 0 to remove and 29 not upgraded.
+Need to get 14.9 MB of archives.
+After this operation, 67.6 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython2.7-minimal amd64 2.7.12-1ubuntu0~16.04.4 [339 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python2.7-minimal amd64 2.7.12-1ubuntu0~16.04.4 [1261 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python-minimal amd64 2.7.12-1~16.04 [28.1 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython2.7-stdlib amd64 2.7.12-1ubuntu0~16.04.4 [1880 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python2.7 amd64 2.7.12-1ubuntu0~16.04.4 [224 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 libpython-stdlib amd64 2.7.12-1~16.04 [7768 B]
+Get:7 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 python amd64 2.7.12-1~16.04 [137 kB]
+Get:8 https://deb.nodesource.com/node_6.x xenial/main amd64 nodejs amd64 6.16.0-1nodesource1 [11.1 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 14.9 MB in 0s (31.6 MB/s)
+Selecting previously unselected package libpython2.7-minimal:amd64.
+(Reading database ... 14995 files and directories currently installed.)
+Preparing to unpack .../libpython2.7-minimal_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+Unpacking libpython2.7-minimal:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+Selecting previously unselected package python2.7-minimal.
+Preparing to unpack .../python2.7-minimal_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+Unpacking python2.7-minimal (2.7.12-1ubuntu0~16.04.4) ...
+Selecting previously unselected package python-minimal.
+Preparing to unpack .../python-minimal_2.7.12-1~16.04_amd64.deb ...
+Unpacking python-minimal (2.7.12-1~16.04) ...
+Selecting previously unselected package libpython2.7-stdlib:amd64.
+Preparing to unpack .../libpython2.7-stdlib_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+Unpacking libpython2.7-stdlib:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+Selecting previously unselected package python2.7.
+Preparing to unpack .../python2.7_2.7.12-1ubuntu0~16.04.4_amd64.deb ...
+Unpacking python2.7 (2.7.12-1ubuntu0~16.04.4) ...
+Selecting previously unselected package libpython-stdlib:amd64.
+Preparing to unpack .../libpython-stdlib_2.7.12-1~16.04_amd64.deb ...
+Unpacking libpython-stdlib:amd64 (2.7.12-1~16.04) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Setting up libpython2.7-minimal:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+Setting up python2.7-minimal (2.7.12-1ubuntu0~16.04.4) ...
+Linking and byte-compiling packages for runtime python2.7...
+Setting up python-minimal (2.7.12-1~16.04) ...
+Selecting previously unselected package python.
+(Reading database ... 15742 files and directories currently installed.)
+Preparing to unpack .../python_2.7.12-1~16.04_amd64.deb ...
+Unpacking python (2.7.12-1~16.04) ...
+Selecting previously unselected package nodejs.
+Preparing to unpack .../nodejs_6.16.0-1nodesource1_amd64.deb ...
+Unpacking nodejs (6.16.0-1nodesource1) ...
+Setting up libpython2.7-stdlib:amd64 (2.7.12-1ubuntu0~16.04.4) ...
+Setting up python2.7 (2.7.12-1ubuntu0~16.04.4) ...
+Setting up libpython-stdlib:amd64 (2.7.12-1~16.04) ...
+Setting up python (2.7.12-1~16.04) ...
+Setting up nodejs (6.16.0-1nodesource1) ...
+Removing intermediate container 4e9b9aec01c2
+ ---> 691b2de290dd
+Step 5/9 : RUN pip3 install     aiohttp     aiopg     bcrypt     grpcio-tools     itsdangerous     nose2     psycopg2-binary     pycrypto     pylint     pycodestyle
+ ---> Running in 414e4e665747
+Requirement already satisfied (use --upgrade to upgrade): aiohttp in /usr/lib/python3/dist-packages
+Collecting aiopg
+  Downloading https://files.pythonhosted.org/packages/76/31/446e570150f6c39fc8e93748b696dcf5697c1a137cdd698bb26ba2519004/aiopg-0.16.0-py3-none-any.whl
+Collecting bcrypt
+  Downloading https://files.pythonhosted.org/packages/ce/3a/3d540b9f5ee8d92ce757eebacf167b9deedb8e30aedec69a2a072b2399bb/bcrypt-3.1.6.tar.gz (42kB)
+Collecting grpcio-tools
+  Downloading https://files.pythonhosted.org/packages/fc/d1/87dda9f243764b3e371040132b62a85e6a08cb458840dbc1587db83c3e14/grpcio_tools-1.19.0-cp35-cp35m-manylinux1_x86_64.whl (22.8MB)
+Collecting itsdangerous
+  Downloading https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
+Collecting nose2
+  Downloading https://files.pythonhosted.org/packages/cd/81/dd7f6539c0b3836b90cdcc8cdbbb4f8dd19bd7a0f94de0ce1c4bbdf75c97/nose2-0.9.0-py2.py3-none-any.whl (136kB)
+Collecting psycopg2-binary
+  Downloading https://files.pythonhosted.org/packages/6a/99/cc5d5963fe759d9bd2bed477d98862aef095fa7ecbbca85c091e8400b70d/psycopg2_binary-2.7.7-cp35-cp35m-manylinux1_x86_64.whl (2.7MB)
+Collecting pycrypto
+  Downloading https://files.pythonhosted.org/packages/60/db/645aa9af249f059cc3a368b118de33889219e0362141e75d4eaf6f80f163/pycrypto-2.6.1.tar.gz (446kB)
+Collecting pylint
+  Downloading https://files.pythonhosted.org/packages/60/c2/b3f73f4ac008bef6e75bca4992f3963b3f85942e0277237721ef1c151f0d/pylint-2.3.1-py3-none-any.whl (765kB)
+Collecting pycodestyle
+  Downloading https://files.pythonhosted.org/packages/0e/0c/04a353e104d2f324f8ee5f4b32012618c1c86dd79e52a433b64fceed511b/pycodestyle-2.5.0-py2.py3-none-any.whl (51kB)
+Collecting cffi>=1.1 (from bcrypt)
+  Downloading https://files.pythonhosted.org/packages/5b/44/fdae2a8f66af426055f9b6fff0b155217081eddaf08a3df79ca11fe05bda/cffi-1.12.2-cp35-cp35m-manylinux1_x86_64.whl (428kB)
+Requirement already satisfied (use --upgrade to upgrade): six>=1.4.1 in /usr/lib/python3/dist-packages (from bcrypt)
+Collecting protobuf>=3.5.0.post1 (from grpcio-tools)
+  Downloading https://files.pythonhosted.org/packages/81/59/c7b0815a78fd641141f24a6ece878293eae6bf1fce40632a6ab9672346aa/protobuf-3.7.1-cp35-cp35m-manylinux1_x86_64.whl (1.2MB)
+Collecting grpcio>=1.19.0 (from grpcio-tools)
+  Downloading https://files.pythonhosted.org/packages/0e/fd/e6696e5b115f328c382dd88414168e2b918cb7153b59dc9228d3c15e356c/grpcio-1.19.0-cp35-cp35m-manylinux1_x86_64.whl (10.8MB)
+Collecting mock==2.0.0; python_version < ""3.6"" (from nose2)
+  Downloading https://files.pythonhosted.org/packages/e6/35/f187bdf23be87092bd0f1200d43d23076cee4d0dec109f195173fd3ebc79/mock-2.0.0-py2.py3-none-any.whl (56kB)
+Collecting coverage>=4.4.1 (from nose2)
+  Downloading https://files.pythonhosted.org/packages/4f/d1/df283ea8e30aff9d567b111f40184260caa4a54f55aa26b48b82cf79161e/coverage-4.5.3-cp35-cp35m-manylinux1_x86_64.whl (205kB)
+Collecting astroid<3,>=2.2.0 (from pylint)
+  Downloading https://files.pythonhosted.org/packages/d5/ad/7221a62a2dbce5c3b8c57fd18e1052c7331adc19b3f27f1561aa6e620db2/astroid-2.2.5-py3-none-any.whl (193kB)
+Collecting mccabe<0.7,>=0.6 (from pylint)
+  Downloading https://files.pythonhosted.org/packages/87/89/479dc97e18549e21354893e4ee4ef36db1d237534982482c3681ee6e7b57/mccabe-0.6.1-py2.py3-none-any.whl
+Collecting isort<5,>=4.2.5 (from pylint)
+  Downloading https://files.pythonhosted.org/packages/28/66/f31fbe908420ef77a88012c76d3dd88ce6d0fb3c925dc1f8b4d5f929bf3c/isort-4.3.16-py2.py3-none-any.whl (42kB)
+Collecting pycparser (from cffi>=1.1->bcrypt)
+  Downloading https://files.pythonhosted.org/packages/68/9e/49196946aee219aead1290e00d1e7fdeab8567783e83e1b9ab5585e6206a/pycparser-2.19.tar.gz (158kB)
+Requirement already satisfied (use --upgrade to upgrade): setuptools in /usr/lib/python3/dist-packages (from protobuf>=3.5.0.post1->grpcio-tools)
+Collecting pbr>=0.11 (from mock==2.0.0; python_version < ""3.6""->nose2)
+  Downloading https://files.pythonhosted.org/packages/14/09/12fe9a14237a6b7e0ba3a8d6fcf254bf4b10ec56a0185f73d651145e9222/pbr-5.1.3-py2.py3-none-any.whl (107kB)
+Collecting typed-ast>=1.3.0; implementation_name == ""cpython"" (from astroid<3,>=2.2.0->pylint)
+  Downloading https://files.pythonhosted.org/packages/b1/62/7e0bfe7bb75bf8a41b58ccb7bd3ab3afaec61e06d9abfda113ad0dc227be/typed_ast-1.3.1-cp35-cp35m-manylinux1_x86_64.whl (734kB)
+Collecting lazy-object-proxy (from astroid<3,>=2.2.0->pylint)
+  Downloading https://files.pythonhosted.org/packages/10/88/d7b8274edf912be71d73a1e5de7988f62b63d9e88e591da2e6f921ab69e6/lazy_object_proxy-1.3.1-cp35-cp35m-manylinux1_x86_64.whl (55kB)
+Collecting wrapt (from astroid<3,>=2.2.0->pylint)
+  Downloading https://files.pythonhosted.org/packages/67/b2/0f71ca90b0ade7fad27e3d20327c996c6252a2ffe88f50a95bba7434eda9/wrapt-1.11.1.tar.gz
+Building wheels for collected packages: bcrypt, pycrypto, pycparser, wrapt
+  Running setup.py bdist_wheel for bcrypt: started
+  Running setup.py bdist_wheel for bcrypt: finished with status 'error'
+  Complete output from command /usr/bin/python3 -u -c ""import setuptools, tokenize;__file__='/tmp/pip-build-g522ktb6/bcrypt/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))"" bdist_wheel -d /tmp/tmp295tyd6_pip-wheel- --python-tag cp35:
+  c/_cffi_backend.c:15:17: fatal error: ffi.h: No such file or directory
+  compilation terminated.
+  Traceback (most recent call last):
+    File ""/usr/lib/python3.5/distutils/unixccompiler.py"", line 118, in _compile
+      extra_postargs)
+    File ""/usr/lib/python3.5/distutils/ccompiler.py"", line 909, in spawn
+      spawn(cmd, dry_run=self.dry_run)
+    File ""/usr/lib/python3.5/distutils/spawn.py"", line 36, in spawn
+      _spawn_posix(cmd, search_path, dry_run=dry_run)
+    File ""/usr/lib/python3.5/distutils/spawn.py"", line 159, in _spawn_posix
+      % (cmd, exit_status))
+  distutils.errors.DistutilsExecError: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File ""/usr/lib/python3.5/distutils/core.py"", line 148, in setup
+      dist.run_commands()
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 955, in run_commands
+      self.run_command(cmd)
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 974, in run_command
+      cmd_obj.run()
+    File ""/usr/lib/python3/dist-packages/setuptools/command/bdist_egg.py"", line 161, in run
+      cmd = self.call_command('install_lib', warn_dir=0)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/bdist_egg.py"", line 147, in call_command
+      self.run_command(cmdname)
+    File ""/usr/lib/python3.5/distutils/cmd.py"", line 313, in run_command
+      self.distribution.run_command(command)
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 974, in run_command
+      cmd_obj.run()
+    File ""/usr/lib/python3/dist-packages/setuptools/command/install_lib.py"", line 23, in run
+      self.build()
+    File ""/usr/lib/python3.5/distutils/command/install_lib.py"", line 109, in build
+      self.run_command('build_ext')
+    File ""/usr/lib/python3.5/distutils/cmd.py"", line 313, in run_command
+      self.distribution.run_command(command)
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 974, in run_command
+      cmd_obj.run()
+    File ""/usr/lib/python3/dist-packages/setuptools/command/build_ext.py"", line 49, in run
+      _build_ext.run(self)
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 338, in run
+      self.build_extensions()
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 447, in build_extensions
+      self._build_extensions_serial()
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 472, in _build_extensions_serial
+      self.build_extension(ext)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/build_ext.py"", line 174, in build_extension
+      _build_ext.build_extension(self, ext)
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 532, in build_extension
+      depends=ext.depends)
+    File ""/usr/lib/python3.5/distutils/ccompiler.py"", line 574, in compile
+      self._compile(obj, src, ext, cc_args, extra_postargs, pp_opts)
+    File ""/usr/lib/python3.5/distutils/unixccompiler.py"", line 120, in _compile
+      raise CompileError(msg)
+  distutils.errors.CompileError: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 154, in save_modules
+      yield saved
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 195, in setup_context
+      yield
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 243, in run_setup
+      DirectorySandbox(setup_dir).run(runner)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 273, in run
+      return func()
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 242, in runner
+      _execfile(setup_script, ns)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 46, in _execfile
+      exec(code, globals, locals)
+    File ""/tmp/easy_install-0c9fyz3x/cffi-1.12.2/setup.py"", line 248, in 
+    File ""/usr/lib/python3.5/distutils/core.py"", line 163, in setup
+      raise SystemExit(""error: "" + str(msg))
+  SystemExit: error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 1087, in run_setup
+      run_setup(setup_script, args)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 246, in run_setup
+      raise
+    File ""/usr/lib/python3.5/contextlib.py"", line 77, in __exit__
+      self.gen.throw(type, value, traceback)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 195, in setup_context
+      yield
+    File ""/usr/lib/python3.5/contextlib.py"", line 77, in __exit__
+      self.gen.throw(type, value, traceback)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 166, in save_modules
+      saved_exc.resume()
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 141, in resume
+      six.reraise(type, exc, self._tb)
+    File ""/usr/lib/python3/dist-packages/pkg_resources/_vendor/six.py"", line 685, in reraise
+      raise value.with_traceback(tb)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 154, in save_modules
+      yield saved
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 195, in setup_context
+      yield
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 243, in run_setup
+      DirectorySandbox(setup_dir).run(runner)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 273, in run
+      return func()
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 242, in runner
+      _execfile(setup_script, ns)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 46, in _execfile
+      exec(code, globals, locals)
+    File ""/tmp/easy_install-0c9fyz3x/cffi-1.12.2/setup.py"", line 248, in 
+    File ""/usr/lib/python3.5/distutils/core.py"", line 163, in setup
+      raise SystemExit(""error: "" + str(msg))
+  SystemExit: error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File """", line 1, in 
+    File ""/tmp/pip-build-g522ktb6/bcrypt/setup.py"", line 240, in 
+      **keywords_with_side_effects(sys.argv)
+    File ""/usr/lib/python3.5/distutils/core.py"", line 108, in setup
+      _setup_distribution = dist = klass(attrs)
+    File ""/usr/lib/python3/dist-packages/setuptools/dist.py"", line 269, in __init__
+      self.fetch_build_eggs(attrs['setup_requires'])
+    File ""/usr/lib/python3/dist-packages/setuptools/dist.py"", line 313, in fetch_build_eggs
+      replace_conflicting=True,
+    File ""/usr/lib/python3/dist-packages/pkg_resources/__init__.py"", line 826, in resolve
+      dist = best[req.key] = env.best_match(req, ws, installer)
+    File ""/usr/lib/python3/dist-packages/pkg_resources/__init__.py"", line 1092, in best_match
+      return self.obtain(req, installer)
+    File ""/usr/lib/python3/dist-packages/pkg_resources/__init__.py"", line 1104, in obtain
+      return installer(requirement)
+    File ""/usr/lib/python3/dist-packages/setuptools/dist.py"", line 380, in fetch_build_egg
+      return cmd.easy_install(req)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 663, in easy_install
+      return self.install_item(spec, dist.location, tmpdir, deps)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 693, in install_item
+      dists = self.install_eggs(spec, download, tmpdir)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 873, in install_eggs
+      return self.build_and_install(setup_script, setup_base)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 1101, in build_and_install
+      self.run_setup(setup_script, setup_base, args)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 1089, in run_setup
+      raise DistutilsError(""Setup script exited with %s"" % (v.args[0],))
+  distutils.errors.DistutilsError: Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  ----------------------------------------
+  Failed building wheel for bcrypt
+  Running setup.py clean for bcrypt
+  Complete output from command /usr/bin/python3 -u -c ""import setuptools, tokenize;__file__='/tmp/pip-build-g522ktb6/bcrypt/setup.py';exec(compile(getattr(tokenize, 'open', open)(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))"" clean --all:
+  c/_cffi_backend.c:15:17: fatal error: ffi.h: No such file or directory
+  compilation terminated.
+  Traceback (most recent call last):
+    File ""/usr/lib/python3.5/distutils/unixccompiler.py"", line 118, in _compile
+      extra_postargs)
+    File ""/usr/lib/python3.5/distutils/ccompiler.py"", line 909, in spawn
+      spawn(cmd, dry_run=self.dry_run)
+    File ""/usr/lib/python3.5/distutils/spawn.py"", line 36, in spawn
+      _spawn_posix(cmd, search_path, dry_run=dry_run)
+    File ""/usr/lib/python3.5/distutils/spawn.py"", line 159, in _spawn_posix
+      % (cmd, exit_status))
+  distutils.errors.DistutilsExecError: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File ""/usr/lib/python3.5/distutils/core.py"", line 148, in setup
+      dist.run_commands()
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 955, in run_commands
+      self.run_command(cmd)
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 974, in run_command
+      cmd_obj.run()
+    File ""/usr/lib/python3/dist-packages/setuptools/command/bdist_egg.py"", line 161, in run
+      cmd = self.call_command('install_lib', warn_dir=0)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/bdist_egg.py"", line 147, in call_command
+      self.run_command(cmdname)
+    File ""/usr/lib/python3.5/distutils/cmd.py"", line 313, in run_command
+      self.distribution.run_command(command)
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 974, in run_command
+      cmd_obj.run()
+    File ""/usr/lib/python3/dist-packages/setuptools/command/install_lib.py"", line 23, in run
+      self.build()
+    File ""/usr/lib/python3.5/distutils/command/install_lib.py"", line 109, in build
+      self.run_command('build_ext')
+    File ""/usr/lib/python3.5/distutils/cmd.py"", line 313, in run_command
+      self.distribution.run_command(command)
+    File ""/usr/lib/python3.5/distutils/dist.py"", line 974, in run_command
+      cmd_obj.run()
+    File ""/usr/lib/python3/dist-packages/setuptools/command/build_ext.py"", line 49, in run
+      _build_ext.run(self)
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 338, in run
+      self.build_extensions()
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 447, in build_extensions
+      self._build_extensions_serial()
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 472, in _build_extensions_serial
+      self.build_extension(ext)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/build_ext.py"", line 174, in build_extension
+      _build_ext.build_extension(self, ext)
+    File ""/usr/lib/python3.5/distutils/command/build_ext.py"", line 532, in build_extension
+      depends=ext.depends)
+    File ""/usr/lib/python3.5/distutils/ccompiler.py"", line 574, in compile
+      self._compile(obj, src, ext, cc_args, extra_postargs, pp_opts)
+    File ""/usr/lib/python3.5/distutils/unixccompiler.py"", line 120, in _compile
+      raise CompileError(msg)
+  distutils.errors.CompileError: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 154, in save_modules
+      yield saved
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 195, in setup_context
+      yield
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 243, in run_setup
+      DirectorySandbox(setup_dir).run(runner)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 273, in run
+      return func()
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 242, in runner
+      _execfile(setup_script, ns)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 46, in _execfile
+      exec(code, globals, locals)
+    File ""/tmp/easy_install-cwn_w7ve/cffi-1.12.2/setup.py"", line 248, in 
+    File ""/usr/lib/python3.5/distutils/core.py"", line 163, in setup
+      raise SystemExit(""error: "" + str(msg))
+  SystemExit: error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 1087, in run_setup
+      run_setup(setup_script, args)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 246, in run_setup
+      raise
+    File ""/usr/lib/python3.5/contextlib.py"", line 77, in __exit__
+      self.gen.throw(type, value, traceback)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 195, in setup_context
+      yield
+    File ""/usr/lib/python3.5/contextlib.py"", line 77, in __exit__
+      self.gen.throw(type, value, traceback)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 166, in save_modules
+      saved_exc.resume()
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 141, in resume
+      six.reraise(type, exc, self._tb)
+    File ""/usr/lib/python3/dist-packages/pkg_resources/_vendor/six.py"", line 685, in reraise
+      raise value.with_traceback(tb)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 154, in save_modules
+      yield saved
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 195, in setup_context
+      yield
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 243, in run_setup
+      DirectorySandbox(setup_dir).run(runner)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 273, in run
+      return func()
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 242, in runner
+      _execfile(setup_script, ns)
+    File ""/usr/lib/python3/dist-packages/setuptools/sandbox.py"", line 46, in _execfile
+      exec(code, globals, locals)
+    File ""/tmp/easy_install-cwn_w7ve/cffi-1.12.2/setup.py"", line 248, in 
+    File ""/usr/lib/python3.5/distutils/core.py"", line 163, in setup
+      raise SystemExit(""error: "" + str(msg))
+  SystemExit: error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  During handling of the above exception, another exception occurred:
+
+  Traceback (most recent call last):
+    File """", line 1, in 
+    File ""/tmp/pip-build-g522ktb6/bcrypt/setup.py"", line 240, in 
+      **keywords_with_side_effects(sys.argv)
+    File ""/usr/lib/python3.5/distutils/core.py"", line 108, in setup
+      _setup_distribution = dist = klass(attrs)
+    File ""/usr/lib/python3/dist-packages/setuptools/dist.py"", line 269, in __init__
+      self.fetch_build_eggs(attrs['setup_requires'])
+    File ""/usr/lib/python3/dist-packages/setuptools/dist.py"", line 313, in fetch_build_eggs
+      replace_conflicting=True,
+    File ""/usr/lib/python3/dist-packages/pkg_resources/__init__.py"", line 826, in resolve
+      dist = best[req.key] = env.best_match(req, ws, installer)
+    File ""/usr/lib/python3/dist-packages/pkg_resources/__init__.py"", line 1092, in best_match
+      return self.obtain(req, installer)
+    File ""/usr/lib/python3/dist-packages/pkg_resources/__init__.py"", line 1104, in obtain
+      return installer(requirement)
+    File ""/usr/lib/python3/dist-packages/setuptools/dist.py"", line 380, in fetch_build_egg
+      return cmd.easy_install(req)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 663, in easy_install
+      return self.install_item(spec, dist.location, tmpdir, deps)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 693, in install_item
+      dists = self.install_eggs(spec, download, tmpdir)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 873, in install_eggs
+      return self.build_and_install(setup_script, setup_base)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 1101, in build_and_install
+      self.run_setup(setup_script, setup_base, args)
+    File ""/usr/lib/python3/dist-packages/setuptools/command/easy_install.py"", line 1089, in run_setup
+      raise DistutilsError(""Setup script exited with %s"" % (v.args[0],))
+  distutils.errors.DistutilsError: Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+  ----------------------------------------
+  Failed cleaning build dir for bcrypt
+  Running setup.py bdist_wheel for pycrypto: started
+  Running setup.py bdist_wheel for pycrypto: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/27/02/5e/77a69d0c16bb63c6ed32f5386f33a2809c94bd5414a2f6c196
+  Running setup.py bdist_wheel for pycparser: started
+  Running setup.py bdist_wheel for pycparser: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/f2/9a/90/de94f8556265ddc9d9c8b271b0f63e57b26fb1d67a45564511
+  Running setup.py bdist_wheel for wrapt: started
+  Running setup.py bdist_wheel for wrapt: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/89/67/41/63cbf0f6ac0a6156588b9587be4db5565f8c6d8ccef98202fc
+Successfully built pycrypto pycparser wrapt
+Failed to build bcrypt
+Installing collected packages: psycopg2-binary, aiopg, pycparser, cffi, bcrypt, protobuf, grpcio, grpcio-tools, itsdangerous, pbr, mock, coverage, nose2, pycrypto, typed-ast, lazy-object-proxy, wrapt, astroid, mccabe, isort, pylint, pycodestyle
+  Running setup.py install for bcrypt: started
+    Running setup.py install for bcrypt: finished with status 'done'
+  Found existing installation: protobuf 3.4.1
+    Not uninstalling protobuf at /usr/lib/python3/dist-packages, outside environment /usr
+Successfully installed aiopg-0.16.0 astroid-2.2.5 bcrypt-3.1.6 cffi-1.12.2 coverage-4.5.3 grpcio-1.19.0 grpcio-tools-1.19.0 isort-4.3.16 itsdangerous-1.1.0 lazy-object-proxy-1.3.1 mccabe-0.6.1 mock-2.0.0 nose2-0.9.0 pbr-5.1.3 protobuf-3.7.1 psycopg2-binary-2.7.7 pycodestyle-2.5.0 pycparser-2.19 pycrypto-2.6.1 pylint-2.3.1 typed-ast-1.3.1 wrapt-1.11.1
+You are using pip version 8.1.1, however version 19.0.3 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+```",open,False,2019-03-31 20:57:39,2019-03-31 20:58:16
+education-sawtooth-simple-supply,venkatesh-nagineni,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/26,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/26,Creating agent getting proxy error,"I try to create new agent with signup but getting proxy error with following image . Please help me to resolve this issue.
+![proxy_error](https://user-images.githubusercontent.com/21661817/51322982-47cbc100-1a67-11e9-8640-4b0479d9f319.PNG)
+
+this is bacause simple-supply rest api not listening on port 8000 and exit with following error  TypeError: __new__() got an unexpected keyword argument 'serialized_options'
+",closed,False,2019-01-17 13:50:59,2019-04-03 21:22:23
+education-sawtooth-simple-supply,QwertyJack,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/25,STL-1472 Fix 'not found' error when build docker,Signed-off-by: QwertyJack <jiyuanyi1992@gmail.com>,open,True,2018-12-12 03:18:06,2019-04-04 02:24:23
+education-sawtooth-simple-supply,faizol,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/24,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/24,protobuf error?,"Hi,
+I'm a newbie and just started learning about sawtooth. I tried to run the containers as instructed in the README.md, but I got these errors on the console;
+```
+simple-supply-subscriber    | TypeError: __new__() got an unexpected keyword argument 'serialized_options'
+
+simple-supply-rest-api      | TypeError: __new__() got an unexpected keyword argument 'serialized_options'
+
+simple-supply-tp            | TypeError: __new__() got an unexpected keyword argument 'serialized_options'
+```
+
+Googling around I think it is related to protobuf (protoc version and protobuf runtime version). How can I fix these errors?
+
+Thanks.
+
+Best regards,",closed,False,2018-10-04 13:28:07,2018-11-09 23:15:07
+education-sawtooth-simple-supply,chenette,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/23,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/23,Add course content to repo; add CC BY 4.0 license,"This version of the course includes:
+
+Creative Commons (CC BY 4.0) license on the front page of each module
+Clarification in module 1 that ZMQ is helpful but not required
+Correction for a typo in module 3.
+
+This PR also adds the CC BY 4.0 license to README.md.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-10-02 19:54:37,2018-10-03 18:36:54
+education-sawtooth-simple-supply,chenette,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/22,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/22,Add course content to repo,"This version of the course includes:
+- Creative Commons (CC BY 4.0) license on the front page of each module
+- Clarification in module 1 that ZMQ is helpful but not required
+- Correction for a typo in module 3.
+
+NOTE: This PR supersedes #21.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-10-01 04:02:15,2018-10-02 20:03:07
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/21,Include course content in repo,"Adds the PDFs of the Sawtooth Application Development course to the repo.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",closed,True,2018-09-06 16:33:00,2018-10-02 18:41:56
+education-sawtooth-simple-supply,ryjones,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/20,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/20,Update Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-17 23:53:55,2018-08-18 02:23:20
+education-sawtooth-simple-supply,QwertyJack,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/19,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/19,Update Dockerfile,resolv 'not found' error,closed,True,2018-07-27 09:29:24,2018-12-12 03:17:23
+education-sawtooth-simple-supply,chenette,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/18,Add overview & client endpoint to README,"- Provide a brief overview of Simple Supply
+- Add client to the list of endpoints
+- Make minor wording changes (light edit)
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2018-07-09 17:11:31,2018-07-19 20:44:32
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/17,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/17,Add docs,"based on #15 
+
+Adds specifications and schema to the /docs directory",closed,True,2018-06-29 15:57:55,2018-06-29 18:03:31
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/16,Fix agent bugs,"- False error was logging on the reporting database
+- unused argument was removed which caused an error in aiohttp for certain requests, so it was re-added and ignored by pylint",closed,True,2018-06-28 19:40:29,2018-06-29 17:55:32
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/15,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/15,Remove agent database fetch for post route,"Eliminates a race condition caused by fetching a resource we just issued a transaction to create.
+Instead we will just return the auth token.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",closed,True,2018-06-28 16:08:54,2018-06-29 17:50:34
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/14,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/14, Allow unit tests to be run alongside other containers,"- Changes test container names so they don't conflict with other containers
+- Small fix to logging of run-docker-test",closed,True,2018-06-26 17:04:14,2018-06-28 15:31:40
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/13,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/13,Fix several small issues and bugs,"- Fixes an issue with the event subscription database not updating agents `end_block_num`
+
+- Fixes remaining lint issues
+
+- Suppress unnecessary webpack warnings and fix a meaningful one",closed,True,2018-06-25 21:48:34,2018-06-28 19:00:24
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/12,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/12,Add docs,,closed,True,2018-06-19 17:26:52,2018-06-26 15:33:11
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/11,Add basic app functionality,"Adds functionality corresponding to each transaction for Simple Supply to the webapp. This app provides very minimal functionality and could be improved as time allows to include dropdowns, pictures, and more in-depth views of record history. However, all of the functionality for creating, transferring, and updating records is implemented.
+
+Also fixes a few bugs that were found while creating the app.",closed,True,2018-06-19 16:54:36,2018-06-21 18:19:27
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/10,Create initial 'Curator' app components,"
+Implements the initial components and navigation for the Curator app, built on top of Simple Supply. After running `docker-compose up`, the application can be accessed at `localhost:8040`. Most pages are placeholders.",closed,True,2018-06-12 20:55:43,2018-06-19 15:23:11
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/9,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/9,Implement authentication route,"based on #8 
+
+Allows a user to authenticate with their public key and password, which will produce a new auth token",closed,True,2018-06-11 17:43:46,2018-06-13 18:09:51
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/8,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/8,Implement update record functionality,based on #7 ,closed,True,2018-06-08 20:20:01,2018-06-13 18:09:33
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/7,Implement transfer record functionality,"based on #6 
+
+- API route and transaction creation implemented
+- Pylint function and method regex changed to allow up to 40 char names
+- TP Transfer Record functionality implemented
+- Reporting database record schema changed to include a unique ID
+- Added unit tests
+
+",closed,True,2018-06-07 19:54:40,2018-06-11 16:44:59
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/6,Implement record GET routes,based on #5 ,closed,True,2018-06-06 20:16:29,2018-06-08 21:51:07
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/5,Implement record POST route,"based on #4 
+
+To test:
+
+1. Create agent by sending `POST localhost:8000/agents`
+```
+{
+	""name"": ""bob"",
+	""password"": ""qwerty""
+}
+```
+
+2. Copy auth token and add it to header
+
+3. Create record by sending `POST localhost:8000/records`
+```
+{
+	""record_id"": ""foo"",
+	""latitude"": 44.982781,
+	""longitude"": -93.271967
+}
+```",closed,True,2018-06-05 21:57:26,2018-06-08 21:49:38
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/4,Implement agent GET routes,"Based on #3 
+
+Adds functionality for `GET /agents` and `GET /agents/{agent_id}` routes
+",closed,True,2018-05-30 18:55:28,2018-06-06 19:36:30
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/3,Implement subscriber and agent POST routes,"**To run:**
+`docker-compose up`
+
+**Test create agent functionality:**
+POST ` {
+	""name"": ""hello"",
+	""password"": ""world""
+}` to `localhost:8000/agents`
+
+**View database:**
+navigate to `http://localhost:8080` (the db admin page) and log in
+_System: PostgreSQL	
+Server: postgres
+Username: sawtooth
+Password: sawtooth
+Database: simple-supply_
+
+View the agents and blocks tables to see the resources
+
+**To run unit tests, run from host machine:**
+`./bin/run-tests`",closed,True,2018-05-29 20:48:21,2018-06-05 21:37:44
+education-sawtooth-simple-supply,dplumb94,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/2,Initial Simple Supply components and setup,"This PR adds the initial Simple Supply components. To run the application, navigate to the project root directory and run: `docker-compose up`
+
+- Simple Supply REST API: **http://localhost:8000**
+- PostgreSQL Admin Panel: **http://localhost:8080**
+
+Application spec: https://docs.google.com/document/d/1k-ifo6Ep4bhuRCT_YH9LfkrGaK6DS00o8REGbS5ccLo/edit#
+
+DB Schema: https://www.lucidchart.com/invitations/accept/0c626296-0869-4cc2-bbbb-1c929b42a777",closed,True,2018-05-14 21:23:58,2018-05-17 15:10:52
+education-sawtooth-simple-supply,jwagantall,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/1,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/1,Create DCO,,closed,True,2018-05-14 20:00:26,2018-05-14 20:00:49

@@ -1,0 +1,107 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+grid,peterschwarz,https://github.com/hyperledger/grid/pull/32,https://api.github.com/repos/hyperledger/grid/issues/32,Configure Grid daemon to write events to a PostGreSQL instance,"This currently writes blocks to a Block table, but does not (yet) deal in fork resolution.",open,True,2019-04-03 19:18:16,2019-04-03 19:31:54
+grid,peterschwarz,https://github.com/hyperledger/grid/pull/31,https://api.github.com/repos/hyperledger/grid/issues/31,Convert TnT dev docker file to multi-stage,Convert the Track and Trace TP's development Dockerfile to use the same multi-stage build style as the grid daemon.  This improves overall build time and developer experience when working in a docker-compose environment.,closed,True,2019-04-02 21:16:01,2019-04-03 14:24:20
+grid,eloaverona,https://github.com/hyperledger/grid/pull/30,https://api.github.com/repos/hyperledger/grid/issues/30,Submit batches endpoint,Implements POST submit_batches endpoint as specified by the openapi spec documentation. ,open,True,2019-04-02 15:13:44,2019-04-03 21:19:19
+grid,vaporos,https://github.com/hyperledger/grid/pull/29,https://api.github.com/repos/hyperledger/grid/issues/29,Add top-level workspace Cargo.toml,"This will keep all of the dependencies the same between components and
+allow running 'cargo test' from the top-level directory.
+
+Signed-off-by: Shawn T. Amundson <amundson@bitwise.io>",open,True,2019-03-29 19:28:28,2019-04-03 15:19:10
+grid,peterschwarz,https://github.com/hyperledger/grid/pull/28,https://api.github.com/repos/hyperledger/grid/issues/28,Initial Event Processor,"This event processor is configured to receive the appropriate events from a Sawtooth Validator, which can be offloaded into a reporting db (to be added in a subsequent PR).",closed,True,2019-03-29 16:30:31,2019-04-03 15:35:44
+grid,peterschwarz,https://github.com/hyperledger/grid/pull/27,https://api.github.com/repos/hyperledger/grid/issues/27,Gracefully shutdown the REST API,"This PR adds the `ctrlc` dependency, and creates a shutdown handle, join handle tuple to be used by the main method. 
+
+It runs the rest api on its own thread, which allows other activities (the future event processor for example) to also be started.",closed,True,2019-03-29 15:21:17,2019-04-01 15:03:47
+grid,agunde406,https://github.com/hyperledger/grid/pull/26,https://api.github.com/repos/hyperledger/grid/issues/26,Fixes for the grid docker-compose file. ,,closed,True,2019-03-28 19:58:45,2019-04-02 13:56:43
+grid,agunde406,https://github.com/hyperledger/grid/pull/25,https://api.github.com/repos/hyperledger/grid/issues/25,Add native implementations for pike protos. ,This is needed to use pike state objects in the grid schema smart contract.,closed,True,2019-03-28 19:43:47,2019-04-02 13:56:41
+grid,eloaverona,https://github.com/hyperledger/grid/pull/24,https://api.github.com/repos/hyperledger/grid/issues/24,Change default validator and rest_api addresses,"To use `localhost` as part of an address does not work with Actix. It compiles but when you try to send a request, there's no response. I found no documentation on this problem, but all Actix examples use `127.0.0.1` rather than localhost. This PR updates updates the default validator
+and REST API endpoints to use `127.0.0.1` instead of `localhost`.
+
+",closed,True,2019-03-27 18:13:29,2019-03-27 20:16:03
+grid,shannynalayna,https://github.com/hyperledger/grid/pull/23,https://api.github.com/repos/hyperledger/grid/issues/23,Add initial Rest API,"Adds initial setup for Rest API which adds a basic Hello World
+route and begins a server using Actix.
+
+There is currently a test in place which uses a TestServer to access the index route currently in place. However, you can also test this initial route directly by running `cargo run` from the `daemon` folder. Then, run the command `curl http://localhost:8080` in a terminal, or access `http://localhost:8080` from a web browser and you should see the message ""Hello world!"" in the response. Use Ctrl+C to shut down this process. 
+
+Signed-off-by: Shannyn Telander <telander@bitwise.io>",closed,True,2019-03-26 16:35:31,2019-03-27 18:08:55
+grid,vaporos,https://github.com/hyperledger/grid/pull/22,https://api.github.com/repos/hyperledger/grid/issues/22,Move pike protos,"Move Pike's protobuf files into the SDK directory. This will temporarily break the code in sawtooth-pike/, but that code will be moved to its final location and tested in subsequent PRs.
+
+To accomplish this, existing track and trace protobuf message ""Agent"" had to be renamed.",closed,True,2019-03-25 18:43:18,2019-03-25 22:03:17
+grid,peterschwarz,https://github.com/hyperledger/grid/pull/21,https://api.github.com/repos/hyperledger/grid/issues/21,Add GridConfig for gridd,This PR adds a GridConfig and GridConfigBuilder to transform CLI args (and future configuration files) into a configuration object.  Defaults are all managed via the builder.,closed,True,2019-03-25 14:32:33,2019-03-25 16:41:07
+grid,eloaverona,https://github.com/hyperledger/grid/pull/20,https://api.github.com/repos/hyperledger/grid/issues/20,Add initial REST API specs,"This PR adds initial openapi spec doc for the Grid REST API. 
+It defines endpoint to submit batches, get batch status, and get schema from the reporting database. 
+To visualize the document [Swagger](http://editor.swagger.io/) is a good tool.",closed,True,2019-03-25 12:07:53,2019-03-27 14:36:16
+grid,peterschwarz,https://github.com/hyperledger/grid/pull/19,https://api.github.com/repos/hyperledger/grid/issues/19,Add gridd to docker compose file,Add a Dockerfile for `gridd` and include a container in the docker compose file.,closed,True,2019-03-22 16:44:10,2019-03-25 14:34:35
+grid,vaporos,https://github.com/hyperledger/grid/pull/18,https://api.github.com/repos/hyperledger/grid/issues/18,Merge pike code into grid,"This merges pike, which was extracted from sawtooth-sabre via filter-branch, into grid. This is initial work to get this code into the repository and will need to be modified further to fully integrate it into grid.",closed,True,2019-03-22 16:17:59,2019-03-25 14:42:27
+grid,agunde406,https://github.com/hyperledger/grid/pull/17,https://api.github.com/repos/hyperledger/grid/issues/17,Add IntoBytes and FromBytes to protocol,"This allows a developer to go directly from bytes to
+the native implementation and from the native
+implementation to the bytes. This will be useful
+when writing smart contracts.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2019-03-21 19:52:44,2019-04-02 13:56:36
+grid,shannynalayna,https://github.com/hyperledger/grid/pull/16,https://api.github.com/repos/hyperledger/grid/issues/16,Add initial daemon package,"Adds initial daemon package within Grid and adds the generated build docs from this package to the .gitignore file. Currently, none of the contents of this package are really functional. ",closed,True,2019-03-21 16:53:33,2019-03-21 20:02:56
+grid,agunde406,https://github.com/hyperledger/grid/pull/15,https://api.github.com/repos/hyperledger/grid/issues/15,Add protocol module to Grid SDK,"This module will be used by componets that do not
+wish to use the protobuf directly. This commit
+includes the protocol definations for the Grid Schema
+payload and state protos.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2019-03-20 16:21:35,2019-04-02 13:56:35
+grid,vaporos,https://github.com/hyperledger/grid/pull/14,https://api.github.com/repos/hyperledger/grid/issues/14,"Add initial ""grid"" CLI",,closed,True,2019-03-19 20:43:22,2019-03-21 17:45:03
+grid,agunde406,https://github.com/hyperledger/grid/pull/13,https://api.github.com/repos/hyperledger/grid/issues/13,Add initial Grid Schema Protos,This required temporarily renaming Track and Trace's PropertyValue to TrackAndTracePropertyValue because protobuf would not build two instances of PropertyValue. We plan to update Track And Trace to use Grid Schema once it has been completed. ,closed,True,2019-03-19 14:27:19,2019-04-02 13:56:34
+grid,agunde406,https://github.com/hyperledger/grid/pull/12,https://api.github.com/repos/hyperledger/grid/issues/12,Add the initial Grid SDK,"This is the start of the grid-sdk that can be
+used by developers to easily pull in other
+grid components. Initially, it contains the track 
+and trace protos.
+
+Also includes proto traits that will be used to
+guard the rest of the code from using protobufs
+directly in the future.
+
+Also update grid track and trace to use the new sdk.",closed,True,2019-03-19 00:06:15,2019-04-02 13:56:31
+grid,chenette,https://github.com/hyperledger/grid/pull/11,https://api.github.com/repos/hyperledger/grid/issues/11,Update CONTRIBUTING.md in grid repo,"- Replace obsolete project names with Hyperledger Grid
+
+- Replace the development-centric details with an overview and a link to
+  the Contributing page on the Grid website.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-03-13 18:57:40,2019-03-14 15:35:49
+grid,chenette,https://github.com/hyperledger/grid/pull/10,https://api.github.com/repos/hyperledger/grid/issues/10,Fix Grid T+T doc link in indexcontent.html,"A previous commit changed the file name for the Grid Track and Trace Family
+Specification, but did not change the ""pathto"" name in the landing page.
+This commit fixes the problem.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-03-11 17:17:01,2019-03-12 19:41:58
+grid,chenette,https://github.com/hyperledger/grid/pull/9,https://api.github.com/repos/hyperledger/grid/issues/9,Update and expand README.md for grid repo,"- Update repo description to explain the Hyperledger Grid project and goals
+
+- Summarize the three main grid repos (didn't include grid-website, because it's
+  not about the Grid software)
+
+- Add ""How to Participate"" section with information intended to encourage
+  high-level contributions: ideas, use case, and examples
+
+- Remove the ""Documentation"" section because ""how to run and extend Hyperledger
+  Grid"" distracts from the focus on shaping the project direction
+
+- Add ""More Information"" section with links
+
+- Clean up the ""License"" section
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",closed,True,2019-03-08 16:50:44,2019-03-12 20:07:01
+grid,agunde406,https://github.com/hyperledger/grid/pull/8,https://api.github.com/repos/hyperledger/grid/issues/8,Update Grid Track and Trace to use sawtooth-sdk = 0.2,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2019-02-20 17:05:48,2019-04-02 13:56:25
+grid,chenette,https://github.com/hyperledger/grid/pull/7,https://api.github.com/repos/hyperledger/grid/issues/7,Docs: Replace Supply Chain with Grid Track and Trace (etc.),"Updated the doc source and related files to refer to Hyperledger Grid or Grid Track and Trace, as appropriate, instead of Sawtooth Supply Chain.
+
+- Change ""Sawtooth Supply Chain"" to ""Grid Track and Trace"" thoroughout the TF spec doc 
+
+- Fix the TF family name, aka namespace string (change ""supply_chain"" go ""grid_track_and-trace"")
+
+- Update the doc contents page, _templates/indexcontent.html
+
+- Update the sphinx doc configuration file, config.py 
+
+- Fix the doc build script so it works for Grid (a name change will be in a separate PR)
+
+- Change the volume (workdir) in the Jenkinsfile from `sawtooth-supply-chain` to `grid`
+
+- Change the name of family_specification.rst to add ""grid_track_and_trace"" (because Grid will have more transaction families going forward)",closed,True,2019-02-20 00:08:51,2019-02-26 22:13:01
+grid,kulkarniamol,https://github.com/hyperledger/grid/pull/6,https://api.github.com/repos/hyperledger/grid/issues/6,Updated docker-compose files to Sawtooth 1.1,Signed-off-by: kulkarniamol <amol.kulkarni@intel.com>,closed,True,2019-02-08 05:25:00,2019-03-26 17:26:09
+grid,vaporos,https://github.com/hyperledger/grid/pull/5,https://api.github.com/repos/hyperledger/grid/issues/5,"Reorganize repository, keeping only non-example platform code in the repo",,closed,True,2019-02-07 16:42:19,2019-02-07 19:49:16
+grid,rbuysse,https://github.com/hyperledger/grid/pull/4,https://api.github.com/repos/hyperledger/grid/issues/4,Unpin Sphinx version,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-21 21:29:42,2019-01-22 22:37:46
+grid,vaporos,https://github.com/hyperledger/grid/pull/3,https://api.github.com/repos/hyperledger/grid/issues/3,Add maintainers and CODEOWNERS,,closed,True,2019-01-18 16:11:41,2019-01-18 19:27:51
+grid,vaporos,https://github.com/hyperledger/grid/pull/2,https://api.github.com/repos/hyperledger/grid/issues/2,Update the README.md to reflect Grid (was: Sawtooth Supply Chain),Signed-off-by: Shawn T. Amundson <amundson@bitwise.io>,closed,True,2019-01-17 22:43:07,2019-01-18 07:27:25
+grid,ryjones,https://github.com/hyperledger/grid/pull/1,https://api.github.com/repos/hyperledger/grid/issues/1,Create dco,,closed,True,2019-01-15 06:57:31,2019-01-15 06:59:21

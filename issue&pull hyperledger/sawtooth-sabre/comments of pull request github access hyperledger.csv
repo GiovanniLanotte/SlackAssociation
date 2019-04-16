@@ -1,0 +1,177 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-sabre/pull/37,https://github.com/hyperledger/sawtooth-sabre/pull/37,"This change is not necessary.  The previous sentence is correct.  However, I shall approve this PR because the new sentence is still grammatically correct, even though it's more wordy than it needs to be.",379528d5014ea8d0403efed1efa7e0836561e6df,2019-01-23 19:05:30,250331098,"@@ -386,7 +386,7 @@ Create a contract registry with no version.
+     repeated string owners = 2;
+   }
+ 
+-If the contract registry for the provided contract name already exists, the
++If the contract registry for the provided contract name already exists, then",14,2019-01-23 19:07:13,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/250331098,https://github.com/hyperledger/sawtooth-sabre/pull/37#discussion_r250331098,chenette
+https://github.com/hyperledger/sawtooth-sabre/pull/37,https://github.com/hyperledger/sawtooth-sabre/pull/37,"There was a double ""the""",379528d5014ea8d0403efed1efa7e0836561e6df,2019-01-23 19:07:36,250331933,"@@ -386,7 +386,7 @@ Create a contract registry with no version.
+     repeated string owners = 2;
+   }
+ 
+-If the contract registry for the provided contract name already exists, the
++If the contract registry for the provided contract name already exists, then",14,2019-01-23 19:12:06,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/250331933,https://github.com/hyperledger/sawtooth-sabre/pull/37#discussion_r250331933,agunde406
+https://github.com/hyperledger/sawtooth-sabre/pull/37,https://github.com/hyperledger/sawtooth-sabre/pull/37,"Oops. Yes, you're right and I'm wrong.  (I was skimming too fast.) Sorry.
+
+Also, thanks, @rranjan3, for fixing this and other errors!",379528d5014ea8d0403efed1efa7e0836561e6df,2019-01-23 19:18:46,250336289,"@@ -386,7 +386,7 @@ Create a contract registry with no version.
+     repeated string owners = 2;
+   }
+ 
+-If the contract registry for the provided contract name already exists, the
++If the contract registry for the provided contract name already exists, then",14,2019-01-23 19:18:47,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/250336289,https://github.com/hyperledger/sawtooth-sabre/pull/37#discussion_r250336289,chenette
+https://github.com/hyperledger/sawtooth-sabre/pull/29,https://github.com/hyperledger/sawtooth-sabre/pull/29,I'm not sure this is necessary - it may be a holdover from a previous state of the Sawtooth SDK.,4bd93f6ecfd8a6155d6494c8298fd537bfef3e82,2018-11-09 21:34:55,232400630,"@@ -29,11 +29,11 @@ sabre-sdk = {path = ""../../../sdk""}
+ 
+ [target.'cfg(unix)'.dependencies]
+ rust-crypto = ""0.2.36""
+-sawtooth_sdk = { git = ""https://github.com/hyperledger/sawtooth-core.git"" }
++sawtooth-sdk = ""^0.1""
+ rustc-serialize = ""0.3.22""
+ log = ""0.3.0""
+ log4rs = ""0.7.0""
+-zmq = { git = ""https://github.com/erickt/rust-zmq"", branch = ""release/v0.8"" }
++sawtooth-zmq = ""0.8.2-dev5""",10,2018-11-10 15:45:54,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/232400630,https://github.com/hyperledger/sawtooth-sabre/pull/29#discussion_r232400630,peterschwarz
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,This compose file already has a section for building a CLI container: https://github.com/hyperledger/sawtooth-sabre/blob/82d68a7f16bdf408435baa11ed088919f0cfb507/docker-compose-installed.yaml#L54. Perhaps you could add the volumes up there?,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-10-08 14:54:19,223393699,"@@ -69,3 +77,14 @@ services:
+     depends_on:
+       - validator
+     entrypoint: sawtooth-sabre -vv --connect tcp://validator:9704
++
++  sabre-cli:",43,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/223393699,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r223393699,rbuysse
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"Thanks for looking into the PR @rbuysse . I'll push another commit that changes the image for shell instead of moving the volume, and we can see how it looks.
+
+To motivate it: one goal was to realign the two docker-compose files (default and installed) and be able to run the tutorial by swapping the docker-compose files when starting the network, one benefit being to shortcircuit the various cargo builds at startup https://sawtooth.hyperledger.org/docs/sabre/releases/latest/application_developer_guide.html#starting-the-network
+then all the sections of the tutorial to do cr, upload, ns, and perm, that are preconditioned with  ""Enter the sabre-cli docker container"" would still work as is, that's why I put the volumes in the sabre-cli, and not shell.
+Looking at the PR again, to follow through the original motivation, I would base the shell container not on `cli/Dockerfile-installed` but on `hyperledger/sawtooth-all:1.0` like in the docker-compose.yml. That would be one more realignment. In the tutorial, the shell container is only used for intkey related commands, so sawtooth-all is sufficient for that.
+The added volumes to the `validator` and `sabre-cli` are for sharing the keys between containers. I noticed the docker-compose-installed.yaml was free of any volumes and this PR breaks this property, and could not tell if there was a best way to break it or not.
+",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-10-08 15:47:48,223412954,"@@ -69,3 +77,14 @@ services:
+     depends_on:
+       - validator
+     entrypoint: sawtooth-sabre -vv --connect tcp://validator:9704
++
++  sabre-cli:",43,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/223412954,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r223412954,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"Thanks for adding the missing subcommand!  But now the ""4"" in the previous line should be ""5"". 
+
+Or you could avoid the number entirely, as in this possible wording change:
+
+     ``sabre`` is the top-level command for Sabre. It contains the 
+     following subcommands: ``cr``, ...
+",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-10-08 21:02:55,223496578,"@@ -9,7 +9,7 @@ and their permissions.
+ sabre
+ =====
+ ``sabre`` is the top level command for Sabre and it contains 4 subcommands.
+-Theses commands are ``upload``, ``ns``, ``perm``, and ``exec``. The subcommands
++Theses commands are ``cr``, ``upload``, ``ns``, ``perm``, and ``exec``. The subcommands",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/223496578,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r223496578,chenette
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,This wording is not grammatically correct. I suggest putting parentheses around (namespaces).   ,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-10-08 21:20:43,223500642,"@@ -100,9 +100,10 @@ Contract
+ --------
+ 
+ A Contract represents the Sabre smart contract. It is uniquely
+-identified by its name and version number. The contract also contains the
+-expected inputs and outputs used when executing the contract, the public
+-key of the creator, and the compiled wasm code of the contract.
++identified by its name and version number. The contract also contains
++the expected inputs and outputs namespaces used when executing the",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/223500642,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r223500642,chenette
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"This note has important information that clarifies the two sets of inputs/outputs, but the current wording is confusing because of ""above"", ""remainder of this section"" and mentioning different actions.  I have several suggestions:
+
+1. Remove the first ""above"" from ""The inputs/outputs explained above.."".  Reason: the word ""above"" can be understood as higher up than the immediately preceding info - i.e., _not_ the transaction-related inputs/outputs.
+
+2. Delete ""In the remainder of this Section"" and describe only CreateContractAction in this note. Reason: Only one other action has these ""contract"" inputs/outputs (ExecuteContractAction), but it is slightly different so this note doesn't apply to both actions.
+
+3. Clarify that the CreateContractAction inputs/outputs are used to enforce namespace permissions for the contract.
+
+4. Delete the entire ExecuteContractAction sentence. Reason: The information about ExecuteContractAction is not exactly correct, and it is confusing because it occurs in the CreateContractAction description.  
+
+In summary, applying these four changes results in the following wording for this note:
+
+     These inputs/outputs are for the general Sawtooth transaction. 
+     They are required for any transaction, whether it is a Sabre 
+     transaction or a transaction of any other transaction family. 
+     However, the inputs/outputs fields in the ``CreateContractAction``, 
+     above,  are not related to the ones listed in the Sawtooth 
+     transaction. The ``CreateContractAction`` inputs/outputs are 
+     used to enforce namespace permissions for the contract.",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-10-24 17:12:03,227880670,"@@ -234,6 +235,16 @@ The outputs for CreateContractAction must include:
+ * the address for the new contract
+ * the address for the contract registry
+ 
++.. note:: The inputs/outputs explained above are for the general",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/227880670,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r227880670,chenette
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"P.S. In the ExecuteContractAction description, there is existing text that describes the namespace permission check. However, perhaps it would be helpful to add a brief clarification there. For example:
+
+     The contract is fetched from state. If the contract 
+     does not exist, the transaction is invalid.                                                     
+                                                                                
+     The inputs and outputs for ``ExecuteContractAction`` 
+     are then checked against the namespace registry ...",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-10-24 17:18:32,227882869,"@@ -234,6 +235,16 @@ The outputs for CreateContractAction must include:
+ * the address for the new contract
+ * the address for the contract registry
+ 
++.. note:: The inputs/outputs explained above are for the general
++   Sawtooth transaction. These are required for any transaction,
++   whether it is a Sabre transaction or a transaction of any other
++   transaction family. In the remainder of this Section, the
++   inputs/outputs fields in the Sabre actions, like
++   ``CreateContractAction``, are not related to the ones listed in the
++   Sawtooth transaction. In contrast, for the
++   ``ExecuteContractAction``, the inputs/outputs are a subset of the",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/227882869,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r227882869,chenette
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,Thanks! I made the change proposed.,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-02 14:26:01,230391815,"@@ -9,7 +9,7 @@ and their permissions.
+ sabre
+ =====
+ ``sabre`` is the top level command for Sabre and it contains 4 subcommands.
+-Theses commands are ``upload``, ``ns``, ``perm``, and ``exec``. The subcommands
++Theses commands are ``cr``, ``upload``, ``ns``, ``perm``, and ``exec``. The subcommands",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/230391815,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r230391815,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,the changes has been integrated in the relevant commit,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-02 14:26:50,230392107,"@@ -69,3 +77,14 @@ services:
+     depends_on:
+       - validator
+     entrypoint: sawtooth-sabre -vv --connect tcp://validator:9704
++
++  sabre-cli:",43,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/230392107,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r230392107,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"Thanks, I made the change.",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-02 14:27:22,230392279,"@@ -100,9 +100,10 @@ Contract
+ --------
+ 
+ A Contract represents the Sabre smart contract. It is uniquely
+-identified by its name and version number. The contract also contains the
+-expected inputs and outputs used when executing the contract, the public
+-key of the creator, and the compiled wasm code of the contract.
++identified by its name and version number. The contract also contains
++the expected inputs and outputs namespaces used when executing the",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/230392279,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r230392279,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,That makes sense! Thanks for looking into it carefully. I integrated the wording you propose as is.,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-02 14:28:32,230392743,"@@ -234,6 +235,16 @@ The outputs for CreateContractAction must include:
+ * the address for the new contract
+ * the address for the contract registry
+ 
++.. note:: The inputs/outputs explained above are for the general",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/230392743,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r230392743,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"I added a sentence at the end of the paragraph explaining the inputs/outputs and namespace permission for the `ExecuteContractAction` payload, as you proposed. Thanks again!",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-02 14:30:02,230393285,"@@ -234,6 +235,16 @@ The outputs for CreateContractAction must include:
+ * the address for the new contract
+ * the address for the contract registry
+ 
++.. note:: The inputs/outputs explained above are for the general
++   Sawtooth transaction. These are required for any transaction,
++   whether it is a Sabre transaction or a transaction of any other
++   transaction family. In the remainder of this Section, the
++   inputs/outputs fields in the Sabre actions, like
++   ``CreateContractAction``, are not related to the ones listed in the
++   Sawtooth transaction. In contrast, for the
++   ``ExecuteContractAction``, the inputs/outputs are a subset of the",,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/230393285,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r230393285,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,This is breaking your build. was the change intentionally?,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-20 18:02:23,235110301,"@@ -44,10 +52,7 @@ services:
+     entrypoint: sawtooth-rest-api --connect tcp://validator:9704 --bind rest-api:9708 -vv
+ 
+   shell:
+-    build:
+-      context: .
+-      dockerfile: cli/Dockerfile-installed
+-    image: sawtooth-sabre-cli:${ISOLATION_ID}
++    image: hyperledger/sawtooth-all:1.0",34,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/235110301,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r235110301,agunde406
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,Thanks for pointing the issue. I changed changed the Jenkinsfile too to reflect that `sabre-cli` entry -- as opposed to `shell` -- should be responsible for building the sabre-cli container now. will see how the jenkins test does with this change,8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-20 18:22:17,235116905,"@@ -44,10 +52,7 @@ services:
+     entrypoint: sawtooth-rest-api --connect tcp://validator:9704 --bind rest-api:9708 -vv
+ 
+   shell:
+-    build:
+-      context: .
+-      dockerfile: cli/Dockerfile-installed
+-    image: sawtooth-sabre-cli:${ISOLATION_ID}
++    image: hyperledger/sawtooth-all:1.0",34,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/235116905,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r235116905,benoitrazet
+https://github.com/hyperledger/sawtooth-sabre/pull/20,https://github.com/hyperledger/sawtooth-sabre/pull/20,"@agunde406 to answer your first question, the change was intentional. The Jenkins test is still failing because the Jenkinsfiles that is picked up to test the PR is the one from the master branch. I'm not sure what to do from there 🤔 ",8477b2c3032e6d1dc5a51730c5393606beb97835,2018-11-20 19:55:15,235147974,"@@ -44,10 +52,7 @@ services:
+     entrypoint: sawtooth-rest-api --connect tcp://validator:9704 --bind rest-api:9708 -vv
+ 
+   shell:
+-    build:
+-      context: .
+-      dockerfile: cli/Dockerfile-installed
+-    image: sawtooth-sabre-cli:${ISOLATION_ID}
++    image: hyperledger/sawtooth-all:1.0",34,2018-12-11 16:51:53,https://api.github.com/repos/hyperledger/sawtooth-sabre/pulls/comments/235147974,https://github.com/hyperledger/sawtooth-sabre/pull/20#discussion_r235147974,benoitrazet

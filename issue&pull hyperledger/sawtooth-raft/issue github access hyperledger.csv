@@ -1,0 +1,210 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-raft,rberg2,https://github.com/hyperledger/sawtooth-raft/pull/66,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/66, Add COMPOSE_PROJECT_NAME to Jenkinsfile,"This variable prevents naming collisions in containers created by
+docker-compose. This variable was missing from the Jenkinsfile rewrite.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2019-03-28 19:09:55,2019-04-02 17:39:15
+sawtooth-raft,pankajgoyal2,https://github.com/hyperledger/sawtooth-raft/pull/65,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/65,Added compose file to setup multinode Raft network on different physi…,"…cal machines.
+
+Signed-off-by: Pankaj Goyal <pankaj.goyal@intel.com>",open,True,2019-03-28 00:51:08,2019-04-02 05:22:07
+sawtooth-raft,pankajgoyal2,https://github.com/hyperledger/sawtooth-raft/pull/64,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/64,Disable Debug Symbols when raft library is build in release mode,Signed-off-by: Pankaj Goyal <pankaj.goyal@intel.com>,open,True,2019-03-28 00:50:16,2019-04-02 05:17:50
+sawtooth-raft,manojgop,https://github.com/hyperledger/sawtooth-raft/pull/63,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/63,Bugfix: Check raft state before adding new block to block queue,"Add new block to block queue only if
+1) Raft node is in leader publishing state and this is a block which leader published
+2) or if raft node is a follower
+
+Signed-off-by: Manoj Gopalakrishnan <manoj.gopalakrishnan@intel.com>",open,True,2019-03-26 09:08:10,2019-03-26 16:18:19
+sawtooth-raft,rberg2,https://github.com/hyperledger/sawtooth-raft/pull/62,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/62,Declarative Jenkinsfile rewrite.,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-03-21 18:46:23,2019-03-26 15:58:21
+sawtooth-raft,manojgop,https://github.com/hyperledger/sawtooth-raft/pull/61,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/61,Fix issue during follower to leader transition in block committing state,"When follower becomes leader while it was in block committing state,
+the leader has to continue in committing state until block is
+fully committed
+
+Signed-off-by: Manoj Gopalakrishnan <manoj.gopalakrishnan@intel.com>",closed,True,2019-03-20 11:35:20,2019-03-22 19:45:52
+sawtooth-raft,arsulegai,https://github.com/hyperledger/sawtooth-raft/pull/60,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/60,State machine correction for sawtooth-raft,"A leader node in sawtooth-raft asks validator to commit a block
+when majority of the follower nodes replicated the log entry.
+However follower nodes may lose the log commit confirmation
+from the leader node. Majority of the follower nodes form a
+group and elect a new leader.
+
+A log entry is safe committed as per raft if majority of the
+nodes have the log stored and at least one entry from the
+leaders term is also majority stored.
+
+If majority of the nodes continue adding blocks, the old
+leader has to replace the log entry. This is taken care by raft.
+However block already added to the blockchain shall also get
+replaced with the new one.
+
+Order of the nodes added to blockchain is controlled by deque.
+
+Signed-off-by: S m, Aruna <aruna.s.m@intel.com>",closed,True,2019-03-18 18:02:53,2019-03-22 19:43:41
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/59,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/59,Update algorithm name and version,"Updates the name and version that the Raft consensus engine reports to
+the validator match the conventions used in other Sawtooth projects.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2019-03-18 16:57:16,2019-03-28 20:29:55
+sawtooth-raft,arsulegai,https://github.com/hyperledger/sawtooth-raft/pull/58,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/58,Enable lint checks on sawtooth-raft,"1. Follow default warning level check for clippy.
+2. Added lint checks as part of Jenkinsfile.
+3. Fix clippy warnings and fmt issues in sawtooth-raft.",open,True,2019-03-17 06:17:09,2019-03-28 09:51:51
+sawtooth-raft,pankajgoyal2,https://github.com/hyperledger/sawtooth-raft/pull/57,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/57,Disable debug log messages,,closed,True,2019-03-14 15:38:11,2019-03-18 10:34:14
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/56,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/56,Add nightly dockerfile,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-03-01 22:04:32,2019-03-22 19:42:33
+sawtooth-raft,agunde406,https://github.com/hyperledger/sawtooth-raft/pull/55,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/55,Update Raft to use Sawtooth Rust SDK 0.2,Signed-off-by: Andrea Gunderson <agunde@bitwise.io>,closed,True,2019-02-20 20:26:31,2019-02-21 16:14:58
+sawtooth-raft,arsulegai,https://github.com/hyperledger/sawtooth-raft/pull/54,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/54,Add compose files for grafana statistics,"There are two commits in this PR, one with newly introduced compose files for grafana. Another commit to enable build and test of sawtooth-raft behind proxy network.
+1. Introduce a new compose file similar to adhoc/node.yaml under
+tests, which enables telegraf statistics to be sent to influxdb.
+2. Introduce a compose file to start grafana and influxdb services
+which can be used to send statistics from sawtooth-raft adhoc
+tests.
+
+There's planned activity to update document, so not included with this PR.",open,True,2019-02-18 17:07:31,2019-03-31 12:12:10
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/53,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/53,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-07 16:33:14,2019-02-09 05:59:26
+sawtooth-raft,manojgop,https://github.com/hyperledger/sawtooth-raft/pull/52,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/52,Resolve Raft crash when invalid transaction is sent,"finalize_block() call returns InvalidState if block has invalid transactions
+where as summarize_block() call returns BlockNotReady.
+So call summarize_block() before finalize_block() to support this scenario.
+
+Signed-off-by: Manoj Gopalakrishnan <manoj.gopalakrishnan@intel.com>",closed,True,2019-02-01 09:08:13,2019-02-07 15:50:26
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/51,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/51,Maintainers codeowners,,closed,True,2019-01-23 03:11:27,2019-01-25 15:22:10
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/50,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/50,Unpin Sphinx version,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-21 19:57:28,2019-01-22 22:37:14
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/49,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/49,Update Cargo.toml with new sawtooth-sdk repo,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-16 19:06:06,2019-01-17 15:50:19
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/48,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/48,Bionic upgrade,,closed,True,2019-01-07 20:08:56,2019-01-14 16:18:01
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/47,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/47,Update consensus configuration settings in adhoc,"Updates the settings for the consensus algorithm name and version in
+`adhoc/node.yaml` to the required values.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-12-17 16:10:21,2019-01-17 15:35:28
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/46,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/46,Update Cargo.toml to use crates for sdk,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-09 16:36:41,2018-11-12 19:20:20
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/45,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/45,Handle Consensus SDK updates,"Updates Raft to conform to recent updates to the Consensus SDK.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-11-01 21:25:01,2018-11-02 19:35:55
+sawtooth-raft,rbuysse,https://github.com/hyperledger/sawtooth-raft/pull/44,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/44,Rename sawtooth-raft to sawtooth-raft-engine,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-01 20:11:10,2018-11-08 15:41:08
+sawtooth-raft,kulkarniamol,https://github.com/hyperledger/sawtooth-raft/pull/43,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/43,Add license headers to files indicated by the fossology scan,"Detailed fossology report available in STL-398
+
+Signed-off-by: kulkarniamol <amol.kulkarni@intel.com>",closed,True,2018-10-23 17:28:56,2018-11-13 15:43:44
+sawtooth-raft,knkski,https://github.com/hyperledger/sawtooth-raft/pull/42,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/42,Return Result in Engine::start,"Corresponding code to [sawtooth-core#1903](https://github.com/hyperledger/sawtooth-core/pull/1903)
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-18 13:58:57,2018-10-22 13:45:06
+sawtooth-raft,askmish,https://github.com/hyperledger/sawtooth-raft/pull/41,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/41,Replace deprecated crate tempdir with tempfile,"Replaced references and usage of the deprecated tempdir crate
+with tempfile crate
+
+Signed-off-by: askmish <ashish.k.mishra@intel.com>",closed,True,2018-10-05 05:16:59,2018-10-10 01:24:08
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/40,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/40,Update README,"Updates the README to remove the ""Future Improvements"" section. Also
+removes the ""Deploying a Sawtooth Network with Raft"" and ""On-Chain
+Settings"" sections in favor of a link to the official documentation.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-10-01 16:42:53,2018-10-01 20:03:14
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/39,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/39,Add .gitignore,Signed-off-by: Logan Seeley <seeley@bitwise.io>,closed,True,2018-10-01 16:33:51,2018-10-10 14:25:38
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/38,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/38,Fix clippy lint,"Updates code to comply with clippy report.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-10-01 16:25:08,2018-10-01 20:02:57
+sawtooth-raft,TomBarnes,https://github.com/hyperledger/sawtooth-raft/pull/37,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/37,License file updates as of September 2018,"Based on contents of:
+    sawtooth-raft/cargo.toml
+...and run-time dependencies identified in:
+    sawtooth-raft/docker-compose-installed
+
+Signed-off-by: Tom Barnes <thomas.j.barnes@intel.com>",closed,True,2018-09-29 00:59:28,2018-10-01 19:26:57
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/36,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/36,Add troubleshooting and log explanation to docs,"Adds a troubleshooting section to the documentation, as well as a
+section explaining how to read the Raft logs.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-09-26 17:43:58,2018-10-10 14:25:26
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/35,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/35,Shutdown raft when removed from network,"Shuts down the raft process when that raft node is removed from the
+network by checking configuration changes to see if a node is being
+removed and if the raft_id matches its own.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-09-24 15:53:43,2018-09-27 18:17:08
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/34,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/34,Add dynamic membership and crash fault tolerance tests to CI,"Adds docker compose files for running the dynamic membership and crash fault tolerance test scripts as docker services, and updates the Jenkinsfile to run these tests as part of CI.",closed,True,2018-09-24 14:57:13,2018-09-27 18:17:01
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/33,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/33,Add crash fault tolerance test,"Adds a crash fault tolerance testing script that does the following:
+
+1. Start a 3 node network with a workload
+2. Stop a node and ensure that the remaining nodes continue to make
+progress
+3. Restart the stopped node and ensure that it gets brought back into
+consensus and makes progress with the other nodes
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-09-21 15:29:16,2018-09-24 14:17:50
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/32,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/32,Add Dockerfile for building publishable docker,"Adds a dockerfile to be used for building docker images to go on DockerHub.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-09-20 20:41:50,2018-09-24 21:09:23
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/31,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/31,Add Raft documentation,"Adds information about Raft to the ""Introduction"" page of the
+documentation and creates the ""Configuring and Deploying"" page. Also
+removes `adhoc/README.md` in favor of moving its contents into the
+documentation itself
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-09-20 20:12:58,2018-09-21 19:14:45
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/30,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/30,Add applied state,Update that saves the last applied entry (the entry that corresponds to the last block that was committed) to stable storage whenever a block is committed and loads the last applied entry when Raft starts. This is used to inform the Raft library of which entries it needs to send to the engine when a node restarts (https://docs.rs/raft/0.3.1/raft/struct.Config.html#structfield.applied).,closed,True,2018-09-20 17:06:01,2018-09-20 21:27:25
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/29,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/29,Simplify cached storage,,closed,True,2018-09-17 23:39:40,2018-09-19 16:02:03
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/28,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/28,Implement full support for adding and removing nodes,"Fixes an issue that crashed the leader when a node's membership was removed.
+
+Includes testing for adding a new node after blocks have already been published and removing an existing node.
+
+This PR relies on [#1866](https://github.com/hyperledger/sawtooth-core/pull/1866) in sawtooth-core",closed,True,2018-09-17 19:43:26,2018-09-21 00:53:26
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/27,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/27,"Reduce FsStorage reads from disk, improve tests, and fix bugs","This PR does a lot including:
+- Eliminating the ""read everything always"" behavior of FsStorage
+- Fixes some bugs
+- Improves parity of FsStorage and CachedStorage with MemStorage
+- Fixes up some non-ergonomic code",closed,True,2018-09-14 22:02:38,2018-09-17 18:56:02
+sawtooth-raft,rberg2,https://github.com/hyperledger/sawtooth-raft/pull/26,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/26,Setup deb package versioning,"This change causes the version in Cargo.toml to be updated with the
+output of the get_version script.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-09-14 20:25:35,2018-09-19 14:21:40
+sawtooth-raft,rberg2,https://github.com/hyperledger/sawtooth-raft/pull/25,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/25,Build and archive deb,,closed,True,2018-09-13 20:51:02,2018-09-14 19:32:51
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/24,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/24,Implement membership changes,"Adds functionality for leader to listen for changes to the `sawtooth.consensus.raft.peers` setting and trigger a configuration change, and for all nodes to handle/apply configuration changes.
+
+Also adds a Bash script for testing dynamic membership of a Raft network. This script will be adapted to work in a Docker service in a later PR.",closed,True,2018-09-13 18:27:06,2018-09-17 15:52:51
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/23,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/23,Remove version switcher dropdown,"This links to the Sawtooth Core docs and should be disabled until a strategy
+for providing version switching for multiple repos is implemented.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-09-12 16:49:19,2018-09-14 15:51:15
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/22,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/22,Bump Raft version requirement,"v0.3.1 updates the default values of the Config used by Raft to valid values.
+v0.3.0 panics because we removed setting these default values.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-09-12 16:33:03,2018-09-14 22:03:14
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/21,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/21,Create dynamic network tooling,"Creates docker compose files for starting and stopping validators in an ad-hoc
+fashion with raft.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-09-11 16:57:49,2018-09-12 16:33:25
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/20,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/20,Initialize Raft docs,"Setup the initial Sphinx docs tooling, create an introduction, and add docs to CI",closed,True,2018-09-06 17:16:41,2018-09-07 15:47:55
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/19,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/19,Add cache layer to FS-backed storage,"Adds a cache layer that stores Raft entries in memory, which speeds up
+the process of reading entries.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-08-30 16:39:48,2018-09-04 19:38:14
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/18,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/18,Fix out-of-order committing of blocks,"Modifies the block backlogs to guarantee that a block will only be
+committed when the previous block is the chain head.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-08-28 20:50:16,2018-09-10 20:47:22
+sawtooth-raft,ryjones,https://github.com/hyperledger/sawtooth-raft/pull/17,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/17,Add Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-21 05:42:48,2018-08-23 19:00:17
+sawtooth-raft,ryjones,https://github.com/hyperledger/sawtooth-raft/pull/16,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/16,Add Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-18 00:11:25,2018-08-28 15:39:36
+sawtooth-raft,ryjones,https://github.com/hyperledger/sawtooth-raft/pull/15,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/15,Add Apache 2.0 License file,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-17 17:00:17,2018-08-21 05:41:41
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/14,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/14,Add maintainers file,Signed-off-by: Logan Seeley <seeley@bitwise.io>,closed,True,2018-08-17 14:34:14,2018-08-18 13:51:36
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/13,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/13,Add backlog of unvalidated blocks,"Adds a backlog of blocks that leader is committing, but the follower has
+not yet received a BlockValid message for. When a node tries to commit
+a block that has not been validated, the validator errors out. This
+prevents that scenario by keeping track of which blocks the leader has
+committed and waiting until a BlockValid message is received for that
+block before committing it.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-08-16 14:55:34,2018-08-24 18:24:57
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/12,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/12,Election updates,,closed,True,2018-08-15 16:39:14,2018-08-23 18:31:03
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/11,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/11,Update postinst to create `var/lib/sawtooth-raft`,"Creates the directory that is used by raft to store its state.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-08-06 21:16:04,2018-08-07 14:47:49
+sawtooth-raft,joeldudleyr3,https://github.com/hyperledger/sawtooth-raft/pull/10,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/10,Checked out addition of persistent storage. Logical reordering of steps.,Signed-off-by: joeldudleyr3 <joel.dudley@r3.com>,closed,True,2018-07-31 09:26:24,2018-07-31 14:23:12
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/9,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/9,Implement persistent storage,Creates a new Storage and StorageExt implementation that is backed by the file-system and integrates it into Sawtooth Raft.,closed,True,2018-07-27 18:32:46,2018-07-30 20:04:41
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/8,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/8,Add basic Jenkinsfile,Signed-off-by: Adam Ludvik <ludvik@bitwise.io>,closed,True,2018-07-24 15:17:13,2018-07-26 21:46:40
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/7,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/7,Add syslogging capability to Sawtooth Raft,"Adds the option to log Raft output to syslog by passing the
+`logging/syslog.yaml` file to `sawtooth-raft` using the `--log_config` command
+line argument. This will enable better debugging when running Raft in a
+LR context.
+
+This PR also changes `Cargo.toml` to pull the log4rs crate from `https://github.com/ltseeley/log4rs/tree/config-loading`. The changes made on that branch allow for the logging level to be set after loading the logger configuration from a file.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-07-24 14:42:21,2018-07-26 20:58:27
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/6,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/6,Update raft tests to use Sawtooth debs,"Instead of building debs manually or depending on published docker
+images, the test now builds a docker image with the necessary Sawtooth
+components installed from the nigthly debs.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-07-23 20:00:39,2018-07-23 21:26:59
+sawtooth-raft,ltseeley,https://github.com/hyperledger/sawtooth-raft/pull/5,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/5,Add packaging and systemd for Sawtooth Raft,Signed-off-by: Logan Seeley <seeley@bitwise.io>,closed,True,2018-07-20 18:44:56,2018-07-23 21:22:26
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/4,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/4,Add liveness test,"This adds the liveness test so that it will run once the validator in sawtooth-core/master supports engines. To run this locally before then, check out the WIP branch and build an installed version of the validator and then tag it `hyperledger/sawtooth-validator:latest`. Then use docker compose to run the test.",closed,True,2018-07-11 21:46:28,2018-07-12 13:00:04
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/3,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/3,Add StorageExt trait,"Create a trait that extends the Storage trait and mirrors the methods on
+MemStorage used by Sawtooth Raft. This makes replacing the
+implementation with persistent storage simpler.
+
+Based on #2 ",closed,True,2018-07-10 16:10:39,2018-07-26 20:58:40
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/2,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/2,Derive raft id from public key,,closed,True,2018-07-05 17:55:50,2018-07-30 15:47:40
+sawtooth-raft,aludvik,https://github.com/hyperledger/sawtooth-raft/pull/1,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/1,Implement Raft Prototype Engine,This PR creates an initial prototype implementation of a Raft-based Sawtooth consensus engine.,closed,True,2018-06-18 14:35:42,2018-06-22 16:01:13

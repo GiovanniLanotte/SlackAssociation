@@ -1,0 +1,101 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-poet,rberg2,https://github.com/hyperledger/sawtooth-poet/pull/27,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/27,Xetex pdf,"This solves a recent build error relating to unicode in the documentation.
+`03:57:57  Underfull \hbox (badness 10000) in paragraph at lines 545--548
+03:57:57  []\T1/ptm/m/n/10 Generate sign-up data: $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 PPK;
+03:57:57   report; PSEmanifest; sealedSignUpData\OT1/cmr/m/n/10 ) =
+03:57:57  [6] [7] [8] [9]
+03:57:57  
+03:57:57  ! Package inputenc Error: Unicode char σ (U+3C3)
+03:57:57  (inputenc)                not set up for use with LaTeX.`
+
+The error started after a upgrade to Sphinx 2.0.0 from 1.8.5",closed,True,2019-03-29 20:38:13,2019-04-03 14:59:17
+sawtooth-poet,rberg2,https://github.com/hyperledger/sawtooth-poet/pull/26,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/26,Add COMPOSE_PROJECT_NAME to Jenkinsfile,"This variable prevents naming collisions in containers created by
+docker-compose. This variable was missing from the Jenkinsfile rewrite.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",open,True,2019-03-28 19:03:37,2019-04-03 19:53:21
+sawtooth-poet,rberg2,https://github.com/hyperledger/sawtooth-poet/pull/25,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/25,Declarative Jenkinsfile rewrite.,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-03-21 20:15:17,2019-03-22 15:47:39
+sawtooth-poet,rberg2,https://github.com/hyperledger/sawtooth-poet/pull/24,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/24,"Ignore R1720: Unnecessary ""elif"" after ""raise"" (no-else-raise)",Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-03-21 14:45:57,2019-03-21 15:37:28
+sawtooth-poet,askmish,https://github.com/hyperledger/sawtooth-poet/pull/23,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/23,Rust validator registry tp initial commits,"This rust validator registry tp replaces the python validator registry tp.
+
+Also, rebasing commits from master to poet2 branch.",open,True,2019-03-19 08:38:04,2019-03-27 09:05:05
+sawtooth-poet,manojgop,https://github.com/hyperledger/sawtooth-poet/pull/22,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/22,POET2 SGX Enclave code (trusted) and bridge (untrusted),"- Removed platform service enclave(PSE) dependencies and monotonic counter
+  to support POET on IA based platforms where PSE is not available
+
+- Removed SGX seal/unseal functionality
+
+- Replaced CreateWaitTimer/CreateWaitCertificate functions which uses
+  SGX trusted time with InitializeWaitCerificate/FinalizeWaitCertificate
+
+Signed-off-by: Manoj Gopalakrishnan <manoj.gopalakrishnan@intel.com>",open,True,2019-03-13 08:57:02,2019-03-22 20:17:45
+sawtooth-poet,rbuysse,https://github.com/hyperledger/sawtooth-poet/pull/21,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/21,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-07 16:33:01,2019-02-27 22:36:21
+sawtooth-poet,vaporos,https://github.com/hyperledger/sawtooth-poet/pull/20,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/20,Update poet2 branch,"This brings poet2 up-to-date with current master branch, which includes various fixes.",open,True,2019-02-04 20:14:53,2019-03-25 15:09:07
+sawtooth-poet,rberg2,https://github.com/hyperledger/sawtooth-poet/pull/19,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/19,Update Jenkinsfile to schedule a build at 3AM CST,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2019-01-23 21:40:57,2019-01-24 19:59:34
+sawtooth-poet,rbuysse,https://github.com/hyperledger/sawtooth-poet/pull/18,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/18,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-22 22:12:20,2019-02-27 22:36:24
+sawtooth-poet,rbuysse,https://github.com/hyperledger/sawtooth-poet/pull/17,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/17,Unpin Sphinx version,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-21 20:00:14,2019-01-22 22:37:20
+sawtooth-poet,rbuysse,https://github.com/hyperledger/sawtooth-poet/pull/16,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/16,002 build fixes,,closed,True,2018-12-12 14:22:03,2018-12-12 16:27:55
+sawtooth-poet,rbuysse,https://github.com/hyperledger/sawtooth-poet/pull/15,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/15,001 bionic upgrade,,open,True,2018-12-06 19:55:58,2019-01-11 21:32:35
+sawtooth-poet,dcmiddle,https://github.com/hyperledger/sawtooth-poet/pull/14,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/14,Update poet2 branch from master,,closed,True,2018-11-20 14:18:54,2018-11-21 15:30:57
+sawtooth-poet,peterschwarz,https://github.com/hyperledger/sawtooth-poet/pull/13,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/13,Update dockerfiles to use bumper/stable apt repo,Signed-off-by: Peter Schwarz <pschwarz@bitwise.io>,closed,True,2018-11-13 21:49:16,2018-11-14 03:07:54
+sawtooth-poet,dcmiddle,https://github.com/hyperledger/sawtooth-poet/pull/12,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/12,Make engine ignore peer notification messages,"PoET does not need to react to its validator's peering events.
+Gracefully handle those notifications by ignoring them rather than
+logging an error.
+
+Signed-off-by: Dan Middleton <dan.middleton@intel.com>",closed,True,2018-11-10 15:48:48,2018-11-14 19:04:01
+sawtooth-poet,dcmiddle,https://github.com/hyperledger/sawtooth-poet/pull/11,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/11,Remove windows make file from docs,Signed-off-by: Dan Middleton <dan.middleton@intel.com>,closed,True,2018-11-08 22:44:48,2018-11-14 21:09:50
+sawtooth-poet,manojgop,https://github.com/hyperledger/sawtooth-poet/pull/10,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/10,Initial commit for POET2,"This PR has multiple commits
+1. Removing files from existing repo which will be superseded by POET2 directory
+2. POET2 Engine and Service implementation based on Sawtooth consensus SDK
+3. POET2 SGX Enclave code (trusted) and bridge (untrusted)
+4. Rust-SGX C++ bridge layer and corresponding Rust FFI layer
+5. C++ unit test cases for SGX enclave
+6. Validatory registry TP for POET implemented in Rust
+7. Docker compose files and debian package files
+8. IAS client and proxy implementation in Rust
+9. Enabled clippy error and rustfmt checks in Jenkins build.
+
+Signed-off-by: Manoj Gopalakrishnan <manoj.gopalakrishnan@intel.com>",closed,True,2018-11-05 09:48:31,2019-03-22 20:20:58
+sawtooth-poet,askmish,https://github.com/hyperledger/sawtooth-poet/pull/9,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/9,Add new poet consensus engine,Signed-off-by: askmish <ashish.k.mishra@intel.com>,closed,True,2018-10-31 09:15:35,2018-11-06 16:36:29
+sawtooth-poet,sandeeplandt,https://github.com/hyperledger/sawtooth-poet/pull/8,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/8,Disabled debug log messages for PoET,"Debug messages are disabled from PoET. Debug log messages will not be displayed in the console. 
+
+
+Signed-off-by: sandeeplandt <sandeepx.hs@intel.com>",open,True,2018-10-24 07:19:55,2018-10-24 07:19:55
+sawtooth-poet,kulkarniamol,https://github.com/hyperledger/sawtooth-poet/pull/7,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/7,Added license headers as indicated by the Fossology scan.,"Detailed report available in STL-398.
+
+Signed-off-by: kulkarniamol <amol.kulkarni@intel.com>",open,True,2018-10-23 17:22:55,2018-11-16 09:43:30
+sawtooth-poet,askmish,https://github.com/hyperledger/sawtooth-poet/pull/6,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/6,Add readme for sawtooth-poet repo,Signed-off-by: askmish <ashish.k.mishra@intel.com>,closed,True,2018-10-12 06:17:52,2019-01-31 07:00:55
+sawtooth-poet,TomBarnes,https://github.com/hyperledger/sawtooth-poet/pull/5,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/5,Updates NOTICES file for Sawtooth 1.1,"Signed-off-by: Tom Barnes <thomas.j.barnes@intel.com>
+
+Based on contents of setup.py in the following folders:
+
+""sawtooth-poet\cli"",
+""sawtooth-poet\common"",
+""sawtooth-poet\core"",
+""sawtooth-poet\\families"",
+""sawtooth-poet\engine"",
+""sawtooth-poet\sgx"",
+""sawtooth-poet\simulator"",
+""sawtooth-poet\ias_client"",
+""sawtooth-poet\ias_proxy"",
+...and run-time dependencies identified in:
+
+""sawtooth-poet\dockerfile-installed""",closed,True,2018-10-11 00:03:23,2018-10-11 20:51:38
+sawtooth-poet,TomBarnes,https://github.com/hyperledger/sawtooth-poet/pull/4,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/4,License file updates as of September 2018,"Based on contents of setup.py in the following folders:
+
+    ""sawtooth-poet\cli"",
+    ""sawtooth-poet\common"",
+    ""sawtooth-poet\core"",
+    ""sawtooth-poet\\families"",
+    ""sawtooth-poet\engine"",
+    ""sawtooth-poet\sgx"",
+    ""sawtooth-poet\simulator"",
+    ""sawtooth-poet\ias_client"",
+    ""sawtooth-poet\ias_proxy"",
+
+...and run-time dependencies identified in:
+
+    ""sawtooth-poet\dockerfile-installed""
+
+Signed-off-by: Tom Barnes <thomas.j.barnes@intel.com>",closed,True,2018-09-29 00:03:07,2018-10-11 00:03:38
+sawtooth-poet,rberg2,https://github.com/hyperledger/sawtooth-poet/pull/3,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/3,Bumperupdate,,closed,True,2018-09-10 19:33:08,2018-09-12 18:40:32
+sawtooth-poet,aludvik,https://github.com/hyperledger/sawtooth-poet/pull/2,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/2,Fixup compose files,Fixes up a few minor issues in the docker CI tools.,closed,True,2018-07-25 19:29:17,2018-07-26 17:47:14
+sawtooth-poet,aludvik,https://github.com/hyperledger/sawtooth-poet/pull/1,https://api.github.com/repos/hyperledger/sawtooth-poet/issues/1,Split PoET off into separate repo from Sawtooth Core,This commit sets up the Sawtooth PoET repo by reorganizing the Sawtooth Core repo post `git filter-branch --subdirectory-filter consensus/poet`.,closed,True,2018-07-20 19:57:51,2018-07-24 13:15:05

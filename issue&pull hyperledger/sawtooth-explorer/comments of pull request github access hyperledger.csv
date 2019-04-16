@@ -1,0 +1,73 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-explorer/pull/11,https://github.com/hyperledger/sawtooth-explorer/pull/11,"I'm getting an error when I try to run this locally:
+
+```
+ERROR: yaml.scanner.ScannerError: mapping values are not allowed here
+  in ""./docker-compose.yml"", line 31, column 11
+```
+
+docker-compose version:
+```
+docker-compose version 1.21.1, build 5a3f1a3
+```",817d3e9f6cb664c0f6364a161591b6ce798fa983,2018-06-22 13:27:10,197444677,"@@ -28,6 +28,10 @@ services:
+     command: [nginx, '-g', 'daemon off;']
+   ng-server:
+     build: .
++      args:
++        - http_proxy
++        - https_proxy
++        - no_proxy",,2018-06-25 08:08:46,https://api.github.com/repos/hyperledger/sawtooth-explorer/pulls/comments/197444677,https://github.com/hyperledger/sawtooth-explorer/pull/11#discussion_r197444677,joewright
+https://github.com/hyperledger/sawtooth-explorer/pull/11,https://github.com/hyperledger/sawtooth-explorer/pull/11,"@askmish adding context explicitly seems to fix the parsing but it does not appear to pick up my proxy settings so you may have a problem in the Dockerfile (or I may have a problem in my environment variables :) ).
+```
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 67f1a49..e4ad1cb 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -27,7 +27,8 @@ services:
+       - ""8091:8091""
+     command: [nginx, '-g', 'daemon off;']
+   ng-server:
+-    build: .
++    build: 
++      context: .
+       args:
+         - http_proxy
+         - https_proxy
+```",817d3e9f6cb664c0f6364a161591b6ce798fa983,2018-06-22 14:32:16,197464373,"@@ -28,6 +28,10 @@ services:
+     command: [nginx, '-g', 'daemon off;']
+   ng-server:
+     build: .
++      args:
++        - http_proxy
++        - https_proxy
++        - no_proxy",,2018-06-25 08:08:46,https://api.github.com/repos/hyperledger/sawtooth-explorer/pulls/comments/197464373,https://github.com/hyperledger/sawtooth-explorer/pull/11#discussion_r197464373,dcmiddle
+https://github.com/hyperledger/sawtooth-explorer/pull/2,https://github.com/hyperledger/sawtooth-explorer/pull/2,"The REST API is what the app talks to, not the validator node, clarification could be useful here",603a9002dcd0f33df2431930b74c79efe8d61e66,2017-12-11 20:52:51,156195411,"@@ -1 +1,82 @@
+-# sawtooth-explorer
+\ No newline at end of file
++# SawtoothExplorer
++
++SawtoothExplorer is an application that provides visibility into the Sawtooth
++Blockchain for Node Operators.
++
++## Dependencies
++
++SawtoothExplorer is built using [Angular](https://angular.io/) and
++[Angular Material](https://material.angular.io/). The project is managed using
++the [Angular CLI](https://cli.angular.io/).
++
++## Getting Started
++Before starting the SawtoothExplorer app, have a local validator running.
++Instructions for doing so are available in the Sawtooth documentation,
++under [Installing and Running Sawtooth](https://sawtooth.hyperledger.org/docs/core/releases/latest/app_developers_guide/installing_sawtooth.html).
++
++Once this is running, the SawtoothExplorer app must be configured to",,2017-12-13 19:09:53,https://api.github.com/repos/hyperledger/sawtooth-explorer/pulls/comments/156195411,https://github.com/hyperledger/sawtooth-explorer/pull/2#discussion_r156195411,kidrecursive
+https://github.com/hyperledger/sawtooth-explorer/pull/2,https://github.com/hyperledger/sawtooth-explorer/pull/2,Can this be made Apache 2.0?,603a9002dcd0f33df2431930b74c79efe8d61e66,2017-12-12 14:16:22,156376671,"@@ -0,0 +1,57 @@
++{
++  ""name"": ""dok-chain-ui"",
++  ""version"": ""0.0.0"",
++  ""license"": ""MIT"",",,2017-12-13 19:09:53,https://api.github.com/repos/hyperledger/sawtooth-explorer/pulls/comments/156376671,https://github.com/hyperledger/sawtooth-explorer/pull/2#discussion_r156376671,dcmiddle
+https://github.com/hyperledger/sawtooth-explorer/pull/2,https://github.com/hyperledger/sawtooth-explorer/pull/2,"Absolutely, will update this and make the requested licensing additions.",603a9002dcd0f33df2431930b74c79efe8d61e66,2017-12-12 15:59:24,156409990,"@@ -0,0 +1,57 @@
++{
++  ""name"": ""dok-chain-ui"",
++  ""version"": ""0.0.0"",
++  ""license"": ""MIT"",",,2017-12-13 19:09:53,https://api.github.com/repos/hyperledger/sawtooth-explorer/pulls/comments/156409990,https://github.com/hyperledger/sawtooth-explorer/pull/2#discussion_r156409990,GiniH

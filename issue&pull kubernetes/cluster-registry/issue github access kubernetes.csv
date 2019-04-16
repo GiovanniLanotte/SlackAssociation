@@ -1,0 +1,1974 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+cluster-registry,rothgar,https://github.com/kubernetes/cluster-registry/issues/1,https://api.github.com/repos/kubernetes/cluster-registry/issues/1,Make design Google doc in readme 644 permissions,I can't open the Google doc in the readme. Please update permissions so anyone with the link can read it.,closed,False,2017-09-11 14:49:57,2017-09-29 23:53:39
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/2,https://api.github.com/repos/kubernetes/cluster-registry/issues/2,Fix a typo,,closed,True,2017-09-20 20:30:52,2017-10-05 17:58:26
+cluster-registry,G-Harmon,https://github.com/kubernetes/cluster-registry/pull/3,https://api.github.com/repos/kubernetes/cluster-registry/issues/3,Remove unnecessary Cluster-Registry header line.,,closed,True,2017-09-21 18:28:46,2017-09-21 18:53:13
+cluster-registry,madhusudancs,https://github.com/kubernetes/cluster-registry/issues/4,https://api.github.com/repos/kubernetes/cluster-registry/issues/4,Repurpose kubefed to join/unjoin clusters,"@perotinus has repurposed `kubefed` (now called `crinit` in this repository) to simplify cluster registry installation in a host Kubernetes cluster. Add support to crinit so that it could be used to register clusters to or deregister clusters from a cluster registry.
+
+cc @G-Harmon @perotinus @csbell @nikhiljindal ",closed,False,2017-09-21 22:40:57,2017-10-12 00:51:01
+cluster-registry,G-Harmon,https://github.com/kubernetes/cluster-registry/pull/5,https://api.github.com/repos/kubernetes/cluster-registry/issues/5,blah change. Testing.,Testing a PR. Please ignore.,closed,True,2017-09-23 00:23:53,2017-09-29 23:53:09
+cluster-registry,G-Harmon,https://github.com/kubernetes/cluster-registry/issues/6,https://api.github.com/repos/kubernetes/cluster-registry/issues/6,Connect the repo to Reviewable,"Hey Jonathan,
+We looked at this yesterday. Do you want to connect the cluster-registry up to Reviewable?
+
+""Please connect this repo at https://reviewable.io/repositories so that all PRs get linked to reviews. Thanks!""",closed,False,2017-09-23 00:36:27,2018-09-15 22:24:19
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/7,https://api.github.com/repos/kubernetes/cluster-registry/issues/7,Multi-tenancy,"The cluster registry currently doesn't support namespaces, which are the main way that Kubernetes APIs support multi-tenancy. It's not clear whether we can use RBAC as-is to support multi tenancy in the cluster registry, or whether we will have to build some alternative support or modify the cluster registry in order to work more fluently with RBAC.
+
+This is one reason that we would implement an authorizer other than ""AlwaysAllow"": in the simple single-tenant case, we can probably assume that authn==authz (that is, anyone who can authenticate is authorized), since there is only one resource type, the cluster,
+
+Not a major issue now.",closed,False,2017-09-27 18:11:35,2018-02-02 02:17:56
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/8,https://api.github.com/repos/kubernetes/cluster-registry/issues/8,Implement delegated authorization,"The cluster registry needs a way to authorize requests. Currently, it allows authenticated callers full access. It should at least support r/w vs readonly usage.
+
+The canonical Kubernetes way to handle this would be RBAC, but we don't currently support creating RBAC policies in the cluster registry, and it's not clear that the cluster registry should have a parallel set of RBAC rules to the main Kubernetes API server (and it probably should defer to another API server if it is an aggregated API server).",closed,False,2017-09-27 18:14:10,2017-12-08 01:16:46
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/9,https://api.github.com/repos/kubernetes/cluster-registry/issues/9,Update README instructions and bazel BUILD file,"I started going through the README to build the binaries and container images and ran into some issues fixed here:
+
+1. Update script name
+1. Update build and run commands
+1. Update bazel BUILD file to allow specifying `project` to upload container image
+1. Update generated bazel BUILD file
+1. Typos
+
+I also ran into an issue because I was missing the Mercurial `hg` CLI tool due to a [bitbucket dependency for `bitbucket.org/ww/goautoneg`](https://github.com/kubernetes/apiserver/blob/b2a8ad67a002d27c8945573abb80b4be543f2a1f/Godeps/Godeps.json#L10) since we have [k8s.io/apiserver in our WORKSPACE dependency](https://github.com/kubernetes/cluster-registry/blob/94f78f21436ae2a8b24ca0fb8d07001c5b7cd52d/WORKSPACE#L61-L67). Installing Mercurial fixed the problem but I'm thinking that should have been handled for me.",closed,True,2017-09-27 22:40:44,2017-12-12 00:21:40
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/10,https://api.github.com/repos/kubernetes/cluster-registry/issues/10,Write a design document,"Now that the cluster registry prototype is done, we should write a design based on this knowledge and circulate it more broadly.",closed,False,2017-09-29 23:52:11,2017-11-16 20:00:59
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/11,https://api.github.com/repos/kubernetes/cluster-registry/issues/11,Write a user guide,"Once the cluster registry is in a stable enough state, it should have a users guide distinct from the developers guide.
+
+This may make sense to host here, or perhaps on a shared Kubernetes page.
+
+cc @pmorie ",closed,False,2017-10-02 20:01:53,2017-11-16 20:02:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/12,https://api.github.com/repos/kubernetes/cluster-registry/issues/12,Add a note about and workaround for bazel 0.6.0 incompatibility,,closed,True,2017-10-02 22:55:45,2017-10-04 15:03:57
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/13,https://api.github.com/repos/kubernetes/cluster-registry/issues/13,Update the versions of go and docker rules in the WORKSPACE.,Tested with bazel 0.6.0 and 0.5.4.,closed,True,2017-10-03 23:48:33,2017-10-04 17:23:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/14,https://api.github.com/repos/kubernetes/cluster-registry/issues/14, Remove the need for Mercurial to be installed by depending on an HTTP archive instead.,Tested by removing the hg command from the PATH and running `bazel fetch`.,closed,True,2017-10-04 00:01:08,2017-10-05 17:58:17
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/15,https://api.github.com/repos/kubernetes/cluster-registry/issues/15,Uncomment a block that configures the API server with authentication options.,"Without this, the API server will not authorize any requests.
+
+cc @font @madhusudancs",closed,True,2017-10-04 21:07:24,2017-10-06 00:14:49
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/16,https://api.github.com/repos/kubernetes/cluster-registry/issues/16,Flesh out the API of the cluster registry,"The API is still a WIP, but this brings it closer to the expected finalform, and to what exists in the API design document.
+
+cf https://docs.google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit# (Must be member of [kubernetes-dev](https://groups.google.com/forum/#!forum/kubernetes-dev) to view.)",closed,True,2017-10-04 21:16:05,2017-10-10 22:05:59
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/17,https://api.github.com/repos/kubernetes/cluster-registry/issues/17,Rename cmd/cr/app/clusterregistry.go to cluster.go,cc @madhusudancs @font ,closed,True,2017-10-05 23:12:37,2017-10-10 22:10:28
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/18,https://api.github.com/repos/kubernetes/cluster-registry/issues/18,Update the codegen scripts to use the repos from the workspace rather than the local GOPATH,"This is not a pretty solution, but until there is good enough support for generating code with genrules, this makes the building a bit easier and means that we're using the same versions as the rest of the code is being built against. This should also allow the cluster-registry repository to live anywhere, not just in GOPATH/src/k8s.io/cluster-registry
+
+I attempted to test this with clean and dirty repositories, but if you have time to patch in and test, I would appreciate it. You may want to `bazel clean --expunge` first.
+
+cc @madhusudancs @font ",closed,True,2017-10-06 01:14:53,2017-10-18 18:42:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/19,https://api.github.com/repos/kubernetes/cluster-registry/issues/19,Modify the crinit unit tests and crinit to support more fine-grained unit tests.,"This does not add full test coverage for crinit, but it moves away from a monolithic test and starts implementing method-level tests. The intention is to add an integration test for the whole crinit flow, and test the intricacies of the logic in unit tests.
+
+cc @madhusudancs, @font ",closed,True,2017-10-09 22:15:04,2017-10-17 23:43:15
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/20,https://api.github.com/repos/kubernetes/cluster-registry/issues/20,Cluster API issues,"@pmorie raised a few issues in #16 about the cluster registry API that were not addressed:
+
+- [x] being more explicit about how credentials are handled/whether credentials should be stored
+  - work here is waiting for input from SIG-auth about how to handle cluster credentials in the cluster registry
+- [x] optional fields should be pointers
+  - this seems reasonable, but would like to discuss with sig-arch and/or sig-api-machinery to make sure
+
+Besides this, there are a few issues from the cluster registry API design that also need to be addressed:
+- [x] using a stronger type for the Kubernetes API server info
+  - this was going to be a copy of `api.Endpoints` from k8s, for reasons described [here](https://docs.google.com/a/google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit?disco=AAAABFxkK0A), but after pushback more discussion is needed
+- [x] spec/status field names/presence
+  - this is waiting on discussions with sig-arch and/or sig-api-machinery
+- [x] `CABundle` in `KubeAPIServer`
+  - waiting for response on comment
+
+And an issue from #29:
+- [x] figure out motivation for or remove `CloudProvider` field
+
+cf https://docs.google.com/a/google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit?disco=AAAABFxkK0A
+
+cc @pmorie @quinton-hoole ",closed,False,2017-10-10 22:02:40,2018-02-02 02:14:52
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/21,https://api.github.com/repos/kubernetes/cluster-registry/issues/21,"Add a docs directory, and reorganize the docs a bit","I added a little bit of content, but the main intention here is to get a bit more structure and move content out of the top-level README.
+
+cc @font, @pmorie, @madhusudancs ",closed,True,2017-10-11 00:13:34,2017-10-17 23:38:14
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/22,https://api.github.com/repos/kubernetes/cluster-registry/issues/22,Add validation logic to ensure that metadata.ClusterName is not set,cf [this comment](https://docs.google.com/a/google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit?disco=AAAABUIGW-g) in the cluster registry API doc.,closed,False,2017-10-11 23:54:55,2017-12-07 06:37:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/23,https://api.github.com/repos/kubernetes/cluster-registry/issues/23,Set up per-PR tests and other CI,"Once #19 goes in, there will be an incomplete but runnable suite of bazel tests that should be run before PR submission.
+
+This involves adding some configuration to the Prow config (https://github.com/kubernetes/test-infra/blob/master/prow/config.yaml) and the job config (https://github.com/kubernetes/test-infra/blob/master/jobs/config.json).
+
+Since it is currently necessary to run `./update-codegen.sh` and `bazel run //:gazelle` before running the bazel tests, I expect that we will have to use a custom execution scenario (https://github.com/kubernetes/test-infra/blob/master/scenarios/execute.py) and call the bazel scenario directly after running the codegen commands.",closed,False,2017-10-12 17:49:23,2018-01-17 01:07:21
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/24,https://api.github.com/repos/kubernetes/cluster-registry/issues/24,Determine whether generated code needs to be checked in,"From a comment on #21, there might be reason to check in the generated artifacts to enable people who do not use bazel to depend on this repository; and perhaps to make the test infrastructure easier to wrangle. I am quite opposed to checking in artifacts unless it really is blocking a workflow, so this issue is tracking whether enough need to outweigh the pain of checked-in generated code.
+
+If this is causing you problems, please bump this issue!",closed,False,2017-10-13 17:39:41,2017-11-09 00:08:24
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/25,https://api.github.com/repos/kubernetes/cluster-registry/issues/25,Add doc.go files for GoDoc ,"GoDoc seems to require `doc.go` files in packages that it scans. Add them where appropriate, and make sure that there are no other things to do to integrate with GoDoc.",closed,False,2017-10-14 00:09:26,2017-12-10 10:47:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/26,https://api.github.com/repos/kubernetes/cluster-registry/issues/26,"Determine whether order of AuthInfo fields has semantic meaning, and what that meaning is","Migrated from a question previously in [the cluster API doc](https://docs.google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit#):
+
+Are the auth configuration objects conceptually ordered? Is the semantic meaning of the ordering defined by the cluster registry itself, or are users free to define their own semantic meaning to the ordering of auth configurations?",closed,False,2017-10-17 00:08:19,2018-05-30 19:11:22
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/27,https://api.github.com/repos/kubernetes/cluster-registry/issues/27,Determine whether/how to expose information about transport layer/proxy necessary to access clusters,"Migrated from the [Cluster API doc](https://docs.google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit#):
+
+How can the API expose information about the transport necessary to reach a cluster? Can/should the cluster registry provide info about proxies, etc. as a field? Is there enough need to make it a top-level field rather than an application-specific annotation?
+
+cc @emaildanwilson",closed,False,2017-10-17 00:34:46,2018-10-27 20:28:14
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/28,https://api.github.com/repos/kubernetes/cluster-registry/issues/28,Flesh out the ClusterStatus field contents and usage patterns,"Migrated from the [Cluster API doc](https://docs.google.com/document/d/1Oi9EO3Jwtp69obakl-9YpLkP764GZzsz95XJlX1a960/edit#):
+
+How should the Status field work? How do users intend to use the status field? How does the API indicate that the status is being updated by a tool vs a user vs no-one? Is that useful information? For one particular example, CloudProvider, which can be provided by a user or provided by a tool, does it belong in status?",closed,False,2017-10-17 00:36:26,2018-10-27 20:28:14
+cluster-registry,justinsb,https://github.com/kubernetes/cluster-registry/issues/29,https://api.github.com/repos/kubernetes/cluster-registry/issues/29,Motivation for the CloudProvider field?,"I'm trying to understand the use case for the CloudProvider field.
+
+What is the cloud provider in a multi-repo, multi-cloudprovider-implementation world?  If there are two AWS cloudprovider implementations, should they have the same name or a different name?  How are the CloudProvider names registered?
+
+What if a single cluster spans multiple clouds?  Should this be of `[]CloudProvider`?  ",closed,False,2017-10-17 02:06:00,2018-02-07 23:34:44
+cluster-registry,justinsb,https://github.com/kubernetes/cluster-registry/issues/30,https://api.github.com/repos/kubernetes/cluster-registry/issues/30,Authentication Config is not versionable,"The proposed authentication configuration revolves around a `map[string]string`
+
+```
+// Config is a map of values that contains the information necessary for a
+// client to authenticate to a Kubernetes API server.
+// +optional
+Config map[string]string `json:""config,omitempty"" protobuf:""bytes,2,rep,name=config""
+```
+
+My understanding is that in general we are now avoiding untyped maps for anything intended to be system-meaningful.   They are hard to version & update, and we risk repeating the same problems we hit when using labels/annotations where we probably should have been using fields.
+
+Should we consider a pattern more akin to health checks or volumes, with an effective union of strongly-typed options-types?",closed,False,2017-10-17 02:14:11,2018-03-17 02:10:51
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/31,https://api.github.com/repos/kubernetes/cluster-registry/issues/31,Update the cluster API per the latest decisions,"This is intended to get the API very close to an alpha state.
+
+cf #20 
+
+cc @font @madhusudancs @pmorie ",closed,True,2017-10-17 17:57:13,2017-10-26 19:36:42
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/32,https://api.github.com/repos/kubernetes/cluster-registry/issues/32,Fix the crinit command descriptions.,,closed,True,2017-10-17 21:35:03,2017-10-17 23:43:07
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/33,https://api.github.com/repos/kubernetes/cluster-registry/issues/33,Move the clusterregistry server implementation to /pkg,"This is in preparation for writing some more detailed tests for the server specifically, and makes the demarcation between the command scaffolding and the actual server implementation cleaner.
+
+This removes an unused method as well.
+
+cc @font @madhusudancs ",closed,True,2017-10-17 22:13:42,2017-10-18 22:11:17
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/34,https://api.github.com/repos/kubernetes/cluster-registry/issues/34, Add a basic integration test for the cluster registry,This is based on work done for the kube-apiserver in [k/k/46865](https://github.com/kubernetes/kubernetes/pull/46865).,closed,True,2017-10-17 23:10:26,2017-11-29 18:13:50
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/35,https://api.github.com/repos/kubernetes/cluster-registry/issues/35,Fix the codegen scripts,,closed,True,2017-10-18 00:34:26,2017-10-18 18:41:54
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/36,https://api.github.com/repos/kubernetes/cluster-registry/issues/36,docker-credential-gcr needed for push to GCR,"I ran into a python error when trying to push to GCR without docker-credential-gcr installed. I propose that it be added to the prerequisites.
+Another potential addition is `go get apimachinery` which I did not have installed prior to attempting to build cluster registry and caused my build to fail. I still am not sure what apimachinery is/does and why it would/wouldn't be installed anyway. I am happy to add this to the prerequisites too if it makes sense.",closed,True,2017-10-18 15:07:01,2018-06-06 13:55:00
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/37,https://api.github.com/repos/kubernetes/cluster-registry/issues/37,Update the codegen scripts in repsonse to comments on #35.,"Also tweaks some cosmetic issues which should make the script a bit easier to follow, and adds the comment necessary to generate conversions.",closed,True,2017-10-18 18:41:13,2017-10-18 22:11:20
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/38,https://api.github.com/repos/kubernetes/cluster-registry/issues/38,Create a helm chart to deploy the cluster-registry,It would be extremely useful to have a helm chart to deploy the cluster-registry and the apiservice resource to add it into the aggregator.,closed,False,2017-10-18 19:21:31,2017-12-01 19:30:15
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/39,https://api.github.com/repos/kubernetes/cluster-registry/issues/39,Remove the now-unused pkg/crinit/testing package,cc @font @madhusudancs,closed,True,2017-10-18 22:36:55,2017-10-25 19:23:00
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/40,https://api.github.com/repos/kubernetes/cluster-registry/issues/40,Simplify the crinit command scaffolding a bit further,,closed,True,2017-10-18 22:49:46,2017-10-25 19:23:18
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/41,https://api.github.com/repos/kubernetes/cluster-registry/issues/41,Add a script that can be used to run CI jobs for bazel,"Also, fix an(other) issue with update-codegen by explicitly setting the `--extra-peer-dirs` and ensuring that they are fetched before the generation command is run.
+
+cc @madhusudancs @font ",closed,True,2017-10-18 23:43:37,2017-10-25 19:23:15
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/42,https://api.github.com/repos/kubernetes/cluster-registry/issues/42,OpenAPI/Swagger definitions generation,Generate OpenAPI and/or Swagger definitions for the cluster API.,closed,False,2017-10-19 17:45:41,2017-12-01 19:51:09
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/43,https://api.github.com/repos/kubernetes/cluster-registry/issues/43,Update path to codegen script,,closed,True,2017-10-20 00:47:35,2017-12-12 00:19:35
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/44,https://api.github.com/repos/kubernetes/cluster-registry/issues/44,Fix a few issues identified by go vet,cc @font @madhusudancs ,closed,True,2017-10-20 20:14:45,2017-10-25 19:23:14
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/45,https://api.github.com/repos/kubernetes/cluster-registry/issues/45,Update the codegen and test scripts to work on Prow,cf https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/pr-logs/pull/cluster-registry/44/pull-cluster-registry-bazel/3/,closed,True,2017-10-20 20:49:55,2017-10-25 19:23:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/46,https://api.github.com/repos/kubernetes/cluster-registry/issues/46,Implement non-delegated authorization,"The cluster registry should have a way to handle authorization when it is not being run as a delegated API server. It doesn't seem ideal to implement the RBAC APIs in the cluster registry, given the potential for confusion and mismatches in implementing an API for a k8s object. One potential approach here is to use an authenticating/authorizing proxy.
+
+Split from #8, which is tracking work for delegated authorization.",closed,False,2017-10-24 18:59:53,2018-01-04 21:13:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/47,https://api.github.com/repos/kubernetes/cluster-registry/issues/47,Allow crinit to accept a file instead of command-line arguments.,"Cloned from https://github.com/kubernetes/kubernetes/issues/50817.
+
+""It would be great to allow `crinit init` to accept a file just like what we do for `kubectl apply -f <filename>`, so that I can put all parameters in a file which is easy to maintain.""",closed,False,2017-10-25 17:33:05,2018-05-16 21:40:57
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/48,https://api.github.com/repos/kubernetes/cluster-registry/issues/48,crinit init should not fail if the resources already exist,"Cloned from https://github.com/kubernetes/kubernetes/issues/50746.
+
+`crinit init` should continue if related resources already exist in the host cluster; or it should provide a `--force` flag. ",closed,False,2017-10-25 17:34:44,2018-05-16 21:40:52
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/49,https://api.github.com/repos/kubernetes/cluster-registry/issues/49,crinit init should allow setting up a secure etcd,"Cloned from https://github.com/kubernetes/kubernetes/issues/50734.
+
+`crinit init` will install etcd, but the etcd is not secured, we should enable secure mode for etcd.
+ [Details about etcd TLS](https://coreos.com/etcd/docs/latest/op-guide/security.html)",closed,False,2017-10-25 17:36:12,2018-05-16 21:40:47
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/50,https://api.github.com/repos/kubernetes/cluster-registry/issues/50,crinit should choose an API version that both it and server uses,"Cloned from https://github.com/kubernetes/kubernetes/issues/50540
+
+(Not sure if this is relevant for `crinit`.)
+
+`crinit` does API version discovery and then uses the preferred API group version that server supports. This breaks when server supports a newer version that the generated clientset that `crinit` uses does not know about.
+
+`crinit` should choose the version that both server and it knows about.",closed,False,2017-10-25 17:37:46,2018-05-16 21:40:43
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/51,https://api.github.com/repos/kubernetes/cluster-registry/issues/51,Introduce a crinit flag to allow time outs,"Cloned from https://github.com/kubernetes/kubernetes/issues/43123.
+
+Today crinit waits infinitely for some of its operations to complete. This is suboptimal. We should introduce a hidden flag to allow timeouts.",closed,False,2017-10-25 17:39:18,2018-05-16 21:40:38
+cluster-registry,ericchiang,https://github.com/kubernetes/cluster-registry/pull/52,https://api.github.com/repos/kubernetes/cluster-registry/issues/52,cmd/clusterregistry: fix BUILD file using gazelle,"cc @perotinus master looks broken.
+
+```
+$ bazel build //cmd/clusterregistry              
+INFO: Found 1 target...                                                                                                
+ERROR: missing input file '//cmd/clusterregistry:clusterregistry'.                   
+ERROR: /home/eric/src/k8s.io/cluster-registry/cmd/clusterregistry/BUILD.bazel:3:1: //cmd/clusterregistry:clusterregistry: missing input file '//cmd/clusterregistry:clusterregistry'.
+ERROR: /home/eric/src/k8s.io/cluster-registry/cmd/clusterregistry/BUILD.bazel:3:1 1 input file(s) do not exist.                                                                                                                              
+INFO: Elapsed time: 0.186s, Critical Path: 0.00s      
+```
+
+Ran gazelle to update the BUILD file. We should probably have a hack file for this (`./hack/update-bazel.sh`)",closed,True,2017-10-25 17:41:02,2017-10-25 17:48:37
+cluster-registry,ericchiang,https://github.com/kubernetes/cluster-registry/pull/53,https://api.github.com/repos/kubernetes/cluster-registry/issues/53,*: move docker build to top level BUILD.bazel file,"Right now, executing `bazel run //:gazelle` results in a dirty git repo, since `/cmd/clusterregistry/BUILD.bazel` was previously ignored. Move the docker build logic to the root  BUILD.bazel file, so all generated code is properly ignored.
+
+cc @perotinus any thoughts here? It's kinda weird that building the binary results in a dirty git repo.",closed,True,2017-10-25 21:04:15,2017-11-10 19:18:06
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/54,https://api.github.com/repos/kubernetes/cluster-registry/issues/54,Configure bots to merge approved PRs that have passed tests,"This can be done before we actually have the tests; the main objective here is to get out of the habit of hitting the merge button by hand.
+
+cc @perotinus ",closed,False,2017-10-26 19:53:22,2017-12-20 23:44:01
+cluster-registry,ericchiang,https://github.com/kubernetes/cluster-registry/issues/55,https://api.github.com/repos/kubernetes/cluster-registry/issues/55,clusterregistry should be able to back its storage with custom resources,"Generic API servers can store state anywhere. The sample API server (the project I believe this project is based off of) happens only supports etcd, but since the cluster-registry expects to store very small amounts of data (~hundred of objects max?) custom resources don't create a crazy amount of overhead.
+
+I'd like to propose that the clusterregistry should support storing state in custom resources. This would dramatically reduce the amount of overhead it takes to deploy it.",closed,False,2017-10-27 00:13:37,2018-03-27 05:09:50
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/56,https://api.github.com/repos/kubernetes/cluster-registry/issues/56,Update rules_go to 0.6.0,Update cluster-registry rules_go to 0.6.0. This should help enable bazel debug builds enabled by https://github.com/bazelbuild/rules_go/pull/743.,closed,False,2017-10-27 03:51:19,2017-11-03 21:22:05
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/57,https://api.github.com/repos/kubernetes/cluster-registry/issues/57,Update the cluster-registry dependencies to newer versions.,"This is a first step towards checked-in vendored dependencies.
+
+- Update the Go rules to use the same version as used by `k/k`
+- Update the `k/` dependencies to post-1.8 versions.
+
+The versions used here were generally those pulled by the `dep` tool, which I have been using for vendoring. A future PR will replace the `WORKSPACE` dependencies with a vendor tree.
+
+/assign @madhusudancs, @pmorie 
+cc @font ",closed,True,2017-10-30 23:29:43,2017-11-03 21:16:59
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/58,https://api.github.com/repos/kubernetes/cluster-registry/issues/58, Use dep to vendor dependencies into the repo,"The commit ""`Add vendored dependencies into the tree.`"", is a generated comment. All hand-made changes are in the other commits.",closed,True,2017-10-31 01:54:12,2017-11-08 22:50:54
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/59,https://api.github.com/repos/kubernetes/cluster-registry/issues/59,Figure out a coherent strategy for updating vendored dependencies,"Based on @ericchiang's comment (https://github.com/kubernetes/cluster-registry/pull/58#issuecomment-340890545).
+
+`dep` is currently not quite ready for use with all of Kubernetes, and using it will potentially expose us to incompatibilities; however, there is activity in other k8s repos to improve `dep` support. Since updating vendored deps is not a common activity, it's not critical to have it be a completely smooth experience, but it should also not be so arcane and messy as to be undoable. We need to evaluate further.",closed,False,2017-11-01 19:37:57,2018-05-16 21:40:33
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/60,https://api.github.com/repos/kubernetes/cluster-registry/issues/60,Tweak the setup of the crinit command to improve its usability,@font @pmorie @ericchiang @madhusudancs ,closed,True,2017-11-01 21:41:31,2017-11-03 21:16:47
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/61,https://api.github.com/repos/kubernetes/cluster-registry/issues/61, Make necessary changes to add generated code to the repo.,"/assign @ericchiang @pmorie @madhusudancs 
+/cc @font ",closed,True,2017-11-01 23:01:17,2017-11-08 22:56:22
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/62,https://api.github.com/repos/kubernetes/cluster-registry/issues/62, Modify the cluster-registry repo to enable checked-in BUILD files,"This should complete the work necessary for #24 and unblock vendoring of this repo.
+
+Only the last two commits (starting with ""Modify the cluster-registry repo to enable checked-in BUILD files."" are meant to be reviewed here). See #61 for the reviews of the other commits.
+
+/assign @madhusudancs @pmorie @ericchiang 
+/cc @font ",closed,True,2017-11-01 23:27:12,2017-11-08 22:50:51
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/63,https://api.github.com/repos/kubernetes/cluster-registry/issues/63,Modify crinit to deploy cluster registry using k8s apiserver aggregation layer,This tracks the work to modify `crinit` to deploy the cluster registry using API aggregation. See https://kubernetes.io/docs/tasks/access-kubernetes-api/setup-extension-api-server/ for required steps.,closed,False,2017-11-02 00:26:39,2017-12-01 19:51:27
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/64,https://api.github.com/repos/kubernetes/cluster-registry/issues/64,WIP: add support to crinit to deploy clusterregistry using k8s API aggregator,In support of #63.,closed,True,2017-11-02 21:31:01,2017-11-02 21:47:54
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/65,https://api.github.com/repos/kubernetes/cluster-registry/issues/65,Add support to crinit to deploy clusterregistry using k8s API aggregator,In support of #63.,closed,True,2017-11-02 21:50:42,2018-02-27 01:50:20
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/66,https://api.github.com/repos/kubernetes/cluster-registry/issues/66,Fix ERROR: logging before flag.Parse in crinit,"Based on comments in #60, we plan to revert to the glog version used by k8s. However, because of all the outstanding repo infra work (#58, #61, #62) I want to defer this so as not to complicate those changes.",closed,False,2017-11-03 19:16:24,2017-11-09 20:11:30
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/67,https://api.github.com/repos/kubernetes/cluster-registry/issues/67,Add issue and PR templates to the cluster registry.,"We can add more content to these later, but for now this is a low-tech way to make sure that issues and PRs are (usually) labelled `sig/multicluster`.
+
+/cc @madhusudancs",closed,True,2017-11-03 23:41:25,2017-11-29 18:13:58
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/68,https://api.github.com/repos/kubernetes/cluster-registry/issues/68,crinit tool name and interface should be considered more carefully,"From https://github.com/kubernetes/cluster-registry/pull/65#issuecomment-342322999, we should consider how the `crinit` tool can be named and how its interface should be organized.
+
+- renaming `crinit` to `kubecr` (credit @font for the name) or something else
+- renaming/regrouping the subcommands to prepare for adding more commands to interact with a cluster registry. This isn't necessarily straightforward, since the tool is intended to support both aggregated and standalone deployments, each of which may have different create/update/delete operations, which may imply a three level nesting of (e.g.) `kubecr <aggregated|standalone> <init|update|delete>`.
+
+I think this is something we'd want to do on a beta timeframe, since at that point we will be expecting the tool's interface not to change significantly.",closed,False,2017-11-06 23:47:10,2018-05-16 21:40:30
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/69,https://api.github.com/repos/kubernetes/cluster-registry/issues/69,clusterregistry apiserver delegated vs standalone personality should be considered,"From [#8 (comment)](https://github.com/kubernetes/cluster-registry/issues/8#issuecomment-341819091):
+
+How do we want to handle the different personalities that clusterregistry will assume when running as a delegated vs standalone apiserver?
+
+Some things that will need to be addressed:
+
+- Authn model: currently CR has built-in authn model. Will also need to delegate to core k8s apiserver. Need to allow both.
+- Authz model: currently CR has always-allow authz model. Will also need to delegate to core k8s apiserver. Need to allow both.
+- Necessary flags: handling common and mutually exclusive flags for standalone vs delegated
+- Other stuff?
+
+Some possible options:
+
+- Add extra flag error checking. Possible confusion when user specifies combinations that are not compatible. This assumes we have several mutually exclusive options. It's not clear that we do yet but may in the future.
+  - Roughly 8 for authn standalone and 8 for authn delegated. 
+- Do we want to add new sub-commands to handle the different flags that could then trigger different paths for the authn/authz setup? This would seem strange for an apiserver. Are there any other apiservers doing this?
+  - This could be something similar to hyperkube where the first argument specifies which ""personality"" to execute.
+- Two separate binaries for delegated vs standalone. Probably try to avoid this unless we follow a hyperkube type model.
+- Other options?",closed,False,2017-11-07 00:33:14,2018-01-04 01:54:24
+cluster-registry,madhusudancs,https://github.com/kubernetes/cluster-registry/issues/70,https://api.github.com/repos/kubernetes/cluster-registry/issues/70,Publish the cluster registry API reference doc,"[Kubernetes API reference doc](https://kubernetes.io/docs/api-reference/v1.8) has been an invaluable resource not just for Kubernetes users, but also for the development team. We need similar a doc for the cluster registry API both for our users and the development team.
+
+cc @perotinus @font @pmorie ",closed,False,2017-11-08 08:03:05,2018-02-14 22:31:54
+cluster-registry,madhusudancs,https://github.com/kubernetes/cluster-registry/issues/71,https://api.github.com/repos/kubernetes/cluster-registry/issues/71,Publish reference docs for cluster registry API server and crinit,"Cluster registry users need reference docs for both API server and crinit binaries. The help text accessible through `--help` command line flag serves its purpose, but it is also extremely valuable to have it on the web so that it is indexed and made quickly accessible through search engines. It saves users from downloading the binaries and running `--help` every time they want to look up something really quick.
+
+cc @perotinus @font @pmorie ",closed,False,2017-11-08 08:07:28,2018-05-16 21:40:25
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/72,https://api.github.com/repos/kubernetes/cluster-registry/issues/72,Update the glog dependency version to match the version used in Kubernetes,"Fixes #66.
+
+/cc @madhusudancs 
+fyi @font 
+
+/sig multicluster
+",closed,True,2017-11-09 00:46:32,2017-11-29 18:13:48
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/73,https://api.github.com/repos/kubernetes/cluster-registry/issues/73,Remove the hack/bazel-test.sh script.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Submit after https://github.com/kubernetes/test-infra/pull/5433.",closed,True,2017-11-09 22:00:53,2017-11-29 18:13:45
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/74,https://api.github.com/repos/kubernetes/cluster-registry/issues/74,Licensing requirements for distributed images/binaries,"As part of the release process, we will need to make sure that licensing requirements for the compiled binaries and distributed source tarballs (if provided) are met.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,False,2017-11-13 19:45:38,2018-01-04 16:48:33
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/75,https://api.github.com/repos/kubernetes/cluster-registry/issues/75,Update development doc to include hg prerequisite,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-11-14 19:12:06,2017-12-12 18:34:36
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/pull/76,https://api.github.com/repos/kubernetes/cluster-registry/issues/76,Ignore .vscode folder in project root,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+E-Z review
+
+/sig multicluster
+",closed,True,2017-11-16 17:51:33,2017-11-30 03:06:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/77,https://api.github.com/repos/kubernetes/cluster-registry/issues/77,Meet alpha API requirements,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+All the [API] requirements under https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#alpha need to be met.",closed,False,2017-11-16 19:32:52,2018-01-04 21:18:46
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/78,https://api.github.com/repos/kubernetes/cluster-registry/issues/78,Support providing a flat file of clusters for storage and later use,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta",closed,False,2017-11-16 19:33:20,2018-01-31 03:10:39
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/79,https://api.github.com/repos/kubernetes/cluster-registry/issues/79,Support independent authn/authz for reading vs writing clusters,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta",closed,False,2017-11-16 19:33:47,2018-01-04 23:08:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/80,https://api.github.com/repos/kubernetes/cluster-registry/issues/80,Provide first-class kubectl integration with the cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This is a bit loosely defined, and will probably require a mini-design (or at least a comment with some ideas in this issue).
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta",closed,False,2017-11-16 19:34:29,2018-07-29 19:32:22
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/81,https://api.github.com/repos/kubernetes/cluster-registry/issues/81,Support grouping of clusters,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+/sig multicluster
+
+This is mainly to support authorization on groups of clusters. Namespaces are the obvious mechanism for this, but they are not the only one and we need to do some design work here to find the right approach.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta",closed,False,2017-11-16 19:35:37,2018-05-18 20:08:51
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/82,https://api.github.com/repos/kubernetes/cluster-registry/issues/82,Supports specifying and enforcing read and/or write authorization for groups of clusters in the registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Depends on #81.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta
+",closed,False,2017-11-16 19:36:14,2018-05-30 19:10:53
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/83,https://api.github.com/repos/kubernetes/cluster-registry/issues/83,Working integration with Federation,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The API should be stable enough at this point to support replacing the Federation cluster API with the cluster registry. The details of this integration will need some design: it's not clear whether the Federation API server will aggregate the cluster registry, or include the API types directly, or something else entirely.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta
+",closed,False,2017-11-16 19:37:45,2018-05-30 19:13:42
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/84,https://api.github.com/repos/kubernetes/cluster-registry/issues/84,Supports status from active controllers,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This requires some API design work: the `Status` object is currently empty. Someone will need to drive building consensus around an initial design for this object. Note that there may be several controllers interacting with the cluster registry as an expected use case, and the status object needs to take this into account.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta",closed,False,2017-11-16 19:39:30,2018-05-30 19:10:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/85,https://api.github.com/repos/kubernetes/cluster-registry/issues/85,Supports guarantees around immutability/identity of clusters in list,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The cluster registry should provide a way to guarantee that a cluster that has been added has not been changed out for another cluster at the same IP address. This could be via a certificate stored in the cluster that a controller validates against the registry, and that can be provided to the user to validate against the cluster in a defined way.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#later",closed,False,2017-11-16 19:41:10,2018-07-15 01:45:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/86,https://api.github.com/repos/kubernetes/cluster-registry/issues/86,"Version skew is understood, documented and tested","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We need to test version skew for the cluster registry, the hosting clusters and `kubectl`. Ideally, we will have upgrade tests and e2e tests that can verify many of these things, but we do need to decide what is worth testing and then write the tests/frameworks necessary.
+
+As a principle, since the cluster registry itself is so simple and foundational, the value of having these sorts of tests is very high, since it allows users to upgrade with more confidence and because the tests themselves are not that complicated to write.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#later",closed,False,2017-11-16 19:43:07,2018-07-15 01:45:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/87,https://api.github.com/repos/kubernetes/cluster-registry/issues/87,Good unit test and minimal integration/e2e test coverage,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Close criteria:
+
+- [ ] unit tests for each non-trivial package
+- [x] integration test for the cluster CRD
+
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#alpha-targeting-late-q4-17
+",closed,False,2017-11-16 19:45:10,2018-07-15 23:06:10
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/88,https://api.github.com/repos/kubernetes/cluster-registry/issues/88,Contributor documentation written,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This is already at least partially done, but could be improved.
+
+Some ideas:
+
+- examples of how to use the generated clients
+- explanation of the code structure
+- all packages have package-level documentation
+
+Feel free to add more ideas!
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#alpha-targeting-late-q4-17",closed,False,2017-11-16 19:47:20,2018-01-17 23:35:16
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/89,https://api.github.com/repos/kubernetes/cluster-registry/issues/89,User documentation drafted,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We should have a draft of user documentation for how to bootstrap/set up/use a cluster registry. This should probably include some examples as well.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#alpha-targeting-late-q4-17",closed,False,2017-11-16 19:47:59,2017-12-06 20:32:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/90,https://api.github.com/repos/kubernetes/cluster-registry/issues/90,Full suite of integration/E2E tests running on each PR,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+A testing plan will define what needs to be covered.
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta-targeting-mid-q1-18",closed,False,2017-11-16 19:48:55,2018-07-02 04:41:42
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/91,https://api.github.com/repos/kubernetes/cluster-registry/issues/91,Graduate cluster API to beta,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We need to first define what sort of signals we want before declaring the API to be beta.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta-targeting-mid-q1-18",closed,False,2017-11-16 19:50:08,2018-09-21 00:31:16
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/92,https://api.github.com/repos/kubernetes/cluster-registry/issues/92,"User documentation complete and proofread, content-wise","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta-targeting-mid-q1-18",closed,False,2017-11-16 19:50:56,2018-07-15 01:45:10
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/93,https://api.github.com/repos/kubernetes/cluster-registry/issues/93,"Solicit feedback from users, or from download statistics","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We want to have some confidence that the alpha version of the cluster registry has seen enough usage to have sussed out issues that we missed. Ideally, we'll have enough feedback from the community that we believe it to be stable, but we may need to rely on download statistics or some other proxy metric if there is not enough direct feedback.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#beta-targeting-mid-q1-18",closed,False,2017-11-16 19:52:52,2018-07-02 04:41:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/94,https://api.github.com/repos/kubernetes/cluster-registry/issues/94,User documentation is complete and published in a finalized location,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Not yet determined what this location is.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#stable-targeting-mid-q2-18",closed,False,2017-11-16 19:53:30,2018-07-15 02:46:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/95,https://api.github.com/repos/kubernetes/cluster-registry/issues/95,Graduate cluster API to v1,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#stable-targeting-mid-q2-18",closed,False,2017-11-16 19:53:46,2018-09-21 00:31:16
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/96,https://api.github.com/repos/kubernetes/cluster-registry/issues/96,Upgrade tests running and documented,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+These should be modifications of our e2e tests, but run across different upgrade scenarios. We need to find the right cost/benefit ratio here, since there is a huge matrix of possible upgrade combinations we could test.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#stable-targeting-mid-q2-18",closed,False,2017-11-16 19:54:46,2018-07-15 01:45:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/97,https://api.github.com/repos/kubernetes/cluster-registry/issues/97,Document supported Kubernetes versions,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Document which Kubernetes API server versions the cluster registry can be aggregated to in a supported manner.
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#stable-targeting-mid-q2-18",closed,False,2017-11-16 19:55:39,2018-07-15 01:45:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/98,https://api.github.com/repos/kubernetes/cluster-registry/issues/98,Cross-platform client and server binaries,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#stable-targeting-mid-q2-18",closed,False,2017-11-16 19:55:59,2018-05-16 21:40:14
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/99,https://api.github.com/repos/kubernetes/cluster-registry/issues/99,"Release process is well-defined, documented, and reproducible by people with appropriate access","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From https://github.com/kubernetes/community/blob/master/contributors/design-proposals/multicluster/cluster-registry/project-design-and-plan.md#stable-targeting-mid-q2-18",closed,False,2017-11-16 19:56:21,2018-07-15 01:45:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/100,https://api.github.com/repos/kubernetes/cluster-registry/issues/100,Determine version strategy for implementation and client tools.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The client tool and API server should have well-defined, consistent versions. We should examine what other Kubernetes projects do.
+
+Semantic versioning is a nice approach in general.
+",closed,False,2017-11-16 20:00:21,2018-05-30 19:15:01
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/101,https://api.github.com/repos/kubernetes/cluster-registry/issues/101,Update CONTRIBUTING.md,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The contribution file should have links to the dev documentation, and an indication that contributions are being solicited.
+",closed,False,2017-11-16 21:39:22,2017-11-29 00:09:00
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/102,https://api.github.com/repos/kubernetes/cluster-registry/issues/102,Get a nightly build of the image and the tool going,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+It would be good to have a nightly image to make it easier for people to test. This could perhaps be done with a prow job for now, and perhaps later migrate to using Cloud Container Builder.",closed,False,2017-11-17 00:21:14,2017-12-07 19:36:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/103,https://api.github.com/repos/kubernetes/cluster-registry/issues/103,Add more details to CONTRIBUTING.md,"/cc @pmorie, @madhusudancs
+
+@font
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-11-17 01:01:32,2017-11-29 00:05:08
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/pull/104,https://api.github.com/repos/kubernetes/cluster-registry/issues/104,Fix typo in CONTRIBUTING.md,"Fix a typo.
+
+/sig multicluster
+",closed,True,2017-11-18 20:10:14,2017-11-27 15:52:30
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/pull/105,https://api.github.com/repos/kubernetes/cluster-registry/issues/105,Add docs/README,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+E-Z review
+
+/sig multicluster
+",closed,True,2017-11-19 00:41:15,2017-11-27 15:50:34
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/106,https://api.github.com/repos/kubernetes/cluster-registry/issues/106,Protobuf support,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The cluster registry should support protocol buffers as an accepted content type. This may imply generating protocol buffers, the associated Go code, and then wiring up the API server properly.
+
+Bazel may have issues with protocol buffer support, so this might be tricky.",closed,False,2017-11-28 22:02:15,2018-01-26 01:38:32
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/107,https://api.github.com/repos/kubernetes/cluster-registry/issues/107, Add OpenAPI support to the cluster registry.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses part of #42. A follow-up will add generating a `swagger.json` file that will be checked in.
+
+/cc @pmorie @madhusudancs 
+fyi @font ",closed,True,2017-11-28 23:23:38,2017-12-20 23:51:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/108,https://api.github.com/repos/kubernetes/cluster-registry/issues/108,Add an example using the cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Idea: a document plus a simple controller that accesses a cluster registry. Ideally something that someone can run by copy/pasting commands to get up and running as quickly as possible.",closed,False,2017-11-29 00:13:35,2017-12-07 19:48:42
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/109,https://api.github.com/repos/kubernetes/cluster-registry/issues/109,Add a script that does a nightly build of the cluster registry.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses #102, though there's still some more clean-up work necessary to make the the user experience smooth.
+
+/cc @font @pmorie @madhusudancs ",closed,True,2017-11-30 02:43:12,2017-12-01 18:02:10
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/110,https://api.github.com/repos/kubernetes/cluster-registry/issues/110,Get versioning info for the built tools from the environment,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Kubernetes uses bazel `--workspace_status` to generate version info and stamp the binaries. We should do the same thing.
+
+e.g.,
+https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/BUILD#L20
+uses
+https://github.com/kubernetes/kubernetes/blob/master/pkg/version/def.bzl
+which is populated by
+https://github.com/kubernetes/kubernetes/blob/master/hack/print-workspace-status.sh
+run because of
+https://github.com/kubernetes/kubernetes/blob/master/.bazelrc
+which uses info genereated by
+https://github.com/kubernetes/kubernetes/blob/master/hack/lib/version.sh
+
+",closed,False,2017-11-30 19:35:21,2017-12-07 07:25:09
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/111,https://api.github.com/repos/kubernetes/cluster-registry/issues/111,Release cross-compiled binaries,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+https://github.com/bazelbuild/rules_go/pull/1079 added the necessary support to `rules_go` to cross compile go binaries. We should update to a new version of the rules so that we can build cross-platform binaries for `crinit` and `clusterregistry`.
+
+There may be some warts between `k/test-infra`'s `go_genrule`. Depending on how important cross-compiled binaries are, we can choose to work around or ignore those warts. This also requires bazel 0.8.0 or greater.",closed,False,2017-11-30 19:40:05,2017-12-23 02:26:44
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/112,https://api.github.com/repos/kubernetes/cluster-registry/issues/112,Add a script to update and verify the OpenAPI spec JSON file.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This should make it easier to generate non-Golang clients for the cluster registry, which would be nice for people who want to experiment with it in other languages.
+
+Finishes out the work for #42.
+",closed,True,2017-11-30 22:55:44,2017-12-08 00:06:46
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/pull/113,https://api.github.com/repos/kubernetes/cluster-registry/issues/113,Add link to nightly build to README.md,"Add a link to the nightly build in README.md
+
+/sig multicluster
+",closed,True,2017-12-01 01:53:27,2017-12-01 02:36:29
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/114,https://api.github.com/repos/kubernetes/cluster-registry/issues/114,Add crinit aggregated unit tests,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Add `crinit aggregated` unit tests similar to `standalone_test.go`. This could also include refactoring the common unit test code.
+
+/sig multicluster
+",closed,False,2017-12-01 21:02:47,2018-05-16 21:39:58
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/115,https://api.github.com/repos/kubernetes/cluster-registry/issues/115,Refactor crinit util package,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Refactor `crinit` [`util`](https://github.com/kubernetes/cluster-registry/blob/master/pkg/crinit/util/util.go) package into multiple packages e.g. options, common, util.
+
+/sig multicluster
+",closed,False,2017-12-01 21:02:51,2018-01-11 20:15:14
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/116,https://api.github.com/repos/kubernetes/cluster-registry/issues/116,Update the release script to configure gcloud Docker credentials.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This should fix the nightly build.
+
+/cc @madhusudancs @font @pmorie 
+",closed,True,2017-12-01 23:28:53,2017-12-08 00:06:44
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/117,https://api.github.com/repos/kubernetes/cluster-registry/issues/117,Add a user guide for the cluster registry.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses #89.",closed,True,2017-12-04 18:58:37,2017-12-20 23:51:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/118,https://api.github.com/repos/kubernetes/cluster-registry/issues/118,"crinit ""Waiting for API server"" doesn't work in some cases","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+`crinit`'s waiting for the API server to be ready does not usually (and sometimes cannot) work.
+
+- NodePort services, which are not accessible outside of the cluster if the node is not publicly accessible
+- aggregated services, where conceptually the ""ready"" check should be that the user can get clusters from the aggregator.",closed,False,2017-12-05 01:48:12,2018-02-02 22:00:41
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/119,https://api.github.com/repos/kubernetes/cluster-registry/issues/119,Cluster Registry support for delegated auth,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+This is now ready to test.
+
+Currently hitting re-defined flags being added due to standalone and delegated sharing similar flags e.g. `authentication-token-webhook-cache-ttl`, `client-ca-file`, etc. Need to either create a common interface for both with a common option flag structure they can both share, create different subcommands, or something else. Problem with a common interface and common option flag structure is that for delegated we rely on the `apiserver` API which we don't own, whereas for standalone we have our own implementation. Also see #69 for more details.
+
+Fix for #8 when this PR is complete.
+
+/sig multicluster
+",closed,True,2017-12-05 05:07:30,2018-07-11 17:05:54
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/120,https://api.github.com/repos/kubernetes/cluster-registry/issues/120,Implement delegated authn/z for the cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses #8. Also see #119, which is parallel work done independently by @font.
+
+Notable changes:
+
+- Adds a flag to enable delegated authn/z for the cluster registry
+- Adds a new role binding that allows the clusterregistry binary to access the `extension-apiserver-authentication` `ConfigMap`
+- Remove non-DNS-compatible characters from the service account name
+- Use the service account in the deployed Pods.",closed,True,2017-12-05 22:04:17,2017-12-20 23:51:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/121,https://api.github.com/repos/kubernetes/cluster-registry/issues/121,Make sure API name is appropriate,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+@madhusudancs brought up in #117 that using `clusterregistry.k8s.io` may not be appropriate; we may need to find a different name that does not contain `k8s.io`. Follow up on this.",closed,False,2017-12-05 23:21:23,2018-07-06 02:13:14
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/122,https://api.github.com/repos/kubernetes/cluster-registry/issues/122,Add examples for the cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+These are a bit messy still, but they demonstrate a simple controller and how the cluster registry API server runs. We can iterate.
+
+Addresses #108.",closed,True,2017-12-05 23:37:23,2017-12-20 23:50:32
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/123,https://api.github.com/repos/kubernetes/cluster-registry/issues/123,Add validation that metadata.clusterName is not set.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses #22
+
+/cc @font @madhusudancs @pmorie ",closed,True,2017-12-06 00:32:20,2017-12-08 00:09:32
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/124,https://api.github.com/repos/kubernetes/cluster-registry/issues/124,Stamp bazel-built binaries with version informaton,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We can determine a better versioning/tagging strategy later. This is mostly pulled from k/k, with some simplifications. At the least, it gives us a way to track what versions of the tools people are using, which is a big win.
+
+/cc @pmorie @madhusudancs @font",closed,True,2017-12-06 03:38:04,2017-12-20 23:50:32
+cluster-registry,madhusudancs,https://github.com/kubernetes/cluster-registry/issues/125,https://api.github.com/repos/kubernetes/cluster-registry/issues/125,Provide DoS protection in cluster registry API server ,"Provide some form of support to prevent DoS attacks on cluster registry API server. We should probably piggyback on https://github.com/kubernetes/kubernetes/issues/22679
+
+cc @perotinus 
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,False,2017-12-06 12:39:10,2018-05-16 21:39:48
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/126,https://api.github.com/repos/kubernetes/cluster-registry/issues/126,Integration/E2E tests for aggregated cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+#120 adds support for running the cluster registry with aggregated authn/z. The integration tests currently only test standalone usage. They should be updated to also test aggregating the cluster registry to a kube-apiserver.",closed,False,2017-12-06 23:20:48,2018-05-16 21:56:12
+cluster-registry,wackxu,https://github.com/kubernetes/cluster-registry/pull/127,https://api.github.com/repos/kubernetes/cluster-registry/issues/127,Refactor crinit util package into multiple packages,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+fix https://github.com/kubernetes/cluster-registry/issues/115
+
+/sig multicluster
+",closed,True,2017-12-07 14:03:32,2018-02-03 09:49:53
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/128,https://api.github.com/repos/kubernetes/cluster-registry/issues/128,Minor fixes after the changes from previous PRs,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Divided into three commits, each descriptively named. This is a clean-up PR.
+
+/cc @madhusudancs @pmorie @font",closed,True,2017-12-07 23:55:07,2017-12-18 18:50:40
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/129,https://api.github.com/repos/kubernetes/cluster-registry/issues/129,"Add some more documentation comments, and fix some lint errors","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @font @pmorie @madhusudancs ",closed,True,2017-12-08 00:13:59,2017-12-18 18:50:42
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/130,https://api.github.com/repos/kubernetes/cluster-registry/issues/130,Add widgets and notes about package docs to the README,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-08 19:15:48,2017-12-18 18:50:45
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/131,https://api.github.com/repos/kubernetes/cluster-registry/issues/131,Update to relative links and add userguide doc link,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-11 19:15:33,2017-12-12 00:18:21
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/132,https://api.github.com/repos/kubernetes/cluster-registry/issues/132,Add integration tests for API client,"As a first step toward realizing #126 we should have a test of integration tests that exercise the clientset against an embedded API server.  An example of this is in https://github.com/kubernetes-incubator/service-catalog/blob/master/test/integration/clientset_test.go though ours can likely be simplified slightly.
+
+@font has been interested in this one
+
+/sig multicluster
+",closed,False,2017-12-11 22:14:00,2017-12-13 20:26:32
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/133,https://api.github.com/repos/kubernetes/cluster-registry/issues/133,"Add Update,Delete to cluster CRUD integration test","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+For #132 
+/sig multicluster
+",closed,True,2017-12-12 06:58:53,2017-12-12 18:30:44
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/134,https://api.github.com/repos/kubernetes/cluster-registry/issues/134,Update userguide after #120 merged,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-12 16:42:57,2017-12-14 01:31:34
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/135,https://api.github.com/repos/kubernetes/cluster-registry/issues/135,Update bazel BUILD files,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-12 18:47:43,2017-12-15 02:08:32
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/136,https://api.github.com/repos/kubernetes/cluster-registry/issues/136,Move CRUD test to test/integration dir,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-12 18:49:18,2017-12-15 02:08:57
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/137,https://api.github.com/repos/kubernetes/cluster-registry/issues/137,Add a section about k8s-bot commands to the developer docs.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From @madhusudancs's comment on #88. Also fixes a bad link.
+
+/cc @font @madhusudancs @pmorie ",closed,True,2017-12-13 19:22:19,2017-12-18 18:50:46
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/138,https://api.github.com/repos/kubernetes/cluster-registry/issues/138,We should release 0.0.1 of cluster-registry,"I don't see any reason that we can't release 0.0.1 now.  I am sure there is work to do to have CI build the image (I would love to be wrong about that). However - we now have integration tests for the client and API resources.  My experience with getting to an initial alpha release of other projects in the past has been that there is not a large payoff to making things any better than 'good enough'.  I think we are at the 'good enough' bar for 0.0.1 now, and we can make improvements (include non-backward-compatible changes) in subsequent releases (which I would suggest that we make weekly).
+
+Posting this issue to see how people feel about this, and to hopefully find a champion or two (ahem, @font and @perotinus) to finalize any remaining work items associated with stuff like building and pushing images.
+
+WDYT?   
+
+/sig multicluster
+",closed,False,2017-12-13 20:30:29,2017-12-19 05:00:40
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/139,https://api.github.com/repos/kubernetes/cluster-registry/issues/139,Add init subcommands to the aggregated and standalone crinit commands.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Also adds a `--short` flag for the version.
+
+/cc @font @madhusudancs @pmorie 
+",closed,True,2017-12-13 22:41:16,2017-12-20 23:50:32
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/140,https://api.github.com/repos/kubernetes/cluster-registry/issues/140,Add cloudProvider to example cluster configs,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-14 02:30:36,2017-12-15 02:09:23
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/141,https://api.github.com/repos/kubernetes/cluster-registry/issues/141,Update OpenAPI generated code and spec,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+We'll want to add the `hack/verify-codegen.sh` and `hack/verify-openapi-spec.sh` scripts as a prow job.
+
+/sig multicluster
+",closed,True,2017-12-14 04:17:54,2017-12-15 02:08:05
+cluster-registry,madhusudancs,https://github.com/kubernetes/cluster-registry/issues/142,https://api.github.com/repos/kubernetes/cluster-registry/issues/142,Support dynamic configuration of cluster registry API server via ComponentConfig,"We should probably piggyback on what kube-apiserver does.
+
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,False,2017-12-14 11:11:17,2018-05-16 21:39:44
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/143,https://api.github.com/repos/kubernetes/cluster-registry/issues/143,Test that the example cluster YAML files work,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+#140 added more info to [examples/samplecontainer/cluster.yaml](https://github.com/kubernetes/cluster-registry/blob/master/examples/samplecontainer/cluster.yaml) and [examples/samplecontainer/cluster-two.yaml](https://github.com/kubernetes/cluster-registry/blob/master/examples/samplecontainer/cluster-two.yaml). We should add a test that these files can be added to a clusterregistry built at HEAD.
+",closed,False,2017-12-14 19:44:11,2018-10-15 04:30:04
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/144,https://api.github.com/repos/kubernetes/cluster-registry/issues/144,Update the release script to support versioned releases.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Also moves to using `BUILD` rules to create tarballs, to simplify the script a bit.
+
+/cc @font @madhusudancs @pmorie 
+
+# Notes
+- changes the layout of the GCR repo, removing the `nightly` subpath. It seems fine to have all images in one directory, since they are all tagged
+- there is no hard link between repo tags and the version passed to the release script. This should be fixed later with automation",closed,True,2017-12-14 22:59:05,2017-12-18 18:51:19
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/145,https://api.github.com/repos/kubernetes/cluster-registry/issues/145,Add script to verify all generated source for prow job,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Will turn this into a single prow job.
+
+/cc @perotinus @madhusudancs @pmorie 
+
+/sig multicluster
+",closed,True,2017-12-15 07:12:44,2017-12-15 07:33:46
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/146,https://api.github.com/repos/kubernetes/cluster-registry/issues/146,Add script to verify all generated source for prow job,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Will turn this into a single prow job.
+
+/cc @perotinus @pmorie @madhusudancs 
+
+/sig multicluster
+",closed,True,2017-12-15 17:15:01,2017-12-16 02:02:18
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/147,https://api.github.com/repos/kubernetes/cluster-registry/issues/147,Container images built with bazel rules_docker rules have the Unix epoch as their timestamps,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Blocked on https://github.com/bazelbuild/rules_docker/issues/155, after which it should be an easy fix on our side.",closed,False,2017-12-15 19:44:00,2018-05-16 21:39:40
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/148,https://api.github.com/repos/kubernetes/cluster-registry/issues/148,Add a doc that explains (in brief) how to do a release.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @pmorie @madhusudancs @font 
+
+I plan to go through this process once #144 is in to create the 0.0.1 release, hopefully this afternoon or Monday morning.",closed,True,2017-12-15 21:46:18,2018-01-04 01:08:31
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/149,https://api.github.com/repos/kubernetes/cluster-registry/issues/149,Update Gopkg.lock: the inputs-digest was out-of-date,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @font @pmorie @madhusudancs ",closed,True,2017-12-18 19:33:35,2018-01-04 01:06:55
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/150,https://api.github.com/repos/kubernetes/cluster-registry/issues/150,Update RELEASE.md to point to docs/release.md,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @pmorie @madhusudancs @font 
+",closed,True,2017-12-18 19:34:38,2018-01-04 01:08:34
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/151,https://api.github.com/repos/kubernetes/cluster-registry/issues/151,Use the generated version in the clusterregistry API server version field.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-18 19:37:41,2017-12-20 23:48:53
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/152,https://api.github.com/repos/kubernetes/cluster-registry/issues/152,Update release.md following the v0.0.1 release,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+A few changes to the release process following the v0.0.1 release.",closed,True,2017-12-18 20:53:05,2017-12-18 23:56:13
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/153,https://api.github.com/repos/kubernetes/cluster-registry/issues/153,Install curl for use in prow job's k8s test image,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-19 01:27:41,2017-12-20 23:33:35
+cluster-registry,marun,https://github.com/kubernetes/cluster-registry/issues/154,https://api.github.com/repos/kubernetes/cluster-registry/issues/154,Ensure resiliency in the face of hosting cluster health problems,"Given that the cluster registry is intended to be a foundational service for applications that target multiple clusters, it may be worth considering what kind of reliability guarantees would be desired by those applications.  It seems interesting to ensure the resiliency of the registry to health problems in the hosting cluster, e.g. by deploying APIs in an HA configuration across multiple clusters.  
+
+Given that etcd cluster members have upper bounds on allowable latency, the hosting clusters of an etcd cluster spanning those clusters would need to be located in close proximity (likely in the same datacenter) which may limit potential fault tolerance.  If greater fault tolerance is required, it may be worth considering the use of a backing store that can reliably span clusters with greater inter-cluster communication latency.
+
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,False,2017-12-19 06:38:41,2018-08-18 22:25:37
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/155,https://api.github.com/repos/kubernetes/cluster-registry/issues/155,Implement standalone webhook authoritzation.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Also adds an example using a webhook for authorization.
+
+Fixes #46.
+
+/cc @font @pmorie @madhusudancs ",closed,True,2017-12-19 19:56:19,2018-01-05 19:50:34
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/156,https://api.github.com/repos/kubernetes/cluster-registry/issues/156,"Add a script to update a LICENSES file, and include license info in the tarballs.","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Also generates a `SOURCES.md` file that includes links to the relevant source archives on GitHub.
+
+Fixes #74.
+
+/cc @font @madhusudancs @pmorie 
+  ",closed,True,2017-12-19 22:41:13,2018-01-05 19:50:35
+cluster-registry,spiffxp,https://github.com/kubernetes/cluster-registry/pull/157,https://api.github.com/repos/kubernetes/cluster-registry/issues/157,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:31:40,2017-12-20 20:28:58
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/158,https://api.github.com/repos/kubernetes/cluster-registry/issues/158,Add pmorie and font to the OWNERS file.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2017-12-20 21:31:16,2018-01-04 01:07:15
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/159,https://api.github.com/repos/kubernetes/cluster-registry/issues/159,Fix OpenAPI code generation for MicroTime and Time structures,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+Our OpenAPI code generation is not properly detecting the `MicroTime` and `Time` custom OpenAPI schema defined in their respective files. For example, `MicroTime` defines https://github.com/kubernetes/apimachinery/blob/20bbfef868144faf29af69ddb2f01646ead5c1a1/pkg/apis/meta/v1/micro_time.go#L152-L161 which should be picked up by the `openapi-gen` code generator to generate the following diff output: 
+
+```diff
+diff --git a/pkg/apis/clusterregistry/v1alpha1/zz_generated.openapi.go b/pkg/apis/clusterregistry/v1alpha1/zz_generated.openapi.go
+index 01aa6f2e..a5c5a8c2 100644
+--- a/pkg/apis/clusterregistry/v1alpha1/zz_generated.openapi.go
++++ b/pkg/apis/clusterregistry/v1alpha1/zz_generated.openapi.go
+@@ -22,6 +22,7 @@ package v1alpha1
+ 
+ import (
+ 	spec ""github.com/go-openapi/spec""
++	v1 ""k8s.io/apimachinery/pkg/apis/meta/v1""
+ 	common ""k8s.io/kube-openapi/pkg/common""
+ )
+ 
+@@ -941,23 +942,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
+ 			},
+ 			Dependencies: []string{},
+ 		},
+-		""k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"": {
+-			Schema: spec.Schema{
+-				SchemaProps: spec.SchemaProps{
+-					Description: ""MicroTime is version of Time with microsecond level precision."",
+-					Properties: map[string]spec.Schema{
+-						""Time"": {
+-							SchemaProps: spec.SchemaProps{
+-								Type:   []string{""string""},
+-								Format: ""date-time"",
+-							},
+-						},
+-					},
+-					Required: []string{""Time""},
+-				},
+-			},
+-			Dependencies: []string{},
+-		},
++		""k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"": v1.MicroTime{}.OpenAPIDefinition(),
+ 		""k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"": {
+ 			Schema: spec.Schema{
+ 				SchemaProps: spec.SchemaProps{
+@@ -1400,23 +1385,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
+ 			Dependencies: []string{
+ 				""k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause""},
+ 		},
+-		""k8s.io/apimachinery/pkg/apis/meta/v1.Time"": {
+-			Schema: spec.Schema{
+-				SchemaProps: spec.SchemaProps{
+-					Description: ""Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."",
+-					Properties: map[string]spec.Schema{
+-						""Time"": {
+-							SchemaProps: spec.SchemaProps{
+-								Type:   []string{""string""},
+-								Format: ""date-time"",
+-							},
+-						},
+-					},
+-					Required: []string{""Time""},
+-				},
+-			},
+-			Dependencies: []string{},
+-		},
++		""k8s.io/apimachinery/pkg/apis/meta/v1.Time"": v1.Time{}.OpenAPIDefinition(),
+ 		""k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp"": {
+ 			Schema: spec.Schema{
+ 				SchemaProps: spec.SchemaProps{
+```
+
+To reproduce this, add `--v=10` and possibly also `--logtostderr` (or just look for the file `/tmp/openapi-gen.*`) in the `openapi-gen` step at: https://github.com/kubernetes/cluster-registry/blob/cc52bb00104bda72a2a14fdf49d71630e81c1fe8/hack/update-codegen.sh#L114-L120
+The problem appears to arise due to missing imports, particularly this one:
+
+```
+I1220 16:35:12.455910    9557 parse.go:418] type checker: /tmp/gopathnU5sCI0j/src/k8s.io/apimachinery/pkg/apis/meta/v1/micro_time.go:23:10: could not import k8s.io/kube-openapi/pkg/common (unable to import ""k8s.io/kube-openapi/pkg/common"": cannot find package ""k8s.io/kube-openapi/pkg/common"" in any of:
+	/usr/local/go/src/k8s.io/kube-openapi/pkg/common (from $GOROOT)
+	/tmp/gopathnU5sCI0j/src/k8s.io/kube-openapi/pkg/common (from $GOPATH))
+
+```
+
+/sig multicluster
+",closed,False,2017-12-21 01:13:50,2017-12-21 19:29:46
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/160,https://api.github.com/repos/kubernetes/cluster-registry/issues/160,Fix for #159,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Fix for #159.
+
+Thanks to @luksa for identifying a dependency issue!
+
+/sig multicluster
+",closed,True,2017-12-21 01:29:01,2018-07-11 17:06:55
+cluster-registry,baodongli,https://github.com/kubernetes/cluster-registry/issues/161,https://api.github.com/repos/kubernetes/cluster-registry/issues/161,can't import the api library,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Hi, I'm trying to use the cluster registry api in my golang project. I imported it as
+
+import ""k8s.io/cluster-registry/pkg/apis/clusterregistry""
+
+In the bazel BUILD file, added the following dependency:
+""@io_k8s_cluster_registry//pkg/apis/clusterregistry:go_default_library""
+
+When building the project, bazel threw the following error:
+ no such package '@io_k8s_cluster_registry//pkg/apis/clusterregistry': The repository could not be resolved and referenced by ...
+
+Can someone let me know what I did wrong? 
+
+",closed,False,2017-12-21 15:06:31,2017-12-22 17:12:40
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/162,https://api.github.com/repos/kubernetes/cluster-registry/issues/162,crinit could be used to set up standalone webhook authn/z,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+From #155.
+
+I have concerns that adding this kind of functionality to `crinit` will make it overly complicated, but it is a bit of a pain to set up by-hand, so having a tool to do it could be useful. I suppose the `crinit` command could expose other subcommands that allow for modifying an existing cluster registry deployment to add different functionality like this: I don't want to add too much more complexity to the `init` flow.",closed,False,2017-12-21 19:31:41,2018-05-16 21:39:34
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/163,https://api.github.com/repos/kubernetes/cluster-registry/issues/163,Add cluster registry aggregated and standalone subcommands,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+This PR addresses #69.
+
+
+/sig multicluster",closed,True,2017-12-22 03:36:32,2018-07-11 17:06:11
+cluster-registry,thockin,https://github.com/kubernetes/cluster-registry/pull/164,https://api.github.com/repos/kubernetes/cluster-registry/issues/164,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281
+
+/sig multicluster
+",closed,True,2017-12-22 18:01:47,2017-12-22 19:28:38
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/165,https://api.github.com/repos/kubernetes/cluster-registry/issues/165,Fixes for webhook authorization,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Follow-up to comments #155, along with a fix that should have gone into that PR.
+
+/cc @madhusudancs @font @pmorie 
+",closed,True,2018-01-04 22:57:53,2018-01-05 19:37:37
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/166,https://api.github.com/repos/kubernetes/cluster-registry/issues/166,Change the default clusterregistry image deployed by crinit,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-01-05 19:41:33,2018-05-07 21:22:33
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/167,https://api.github.com/repos/kubernetes/cluster-registry/issues/167,Add repo-infra scripts to verify go source code,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Adding scripts from [repo-infra](https://github.com/kubernetes/repo-infra/tree/0aafaab9e158d3628804242c6a9c4dd3eb8bce1f/verify) to help verify go source code. It would be best to vendor in the scripts to execute them directly, but we are blocked on https://github.com/golang/dep/issues/1306.
+
+The first commit adds the scripts and the second commit fixes the errors.
+
+This can be followed up with a prow job.
+
+/sig multicluster
+",closed,True,2018-01-06 03:01:59,2018-01-11 02:18:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/168,https://api.github.com/repos/kubernetes/cluster-registry/issues/168,Add a link to the GCS viewer for cluster registry releases.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @pmorie @madhusudancs @font ",closed,True,2018-01-08 20:03:26,2018-05-07 21:22:27
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/169,https://api.github.com/repos/kubernetes/cluster-registry/issues/169,'Type' field for the AuthInfo object,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+@pmorie suggested that the `AuthInfo` object could also have a `Type` field at the top level. This would help clients to distinguish what they should do with the contents of the `AuthInfo` object.
+
+I think this is a good thing to add: every `AuthInfo` object does require type information in order to be useful, and pulling it into a field allows for potential validation/development a _de facto_ or formalized standard of types.
+
+I'd suggest considering having the `Type` field be an object (`TypeInfo`) to allow future extensions to the type information. For example, it would the be possible to express different versions of an authentication type without having to crush them into `X-v1`, `X-v2` strings, and so on; or, to have subtypes that are specialized varieties of one type.",closed,False,2018-01-08 21:11:49,2018-01-18 04:06:32
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/170,https://api.github.com/repos/kubernetes/cluster-registry/issues/170,added crinit aggregated test,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+Adds crinit aggregated unit tests similar to standalone_test.go. Follow up PR will attempt to refactor for common unit test for standalone and aggregated.
+Addresses issue: #114 
+
+/sig multicluster
+/cc @perotinus @font 
+",closed,True,2018-01-09 14:17:39,2018-01-24 18:42:42
+cluster-registry,patrickshan,https://github.com/kubernetes/cluster-registry/issues/171,https://api.github.com/repos/kubernetes/cluster-registry/issues/171,Support custom CA for crinit,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Currently crinit will generate a new self-signed CA and you can not supply your custom CA. Since we have pre-generated custom CAs for our different clusters, it would be nice if crinit could support custom CA.
+
+For now, the work around is to manually replace ca.crt inside the credentials secret object with our own CA after crinit finished and kill the pods to have it updated with our CA.",closed,False,2018-01-11 00:58:13,2018-05-16 21:39:30
+cluster-registry,patrickshan,https://github.com/kubernetes/cluster-registry/issues/172,https://api.github.com/repos/kubernetes/cluster-registry/issues/172,Get current clusters failed due to User `apiserver-client` permission,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+
+**What happened**:
+After provisioning cluster registry using crinit (actually it hangs at the last step to wait api server to come up but the actually pods and service are UP), when you do a get cluster operation, it will fail:
+`
+$ kubectl get clusters
+Error from server (Forbidden): clusters.clusterregistry.k8s.io is forbidden: User ""apiserver-client"" cannot list clusters.clusterregistry.k8s.io at the cluster scope
+`
+
+**What you expected to happen**:
+It should return ""No resources found""
+
+**How to reproduce it (as minimally and precisely as possible)**:
+
+1. use crinit to provision cluster registry inside an existing kube cluster:
+```
+./crinit aggregated init lab-cluster-registry --etcd-pv-storage-class ebs-volume --image 'gcr.io/crreleases/clusterregistry:latest_nightly' --host-cluster-context cluster-0.ap-southeast-2.lab
+```
+2. the above command will hang at the last step `Waiting for the cluster registry API server to come up...` when you check the pods, etcd container is UP while clusterregistry container complains about certificates error
+3. Update secret object `lab-cluster-registry-apiserver-credentials` to use cluster's existing CA to replace `ca.crt`
+4. kill the existing pods to pick up the new CA and the pod will be UP and running
+```
+$ kubectl logs -f lab-cluster-registry-apiserver-847849b6b5-msl66 clusterregistry
+I0111 04:10:17.060912       1 serve.go:85] Serving securely on 0.0.0.0:8443
+```
+5. run kubectl get clusters which will get the error above
+```
+$ kubectl get clusters
+Error from server (Forbidden): clusters.clusterregistry.k8s.io is forbidden: User ""apiserver-client"" cannot list clusters.clusterregistry.k8s.io at the cluster scope
+```
+
+**Anything else we need to know?**:
+I also tried to update clusterregistry.k8s.io:apiserver clusterrolebindings to include `apiserver-client` User but that didn't solve the problem:
+```
+$ kubectl get clusterrolebindings clusterregistry.k8s.io:apiserver -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: 2018-01-11T04:09:18Z
+  labels:
+    app: clusterregistry
+  name: clusterregistry.k8s.io:apiserver
+  resourceVersion: ""1034807""
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/clusterregistry.k8s.io%3Aapiserver
+  uid: 3197e988-f685-11e7-b176-0671bf07fdba
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: clusterregistry.k8s.io:apiserver
+subjects:
+- kind: ServiceAccount
+  name: clusterregistry-k8s-io-apiserver
+  namespace: clusterregistry
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: apiserver-client
+```
+**Environment**:
+- Kubernetes version (use `kubectl version`): v1.8.6
+- Cloud provider or hardware configuration: AWS
+- OS (e.g. from /etc/os-release): Container Linux by CoreOS 1576.5.0 (Ladybug)
+- Kernel (e.g. `uname -a`): Linux  4.14.11-coreos #1 SMP Fri Jan 5 11:00:14 UTC 2018 x86_64 Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz GenuineIntel GNU/Linux
+- Install tools: crinit (built locally based on current master@HEAD); clusterregistry image: gcr.io/crreleases/clusterregistry:latest_nightly
+- Others:
+",closed,False,2018-01-11 06:08:44,2018-01-17 11:17:31
+cluster-registry,baodongli,https://github.com/kubernetes/cluster-registry/issues/173,https://api.github.com/repos/kubernetes/cluster-registry/issues/173,Can't import this repo due to incompatible k8s.io/apimachinery,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+While trying to import cluster-registry api to istio pilot that requires version 1.9 of k8s.io/apimachinery, build of the cluster-registry failed since it depends on an earlier version of k8s.io/apimachinery.
+
+",closed,False,2018-01-11 20:43:58,2018-02-20 17:55:58
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/174,https://api.github.com/repos/kubernetes/cluster-registry/issues/174,Update and simplify Go source file verification scripts,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+- Update OpenAPI spec after cluster registry v0.0.2 released.
+
+- Updated the script that runs all Go source file verify scripts to not take any arguments. This helps simplify it, easier to document it, and easier to run as a Prow job.
+
+- Also updated individual verify scripts to allow being run from any directory.
+
+- Fixed the `gofmt` errors.
+
+
+/sig multicluster
+",closed,True,2018-01-13 00:35:01,2018-01-17 02:00:31
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/175,https://api.github.com/repos/kubernetes/cluster-registry/issues/175,Add link to userguide to enable k8s aggregation layer,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-01-16 02:08:25,2018-01-19 04:51:40
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/176,https://api.github.com/repos/kubernetes/cluster-registry/issues/176,Add type info to the AuthInfo object.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Fixes #169.
+
+/cc @pmorie @madhusudancs @font 
+Please take a look at this; this is an API change and I want to make sure that we're happy with it, or that we have a chance to suggest more fields that should be in `AuthProviderType`.",closed,True,2018-01-16 22:33:41,2018-01-26 01:40:49
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/177,https://api.github.com/repos/kubernetes/cluster-registry/issues/177,Remove the bootstrap token logic from the cluster registry.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+I don't think there's a need for this for the cluster registry, considering it's not actually trying to bootstrap nodes into a cluster. If there is in the future, it's easier to add it back.
+
+/cc @font @madhusudancs @pmorie",closed,True,2018-01-16 22:43:22,2018-01-26 01:41:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/178,https://api.github.com/repos/kubernetes/cluster-registry/issues/178,Support protocol buffers as a transport medium in the cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @font @madhusudancs @pmorie 
+
+Fixes #106.",closed,True,2018-01-17 01:02:53,2018-01-26 01:40:47
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/issues/179,https://api.github.com/repos/kubernetes/cluster-registry/issues/179,Remove dependency on temporary GOPATH in verify-go-src.sh,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+The existing `bazelbuild` image that is used to run the CI test is lacking a `GOPATH` environment setup that is required to run a non-bazel execute scenario requiring the Go toolchain, e.g. `go vet`, `go list`, etc. used by scripts called by `verify-go-src.sh`. This means we need to rely on creating our own temporary GOPATH as is currently being done in [`verify-go-src.sh`](https://github.com/kubernetes/cluster-registry/blob/master/hack/verify-go-src.sh).
+
+Once https://github.com/kubernetes/test-infra/issues/6304 is resolved, we can simplify the `verify-go-src.sh` script to remove the dependency on creating our own temporary `GOPATH`.
+
+/sig multicluster
+",closed,False,2018-01-17 21:56:02,2018-01-20 00:28:28
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/180,https://api.github.com/repos/kubernetes/cluster-registry/issues/180,Fix crinit standalone deployment,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+This went into v0.0.2 with the recent `crinit` refactor, so we'll need to release v0.0.3.
+
+/sig multicluster
+",closed,True,2018-01-19 00:06:58,2018-01-19 04:51:17
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/181,https://api.github.com/repos/kubernetes/cluster-registry/issues/181,Remove dependency on temporary GOPATH,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+Fixes #179.
+
+Now that we're relying on a different test image for the Prow job that runs this script, we can remove the dependency on a temporary `GOPATH` setup. This is because the new image contains the Go toolchain and a proper GOPATH setup prior to launching this script.
+
+/sig multicluster
+",closed,True,2018-01-19 18:32:15,2018-07-11 17:06:20
+cluster-registry,ixdy,https://github.com/kubernetes/cluster-registry/pull/182,https://api.github.com/repos/kubernetes/cluster-registry/issues/182,Update bazelbuild/rules_go to ~latest and use go1.9.2.,"There's a bug in `bazelbuild/rules_go` before 0.9.0 which causes builds to fail with Bazel 0.10.0+.
+
+I'm proactively updating the dependency so things don't break when Bazel 0.10.0 is released. This should be backwards compatible with older versions of Bazel (0.8.0+).
+
+I chose to match the version now used in the `kubernetes/kubernetes` master branch.
+
+/sig multicluster
+
+",closed,True,2018-01-19 22:51:28,2018-01-20 00:35:28
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/183,https://api.github.com/repos/kubernetes/cluster-registry/issues/183,Update Gopkg.lock,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+For some reason it got out of sync.
+
+/sig multicluster
+",closed,True,2018-01-26 02:11:31,2018-05-07 21:22:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/184,https://api.github.com/repos/kubernetes/cluster-registry/issues/184,Update the LICENSES file.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-01-26 02:13:28,2018-05-07 21:21:54
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/185,https://api.github.com/repos/kubernetes/cluster-registry/issues/185,Migrate API and generated API code into separate repo,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Thinking about #173 some more, I think the best way to solve this problem is to split the cluster registry repository into two ""separate units"" (likely repos): 
+
+- `crinit`, `clusterregistry` API server and examples
+- `clusterregistry` API
+
+The API itself does not have that many dependencies, and should be easy for other integrators to vendor in; the `clusterregistry` API server and `crinit` have dependencies on specific versions of the API machinery and other components which should not be imposed on dependents. Or, in other words, the cluster registry binaries are ""end products"" that should be able to make tight decisions about their dependency versions, while the API does not have these requirements.
+
+That said, I think this decision requires some consideration about the downsides of having to maintain two separate repos and keep them in sync within the cluster registry project. For example, generating the `swagger.json` file currently requires running a `clusterregistry` API server, which in this new model would live in a separate repository.
+
+\cc @pmorie @madhusudancs @font  
+",closed,False,2018-01-29 20:04:04,2018-07-06 01:12:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/186,https://api.github.com/repos/kubernetes/cluster-registry/issues/186,Update the OpenAPI spec for v0.0.3,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @font @madhusudancs @pmorie ",closed,True,2018-01-29 23:33:26,2018-05-07 21:22:43
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/187,https://api.github.com/repos/kubernetes/cluster-registry/issues/187,crinit should have better troubleshooting advice,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This could be implemented with a link to a troubleshooting page in this repo, with advice about how to debug a failed deployment.
+",closed,False,2018-01-30 01:40:37,2018-05-16 21:38:19
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/188,https://api.github.com/repos/kubernetes/cluster-registry/issues/188,Improve crinit's handling of waiting for the cluster registry API server.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @madhusudancs @pmorie @font 
+
+Also, adds reasonable timeouts for the `Waiting for API server...` operations.
+
+Addresses #118. Also filed #187 as a result of this work to think holistically about how to give troubleshooting help when `crinit` fails.",closed,True,2018-01-30 02:44:39,2018-05-07 21:22:47
+cluster-registry,marun,https://github.com/kubernetes/cluster-registry/pull/189,https://api.github.com/repos/kubernetes/cluster-registry/issues/189,Update integration package name to match path,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-01-30 17:15:14,2018-02-01 01:50:05
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/190,https://api.github.com/repos/kubernetes/cluster-registry/issues/190,Update Gopkg.toml to not constrain to specific dependency revisions,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Constraining dependency versions in `Gopkg.toml` to specific revisions is almost always an [antipattern](https://golang.github.io/dep/docs/Gopkg.toml.html#revision), according to the `dep` documentation. We should move away from this.",closed,False,2018-02-01 01:28:39,2018-02-16 18:21:52
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/191,https://api.github.com/repos/kubernetes/cluster-registry/issues/191,Remove the CloudProvider field from the API,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @madhusudancs @pmorie @font 
+
+I haven't heard any objections to this, and I think it makes a migration to making this API a bit more generic than clusters more reasonable. And, it's easy enough to add this back later.
+
+Fixes #29",closed,True,2018-02-01 23:34:06,2018-05-07 21:22:45
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/192,https://api.github.com/repos/kubernetes/cluster-registry/issues/192,Add aggregated and standalone delete sub-command with --force option,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+- Separates out aggregated and standalone init and delete sub-commands into their own files.
+- Adds delete sub-command to aggregated and standalone deployments.
+- Adds a `--force` option for the delete sub-command.
+
+This provides a fix for #48 by allowing the proper deletion of the cluster registry before proceeding with initializing it again.
+
+Providing an equivalent `--force` flag for the `init` sub-command requires checking for an `AlreadyExists` object error status and if it exists, retrieve it to continue using that object. This retrieved object can potentially have been initialized with different options from the current run. That is, the already stored object may contain parameters that may preclude the option flags requested by the user during the latest run. This makes the solution not as clean IMO. So I'd like to propose moving forward with this solution for now.
+
+/cc @perotinus @madhusudancs @pmorie 
+
+/sig multicluster
+",closed,True,2018-02-03 03:21:36,2018-07-11 17:06:02
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/193,https://api.github.com/repos/kubernetes/cluster-registry/issues/193,Remove the internal version of the cluster API,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+After discussions with various people, I think that having the internal version doesn't provide enough benefit to be worth the maintenance cost. The one benefit that I know of for keeping the internal version is that it provides a standardized format for external versions to be converted into, but it seems like this purpose can be equally well served by an external type which other external types are converted into.
+
+/cc @font @madhusudancs @pmorie @lavalamp @erictune ",closed,True,2018-02-08 22:42:05,2018-05-07 21:22:49
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/194,https://api.github.com/repos/kubernetes/cluster-registry/issues/194,Add cluster-registry API reference docs,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+I plan to follow up with details on generating these docs in a future PR.
+
+/cc @perotinus @madhusudancs @pmorie 
+/sig multicluster
+",closed,True,2018-02-08 23:08:34,2018-07-11 17:07:04
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/195,https://api.github.com/repos/kubernetes/cluster-registry/issues/195,Migrate to integration test harness in https://github.com/kubernetes-sig-testing/frameworks,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster",closed,False,2018-02-09 21:38:52,2018-05-16 21:55:16
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/196,https://api.github.com/repos/kubernetes/cluster-registry/issues/196,"Local/development E2E test environment, via docker/minikube","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Developers need to be able to run E2E tests quickly, without needing to stage a whole Kubernetes cluster.",closed,False,2018-02-09 21:39:51,2018-05-16 21:53:31
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/197,https://api.github.com/repos/kubernetes/cluster-registry/issues/197,Examine `kubetest` and determine its suitability for running E2E tests with cluster registry,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+FIgure out if [kubetest](https://github.com/kubernetes/test-infra/tree/master/kubetest) is suitable for us to run E2E tests for the cluster registry.",closed,False,2018-02-09 21:40:34,2018-07-09 23:45:10
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/198,https://api.github.com/repos/kubernetes/cluster-registry/issues/198,Write client-generic CRUD test building blocks,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We should have testing ""building blocks"" that perform and validate CRUD operations with a provided client. These can then be used for aggregated and standalone E2E and integration tests, without having to write different tests per environment.",closed,False,2018-02-09 21:41:50,2018-07-09 23:45:11
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/199,https://api.github.com/repos/kubernetes/cluster-registry/issues/199,Tests for clusterregistry flag parsing/processing,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The flag processing of the `clusterregistry` API server is intricate enough that we should have a suite of tests for it (and ensure that it is itself testable).",closed,False,2018-02-09 21:42:42,2018-05-16 21:37:56
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/200,https://api.github.com/repos/kubernetes/cluster-registry/issues/200,Tests for example code,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+We should write integration tests for as much of the example code as possible. It's not the highest priority item right now, but having these tests will help make sure that that code does not break as the clusterregistry evolves.",closed,False,2018-02-09 21:43:49,2018-10-14 00:02:06
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/201,https://api.github.com/repos/kubernetes/cluster-registry/issues/201,Update Gopkg.toml to not have constraints.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This is not a final solution to the problem of vendoring, and we expect to split the repo apart in the near future, but this change should at least unblock other teams from vendoring.
+
+/cc @font @pmorie @madhusudancs 
+",closed,True,2018-02-14 23:02:17,2018-05-07 21:22:12
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/202,https://api.github.com/repos/kubernetes/cluster-registry/issues/202,Namespace the Cluster resource,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+In my testing, this seemed to worked fine in both aggregated and standalone modes.
+
+/cc @pmorie @madhusudancs @font
+",closed,True,2018-02-15 22:46:16,2018-05-16 21:49:32
+cluster-registry,mlowery,https://github.com/kubernetes/cluster-registry/issues/203,https://api.github.com/repos/kubernetes/cluster-registry/issues/203,crinit should support running outside of aggregator in aggregated mode,"Today, when running the `aggregated` subcommand, `crinit` will create the extension apiserver in the aggregator (since it only takes one context `host-cluster-context`). In some circumstances, an operator may want to run cluster registry outside of the aggregator. I have customized `crinit` to support this. Is this a feature that you would be interested in? A summary of changes:
+
+* takes additional kubeconfig context `agg-context` (defaults to value given in `host-cluster-context` for backward compatibility)
+* passes `request-header-*` to cluster registry apiserver (since it cannot get these from the `extension-apiserver-authentication` configmap at runtime through in-cluster client)
+* passes `{authentication,authorization}-kubeconfig` to cluster registry apiserver (since it cannot use in-cluster client) and mounts related secret (after serviceaccount created, fetches token from its related secret in aggregator and uses that as secret)
+* takes additional flag `canonical-name` which becomes the `externalName` value in a service of type `ExternalName` which lives in the aggregator and points to the ""real"" service in the host cluster
+* skips some steps that are not needed when running outside the aggregator (e.g. creating a rolebinding for reading `extension-apiserver-authentication` configmap)
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,False,2018-02-20 21:42:00,2018-05-16 21:37:44
+cluster-registry,mlowery,https://github.com/kubernetes/cluster-registry/pull/204,https://api.github.com/repos/kubernetes/cluster-registry/issues/204,Fix clusterregistry.k8s.io:apiserver ClusterRole,"I discovered this when I attempted to create a new `ClusterRoleBinding` referencing this `ClusterRole`. Until I changed from `cluster` to `clusters`, it didn't work.
+
+Before:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: clusterregistry
+  name: clusterregistry.k8s.io:apiserver
+rules:
+- apiGroups:
+  - clusterregistry.k8s.io
+  resources:
+  - cluster
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+```
+
+After (only change is `clusters` under `resources`):
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: clusterregistry
+  name: clusterregistry.k8s.io:apiserver
+rules:
+- apiGroups:
+  - clusterregistry.k8s.io
+  resources:
+  - clusters
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+```
+
+This brings up another question. What is the purpose of this `ClusterRole`? It's bound to the `ServiceAccount` in the `ClusterRoleBinding` of the same name but I'm not familiar with when that would be used. Any instruction here would be appreciated.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-02-22 02:14:31,2018-02-27 06:42:28
+cluster-registry,mlowery,https://github.com/kubernetes/cluster-registry/pull/205,https://api.github.com/repos/kubernetes/cluster-registry/issues/205,Add support to crinit for running cluster registry outside of aggregator,"Closes #203
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-02-22 22:17:53,2018-05-30 19:08:17
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/206,https://api.github.com/repos/kubernetes/cluster-registry/issues/206,Update clientCIDR fields to match API definition,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-02-22 23:34:40,2018-07-11 17:06:39
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/207,https://api.github.com/repos/kubernetes/cluster-registry/issues/207,Remove cluster role and binding for clusters,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+Remove unnecessary cluster role and cluster role binding objects as I don't think we'll need it. This is mainly used to provide permissions for controllers within the cluster to perform specific cluster operations e.g. an admission controller to perform specific cluster resource operations. This cleans up and simplifies the code a bit. We can always add it back later if needed.
+
+The [k8s docs on this](https://kubernetes.io/docs/tasks/access-kubernetes-api/setup-extension-api-server/) are a little misleading and suggest this is needed.
+
+/sig multicluster
+",closed,True,2018-02-27 06:38:53,2018-07-11 17:05:45
+cluster-registry,AdamDang,https://github.com/kubernetes/cluster-registry/pull/208,https://api.github.com/repos/kubernetes/cluster-registry/issues/208,Typo: fix boostrap->bootstrap,"""boostrap"" is not correct.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-02-27 11:44:12,2018-03-18 15:22:12
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/209,https://api.github.com/repos/kubernetes/cluster-registry/issues/209,validates contents contained in createdRBACObj in aggregated test,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This is a follow up PR to #170 which adds validation of the contents of the RBAC Object in the crinit aggregated test
+
+Hopefully closes issue: #114
+If it doesn't, please let me know what else needs to be done to satisfy this issue and I can work on it.",closed,True,2018-02-28 17:50:27,2018-04-11 20:54:56
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/210,https://api.github.com/repos/kubernetes/cluster-registry/issues/210,Add columns to `kubectl get clusters`,"Currently, the cluster registry does not send OpenAPI column information for use with kubectl. We should begin sending this so that users get more information when they do `kubectl get clusters`.
+
+/sig multicluster
+",closed,False,2018-03-01 15:41:49,2018-05-18 02:25:56
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/211,https://api.github.com/repos/kubernetes/cluster-registry/issues/211,Ensure `kubectl explain clusters` has meaningful output,"This issue is to ensure that `kubectl explain cluster` has meaningful output; requires some of the same bits as #210 
+
+/sig multicluster
+
+cc @onyiny-ang ",closed,False,2018-03-01 15:43:46,2018-03-20 14:54:43
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/212,https://api.github.com/repos/kubernetes/cluster-registry/issues/212,[WIP] Adding 'kubectl' column Info using table convertor,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses #210 ",closed,True,2018-03-12 22:55:09,2018-06-06 13:55:02
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/213,https://api.github.com/repos/kubernetes/cluster-registry/issues/213,Add custom columns to openAPI schema,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses #210 
+Since Tableconvertor from #212 requires an updated apiserver, I am attempting a different means to achieve a similar end.
+
+This PR adds appropriate x-kubernetes-print-columns extensions to the OpenAPI schema, which enhances kubectl output when listing cluster resources:
+
+This requires:
+- a rebuild of the cluster-registry container image
+-  kubectl to be built from master, or use the `--use-openapi-print-columns=true` option",closed,True,2018-03-18 03:55:15,2018-06-06 13:54:57
+cluster-registry,junxu,https://github.com/kubernetes/cluster-registry/pull/214,https://api.github.com/repos/kubernetes/cluster-registry/issues/214,Fix example for creating cluster,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-03-20 04:38:21,2018-03-28 19:22:04
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/215,https://api.github.com/repos/kubernetes/cluster-registry/issues/215,Transform this repo from a custom API server to a set of CRDs,"As @perotinus has outlined [here](https://docs.google.com/document/d/1FhoxzYUJ4qiyZ4qA8LE5zgCO4jUihiDUlbttvLlnRmk/edit#), there are a number of reasons that using CRDs as the basis of cluster-registry.
+
+I think we should move toward using CRDs as the basis for this repository. I imagine that after that transformation, we probably have 2 (possibly 3) repos:
+
+- `cluster-registry` holds:
+  - the CRD definitions
+  - any future validating/mutating webhook server
+  - a tiny `crinit` binary that installs the CRDs
+- `cluster-registry-api` holds the Go API
+- `cluster-registry-client-go` holds the generated Go client
+
+We could collapse the `cluster-registry-api` repo and `cluster-registry-client-go` repo into just `cluster-registry-client-go` initially, if useful.
+
+/sig multicluster
+",closed,False,2018-03-26 16:50:13,2018-05-16 21:37:03
+cluster-registry,sbezverk,https://github.com/kubernetes/cluster-registry/issues/216,https://api.github.com/repos/kubernetes/cluster-registry/issues/216,Inter cluster member authentication,"It would be great to offer some functionality for a cluster member to request a certificate which would allow application running on the cluster member which is using this certificate to access other cluster members API.
+
+/sig multicluster
+",closed,False,2018-03-26 17:14:20,2018-08-23 19:20:40
+cluster-registry,jianzhangbjz,https://github.com/kubernetes/cluster-registry/issues/217,https://api.github.com/repos/kubernetes/cluster-registry/issues/217,crinit aggregated init fail due to cannot create the clusterrole,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+I followed the [doc](https://github.com/kubernetes/cluster-registry/blob/f549e8d7cfffc2c4f81fe9f29595b3a99e74f3db/docs/userguide.md#aggregated-api-server) , but encounter an issue when running the `aggregated init` command. Seem like the clusterrole `clusterregistry.k8s.io:apiserver` created failed. Or something else I missed?
+
+```command
+[root@host-172-16-120-152 cr]# ./crinit aggregated init jian --host-cluster-context=openshift-ansible-service-broker/172-16-120-152:8443/system:admin --v 10
+...
+I0406 08:01:13.704456   12221 init.go:200] Successfully created service account
+I0406 08:01:13.704533   12221 init.go:204] Creating cluster role clusterregistry.k8s.io:apiserver
+I0406 08:01:13.704677   12221 request.go:853] Request Body: {""kind"":""ClusterRole"",""apiVersion"":""rbac.authorization.k8s.io/v1"",""metadata"":{""name"":""clusterregistry.k8s.io:apiserver"",""creationTimestamp"":null,""labels"":{""app"":""clusterregistry""}},""rules"":[{""verbs"":[""get"",""list"",""watch"",""create"",""update"",""patch"",""delete""],""apiGroups"":[""clusterregistry.k8s.io""],""resources"":[""clusters""]}]}
+I0406 08:01:13.704774   12221 round_trippers.go:417] curl -k -v -XPOST  -H ""User-Agent: crinit/v0.0.0 (linux/amd64) kubernetes/$Format"" -H ""Accept: application/json, */*"" -H ""Content-Type: application/json"" https://172.16.120.152:8443/apis/rbac.authorization.k8s.io/v1/clusterroles
+I0406 08:01:13.706440   12221 round_trippers.go:436] POST https://172.16.120.152:8443/apis/rbac.authorization.k8s.io/v1/clusterroles 404 Not Found in 1 milliseconds
+I0406 08:01:13.706777   12221 round_trippers.go:442] Response Headers:
+I0406 08:01:13.706826   12221 round_trippers.go:445]     Content-Type: application/json
+I0406 08:01:13.706869   12221 round_trippers.go:445]     Content-Length: 174
+I0406 08:01:13.706910   12221 round_trippers.go:445]     Date: Fri, 06 Apr 2018 12:01:13 GMT
+I0406 08:01:13.706951   12221 round_trippers.go:445]     Cache-Control: no-store
+I0406 08:01:13.707005   12221 request.go:853] Response Body: {""kind"":""Status"",""apiVersion"":""v1"",""metadata"":{},""status"":""Failure"",""message"":""the server could not find the requested resource"",""reason"":""NotFound"",""details"":{},""code"":404}
+I0406 08:01:13.707441   12221 init.go:209] Failed to create cluster role &ClusterRole{ObjectMeta:k8s_io_apimachinery_pkg_apis_meta_v1.ObjectMeta{Name:,GenerateName:,Namespace:,SelfLink:,UID:,ResourceVersion:,Generation:0,CreationTimestamp:0001-01-01 00:00:00 +0000 UTC,DeletionTimestamp:<nil>,DeletionGracePeriodSeconds:nil,Labels:map[string]string{},Annotations:map[string]string{},OwnerReferences:[],Finalizers:[],ClusterName:,Initializers:nil,},Rules:[],}: the server could not find the requested resource
+F0406 08:01:13.707714   12221 init.go:101] error: the server could not find the requested resource
+```
+Below info for your receference.
+`crinit` version as below:
+```command
+[root@host-172-16-120-152 cr]# ./crinit version
+version.Info{Major:"""", Minor:"""", GitVersion:""v0.0.3-32+8ff07ac427132f-dirty"", GitCommit:""8ff07ac427132fa8803329c477762a2eba6c5d8f"", GitTreeState:""dirty"", BuildDate:""2018-04-06T05:04:23Z"", GoVersion:""go1.9.2"", Compiler:""gc"", Platform:""linux/amd64""}
+```
+current context:
+```command
+[root@host-172-16-120-152 cr]# oc config get-contexts
+CURRENT   NAME                                                                        CLUSTER                                                AUTHINFO                           NAMESPACE
+*         openshift-ansible-service-broker/172-16-120-152:8443/system:admin           172-16-120-152:8443                                    system:admin/172-16-120-152:8443   openshift-ansible-service-broker
+          default/172-16-120-152:8443/system:admin                                    172-16-120-152:8443                                    system:admin/172-16-120-152:8443   default
+          default/host-8-244-1-host-centralci-eng-rdu2-redhat-com:8443/system:admin   host-8-244-1-host-centralci-eng-rdu2-redhat-com:8443   system:admin/172-16-120-152:8443   default
+          jmw6p/172-16-120-152:8443/system:admin                                      172-16-120-152:8443                                    system:admin/172-16-120-152:8443   jmw6p
+```",closed,False,2018-04-06 12:38:58,2018-05-17 01:38:09
+cluster-registry,thockin,https://github.com/kubernetes/cluster-registry/pull/218,https://api.github.com/repos/kubernetes/cluster-registry/issues/218,Use k8s GCR vanity URL,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-04-06 15:57:27,2018-04-06 23:09:08
+cluster-registry,jianzhangbjz,https://github.com/kubernetes/cluster-registry/issues/219,https://api.github.com/repos/kubernetes/cluster-registry/issues/219,crinit standalone init failed,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+I run the `standalone init` per this [user guide](https://github.com/kubernetes/cluster-registry/blob/master/docs/userguide.md#standalone), but failed. Details as below:
+```command
+[root@host-172-16-120-8 ~]# ./crinit standalone init jian --host-cluster-context=openshift-ansible-service-broker/172-16-120-8:8443/system:admin  --v 5
+Creating a namespace clusterregistry for the cluster registry...I0407 10:46:48.977752  114074 options.go:203] Creating a namespace clusterregistry for the cluster registry
+ done
+Creating cluster registry API server service...I0407 10:46:49.004032  114074 options.go:221] Creating cluster registry API server service
+..........................................................................^C
+```
+I waiting for a long time so I interrupt it by type `Ctrl + c`.
+```command
+[root@host-172-16-120-8 ~]# oc get all
+NAME       TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)         AGE
+svc/jian   LoadBalancer   172.30.60.57   <pending>     443:31741/TCP   6m
+[root@host-172-16-120-8 ~]# oc describe svc jian
+Name:                     jian
+Namespace:                clusterregistry
+Labels:                   app=clusterregistry
+Annotations:              <none>
+Selector:                 app=clusterregistry,module=clusterregistry-apiserver
+Type:                     LoadBalancer
+IP:                       172.30.60.57
+Port:                     https  443/TCP
+TargetPort:               https/TCP
+NodePort:                 https  31741/TCP
+Endpoints:                <none>
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+I found the service is a `LoadBalancer` type, so I need to config the `LoadBalancer` before running this `standalone init`?
+",closed,False,2018-04-08 03:41:40,2018-04-11 03:04:37
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/220,https://api.github.com/repos/kubernetes/cluster-registry/issues/220,Determine scoping of Cluster registry types,"I realized today that despite our numerous discussions on the subject we don't have an issue dealing with what the scope of the cluster registry API should be.
+
+Options:
+
+- Only cluster-scoped
+- Only namespace-scoped
+- Both
+
+/sig multicluster
+",closed,False,2018-04-10 19:43:50,2018-04-25 19:49:57
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/issues/221,https://api.github.com/repos/kubernetes/cluster-registry/issues/221,Determine name of 'public' namespace for globally accessible cluster records,"As part of #220, we decided that there should be a reserved namespace designated as being for 'public' cluster records that anyone should be allowed to see. This issue is to determine the name of that namespace.",closed,False,2018-04-24 19:55:27,2018-10-27 20:28:13
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/222,https://api.github.com/repos/kubernetes/cluster-registry/issues/222,Update the OpenAPI spec for the v0.0.4 release.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-05-02 21:33:42,2018-05-07 21:21:44
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/issues/223,https://api.github.com/repos/kubernetes/cluster-registry/issues/223,`crinit standalone init mycr  mycluster.icp-context` hang,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+```
+root@gyliu-ubuntu-1:~/gyliu/mc# ./crinit standalone init mycr  mycluster.icp-context
+Creating a namespace clusterregistry for the cluster registry... done
+Creating cluster registry API server service...............................................................................................
+```
+
+Which log shall I check for such condition?",closed,False,2018-05-07 06:05:26,2018-05-17 02:59:55
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/224,https://api.github.com/repos/kubernetes/cluster-registry/issues/224,Highlight clone location.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-05-07 06:57:56,2018-05-09 01:48:33
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/225,https://api.github.com/repos/kubernetes/cluster-registry/issues/225,Migrate the cluster registry to use a CRD,"This PR has many commits. I think it will be easier to review commit-by-commit rather than reviewing the entire PR at once.
+
+Follow-up items being tracked in #229.
+
+/sig multicluster
+
+cc @font @pmorie @madhusudancs ",closed,True,2018-05-08 18:27:10,2018-05-18 00:24:05
+cluster-registry,roytman,https://github.com/kubernetes/cluster-registry/issues/226,https://api.github.com/repos/kubernetes/cluster-registry/issues/226,Wrong cp command in the examples/samplecontainer/README.md,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The file examples/samplecontainer/README.md has the following command
+`
+cp ""$(bazel info bazel-bin)/cmd/clusterregistry/clusterregistry"" \
+  ""$(bazel info bazel-bin)/examples/slackcontroller/slackcontroller"" \
+  ./contents
+`
+
+However, the  binaries are located in the OS and ARCH dependent path. 
+
+On my MAC it is 
+`$(bazel info bazel-bin)/cmd/clusterregistry/darwin_amd64_stripped/clusterregistry""` and
+`$(bazel info bazel-bin)/examples/slackcontroller/darwin_amd64_stripped/slackcontroller""`",closed,False,2018-05-10 21:01:18,2018-05-16 21:31:14
+cluster-registry,roytman,https://github.com/kubernetes/cluster-registry/pull/227,https://api.github.com/repos/kubernetes/cluster-registry/issues/227,Fix the cp command,"   fix location of binaries
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The  examples/samplecontainer/README.md file has the following command
+cp ""$(bazel info bazel-bin)/cmd/clusterregistry/clusterregistry"" \ ""$(bazel info bazel-bin)/examples/slackcontroller/slackcontroller"" \ ./contents
+
+However, the binaries are located in the OS and ARCH dependent path.
+
+On my MAC they are
+`$(bazel info bazel-bin)/cmd/clusterregistry/darwin_amd64_stripped/clusterregistry""` and
+`$(bazel info bazel-bin)/examples/slackcontroller/darwin_amd64_stripped/slackcontroller""`
+
+Issue #226 ",closed,True,2018-05-10 21:04:07,2018-05-15 06:28:16
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/228,https://api.github.com/repos/kubernetes/cluster-registry/issues/228,Add namespaces to the cluster CRD,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+/assign @font @madhusudancs @pmorie 
+
+Fixes #81,  #82 and #228.",closed,True,2018-05-16 21:30:11,2018-06-05 00:26:41
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/issues/229,https://api.github.com/repos/kubernetes/cluster-registry/issues/229,Follow-up tasks for CRD conversion,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+/sig multicluster
+
+Follow-up tasks from #225, migrated here for easier tracking
+- [x] switch to a namespaced object (#228)
+- [x] remove the unnecessary test jobs
+- [x] figure out what needs to be done with `LICENSES`
+- [ ] create a release process for the CRD
+- [ ] figure out if/how to write a test to verify that the `kubebuilder` generated code is up-to-date
+- [ ] run the integration tests in `/test/...` before each PR
+- [x] close bugs made irrelevant by this PR
+- [ ] validation
+- [x] look at removing `pkg/inject` if it's not necessary.
+- [x] fix issue with cluster CRD `additionalPermissions` field (#231)",closed,False,2018-05-17 03:43:12,2018-10-29 23:18:14
+cluster-registry,mmeliani,https://github.com/kubernetes/cluster-registry/issues/230,https://api.github.com/repos/kubernetes/cluster-registry/issues/230,setting up cluster registry fails ,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+get the following error while installing the cluster registry 
+```
+kubectl apply -f cluster-registry-crd.yaml 
+The CustomResourceDefinition ""clusters.clusterregistry.k8s.io"" is invalid: spec.validation.openAPIV3Schema.properties[spec].properties[authInfo].properties[providers].items.properties[config].additionalProperties: Forbidden: additionalProperties cannot be set to false
+```
+where am I going wrong ?  
+
+/sig multicluster
+",closed,False,2018-05-17 13:10:50,2018-05-18 20:09:36
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/231,https://api.github.com/repos/kubernetes/cluster-registry/issues/231,Remove the additionalProperties field from the CRD spec.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This fixes the issue in #230. I believe there is a better way to fix this (IIRC @pmorie suggested using a slice of objects with key-value pairs instead of a map), but this will unblock people from using this now.
+
+/assign @pmorie @font @madhusudancs 
+",closed,True,2018-05-18 00:37:47,2018-06-05 00:26:42
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/232,https://api.github.com/repos/kubernetes/cluster-registry/issues/232,Fix the user guide to work for namespaced clusters.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-05-18 20:26:35,2018-06-05 00:26:39
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/233,https://api.github.com/repos/kubernetes/cluster-registry/issues/233,Add SECURITY_CONTACTS to the cluster registry repo,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Does anyone else want to volunteer to be a security contact?
+
+/assign @madhusudancs @pmorie @font ",closed,True,2018-05-23 17:16:22,2018-06-05 00:26:38
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/234,https://api.github.com/repos/kubernetes/cluster-registry/issues/234,"Two updates to the cluster API: adding a condition to the status, and modifying the AuthInfo","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This PR proposes two changes to the cluster registry API:
+
+- adding a conditions object to the status, and defining one condition, `OK`
+- removing the list of providers with maps of data from `AuthInfo` in favor of two object references, one for controller authentication and one for user authentication.
+
+I think the first change is valuable before we move the API to beta, and the condition I've defined is relevant to any environment that's running a cluster registry. The second change doesn't change the expressiveness of the API in any way, but it provides a more clear split between how controllers and users interact with the cluster object, and an easier-to-work with interface for allowing users to use the cluster registry to get access to credentials. It also works around a minor issue with CRD validation spec generation.
+
+With these changes I would feel comfortable moving the API to beta.
+
+/cc @font @pmorie @madhusudancs ",closed,True,2018-05-23 19:22:00,2018-06-05 00:26:33
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/235,https://api.github.com/repos/kubernetes/cluster-registry/issues/235,Address follow up tasks from CRD conversion: LICENCES,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+This PR addresses the LICENSES follow up task in #229 (figure out what needs to be done with LICENSES).
+Follow up tasks will explore and hopefully implement the test to verify kubebuilder generated code and  the integration tests in /test/... being run before each PR.",closed,True,2018-05-24 20:31:46,2018-05-30 18:15:55
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/236,https://api.github.com/repos/kubernetes/cluster-registry/issues/236,Some small updates to the cluster CRD YAML,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+- leave all the generated fields in the YAML, to make the process of generating and updating simpler
+- fix a bug with the generated YAML. https://github.com/kubernetes-sigs/kubebuilder/issues/220 tracks fixing this issue upstream.
+
+/assign @pmorie @madhusudancs @font ",closed,True,2018-05-25 22:34:41,2018-06-05 00:26:36
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/237,https://api.github.com/repos/kubernetes/cluster-registry/issues/237,"Remove unnecessary code from pkg/inject, and clarify why that package and pkg/controller exist.","<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Addresses one of the follow-up items in #229.
+
+/assign @font @madhusudancs @pmorie ",closed,True,2018-05-29 23:50:31,2018-06-05 00:26:31
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/238,https://api.github.com/repos/kubernetes/cluster-registry/issues/238,Update the cluster type definition to use a locally-defined object reference.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+Based on advice found in https://github.com/kubernetes-incubator/service-catalog/issues/1411 and elsewhere that suggests that `v1.ObjectReference` is better avoided.
+/sig multicluster
+/assign @madhusudancs @font @csbell @pmorie",closed,True,2018-05-30 19:03:14,2018-06-05 00:26:30
+cluster-registry,colemickens,https://github.com/kubernetes/cluster-registry/pull/239,https://api.github.com/repos/kubernetes/cluster-registry/issues/239,s/cluster API/Cluster Registry API/g,"It's a bit confusing as written.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-04 06:34:17,2018-06-04 13:54:54
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/240,https://api.github.com/repos/kubernetes/cluster-registry/issues/240,Remove the unused .bazelrc file.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-04 21:09:03,2018-06-05 00:26:28
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/issues/241,https://api.github.com/repos/kubernetes/cluster-registry/issues/241,How to deploy storage-provisioner,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+At step https://github.com/kubernetes-sigs/federation-v2/blob/master/docs/userguide.md#deploy-the-cluster-registry , it is requested to create `storage-provisioner`. Any steps can help me to set up this?
+
+## Deploy the Cluster Registry
+Make sure the storage provisioner is ready before deploying the Cluster Registry.
+
+kubectl -n kube-system get pod storage-provisioner",closed,False,2018-06-13 15:45:29,2018-06-13 17:25:34
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/issues/242,https://api.github.com/repos/kubernetes/cluster-registry/issues/242,Where to get federation image,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+In step https://github.com/kubernetes-sigs/federation-v2/blob/master/docs/userguide.md#automated-deployment , 
+
+## Automated Deployment
+If you would like to have the deployment of the cluster registry and federation-v2 control plane automated, then invoke the deployment script by running:
+
+./scripts/deploy-federation.sh <image> cluster2
+Where <image> is in the form <containerregistry>/<username>/<imagename>:<tagname> e.g. docker.io/<username>/federation-v2:test.
+
+Where to get the image of `federation-v2:test`?
+
+Any steps for me to build this image?",closed,False,2018-06-13 15:47:29,2018-06-13 21:57:48
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/issues/243,https://api.github.com/repos/kubernetes/cluster-registry/issues/243,Upgrade kubebuilder to 0.1.12,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+The 0.1.11 already fixed the issue https://github.com/kubernetes-sigs/kubebuilder/issues/220",closed,False,2018-06-14 03:11:28,2018-06-28 22:44:20
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/244,https://api.github.com/repos/kubernetes/cluster-registry/issues/244,Upgrade kubebuilder to 0.1.12.,"Fixed https://github.com/kubernetes/cluster-registry/issues/243
+
+/cc @font @madhusudancs @perotinus @pmorie
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-14 03:23:24,2018-06-28 22:53:33
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/245,https://api.github.com/repos/kubernetes/cluster-registry/issues/245,Updated .gitignore.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-14 03:31:06,2018-06-28 21:55:27
+cluster-registry,onyiny-ang,https://github.com/kubernetes/cluster-registry/pull/246,https://api.github.com/repos/kubernetes/cluster-registry/issues/246,Fix broken link to userguide,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Minimal fix to a broken user guide link.
+/assign @perotinus 
+",closed,True,2018-06-19 14:14:42,2018-06-19 17:18:33
+cluster-registry,max8899,https://github.com/kubernetes/cluster-registry/pull/247,https://api.github.com/repos/kubernetes/cluster-registry/issues/247,fix typo,"prefered -> preferred
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-27 06:51:39,2018-07-04 08:00:46
+cluster-registry,max8899,https://github.com/kubernetes/cluster-registry/pull/248,https://api.github.com/repos/kubernetes/cluster-registry/issues/248,fix typo,"depedencies -> dependencies
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-27 06:53:58,2018-07-04 08:00:34
+cluster-registry,max8899,https://github.com/kubernetes/cluster-registry/pull/249,https://api.github.com/repos/kubernetes/cluster-registry/issues/249,fix some typo,"consistenly -> consistently
+neccessary ->necessary
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-06-27 06:57:20,2018-09-27 02:24:05
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/250,https://api.github.com/repos/kubernetes/cluster-registry/issues/250,Use `gofmt -s -w` to format the file.,"`gofmt -s` will not write result to source file.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster",closed,True,2018-06-28 05:33:31,2018-06-28 22:52:48
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/251,https://api.github.com/repos/kubernetes/cluster-registry/issues/251,Updated promopt message for gofmt.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @perotinus ",closed,True,2018-06-28 22:52:25,2018-06-29 00:31:16
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/252,https://api.github.com/repos/kubernetes/cluster-registry/issues/252,Added status to cluster yaml template.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @perotinus",closed,True,2018-07-02 06:12:58,2018-07-03 00:13:34
+cluster-registry,thisisshi,https://github.com/kubernetes/cluster-registry/issues/253,https://api.github.com/repos/kubernetes/cluster-registry/issues/253,Link to YAML for CRD leads to 404 on website,"https://kubernetes.github.io/cluster-registry/userguide.html
+
+the link ""YAML for the CRD"" leads to https://kubernetes.github.io/cluster-registry-crd.yaml which is a 404
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,False,2018-07-11 15:47:26,2018-07-11 22:02:40
+cluster-registry,thisisshi,https://github.com/kubernetes/cluster-registry/pull/254,https://api.github.com/repos/kubernetes/cluster-registry/issues/254,"fix crd yaml path in website, previously was 404","Related to #253 
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-07-11 15:48:06,2018-07-11 21:58:26
+cluster-registry,patrickshan,https://github.com/kubernetes/cluster-registry/issues/255,https://api.github.com/repos/kubernetes/cluster-registry/issues/255,CRD definition is broken on kube 1.11.1 cluster,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+ when applying the crd config to a kube 1.11.1 cluster, it will error out with this message:
+```
+$ kubectl apply -f cluster-registry-crd.yaml
+error: error validating ""cluster-registry-crd.yaml"": error validating data: [ValidationError(CustomResourceDefinition.status): missing required field ""conditions"" in io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceDefinitionStatus, ValidationError(CustomResourceDefinition.status): missing required field ""storedVersions"" in io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.CustomResourceDefinitionStatus]; if you choose to ignore these errors, turn validation off with --validate=false
+```
+
+Currently we worked around the issue by updating CRD with this change although we are not quite sure if that's the right way to fix it:
+```
+-  conditions: null
++  conditions: []
++  storedVersions: []
+```
+",closed,False,2018-07-24 04:57:37,2019-01-18 14:51:15
+cluster-registry,perotinus,https://github.com/kubernetes/cluster-registry/pull/256,https://api.github.com/repos/kubernetes/cluster-registry/issues/256,Fix a missing 'omitempty' tag.,"The Cluster's Status field was missing the 'omitempty' tag, which caused
+the generation machinery to mark it as required. It should be optional.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/cc @madhusudancs @font @pmorie 
+/sig multicluster
+",closed,True,2018-08-14 17:05:13,2018-08-14 17:45:00
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/pull/257,https://api.github.com/repos/kubernetes/cluster-registry/issues/257,Remove Cluster.Spec.AuthInfo,"Removes AuthInfo from ClusterSpec, as we are not sure at all whether people are using this type, or where it is necessary.
+
+/sig multicluster
+",closed,True,2018-08-28 18:07:34,2019-01-25 19:40:48
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/258,https://api.github.com/repos/kubernetes/cluster-registry/issues/258,Upgrade kubebuilder to 1.0.3.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @font @madhusudancs @perotinus @pmorie",closed,True,2018-09-11 06:21:06,2018-09-27 05:01:23
+cluster-registry,gyliu513,https://github.com/kubernetes/cluster-registry/pull/259,https://api.github.com/repos/kubernetes/cluster-registry/issues/259,Document crd-install annotation for cluster registry crd.,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+/cc @font @madhusudancs @perotinus @pmorie",closed,True,2018-09-11 07:10:20,2018-09-27 03:01:53
+cluster-registry,poothia,https://github.com/kubernetes/cluster-registry/pull/260,https://api.github.com/repos/kubernetes/cluster-registry/issues/260, Adding update-gofmt.sh to fix gofmt errors ,"Adding update-gofmt.sh to automate fixing of gofmt errors.
+part of #263 
+
+/sig multicluster
+",open,True,2018-09-20 11:42:53,2019-02-27 06:29:00
+cluster-registry,pmorie,https://github.com/kubernetes/cluster-registry/pull/261,https://api.github.com/repos/kubernetes/cluster-registry/issues/261,(Request for comments) Add ClusterCredentials API,"Adds a `ClusterCredentials` API type that provides a kubeconfig to communicate with a cluster in the cluster registry. Submitting for comments per our recent discussion in the SIG.
+
+/sig multicluster
+",open,True,2018-09-25 15:57:11,2019-01-25 15:48:56
+cluster-registry,font,https://github.com/kubernetes/cluster-registry/pull/262,https://api.github.com/repos/kubernetes/cluster-registry/issues/262,Disable go vet since we don't commit vendored deps,"<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+This disables running the `go vet` verification step in CI since we don't commit the vendored dependencies and all we really have is a CRD and generated code.
+
+/sig multicluster
+",closed,True,2018-09-25 17:00:44,2018-09-27 02:24:12
+cluster-registry,poothia,https://github.com/kubernetes/cluster-registry/issues/263,https://api.github.com/repos/kubernetes/cluster-registry/issues/263,Add missing go tools.,"This issue is to track to have various go tools and their automated scripts. 
+
+/kind feature
+/sig multicluster
+",closed,False,2018-09-28 07:19:24,2019-02-28 12:25:18
+cluster-registry,danehans,https://github.com/kubernetes/cluster-registry/issues/264,https://api.github.com/repos/kubernetes/cluster-registry/issues/264,kubefed2 join fails with gke clusters,"`kubefed2 join` does not work with gke clusters:
+
+k8s v1.11:
+```
+$ kubectl version
+Client Version: version.Info{Major:""1"", Minor:""11"", GitVersion:""v1.11.2"", GitCommit:""bb9ffb1654d4a729bb4cec18ff088eacc153c239"", GitTreeState:""clean"", BuildDate:""2018-08-07T23:17:28Z"", GoVersion:""go1.10.3"", Compiler:""gc"", Platform:""darwin/amd64""}
+Server Version: version.Info{Major:""1"", Minor:""11+"", GitVersion:""v1.11.2-gke.4"", GitCommit:""bb037862be432125e098164b4fec8d45c3a43407"", GitTreeState:""clean"", BuildDate:""2018-08-29T23:15:26Z"", GoVersion:""go1.10.3b4"", Compiler:""gc"", Platform:""linux/amd64""}
+```
+fed-v2 master branch:
+```
+$ git log --oneline
+b8b49c97 Merge pull request #301 from pmorie/doc-readme
+```
+
+I successfully create the registry ns, crd, and cluster role binding:
+```
+$ kubectl create ns kube-multicluster-public
+namespace/kube-multicluster-public created
+
+$ kubectl apply --validate=false -f vendor/k8s.io/cluster-registry/cluster-registry-crd.yaml 
+customresourcedefinition.apiextensions.k8s.io/clusters.clusterregistry.k8s.io created
+
+$ kubectl create clusterrolebinding federation-admin --clusterrole=cluster-admin \
+>     --serviceaccount=""federation-system:default""
+clusterrolebinding.rbac.authorization.k8s.io/federation-admin created
+```
+
+I get the following error when trying to add the 1st cluster:
+```
+$ ./bin/kubefed2 join cluster1 --cluster-context cluster1 \
+>     --host-cluster-context cluster1 --add-to-registry --v=2
+I1004 09:29:46.316699   54078 join.go:141] Args and flags: name cluster1, host: cluster1, host-system-namespace: federation-system, registry-namespace: kube-multicluster-public, kubeconfig: , cluster-context: cluster1, secret-name: , limited-scope: false, dry-run: false
+I1004 09:29:46.322189   54078 join.go:195] Performing preflight checks.
+I1004 09:29:46.847440   54078 join.go:283] Registering cluster: cluster1 with the cluster registry.
+I1004 09:29:47.214533   54078 join.go:287] Could not register cluster: cluster1 with the cluster registry: the server could not find the requested resource (post clusters.clusterregistry.k8s.io)
+F1004 09:29:47.214579   54078 join.go:117] error: the server could not find the requested resource (post clusters.clusterregistry.k8s.io)
+```
+
+The crd exists:
+```
+$ kubectl get crd | grep reg
+clusters.clusterregistry.k8s.io                                   2018-10-04T16:27:24Z
+```
+
+The kube config matches the kubefed2 join flags:
+```
+$ kubectl config get-contexts
+CURRENT   NAME       CLUSTER    AUTHINFO   NAMESPACE
+          cluster1   cluster1   cluster1   
+*         cluster2   cluster2   cluster2   
+```
+
+I can add the cluster to the registry manually:
+```
+$ cat cluster-reg.yaml
+apiVersion: clusterregistry.k8s.io/v1alpha1
+kind: Cluster
+metadata:
+  name: cluster1
+  namespace: kube-multicluster-public
+spec:
+  authInfo: {}
+  kubernetesApiEndpoints:
+    serverEndpoints:
+      - clientCIDR: ""0.0.0.0/0""
+        serverAddress: ""https://<SNIP>""
+
+$ kubectl apply -f cluster-reg.yaml 
+cluster.clusterregistry.k8s.io/cluster1 created
+
+$ kubectl get clusters -n kube-multicluster-public -o yaml
+apiVersion: v1
+items:
+- apiVersion: clusterregistry.k8s.io/v1alpha1
+  kind: Cluster
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {""apiVersion"":""clusterregistry.k8s.io/v1alpha1"",""kind"":""Cluster"",""metadata"":{""annotations"":{},""name"":""cluster1"",""namespace"":""kube-multicluster-public""},""spec"":{""authInfo"":{},""kubernetesApiEndpoints"":{""serverEndpoints"":[{""clientCIDR"":""0.0.0.0/0"",""serverAddress"":""https://35.203.129.80""}]}}}
+    creationTimestamp: 2018-10-04T17:08:01Z
+    generation: 1
+    name: cluster1
+    namespace: kube-multicluster-public
+    resourceVersion: ""170570""
+    selfLink: /apis/clusterregistry.k8s.io/v1alpha1/namespaces/kube-multicluster-public/clusters/cluster1
+    uid: 0cc43b02-c7f8-11e8-9b5d-42010a8a0277
+  spec:
+    authInfo: {}
+    kubernetesApiEndpoints:
+      serverEndpoints:
+      - clientCIDR: 0.0.0.0/0
+        serverAddress: https://35.203.129.80
+kind: List
+metadata:
+  resourceVersion: """"
+  selfLink: """"
+```
+
+/sig multicluster
+",closed,False,2018-10-04 17:15:27,2018-10-04 18:29:27
+cluster-registry,mooncak,https://github.com/kubernetes/cluster-registry/pull/265,https://api.github.com/repos/kubernetes/cluster-registry/issues/265,Fix typos in the files,"Signed-off-by: mooncake <xcoder@tenxcloud.com>
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+
+Fix typos in below files:
+
+1. docs/reference/build/README.md
+2. docs/reference/build/scroll.js
+3. hack/imports.go
+
+",closed,True,2018-10-14 14:45:14,2018-10-23 21:15:44
+cluster-registry,poothia,https://github.com/kubernetes/cluster-registry/pull/266,https://api.github.com/repos/kubernetes/cluster-registry/issues/266,Switch to github.com/pkg/errors,"part of https://github.com/kubernetes-sigs/federation-v2/issues/381#issue-376377377
+
+/sig multicluster
+",closed,True,2018-11-02 15:50:47,2018-11-06 18:47:34
+cluster-registry,mooncak,https://github.com/kubernetes/cluster-registry/pull/267,https://api.github.com/repos/kubernetes/cluster-registry/issues/267,"Fix typos: prefered->preferred, depedencies->dependencies","Fix typos: prefered->preferred, depedencies->dependencies
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-11-10 12:21:44,2019-03-13 18:17:37
+cluster-registry,poothia,https://github.com/kubernetes/cluster-registry/pull/268,https://api.github.com/repos/kubernetes/cluster-registry/issues/268,Use a forked version of glog in kubernetes,"ref: https://github.com/kubernetes/kubernetes/issues/70264
+
+
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",closed,True,2018-11-22 12:52:59,2019-03-13 18:11:38
+cluster-registry,poothia,https://github.com/kubernetes/cluster-registry/pull/269,https://api.github.com/repos/kubernetes/cluster-registry/issues/269,Fixing broken CRD definition,"fixes #255 
+
+reference https://github.com/kubernetes-sigs/federation-v2/pull/369
+
+/sig multicluster
+",closed,True,2018-12-07 10:18:25,2019-01-19 00:25:05
+cluster-registry,marun,https://github.com/kubernetes/cluster-registry/issues/270,https://api.github.com/repos/kubernetes/cluster-registry/issues/270,Consider removing generated client,"The [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime) library contains a generic client that can be used in place of a generated client.  I think removal of the generated client from this repo would be a win for both maintenance and downstream consumption.
+
+See [a comment](https://github.com/kubernetes-sigs/federation-v2/issues/208#issuecomment-450881311) on https://github.com/kubernetes-sigs/federation-v2/issues/208 for an example of how client usage would change.
+
+<!-- Labels this issue with the sig/multicluster label. Please do not remove. -->
+
+/sig multicluster
+",open,False,2019-01-02 16:31:02,2019-04-02 17:26:10
+cluster-registry,ash2k,https://github.com/kubernetes/cluster-registry/issues/271,https://api.github.com/repos/kubernetes/cluster-registry/issues/271,Re-generate client to make it compilable with 1.13 libraries,"Please re-generate client, it currently does not work with 1.13 libraries.
+Getting:
+```console
+vendor/k8s.io/cluster-registry/pkg/client/clientset/versioned/typed/clusterregistry/v1alpha1/fake/fake_cluster.go:135:44: not enough arguments in call to testing.NewPatchSubresourceAction
+        have (schema.GroupVersionResource, string, string, []byte, []string...)
+        want (schema.GroupVersionResource, string, string, types.PatchType, []byte, ...string)
+```
+
+/sig multicluster
+",open,False,2019-01-21 05:01:32,2019-03-27 06:06:21
+cluster-registry,joelsmith,https://github.com/kubernetes/cluster-registry/pull/272,https://api.github.com/repos/kubernetes/cluster-registry/issues/272,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:52:46,2019-03-13 18:17:45

@@ -1,0 +1,32 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/19,https://api.github.com/repos/hyperledger/iroha-java/issues/19,Bump to rc5,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,closed,True,2019-03-21 15:54:25,2019-03-21 17:12:52
+iroha-java,rogachevsn55,https://github.com/hyperledger/iroha-java/pull/18,https://api.github.com/repos/hyperledger/iroha-java/issues/18,add new config params into IrohaConfig,,closed,True,2019-03-14 14:06:44,2019-03-14 14:40:38
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/17,https://api.github.com/repos/hyperledger/iroha-java/issues/17,Add updates,,closed,True,2019-03-13 12:19:42,2019-03-14 12:45:28
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/16,https://api.github.com/repos/hyperledger/iroha-java/issues/16,Feature/verbosity,,closed,True,2019-03-13 12:07:07,2019-03-13 12:19:23
+iroha-java,Mingela,https://github.com/hyperledger/iroha-java/pull/15,https://api.github.com/repos/hyperledger/iroha-java/issues/15,Added batches creation API without signatures,,closed,True,2019-03-13 07:41:33,2019-03-13 09:19:51
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/14,https://api.github.com/repos/hyperledger/iroha-java/issues/14,Bump to rc4-hotfix-1,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,closed,True,2019-03-12 14:22:08,2019-03-12 14:34:22
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/13,https://api.github.com/repos/hyperledger/iroha-java/issues/13,Add GetBlock,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,closed,True,2019-03-04 17:09:10,2019-03-04 17:11:20
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/12,https://api.github.com/repos/hyperledger/iroha-java/issues/12,Bump rc4,,closed,True,2019-03-02 10:31:32,2019-03-02 12:58:06
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/11,https://api.github.com/repos/hyperledger/iroha-java/issues/11,Bump to rc4,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,closed,True,2019-03-01 17:45:11,2019-03-02 10:18:34
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/10,https://api.github.com/repos/hyperledger/iroha-java/issues/10,Fix/non closed channel,"Sometimes you may get the following error:
+```
+Feb 18, 2019 3:42:40 PM io.grpc.internal.ManagedChannelOrphanWrapper$ManagedChannelReference cleanQueue
+SEVERE: *~*~*~ Channel ManagedChannelImpl{logId=io.grpc.internal.ManagedChannelImpl-5, target=localhost:32787} was not shutdown properly!!! ~*~*~*
+    Make sure to call shutdown()/shutdownNow() and wait until awaitTermination() returns true.
+java.lang.RuntimeException: ManagedChannel allocation site
+```
+
+This is because `ManagedChannel` with direct executor, which was implicitly created for streaming blocks stream, was not properly closed.",closed,True,2019-02-18 15:15:55,2019-02-21 13:16:34
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/9,https://api.github.com/repos/hyperledger/iroha-java/issues/9,Release rc3,,closed,True,2019-02-12 11:05:45,2019-02-12 15:42:38
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/8,https://api.github.com/repos/hyperledger/iroha-java/issues/8,Make WaitForTerminalStatus strategy default,,closed,True,2019-02-12 10:42:49,2019-02-12 11:03:40
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/7,https://api.github.com/repos/hyperledger/iroha-java/issues/7,Feature/add concurrency test,Fixes #5 ,closed,True,2019-01-31 06:54:14,2019-02-01 08:35:11
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/issues/6,https://api.github.com/repos/hyperledger/iroha-java/issues/6,"IrohaAPI.transaction(tx, new WaitForTerminalStatus()).subscribe(...) is blocking","IrohaAPI.transaction(tx, new WaitForTerminalStatus()).subscribe(...) is blocking but should be non-blocking.
+
+https://github.com/hyperledger/iroha-java/blob/master/client/src/main/java/jp/co/soramitsu/iroha/java/subscription/WaitForTerminalStatus.java#L100-L117",closed,False,2019-01-30 13:07:47,2019-02-12 15:43:02
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/issues/5,https://api.github.com/repos/hyperledger/iroha-java/issues/5,Move latest commits from iroha-pure-java here,"1. 568483cf7d9d24ec634b234352415ced45a296b6
+2. 8b5d73dcd5324e4fd2dadf49c86728e76bbcf061
+3. dbe4237af422e06a9bed639d386768a9f98b210c",closed,False,2019-01-30 13:06:56,2019-02-01 08:35:11
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/4,https://api.github.com/repos/hyperledger/iroha-java/issues/4,Feature/jitpack,Fix issues related to jitpack. Now lib can be included and works as expected,closed,True,2019-01-26 13:34:30,2019-01-26 20:12:22
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/3,https://api.github.com/repos/hyperledger/iroha-java/issues/3,Feature/update readme,,closed,True,2019-01-24 11:38:39,2019-01-24 11:41:18
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/2,https://api.github.com/repos/hyperledger/iroha-java/issues/2,Add README,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,closed,True,2019-01-24 11:05:39,2019-01-25 18:27:41
+iroha-java,Warchant,https://github.com/hyperledger/iroha-java/pull/1,https://api.github.com/repos/hyperledger/iroha-java/issues/1,Move ts and ipj to iroha-java,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,closed,True,2019-01-23 15:06:40,2019-01-24 11:04:23

@@ -1,0 +1,2045 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-website/pull/38,https://github.com/hyperledger/sawtooth-website/pull/38,"This is a nitpick, but please change the capitalization to PBFT and Raft, because these are the ""generic"" names for the consensus algorithms.  (If they were the engine names, they'd need to be in double backticks, as above.) Unfortunately, the engine names are not the same as the generic names.",76127e7e1b1c4c78e1540a2d1ae506d01694cf15,2019-03-22 00:10:46,268001770,"@@ -41,9 +41,9 @@ sawtooth.config.authorization_type
+     Example setting--never used.  To set authorization type, use command line option ``sawtooth-validator --network-auth {trust|challenge}``
+ 
+ sawtooth.consensus.algorithm.name
+-    Pluggable consensus algorithm name. These include ``PoET``, ``Devmode``, ``sawtooth-raft-engine``, and ``sawtooth-pbft``.  The default is ``devmode`` for Sawtooth 1.1 or earlier, with no default for the (unreleased) nightly build.
++    Pluggable consensus algorithm name. These include ``PoET``, ``Devmode``, ``raft``, and ``pbft``.  The default is ``devmode`` for Sawtooth 1.1 or earlier, with no default for the (unreleased) nightly build.
+ sawtooth.consensus.algorithm.version
+-    Consensus algorithm version. Currently 0.1 for PoET, Devmode, and sawtooth-pbft, and 0.1.0 for sawtooth-raft-engine.
++    Consensus algorithm version. Currently 0.1 for PoET, Devmode, pbft, and raft.",,2019-03-22 13:47:09,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/268001770,https://github.com/hyperledger/sawtooth-website/pull/38#discussion_r268001770,chenette
+https://github.com/hyperledger/sawtooth-website/pull/35,https://github.com/hyperledger/sawtooth-website/pull/35,It might be worth a comment here that this has security implications.,ae2d1d56f81ef2d37684df3932d7cb3560923148,2019-02-26 16:18:49,260365835,"@@ -256,6 +256,8 @@ The usual problem when you get this message is configuring the peer endpoints
+ 
+ * Check peer configuration in your local and remote ``/etc/sawtooth/validator.toml`` files. Check the ``peering`` and ``endpoint`` lines. Check the ``seeds`` line (for dynamic peering) or ``peers`` line (for static peering)
+ 
++* If you are connecting to external nodes on the network, bind to 0.0.0.0 (which means any IP address) or your external IP address instead of 127.0.0.1 (localhost only).",,2019-03-04 17:22:38,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/260365835,https://github.com/hyperledger/sawtooth-website/pull/35#discussion_r260365835,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/35,https://github.com/hyperledger/sawtooth-website/pull/35,"Worth mentioning example configuration. Many people do that mistake of leaving ""--endpoint tcp://non-public-address:8800"" when running in docker containers but on multiple machines.",ae2d1d56f81ef2d37684df3932d7cb3560923148,2019-02-26 16:25:56,260369433,"@@ -256,6 +256,8 @@ The usual problem when you get this message is configuring the peer endpoints
+ 
+ * Check peer configuration in your local and remote ``/etc/sawtooth/validator.toml`` files. Check the ``peering`` and ``endpoint`` lines. Check the ``seeds`` line (for dynamic peering) or ``peers`` line (for static peering)
+ 
++* If you are connecting to external nodes on the network, bind to 0.0.0.0 (which means any IP address) or your external IP address instead of 127.0.0.1 (localhost only).",,2019-03-04 17:22:38,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/260369433,https://github.com/hyperledger/sawtooth-website/pull/35#discussion_r260369433,arsulegai
+https://github.com/hyperledger/sawtooth-website/pull/35,https://github.com/hyperledger/sawtooth-website/pull/35,"Good point. I added:
+
+> Be careful doing this as this opens up the listening port to the outside network.",ae2d1d56f81ef2d37684df3932d7cb3560923148,2019-02-26 16:26:08,260369574,"@@ -256,6 +256,8 @@ The usual problem when you get this message is configuring the peer endpoints
+ 
+ * Check peer configuration in your local and remote ``/etc/sawtooth/validator.toml`` files. Check the ``peering`` and ``endpoint`` lines. Check the ``seeds`` line (for dynamic peering) or ``peers`` line (for static peering)
+ 
++* If you are connecting to external nodes on the network, bind to 0.0.0.0 (which means any IP address) or your external IP address instead of 127.0.0.1 (localhost only).",,2019-03-04 17:22:39,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/260369574,https://github.com/hyperledger/sawtooth-website/pull/35#discussion_r260369574,danintel
+https://github.com/hyperledger/sawtooth-website/pull/35,https://github.com/hyperledger/sawtooth-website/pull/35,"I would prefer this to say ""(which means every IP address)"" and ""Be careful doing this as it can potentially open up this port to external networks"".",ae2d1d56f81ef2d37684df3932d7cb3560923148,2019-02-26 16:40:34,260377479,"@@ -256,6 +256,8 @@ The usual problem when you get this message is configuring the peer endpoints
+ 
+ * Check peer configuration in your local and remote ``/etc/sawtooth/validator.toml`` files. Check the ``peering`` and ``endpoint`` lines. Check the ``seeds`` line (for dynamic peering) or ``peers`` line (for static peering)
+ 
++* If you are connecting to external nodes on the network, bind to 0.0.0.0 (which means any IP address) or your external IP address instead of 127.0.0.1 (localhost only).",,2019-03-04 17:22:39,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/260377479,https://github.com/hyperledger/sawtooth-website/pull/35#discussion_r260377479,rberg2
+https://github.com/hyperledger/sawtooth-website/pull/35,https://github.com/hyperledger/sawtooth-website/pull/35,"Reworded to:
+> Be careful doing this as may open up this port to external networks.
+",ae2d1d56f81ef2d37684df3932d7cb3560923148,2019-02-26 18:47:00,260431963,"@@ -256,6 +256,8 @@ The usual problem when you get this message is configuring the peer endpoints
+ 
+ * Check peer configuration in your local and remote ``/etc/sawtooth/validator.toml`` files. Check the ``peering`` and ``endpoint`` lines. Check the ``seeds`` line (for dynamic peering) or ``peers`` line (for static peering)
+ 
++* If you are connecting to external nodes on the network, bind to 0.0.0.0 (which means any IP address) or your external IP address instead of 127.0.0.1 (localhost only).",,2019-03-04 17:22:39,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/260431963,https://github.com/hyperledger/sawtooth-website/pull/35#discussion_r260431963,danintel
+https://github.com/hyperledger/sawtooth-website/pull/34,https://github.com/hyperledger/sawtooth-website/pull/34,"Small nitpick: There are two authors shown at the start of the video: you and Tom.  To be totally consistent, you could add his name here. But this isn't a blocker.",6f949bef193ff3dd288a28d499eb38f819d6694d,2019-02-21 15:58:18,258993262,"@@ -22,7 +22,10 @@ Selected YouTube Videos
+ 
+ 2019 YouTube Videos
+ -------------------
+-Hyperledger Sawtooth Performance Metrics with Grafana (Dan Anderson, Intel, 2019)
++Hyperledger Sawtooth Application Development Overview using ""SimpleWallet"" (Dan Anderson, Intel, 2019)",,2019-02-21 16:35:41,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/258993262,https://github.com/hyperledger/sawtooth-website/pull/34#discussion_r258993262,chenette
+https://github.com/hyperledger/sawtooth-website/pull/34,https://github.com/hyperledger/sawtooth-website/pull/34,"Thanks for the review.
+
+I fixed the name and rebased.
+
+The names with videos are the speakers.",6f949bef193ff3dd288a28d499eb38f819d6694d,2019-02-21 16:34:41,259011015,"@@ -22,7 +22,10 @@ Selected YouTube Videos
+ 
+ 2019 YouTube Videos
+ -------------------
+-Hyperledger Sawtooth Performance Metrics with Grafana (Dan Anderson, Intel, 2019)
++Hyperledger Sawtooth Application Development Overview using ""SimpleWallet"" (Dan Anderson, Intel, 2019)",,2019-02-21 16:35:41,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/259011015,https://github.com/hyperledger/sawtooth-website/pull/34#discussion_r259011015,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"I would say that PoET CFT is able to run on systems that do not have SGX and is suitable for use in systems that do not require BFT,",54f2915410f4e00bfc40092727373073852c4034,2019-01-23 20:57:14,250368980,"@@ -78,7 +78,7 @@ But you can change consensus after the Sawtooth network has started.
+ Is PoET CFT suitable for production use?
+ ----------------------------------------
+ 
+-Yes.  It is for systems that do not have SGX and is intended for use in production.  Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.
++Yes. It is for systems that do not have SGX and is intended for use in production. Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.
+ PoET CFT simulates the SGX environment and provides CFT (similar to Fabric and other blockchain software), which is good enough to go into production.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/250368980,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r250368980,TomBarnes
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"OK. I added the qualifier ""for systems that do not require BFT"" to the first sentence.",54f2915410f4e00bfc40092727373073852c4034,2019-01-23 21:13:39,250374287,"@@ -78,7 +78,7 @@ But you can change consensus after the Sawtooth network has started.
+ Is PoET CFT suitable for production use?
+ ----------------------------------------
+ 
+-Yes.  It is for systems that do not have SGX and is intended for use in production.  Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.
++Yes. It is for systems that do not have SGX and is intended for use in production. Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.
+ PoET CFT simulates the SGX environment and provides CFT (similar to Fabric and other blockchain software), which is good enough to go into production.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/250374287,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r250374287,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,I don't think we need the third-party qualifier here.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 18:48:27,253595193,"@@ -19,12 +19,13 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What is a Sawtooth Client?
+ --------------------------
+-It is an application that communicates with the Sawtooth Validator, usually using the REST API.  The application is Transaction Family-specific and may come in various forms, such as a CLI, BUI (browser/web app), GUI, or background daemon.  The client may be written in any language supported by the Sawtooth SDK.
++It is an application that communicates with the Sawtooth Validator, usually using the REST API. The application is Transaction Family-specific and may come in various forms, such as a CLI, BUI (browser/web app), GUI, or background daemon. The client may be written in any language supported by the Sawtooth SDK.
+ 
+ What languages does the Sawtooth Client SDK support?
+ ----------------------------------------------------
+ JavaScript, Python 3, and Rust.
+ Others are in the process of being added: Java and C++.
++A third-party Microsoft .NET SDK is also available from https://github.com/hyperledger/sawtooth-sdk-dotnet",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253595193,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253595193,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Remove the Fabric comparison - the mechanisms are very different, and that makes this comparison potentially confusing.
+
+Remove the reference about production networks. If mentioning BFT, maybe say something like ""Note that PoET CFT is not Byzantine fault tolerant.""",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 18:54:12,253597399,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)
++    Only suitable for testing TPs with single validator deployments. Uses a simplified random-leader algorithm for development and testing. Not for production use
++PoET CFT (name ""PoET"", version 0.1)
++    Also known as PoET Simulator. PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains. Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX). Has Crash Fault Tolerance and can be used for production networks if BFT is not required",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253597399,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253597399,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Supported in Sawtooth 1.0 only - should that be mentioned here?,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 18:54:56,253597697,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)
++    Only suitable for testing TPs with single validator deployments. Uses a simplified random-leader algorithm for development and testing. Not for production use
++PoET CFT (name ""PoET"", version 0.1)
++    Also known as PoET Simulator. PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains. Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX). Has Crash Fault Tolerance and can be used for production networks if BFT is not required
++PoET SGX (name ""PoET"", version 0.1)",17,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253597697,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253597697,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Can we omit the versions so this stays up-to-date easier?),54f2915410f4e00bfc40092727373073852c4034,2019-02-04 18:55:32,253597966,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)",13,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253597966,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253597966,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"I think we should take a position on its production-readiness from a maturity standpoint but make it clear separately that its a business and trust decision whether CFT is good enough for production. (My opinion is generally no -- if CFT is good enough (which means a lack of adversarial trust issues being solved), then why use blockchain?)",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:01:52,253600567,"@@ -77,8 +76,7 @@ But you can change consensus after the Sawtooth network has started.
+ 
+ Is PoET CFT suitable for production use?
+ ----------------------------------------
+-
+-Yes.  It is for systems that do not have SGX and is intended for use in production.  Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.
++Yes. It is for systems that do not have SGX and is intended for use in production for systems that do not require BFT. Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253600567,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253600567,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Line break issues here - the e should be on the previous line, and the s from the previous line should be on this line.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:03:11,253601023,"@@ -132,6 +130,14 @@ Where is PoET 1.0 Specification?
+ 
+ https://sawtooth.hyperledger.org/docs/core/releases/latest/architecture/poet.html
+ 
++Why is PoET SGX Byzantine Fault Tolerant?
++-----------------------------------------
++Because the PoET waiting time is enforced with an SGX enclave. There is also mor
++e defense-in-depth checks, but that doesn't make it BFT. In comparison, Bitcoin'",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253601023,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253601023,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"5 might be a better recommendation. Even with 10, it can be hard to keep from tripping Z test. But 5 gives better wait time averages.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:05:29,253601850,"@@ -210,12 +218,27 @@ https://drive.google.com/drive/folders/0B_NJV6eJXAA1VnFUakRzaG1raXc
+ What are the minimum number of nodes needed for PoET?
+ -----------------------------------------------------
+ 
+-PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently).  In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.
++PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently). In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253601850,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253601850,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"This could be strengthened to ""We recommend PBFT for small networks."" Raft is less interesting being CFT and not BFT, and having overall less testing done.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:07:01,253602413,"@@ -210,12 +218,27 @@ https://drive.google.com/drive/folders/0B_NJV6eJXAA1VnFUakRzaG1raXc
+ What are the minimum number of nodes needed for PoET?
+ -----------------------------------------------------
+ 
+-PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently).  In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.
++PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently). In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.
++
++Can PoET be configured for small networks?
++------------------------------------
++Yes, for development purposes.
++For production purposes, consider using another consensus algorithm.
++For example, Raft or PBFT handles a small number of nodes nicely.",134,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253602413,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253602413,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,This should be considered a bug. Maybe we could link to a JIRA here.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:08:00,253602841,"@@ -224,6 +247,22 @@ Can I restrict what validator nodes win consensus?
+ No. Every peer node validates blocks and every peer node can publish a block.
+ You can write your own plugin consensus module to restrict what peer nodes win. Or modify an existing consensus module to experiment.
+ 
++How do I restart a consensus engine?
++------------------------------------
++First stop the validator, then restart the consensus engine.
++If you leave the validator engine running, it will not connect to the restarted consensus engine.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253602841,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253602841,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Is this a typo ""config-genesispoet_genesis.batch""?",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:09:18,253603280,"@@ -138,14 +99,26 @@ This usually occurs when there is no genesis node created. To create, type the f
+ 
+ I get this error when running ``sudo -u sawtooth sawadm genesis config-genesis.batch`` : ``Permission denied``
+ --------------------------------------------------------------------------------------------------------------
+-The ownership or permission is wrong. To fix it, type:
++Change to a sawtooth user-writable directory before running the command and make sure file `config-genesis.batch` does not already exist: ``cd /tmp; ls config-genesispoet_genesis.batch``",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253603280,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253603280,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"We should not steer people to the old 0.8 version at all, but instead focus on installing it with 1.1.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:12:21,253604409,"@@ -209,6 +202,25 @@ How do I install Sawtooth on AWS?
+ * Then follow the instructions for using your Sawtooth AWS instance at
+   https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/aws.html
+ 
++How do I install Sawtooth Supply Chain on AWS?",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253604409,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253604409,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,We probably consider the necessity of this patch a bug?,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:13:27,253604924,"@@ -209,6 +202,25 @@ How do I install Sawtooth on AWS?
+ * Then follow the instructions for using your Sawtooth AWS instance at
+   https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/aws.html
+ 
++How do I install Sawtooth Supply Chain on AWS?
++----------------------------------------------
++* Sign up for a free AWS Free Tier account, if you don't have an account. The AWS Free Tier is free for qualifying developers. This gives you 1 Micro instance (or any combination of instances up to 750 hours/month) for 12 months. See https://aws.amazon.com/free/
++* Create your instance from the Hyperledger Sawtooth Supply Chain product page on AWS Marketplace, at https://aws.amazon.com/marketplace/pp/B077FLR7V5
++* Follow instructions to launch an AWS Marketplace instance using this gist:
++https://gist.github.com/danintel/04c9a6b870730842c30454a8cc1e594e
++* This installs Sawtooth 0.8 (prerelease, 2017) and Sawtooth Supply Chain
++* For the current version, install the current Sawtooth release (1.1, Bumper) on a Ubuntu 16 LTS (Xenial) instance on AWS, then install Sawtooth Supply Chain with Docker from https://github.com/hyperledger/sawtooth-supply-chain . The repo supports Sawtooth 1.2, which is not released, and Ubunt 18 LTS (Bionic).  To patch Supply Chain to support Sawtooth 1.1, follow these steps:
++.. code:: sh
++
++    $ git clone https://github.com/hyperledger/sawtooth-supply-chain
++    $ cd sawtooth-supply-chain
++    $ git diff 50c404c >bionic.patch
++    $ patch --dry-run -R -p1 <bionic.patch
++    $ patch           -R -p1 <bionic.patch
++    $ sudo docker-compose up",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253604924,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253604924,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"This should also be tied to some bug, otherwise we won't know when to remove the workaround from the FAQ.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:14:18,253605247,"@@ -268,6 +280,8 @@ Ubuntu 18.04 LTS is supported only in the nightly development packages. Use Ubun
+ You can also install Sawtooth with Docker. See:
+ https://sawtooth.hyperledger.org/docs/core/releases/latest/app_developers_guide/docker.html
+ 
++If you wish to install the nightly development packages on Ubuntu 18.04 LTS (Bionic), then, for now, specify the individual packages you wish to install instead of parent package ``sawtooth``.  For example, ``sudo apt-get install python3-sawtooth-cli python3-sawtooth-integration python3-sawtooth-rest-api python3-sawtooth-sdk python3-sawtooth-settings python3-sawtooth-signing python3-sawtooth-validator sawtooth-devmode-engine-rust``",121,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253605247,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253605247,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"This might be partially incorrect in that the back pressure isn't just about slower members of the network. Rather, it is about rejecting load (in the form of batches) that the network wouldn't be able to accommodate in a reasonable amount of time (next couple blocks).
+
+This should never be turned off as without this feature it is trivial to do a client-based attack which overwhelms the network creating a DoS.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:20:20,253607592,"@@ -116,6 +116,10 @@ Back pressure is a flow-control technique to help prevent DoS attacks.
+ It results in a ``Status.QUEUE_FULL`` client batch submit response or a 429 ""Too Many Requests"" REST API error.
+ If the validator is overwhelmed it will stop accepting new batches until it can handle more work. The number of batches that validator can accept is based on a multiplier,  QUEUE_MULTIPLIER (currently 10, formerly 2), times a rolling average of the number of published batches.
+ 
++Can I disable the back pressure test?
++-------------------------------------
++No. There isn't a way to disable that currently because it's determined based on a multiplier of the publishing rate of the network. It allows the slower members of the network to not drift behind the faster members when it comes to staying in consensus. You would have to make a custom build of Sawtooth to remove that check.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253607592,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253607592,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"For best practice - we should avoid referring to '1.2' or other unreleased versions - we may never release a 1.2, we could go instead to 2.0. This sounds like a compatibility bug to me.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:23:52,253608881,"@@ -40,15 +40,29 @@ Since Sawtooth settings are extensible and include transaction family-specific s
+ sawtooth.config.authorization_type
+     Example setting--never used.  To set authorization type, use command line option ``sawtooth-validator --network-auth {trust|challenge}``
+ 
+-sawtooth.consensus.algorithm
+-    Consensus algorithm (e.g., ``poet`` (PoET SGX or PoET CFT) or ``devmode`` (default) or ``raft`` or any other pluggable consensus engine you provide)
++sawtooth.consensus.algorithm.name
++    Pluggable consensus algorithm name. These include ``PoET``, ``Devmode``, ``sawtooth-raft-engine``, and ``sawtooth-pbft``.  The default is ``devmode`` for Sawtooth 1.1 or earlier, with no default for 1.2.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253608881,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253608881,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Typo 'generateing',54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:24:55,253609511,"@@ -273,6 +273,13 @@ I noticed that TPs on various nodes do not process transactions in the same orde
+ ---------------------------------------------------------------------------------------
+ There is no guarantee of sequencing in terms of how different transactions are submitted and executed by the TPs. When transactions read or modify the same portions of state, the validator enforces ordering correctness, even with parallel execution. That is because the validator's scheduler understands the ordering relationship and needs to apply each state transition to the context provided to the next transaction's execution.
+ 
++What do ``failed state root hash validation`` errors mean?
++----------------------------------------------------------
++You have something non-deterministic happening with your changes to state.
++You should not do non-deterministic actions in your transaction processor such as generateing timestamps or random numbers.  The serialization must also be deterministic--the data must always serialize the same.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253609511,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253609511,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Same comment here re:1.2 - ""and earlier and ``parallel`` for nightly master"" or something.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 19:26:12,253610037,"@@ -204,7 +204,7 @@ The validator has two schedulers--parallel and serial.
+ The parallel scheduler gives a performance boost because it allows multiple transactions to be processed at the same time when the transaction inputs/outputs do not conflict.
+ The scheduler is specified with the
+ ``sawtooth-validator --scheduler {parallel,serial}`` option.
+-The current default is ``serial``, but it may change to ``parallel`` in the future.
++The current default is ``serial`` for Sawtooth 1.1 and earlier and ``parallel`` for Sawtooth 1.2 (nightly).",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253610037,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253610037,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:24:25,253651735,"@@ -273,6 +273,13 @@ I noticed that TPs on various nodes do not process transactions in the same orde
+ ---------------------------------------------------------------------------------------
+ There is no guarantee of sequencing in terms of how different transactions are submitted and executed by the TPs. When transactions read or modify the same portions of state, the validator enforces ordering correctness, even with parallel execution. That is because the validator's scheduler understands the ordering relationship and needs to apply each state transition to the context provided to the next transaction's execution.
+ 
++What do ``failed state root hash validation`` errors mean?
++----------------------------------------------------------
++You have something non-deterministic happening with your changes to state.
++You should not do non-deterministic actions in your transaction processor such as generateing timestamps or random numbers.  The serialization must also be deterministic--the data must always serialize the same.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253651735,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253651735,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:25:51,253652166,"@@ -19,12 +19,13 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What is a Sawtooth Client?
+ --------------------------
+-It is an application that communicates with the Sawtooth Validator, usually using the REST API.  The application is Transaction Family-specific and may come in various forms, such as a CLI, BUI (browser/web app), GUI, or background daemon.  The client may be written in any language supported by the Sawtooth SDK.
++It is an application that communicates with the Sawtooth Validator, usually using the REST API. The application is Transaction Family-specific and may come in various forms, such as a CLI, BUI (browser/web app), GUI, or background daemon. The client may be written in any language supported by the Sawtooth SDK.
+ 
+ What languages does the Sawtooth Client SDK support?
+ ----------------------------------------------------
+ JavaScript, Python 3, and Rust.
+ Others are in the process of being added: Java and C++.
++A third-party Microsoft .NET SDK is also available from https://github.com/hyperledger/sawtooth-sdk-dotnet",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253652166,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253652166,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Accepted.
+I used the phrase for PoET CFT ""Has Crash Fault Tolerance (CFT), but is not Byzantine Fault Tolerant (BFT)""",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:30:55,253653812,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)
++    Only suitable for testing TPs with single validator deployments. Uses a simplified random-leader algorithm for development and testing. Not for production use
++PoET CFT (name ""PoET"", version 0.1)
++    Also known as PoET Simulator. PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains. Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX). Has Crash Fault Tolerance and can be used for production networks if BFT is not required",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253653812,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253653812,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Accepted. I'll add ""Currently supported in Sawtooth 1.0 only.""",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:33:47,253654834,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)
++    Only suitable for testing TPs with single validator deployments. Uses a simplified random-leader algorithm for development and testing. Not for production use
++PoET CFT (name ""PoET"", version 0.1)
++    Also known as PoET Simulator. PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains. Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX). Has Crash Fault Tolerance and can be used for production networks if BFT is not required
++PoET SGX (name ""PoET"", version 0.1)",17,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253654834,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253654834,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,I want to leave the consensus versions for now as they are mandatory for Sawtooth 1.2 and are difficult-to-find in documentation.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:35:32,253655391,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)",13,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253655391,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253655391,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Accepted. I'll remove mention of production-readiness. Here is the reworded answer:
+
+> What protections does PoET CFT have, since it is not BFT?
+> ----------------------------------------
+> It is for systems that do not have SGX and do not require BFT. Both PoET CFT and PoET SGX 
+have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.  PoET CFT simulates the SGX environment and provides CFT. That said, PoET SGX is preferred because of the additional SGX protections for generating the wait time.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:40:43,253656995,"@@ -77,8 +76,7 @@ But you can change consensus after the Sawtooth network has started.
+ 
+ Is PoET CFT suitable for production use?
+ ----------------------------------------
+-
+-Yes.  It is for systems that do not have SGX and is intended for use in production.  Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.
++Yes. It is for systems that do not have SGX and is intended for use in production for systems that do not require BFT. Both PoET CFT and PoET SGX have tests to guard against bad actors, such as the ""Z Test"" to check a validator is not winning too frequently.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253656995,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253656995,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted. Copy/paste error.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:48:30,253659440,"@@ -132,6 +130,14 @@ Where is PoET 1.0 Specification?
+ 
+ https://sawtooth.hyperledger.org/docs/core/releases/latest/architecture/poet.html
+ 
++Why is PoET SGX Byzantine Fault Tolerant?
++-----------------------------------------
++Because the PoET waiting time is enforced with an SGX enclave. There is also mor
++e defense-in-depth checks, but that doesn't make it BFT. In comparison, Bitcoin'",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253659440,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253659440,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:49:35,253659790,"@@ -210,12 +218,27 @@ https://drive.google.com/drive/folders/0B_NJV6eJXAA1VnFUakRzaG1raXc
+ What are the minimum number of nodes needed for PoET?
+ -----------------------------------------------------
+ 
+-PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently).  In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.
++PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently). In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253659790,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253659790,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:51:39,253660447,"@@ -210,12 +218,27 @@ https://drive.google.com/drive/folders/0B_NJV6eJXAA1VnFUakRzaG1raXc
+ What are the minimum number of nodes needed for PoET?
+ -----------------------------------------------------
+ 
+-PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently).  In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.
++PoET needs at least 3 nodes, but works best with at least 4 or 5 nodes. This is to avoid Z Test failures (a node winning too frequently). In production, to keep a blockchain safe, more nodes are always better, regardless of the consensus. 10 nodes are good for internal testing. For production, have 2 nodes per identity.
++
++Can PoET be configured for small networks?
++------------------------------------
++Yes, for development purposes.
++For production purposes, consider using another consensus algorithm.
++For example, Raft or PBFT handles a small number of nodes nicely.",134,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253660447,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253660447,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted. Filed https://jira.hyperledger.org/projects/STL/issues/STL-1465 and added a link.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 21:59:23,253662981,"@@ -224,6 +247,22 @@ Can I restrict what validator nodes win consensus?
+ No. Every peer node validates blocks and every peer node can publish a block.
+ You can write your own plugin consensus module to restrict what peer nodes win. Or modify an existing consensus module to experiment.
+ 
++How do I restart a consensus engine?
++------------------------------------
++First stop the validator, then restart the consensus engine.
++If you leave the validator engine running, it will not connect to the restarted consensus engine.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253662981,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253662981,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted. It should be `config-genesis.batch`,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 22:02:24,253663968,"@@ -138,14 +99,26 @@ This usually occurs when there is no genesis node created. To create, type the f
+ 
+ I get this error when running ``sudo -u sawtooth sawadm genesis config-genesis.batch`` : ``Permission denied``
+ --------------------------------------------------------------------------------------------------------------
+-The ownership or permission is wrong. To fix it, type:
++Change to a sawtooth user-writable directory before running the command and make sure file `config-genesis.batch` does not already exist: ``cd /tmp; ls config-genesispoet_genesis.batch``",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253663968,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253663968,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted. Removed.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 22:03:27,253664290,"@@ -209,6 +202,25 @@ How do I install Sawtooth on AWS?
+ * Then follow the instructions for using your Sawtooth AWS instance at
+   https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/aws.html
+ 
++How do I install Sawtooth Supply Chain on AWS?",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253664290,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253664290,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Filed https://jira.hyperledger.org/browse/STL-1482
+_sawtooth-supply-chain does not support latest release, Sawtooth 1.1 Bionic_",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 23:00:54,253680900,"@@ -209,6 +202,25 @@ How do I install Sawtooth on AWS?
+ * Then follow the instructions for using your Sawtooth AWS instance at
+   https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/aws.html
+ 
++How do I install Sawtooth Supply Chain on AWS?
++----------------------------------------------
++* Sign up for a free AWS Free Tier account, if you don't have an account. The AWS Free Tier is free for qualifying developers. This gives you 1 Micro instance (or any combination of instances up to 750 hours/month) for 12 months. See https://aws.amazon.com/free/
++* Create your instance from the Hyperledger Sawtooth Supply Chain product page on AWS Marketplace, at https://aws.amazon.com/marketplace/pp/B077FLR7V5
++* Follow instructions to launch an AWS Marketplace instance using this gist:
++https://gist.github.com/danintel/04c9a6b870730842c30454a8cc1e594e
++* This installs Sawtooth 0.8 (prerelease, 2017) and Sawtooth Supply Chain
++* For the current version, install the current Sawtooth release (1.1, Bumper) on a Ubuntu 16 LTS (Xenial) instance on AWS, then install Sawtooth Supply Chain with Docker from https://github.com/hyperledger/sawtooth-supply-chain . The repo supports Sawtooth 1.2, which is not released, and Ubunt 18 LTS (Bionic).  To patch Supply Chain to support Sawtooth 1.1, follow these steps:
++.. code:: sh
++
++    $ git clone https://github.com/hyperledger/sawtooth-supply-chain
++    $ cd sawtooth-supply-chain
++    $ git diff 50c404c >bionic.patch
++    $ patch --dry-run -R -p1 <bionic.patch
++    $ patch           -R -p1 <bionic.patch
++    $ sudo docker-compose up",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253680900,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253680900,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Accepted. Filed JIRA issue https://jira.hyperledger.org/projects/STL/issues/STL-1465
+and added link to the bug.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 23:36:24,253689612,"@@ -268,6 +280,8 @@ Ubuntu 18.04 LTS is supported only in the nightly development packages. Use Ubun
+ You can also install Sawtooth with Docker. See:
+ https://sawtooth.hyperledger.org/docs/core/releases/latest/app_developers_guide/docker.html
+ 
++If you wish to install the nightly development packages on Ubuntu 18.04 LTS (Bionic), then, for now, specify the individual packages you wish to install instead of parent package ``sawtooth``.  For example, ``sudo apt-get install python3-sawtooth-cli python3-sawtooth-integration python3-sawtooth-rest-api python3-sawtooth-sdk python3-sawtooth-settings python3-sawtooth-signing python3-sawtooth-validator sawtooth-devmode-engine-rust``",121,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253689612,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253689612,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,"Accepted. Reworded answer in _italics_:
+
+> No. There isn't a way to disable that currently because it's determined based on a multiplier of the publishing rate of the network. _Back pressure test is about rejecting load (in the form of batches) that the network wouldn't be able to accommodate in a reasonable amount of time (next couple blocks). This should never be turned off as without this feature it is trivial to do a client-based attack which overwhelms the network creating a DoS_. You would have to make a custom build of Sawtooth to remove that check.",54f2915410f4e00bfc40092727373073852c4034,2019-02-04 23:51:08,253692869,"@@ -116,6 +116,10 @@ Back pressure is a flow-control technique to help prevent DoS attacks.
+ It results in a ``Status.QUEUE_FULL`` client batch submit response or a 429 ""Too Many Requests"" REST API error.
+ If the validator is overwhelmed it will stop accepting new batches until it can handle more work. The number of batches that validator can accept is based on a multiplier,  QUEUE_MULTIPLIER (currently 10, formerly 2), times a rolling average of the number of published batches.
+ 
++Can I disable the back pressure test?
++-------------------------------------
++No. There isn't a way to disable that currently because it's determined based on a multiplier of the publishing rate of the network. It allows the slower members of the network to not drift behind the faster members when it comes to staying in consensus. You would have to make a custom build of Sawtooth to remove that check.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253692869,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253692869,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted. Changed 1.2 to _(unreleased) nightly build_.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 23:53:01,253693232,"@@ -40,15 +40,29 @@ Since Sawtooth settings are extensible and include transaction family-specific s
+ sawtooth.config.authorization_type
+     Example setting--never used.  To set authorization type, use command line option ``sawtooth-validator --network-auth {trust|challenge}``
+ 
+-sawtooth.consensus.algorithm
+-    Consensus algorithm (e.g., ``poet`` (PoET SGX or PoET CFT) or ``devmode`` (default) or ``raft`` or any other pluggable consensus engine you provide)
++sawtooth.consensus.algorithm.name
++    Pluggable consensus algorithm name. These include ``PoET``, ``Devmode``, ``sawtooth-raft-engine``, and ``sawtooth-pbft``.  The default is ``devmode`` for Sawtooth 1.1 or earlier, with no default for 1.2.",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253693232,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253693232,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Accepted. Changed to _the (unreleased) Sawtooth nightly build_.,54f2915410f4e00bfc40092727373073852c4034,2019-02-04 23:54:49,253693591,"@@ -204,7 +204,7 @@ The validator has two schedulers--parallel and serial.
+ The parallel scheduler gives a performance boost because it allows multiple transactions to be processed at the same time when the transaction inputs/outputs do not conflict.
+ The scheduler is specified with the
+ ``sawtooth-validator --scheduler {parallel,serial}`` option.
+-The current default is ``serial``, but it may change to ``parallel`` in the future.
++The current default is ``serial`` for Sawtooth 1.1 and earlier and ``parallel`` for Sawtooth 1.2 (nightly).",,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253693591,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253693591,danintel
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,Ok. I see how that is relevant for other questions within the FAQ.,54f2915410f4e00bfc40092727373073852c4034,2019-02-05 15:25:16,253910369,"@@ -19,20 +19,19 @@ PREVIOUS_ FAQ_ NEXT_
+ 
+ What consensus algorithms does Sawtooth support?
+ ------------------------------------------------
+-
+-dev-mode
+-    Only suitable for testing TPs with single validator deployments.  Uses a simplified random-leader algorithm for development and testing.  Not for production use
+-PoET CFT (also known as PoET Simulator)
+-    PoET with a simulated SGX environment. Provides CFT similar to Fabric and some other blockchains.  Requires poet-validator-registry TP. Runs on any processor (does not require Intel or SGX).  Has Crash Fault Tolerance and can be used for production networks if BFT is not required
+-PoET SGX
++Devmode (name ""Devmode"", version 0.1)",13,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/253910369,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r253910369,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,These settings are out of date. please see https://github.com/hyperledger/sawtooth-pbft/pull/85/files#diff-6d8a5e2104954a026de2bfe2b936aea4L78 for the updated ( and soon to be merged) most updated version. ,54f2915410f4e00bfc40092727373073852c4034,2019-02-05 19:42:24,254017911,"@@ -40,15 +40,29 @@ Since Sawtooth settings are extensible and include transaction family-specific s
+ sawtooth.config.authorization_type
+     Example setting--never used.  To set authorization type, use command line option ``sawtooth-validator --network-auth {trust|challenge}``
+ 
+-sawtooth.consensus.algorithm
+-    Consensus algorithm (e.g., ``poet`` (PoET SGX or PoET CFT) or ``devmode`` (default) or ``raft`` or any other pluggable consensus engine you provide)
++sawtooth.consensus.algorithm.name
++    Pluggable consensus algorithm name. These include ``PoET``, ``Devmode``, ``sawtooth-raft-engine``, and ``sawtooth-pbft``.  The default is ``devmode`` for Sawtooth 1.1 or earlier, with no default for the (unreleased) nightly build.
++sawtooth.consensus.algorithm.version
++    Consensus algorithm version. Currently 0.1 for PoET, Devmode, and sawtooth-pbft, and 0.1.0 for sawtooth-raft-engine.
+ sawtooth.consensus.block_validation_rules
+     Lists validation rules to use in deciding what blocks to add to the blockchain.
+     See https://sawtooth.hyperledger.org/docs/core/nightly/master/architecture/injecting_batches_block_validation_rules.html
+ sawtooth.consensus.max_wait_time
+     Maximum devmode consensus wait time, in seconds
+ sawtooth.consensus.min_wait_time
+     Minimum devmode consensus wait time, in seconds
++
++sawtooth.consensus.pbft.block_duration",27,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/254017911,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r254017911,agunde406
+https://github.com/hyperledger/sawtooth-website/pull/27,https://github.com/hyperledger/sawtooth-website/pull/27,I updated the PBFT settings. Thanks!,54f2915410f4e00bfc40092727373073852c4034,2019-02-05 20:23:43,254032081,"@@ -40,15 +40,29 @@ Since Sawtooth settings are extensible and include transaction family-specific s
+ sawtooth.config.authorization_type
+     Example setting--never used.  To set authorization type, use command line option ``sawtooth-validator --network-auth {trust|challenge}``
+ 
+-sawtooth.consensus.algorithm
+-    Consensus algorithm (e.g., ``poet`` (PoET SGX or PoET CFT) or ``devmode`` (default) or ``raft`` or any other pluggable consensus engine you provide)
++sawtooth.consensus.algorithm.name
++    Pluggable consensus algorithm name. These include ``PoET``, ``Devmode``, ``sawtooth-raft-engine``, and ``sawtooth-pbft``.  The default is ``devmode`` for Sawtooth 1.1 or earlier, with no default for the (unreleased) nightly build.
++sawtooth.consensus.algorithm.version
++    Consensus algorithm version. Currently 0.1 for PoET, Devmode, and sawtooth-pbft, and 0.1.0 for sawtooth-raft-engine.
+ sawtooth.consensus.block_validation_rules
+     Lists validation rules to use in deciding what blocks to add to the blockchain.
+     See https://sawtooth.hyperledger.org/docs/core/nightly/master/architecture/injecting_batches_block_validation_rules.html
+ sawtooth.consensus.max_wait_time
+     Maximum devmode consensus wait time, in seconds
+ sawtooth.consensus.min_wait_time
+     Minimum devmode consensus wait time, in seconds
++
++sawtooth.consensus.pbft.block_duration",27,2019-02-05 20:26:58,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/254032081,https://github.com/hyperledger/sawtooth-website/pull/27#discussion_r254032081,danintel
+https://github.com/hyperledger/sawtooth-website/pull/22,https://github.com/hyperledger/sawtooth-website/pull/22,Title underlines should match the title character length.,402c3a329f3cff8af89ca53d83a5318c8c05a6d4,2018-12-11 19:37:52,240762024,"@@ -94,6 +94,11 @@ Use the ``delete_state`` in the SDK to delete a specific state variable.
+ The data will remain in previously-created blocks (which are immutable),
+ but will not be in the current blockchain state.
+ 
++How can a Sawtooth client access a validator on another machine?
++------------------------------",,2018-12-13 21:12:52,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/240762024,https://github.com/hyperledger/sawtooth-website/pull/22#discussion_r240762024,Sutrannu
+https://github.com/hyperledger/sawtooth-website/pull/22,https://github.com/hyperledger/sawtooth-website/pull/22,Title underlines should match the title character length.,402c3a329f3cff8af89ca53d83a5318c8c05a6d4,2018-12-11 19:38:12,240762158,"@@ -116,6 +116,10 @@ Back pressure is a flow-control technique to help prevent DoS attacks.
+ It results in a ``Status.QUEUE_FULL`` client batch submit response or a 429 ""Too Many Requests"" REST API error.
+ If the validator is overwhelmed it will stop accepting new batches until it can handle more work. The number of batches that validator can accept is based on a multiplier,  QUEUE_MULTIPLIER (currently 10, formerly 2), times a rolling average of the number of published batches.
+ 
++What does this error mean from sawset: ``There is no resource with the identifier``?
++-----------------------------------",,2018-12-13 21:12:52,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/240762158,https://github.com/hyperledger/sawtooth-website/pull/22#discussion_r240762158,Sutrannu
+https://github.com/hyperledger/sawtooth-website/pull/22,https://github.com/hyperledger/sawtooth-website/pull/22,Fixed and updated PR.,402c3a329f3cff8af89ca53d83a5318c8c05a6d4,2018-12-11 23:29:31,240831457,"@@ -116,6 +116,10 @@ Back pressure is a flow-control technique to help prevent DoS attacks.
+ It results in a ``Status.QUEUE_FULL`` client batch submit response or a 429 ""Too Many Requests"" REST API error.
+ If the validator is overwhelmed it will stop accepting new batches until it can handle more work. The number of batches that validator can accept is based on a multiplier,  QUEUE_MULTIPLIER (currently 10, formerly 2), times a rolling average of the number of published batches.
+ 
++What does this error mean from sawset: ``There is no resource with the identifier``?
++-----------------------------------",,2018-12-13 21:12:52,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/240831457,https://github.com/hyperledger/sawtooth-website/pull/22#discussion_r240831457,danintel
+https://github.com/hyperledger/sawtooth-website/pull/22,https://github.com/hyperledger/sawtooth-website/pull/22,spelling: unneeded,402c3a329f3cff8af89ca53d83a5318c8c05a6d4,2018-12-12 22:00:43,241201400,"@@ -209,6 +209,8 @@ Solidity
+     A contract-oriented programming language used to implement smart contracts. Compiles into Ethereum VM code and is supported by Seth
+ Stale block
+     A block proposed to be at the head of a blockchain, but lost to a competing block that became the head as decided by the consensus algorithm
++State Pruning
++    Removing uneeded older state roots from Merkle-Radix global state database.  See https://github.com/hyperledger/sawtooth-rfcs/pull/8",,2018-12-13 21:12:52,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/241201400,https://github.com/hyperledger/sawtooth-website/pull/22#discussion_r241201400,TomBarnes
+https://github.com/hyperledger/sawtooth-website/pull/22,https://github.com/hyperledger/sawtooth-website/pull/22,Fixed.,402c3a329f3cff8af89ca53d83a5318c8c05a6d4,2018-12-12 22:19:02,241206639,"@@ -209,6 +209,8 @@ Solidity
+     A contract-oriented programming language used to implement smart contracts. Compiles into Ethereum VM code and is supported by Seth
+ Stale block
+     A block proposed to be at the head of a blockchain, but lost to a competing block that became the head as decided by the consensus algorithm
++State Pruning
++    Removing uneeded older state roots from Merkle-Radix global state database.  See https://github.com/hyperledger/sawtooth-rfcs/pull/8",,2018-12-13 21:12:52,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/241206639,https://github.com/hyperledger/sawtooth-website/pull/22#discussion_r241206639,danintel
+https://github.com/hyperledger/sawtooth-website/pull/20,https://github.com/hyperledger/sawtooth-website/pull/20,"Bad link.  It should be this link instead:
+
+https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide.html",8c46f6d21ff56e33942896932dd1c558580f365f,2018-12-05 21:40:08,239247797,"@@ -0,0 +1,322 @@
++---
++layout: page
++hide: true
++title: Hyperledger Sawtooth 1.1 (Bumper)
++permalink: /release/bumper/
++release: 1.1
++release-name: bumper
++# Copyright (c) 2018 Bitwise IO, Inc.
++# Licensed under Creative Commons Attribution 4.0 International License
++# https://creativecommons.org/licenses/by/4.0/
++---
++
++<a href=""top""></a>
++
++Hyperledger Sawtooth 1.1 (Bumper) is now available. See the [latest
++documentation](https://sawtooth.hyperledger.org/docs/core/releases/latest/) to
++get started.
++
++This page describes the new and changed features in Hyperledger
++Sawtooth 1.1 (since release 1.0). Information is organized in the following
++categories:
++
++- [Core Sawtooth Components](#core-sawtooth-components)
++- [Consensus](#consensus): Includes the new consensus API, changes to existing
++  consensus algorithm implementations, and support for new consensus algorithms
++- [Documentation](#documentation)
++- [Smart Contract Engines](#smart-contract-engines)
++- [DevOps and CI](#devops-and-ci): Describes changes to the project's build
++  tools and continuous integration process
++- [Website](#website): Includes the Sawtooth website content, structure, and
++  website development processes
++
++# Core Sawtooth Components
++
++## New Features
++
++- The consensus API has been completely redesigned. Consensus has been moved to
++  a separate process, called a “consensus engine”. See [Hyperledger Sawtooth
++  Consensus](#hyperledger-sawtooth-consensus) for more details.
++- State pruning is now supported at a configurable block horizon. This helps
++  limit the total storage requirements for global state by removing historic
++  state after the configured horizon. Check out the [state pruning
++  RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/8) for more details.
++- Several example transaction processors have been rewritten in Rust, including
++  IntegerKey (intkey), XO, and Smallbank.
++- A new `/status` endpoint and `sawtooth status show` command are available to
++  query status information for an active validator.
++- New metrics have been added for submitted batches and transactions, thread
++  pools, transaction processing, and dispatcher queue sizes.
++- The internal metrics library has been refactored to be more modular and
++  similar to the logging API.
++- The gossip protocol used by Sawtooth is now versioned to support
++  backwards-compatible upgrades in the future.
++
++## Major Improvements
++
++- The Rust SDK has matured. It now includes libraries for signing, writing
++  transaction processors, and writing consensus engines, along with supporting
++  information for the auto-generated SDK documentation.
++- Several key items have been rewritten in Rust: Validator CLI argument
++  parsing, global state database (and supporting views), ChainController, and
++  BlockPublisher. This change allows some code to be executed outside of the
++  Python global interpreter lock (GIL).
++- The ChainController and BlockPublisher have been substantially refactored to
++  be more modular and support validating blocks in parallel.
++
++## Minor Improvements
++
++- Transaction processors can now report the maximum number of transactions that
++  they can handle at a time. The validator will only request that many
++  transactions at a time for processing.
++- Logging has been improved to reduce the volume and improve the quality of
++  generated log messages.
++- Discarded blocks are now explicitly canceled to avoid wasting effort on
++  blocks that will never be chosen.
++- Deserialization is now cached for messages that have multiple handlers to
++  avoid redundant work.
++- Peers are requested only from connections that have passed authorization.
++- Client message handling has been moved to a separate thread pool to avoid
++  interfering with transaction processing.
++- The parallel scheduler has been refactored to use a generic `PredecessorTree`
++  data structure.
++
++## Bug Fixes
++
++- Fixed a bad internal configuration that allowed the Completer and
++  ChainController to get out of sync about which blocks were in the system
++- Add missing handlers for client messages
++- Correctly decrement ""time to live"" on gossip messages
++- Handled an edge case where a new node will not get the chain until a new
++  block is published
++- Stopped trying to unschedule transactions that haven't been scheduled yet
++- Fixed a number of concurrency issues where data structure were being accessed
++  concurrently without protection or with incorrect usage of synchronization
++  primitives
++- Fixed a bug where a future could be executed in the event loop instead of in
++  a thread pool
++- Only broadcast to peers that have completed authorization
++- Ensured that candidate blocks are only built in the BlockPublisher thread
++
++## Upgrade Considerations
++
++- The consensus setting `sawtooth.consensus.algorithm` setting has been
++  deprecated and no longer has an effect. Instead, use the settings
++  `sawtooth.consensus.algorithm.name` and `sawtooth.consensus.algorithm.version`
++  to set the name and version of the consensus engine.
++- All SDKs except Rust and Python have been moved from sawtooth-core to
++  [separate repositories](https://github.com/hyperledger?utf8=%E2%9C%93&q=sawtooth-sdk&type=&language=).
++- PoET has been moved to [a new repository](https://github.com/hyperledger/sawtooth-poet).
++
++[> back to top <](#top)
++
++# Consensus
++
++Hyperledger Sawtooth 1.1 includes a new consensus interface that enables
++features like language independence for consensus algorithms. Consensus
++protocols are now implemented as separate processes called “consensus engines"",
++which enables more consensus options for Sawtooth. Check out the [consensus API
++RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/4) for more details.
++
++- The network deployment tools have been updated to launch the consensus
++  processes. If you have made your own custom launch scripts, note that the
++  consensus engine now runs as its own process, like other services such as the
++  REST API and transaction processors. Please see the example Sawtooth
++  docker-compose files for reference.
++- This release includes the following consensus engines based on the new
++  consensus API:
++  - [PoET consensus engine](https://github.com/hyperledger/sawtooth-poet), a
++    refactored version of the previous PoET consensus module.
++  - Dev mode consensus engine, based on the previous dev mode consensus module.
++  - New [PBFT consensus engine](https://github.com/hyperledger/sawtooth-pbft),
++    based on the Practical Byzantine Fault Tolerance (PBFT) consensus algorithm.
++  - New [Raft consensus engine](https://github.com/hyperledger/sawtooth-raft),
++    based on the Raft consensus algorithm.
++
++## Sawtooth PoET
++
++The Sawtooth Proof of Elapsed Time (PoET) consensus can be deployed as a pure
++Python application using a simulated enclave, called PoET simulator, or with a
++C++ module implementing an Intel&reg; Software Guard Extensions (Intel&reg; SGX)
++enclave, called PoET-SGX.
++
++- PoET simulator is available in the 1.1 release as a consensus engine. If you
++  are using PoET simulator consensus, we recommend upgrading to Sawtooth 1.1.
++- PoET-SGX has not been validated on Sawtooth 1.1. Users relying on PoET-SGX
++  are recommended to remain on Sawtooth 1.0. We are working on a new
++  implementation of poet and its TEE enclave, which is anticipated for a point
++  release in the near future.
++
++## Sawtooth Raft
++
++Hyperledger Sawtooth 1.1 supports a developer preview of [Sawtooth
++Raft](https://github.com/hyperledger/sawtooth-raft), a Rust implementation of
++Raft based on the [raft-rs](https://github.com/pingcap/raft-rs) library used by
++[TiKV](https://github.com/tikv/tikv). The Sawtooth Raft consensus engine uses
++the new consensus API.
++
++Sawtooth Raft is still in the prototype phase and is under active development.
++
++## Sawtooth PBFT
++
++The Hyperledger Sawtooth 1.1 release includes the [Sawtooth PBFT consensus
++engine](https://github.com/hyperledger/sawtooth-pbft). Sawtooth PBFT is based
++on the [original PBFT paper](http://pmg.csail.mit.edu/papers/osdi99.pdf) with
++several extensions to make it compatible with Sawtooth and to resolve known
++issues with the original protocol. See the RFCs for more details:
++
++- [Initial RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/19)
++- [Extension RFC to mitigate fair ordering and silent leader issues](https://github.com/hyperledger/sawtooth-rfcs/pull/29)
++- [Extension RFC to enable observer validation of consensus](https://github.com/hyperledger/sawtooth-rfcs/pull/30)
++
++Sawtooth PBFT is still in the prototype phase and is under active development.
++
++[> back to top <](#top)
++
++# Documentation
++
++In addition to updates for Hyperledger Sawtooth 1.1 features, technical
++corrections, and bug fixes throughout, the Sawtooth documentation has the
++following changes and improvements.
++
++## Application Developer’s Guide
++
++- Improved procedures for running a single Sawtooth node with Docker, Ubuntu,
++  or AWS, plus a new Kubernetes procedure. See [Setting Up a Sawtooth
++  Application Development Environment](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/installing_sawtooth.html).
++- New procedures to add multiple nodes to a network for Docker, Ubuntu, and
++  Kubernetes. See [Creating a Sawtooth Network](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/creating_sawtooth_network.html).
++- Updated procedure for trying the example tic-tac-toe transaction processor in
++  Sawtooth. See [Playing with the XO Transaction Family](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/intro_xo_transaction_family.html).
++- Improved and expanded tutorials for using the Sawtooth JavaScript, Go, and
++  Python SDKs, plus a new Rust version. See [Using the Sawtooth SDKs](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/using_the_sdks.html).
++
++## API References
++
++- New Rust SDK documentation; see
++  [Rust SDK API Reference](https://sawtooth.hyperledger.org/docs/core/nightly/master/sdks.html#rust).
++
++## System Administrator’s Guide
++
++- Improved procedure for setting up a Sawtooth network with PoET simulator
++  consensus, including new steps to change off-chain settings and test the
++  system. See [Setting Up a Sawtooth Node](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/setting_up_sawtooth_poet-sim.html).
++- Updated procedure to configure a proxy server. See [Using a Proxy Server to
++  Authorize the REST API](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/rest_auth_proxy.html).
++- Updated permission information. See [Configuring Validator and Transactor
++  Permissions](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/configuring_permissions.html).
++- New procedure to configure Sawtooth to display Grafana metrics. See [Using
++  Grafana to Display Sawtooth Metrics](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/grafana_configuration.html).
++
++## Architecture Guide
++
++- General improvements and a new architecture overview.
++
++## Glossary
++
++- New glossary of Sawtooth terminology.
++
++[> back to top <](#top)
++
++# Smart Contract Engines
++
++## Sawtooth Seth
++
++Hyperledger Sawtooth 1.1 continues to support [Sawtooth
++Seth](https://github.com/hyperledger/sawtooth-seth), an Ethereum-compatible
++transaction family for the Hyperledger Sawtooth platform. Significant changes
++in this release:
++
++- A new `seth` CLI that is capable of communicating with the existing JSON-RPC
++  API. This CLI will let us test the JSON-RPC API, and will eventually allow us
++  to deprecate the existing REST-API-based CLI, which is now available in the
++  `seth-cli-go` container.
++- The existing JSON-RPC API has been updated to align more closely with
++  existing Ethereum JSON-RPC implementations, particularly in how it handles
++  account management. This change provides better inter-compatibility with
++  off-the-shelf Ethereum tooling.
++- The Burrow version was updated from 0.17 to 0.21 and vendor dependencies were
++  removed.
++- The build process and dependencies have been updated and aligned with current
++  best practices, such as formatting the Rust code and linting it with Clippy.
++- The documentation has been updated with minor corrections.
++- Several minor bugs have been fixed, such as a segfault occurring when
++  creating an account with a nonce, and invalid addresses being displayed in
++  contract listing.
++- This release includes Dockerfiles suitable for publishing to Docker Hub.
++
++## Sawtooth Sabre
++
++Hyperledger Sawtooth 1.1 supports [Sawtooth
++Sabre](https://github.com/hyperledger/sawtooth-sabre), a transaction family
++that implements on-chain smart contracts executed in a WebAssembly virtual
++machine. Sabre smart contracts are stored on chain and executed using the Sabre
++transaction processor.
++
++Sawtooth Sabre includes an SDK for writing Sabre smart contracts in Rust. The
++smart contracts can be written in such a way that they can be compiled into
++transaction processor and run without Sabre. This also makes it easy to convert
++already-written Rust transaction processors to a Sabre smart contract.
++
++**Note:** Sabre is currently at version 0.1 and is under active development.
++
++[> back to top <](#top)
++
++# DevOps and CI
++
++## Build System Improvements
++
++- The `bin/build_all` script and related build scripts have been replaced with
++  `docker-compose`.
++- The Docker Compose files now have 'build' sections, so that pre-building
++  steps aren't necessary and all required images can be built with a single
++  `docker-compose up` command.
++- The `sawtooth-dev-{lang}` Dockerfiles are deprecated. Each component now has
++  its own Dockerfile for development.
++
++Check out the [build system
++RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/25) for more details.
++
++**Note**: Requires Docker Engine 18.02.0 or later.
++
++## Docker
++
++- Each component now has ""installed"" Dockerfiles that utilize multi-stage
++  builds. These Dockerfiles are suitable for publishing to a docker registry.
++
++**Note**: Requires Docker Engine 18.02.0 or later.
++
++## Kubernetes
++
++- This release includes example files for two Kubernetes deployments: A
++  five-node network using PoET simulator and a single-node environment using
++  dev mode consensus. The Application Developer’s Guide describes how to use
++  these example files; see the [Hyperledger Sawtooth
++  documentation](#hyperledger-sawtooth-documentation).",,2018-12-05 21:58:11,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/239247797,https://github.com/hyperledger/sawtooth-website/pull/20#discussion_r239247797,chenette
+https://github.com/hyperledger/sawtooth-website/pull/20,https://github.com/hyperledger/sawtooth-website/pull/20,"Except use the right ""latest"" version of that link.  Sorry!
+",8c46f6d21ff56e33942896932dd1c558580f365f,2018-12-05 21:42:03,239248417,"@@ -0,0 +1,322 @@
++---
++layout: page
++hide: true
++title: Hyperledger Sawtooth 1.1 (Bumper)
++permalink: /release/bumper/
++release: 1.1
++release-name: bumper
++# Copyright (c) 2018 Bitwise IO, Inc.
++# Licensed under Creative Commons Attribution 4.0 International License
++# https://creativecommons.org/licenses/by/4.0/
++---
++
++<a href=""top""></a>
++
++Hyperledger Sawtooth 1.1 (Bumper) is now available. See the [latest
++documentation](https://sawtooth.hyperledger.org/docs/core/releases/latest/) to
++get started.
++
++This page describes the new and changed features in Hyperledger
++Sawtooth 1.1 (since release 1.0). Information is organized in the following
++categories:
++
++- [Core Sawtooth Components](#core-sawtooth-components)
++- [Consensus](#consensus): Includes the new consensus API, changes to existing
++  consensus algorithm implementations, and support for new consensus algorithms
++- [Documentation](#documentation)
++- [Smart Contract Engines](#smart-contract-engines)
++- [DevOps and CI](#devops-and-ci): Describes changes to the project's build
++  tools and continuous integration process
++- [Website](#website): Includes the Sawtooth website content, structure, and
++  website development processes
++
++# Core Sawtooth Components
++
++## New Features
++
++- The consensus API has been completely redesigned. Consensus has been moved to
++  a separate process, called a “consensus engine”. See [Hyperledger Sawtooth
++  Consensus](#hyperledger-sawtooth-consensus) for more details.
++- State pruning is now supported at a configurable block horizon. This helps
++  limit the total storage requirements for global state by removing historic
++  state after the configured horizon. Check out the [state pruning
++  RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/8) for more details.
++- Several example transaction processors have been rewritten in Rust, including
++  IntegerKey (intkey), XO, and Smallbank.
++- A new `/status` endpoint and `sawtooth status show` command are available to
++  query status information for an active validator.
++- New metrics have been added for submitted batches and transactions, thread
++  pools, transaction processing, and dispatcher queue sizes.
++- The internal metrics library has been refactored to be more modular and
++  similar to the logging API.
++- The gossip protocol used by Sawtooth is now versioned to support
++  backwards-compatible upgrades in the future.
++
++## Major Improvements
++
++- The Rust SDK has matured. It now includes libraries for signing, writing
++  transaction processors, and writing consensus engines, along with supporting
++  information for the auto-generated SDK documentation.
++- Several key items have been rewritten in Rust: Validator CLI argument
++  parsing, global state database (and supporting views), ChainController, and
++  BlockPublisher. This change allows some code to be executed outside of the
++  Python global interpreter lock (GIL).
++- The ChainController and BlockPublisher have been substantially refactored to
++  be more modular and support validating blocks in parallel.
++
++## Minor Improvements
++
++- Transaction processors can now report the maximum number of transactions that
++  they can handle at a time. The validator will only request that many
++  transactions at a time for processing.
++- Logging has been improved to reduce the volume and improve the quality of
++  generated log messages.
++- Discarded blocks are now explicitly canceled to avoid wasting effort on
++  blocks that will never be chosen.
++- Deserialization is now cached for messages that have multiple handlers to
++  avoid redundant work.
++- Peers are requested only from connections that have passed authorization.
++- Client message handling has been moved to a separate thread pool to avoid
++  interfering with transaction processing.
++- The parallel scheduler has been refactored to use a generic `PredecessorTree`
++  data structure.
++
++## Bug Fixes
++
++- Fixed a bad internal configuration that allowed the Completer and
++  ChainController to get out of sync about which blocks were in the system
++- Add missing handlers for client messages
++- Correctly decrement ""time to live"" on gossip messages
++- Handled an edge case where a new node will not get the chain until a new
++  block is published
++- Stopped trying to unschedule transactions that haven't been scheduled yet
++- Fixed a number of concurrency issues where data structure were being accessed
++  concurrently without protection or with incorrect usage of synchronization
++  primitives
++- Fixed a bug where a future could be executed in the event loop instead of in
++  a thread pool
++- Only broadcast to peers that have completed authorization
++- Ensured that candidate blocks are only built in the BlockPublisher thread
++
++## Upgrade Considerations
++
++- The consensus setting `sawtooth.consensus.algorithm` setting has been
++  deprecated and no longer has an effect. Instead, use the settings
++  `sawtooth.consensus.algorithm.name` and `sawtooth.consensus.algorithm.version`
++  to set the name and version of the consensus engine.
++- All SDKs except Rust and Python have been moved from sawtooth-core to
++  [separate repositories](https://github.com/hyperledger?utf8=%E2%9C%93&q=sawtooth-sdk&type=&language=).
++- PoET has been moved to [a new repository](https://github.com/hyperledger/sawtooth-poet).
++
++[> back to top <](#top)
++
++# Consensus
++
++Hyperledger Sawtooth 1.1 includes a new consensus interface that enables
++features like language independence for consensus algorithms. Consensus
++protocols are now implemented as separate processes called “consensus engines"",
++which enables more consensus options for Sawtooth. Check out the [consensus API
++RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/4) for more details.
++
++- The network deployment tools have been updated to launch the consensus
++  processes. If you have made your own custom launch scripts, note that the
++  consensus engine now runs as its own process, like other services such as the
++  REST API and transaction processors. Please see the example Sawtooth
++  docker-compose files for reference.
++- This release includes the following consensus engines based on the new
++  consensus API:
++  - [PoET consensus engine](https://github.com/hyperledger/sawtooth-poet), a
++    refactored version of the previous PoET consensus module.
++  - Dev mode consensus engine, based on the previous dev mode consensus module.
++  - New [PBFT consensus engine](https://github.com/hyperledger/sawtooth-pbft),
++    based on the Practical Byzantine Fault Tolerance (PBFT) consensus algorithm.
++  - New [Raft consensus engine](https://github.com/hyperledger/sawtooth-raft),
++    based on the Raft consensus algorithm.
++
++## Sawtooth PoET
++
++The Sawtooth Proof of Elapsed Time (PoET) consensus can be deployed as a pure
++Python application using a simulated enclave, called PoET simulator, or with a
++C++ module implementing an Intel&reg; Software Guard Extensions (Intel&reg; SGX)
++enclave, called PoET-SGX.
++
++- PoET simulator is available in the 1.1 release as a consensus engine. If you
++  are using PoET simulator consensus, we recommend upgrading to Sawtooth 1.1.
++- PoET-SGX has not been validated on Sawtooth 1.1. Users relying on PoET-SGX
++  are recommended to remain on Sawtooth 1.0. We are working on a new
++  implementation of poet and its TEE enclave, which is anticipated for a point
++  release in the near future.
++
++## Sawtooth Raft
++
++Hyperledger Sawtooth 1.1 supports a developer preview of [Sawtooth
++Raft](https://github.com/hyperledger/sawtooth-raft), a Rust implementation of
++Raft based on the [raft-rs](https://github.com/pingcap/raft-rs) library used by
++[TiKV](https://github.com/tikv/tikv). The Sawtooth Raft consensus engine uses
++the new consensus API.
++
++Sawtooth Raft is still in the prototype phase and is under active development.
++
++## Sawtooth PBFT
++
++The Hyperledger Sawtooth 1.1 release includes the [Sawtooth PBFT consensus
++engine](https://github.com/hyperledger/sawtooth-pbft). Sawtooth PBFT is based
++on the [original PBFT paper](http://pmg.csail.mit.edu/papers/osdi99.pdf) with
++several extensions to make it compatible with Sawtooth and to resolve known
++issues with the original protocol. See the RFCs for more details:
++
++- [Initial RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/19)
++- [Extension RFC to mitigate fair ordering and silent leader issues](https://github.com/hyperledger/sawtooth-rfcs/pull/29)
++- [Extension RFC to enable observer validation of consensus](https://github.com/hyperledger/sawtooth-rfcs/pull/30)
++
++Sawtooth PBFT is still in the prototype phase and is under active development.
++
++[> back to top <](#top)
++
++# Documentation
++
++In addition to updates for Hyperledger Sawtooth 1.1 features, technical
++corrections, and bug fixes throughout, the Sawtooth documentation has the
++following changes and improvements.
++
++## Application Developer’s Guide
++
++- Improved procedures for running a single Sawtooth node with Docker, Ubuntu,
++  or AWS, plus a new Kubernetes procedure. See [Setting Up a Sawtooth
++  Application Development Environment](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/installing_sawtooth.html).
++- New procedures to add multiple nodes to a network for Docker, Ubuntu, and
++  Kubernetes. See [Creating a Sawtooth Network](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/creating_sawtooth_network.html).
++- Updated procedure for trying the example tic-tac-toe transaction processor in
++  Sawtooth. See [Playing with the XO Transaction Family](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/intro_xo_transaction_family.html).
++- Improved and expanded tutorials for using the Sawtooth JavaScript, Go, and
++  Python SDKs, plus a new Rust version. See [Using the Sawtooth SDKs](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/using_the_sdks.html).
++
++## API References
++
++- New Rust SDK documentation; see
++  [Rust SDK API Reference](https://sawtooth.hyperledger.org/docs/core/nightly/master/sdks.html#rust).
++
++## System Administrator’s Guide
++
++- Improved procedure for setting up a Sawtooth network with PoET simulator
++  consensus, including new steps to change off-chain settings and test the
++  system. See [Setting Up a Sawtooth Node](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/setting_up_sawtooth_poet-sim.html).
++- Updated procedure to configure a proxy server. See [Using a Proxy Server to
++  Authorize the REST API](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/rest_auth_proxy.html).
++- Updated permission information. See [Configuring Validator and Transactor
++  Permissions](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/configuring_permissions.html).
++- New procedure to configure Sawtooth to display Grafana metrics. See [Using
++  Grafana to Display Sawtooth Metrics](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/grafana_configuration.html).
++
++## Architecture Guide
++
++- General improvements and a new architecture overview.
++
++## Glossary
++
++- New glossary of Sawtooth terminology.
++
++[> back to top <](#top)
++
++# Smart Contract Engines
++
++## Sawtooth Seth
++
++Hyperledger Sawtooth 1.1 continues to support [Sawtooth
++Seth](https://github.com/hyperledger/sawtooth-seth), an Ethereum-compatible
++transaction family for the Hyperledger Sawtooth platform. Significant changes
++in this release:
++
++- A new `seth` CLI that is capable of communicating with the existing JSON-RPC
++  API. This CLI will let us test the JSON-RPC API, and will eventually allow us
++  to deprecate the existing REST-API-based CLI, which is now available in the
++  `seth-cli-go` container.
++- The existing JSON-RPC API has been updated to align more closely with
++  existing Ethereum JSON-RPC implementations, particularly in how it handles
++  account management. This change provides better inter-compatibility with
++  off-the-shelf Ethereum tooling.
++- The Burrow version was updated from 0.17 to 0.21 and vendor dependencies were
++  removed.
++- The build process and dependencies have been updated and aligned with current
++  best practices, such as formatting the Rust code and linting it with Clippy.
++- The documentation has been updated with minor corrections.
++- Several minor bugs have been fixed, such as a segfault occurring when
++  creating an account with a nonce, and invalid addresses being displayed in
++  contract listing.
++- This release includes Dockerfiles suitable for publishing to Docker Hub.
++
++## Sawtooth Sabre
++
++Hyperledger Sawtooth 1.1 supports [Sawtooth
++Sabre](https://github.com/hyperledger/sawtooth-sabre), a transaction family
++that implements on-chain smart contracts executed in a WebAssembly virtual
++machine. Sabre smart contracts are stored on chain and executed using the Sabre
++transaction processor.
++
++Sawtooth Sabre includes an SDK for writing Sabre smart contracts in Rust. The
++smart contracts can be written in such a way that they can be compiled into
++transaction processor and run without Sabre. This also makes it easy to convert
++already-written Rust transaction processors to a Sabre smart contract.
++
++**Note:** Sabre is currently at version 0.1 and is under active development.
++
++[> back to top <](#top)
++
++# DevOps and CI
++
++## Build System Improvements
++
++- The `bin/build_all` script and related build scripts have been replaced with
++  `docker-compose`.
++- The Docker Compose files now have 'build' sections, so that pre-building
++  steps aren't necessary and all required images can be built with a single
++  `docker-compose up` command.
++- The `sawtooth-dev-{lang}` Dockerfiles are deprecated. Each component now has
++  its own Dockerfile for development.
++
++Check out the [build system
++RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/25) for more details.
++
++**Note**: Requires Docker Engine 18.02.0 or later.
++
++## Docker
++
++- Each component now has ""installed"" Dockerfiles that utilize multi-stage
++  builds. These Dockerfiles are suitable for publishing to a docker registry.
++
++**Note**: Requires Docker Engine 18.02.0 or later.
++
++## Kubernetes
++
++- This release includes example files for two Kubernetes deployments: A
++  five-node network using PoET simulator and a single-node environment using
++  dev mode consensus. The Application Developer’s Guide describes how to use
++  these example files; see the [Hyperledger Sawtooth
++  documentation](#hyperledger-sawtooth-documentation).",,2018-12-05 21:58:11,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/239248417,https://github.com/hyperledger/sawtooth-website/pull/20#discussion_r239248417,chenette
+https://github.com/hyperledger/sawtooth-website/pull/20,https://github.com/hyperledger/sawtooth-website/pull/20,Link href set to https://sawtooth.hyperledger.org/docs/core/releases/latest/app_developers_guide.html,8c46f6d21ff56e33942896932dd1c558580f365f,2018-12-05 21:43:57,239249033,"@@ -0,0 +1,322 @@
++---
++layout: page
++hide: true
++title: Hyperledger Sawtooth 1.1 (Bumper)
++permalink: /release/bumper/
++release: 1.1
++release-name: bumper
++# Copyright (c) 2018 Bitwise IO, Inc.
++# Licensed under Creative Commons Attribution 4.0 International License
++# https://creativecommons.org/licenses/by/4.0/
++---
++
++<a href=""top""></a>
++
++Hyperledger Sawtooth 1.1 (Bumper) is now available. See the [latest
++documentation](https://sawtooth.hyperledger.org/docs/core/releases/latest/) to
++get started.
++
++This page describes the new and changed features in Hyperledger
++Sawtooth 1.1 (since release 1.0). Information is organized in the following
++categories:
++
++- [Core Sawtooth Components](#core-sawtooth-components)
++- [Consensus](#consensus): Includes the new consensus API, changes to existing
++  consensus algorithm implementations, and support for new consensus algorithms
++- [Documentation](#documentation)
++- [Smart Contract Engines](#smart-contract-engines)
++- [DevOps and CI](#devops-and-ci): Describes changes to the project's build
++  tools and continuous integration process
++- [Website](#website): Includes the Sawtooth website content, structure, and
++  website development processes
++
++# Core Sawtooth Components
++
++## New Features
++
++- The consensus API has been completely redesigned. Consensus has been moved to
++  a separate process, called a “consensus engine”. See [Hyperledger Sawtooth
++  Consensus](#hyperledger-sawtooth-consensus) for more details.
++- State pruning is now supported at a configurable block horizon. This helps
++  limit the total storage requirements for global state by removing historic
++  state after the configured horizon. Check out the [state pruning
++  RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/8) for more details.
++- Several example transaction processors have been rewritten in Rust, including
++  IntegerKey (intkey), XO, and Smallbank.
++- A new `/status` endpoint and `sawtooth status show` command are available to
++  query status information for an active validator.
++- New metrics have been added for submitted batches and transactions, thread
++  pools, transaction processing, and dispatcher queue sizes.
++- The internal metrics library has been refactored to be more modular and
++  similar to the logging API.
++- The gossip protocol used by Sawtooth is now versioned to support
++  backwards-compatible upgrades in the future.
++
++## Major Improvements
++
++- The Rust SDK has matured. It now includes libraries for signing, writing
++  transaction processors, and writing consensus engines, along with supporting
++  information for the auto-generated SDK documentation.
++- Several key items have been rewritten in Rust: Validator CLI argument
++  parsing, global state database (and supporting views), ChainController, and
++  BlockPublisher. This change allows some code to be executed outside of the
++  Python global interpreter lock (GIL).
++- The ChainController and BlockPublisher have been substantially refactored to
++  be more modular and support validating blocks in parallel.
++
++## Minor Improvements
++
++- Transaction processors can now report the maximum number of transactions that
++  they can handle at a time. The validator will only request that many
++  transactions at a time for processing.
++- Logging has been improved to reduce the volume and improve the quality of
++  generated log messages.
++- Discarded blocks are now explicitly canceled to avoid wasting effort on
++  blocks that will never be chosen.
++- Deserialization is now cached for messages that have multiple handlers to
++  avoid redundant work.
++- Peers are requested only from connections that have passed authorization.
++- Client message handling has been moved to a separate thread pool to avoid
++  interfering with transaction processing.
++- The parallel scheduler has been refactored to use a generic `PredecessorTree`
++  data structure.
++
++## Bug Fixes
++
++- Fixed a bad internal configuration that allowed the Completer and
++  ChainController to get out of sync about which blocks were in the system
++- Add missing handlers for client messages
++- Correctly decrement ""time to live"" on gossip messages
++- Handled an edge case where a new node will not get the chain until a new
++  block is published
++- Stopped trying to unschedule transactions that haven't been scheduled yet
++- Fixed a number of concurrency issues where data structure were being accessed
++  concurrently without protection or with incorrect usage of synchronization
++  primitives
++- Fixed a bug where a future could be executed in the event loop instead of in
++  a thread pool
++- Only broadcast to peers that have completed authorization
++- Ensured that candidate blocks are only built in the BlockPublisher thread
++
++## Upgrade Considerations
++
++- The consensus setting `sawtooth.consensus.algorithm` setting has been
++  deprecated and no longer has an effect. Instead, use the settings
++  `sawtooth.consensus.algorithm.name` and `sawtooth.consensus.algorithm.version`
++  to set the name and version of the consensus engine.
++- All SDKs except Rust and Python have been moved from sawtooth-core to
++  [separate repositories](https://github.com/hyperledger?utf8=%E2%9C%93&q=sawtooth-sdk&type=&language=).
++- PoET has been moved to [a new repository](https://github.com/hyperledger/sawtooth-poet).
++
++[> back to top <](#top)
++
++# Consensus
++
++Hyperledger Sawtooth 1.1 includes a new consensus interface that enables
++features like language independence for consensus algorithms. Consensus
++protocols are now implemented as separate processes called “consensus engines"",
++which enables more consensus options for Sawtooth. Check out the [consensus API
++RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/4) for more details.
++
++- The network deployment tools have been updated to launch the consensus
++  processes. If you have made your own custom launch scripts, note that the
++  consensus engine now runs as its own process, like other services such as the
++  REST API and transaction processors. Please see the example Sawtooth
++  docker-compose files for reference.
++- This release includes the following consensus engines based on the new
++  consensus API:
++  - [PoET consensus engine](https://github.com/hyperledger/sawtooth-poet), a
++    refactored version of the previous PoET consensus module.
++  - Dev mode consensus engine, based on the previous dev mode consensus module.
++  - New [PBFT consensus engine](https://github.com/hyperledger/sawtooth-pbft),
++    based on the Practical Byzantine Fault Tolerance (PBFT) consensus algorithm.
++  - New [Raft consensus engine](https://github.com/hyperledger/sawtooth-raft),
++    based on the Raft consensus algorithm.
++
++## Sawtooth PoET
++
++The Sawtooth Proof of Elapsed Time (PoET) consensus can be deployed as a pure
++Python application using a simulated enclave, called PoET simulator, or with a
++C++ module implementing an Intel&reg; Software Guard Extensions (Intel&reg; SGX)
++enclave, called PoET-SGX.
++
++- PoET simulator is available in the 1.1 release as a consensus engine. If you
++  are using PoET simulator consensus, we recommend upgrading to Sawtooth 1.1.
++- PoET-SGX has not been validated on Sawtooth 1.1. Users relying on PoET-SGX
++  are recommended to remain on Sawtooth 1.0. We are working on a new
++  implementation of poet and its TEE enclave, which is anticipated for a point
++  release in the near future.
++
++## Sawtooth Raft
++
++Hyperledger Sawtooth 1.1 supports a developer preview of [Sawtooth
++Raft](https://github.com/hyperledger/sawtooth-raft), a Rust implementation of
++Raft based on the [raft-rs](https://github.com/pingcap/raft-rs) library used by
++[TiKV](https://github.com/tikv/tikv). The Sawtooth Raft consensus engine uses
++the new consensus API.
++
++Sawtooth Raft is still in the prototype phase and is under active development.
++
++## Sawtooth PBFT
++
++The Hyperledger Sawtooth 1.1 release includes the [Sawtooth PBFT consensus
++engine](https://github.com/hyperledger/sawtooth-pbft). Sawtooth PBFT is based
++on the [original PBFT paper](http://pmg.csail.mit.edu/papers/osdi99.pdf) with
++several extensions to make it compatible with Sawtooth and to resolve known
++issues with the original protocol. See the RFCs for more details:
++
++- [Initial RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/19)
++- [Extension RFC to mitigate fair ordering and silent leader issues](https://github.com/hyperledger/sawtooth-rfcs/pull/29)
++- [Extension RFC to enable observer validation of consensus](https://github.com/hyperledger/sawtooth-rfcs/pull/30)
++
++Sawtooth PBFT is still in the prototype phase and is under active development.
++
++[> back to top <](#top)
++
++# Documentation
++
++In addition to updates for Hyperledger Sawtooth 1.1 features, technical
++corrections, and bug fixes throughout, the Sawtooth documentation has the
++following changes and improvements.
++
++## Application Developer’s Guide
++
++- Improved procedures for running a single Sawtooth node with Docker, Ubuntu,
++  or AWS, plus a new Kubernetes procedure. See [Setting Up a Sawtooth
++  Application Development Environment](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/installing_sawtooth.html).
++- New procedures to add multiple nodes to a network for Docker, Ubuntu, and
++  Kubernetes. See [Creating a Sawtooth Network](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/creating_sawtooth_network.html).
++- Updated procedure for trying the example tic-tac-toe transaction processor in
++  Sawtooth. See [Playing with the XO Transaction Family](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/intro_xo_transaction_family.html).
++- Improved and expanded tutorials for using the Sawtooth JavaScript, Go, and
++  Python SDKs, plus a new Rust version. See [Using the Sawtooth SDKs](https://sawtooth.hyperledger.org/docs/core/nightly/master/app_developers_guide/using_the_sdks.html).
++
++## API References
++
++- New Rust SDK documentation; see
++  [Rust SDK API Reference](https://sawtooth.hyperledger.org/docs/core/nightly/master/sdks.html#rust).
++
++## System Administrator’s Guide
++
++- Improved procedure for setting up a Sawtooth network with PoET simulator
++  consensus, including new steps to change off-chain settings and test the
++  system. See [Setting Up a Sawtooth Node](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/setting_up_sawtooth_poet-sim.html).
++- Updated procedure to configure a proxy server. See [Using a Proxy Server to
++  Authorize the REST API](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/rest_auth_proxy.html).
++- Updated permission information. See [Configuring Validator and Transactor
++  Permissions](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/configuring_permissions.html).
++- New procedure to configure Sawtooth to display Grafana metrics. See [Using
++  Grafana to Display Sawtooth Metrics](https://sawtooth.hyperledger.org/docs/core/nightly/master/sysadmin_guide/grafana_configuration.html).
++
++## Architecture Guide
++
++- General improvements and a new architecture overview.
++
++## Glossary
++
++- New glossary of Sawtooth terminology.
++
++[> back to top <](#top)
++
++# Smart Contract Engines
++
++## Sawtooth Seth
++
++Hyperledger Sawtooth 1.1 continues to support [Sawtooth
++Seth](https://github.com/hyperledger/sawtooth-seth), an Ethereum-compatible
++transaction family for the Hyperledger Sawtooth platform. Significant changes
++in this release:
++
++- A new `seth` CLI that is capable of communicating with the existing JSON-RPC
++  API. This CLI will let us test the JSON-RPC API, and will eventually allow us
++  to deprecate the existing REST-API-based CLI, which is now available in the
++  `seth-cli-go` container.
++- The existing JSON-RPC API has been updated to align more closely with
++  existing Ethereum JSON-RPC implementations, particularly in how it handles
++  account management. This change provides better inter-compatibility with
++  off-the-shelf Ethereum tooling.
++- The Burrow version was updated from 0.17 to 0.21 and vendor dependencies were
++  removed.
++- The build process and dependencies have been updated and aligned with current
++  best practices, such as formatting the Rust code and linting it with Clippy.
++- The documentation has been updated with minor corrections.
++- Several minor bugs have been fixed, such as a segfault occurring when
++  creating an account with a nonce, and invalid addresses being displayed in
++  contract listing.
++- This release includes Dockerfiles suitable for publishing to Docker Hub.
++
++## Sawtooth Sabre
++
++Hyperledger Sawtooth 1.1 supports [Sawtooth
++Sabre](https://github.com/hyperledger/sawtooth-sabre), a transaction family
++that implements on-chain smart contracts executed in a WebAssembly virtual
++machine. Sabre smart contracts are stored on chain and executed using the Sabre
++transaction processor.
++
++Sawtooth Sabre includes an SDK for writing Sabre smart contracts in Rust. The
++smart contracts can be written in such a way that they can be compiled into
++transaction processor and run without Sabre. This also makes it easy to convert
++already-written Rust transaction processors to a Sabre smart contract.
++
++**Note:** Sabre is currently at version 0.1 and is under active development.
++
++[> back to top <](#top)
++
++# DevOps and CI
++
++## Build System Improvements
++
++- The `bin/build_all` script and related build scripts have been replaced with
++  `docker-compose`.
++- The Docker Compose files now have 'build' sections, so that pre-building
++  steps aren't necessary and all required images can be built with a single
++  `docker-compose up` command.
++- The `sawtooth-dev-{lang}` Dockerfiles are deprecated. Each component now has
++  its own Dockerfile for development.
++
++Check out the [build system
++RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/25) for more details.
++
++**Note**: Requires Docker Engine 18.02.0 or later.
++
++## Docker
++
++- Each component now has ""installed"" Dockerfiles that utilize multi-stage
++  builds. These Dockerfiles are suitable for publishing to a docker registry.
++
++**Note**: Requires Docker Engine 18.02.0 or later.
++
++## Kubernetes
++
++- This release includes example files for two Kubernetes deployments: A
++  five-node network using PoET simulator and a single-node environment using
++  dev mode consensus. The Application Developer’s Guide describes how to use
++  these example files; see the [Hyperledger Sawtooth
++  documentation](#hyperledger-sawtooth-documentation).",,2018-12-05 21:58:11,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/239249033,https://github.com/hyperledger/sawtooth-website/pull/20#discussion_r239249033,Sutrannu
+https://github.com/hyperledger/sawtooth-website/pull/20,https://github.com/hyperledger/sawtooth-website/pull/20,"This is supposed to link with the ""Consensus"" section lower down (line 113).
+
+`# Consensus`",8c46f6d21ff56e33942896932dd1c558580f365f,2018-12-05 21:50:49,239251174,"@@ -0,0 +1,322 @@
++---
++layout: page
++hide: true
++title: Hyperledger Sawtooth 1.1 (Bumper)
++permalink: /release/bumper/
++release: 1.1
++release-name: bumper
++# Copyright (c) 2018 Bitwise IO, Inc.
++# Licensed under Creative Commons Attribution 4.0 International License
++# https://creativecommons.org/licenses/by/4.0/
++---
++
++<a href=""top""></a>
++
++Hyperledger Sawtooth 1.1 (Bumper) is now available. See the [latest
++documentation](https://sawtooth.hyperledger.org/docs/core/releases/latest/) to
++get started.
++
++This page describes the new and changed features in Hyperledger
++Sawtooth 1.1 (since release 1.0). Information is organized in the following
++categories:
++
++- [Core Sawtooth Components](#core-sawtooth-components)
++- [Consensus](#consensus): Includes the new consensus API, changes to existing
++  consensus algorithm implementations, and support for new consensus algorithms
++- [Documentation](#documentation)
++- [Smart Contract Engines](#smart-contract-engines)
++- [DevOps and CI](#devops-and-ci): Describes changes to the project's build
++  tools and continuous integration process
++- [Website](#website): Includes the Sawtooth website content, structure, and
++  website development processes
++
++# Core Sawtooth Components
++
++## New Features
++
++- The consensus API has been completely redesigned. Consensus has been moved to
++  a separate process, called a “consensus engine”. See [Hyperledger Sawtooth
++  Consensus](#hyperledger-sawtooth-consensus) for more details.",,2018-12-05 21:58:11,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/239251174,https://github.com/hyperledger/sawtooth-website/pull/20#discussion_r239251174,chenette
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"Minor nitpick:  I'd say either ""You can write your own ...."" or ""One can write one's own..."".",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 16:45:59,238346828,"@@ -219,6 +219,11 @@ Blockchain achieves fault tolerance by having its state (data) completely duplic
+ Distributing nodes on virtual machines sharing the same host does nothing to guard against hardware faults.
+ Distributing nodes at the same site does not protect against site outages.
+ 
++Can I restrict what validator nodes win consensus?
++-------------------------
++No. Every peer node validates blocks and every peer node can publish a block.
++One can write your own plugin consensus module to restrict what peer nodes win. Or modify an existing consensus module to experiment.",,2018-12-03 19:36:55,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238346828,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238346828,chenette
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"Delete ""Development"" (the title in the video is ""Hyperledger Sawtooth Technical Overview"").  ",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 16:46:15,238346934,"@@ -31,6 +31,12 @@ Intel: Building Blockchain for the Enterprise. Shows how Sawtooth builds are don
+ Sawtooth 1.0 Architecture and App Development (31:26, Zac Delventhal, Bitwise, 2018)
+     https://www.youtube.com/watch?v=uBebFQM49Xk
+ 
++Hyperledger Sawtooth Technical Overview Development (58:50, Dan Anderson, Intel, 2018)",,2018-12-03 19:36:55,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238346934,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238346934,chenette
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"This is the ""text title"" of the youtube video, but I prefer the title shown in the actual video: Hyperledger Sawtooth Application Developer Overview using ""CookieJar"" (it's more descriptive).",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 16:50:21,238348678,"@@ -31,6 +31,12 @@ Intel: Building Blockchain for the Enterprise. Shows how Sawtooth builds are don
+ Sawtooth 1.0 Architecture and App Development (31:26, Zac Delventhal, Bitwise, 2018)
+     https://www.youtube.com/watch?v=uBebFQM49Xk
+ 
++Hyperledger Sawtooth Technical Overview Development (58:50, Dan Anderson, Intel, 2018)
++    https://www.youtube.com/watch?v=KGFuKIBma_M
++
++Hyperledger Sawtooth Application Development (55:16, Dan Anderson, Intel, 2018)",,2018-12-03 19:36:55,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238348678,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238348678,chenette
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"The title doesn't include ""Sawtooth"". It's: Revolutionizing Identity Management with Blockchain – Intel Chip Chat – Episode 612",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 16:51:40,238349308,"@@ -61,6 +67,9 @@ Hyperledger Sawtooth 1.0: Market Significance and Technical Overview. Free regis
+ 
+ Intel Chip Chat Audio
+ ---------------------
++Revolutionizing Identity Management with Sawtooth Blockchain. Ep. 612 (8:33, Chris Spanton, T-Mobile, 2018)",,2018-12-03 19:36:55,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238349308,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238349308,chenette
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"OK. ""You can ...""",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 19:30:36,238405979,"@@ -219,6 +219,11 @@ Blockchain achieves fault tolerance by having its state (data) completely duplic
+ Distributing nodes on virtual machines sharing the same host does nothing to guard against hardware faults.
+ Distributing nodes at the same site does not protect against site outages.
+ 
++Can I restrict what validator nodes win consensus?
++-------------------------
++No. Every peer node validates blocks and every peer node can publish a block.
++One can write your own plugin consensus module to restrict what peer nodes win. Or modify an existing consensus module to experiment.",,2018-12-03 19:36:55,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238405979,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238405979,danintel
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"OK, thanks.",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 19:31:05,238406139,"@@ -31,6 +31,12 @@ Intel: Building Blockchain for the Enterprise. Shows how Sawtooth builds are don
+ Sawtooth 1.0 Architecture and App Development (31:26, Zac Delventhal, Bitwise, 2018)
+     https://www.youtube.com/watch?v=uBebFQM49Xk
+ 
++Hyperledger Sawtooth Technical Overview Development (58:50, Dan Anderson, Intel, 2018)",,2018-12-03 19:36:55,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238406139,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238406139,danintel
+https://github.com/hyperledger/sawtooth-website/pull/16,https://github.com/hyperledger/sawtooth-website/pull/16,"I changed it to ""[Sawtooth] Blockchain"". It discusses Sawtooth, even though it is not in the title.",06f758dc271efee306259336e4919c9cfff5fd72,2018-12-03 19:37:33,238408590,"@@ -61,6 +67,9 @@ Hyperledger Sawtooth 1.0: Market Significance and Technical Overview. Free regis
+ 
+ Intel Chip Chat Audio
+ ---------------------
++Revolutionizing Identity Management with Sawtooth Blockchain. Ep. 612 (8:33, Chris Spanton, T-Mobile, 2018)",,2018-12-03 19:37:33,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/238408590,https://github.com/hyperledger/sawtooth-website/pull/16#discussion_r238408590,danintel
+https://github.com/hyperledger/sawtooth-website/pull/8,https://github.com/hyperledger/sawtooth-website/pull/8,"Is it bumper or Bumper?
+
+Also, it should be codenamed (not codename).
+",da6337792484293b230083c866eb53650d125861,2018-11-05 21:03:41,230910784,"@@ -23,6 +23,15 @@ community and documented
+ Information on what _Active_ entails can be found in the
+ [Hyperledger Project Lifecycle document](https://wiki.hyperledger.org/community/project-lifecycle).
+ 
++# Latest Release
++
++The latest release of Hyperledger Sawtooth is 1.1, codename Bumper.",,2018-12-05 06:01:12,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/230910784,https://github.com/hyperledger/sawtooth-website/pull/8#discussion_r230910784,chenette
+https://github.com/hyperledger/sawtooth-website/pull/8,https://github.com/hyperledger/sawtooth-website/pull/8,:s/:/.,da6337792484293b230083c866eb53650d125861,2018-11-06 01:26:35,230974072,"@@ -0,0 +1,315 @@
++---
++layout: page
++hide: true
++title: Bumper Release Notes
++permalink: /release/bumper/
++release: 1.1
++release-name: bumper
++# Copyright (c) 2018 Bitwise IO, Inc.
++# Licensed under Creative Commons Attribution 4.0 International License
++# https://creativecommons.org/licenses/by/4.0/
++---
++
++<a href=""top""></a>
++
++Hyperledger Sawtooth 1.1 (Bumper) is now available. See the [latest
++documentation](https://sawtooth.hyperledger.org/docs/core/releases/latest/) to
++get started.
++
++The following release notes describe the new and changed features in
++Hyperledger Sawtooth 1.1 (since release 1.0). They have been organized into the
++following categories:
++
++- [Core](#core): Changes to core Sawtooth components
++- [Consensus](#consensus): Changes to the consensus API, changes to existing
++  consensus algorithm implementations, and announcements for new consensus
++  algorithm support
++- [Documentation](#documentation): Changes to the Sawtooth documentation
++- [Smart Contract Engines](#smart-contract-engines): Changes to smart contract
++  engines supported by Sawtooth
++- [DevOps and CI](#devops-and-ci): Changes to the project's build tools and CI
++  process
++- [Website](#website): Changes to the Sawtooth website content, structure, and
++  development processes
++
++# Core
++
++## New Features
++
++- The consensus API has been completely redesigned. Consensus has been moved to
++  a separate process, called a “consensus engine”. See [Hyperledger Sawtooth
++  Consensus](#hyperledger-sawtooth-consensus), below for more details.
++- State pruning is now supported at a configurable block horizon. This helps
++  limit the total storage requirements for global state by removing historic
++  state after the configured horizon. Check out the [state pruning
++  RFC](https://github.com/hyperledger/sawtooth-rfcs/pull/8) for more details:",,2018-12-05 06:01:12,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/230974072,https://github.com/hyperledger/sawtooth-website/pull/8#discussion_r230974072,dcmiddle
+https://github.com/hyperledger/sawtooth-website/pull/7,https://github.com/hyperledger/sawtooth-website/pull/7,"Odd intent here, unintentional tab?",a77850181929c3c2fe9842420e796625617ffacc,2018-11-01 14:42:43,230065575,"@@ -2,19 +2,74 @@
+ # Copyright (c) 2018 Bitwise IO, Inc.
+ # Licensed under Creative Commons Attribution 4.0 International License
+ # https://creativecommons.org/licenses/by/4.0/
++##
++
++readonly wd=""$(pwd)""
++
++info(){
++    echo -e ""\e[94m${1}\e[93m""
++}
++
++get_archives(){
++    wget -qNrA gz -nH --no-parent --no-check-certificate \
++        https://sawtooth.hyperledger.org/archive/core/
++    wget -qNO archive/core/sl.txt --no-check-certificate \
++        https://sawtooth.hyperledger.org/archive/core/sl.txt
++}
++
++info ""Retrieving docs""
++get_archives
++
++info ""Extracting docs""
++mkdir -p ./archive/docs
++ls ./archive/core/*.gz | xargs -I{} tar --skip-old-files -xzf {} \
++    -C ./archive/docs/
++
++info ""Retrieving nightlies""
++for repo in core seth raft sabre supply-chain; do
++    for branch in master; do
++        url=""https://build.sawtooth.me/job/Sawtooth-Hyperledger/job/""
++        url=""${url}sawtooth-${repo}""
++        url=""${url}/job/""
++        url=""${url}${branch}""
++        url=""${url}/lastSuccessfulBuild/artifact/docs/build/html/*zip*/html.zip""
++        mkdir -p ./archive/nightly/${repo}
++        wget -qNO ./archive/nightly/${repo}/${branch}.zip \
++            --no-check-certificate ""${url}""
++        unzip -qn ./archive/nightly/${repo}/${branch}.zip \
++            -d ./archive/nightly/${repo}/
++        mkdir -p ./archive/docs/${repo}/nightly/${branch}/
++        cp -rd ./archive/nightly/${repo}/html/* \
++            ./archive/docs/${repo}/nightly/${branch}/
++    done
++done
++
++info ""Setting symlinks""
++for line in $(cat ${wd}/archive/core/sl.txt); do
++    parent=$(echo $line | cut -d: -f1)
++    link=$(echo $line | cut -d: -f2)
++    target=$(echo $line | cut -d: -f3)
++    mkdir -p ${wd}/archive/docs/${parent}
++    cd ${wd}/archive/docs/${parent}
++    ln -frsT $target $link
++done
++cd ${wd}
++
+ 
+ until [ -f /srv/jekyll/lint.complete ]; do
+     sleep .2
+ done
+ 
+ # test for files in build directory
+ if (shopt -s nullglob dotglob; f=(/srv/jekyll/_site/*); ((${#f[@]}))); then
++    info ""Copying build to container""
++    sed -i '/versions.json/s/https.*json/\/docs\/versions.json/' ./archive/docs/*/*/*/_static/version_switcher.js
++    cp -rd ./archive/docs/* /usr/local/apache2/htdocs/docs/
+     cp -rf /srv/jekyll/_site/* /usr/local/apache2/htdocs/
+     rm /srv/jekyll/*.complete
+-
+     /usr/local/apache2/bin/httpd -DFOREGROUND
+ else
+     rm /srv/jekyll/*.complete
+-	echo ""Site was not built"">&2
++	info ""Site was not built""",,2018-11-02 20:12:39,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/230065575,https://github.com/hyperledger/sawtooth-website/pull/7#discussion_r230065575,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/7,https://github.com/hyperledger/sawtooth-website/pull/7,This newline-only change should probably be a separate commit.,a77850181929c3c2fe9842420e796625617ffacc,2018-11-01 14:43:43,230065974,"@@ -31,4 +31,4 @@ services:
+     ports:
+       - 8000:80
+     volumes:
+-      - $PWD/generator:/srv/jekyll
+\ No newline at end of file
++      - $PWD/generator:/srv/jekyll",,2018-11-02 20:12:39,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/230065974,https://github.com/hyperledger/sawtooth-website/pull/7#discussion_r230065974,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/7,https://github.com/hyperledger/sawtooth-website/pull/7,Same for other line-only changes.,a77850181929c3c2fe9842420e796625617ffacc,2018-11-01 14:44:10,230066141,"@@ -31,4 +31,4 @@ services:
+     ports:
+       - 8000:80
+     volumes:
+-      - $PWD/generator:/srv/jekyll
+\ No newline at end of file
++      - $PWD/generator:/srv/jekyll",,2018-11-02 20:12:39,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/230066141,https://github.com/hyperledger/sawtooth-website/pull/7#discussion_r230066141,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,"This post would be a better example since it's Sawtooth-centric:
+
+https://www.hyperledger.org/blog/2018/07/24/hyperledger-sawtooth-seth-and-truffle-101",879b920ed16317129f07a21f7b895b391c0e1db0,2018-09-25 14:13:56,220209873,"@@ -0,0 +1,25 @@
++---",1,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/220209873,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r220209873,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,"We could move the community page to the website as well, since it is not release specific (or sawtooth-core specific).",879b920ed16317129f07a21f7b895b391c0e1db0,2018-09-25 14:16:20,220210889,"@@ -0,0 +1,27 @@
++---
++layout: page
++title: Contact
++permalink: /contact/
++feature-img: ""../examples/img/hero-bond-bg.jpg""
++---
++
++# Contributing to Hyperledger Sawtooth
++
++Hyperledger Sawtooth is Apache 2.0 licensed and accepts contributions via
++[GitHub](https://github.com/hyperledger/sawtooth-core) pull requests.
++
++Please see [Contributing](https://sawtooth.hyperledger.org/docs/core/releases/la",16,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/220210889,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r220210889,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,"This is somewhat inaccurate. Per current discussion in #sawtooth-governance, replace with ""Copyright &copy; 2015-2018 contributors to Hyperledger Sawtooth"". (If we end up with something else, we will just change it to the new thing).",879b920ed16317129f07a21f7b895b391c0e1db0,2018-09-25 14:23:31,220213851,"@@ -0,0 +1,101 @@
++# SITE CONFIGURATION
++#baseurl: / # the subpath of your site, e.g. /blog
++url: ""0.0.0.0"" # the base hostname & protocol for your site
++#destination: /srv/jekyll/_site
++keep_files: [./*]
++
++# THEME-SPECIFIC CONFIGURATION
++theme_settings:
++  # Meta
++  title: Hyperledger Sawtooth
++  avatar: avatar.png
++  gravatar: # Email MD5 hash
++  description: ""A website with blog posts and pages"" # used by search engines
++
++  # Header and footer text
++  header_text: >
++     <h1>Sawtooth</h1>
++  header_text_feature_image: ../examples/img/hero-bg.jpg
++  footer_text: >
++    <h2>Sawtooth</h2>
++    <p>
++      <a href=""https://chat.hyperledger.org/channel/sawtooth"" target=""_blank"" title=""Rocket Chat"">RocketChat</a>
++    </p>
++    <p>
++      <a href=""/docs/"" target=""_blank"" title=""Documentation"">Documentation</a>
++      &bull;
++      <a href=""https://github.com/hyperledger/sawtooth-core/"" target=""_blank"" title=""Github"">Github</a>
++      &bull;
++      <a href=""/examples/seafood.html"" title=""Seafood Supply Chain Traceability"">Seafood Supply Chain Traceability</a>
++      &bull;
++      <a href=""/examples/bond.html"" title=""Bond Asset Settlement"">Bond Asset Settlement</a>
++      &bull;
++      <a href=""/examples/marketplace.html"" title=""Marketplace Digital Asset Exchange"">Marketplace Digital Asset Exchange</a>
++    </p>
++    <p>
++      <a href=""http://www.linuxfoundation.org/privacy"" target=""_blank"" title=""Privacy Policy"">Privacy Policy</a>
++      &bull;
++      <a href=""http://www.linuxfoundation.org/terms"" target=""_blank"" title=""Terms of Service"">Terms of Service</a>
++    </p>
++    <p>
++      <small class=""copyright"">&copy; Copyright 2015&ndash;2017, Intel Corporation. Sawtooth is an open source project that is available to the public.</small>",,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/220213851,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r220213851,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,Suggest removing from the footer and placing this on only one page (about?).,879b920ed16317129f07a21f7b895b391c0e1db0,2018-09-25 14:24:14,220214151,"@@ -0,0 +1,101 @@
++# SITE CONFIGURATION
++#baseurl: / # the subpath of your site, e.g. /blog
++url: ""0.0.0.0"" # the base hostname & protocol for your site
++#destination: /srv/jekyll/_site
++keep_files: [./*]
++
++# THEME-SPECIFIC CONFIGURATION
++theme_settings:
++  # Meta
++  title: Hyperledger Sawtooth
++  avatar: avatar.png
++  gravatar: # Email MD5 hash
++  description: ""A website with blog posts and pages"" # used by search engines
++
++  # Header and footer text
++  header_text: >
++     <h1>Sawtooth</h1>
++  header_text_feature_image: ../examples/img/hero-bg.jpg
++  footer_text: >
++    <h2>Sawtooth</h2>
++    <p>
++      <a href=""https://chat.hyperledger.org/channel/sawtooth"" target=""_blank"" title=""Rocket Chat"">RocketChat</a>
++    </p>
++    <p>
++      <a href=""/docs/"" target=""_blank"" title=""Documentation"">Documentation</a>
++      &bull;
++      <a href=""https://github.com/hyperledger/sawtooth-core/"" target=""_blank"" title=""Github"">Github</a>
++      &bull;
++      <a href=""/examples/seafood.html"" title=""Seafood Supply Chain Traceability"">Seafood Supply Chain Traceability</a>
++      &bull;
++      <a href=""/examples/bond.html"" title=""Bond Asset Settlement"">Bond Asset Settlement</a>
++      &bull;
++      <a href=""/examples/marketplace.html"" title=""Marketplace Digital Asset Exchange"">Marketplace Digital Asset Exchange</a>
++    </p>
++    <p>
++      <a href=""http://www.linuxfoundation.org/privacy"" target=""_blank"" title=""Privacy Policy"">Privacy Policy</a>
++      &bull;
++      <a href=""http://www.linuxfoundation.org/terms"" target=""_blank"" title=""Terms of Service"">Terms of Service</a>
++    </p>
++    <p>
++      <small class=""copyright"">&copy; Copyright 2015&ndash;2017, Intel Corporation. Sawtooth is an open source project that is available to the public.</small>
++    </p>
++    <p>
++      <small>Powered by <a href=""http://jekyllrb.com"">Jekyll</a> with <a href=""https://github.com/rohanchandra/type-theme"">Type Theme</a>",,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/220214151,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r220214151,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,We could perhaps find a way to search for sawtooth tweets instead of just Hyperledger.,879b920ed16317129f07a21f7b895b391c0e1db0,2018-09-25 14:25:32,220214708,"@@ -0,0 +1,159 @@
++{% if site.theme_settings.rss %}
++<li>
++	<a href=""{{ ""/feed.xml"" | prepend: site.baseurl | prepend: site.url }}"" title=""{{ site.theme_settings.str_rss_follow }}"">
++		<i class=""fa fa-fw fa-rss""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.email_address %}
++<li>
++	<a href=""mailto:{{ site.theme_settings.email_address }}"" title=""{{ site.theme_settings.str_email }}"">
++		<i class=""fa fa-fw fa-envelope""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.behance %}
++<li>
++	<a href=""https://www.behance.net/{{ site.theme_settings.behance }}"" title=""{{ site.theme_settings.str_follow_on }} Behance"">
++		<i class=""fa fa-fw fa-behance""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.bitbucket %}
++<li>
++	<a href=""https://bitbucket.org/{{ site.theme_settings.bitbucket }}"" title=""{{ site.theme_settings.str_follow_on }} Bitbucket"">
++		<i class=""fa fa-fw fa-bitbucket""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.dribbble %}
++<li>
++	<a href=""https://dribbble.com/{{ site.theme_settings.dribbble }}"" title=""{{ site.theme_settings.str_follow_on }} Dribbble"">
++		<i class=""fa fa-fw fa-dribbble""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.facebook %}
++<li>
++	<a href=""https://www.facebook.com/{{ site.theme_settings.facebook }}"" title=""{{ site.theme_settings.str_follow_on }} Facebook"">
++		<i class=""fa fa-fw fa-facebook""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.flickr %}
++<li>
++	<a href=""https://www.flickr.com/photos/{{ site.theme_settings.flickr }}"" title=""{{ site.theme_settings.str_follow_on }} Flickr"">
++		<i class=""fa fa-fw fa-flickr""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.github %}
++<li>
++	<a href=""https://github.com/{{ site.theme_settings.github }}"" title=""{{ site.theme_settings.str_follow_on }} GitHub"">
++		<i class=""fa fa-fw fa-github""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.google_plus %}
++<li>
++	<a href=""https://plus.google.com/{{ site.theme_settings.google_plus }}"" title=""{{ site.theme_settings.str_follow_on }} Google+"">
++		<i class=""fa fa-fw fa-google-plus""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.instagram %}
++<li>
++	<a href=""http://instagram.com/{{ site.theme_settings.instagram }}"" title=""{{ site.theme_settings.str_follow_on }} Instagram"">
++		<i class=""fa fa-fw fa-instagram""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.linkedin %}
++<li>
++	<a href=""{{ site.theme_settings.linkedin }}"" title=""{{ site.theme_settings.str_follow_on }} LinkedIn"">
++		<i class=""fa fa-fw fa-linkedin""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.pinterest %}
++<li>
++	<a href=""http://www.pinterest.com/{{ site.theme_settings.pinterest }}"" title=""{{ site.theme_settings.str_follow_on }} Pinterest"">
++		<i class=""fa fa-fw fa-pinterest""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.reddit %}
++<li>
++	<a href=""https://www.reddit.com/user/{{ site.theme_settings.reddit }}"" title=""{{ site.theme_settings.str_follow_on }} Reddit"">
++		<i class=""fa fa-fw fa-reddit""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.soundcloud %}
++<li>
++	<a href=""https://soundcloud.com/{{ site.theme_settings.soundcloud }}"" title=""{{ site.theme_settings.str_follow_on }} SoundCloud"">
++		<i class=""fa fa-fw fa-soundcloud""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.stack_exchange %}
++<li>
++	<a href=""{{ site.theme_settings.stack_exchange }}"" title=""{{ site.theme_settings.str_follow_on }} Stack Exchange"">
++		<i class=""fa fa-fw fa-stack-exchange""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.steam %}
++<li>
++	<a href=""http://steamcommunity.com/id/{{ site.theme_settings.steam }}"" title=""{{ site.theme_settings.str_follow_on }} Steam"">
++		<i class=""fa fa-fw fa-steam""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.tumblr %}
++<li>
++	<a href=""http://{{ site.theme_settings.tumblr }}.tumblr.com/"" title=""{{ site.theme_settings.str_follow_on }} Tumblr"">
++		<i class=""fa fa-fw fa-tumblr""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.twitter %}
++<li>
++	<a href=""https://twitter.com/{{ site.theme_settings.twitter }}"" title=""{{ site.theme_settings.str_follow_on }} Twitter"">",140,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/220214708,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r220214708,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,Should be simple. This should be a standalone PR.,879b920ed16317129f07a21f7b895b391c0e1db0,2018-10-02 14:56:04,221985685,"@@ -0,0 +1,27 @@
++---
++layout: page
++title: Contact
++permalink: /contact/
++feature-img: ""../examples/img/hero-bond-bg.jpg""
++---
++
++# Contributing to Hyperledger Sawtooth
++
++Hyperledger Sawtooth is Apache 2.0 licensed and accepts contributions via
++[GitHub](https://github.com/hyperledger/sawtooth-core) pull requests.
++
++Please see [Contributing](https://sawtooth.hyperledger.org/docs/core/releases/la",16,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/221985685,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r221985685,Sutrannu
+https://github.com/hyperledger/sawtooth-website/pull/4,https://github.com/hyperledger/sawtooth-website/pull/4,Research project. Maybe possible. ,879b920ed16317129f07a21f7b895b391c0e1db0,2018-10-02 14:56:31,221985879,"@@ -0,0 +1,159 @@
++{% if site.theme_settings.rss %}
++<li>
++	<a href=""{{ ""/feed.xml"" | prepend: site.baseurl | prepend: site.url }}"" title=""{{ site.theme_settings.str_rss_follow }}"">
++		<i class=""fa fa-fw fa-rss""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.email_address %}
++<li>
++	<a href=""mailto:{{ site.theme_settings.email_address }}"" title=""{{ site.theme_settings.str_email }}"">
++		<i class=""fa fa-fw fa-envelope""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.behance %}
++<li>
++	<a href=""https://www.behance.net/{{ site.theme_settings.behance }}"" title=""{{ site.theme_settings.str_follow_on }} Behance"">
++		<i class=""fa fa-fw fa-behance""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.bitbucket %}
++<li>
++	<a href=""https://bitbucket.org/{{ site.theme_settings.bitbucket }}"" title=""{{ site.theme_settings.str_follow_on }} Bitbucket"">
++		<i class=""fa fa-fw fa-bitbucket""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.dribbble %}
++<li>
++	<a href=""https://dribbble.com/{{ site.theme_settings.dribbble }}"" title=""{{ site.theme_settings.str_follow_on }} Dribbble"">
++		<i class=""fa fa-fw fa-dribbble""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.facebook %}
++<li>
++	<a href=""https://www.facebook.com/{{ site.theme_settings.facebook }}"" title=""{{ site.theme_settings.str_follow_on }} Facebook"">
++		<i class=""fa fa-fw fa-facebook""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.flickr %}
++<li>
++	<a href=""https://www.flickr.com/photos/{{ site.theme_settings.flickr }}"" title=""{{ site.theme_settings.str_follow_on }} Flickr"">
++		<i class=""fa fa-fw fa-flickr""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.github %}
++<li>
++	<a href=""https://github.com/{{ site.theme_settings.github }}"" title=""{{ site.theme_settings.str_follow_on }} GitHub"">
++		<i class=""fa fa-fw fa-github""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.google_plus %}
++<li>
++	<a href=""https://plus.google.com/{{ site.theme_settings.google_plus }}"" title=""{{ site.theme_settings.str_follow_on }} Google+"">
++		<i class=""fa fa-fw fa-google-plus""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.instagram %}
++<li>
++	<a href=""http://instagram.com/{{ site.theme_settings.instagram }}"" title=""{{ site.theme_settings.str_follow_on }} Instagram"">
++		<i class=""fa fa-fw fa-instagram""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.linkedin %}
++<li>
++	<a href=""{{ site.theme_settings.linkedin }}"" title=""{{ site.theme_settings.str_follow_on }} LinkedIn"">
++		<i class=""fa fa-fw fa-linkedin""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.pinterest %}
++<li>
++	<a href=""http://www.pinterest.com/{{ site.theme_settings.pinterest }}"" title=""{{ site.theme_settings.str_follow_on }} Pinterest"">
++		<i class=""fa fa-fw fa-pinterest""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.reddit %}
++<li>
++	<a href=""https://www.reddit.com/user/{{ site.theme_settings.reddit }}"" title=""{{ site.theme_settings.str_follow_on }} Reddit"">
++		<i class=""fa fa-fw fa-reddit""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.soundcloud %}
++<li>
++	<a href=""https://soundcloud.com/{{ site.theme_settings.soundcloud }}"" title=""{{ site.theme_settings.str_follow_on }} SoundCloud"">
++		<i class=""fa fa-fw fa-soundcloud""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.stack_exchange %}
++<li>
++	<a href=""{{ site.theme_settings.stack_exchange }}"" title=""{{ site.theme_settings.str_follow_on }} Stack Exchange"">
++		<i class=""fa fa-fw fa-stack-exchange""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.steam %}
++<li>
++	<a href=""http://steamcommunity.com/id/{{ site.theme_settings.steam }}"" title=""{{ site.theme_settings.str_follow_on }} Steam"">
++		<i class=""fa fa-fw fa-steam""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.tumblr %}
++<li>
++	<a href=""http://{{ site.theme_settings.tumblr }}.tumblr.com/"" title=""{{ site.theme_settings.str_follow_on }} Tumblr"">
++		<i class=""fa fa-fw fa-tumblr""></i>
++	</a>
++</li>
++{% endif %}
++
++{% if site.theme_settings.twitter %}
++<li>
++	<a href=""https://twitter.com/{{ site.theme_settings.twitter }}"" title=""{{ site.theme_settings.str_follow_on }} Twitter"">",140,2018-10-25 15:18:00,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/221985879,https://github.com/hyperledger/sawtooth-website/pull/4#discussion_r221985879,Sutrannu
+https://github.com/hyperledger/sawtooth-website/pull/3,https://github.com/hyperledger/sawtooth-website/pull/3,"Looks like Github and RocketChat got switched. Github is ineffectualproperty, RocketChat is kelly_",24a247b43fbfca18e45e0b1f132dcb70154b4702,2018-08-22 19:11:53,212074464,"@@ -0,0 +1,13 @@
++| Name | GitHub | RocketChat |
++| --- | --- | --- |
++| Adam Ludvik | aludvik | adamludvik |
++| Andi Gunderson | agunde406 | agunde |
++| Anne Chenette | chenette | achenette |
++| Boyd Johnson | boydjohnson | boydjohnson |
++| Dan Middleton | dcmiddle | Dan |
++| Darian Plumb | dplumb94 | dplumb |
++| James Mitchell | jsmitchell | jsmitchell |
++| Kelly Olson | kelly\_ | ineffectualproperty |",,2018-09-24 14:17:49,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/212074464,https://github.com/hyperledger/sawtooth-website/pull/3#discussion_r212074464,ineffectualproperty
+https://github.com/hyperledger/sawtooth-website/pull/3,https://github.com/hyperledger/sawtooth-website/pull/3,Fixed.,24a247b43fbfca18e45e0b1f132dcb70154b4702,2018-08-22 19:13:28,212074935,"@@ -0,0 +1,13 @@
++| Name | GitHub | RocketChat |
++| --- | --- | --- |
++| Adam Ludvik | aludvik | adamludvik |
++| Andi Gunderson | agunde406 | agunde |
++| Anne Chenette | chenette | achenette |
++| Boyd Johnson | boydjohnson | boydjohnson |
++| Dan Middleton | dcmiddle | Dan |
++| Darian Plumb | dplumb94 | dplumb |
++| James Mitchell | jsmitchell | jsmitchell |
++| Kelly Olson | kelly\_ | ineffectualproperty |",,2018-09-24 14:17:49,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/212074935,https://github.com/hyperledger/sawtooth-website/pull/3#discussion_r212074935,vaporos
+https://github.com/hyperledger/sawtooth-website/pull/2,https://github.com/hyperledger/sawtooth-website/pull/2,Is the intention for these particular users to fill in these blanks?,0e8b4e181ea6deaae4f979a4dadef448c7c987a6,2018-08-22 20:54:28,212104618,"@@ -0,0 +1,111 @@
++**T-Mobile**  
++Use Case: Identity: Role-based Access Control  
++Project Link: https://opensource.t-mobile.com/blog/posts/hyperdirectory-blockchain-innovation/  
++Code: https://github.com/hyperledger/sawtooth-next-directory  
++Sawtooth Quote: “As the Un-carrier, T-Mobile approaches the wireless industry differently, from the customer experience to pushing the limits of the technologies that power our business and service,” said Warren McNeel, Senior Vice President, Digital Technology and Development, T-Mobile. “Using Hyperledger Sawtooth as a platform, the company created Sawtooth Hyper Directory as an Identity and Access Management (IAM) solution, and we’re excited to continue to develop new solutions on the platform that can help add value and functionality for both customers and our business.”  
++Contact:  
++
++**Tel Aviv Stock Exchange**  
++Use Case: Securities Lending  
++Project Link: https://www.ledgerinsights.com/tel-aviv-stock-exchange-blockchain/  
++Code:  ",11,2018-08-22 20:54:29,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/212104618,https://github.com/hyperledger/sawtooth-website/pull/2#discussion_r212104618,peterschwarz
+https://github.com/hyperledger/sawtooth-website/pull/2,https://github.com/hyperledger/sawtooth-website/pull/2,Yep! Once we get this merged I'm going to reach out to the contacts I know to have them update it.,0e8b4e181ea6deaae4f979a4dadef448c7c987a6,2018-08-22 21:06:08,212108999,"@@ -0,0 +1,111 @@
++**T-Mobile**  
++Use Case: Identity: Role-based Access Control  
++Project Link: https://opensource.t-mobile.com/blog/posts/hyperdirectory-blockchain-innovation/  
++Code: https://github.com/hyperledger/sawtooth-next-directory  
++Sawtooth Quote: “As the Un-carrier, T-Mobile approaches the wireless industry differently, from the customer experience to pushing the limits of the technologies that power our business and service,” said Warren McNeel, Senior Vice President, Digital Technology and Development, T-Mobile. “Using Hyperledger Sawtooth as a platform, the company created Sawtooth Hyper Directory as an Identity and Access Management (IAM) solution, and we’re excited to continue to develop new solutions on the platform that can help add value and functionality for both customers and our business.”  
++Contact:  
++
++**Tel Aviv Stock Exchange**  
++Use Case: Securities Lending  
++Project Link: https://www.ledgerinsights.com/tel-aviv-stock-exchange-blockchain/  
++Code:  ",11,2018-08-22 21:06:08,https://api.github.com/repos/hyperledger/sawtooth-website/pulls/comments/212108999,https://github.com/hyperledger/sawtooth-website/pull/2#discussion_r212108999,ineffectualproperty

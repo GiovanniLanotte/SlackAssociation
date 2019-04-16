@@ -1,0 +1,821 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/1,https://github.com/kubernetes/kubectl/pull/1,pwittrock,Initial repo boilerplate,,['monopole'],1,2017-03-30 20:27:45,2017-03-30 20:53:29,2017-03-30 20:53:30,True,2017-03-30 20:53:29,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/13,https://github.com/kubernetes/kubectl/pull/13,pwittrock,Add issue template for kubectl repo,,['mengqiy'],1,2017-05-18 17:07:49,2017-05-18 17:39:37,2017-05-18 17:39:38,True,2017-05-18 17:39:37,mengqiy,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/64,https://github.com/kubernetes/kubectl/pull/64,mengqiy,add types for descriptor and manifest,"We finally agreed to land on kubectl repo.
+Moved from main repo PR: https://github.com/kubernetes/kubernetes/pull/52570.
+A lot of discussion there.
+",['bgrant0607'],1,2017-09-28 14:26:14,2017-09-28 15:05:29,2017-09-28 22:22:25,True,2017-09-28 15:05:29,bgrant0607,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/65,https://github.com/kubernetes/kubectl/pull/65,monopole,start kexpand,"A place to hang code.
+
+Starting with `kexpand` since `expand` is already taken on linux systems, and since it's
+unique enough to change with `find ./ | xargs sed -i 's/kexpand/foo/'`
+",['bgrant0607'],1,2017-09-28 19:16:20,2017-09-28 21:25:00,2018-04-06 21:27:13,True,2017-09-28 21:25:00,bgrant0607,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/82,https://github.com/kubernetes/kubectl/pull/82,pwittrock,Write guide for maintainers sustaining engineering tasks.,,"['fabianofranz', 'shiywang', 'seans3']",1,2017-10-18 16:56:26,2017-10-18 19:22:13,2017-10-18 19:22:13,True,2017-10-18 19:22:13,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/85,https://github.com/kubernetes/kubectl/pull/85,pwittrock,Add items to Maintainers tasks,"- new contributor tasks
+- reporting at community meeting
+- setting up f2f",[],1,2017-10-18 19:46:17,2017-10-18 19:46:26,2017-10-18 19:46:27,True,2017-10-18 19:46:26,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/102,https://github.com/kubernetes/kubectl/pull/102,mengqiy,add kexpand util,"Move some util code from https://github.com/kubernetes/kubernetes/pull/52682 to kubectl repo.
+
+There will a followup PR to move https://github.com/kubernetes/kubernetes/pull/52682/files#diff-0c3f4528c27638ae0b2b2fd6e2ecff6b code to kubectl repo. But it is blocked by some dependency issue of kubectl factory code.
+",['monopole'],1,2017-10-23 19:48:20,2017-10-25 02:05:19,2017-10-25 02:05:19,True,2017-10-25 02:05:19,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/103,https://github.com/kubernetes/kubectl/pull/103,monopole,Add travis CICD coverage.,"Also, rename ""kexpand"" to ""kinflate"" to ease pronunciation.",[],1,2017-10-24 23:18:25,2017-10-25 04:37:37,2018-04-06 21:27:14,True,2017-10-25 04:37:37,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/105,https://github.com/kubernetes/kubectl/pull/105,monopole,tweak precommit,untabify and make the intent more obvious,[],1,2017-10-25 17:32:46,2017-10-25 18:08:42,2018-04-06 21:27:15,True,2017-10-25 18:08:42,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/106,https://github.com/kubernetes/kubectl/pull/106,pwittrock,Create issue_backlog.md,Doc for describing how issues should be picked for new contributors.,"['fabianofranz', 'monopole', 'seans3']",9,2017-10-25 23:27:47,2017-10-26 22:50:33,2017-10-26 22:50:33,True,2017-10-26 22:50:33,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/108,https://github.com/kubernetes/kubectl/pull/108,monopole,Skip CICD build on markdown or doc changes.,"Noticed that merging of
+  https://github.com/kubernetes/kubectl/blob/master/docs/maintainers/issue_backlog.md 
+launched all the go gets, go tests, drama for no reason.
+",[],1,2017-10-26 23:25:59,2017-10-28 14:39:11,2017-10-28 14:39:17,True,2017-10-28 14:39:11,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/110,https://github.com/kubernetes/kubectl/pull/110,monopole,test travis filter,,[],1,2017-10-28 14:43:19,2017-10-28 20:48:50,2018-04-06 21:27:16,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/111,https://github.com/kubernetes/kubectl/pull/111,monopole,Tweak travis early exit,,[],1,2017-10-28 20:48:35,2017-10-28 20:58:00,2018-04-06 21:27:17,True,2017-10-28 20:58:00,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/112,https://github.com/kubernetes/kubectl/pull/112,spiffxp,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: kubernetes/test-infra#3851",['pwittrock'],1,2017-10-31 23:35:44,2017-11-06 21:57:55,2017-11-06 22:22:29,True,2017-11-06 21:57:55,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/128,https://github.com/kubernetes/kubectl/pull/128,apelisse,Clarify requirements in README.md,,['monopole'],1,2017-11-13 21:55:07,2017-11-21 00:43:48,2017-11-21 00:43:48,True,2017-11-21 00:43:48,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/129,https://github.com/kubernetes/kubectl/pull/129,apelisse,Use deps,Use github.com/golang/deps to manage dependencies. It's cleaner.,['pwittrock'],5,2017-11-13 22:19:19,2017-11-28 22:51:24,2017-11-28 22:51:24,True,2017-11-28 22:51:24,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/130,https://github.com/kubernetes/kubectl/pull/130,apelisse,"Simplify travis script, work against `vendor/`","The current travis script currently fails if we have a `vendor/`
+directory, and is also quite longer than necessary.",[],1,2017-11-13 22:44:41,2017-11-28 22:34:22,2017-11-28 22:34:22,True,2017-11-28 22:34:22,apelisse,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/144,https://github.com/kubernetes/kubectl/pull/144,mengqiy,Check in kinflate,"check in
+- kinflate code
+- add an example
+- add script to copy code to `/vendor`
+- update `/vendor`
+",['monopole'],4,2017-11-17 23:52:26,2017-12-05 22:48:31,2017-12-05 22:48:31,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/145,https://github.com/kubernetes/kubectl/pull/145,monopole,Tweak pre-commit to ignore vendor directory.,,['mengqiy'],1,2017-11-18 01:30:13,2017-11-21 01:26:07,2018-04-06 21:27:43,True,2017-11-21 01:26:07,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/149,https://github.com/kubernetes/kubectl/pull/149,totherme,Beginnings of a test framework,"As discussed in https://github.com/kubernetes/kubectl/issues/87 and in slack and hangouts.
+
+Known issues:
+- If etcd starts slowly, the apiserver might not start in a sane state. This will be fixed soon.
+- If anything is currently listening on any of the ports we use, there will be clashes.
+",[],39,2017-11-21 16:51:31,2017-11-29 23:29:25,2017-11-30 20:55:10,True,2017-11-29 23:29:25,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/154,https://github.com/kubernetes/kubectl/pull/154,hoegaarden,Proper fake for etcd,"@apelisse , this is the first part of us removing this fake binaries and thus the tight coupling as described in https://github.com/kubernetes/kubectl/issues/153 .",[],3,2017-12-04 12:31:02,2017-12-05 21:23:47,2017-12-06 15:12:55,True,2017-12-05 21:23:47,apelisse,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/155,https://github.com/kubernetes/kubectl/pull/155,hoegaarden,Proper fake for apiserver,"@apelisse , this is the second part of us removing this fake binaries and thus the tight coupling as described in #153 .
+
+Related to #154 .",[],4,2017-12-04 13:54:58,2017-12-05 21:28:31,2017-12-06 15:12:47,True,2017-12-05 21:28:31,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/157,https://github.com/kubernetes/kubectl/pull/157,hoegaarden,No special treatment for test framework,"Based on top of
+- #154 
+- #155 
+
+As discussed with @apelisse .
+
+[closes #152]",[],10,2017-12-05 13:58:24,2017-12-07 19:03:08,2017-12-22 14:49:24,True,2017-12-07 19:03:08,apelisse,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/158,https://github.com/kubernetes/kubectl/pull/158,AlexKhotian,Move `openapi` package from `k8s.io/kubernetes` to `k8s.io/kubectl`,"- Moved packages openapi and validation;
+- Improved  a bit the documentation of openapi package;
+- Added examples for validation and openapi_getter;
+- Cherry-picked a swagger.json for tests(validation_test and openapi_test)
+
+Fixes #137",['apelisse'],138,2017-12-05 17:33:36,2017-12-13 20:23:11,2017-12-13 20:23:11,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/159,https://github.com/kubernetes/kubectl/pull/159,mengqiy,WIP: Check in initial kinflate,"This supersede https://github.com/kubernetes/kubectl/pull/144.
+
+Please ignore the following 2 commits for now.
+`hacky update vendor`: this commit will be replaced by another PR that is purely generated by dep, after we fix the publish bot.
+`move pkgs`: this commit will be replaced by another PR that move some packages from `k8s.io/kubernetes` to `k8s.io/kubectl`.
+
+`add example`: this commit contains an example. You can try it by running `kinflate -f pkg/kinflate/example/instances/exampleinstance/`
+`implement initial kinflate`: this commit is kinflate code.
+
+We should not merge this PR until the PRs for 1st and 2nd are merged.
+","['apelisse', 'monopole']",4,2017-12-05 22:47:46,2017-12-15 19:27:00,2017-12-15 19:27:01,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/160,https://github.com/kubernetes/kubectl/pull/160,wackxu,[WIP] Move `k8s.io/kubernetes/pkg/kubectl/explain` to `k8s.io/kubectl/pkg/explain,fix https://github.com/kubernetes/kubectl/issues/136,[],22,2017-12-06 08:01:34,2018-05-07 18:59:07,2018-05-07 18:59:07,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/165,https://github.com/kubernetes/kubectl/pull/165,wackxu,add gitignore file,/assign @apelisse ,['apelisse'],1,2017-12-08 07:27:40,2018-06-24 07:37:31,2018-06-24 07:37:31,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/166,https://github.com/kubernetes/kubectl/pull/166,totherme,Add a sane default constructor for the Etcd and EtcdConfig structs,"[closes #161]
+
+We need to do some calculation to find binary paths and free ports, so we can't make a 0-value Etcd struct useful. But we can provide a constructor that takes no arguments, and gives you good defaults.
+
+Cc @hoegaarden @apelisse ",['apelisse'],5,2017-12-08 14:42:48,2017-12-08 18:28:14,2017-12-08 18:28:14,True,2017-12-08 18:28:14,apelisse,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/168,https://github.com/kubernetes/kubectl/pull/168,totherme,Finalize the interface of the Fixtures struct,"[closes #163]
+
+In the process of making the APIServer constructor take 0 arguments (#162), we naturally find ourselves making the Fixtures constructor take 0 arguments (#163).
+
+We'll be cleaning things up even more as we continue to work on #162, but this seems like a reasonable mid-point where there's already some user-value. In particular, the main interface to the test framework (The Fixtures constructor and methods) ought to be stable now:
+
+```go
+myFixtures, err := test.NewFixtures()
+err = myFixtures.Start()
+myServerURL = myFixtures.APIServerURL()
+// Run tests using myServerURL
+err = myFixtures.Stop()
+```
+
+Cc @hoegaarden @apelisse ",['apelisse'],7,2017-12-11 14:02:31,2017-12-14 23:21:29,2017-12-14 23:21:29,True,2017-12-14 23:21:29,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/169,https://github.com/kubernetes/kubectl/pull/169,mengqiy,Move several packages,"k8s.io/kubernetes/pkg/kubectl/categories -> k8s.io/kubectl/pkg/categories
+k8s.io/kubernetes/pkg/kubectl/scheme -> k8s.io/kubectl/pkg/scheme
+k8s.io/kubernetes/pkg/kubectl/validation -> k8s.io/kubectl/pkg/validation
+","['apelisse', 'monopole']",18,2017-12-11 23:41:38,2018-04-13 03:45:17,2018-04-13 03:45:17,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/173,https://github.com/kubernetes/kubectl/pull/173,apelisse,Move openapi,"Copy the openapi package from kubernetes `k8s.io/kubernetes/pkg/kubectl/cmd/util/openapi` to `k8s.io/kubectl/pkg/openapi/`.
+
+@AlexKhotian has done pretty much everything. I've just simplified some of the history.",[],47,2017-12-12 23:42:04,2018-05-23 02:59:59,2018-05-23 02:59:59,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/176,https://github.com/kubernetes/kubectl/pull/176,hoegaarden,162 apiserver sane default constructor,"Based on #168:
+
+The APIServer has now sane defaults for the constructor.
+- The Port/Address allocation/management is handled by a (new thing called) AddressManager
+- The path to APIServer's binary is now managed by a PathFinder
+
+[closes #162]
+
+@totherme ",['apelisse'],11,2017-12-14 09:44:10,2017-12-15 00:03:30,2017-12-15 00:03:30,True,2017-12-15 00:03:30,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/177,https://github.com/kubernetes/kubectl/pull/177,hoegaarden,Zero conf structs,"Based on: #176 
+
+This is some more cleanup and work on the test framework. The most important changes of this PR are:
+- Rename `Fixtures` to `ControlPlane` (and `FixtureProcess` to `ControlPlaneProcess`, and others like that)
+- Have `Etcd` & `APIServer` work as 0-conf structs, just use `etcd := &Etcd{}`
+- Remove `PortFinder` in favour of `AddressManager`
+- Remove both `EtcdConfig` and `APIServerConfig`
+- Some additional testing
+
+@totherme ",['apelisse'],22,2017-12-14 09:57:12,2017-12-15 00:18:30,2017-12-22 14:48:27,True,2017-12-15 00:18:30,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/178,https://github.com/kubernetes/kubectl/pull/178,totherme,Control pane process timeouts,"This PR is really on top of #177 , so it's not as huge as it looks.
+
+This PR removes an edge case in which using the framework from a standard go test (not using the ginkgo framework) could have caused a panic rather than a clean test failure. You can see this edge case in the old code as a call to `.Wait()` on a `gexec.Session` struct. That method implicitly uses an `Eventually` assertion from the ginkgo/gomega framework. The new code manages the waiting in our framework, and returns an error in the case of a timeout.
+
+Cc: @hoegaarden 
+
+/assign @apelisse ",['apelisse'],24,2017-12-14 15:29:10,2017-12-15 04:40:30,2017-12-15 04:40:30,True,2017-12-15 04:40:29,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/179,https://github.com/kubernetes/kubectl/pull/179,pwittrock,ktl proposal,,[],5,2017-12-14 19:34:10,2018-05-07 02:49:04,2018-05-07 02:49:04,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/180,https://github.com/kubernetes/kubectl/pull/180,hoegaarden,Examples,"- Refactor AddressManager
+- Add documentation for APIServer (and Etcd) and add some examples
+
+Cc @totherme 
+
+/assign @apelisse ",['apelisse'],2,2017-12-15 16:22:25,2017-12-18 17:08:34,2017-12-18 17:08:35,True,2017-12-18 17:08:34,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/181,https://github.com/kubernetes/kubectl/pull/181,mengqiy,check in kinflate,"This supersede #159 
+
+Use the example:
+```
+kinflate -f pkg/kinflate/example/instances/exampleinstance/
+```
+","['apelisse', 'monopole']",3,2017-12-15 19:25:10,2017-12-15 20:32:30,2018-08-16 02:21:30,True,2017-12-15 20:32:30,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/182,https://github.com/kubernetes/kubectl/pull/182,jberkhahn,Add framework to init config in a plugin,"Hello. This is a PR of the extracted framework from the service-catalog plugins I've been writing. I discussed it with @pwittrock at Kubecon, and he expressed interest in me contributing it here for general use.
+
+It's use is to create a config based on the system kubectl config and the environment variables passed in from the calling plugin framework. I've got most of them worked out, however the overrides for the config cluster, context, and user still need to be done. I thought I would get this out here and get some feedback on what I have so far.
+
+Thanks,
+@jberkhahn",['droot'],3,2017-12-15 20:12:58,2018-01-24 21:38:39,2018-01-24 21:38:39,True,2018-01-24 21:38:39,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/183,https://github.com/kubernetes/kubectl/pull/183,mengqiy,update vendor,"Pin the following repo to master branch:
+- api
+- apimachinery
+- client-go
+",['apelisse'],1,2017-12-15 21:54:19,2017-12-15 23:12:30,2017-12-15 23:27:52,True,2017-12-15 23:12:30,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/184,https://github.com/kubernetes/kubectl/pull/184,totherme,Integration Framework: Simplify paths,"This PR follows up on some of the comments from #180. It simplifies the business of finding paths to the etcd and apiserver binaries.
+
+/assign @apelisse ",['apelisse'],4,2017-12-18 15:17:04,2017-12-18 17:13:35,2017-12-18 17:13:35,True,2017-12-18 17:13:35,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/187,https://github.com/kubernetes/kubectl/pull/187,spiffxp,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",['cblecker'],1,2017-12-20 18:33:35,2017-12-28 17:40:37,2018-01-04 16:42:15,True,2017-12-28 17:40:37,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/191,https://github.com/kubernetes/kubectl/pull/191,mengqiy,update manifest types,"- Update type definition for manifest to make align with https://github.com/kubernetes/kubernetes/blob/d8d680be6e2bd1455bb6861f9bd6ed7d4f7dce43/pkg/kubectl/configmap.go#L39-L44 and https://github.com/kubernetes/kubernetes/blob/d8d680be6e2bd1455bb6861f9bd6ed7d4f7dce43/pkg/kubectl/secret.go#L39-L44.
+- Change `TLS` to be a pointer.
+  ",['monopole'],1,2018-01-03 19:38:14,2018-01-05 18:34:12,2018-01-05 19:34:51,True,2018-01-05 18:34:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/193,https://github.com/kubernetes/kubectl/pull/193,hoegaarden,Simplify directory handling,"We now use simple strings for the paths to the certificate directory (APIServer) and the data directory (Etcd) instead of the `TempDirManager`.
+
+cc: @totherme @apelisse 
+  ",['apelisse'],4,2018-01-05 16:41:14,2018-01-08 17:34:12,2018-01-08 17:34:12,True,2018-01-08 17:34:12,k8s-ci-robot,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/194,https://github.com/kubernetes/kubectl/pull/194,hoegaarden,Simplify address handling,"To configure the host/port the APIServer and Etcd are listening on, we now use a `url.URL` instead of the `AddressManager`; for defaulting we still use the `DefaultAddressManager`.
+
+This PR is based on #193 
+
+cc: @totherme @apelisse 
+
+/assign @apelisse ",['apelisse'],7,2018-01-05 16:44:32,2018-01-08 17:35:12,2018-01-08 17:35:12,True,2018-01-08 17:35:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/195,https://github.com/kubernetes/kubectl/pull/195,mengqiy,format comments for types.go,Per https://github.com/kubernetes/kubectl/pull/191#pullrequestreview-86986658,['monopole'],1,2018-01-06 00:43:46,2018-01-08 23:27:11,2018-01-08 23:29:12,True,2018-01-08 23:27:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/196,https://github.com/kubernetes/kubectl/pull/196,totherme,Hide test framework internals,"Hopefully this'll make the godocs a lot simpler.
+
+This is built on top of #194 , so it's probably not as big as it seems at first.
+
+CC: @hoegaarden 
+
+/assign @apelisse ",['apelisse'],12,2018-01-08 14:12:49,2018-01-08 17:36:11,2018-01-08 17:36:11,True,2018-01-08 17:36:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/198,https://github.com/kubernetes/kubectl/pull/198,mengqiy,copy some configmap and secret related pkgs for kinflate,"This PR copied the pkgs and added one field:
+https://github.com/kubernetes/kubectl/pull/198/files#diff-02b8e163d2953b0f138313481b32d784R42",['monopole'],1,2018-01-08 20:39:41,2018-01-08 22:43:11,2018-01-08 22:46:52,True,2018-01-08 22:43:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/199,https://github.com/kubernetes/kubectl/pull/199,mengqiy,pod template visitor,"Implement of pod template visitor for kinflate.
+
+This PR depends on #198
+",['monopole'],1,2018-01-08 20:43:21,2018-01-08 23:46:17,2018-01-08 23:46:40,True,2018-01-08 23:46:17,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/200,https://github.com/kubernetes/kubectl/pull/200,mengqiy,configmap and secret helper functions,"This depends on #198 and #201.
+  ",['monopole'],1,2018-01-08 21:53:16,2018-01-09 23:25:11,2018-01-09 23:25:38,True,2018-01-09 23:25:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/201,https://github.com/kubernetes/kubectl/pull/201,mengqiy,update simple example,Some files will be used in the unit test for https://github.com/kubernetes/kubectl/pull/200 after this PR merged.,['monopole'],1,2018-01-09 00:55:58,2018-01-09 22:53:12,2018-01-09 22:53:21,True,2018-01-09 22:53:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/202,https://github.com/kubernetes/kubectl/pull/202,seans3,Initial install,,['apelisse'],2,2018-01-09 22:48:47,2018-07-18 03:57:52,2018-07-18 03:57:52,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/203,https://github.com/kubernetes/kubectl/pull/203,mengqiy,Add some update helpers for kinflate,,['monopole'],2,2018-01-09 23:54:15,2018-01-10 00:48:12,2018-01-10 00:54:29,True,2018-01-10 00:48:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/204,https://github.com/kubernetes/kubectl/pull/204,mengqiy,add one more update helper function,,['monopole'],1,2018-01-10 17:17:47,2018-01-10 17:24:11,2018-01-10 17:26:37,True,2018-01-10 17:24:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/205,https://github.com/kubernetes/kubectl/pull/205,mengqiy,more support for configmap and secret,There will be some test to replace https://github.com/kubernetes/kubectl/blob/c61d60e246663574dd531a0c61a99c325e81f809/cmd/kinflate/kinflate_test.go#L27-L32 soon.,['monopole'],2,2018-01-10 17:39:44,2018-01-12 17:11:24,2018-01-12 18:11:17,True,2018-01-12 17:11:24,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/207,https://github.com/kubernetes/kubectl/pull/207,totherme,Test framework: Simplify UX,"In order to simplify the UX of our library, we decided to temporarily abandon our precious unit tests, and explore driving out the library interface using only the godocs. These commits tell that story.
+
+The end result is that most of the actual logic has been moved into an internal package, and the visible parts of the library are largely configuration structs.
+
+CC: @hoegaarden 
+/assign @apelisse ",['apelisse'],15,2018-01-15 14:27:55,2018-01-17 19:17:28,2018-01-17 19:17:28,True,2018-01-17 19:17:28,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/208,https://github.com/kubernetes/kubectl/pull/208,hoegaarden,Fix formatting issues as suggested by gofmt,"[Travis](https://travis-ci.org/kubernetes/kubectl/builds/329076589#L521) showed those issues today.
+
+cc: @totherme 
+/assign @apelisse ",['apelisse'],1,2018-01-15 17:17:48,2018-01-17 19:16:27,2018-01-17 19:16:27,True,2018-01-17 19:16:27,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/209,https://github.com/kubernetes/kubectl/pull/209,hoegaarden,Test framework: Configure the APIServer with the URL to Etcd,"The `APIServer` does not create, start & stop `Etcd` itself anymore, but gets configured with the URL to `Etcd`. Creating, starting & stopping of `Etcd` is now the responsibility of the `ControlPlane`.
+
+This PR is based on #207, thus it looks way bigger then it actually is.
+
+CC: @totherme 
+/assign @apelisse ",['apelisse'],17,2018-01-16 15:28:10,2018-01-17 19:18:28,2018-01-17 21:01:03,True,2018-01-17 19:18:28,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/211,https://github.com/kubernetes/kubectl/pull/211,apelisse,pre-commit: Check gofmt output for errors,"gofmt doesn't return an error exit code when it fails (because some
+files are improperly formatted). Make sure that the output is empty
+instead.",['hoegaarden'],1,2018-01-16 17:17:29,2018-01-17 19:28:26,2018-01-17 19:29:33,True,2018-01-17 19:28:26,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/213,https://github.com/kubernetes/kubectl/pull/213,hoegaarden,Test framework: Update docs,"This is based on #209, so agian appears to be much bigger than it actually is.
+
+CC: @totherme 
+/assign @apelisse ",['apelisse'],18,2018-01-17 11:16:24,2018-01-17 19:29:27,2018-01-17 19:30:23,True,2018-01-17 19:29:27,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/214,https://github.com/kubernetes/kubectl/pull/214,mengqiy,update mutate func,"update mutate func:
+- mutateField now takes a list of mutation func
+- support create if not present
+
+Fix a bug in the last commit.",['monopole'],1,2018-01-17 21:28:30,2018-01-19 18:12:28,2018-01-19 18:17:08,True,2018-01-19 18:12:28,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/215,https://github.com/kubernetes/kubectl/pull/215,mengqiy,Nameprefix util,"Add
+- encode and decode util
+- nameprefix util
+
+We want each functionality in kinflate to implement interface
+```
+type Interface interface {
+	Run(m map[GroupVersionKindName]*unstructured.Unstructured) error
+	RunWrapper([]byte) ([]byte, error)
+}
+```
+so that it
+- can be chained together easily
+- can be easily turned into a kubectl command
+
+After 1) name prefix 2) apply labels 3) apply annotations 4) update name reference are all implemented in the new format, kinflate will migrate to use the new util.
+The code base will be more modular and cleaner.
+",['monopole'],3,2018-01-19 18:57:54,2018-01-22 18:32:35,2018-01-22 18:59:40,True,2018-01-22 18:32:35,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/218,https://github.com/kubernetes/kubectl/pull/218,mengqiy,additional labels and annotations util,"An implementation of `Transformer` interface to apply additional labels annotations.
+
+",['monopole'],3,2018-01-22 19:03:32,2018-01-24 01:04:31,2018-01-24 01:06:12,True,2018-01-24 01:04:31,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/219,https://github.com/kubernetes/kubectl/pull/219,mengqiy,util to update name reference,"This PR is based on top of https://github.com/kubernetes/kubectl/pull/218. The first 2 commits are from https://github.com/kubernetes/kubectl/pull/218.
+
+Add util to update the name field that references another object's name.
+
+",['monopole'],1,2018-01-23 01:08:43,2018-01-24 22:57:31,2018-01-24 23:18:22,True,2018-01-24 22:57:31,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/220,https://github.com/kubernetes/kubectl/pull/220,ant31,kinflate: Separate 'resources' from 'packages',"I've been trying kinflate and have two feedbacks:
+
+##### 1. Should not be forced to use 'overlays'
+The initial proposal differentiated Overlays and BaseManifests but we later concluded that they could be merged into the resource Manifest, which can *optionally* include other Manifests.
+ 
+In the current version, a user can't inflate a package that doesn't reference an another package
+``` shell
+$ kinflate -f pkg/kinflate/examples/simple/package/
+error: open pkg/kinflate/examples/simple/package/deployment/deployment.yaml/Kube-manifest.yaml: not a directory
+```
+`simple/package/Kube-manifest.yaml`  is a valid manifest and the expected output is:
+```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    app: mungebot
+  name: mungebot-service
+spec:
+  ports:
+  - port: 7002
+  selector:
+    app: mungebot
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: mungebot
+  name: mungebot
+spec:
+  replicas: 1
+  template:
+    annotations: {}
+    metadata:
+      labels:
+        app: mungebot
+    spec:
+      containers:
+      - env:
+        - name: foo
+          value: bar
+        image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+```
+
+##### 2. Can't include new resources in 'overlays'
+The `resources` field is used for two distinct purposes and they can't be mixed
+ - Reference other packages
+ - Include resources
+
+It should be possible to include additional resources to a package (e.g. an ingress) 
+I propose to add a new field 'packages'  instead of mixing them under the `resources` field. 
+```
+packages:
+  ../../package
+resources:
+ - files/ingress.yaml
+```
+
+cc @monopole / @mengqiy 
+",[],1,2018-01-23 15:41:29,2018-02-09 00:18:27,2018-02-09 00:18:38,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/222,https://github.com/kubernetes/kubectl/pull/222,mengqiy,fix golink and refactor test,,['monopole'],1,2018-01-24 02:10:08,2018-01-24 22:18:39,2018-01-24 22:20:16,True,2018-01-24 22:18:39,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/223,https://github.com/kubernetes/kubectl/pull/223,apelisse,Remove pkg/framework/test that has moved to https://github.com/kubern…,…etes-sig-testing/frameworks,['totherme'],3,2018-01-24 17:21:43,2018-02-07 18:15:48,2018-02-07 18:15:48,True,2018-02-07 18:15:48,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/225,https://github.com/kubernetes/kubectl/pull/225,mengqiy,Rebase kinflate on new utils,"Rebase kinflate on new utils and remove some dead code.
+kinflate no longer requires overlays. i.e. each manifest can be applied alone.
+This PR addresses the 1st issue in https://github.com/kubernetes/kubectl/pull/220#issue-290884591
+",['monopole'],4,2018-01-24 22:23:50,2018-01-26 21:37:32,2018-01-27 04:30:18,True,2018-01-26 21:37:32,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/228,https://github.com/kubernetes/kubectl/pull/228,dls314,Update plugin_client.go,"Prefer USERPROFILE as the home path if available.
+
+Possible fix for
+https://github.com/kubernetes/kubectl/issues/227",['pwittrock'],1,2018-01-26 21:02:01,2018-01-29 19:20:08,2018-01-29 19:20:08,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/229,https://github.com/kubernetes/kubectl/pull/229,mengqiy,fix name ref issue,Fix an issue when failing to find the name of a configmap or a secret.,['monopole'],1,2018-01-26 23:04:11,2018-01-27 00:33:32,2018-01-27 00:33:49,True,2018-01-27 00:33:32,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/230,https://github.com/kubernetes/kubectl/pull/230,mengqiy,delete dead code,"Delete `pod_template_visitor` and the pkg it depends on, i.e. `pkg/kinflate/apps`.",['monopole'],1,2018-01-29 20:58:24,2018-01-29 21:03:32,2018-01-29 21:54:38,True,2018-01-29 21:03:32,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/231,https://github.com/kubernetes/kubectl/pull/231,monopole,Add init command.,,[],1,2018-01-29 23:43:16,2018-01-29 23:50:35,2018-04-06 21:28:12,True,2018-01-29 23:50:35,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/232,https://github.com/kubernetes/kubectl/pull/232,mengqiy,add mock fs and file for testing,,['monopole'],1,2018-01-30 17:53:28,2018-01-30 18:11:06,2018-01-30 18:23:15,True,2018-01-30 18:11:06,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/233,https://github.com/kubernetes/kubectl/pull/233,monopole,"Tweak the fakes, add a test of fake.",,[],1,2018-01-30 19:16:37,2018-01-30 19:32:07,2018-04-06 21:28:13,True,2018-01-30 19:32:07,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/234,https://github.com/kubernetes/kubectl/pull/234,mengqiy,real kinflate init,,['monopole'],1,2018-01-30 21:09:33,2018-01-30 21:14:08,2018-01-30 21:14:25,True,2018-01-30 21:14:08,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/235,https://github.com/kubernetes/kubectl/pull/235,apelisse,kinflate: Create AddConfigMap structure,This is empty and does nothing.,[],1,2018-01-30 22:14:39,2018-01-31 18:54:12,2018-01-31 18:54:12,True,2018-01-31 18:54:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/236,https://github.com/kubernetes/kubectl/pull/236,monopole,start addresource command,,[],1,2018-01-30 22:47:34,2018-01-30 22:51:10,2018-04-06 21:28:14,True,2018-01-30 22:51:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/237,https://github.com/kubernetes/kubectl/pull/237,monopole,More addresource code,,[],1,2018-01-31 00:09:30,2018-01-31 00:39:04,2018-04-06 21:28:16,True,2018-01-31 00:39:04,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/238,https://github.com/kubernetes/kubectl/pull/238,monopole,Init writes only a manifest to the current dir.,,[],1,2018-01-31 17:54:00,2018-01-31 18:57:10,2018-04-06 21:28:17,True,2018-01-31 18:57:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/239,https://github.com/kubernetes/kubectl/pull/239,apelisse,Apelisse droot seans3,,[],3,2018-01-31 19:47:24,2018-01-31 22:40:06,2018-01-31 22:40:06,True,2018-01-31 22:40:06,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/240,https://github.com/kubernetes/kubectl/pull/240,apelisse,kinflate: Manifest type improvements,"This also updates the code, the tests and the example.",[],3,2018-02-01 18:01:52,2018-02-05 18:28:11,2018-02-05 21:10:54,True,2018-02-05 18:28:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/241,https://github.com/kubernetes/kubectl/pull/241,mengqiy,multitransformer,,['monopole'],1,2018-02-01 22:03:50,2018-02-02 17:00:16,2018-02-02 17:16:05,True,2018-02-02 17:00:16,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/242,https://github.com/kubernetes/kubectl/pull/242,droot,WIP kinflate add configmap/secret commands,,[],5,2018-02-02 00:09:33,2018-02-06 23:37:07,2018-02-06 23:37:07,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/243,https://github.com/kubernetes/kubectl/pull/243,mengqiy,restructure the code a bit,"This PR depends on https://github.com/kubernetes/kubectl/pull/241.
+The 1st commit is from https://github.com/kubernetes/kubectl/pull/241.
+No new code in the 2nd commit.
+",['monopole'],2,2018-02-02 01:12:58,2018-02-02 17:00:13,2018-02-02 17:16:10,True,2018-02-02 17:00:13,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/244,https://github.com/kubernetes/kubectl/pull/244,mengqiy,add a constructor for multitransformer,,['monopole'],1,2018-02-02 17:44:44,2018-02-02 18:05:12,2018-02-02 18:11:36,True,2018-02-02 18:05:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/245,https://github.com/kubernetes/kubectl/pull/245,monopole,add missing command,,['seans3'],1,2018-02-02 20:46:24,2018-02-02 20:58:05,2018-04-06 21:28:18,True,2018-02-02 20:58:05,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/246,https://github.com/kubernetes/kubectl/pull/246,mengqiy,register addResource,,['monopole'],1,2018-02-02 20:59:38,2018-02-02 21:00:41,2018-02-02 21:00:44,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/247,https://github.com/kubernetes/kubectl/pull/247,mengqiy,All Run functions should not depend on Cobra,,['monopole'],1,2018-02-02 21:35:31,2018-02-03 00:00:08,2018-02-03 00:28:48,True,2018-02-03 00:00:08,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/249,https://github.com/kubernetes/kubectl/pull/249,mengqiy,fix a bug of nameprefix lost after applying patch,,['monopole'],1,2018-02-03 00:46:53,2018-02-05 17:28:12,2018-02-06 05:37:20,True,2018-02-05 17:28:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/251,https://github.com/kubernetes/kubectl/pull/251,hangyan,Fix typo in function name and comment,,['pwittrock'],1,2018-02-05 09:32:55,2018-02-05 17:37:12,2018-02-05 17:37:12,True,2018-02-05 17:37:12,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/252,https://github.com/kubernetes/kubectl/pull/252,seans3,WIP: Kinflate addConfigMap,,[],5,2018-02-05 18:59:58,2018-02-08 18:29:52,2018-02-08 18:29:52,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/253,https://github.com/kubernetes/kubectl/pull/253,monopole,add setprefixname command,,['Liujingfang1'],1,2018-02-05 21:27:13,2018-02-05 21:31:06,2018-04-06 21:28:19,True,2018-02-05 21:31:06,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/254,https://github.com/kubernetes/kubectl/pull/254,monopole,modifyREADME,show simple usage,['Liujingfang1'],1,2018-02-05 22:04:05,2018-02-05 22:31:58,2018-04-06 21:28:23,True,2018-02-05 22:31:58,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/255,https://github.com/kubernetes/kubectl/pull/255,monopole,tweakREADME,,[],1,2018-02-05 23:44:36,2018-02-06 00:20:03,2018-04-06 21:27:55,True,2018-02-06 00:20:03,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/256,https://github.com/kubernetes/kubectl/pull/256,droot,Add configmap,"This PR adds ""configmap"" command to kinflate.","['apelisse', 'monopole']",3,2018-02-06 00:24:52,2018-02-06 04:12:08,2018-02-06 18:01:31,True,2018-02-06 04:12:08,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/257,https://github.com/kubernetes/kubectl/pull/257,seans3,Kinflate add generic secret command.,,['apelisse'],1,2018-02-06 18:34:10,2018-02-06 19:44:17,2018-02-06 19:44:17,True,2018-02-06 19:44:17,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/258,https://github.com/kubernetes/kubectl/pull/258,apelisse,Unstruct package framework for json/yaml manipulation,"The package ""unstruct"" provides utility functions to walk through and modify an unstructured json/yaml object (as decoded in an `interface{}`)
+",[],5,2018-02-06 19:50:24,2018-03-19 22:43:22,2018-03-19 22:43:22,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/259,https://github.com/kubernetes/kubectl/pull/259,seans3,Kinflate add secret tls command.,,['apelisse'],1,2018-02-06 19:57:02,2018-02-06 23:40:45,2018-02-06 23:40:45,True,2018-02-06 23:40:45,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/260,https://github.com/kubernetes/kubectl/pull/260,Liujingfang1,Change command setprefixname to setnameprefix,,[],1,2018-02-06 23:06:28,2018-02-06 23:26:56,2018-02-09 20:11:17,True,2018-02-06 23:26:56,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/261,https://github.com/kubernetes/kubectl/pull/261,monopole,add short and longer demo,,[],1,2018-02-06 23:34:21,2018-02-06 23:35:40,2018-04-06 21:27:53,True,2018-02-06 23:35:40,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/262,https://github.com/kubernetes/kubectl/pull/262,droot,kinflate: implemented 'add' subcommand,,"['apelisse', 'monopole']",1,2018-02-07 00:49:43,2018-02-07 18:20:45,2018-02-07 18:20:46,True,2018-02-07 18:20:45,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/263,https://github.com/kubernetes/kubectl/pull/263,mengqiy,fix wrong paths of name reference transformer config,,['monopole'],1,2018-02-07 01:02:55,2018-02-07 01:15:44,2018-02-07 01:16:51,True,2018-02-07 01:15:44,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/264,https://github.com/kubernetes/kubectl/pull/264,monopole,demotweak,,[],1,2018-02-07 01:18:41,2018-02-07 01:18:52,2018-02-07 01:18:54,True,2018-02-07 01:18:52,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/265,https://github.com/kubernetes/kubectl/pull/265,lmxia,fix typos in pkg/kinflate/util_test.go and pkg/framework/test/etcd.go,,[],1,2018-02-07 03:16:10,2018-02-14 17:41:41,2018-02-14 17:41:41,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/266,https://github.com/kubernetes/kubectl/pull/266,lmxia,fix typos in cmd/kinflate/shortDemo.md,,[],1,2018-02-07 03:21:33,2018-02-08 17:52:43,2018-02-09 00:08:48,True,2018-02-08 17:52:43,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/267,https://github.com/kubernetes/kubectl/pull/267,monopole,tweakdemo,,[],1,2018-02-07 16:52:00,2018-02-07 16:52:09,2018-04-06 21:27:52,True,2018-02-07 16:52:09,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/268,https://github.com/kubernetes/kubectl/pull/268,droot,kinflate: added set subcommand,,"['apelisse', 'monopole']",1,2018-02-07 20:40:02,2018-02-07 20:54:44,2018-02-07 20:54:44,True,2018-02-07 20:54:43,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/270,https://github.com/kubernetes/kubectl/pull/270,mengqiy,manifest tree builder,"There will be another PR to update the transformers and switch kinflate inflate to use the tree builder.
+","['droot', 'monopole']",5,2018-02-08 22:03:12,2018-02-09 18:35:53,2018-02-09 18:37:18,True,2018-02-09 18:35:53,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/272,https://github.com/kubernetes/kubectl/pull/272,monopole,fix demo,,[],1,2018-02-09 21:56:05,2018-02-09 21:56:16,2018-04-06 21:27:52,True,2018-02-09 21:56:16,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/273,https://github.com/kubernetes/kubectl/pull/273,monopole,add demo testing,,[],1,2018-02-10 00:41:43,2018-02-10 07:26:51,2018-04-06 21:27:51,True,2018-02-10 07:26:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/274,https://github.com/kubernetes/kubectl/pull/274,mengqiy,Kinflate use manifest tree builder,,"['droot', 'monopole']",4,2018-02-10 02:22:02,2018-02-12 23:46:50,2018-02-12 23:54:40,True,2018-02-12 23:46:50,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/275,https://github.com/kubernetes/kubectl/pull/275,yank1,fix a typo init.go,fix a typo init.go,[],1,2018-02-11 06:28:06,2018-02-12 07:06:49,2018-02-12 07:06:49,True,2018-02-12 07:06:49,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/279,https://github.com/kubernetes/kubectl/pull/279,mengqiy,error out when a patch has not matching object,"Address some comments from https://github.com/kubernetes/kubectl/pull/274:
+- error out when a patch has not matching object
+- it stop deleting the object from the overlay KObject.",['droot'],1,2018-02-13 00:08:43,2018-02-13 01:04:50,2018-02-13 01:40:03,True,2018-02-13 01:04:50,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/280,https://github.com/kubernetes/kubectl/pull/280,seans3,More specific error messages for missing/bad manifest file,,[],1,2018-02-13 00:58:21,2018-02-13 21:08:51,2018-02-13 21:08:51,True,2018-02-13 21:08:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/281,https://github.com/kubernetes/kubectl/pull/281,mengqiy,Noop transformer,,['droot'],1,2018-02-13 01:00:10,2018-02-13 01:58:50,2018-02-13 02:02:09,True,2018-02-13 01:58:50,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/282,https://github.com/kubernetes/kubectl/pull/282,Liujingfang1,WIP: fix filesystem tech debt,"Replaced the os.Stat by filesystem.Stat in builder.go
+Improved the error message when loading resources
+",[],1,2018-02-13 18:27:29,2018-02-14 23:09:53,2018-02-22 23:41:24,True,2018-02-14 23:09:53,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/283,https://github.com/kubernetes/kubectl/pull/283,monopole,Add links to existing demo and tutorial pages.,"Add links to existing demo and tutorial pages.
+",[],1,2018-02-13 18:48:11,2018-02-13 18:50:06,2018-04-06 21:27:40,True,2018-02-13 18:50:05,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/284,https://github.com/kubernetes/kubectl/pull/284,monopole,Make test failures easier to see and understand.,"It's too difficult to read travis output and understand how many failures happened and where they occurred, because the output is one continuous stream and by design accumulates errors, only reporting a logical OR at the end.
+
+This change increases the readability of the output, and makes it easy to add new tests that report themselves in a consistent fashion.
+
+
+",[],1,2018-02-13 21:27:22,2018-02-13 23:12:50,2018-04-06 21:27:39,True,2018-02-13 23:12:50,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/285,https://github.com/kubernetes/kubectl/pull/285,apelisse,kinflate: Generate secrets with commands,"Remove the DataSources for secret, and generate the content of secrets
+with the output of commands. This allows more dynamic encrypted/secure
+secrets that are not just saved plain in the repository.
+
+Things that are not perfect with this code:
+- I'm wondering if we should just merge back TLS secret with generic secrets now. I think that TLS secrets should also be generated by commands. It would re-simplify the code and the Kube-manifest file.
+- I've removed many tests, the coverage for the new code is definitely not as good,
+- I'm not sure this is going to work flawlessly when there are multiple Kube-manifest files in the process. Are the commands going to be executed from where they should? ... Do we have a good way to test that use-case?",[],4,2018-02-14 17:40:43,2018-02-17 00:08:40,2018-02-17 00:08:40,True,2018-02-17 00:08:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/289,https://github.com/kubernetes/kubectl/pull/289,seans3,Checkpoint toward better kinflate error messages.,"This is a partial refactor toward an organization which better supports kinlfate error messages. We recognize that both the Loader and ManifestLoader classes are incoherent, and we intend to address this issue in future PR's. We've included several TODO's.","['seans3', 'Liujingfang1']",2,2018-02-14 22:55:39,2018-02-14 23:09:51,2018-02-14 23:09:51,True,2018-02-14 23:09:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/292,https://github.com/kubernetes/kubectl/pull/292,mengqiy,add kinflate diff command,"- support noop option for kinflate inflate
+- add a test for noop option
+- port some diff util and update vendor to make it builds.
+- add kinflate diff command (ONLY diff the current layer(Node), not the whole tree)
+
+fixes: #295 ","['droot', 'monopole']",4,2018-02-15 00:18:19,2018-02-21 19:20:40,2018-02-21 21:00:33,True,2018-02-21 19:20:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/294,https://github.com/kubernetes/kubectl/pull/294,seans3,New structure: ManifestError,"New structure (ManifestError) to encasulate info needed for descriptve errors while parsing, creating kinflate manifests.","['seans3', 'Liujingfang1']",1,2018-02-15 21:04:16,2018-02-15 21:43:39,2018-02-15 21:43:39,True,2018-02-15 21:43:39,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/296,https://github.com/kubernetes/kubectl/pull/296,droot,kinflate: removed non-existing resources from manifest file,"`kinflate init` generates a manifest file which contains
+non-existent resources in `resources` section. This change
+keeps those resources in commented form so that 'kinflate inflate'
+doesnt barf at the user.","['mengqiy', 'monopole']",1,2018-02-15 23:20:05,2018-02-16 17:33:41,2018-02-16 17:33:41,True,2018-02-16 17:33:41,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/297,https://github.com/kubernetes/kubectl/pull/297,droot,kinflate: improved README and added getting-started,"Improves README.md
+Added Getting Started guide",['mengqiy'],1,2018-02-15 23:53:00,2018-02-17 00:15:38,2018-02-17 00:15:38,True,2018-02-17 00:15:38,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/299,https://github.com/kubernetes/kubectl/pull/299,mengqiy,better integration test,,[],1,2018-02-16 18:38:38,2018-02-16 19:42:39,2018-02-16 19:58:21,True,2018-02-16 19:42:39,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/301,https://github.com/kubernetes/kubectl/pull/301,ellenkorbes,Resource Library,"Package resource implements tools for the discovery and filtering of resources in an API server.
+
+Tests to be implemented in a subsequent PR.","['apelisse', 'pwittrock']",3,2018-02-16 23:58:54,2018-03-06 17:09:53,2018-03-06 17:09:53,True,2018-03-06 17:09:53,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/303,https://github.com/kubernetes/kubectl/pull/303,Liujingfang1,Create different internal error types,,[],2,2018-02-20 18:46:11,2018-02-20 23:33:17,2018-02-20 23:33:17,True,2018-02-20 23:33:17,seans3,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/307,https://github.com/kubernetes/kubectl/pull/307,mengqiy,initial implementation for file loader,,['seans3'],1,2018-02-21 02:09:26,2018-02-21 02:28:14,2018-02-21 18:00:34,True,2018-02-21 02:28:14,seans3,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/308,https://github.com/kubernetes/kubectl/pull/308,Liujingfang1,Move ManifestLoader under tree package,,[],1,2018-02-21 18:49:45,2018-02-21 19:36:40,2018-02-21 19:36:40,True,2018-02-21 19:36:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/309,https://github.com/kubernetes/kubectl/pull/309,droot,removed '-u' option from install command,"'go get' complains if package exists and has been checked out with
+different protocol (https/git). This results in tutorial integration
+test failures. Disabling the option untill we have a solid solution.",[],1,2018-02-21 19:40:22,2018-02-21 19:41:40,2018-02-21 19:41:40,True,2018-02-21 19:41:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/310,https://github.com/kubernetes/kubectl/pull/310,mengqiy,update yaml import pkg,make all the yaml pkgs we use consist.,['droot'],1,2018-02-21 22:38:26,2018-02-22 16:34:40,2018-03-02 02:22:58,True,2018-02-22 16:34:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/311,https://github.com/kubernetes/kubectl/pull/311,Liujingfang1,Use ManifestLoader to read and write the kubemanifest file,Use ManifestLoader to clean the TODO item in set_name_prefix.go,[],1,2018-02-21 22:49:38,2018-02-21 22:52:40,2018-02-21 22:52:40,True,2018-02-21 22:52:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/312,https://github.com/kubernetes/kubectl/pull/312,seans3,First pass at Application abstraction with unimplemented methods,Includes the first pass at the Resource interface,"['apelisse', 'seans3']",1,2018-02-21 23:05:09,2018-02-21 23:08:40,2018-02-21 23:08:40,True,2018-02-21 23:08:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/313,https://github.com/kubernetes/kubectl/pull/313,droot,added configmap resource implementation,This is a very early idea of implementing resource for configmap objects just to get a handle on the shape of the solution.,[],1,2018-02-22 03:59:28,2018-02-23 19:19:45,2018-02-23 20:40:05,True,2018-02-23 19:19:45,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/314,https://github.com/kubernetes/kubectl/pull/314,Liujingfang1,Add appresource implementation,,[],1,2018-02-22 23:29:38,2018-02-23 21:57:46,2018-03-07 17:22:39,True,2018-02-23 21:57:46,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/315,https://github.com/kubernetes/kubectl/pull/315,seans3,Refactor Loader interface,"* The Loader interface adds New(root) -> Loader method to clone new Loaders
+* The factory becomes an internal implementation of loaderImpl
+* Removes fakefileloader, since we can just create a loader with a fake filesystem.
+TODO: Implement better filepath calculation","['mengqiy', 'seans3']",1,2018-02-22 23:41:57,2018-02-23 17:23:48,2018-02-23 21:08:48,True,2018-02-23 17:23:47,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/316,https://github.com/kubernetes/kubectl/pull/316,droot,configmap resource implementation using loader,,[],1,2018-02-23 23:56:00,2018-02-26 19:53:45,2018-02-26 19:53:45,True,2018-02-26 19:53:45,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/317,https://github.com/kubernetes/kubectl/pull/317,seans3,Refactor Loader interface,"* Adds Root() method to Loader interface
+* Exposes SchemeLoader interface
+* Renames RootLoader() to Init()
+* Dynamically adds SchemeLoaders to root loader in Init()
+* Removes private fileLoader tests",['seans3'],4,2018-02-24 00:50:29,2018-02-26 23:26:04,2018-02-26 23:26:05,True,2018-02-26 23:26:04,seans3,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/318,https://github.com/kubernetes/kubectl/pull/318,apelisse,kinflate/transformers: Keep private things private,,[],1,2018-02-26 17:25:08,2018-02-26 18:30:46,2018-02-26 18:30:46,True,2018-02-26 18:30:46,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/319,https://github.com/kubernetes/kubectl/pull/319,Liujingfang1,Add secret resource,"Create Resource from one `SecretGenerator` object.
+It reads the command, executes the command and use the output as the secret data. 
+When executing the command, it need a path `p`, which is the root directory containing Kube-manifest.YAML file. With #317, we can call this function by `NewFromSecretGenerator(s, loader.Root())`",[],1,2018-02-26 17:43:44,2018-02-26 19:32:45,2018-03-07 17:22:38,True,2018-02-26 19:32:45,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/320,https://github.com/kubernetes/kubectl/pull/320,Liujingfang1,Change function name from ResourcesFromPath to NewFromPath,change function name to be consistent with `NewFromConfigmap` and `NewFromSecretGenerator`,[],1,2018-02-26 19:44:50,2018-02-26 21:25:39,2018-03-07 17:22:36,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/321,https://github.com/kubernetes/kubectl/pull/321,Liujingfang1,change function name from ResourceFromPath to NewFromPath,,[],1,2018-02-26 21:30:40,2018-02-26 21:38:47,2018-02-26 21:38:47,True,2018-02-26 21:38:47,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/322,https://github.com/kubernetes/kubectl/pull/322,mengqiy,implement Resources func for applicationImpl,,['Liujingfang1'],1,2018-02-26 21:52:25,2018-03-02 20:40:52,2018-03-02 20:42:41,True,2018-03-02 20:40:52,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/323,https://github.com/kubernetes/kubectl/pull/323,seans3,Move fake loader into its own package; Update loader test,,['seans3'],2,2018-02-26 23:45:43,2018-02-27 00:45:46,2018-02-27 00:45:46,True,2018-02-27 00:45:46,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/324,https://github.com/kubernetes/kubectl/pull/324,Liujingfang1,Modify Encode function,,[],1,2018-02-27 17:37:41,2018-03-01 17:00:37,2018-03-07 17:22:19,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/327,https://github.com/kubernetes/kubectl/pull/327,seans3,Update FakeLoader for simpler interface; FakeLoader uses real Loader,,['seans3'],1,2018-02-27 20:43:57,2018-02-27 21:30:48,2018-02-27 21:30:48,True,2018-02-27 21:30:48,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/328,https://github.com/kubernetes/kubectl/pull/328,seans3,Simplified Loader.New() to always take a directory,Allow the FakeLoader to be initialized with a directory; not just a full file path.,['seans3'],2,2018-02-27 23:31:42,2018-02-28 22:58:56,2018-02-28 22:58:56,True,2018-02-28 22:58:56,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/329,https://github.com/kubernetes/kubectl/pull/329,Liujingfang1,Add nameHashTransformer,,['mengqiy'],1,2018-02-27 23:49:08,2018-02-28 00:03:47,2018-03-07 17:22:17,True,2018-02-28 00:03:47,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/331,https://github.com/kubernetes/kubectl/pull/331,mengqiy,update resource package,This PR will be useful for implementing Resources func for applicationImpl in https://github.com/kubernetes/kubectl/pull/322.,[],1,2018-03-01 01:27:24,2018-03-01 22:13:30,2018-03-01 22:18:15,True,2018-03-01 22:13:30,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/333,https://github.com/kubernetes/kubectl/pull/333,Liujingfang1,Change inflate to use Application interface,"The change is covered by existing tests.
+
+Note:
+We will have a different PR to remove the mode flag and add tests for `kinflate diff`.
+The type `KObject` will be removed in the future.",[],1,2018-03-02 20:56:58,2018-03-02 22:08:54,2018-03-07 17:22:15,True,2018-03-02 22:08:54,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/334,https://github.com/kubernetes/kubectl/pull/334,Liujingfang1,Update inflate/diff and corresponding tests,"Current code uses a mode flag to switch between noop mode and normal mode when running inflate and diff. As a result, diff.go refers to some function in inflate.go. This change includes
+- Rewrite `RunDiff` to call Application interface
+- Remove the `mode` flag from both diff.go and inflate.go
+- Add tests for `kinflate diff` using the same test data for `kinflate inflate`.",[],1,2018-03-02 22:31:41,2018-03-05 21:32:51,2018-03-07 17:22:15,True,2018-03-05 21:32:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/340,https://github.com/kubernetes/kubectl/pull/340,mengqiy,fall back to JSON merge patch for types w/o schema (CRD),,[],2,2018-03-06 01:56:59,2018-03-06 18:37:54,2018-03-06 18:42:04,True,2018-03-06 18:37:54,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/341,https://github.com/kubernetes/kubectl/pull/341,Liujingfang1,Add util functions to read/write manifest file and update sub commands,"This change removes all the dependency on package tree from sub commands add resource, add configmap, set nameprefix",[],1,2018-03-06 22:33:06,2018-03-07 00:49:53,2018-03-07 00:49:53,True,2018-03-07 00:49:53,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/343,https://github.com/kubernetes/kubectl/pull/343,Liujingfang1,Remove package tree,,[],1,2018-03-07 17:05:54,2018-03-07 17:14:54,2018-03-07 21:54:27,True,2018-03-07 17:14:54,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/344,https://github.com/kubernetes/kubectl/pull/344,mengqiy,appending name hash only applies to current layer,"@Liujingfang1 observed a bug the hash can be appended in multiple layers, e.g. `configmap-<hash1>-<hash2>`
+
+The name hash transformer should be only applied to the configmap and secrets generated from the current layer.
+",[],1,2018-03-08 01:57:26,2018-03-08 22:01:13,2018-03-09 04:35:20,True,2018-03-08 22:01:13,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/348,https://github.com/kubernetes/kubectl/pull/348,jberkhahn,Use passed-in context in pluginutils config initializer,"This will grab the context out of the config file if one is specified by the KUBECTL_GLOBAL_FLAG_CONTEXT passed in from the plugin framework.
+
+@carolynvs might want to take a look at this.",['droot'],1,2018-03-09 00:02:47,2018-03-22 21:45:03,2018-03-22 21:45:03,True,2018-03-22 21:45:03,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/349,https://github.com/kubernetes/kubectl/pull/349,mengqiy,Rename KObject to ResourceCollection,There will be another PR to change the related function signature to return `ResourceCollection` instead of `[]*Resource`.,[],1,2018-03-10 00:37:41,2018-03-10 00:51:13,2018-03-10 00:51:46,True,2018-03-10 00:51:13,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/350,https://github.com/kubernetes/kubectl/pull/350,mengqiy,cleanup Resouce slice related code,"Change function signature to return ResourceCollection instead of []*Resource.
+Cleanup tests and embed test data according the tott article `remove logic from the test`.
+Moved ResourceCollection to resource pkg.
+
+Most of this PR is mechanical change, nothing very interesting.",[],1,2018-03-12 19:26:45,2018-03-12 22:08:11,2018-03-12 22:12:08,True,2018-03-12 22:08:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/351,https://github.com/kubernetes/kubectl/pull/351,Liujingfang1,Add testing script to invoke example testing,,[],1,2018-03-12 22:49:39,2018-03-13 17:19:11,2018-03-13 17:19:11,True,2018-03-13 17:19:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/352,https://github.com/kubernetes/kubectl/pull/352,mengqiy,fix bug when update name ref in multi layer setup,https://github.com/kubernetes/kubectl/pull/349 and https://github.com/kubernetes/kubectl/pull/350 are preparation for this PR. So this PR can be write in a cleaner way.,[],1,2018-03-12 22:53:55,2018-03-12 23:54:10,2018-03-13 00:08:57,True,2018-03-12 23:54:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/354,https://github.com/kubernetes/kubectl/pull/354,apelisse,unstructpath: Create json path type package.,"This package let's you find specific path in your unstruct types, kind
+of like jsonpath does. But this is statically compile.
+
+This replaces #258 
+
+It doesn't have the controversial types anymore.",[],2,2018-03-14 17:12:45,2018-03-16 20:53:25,2018-03-16 20:53:25,True,2018-03-16 20:53:25,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/355,https://github.com/kubernetes/kubectl/pull/355,Liujingfang1,Update main.sh to exit non-zero when there is a failure,,[],1,2018-03-16 20:19:15,2018-03-16 20:26:25,2018-03-16 20:30:57,True,2018-03-16 20:26:25,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/356,https://github.com/kubernetes/kubectl/pull/356,Liujingfang1,Update directories in test script,"Assume there is only one example directory we want to test. If we can find `tests/test.sh` inside that directory, we run the test against that dir.
+
+Also remove lines `cd <dir>`",[],1,2018-03-16 22:06:35,2018-03-16 22:40:26,2018-03-16 22:40:27,True,2018-03-16 22:40:26,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/358,https://github.com/kubernetes/kubectl/pull/358,a8uhnf,Fix label test in documentation appropriately,,['monopole'],1,2018-03-19 04:55:44,2018-12-17 07:14:11,2018-12-17 07:14:11,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/359,https://github.com/kubernetes/kubectl/pull/359,apelisse,unstructpath: Move predicates to their own package,"Move the predicates to a ""predicates"" package, to simplify the
+structure. This is purely mechanical change. Better documentation for
+the package will come next, as well as a few other changes.",[],1,2018-03-19 16:21:08,2018-03-19 16:54:02,2018-03-19 16:54:02,True,2018-03-19 16:54:02,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/360,https://github.com/kubernetes/kubectl/pull/360,apelisse,predicates: Rename Value into Interface,"Since the original ""Value"" class is gone, it doesn't make sense anymore
+to refer to that name. Now it's simply an ""interface{}"", so the name
+Interface is more suited.",[],1,2018-03-19 17:16:57,2018-03-19 21:45:01,2018-03-19 21:45:01,True,2018-03-19 21:45:01,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/362,https://github.com/kubernetes/kubectl/pull/362,apelisse,"selectors: Remove ""Map"" and ""Slice""","Transforming from Interface to Map or Slice in order to get a sub-item
+was cumbersome, so now you can only get children directly from the
+interface.
+    
+Maps and Slices are at the same level as Number or string (you can only
+filter or get). Also rename Map/Slice/Number/String to
+AsMap/AsSlice/AsNumber/AsString to remove ambiguity.
+
+Also, move predicates and unstructpath to path
+
+And rename unstructpath to selectors, since the package only contains
+selectors now. The name of types in the selectors package could be
+improved now that the package name is more specific.
+
+Also, remove the suffix S from selectors
+
+Since the package is now called ""selectors"", the S at the end of each
+type name is no longer needed.",[],3,2018-03-20 22:17:48,2018-03-20 22:40:01,2018-03-20 22:40:02,True,2018-03-20 22:40:01,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/366,https://github.com/kubernetes/kubectl/pull/366,mengqiy,Integrate openapi,"Pin all the version in vendor to the same version as k/k
+
+
+
+",[],3,2018-03-22 00:22:45,2018-07-31 18:37:56,2018-07-31 18:37:56,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/367,https://github.com/kubernetes/kubectl/pull/367,Liujingfang1,change packages to bases in Manifest,,['monopole'],1,2018-03-22 16:33:49,2018-03-26 23:14:02,2018-03-26 23:14:02,True,2018-03-26 23:14:02,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/368,https://github.com/kubernetes/kubectl/pull/368,droot,updated namereference config for missing references.,"highlights:
+RBAC references
+ServiceAccountName reference
+StatefulSet headless service reference",[],1,2018-03-22 18:30:28,2018-04-11 20:34:56,2018-04-11 20:34:56,True,2018-04-11 20:34:56,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/370,https://github.com/kubernetes/kubectl/pull/370,mengqiy,support multiple patches for the same GVKN,"Before: multiple patches against the same GVKN is not supported, because loaded patches are stored in the ResourceCollection which is indexed by GVKN. So it will complain if there are multiple patches for one GVKN.
+
+After: loaded patches are stored in a slice of Resource.
+",[],1,2018-03-22 21:10:33,2018-03-23 15:41:02,2018-03-23 16:11:58,True,2018-03-23 15:41:02,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/372,https://github.com/kubernetes/kubectl/pull/372,mengqiy,update vendor apimachinery,Pick up some change in SMP.,[],1,2018-03-23 17:20:54,2018-03-23 18:07:04,2018-03-23 18:30:37,True,2018-03-23 18:07:04,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/373,https://github.com/kubernetes/kubectl/pull/373,Liujingfang1,Add different behavior for configmaps in overlay,"In our current kindflate code, we don't support redefining configmap or secrets in overlays. If we want to change a configmap in the base, we are only allowed to apply a patch file containing the new configmap content.
+
+This change is to enable us to redefine configmap in overlays. For example, in `base/Kube-manifest.yaml`, we define
+```configMaps:
+- name: demo-configmap
+  files:
+    - application.properties
+```
+In `instance/staging/Kube-manifest.yaml`, if we define it as
+```configMaps:
+- name: demo-configmap
+  behavior: replace
+  files:
+    - staging-application.properties
+```
+Then `staging-application.properties` is going to be used instead of `application.properties`.
+
+In `instance/production/Kube-manifest.yaml`, if we define it as
+```configMaps:
+- name: demo-configmap
+  behavior: merge
+  files:
+    - production-env.properties
+```
+Then both `application.properties` and `production-env.properties` are used ",[],1,2018-03-23 21:17:40,2018-04-03 22:38:08,2018-04-03 22:38:08,True,2018-04-03 22:38:08,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/375,https://github.com/kubernetes/kubectl/pull/375,mengqiy,Conflict detection in kinflate,"Support conflict detection for patches in the same Kube-manifest.yaml.
+
+This depends on https://github.com/kubernetes/kubernetes/pull/61905.
+",[],2,2018-03-23 22:21:50,2018-04-09 22:28:09,2018-04-09 22:43:05,True,2018-04-09 22:28:09,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/377,https://github.com/kubernetes/kubectl/pull/377,mengqiy,detect unknown fields in Kube-manifest.yaml,This PR depends https://github.com/kinflate/tuthello/pull/2.,[],3,2018-03-27 00:54:09,2018-03-28 19:26:05,2018-03-28 19:37:58,True,2018-03-28 19:26:05,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/379,https://github.com/kubernetes/kubectl/pull/379,monopole,A new hello-world demo.,"This demo uses an existing server and existing base config, both of which have their own documentation -
+making this demo cleaner and shorter.
+",[],1,2018-03-27 20:20:59,2018-03-27 21:15:52,2018-04-06 21:27:38,True,2018-03-27 21:15:52,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/380,https://github.com/kubernetes/kubectl/pull/380,monopole,newshortdemo,"Tighten the home page and the mysql example.
+",[],1,2018-03-27 23:21:56,2018-03-27 23:29:10,2018-04-06 21:27:37,True,2018-03-27 23:29:10,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/381,https://github.com/kubernetes/kubectl/pull/381,monopole,renameDemos,file names now give a better hint as to purpose,[],1,2018-03-28 00:10:29,2018-03-28 00:13:42,2018-04-06 21:27:36,True,2018-03-28 00:13:42,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/382,https://github.com/kubernetes/kubectl/pull/382,monopole,combine demos into a subdir,,[],1,2018-03-28 20:11:29,2018-03-28 20:23:03,2018-04-06 21:27:29,True,2018-03-28 20:23:03,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/383,https://github.com/kubernetes/kubectl/pull/383,jberkhahn,Return rest config and regular config  from pluginutil Init method,"-add namespace overriding based on kubectl plugin env var
+
+We added namespace overriding in svcat's standalone mode, so we need to be able to override it in plugin mode as well. I figured while I was in here, I might as well make the init method return the whole config, in case we need to pull anything off it in the future.
+
+Thanks!
+",[],1,2018-03-28 21:13:57,2018-04-03 18:36:08,2018-04-03 18:36:08,True,2018-04-03 18:36:08,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/387,https://github.com/kubernetes/kubectl/pull/387,droot,integrated glog in command structure,,[],1,2018-03-30 23:06:46,2018-03-30 23:21:04,2018-03-30 23:21:04,True,2018-03-30 23:21:04,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/388,https://github.com/kubernetes/kubectl/pull/388,monopole,Add glossary,"and pointers to it from the main README.
+
+Need a place to define terminology.
+
+This is a conversion and update of the content at go/kinflate-glossary
+
+At the last minute, i pulled workflows out of the glossary, to make it a freestanding MD file, to which we can figures.  Perhaps this stuff goes into the main README, but trying to keep that short.
+
+",[],3,2018-04-02 19:00:34,2018-04-02 20:50:14,2018-04-06 21:27:27,True,2018-04-02 20:50:14,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/389,https://github.com/kubernetes/kubectl/pull/389,monopole,add workflow figs,,"['droot', 'monopole']",1,2018-04-02 23:16:41,2018-04-03 19:37:52,2018-04-06 21:27:27,True,2018-04-03 19:37:52,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/390,https://github.com/kubernetes/kubectl/pull/390,droot,kinflate: added version command,add version package. Will be using it in container builder to embed version in all the releases. It will help us during debugging any external issues.,"['mengqiy', 'monopole']",1,2018-04-03 00:10:27,2018-04-03 02:42:05,2018-04-03 02:42:05,True,2018-04-03 02:42:05,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/393,https://github.com/kubernetes/kubectl/pull/393,Liujingfang1,Add different behavior for secretGenerator in overlay,"Add `Behavior` to `SecretGenerator`
+Add test in `kinflate inflate` and `kinflate diff`
+
+Since the logic is already handled in #373 , when we add `Behavior` for SecretGenerator, it automatically works.",[],1,2018-04-03 22:58:32,2018-04-03 23:32:07,2018-04-03 23:32:07,True,2018-04-03 23:32:07,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/394,https://github.com/kubernetes/kubectl/pull/394,Liujingfang1,change ConfigMap to ConfigMapGenerator,,['monopole'],2,2018-04-03 23:19:08,2018-04-04 22:21:10,2018-04-04 22:21:10,True,2018-04-04 22:21:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/395,https://github.com/kubernetes/kubectl/pull/395,droot,kinflate: add build automation,"Highlights:
+- Adds a build script to generate the archive for Kinflate
+- Adds configs for Google Container Builder to generate the build locally or in Google container builder
+
+I have tested the build triggers with my fork.",[],1,2018-04-03 23:51:47,2018-04-04 17:44:09,2018-04-04 17:44:09,True,2018-04-04 17:44:09,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/402,https://github.com/kubernetes/kubectl/pull/402,monopole,some wording tweaks,"Trying to make more sense, and provide more links into the glossary for easy access to definitions.",[],1,2018-04-04 17:17:52,2018-04-04 20:31:09,2018-04-06 21:27:25,True,2018-04-04 20:31:09,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/403,https://github.com/kubernetes/kubectl/pull/403,droot,kinflate: remove prune field from the manifest,,[],1,2018-04-04 17:42:57,2018-04-04 18:12:09,2018-04-04 18:12:10,True,2018-04-04 18:12:09,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/404,https://github.com/kubernetes/kubectl/pull/404,monopole,Remove the -f option of inflate,"The manifest path is now just the first arg after the command.
+If no arg specified, the current working directory is assumed.
+",[],1,2018-04-04 21:00:39,2018-04-04 21:53:10,2018-04-06 21:27:07,True,2018-04-04 21:53:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/405,https://github.com/kubernetes/kubectl/pull/405,Liujingfang1,Add springboot example demo,first revision of spring boot example demo,[],1,2018-04-05 22:28:52,2018-04-09 22:25:10,2018-04-09 22:25:10,True,2018-04-09 22:25:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/406,https://github.com/kubernetes/kubectl/pull/406,Liujingfang1,Add logging for replacing and merging configmap and secrets,"Tested locally with ` kinflate inflate --alsologtostderr  --v 4 instances/staging`. 
+Here is the output
+``` 
+I0405 16:07:23.576661  257572 decoder.go:224] decoding stream as YAML
+I0405 16:07:23.577546  257572 decoder.go:224] decoding stream as YAML
+I0405 16:07:23.578280  257572 util.go:116] Merge object map[kind:ConfigMap apiVersion:v1 metadata:map[name:my-demo-configmap creationTimestamp:<nil>] data:map[application.properties:app.name=Kinflate Demo for a Spring Boot application
+]] with map[kind:ConfigMap apiVersion:v1 metadata:map[name:demo-configmap creationTimestamp:<nil>] data:map[application.properties:app.name=Staging Kinflate Demo
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://35.184.58.94:3306/db_example
+spring.datasource.username=roott
+spring.datasource.password=admin
+ foo:bar staging:]]
+I0405 16:07:23.578347  257572 util.go:119] The merged object is map[kind:ConfigMap apiVersion:v1 metadata:map[creationTimestamp:<nil> labels:map[] annotations:map[] name:my-demo-configmap] data:map[application.properties:app.name=Staging Kinflate Demo
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://35.184.58.94:3306/db_example
+spring.datasource.username=roott
+spring.datasource.password=admin
+ foo:bar staging:]]
+```",['mengqiy'],1,2018-04-05 23:09:17,2018-04-06 22:00:09,2018-04-06 22:00:09,True,2018-04-06 22:00:09,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/408,https://github.com/kubernetes/kubectl/pull/408,thockin,Use k8s GCR vanity URL,,['pwittrock'],1,2018-04-06 15:52:14,2019-02-26 02:11:24,2019-02-26 02:11:24,True,2019-02-26 02:11:24,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/409,https://github.com/kubernetes/kubectl/pull/409,mengqiy,update vendor apimachinery,Pick up the change in https://github.com/kubernetes/kubernetes/pull/61905 for https://github.com/kubernetes/kubectl/pull/375,[],1,2018-04-06 17:05:00,2018-04-06 17:45:09,2018-04-06 18:05:57,True,2018-04-06 17:45:09,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/410,https://github.com/kubernetes/kubectl/pull/410,monopole,newreadme,quick change per Ahmet's suggestions,[],1,2018-04-06 17:34:04,2018-04-06 17:37:12,2018-04-06 21:27:02,True,2018-04-06 17:37:12,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/411,https://github.com/kubernetes/kubectl/pull/411,monopole,onePageHelloWorld,"per Ahmet's suggestion, put hello world on one page.
+
+This demo is tested as part of the presubmit.
+
+",[],1,2018-04-06 18:04:50,2018-04-06 18:18:36,2018-04-06 21:27:00,True,2018-04-06 18:18:36,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/412,https://github.com/kubernetes/kubectl/pull/412,monopole,add tree output to demo,"This makes it easier to understand the file layout without having to actually execute the commands.
+",[],1,2018-04-06 19:59:12,2018-04-06 20:07:30,2018-04-06 21:26:59,True,2018-04-06 20:07:30,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/413,https://github.com/kubernetes/kubectl/pull/413,monopole,README for demos,,[],1,2018-04-06 22:03:02,2018-04-06 22:20:10,2018-04-26 21:18:46,True,2018-04-06 22:20:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/414,https://github.com/kubernetes/kubectl/pull/414,monopole,Command organization - build and edit," * inflate becomes build
+ * edit sits on top of add, set, etc.
+",[],1,2018-04-06 22:55:27,2018-04-06 23:27:08,2018-04-26 21:18:45,True,2018-04-06 23:27:08,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/416,https://github.com/kubernetes/kubectl/pull/416,monopole,structure for manifest documentation,"We need some documentation for the manifest on the website.
+
+Here's an initial structure, that uses the ""kinflate init"" command as a source of truth
+to create an example that displays on the website.
+
+To update the docs, create a branch, run ""make docs"", and merge the branch.
+
+Down the road we could use the makefile to do more sophisticated inclusion of generated code with the website.
+
+",[],1,2018-04-09 18:54:36,2018-04-10 16:53:02,2018-04-26 21:18:44,True,2018-04-10 16:53:02,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/419,https://github.com/kubernetes/kubectl/pull/419,mengqiy,swtich to depend on the scheme in client-go,,[],1,2018-04-10 18:18:44,2018-04-10 22:42:55,2018-04-10 23:48:32,True,2018-04-10 22:42:55,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/420,https://github.com/kubernetes/kubectl/pull/420,Liujingfang1,change Kube-manifest.yaml to kustomize.yaml,Will update the example-ldap and example-springboot after this PR is merged,[],1,2018-04-10 18:37:03,2018-04-10 19:07:11,2018-04-10 19:07:11,True,2018-04-10 19:07:11,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/423,https://github.com/kubernetes/kubectl/pull/423,monopole,Test config map names,"This demonstrates how configmap changes result in name changes
+that force rolling updates for deployments.
+
+Since the demo is tested, this 
+Fixes #422 
+",[],1,2018-04-10 21:29:23,2018-04-11 00:00:46,2018-04-26 21:18:42,True,2018-04-11 00:00:46,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/424,https://github.com/kubernetes/kubectl/pull/424,Liujingfang1,change kinflate to kustomize,,[],1,2018-04-10 22:29:23,2018-04-11 19:50:50,2018-04-11 19:50:50,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/428,https://github.com/kubernetes/kubectl/pull/428,droot,change kinflate to kustomize,Rebased and resolved conflict in `pkg/kustomize/transformers/overlay.go`,[],1,2018-04-11 18:13:12,2018-04-11 18:25:56,2018-04-11 18:25:56,True,2018-04-11 18:25:56,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/433,https://github.com/kubernetes/kubectl/pull/433,monopole,Remove init and manifest from demos,This partially addresses both #429 (remove init from everything) and #432 (remove manifest from everything).,[],1,2018-04-11 21:00:17,2018-04-11 21:38:56,2018-04-26 21:18:40,True,2018-04-11 21:38:56,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/434,https://github.com/kubernetes/kubectl/pull/434,droot,kustomize: automate github release publishing,"An example release looks like:
+
+https://github.com/droot/kubectl/releases/tag/v0.1.0",[],1,2018-04-11 22:20:03,2018-04-11 22:23:55,2018-04-11 22:23:55,True,2018-04-11 22:23:55,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/435,https://github.com/kubernetes/kubectl/pull/435,mengqiy,Update vendor and related hash func,"The 1st commit pins api, apimachinery, client-go to the latest version.
+The 2nd commit updates the related hash func",[],2,2018-04-11 22:21:55,2018-04-13 00:15:59,2018-04-14 22:19:41,True,2018-04-13 00:15:59,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/437,https://github.com/kubernetes/kubectl/pull/437,monopole,Drop k8s metadata fields from kustomize.yaml struct,"### Move
+  `pkg/apis/manifest/v1alpha1/types.go`
+to
+  `pkg/kustomize/types/manifest.go`
+
+Will rename the `Manifest` type to `Kustomization` in a subsequent PR
+(so this file name will change then).
+
+### Remove user visible references to the word _manifest_
+...in the files this PR touches.
+
+### Replace
+```
+apiVersion: manifest.k8s.io/v1alpha1	
+kind: Package	
+metadata:	
+  name: foo
+```
+with
+```
+kustomizationName: foo
+```
+This latter field makes it possible to add a name to the overall customization, although it's not used for any purpose.  It's basically a documentation field that survives unmarshall/marshall.
+
+Partially addresses #436",[],1,2018-04-12 00:23:50,2018-04-12 02:51:55,2018-04-12 02:51:56,True,2018-04-12 02:51:55,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/438,https://github.com/kubernetes/kubectl/pull/438,monopole,manifest becomes kustomization,"Rename ""manifest file"" to ""kustomization file"" everywhere.
+
+No more use of the word manifest.  Fixes #431 
+
+_To kustomize is to use a kustomization file._",[],1,2018-04-12 23:44:11,2018-04-13 03:43:59,2018-04-26 21:18:39,True,2018-04-13 03:43:59,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/439,https://github.com/kubernetes/kubectl/pull/439,monopole,Drop the init command,"Dropping the `init` command because there's no such thing as good default values for a customization.
+
+Anything we'd put in a kustomization file created by init has to be modified or deleted by the user, so it hinders them rather than helps them.  We've noticed this inconvenience when writing demos, etc.
+
+Fixes #429
+",[],1,2018-04-13 17:08:48,2018-04-13 18:00:01,2018-04-26 21:18:38,True,2018-04-13 18:00:00,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/440,https://github.com/kubernetes/kubectl/pull/440,monopole,Example kustomize.yaml,"Fixes #430
+",[],1,2018-04-13 18:22:02,2018-04-17 16:31:59,2018-04-26 21:18:11,True,2018-04-17 16:31:59,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/441,https://github.com/kubernetes/kubectl/pull/441,monopole,Some kustomization field renaming.," * drop `kustomizationName` and `description`
+ * change `objectLabels` to `labelsToAdd`
+ * change `objectAnnotations` to `annotationsToAdd`",[],1,2018-04-13 20:37:06,2018-04-13 20:42:55,2018-04-26 21:18:30,True,2018-04-13 20:42:55,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/442,https://github.com/kubernetes/kubectl/pull/442,monopole,Update figs,"New file names, new field names, no more k8s fields.",[],1,2018-04-16 20:44:32,2018-04-16 20:50:35,2018-04-26 21:18:29,True,2018-04-16 20:50:35,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/443,https://github.com/kubernetes/kubectl/pull/443,monopole,updated figs,,[],1,2018-04-16 21:01:54,2018-04-16 21:02:02,2018-04-26 21:18:27,True,2018-04-16 21:02:02,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/445,https://github.com/kubernetes/kubectl/pull/445,monopole,kustomize.yaml becomes kustomization.yaml,"Allows one to more succinctly refer to the kustomize configuration file as a _kustomization_.
+Formerly, it was called a manifest, but that term no longer used as it suggests package management.
+",[],1,2018-04-17 18:20:29,2018-04-17 18:26:17,2018-04-26 21:18:10,True,2018-04-17 18:26:17,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/446,https://github.com/kubernetes/kubectl/pull/446,monopole,new figs,,[],1,2018-04-17 20:49:48,2018-04-17 20:50:18,2018-04-26 21:18:09,True,2018-04-17 20:50:18,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/447,https://github.com/kubernetes/kubectl/pull/447,AdamDang,Typo fix in glossary.md,"mySql->MySQL
+refers to to->refers to",['pwittrock'],5,2018-04-23 14:39:49,2018-04-30 20:41:18,2018-05-01 02:13:03,True,2018-04-30 20:41:18,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/448,https://github.com/kubernetes/kubectl/pull/448,monopole,add a tested breakfast configuration demo,it's not just about k8s resources.,[],1,2018-04-24 20:06:48,2018-04-24 21:44:30,2018-04-26 21:18:08,True,2018-04-24 21:44:30,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/451,https://github.com/kubernetes/kubectl/pull/451,richardmarshall,Add subcommand for adding patches to the kustomization file,"Adds a new sub-command for adding patches to the kustomization file.
+
+```
+kustomize edit add patch my_neat_patch.yaml
+```
+
+Also updated the springboot demo to use the new command instead of sed.",[],1,2018-04-27 14:28:54,2018-04-30 23:32:18,2018-04-30 23:47:23,True,2018-04-30 23:32:18,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/452,https://github.com/kubernetes/kubectl/pull/452,AdamDang,Typo fix: resourse->resource,Line 253: resourse->resource,['pwittrock'],1,2018-04-27 15:29:53,2018-04-30 20:39:31,2018-05-01 01:57:14,True,2018-04-30 20:39:31,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/453,https://github.com/kubernetes/kubectl/pull/453,monopole,configmapgenerator example,,[],1,2018-04-27 22:28:24,2018-04-30 22:45:16,2018-05-08 19:12:10,True,2018-04-30 22:45:16,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/455,https://github.com/kubernetes/kubectl/pull/455,monopole,pull helloWorld demo data into code repo,"As part of the kinflate to kustomize rename, the org https://github.com/kinflate will be going away.
+
+Also, it won't be replaced, since who would own the new org is problematic.  Perhaps we'll be able to put examples into their own repos under kubernetes-sigs, as siblings to the kustomize repo.  Until then, will pull the demo data in one at a time.  This PR pulls in helloworld.
+",[],1,2018-04-30 23:00:25,2018-04-30 23:27:15,2018-05-08 19:12:08,True,2018-04-30 23:27:15,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/456,https://github.com/kubernetes/kubectl/pull/456,monopole,fix glitch in hello world,"fix some wording now that this example no longer does ""git clone""",[],1,2018-05-01 18:05:20,2018-05-01 18:12:18,2018-05-08 19:12:07,True,2018-05-01 18:12:18,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/457,https://github.com/kubernetes/kubectl/pull/457,monopole,add configGeneration to README in demos dir,,[],1,2018-05-01 18:50:09,2018-05-01 20:02:18,2018-05-08 19:12:06,True,2018-05-01 20:02:18,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/458,https://github.com/kubernetes/kubectl/pull/458,monopole,capture springboot demo data,,[],1,2018-05-01 20:57:11,2018-05-01 20:57:19,2018-05-08 19:12:05,True,2018-05-01 20:57:19,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/459,https://github.com/kubernetes/kubectl/pull/459,monopole,Modify mysql and springboot demo to download their data from the code…,"… repo, not the kinflate repo",[],1,2018-05-01 22:03:54,2018-05-01 22:10:08,2018-05-08 19:11:55,True,2018-05-01 22:10:07,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/460,https://github.com/kubernetes/kubectl/pull/460,monopole,drop unused pngs,"Fix some nits (bad links, kustomize in normal font, etc.) and drop two unused png files.",[],1,2018-05-01 22:44:36,2018-05-03 18:10:57,2018-05-08 19:11:53,True,2018-05-03 18:10:57,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/462,https://github.com/kubernetes/kubectl/pull/462,AdamDang,Typo fix in the returned info.,Line 58: creat->create,['pwittrock'],1,2018-05-02 11:30:02,2018-05-02 23:08:51,2018-05-02 23:08:51,True,2018-05-02 23:08:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/463,https://github.com/kubernetes/kubectl/pull/463,AdamDang,Typo fix: defintion->definition,Line 148: defintion->definition,['pwittrock'],1,2018-05-03 14:38:38,2018-05-03 18:11:52,2018-05-03 18:11:52,True,2018-05-03 18:11:52,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/464,https://github.com/kubernetes/kubectl/pull/464,Liujingfang1,Add ldap example to demo data,"`base` folder is copied from `kinflate/example-ldap`
+`overlays` folder is copied from `kinflate/example-ldap-instances`",[],1,2018-05-03 20:27:41,2018-05-04 01:38:51,2018-05-04 01:38:51,True,2018-05-04 01:38:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/466,https://github.com/kubernetes/kubectl/pull/466,Liujingfang1,change test script to use ldap from the new location,"This change is for the integration test of kustomize: kinflate-periodic-default-gke
+It will pick up the ldap example from new location.",[],1,2018-05-04 16:32:43,2018-05-04 18:08:52,2018-05-04 18:08:52,True,2018-05-04 18:08:51,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/467,https://github.com/kubernetes/kubectl/pull/467,Liujingfang1,Add ldap demo,locally tested by `bin/pre-commit.sh`,[],1,2018-05-04 17:58:42,2018-05-04 18:07:53,2018-05-04 18:07:53,True,2018-05-04 18:07:53,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/469,https://github.com/kubernetes/kubectl/pull/469,AdamDang,Typo fix: cluser->cluster,Line 241: cluser->cluster,[],1,2018-05-08 16:00:28,2018-05-11 20:31:43,2018-05-11 20:31:43,True,2018-05-11 20:31:43,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/470,https://github.com/kubernetes/kubectl/pull/470,monopole,add apache license file for kustomize,,[],1,2018-05-08 17:35:07,2018-05-08 17:40:56,2018-05-08 17:41:04,True,2018-05-08 17:40:56,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/471,https://github.com/kubernetes/kubectl/pull/471,monopole,Replace term 'instance' with 'variant'.,,[],1,2018-05-08 18:42:04,2018-05-08 18:46:21,2018-05-08 19:11:50,True,2018-05-08 18:46:21,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/472,https://github.com/kubernetes/kubectl/pull/472,monopole,reorderGloss,,[],1,2018-05-08 19:10:27,2018-05-08 19:10:41,2018-05-08 19:11:48,True,2018-05-08 19:10:41,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/473,https://github.com/kubernetes/kubectl/pull/473,monopole,updateFigs,,[],1,2018-05-08 19:20:48,2018-05-08 19:20:55,2018-05-08 19:20:55,True,2018-05-08 19:20:55,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/474,https://github.com/kubernetes/kubectl/pull/474,monopole,updateFig2,,[],1,2018-05-08 19:26:14,2018-05-08 19:26:22,2018-05-08 19:26:22,True,2018-05-08 19:26:22,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/477,https://github.com/kubernetes/kubectl/pull/477,soltysh,Add myself to owners,,['pwittrock'],1,2018-05-09 13:53:41,2018-05-09 14:55:59,2018-05-10 14:00:45,True,2018-05-09 14:55:59,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/478,https://github.com/kubernetes/kubectl/pull/478,AdamDang,Typo fix: implmentation->implementation,Line 32: implmentation->implementation,[],1,2018-05-09 14:55:38,2018-05-14 16:50:46,2018-05-14 16:50:46,False,,,dirty,False,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/482,https://github.com/kubernetes/kubectl/pull/482,seans3,Add owners section for subproject owners,Add an 'owners' section of the OWNERS file. Members of this section are specifically enumerated as the Subproject Owner role for the 'kubeclt' subproject in the SIG CLI charter.,"['seans3', 'pwittrock']",1,2018-05-10 00:27:15,2018-05-10 15:05:51,2018-05-10 15:05:51,True,2018-05-10 15:05:50,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/484,https://github.com/kubernetes/kubectl/pull/484,monopole,add code of conduct,,[],1,2018-05-11 18:10:54,2018-05-11 18:11:04,2018-05-11 18:11:04,True,2018-05-11 18:11:04,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/485,https://github.com/kubernetes/kubectl/pull/485,monopole,owner mods,,[],1,2018-05-11 18:38:40,2018-05-11 18:38:53,2018-05-11 18:38:53,True,2018-05-11 18:38:53,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/486,https://github.com/kubernetes/kubectl/pull/486,monopole,Remove kustomize,Moved to https://github.com/kubernetes-sigs/kustomize,[],1,2018-05-11 22:21:14,2018-05-14 03:28:25,2018-05-14 03:28:25,True,2018-05-14 03:28:25,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/488,https://github.com/kubernetes/kubectl/pull/488,monopole,update vendoring post kustomize delete,"This is just a ""dep ensure"", to get rid of vendoring that's no longer needed.",[],1,2018-05-16 23:43:21,2018-05-17 17:50:50,2018-05-17 17:50:50,True,2018-05-17 17:50:50,monopole,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/504,https://github.com/kubernetes/kubectl/pull/504,max8899,fix some typos,taht -> that,"['soltysh', 'adohe', 'nikhita']",1,2018-06-28 05:39:28,2018-07-02 13:30:17,2018-07-02 16:56:17,True,2018-07-02 13:30:17,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/516,https://github.com/kubernetes/kubectl/pull/516,seans3,[WIP] Kubectl main out of core repo with vendored dependencies,"* To build `kubectl` binary (top-level directory): `go build kubectl.go`
+* Pulls only one file (`cmd/kubectl/kubectl.go`, `kubectl` main) out of the core repo.
+* Doesn't move any other `kubectl` code.
+* Vendors all remaining `kubectl` dependencies.
+* Allows decomposition of `kubectl`, including some `kubectl` subcommands in different repos.
+* Allows for multiple ownership of pieces of `kubectl`.
+* Allows more frequent releases, and different release cadences.
+* Simplifies testing.
+",['seans3'],3,2018-07-31 22:47:19,2018-09-20 10:11:29,2018-09-20 10:11:29,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/541,https://github.com/kubernetes/kubectl/pull/541,seans3,Adds initial required SECURITY_CONTACTS file,"* Initial SECURITY_CONTACTS for the kubectl repo.
+* Uses required template.
+* These are the same contacts as every other kubernetes repo for now.","['soltysh', 'seans3']",1,2018-09-26 18:32:07,2018-09-28 20:16:15,2018-09-28 20:16:15,True,2018-09-28 20:16:15,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/559,https://github.com/kubernetes/kubectl/pull/559,pwittrock,Kubectl Book,"Initial revision of kubectl book for managing Kubernetes Applcations.
+
+Rendered content viewable here:
+- https://pwittrock-kubectl.firebaseapp.com
+
+Tracking Bugs for how things *should* work here:
+- https://github.com/kubernetes/kubectl/projects/7",[],1,2018-11-12 04:39:40,2018-11-12 19:57:07,2018-11-12 19:57:07,True,2018-11-12 19:57:07,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/560,https://github.com/kubernetes/kubectl/pull/560,xichengliudui,To add and update the function name,To add and update the function name,"['soltysh', 'apelisse', 'seans3', 'pwittrock']",1,2018-11-12 07:08:43,2019-02-22 07:39:10,2019-02-22 07:39:15,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/561,https://github.com/kubernetes/kubectl/pull/561,pwittrock,Remove node_modules from GitBook,,"['juanvallejo', 'seans3']",2,2018-11-12 20:07:46,2018-11-12 20:22:10,2018-11-12 20:22:10,True,2018-11-12 20:22:10,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/563,https://github.com/kubernetes/kubectl/pull/563,xichengliudui,Update notes,Update the function name in the log,"['soltysh', 'pwittrock']",1,2018-11-16 02:42:09,2018-12-04 08:32:17,2018-12-04 08:32:19,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/579,https://github.com/kubernetes/kubectl/pull/579,pwittrock,Update Kubectl GitBook,"Batch updates to kubectl book.
+
+- Expand resource layout config
+- Update kustomization docs
+- Update npm deps",['seans3'],2,2019-01-28 18:47:34,2019-01-28 19:29:24,2019-01-28 19:29:24,True,2019-01-28 19:29:24,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/590,https://github.com/kubernetes/kubectl/pull/590,webdeb,Feature: allow to pass kubeconfig as a base64 string,"This PR makes it possible to provide --kubeconfig=""base64:$KUBE_CONFIG_BASE64"" as proposed in the issue #588 
+
+---
+
+Hello Guys, this is my first code in go ever, please be cool, if something is missing, docs, tests, code, whatever.. no big deal, I'll fix it.
+
+thx",[],4,2019-02-15 00:04:56,2019-02-16 20:03:24,2019-02-16 20:03:25,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/591,https://github.com/kubernetes/kubectl/pull/591,pwittrock,Refine Kubectl GitBook,"Flesh out the GitBook more.
+
+Hosted at: https://pwittrock-kubectl.firebaseapp.com/",['Liujingfang1'],3,2019-02-26 02:09:03,2019-03-12 20:42:40,2019-03-12 20:42:40,True,2019-03-12 20:42:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/602,https://github.com/kubernetes/kubectl/pull/602,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['spiffxp', 'pwittrock', 'nikhita']",1,2019-03-08 18:08:38,2019-03-20 02:46:25,2019-03-20 02:46:26,True,2019-03-20 02:46:25,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/604,https://github.com/kubernetes/kubectl/pull/604,Liujingfang1,add gitbook-cli into kubectl book package.json,"add gitbook-cli into kubectl book package.json
+
+Necessary for hosting on netlify","['mengqiy', 'pwittrock']",1,2019-03-11 21:42:38,2019-03-12 16:08:39,2019-03-12 16:08:40,True,2019-03-12 16:08:39,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/606,https://github.com/kubernetes/kubectl/pull/606,Liujingfang1,a test pr for showing kubectl book,,[],1,2019-03-12 18:24:36,2019-03-12 20:30:07,2019-03-12 20:30:07,False,,,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/607,https://github.com/kubernetes/kubectl/pull/607,Liujingfang1,add google analytics to kubectl book,,['mengqiy'],1,2019-03-12 20:55:53,2019-03-12 21:54:40,2019-03-26 14:38:20,True,2019-03-12 21:54:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/608,https://github.com/kubernetes/kubectl/pull/608,pwittrock,Kubectl Book: Add Favicon and clean wording,"- Add a favicon.ico for the kubectl logo
+- Minor wording cleanup on kubectl introduction",['Liujingfang1'],2,2019-03-13 00:39:11,2019-03-13 15:09:36,2019-03-13 15:09:36,True,2019-03-13 15:09:36,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/609,https://github.com/kubernetes/kubectl/pull/609,pwittrock,GitBook: Refine App Composition and Deployment guidelines,- Also make them more clearly Alpha,['Liujingfang1'],1,2019-03-13 15:46:33,2019-03-13 18:33:40,2019-03-13 20:56:34,True,2019-03-13 18:33:40,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/610,https://github.com/kubernetes/kubectl/pull/610,pwittrock,Refine App Composition and Deployment guidelines,- Also make them more clearly Alpha / Beta,['Liujingfang1'],1,2019-03-14 17:16:14,2019-03-14 17:48:29,2019-03-14 17:48:29,True,2019-03-14 17:48:29,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/611,https://github.com/kubernetes/kubectl/pull/611,soltysh,Various fixes,/assign @pwittrock ,['pwittrock'],1,2019-03-14 22:03:11,2019-03-14 22:17:32,2019-03-26 09:40:14,True,2019-03-14 22:17:32,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/612,https://github.com/kubernetes/kubectl/pull/612,pwittrock,kubectl book - add `newName` function,- update the customizing pod template with `newName`,['Liujingfang1'],2,2019-03-14 22:19:49,2019-03-14 23:52:57,2019-03-14 23:52:57,True,2019-03-14 23:52:57,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/616,https://github.com/kubernetes/kubectl/pull/616,pwittrock,GitBook: Update structure titles,,['Liujingfang1'],1,2019-03-18 19:51:33,2019-03-18 20:12:21,2019-03-18 20:12:21,True,2019-03-18 20:12:21,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/617,https://github.com/kubernetes/kubectl/pull/617,pwittrock,kubectl book: Fix exec examples caused by bad refactoring,"- refactoring replaced '$ ' with 'deploy'
+- should have replaced '$ ' with ''",['Liujingfang1'],2,2019-03-19 16:39:52,2019-03-19 16:56:27,2019-03-19 16:56:27,True,2019-03-19 16:56:27,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/618,https://github.com/kubernetes/kubectl/pull/618,pwittrock,Address Doc Feedback,,['Liujingfang1'],2,2019-03-20 20:33:05,2019-03-22 17:48:50,2019-03-22 17:48:50,True,2019-03-22 17:48:50,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/619,https://github.com/kubernetes/kubectl/pull/619,seans3,Adds kubectl logo to repository,"* Adds kubectl logo images in three sizes (full, medium, and small)
+* The full size is 3182x3200
+* The medium size is 300x300
+* The small size is 200x200
+* Includes the medium logo into the README.md","['seans3', 'pwittrock']",1,2019-03-21 23:48:38,2019-03-21 23:58:19,2019-03-21 23:58:19,True,2019-03-21 23:58:19,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/620,https://github.com/kubernetes/kubectl/pull/620,pwittrock,Kubectl Book Final Edits,,[],1,2019-03-22 23:32:52,2019-03-23 00:06:29,2019-03-24 19:06:32,True,2019-03-23 00:06:29,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/621,https://github.com/kubernetes/kubectl/pull/621,pwittrock,Fix examples,,[],1,2019-03-25 16:28:19,2019-03-25 16:28:30,2019-03-25 16:28:49,True,2019-03-25 16:28:30,pwittrock,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/624,https://github.com/kubernetes/kubectl/pull/624,jonas,Remove cp examples from the port-forward page,"The examples at the end of the port_forward_to_pods page are derived
+from the copying_container_files page when it was created.",['soltysh'],1,2019-03-26 03:32:20,2019-03-29 16:06:13,2019-03-29 16:48:59,True,2019-03-29 16:06:13,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/626,https://github.com/kubernetes/kubectl/pull/626,BenHall,Dockerfile for GitBook,A Dockerfile for making it easier to run the GitBook locally when making changes,[],1,2019-03-26 10:28:19,,2019-03-26 10:28:44,False,,,unstable,True,open
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/630,https://github.com/kubernetes/kubectl/pull/630,Rio,fix(docs): Fix typo and command reference,closes #629 ,['soltysh'],2,2019-03-28 09:40:36,2019-03-28 15:48:47,2019-03-28 16:04:08,True,2019-03-28 15:48:47,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/633,https://github.com/kubernetes/kubectl/pull/633,chrisz100,Fixed a typo in field merge semantics,,['soltysh'],1,2019-03-28 10:53:35,2019-03-28 15:50:47,2019-03-28 15:51:09,True,2019-03-28 15:50:47,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/634,https://github.com/kubernetes/kubectl/pull/634,Rio,feat(docs): add section on environment style configmap/secret generation,"This adds an example of generating configmaps/secrets using the `env` option.
+It also adds a bit of clarification that the same `literals`, `files` and `env` options can be used for secrets.
+
+closes #632 ",[],1,2019-03-28 10:56:16,,2019-03-28 10:57:03,False,,,unstable,True,open
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/635,https://github.com/kubernetes/kubectl/pull/635,chrisz100,replaced Conainer with Container,fixes #627 ,"['soltysh', 'pwittrock']",1,2019-03-28 11:43:25,2019-03-28 15:52:45,2019-03-28 15:52:45,True,2019-03-28 15:52:45,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/636,https://github.com/kubernetes/kubectl/pull/636,mikeraimondi,fix typo,,"['soltysh', 'Liujingfang1']",1,2019-04-01 15:20:52,2019-04-02 15:08:37,2019-04-02 15:08:37,True,2019-04-02 15:08:37,k8s-ci-robot,unknown,,closed
+kubectl,https://api.github.com/repos/kubernetes/kubectl/pulls/638,https://github.com/kubernetes/kubectl/pull/638,pwittrock,Book: update labeling recommendations,,[],1,2019-04-04 14:44:31,2019-04-04 14:49:42,2019-04-04 14:49:53,True,2019-04-04 14:49:42,pwittrock,unknown,,closed

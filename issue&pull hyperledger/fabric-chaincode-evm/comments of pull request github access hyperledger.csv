@@ -1,0 +1,62 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,gonna need more info on this.,f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-09 06:31:21,263988707,"@@ -91,16 +90,16 @@ func (evmcc *EvmChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response
+ 
+ 	var gas uint64 = 10000
+ 	state := statemanager.NewStateManager(stub)
+-	evmCache := evm.NewState(state)
++	evmCache := evm.NewState(state, func(height uint64) []byte {
++		return []byte(""BlockyMcHash"")",14,2019-03-09 21:26:46,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/263988707,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r263988707,MHBauer
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,should this be a method of the interface? ,f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-09 06:35:13,263988803,"@@ -92,3 +93,21 @@ func (s *stateManager) SetStorage(address crypto.Address, key, value binary.Word
+ 
+ 	return err
+ }
++
++// Bump the sequence number of an account
++func IncSequence(state StateManager, address crypto.Address) error {",14,2019-03-09 21:26:46,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/263988803,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r263988803,MHBauer
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,with this we're back to a per-address increment.,f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-09 06:35:29,263988814,"@@ -92,3 +93,21 @@ func (s *stateManager) SetStorage(address crypto.Address, key, value binary.Word
+ 
+ 	return err
+ }
++
++// Bump the sequence number of an account
++func IncSequence(state StateManager, address crypto.Address) error {
++	const errHeader = ""IncSequence():""
++	acc, err := state.GetAccount(address)",16,2019-03-09 21:26:46,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/263988814,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r263988814,MHBauer
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,"No, actually this is optimal :)
+
+We added support for the BLOCKHASH opcode in the EVM (https://github.com/hyperledger/burrow/pull/967).
+
+You should pass a block hash (or state hash of some kind) at the requested height. You only need to maintain a lookback history of 256, see: https://github.com/hyperledger/burrow/blob/develop/execution/evm/vm.go#L648 
+
+Not a huge deal to make this a stub for now, I would have thought.",f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-09 15:26:35,264003166,"@@ -91,16 +90,16 @@ func (evmcc *EvmChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response
+ 
+ 	var gas uint64 = 10000
+ 	state := statemanager.NewStateManager(stub)
+-	evmCache := evm.NewState(state)
++	evmCache := evm.NewState(state, func(height uint64) []byte {
++		return []byte(""BlockyMcHash"")",14,2019-03-09 21:26:46,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/264003166,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r264003166,silasdavis
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,"I tend to like to keep interfaces minimal, and add helpers that compose over the interfaces as separate static functions, that way implementers of `StateManager` get static helper methods like this for free and don't have to reimplement. There may be some context I am missing that makes it better to have this on the interface (or even as a private method, or inline code) though.",f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-09 15:30:56,264003317,"@@ -92,3 +93,21 @@ func (s *stateManager) SetStorage(address crypto.Address, key, value binary.Word
+ 
+ 	return err
+ }
++
++// Bump the sequence number of an account
++func IncSequence(state StateManager, address crypto.Address) error {",14,2019-03-09 21:26:46,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/264003317,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r264003317,silasdavis
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,"Hm not sure I follow, the behaviour is basically the same as:
+
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3/commits/3b2fd2b8490c5eafa13d0e0994536e3484f05d59#diff-072bdea284f7fd429bccb691f870c9ebL116 which is per address.",f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-09 15:31:21,264003331,"@@ -92,3 +93,21 @@ func (s *stateManager) SetStorage(address crypto.Address, key, value binary.Word
+ 
+ 	return err
+ }
++
++// Bump the sequence number of an account
++func IncSequence(state StateManager, address crypto.Address) error {
++	const errHeader = ""IncSequence():""
++	acc, err := state.GetAccount(address)",16,2019-03-09 21:26:46,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/264003331,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r264003331,silasdavis
+https://github.com/hyperledger/fabric-chaincode-evm/pull/3,https://github.com/hyperledger/fabric-chaincode-evm/pull/3,I initially thought it would make sense as part of the interface too. But I like the simplicity of the state interface doing just the basic operations and it not really needing to know what an account looks like or not.,f1766927d1b682dd3fb53c2ff2440ba12c7418cc,2019-03-11 21:26:02,264437495,"@@ -92,3 +93,21 @@ func (s *stateManager) SetStorage(address crypto.Address, key, value binary.Word
+ 
+ 	return err
+ }
++
++// Bump the sequence number of an account
++func IncSequence(state StateManager, address crypto.Address) error {",14,2019-03-11 21:26:02,https://api.github.com/repos/hyperledger/fabric-chaincode-evm/pulls/comments/264437495,https://github.com/hyperledger/fabric-chaincode-evm/pull/3#discussion_r264437495,swetharepakula

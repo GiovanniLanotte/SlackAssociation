@@ -1,0 +1,221 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+cloud-provider-aws,nckturner,https://github.com/kubernetes/cloud-provider-aws/issues/1,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/1,Kick off meeting for cloud-provider-aws,"On **Friday, April 13 9:00 AM PDT** we will discuss our approach to using this repository.  This may include repository structure, scope, migration strategy, any specifics about the components that people would like to discuss, and finally owners/contributors for areas of work.  (CSI, flex, CCM, ...)
+
+Links: 
+* [Zoom](https://zoom.us/j/787449961) 
+* [SIG-AWS agenda & notes](https://docs.google.com/document/d/1-i0xQidlXnFEP9fXHWkBxqySkXwJnrGJP9OGyP2_P14/edit#)
+",closed,False,2018-04-10 22:14:07,2018-07-11 03:11:03
+cloud-provider-aws,nckturner,https://github.com/kubernetes/cloud-provider-aws/pull/2,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/2,"Add myself, Micah to approvers/reviewers",Signed-off-by: Nick Turner <nic@amazon.com>,closed,True,2018-04-11 21:07:48,2018-06-01 18:47:56
+cloud-provider-aws,nckturner,https://github.com/kubernetes/cloud-provider-aws/pull/3,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/3,Vendored ccm,"Creates aws ccm binary, with the cloud provider specific code vendored in-tree code.  It should eventually migrate to this repository, but this will help us get started with e2e testing. ",closed,True,2018-04-25 16:48:34,2018-06-11 11:09:39
+cloud-provider-aws,jessfraz,https://github.com/kubernetes/cloud-provider-aws/issues/4,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/4,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:16,2018-11-13 19:21:12
+cloud-provider-aws,aojea,https://github.com/kubernetes/cloud-provider-aws/issues/5,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/5,Missing CONTRIBUTING.md file,"All K8s subrepositories should have a CONTRIBUTING.md file, which at the minimum should point to https://github.com/kubernetes/community/blob/master/contributors/guide/README.md. Care should be taken that all information is in sync with the contributor guide.
+
+Subrepositories may also have contributing guidelines specific to that repository. They should be explicitly documented and explained in the CONTRIBUTING.md
+
+Ref:  https://github.com/kubernetes/community/issues/1832",closed,False,2018-07-16 09:23:20,2018-08-08 06:21:45
+cloud-provider-aws,nikhita,https://github.com/kubernetes/cloud-provider-aws/pull/6,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/6,Add CONTRIBUTING.md,"Fixes #5 
+xref https://github.com/kubernetes/community/issues/1832
+
+/assign jsafrane justinsb ",closed,True,2018-07-19 04:59:27,2018-08-08 06:22:08
+cloud-provider-aws,poothia,https://github.com/kubernetes/cloud-provider-aws/pull/7,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/7,adding missing code-of-conduct.md,adding missing code-of-conduct.md file as suggested by kubernetes-template-project.,closed,True,2018-08-02 10:27:36,2018-08-08 06:18:27
+cloud-provider-aws,RA489,https://github.com/kubernetes/cloud-provider-aws/pull/8,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/8,Create README.md,Adding README.md file.,closed,True,2018-08-02 11:28:02,2018-08-08 21:30:01
+cloud-provider-aws,nckturner,https://github.com/kubernetes/cloud-provider-aws/pull/9,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/9,Create SECURITY_CONTACTS file,fixes #4 ,closed,True,2018-08-08 07:00:12,2018-11-13 19:21:12
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/10,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/10,Add SECURITY_CONTACTS file,"**What this PR does / why we need it**:
+This adds a SECURITY_CONTACTS file. The reviewers are AWS employees who are currently Kubernetes organization members.
+
+**Which issue(s) this PR fixes**:
+Fixes #4
+
+**Special notes for your reviewer**:
+
+**Release note**:
+```release-note
+NONE
+```
+/kind feature
+/cc @d-nishi @jessfraz ",closed,True,2018-10-04 23:07:54,2018-10-04 23:13:29
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/11,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/11,Copy latest version of in-tree provider,"**What this PR does / why we need it**:
+This PR copies the latest version of the in-tree cloud provider code for AWS into this repository. The code here is unmodified and identical to the in-tree code as of commit 1ce5f67af0.
+
+**Which issue(s) this PR fixes**:
+
+**Special notes for your reviewer**:
+This is the first change in a series of changes updating this repository and getting the code into a working state. I'm breaking the initial set of changes into 3 commits to make it easier to review: copy in-tree code, update dependencies, and build fixes.
+
+**Release note**:
+```release-note
+NONE
+```
+/kind feature
+/cc @dims @cheftako @d-nishi",closed,True,2018-10-04 23:12:48,2018-10-25 22:46:33
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/12,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/12,Update package dependencies,"**What this PR does / why we need it**:
+Update the dependencies with the latest versions for Kubernetes 1.11 and the copied in-tree cloud provider code. The only interesting files in this PR are `Gopkg.toml` and potentially `Gopkg.lock`, although the later is entirely generated by dep.
+
+**Which issue(s) this PR fixes**:
+
+**Special notes for your reviewer**:
+This is the second change in a series of changes updating this repository and getting the code into a working state. I'm breaking the initial set of changes into 3 commits to make it easier to review: copy in-tree code, update dependencies, and build fixes.
+
+**Release note**:
+```release-note
+NONE
+```
+/kind feature
+/cc @dims @cheftako @d-nishi",closed,True,2018-10-04 23:15:59,2018-10-25 22:46:29
+cloud-provider-aws,jsafrane,https://github.com/kubernetes/cloud-provider-aws/issues/13,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/13,Move beta annotations to GA,"AWS cloud provider uses couple of load balancer annotations that are still marked as beta: https://github.com/kubernetes/kubernetes/blob/076dbc6fd645f66488d5adb374fd338ed5f9a439/pkg/cloudprovider/providers/aws/aws.go#L98
+
+Some of them are more than 2 years old. They should be stable by now. Now that cloud provider is being moved is a great time to clean them up.
+
+Note that according to [API deprecation policy](https://kubernetes.io/docs/reference/using-api/deprecation-policy/) all beta annotations are declared as stable API and we can't remove them. The code needs to support both beta and stable annotations, advertising only the stable ones in docs.",closed,False,2018-10-05 07:55:55,2019-03-04 09:56:07
+cloud-provider-aws,danielsand,https://github.com/kubernetes/cloud-provider-aws/issues/14,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/14,Kubernetes  1.11.x => 1.12.x AWS Cloud Provider fails to align AWSInstances <=> Kubernetes Instances,"Hello,
+
+i have chef + terraform + kubeadm glued together to raise quickly a Kubernetes cluster in any version inside of AWS with nginx ingress + ELB installed via default.
+
+Starting of Kubernetes Version 1.11.x => this stops working.
+
+The AWS Cloud provider doesn't populate the ELB with the EC2 Nodes anymore.
+
+The Only hint i have is that this Log lines appears in the Kubernetes-Controller pod.
+
+```
+node "".....compute.internal"" did not have ProviderID set
+node "".....compute.internal"" did not have ProviderID set
+node "".....compute.internal"" did not have ProviderID set
+```
+
+has some tagging changed or needs to be adapted ?
+
+Reference:
+https://github.com/kubernetes/kubeadm/issues/973",open,False,2018-10-05 11:58:42,2019-03-19 00:38:54
+cloud-provider-aws,D2809,https://github.com/kubernetes/cloud-provider-aws/issues/15,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/15, what is the aws command that we can use to add a K8s pod's ip address into an NLB. As well as how to remove the IP from the existing  NLB.,"Would this command work?
+aws --region us-east-1 elb register-instances-with-load-balancer --load-balancer-name <nlb-name> --instances <ec2-instance-id>
+",closed,False,2018-10-09 22:16:08,2019-03-08 23:44:29
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/16,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/16,Add AWS team as owners,"Adds the AWS team as reviewers and approvers for the AWS cloud provider.
+
+/kind cleanup
+/sig aws",closed,True,2018-10-25 21:59:02,2018-11-10 22:33:26
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/17,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/17,Copy latest version of in-tree provider,"Copies the latest version of the AWS cloud provider from kubernetes/kubernetes@0df79e4daa into this package. Future maintenance will occur here and patches from in-tree updates will be applied regularly to keep the code-bases in sync.
+
+There is nothing that needs detailed review in this commit as the code was copied completely unmodified from kubernetes/kubernetes.
+
+/cc @d-nishi 
+/milestone v1.13
+/kind feature
+/sig aws
+/sig cloud-provider",closed,True,2018-11-15 16:09:27,2018-11-15 17:37:00
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/18,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/18,Update package dependencies,"This updates the vendored dependencies as a result of adding the cloud provider code from #17. This is a result of a `dep ensure -update`. The only file that might be interesting here is [Gopkg.toml](https://github.com/kubernetes/cloud-provider-aws/pull/18/files#diff-836546cc53507f6b2d581088903b1785) which was updated to newer versions and some unused packages removed.
+
+/cc @d-nishi
+/milestone v1.13
+/kind feature
+/sig aws
+/sig cloud-provider",closed,True,2018-11-15 16:12:25,2018-11-15 17:23:16
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/19,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/19,Update cloud provider,"This change updates the driver application so the cloud provider can function out of tree. It also adds a Makefile to build and test the code as well as the appropriate supporting scripts.
+
+/cc @d-nishi
+/milestone v1.13
+/kind feature
+/sig aws
+/sig cloud-provider",closed,True,2018-11-15 19:10:34,2018-11-15 20:15:06
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/issues/20,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/20,Migrate from glog to klog,Migrate all usages of `glog` to the vendored `klog` introduced in kubernetes/kubernetes#70889,open,False,2018-11-15 20:14:09,2019-02-14 19:09:49
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/21,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/21,Update cloud-provider-aws docs,"This is the start of the cloud provider docs for the 1.13 release.
+
+/milestone v1.13
+/kind feature
+/sig aws
+/sig cloud-provider
+",closed,True,2018-11-16 03:54:00,2019-02-19 19:05:09
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/22,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/22,Add changelog for v0.1.0,"This adds the changelog for the alpha v0.1.0 release. The hashes are provisional based on my fork as I don't yet have access to create tags in this repo.
+
+/milestone v1.13
+/kind feature
+/sig aws
+/sig cloud-provider
+/assign @d-nishi ",closed,True,2018-11-29 17:37:07,2018-11-29 18:32:32
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/23,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/23,Add GitHub templates,"Copied from kubernetes as a starting point for this repo.
+
+/kind feature
+/sig aws
+/sig cloud-provider
+/release-note-none",closed,True,2018-12-03 21:57:40,2019-02-18 23:47:17
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/24,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/24,Add NOTICE and third-party attribution,"/kind feature
+/sig aws
+/sig cloud-provider
+/release-note-none",closed,True,2018-12-03 21:57:46,2019-02-18 23:30:16
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/25,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/25,Add AWS team as security contacts,"Add new team members who are the primary maintainers from the AWS side.
+
+/kind feature
+/sig aws
+/sig cloud-provider
+/release-note-none",closed,True,2018-12-03 21:58:04,2018-12-04 07:35:40
+cloud-provider-aws,joysarkarhub,https://github.com/kubernetes/cloud-provider-aws/pull/26,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/26,removed trailing comma from Master policy in README.md,In `README.md` Master policy section trailing section had a `'` (comma). If you don't have multiple section this code be syntax issue for json.,closed,True,2018-12-31 16:04:36,2019-02-18 23:55:55
+cloud-provider-aws,Benjamin-Dobell,https://github.com/kubernetes/cloud-provider-aws/issues/27,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/27,AWS node/instance security group - misuse of cluster tag,"Cross post of k8s issue. **Aside:** Is there an official policy on where cloud provider issues should be opened?
+
+---
+
+The AWS cloud provider cluster tag, which defines ownership semantics, is presently being utilised improperly for unrelated purposes. In particular, _attempting_ to identify which instance security groups should be updated to allow inbound load balancer traffic.
+
+This means we (or our controllers) are unable to attach additional security groups to our instances (without ""leaking"" security group resources).
+
+Please refer to the upstream issue for further details [kubernetes/kubernetes#73906](https://github.com/kubernetes/kubernetes/issues/73906)",open,False,2019-02-12 03:54:23,2019-02-12 06:05:47
+cloud-provider-aws,zacharya,https://github.com/kubernetes/cloud-provider-aws/issues/28,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/28,Add ability to provide an EBS volume snapshot ID for the EBS storage class,"We have internal requirements that all EBS volumes be encrypted and based off of a certain snapshot in our accounts.  Currently there is no way to pass in a snapshot ID, however the change is trivial and I have an enhancement queued up if the maintainers agree to add this functionality.",closed,False,2019-02-13 18:34:40,2019-02-19 14:58:39
+cloud-provider-aws,zacharya,https://github.com/kubernetes/cloud-provider-aws/pull/29,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/29,Ability to specify a snapshot ID for EBS volumes,Fix for #28 ,closed,True,2019-02-13 22:10:50,2019-02-13 22:17:17
+cloud-provider-aws,zacharya,https://github.com/kubernetes/cloud-provider-aws/pull/30,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/30,Adding snapshot ID option for EBS volume creation,"```release-note
+NONE
+```
+
+Enhancement per #28",closed,True,2019-02-13 22:20:22,2019-02-19 14:58:19
+cloud-provider-aws,leakingtapan,https://github.com/kubernetes/cloud-provider-aws/pull/31,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/31,Fix build,"Fix the build and update readme to redirect request for EBS volume plugin
+
+```release-note
+None
+```",closed,True,2019-02-18 22:49:40,2019-02-18 23:16:16
+cloud-provider-aws,mcrute,https://github.com/kubernetes/cloud-provider-aws/pull/32,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/32,Convert to go modules,"**What type of PR is this?**
+/kind cleanup
+
+**What this PR does / why we need it**:
+Convert from dep to go mod. Needed to simplify and modify dependency management and to reduce the amount of vendored code in the repo.
+
+Most of this PR is just vendor removal. Potentially interesting are:
+* [Makefile](https://github.com/kubernetes/cloud-provider-aws/pull/32/files#diff-b67911656ef5d18c4ae36cb6741b7965)
+* [go.mod](https://github.com/kubernetes/cloud-provider-aws/pull/32/files#diff-37aff102a57d3d7b797f152915a6dc16)
+
+```release-note
+NONE
+```
+/cc @leakingtapan ",closed,True,2019-02-19 00:22:33,2019-02-19 04:10:32
+cloud-provider-aws,randomvariable,https://github.com/kubernetes/cloud-provider-aws/issues/33,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/33,Tighten IAM Permissions,"<!-- Please only use this template for submitting enhancement requests -->
+
+Related to https://github.com/kubernetes-sigs/cluster-api-provider-aws/issues/608 
+
+**What would you like to be added**:
+[Cluster API Provider AWS](https://github.com/kubernetes-sigs/cluster-api-provider-aws/blob/master/pkg/cloud/aws/services/cloudformation/bootstrap.go) attempts to use least privileges whereever possible.
+
+The project maintains a copy of the IAM policies used by cloud-provider-aws, but these are permissive compared to the use of IAM conditions in the Cluster API AWS.
+
+If there is consistent tagging in use, then these permissions can be scoped down.
+
+**Why is this needed**:
+
+Enhanced security posture.
+
+<!-- DO NOT EDIT BELOW THIS LINE -->
+/kind feature",open,False,2019-02-26 00:36:25,2019-02-26 00:36:26
+cloud-provider-aws,joelsmith,https://github.com/kubernetes/cloud-provider-aws/pull/34,https://api.github.com/repos/kubernetes/cloud-provider-aws/issues/34,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,open,True,2019-03-08 17:52:22,2019-03-20 02:43:40

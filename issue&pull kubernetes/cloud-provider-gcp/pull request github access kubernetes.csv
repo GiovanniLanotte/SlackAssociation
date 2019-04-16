@@ -1,0 +1,205 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/1,https://github.com/kubernetes/cloud-provider-gcp/pull/1,awly,Import gke-certificates-controller from k8s.io/kubernetes,Ported over the commit history and added vendored deps.,"['nicksardo', 'mikedanese']",21,2018-03-21 21:13:23,2018-04-05 23:19:35,2018-04-24 21:25:01,True,2018-04-05 23:19:35,calebamiles,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/2,https://github.com/kubernetes/cloud-provider-gcp/pull/2,mikedanese,add mikedanese to owners,"mikdanese needs to approve changes to gke-certificates-controller which
+will live in this repo.
+
+mikedanese is:
+* emeritus maintainer of gcp cloud provider.
+* owner of k8s.io/kubernetes/pkg/cloudprovider.",['calebamiles'],1,2018-03-22 18:24:29,2018-03-26 19:59:02,2018-03-26 21:43:48,True,2018-03-26 19:59:02,calebamiles,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/3,https://github.com/kubernetes/cloud-provider-gcp/pull/3,awly,Copy SAR approver code into gke certs controller,"Original code: https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/certificates/approver/sarapprove.go
+
+The code is not identical, some modifications were made to support
+future attestation checks.
+
+Also remove 500ms backoff time in gkeSigner test to cut down testing
+time from 7s to 0.2s.",['mikedanese'],1,2018-04-06 18:43:58,2018-04-09 21:19:09,2018-04-24 21:24:49,True,2018-04-09 21:19:09,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/4,https://github.com/kubernetes/cloud-provider-gcp/pull/4,mikedanese,setup build with bazel,@awly ,['cjcullen'],3,2018-04-13 16:16:54,2018-04-13 19:07:01,2018-04-16 21:29:17,True,2018-04-13 19:07:01,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/5,https://github.com/kubernetes/cloud-provider-gcp/pull/5,awly,Remove non-GCP auth providers,Also prune their dependency tree.,['mikedanese'],2,2018-04-13 22:12:18,2018-04-19 20:08:02,2018-04-24 21:24:45,True,2018-04-19 20:08:01,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/7,https://github.com/kubernetes/cloud-provider-gcp/pull/7,awly,Approve Kubelet serving CSR,"Validate same as client CSRs, plus check DNSNames SAN.
+
+DNSNames should contain GCE VM name. Approver checks it against cluster
+project in VM metadata (customer project, not master project).
+Optionally it also checks that VM belongs to cluster's NodePool.",['mikedanese'],2,2018-04-19 18:25:00,2018-04-24 20:59:01,2018-04-24 21:24:42,True,2018-04-24 20:59:01,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/8,https://github.com/kubernetes/cloud-provider-gcp/pull/8,awly,Stamp docker images with commit SHA instead of timestamp,,['mikedanese'],1,2018-04-23 18:34:20,2018-04-23 20:37:02,2018-04-24 21:24:43,True,2018-04-23 20:37:02,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/9,https://github.com/kubernetes/cloud-provider-gcp/pull/9,awly,Tag images with explicit meaningful version,,['mikedanese'],1,2018-04-25 22:55:56,2018-04-25 23:01:04,2018-07-26 17:54:33,True,2018-04-25 23:01:03,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/10,https://github.com/kubernetes/cloud-provider-gcp/pull/10,awly,Fix node server cert validation,"- discard warnings when parsing gce.conf
+- get instance name from csr.Spec.Username (instead of DNS SAN)
+- move SAN filtering out of isNodeCert
+- handle private instance IP
+- add logging around CSR approvals",['mikedanese'],1,2018-04-27 19:32:36,2018-04-30 21:05:17,2018-07-26 17:54:37,True,2018-04-30 21:05:17,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/11,https://github.com/kubernetes/cloud-provider-gcp/pull/11,awly,Bump certs controller version,This adds support for node serving certs.,['mikedanese'],1,2018-04-30 21:50:35,2018-05-01 21:21:18,2018-07-26 17:54:28,True,2018-05-01 21:21:18,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/12,https://github.com/kubernetes/cloud-provider-gcp/pull/12,awly,Update and re-run gazelle,This is mostly so that `bazel run :gazelle` produces no diffs and doesn't break stuff in the future.,['mikedanese'],2,2018-05-07 20:20:28,2018-05-11 17:32:28,2018-07-26 17:54:27,True,2018-05-11 17:32:28,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/13,https://github.com/kubernetes/cloud-provider-gcp/pull/13,awly,Exec auth plugin using VM ID token,"Most of the code is copied from k8s.io/kubernetes/pkg/kubelet/certificate/...
+The only major difference is in request.go where we fetch a VM ID token for Bearer field instead of parsing bootstrap-kubeconfig.",['mikedanese'],2,2018-05-09 21:54:08,2018-05-11 18:42:30,2018-07-26 17:54:27,True,2018-05-11 18:42:30,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/14,https://github.com/kubernetes/cloud-provider-gcp/pull/14,awly,Add TPM mode to exec auth plugin,"TPM mode bootstraps TLS key/cert using k8s CSR endpoint with TPM
+attestation. The key/cert are cached returned instead of a token.
+
+Note: some parts of the implementation are stubbed out temporarily for
+testing.",['mikedanese'],2,2018-05-22 21:40:13,2018-06-07 17:06:27,2018-07-26 17:54:24,True,2018-06-07 17:06:26,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/15,https://github.com/kubernetes/cloud-provider-gcp/pull/15,awly,Add bazel rule to push exec plugin to GCS,,['saad-ali'],1,2018-05-23 23:44:47,2018-07-03 23:13:13,2018-07-26 17:53:44,False,,,dirty,False,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/17,https://github.com/kubernetes/cloud-provider-gcp/pull/17,awly,Cert controller validation for tpm attestation,"Still WIP, want to submit implementation in smaller chunks.",['mikedanese'],6,2018-05-24 20:26:01,2018-07-03 21:33:21,2018-07-26 17:53:41,True,2018-07-03 21:33:21,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/19,https://github.com/kubernetes/cloud-provider-gcp/pull/19,mborsz,Add leader election to gke-certificates-controller.,"It's enabled by default to be consistent with other components like
+kube-scheduler and kube-controller-manager.","['awly', 'mikedanese']",1,2018-06-06 09:37:15,2018-06-13 17:59:28,2018-06-13 17:59:29,True,2018-06-13 17:59:28,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/20,https://github.com/kubernetes/cloud-provider-gcp/pull/20,awly,Make exec plugin more robust,"1. rotate when cert is >1d old
+2. rotate when cert expires in <1hr
+3. if rotation fails, use old cert if still valid
+4. if TPM attestation fails, use old bootstrap flow",['mikedanese'],1,2018-06-07 22:30:26,2018-06-08 21:48:59,2018-07-26 17:53:26,True,2018-06-08 21:48:59,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/21,https://github.com/kubernetes/cloud-provider-gcp/pull/21,awly,Bump gke-certificates-controller version,Now with leader election!,['mikedanese'],1,2018-06-14 17:07:41,2018-06-25 21:49:40,2018-07-26 17:53:18,False,,,dirty,False,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/22,https://github.com/kubernetes/cloud-provider-gcp/pull/22,awly,Use dedicated clients for informer/approver/signer,This should cut down ~400ms CSR updates due to shared quota,"['mikedanese', 'wojtek-t']",1,2018-06-21 19:26:25,2018-06-22 16:49:06,2018-07-26 17:53:15,True,2018-06-22 16:49:06,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/23,https://github.com/kubernetes/cloud-provider-gcp/pull/23,awly,Update GKE dependencies to 1.11,Since gke-exec-auth-plugin depends on 1.11 API,"['mikedanese', 'cjcullen']",1,2018-06-25 19:40:26,2018-06-25 21:13:23,2018-07-26 17:53:09,True,2018-06-25 21:13:23,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/24,https://github.com/kubernetes/cloud-provider-gcp/pull/24,mikedanese,continue to publish ExternalID to fix logmon,,['awly'],3,2018-06-27 20:34:33,2018-07-02 21:37:20,2018-07-03 05:52:43,True,2018-07-02 21:37:20,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/25,https://github.com/kubernetes/cloud-provider-gcp/pull/25,awly,Add GCB config for gke-exec-auth-plugin,"Builds, tests and pushes to GCS in a versioned directory. This won't
+trigger rebuilds on commit (yet).","['mikedanese', 'dnardo']",1,2018-07-03 02:22:38,2018-07-03 17:41:21,2018-07-26 17:53:03,True,2018-07-03 17:41:21,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/27,https://github.com/kubernetes/cloud-provider-gcp/pull/27,awly,Check EK cert against root CA,"Root CA lives at a well-known URL. Implement a cache in front of it and
+refresh every hour.
+Check EK certs signature as well as CA CRLs.",['mikedanese'],1,2018-07-09 23:53:56,2018-07-11 21:19:26,2018-07-26 17:52:59,True,2018-07-11 21:19:26,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/28,https://github.com/kubernetes/cloud-provider-gcp/pull/28,awly,Add metrics to cert controller,Measure count and latency per status for both signer and approver.,['mikedanese'],1,2018-07-10 21:23:26,2018-07-11 07:10:25,2018-07-26 17:52:56,True,2018-07-11 07:10:25,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/29,https://github.com/kubernetes/cloud-provider-gcp/pull/29,mikedanese,factor out annotaters so we can add more,cc @awly ,['awly'],1,2018-07-11 07:01:24,2018-07-13 00:11:26,2018-07-13 00:12:00,True,2018-07-13 00:11:26,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/30,https://github.com/kubernetes/cloud-provider-gcp/pull/30,awly,Rotate kubelet certs after 10 days,"This was different from approved design:
+- kubelet caches for 1h in memory
+- exec plugin caches for 10 days on disk
+- certs issued for 1yr",['mikedanese'],1,2018-07-11 21:37:41,2018-07-11 22:02:26,2018-07-26 17:52:47,True,2018-07-11 22:02:26,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/31,https://github.com/kubernetes/cloud-provider-gcp/pull/31,awly,Add label per approval type to approver metrics,This way we'll distinguish what kind of bootstrap flow kubelets use.,['mikedanese'],1,2018-07-13 18:47:53,2018-07-17 17:04:40,2018-07-26 17:52:41,True,2018-07-17 17:04:39,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/32,https://github.com/kubernetes/cloud-provider-gcp/pull/32,awly,Read VM identity from AIK cert,"Without this, VM A can impersonate VM B by requesting cert with forged
+VM IDENTITY block. VM identity from AIK ties it to TPM ownership
+specific VM.",['mikedanese'],1,2018-07-13 19:00:04,2018-07-18 21:51:22,2018-07-26 17:52:12,True,2018-07-18 21:51:21,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/34,https://github.com/kubernetes/cloud-provider-gcp/pull/34,mikedanese,Refactor gcp-controller-manager startup,"Enables us to start individual controllers. This is required to start only the annotator in GCE.
+
+@kawych ",['awly'],5,2018-07-17 18:48:51,2018-07-24 16:47:55,2018-07-24 16:47:55,True,2018-07-24 16:47:55,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/35,https://github.com/kubernetes/cloud-provider-gcp/pull/35,mikedanese,switch owners and reviewers for gcp-controller-manager,/assign @awly ,['awly'],1,2018-07-17 21:06:12,2018-07-17 21:24:40,2018-07-17 22:07:30,True,2018-07-17 21:24:40,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/36,https://github.com/kubernetes/cloud-provider-gcp/pull/36,nikhita,Add CONTRIBUTING.md,"Fixes #33 
+xref https://github.com/kubernetes/community/issues/1832
+
+/assign bowei mikedanese ","['bowei', 'mikedanese']",1,2018-07-19 05:14:27,2018-07-19 14:53:55,2018-07-20 04:29:10,True,2018-07-19 14:53:54,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/37,https://github.com/kubernetes/cloud-provider-gcp/pull/37,awly,Enable node pool check,"Fix a few bugs found along:
+
+- CN check didn't trim `system:node:` prefix correctly
+- `Zone` in VM identity in AIK was full URL instead of just name
+- VM identity in AIK failed to parse because asn1 doesn't understand uint64
+- exec plugin would create new CSR on each failed run",['mikedanese'],3,2018-07-20 01:20:38,2018-07-27 00:11:43,2018-07-27 00:11:43,True,2018-07-27 00:11:43,awly,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/38,https://github.com/kubernetes/cloud-provider-gcp/pull/38,mikedanese, add annotater for label reconciliation,"last two commits
+
+depends on https://github.com/kubernetes/cloud-provider-gcp/pull/34",['awly'],2,2018-07-24 06:44:57,2018-07-27 18:28:59,2018-07-27 18:30:14,True,2018-07-27 18:28:59,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/39,https://github.com/kubernetes/cloud-provider-gcp/pull/39,awly,Simplify image publishing script,Also remove exec plugin GCB config.,['mikedanese'],1,2018-07-24 21:55:40,2018-07-25 16:54:56,2018-07-26 17:52:06,True,2018-07-25 16:54:56,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/40,https://github.com/kubernetes/cloud-provider-gcp/pull/40,awly,Add cloudbuild config for presubmits,,['mikedanese'],1,2018-07-25 17:48:19,2018-07-25 20:24:57,2018-07-26 17:52:03,True,2018-07-25 20:24:57,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/41,https://github.com/kubernetes/cloud-provider-gcp/pull/41,awly,Add SECURITY_CONTACTS file,Fixes #16,['mikedanese'],1,2018-07-25 20:36:09,2018-07-25 21:25:56,2018-07-26 17:52:00,True,2018-07-25 21:25:56,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/42,https://github.com/kubernetes/cloud-provider-gcp/pull/42,awly,Break the build to test CI,,[],1,2018-07-26 20:34:54,2018-07-27 16:09:38,2018-07-27 16:09:41,False,,,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/43,https://github.com/kubernetes/cloud-provider-gcp/pull/43,awly,Tests for plugin caching logic,"Actually caught 2 bugs:
+- corrupt existing private key would be returned
+- (unlikely) expired cert that's <10d old would be returned",['mikedanese'],1,2018-07-27 00:37:36,2018-08-14 02:28:26,2018-08-14 02:28:26,True,2018-08-14 02:28:26,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/44,https://github.com/kubernetes/cloud-provider-gcp/pull/44,awly,Unit tests for gke_approver validation,,['mikedanese'],6,2018-07-27 17:51:38,2018-08-21 20:35:22,2018-08-21 20:35:22,True,2018-08-21 20:35:22,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/45,https://github.com/kubernetes/cloud-provider-gcp/pull/45,mikedanese,only reconcile labels when kube-labels instance metadata is present,/assign @awly ,['awly'],1,2018-07-30 22:11:51,2018-07-31 21:12:38,2018-07-31 21:15:23,True,2018-07-31 21:12:38,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/46,https://github.com/kubernetes/cloud-provider-gcp/pull/46,poothia,adding code-of-conduct.md,adding missing code-of-conduct.md file as suggested by kubernetes-template-project.,['awly'],1,2018-08-02 09:19:29,2018-08-02 16:46:27,2018-08-02 16:46:27,True,2018-08-02 16:46:27,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/47,https://github.com/kubernetes/cloud-provider-gcp/pull/47,awly,Retry CSR failing due to transient errors,"Any GCE API call failure should cause a retry instead of denial of CSRs.
+Otherwise kubelets get stuck in CSR retry loop, re-using denied CSR
+objects forever.",['mikedanese'],1,2018-08-06 22:23:13,2018-08-09 00:18:58,2018-08-09 00:18:58,True,2018-08-09 00:18:58,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/48,https://github.com/kubernetes/cloud-provider-gcp/pull/48,awly,Fix prometheus metric names to follow the style guide,,['mikedanese'],1,2018-08-10 20:58:40,2018-08-13 16:16:21,2018-08-13 16:16:21,True,2018-08-13 16:16:21,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/49,https://github.com/kubernetes/cloud-provider-gcp/pull/49,awly,Allow missing AIK certificate,"AIK certificate can fail to provision. We should still send a CSR and
+let the approver use a separate channel to verify attestation.",['mikedanese'],1,2018-08-15 22:50:34,2018-08-21 20:48:11,2018-08-21 20:48:11,True,2018-08-21 20:48:11,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/50,https://github.com/kubernetes/cloud-provider-gcp/pull/50,vishh,Adding a new node annotator for node termination handler,"[Node termination handler](https://github.com/GoogleCloudPlatform/k8s-node-termination-handler) needs to apply & remove a taint as part of handling graceful node termination.
+This PR adds a new annotator that translated a Node Annotation into a special taint for handling GCE VM terminations gracefully in GKE
+
+cc @mikedanese ",[],3,2018-08-30 19:08:33,2019-02-27 18:07:16,2019-02-27 18:07:17,False,,,dirty,False,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/51,https://github.com/kubernetes/cloud-provider-gcp/pull/51,awly,Re-run gazelle and add gazelle-diff command for presubmit,"The build wasn't actually broken.
+This probably worked because test's dependencies are merged with package
+dependencies when package name matches.
+
+Clean it up and I'll add a presubmit check using gazelle-diff
+separately. Existing presubmit will catch failing build/test.",['mikedanese'],1,2018-08-30 22:40:36,2018-08-31 19:50:30,2018-08-31 19:50:30,True,2018-08-31 19:50:30,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/52,https://github.com/kubernetes/cloud-provider-gcp/pull/52,awly,Add a script for merging LICENSE files,,['mikedanese'],1,2018-09-20 00:48:05,2018-09-28 21:22:24,2018-09-28 21:22:24,True,2018-09-28 21:22:24,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/53,https://github.com/kubernetes/cloud-provider-gcp/pull/53,awly,Verify vTPM-based CSRs using EK from GCE API,"EK cert is not reliably present. New Beta API gives us the EK public key reliably. The old cert-based code is kept, but unreachable.",['mikedanese'],2,2018-09-26 23:49:48,2018-09-28 21:13:55,2018-09-28 21:13:55,True,2018-09-28 21:13:55,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/56,https://github.com/kubernetes/cloud-provider-gcp/pull/56,awly,Start migration to Go modules,"This still uses bazel, only replace `dep` with modules for managing `vendor/`.
+
+- generate go.mod and go.sum from Gopkg.lock
+- fix a lint error to make build pass
+- tests pass
+- remove `dep`-generated files
+
+Updates https://github.com/kubernetes/cloud-provider-gcp/issues/55",['mikedanese'],3,2018-10-05 00:02:33,2019-01-26 02:33:54,2019-01-28 17:17:20,True,2019-01-26 02:33:54,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/57,https://github.com/kubernetes/cloud-provider-gcp/pull/57,awly,Remove self client cert approver,"Cert rotation is not enabled in GKE and we will use a TPM-attested
+bootstrap for rotation in the future.",['mikedanese'],1,2018-10-25 18:40:04,2018-10-25 20:03:07,2018-10-25 20:03:07,True,2018-10-25 20:03:07,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/58,https://github.com/kubernetes/cloud-provider-gcp/pull/58,mooncak,Fix typos: direcly -> directly,"Signed-off-by: mooncake <xcoder@tenxcloud.com>
+
+Fix typos: direcly -> directly","['awly', 'jingxu97']",1,2018-11-05 14:56:39,2018-11-05 17:46:53,2018-11-05 17:46:53,True,2018-11-05 17:46:53,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/59,https://github.com/kubernetes/cloud-provider-gcp/pull/59,xichengliudui,Add the function name to the comment,Add the function name to the comment,[],1,2018-11-07 06:48:30,2018-11-07 06:48:38,2018-11-07 06:48:42,False,,,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/60,https://github.com/kubernetes/cloud-provider-gcp/pull/60,xichengliudui,Add the function name to the comment,Add the function name to the comment,"['awly', 'MrHohn', 'jingxu97']",1,2018-11-07 07:01:33,2018-11-08 19:06:08,2018-11-08 19:06:08,True,2018-11-08 19:06:08,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/61,https://github.com/kubernetes/cloud-provider-gcp/pull/61,awly,Move tools/bazel.rc to .bazelrc,The former is deprecated and no longer read.,['mikedanese'],1,2018-11-08 19:53:03,2018-11-08 20:05:54,2018-11-08 20:05:55,True,2018-11-08 20:05:54,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/62,https://github.com/kubernetes/cloud-provider-gcp/pull/62,xichengliudui,Remove unnecessary code,Remove unnecessary code,['awly'],1,2018-11-21 09:20:23,2018-11-21 19:19:51,2018-11-21 19:19:51,True,2018-11-21 19:19:51,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/63,https://github.com/kubernetes/cloud-provider-gcp/pull/63,liggitt,ensure Node matches metadata before approving CSRs,"Before approving a client certificate request from a node, ensure any existing Node API object still matches information from metadata, and isn't a vestigial Node object that should be deleted before giving the new one API credentials
+
+Best reviewed split without whitespace: https://github.com/kubernetes/cloud-provider-gcp/pull/63/files?utf8=%E2%9C%93&diff=split&w=1",['bowei'],2,2018-12-04 20:03:01,2018-12-05 23:35:26,2018-12-06 00:02:57,True,2018-12-05 23:35:26,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/64,https://github.com/kubernetes/cloud-provider-gcp/pull/64,mikedanese,bump bazel rules to fix http_archive deprecation,,['bowei'],1,2018-12-04 22:46:47,2018-12-04 22:59:11,2018-12-04 22:59:15,True,2018-12-04 22:59:11,mikedanese,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/65,https://github.com/kubernetes/cloud-provider-gcp/pull/65,mikedanese,Cherrypick #64 into release-1.11.0,Cherrypick #64 into release-1.11.0,"['bowei', 'awly']",1,2018-12-04 23:13:15,2018-12-04 23:18:46,2018-12-04 23:18:46,True,2018-12-04 23:18:46,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/66,https://github.com/kubernetes/cloud-provider-gcp/pull/66,mikedanese,Cherrypick #64 into release-1.11.2,Cherrypick #64 into release-1.11.2,"['bowei', 'awly']",1,2018-12-04 23:13:27,2018-12-04 23:21:51,2018-12-04 23:21:51,True,2018-12-04 23:21:50,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/67,https://github.com/kubernetes/cloud-provider-gcp/pull/67,awly,"Cherry-pick ""ensure Node matches metadata before approving CSRs""",Also cherry-pick the bazel build fix,['bowei'],2,2018-12-05 23:53:30,2018-12-06 00:13:37,2018-12-06 00:13:37,True,2018-12-06 00:13:37,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/68,https://github.com/kubernetes/cloud-provider-gcp/pull/68,awly,"Cherry-pick ""ensure Node matches metadata before approving CSRs""",Also cherry-pick the bazel build fix,['bowei'],2,2018-12-05 23:57:00,2018-12-06 00:04:19,2018-12-06 00:04:19,True,2018-12-06 00:04:19,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/69,https://github.com/kubernetes/cloud-provider-gcp/pull/69,awly,Move tools/bazel.rc to .bazelrc,"The former is deprecated and no longer read.
+
+Cherry pick a86ecc1fbf46b593f09d9ae23cd18788f8880f7e",['MrHohn'],1,2018-12-06 00:29:12,2018-12-06 00:37:50,2018-12-06 00:37:51,True,2018-12-06 00:37:50,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/70,https://github.com/kubernetes/cloud-provider-gcp/pull/70,awly,Move tools/bazel.rc to .bazelrc,"The former is deprecated and no longer read.
+
+Cherry pick a86ecc1fbf46b593f09d9ae23cd18788f8880f7e",['MrHohn'],1,2018-12-06 00:31:46,2018-12-06 00:39:38,2018-12-06 00:39:39,True,2018-12-06 00:39:38,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/71,https://github.com/kubernetes/cloud-provider-gcp/pull/71,cheftako,[WIP] Adding basic system which creates a working deployable for GCP.,"Minor fixes. CCM builds but not correctly.
+Clean up
+Fixed apiserver from bad delete.
+Got CCM building and placed in server tgz",[],2,2018-12-12 23:19:02,,2019-01-18 03:27:48,False,,,dirty,False,open
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/72,https://github.com/kubernetes/cloud-provider-gcp/pull/72,liggitt,bump qps/burst defaults,the defaults of 5/10 are not appropriate for a critical-path controller,['wojtek-t'],1,2019-01-03 21:56:48,2019-01-08 19:58:48,2019-01-15 11:44:36,True,2019-01-08 19:58:48,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/73,https://github.com/kubernetes/cloud-provider-gcp/pull/73,mikedanese,bump go_rules and go version to 1.11.4 boring crypto,rules_go bump fixes the build. go1.11.4 is just for hygiene. We need to decouple ourselves from the k8s core build image or get on their radar so this doesn't happen.,"['bowei', 'liggitt']",1,2019-01-08 18:10:06,2019-01-08 18:24:36,2019-01-08 19:52:32,True,2019-01-08 18:24:36,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/74,https://github.com/kubernetes/cloud-provider-gcp/pull/74,cheftako,Gce ccm build,"Minor fixes. CCM builds but not correctly.
+Clean up
+Fixed apiserver from bad delete.
+Got CCM building and placed in server tgz",[],2,2019-01-26 01:06:25,,2019-01-31 02:08:00,False,,,dirty,False,open
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/75,https://github.com/kubernetes/cloud-provider-gcp/pull/75,mikedanese,ccm build using bazel,"Prototype of #74 that uses bazel.
+
+The last commit is the most exciting.
+
+To run the CCM:
+```
+$ bazel run //cmd/cloud-controller-manager:cloud-controller-manager-image
+$ docker run gcr.io/k8s-image-staging/cloud-controller-manager:latest --help
+```
+
+To build the modified release tars:
+```
+$ bazel build //build:release-tars
+```
+
+It seems like #74 is attempting to overlay prebuilt release tars so I worked on mimicking that. Alternatively we could import the k/k build and rebuild the pieces that we need to produce our modified release.
+
+@cheftako @BenTheElder @ixdy ","['cheftako', 'awly']",7,2019-01-26 20:08:15,2019-03-26 02:33:18,2019-03-26 02:33:18,True,2019-03-26 02:33:18,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/76,https://github.com/kubernetes/cloud-provider-gcp/pull/76,mikedanese,update go to 1.11.5,Pickup CVE fix.,['awly'],1,2019-01-28 17:44:45,2019-01-28 17:57:32,2019-01-28 17:57:32,True,2019-01-28 17:57:32,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/77,https://github.com/kubernetes/cloud-provider-gcp/pull/77,mikedanese,update gcpcm to use v1.13.0 k8s libraries,1.13.0 is compatible with cloud-controller-manager. This prepares us to migrate ccm to this repo.,['awly'],2,2019-01-28 17:55:18,2019-01-28 18:15:18,2019-01-28 18:20:23,True,2019-01-28 18:15:18,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/78,https://github.com/kubernetes/cloud-provider-gcp/pull/78,awly,Use pflag directly to shed some dependencies,,['mikedanese'],1,2019-02-01 01:45:45,2019-02-02 03:30:05,2019-02-02 03:30:05,True,2019-02-02 03:30:05,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/79,https://github.com/kubernetes/cloud-provider-gcp/pull/79,mikedanese,add an alt token source mode to the exec plugin,"alt_token_source.go is copied and trimmed from the gce cloud provider
+which cuts out 25M in binary size.",['awly'],1,2019-02-02 04:38:02,2019-02-06 23:07:50,2019-02-06 23:24:57,True,2019-02-06 23:07:49,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/80,https://github.com/kubernetes/cloud-provider-gcp/pull/80,mikedanese,improve container build,"* move to distroless
+* add image bundling
+* remove unused config options
+
+Broken out of the ccm pull to make it more reviewable.","['BenTheElder', 'awly']",1,2019-02-04 21:06:51,2019-02-05 18:55:13,2019-02-05 18:55:13,True,2019-02-05 18:55:13,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/81,https://github.com/kubernetes/cloud-provider-gcp/pull/81,rlenferink,Updated OWNERS file to include link to docs,,"['awly', 'jingxu97']",1,2019-02-05 18:29:47,2019-02-05 18:38:29,2019-02-05 18:40:49,True,2019-02-05 18:38:29,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/82,https://github.com/kubernetes/cloud-provider-gcp/pull/82,krzyzacy,Correctly handle get region from zone,"zone can have more than one letters technically......
+
+/assign @awly @mikedanese @zmerlynn 
+cc @Random-Liu @MrHohn who helped tracing this down","['awly', 'mikedanese', 'zmerlynn', 'MrHohn']",3,2019-03-02 01:43:58,2019-03-02 20:54:24,2019-03-03 20:00:13,True,2019-03-02 20:54:23,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/83,https://github.com/kubernetes/cloud-provider-gcp/pull/83,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,[],1,2019-03-08 17:52:28,2019-03-08 23:05:16,2019-03-09 00:15:46,True,2019-03-08 23:05:16,awly,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/84,https://github.com/kubernetes/cloud-provider-gcp/pull/84,sambdavidson,Moved pantheon metrics to their own file and fixed various go-lint errors,"Moved metrics from `gke_approver.go` to new `metrics.go`.
+
+Fixed a bunch of go-lint errors. 
+
+Cleanup in anticipation of plumbing additional metrics ",['awly'],2,2019-03-11 23:07:28,2019-03-12 18:26:46,2019-03-12 18:32:14,True,2019-03-12 18:26:46,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/85,https://github.com/kubernetes/cloud-provider-gcp/pull/85,awly,Use cluster's location when fetching from GKE API,"Instances are not guaranteed to be in cluster master's zone:
+- in regional clusters
+- in regional NodePools
+
+Also handle the case of regional NodePools when checking Node
+membership.
+
+Add tests to cover some common cases.
+
+This fix only applies to vTPM attestation validator.","['mikedanese', 'immutableT']",2,2019-03-12 02:09:46,2019-04-03 21:44:50,2019-04-03 21:44:50,True,2019-04-03 21:44:50,k8s-ci-robot,unknown,,closed
+cloud-provider-gcp,https://api.github.com/repos/kubernetes/cloud-provider-gcp/pulls/86,https://github.com/kubernetes/cloud-provider-gcp/pull/86,sambdavidson,Outbound QPS metrics in gcp-controller-manager,"- Moved `metrics.go` contents into its own package `csrmetrics`.
+  - Moved additional prometheus metrics from `gke_signer.go` to `csrmetrics.go`.
+- Refactored existing metrics to reduce code duplication.
+- Created new metric `OutboundRPC` which records with the name `outbound_rpc_latency`. 
+- Added `OutboundRPC` recording to several rpcs within `gke_approver.go` and `gke_signer.go`.",['awly'],2,2019-03-12 23:33:37,2019-03-13 21:28:27,2019-03-13 21:28:27,True,2019-03-13 21:28:27,k8s-ci-robot,unknown,,closed

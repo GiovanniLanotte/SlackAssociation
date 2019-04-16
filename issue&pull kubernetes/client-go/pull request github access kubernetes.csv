@@ -1,0 +1,661 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/7,https://github.com/kubernetes/client-go/pull/7,caesarxuchao,Update README.md and restructure the master branch,"- Update the README to state the new versioning mechanism of client-go, also clarify the compatibility issues.
+- Add a CHANGELOG.md
+- Remove the top-level folders for versions. Keep the contents of the 1.5 folder
+- Removed the copy.sh and godeps-json-updater.go, they only need to exist in the main repository
+
+TODO:
+- Before merging this PR, we need to send out an announcement about the change kube-dev mailing list
+- [DONE] We need to change the copy.sh (https://github.com/kubernetes/kubernetes/pull/34989) and the client-go publisher robot (https://github.com/kubernetes/contrib/pull/1895). Those work can be done in parallel
+
+@mml @mbohlool @timoreimann could you help review it?
+cc @thockin 
+","['mml', 'mbohlool']",2,2016-09-28 22:10:53,2016-10-19 21:42:43,2016-10-19 21:42:43,True,2016-10-19 21:42:43,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/10,https://github.com/kubernetes/client-go/pull/10,juanvallejo,"add Timeout field to REST client (1.4, 1.5) config","Fixes test panics in k8s PR:
+https://github.com/kubernetes/kubernetes/pull/33958
+and OpenShift PR: https://github.com/openshift/origin/pull/11104
+
+The linked Kubernetes PR adds a ""Timeout"" field to the rest client in
+order to implement global http request timeouts for server requests.
+
+@soltysh @fabianofranz 
+",[],1,2016-10-07 22:25:16,2016-10-07 22:29:06,2016-10-07 23:46:18,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/11,https://github.com/kubernetes/client-go/pull/11,caesarxuchao,Add PR template," to instruct people to submit PRs to the main repository for now.
+",['lavalamp'],1,2016-10-07 23:29:28,2016-10-07 23:47:20,2016-10-07 23:47:20,True,2016-10-07 23:47:20,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/13,https://github.com/kubernetes/client-go/pull/13,caesarxuchao,remove 1.5 folder from 1.4 branch,"@lavalmap @timoreimann I made the 1.4 branch, and remove the 1.5 folder from it. I want to keep the 1.4 folder instead of moving things out, because this way users don't need to change their import lines.
+
+I want to make a 1.5 branch as well, because 1.5 fixed some issues in 1.4 (like the auth plugin), I think 1.5 has some users.
+","['lavalamp', 'mbohlool']",1,2016-10-14 20:27:27,2016-10-17 18:10:35,2016-10-17 18:33:05,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/14,https://github.com/kubernetes/client-go/pull/14,caesarxuchao,remove 1.4 folder from 1.5 branch,"Similar to https://github.com/kubernetes/client-go/pull/13
+
+1.5 include some patches, like included [auth plugin](https://github.com/kubernetes/kubernetes/pull/33334), [timeout field in RESTClient config](https://github.com/kubernetes/kubernetes/pull/33958), etc.
+
+The 1.5 folder is kept so that existing users client 1.5 client-go don't need to rewrite the import path. These folders will be removed in master and future release branches.
+
+cc @timoreimann @mbohlool
+",['mbohlool'],1,2016-10-17 17:50:21,2016-10-17 18:02:12,2016-10-17 18:06:15,True,2016-10-17 18:02:12,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/15,https://github.com/kubernetes/client-go/pull/15,caesarxuchao,"Revert ""remove 1.4 folder from 1.5 branch""","Reverts kubernetes/client-go#14
+",[],1,2016-10-17 18:02:46,2016-10-17 18:03:12,2016-10-17 18:03:12,True,2016-10-17 18:03:12,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/16,https://github.com/kubernetes/client-go/pull/16,caesarxuchao,remove 1.4 folder from 1.5 branch,"Recreated PR https://github.com/kubernetes/client-go/pull/14 against 1.5 branch.
+
+cc @mbohlool 
+",[],1,2016-10-17 18:06:54,2016-10-17 18:08:08,2016-10-17 18:08:08,True,2016-10-17 18:08:08,caesarxuchao,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/17,https://github.com/kubernetes/client-go/pull/17,caesarxuchao,remove 1.5 folder from 1.4 branch,"Recreated https://github.com/kubernetes/client-go/pull/13 against the 1.4 branch.
+
+cc @mbohlool 
+",[],1,2016-10-17 18:12:55,2016-10-17 18:15:22,2016-10-17 18:15:22,True,2016-10-17 18:15:22,caesarxuchao,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/22,https://github.com/kubernetes/client-go/pull/22,caesarxuchao,manually copy the fix the fake_pod_expansion.go,"Manually copy the fix in the main repository. Fix https://github.com/kubernetes/client-go/issues/21
+
+cc @timoreimann, could you try the fix? This repo does have any testing framework set, so I'm a little nervous to merge the PR, though I had tested it locally.
+",[],1,2016-10-21 17:08:47,2016-10-23 20:27:11,2016-10-23 20:27:11,True,2016-10-23 20:27:10,caesarxuchao,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/23,https://github.com/kubernetes/client-go/pull/23,caesarxuchao,Add back examples,"Examples got deleted by the publisher robot. Manually added them back.
+",[],1,2016-10-21 19:33:20,2016-10-21 19:33:40,2016-10-21 19:33:40,True,2016-10-21 19:33:40,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/29,https://github.com/kubernetes/client-go/pull/29,wfarr,Thirdpartyresources examples,"Adds a basic example for registering a ThirdPartyResource and interacting with a custom Resource type.
+
+A follow-up PR will include a controller built on the same foundations, but a simple CRUD example will be useful for folks as well.
+
+Tested against kubernetes 1.4.5 on GKE.
+
+attn @caesarxuchao
+cc  @mkobetic @ibawt @lxfontes
+
+<!-- Reviewable:start -->
+
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/client-go/29)
+<!-- Reviewable:end -->
+",[],3,2016-11-04 19:23:55,2016-11-11 05:45:48,2016-11-14 15:53:13,True,2016-11-11 05:45:48,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/30,https://github.com/kubernetes/client-go/pull/30,wfarr,Add Informer examples,"Demonstrates a basic controller watching Pod events in a cluster.
+
+Tested against kubernetes 1.4.5 on GKE.
+
+attn @caesarxuchao
+cc @mkobetic @ibawt @lxfontes
+
+<!-- Reviewable:start -->
+
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/client-go/30)
+<!-- Reviewable:end -->
+",['mbohlool'],7,2016-11-04 21:21:59,2017-04-13 20:53:01,2017-04-13 20:53:01,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/37,https://github.com/kubernetes/client-go/pull/37,wfarr,Follow-up for ThirdPartyResources examples,"Follow-up to https://github.com/kubernetes/client-go/pull/29: 
+
+* f485fdd Link to ugorji issue in code comments
+* bd676a6 Add a link to the TPR feature issue in comments
+* 4cf2426 Switch to post-1.5 import style
+* 10a1750 Don't reuse api.Scheme and api.Codecs
+* 3806ead Rename examples/third-party-resources to use underscores
+* d939327 Update README for third-party-resources example
+
+I believe this should address all the feedback offered in #29
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/client-go/37)
+<!-- Reviewable:end -->
+",[],6,2016-11-14 15:52:29,2017-03-02 21:53:59,2017-03-02 21:53:59,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/39,https://github.com/kubernetes/client-go/pull/39,dtan4,Make example codes buildable with the latest client-go,"## WHY
+
+Currently, examples cannot be built with master / v2.0.0-alpha version of client-go.
+
+```
+$ go build -v
+main.go:24:2: cannot find package ""k8s.io/client-go/1.4/kubernetes"" in any of:
+        /Users/dtan4/src/github.com/kubernetes/client-go/vendor/k8s.io/client-go/1.4/kubernetes (vendor tree)
+        /usr/local/Cellar/go/1.7.3/libexec/src/k8s.io/client-go/1.4/kubernetes (from $GOROOT)
+        /Users/dtan4/src/k8s.io/client-go/1.4/kubernetes (from $GOPATH)
+main.go:25:2: cannot find package ""k8s.io/client-go/1.4/pkg/api"" in any of:
+        /Users/dtan4/src/github.com/kubernetes/client-go/vendor/k8s.io/client-go/1.4/pkg/api (vendor tree)
+        /usr/local/Cellar/go/1.7.3/libexec/src/k8s.io/client-go/1.4/pkg/api (from $GOROOT)
+        /Users/dtan4/src/k8s.io/client-go/1.4/pkg/api (from $GOPATH)
+main.go:26:2: cannot find package ""k8s.io/client-go/1.4/tools/clientcmd"" in any of:
+        /Users/dtan4/src/github.com/kubernetes/client-go/vendor/k8s.io/client-go/1.4/tools/clientcmd (vendor tree)
+        /usr/local/Cellar/go/1.7.3/libexec/src/k8s.io/client-go/1.4/tools/clientcmd (from $GOROOT)
+        /Users/dtan4/src/k8s.io/client-go/1.4/tools/clientcmd (from $GOPATH)
+```
+
+## WHAT
+
+Make example codes buildable with master version.
+
+I read https://github.com/kubernetes/client-go#contributing-code and found `pkg/client` package. However, it seemed that `examples` directory did not exist there, so I made this pull request directly in this repository.
+
+If there is another proper way to send patches, please let me know.
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/client-go/39)
+<!-- Reviewable:end -->
+",[],3,2016-11-15 01:57:38,2016-11-21 22:09:50,2016-11-21 23:37:37,True,2016-11-21 22:09:50,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/53,https://github.com/kubernetes/client-go/pull/53,caesarxuchao,fix thirdparty example,"Update the example to compile against HEAD.
+
+Fixes https://github.com/kubernetes/client-go/issues/52
+
+cc @wfarr ",[],1,2016-12-14 19:55:20,2016-12-14 20:34:55,2016-12-14 20:34:55,True,2016-12-14 20:34:54,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/54,https://github.com/kubernetes/client-go/pull/54,caesarxuchao,Cherry-pick fixes to release 2.0,"CHANGELOG:
+clientset supports multiple versions per group
+apps & policy group graduate to v1beta1
+
+I'll make v2.0.0 after this PR gets merged.  
+
+After this PR gets merged, the release-2.0 branch is roughly tracking the kubernetes/release-1.5 branch. I'll manually cherry-pick bug fixes to the release-2.0 branch, and create v2.x.0 tags. (It seems we should name the branch release-2 instead of release-2.0)",['mbohlool'],10,2016-12-14 23:21:18,2016-12-20 06:23:22,2016-12-20 06:23:23,True,2016-12-20 06:23:22,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/61,https://github.com/kubernetes/client-go/pull/61,ash2k,Cleanup example,Fix for #59. I'm not sure about `Schema` - see [the comment in the `init()` function](https://github.com/kubernetes/kubernetes/blob/master/pkg/api/register.go#L75). If a new Schema is created for the client does it need to have those converter functions added manually?,[],2,2017-01-10 08:33:11,2017-02-08 11:18:54,2017-02-08 11:18:54,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/65,https://github.com/kubernetes/client-go/pull/65,rmohr,Add workqueue example,"Demonstrates how to compose a controller out of cache.Controller, cache.Indexer and a workqueue.
+
+Tested on kubernetes 1.4.5.",['mbohlool'],2,2017-01-12 12:33:54,2017-03-11 00:47:06,2017-05-01 17:05:20,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/72,https://github.com/kubernetes/client-go/pull/72,deads2k,update for new packages,@lavalamp where do these examples live.  They need some updates.,[],1,2017-01-18 21:15:35,2017-02-14 01:35:55,2017-02-14 01:35:55,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/75,https://github.com/kubernetes/client-go/pull/75,berrange,Fix build of third-party-resource example program,"The TPR example was broken by the extraction of much
+client-go code into the apimachinery package.
+
+",[],1,2017-01-20 11:12:36,2017-02-02 09:41:21,2017-02-02 09:41:21,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/77,https://github.com/kubernetes/client-go/pull/77,fate-grand-order,fix misspell “ underlying” in request.go,"Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+",[],1,2017-01-22 15:50:38,2017-01-22 15:51:21,2017-01-22 15:51:21,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/86,https://github.com/kubernetes/client-go/pull/86,lavalamp,Fix examples that don't build,,['caesarxuchao'],1,2017-02-02 00:30:36,2017-02-02 00:30:51,2017-03-02 07:34:43,True,2017-02-02 00:30:51,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/87,https://github.com/kubernetes/client-go/pull/87,lavalamp,enable travis,,['caesarxuchao'],1,2017-02-02 00:50:41,2017-02-02 01:01:49,2017-02-02 01:02:10,True,2017-02-02 01:01:49,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/94,https://github.com/kubernetes/client-go/pull/94,caesarxuchao,Fix the import path for examples in release-1.5 branch,"They should import 1.5 instead of 1.4.
+
+cc @lavalamp ",[],1,2017-02-08 02:32:21,2017-02-08 02:33:20,2017-02-08 02:33:25,True,2017-02-08 02:33:20,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/96,https://github.com/kubernetes/client-go/pull/96,caesarxuchao,add back travis,"The file is copied from #87.
+
+The file was deleted by the publishing robot.
+
+update: the robot is fixed in https://github.com/kubernetes/test-infra/pull/1784, it won't delete .travis.yml again.
+
+cc @lavalamp 
+",[],1,2017-02-11 13:33:01,2017-02-11 13:33:54,2017-02-13 17:36:49,True,2017-02-11 13:33:54,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/97,https://github.com/kubernetes/client-go/pull/97,caesarxuchao,enable travis in release-2.0,"Cherry-pick of https://github.com/kubernetes/client-go/pull/87
+
+cc @lavalamp",[],1,2017-02-11 13:43:21,2017-02-11 13:45:53,2017-02-13 17:35:42,True,2017-02-11 13:45:53,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/98,https://github.com/kubernetes/client-go/pull/98,caesarxuchao,enable travis in release-1.5,"Cherry-pick of #87
+
+cc @lavalamp",[],1,2017-02-11 13:52:47,2017-02-11 13:55:40,2017-02-13 17:36:19,True,2017-02-11 13:55:40,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/99,https://github.com/kubernetes/client-go/pull/99,caesarxuchao,enable travis in release-1.4,"Cherry-pick of #87
+
+cc @lavalamp",[],1,2017-02-11 13:56:37,2017-02-11 14:00:37,2017-02-11 14:00:37,True,2017-02-11 14:00:37,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/101,https://github.com/kubernetes/client-go/pull/101,caesarxuchao,"manually fix master, revert to when client-go depends on apimachinery 7080e","manually fix master, revert to when client-go depends on apimachinery 7080e7080e31e90e981181435294bca96c80a37db8941
+
+cc @lavalamp 
+
+Fix #93",[],1,2017-02-12 03:16:39,2017-02-13 04:05:38,2017-02-13 17:40:56,True,2017-02-13 04:05:38,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/102,https://github.com/kubernetes/client-go/pull/102,caesarxuchao,manually update release-2.0,"It's tracking k8s.io/kubernetes release 1.5, last commit is bde8578d9675129b7a2aa08f1b825ec6cc0f3420
+
+Fix https://github.com/kubernetes/client-go/issues/66.
+
+cc @lavalamp ",[],1,2017-02-13 04:27:56,2017-02-13 17:46:51,2017-02-13 17:46:51,True,2017-02-13 17:46:51,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/103,https://github.com/kubernetes/client-go/pull/103,caesarxuchao,[DO NOT MERGE] Release 2.0 updates generated by the robot,"caesarxuchao/client-go#release-2.0 is updated by the robot. This PR is to verify if the robot generates compilable code.
+
+cc @lavalamp @sttts @deads2k",[],2,2017-02-13 15:45:31,2017-02-21 18:45:01,2017-02-21 18:45:01,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/104,https://github.com/kubernetes/client-go/pull/104,caesarxuchao,[DO NOT MERGE] master updates generated by the robot,"caesarxuchao/client-go#master is updated by the robot. This PR is to verify if the robot generates compilable code.
+
+Note that in Godeps.yml, the apimachinery commit it updated to the [latest commit](https://github.com/caesarxuchao/apimachinery/commits/master). The code in vendor/apimachinery is also updated.
+
+cc @lavalamp @sttts @deads2k
+",[],19,2017-02-13 15:51:38,2017-02-21 18:45:06,2017-02-21 18:45:06,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/106,https://github.com/kubernetes/client-go/pull/106,lavalamp,Detailed installation instructions,Fix #105.,['caesarxuchao'],1,2017-02-14 23:09:31,2017-02-15 18:41:56,2017-03-01 23:58:53,True,2017-02-15 18:41:56,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/108,https://github.com/kubernetes/client-go/pull/108,lavalamp,Update README to explain versioning better,Trying to clear up more confusion.,['caesarxuchao'],1,2017-02-15 00:16:36,2017-02-15 13:49:16,2017-02-15 18:25:45,True,2017-02-15 13:49:16,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/109,https://github.com/kubernetes/client-go/pull/109,caesarxuchao,minor change to README,Fixed the matrix. Though there is still one question left: https://github.com/kubernetes/client-go/pull/108#discussion_r101276771,['lavalamp'],1,2017-02-15 13:52:06,2017-02-15 18:26:08,2017-02-16 01:41:49,True,2017-02-15 18:26:08,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/112,https://github.com/kubernetes/client-go/pull/112,caesarxuchao,update CHANGELOG,Partially addressed https://github.com/kubernetes/client-go/issues/111.,['lavalamp'],1,2017-02-16 12:36:06,2017-02-16 17:42:38,2017-02-16 17:42:38,True,2017-02-16 17:42:38,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/113,https://github.com/kubernetes/client-go/pull/113,caesarxuchao,update INSTALL.md to use 2.0.0 as example,@lavalamp,['lavalamp'],1,2017-02-16 12:40:07,2017-02-16 17:43:02,2017-02-16 17:43:02,True,2017-02-16 17:43:02,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/115,https://github.com/kubernetes/client-go/pull/115,Firemango,Fix broken link to Dep,Fix broken link to Dep,[],1,2017-02-16 18:32:59,2017-02-16 18:56:58,2017-02-16 18:58:04,True,2017-02-16 18:56:58,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/116,https://github.com/kubernetes/client-go/pull/116,lavalamp,"Add deprecation status/policy, version recommendation",,['caesarxuchao'],1,2017-02-16 18:53:16,2017-02-16 18:53:45,2017-02-17 02:27:48,True,2017-02-16 18:53:45,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/117,https://github.com/kubernetes/client-go/pull/117,Firemango,Fix broken example,"Installing and trying to run this example gives an error. This update fixes the issue.
+",[],1,2017-02-16 19:11:07,2017-02-16 19:14:20,2017-02-16 19:47:50,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/118,https://github.com/kubernetes/client-go/pull/118,hongchaodeng,INSTALL.md: fix link to dep,,[],1,2017-02-16 23:01:17,2017-02-17 21:23:29,2017-02-17 21:25:05,True,2017-02-17 21:23:29,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/121,https://github.com/kubernetes/client-go/pull/121,lavalamp,fix dep install command,Fixes #120.,[],1,2017-02-17 21:41:01,2017-02-17 21:41:08,2017-02-17 21:41:08,True,2017-02-17 21:41:08,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/124,https://github.com/kubernetes/client-go/pull/124,ash2k,Fix readme,"`glide install` will not add a dependency to the `glide.yaml` file.
+
+```
+glide install --help
+NAME:
+   glide install - Install a project's dependencies
+
+USAGE:
+   glide install [command options] [arguments...]
+
+DESCRIPTION:
+   This uses the native VCS of each package to install
+   the appropriate version. There are two ways a project's dependencies can
+   be installed. When there is a glide.yaml file defining the dependencies but
+   no lock file (glide.lock) the dependencies are installed using the ""update""
+   command and a glide.lock file is generated pinning all dependencies. If a
+   glide.lock file is already present the dependencies are installed or updated
+   from the lock file.
+
+OPTIONS:
+   --force             If there was a change in the repo or VCS switch to new one. Warning: changes will be lost.
+   --strip-vendor, -v  Removes nested vendor and Godeps/_workspace directories.
+   --skip-test         Resolve dependencies in test files.
+```
+```
+glide get --help
+NAME:
+   glide get - Install one or more packages into `vendor/` and add dependency to glide.yaml.
+
+USAGE:
+   glide get [command options] [arguments...]
+
+DESCRIPTION:
+   Gets one or more package (like 'go get') and then adds that file
+   to the glide.yaml file. Multiple package names can be specified on one line.
+
+       $ glide get github.com/Masterminds/cookoo/web
+
+   The above will install the project github.com/Masterminds/cookoo and add
+   the subpackage 'web'.
+
+   If a fetched dependency has a glide.yaml file, configuration from Godep,
+   GPM, GOM, or GB Glide that configuration will be used to find the dependencies
+   and versions to fetch. If those are not available the dependent packages will
+   be fetched as either a version specified elsewhere or the latest version.
+
+   When adding a new dependency Glide will perform an update to work out the
+   the versions for the dependencies of this dependency (transitive ones). This
+   will generate an updated glide.lock file with specific locked versions to use.
+
+   The '--strip-vendor' flag will remove any nested 'vendor' folders and
+   'Godeps/_workspace' folders after an update (along with undoing any Godep
+   import rewriting). Note, The Godeps specific functionality is deprecated and
+   will be removed when most Godeps users have migrated to using the vendor
+   folder.
+
+OPTIONS:
+   --test                   Add test dependencies.
+   --insecure               Use http:// rather than https:// to retrieve packages.
+   --no-recursive, --quick  Disable updating dependencies' dependencies.
+   --force                  If there was a change in the repo or VCS switch to new one. Warning, changes will be lost.
+   --all-dependencies       This will resolve all dependencies for all packages, not just those directly used.
+   --resolve-current        Resolve dependencies for only the current system rather than all build modes.
+   --strip-vendor, -v       Removes nested vendor and Godeps/_workspace directories.
+   --non-interactive        Disable interactive prompts.
+   --skip-test              Resolve dependencies in test files.
+```",['caesarxuchao'],1,2017-02-21 12:26:42,2017-02-22 16:46:44,2017-02-23 10:41:28,True,2017-02-22 16:46:44,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/125,https://github.com/kubernetes/client-go/pull/125,caesarxuchao,Fix README: client-go issues should be reported at k8s.io/client-go now,Fix https://github.com/kubernetes/client-go/issues/84.,['lavalamp'],1,2017-02-22 00:42:35,2017-02-22 00:48:51,2017-02-22 00:48:51,True,2017-02-22 00:48:51,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/127,https://github.com/kubernetes/client-go/pull/127,ericchiang,INSTALL.md: update Glide instructions to prefer glide update,"`glide get` has weird dependencies on the glide cache.
+`glide install` just updates `glide.lock` but doesn't update /vendor.
+`glide init` will detect dependencies from your current project,
+making it dependent on the external files.
+
+Just recommend users create a `glide.yaml` manually, then use
+`glide update` to populate their /vendor directory. Technically you
+could do a dance of `glide init` -> `glide get` -> `glide update`[0]
+but this seems less error prone.
+
+Additionally, provide instructions for users who want to use
+different versions of packages than `client-go`, and add a note
+about glide-vc.
+
+[0] https://github.com/coreos/etcd/blob/v3.1.1/scripts/updatedep.sh
+
+Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+
+cc @caesarxuchao @lavalamp @kubernetes/client-go-reviewers ",[],1,2017-02-22 18:19:01,2017-02-23 18:17:39,2017-02-23 18:45:08,True,2017-02-23 18:17:39,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/129,https://github.com/kubernetes/client-go/pull/129,caesarxuchao,Sync with k8s.io/kubernetes/staging,"Sync with k8s.io/kubernetest at 17375fc59fff39135af63bd1750bb07c36ef873b, and k8s.io/apimachinery at d90aa2c8531f13b0ca734845934c10dcb6a56ca7
+
+Updated the CHANGELOG accordingly. Please let me know if I missed any important changes.
+
+Fix https://github.com/kubernetes/client-go/issues/123.
+
+@deads2k @DirectXMan12 @sttts @lavalamp ",[],2,2017-02-23 20:38:10,2017-02-24 20:36:40,2017-02-24 21:40:11,True,2017-02-24 20:36:40,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/130,https://github.com/kubernetes/client-go/pull/130,caesarxuchao,minor fix of 'go get' command,cc @lavalamp,[],1,2017-02-24 20:55:27,2017-02-24 20:55:55,2017-02-24 20:56:32,True,2017-02-24 20:55:55,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/133,https://github.com/kubernetes/client-go/pull/133,caesarxuchao,[Do not merge] [PoC] Changes generated by publish script,"Generated by https://github.com/kubernetes/test-infra/pull/2077
+
+First two commits are manually written to sync client-go up to a state that could be further updated by the publish script.
+
+Note that the apimachinery in Godeps.json is updated to its latest commit 0cb55cd30057dc724a0025bc2475d7eac663343e (the last commit in https://github.com/kubernetes/apimachinery/pull/8)
+
+Travis failed probably because vendor/k8s.io/apimachinery and vendor/.../glog are removed.
+
+cc @deads2k @sttts @lavalamp ",[],2,2017-03-01 08:00:02,2017-03-08 18:47:07,2017-03-08 23:21:14,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/134,https://github.com/kubernetes/client-go/pull/134,jbeda,Update INSTALL.md to match reality,"Signed-off-by: Joe Beda <joe.github@bedafamily.com>
+",[],1,2017-03-01 23:08:04,2017-03-02 18:21:55,2017-03-02 18:21:55,True,2017-03-02 18:21:55,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/135,https://github.com/kubernetes/client-go/pull/135,caesarxuchao,Disclaimer on `go get` doesn't work,@jbeda @lavalamp how about this disclaimer?,['lavalamp'],1,2017-03-02 00:17:02,2017-03-02 18:22:48,2017-03-02 18:22:52,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/138,https://github.com/kubernetes/client-go/pull/138,caesarxuchao,Adding note about examples only work with the code in the same branch,"Adding this note because the problem has confused many users.
+
+Also created kuberentes pr https://github.com/kubernetes/kubernetes/pull/42625, i duplicated the pr here since we don't know when the next sync will be.","['lavalamp', 'mbohlool']",1,2017-03-07 06:36:57,2017-03-07 18:24:23,2017-03-07 18:24:23,True,2017-03-07 18:24:23,mbohlool,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/139,https://github.com/kubernetes/client-go/pull/139,aaronlevy,Update dep usage in install docs,"Apologies if this really shouldn't be opened here.
+
+Gave `dep` a shot for the first time, and due to some recently added tags to the `go-restful` package, the instructions weren't working (latest tag 2.2.0 doesn't contain go-restful/swagger package, which is required by client-go).
+
+There might be a better way to handle this rather than pre-populating the `manifest.json`, but a couple quick cli tests didn't work (e.g. running `ensure go-restful@v1.2`).
+
+Related: https://github.com/kubernetes/client-go/issues/107 (but also not sure prefered way to implement auto tests...)
+",[],1,2017-03-07 20:15:49,2017-03-20 20:42:46,2017-03-20 20:42:50,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/140,https://github.com/kubernetes/client-go/pull/140,caesarxuchao,Generated by robot,"First two commits are manually written to sync client-go up to a state that could be further updated by the publish script.
+
+@sttts Original Kubernetes-commit are included in the commit messages ^^
+
+All 5 PRs generated in the same run of the robot:
+https://github.com/kubernetes/client-go/pull/140
+https://github.com/kubernetes/apimachinery/pull/10
+https://github.com/kubernetes/apiserver/pull/4
+https://github.com/kubernetes/kube-aggregator/pull/4
+https://github.com/kubernetes/sample-apiserver/pull/2
+","['sttts', 'mbohlool']",26,2017-03-08 18:47:49,2017-03-20 20:30:56,2017-03-22 13:56:55,True,2017-03-20 20:30:56,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/141,https://github.com/kubernetes/client-go/pull/141,caesarxuchao,Changes generated by publish script,"ref: 
+changes generated in the same run for other repos/branches:
+https://github.com/kubernetes/apimachinery/pull/9/files
+https://github.com/kubernetes/client-go/pull/140/files
+
+using the script here: https://github.com/kubernetes/test-infra/pull/2194
+
+Explanation on the diffs:
+1. many .travis.yml and xxx.sh files are added to vendor. That's because copy.sh used to intentionally remove these files from k8s.io/kubernetes/staging/client-go, and the k8s.io/client-go/vendor is copied from the k8s.io/kubernetes/staging. The new scripts runs a `godep restore/save` cycle to populate the vendor/ dir, thus these .yml and .sh files are added.
+
+2. removal of vendor/glog. This is intentional, this helps `go get` users. Details are in https://github.com/kubernetes/test-infra/pull/2077.
+",['mbohlool'],2,2017-03-08 23:06:42,2017-03-20 20:10:59,2017-03-20 20:10:59,True,2017-03-20 20:10:59,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/146,https://github.com/kubernetes/client-go/pull/146,WilliamDenniss,Updated installation instructions.,"– dep is now alpha not pre-alpha
+– Added a link to the correctly versioned samples for use with the dep instructions.
+",[],1,2017-03-14 21:02:40,2017-03-14 23:17:33,2017-03-14 23:17:33,True,2017-03-14 23:17:33,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/153,https://github.com/kubernetes/client-go/pull/153,caesarxuchao,Round2: Generated by scripts,"Last round of PRs failed to update vendor/. This one fixed it.
+
+Changes in this PR is innocuous.
+",['caesarxuchao'],2,2017-03-20 22:23:36,2017-03-21 21:11:18,2017-03-21 21:11:18,True,2017-03-21 21:11:18,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/154,https://github.com/kubernetes/client-go/pull/154,caesarxuchao,Round2: Generated by scripts,"Last round of PRs failed to update vendor/. This one fixed it.
+
+In last round, a manual commit removed the vendor/, due to the bug, the robot didn't add back the vendor/. This PR added it back.
+
+@deads2k @sttts cc @mbohlool 
+
+PRs to other repos:
+https://github.com/kubernetes/apiserver/pull/5
+https://github.com/kubernetes/kube-aggregator/pull/5
+https://github.com/kubernetes/sample-apiserver/pull/3
+https://github.com/kubernetes/client-go/pull/154
+https://github.com/kubernetes/apimachinery/pull/11",[],2,2017-03-20 22:25:46,2017-03-21 21:09:59,2017-03-21 21:10:51,True,2017-03-21 21:09:59,deads2k,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/157,https://github.com/kubernetes/client-go/pull/157,caesarxuchao,"We support `go get` now, update INSTALL.md","The master branch of client-go is published in sync with the master branch of apimachinery now, so `go get k8s.io/client-go/...` will work.
+
+We removed `k8s.io/apimachinery` from client-go's `vendor/` folder, so the only copy of apimachinery will be the one in GOPATH, so https://github.com/kubernetes/client-go/issues/83 is fixed.
+
+So i think we can add back the section about `go get` to INSTALL.md.
+
+@jbeda @rubenv @lavalamp ",['lavalamp'],1,2017-03-21 23:18:00,2017-03-31 23:55:44,2017-03-31 23:55:44,True,2017-03-31 23:55:44,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/160,https://github.com/kubernetes/client-go/pull/160,caesarxuchao,[Do Not Merge] Release 3.0,"Generated by bot
+
+The release-3.0 of client-go, and release-1.6 branches of apimachinery, apiserver, kube-aggregator, and sample-apiserver are tracking relesae-1.6 of kubernetes. These branches might depend on each other, but not on commit in the master branch.
+
+The PR batch:
+https://github.com/kubernetes/sample-apiserver/pull/4
+https://github.com/kubernetes/kube-aggregator/pull/6
+https://github.com/kubernetes/apiserver/pull/6
+https://github.com/kubernetes/client-go/pull/160
+no change to the release 1.6 branch of apimachinery
+
+cc @deads2k @sttts ",[],11,2017-03-30 03:04:06,2017-03-31 17:58:59,2017-03-31 17:58:59,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/168,https://github.com/kubernetes/client-go/pull/168,caesarxuchao,describe kubernetes-vX.Y.Z tag in README,@lavalamp @mbohlool ptal. Thanks.,[],1,2017-04-03 17:28:08,2017-10-30 22:52:28,2017-10-30 22:52:28,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/169,https://github.com/kubernetes/client-go/pull/169,caesarxuchao,Add client-go 3.0 beta to compatibility matrix,@mbohlool @lavalamp ptal. Thanks.,[],1,2017-04-03 17:50:16,2017-04-03 19:35:07,2017-04-03 19:35:07,True,2017-04-03 19:35:07,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/171,https://github.com/kubernetes/client-go/pull/171,caesarxuchao,minor update to installation guide using dep,"Fix https://github.com/kubernetes/client-go/issues/166.
+",['mbohlool'],1,2017-04-03 21:27:45,2017-04-03 21:32:39,2017-04-03 21:32:39,True,2017-04-03 21:32:39,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/172,https://github.com/kubernetes/client-go/pull/172,caesarxuchao,update CHANGELOG for v3.0.0-beta.0,@lavalamp @mbohlool ptal. Thanks.,"['lavalamp', 'mbohlool']",1,2017-04-03 22:50:43,2017-04-03 22:53:09,2017-04-03 22:53:09,True,2017-04-03 22:53:09,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/179,https://github.com/kubernetes/client-go/pull/179,caesarxuchao,Move dep to the last recommended vendoring tool,"`dep` is still alpha and thus not stable, e.g., `dep` just changed its manifest file format, as pointed out by @ensonic https://github.com/kubernetes/client-go/issues/176#issuecomment-293842046. Hence, I moved dep to the last recommended vendoring tool instead of as the first recommendation.","['lavalamp', 'mbohlool']",1,2017-04-13 18:31:03,2017-04-13 19:25:16,2017-04-24 07:38:23,True,2017-04-13 19:25:16,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/182,https://github.com/kubernetes/client-go/pull/182,caesarxuchao,"Adding instructions on how to use ""dep"" to get client-go v3.0.0-beta.0 in INSTALL.md","`dep` doesn't interpret Godeps.json, so we need to manually checkout the compatible version of apimachinery.
+
+I don't want to check in the manifest/lock files of `dep`, as the format is not stable. In fact, the [README](https://github.com/golang/dep#usage) of dep suggests not checking in these files.
+
+Alternative to this PR, perhaps we should remove `dep` from INSTALL.md until it becomes beta? @cscatolini @ericchiang @mbohlool @lavalamp what do you think?",[],1,2017-04-18 23:24:06,2017-08-22 18:06:15,2017-08-22 18:06:15,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/195,https://github.com/kubernetes/client-go/pull/195,ahmetb,Add travis build status & godoc badges to README,Signed-off-by: Ahmet Alp Balkan <ahmetb@google.com>,['caesarxuchao'],1,2017-05-17 18:26:42,2017-05-22 17:54:14,2017-05-22 17:54:14,True,2017-05-22 17:54:14,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/210,https://github.com/kubernetes/client-go/pull/210,caesarxuchao,bump go version to 1.8.1 for travis,@lavalamp @mbohlool fyi,[],1,2017-06-13 22:57:15,2017-06-13 23:02:11,2017-06-13 23:02:11,True,2017-06-13 23:02:11,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/212,https://github.com/kubernetes/client-go/pull/212,nikhita,README: fix script to update staging area,"Running `staging/copy.sh` echoes `Do not run this script directly, but via hack/update-staging-client-go.sh.` as mentioned here: https://github.com/kubernetes/kubernetes/blob/master/staging/copy.sh#L49.
+
+We can directly point to `hack/update-staging-client-go.sh`. ",[],1,2017-06-16 23:38:41,2017-06-29 19:04:49,2017-06-29 19:05:26,True,2017-06-29 19:04:49,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/215,https://github.com/kubernetes/client-go/pull/215,diazjf,Update Links for How to Use It,"Updates the Links for the ""How to Use It"" Section of the Readme.
+Currently the links are sending the user to a 404 Package due to
+changes of the documentation path. Also now we show docs rather
+than the main.go.
+",[],1,2017-06-20 20:44:01,2017-07-24 19:38:01,2017-07-24 19:38:08,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/219,https://github.com/kubernetes/client-go/pull/219,tomdee,Fix links to examples in README.md,,[],1,2017-06-23 20:08:03,2017-08-18 01:26:26,2017-08-18 01:26:26,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/221,https://github.com/kubernetes/client-go/pull/221,xingzhou,Update the code copy script name in README,"staging/copy.sh can no longer be run directly under
+the k8s main repo, update the script to
+./hack/update-staging-client-go.sh
+in README
+
+This is an update of README of the repo.
+",[],1,2017-06-27 08:14:16,2017-06-30 01:18:13,2017-06-30 01:18:13,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/225,https://github.com/kubernetes/client-go/pull/225,erikbgithub,Making the intended meaning more obvious,"Just a suggestion. And maybe you want to go throug hall your docs and look for that. I don't think it's the only place.
+",[],1,2017-06-28 13:48:42,2017-08-18 01:25:19,2017-08-18 01:25:19,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/228,https://github.com/kubernetes/client-go/pull/228,ffledgling,Fix broken links in README.md,"Adding this as a PR because the staging/src/ in `kubernetes/kubernetes` doesn't seem to have the README itself.
+
+Patch fixes links to in-cluster/out-of-cluster exmaples point to
+non-existent paths.
+",[],1,2017-06-29 10:20:42,2017-06-29 11:07:17,2017-06-29 11:07:17,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/233,https://github.com/kubernetes/client-go/pull/233,caesarxuchao,V3.0.0 updates,I'll create the v3.0.0 release after this is merged.,['lavalamp'],3,2017-07-05 22:57:18,2017-07-11 20:04:39,2017-07-11 20:04:39,True,2017-07-11 20:04:39,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/237,https://github.com/kubernetes/client-go/pull/237,caesarxuchao,Add v4.0.0 changelog,"TODO: generate TOC.
+
+A step towards fixing https://github.com/kubernetes/client-go/issues/231.",['lavalamp'],1,2017-07-11 00:47:31,2017-07-11 20:45:36,2017-07-11 21:52:47,True,2017-07-11 20:45:36,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/241,https://github.com/kubernetes/client-go/pull/241,caesarxuchao,explaining the API migration in CHANGELOG,"Fix https://github.com/kubernetes/client-go/issues/238.
+Fix https://github.com/kubernetes/client-go/issues/238.",['lavalamp'],1,2017-07-11 23:46:09,2017-07-11 23:59:50,2017-07-13 03:47:41,True,2017-07-11 23:59:50,lavalamp,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/245,https://github.com/kubernetes/client-go/pull/245,caesarxuchao,Fix a typo,cc @ash2k,[],1,2017-07-13 03:47:15,2017-07-13 03:47:30,2017-07-13 03:47:30,True,2017-07-13 03:47:30,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/258,https://github.com/kubernetes/client-go/pull/258,tobilarscheid,README.md: fix link to in-cluster example,"> Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+
+Got it, but I am not submitting code - just a minor README change.",[],1,2017-07-28 10:15:44,2017-08-18 01:23:30,2017-08-18 01:23:30,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/261,https://github.com/kubernetes/client-go/pull/261,hblanks,README.md: fix broken links to examples in & out of cluster,"Seems like this file isn't in the main Kubernetes repo, so here's a PR to fix its broken link.",[],1,2017-08-01 09:44:23,2017-08-18 01:22:28,2017-08-18 01:22:28,True,2017-08-18 01:22:28,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/262,https://github.com/kubernetes/client-go/pull/262,JaSei,improve documentation of install via `dep`,related with #256 ,[],1,2017-08-03 12:31:00,2017-10-30 22:52:02,2017-10-30 22:52:02,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/263,https://github.com/kubernetes/client-go/pull/263,asifdxtreme,Add GoReportCard badge,"
+",['sttts'],1,2017-08-04 04:04:51,2017-12-20 11:55:43,2017-12-20 11:55:43,True,2017-12-20 11:55:43,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/264,https://github.com/kubernetes/client-go/pull/264,fisherxu,Fix: 'kubernetes' should be start with 'K',"Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+",['lavalamp'],1,2017-08-04 16:38:59,2017-08-29 00:02:45,2017-08-29 00:02:45,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/265,https://github.com/kubernetes/client-go/pull/265,orkun1675,update broken examples links,"Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+",['ahmetb'],1,2017-08-07 17:26:34,2017-10-01 23:11:11,2017-10-01 23:11:11,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/269,https://github.com/kubernetes/client-go/pull/269,F00b4rch,Updating Readme.md,"Correcting examples location links
+
+Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+",[],1,2017-08-11 21:11:16,2017-08-11 21:11:49,2017-08-11 21:23:44,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/270,https://github.com/kubernetes/client-go/pull/270,F00b4rch,Updating Readme.md,Correcting examples location links,[],1,2017-08-11 21:22:42,2017-08-11 21:23:41,2017-08-11 21:23:44,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/272,https://github.com/kubernetes/client-go/pull/272,nogoegst,Fix broken example link,"> Sorry, client-go does not accept changes via pull requests at this time. Please
+> submit your pull request to the main repository:
+> https://github.com/kubernetes/kubernetes.  See the guidance here:
+> https://github.com/kubernetes/client-go#contributing-code.
+
+Hmm, the hack script was removed as part of https://github.com/kubernetes/kubernetes/pull/49346. I have no idea what to do else but submit a PR here.
+",['caesarxuchao'],1,2017-08-14 09:31:19,2017-10-04 20:41:19,2017-10-04 20:41:19,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/274,https://github.com/kubernetes/client-go/pull/274,nikhita,README: remove non-existent update-staging-client-go.sh,"https://github.com/kubernetes/kubernetes/pull/49346 removed the script. We no longer need it.
+
+cc @sttts @caesarxuchao 
+fyi @dims ",[],1,2017-08-14 15:23:52,2017-08-14 17:09:33,2017-08-14 17:09:43,True,2017-08-14 17:09:33,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/275,https://github.com/kubernetes/client-go/pull/275,caesarxuchao,Update changelog and readme for 4.0.0,,[],1,2017-08-18 00:48:39,2017-08-18 01:11:54,2017-08-18 01:11:54,True,2017-08-18 01:11:54,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/282,https://github.com/kubernetes/client-go/pull/282,sttts,DO-NOT-MERGE: test export of client-go release-1.7,"Using https://github.com/kubernetes/test-infra/pull/4134.
+
+**Note**: Github skipped all merge commits in this PR. This is **not** what we want in client-go. Hence, do not merge this. Better look at https://github.com/sttts/client-go/commits/release-4.0 or even better at a Git viewer which understands branches and merges:
+
+<img width=""1601"" alt=""bildschirmfoto 2017-08-29 um 17 03 40"" src=""https://user-images.githubusercontent.com/730123/29828080-117c59d0-8cdc-11e7-8b4e-17598c00ba4a.png"">
+
+",['caesarxuchao'],29,2017-08-29 15:05:06,2017-08-29 15:06:08,2017-08-29 15:06:08,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/283,https://github.com/kubernetes/client-go/pull/283,sttts,DO-NOT-MERGE: test export of client-go release-1.7,"Using https://github.com/kubernetes/test-infra/pull/4134.
+
+**Note**: Github skipped all merge commits in this PR. This is **not** what we want in client-go. Hence, do not merge this. Better look at https://github.com/sttts/client-go/commits/release-4.0 or even better at a Git viewer which understands branches and merges:
+
+<img width=""1601"" alt=""bildschirmfoto 2017-08-29 um 17 03 40"" src=""https://user-images.githubusercontent.com/730123/29828080-117c59d0-8cdc-11e7-8b4e-17598c00ba4a.png"">
+
+",[],11,2017-08-29 15:05:34,2017-09-01 15:14:12,2017-09-01 15:14:12,True,2017-09-01 15:14:12,eparis,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/284,https://github.com/kubernetes/client-go/pull/284,sttts,DO-NOT-MERGE: test export of client-go master,"**Note:** Github dropped the feature branches and some merge commits in this PR view. This is not what we want in client-go. Hence, do not merge this. Better look at https://github.com/sttts/client-go/commits/master or even better at a Git viewer which understands branches and merges:
+
+<img width=""1250"" alt=""bildschirmfoto 2017-08-29 um 17 10 45"" src=""https://user-images.githubusercontent.com/730123/29828456-0a4c91a6-8cdd-11e7-9034-eab3478e9385.png"">
+",['caesarxuchao'],83,2017-08-29 15:10:29,2017-09-01 15:14:09,2017-09-01 15:14:09,True,2017-09-01 15:14:09,eparis,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/302,https://github.com/kubernetes/client-go/pull/302,alok87,Typo fix,Typo fix,[],1,2017-10-02 08:50:27,2017-10-30 22:49:27,2017-10-30 22:49:27,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/306,https://github.com/kubernetes/client-go/pull/306,rickypai,Update installation doc to reflect current version and dep command line use,@caesarxuchao,[],2,2017-10-04 05:13:22,2017-10-30 22:48:39,2017-10-30 22:48:39,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/313,https://github.com/kubernetes/client-go/pull/313,roycaihw,add changelog for v5.0.0,,[],1,2017-10-17 23:03:31,2017-10-20 20:25:33,2017-10-20 20:25:33,True,2017-10-20 20:25:33,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/316,https://github.com/kubernetes/client-go/pull/316,caesarxuchao,Update README.md to explain kubernetes tags and the v5.0.0 tag,@cheftako could you help proof read? Thank you.,['cheftako'],1,2017-10-25 01:24:51,2017-11-01 02:48:53,2017-11-01 02:48:53,True,2017-11-01 02:48:53,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/317,https://github.com/kubernetes/client-go/pull/317,caesarxuchao,add v5.0.1 to CHANGELOG,,['caesarxuchao'],1,2017-10-26 02:15:12,2017-10-26 02:17:32,2017-10-26 02:17:32,True,2017-10-26 02:17:32,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/319,https://github.com/kubernetes/client-go/pull/319,caesarxuchao,Document that client-go is not yet compatible with dep,@sttts could you proof read this? Thank you.,['sttts'],1,2017-10-31 00:09:20,2017-11-01 19:11:51,2017-11-01 19:12:05,True,2017-11-01 19:11:50,caesarxuchao,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/321,https://github.com/kubernetes/client-go/pull/321,mattnworb,readme: fix minor typo in Table of Contents,"I saw the warning about this repo not accepting PRs at this time and that changes should be made in  https://github.com/kubernetes/kubernetes, but it seems to me like the README is only maintained in this repo.",['sttts'],1,2017-11-07 15:22:02,2017-12-14 15:40:56,2017-12-14 15:40:56,True,2017-12-14 15:40:56,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/337,https://github.com/kubernetes/client-go/pull/337,markmandel,Add Dependency matrix to README,"This makes it far more explicit about all the libraries that are used in conjunction with client-go and which
+versions you require for each version of Kubernetes.
+
+Context: [Friction Log](https://docs.google.com/a/google.com/document/d/1N1pBov7Odpg_u-kILHcswYh4VO-aMlYQdFIH64DYeek/edit?disco=AAAABdZx8JM)
+",['sttts'],1,2017-11-29 19:59:01,2018-02-14 22:12:20,2018-02-14 22:12:26,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/339,https://github.com/kubernetes/client-go/pull/339,a4abhishek,Update INSTALL.md,"This is a very minor change, but it'll definitly help the New-Commers like me.
+
+Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+",['sttts'],1,2017-12-02 20:49:14,2017-12-14 15:41:44,2017-12-14 15:41:44,True,2017-12-14 15:41:44,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/341,https://github.com/kubernetes/client-go/pull/341,nikhita,Add client-go 6.0.0 changelog,"Ref: https://docs.google.com/spreadsheets/d/1PahRDTfiPbD1DEjtL-3ButW3U-FTKzS8r9NKZQ2kr2c/edit#
+
+/cc @sttts @caesarxuchao @munnerz @timoreimann @markmandel",['sttts'],1,2017-12-06 23:53:06,2017-12-18 12:25:45,2017-12-18 12:32:13,True,2017-12-18 12:25:45,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/347,https://github.com/kubernetes/client-go/pull/347,sttts,Update README.md and INSTALL.md for v6.0.0,"Prepare for v6.0.0 release.
+",['cheftako'],1,2017-12-18 16:28:30,2017-12-19 08:22:46,2017-12-19 08:22:50,True,2017-12-19 08:22:46,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/349,https://github.com/kubernetes/client-go/pull/349,xianlubird,Change api path from api to apis,"Signed-off-by: xianlubird <xianlubird@gmail.com>
+
+Sorry, client-go does not accept changes via pull requests at this time. Please
+submit your pull request to the main repository:
+https://github.com/kubernetes/kubernetes.  See the guidance here:
+https://github.com/kubernetes/client-go#contributing-code.
+",[],1,2017-12-19 11:42:25,2017-12-19 11:43:26,2017-12-19 11:43:26,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/350,https://github.com/kubernetes/client-go/pull/350,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",[],1,2017-12-20 18:31:36,2017-12-20 19:54:58,2017-12-20 20:13:54,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/356,https://github.com/kubernetes/client-go/pull/356,spiffxp,Remove .github in prep to sync from k/k/staging,ref: https://github.com/kubernetes/kubernetes/pull/57571,['sttts'],1,2018-01-08 20:35:49,2018-01-09 08:17:03,2018-01-09 17:53:25,True,2018-01-09 08:17:03,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/376,https://github.com/kubernetes/client-go/pull/376,sunlintong,Update main.go,"Add some note
+",[],1,2018-03-14 03:50:21,2018-03-14 03:55:21,2018-03-14 03:55:21,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/377,https://github.com/kubernetes/client-go/pull/377,sunlintong,Update main.go,"add some note
+
+",[],1,2018-03-14 05:00:00,2018-03-14 05:02:38,2018-03-14 05:02:38,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/389,https://github.com/kubernetes/client-go/pull/389,nikhita,Add client-go 7.0.0 changelog,"Ref: https://docs.google.com/spreadsheets/d/14A9bijhCBHju5V0R4leKaa-ugcm-pEC9SZ0zJFHpVBk/edit#gid=0
+
+/cc @sttts @caesarxuchao @timoreimann @munnerz @LiliC
+",['sttts'],1,2018-04-01 11:36:13,2018-04-03 08:04:29,2018-04-03 08:06:06,True,2018-04-03 08:04:29,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/391,https://github.com/kubernetes/client-go/pull/391,nikhita,Update README to reflect 7.0.0 release,"/cc @sttts @caesarxuchao 
+",['caesarxuchao'],1,2018-04-03 08:21:47,2018-04-03 20:16:04,2018-04-03 20:16:04,True,2018-04-03 20:16:04,sttts,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/397,https://github.com/kubernetes/client-go/pull/397,michelleN,fix(docs): fix out-of-cluster example description,"Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",[],1,2018-04-18 01:02:29,2018-04-18 01:02:45,2018-04-18 01:02:45,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/420,https://github.com/kubernetes/client-go/pull/420,mistyhacks,Rewording for clarity,"Signed-off-by: Misty Stanley-Jones <mistyhacks@google.com>
+
+Fixes #419 
+
+Yes I read the notice below, but the `README.md` is not in `kubernetes/kubernetes` (or I certainly can't find it), so I think this is the only way to fix this.
+
+```
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+```
+",['sttts'],1,2018-05-24 20:17:52,2018-05-25 12:35:34,2018-05-25 17:29:11,True,2018-05-25 12:35:33,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/421,https://github.com/kubernetes/client-go/pull/421,mistyhacks,Document that changes to the README.md are done in this repo,"Signed-off-by: Misty Stanley-Jones <mistyhacks@google.com>
+
+Documenting exceptions to the no-PR policy that were uncovered in #420.
+","['sttts', 'liggitt']",1,2018-05-25 17:33:33,2018-05-29 07:07:32,2018-05-29 07:13:42,True,2018-05-29 07:07:32,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/423,https://github.com/kubernetes/client-go/pull/423,sttts,Revert non-staging change to .github/PULL_REQUEST_TEMPLATE.md,"Stop the bot falling over, reverting part of https://github.com/kubernetes/client-go/pull/421.
+
+Compare: the original file is at https://github.com/kubernetes/kubernetes/tree/master/staging/src/k8s.io/client-go/.github","['liggitt', 'luxas']",1,2018-05-29 07:11:55,2018-05-29 08:52:33,2018-06-08 07:34:48,True,2018-05-29 08:52:33,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/429,https://github.com/kubernetes/client-go/pull/429,nikhita,Add client-go 8.0.0 changelog,"Ref: https://docs.google.com/spreadsheets/d/1jPexPgSohmD7zVmIeVvAFjjK_pqFu4MdjsmBXlINfvg/edit#gid=0
+
+/assign sttts caesarxuchao 
+","['sttts', 'caesarxuchao']",2,2018-06-14 14:42:14,2018-06-29 09:30:23,2018-06-29 09:30:23,True,2018-06-29 09:30:23,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/438,https://github.com/kubernetes/client-go/pull/438,charrywanganthony,update INSTALL.md,"To prevent: `cannot find package ""k8s.io/api/xxx"" in any of: xxx(vendor tree)`",[],1,2018-07-09 02:37:23,2018-07-24 09:23:29,2018-07-24 09:23:36,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/441,https://github.com/kubernetes/client-go/pull/441,pawelprazak,Fixes #192 - adds ability to use kubeconfig context,"Sorry, we do not accept changes directly against this repository, unless the
+change is to the `README.md` itself. Please see 
+`CONTRIBUTING.md` for information on where and how to contribute instead.
+
+^^^^^^^^^^^
+How one does that? Instructions are not very clear.",['nikhita'],1,2018-07-17 09:22:27,2018-07-17 09:27:27,2018-07-17 09:27:27,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/443,https://github.com/kubernetes/client-go/pull/443,shilpakarthik,Release 5.0,"Sorry, we do not accept changes directly against this repository, unless the
+change is to the `README.md` itself. Please see 
+`CONTRIBUTING.md` for information on where and how to contribute instead.
+",['nikhita'],40,2018-08-01 03:35:37,2018-08-01 06:25:41,2018-08-01 06:25:41,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/466,https://github.com/kubernetes/client-go/pull/466,nikhita,Add client-go 9.0.0 changelog,"Ref: https://docs.google.com/spreadsheets/d/1VwVbMA1JBPo30QhX92Z5wuyp5MLUNkW9JGs7s59GZyU/edit#gid=0
+
+/assign @sttts @caesarxuchao ","['sttts', 'caesarxuchao']",2,2018-09-19 10:04:38,2018-09-27 17:16:01,2018-11-28 06:12:39,True,2018-09-27 17:16:01,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/467,https://github.com/kubernetes/client-go/pull/467,nikhita,Bump go version to 1.10.2 for travis,"The travis build fails with `undefined: strings.Builder`. This is due to an old go version (1.8.1 :scream: )
+
+Also, see a similar fix for publishing bot for more details: https://github.com/kubernetes/publishing-bot/pull/74.
+
+This blocks merging any PRs sent directly to this repo: https://github.com/kubernetes/client-go/pull/466.
+
+/assign @sttts ",['sttts'],1,2018-09-19 10:15:36,2018-09-19 11:34:30,2018-09-19 11:34:30,True,2018-09-19 11:34:30,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/468,https://github.com/kubernetes/client-go/pull/468,nikhita,Remove INSTALL.md,"This is going to move to staging: https://github.com/kubernetes/kubernetes/pull/68790
+
+/assign @sttts ",['sttts'],1,2018-09-19 10:29:54,2018-09-19 12:05:00,2018-09-19 12:05:00,True,2018-09-19 12:05:00,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/469,https://github.com/kubernetes/client-go/pull/469,nikhita,Remove INSTALL.md from release-9.0,"https://github.com/kubernetes/client-go/pull/468 removed INSTALL.md from master and https://github.com/kubernetes/kubernetes/pull/68790 added it to staging.
+
+Because https://github.com/kubernetes/kubernetes/pull/68790 added it to staging, the publishing bot first ""publishes"" it to master and then tries to cherry-pick it to release-9 but fails because of conflicts -- since an INSTALL.md file exists there already: https://github.com/kubernetes/kubernetes/issues/56876#issuecomment-423013411.
+
+/cc @dims 
+/assign @sttts ","['sttts', 'liggitt']",1,2018-09-20 05:07:49,2018-09-20 12:01:00,2018-09-20 12:01:00,True,2018-09-20 12:01:00,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/470,https://github.com/kubernetes/client-go/pull/470,nikhita,Bump go version to 1.10.2 for travis for release-9.0,"Travis is broken on release-9.0. This PR fixes it and unblocks other direct PRs to this repo on release-9.0.
+
+See https://github.com/kubernetes/client-go/pull/467 - similar PR for master for more details.","['sttts', 'liggitt']",1,2018-09-20 05:14:18,2018-09-20 11:46:05,2018-09-20 11:46:05,True,2018-09-20 11:46:05,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/480,https://github.com/kubernetes/client-go/pull/480,nikhita,travis: run godep restore for non-master branches,"Currently, we just run `go build ./...` in travis. This means that go build ends up using master branches of client-go's dependencies (apimachinery, api) for building the non-master branches. This will fail almost all the time for non-master branches.
+
+So, for non-master branches we should run `godep restore && go build ./...`.",['sttts'],1,2018-10-05 11:06:29,2018-10-05 14:33:23,2018-10-05 15:13:00,True,2018-10-05 14:33:23,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/481,https://github.com/kubernetes/client-go/pull/481,nikhita,travis: bump go version to 1.11.1,Ref: https://github.com/kubernetes/kubernetes/pull/69386,"['sttts', 'yliaog']",1,2018-10-06 07:39:33,2018-10-09 08:06:21,2018-10-09 08:07:31,True,2018-10-09 08:06:21,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/492,https://github.com/kubernetes/client-go/pull/492,qq362541268,Release 5.0,"Sorry, we do not accept changes directly against this repository, unless the
+change is to the `README.md` itself. Please see 
+`CONTRIBUTING.md` for information on where and how to contribute instead.
+",[],40,2018-10-11 07:17:56,2018-10-11 07:19:35,2018-10-11 07:19:35,False,,,dirty,False,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/497,https://github.com/kubernetes/client-go/pull/497,berroteran,Add entry topic license on readme file,"By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+have the right to submit it under the open source license
+indicated in the file;
+
+(b) I understand and agree that this project and the contribution
+are public and that a record of the contribution (including all
+personal information I submit with it, including my sign-off) is
+maintained indefinitely and may be redistributed consistent with
+this project or the open source license(s) involved.
+
+Signed-off-by: Omar Berroteran Silva
+
+Sorry, we do not accept changes directly against this repository, unless the
+change is to the `README.md` itself. Please see 
+`CONTRIBUTING.md` for information on where and how to contribute instead.
+",[],1,2018-10-23 04:42:07,2018-10-23 06:10:59,2018-10-23 06:10:59,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/502,https://github.com/kubernetes/client-go/pull/502,xichengliudui,Delete some redundant code,"Sorry, we do not accept changes directly against this repository, unless the
+change is to the `README.md` itself. Please see 
+`CONTRIBUTING.md` for information on where and how to contribute instead.
+",[],1,2018-11-13 08:26:20,2018-11-13 08:27:00,2018-11-13 08:27:04,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/510,https://github.com/kubernetes/client-go/pull/510,nikhita,Add client-go 10.0.0 changelog,"For https://github.com/kubernetes/client-go/issues/506
+
+Ref: https://docs.google.com/spreadsheets/d/1DS9hI2u1wYMG70_ALqc4holhmovNz-fr-ZUQGvhoplM
+
+/assign @sttts @caesarxuchao ","['sttts', 'caesarxuchao']",2,2018-11-28 06:52:33,2018-12-03 09:48:23,2018-12-03 10:01:40,True,2018-12-03 09:48:23,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/511,https://github.com/kubernetes/client-go/pull/511,nikhita,travis: bump go version to 1.11.2,"Ref for bumping go version: https://github.com/kubernetes/kubernetes/pull/70665
+
+`godep restore` is automatically run by Travis CI, so we don't really need an explicit godep step for it.
+
+/assign @sttts ",['sttts'],1,2018-11-28 06:58:06,2018-12-04 10:36:16,2018-12-04 10:36:16,True,2018-12-04 10:36:16,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/514,https://github.com/kubernetes/client-go/pull/514,matthewsamuel95,use bytes.Buffer for Go version 1.9,"Current code has resulted in this 
+go/src/github.com/kubernetes-incubator/cri-tools/vendor/k8s.io/client-go/transport/round_trippers.go:437:9: undefined: strings.Builder
+
+",['sttts'],1,2018-11-30 00:36:19,2018-11-30 08:02:12,2018-11-30 08:02:13,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/515,https://github.com/kubernetes/client-go/pull/515,nikhita,Cherry-pick of changelog updates to release-10.0 branch,"https://github.com/kubernetes/client-go/pull/510 added the changelog to master. But this change is not present in the `release-10.0` branch, so this PR cherry-picks commits from #510 onto the `release-10.0` branch.
+
+---
+
+Until now, we have never cherry-picked the changelog changes, so all release-`n` branches contain changelog/readme updates for the the release `n-1`.
+Example - https://github.com/kubernetes/client-go/tree/release-9.0.",['sttts'],3,2018-12-03 10:15:08,2018-12-04 12:18:39,2018-12-04 12:18:39,True,2018-12-04 12:18:39,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/546,https://github.com/kubernetes/client-go/pull/546,liggitt,Reference auth plugins in readme,"Mention the auth plugins as a noteworthy package.
+
+xref #545 ",['nikhita'],1,2019-01-17 03:50:43,2019-01-17 14:02:29,2019-01-17 14:02:29,True,2019-01-17 14:02:29,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/558,https://github.com/kubernetes/client-go/pull/558,gbrener,Update in-cluster-client-configuration/README.md,"Split paragraph to address https://github.com/kubernetes/client-go/issues/557 .
+
+This is to a repository README file, so should not be subject to https://github.com/kubernetes/community/tree/master/contributors/guide .",[],1,2019-02-06 19:21:13,2019-02-06 19:23:25,2019-02-06 19:23:26,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/559,https://github.com/kubernetes/client-go/pull/559,fridex,File controllers.md has moved,,[],1,2019-02-12 11:51:42,2019-02-12 12:12:21,2019-02-12 12:22:15,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/560,https://github.com/kubernetes/client-go/pull/560,fridex,File controllers.md has moved,"Sorry, we do not accept changes directly against this repository, unless the
+change is to the `README.md` itself. Please see 
+`CONTRIBUTING.md` for information on where and how to contribute instead.
+",[],1,2019-02-12 12:10:49,2019-02-12 12:22:03,2019-02-12 12:22:07,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/561,https://github.com/kubernetes/client-go/pull/561,fridex,File controllers.md has moved,,['yliaog'],1,2019-02-12 12:21:33,2019-02-12 20:15:35,2019-02-12 20:15:36,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/573,https://github.com/kubernetes/client-go/pull/573,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,[],1,2019-03-08 18:40:59,2019-03-09 01:23:46,2019-03-09 01:23:46,False,,,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/582,https://github.com/kubernetes/client-go/pull/582,sttts,Update .travis.yml for go.mod,,['nikhita'],2,2019-04-04 08:49:15,2019-04-04 09:04:53,2019-04-04 09:14:32,True,2019-04-04 09:04:53,k8s-ci-robot,unknown,,closed
+client-go,https://api.github.com/repos/kubernetes/client-go/pulls/583,https://github.com/kubernetes/client-go/pull/583,nikhita,Update README to reflect v11.0.0 release,"We should reflect the latest release in the README and deprecate v8.0. 
+
+Also, remove info about using godep from the README.",['sttts'],1,2019-04-04 09:35:46,2019-04-04 09:38:52,2019-04-04 09:38:52,True,2019-04-04 09:38:52,k8s-ci-robot,unknown,,closed

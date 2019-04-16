@@ -1,0 +1,53 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23,We have been attempting to alphabetize the names.,36e9997274a0cceb00e74919c968c80ac795d339,2018-12-04 22:31:26,238865389,"@@ -81,7 +81,8 @@ experts = [
+   ""tkuhrt"",
+   ""xcr"",
+   ""yacovm"",
+-  ""zac""
++  ""zac"",
++  ""kdenhartog""",,2018-12-04 23:06:28,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/pulls/comments/238865389,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23#discussion_r238865389,tkuhrt
+https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23,thanks for pointing that out. I changed this now.,36e9997274a0cceb00e74919c968c80ac795d339,2018-12-04 23:07:02,238874865,"@@ -81,7 +81,8 @@ experts = [
+   ""tkuhrt"",
+   ""xcr"",
+   ""yacovm"",
+-  ""zac""
++  ""zac"",
++  ""kdenhartog""",,2018-12-04 23:07:02,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/pulls/comments/238874865,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23#discussion_r238874865,kdenhartog
+https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/7,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/7,"this is the added keyword
+
+I thought about deleting the other fabric stems, but I decided to leave them",3b381c25a29f2d35b26569c7fa394e5cd6254db5,2018-03-30 01:29:36,178217855,"@@ -13,32 +13,33 @@ celloRegEx = [
+ ]
+ 
+ composerRegEx = [
++  /bna/i,
++  /business network archive/i,
++  /[^#]composer/i,
+   /createPeerAdminCard/i,
+   /getAssetRegistry/i,
+-  /getParticipantRegistry/i,
+-  /business network archive/i,
+-  /bna/i,
+-  /[^#]composer/i
++  /getParticipantRegistry/i
+ ]
+ 
+ fabricQuestionsRegEx = [
+   /byfn/i,
+-  /orderer/i,
+-  /ordering service/i,
+-  /fabric-samples/i,
+-  /configtx/i,
+   /chaincode/i,
+-  /endorser/i,
+-  /endorsement/i,
++  /configtx/i,
+   /configtxgen/i,
+-  /msp/i,
+-  /create_channel.sh/i,
+   /core.yaml/i,
+-  /stub.getQueryResult/i,
++  /create_channel.sh/i,
++  /crypto-config.yaml/i,
++  /endorsement/i,
++  /endorser/i,
++  /fabric/i,",35,2018-03-30 01:30:15,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/pulls/comments/178217855,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/7#discussion_r178217855,ryjones

@@ -1,0 +1,102 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/8,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/463264306,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/8#issuecomment-463264306,tmarkovski,"@paparent No reason TransactionContext can't be interfaced. I'll add this in a future update.
+
+Meantime, if you want to mock this, you can just mock the `IStreamListener` that the TransactionContext depends on. Here's a quick untested mock setup using Moq.
+
+```
+            var stream = new Mock<IStreamListener>();
+            stream.Setup(x => x.SendAsync(
+                    It.Is<Message>(y => y.MessageType.Equals(MessageType.TpStateGetRequest)),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(
+                    new Message
+                    {
+                        MessageType = MessageType.TpStateGetResponse,
+                        Content = new TpStateGetResponse().ToByteString()
+                    });
+
+            stream.Setup(x => x.SendAsync(
+                    It.Is<Message>(y => y.MessageType.Equals(MessageType.TpStateSetRequest)),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(
+                    new Message
+                    {
+                        MessageType = MessageType.TpStateSetResponse,
+                        Content = new TpStateSetResponse().ToByteString()
+                    });
+
+            stream.Setup(x => x.SendAsync(
+                    It.Is<Message>(y => y.MessageType.Equals(MessageType.TpStateDeleteRequest)),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(
+                    new Message
+                    {
+                        MessageType = MessageType.TpStateDeleteResponse,
+                        Content = new TpStateDeleteResponse().ToByteString()
+                    });
+
+            stream.Setup(x => x.SendAsync(
+                    It.Is<Message>(y => y.MessageType.Equals(MessageType.TpReceiptAddDataRequest)),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(
+                    new Message
+                    {
+                        MessageType = MessageType.TpReceiptAddDataResponse,
+                        Content = new TpReceiptAddDataResponse().ToByteString()
+                    });
+
+            stream.Setup(x => x.SendAsync(
+                    It.Is<Message>(y => y.MessageType.Equals(MessageType.TpEventAddRequest)),
+                    It.IsAny<CancellationToken>()))
+                .ReturnsAsync(
+                    new Message
+                    {
+                        MessageType = MessageType.TpEventAddResponse,
+                        Content = new TpEventAddResponse().ToByteString()
+                    });
+
+            var txContext = new TransactionContext(stream.Object, ""1"");
+```",2019-02-13 16:22:23,2019-02-13 16:22:23
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/8,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/463273730,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/8#issuecomment-463273730,paparent,"@tmarkovski Thanks for reply !! I'll look into that ! seems a bit complicated but will try it ! 
+
+I guess having an interface for TransactionContext will make this easier ! 
+
+Thanks a lot ! ",2019-02-13 16:45:10,2019-02-13 16:45:10
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/461574345,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6#issuecomment-461574345,agunde406,"Instead of having a merge commit in this pr, your original commit should be rebased on master. ",2019-02-07 19:58:42,2019-02-07 19:58:42
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/6,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/462457837,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6#issuecomment-462457837,tmarkovski,"> Instead of having a merge commit in this pr, your original commit should be rebased on master.
+
+Done.
+
+Wouldn't squashing take care of it anyway?",2019-02-11 19:19:33,2019-02-11 19:19:33
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/460785476,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/5#issuecomment-460785476,tmarkovski,"I should add some build scripts and/or docker to be able to build this - I've been lazy.
+
+You need to generate the protobuf files, this is done in few steps
+- Use protobuf compiler (protoc) to generate *.cs files from the core repo at https://github.com/hyperledger/sawtooth-core/tree/master/protos
+- Copy all generated *.cs files to `src/Protobuf` folder in this repo
+- Compile as normal
+
+Protobuf compiler can be download as standalone for your platform,  but it is also included as nuget package. If you do ""dotnet restore"" to the solution, you will find the tool in your `$HOME/.nuget/packages/Google.Protobuf.Tools`
+
+https://developers.google.com/protocol-buffers/docs/csharptutorial",2019-02-05 20:10:52,2019-02-05 20:10:52
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/460817083,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/5#issuecomment-460817083,paparent,"@tmarkovski Thanks ! It worked ! Did it manually. I'm not used to do those tasks inside Visual Studio directly, but I'll try to learn.
+
+Now I can investigate the issue #4. Some other TP reports the error in the `/batch_statuses/` rest api.
+",2019-02-05 21:48:40,2019-02-05 21:48:40
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/460837257,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/5#issuecomment-460837257,tmarkovski,"@paparent Glad you did. I also created a PR with some instructions for folks looking to do this as well.
+
+https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6
+",2019-02-05 22:55:34,2019-02-05 22:55:34
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/458690721,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/4#issuecomment-458690721,agunde406,"If the invalid transaction is the only transaction, and no block is produced the transaction is not properly removed from the pending queue. This pr is trying to fix this bug in the validator. https://github.com/hyperledger/sawtooth-core/pull/1994 If you submit a valid transaction the invalid one should be properly removed. ",2019-01-29 20:15:40,2019-01-29 20:15:40
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/458693537,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/4#issuecomment-458693537,paparent,"@agunde406 Thanks for fast reply ! Indeed, when I send a valid transaction after, it stops appending in the batch_statuses `transactionsids`. 
+
+What's the purpose of the actual message in the exception ?? Does its gets back in some way to the client ? If not, what's the use of that message ? (to me it seems to be a good feedback to deal with specific errors).",2019-01-29 20:24:33,2019-01-29 20:24:33
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/461048118,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/4#issuecomment-461048118,paparent,"With the supply chain TP example, I see the errors in the `batch_statuses` endpoint. Is there something special hapenning? I dunno how to debug / test that. I hope I could help.",2019-02-06 14:44:54,2019-02-06 14:44:54
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/461831766,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/4#issuecomment-461831766,paparent,"cc @agunde406  @tmarkovski 
+
+Hi, Just tested with the python SDK, I see the message in the batch_statuses, but in the dotnet sdk, I don't see it... ",2019-02-08 15:04:58,2019-02-08 15:04:58
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/374350224,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/2#issuecomment-374350224,ryjones,BoncyCastle->BouncyCastle,2018-03-19 19:57:57,2018-03-19 19:57:57
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/374399138,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/2#issuecomment-374399138,vaporos,Please add license headers on the top of all the source files.,2018-03-19 22:08:37,2018-03-19 22:08:37
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/374405191,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/2#issuecomment-374405191,tmarkovski,@vaporos Added,2018-03-19 22:28:45,2018-03-19 22:28:45
+https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/comments/384778252,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/2#issuecomment-384778252,dcmiddle,"@tmarkovski Looks like I'm late to the party.
+Great contribution!
+Can you fix the license headers? Unless Intel provided these files, you don't need the intel copyright at the top of each.",2018-04-26 20:27:36,2018-04-26 20:27:36

@@ -1,0 +1,848 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+apiextensions-apiserver,ahmetb,https://github.com/kubernetes/apiextensions-apiserver/issues/1,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/1,Add cleanup steps,"To be consistent with other client-go tutorials, we need https://github.com/kubernetes/apiextensions-apiserver/tree/master/examples/client-go example to have a `## Cleanup` section where the instructions to remove artifacts created by the example program can be removed.",closed,False,2017-06-26 18:14:37,2017-07-03 10:07:04
+apiextensions-apiserver,resouer,https://github.com/kubernetes/apiextensions-apiserver/pull/2,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/2,Fix is existing error when nil,"When error is `IsAlreadyExists`, crd will be nil, then `defer` statement will `nil pointer`.",closed,True,2017-07-28 03:03:38,2017-07-28 08:58:29
+apiextensions-apiserver,ash2k,https://github.com/kubernetes/apiextensions-apiserver/issues/3,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/3,Kubernetes 1.7 compatible branch?,"How can I use CRD client from this repo with client-go release-4.0 (kubernetes 1.7) branch? They rely on different versions of apimachinery.
+
+Related: https://github.com/kubernetes/client-go/issues/247",closed,False,2017-07-28 04:45:03,2018-01-23 10:57:39
+apiextensions-apiserver,yaronha,https://github.com/kubernetes/apiextensions-apiserver/issues/4,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/4,ListOptions with CRD,"I tried to implement CRD List client function and specify ListOptions, followed the same pattern used by standard objects and it didn’t seem to work, is there a documented/working way to do this?
+Im specifically interested in the LabelSelector option 
+
+The following code didn’t work, and resulted in an error: 
+     v1.ListOptions is not suitable for converting to ""myorg.io/v1""
+
+```golang
+func (c *Client) List(namespace string, opts meta_v1.ListOptions) (*FunctionList, error) { 
+       var result FunctionList
+       err := c.restClient.Get().
+              Namespace(namespace).Resource(c.getNamePlural()).
+              VersionedParams(&opts, scheme.ParameterCodec).
+              Do().Into(&result)
+       return &result, err
+}
+```
+it failed in the ParameterCodec.EncodeParameters() function  (called by VersionedParams() )
+
+Yaron
+",closed,False,2017-07-28 12:26:26,2018-01-02 07:41:58
+apiextensions-apiserver,gouthamve,https://github.com/kubernetes/apiextensions-apiserver/issues/5,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/5,Waiting for CRD establishment might not always work,"We are waiting for the CRD to be ready here: https://github.com/kubernetes/apiextensions-apiserver/blob/master/examples/client-go/client/cr.go#L58-L77
+
+But even with both the conditions satisfying, the endpoint might not be ready. See:
+```bash
+➜  prometheus-operator git:(v1-move) ✗ kc get crd -oyaml
+apiVersion: v1
+items:
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    creationTimestamp: 2017-08-08T11:37:07Z
+    name: prometheuses.monitoring.coreos.com
+    namespace: """"
+    resourceVersion: ""528""
+    selfLink: /apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/prometheuses.monitoring.coreos.com
+    uid: e8cc861e-7c2d-11e7-874c-080027e7de4b
+  spec:
+    group: monitoring.coreos.com
+    names:
+      kind: Prometheus
+      listKind: PrometheusList
+      plural: prometheuses
+      singular: prometheus
+    scope: Namespaced
+    version: v1
+  status:
+    acceptedNames:
+      kind: Prometheus
+      listKind: PrometheusList
+      plural: prometheuses
+      singular: prometheus
+    conditions:
+    - lastTransitionTime: null
+      message: no conflicts found
+      reason: NoConflicts
+      status: ""True""
+      type: NamesAccepted
+    - lastTransitionTime: 2017-08-08T11:37:07Z
+      message: the initial names have been accepted
+      reason: InitialNamesAccepted
+      status: ""True""
+      type: Established
+kind: List
+metadata:
+  resourceVersion: """"
+  selfLink: """"
+➜  prometheus-operator git:(v1-move) ✗ kc get prometheus
+Error from server (NotFound): Unable to list ""prometheuses"": the server could not find the requested resource (get prometheuses.monitoring.coreos.com)
+➜  prometheus-operator git:(v1-move) ✗ kc create -f prom-v1.yaml
+Error from server (NotFound): error when creating ""prom-v1.yaml"": the server could not find the requested resource (post prometheuses.monitoring.coreos.com)
+.
+.
+.
+# Several mins later:
+➜  prometheus-operator git:(v1-move) ✗ kc get prometheus
+No resources found.
+➜  prometheus-operator git:(v1-move) ✗ kc create -f prom-v1.yaml
+prometheus ""main"" created
+```
+
+Running `1.7.0` on minikube:
+```
+➜  prometheus-operator git:(v1-move) ✗ kc version
+Client Version: version.Info{Major:""1"", Minor:""7"", GitVersion:""v1.7.2"", GitCommit:""922a86cfcd65915a9b2f69f3f193b8907d741d9c"", GitTreeState:""clean"", BuildDate:""2017-07-21T19:06:19Z"", GoVersion:""go1.8.3"", Compiler:""gc"", Platform:""darwin/amd64""}
+Server Version: version.Info{Major:""1"", Minor:""7"", GitVersion:""v1.7.0"", GitCommit:""d3ada0119e776222f11ec7945e6d860061339aad"", GitTreeState:""clean"", BuildDate:""2017-07-26T00:12:31Z"", GoVersion:""go1.8.3"", Compiler:""gc"", Platform:""linux/amd64""}
+```
+
+Is this a bug or just a bad way to wait for ready?
+
+Thanks,
+Goutham.",closed,False,2017-08-08 11:49:30,2018-03-09 17:17:44
+apiextensions-apiserver,gouthamve,https://github.com/kubernetes/apiextensions-apiserver/issues/6,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/6,"Consistency issues with CRDs: `get crd` doesn't work, full name works.","`kubectl get crd` fails, but `kubectl get customresourcedefinition` succeeds.
+
+```
+➜  ~ kc get customresourcedefinition; kc get crd
+NAME                                 KIND
+prometheuses.monitoring.coreos.com   CustomResourceDefinition.v1beta1.apiextensions.k8s.io
+the server doesn't have a resource type ""crd""
+```
+
+And:
+```
+➜  ~ kc get customresourcedefinition -oyaml
+apiVersion: v1
+items:
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    creationTimestamp: 2017-08-08T12:17:39Z
+    name: prometheuses.monitoring.coreos.com
+    namespace: """"
+    resourceVersion: ""3420""
+    selfLink: /apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/prometheuses.monitoring.coreos.com
+    uid: 91d678e5-7c33-11e7-874c-080027e7de4b
+  spec:
+    group: monitoring.coreos.com
+    names:
+      kind: Prometheus
+      listKind: PrometheusList
+      plural: prometheuses
+      shortNames:
+      - prom
+      singular: prometheus
+    scope: Namespaced
+    version: v1
+  status:
+    acceptedNames:
+      kind: Prometheus
+      listKind: PrometheusList
+      plural: prometheuses
+      shortNames:
+      - prom
+      singular: prometheus
+    conditions:
+    - lastTransitionTime: null
+      message: no conflicts found
+      reason: NoConflicts
+      status: ""True""
+      type: NamesAccepted
+    - lastTransitionTime: 2017-08-08T12:17:39Z
+      message: the initial names have been accepted
+      reason: InitialNamesAccepted
+      status: ""True""
+      type: Established
+kind: List
+metadata:
+  resourceVersion: """"
+  selfLink: """"
+```
+
+```
+➜  ~ kc version
+Client Version: version.Info{Major:""1"", Minor:""7"", GitVersion:""v1.7.2"", GitCommit:""922a86cfcd65915a9b2f69f3f193b8907d741d9c"", GitTreeState:""clean"", BuildDate:""2017-07-21T19:06:19Z"", GoVersion:""go1.8.3"", Compiler:""gc"", Platform:""darwin/amd64""}
+Server Version: version.Info{Major:""1"", Minor:""7"", GitVersion:""v1.7.0"", GitCommit:""d3ada0119e776222f11ec7945e6d860061339aad"", GitTreeState:""clean"", BuildDate:""2017-07-26T00:12:31Z"", GoVersion:""go1.8.3"", Compiler:""gc"", Platform:""linux/amd64""}
+```",closed,False,2017-08-08 12:21:27,2018-01-31 13:48:42
+apiextensions-apiserver,gouthamve,https://github.com/kubernetes/apiextensions-apiserver/issues/7,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/7,Long name registers but shortname doesn't,"Related to #5 #6 
+
+Here there are TPRs with version `v1alpha1` and a CRD with the same group but version `v1`. There used to be a prometheus TPR with `v1alpha1` but that was deleted and a CRD was created in its place. 
+
+Are there chances that we are somehow still routing requests to the TPR?
+
+```
+➜  prometheus-operator git:(v1-move) ✗ kc get customresourcedefinition -oyaml
+apiVersion: v1
+items:
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    creationTimestamp: 2017-08-10T03:37:14Z
+    name: prometheuses.monitoring.coreos.com
+    namespace: """"
+    resourceVersion: ""35219""
+    selfLink: /apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/prometheuses.monitoring.coreos.com
+    uid: 3379b97d-7d7d-11e7-9b87-080027e7de4b
+  spec:
+    group: monitoring.coreos.com
+    names:
+      kind: Prometheus
+      listKind: PrometheusList
+      plural: prometheuses
+      shortNames:
+      - prom
+      singular: prometheus
+    scope: Namespaced
+    version: v1
+  status:
+    acceptedNames:
+      kind: Prometheus
+      listKind: PrometheusList
+      plural: prometheuses
+      shortNames:
+      - prom
+      singular: prometheus
+    conditions:
+    - lastTransitionTime: null
+      message: no conflicts found
+      reason: NoConflicts
+      status: ""True""
+      type: NamesAccepted
+    - lastTransitionTime: 2017-08-10T03:37:14Z
+      message: the initial names have been accepted
+      reason: InitialNamesAccepted
+      status: ""True""
+      type: Established
+kind: List
+metadata:
+  resourceVersion: """"
+  selfLink: """"
+```
+```
+➜  prometheus-operator git:(v1-move) ✗ kc get prometheus; kc get prom
+No resources found.
+the server doesn't have a resource type ""prom""
+➜  prometheus-operator git:(v1-move) ✗ kc get crd
+the server doesn't have a resource type ""crd""
+```
+```
+➜  prometheus-operator git:(v1-move) ✗ kc get thirdpartyresources -oyaml
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  description: Managed Alertmanager cluster
+  kind: ThirdPartyResource
+  metadata:
+    creationTimestamp: 2017-08-10T03:34:30Z
+    name: alertmanager.monitoring.coreos.com
+    namespace: """"
+    resourceVersion: ""35020""
+    selfLink: /apis/extensions/v1beta1/thirdpartyresources/alertmanager.monitoring.coreos.com
+    uid: d1bcf01b-7d7c-11e7-9b87-080027e7de4b
+  versions:
+  - name: v1alpha1
+- apiVersion: extensions/v1beta1
+  description: Prometheus monitoring for a service
+  kind: ThirdPartyResource
+  metadata:
+    creationTimestamp: 2017-08-10T03:34:30Z
+    name: service-monitor.monitoring.coreos.com
+    namespace: """"
+    resourceVersion: ""35026""
+    selfLink: /apis/extensions/v1beta1/thirdpartyresources/service-monitor.monitoring.coreos.com
+    uid: d1f053d2-7d7c-11e7-9b87-080027e7de4b
+  versions:
+  - name: v1alpha1
+kind: List
+metadata:
+  resourceVersion: """"
+  selfLink: """"
+```",closed,False,2017-08-10 03:47:29,2018-03-09 21:21:33
+apiextensions-apiserver,mad01,https://github.com/kubernetes/apiextensions-apiserver/issues/8,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/8,client-go example does not build if moved out from this repo,"if you are tracking head of the k8s.io dependencies it's not building. if moved out form project dir 
+```
+$ go build 
+./main.go:50: cannot use config (type *""k8s.io/client-go/rest"".Config) as type *""k8s.io/apiextensions-apiserver/vendor/k8s.io/client-go/rest"".Config in argument to clientset.NewForConfig
+./main.go:66: cannot use config (type *""k8s.io/client-go/rest"".Config) as type *""k8s.io/apiextensions-apiserver/vendor/k8s.io/client-go/rest"".Config in argument to client.NewClient
+./main.go:85: cannot use ""k8s.io/apimachinery/pkg/apis/meta/v1"".ObjectMeta literal (type ""k8s.io/apimachinery/pkg/apis/meta/v1"".ObjectMeta) as type ""k8s.io/apiextensions-apiserver/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".ObjectMeta in field value
+```",closed,False,2017-08-10 12:02:07,2018-01-16 14:54:30
+apiextensions-apiserver,ash2k,https://github.com/kubernetes/apiextensions-apiserver/issues/9,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/9,Ensure CRD exists helper,"There is a helper method in the example that creates a CRD and waits for it to be established. I have a similar method but a bit more sophisticated (uses a lister instead of a rest client, handles a number of edge cases like conflicts, can update CRD if it does not match). If there is interest I can submit a PR with it. Perhaps will need to make it more flexible first.
+
+Existing code: https://github.com/kubernetes/apiextensions-apiserver/blob/master/examples/client-go/client/cr.go#L38
+
+My version: https://github.com/atlassian/smith/blob/master/pkg/resources/crd_helpers.go#L38",closed,False,2017-08-10 13:13:25,2018-07-07 20:55:12
+apiextensions-apiserver,fabiand,https://github.com/kubernetes/apiextensions-apiserver/issues/10,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/10,CRDs can not be created with `apply`,"The following `apply` call fails for me, but `creat`ing the same file works.
+
+```
+$ k apply -f /var/tmp/kubevirt-demo/kubevirt/manifests/vm-resource.yaml
+error: unable to decode ""/var/tmp/kubevirt-demo/kubevirt/manifests/vm-resource.yaml"": no kind ""CustomResourceDefinition"" is registered for version ""apiextensions.k8s.io/v1beta1""
+```
+
+on a minikube:
+```
+$ minikube start --vm-driver kvm --network-plugin cni --iso-url https://storage.googleapis.com/minikube-builds/1846/minikube-testing.iso
+Starting local Kubernetes v1.7.0 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Setting up certs...
+Starting cluster components...
+Connecting to cluster...
+Setting up kubeconfig...
+Kubectl is now configured to use the cluster.
+
+$ k api-versions
+admissionregistration.k8s.io/v1alpha1
+apiextensions.k8s.io/v1beta1
+apiregistration.k8s.io/v1beta1
+apps/v1beta1
+authentication.k8s.io/v1
+authentication.k8s.io/v1beta1
+authorization.k8s.io/v1
+authorization.k8s.io/v1beta1
+autoscaling/v1
+autoscaling/v2alpha1
+batch/v1
+batch/v2alpha1
+certificates.k8s.io/v1beta1
+extensions/v1beta1
+networking.k8s.io/v1
+policy/v1beta1
+rbac.authorization.k8s.io/v1alpha1
+rbac.authorization.k8s.io/v1beta1
+settings.k8s.io/v1alpha1
+storage.k8s.io/v1
+storage.k8s.io/v1beta1
+v1
+```",closed,False,2017-08-21 09:53:52,2017-08-23 18:53:14
+apiextensions-apiserver,sadlil,https://github.com/kubernetes/apiextensions-apiserver/issues/11,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/11,Short names do not works with matching names,"Here is my CRD
+```
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: deployments.sadlil.com
+spec:
+  group: sadlil.com
+  version: v1
+  scope: Namespaced
+  names:
+    plural: deployments
+    singular: deployment
+    kind: Deployment
+    shortNames:
+    - deploy
+    - dpl
+```
+```
+$ kubectl get crd -o yaml
+apiVersion: v1
+items:
+- apiVersion: apiextensions.k8s.io/v1beta1
+  kind: CustomResourceDefinition
+  metadata:
+    creationTimestamp: 2017-08-31T05:25:23Z
+    name: deployments.sadlil.com
+    namespace: """"
+    resourceVersion: ""2259321""
+    selfLink: /apis/apiextensions.k8s.io/v1beta1/customresourcedefinitions/deployments.sadlil.com
+    uid: c9e0720a-8e0c-11e7-99a7-02f03673b1d6
+  spec:
+    group: sadlil.com
+    names:
+      kind: Deployment
+      listKind: DeploymentList
+      plural: deployments
+      shortNames:
+      - deploy
+      - dpl
+      singular: deployment
+    scope: Namespaced
+    version: v1
+  status:
+    acceptedNames:
+      kind: Deployment
+      listKind: DeploymentList
+      plural: deployments
+      shortNames:
+      - deploy
+      - dpl
+      singular: deployment
+    conditions:
+    - lastTransitionTime: null
+      message: no conflicts found
+      reason: NoConflicts
+      status: ""True""
+      type: NamesAccepted
+    - lastTransitionTime: 2017-08-31T05:25:23Z
+      message: the initial names have been accepted
+      reason: InitialNamesAccepted
+      status: ""True""
+      type: Established
+
+```
+
+CRD Data
+```
+apiVersion: sadlil.com/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-server
+  name: test-server
+  namespace: default
+spec:
+  type: hello-world
+```
+
+Outputs
+```
+$ kubectl get deployments.sadlil.com
+NAME          KIND
+test-server   Deployment.v1.sadlil.com
+$ kubectl get deploy
+No resources found.
+$ kubectl get dpl
+No resources found.
+$ kubectl get deployments
+No resources found.
+$ kubectl get deployment
+No resources found.
+```
+Expected to see the resource list when `kubectl get dpl` or `kubectl get deployments`.
+
+Versions
+```
+Client Version: v1.7.3
+Server Version: v1.7.0
+```
+",closed,False,2017-08-31 05:37:04,2018-01-23 14:09:30
+apiextensions-apiserver,aerokite,https://github.com/kubernetes/apiextensions-apiserver/issues/12,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/12,Plural name for CRD doesn't work with kubectl,"My CRD for Elasticsearch
+
+```
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  labels:
+    app: kubedb
+  name: elasticsearches.kubedb.com
+spec:
+  group: kubedb.com
+  names:
+    kind: Elasticsearch
+    listKind: ElasticsearchList
+    plural: elasticsearches
+    shortNames:
+    - es
+    singular: elasticsearch
+  scope: Namespaced
+  version: v1alpha1
+status:
+  acceptedNames:
+    kind: Elasticsearch
+    listKind: ElasticsearchList
+    plural: elasticsearches
+    shortNames:
+    - es
+    singular: elasticsearch
+  conditions:
+  - lastTransitionTime: null
+    message: no conflicts found
+    reason: NoConflicts
+    status: ""True""
+    type: NamesAccepted
+  - lastTransitionTime: 2017-08-31T07:10:38Z
+    message: the initial names have been accepted
+    reason: InitialNamesAccepted
+    status: ""True""
+    type: Established
+```
+
+None of the following commands is working
+
+```
+$ kubectl get elasticsearch
+Error from server (NotFound): Unable to list ""elasticsearchs"": the server could not find the requested resource (get elasticsearchs.kubedb.com)
+
+kubectl get elasticsearches
+the server doesn't have a resource type ""elasticsearches""
+
+kubectl get es
+the server doesn't have a resource type ""elasticsearches""
+```
+
+But I got correct SelfLink
+
+```
+/apis/kubedb.com/v1alpha1/elasticsearches
+```
+
+Here, I have used **elasticsearches** as plural form of **elasticsearch**.
+
+How can I fix this and use **elasticsearches** as plural for kind **Elasticsearch**?",closed,False,2017-08-31 07:50:48,2018-01-15 18:22:44
+apiextensions-apiserver,resouer,https://github.com/kubernetes/apiextensions-apiserver/issues/13,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/13,Vendor k8s.io/apiextensions-apiserver/pkg/features does not work,"cannot find package ""k8s.io/apiextensions-apiserver/pkg/features""
+",closed,False,2017-09-19 13:38:58,2017-12-20 07:10:35
+apiextensions-apiserver,prateekpandey14,https://github.com/kubernetes/apiextensions-apiserver/pull/14,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/14,Fix README link,"Broken link which points to thirdpartyresources.md file in kubernetes/community repository.
+@deads2k ",closed,True,2017-09-23 12:45:34,2017-09-29 17:27:03
+apiextensions-apiserver,srossross,https://github.com/kubernetes/apiextensions-apiserver/issues/15,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/15,Help running deepcopy-gen and or client-gen,I am trying to adapt the `examples/client-go` by adding my own Custom Resource Type. When I change the name of the resource type from Example I get Deepcopy not supported errors. I think that I am supposed to run deepcopy-gen on the package to update `zz_generated.deepcopy.go` - but it is unclear how to do so.,closed,False,2017-10-12 17:55:23,2017-10-17 17:25:22
+apiextensions-apiserver,flyer103,https://github.com/kubernetes/apiextensions-apiserver/issues/16,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/16,Is there an example to show how to create an instance of CRD?,"I have found an example of how to create a CRD resource and how to watch the events of a CRD resource from [this example](https://github.com/kubernetes/apiextensions-apiserver/tree/master/examples/client-go).
+
+I want to create/update/delete an instance of a CRD resource, for example, I have created a CRD resource `OpCRD` and need to create/update/delete instances of `OpCRD`.
+
+Are there some examples to show how to do this?",closed,False,2017-10-17 11:29:54,2017-10-17 15:14:24
+apiextensions-apiserver,flyer103,https://github.com/kubernetes/apiextensions-apiserver/issues/17,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/17,Is it invalid to create a CRD resource with multiple versions?,"I could use `client-go` or CRD yaml file to create a CRD resource. But I need a resource with multiple versions in one cluster to do different things. I have tried but always got the error that the CRD resource has been created (using `client-go`) or field is immutable (using CRD yaml file).
+
+So is it invalid to create a CRD resource with multiple versions?",closed,False,2017-10-19 09:25:54,2017-10-23 05:02:44
+apiextensions-apiserver,nikhita,https://github.com/kubernetes/apiextensions-apiserver/pull/18,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/18,Remove README and LICENSE,"Addresses https://github.com/kubernetes/kubernetes/issues/54398.
+
+/cc @sttts ",closed,True,2017-10-23 11:55:25,2017-12-18 12:21:56
+apiextensions-apiserver,R053NR07,https://github.com/kubernetes/apiextensions-apiserver/issues/19,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/19,Could not create CRD on external cluster,"Hey,
+I try to watch CRDs on multiple external clusters. For that purpose I created RESTClients (currently I do not have a clientset for those clusters) to watch the CRDs. 
+
+So using the RESTClient to get, watch, ... is possible:
+```
+err = eRESTClient.Get().Resource(crv1.CRDPromPlural).Do().Into(&pl)
+```
+Works for me on an existiong CRD.
+
+Now I wanted to create the CRDs automatically on new clusters if the CRD does not exist.
+
+To do so I did following:
+```
+eClientset := apiextensionsclient.New(eRESTClient)
+
+crd := &apiextensionsv1beta1.CustomResourceDefinition{
+        ObjectMeta: metav1.ObjectMeta{
+                Name: ""tests.monitoring.io"",
+        },
+        Spec: apiextensionsv1beta1.CustomResourceDefinitionSpec{
+                Scope:   apiextensionsv1beta1.NamespaceScoped,
+                Group:   ""monitoring.io"",
+                Version: ""v1"",
+                Names: apiextensionsv1beta1.CustomResourceDefinitionNames{
+                        Kind:     ""Test"",
+                        Plural:   ""tests"",
+                        Singular: ""test"",
+                },
+        },
+}
+_, err = eClientset.Apiextensions().CustomResourceDefinitions().Create(crd)
+```
+
+But this does not work and following error appears:
+```
+the server could not find the requested resource (post customresourcedefinitions.monitoring.io)
+```
+
+Can somebody tell me if I need to do something special to my RESTClient to get that working, or why the clientset is not working in this case?",closed,False,2017-12-05 17:16:25,2018-05-29 07:36:59
+apiextensions-apiserver,sickyoon,https://github.com/kubernetes/apiextensions-apiserver/pull/20,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/20,Update doc.go to fix dependency for 1.7-release,"Fixing dependency for 1.7-release
+```
+release-1.7: Could not introduce k8s.io/apiextensions-apiserver@release-1.7, as its subpackage k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1 does not contain usable Go code (*pkgtree.NonCanonicalImportRoot).. (Package is required by (root).)
+```",closed,True,2017-12-12 17:50:03,2017-12-15 12:58:57
+apiextensions-apiserver,spiffxp,https://github.com/kubernetes/apiextensions-apiserver/pull/21,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/21,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:31:18,2017-12-20 20:13:26
+apiextensions-apiserver,tylerauerbeck,https://github.com/kubernetes/apiextensions-apiserver/issues/22,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/22,unable to pull release-1.9 with dep,"I'm currently trying to add k8s.io/apiextensions-apiservrer release-1.9 as a dependency to my project. However when I run the following:
+
+`dep ensure -add k8s.io/apiextensions-apiserver@release-1.9`
+
+The process just hangs and never completes. I've attempted this from multiple machines and networks to rule out the basic issues on my end. Is this expected behavior? ",closed,False,2018-01-14 08:21:59,2018-03-12 06:25:02
+apiextensions-apiserver,domcar,https://github.com/kubernetes/apiextensions-apiserver/issues/23,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/23,use of vendored package not allowed,"Hi Guys,
+
+maybe my problem is easy to solve but I can't get it working.
+My goal is just to list/get CRD in my cluster (not created by me, already present).
+
+I wrote the following code:
+```
+package main
+import (
+    ""fmt""
+
+    restext ""k8s.io/apiextensions-apiserver/vendor/k8s.io/client-go/rest""
+    ext ""k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1""
+)
+var k8sext, _ = newK8Sextclient()              // k8s client
+
+func main() {
+    fmt.Println(""test"")
+}
+
+func newK8Sextclient() (*ext.ApiextensionsV1beta1Client, error) {
+    configext, err := restext.InClusterConfig()
+    if err != nil { panic(err.Error()) }
+    return ext.NewForConfig(configext)
+}
+```
+but I get:
+`main.go:5:5: use of vendored package not allowed`
+
+What am I doing wrong?
+
+Instead if I use the package `""k8s.io/client-go/rest""` I get this other error:
+`./main.go:18:28: cannot use configext (type *""k8s.io/client-go/rest"".Config) as type *""k8s.io/apiextensions-apiserver/vendor/k8s.io/client-go/rest"".Config in argument to ""k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1"".NewForConfig`
+
+Thanks for your help",closed,False,2018-01-30 11:09:47,2019-03-04 11:03:39
+apiextensions-apiserver,pwittrock,https://github.com/kubernetes/apiextensions-apiserver/issues/24,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/24,CRD validation doesn't prevent fields missing from the spec,"Steps to reproduce...
+
+Create example CRD:
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: crontabs.stable.example.com
+spec:
+  group: stable.example.com
+  version: v1
+  scope: Namespaced
+  names:
+    plural: crontabs
+    singular: crontab
+    kind: CronTab
+    shortNames:
+    - ct
+  validation:
+   # openAPIV3Schema is the schema for validating custom objects.
+    openAPIV3Schema:
+      properties:
+        spec:
+          properties:
+            cronSpec:
+              type: string
+              pattern: '^(\d+|\*)(/\d+)?(\s+(\d+|\*)(/\d+)?){4}$'
+            replicas:
+              type: integer
+              minimum: 1
+              maximum: 10
+```
+
+Create instance:
+
+```yaml
+apiVersion: stable.example.com/v1
+kind: CronTab
+metadata:
+  name: c
+spec:
+  cSpec: foo
+```
+
+This is accepted, but should result in an error since there is no field cSpec",closed,False,2018-02-16 15:56:28,2018-05-21 08:57:00
+apiextensions-apiserver,pwittrock,https://github.com/kubernetes/apiextensions-apiserver/issues/25,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/25,"CRD validation doesn't accept empty values for type ""object"" fields","Create example CRD, but make spec an object
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: crontabs.stable.example.com
+spec:
+  group: stable.example.com
+  version: v1
+  scope: Namespaced
+  names:
+    plural: crontabs
+    singular: crontab
+    kind: CronTab
+    shortNames:
+    - ct
+  validation:
+   # openAPIV3Schema is the schema for validating custom objects.
+    openAPIV3Schema:
+      properties:
+        spec:
+          type: object
+          properties:
+            cronSpec:
+              type: string
+              pattern: '^(\d+|\*)(/\d+)?(\s+(\d+|\*)(/\d+)?){4}$'
+            replicas:
+              type: integer
+              minimum: 1
+              maximum: 10
+```
+
+Create an instance with an empty spec
+
+```yaml
+apiVersion: stable.example.com/v1
+kind: CronTab
+metadata:
+  name: c
+spec:
+```
+
+This throws the following error, but shouldn't since spec doesn't have any required fields:
+
+> The CronTab ""c"" is invalid: []: Invalid value: map[string]interface {}{""apiVersion"":""stable.example.com/v1"", ""kind"":""CronTab"", ""metadata"":map[string]interface {}{""name"":""c"", ""namespace"":""default"", ""creationTimestamp"":""2018-02-16T15:53:27Z"", ""uid"":""86df4c72-1331-11e8-8944-42010a800029"", ""selfLink"":"""", ""clusterName"":""""}, ""spec"":interface {}(nil)}: validation failure list:",open,False,2018-02-16 15:58:11,2019-02-08 15:27:36
+apiextensions-apiserver,pwittrock,https://github.com/kubernetes/apiextensions-apiserver/issues/26,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/26,CRD validation doesn't support validating maps,"According the [openapi spec](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#model-with-mapdictionary-properties) maps are represented as a:
+
+```json
+{
+  ""type"": ""object"",
+  ""additionalProperties"": {
+    ""type"": ""string""
+  }
+}
+```
+
+However when using a CRD with that validation it accepts requests that shouldn't validate:
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: crontabs.stable.example.com
+spec:
+  group: stable.example.com
+  version: v1
+  scope: Namespaced
+  names:
+    kind: CronTab
+  validation:
+   # openAPIV3Schema is the schema for validating custom objects.
+    openAPIV3Schema:
+      properties:
+        labels:
+          type: object
+          properties:
+            additionalProperties: 
+              type: string
+```
+
+Successfully created this yaml (shouldn't have)
+
+```yaml
+apiVersion: stable.example.com/v1
+kind: CronTab
+labels:
+  foo:
+  - bar
+metadata:
+  name: name
+spec:
+```
+
+Note: I have also gotten this error when using the go-client library to create the CRD spec:
+
+> [spec.validation.openAPIV3Schema.properties[metadata].properties[annotations].additionalProperties: Forbidden: additionalProperties cannot be set to false, spec.validation.openAPIV3Schema.properties[metadata].properties[labels].additionalProperties: Forbidden: additionalProperties cannot be set to false]
+
+I suspect this is because when unmarshalling the json, Allows is not set to true:
+
+https://github.com/kubernetes/apiextensions-apiserver/blob/master/pkg/apis/apiextensions/v1beta1/marshal.go#L43
+
+",closed,False,2018-02-16 16:31:13,2018-02-20 07:16:52
+apiextensions-apiserver,pwittrock,https://github.com/kubernetes/apiextensions-apiserver/issues/27,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/27,CRD validation support references for core types,Common core types like ObjectMeta and PodSpec blow up the CRD validation into something unmanageable.  Openapi supports references to other specs.  We need to be able to reference core schema types from the validation so that CRDs aren't bloated with 100's of lines of boilerplate validation that obfuscates the important pieces defined by the user.,closed,False,2018-02-16 17:23:10,2018-02-20 07:17:46
+apiextensions-apiserver,kindule,https://github.com/kubernetes/apiextensions-apiserver/issues/28,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/28,CRD validation not support enum number as expected,"Create example CRD, and validate master.replicas must be 1 or 3.
+
+Use `Enum` not work as expected.
+Always raise error `in body should be one of [1 3]`.
+
+```Go
+""master"": {
+    Properties: map[string]apiextensionsv1beta1.JSONSchemaProps{
+        ""replicas"": {
+            Description: ""must be 1 or 3"",
+            Type:        ""number"",
+            // TODO: not work as expect
+            Enum: []apiextensionsv1beta1.JSON{
+                {
+                    Raw: []byte(fmt.Sprintf(`1`)),
+                },
+                {
+                    Raw: []byte(fmt.Sprintf(`3`)),
+                },
+            },
+        },
+```
+
+Use `AnyOf` can work as expected but very ugly.
+```Go
+""master"": {
+    Properties: map[string]apiextensionsv1beta1.JSONSchemaProps{
+        ""replicas"": {
+            Description: ""must be 1 or 3"",
+            Type:        ""number"",
+            // Work as expect but very ugly
+            AnyOf: []apiextensionsv1beta1.JSONSchemaProps{
+                {
+                    Description: ""must be 1 or 3"",
+                    Type:        ""number"",
+                    Minimum:     util.Float64Ptr(1),
+                    Maximum:     util.Float64Ptr(1),
+                },
+                {
+                    Description: ""must be 1 or 3"",
+                    Type:        ""number"",
+                    Minimum:     util.Float64Ptr(3),
+                    Maximum:     util.Float64Ptr(3),
+                },
+            },
+        },
+```",closed,False,2018-03-11 13:16:18,2018-12-10 19:52:39
+apiextensions-apiserver,jakewins,https://github.com/kubernetes/apiextensions-apiserver/issues/29,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/29,CRD TypeMeta empty for new objects,"I think this is the same issue - except for CRDs, obviously - as https://github.com/kubernetes/client-go/issues/60
+
+Basically:
+
+- Create a CRD and a matching controller
+- Set up the controller to print out the `TypeMeta` details of any objects passed to the `added` function hook
+- The objects that show up are missing `TypeMeta`
+
+This does not happen for subsequent changes - triggering the `updated` hook - it only occurs for the first added call. I've traced it back to the reflector on the controller side, I think the problem is present in the representation the controller get over the wire, but I'm not sure where to look on the REST API side.. 
+
+Happy to help if someone has pointers for where to look on the server side. 
+
+Here's a tiny project replicating the issue: 
+https://github.com/jakewins/crd-missing-type",closed,False,2018-03-22 22:43:40,2018-12-10 19:57:14
+apiextensions-apiserver,keshin,https://github.com/kubernetes/apiextensions-apiserver/issues/30,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/30,CRD - is there a sample about setting default values with Initializer,"According to the document in https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/, I should be able to have the defaulting and ""Custom Business Logic"" for my CRD with an Initializer. Is there a sample I can refer to? Many thanks",closed,False,2018-05-17 08:53:03,2018-10-14 10:12:07
+apiextensions-apiserver,jessfraz,https://github.com/kubernetes/apiextensions-apiserver/issues/31,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/31,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:08,2018-06-02 04:17:32
+apiextensions-apiserver,tedli,https://github.com/kubernetes/apiextensions-apiserver/issues/32,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/32,"Use as client go, got NotRegisteredErr","I use github.com/kubeflow/tf-operator(v0.1.0), k8s.io/client-go(v5.0.0) in my project. The go dependencies was managed by `glide`, and it tells me tf-operator want apiextensions-apiserver with version kubernetes-1.8.4.
+
+Codes built and ran. However, when run into
+
+```golang
+clientset.ApiextensionsV1beta1().CustomResourceDefinitions().Get(""name"", metav1.GetOptions{})
+```
+
+I got an error said ""v1.GetOptions is not suitable for converting to \""meta.k8s.io/v1\"".
+
+Am I using those packages in mismatched versions? How can I solve the error. Thanks",closed,False,2018-06-01 12:26:27,2018-06-04 09:02:45
+apiextensions-apiserver,Jack47,https://github.com/kubernetes/apiextensions-apiserver/issues/33,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/33,support subresources other than `status` and `scale`?,"Seems CRD currently [doesn’t support sub resource other than `status` and `scale`](https://github.com/kubernetes/apiextensions-apiserver/blob/master/pkg/apiserver/customresource_discovery_controller.go#L139). 
+So does this project have plan to support other sub resource? In Kubernetes there are a number of other subresources like /log, /exec, /bind. Although their semantics is much more special than `/status ` and `/scale`, but user needs apiextension-apiserver to allow implemting semantics.",closed,False,2018-09-16 02:44:14,2018-12-11 08:22:05
+apiextensions-apiserver,goutamtadi1,https://github.com/kubernetes/apiextensions-apiserver/issues/38,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/38,Support `nullable` field in JSONSchema,"Currently, we neither allow a `{Type: ""string""}` attribute with a `nullable` field nor support 
+```
+AnyOf: []JSONSchemaProps{
+    {Type: ""string""},
+    {Type: ""null""}
+}
+```
+to allow `null` values for the given attribute. Has there been any decision not to support `null` values to attributes that I'm unaware of? This will be useful to support `null`s, so that attributes don't require an `""""` empty string value to be passed. 
+
+Are there any future plans to support `null` values in attributes?
+
+Thanks,
+Goutam Tadi",open,False,2018-12-20 17:30:09,2019-03-20 19:06:41
+apiextensions-apiserver,skonto,https://github.com/kubernetes/apiextensions-apiserver/issues/39,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/39,List of namespaces support for informers,Would it be possible for the `SharedInformerFactory` to be able to monitor a list of namespaces instead of either `any` or a specific one? ,open,False,2019-02-22 13:48:50,2019-02-22 13:49:10
+apiextensions-apiserver,joelsmith,https://github.com/kubernetes/apiextensions-apiserver/pull/40,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/40,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:51:58,2019-03-09 01:18:02
+apiextensions-apiserver,pitiwari,https://github.com/kubernetes/apiextensions-apiserver/issues/41,https://api.github.com/repos/kubernetes/apiextensions-apiserver/issues/41,crd validation failing if value doesnt exists,"This is more of a question.
+
+We have written crd validation. In our case we wanted to validate a value against a fixed set of values (say should have one value among 6 possible values) but it is possible this particular field might not have a value in that case validation shouldn’t fail. I tried with OneOf but OneOf fails when value doesn’t exist. Do we know which keyword I can use for this validation ?.
+ 
+For example
+ 
+Header:”GET”
+Value: “present_match”.   // here validation should happen 
+ 
+Example 2
+Header:”GET”   // since value is not there so crd should be ok with it
+ 
+Regards Piyush",open,False,2019-04-02 12:36:47,2019-04-02 12:36:47

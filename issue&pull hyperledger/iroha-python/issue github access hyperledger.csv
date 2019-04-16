@@ -1,0 +1,325 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+iroha-python,Stayer,https://github.com/hyperledger/iroha-python/pull/31,https://api.github.com/repos/hyperledger/iroha-python/issues/31,Fix sed,"Fixed hostname for iroha-postgres
+
+Signed-off-by: Alexey Rodionov <rodionov12@gmail.com>",open,True,2019-04-03 08:29:01,2019-04-04 06:38:09
+iroha-python,igor-egorov,https://github.com/hyperledger/iroha-python/pull/30,https://api.github.com/repos/hyperledger/iroha-python/issues/30,Add timeout parameter to network calls. Prepare examples for CI,"Signed-off-by: Igor Egorov <igor@soramitsu.co.jp>
+
+### Description of the Change
+
+Make examples execution finite.
+Examples now can read environment variables.
+Add timeout parameter for network operations in IrohaGrpc.
+
+### Benefits
+
+A step towards CI automation.
+
+### Usage Examples or Tests
+
+Run irohad with default genesis.block and keys and run one of:
+* tx-example.py
+* batch-example.py
+* blocks-query.py",closed,True,2019-03-05 11:36:27,2019-03-19 12:29:34
+iroha-python,Stayer,https://github.com/hyperledger/iroha-python/pull/29,https://api.github.com/repos/hyperledger/iroha-python/issues/29,Feature/pipeline,,closed,True,2019-02-26 10:00:36,2019-04-03 07:24:41
+iroha-python,lebdron,https://github.com/hyperledger/iroha-python/pull/28,https://api.github.com/repos/hyperledger/iroha-python/issues/28,Remove exception handling and make send_txs iface consistent with batch,"### Description of the Change
+- Remove exception handling in `IrohaGrpc` methods to make them consistent
+- Refactor `send_txs` method with list to make it consistent with `batch` method in `Iroha`
+
+### Benefits
+Consistency
+
+### Possible Drawbacks 
+None
+",closed,True,2019-02-22 09:18:03,2019-02-26 06:45:48
+iroha-python,igor-egorov,https://github.com/hyperledger/iroha-python/pull/27,https://api.github.com/repos/hyperledger/iroha-python/issues/27,"Fix batch method for python 3.7, add support fot GetBlock, vbump 0.0.3","Signed-off-by: Igor Egorov <igor@soramitsu.co.jp>
+
+### Description of the Change
+
+Make `Iroha().batch()` method work again in Python 3.7.
+Bump package version to `0.0.3`
+Add support of `GetBlock` query.
+Fix `batch-example.py`
+
+### Usage Examples or Tests
+
+```bash
+examples/batch-example.py
+```",closed,True,2019-02-21 09:21:51,2019-02-21 10:27:20
+iroha-python,igor-egorov,https://github.com/hyperledger/iroha-python/pull/26,https://api.github.com/repos/hyperledger/iroha-python/issues/26,Update master branch,"Signed-off-by: Igor Egorov <igor@soramitsu.co.jp>
+",closed,True,2019-02-07 16:21:05,2019-02-07 16:23:33
+iroha-python,neewy,https://github.com/hyperledger/iroha-python/issues/25,https://api.github.com/repos/hyperledger/iroha-python/issues/25,Update the library and make the license file compliant with Hyperledger Charter,"https://wiki.hyperledger.org/community/copyright-and-license-policy?s[]=license
+https://www.hyperledger.org/about/charter #13 
+please reuse https://github.com/hyperledger/iroha/pull/1944 if needed",open,False,2019-01-21 09:53:32,2019-01-21 09:53:32
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/24,https://api.github.com/repos/hyperledger/iroha-python/issues/24,Signatures -> Signature,"# Goal
+In Hyperledger / iroha, Signatures of Transaction is handled as singular, not plural.
+( refrence : https://github.com/hyperledger/iroha/pull/604 )
+",closed,True,2017-10-10 06:15:55,2019-01-21 09:53:51
+iroha-python,a-r-g-v,https://github.com/hyperledger/iroha-python/pull/23,https://api.github.com/repos/hyperledger/iroha-python/issues/23,replace ed25519 module,"This PR makes that ED25519 which used dynamic loading Library replaced by the static link's one.
+After this pull request merged, we can use `iroha-python` with just `python setup.py install`
+",closed,True,2017-10-06 08:06:36,2019-01-21 09:55:07
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/22,https://api.github.com/repos/hyperledger/iroha-python/issues/22,Develop,"# Iroha Python v0.95
+Iroha Python v0.95
+
+## Install
+
+### Python
+
+Supported Python versions: 3.6 (see `tox.ini`). ( WIP : not tried 2.x )
+Multiple Python versions can be installed with your system package manager or with the [pyenv](https://github.com/pyenv/pyenv) tool.
+The pyenv itself can also be installed with a system package manager or with the [pyenv-installer](https://github.com/pyenv/pyenv-installer) script.
+
+#### Example installation steps
+
+```sh
+# Install pyenv using pyenv-installer
+curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+# pyenv initialization
+export PATH=""${HOME}/.pyenv/bin:${PATH}""
+eval ""$(pyenv init -)""
+# Also initialize on startup; if you are using zsh, replace ""~/.bashrc"" with ""~/.zshrc""
+echo 'export PATH=""${HOME}/.pyenv/bin:${PATH}""' >> ~/.bashrc
+echo 'eval ""$(pyenv init -)""' >> ~/.bashrc
+# Install the most recent Python versions (both 3 and 2)
+pyenv install 3.6.0
+pyenv install 2.7.13
+# Bring both installed versions into the scope: we are testing against both versions
+pyenv global 3.6.0 2.7.13
+# Only the ""tox"" package needs to be installed manually
+pip install tox
+```
+
+## How to use
+### Install
+```
+$ cd iroha-python
+$ pip install -r requirement.txt
+$ make all
+$ python setup.py install
+```
+
+### Example Code
+```python
+import time
+import iroha
+
+iroha.setDebugLog()
+
+# Generate Connection used to connect iroha
+connection = iroha.gen_connection(ip=""127.0.0.1"",port=50051)
+#connection = iroha.gen_connection(ip=""0.0.0.0"",port=""10001"")
+creator = ""sioya@sporting.salt""
+tx_counter = 0
+
+# Generate Keypairs ( Signatories )
+keypairs = []
+keypairs.append(iroha.keygen())
+keypairs.append(iroha.keygen())
+
+
+# Generate Creator creating transaction and query
+creator = iroha.gen_creator(""sinkai@jump.com"",keypairs,connection)
+
+# Create Transaction
+tx1 = creator.create_tx()
+
+# Add Commmand to tx1
+tx1.add_command(
+    iroha.CreateAccount(
+        account_name = ""sinkai"",
+        domain_id = ""jump.com"",
+        main_pubkey = keypairs[0].public_key,
+    )
+)
+
+# Sign Transaction
+tx1.sign()
+
+# Verify tx1 Transaction
+assert(tx1.verify())
+
+# Issue tx1 Transaction
+tx1.issue()
+
+# Check tranaction status from iroha
+while tx1.check().tx_status == iroha.TxStatus.Value(""ON_PROCESS""):
+    print(""Wait Commit"")
+    time.sleep(0.1)
+
+
+# Create Query
+query1 = creator.create_query()
+
+# Set Query to query1
+query1.set_request(
+    iroha.GetAccount(
+        account_id = ""sinkai@jump.com""
+    )
+)
+
+# Verify query1 Query
+assert(query1.verify())
+
+# Issue query1 Query and Get Response
+ret = query1.issue()
+
+# Handling query response
+if ret.verify():
+    if ret.has_error():
+        print( ret.error_response() )
+    elif ret.has_account():
+        print( ret.account() )
+    else:
+        assert(False)
+else:
+    print(""unverified"")
+    assert(False)
+
+```
+
+### test
+```
+$ tox
+```",closed,True,2017-10-04 01:28:08,2019-01-21 09:54:41
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/21,https://api.github.com/repos/hyperledger/iroha-python/issues/21,Change Directory,"# Goal
+- [x] Success setup.py
+- [x] Change Directory structure
+- [x] Change Readme.md
+- [x] Create Document
+- [x] Success example_iroha_python.py",closed,True,2017-10-03 09:58:31,2019-01-21 09:55:10
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/20,https://api.github.com/repos/hyperledger/iroha-python/issues/20,Feature Connection to iroha,"# Connection to iroha
+Until enable execute example_iroha_python.py (Use mock-iroha)
+
+# Progress
+- [x] Connection
+  - [x] gen / get stub
+- [x] transaction
+  - [x] issue
+  - [x] check
+- [x] query
+  - [x] issue
+- [x] example_iroha_python
+  - [x] local verify check
+
+# Test
+- [x] Connection
+  - [x] except test
+",closed,True,2017-10-02 10:43:14,2019-01-21 09:55:08
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/issues/19,https://api.github.com/repos/hyperledger/iroha-python/issues/19,Switch to spare peer when connection to Iroha fails,Switch to spare peer when connection to Iroha fails.,closed,False,2017-10-02 06:59:56,2019-01-21 09:52:11
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/18,https://api.github.com/repos/hyperledger/iroha-python/issues/18,Feature query,"# Create Transaction
+Until the creator creates a transaction
+# Progress
+- [x] creator
+  - [x] create_query
+- [x] query
+  - [x] set_request
+  - [x] verify
+  - [x] set_request
+- [x] request
+   - [x] wrap_request ( e.g : payload, get_account -> payload.get_account = get_account )
+- [x] response
+   - [x] wrapper response data
+
+# Test Progress
+- [x] creator
+  - [x] create_query
+- [x] query
+  - [x] set_request
+  - [x] verify
+  - [x] set_request
+- [x] request
+   - [x] wrap_request ( e.g : payload, get_account -> payload.get_account = get_account )
+- [x] response
+   - [x] wrapper response data",closed,True,2017-09-29 08:20:57,2019-01-21 09:55:00
+iroha-python,a-r-g-v,https://github.com/hyperledger/iroha-python/issues/17,https://api.github.com/repos/hyperledger/iroha-python/issues/17,need docstring,"In order to explain how to use the API, top of all public methods is required docstring (PEP-257) ",closed,False,2017-09-29 06:57:05,2017-10-02 11:44:19
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/16,https://api.github.com/repos/hyperledger/iroha-python/issues/16,Feature Create Transaction,"# Create Transaction
+Until the creator creates a transaction
+# Progress
+- [x] creator
+  - [x] create_tx
+- [x] transaction
+  - [x] set_status
+  - [x] sign
+  - [x] verify
+  - [x] add_command
+- [x] command
+   - [x] wrap_command ( e.g : add_signatory -> Command( add_signatory = add_signatory ) )
+
+# Test Progress
+- [x] creator
+  - [x] create_tx
+- [x] transaction
+  - [x] set_status
+  - [x] sign
+  - [x] verify
+  - [x] add_command
+- [x] command
+   - [x] wrap_command ( e.g : add_signatory -> Command( add_signatory = add_signatory ) )",closed,True,2017-09-28 11:44:54,2019-01-21 09:54:59
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/15,https://api.github.com/repos/hyperledger/iroha-python/issues/15,Pylint  導入,"# Pylintの導入
+# Progress
+- [x] add .pylintrc
+- [x] add .circleci
+- [x] rewrite all code",closed,True,2017-09-28 07:04:59,2019-01-21 09:54:57
+iroha-python,satellitex,https://github.com/hyperledger/iroha-python/pull/14,https://api.github.com/repos/hyperledger/iroha-python/issues/14,Test Tool の導入,"# TestTool 導入
+tox を導入し test_helper を動かす。
+# Progress
+- [x] test
+- [x] tox
+- [x] dependences library
+- [x] dependences environment
+",closed,True,2017-09-27 06:44:45,2019-01-21 09:54:55
+iroha-python,rjones-lf,https://github.com/hyperledger/iroha-python/pull/13,https://api.github.com/repos/hyperledger/iroha-python/issues/13,Create cla.md,,closed,True,2017-06-17 08:18:18,2017-06-17 08:21:16
+iroha-python,rjones-lf,https://github.com/hyperledger/iroha-python/pull/12,https://api.github.com/repos/hyperledger/iroha-python/issues/12,Create cla.md,do not merge,closed,True,2017-06-16 04:58:46,2017-06-16 04:59:22
+iroha-python,rjones-lf,https://github.com/hyperledger/iroha-python/pull/11,https://api.github.com/repos/hyperledger/iroha-python/issues/11,Create clahub,This PR exists to trigger CLAHUB. DO NOT MERGE,closed,True,2017-06-02 17:51:22,2017-06-16 04:59:22
+iroha-python,MizukiSonoko,https://github.com/hyperledger/iroha-python/issues/10,https://api.github.com/repos/hyperledger/iroha-python/issues/10,We want to install using 'pip',"- [ ] Decide using who's account
+Owner of https://pypi.python.org/pypi/hyperledger/0.1.5 isn't related to Hyperledger directly.
+(owner is member, but personal account)
+- [ ] Sign up PyPI(https://pypi.python.org/pypi?%3Aaction=register_form).
+
+
+## Goal
+
+```
+$ pip install iroha-python
+```
+",closed,False,2017-03-29 01:58:56,2019-01-21 09:52:21
+iroha-python,emilmelnikov,https://github.com/hyperledger/iroha-python/pull/9,https://api.github.com/repos/hyperledger/iroha-python/issues/9,Setup CircleCI,"* Add CircleCI config
+* Downgrade to Python 3.5.2 because the latest Apline Linux has it
+* Add build badge from shield.io",closed,True,2017-03-28 12:27:24,2017-03-29 09:51:13
+iroha-python,emilmelnikov,https://github.com/hyperledger/iroha-python/pull/8,https://api.github.com/repos/hyperledger/iroha-python/issues/8,Add FlatBuffers support,"* Add FlatBuffers schema and tests
+* Remove protobuf code
+* Update README",closed,True,2017-03-23 14:40:53,2017-03-28 12:13:46
+iroha-python,takemiyamakoto,https://github.com/hyperledger/iroha-python/issues/7,https://api.github.com/repos/hyperledger/iroha-python/issues/7,enable circle-ci,,closed,False,2017-03-23 13:18:34,2017-03-24 00:32:57
+iroha-python,takemiyamakoto,https://github.com/hyperledger/iroha-python/issues/6,https://api.github.com/repos/hyperledger/iroha-python/issues/6,Convert to use grpc + flatbuffers,This library needs to be converted to use flatbuffers and grpc.,closed,False,2017-03-16 07:10:57,2017-09-28 05:45:40
+iroha-python,takemiyamakoto,https://github.com/hyperledger/iroha-python/pull/5,https://api.github.com/repos/hyperledger/iroha-python/issues/5,Feature/ed25519 sha3,,closed,True,2017-03-15 04:25:18,2017-03-16 02:18:06
+iroha-python,takemiyamakoto,https://github.com/hyperledger/iroha-python/pull/4,https://api.github.com/repos/hyperledger/iroha-python/issues/4,Feature/grpc,,closed,True,2017-03-14 02:58:01,2017-03-15 04:25:03
+iroha-python,takemiyamakoto,https://github.com/hyperledger/iroha-python/pull/3,https://api.github.com/repos/hyperledger/iroha-python/issues/3,Feature/ed25519 sha3,,closed,True,2017-03-11 00:46:47,2017-03-14 02:58:35
+iroha-python,Warchant,https://github.com/hyperledger/iroha-python/issues/2,https://api.github.com/repos/hyperledger/iroha-python/issues/2,Requirements.txt is missing,"```
+pip install -r requirements.txt
+```
+
+But where is requirements.txt?
+
+```
+├── iroha.py
+├── LICENSE
+├── README.md
+├── test_iroha.py
+└── tox.ini
+```",closed,False,2017-03-06 17:45:38,2017-03-16 13:54:32
+iroha-python,MizukiSonoko,https://github.com/hyperledger/iroha-python/issues/1,https://api.github.com/repos/hyperledger/iroha-python/issues/1,design,"I propose this.
+
+## Archtecture
+```
+iroha
+├── transaction.py
+|    ├── Builder
+|    └── Validator
+├── repository.py
+|    ├── AssetRepo
+|    └── TransactionRepo
+├── crypto.py
+|    ├── Hash
+|    └── KeyPair
+└── connection.py
+```
+",closed,False,2017-03-02 08:44:11,2017-03-07 12:03:48

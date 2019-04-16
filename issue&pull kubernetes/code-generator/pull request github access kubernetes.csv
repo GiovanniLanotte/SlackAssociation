@@ -1,0 +1,43 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/2,https://github.com/kubernetes/code-generator/pull/2,eparis,Introduce content from kubernetes-template-project,This did not include a README or a RELEASE file.,[],1,2017-09-07 23:30:35,2018-01-15 15:34:18,2018-01-15 15:34:18,False,,,dirty,False,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/3,https://github.com/kubernetes/code-generator/pull/3,sttts,Add LICENSE and README.md,,['lavalamp'],1,2017-09-08 08:16:25,2017-09-08 16:25:29,2017-09-08 16:25:29,True,2017-09-08 16:25:29,lavalamp,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/10,https://github.com/kubernetes/code-generator/pull/10,tamalsaha,Add go flags to go-to-protobuf,,[],1,2017-10-20 02:28:49,2017-10-26 00:36:35,2017-10-26 00:36:38,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/12,https://github.com/kubernetes/code-generator/pull/12,nikhita,Remove README and LICENSE,"Addresses https://github.com/kubernetes/kubernetes/issues/54398.
+
+/cc @sttts ",[],1,2017-10-23 11:44:20,2017-10-25 19:17:22,2017-10-25 19:17:22,True,2017-10-25 19:17:22,sttts,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/17,https://github.com/kubernetes/code-generator/pull/17,pwittrock,Proposal for meta-generator,"This is a proposal in the form of what would be the user facing documentation for a meta code generation tool.
+
+kubernetes/kubernetes#53524","['sttts', 'caesarxuchao']",3,2017-10-30 21:04:00,2017-11-01 22:42:37,2017-11-02 16:25:09,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/23,https://github.com/kubernetes/code-generator/pull/23,mrIncompetent,Remove ToLower for imports / package names,The current ToLower breaks repos which are not all lowercase. Like in my case: mrIncompetent,[],1,2017-11-25 00:34:57,2017-11-25 00:44:25,2017-11-25 00:44:33,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/26,https://github.com/kubernetes/code-generator/pull/26,wackxu,add dependency for release-1.8,"When I use release-1.8, I use glide to add this into vendor, but when I run `generate-groups.sh`, there is something wrong, because `code-generator` can not found its dependency. So I add the dependency for people to easy use.
+
+/assign @sttts ",['munnerz'],1,2017-12-05 10:48:12,2017-12-12 10:31:35,2017-12-12 10:31:35,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/29,https://github.com/kubernetes/code-generator/pull/29,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",[],1,2017-12-20 18:31:44,2017-12-20 19:55:06,2017-12-20 20:13:58,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/60,https://github.com/kubernetes/code-generator/pull/60,dims,Switch from glog to klog,"Change-Id: I49cb7d59bd8798cb5a41c7e9a19aa59fdb260aca
+
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",[],1,2018-11-09 03:57:10,2018-11-09 03:57:53,2018-11-09 03:57:53,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/61,https://github.com/kubernetes/code-generator/pull/61,booxter,Expose object tracker for fake clientsets,"Not every object kind can be registered via tracker .Add() called as part of
+SimpleClientset initialization. This is because .Add() relies on
+UnsafeGuessKindToResource to convert object kinds into resource type names,
+which is broken for some resources. An example of an affected kind is
+NetworkAttachmentDefinitions CRD that uses network-attachment-definitions as
+its resource type name. When UnsafeGuessKindToResource is called for this kind,
+it returns networkattachmentdefinitions (without dashes).
+
+As per the comment inside .Add, kinds affected by UnsafeGuessKindToResource
+deficiencies should instead register objects using tracker .Create() method.
+Problem is, current SimpleClientset struct definition doesn't expose the object
+tracker in any way, which makes it impossible to properly register these kinds
+at all.
+
+To address the issue, this change modifies the definition of SimpleClientset
+struct to expose the object tracker used via Tracker() method.
+
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",[],1,2018-11-14 23:10:58,2018-11-14 23:30:26,2018-11-14 23:30:27,False,,,unknown,,closed
+code-generator,https://api.github.com/repos/kubernetes/code-generator/pulls/66,https://github.com/kubernetes/code-generator/pull/66,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,[],1,2019-03-08 17:52:49,2019-03-09 01:19:22,2019-03-09 01:19:23,False,,,unknown,,closed

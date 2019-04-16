@@ -1,0 +1,48 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-sdk-dotnet,paparent,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/8,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/8,Unit testing,"Hi ! 
+
+I'd like to have some help on how to implement unit testing for a TP that is using this SDK ! 
+
+Let say I've a method that looks like : `Properties FetchProperties(TransactionContext context, string recordId)` 
+
+How can I mock the TransactionContext ? I tried with the Moq library but since it's not an interface, and the methods aren't virtual, I can't :(
+
+(sorry, not used to unit test in c#, might be trivial!)",open,False,2019-02-12 16:26:26,2019-02-13 16:45:10
+sawtooth-sdk-dotnet,rbuysse,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/7,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-07 16:34:18,2019-02-07 18:47:26
+sawtooth-sdk-dotnet,tmarkovski,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/6,Add docker to generate protos and build SDK locally,"This PR updates the Dockerfile to automatically generate the model files from the *.proto definitions, for those looking to buld the SDK themselves. These files are not included in the repo, but are required to build the solution.
+Readme file updated with instructions.",open,True,2019-02-05 22:49:17,2019-02-12 15:44:42
+sawtooth-sdk-dotnet,paparent,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/5,Compile the library,"Hi, I'd like to know how to compile the library? I've many error about `Message`, `PingResponse`, etc could not be found. Can't find `Message.Types` either.",open,False,2019-02-05 19:55:23,2019-02-05 22:55:34
+sawtooth-sdk-dotnet,paparent,https://github.com/hyperledger/sawtooth-sdk-dotnet/issues/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/4,InvalidTransactionException,"I did a very simple Transaction Processor for testing how Sawtooth works. Something that is very similar to the intkey tp. So basicly when we set an already existing value, it does an error (InvalidTransactionException). But when I query the sawtooth RestAPI /batch_statuses, the invalid transactions keeps growing and growing. I was told that when this exception, it shouldn't retry.
+
+Is this an expected behavior ?",open,False,2019-01-29 20:05:54,2019-02-08 15:04:58
+sawtooth-sdk-dotnet,rbuysse,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/3,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/3,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-22 22:26:58,2019-01-22 22:43:44
+sawtooth-sdk-dotnet,tmarkovski,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/2,Sawtooth SDK for .NET Core,"Sawtooth SDK for .NET Core
+
+This is a .NET implementation of the SDK. It features full support for the client libraries. The SDK targets netstandard2.0, making it usable in all .NET Core applications, including mobile frameworks like Xamarin.
+
+Features
+- Transaction Processor
+  - ITransactionHandler interface - main handler implementation 
+  - TransactionContext - provides access to methods for managing the state as well as events and receipt data
+- Client modules
+  - ISigner and Signer implementation - support for signing and verifying signatures. Signer class also includes methods for generating key pairs
+  - ValidatorClient - class that wraps access to the ZMQ based on the same stream logic as the transaction processor. Provides method to get/submit batches and transactions as well as sending any message
+
+The SDK uses the Task Parallel Library to provide idiomatic method signatures for working with request/response messaging.
+
+Dependencies
+- BouncyCastle
+- Google.Protobuf
+- NetMQ
+
+Examples
+Two projects implementing the ""intkey"" processor family are included in the examples as well as a tutorial on running the code.
+
+Protobufs
+Protobufs are generated using Google.Protobuf.Tools package that provides ""protoc"" binaries for all platforms.
+
+Unit Tests
+Basic unit tests with xUnit are included. Better code coverage with additional unit tests will be added soon.
+
+Signed-off-by: Tomislav Markovski <tmarkovski@gmail.com>",closed,True,2018-03-19 19:41:06,2019-02-06 14:49:48
+sawtooth-sdk-dotnet,ryjones,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/1,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/issues/1,Create dco,,closed,True,2018-03-16 23:17:33,2018-03-16 23:18:38

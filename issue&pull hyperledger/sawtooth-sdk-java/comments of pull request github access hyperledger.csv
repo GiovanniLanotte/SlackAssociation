@@ -1,0 +1,2146 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,same formatting issue as above,3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 01:22:28,245852460,"@@ -0,0 +1,499 @@
++********************************************
++Client: Building and Submitting Transactions
++********************************************
++
++The process of encoding information to be submitted to a distributed ledger is
++generally non-trivial. A series of cryptographic safeguards are used to
++confirm identity and data validity. Hyperledger Sawtooth is no different, but
++the Java SDK does provide client functionality that abstracts away
++most of these details, and greatly simplifies the process of making changes to
++the blockchain.
++
++
++Creating a Private Key and Signer
++=================================
++
++In order to confirm your identity and sign the information you send to the
++validator, you will need a 256-bit key. Sawtooth uses the secp256k1 ECDSA
++standard for signing, which means that almost any set of 32 bytes is a valid
++key. It is fairly simple to generate a valid key using the SDK's *signing*
++module.
++
++A *Signer* wraps a private key and provides some convenient methods for signing
++bytes and getting the private key's associated public key.
++
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import sawtooth.sdk.signing.Secp256k1Context
++    import sawtooth.sdk.signing.Signer
++
++    val context = Secp256k1Context()
++    val privateKey = context.newRandomPrivateKey()
++    val signer = Signer(context, privateKey)
++
++**Java**
++
++.. code-block::  java
++
++    import sawtooth.sdk.signing.PrivateKey;
++    import sawtooth.sdk.signing.Secp256k1Context;
++    import sawtooth.sdk.signing.Signer;
++
++    private Secp256k1Context context  = new Secp256k1Context();
++    private PrivateKey privateKey = context.newRandomPrivateKey();
++    private Signer signer = new Signer(context, privateKey);
++
++
++.. note::
++
++   This key is the **only** way to prove your identity on the blockchain. Any
++   person possessing it will be able to sign Transactions using your identity,
++   and there is no way to recover it if lost. It is very important that any
++   private key is kept secret and secure.
++
++
++Encoding Your Payload
++=====================
++
++   Transaction payloads are composed of binary-encoded data that is opaque to the
++   validator. The logic for encoding and decoding them rests entirely within the
++   particular Transaction Processor itself. As a result, there are many possible
++   formats, and you will have to look to the definition of the Transaction
++   Processor itself for that information. As an example, the *IntegerKey*
++   Transaction Processor uses a payload of three key/value pairs encoded as
++   `CBOR <https://en.wikipedia.org/wiki/CBOR>`_. Creating one might look like this:
++
++
++   **Kotlin**
++
++   .. code-block:: kotlin
++
++       import co.nstant.`in`.cbor.CborBuilder
++       import co.nstant.`in`.cbor.CborEncoder
++
++       val payload = ByteArrayOutputStream()
++       CborEncoder(payload).encode(
++            CborBuilder()
++                .addMap()
++                .put(""Verb"", ""set"")
++                .put(""Name"", ""foo"")
++                .put(""Value"", 42)
++                .end()
++                .build())
++
++        val encodedBytes = payload.toByteArray()
++
++   **Java**
++
++   .. code-block::  java
++
++       import co.nstant.in.cbor.CborBuilder;
++       import co.nstant.in.cbor.CborEncoder;
++       import co.nstant.in.cbor.CborException;
++
++       ByteArrayOutputStream payload = new ByteArrayOutputStream();
++        try {
++            new CborEncoder(payload).encode(new CborBuilder()
++                    .addMap()
++                    .put(""Verb"", ""set"")
++                    .put(""Name"", ""foo"")
++                    .put(""Value"", 42)
++                    .end()
++                    .build());
++        } catch (CborException e) {
++            e.printStackTrace();
++        }
++        byte[] payloadBytes = payload.toByteArray();
++
++
++Building the Transaction
++========================
++
++*Transactions* are the basis for individual changes of state to the Sawtooth
++blockchain. They are composed of a binary payload, a binary-encoded
++*TransactionHeader* with some cryptographic safeguards and metadata about how
++it should be handled, and a signature of that header. It would be worthwhile
++to familiarize yourself with the information in  `Transactions and Batches
++<https://sawtooth.hyperledger.org/docs/core/releases/latest/architecture/transactions_and_batches.html>`_,
++particularly the definition of TransactionHeaders.
++
++
++1. Create the Transaction Header
++--------------------------------
++
++A TransactionHeader contains information for routing a transaction to the
++correct transaction processor, what input and output state addresses are
++involved, references to prior transactions it depends on, and the public keys
++associated with the its signature. The header references the payload through a
++SHA-512 hash of the payload bytes.
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import sawtooth.sdk.protobuf.TransactionHeader
++    import java.util.UUID
++
++    import com.google.common.io.BaseEncoding
++    import java.security.MessageDigest
++
++    fun hash(input: String): String {
++        val digest = MessageDigest.getInstance(""SHA-512"")
++        digest.reset()
++        digest.update(input.toByteArray())
++        return BaseEncoding.base16().lowerCase().encode(digest.digest())
++    }
++
++    val header = TransactionHeader.newBuilder()
++      .setSignerPublicKey(signer.publicKey.hex())
++      .setFamilyName(""intkey"")
++      .setFamilyVersion(""1.0"")
++      .addInputs(""1cf1266e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7"")
++      .addOutputs(""1cf1266e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7"")
++      .setPayloadSha512(hash(payload))
++      .setBatcherPublicKey(signer.publicKey.hex())
++      .setNonce(UUID.randomUUID().toString())
++      .build()
++
++
++**Java**
++
++.. code-block::  java
++
++    import sawtooth.sdk.protobuf.TransactionHeader;
++    import java.util.UUID;
++
++    TransactionHeader header = TransactionHeader.newBuilder()
++      .setSignerPublicKey(signer.getPublicKey().hex())
++      .setFamilyName(""xo"")
++      .setFamilyVersion(""1.0"")
++      .addInputs(""1cf1266e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7"")
++      .addOutputs(""1cf1266e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7"")
++      .setPayloadSha512(hash(payload))
++      .setBatcherPublicKey(signer.getPublicKey().hex())
++      .setNonce(UUID.randomUUID().toString())
++      .build();
++
++.. note::
++
++   Remember that a *batcher public_key* is the hex public key matching the private
++   key that will later be used to sign a Transaction's Batch, and
++   *dependencies* are the *header signatures* of Transactions that must be
++   committed before this one (see `TransactionHeaders
++   <https://sawtooth.hyperledger.org/docs/core/releases/latest/
++   architecture/transactions_and_batches.html>`_).
++
++.. note::
++
++   The *inputs* and *outputs* are the state addresses a Transaction is allowed
++   to read from or write to. With the Transaction above, we referenced the
++   specific address where the value of  ``'foo'`` is stored.  Whenever possible,
++   specific addresses should be used, as this will allow the validator to
++   schedule transaction processing more efficiently.
++
++   Note that the methods for assigning and validating addresses are entirely up
++   to the Transaction Processor. In the case of IntegerKey, there are `specific
++   rules to generate valid addresses <https://sawtooth.hyperledger.org/docs/core/
++   releases/latest/transaction_family_specifications/
++   integerkey_transaction_family.html#addressing>`_, which must be followed or
++   Transactions will be rejected. You will need to follow the addressing rules
++   for whichever Transaction Family you are working with.
++
++
++2. Create the Transaction
++-------------------------
++
++Once the TransactionHeader is constructed, its bytes are then used to create a
++signature.  This header signature also acts as the ID of the transaction.  The
++header bytes, the header signature, and the payload bytes are all used to
++construct the complete Transaction.
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import com.google.protobuf.ByteString
++    import sawtooth.sdk.protobuf.Transaction
++
++    val signature = signer.sign(header.toByteArray())
++
++    val transaction =  Transaction.newBuilder()
++                        .setHeader(header.toByteString())
++                        .setPayload(ByteString.copyFrom(payloadBytes))
++                        .setHeaderSignature(signature)
++                        .build()
++
++**Java**
++
++.. code-block::  java
++
++    import com.google.protobuf.ByteString;
++    import sawtooth.sdk.protobuf.Transaction;
++
++    String signature = signer.sign(header.toByteArray());
++
++    Transaction transaction =  Transaction.newBuilder()
++                                   .setHeader(header.toByteString())
++                                   .setPayload(ByteString.copyFrom(payloadBytes))
++                                   .setHeaderSignature(signature)
++                                   .build();
++
++
++3. (optional) Encode the Transaction(s)
++---------------------------------------
++
++If the same machine is creating Transactions and Batches there is no need to
++encode the Transaction instances. However, in the use case where Transactions
++are being batched externally, they must be serialized before being transmitted
++to the batcher. The Java SDK offers two options for this. One or more
++Transactions can be combined into a serialized *TransactionList* method, or can
++be serialized as a single Transaction.
++
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import sawtooth.sdk.protobuf.TransactionList
++
++    val txn_list_bytes = TransactionList.newBuilder()
++        .addTransactions(txn1)
++        .addTransactions(txn2)
++        .build()
++        .toByteString()
++
++    txn_bytes = txn.toByteString()
++
++**Java**
++
++.. code-block::  java
++
++    import com.google.protobuf.ByteString;
++    import sawtooth.sdk.protobuf.TransactionList;
++
++    ByteString txn_list_bytes = TransactionList.newBuilder()
++        .addTransactions(txn1)
++        .addTransactions(txn2)
++        .build()
++        .toByteString();
++
++    ByteString txn_bytes = transaction.toByteString();
++
++
++Building the Batch
++==================
++
++Once you have one or more Transaction instances ready, they must be wrapped in a
++*Batch*. Batches are the atomic unit of change in Sawtooth's state. When a Batch
++is submitted to a validator each Transaction in it will be applied (in order),
++or *no* Transactions will be applied. Even if your Transactions are not
++dependent on any others, they cannot be submitted directly to the validator.
++They must all be wrapped in a Batch.
++
++
++1. Create the BatchHeader
++-------------------------
++
++Similar to the TransactionHeader, there is a *BatchHeader* for each Batch.
++As Batches are much simpler than Transactions, a BatchHeader needs only  the
++public key of the signer and the list of Transaction IDs, in the same order they
++are listed in the Batch.
++
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import sawtooth.sdk.protobuf.BatchHeader
++
++    val transactions = arrayOf(transaction)
++
++    val batchHeader = BatchHeader.newBuilder()
++           .setSignerPublicKey(signer.publicKey.hex())
++           .addAllTransactionIds(
++              transactions.map { transaction -> transaction.headerSignature }
++           )
++           .build()
++
++**Java**
++
++.. code-block::  java
++
++      import sawtooth.sdk.protobuf.BatchHeader;
++      import sawtooth.sdk.protobuf.Transaction;
++
++      List<Transaction> transactions = new ArrayList();
++      transactions.add(transaction);
++
++      BatchHeader batchHeader = BatchHeader.newBuilder()
++          .setSignerPublicKey(signer.getPublicKey().hex())
++          .addAllTransactionIds(
++                  transactions
++                          .stream()
++                          .map(Transaction::getHeaderSignature)
++                          .collect(Collectors.toList())
++          )
++          .build();
++
++2. Create the Batch
++-------------------
++
++Using the SDK, creating a Batch is similar to creating a transaction.  The
++header is signed, and the resulting signature acts as the Batch's ID.  The Batch
++is then constructed out of the header bytes, the header signature, and the
++transactions that make up the batch.
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++        import sawtooth.sdk.protobuf.Batch
++
++        val batchSignature = signer.sign(batchHeader.toByteArray())
++
++        val batch = Batch.newBuilder()
++            .setHeader(batchHeader.toByteString())
++            .addAllTransactions(transactions.asIterable())
++            .setHeaderSignature(batchSignature)
++            .build()
++
++**Java**
++
++.. code-block::  java
++
++    import sawtooth.sdk.protobuf.Batch;
++
++    String batchSignature = signer.sign(batchHeader.toByteArray());
++
++    Batch batch = Batch.newBuilder()
++             .setHeader(batchHeader.toByteString())
++             .addAllTransactions(transactions)
++             .setHeaderSignature(batchSignature)
++             .build();
++
++3. Encode the Batch(es) in a BatchList
++--------------------------------------
++
++In order to submit Batches to the validator, they  must be collected into a
++*BatchList*.  Multiple batches can be submitted in one BatchList, though the
++Batches themselves don't necessarily need to depend on each other. Unlike
++Batches, a BatchList is not atomic. Batches from other clients may be
++interleaved with yours.
++
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import sawtooth.sdk.protobuf.BatchList
++
++    val batchList = BatchList.newBuilder()
++        .addBatches(batch)
++        .build()
++        .toByteArray()
++
++**Java**
++
++.. code-block::  java
++
++      import sawtooth.sdk.protobuf.BatchList;
++
++      byte[] batchListBytes = BatchList.newBuilder()
++              .addBatches(batch)
++              .build()
++              .toByteArray();
++
++.. note::
++
++   Note, if the transaction creator is using a different private key than the
++   batcher, the *batcher public_key* must have been specified for every Transaction,
++   and must have been generated from the private key being used to sign the
++   Batch, or validation will fail.
++
++
++Submitting Batches to the Validator
++===================================
++
++   The prescribed way to submit Batches to the validator is via the REST API.",,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/245852460,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r245852460,dplumb94
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,"Formatting is a bit off here, looks like it is indented one tab too far.",3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 01:24:09,245852741,"@@ -0,0 +1,499 @@
++********************************************
++Client: Building and Submitting Transactions
++********************************************
++
++The process of encoding information to be submitted to a distributed ledger is
++generally non-trivial. A series of cryptographic safeguards are used to
++confirm identity and data validity. Hyperledger Sawtooth is no different, but
++the Java SDK does provide client functionality that abstracts away
++most of these details, and greatly simplifies the process of making changes to
++the blockchain.
++
++
++Creating a Private Key and Signer
++=================================
++
++In order to confirm your identity and sign the information you send to the
++validator, you will need a 256-bit key. Sawtooth uses the secp256k1 ECDSA
++standard for signing, which means that almost any set of 32 bytes is a valid
++key. It is fairly simple to generate a valid key using the SDK's *signing*
++module.
++
++A *Signer* wraps a private key and provides some convenient methods for signing
++bytes and getting the private key's associated public key.
++
++
++**Kotlin**
++
++.. code-block:: kotlin
++
++    import sawtooth.sdk.signing.Secp256k1Context
++    import sawtooth.sdk.signing.Signer
++
++    val context = Secp256k1Context()
++    val privateKey = context.newRandomPrivateKey()
++    val signer = Signer(context, privateKey)
++
++**Java**
++
++.. code-block::  java
++
++    import sawtooth.sdk.signing.PrivateKey;
++    import sawtooth.sdk.signing.Secp256k1Context;
++    import sawtooth.sdk.signing.Signer;
++
++    private Secp256k1Context context  = new Secp256k1Context();
++    private PrivateKey privateKey = context.newRandomPrivateKey();
++    private Signer signer = new Signer(context, privateKey);
++
++
++.. note::
++
++   This key is the **only** way to prove your identity on the blockchain. Any
++   person possessing it will be able to sign Transactions using your identity,
++   and there is no way to recover it if lost. It is very important that any
++   private key is kept secret and secure.
++
++
++Encoding Your Payload
++=====================
++
++   Transaction payloads are composed of binary-encoded data that is opaque to the",,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/245852741,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r245852741,dplumb94
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,We should add the Android client to this note once it is merged.,3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 01:31:11,245853726,"@@ -0,0 +1,20 @@
++Overview
++========
++
++This tutorial shows how to use the Sawtooth Java SDK to develop a
++client. The client is responsible for creating and signing transactions, combining
++those transactions into batches, and submitting them to the validator. The
++client can post batches through the REST API or connect directly to the
++validator via `ZeroMQ <http://zeromq.org>`_.
++
++.. note::
++
++   This tutorial demonstrates the relevant concepts for a Sawtooth
++   client, but does not create a complete implementation.
++
++   For a Java implementation of the XO transaction family, see
++   `https://github.com/hyperledger/sawtooth-sdk-java/tree/master/examples/xo_java
++   <https://github.com/hyperledger/sawtooth-sdk-java/tree/master/examples/xo_java>`_.
++",18,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/245853726,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r245853726,dplumb94
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,"There are a few Sphinx extensions that allow you to have tabbed views. That might be nice for these places where we have a Java project/Android project, or Java/Kotlin examples. Not sure if it is worth the complication of adding a 3rd party extension though. Maybe run it by @chenette ",3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 01:42:24,245855450,"@@ -0,0 +1,52 @@
++========================
++Importing the Java SDK
++========================
++
++.. note::
++   The Sawtooth Java SDK requires JDK 8 or above.
++
++Once you've got a working version of Sawtooth, there are a few additional
++steps you'll need to take to get started developing for Sawtooth.
++
++**Java Project**",11,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/245855450,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r245855450,dplumb94
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,Agreed!,3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 15:04:32,246028378,"@@ -0,0 +1,20 @@
++Overview
++========
++
++This tutorial shows how to use the Sawtooth Java SDK to develop a
++client. The client is responsible for creating and signing transactions, combining
++those transactions into batches, and submitting them to the validator. The
++client can post batches through the REST API or connect directly to the
++validator via `ZeroMQ <http://zeromq.org>`_.
++
++.. note::
++
++   This tutorial demonstrates the relevant concepts for a Sawtooth
++   client, but does not create a complete implementation.
++
++   For a Java implementation of the XO transaction family, see
++   `https://github.com/hyperledger/sawtooth-sdk-java/tree/master/examples/xo_java
++   <https://github.com/hyperledger/sawtooth-sdk-java/tree/master/examples/xo_java>`_.
++",18,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/246028378,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r246028378,eloaverona
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,"I tried to use this one [sphinxcontrib-osexample](https://github.com/svx/sphinxcontrib-osexample) for codeblock tabs. But I couldn't make it work following their documentation. So, I decided not to spend much time trying to figure it out. But I can spend more time in it, if needed. ",3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 15:09:10,246030345,"@@ -0,0 +1,52 @@
++========================
++Importing the Java SDK
++========================
++
++.. note::
++   The Sawtooth Java SDK requires JDK 8 or above.
++
++Once you've got a working version of Sawtooth, there are a few additional
++steps you'll need to take to get started developing for Sawtooth.
++
++**Java Project**",11,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/246030345,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r246030345,eloaverona
+https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,"Tabbed view isn't going to work great as a PDF (or other non-interactive formats), so better to avoid.",3cf2611fbb41e9e7871380b640b1c3f423178b88,2019-01-08 15:19:23,246034560,"@@ -0,0 +1,52 @@
++========================
++Importing the Java SDK
++========================
++
++.. note::
++   The Sawtooth Java SDK requires JDK 8 or above.
++
++Once you've got a working version of Sawtooth, there are a few additional
++steps you'll need to take to get started developing for Sawtooth.
++
++**Java Project**",11,2019-01-08 15:20:46,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/246034560,https://github.com/hyperledger/sawtooth-sdk-java/pull/17#discussion_r246034560,vaporos
+https://github.com/hyperledger/sawtooth-sdk-java/pull/16,https://github.com/hyperledger/sawtooth-sdk-java/pull/16,This looks left over from debugging.,4d1f65e0ea9e7addb244cf28cdf0364b7255941a,2019-01-04 16:29:13,245348303,"@@ -66,6 +68,8 @@ services:
+     expose:
+       - 4004
+       - 8008
++    ports:
++      - ""8008:8008""",,2019-01-04 16:30:53,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/245348303,https://github.com/hyperledger/sawtooth-sdk-java/pull/16#discussion_r245348303,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/16,https://github.com/hyperledger/sawtooth-sdk-java/pull/16,Updated!,4d1f65e0ea9e7addb244cf28cdf0364b7255941a,2019-01-04 16:31:26,245348959,"@@ -66,6 +68,8 @@ services:
+     expose:
+       - 4004
+       - 8008
++    ports:
++      - ""8008:8008""",,2019-01-04 16:31:26,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/245348959,https://github.com/hyperledger/sawtooth-sdk-java/pull/16#discussion_r245348959,eloaverona
+https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,Is this supposed to be `sawtooth-sdk-signing`?,de9342a1b85f63d02798e7fbe34391627339ef12,2018-11-12 21:52:13,232824736,"@@ -0,0 +1,66 @@
++![Hyperledger Sawtooth](https://raw.githubusercontent.com/hyperledger/sawtooth-core/master/images/sawtooth_logo_light_blue-small.png)
++
++# Hyperledger Sawtooth Java SDK
++
++## Install Sawtooth SDK from Central Repository
++
++#### Build a Sawtooth transaction processor
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</group>
++        <artifactId>sawtooth-sdk-transaction-processor</artifactId>
++        <version>v0.1.1</version>
++    </dependency>
++```
++
++#### Sign and verify signatures of transaction and batch headers
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</groupId>
++        <artifactId>sawtooth-sdk-transaction-processor</artifactId>",,2019-02-11 17:30:40,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/232824736,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#discussion_r232824736,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,"Yes, Thanks.
+",de9342a1b85f63d02798e7fbe34391627339ef12,2018-11-12 23:07:09,232843184,"@@ -0,0 +1,66 @@
++![Hyperledger Sawtooth](https://raw.githubusercontent.com/hyperledger/sawtooth-core/master/images/sawtooth_logo_light_blue-small.png)
++
++# Hyperledger Sawtooth Java SDK
++
++## Install Sawtooth SDK from Central Repository
++
++#### Build a Sawtooth transaction processor
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</group>
++        <artifactId>sawtooth-sdk-transaction-processor</artifactId>
++        <version>v0.1.1</version>
++    </dependency>
++```
++
++#### Sign and verify signatures of transaction and batch headers
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</groupId>
++        <artifactId>sawtooth-sdk-transaction-processor</artifactId>",,2019-02-11 17:30:40,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/232843184,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#discussion_r232843184,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,[nitpick] .. from maven central repository?,de9342a1b85f63d02798e7fbe34391627339ef12,2018-11-13 03:40:57,232888709,"@@ -0,0 +1,66 @@
++![Hyperledger Sawtooth](https://raw.githubusercontent.com/hyperledger/sawtooth-core/master/images/sawtooth_logo_light_blue-small.png)
++
++# Hyperledger Sawtooth Java SDK
++
++## Install Sawtooth SDK from Central Repository",,2019-02-11 17:30:41,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/232888709,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#discussion_r232888709,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,"Good catch, there's 2 SDKs, the Java one and the [Main one](https://sawtooth.hyperledger.org/docs/core/releases/1.0/app_developers_guide/python_sdk_install.html).
+
+This can get confusing for newbies.",de9342a1b85f63d02798e7fbe34391627339ef12,2018-11-13 09:57:48,232967453,"@@ -0,0 +1,66 @@
++![Hyperledger Sawtooth](https://raw.githubusercontent.com/hyperledger/sawtooth-core/master/images/sawtooth_logo_light_blue-small.png)
++
++# Hyperledger Sawtooth Java SDK
++
++## Install Sawtooth SDK from Central Repository",,2019-02-11 17:30:41,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/232967453,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#discussion_r232967453,CarvalhoLeonardo
+https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,"This should probably reference the contributing guide in the docs.
+
+https://sawtooth.hyperledger.org/docs/core/releases/latest/community/contributing.html",de9342a1b85f63d02798e7fbe34391627339ef12,2018-12-26 18:43:27,244033647,"@@ -0,0 +1,66 @@
++![Hyperledger Sawtooth](https://raw.githubusercontent.com/hyperledger/sawtooth-core/master/images/sawtooth_logo_light_blue-small.png)
++
++# Hyperledger Sawtooth Java SDK
++
++## Install Sawtooth SDK from Central Repository
++
++#### Build a Sawtooth transaction processor
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</group>
++        <artifactId>sawtooth-sdk-transaction-processor</artifactId>
++        <version>v0.1.1</version>
++    </dependency>
++```
++
++#### Sign and verify signatures of transaction and batch headers
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</groupId>
++        <artifactId>sawtooth-sdk-signing</artifactId>
++        <version>v0.1.1</version>
++    </dependency>
++```
++
++#### Send messages to the Sawtooth validator interfaces (infrequent use case)
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</groupId>
++        <artifactId>sawtooth-sdk-protos</artifactId>
++        <version>v0.1.1</version>
++    </dependency>
++```
++
++## Examples (sawtooth-sdk-java/examples)
++* xo_java
++    - [transaction family specification](https://sawtooth.hyperledger.org/docs/core/releases/latest/transaction_family_specifications/xo_transaction_family.html)
++* intkey_java
++    - [transaction family specification](https://sawtooth.hyperledger.org/docs/core/releases/latest/transaction_family_specifications/integerkey_transaction_family.html)
++
++
++
++## Work on the Sawtooth SDK
++
++#### Build the Sawtooth SDK
++
++Requirements:
++* JDK 11
++* Maven 3
++
++Pull requests against the repo at [https://github.com/hyperledger/sawtooth-sdk-java](https://github.com/hyperledger/sawtooth-sdk-java)
++are automatically built using the Jenkinsfile in the repository.
++
++Important build steps in the Jenkinsfile:
++* docker-compose -f docker/compose/java-build.yaml up (**builds the SDK and examples**)
++* Run *docker-compose up* on each of the test yaml files in intkey_java/tests/* and xo_java/tests/*
++
++#### Make A Pull Request",60,2019-02-11 17:30:41,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/244033647,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#discussion_r244033647,rbuysse
+https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,We could optionally mention how to build SDK only. For example with mvn installed and bin/build_java_sdk can build SDK only.,de9342a1b85f63d02798e7fbe34391627339ef12,2019-02-11 18:44:07,255641431,"@@ -0,0 +1,62 @@
++![Hyperledger Sawtooth](https://raw.githubusercontent.com/hyperledger/sawtooth-core/master/images/sawtooth_logo_light_blue-small.png)
++
++# Hyperledger Sawtooth Java SDK
++
++## Install Sawtooth Java SDK from Maven Central Repository
++
++#### Build a Sawtooth transaction processor
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</group>
++        <artifactId>sawtooth-sdk-transaction-processor</artifactId>
++        <version>v0.1.2</version>
++    </dependency>
++```
++
++#### Sign and verify signatures of transaction and batch headers
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</groupId>
++        <artifactId>sawtooth-sdk-signing</artifactId>
++        <version>v0.1.2</version>
++    </dependency>
++```
++
++#### Send messages to the Sawtooth validator interfaces (infrequent use case)
++
++```xml
++    <dependency>
++        <groupId>org.hyperledger.sawtooth</groupId>
++        <artifactId>sawtooth-sdk-protos</artifactId>
++        <version>v0.1.2</version>
++    </dependency>
++```
++
++## Examples (sawtooth-sdk-java/examples)
++* xo_java
++    - [transaction family specification](https://sawtooth.hyperledger.org/docs/core/releases/latest/transaction_family_specifications/xo_transaction_family.html)
++* intkey_java
++    - [transaction family specification](https://sawtooth.hyperledger.org/docs/core/releases/latest/transaction_family_specifications/integerkey_transaction_family.html)
++* xo_android_client
++    - An Android client for the XO transaction family, written in Kotlin
++
++
++## Work on the Sawtooth SDK
++
++#### Build the Sawtooth SDK
++
++Requirements:
++* Maven 3
++
++Pull requests against the repo at [https://github.com/hyperledger/sawtooth-sdk-java](https://github.com/hyperledger/sawtooth-sdk-java)
++are automatically built using the Jenkinsfile in the repository.
++
++Important build steps in the Jenkinsfile:
++* docker-compose -f docker/compose/java-build.yaml up (**builds the SDK and examples**)",57,2019-02-11 18:44:16,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/255641431,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#discussion_r255641431,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/8,https://github.com/hyperledger/sawtooth-sdk-java/pull/8,"https://maven.apache.org/scm/git.html
+
+Is it a typo here '...com:hyperledger...' instead of '...com/hyperledger...', or is it intended?",44d02ae82ee1784c4a2c822fc3eafaf3c8d32730,2018-11-07 17:56:18,231613128,"@@ -20,11 +20,36 @@
+          xsi:schemaLocation=""http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"">
+     <modelVersion>4.0.0</modelVersion>
+ 
+-    <groupId>sawtooth</groupId>
++    <groupId>org.hyperledger.sawtooth</groupId>
+     <artifactId>sawtooth-sdk-java</artifactId>
+     <version>0.0.1-SNAPSHOT</version>
+     <packaging>pom</packaging>
+ 
++    <name>${project.groupId}:${project.artifactId}</name>
++    <description>""Java SDK for interacting with the Sawtooth distributed ledger framework""</description>
++    <url>https://sawtooth.hyperledger.org</url>
++
++    <licenses>
++        <license>
++            <name>The Apache License, Version 2.0</name>
++            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
++        </license>
++    </licenses>
++
++    <developers>
++        <developer>
++            <name>Sawtooth Developers</name>
++            <email>sawtooth@lists.hyperledger.org</email>
++            <organizationUrl>https://sawtooth.hyperledger.org</organizationUrl>
++        </developer>
++    </developers>
++
++    <scm>
++        <connection>scm:git:git://github.com/hyperledger/sawtooth-sdk-java.git</connection>
++        <developerConnection>scm:git:ssh://github.com:hyperledger/sawtooth-sdk-java.git</developerConnection>",31,2018-11-07 17:59:03,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/231613128,https://github.com/hyperledger/sawtooth-sdk-java/pull/8#discussion_r231613128,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,Is this change intentionally in this commit (the commit is otherwise related to reorganization).,dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-01 18:23:49,230147192,"@@ -147,31 +142,13 @@ public final Message receive(final long timeout) throws TimeoutException {
+   }
+ 
+   /**
+-   * generate a random String using the sha-256 algorithm, to correlate sent messages.
++   * generate a random String, to correlate sent messages.
+    * with futures
+    *
+    * @return a random String
+    */
+   private String generateId() {
+-    StringBuilder stringBuilder = new StringBuilder();
+-    try {
+-      MessageDigest messageDigest = MessageDigest.getInstance(""SHA-256"");
+-      UUID uuid = UUID.randomUUID();
+-      byte[] dataRepresentingUuid = uuid.toString().getBytes(""UTF-8"");
+-
+-      messageDigest.update(dataRepresentingUuid);
+-
+-
+-      byte[] digest = messageDigest.digest();
+-
+-      stringBuilder.append(Utils.HEX.encode(digest).toLowerCase());
+-    } catch (NoSuchAlgorithmException nsae) {
+-      nsae.printStackTrace();
+-    } catch (UnsupportedEncodingException usee) {
+-      usee.printStackTrace();
+-    }
+-    return stringBuilder.toString();
++    return UUID.randomUUID().toString();",41,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230147192,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230147192,vaporos
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,This commit should probably be pulled out and happen first.,dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-01 19:50:08,230174322,"@@ -147,31 +142,13 @@ public final Message receive(final long timeout) throws TimeoutException {
+   }
+ 
+   /**
+-   * generate a random String using the sha-256 algorithm, to correlate sent messages.
++   * generate a random String, to correlate sent messages.
+    * with futures
+    *
+    * @return a random String
+    */
+   private String generateId() {
+-    StringBuilder stringBuilder = new StringBuilder();
+-    try {
+-      MessageDigest messageDigest = MessageDigest.getInstance(""SHA-256"");
+-      UUID uuid = UUID.randomUUID();
+-      byte[] dataRepresentingUuid = uuid.toString().getBytes(""UTF-8"");
+-
+-      messageDigest.update(dataRepresentingUuid);
+-
+-
+-      byte[] digest = messageDigest.digest();
+-
+-      stringBuilder.append(Utils.HEX.encode(digest).toLowerCase());
+-    } catch (NoSuchAlgorithmException nsae) {
+-      nsae.printStackTrace();
+-    } catch (UnsupportedEncodingException usee) {
+-      usee.printStackTrace();
+-    }
+-    return stringBuilder.toString();
++    return UUID.randomUUID().toString();",41,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230174322,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230174322,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,Question: It'll force existing client applications to change their package declaration. Sawtooth Java SDK is claimed to be having maturity level 3. Is this ok?,dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-03 07:44:28,230547807,"@@ -12,7 +12,7 @@
+  limitations under the License.
+ ------------------------------------------------------------------------------*/
+ 
+-package sawtooth.sdk.client.signing;
++package sawtooth.sdk.signing;",5,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230547807,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230547807,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,"[nitpick]: Question regarding naming convention
+Why is following convention followed
+~/.m2/repository/sawtooth/sawtooth-sdk-transaction-processor, .../sawtooth-sdk-signing, .../sawtooth-sdk-protos
+instead of something like
+~/.m2/repository/sawtooth-sdk-java/transaction-processor, .../signing, .../protos",dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-03 09:04:01,230549279,"@@ -20,105 +21,20 @@
+     <modelVersion>4.0.0</modelVersion>
+ 
+     <groupId>sawtooth</groupId>
+-    <artifactId>sdk</artifactId>
+-    <version>1.0-SNAPSHOT</version>
++    <artifactId>sawtooth-sdk-java</artifactId>
++    <version>0.0.1-SNAPSHOT</version>
++    <packaging>pom</packaging>
++
++    <modules>
++        <module>sawtooth-sdk-protos</module>",19,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230549279,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230549279,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,This file must be deleted from here? Because I see a new copy with changed generateId() placed under transaction-processor module.,dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-03 09:19:29,230549615,"@@ -18,11 +18,6 @@
+ ",1,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230549615,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230549615,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,I'm not entirely sure. I do like that the jar comes out as `/target/sawtooth-sdk-signing-*.jar`,dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-05 16:18:54,230813470,"@@ -20,105 +21,20 @@
+     <modelVersion>4.0.0</modelVersion>
+ 
+     <groupId>sawtooth</groupId>
+-    <artifactId>sdk</artifactId>
+-    <version>1.0-SNAPSHOT</version>
++    <artifactId>sawtooth-sdk-java</artifactId>
++    <version>0.0.1-SNAPSHOT</version>
++    <packaging>pom</packaging>
++
++    <modules>
++        <module>sawtooth-sdk-protos</module>",19,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230813470,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230813470,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,"I think we should do it now, before we publish to the mavan central repository.",dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-05 16:19:59,230813960,"@@ -12,7 +12,7 @@
+  limitations under the License.
+ ------------------------------------------------------------------------------*/
+ 
+-package sawtooth.sdk.client.signing;
++package sawtooth.sdk.signing;",5,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230813960,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230813960,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,Good catch. I will remove it.,dabc087da85388fcf9792ae12f24ef275c2fd298,2018-11-05 16:24:50,230816095,"@@ -18,11 +18,6 @@
+ ",1,2018-11-05 19:02:52,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/230816095,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#discussion_r230816095,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,Copyright headers are missing in uploaded files,0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-20 05:59:56,226817741,"@@ -0,0 +1,52 @@
++package sawtooth.sdk.client.signing;",15,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/226817741,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r226817741,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"Curious question and a thought: (sorry for being verbose)
+I see this is the way traits are created in Rust, that is to have PrivateKey and PublicKey as separate interfaces. In case of Java since one class can implement multiple interfaces it'll give impression that ABCAlgoKey can implement both of these.
+Would it be nice to have single interface Key, PrivateKey and PublicKey may be abstract implementation of it?",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-20 12:13:58,226825484,"@@ -0,0 +1,28 @@
++package sawtooth.sdk.client.signing;",15,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/226825484,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r226825484,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"[nitpick] TODO comment will be nice, since we're planning to complete the feature.",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-20 12:16:48,226825537,"@@ -0,0 +1,80 @@
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++
++import java.security.SecureRandom;
++import java.util.logging.Logger;
++
++/**
++ * A Context for signing and verifying Secp256k1 signatures.
++ */
++public class Secp256k1Context implements Context {
++  /**
++   * Logger.
++   */
++  private static final Logger LOGGER = Logger.getLogger(Context.class.getName());
++
++  /**
++   * The number of bytes in the signature.
++   */
++  private static final int NUM_SIGNATURE_BYTES = 64;
++
++  /**
++   * Half of the number of bytes in the signature.
++   */
++  private static final int HALF_NUM_SIGNATURE_BYTES = 32;
++
++  @Override
++  public final String getAlgorithmName() {
++    return ""secp256k1"";
++  }
++
++  @Override
++  public final PublicKey getPublicKey(final PrivateKey privateKey) {
++    ECKey privKey = ECKey.fromPrivate(privateKey.getBytes());
++    byte[] publicKey = privKey.getPubKey();
++    return new Secp256k1PublicKey(publicKey);
++  }
++
++  /**
++   * Generate a bitcoin-style compact signature.
++   *
++   * @param privateKey ECKey private key
++   * @param data the raw message bytes
++   * @return the raw signature bytes
++   */
++  private static byte[] generateCompactSig(final ECKey privateKey, final byte[] data) {
++    Sha256Hash hash = Sha256Hash.of(data);
++    ECKey.ECDSASignature sig = privateKey.sign(hash);
++
++    byte[] csig = new byte[NUM_SIGNATURE_BYTES];
++
++    System.arraycopy(Utils.bigIntegerToBytes(sig.r, HALF_NUM_SIGNATURE_BYTES), 0,
++                                             csig, 0, HALF_NUM_SIGNATURE_BYTES);
++    System.arraycopy(Utils.bigIntegerToBytes(sig.s, HALF_NUM_SIGNATURE_BYTES), 0,
++                                             csig, HALF_NUM_SIGNATURE_BYTES, HALF_NUM_SIGNATURE_BYTES);
++    return csig;
++  }
++
++  @Override
++  public final String sign(final byte[] data, final PrivateKey privateKey) {
++    ECKey privKey = ECKey.fromPrivate(privateKey.getBytes());
++
++    return Utils.HEX.encode(generateCompactSig(privKey, data));
++  }
++
++  @Override
++  public final boolean verify(final String signature, final byte[] data, final PublicKey publicKey) {
++",105,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/226825537,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r226825537,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"IMHO, there will code that will only have access to the PublicKey methods, due to the role it is executing (like on clients, consumers, etc).
+
+So, keeping an interface with signatures only referring to PublicKey is a must do, but a ""server"" side that implements both interfaces is a possibility.
+
+On top of that, on secp256k1 (and other asymmetric keys as well)   the Private Key can generate the Public Key for you, anytime.",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-20 12:41:57,226826111,"@@ -0,0 +1,28 @@
++package sawtooth.sdk.client.signing;",15,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/226826111,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r226826111,CarvalhoLeonardo
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"Agree, thanks for more details",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-20 14:17:49,226828595,"@@ -0,0 +1,28 @@
++package sawtooth.sdk.client.signing;",15,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/226828595,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r226828595,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,Added those in. Thanks for the catch.,0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-23 21:27:49,227571449,"@@ -0,0 +1,52 @@
++package sawtooth.sdk.client.signing;",15,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227571449,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227571449,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"I implemented this method, so no todo comment needed.",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-23 21:28:11,227571560,"@@ -0,0 +1,80 @@
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++
++import java.security.SecureRandom;
++import java.util.logging.Logger;
++
++/**
++ * A Context for signing and verifying Secp256k1 signatures.
++ */
++public class Secp256k1Context implements Context {
++  /**
++   * Logger.
++   */
++  private static final Logger LOGGER = Logger.getLogger(Context.class.getName());
++
++  /**
++   * The number of bytes in the signature.
++   */
++  private static final int NUM_SIGNATURE_BYTES = 64;
++
++  /**
++   * Half of the number of bytes in the signature.
++   */
++  private static final int HALF_NUM_SIGNATURE_BYTES = 32;
++
++  @Override
++  public final String getAlgorithmName() {
++    return ""secp256k1"";
++  }
++
++  @Override
++  public final PublicKey getPublicKey(final PrivateKey privateKey) {
++    ECKey privKey = ECKey.fromPrivate(privateKey.getBytes());
++    byte[] publicKey = privKey.getPubKey();
++    return new Secp256k1PublicKey(publicKey);
++  }
++
++  /**
++   * Generate a bitcoin-style compact signature.
++   *
++   * @param privateKey ECKey private key
++   * @param data the raw message bytes
++   * @return the raw signature bytes
++   */
++  private static byte[] generateCompactSig(final ECKey privateKey, final byte[] data) {
++    Sha256Hash hash = Sha256Hash.of(data);
++    ECKey.ECDSASignature sig = privateKey.sign(hash);
++
++    byte[] csig = new byte[NUM_SIGNATURE_BYTES];
++
++    System.arraycopy(Utils.bigIntegerToBytes(sig.r, HALF_NUM_SIGNATURE_BYTES), 0,
++                                             csig, 0, HALF_NUM_SIGNATURE_BYTES);
++    System.arraycopy(Utils.bigIntegerToBytes(sig.s, HALF_NUM_SIGNATURE_BYTES), 0,
++                                             csig, HALF_NUM_SIGNATURE_BYTES, HALF_NUM_SIGNATURE_BYTES);
++    return csig;
++  }
++
++  @Override
++  public final String sign(final byte[] data, final PrivateKey privateKey) {
++    ECKey privKey = ECKey.fromPrivate(privateKey.getBytes());
++
++    return Utils.HEX.encode(generateCompactSig(privKey, data));
++  }
++
++  @Override
++  public final boolean verify(final String signature, final byte[] data, final PublicKey publicKey) {
++",105,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227571560,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227571560,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,[nitpick] How about declaring all constants outside the scope of functions ? (similar comment for PrivateKey and PublicKey implementations below),0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 02:28:39,227624891,"@@ -0,0 +1,125 @@
++/* Copyright 2018 Bitwise IO
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++import org.spongycastle.asn1.sec.SECNamedCurves;
++import org.spongycastle.asn1.x9.X9ECParameters;
++import org.spongycastle.crypto.params.ECDomainParameters;
++import org.spongycastle.crypto.params.ECPublicKeyParameters;
++import org.spongycastle.crypto.signers.ECDSASigner;
++import org.spongycastle.math.ec.ECPoint;
++
++import java.math.BigInteger;
++import java.security.SecureRandom;
++import java.util.Arrays;
++import java.util.logging.Logger;
++
++/**
++ * A Context for signing and verifying Secp256k1 signatures.
++ */
++public class Secp256k1Context implements Context {
++  /**
++   * Logger.
++   */
++  private static final Logger LOGGER = Logger.getLogger(Context.class.getName());
++
++  /**
++   * The number of bytes in the signature.
++   */
++  private static final int NUM_SIGNATURE_BYTES = 64;
++
++  /**
++   * Half of the number of bytes in the signature.
++   */
++  private static final int HALF_NUM_SIGNATURE_BYTES = 32;
++
++  @Override
++  public final String getAlgorithmName() {
++    return ""secp256k1"";",,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227624891,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227624891,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,Sounds good.,0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 14:31:34,227814756,"@@ -0,0 +1,125 @@
++/* Copyright 2018 Bitwise IO
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++import org.spongycastle.asn1.sec.SECNamedCurves;
++import org.spongycastle.asn1.x9.X9ECParameters;
++import org.spongycastle.crypto.params.ECDomainParameters;
++import org.spongycastle.crypto.params.ECPublicKeyParameters;
++import org.spongycastle.crypto.signers.ECDSASigner;
++import org.spongycastle.math.ec.ECPoint;
++
++import java.math.BigInteger;
++import java.security.SecureRandom;
++import java.util.Arrays;
++import java.util.logging.Logger;
++
++/**
++ * A Context for signing and verifying Secp256k1 signatures.
++ */
++public class Secp256k1Context implements Context {
++  /**
++   * Logger.
++   */
++  private static final Logger LOGGER = Logger.getLogger(Context.class.getName());
++
++  /**
++   * The number of bytes in the signature.
++   */
++  private static final int NUM_SIGNATURE_BYTES = 64;
++
++  /**
++   * Half of the number of bytes in the signature.
++   */
++  private static final int HALF_NUM_SIGNATURE_BYTES = 32;
++
++  @Override
++  public final String getAlgorithmName() {
++    return ""secp256k1"";",,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227814756,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227814756,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"Spongycastle is an offshoot of bouncycastle. It fixed a namespacing issue in android. It seems subsequently that issues has corrected itself and we want bouncycastle. 
+It looks like the bitcoinj people just did a switcheroo on you between when you wrote this and yesterday .. changing back to bouncy from spongy.
+see: https://github.com/bitcoinj/bitcoinj/commit/ad262de9619fa4c86c34bece7288ef1e18335b06
+see also: https://github.com/rtyley/spongycastle/issues/34
+",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 14:37:36,227817689,"@@ -0,0 +1,125 @@
++/* Copyright 2018 Bitwise IO
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++import org.spongycastle.asn1.sec.SECNamedCurves;
++import org.spongycastle.asn1.x9.X9ECParameters;
++import org.spongycastle.crypto.params.ECDomainParameters;
++import org.spongycastle.crypto.params.ECPublicKeyParameters;
++import org.spongycastle.crypto.signers.ECDSASigner;
++import org.spongycastle.math.ec.ECPoint;",,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227817689,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227817689,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,Also if the bicoinj library shields us from any of these imports it's probably better to work through their abstraction. That way if there are future updates we'll automatically inherit them.,0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 14:39:31,227818581,"@@ -0,0 +1,125 @@
++/* Copyright 2018 Bitwise IO
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++import org.spongycastle.asn1.sec.SECNamedCurves;
++import org.spongycastle.asn1.x9.X9ECParameters;
++import org.spongycastle.crypto.params.ECDomainParameters;
++import org.spongycastle.crypto.params.ECPublicKeyParameters;
++import org.spongycastle.crypto.signers.ECDSASigner;
++import org.spongycastle.math.ec.ECPoint;",,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227818581,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227818581,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"This approach might be diverting around the native implementation that we want to use. 
+I think we want to call this method:
+https://github.com/bitcoinj/bitcoinj/blob/master/core/src/main/java/org/bitcoinj/core/ECKey.java#L701
+Having first instantiated this https://github.com/bitcoinj/bitcoinj/blob/master/core/src/main/java/org/bitcoinj/core/ECKey.java#L516 ",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 15:01:53,227829299,"@@ -0,0 +1,125 @@
++/* Copyright 2018 Bitwise IO
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++import org.spongycastle.asn1.sec.SECNamedCurves;
++import org.spongycastle.asn1.x9.X9ECParameters;
++import org.spongycastle.crypto.params.ECDomainParameters;
++import org.spongycastle.crypto.params.ECPublicKeyParameters;
++import org.spongycastle.crypto.signers.ECDSASigner;
++import org.spongycastle.math.ec.ECPoint;
++
++import java.math.BigInteger;
++import java.security.SecureRandom;
++import java.util.Arrays;
++import java.util.logging.Logger;
++
++/**
++ * A Context for signing and verifying Secp256k1 signatures.
++ */
++public class Secp256k1Context implements Context {
++  /**
++   * Logger.
++   */
++  private static final Logger LOGGER = Logger.getLogger(Context.class.getName());
++
++  /**
++   * The number of bytes in the signature.
++   */
++  private static final int NUM_SIGNATURE_BYTES = 64;
++
++  /**
++   * Half of the number of bytes in the signature.
++   */
++  private static final int HALF_NUM_SIGNATURE_BYTES = 32;
++
++  @Override
++  public final String getAlgorithmName() {
++    return ""secp256k1"";
++  }
++
++  @Override
++  public final PublicKey getPublicKey(final PrivateKey privateKey) {
++    ECKey privKey = ECKey.fromPrivate(privateKey.getBytes());
++    byte[] publicKey = privKey.getPubKey();
++    return new Secp256k1PublicKey(publicKey);
++  }
++
++  /**
++   * Generate a bitcoin-style compact signature.
++   *
++   * @param privateKey ECKey private key
++   * @param data the raw message bytes
++   * @return the raw signature bytes
++   */
++  private static byte[] generateCompactSig(final ECKey privateKey, final byte[] data) {
++    Sha256Hash hash = Sha256Hash.of(data);
++    ECKey.ECDSASignature sig = privateKey.sign(hash);
++
++    byte[] csig = new byte[NUM_SIGNATURE_BYTES];
++
++    System.arraycopy(Utils.bigIntegerToBytes(sig.r, HALF_NUM_SIGNATURE_BYTES), 0,
++                                             csig, 0, HALF_NUM_SIGNATURE_BYTES);
++    System.arraycopy(Utils.bigIntegerToBytes(sig.s, HALF_NUM_SIGNATURE_BYTES), 0,
++                                             csig, HALF_NUM_SIGNATURE_BYTES, HALF_NUM_SIGNATURE_BYTES);
++
++    return csig;
++  }
++
++  @Override
++  public final String sign(final byte[] data, final PrivateKey privateKey) {
++    ECKey privKey = ECKey.fromPrivate(privateKey.getBytes());
++
++    return Utils.HEX.encode(generateCompactSig(privKey, data));
++  }
++
++  @Override
++  public final boolean verify(final String signature, final byte[] data, final PublicKey publicKey) {
++    X9ECParameters x9ECParameters = SECNamedCurves.getByName(this.getAlgorithmName());
++    ECDomainParameters params = new ECDomainParameters(
++        x9ECParameters.getCurve(),
++        x9ECParameters.getG(),
++        x9ECParameters.getN(),
++        x9ECParameters.getH());
++
++    ECPoint qPoint = x9ECParameters.getCurve().decodePoint(publicKey.getBytes());
++
++    ECDSASigner ecdsaSigner = new ECDSASigner();
++    ECPublicKeyParameters ecPublicKeyParameters = new ECPublicKeyParameters(qPoint, params);
++    ecdsaSigner.init(false, ecPublicKeyParameters);
++
++    byte[] signatureBytes = Utils.HEX.decode(signature);
++
++    byte[] rbytes = Arrays.copyOfRange(signatureBytes, 0, HALF_NUM_SIGNATURE_BYTES);
++    byte[] sbytes = Arrays.copyOfRange(signatureBytes, HALF_NUM_SIGNATURE_BYTES, NUM_SIGNATURE_BYTES);
++
++    BigInteger rSig = new BigInteger(1, rbytes);
++    BigInteger sSig = new BigInteger(1, sbytes);
++
++    byte[] hash = Sha256Hash.of(data).getBytes();
++
++    return ecdsaSigner.verifySignature(hash, rSig, sSig);",,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227829299,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227829299,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"Thanks for digging in to this, @dcmiddle . I won't import spongycastle and use the bitcoinj abstraction.",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 15:35:46,227844548,"@@ -0,0 +1,125 @@
++/* Copyright 2018 Bitwise IO
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++import org.bitcoinj.core.ECKey;
++import org.bitcoinj.core.Sha256Hash;
++import org.bitcoinj.core.Utils;
++import org.spongycastle.asn1.sec.SECNamedCurves;
++import org.spongycastle.asn1.x9.X9ECParameters;
++import org.spongycastle.crypto.params.ECDomainParameters;
++import org.spongycastle.crypto.params.ECPublicKeyParameters;
++import org.spongycastle.crypto.signers.ECDSASigner;
++import org.spongycastle.math.ec.ECPoint;",,2018-10-24 15:55:39,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227844548,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227844548,boydjohnson
+https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,"This should probably perform more of a dynamic dispatch model (not unlike JDBC, or SL4J).  Otherwise, new context implementations can only be created directly.
+
+Should be left for a future PR, though. ",0a31f78d926134dc14a38e70807acacee969d7b6,2018-10-24 17:48:43,227893628,"@@ -0,0 +1,46 @@
++/* Copyright 2018 Bitwise IO, Inc.
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------*/
++
++package sawtooth.sdk.client.signing;
++
++/**
++ * A factory class for making Contexts.
++ */
++public final class CryptoFactory {
++
++  /**
++   * Private constructor for Factory class.
++   */
++  private CryptoFactory() { }
++
++  /**
++   * Create a Context of the specific type.
++   *
++   * @param algorithmName The name of the algorithm.
++   * @return A Context.
++   */
++  public static Context createContext(final String algorithmName) {
++
++    Context context = null;
++
++    if (algorithmName.equals(""secp256k1"")) {",37,2018-10-24 17:48:51,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/227893628,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#discussion_r227893628,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,Exit here?,c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-10 15:18:58,224123754,"@@ -0,0 +1,326 @@
++/*
++ * Copyright 2016, 2017 Intel Corporation Licensed under the Apache License, Version 2.0 (the
++ * ""License""); you may not use this file except in compliance with the License. You may obtain a
++ * copy of the License at
++ * 
++ * http://www.apache.org/licenses/LICENSE-2.0
++ * 
++ * Unless required by applicable law or agreed to in writing, software distributed under the License
++ * is distributed on an ""AS IS"" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
++ * or implied. See the License for the specific language governing permissions and limitations under
++ * the License. ------------------------------------------------------------------------------
++ */
++
++package sawtooth.examples.intkey;
++
++import java.io.ByteArrayInputStream;
++import java.io.ByteArrayOutputStream;
++import java.io.UnsupportedEncodingException;
++import java.nio.ByteBuffer;
++import java.security.NoSuchAlgorithmException;
++import java.util.AbstractMap;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Collection;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.concurrent.CompletableFuture;
++import java.util.concurrent.Future;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import com.google.protobuf.ByteString;
++import com.google.protobuf.InvalidProtocolBufferException;
++import co.nstant.in.cbor.CborBuilder;
++import co.nstant.in.cbor.CborDecoder;
++import co.nstant.in.cbor.CborEncoder;
++import co.nstant.in.cbor.CborException;
++import co.nstant.in.cbor.model.DataItem;
++import sawtooth.sdk.protobuf.TpProcessRequest;
++import sawtooth.sdk.protobuf.TpProcessResponse;
++import sawtooth.sdk.protobuf.TpProcessResponse.Status;
++import sawtooth.sdk.reactive.common.exceptions.InternalError;
++import sawtooth.sdk.reactive.common.exceptions.InvalidTransactionException;
++import sawtooth.sdk.reactive.common.messaging.MessageFactory;
++import sawtooth.sdk.reactive.common.messaging.SawtoothAddressFactory;
++import sawtooth.sdk.reactive.common.utils.FormattingUtils;
++import sawtooth.sdk.reactive.tp.processor.SawtoothState;
++import sawtooth.sdk.reactive.tp.processor.TransactionHandler;
++
++public class IntegerKeyHandler implements TransactionHandler, SawtoothAddressFactory {
++
++  private static final Logger LOGGER = LoggerFactory.getLogger(IntegerKeyHandler.class.getName());
++
++  private static final long MIN_VALUE = 0;
++  private static final long MAX_VALUE = Long.MAX_VALUE;
++  private static final long MAX_NAME_LENGTH = 20;
++  private MessageFactory tpMesgFactory;
++
++  /**
++   * constructor.
++   * 
++   */
++  public IntegerKeyHandler() {
++
++    try {
++      tpMesgFactory = new MessageFactory(""intkey"", ""1.0"", null, null, ""intkey"");
++    } catch (NoSuchAlgorithmException e) {
++      e.printStackTrace();",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/224123754,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r224123754,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,Change function name to createTransactionHeaderSignature?,c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-10 15:36:45,224131230,"@@ -0,0 +1,388 @@
++package sawtooth.sdk.reactive.common.messaging;
++
++import java.nio.ByteBuffer;
++import java.nio.charset.StandardCharsets;
++import java.security.NoSuchAlgorithmException;
++import java.security.SecureRandom;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Calendar;
++import java.util.List;
++import java.util.stream.Collectors;
++import org.bitcoinj.core.ECKey;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import com.google.protobuf.ByteString;
++import com.google.protobuf.InvalidProtocolBufferException;
++import sawtooth.sdk.protobuf.Batch;
++import sawtooth.sdk.protobuf.BatchHeader;
++import sawtooth.sdk.protobuf.Event;
++import sawtooth.sdk.protobuf.Message;
++import sawtooth.sdk.protobuf.Message.MessageType;
++import sawtooth.sdk.protobuf.TpEventAddRequest;
++import sawtooth.sdk.protobuf.TpEventAddResponse;
++import sawtooth.sdk.protobuf.TpProcessRequest;
++import sawtooth.sdk.protobuf.TpProcessResponse;
++import sawtooth.sdk.protobuf.TpRegisterRequest;
++import sawtooth.sdk.protobuf.TpRegisterResponse;
++import sawtooth.sdk.protobuf.TpUnregisterRequest;
++import sawtooth.sdk.protobuf.Transaction;
++import sawtooth.sdk.protobuf.TransactionHeader;
++import sawtooth.sdk.protobuf.TransactionList;
++import sawtooth.sdk.reactive.common.crypto.SawtoothSigner;
++import sawtooth.sdk.reactive.common.utils.FormattingUtils;
++
++public class MessageFactory extends CoreMessagesFactory {
++
++  final String[] nameSpaces;
++  final String familyName;
++  final String familyVersion;
++
++  private final static Logger LOGGER = LoggerFactory.getLogger(MessageFactory.class);
++
++  private final ECKey signerPrivateKey;
++  private final String signerPublicKeyString;
++  private final byte[] signerPublicKeyEncodedPointByte;
++
++  @SuppressWarnings(""unused"")
++  private MessageFactory() throws NoSuchAlgorithmException {
++    super("""");
++    signerPrivateKey = null;
++    signerPublicKeyString = null;
++    signerPublicKeyEncodedPointByte = null;   
++    nameSpaces = null;
++    familyName = null;
++    familyVersion = null;
++  }
++
++  @Override
++  protected Object clone() throws CloneNotSupportedException {
++    throw new CloneNotSupportedException();
++  }
++  
++  public MessageFactory(String familyName, String familyVersion, ECKey privateKey, ECKey publicKey,
++      String... nameSpaces) throws NoSuchAlgorithmException {
++    this(familyName, ""SHA-512"", familyVersion, privateKey, publicKey, nameSpaces);
++  }
++
++  public MessageFactory(String familyName, String digesterAlgo, String familyVersion,
++      ECKey privateKey, ECKey publicKey, String... nameSpaces) throws NoSuchAlgorithmException {
++    super(digesterAlgo);
++    this.familyName = familyName;
++    this.familyVersion = familyVersion;
++    if (privateKey == null) {
++      LOGGER.warn(""Private Key null, creating a temporary one..."");
++      this.signerPrivateKey = SawtoothSigner.generatePrivateKey(new SecureRandom(ByteBuffer
++          .allocate(Long.BYTES).putLong(Calendar.getInstance().getTimeInMillis()).array()));
++      LOGGER.warn(""Created with encryption "" + this.signerPrivateKey.getEncryptionType().toString()
++          + "" and Key Crypter "" + this.signerPrivateKey.getKeyCrypter());
++    } else {
++      this.signerPrivateKey = privateKey;
++    }
++    if (publicKey == null) {
++      signerPublicKeyEncodedPointByte = signerPrivateKey.getPubKeyPoint().getEncoded(true);
++      signerPublicKeyString = FormattingUtils.bytesToHex(signerPublicKeyEncodedPointByte);
++    } else {
++      signerPublicKeyEncodedPointByte = publicKey.getPubKeyPoint().getEncoded(true);
++      signerPublicKeyString = FormattingUtils.bytesToHex(publicKey.getPubKey());
++    }
++
++    List<String> binNameSpaces = new ArrayList<String>();
++    for (String eachNS : nameSpaces) {
++      binNameSpaces
++          .add(FormattingUtils.hash512(eachNS.getBytes(StandardCharsets.UTF_8)).substring(0, 6));
++    }
++    this.nameSpaces = new String[nameSpaces.length];
++    binNameSpaces.toArray(this.nameSpaces);
++
++  }
++
++  public final String[] getNameSpaces() {
++    return nameSpaces;
++  }
++
++  public final String getFamilyName() {
++    return familyName;
++  }
++
++  public final String getFamilyVersion() {
++    return familyVersion;
++  }
++
++  public String getPubliceyString() {
++    return signerPublicKeyString;
++  }
++
++  public byte[] getSignerPublicKeyEncodedPointByte() {
++    return signerPublicKeyEncodedPointByte;
++  }
++
++
++  public final TransactionHeader createTransactionHeader(String payloadSha512, List<String> inputs,
++      List<String> outputs, List<String> dependencies, boolean needsNonce, String batcherPubKey) {
++    TransactionHeader.Builder thBuilder = TransactionHeader.newBuilder();
++    thBuilder.setFamilyName(familyName);
++    thBuilder.setFamilyVersion(familyVersion);
++    thBuilder.setSignerPublicKey(getPubliceyString());
++    thBuilder.setBatcherPublicKey(
++        batcherPubKey != null ? batcherPubKey : thBuilder.getSignerPublicKey());
++    thBuilder.setPayloadSha512(payloadSha512);
++
++    if (needsNonce) {
++      thBuilder.setNonce(String.valueOf(Calendar.getInstance().getTimeInMillis()));
++    }
++
++    if (dependencies != null && !dependencies.isEmpty()) {
++      thBuilder.addAllDependencies(dependencies);
++    }
++
++    if (inputs != null && !inputs.isEmpty()) {
++      thBuilder.addAllInputs(inputs);
++    }
++
++    if (outputs != null && !outputs.isEmpty()) {
++      thBuilder.addAllOutputs(outputs);
++    }
++
++    return thBuilder.build();
++  }
++
++  public String createHeaderSignature(TransactionHeader header) {",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/224131230,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r224131230,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,"typo ""getPublicKeyString""",c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-10 15:41:08,224133125,"@@ -0,0 +1,388 @@
++package sawtooth.sdk.reactive.common.messaging;
++
++import java.nio.ByteBuffer;
++import java.nio.charset.StandardCharsets;
++import java.security.NoSuchAlgorithmException;
++import java.security.SecureRandom;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Calendar;
++import java.util.List;
++import java.util.stream.Collectors;
++import org.bitcoinj.core.ECKey;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import com.google.protobuf.ByteString;
++import com.google.protobuf.InvalidProtocolBufferException;
++import sawtooth.sdk.protobuf.Batch;
++import sawtooth.sdk.protobuf.BatchHeader;
++import sawtooth.sdk.protobuf.Event;
++import sawtooth.sdk.protobuf.Message;
++import sawtooth.sdk.protobuf.Message.MessageType;
++import sawtooth.sdk.protobuf.TpEventAddRequest;
++import sawtooth.sdk.protobuf.TpEventAddResponse;
++import sawtooth.sdk.protobuf.TpProcessRequest;
++import sawtooth.sdk.protobuf.TpProcessResponse;
++import sawtooth.sdk.protobuf.TpRegisterRequest;
++import sawtooth.sdk.protobuf.TpRegisterResponse;
++import sawtooth.sdk.protobuf.TpUnregisterRequest;
++import sawtooth.sdk.protobuf.Transaction;
++import sawtooth.sdk.protobuf.TransactionHeader;
++import sawtooth.sdk.protobuf.TransactionList;
++import sawtooth.sdk.reactive.common.crypto.SawtoothSigner;
++import sawtooth.sdk.reactive.common.utils.FormattingUtils;
++
++public class MessageFactory extends CoreMessagesFactory {
++
++  final String[] nameSpaces;
++  final String familyName;
++  final String familyVersion;
++
++  private final static Logger LOGGER = LoggerFactory.getLogger(MessageFactory.class);
++
++  private final ECKey signerPrivateKey;
++  private final String signerPublicKeyString;
++  private final byte[] signerPublicKeyEncodedPointByte;
++
++  @SuppressWarnings(""unused"")
++  private MessageFactory() throws NoSuchAlgorithmException {
++    super("""");
++    signerPrivateKey = null;
++    signerPublicKeyString = null;
++    signerPublicKeyEncodedPointByte = null;   
++    nameSpaces = null;
++    familyName = null;
++    familyVersion = null;
++  }
++
++  @Override
++  protected Object clone() throws CloneNotSupportedException {
++    throw new CloneNotSupportedException();
++  }
++  
++  public MessageFactory(String familyName, String familyVersion, ECKey privateKey, ECKey publicKey,
++      String... nameSpaces) throws NoSuchAlgorithmException {
++    this(familyName, ""SHA-512"", familyVersion, privateKey, publicKey, nameSpaces);
++  }
++
++  public MessageFactory(String familyName, String digesterAlgo, String familyVersion,
++      ECKey privateKey, ECKey publicKey, String... nameSpaces) throws NoSuchAlgorithmException {
++    super(digesterAlgo);
++    this.familyName = familyName;
++    this.familyVersion = familyVersion;
++    if (privateKey == null) {
++      LOGGER.warn(""Private Key null, creating a temporary one..."");
++      this.signerPrivateKey = SawtoothSigner.generatePrivateKey(new SecureRandom(ByteBuffer
++          .allocate(Long.BYTES).putLong(Calendar.getInstance().getTimeInMillis()).array()));
++      LOGGER.warn(""Created with encryption "" + this.signerPrivateKey.getEncryptionType().toString()
++          + "" and Key Crypter "" + this.signerPrivateKey.getKeyCrypter());
++    } else {
++      this.signerPrivateKey = privateKey;
++    }
++    if (publicKey == null) {
++      signerPublicKeyEncodedPointByte = signerPrivateKey.getPubKeyPoint().getEncoded(true);
++      signerPublicKeyString = FormattingUtils.bytesToHex(signerPublicKeyEncodedPointByte);
++    } else {
++      signerPublicKeyEncodedPointByte = publicKey.getPubKeyPoint().getEncoded(true);
++      signerPublicKeyString = FormattingUtils.bytesToHex(publicKey.getPubKey());
++    }
++
++    List<String> binNameSpaces = new ArrayList<String>();
++    for (String eachNS : nameSpaces) {
++      binNameSpaces
++          .add(FormattingUtils.hash512(eachNS.getBytes(StandardCharsets.UTF_8)).substring(0, 6));
++    }
++    this.nameSpaces = new String[nameSpaces.length];
++    binNameSpaces.toArray(this.nameSpaces);
++
++  }
++
++  public final String[] getNameSpaces() {
++    return nameSpaces;
++  }
++
++  public final String getFamilyName() {
++    return familyName;
++  }
++
++  public final String getFamilyVersion() {
++    return familyVersion;
++  }
++
++  public String getPubliceyString() {",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/224133125,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r224133125,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,Batch signer need not be Transaction signer,c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-10 15:42:04,224133515,"@@ -0,0 +1,388 @@
++package sawtooth.sdk.reactive.common.messaging;
++
++import java.nio.ByteBuffer;
++import java.nio.charset.StandardCharsets;
++import java.security.NoSuchAlgorithmException;
++import java.security.SecureRandom;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Calendar;
++import java.util.List;
++import java.util.stream.Collectors;
++import org.bitcoinj.core.ECKey;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import com.google.protobuf.ByteString;
++import com.google.protobuf.InvalidProtocolBufferException;
++import sawtooth.sdk.protobuf.Batch;
++import sawtooth.sdk.protobuf.BatchHeader;
++import sawtooth.sdk.protobuf.Event;
++import sawtooth.sdk.protobuf.Message;
++import sawtooth.sdk.protobuf.Message.MessageType;
++import sawtooth.sdk.protobuf.TpEventAddRequest;
++import sawtooth.sdk.protobuf.TpEventAddResponse;
++import sawtooth.sdk.protobuf.TpProcessRequest;
++import sawtooth.sdk.protobuf.TpProcessResponse;
++import sawtooth.sdk.protobuf.TpRegisterRequest;
++import sawtooth.sdk.protobuf.TpRegisterResponse;
++import sawtooth.sdk.protobuf.TpUnregisterRequest;
++import sawtooth.sdk.protobuf.Transaction;
++import sawtooth.sdk.protobuf.TransactionHeader;
++import sawtooth.sdk.protobuf.TransactionList;
++import sawtooth.sdk.reactive.common.crypto.SawtoothSigner;
++import sawtooth.sdk.reactive.common.utils.FormattingUtils;
++
++public class MessageFactory extends CoreMessagesFactory {
++
++  final String[] nameSpaces;
++  final String familyName;
++  final String familyVersion;
++
++  private final static Logger LOGGER = LoggerFactory.getLogger(MessageFactory.class);
++
++  private final ECKey signerPrivateKey;
++  private final String signerPublicKeyString;
++  private final byte[] signerPublicKeyEncodedPointByte;
++
++  @SuppressWarnings(""unused"")
++  private MessageFactory() throws NoSuchAlgorithmException {
++    super("""");
++    signerPrivateKey = null;
++    signerPublicKeyString = null;
++    signerPublicKeyEncodedPointByte = null;   
++    nameSpaces = null;
++    familyName = null;
++    familyVersion = null;
++  }
++
++  @Override
++  protected Object clone() throws CloneNotSupportedException {
++    throw new CloneNotSupportedException();
++  }
++  
++  public MessageFactory(String familyName, String familyVersion, ECKey privateKey, ECKey publicKey,
++      String... nameSpaces) throws NoSuchAlgorithmException {
++    this(familyName, ""SHA-512"", familyVersion, privateKey, publicKey, nameSpaces);
++  }
++
++  public MessageFactory(String familyName, String digesterAlgo, String familyVersion,
++      ECKey privateKey, ECKey publicKey, String... nameSpaces) throws NoSuchAlgorithmException {
++    super(digesterAlgo);
++    this.familyName = familyName;
++    this.familyVersion = familyVersion;
++    if (privateKey == null) {
++      LOGGER.warn(""Private Key null, creating a temporary one..."");
++      this.signerPrivateKey = SawtoothSigner.generatePrivateKey(new SecureRandom(ByteBuffer
++          .allocate(Long.BYTES).putLong(Calendar.getInstance().getTimeInMillis()).array()));
++      LOGGER.warn(""Created with encryption "" + this.signerPrivateKey.getEncryptionType().toString()
++          + "" and Key Crypter "" + this.signerPrivateKey.getKeyCrypter());
++    } else {
++      this.signerPrivateKey = privateKey;
++    }
++    if (publicKey == null) {
++      signerPublicKeyEncodedPointByte = signerPrivateKey.getPubKeyPoint().getEncoded(true);
++      signerPublicKeyString = FormattingUtils.bytesToHex(signerPublicKeyEncodedPointByte);
++    } else {
++      signerPublicKeyEncodedPointByte = publicKey.getPubKeyPoint().getEncoded(true);
++      signerPublicKeyString = FormattingUtils.bytesToHex(publicKey.getPubKey());
++    }
++
++    List<String> binNameSpaces = new ArrayList<String>();
++    for (String eachNS : nameSpaces) {
++      binNameSpaces
++          .add(FormattingUtils.hash512(eachNS.getBytes(StandardCharsets.UTF_8)).substring(0, 6));
++    }
++    this.nameSpaces = new String[nameSpaces.length];
++    binNameSpaces.toArray(this.nameSpaces);
++
++  }
++
++  public final String[] getNameSpaces() {
++    return nameSpaces;
++  }
++
++  public final String getFamilyName() {
++    return familyName;
++  }
++
++  public final String getFamilyVersion() {
++    return familyVersion;
++  }
++
++  public String getPubliceyString() {
++    return signerPublicKeyString;
++  }
++
++  public byte[] getSignerPublicKeyEncodedPointByte() {
++    return signerPublicKeyEncodedPointByte;
++  }
++
++
++  public final TransactionHeader createTransactionHeader(String payloadSha512, List<String> inputs,
++      List<String> outputs, List<String> dependencies, boolean needsNonce, String batcherPubKey) {
++    TransactionHeader.Builder thBuilder = TransactionHeader.newBuilder();
++    thBuilder.setFamilyName(familyName);
++    thBuilder.setFamilyVersion(familyVersion);
++    thBuilder.setSignerPublicKey(getPubliceyString());
++    thBuilder.setBatcherPublicKey(
++        batcherPubKey != null ? batcherPubKey : thBuilder.getSignerPublicKey());
++    thBuilder.setPayloadSha512(payloadSha512);
++
++    if (needsNonce) {
++      thBuilder.setNonce(String.valueOf(Calendar.getInstance().getTimeInMillis()));
++    }
++
++    if (dependencies != null && !dependencies.isEmpty()) {
++      thBuilder.addAllDependencies(dependencies);
++    }
++
++    if (inputs != null && !inputs.isEmpty()) {
++      thBuilder.addAllInputs(inputs);
++    }
++
++    if (outputs != null && !outputs.isEmpty()) {
++      thBuilder.addAllOutputs(outputs);
++    }
++
++    return thBuilder.build();
++  }
++
++  public String createHeaderSignature(TransactionHeader header) {
++    return SawtoothSigner.signHexSequence(signerPrivateKey, header.toByteArray());
++  }
++
++  public Message getRegisterRequest() {
++    Message newMessage = Message.newBuilder().setContent(createTpRegisterRequest().toByteString())
++        .setCorrelationId(this.generateId()).setMessageType(MessageType.TP_REGISTER_REQUEST)
++        .build();
++
++    return newMessage;
++  }
++
++  private TpRegisterRequest createTpRegisterRequest() {
++    TpRegisterRequest.Builder reqBuilder = TpRegisterRequest.newBuilder();
++
++    reqBuilder.setFamily(familyName);
++    reqBuilder.addAllNamespaces(Arrays.asList(nameSpaces));
++    reqBuilder.setVersion(familyVersion);
++    if (LOGGER.isDebugEnabled()) {
++      LOGGER.debug(String.format(""Register request : Family %s, Namespaces %s, Version %s"",
++          familyName, Arrays.deepToString(nameSpaces), familyVersion));
++    }
++    return reqBuilder.build();
++  }
++
++  public Message getRegisterResponse(int status, String correlationId) {
++    Message newMessage = Message.newBuilder()
++        .setContent(createTpRegisterResponse(status).toByteString()).setCorrelationId(correlationId)
++        .setMessageType(MessageType.TP_REGISTER_RESPONSE).build();
++
++    return newMessage;
++  }
++
++  private TpRegisterResponse createTpRegisterResponse(int status) {
++    TpRegisterResponse.Builder reqBuilder = TpRegisterResponse.newBuilder();
++
++    reqBuilder.setStatusValue(status);
++
++    return reqBuilder.build();
++  }
++
++  public Message getUnregisterRequest() {
++    Message newMessage = Message.newBuilder().setContent(createTpUnregisterRequest().toByteString())
++        .setCorrelationId(generateId()).setMessageType(MessageType.TP_UNREGISTER_REQUEST).build();
++
++    return newMessage;
++  }
++
++  private TpUnregisterRequest createTpUnregisterRequest() {
++    TpUnregisterRequest request = TpUnregisterRequest.newBuilder().build();
++    return request;
++  }
++
++  
++
++  public Message getProcessRequest(String contextId, ByteBuffer payload, List<String> inputs,
++      List<String> outputs, List<String> dependencies, String batcherPubKey)
++      throws NoSuchAlgorithmException {
++    Message newMessage =
++        Message.newBuilder()
++            .setContent(createTpProcessRequest(contextId, payload, inputs, outputs, dependencies,
++                batcherPubKey).toByteString())
++            .setCorrelationId(generateId()).setMessageType(MessageType.TP_PROCESS_REQUEST).build();
++
++    return newMessage;
++  }
++
++
++  public TpProcessRequest createTpProcessRequest(String contextId, ByteBuffer payload,
++      List<String> inputs, List<String> outputs, List<String> dependencies, String batcherPubKey)
++      throws NoSuchAlgorithmException {
++    TpProcessRequest.Builder reqBuilder = TpProcessRequest.newBuilder();
++
++    String hexFormattedDigest = generateHASH512Hex(payload.array());
++
++    if (contextId != null && !contextId.isEmpty()) {
++      if (LOGGER.isDebugEnabled()) {
++        LOGGER.debug(""Context id set: "" + contextId);
++      }
++      reqBuilder.setContextId(contextId);
++    }
++
++    reqBuilder.setHeader(createTransactionHeader(hexFormattedDigest, inputs, outputs, dependencies,
++        Boolean.TRUE, batcherPubKey));
++
++
++    reqBuilder.setPayload(ByteString.copyFrom(payload.array()));
++
++    reqBuilder.setSignature(createHeaderSignature(reqBuilder.getHeader()));
++
++    return reqBuilder.build();
++  }
++
++  public Message getProcessResponse(String correlationId, TpProcessResponse originalResponse) {
++    Message newMessage = Message.newBuilder().setContent(originalResponse.toByteString())
++        .setCorrelationId(correlationId).setMessageType(MessageType.TP_PROCESS_RESPONSE).build();
++
++    return newMessage;
++  }
++
++  public Message getProcessResponse(String correlationId, String statusMessage,
++      sawtooth.sdk.protobuf.TpProcessResponse.Status status, ByteString extData) {
++    TpProcessResponse.Builder resBuilder = TpProcessResponse.newBuilder();
++
++    if (extData != null && !extData.isEmpty())
++      resBuilder.setExtendedData(extData);
++
++    resBuilder.setMessage(statusMessage);
++    resBuilder.setStatus(status);
++
++    Message newMessage = Message.newBuilder().setContent(resBuilder.build().toByteString())
++        .setCorrelationId(correlationId).setMessageType(MessageType.TP_PROCESS_RESPONSE).build();
++
++    return newMessage;
++  }
++
++  private TpProcessResponse parseTpProcessResponse(Message message)
++      throws InvalidProtocolBufferException {
++    TpProcessResponse responseMessage = TpProcessResponse.parseFrom(message.getContent());
++
++    return responseMessage;
++  }
++
++  
++
++  public Message getEventAddRequest(String contextId, String eventType,
++      List<Event.Attribute> attributes, ByteString data) {
++    Message newMessage = Message.newBuilder()
++        .setContent(createTpEventAddRequest(contextId, eventType, attributes, data).toByteString())
++        .setCorrelationId(generateId()).setMessageType(MessageType.TP_EVENT_ADD_REQUEST).build();
++
++    return newMessage;
++  }
++
++  private TpEventAddRequest createTpEventAddRequest(String contextId, String eventType,
++      List<Event.Attribute> attributes, ByteString data) {
++
++    TpEventAddRequest.Builder reqBuilder = TpEventAddRequest.newBuilder();
++
++    Event.Builder eventBuilder = Event.newBuilder();
++    eventBuilder.setData(data);
++    eventBuilder.setEventType(eventType);
++    eventBuilder.addAllAttributes(attributes);
++
++    reqBuilder.setContextId(contextId);
++    reqBuilder.setEvent(eventBuilder.build());
++
++    return reqBuilder.build();
++  }
++
++  public TpEventAddResponse createTpEventAddResponse(Message respMesg)
++      throws InvalidProtocolBufferException {
++    TpEventAddResponse parsedExp = TpEventAddResponse.parseFrom(respMesg.getContent());
++    return parsedExp;
++
++  }
++
++
++  private Transaction createTransaction(ByteBuffer payload, List<String> inputs,
++      List<String> outputs, List<String> dependencies, String batcherPubKey)
++      throws NoSuchAlgorithmException {
++    Transaction.Builder transactionBuilder = Transaction.newBuilder();
++    transactionBuilder
++        .setPayload(ByteString.copyFrom(payload.toString(), StandardCharsets.US_ASCII));
++    TransactionHeader header = createTransactionHeader(generateHASH512Hex(payload.array()), inputs,
++        outputs, dependencies, Boolean.TRUE, batcherPubKey);
++    transactionBuilder.setHeader(header.toByteString());
++    transactionBuilder.setHeaderSignature(createHeaderSignature(header));
++
++    return transactionBuilder.build();
++  }
++
++  private Transaction createTransactionFromProcessRequest(Message processRequest)
++      throws InvalidProtocolBufferException {
++    Transaction.Builder transactionBuilder = Transaction.newBuilder();
++    TpProcessRequest theRequest = TpProcessRequest.parseFrom(processRequest.getContent());
++    transactionBuilder.setHeader(theRequest.getHeader().toByteString());
++    transactionBuilder.setPayload(theRequest.getPayload());
++    String hexFormattedDigest = generateHASH512Hex(theRequest.getPayload().toByteArray());
++    TransactionHeader header =
++        createTransactionHeader(hexFormattedDigest, theRequest.getHeader().getInputsList(),
++            theRequest.getHeader().getOutputsList(), theRequest.getHeader().getDependenciesList(),
++            Boolean.TRUE, theRequest.getHeader().getBatcherPublicKey());
++    transactionBuilder.setHeader(header.toByteString());
++    transactionBuilder.setHeaderSignature(createHeaderSignature(header));
++
++    return transactionBuilder.build();
++  }
++
++
++  public Batch createBatch(List<? extends Message> transactions, boolean trace) {
++
++
++    TransactionList.Builder transactionListBuilder = TransactionList.newBuilder();
++
++    List<String> txnSignatures = transactions.stream().map(et -> {
++      String result = """";
++      try {
++        Transaction toAdd;
++        if (et.getMessageType().equals(MessageType.TP_PROCESS_REQUEST)) {
++          toAdd = createTransactionFromProcessRequest(et);
++
++        } else {
++          toAdd = Transaction.parseFrom(et.getContent());
++        }
++        transactionListBuilder.addTransactions(toAdd);
++        result = toAdd.getHeaderSignature();
++      } catch (InvalidProtocolBufferException e) {
++        LOGGER.error(
++            ""InvalidProtocolBufferException on Message "" + et.toString() + "" : "" + e.getMessage());
++        e.printStackTrace();
++      }
++      return result;
++    }).collect(Collectors.toList());
++
++
++    BatchHeader batchHeader = BatchHeader.newBuilder().addAllTransactionIds(txnSignatures)",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/224133515,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r224133515,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,"Copyright headers are missing, please also consider adding in other files.",c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-16 03:21:13,225385545,"@@ -0,0 +1,41 @@
++package sawtooth.examples.intkey;",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/225385545,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r225385545,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,Can we avoid null usage here? and other places. Maybe use Option.,c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-16 03:21:40,225385583,"@@ -0,0 +1,41 @@
++package sawtooth.examples.intkey;
++
++import java.util.Arrays;
++import java.util.List;
++
++public enum TPOperations {
++
++  INC(""inc"",""Increment the value at the address""),
++  DEC(""dec"",""Decrement the value at the address""),
++  SET(""set"",""Set a value at a not set address"");
++  
++  public final String getVerb() {
++    return verb;
++  }
++
++  public final String getDescription() {
++    return description;
++  }
++
++  private final String verb;
++  private final String description;
++  
++  private TPOperations(String verb, String description) {
++    this.verb=verb;
++    this.description = description;
++  }
++  
++  public static List<TPOperations> getAllOperations(){
++    return Arrays.asList(values());
++  }
++  
++  public static TPOperations getByVerb(String verb) {
++    for (TPOperations eachOne : values()) {
++      if (eachOne.getVerb().equalsIgnoreCase(verb)) {
++        return eachOne;
++      }
++    }
++    
++    return null;",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/225385583,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r225385583,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,typo for the word transactions,c0e41db4ae8e5cff4b259b710783b174bee1227b,2018-10-16 03:22:35,225385703,"@@ -35,13 +35,9 @@ message TpRegisterRequest {
+     string version = 2;
+ 
+     // The namespaces this transaction processor expects to interact with
+-    // when processing transactions matching this specification; will be
++    // when processing transations matching this specification; will be",,2019-02-17 13:01:45,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/pulls/comments/225385703,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#discussion_r225385703,arsulegai

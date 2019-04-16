@@ -1,0 +1,97 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+iroha-scala,mitsutaka-takeda,https://github.com/hyperledger/iroha-scala/pull/20,https://api.github.com/repos/hyperledger/iroha-scala/issues/20,(+): Support SubtractAssetQuantity,"# What is this pull request?
+
+Support SubtractAssetQuantity of iroha's CommandService.
+
+# Why do you implement it? Why do we need this pull request?
+
+In order to invoke the iroha's SubtractAssetQuantity command.
+
+# How to use the features provided in the pull request?
+
+Create a command with `Iroha.CommandService.subtractAssetQuantity' method, and send the transaction containing the command.",closed,True,2018-02-08 06:49:07,2018-02-10 12:12:33
+iroha-scala,mitsutaka-takeda,https://github.com/hyperledger/iroha-scala/pull/19,https://api.github.com/repos/hyperledger/iroha-scala/issues/19,Feature/support SubtractAssetQuantity,"# What is this pull request?
+
+Support SubtractAssetQuantity of iroha's CommandService.
+
+# Why do you implement it? Why do we need this pull request?
+
+In order to invoke the iroha's SubtractAssetQuantity command.
+
+# How to use the features provided in the pull request?
+
+Create a command with `Iroha.CommandService.subtractAssetQuantity' method, and send the transaction containing the command.",closed,True,2018-02-08 06:36:20,2018-02-08 06:46:47
+iroha-scala,mitsutaka-takeda,https://github.com/hyperledger/iroha-scala/pull/18,https://api.github.com/repos/hyperledger/iroha-scala/issues/18,Hotfix/upgrade sbt-pgp,Failed to fetch the old version of sbt-pgp in our build pipeline.,closed,True,2018-02-08 06:14:55,2018-02-08 06:21:38
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/17,https://api.github.com/repos/hyperledger/iroha-scala/issues/17,(+) Update domain validator as RFC1305.,"# What is this pull request?
+Add a validator to validate domain name as RFC1305.
+
+# Why do you implement it? Why do we need this pull request?
+Old implementation that regex validator was insufficient.
+",closed,True,2018-02-02 08:59:22,2018-02-02 08:59:36
+iroha-scala,mitsutaka-takeda,https://github.com/hyperledger/iroha-scala/pull/16,https://api.github.com/repos/hyperledger/iroha-scala/issues/16,(+)Add a learning test for the behavior of tx_counter,"# What is this pull request?
+
+Add a test to learn the behavior of tx_counter. We wanted to make sure we can submit a transaction with the same tx_counter.
+
+# Why do you implement it? Why do we need this pull request?
+
+A test case for checking the behavior of  iroha node when it receives transactions with the same tx_counter.
+",closed,True,2018-02-02 06:08:48,2018-02-02 08:26:48
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/15,https://api.github.com/repos/hyperledger/iroha-scala/issues/15,(~) Fix issue with account name validation.,"If account name start with number, the createAccount command will fail.
+
+Signed-off-by: SHIMADA, Daisuke <dice.k1984@gmail.com>",closed,True,2018-02-02 03:56:30,2018-02-02 03:56:41
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/14,https://api.github.com/repos/hyperledger/iroha-scala/issues/14,(~) Refactoring test code.,"Separate generation of command and transaction.
+
+Signed-off-by: SHIMADA, Daisuke <dice.k1984@gmail.com>",closed,True,2018-02-02 03:34:27,2018-02-02 03:35:02
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/13,https://api.github.com/repos/hyperledger/iroha-scala/issues/13,(+) Update Ed25519 usage for iroha v1.,"1. Changed ed25519 hash algorithm to SHA3-512.
+
+SHA3EdDSAPrivateKeySpec is override class to use SHA3-512 as hash algorithm in Java8.
+
+iroha v1 is change from SHA-512 to SHA3-512.
+
+But it cannot get SHA3 instance by MessageDigest.getInstance in Java8.
+
+And I didn't want to use Java9 because several dependencies.
+
+So I created SHA3EdDSAPrivateKeySpec.
+
+2. Updated proto files for iroha v1.
+
+3. Updated validations for iroha v1.
+
+Signed-off-by: SHIMADA, Daisuke <dice.k1984@gmail.com>",closed,True,2018-02-01 09:05:31,2018-02-02 03:35:13
+iroha-scala,mitsutaka-takeda,https://github.com/hyperledger/iroha-scala/pull/12,https://api.github.com/repos/hyperledger/iroha-scala/issues/12,Feature/get transaction status,"# What is this pull request?
+
+Support asking transaction's status to Iroha's CommandService.
+
+# Why do you implement it? Why do we need this pull request?
+
+Iroha clients need to know the status of their transaction request.
+
+# How to use the features provided in the pull request?
+
+Compute the hash of a transaction with `Iroha.CommandService.txHash`.  Ask Iroha's CommandService with the hash.",closed,True,2018-02-01 08:59:49,2018-02-01 09:06:37
+iroha-scala,mitsutaka-takeda,https://github.com/hyperledger/iroha-scala/pull/11,https://api.github.com/repos/hyperledger/iroha-scala/issues/11,Feature/get transaction status,"# What is this pull request?
+
+Support asking transaction's status to Iroha's CommandService.
+
+# Why do you implement it? Why do we need this pull request?
+
+Iroha clients need to know the status of their transaction request.
+
+# How to use the features provided in the pull request?
+
+Compute the hash of a transaction with `Iroha.CommandService.txHash`.  Ask Iroha's CommandService with the hash.",closed,True,2018-02-01 08:31:50,2018-02-01 08:57:42
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/10,https://api.github.com/repos/hyperledger/iroha-scala/issues/10,Feature/brushup utils,,closed,True,2017-11-15 10:39:32,2017-11-15 10:40:03
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/9,https://api.github.com/repos/hyperledger/iroha-scala/issues/9,Implement api methods for currently(0.95) iroha node.,"Update protos.
+Update api usages.
+Update tests.
+
+Signed-off-by: SHIMADA, Daisuke <dice.k1984@gmail.com>",closed,True,2017-11-08 03:51:46,2017-11-15 10:38:59
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/8,https://api.github.com/repos/hyperledger/iroha-scala/issues/8,Implement api methods for currently(0.95) iroha node.,"Signed-off-by: SHIMADA, Daisuke <dice.k1984@gmail.com>",closed,True,2017-11-08 03:44:42,2017-11-08 03:51:10
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/7,https://api.github.com/repos/hyperledger/iroha-scala/issues/7,Feature/implement protobuf,Corresponded to the latest iroha node.,closed,True,2017-11-08 03:31:53,2017-11-08 03:32:28
+iroha-scala,ryjones,https://github.com/hyperledger/iroha-scala/pull/6,https://api.github.com/repos/hyperledger/iroha-scala/issues/6,Create dcotrigger,,closed,True,2017-10-14 18:25:00,2017-10-14 18:26:04
+iroha-scala,ryjones,https://github.com/hyperledger/iroha-scala/pull/5,https://api.github.com/repos/hyperledger/iroha-scala/issues/5,Create DCO,DO NOT MERGE,closed,True,2017-10-03 21:27:56,2017-10-03 21:36:32
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/4,https://api.github.com/repos/hyperledger/iroha-scala/issues/4,Update for new protobuf (hyperledger/iroha f13211b).,Implement scala client for new protobuf.,closed,True,2017-08-25 17:53:21,2017-08-25 17:55:40
+iroha-scala,rjones-lf,https://github.com/hyperledger/iroha-scala/pull/3,https://api.github.com/repos/hyperledger/iroha-scala/issues/3,Create cla.md,,closed,True,2017-06-17 08:18:23,2017-06-17 08:21:30
+iroha-scala,rjones-lf,https://github.com/hyperledger/iroha-scala/pull/2,https://api.github.com/repos/hyperledger/iroha-scala/issues/2,Create clahub,This PR exists to trigger CLAHUB. DO NOT MERGE,closed,True,2017-06-02 17:51:23,2017-06-17 08:21:30
+iroha-scala,cimadai,https://github.com/hyperledger/iroha-scala/pull/1,https://api.github.com/repos/hyperledger/iroha-scala/issues/1,Update library name and organization name.,,closed,True,2017-03-17 10:25:41,2017-03-17 10:26:48

@@ -1,0 +1,97 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/iroha-javascript/pull/18,https://github.com/hyperledger/iroha-javascript/pull/18,`npm run test:browser` ?,287c27221e51d2f54b87e70965c00fd88e2ce7ff,2017-05-19 05:32:58,117406077,"@@ -104,6 +104,7 @@ Return True or False;
+ #### NPM scripts
+ 
+  - `npm t`: Run test suite
++ - `npm run test:karma`: Run test suite for browser",,2017-05-19 05:38:42,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/117406077,https://github.com/hyperledger/iroha-javascript/pull/18#discussion_r117406077,gucc1
+https://github.com/hyperledger/iroha-javascript/pull/11,https://github.com/hyperledger/iroha-javascript/pull/11,Why travis? Other Iroha projects are using circle-ci2.,ac8a5b17513cdf33c77e25f6d5b8f888e33b4407,2017-03-19 06:56:27,106799521,"@@ -0,0 +1,19 @@
++language: node_js",,2017-03-19 11:43:50,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/106799521,https://github.com/hyperledger/iroha-javascript/pull/11#discussion_r106799521,takemiyamakoto
+https://github.com/hyperledger/iroha-javascript/pull/11,https://github.com/hyperledger/iroha-javascript/pull/11,```https://github.com/hyperledger/iroha-javascript#readme``` might be better,ac8a5b17513cdf33c77e25f6d5b8f888e33b4407,2017-03-19 06:57:16,106799529,"@@ -2,27 +2,111 @@
+   ""name"": ""irohajs"",
+   ""version"": ""1.0.0"",
+   ""description"": """",
+-  ""main"": ""src/iroha.js"",
++  ""keywords"": [],
++  ""main"": ""dist/irohajs.js"",
++  ""typings"": ""dist/src/irohajs.d.ts"",
++  ""files"": [
++    ""dist""
++  ],
++  ""author"": """",
++  ""license"": ""Apache-2.0"",
++  ""bugs"": {
++    ""url"": ""https://github.com/soramitsu/iroha-javascript/issues""
++  },
++  ""homepage"": ""https://github.com/soramitsu/iroha-javascript#readme"",",,2017-03-19 11:43:50,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/106799529,https://github.com/hyperledger/iroha-javascript/pull/11#discussion_r106799529,takemiyamakoto
+https://github.com/hyperledger/iroha-javascript/pull/11,https://github.com/hyperledger/iroha-javascript/pull/11,```https://github.com/hyperledger/iroha-javascript/issues``` might be better,ac8a5b17513cdf33c77e25f6d5b8f888e33b4407,2017-03-19 06:57:38,106799531,"@@ -2,27 +2,111 @@
+   ""name"": ""irohajs"",
+   ""version"": ""1.0.0"",
+   ""description"": """",
+-  ""main"": ""src/iroha.js"",
++  ""keywords"": [],
++  ""main"": ""dist/irohajs.js"",
++  ""typings"": ""dist/src/irohajs.d.ts"",
++  ""files"": [
++    ""dist""
++  ],
++  ""author"": """",
++  ""license"": ""Apache-2.0"",
++  ""bugs"": {
++    ""url"": ""https://github.com/soramitsu/iroha-javascript/issues""",,2017-03-19 11:43:50,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/106799531,https://github.com/hyperledger/iroha-javascript/pull/11#discussion_r106799531,takemiyamakoto
+https://github.com/hyperledger/iroha-javascript/pull/11,https://github.com/hyperledger/iroha-javascript/pull/11,"→``` ""url"": ""git+https://github.com/hyperledger/iroha-javascript.git""```",ac8a5b17513cdf33c77e25f6d5b8f888e33b4407,2017-03-19 06:58:33,106799545,"@@ -2,27 +2,111 @@
+   ""name"": ""irohajs"",
+   ""version"": ""1.0.0"",
+   ""description"": """",
+-  ""main"": ""src/iroha.js"",
++  ""keywords"": [],
++  ""main"": ""dist/irohajs.js"",
++  ""typings"": ""dist/src/irohajs.d.ts"",
++  ""files"": [
++    ""dist""
++  ],
++  ""author"": """",
++  ""license"": ""Apache-2.0"",
++  ""bugs"": {
++    ""url"": ""https://github.com/soramitsu/iroha-javascript/issues""
++  },
++  ""homepage"": ""https://github.com/soramitsu/iroha-javascript#readme"",
++  ""engines"": {
++    ""node"": "">=6.0.0""
++  },
+   ""scripts"": {
+-    ""test"": ""echo \""Error: no test specified\"" && exit 1"",
+-    ""build"": """"
++    ""lint"": ""tslint -e **/node_modules/** -e **/dist/** **/*.ts "",
++    ""prebuild"": ""rimraf dist && rimraf docs"",
++    ""build"": ""webpack -p"",
++    ""build:dev"": ""webpack"",
++    ""test"": ""jest"",
++    ""test:watch"": ""jest --watch"",
++    ""test:prod"": ""npm run lint && npm run test -- --coverage --no-cache"",
++    ""deploy-docs"": ""node tools/gh-pages-publish.js"",
++    ""report-coverage"": ""cat ./coverage/lcov.info | coveralls"",
++    ""commit"": ""git-cz"",
++    ""semantic-release"": ""semantic-release pre && npm publish && semantic-release post"",
++    ""prepush"": ""npm run test:prod && npm run build"",
++    ""commitmsg"": ""validate-commit-msg""
+   },
+   ""repository"": {
+     ""type"": ""git"",
+     ""url"": ""git+https://github.com/soramitsu/iroha-javascript.git""",39,2017-03-19 11:43:50,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/106799545,https://github.com/hyperledger/iroha-javascript/pull/11#discussion_r106799545,takemiyamakoto
+https://github.com/hyperledger/iroha-javascript/pull/11,https://github.com/hyperledger/iroha-javascript/pull/11,"Sorry, i didn't know you already use circle-ci2. I would try to change it to be like other one.",ac8a5b17513cdf33c77e25f6d5b8f888e33b4407,2017-03-19 09:48:00,106802286,"@@ -0,0 +1,19 @@
++language: node_js",,2017-03-19 11:43:50,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/106802286,https://github.com/hyperledger/iroha-javascript/pull/11#discussion_r106802286,theofilis
+https://github.com/hyperledger/iroha-javascript/pull/11,https://github.com/hyperledger/iroha-javascript/pull/11,οκ,ac8a5b17513cdf33c77e25f6d5b8f888e33b4407,2017-03-19 09:48:10,106802289,"@@ -2,27 +2,111 @@
+   ""name"": ""irohajs"",
+   ""version"": ""1.0.0"",
+   ""description"": """",
+-  ""main"": ""src/iroha.js"",
++  ""keywords"": [],
++  ""main"": ""dist/irohajs.js"",
++  ""typings"": ""dist/src/irohajs.d.ts"",
++  ""files"": [
++    ""dist""
++  ],
++  ""author"": """",
++  ""license"": ""Apache-2.0"",
++  ""bugs"": {
++    ""url"": ""https://github.com/soramitsu/iroha-javascript/issues""",,2017-03-19 11:43:50,https://api.github.com/repos/hyperledger/iroha-javascript/pulls/comments/106802289,https://github.com/hyperledger/iroha-javascript/pull/11#discussion_r106802289,theofilis

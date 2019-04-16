@@ -1,0 +1,160 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/composer-concerto/issues/31,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/477555035,https://github.com/hyperledger/composer-concerto/pull/31#issuecomment-477555035,dselman,"Sorry, I already did it and republished 0.70.1.",2019-03-28 11:24:00,2019-03-28 11:24:00
+https://api.github.com/repos/hyperledger/composer-concerto/issues/30,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/477804084,https://github.com/hyperledger/composer-concerto/issues/30#issuecomment-477804084,jeromesimeon,"It seems like the question of `mkdirp` is only the top of the iceberg. Here is a more detailed analysis of the listed dependencies in both `composer-concerto` and `composer-concerto-tools`:
+
+**Composer Concerto:**
+
+In dependencies, and used in `./lib`:
+
+```
+    ""axios"": ""0.18.0"",
+    ""debug"": ""4.0.1"",
+    ""lodash.padstart"": ""4.6.1"",
+    ""lorem-ipsum"": ""1.0.6"",
+    ""npm-paths"": ""1.0.0"",
+    ""urijs"": ""1.19.1"",
+    ""mkdirp"": ""0.5.1"",
+    ""moment-mini"": ""2.22.1"",
+    ""uuid"": ""3.3.2""
+```
+
+*** Not in dependencies, but used in `./lib`:
+
+```
+    ""acorn"": ""5.1.2"",
+    ""commander"": ""2.18.0"",
+    ""doctrine"": ""2.1.0"",
+    ""fs-extra"": ""1.0.0"",
+    ""node-plantuml"": ""0.7.0"",
+    ""semver"": ""5.5.1"",
+    ""yargs"": ""12.0.2""
+```
+
+**Composer Concerto Tools:**
+
+In dependencies, and used in `./lib`:
+
+```
+    ""composer-concerto"": ""0.60.1"",
+    ""debug"": ""4.1.0"",
+    ""mkdirp"": ""0.5.1"",
+```
+
+*** In dependencies, but not used in `./lib`:
+
+```
+    ""axios"": ""0.18.0"",
+    ""commander"": ""2.19.0"",
+    ""doctrine"": ""2.1.0"",
+    ""fs-extra"": ""7.0.0"",
+    ""lodash.padstart"": ""4.6.1"",
+    ""lorem-ipsum"": ""1.0.6"",
+    ""moment"": ""2.22.2"",
+    ""npm-paths"": ""1.0.0"",
+    ""semver"": ""5.6.0"",
+    ""urijs"": ""1.19.1"",
+    ""uuid"": ""3.3.2"",
+    ""yargs"": ""12.0.2""
+```
+
+A possible resolution could be:
+1. Remove unneeded dependencies in Composer Concerto Tools
+2. Add needed dependencies in Composer Concerto
+
+@dselman : I would be happy to work on PRs for that on both projects, but could use some review/guidance.
+
+A few additional notes:
+- Different versions for ""debug"" in composer concerto & tools, use the more recent? (""debug"": ""4.1.0"")
+- Unclear whether some of the code in composer-concerto/lib/tools is really used at runtime
+",2019-03-28 23:11:26,2019-03-28 23:12:15
+https://api.github.com/repos/hyperledger/composer-concerto/issues/30,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/478017966,https://github.com/hyperledger/composer-concerto/issues/30#issuecomment-478017966,dselman,"Yes, if you could submit PRs for both that would be great. Upgrading debug will hopefully not be an issue. 
+
+On your second point, do you have more details?",2019-03-29 14:28:54,2019-03-29 14:28:54
+https://api.github.com/repos/hyperledger/composer-concerto/issues/30,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/478020707,https://github.com/hyperledger/composer-concerto/issues/30#issuecomment-478020707,jeromesimeon,"Great. I'll start working on those PRs.
+
+About the second point about `lib/tools`: when looking at the dependencies, `yargs` and `node-plantuml` only show up in `lib/tools` which AFAICT is only used in `./test` but isn't exposed in the main index. I wasn't sure if those tools were being used or could be moved to testing (and the corresponding dependencies could go to `devDependencies`.
+
+I won't tackle that part unless I hear otherwise.
+",2019-03-29 14:36:19,2019-03-29 14:36:19
+https://api.github.com/repos/hyperledger/composer-concerto/issues/30,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/478072562,https://github.com/hyperledger/composer-concerto/issues/30#issuecomment-478072562,jeromesimeon,"PR in #32 
+
+Note that It took the liberty to bump the Composer Concerto version to 0.70.2 in the package.json
+",2019-03-29 16:56:10,2019-03-29 16:56:10
+https://api.github.com/repos/hyperledger/composer-concerto/issues/30,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/478083791,https://github.com/hyperledger/composer-concerto/issues/30#issuecomment-478083791,jeromesimeon,"Corresponding PR for `composer-concerto-tools` in https://github.com/hyperledger/composer-concerto-tools/pull/15
+
+This is WIP since the `package.json` will have to be updated to the not-yet-released version `0.70.2` of `composer-concerto`",2019-03-29 17:29:32,2019-03-29 17:31:01
+https://api.github.com/repos/hyperledger/composer-concerto/issues/27,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/470117166,https://github.com/hyperledger/composer-concerto/issues/27#issuecomment-470117166,jeromesimeon,"A bit of fact finding:
+I believe the corresponding code for deserialization is at:
+https://github.com/hyperledger/composer-concerto/blob/280e1e99c1b3369b3e24ff035f0d1dcbe32d6a88/lib/serializer/jsonpopulator.js#L214
+and the corresponding code for serialization is at:
+https://github.com/hyperledger/composer-concerto/blob/280e1e99c1b3369b3e24ff035f0d1dcbe32d6a88/lib/serializer/jsongenerator.js#L164
+
+As far as I can tell, there is no way to maintain the initial time zone offset with JavaScript `Date`:
+https://stackoverflow.com/questions/17751698/stop-javascript-date-function-from-changing-timezone-offset
+
+Some possible ways to address this might be to:
+1. switch to a different date/time library, e.g., https://momentjs.com
+2. preserve the original string
+",2019-03-06 13:59:34,2019-03-06 13:59:34
+https://api.github.com/repos/hyperledger/composer-concerto/issues/27,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/474347511,https://github.com/hyperledger/composer-concerto/issues/27#issuecomment-474347511,jeromesimeon,This is resolved with the latest version. Thanks.,2019-03-19 12:48:35,2019-03-19 12:48:35
+https://api.github.com/repos/hyperledger/composer-concerto/issues/26,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/444935520,https://github.com/hyperledger/composer-concerto/issues/26#issuecomment-444935520,jeromesimeon,"From @dselman https://github.com/accordproject/cicero/issues/111:
+
+My inclination is:
+
+```
+enum TemporalUnit {
+  @localization_en( 'day', 'days')
+  @localization_fr( 'jour', 'jours')
+  o DAY
+  //...
+}
+```
+
+With the second key (plural) optional.
+
+Note that in its current state Composer doesn't support multiple decorators with the same name on the same element. 
+
+Also, note that while an external localization file would be very nice for translation purposes it would be tricky to make it work with models that are loaded from URLs.",2018-12-06 16:31:08,2018-12-06 16:31:08
+https://api.github.com/repos/hyperledger/composer-concerto/issues/26,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/460423074,https://github.com/hyperledger/composer-concerto/issues/26#issuecomment-460423074,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2019-02-04 21:38:24,2019-02-04 21:38:24
+https://api.github.com/repos/hyperledger/composer-concerto/issues/26,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/464892572,https://github.com/hyperledger/composer-concerto/issues/26#issuecomment-464892572,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-02-18 21:49:15,2019-02-18 21:49:15
+https://api.github.com/repos/hyperledger/composer-concerto/issues/23,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/434303053,https://github.com/hyperledger/composer-concerto/issues/23#issuecomment-434303053,dselman,Fixed,2018-10-30 13:35:45,2018-10-30 13:35:45
+https://api.github.com/repos/hyperledger/composer-concerto/issues/17,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/432212220,https://github.com/hyperledger/composer-concerto/pull/17#issuecomment-432212220,dselman,Merci!,2018-10-23 11:41:19,2018-10-23 11:41:19
+https://api.github.com/repos/hyperledger/composer-concerto/issues/15,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/450471833,https://github.com/hyperledger/composer-concerto/issues/15#issuecomment-450471833,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2018-12-29 07:13:36,2018-12-29 07:13:36
+https://api.github.com/repos/hyperledger/composer-concerto/issues/15,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453773998,https://github.com/hyperledger/composer-concerto/issues/15#issuecomment-453773998,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-12 19:20:24,2019-01-12 19:20:24
+https://api.github.com/repos/hyperledger/composer-concerto/issues/14,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/450471832,https://github.com/hyperledger/composer-concerto/issues/14#issuecomment-450471832,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2018-12-29 07:13:36,2018-12-29 07:13:36
+https://api.github.com/repos/hyperledger/composer-concerto/issues/14,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453774000,https://github.com/hyperledger/composer-concerto/issues/14#issuecomment-453774000,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-12 19:20:25,2019-01-12 19:20:25
+https://api.github.com/repos/hyperledger/composer-concerto/issues/13,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/431376454,https://github.com/hyperledger/composer-concerto/issues/13#issuecomment-431376454,jeromesimeon,Do we actually allow override at all?! With what semantic?,2018-10-19 14:10:56,2018-10-19 14:10:56
+https://api.github.com/repos/hyperledger/composer-concerto/issues/13,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/450471831,https://github.com/hyperledger/composer-concerto/issues/13#issuecomment-450471831,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2018-12-29 07:13:36,2018-12-29 07:13:36
+https://api.github.com/repos/hyperledger/composer-concerto/issues/13,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453774002,https://github.com/hyperledger/composer-concerto/issues/13#issuecomment-453774002,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-12 19:20:26,2019-01-12 19:20:26
+https://api.github.com/repos/hyperledger/composer-concerto/issues/12,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/450471834,https://github.com/hyperledger/composer-concerto/issues/12#issuecomment-450471834,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2018-12-29 07:13:37,2018-12-29 07:13:37
+https://api.github.com/repos/hyperledger/composer-concerto/issues/12,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453773992,https://github.com/hyperledger/composer-concerto/issues/12#issuecomment-453773992,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-12 19:20:21,2019-01-12 19:20:21
+https://api.github.com/repos/hyperledger/composer-concerto/issues/11,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/431366834,https://github.com/hyperledger/composer-concerto/issues/11#issuecomment-431366834,dselman,"One approach would be for `ClassDeclaration.getSuperType` to delegate to its `ModelManager`. This would allow sub-classes of `ModelManager` to override the `ClassDeclarations` explicit super type based on decorators, namespace, maps etc.",2018-10-19 13:40:44,2018-10-19 13:40:44
+https://api.github.com/repos/hyperledger/composer-concerto/issues/11,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/431377539,https://github.com/hyperledger/composer-concerto/issues/11#issuecomment-431377539,jeromesimeon,"What's the use case for implicit super types? The only example I have in mind is when you write `e.g., asset Foo { ... }` there is an implicit `Asset` super type.",2018-10-19 14:14:15,2018-10-19 14:14:15
+https://api.github.com/repos/hyperledger/composer-concerto/issues/11,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/450471830,https://github.com/hyperledger/composer-concerto/issues/11#issuecomment-450471830,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2018-12-29 07:13:35,2018-12-29 07:13:35
+https://api.github.com/repos/hyperledger/composer-concerto/issues/11,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453773996,https://github.com/hyperledger/composer-concerto/issues/11#issuecomment-453773996,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-12 19:20:23,2019-01-12 19:20:23
+https://api.github.com/repos/hyperledger/composer-concerto/issues/10,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/433876423,https://github.com/hyperledger/composer-concerto/issues/10#issuecomment-433876423,dselman,@mttrbrts has picked up this work and is making good progress.,2018-10-29 11:27:15,2018-10-29 11:27:15
+https://api.github.com/repos/hyperledger/composer-concerto/issues/10,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/438822139,https://github.com/hyperledger/composer-concerto/issues/10#issuecomment-438822139,mttrbrts,"The latest work is available in a fork of Uchi's work here, https://github.com/mttrbrts/concerto-form
+
+Eventually, I see this ending up in https://github.com/hyperledger/composer-concerto-tools",2018-11-14 21:18:15,2018-11-14 21:18:15
+https://api.github.com/repos/hyperledger/composer-concerto/issues/10,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453933811,https://github.com/hyperledger/composer-concerto/issues/10#issuecomment-453933811,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2019-01-14 08:50:21,2019-01-14 08:50:21
+https://api.github.com/repos/hyperledger/composer-concerto/issues/10,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/458903915,https://github.com/hyperledger/composer-concerto/issues/10#issuecomment-458903915,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-30 11:03:17,2019-01-30 11:03:17
+https://api.github.com/repos/hyperledger/composer-concerto/issues/9,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/450471835,https://github.com/hyperledger/composer-concerto/issues/9#issuecomment-450471835,stale[bot],"This issue has been automatically marked as stale because it has not had any recent activity. It will be closed if no further activity occurs in the next 14 days. Thank you for your contributions.
+",2018-12-29 07:13:37,2018-12-29 07:13:37
+https://api.github.com/repos/hyperledger/composer-concerto/issues/9,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/453773995,https://github.com/hyperledger/composer-concerto/issues/9#issuecomment-453773995,stale[bot],"This issue has been automatically closed because no further activity occurred. If you believe the issue is still relevant, please either reopen this issue, open a new issue, or contact one of the [project maintainers](https://github.com/hyperledger/composer/blob/master/MAINTAINERS.md)
+",2019-01-12 19:20:22,2019-01-12 19:20:22
+https://api.github.com/repos/hyperledger/composer-concerto/issues/7,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/428919888,https://github.com/hyperledger/composer-concerto/issues/7#issuecomment-428919888,dselman,I have requested a new repo and will start this refactoring soon.,2018-10-11 11:27:12,2018-10-11 11:27:12
+https://api.github.com/repos/hyperledger/composer-concerto/issues/7,https://api.github.com/repos/hyperledger/composer-concerto/issues/comments/434303381,https://github.com/hyperledger/composer-concerto/issues/7#issuecomment-434303381,dselman,Complete. The only `codegen` code that is left is used by the build system.,2018-10-30 13:36:38,2018-10-30 13:36:38

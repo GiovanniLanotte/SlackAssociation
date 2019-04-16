@@ -1,0 +1,1263 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Typo: CBRO->CBOR,efa684fd9a9dc3163a667152101a6cc285e84176,2018-12-19 14:21:48,242932579,"@@ -0,0 +1,344 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	bytes2 ""bytes""
++	""encoding/base64""
++	""encoding/hex""
++	""errors""
++	""fmt""
++	cbor ""github.com/brianolson/cbor_go""
++	""github.com/golang/protobuf/proto""
++	""github.com/hyperledger/sawtooth-sdk-go/protobuf/batch_pb2""
++	""github.com/hyperledger/sawtooth-sdk-go/protobuf/transaction_pb2""
++	""github.com/hyperledger/sawtooth-sdk-go/signing""
++	""gopkg.in/yaml.v2""
++	""io/ioutil""
++	""math/rand""
++	""net/http""
++	""strconv""
++	""strings""
++	""time""
++)
++
++type IntkeyClient struct {
++	url    string
++	signer *signing.Signer
++}
++
++func NewIntkeyClient(url string, keyfile string) (IntkeyClient, error) {
++
++	var privateKey signing.PrivateKey
++	if keyfile != """" {
++		// Read private key file
++		privateKeyStr, err := ioutil.ReadFile(keyfile)
++		if err != nil {
++			return IntkeyClient{},
++				errors.New(fmt.Sprintf(""Failed to read private key: %v"", err))
++		}
++		// Get private key object
++		privateKey = signing.NewSecp256k1PrivateKey(privateKeyStr)
++	} else {
++		privateKey = signing.NewSecp256k1Context().NewRandomPrivateKey()
++	}
++	cryptoFactory := signing.NewCryptoFactory(signing.NewSecp256k1Context())
++	signer := cryptoFactory.NewSigner(privateKey)
++	return IntkeyClient{url, signer}, nil
++}
++
++func (intkeyClient IntkeyClient) Set(
++	name string, value uint, wait uint) (string, error) {
++	return intkeyClient.sendTransaction(VERB_SET, name, value, wait)
++}
++
++func (intkeyClient IntkeyClient) Inc(
++	name string, value uint, wait uint) (string, error) {
++	return intkeyClient.sendTransaction(VERB_INC, name, value, wait)
++}
++
++func (intkeyClient IntkeyClient) Dec(
++	name string, value uint, wait uint) (string, error) {
++	return intkeyClient.sendTransaction(VERB_DEC, name, value, wait)
++}
++
++func (intkeyClient IntkeyClient) List() ([]map[interface{}]interface{}, error) {
++
++	// API to call
++	apiSuffix := fmt.Sprintf(""%s?address=%s"",
++		STATE_API, intkeyClient.getPrefix())
++	response, err := intkeyClient.sendRequest(apiSuffix, []byte{}, """", """")
++	if err != nil {
++		return []map[interface{}]interface{}{}, err
++	}
++
++	var toReturn []map[interface{}]interface{}
++	responseMap := make(map[interface{}]interface{})
++	err = yaml.Unmarshal([]byte(response), &responseMap)
++	if err != nil {
++		return []map[interface{}]interface{}{},
++			errors.New(fmt.Sprintf(""Error reading response: %v"", err))
++	}
++	encodedEntries := responseMap[""data""].([]interface{})
++	for _, entry := range encodedEntries {
++		entryData, ok := entry.(map[interface{}]interface{})
++		if !ok {
++			return []map[interface{}]interface{}{},
++				errors.New(""Error reading entry data"")
++		}
++		stringData, ok := entryData[""data""].(string)
++		if !ok {
++			return []map[interface{}]interface{}{},
++				errors.New(""Error reading string data"")
++		}
++		decodedBytes, err := base64.StdEncoding.DecodeString(stringData)
++		if err != nil {
++			return []map[interface{}]interface{}{},
++				errors.New(fmt.Sprint(""Error decoding: %v"", err))
++		}
++		foundMap := make(map[interface{}]interface{})
++		err = cbor.Loads(decodedBytes, &foundMap)
++		if err != nil {
++			return []map[interface{}]interface{}{},
++				errors.New(fmt.Sprint(""Error binary decoding: %v"", err))
++		}
++		toReturn = append(toReturn, foundMap)
++	}
++	return toReturn, nil
++}
++
++func (intkeyClient IntkeyClient) Show(name string) (string, error) {
++	apiSuffix := fmt.Sprintf(""%s/%s"", STATE_API, intkeyClient.getAddress(name))
++	response, err := intkeyClient.sendRequest(apiSuffix, []byte{}, """", name)
++	if err != nil {
++		return """", err
++	}
++	responseMap := make(map[interface{}]interface{})
++	err = yaml.Unmarshal([]byte(response), &responseMap)
++	if err != nil {
++		return """", errors.New(fmt.Sprint(""Error reading response: %v"", err))
++	}
++	data, ok := responseMap[""data""].(string)
++	if !ok {
++		return """", errors.New(""Error reading as string"")
++	}
++	responseData, err := base64.StdEncoding.DecodeString(data)
++	if err != nil {
++		return """", errors.New(fmt.Sprint(""Error decoding response: %v"", err))
++	}
++	responseFinal := make(map[interface{}]interface{})
++	err = cbor.Loads(responseData, &responseFinal)
++	if err != nil {
++		return """", errors.New(fmt.Sprint(""Error binary decoding: %v"", err))
++	}
++	return fmt.Sprintf(""%v"", responseFinal[name]), nil
++}
++
++func (intkeyClient IntkeyClient) getStatus(
++	batchId string, wait uint) (string, error) {
++
++	// API to call
++	apiSuffix := fmt.Sprintf(""%s?id=%s&wait=%d"",
++		BATCH_STATUS_API, batchId, wait)
++	response, err := intkeyClient.sendRequest(apiSuffix, []byte{}, """", """")
++	if err != nil {
++		return """", err
++	}
++
++	responseMap := make(map[interface{}]interface{})
++	err = yaml.Unmarshal([]byte(response), &responseMap)
++	if err != nil {
++		return """", errors.New(fmt.Sprintf(""Error reading response: %v"", err))
++	}
++	entry :=
++		responseMap[""data""].([]interface{})[0].(map[interface{}]interface{})
++	return fmt.Sprint(entry[""status""]), nil
++}
++
++func (intkeyClient IntkeyClient) sendRequest(
++	apiSuffix string,
++	data []byte,
++	contentType string,
++	name string) (string, error) {
++
++	// Construct URL
++	var url string
++	if strings.HasPrefix(intkeyClient.url, ""http://"") {
++		url = fmt.Sprintf(""%s/%s"", intkeyClient.url, apiSuffix)
++	} else {
++		url = fmt.Sprintf(""http://%s/%s"", intkeyClient.url, apiSuffix)
++	}
++
++	// Send request to validator URL
++	var response *http.Response
++	var err error
++	if len(data) > 0 {
++		response, err = http.Post(url, contentType, bytes2.NewBuffer(data))
++	} else {
++		response, err = http.Get(url)
++	}
++	if err != nil {
++		return """", errors.New(
++			fmt.Sprintf(""Failed to connect to REST API: %v"", err))
++	}
++	if response.StatusCode == 404 {
++		logger.Debug(fmt.Sprintf(""%v"", response))
++		return """", errors.New(fmt.Sprintf(""No such key: %s"", name))
++	} else if response.StatusCode >= 400 {
++		return """", errors.New(
++			fmt.Sprintf(""Error %d: %s"", response.StatusCode, response.Status))
++	}
++	defer response.Body.Close()
++	reponseBody, err := ioutil.ReadAll(response.Body)
++	if err != nil {
++		return """", errors.New(fmt.Sprintf(""Error reading response: %v"", err))
++	}
++	return string(reponseBody), nil
++}
++
++func (intkeyClient IntkeyClient) sendTransaction(
++	verb string, name string, value uint, wait uint) (string, error) {
++
++	// construct the payload information in CBRO format",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/242932579,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r242932579,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Remove TODO from the code,efa684fd9a9dc3163a667152101a6cc285e84176,2018-12-19 14:23:31,242933183,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/242933183,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r242933183,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,TODO,efa684fd9a9dc3163a667152101a6cc285e84176,2018-12-19 14:23:38,242933227,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/242933227,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r242933227,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Remove TODO,efa684fd9a9dc3163a667152101a6cc285e84176,2018-12-19 14:23:49,242933289,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system
++			fmt.Println(DISTRIBUTION_NAME + "" (Hyperledger Sawtooth) version "" + FAMILY_VERSION)
++			os.Exit(0)
++		}
++	}
++
++	var opts Opts
++	parser := flags.NewParser(&opts, flags.Default)
++	parser.Command.Name = ""intkey""
++
++	// Add sub-commands
++	commands := []Command{
++		&Set{},
++		&Inc{},
++		&Dec{},
++		&Show{},
++		&List{},
++		// TODO: Add workload related options, to match with Python CLI",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/242933289,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r242933289,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"We try to void having util files. Instead, I suggest moving these functions to main. ",efa684fd9a9dc3163a667152101a6cc285e84176,2018-12-19 14:30:51,242936073,"@@ -0,0 +1,61 @@
++/**",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/242936073,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r242936073,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Corrected,efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-13 10:13:11,247340884,"@@ -0,0 +1,344 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	bytes2 ""bytes""
++	""encoding/base64""
++	""encoding/hex""
++	""errors""
++	""fmt""
++	cbor ""github.com/brianolson/cbor_go""
++	""github.com/golang/protobuf/proto""
++	""github.com/hyperledger/sawtooth-sdk-go/protobuf/batch_pb2""
++	""github.com/hyperledger/sawtooth-sdk-go/protobuf/transaction_pb2""
++	""github.com/hyperledger/sawtooth-sdk-go/signing""
++	""gopkg.in/yaml.v2""
++	""io/ioutil""
++	""math/rand""
++	""net/http""
++	""strconv""
++	""strings""
++	""time""
++)
++
++type IntkeyClient struct {
++	url    string
++	signer *signing.Signer
++}
++
++func NewIntkeyClient(url string, keyfile string) (IntkeyClient, error) {
++
++	var privateKey signing.PrivateKey
++	if keyfile != """" {
++		// Read private key file
++		privateKeyStr, err := ioutil.ReadFile(keyfile)
++		if err != nil {
++			return IntkeyClient{},
++				errors.New(fmt.Sprintf(""Failed to read private key: %v"", err))
++		}
++		// Get private key object
++		privateKey = signing.NewSecp256k1PrivateKey(privateKeyStr)
++	} else {
++		privateKey = signing.NewSecp256k1Context().NewRandomPrivateKey()
++	}
++	cryptoFactory := signing.NewCryptoFactory(signing.NewSecp256k1Context())
++	signer := cryptoFactory.NewSigner(privateKey)
++	return IntkeyClient{url, signer}, nil
++}
++
++func (intkeyClient IntkeyClient) Set(
++	name string, value uint, wait uint) (string, error) {
++	return intkeyClient.sendTransaction(VERB_SET, name, value, wait)
++}
++
++func (intkeyClient IntkeyClient) Inc(
++	name string, value uint, wait uint) (string, error) {
++	return intkeyClient.sendTransaction(VERB_INC, name, value, wait)
++}
++
++func (intkeyClient IntkeyClient) Dec(
++	name string, value uint, wait uint) (string, error) {
++	return intkeyClient.sendTransaction(VERB_DEC, name, value, wait)
++}
++
++func (intkeyClient IntkeyClient) List() ([]map[interface{}]interface{}, error) {
++
++	// API to call
++	apiSuffix := fmt.Sprintf(""%s?address=%s"",
++		STATE_API, intkeyClient.getPrefix())
++	response, err := intkeyClient.sendRequest(apiSuffix, []byte{}, """", """")
++	if err != nil {
++		return []map[interface{}]interface{}{}, err
++	}
++
++	var toReturn []map[interface{}]interface{}
++	responseMap := make(map[interface{}]interface{})
++	err = yaml.Unmarshal([]byte(response), &responseMap)
++	if err != nil {
++		return []map[interface{}]interface{}{},
++			errors.New(fmt.Sprintf(""Error reading response: %v"", err))
++	}
++	encodedEntries := responseMap[""data""].([]interface{})
++	for _, entry := range encodedEntries {
++		entryData, ok := entry.(map[interface{}]interface{})
++		if !ok {
++			return []map[interface{}]interface{}{},
++				errors.New(""Error reading entry data"")
++		}
++		stringData, ok := entryData[""data""].(string)
++		if !ok {
++			return []map[interface{}]interface{}{},
++				errors.New(""Error reading string data"")
++		}
++		decodedBytes, err := base64.StdEncoding.DecodeString(stringData)
++		if err != nil {
++			return []map[interface{}]interface{}{},
++				errors.New(fmt.Sprint(""Error decoding: %v"", err))
++		}
++		foundMap := make(map[interface{}]interface{})
++		err = cbor.Loads(decodedBytes, &foundMap)
++		if err != nil {
++			return []map[interface{}]interface{}{},
++				errors.New(fmt.Sprint(""Error binary decoding: %v"", err))
++		}
++		toReturn = append(toReturn, foundMap)
++	}
++	return toReturn, nil
++}
++
++func (intkeyClient IntkeyClient) Show(name string) (string, error) {
++	apiSuffix := fmt.Sprintf(""%s/%s"", STATE_API, intkeyClient.getAddress(name))
++	response, err := intkeyClient.sendRequest(apiSuffix, []byte{}, """", name)
++	if err != nil {
++		return """", err
++	}
++	responseMap := make(map[interface{}]interface{})
++	err = yaml.Unmarshal([]byte(response), &responseMap)
++	if err != nil {
++		return """", errors.New(fmt.Sprint(""Error reading response: %v"", err))
++	}
++	data, ok := responseMap[""data""].(string)
++	if !ok {
++		return """", errors.New(""Error reading as string"")
++	}
++	responseData, err := base64.StdEncoding.DecodeString(data)
++	if err != nil {
++		return """", errors.New(fmt.Sprint(""Error decoding response: %v"", err))
++	}
++	responseFinal := make(map[interface{}]interface{})
++	err = cbor.Loads(responseData, &responseFinal)
++	if err != nil {
++		return """", errors.New(fmt.Sprint(""Error binary decoding: %v"", err))
++	}
++	return fmt.Sprintf(""%v"", responseFinal[name]), nil
++}
++
++func (intkeyClient IntkeyClient) getStatus(
++	batchId string, wait uint) (string, error) {
++
++	// API to call
++	apiSuffix := fmt.Sprintf(""%s?id=%s&wait=%d"",
++		BATCH_STATUS_API, batchId, wait)
++	response, err := intkeyClient.sendRequest(apiSuffix, []byte{}, """", """")
++	if err != nil {
++		return """", err
++	}
++
++	responseMap := make(map[interface{}]interface{})
++	err = yaml.Unmarshal([]byte(response), &responseMap)
++	if err != nil {
++		return """", errors.New(fmt.Sprintf(""Error reading response: %v"", err))
++	}
++	entry :=
++		responseMap[""data""].([]interface{})[0].(map[interface{}]interface{})
++	return fmt.Sprint(entry[""status""]), nil
++}
++
++func (intkeyClient IntkeyClient) sendRequest(
++	apiSuffix string,
++	data []byte,
++	contentType string,
++	name string) (string, error) {
++
++	// Construct URL
++	var url string
++	if strings.HasPrefix(intkeyClient.url, ""http://"") {
++		url = fmt.Sprintf(""%s/%s"", intkeyClient.url, apiSuffix)
++	} else {
++		url = fmt.Sprintf(""http://%s/%s"", intkeyClient.url, apiSuffix)
++	}
++
++	// Send request to validator URL
++	var response *http.Response
++	var err error
++	if len(data) > 0 {
++		response, err = http.Post(url, contentType, bytes2.NewBuffer(data))
++	} else {
++		response, err = http.Get(url)
++	}
++	if err != nil {
++		return """", errors.New(
++			fmt.Sprintf(""Failed to connect to REST API: %v"", err))
++	}
++	if response.StatusCode == 404 {
++		logger.Debug(fmt.Sprintf(""%v"", response))
++		return """", errors.New(fmt.Sprintf(""No such key: %s"", name))
++	} else if response.StatusCode >= 400 {
++		return """", errors.New(
++			fmt.Sprintf(""Error %d: %s"", response.StatusCode, response.Status))
++	}
++	defer response.Body.Close()
++	reponseBody, err := ioutil.ReadAll(response.Body)
++	if err != nil {
++		return """", errors.New(fmt.Sprintf(""Error reading response: %v"", err))
++	}
++	return string(reponseBody), nil
++}
++
++func (intkeyClient IntkeyClient) sendTransaction(
++	verb string, name string, value uint, wait uint) (string, error) {
++
++	// construct the payload information in CBRO format",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/247340884,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r247340884,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"Done, version will be picked up during build",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-13 10:13:32,247340890,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/247340890,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r247340890,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"Done, version will be picked up during build",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-13 10:13:54,247340898,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/247340898,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r247340898,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"Removed this TODO, only python client has workload for now. Intkey is complete without workload command.",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-13 10:14:44,247340918,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system
++			fmt.Println(DISTRIBUTION_NAME + "" (Hyperledger Sawtooth) version "" + FAMILY_VERSION)
++			os.Exit(0)
++		}
++	}
++
++	var opts Opts
++	parser := flags.NewParser(&opts, flags.Default)
++	parser.Command.Name = ""intkey""
++
++	// Add sub-commands
++	commands := []Command{
++		&Set{},
++		&Inc{},
++		&Dec{},
++		&Show{},
++		&List{},
++		// TODO: Add workload related options, to match with Python CLI",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/247340918,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r247340918,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"Ok, moved",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-13 10:14:54,247340923,"@@ -0,0 +1,61 @@
++/**",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/247340923,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r247340923,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Please squash these changes into the original commits.,efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-28 15:55:34,251475811,"@@ -214,7 +214,7 @@ func (intkeyClient IntkeyClient) sendRequest(
+ func (intkeyClient IntkeyClient) sendTransaction(
+ 	verb string, name string, value uint, wait uint) (string, error) {
+ 
+-	// construct the payload information in CBRO format
++	// construct the payload information in CBOR format",217,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/251475811,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r251475811,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"The commit message makes it sound like it a unit test for the intkey client but this is not the case, also listing ""1."" for only one item is redundant. I suggesting changing the commit message to ""Add unit test for SHA512 conversion method in Go"" also rename the file to something that does not mention utils.",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-28 16:00:34,251478205,"@@ -0,0 +1,31 @@
++/**",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/251478205,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r251478205,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"In the future, I suggest making this kind of changes in their own pr. This will help get quick fixes like this in quicker, without requiring approval of all of the other changes and components.",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-28 16:02:52,251479214,"@@ -38,6 +38,7 @@ services:
+     image: hyperledger/sawtooth-validator
+     expose:
+       - 4004
++      - 5050",4,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/251479214,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r251479214,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"Yes, makes sense",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-28 16:24:38,251488577,"@@ -214,7 +214,7 @@ func (intkeyClient IntkeyClient) sendRequest(
+ func (intkeyClient IntkeyClient) sendTransaction(
+ 	verb string, name string, value uint, wait uint) (string, error) {
+ 
+-	// construct the payload information in CBRO format
++	// construct the payload information in CBOR format",217,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/251488577,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r251488577,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"Sure, agree. It happened this time because original PR was raised when tests used older validator (without consensus SDK) and it was required to make build pass.",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-28 16:26:52,251489617,"@@ -38,6 +38,7 @@ services:
+     image: hyperledger/sawtooth-validator
+     expose:
+       - 4004
++      - 5050",4,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/251489617,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r251489617,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,"This commit became obsolete with refactored commit in place, file name is now main_test.go
+Let me squash it with previous commit as there's only one unit test case here.",efa684fd9a9dc3163a667152101a6cc285e84176,2019-01-28 16:30:20,251491253,"@@ -0,0 +1,31 @@
++/**",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/251491253,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r251491253,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Remove TODO from commit message,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 16:34:07,253543308,"@@ -0,0 +1,39 @@
++/**",1,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253543308,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253543308,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,this file should not be added at all (it is removed in the next commit) Please remove this from this commit. ,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 16:37:09,253544526,"@@ -0,0 +1,61 @@
++/**",,2019-02-06 01:35:31,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253544526,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253544526,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,TODO still shows up in this commit. (removed in the next one) It should instead just not be added int his commit. ,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 16:38:00,253544885,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253544885,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253544885,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Same as above,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 16:38:07,253544920,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253544920,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253544920,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Same as above,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 16:38:14,253544966,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system
++			fmt.Println(DISTRIBUTION_NAME + "" (Hyperledger Sawtooth) version "" + FAMILY_VERSION)
++			os.Exit(0)
++		}
++	}
++
++	var opts Opts
++	parser := flags.NewParser(&opts, flags.Default)
++	parser.Command.Name = ""intkey""
++
++	// Add sub-commands
++	commands := []Command{
++		&Set{},
++		&Inc{},
++		&Dec{},
++		&Show{},
++		&List{},
++		// TODO: Add workload related options, to match with Python CLI",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253544966,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253544966,agunde406
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Ok,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 17:08:04,253557670,"@@ -0,0 +1,39 @@
++/**",1,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253557670,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253557670,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Will remove from original commit.,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 17:12:42,253559420,"@@ -0,0 +1,61 @@
++/**",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253559420,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253559420,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Done,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 17:14:02,253559868,"@@ -0,0 +1,39 @@
++/**",1,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253559868,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253559868,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Removed from original commit,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 17:14:24,253560018,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253560018,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253560018,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Removed from original commit,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 17:14:34,253560077,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253560077,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253560077,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/17,https://github.com/hyperledger/sawtooth-sdk-go/pull/17,Removed from original commit,efa684fd9a9dc3163a667152101a6cc285e84176,2019-02-04 17:14:45,253560142,"@@ -0,0 +1,116 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++package main
++
++import (
++	""fmt""
++	""github.com/hyperledger/sawtooth-sdk-go/logging""
++	flags ""github.com/jessevdk/go-flags""
++	""os""
++)
++
++// All subcommands implement this interface
++type Command interface {
++	Register(*flags.Command) error
++	Name() string
++	KeyfilePassed() string
++	UrlPassed() string
++	Run() error
++}
++
++type Opts struct {
++	Verbose []bool `short:""v"" long:""verbose"" description:""Enable more verbose output""`
++	Version bool   `short:""V"" long:""version"" description:""Display version information""`
++}
++
++var logger *logging.Logger = logging.Get()
++
++func main() {
++	// TODO: Following if condition for version printing can be improved
++	arguments := os.Args[1:]
++	for _, arg := range arguments {
++		if arg == ""-V"" || arg == ""--version"" {
++			// TODO: Replace with distribution version from system
++			fmt.Println(DISTRIBUTION_NAME + "" (Hyperledger Sawtooth) version "" + FAMILY_VERSION)
++			os.Exit(0)
++		}
++	}
++
++	var opts Opts
++	parser := flags.NewParser(&opts, flags.Default)
++	parser.Command.Name = ""intkey""
++
++	// Add sub-commands
++	commands := []Command{
++		&Set{},
++		&Inc{},
++		&Dec{},
++		&Show{},
++		&List{},
++		// TODO: Add workload related options, to match with Python CLI",,2019-02-06 01:35:32,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/253560142,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#discussion_r253560142,arsulegai
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,Should probably leave in CONTRIBUTING.md,bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-17 12:48:09,182059028,"@@ -1,9 +0,0 @@
+-# Contributing to Hyperledger Sawtooth",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/182059028,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r182059028,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,are any of these licensing notices required by the go-sdk?,bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-17 12:49:00,182059244,"@@ -1,1649 +0,0 @@
+-",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/182059244,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r182059244,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,re-added and rebased. Thanks for the suggestions.,bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-17 14:17:28,182088984,"@@ -1,9 +0,0 @@
+-# Contributing to Hyperledger Sawtooth",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/182088984,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r182088984,rberg2
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,"not sure, so I added the file to be safe.",bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-17 14:18:02,182089158,"@@ -1,1649 +0,0 @@
+-",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/182089158,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r182089158,rberg2
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,This file should just be called `Dockerfile` and should live in the top-level directory in order to be consistent with other breakout repos we have created.,bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-23 14:06:48,183407257,"@@ -0,0 +1,69 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++# Description:
++#   Builds an image to be used when developing in Go. The default CMD is to run
++#   build_go.
++#
++# Build:
++#   $ cd sawtooth-sdk-go/docker
++#   $ docker build . -f sawtooth-build-go-protos -t sawtooth-build-go-protos
++#
++# Run:
++#   $ cd sawtooth-sdk-go
++#   $ docker run -v $(pwd):/project/sawtooth-sdk-go sawtooth-build-go-protos
++
++FROM ubuntu:xenial
++
++LABEL ""install-type""=""mounted""
++
++RUN echo ""deb http://repo.sawtooth.me/ubuntu/ci xenial universe"" >> /etc/apt/sources.list \
++ && echo ""deb http://archive.ubuntu.com/ubuntu xenial-backports universe"" >> /etc/apt/sources.list \
++ && apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ && apt-get update \
++ && apt-get install -y -q --allow-downgrades \
++    golang-1.9-go \
++    git \
++    libssl-dev \
++    libzmq3-dev \
++    mockgen \
++    openssl \
++    protobuf \
++    python3 \
++    python3-grpcio \
++    python3-grpcio-tools \
++    python3-pkg-resources \
++ && apt-get clean \
++ && rm -rf /var/lib/apt/lists/*
++
++ENV GOPATH=/go
++
++ENV PATH=$PATH:/go/bin:/usr/lib/go-1.9/bin
++
++RUN mkdir /go
++
++RUN go get -u \
++    github.com/btcsuite/btcd/btcec \
++    github.com/golang/protobuf/proto \
++    github.com/golang/protobuf/protoc-gen-go \
++    github.com/golang/mock/gomock \
++    github.com/pebbe/zmq4 \
++    github.com/satori/go.uuid
++
++RUN mkdir -p /project/sawtooth-sdk-go/
++
++WORKDIR /project/sawtooth-sdk-go/
++
++CMD go generate",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/183407257,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r183407257,aludvik
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,"Since this file is doing more than just build protos, it should be called something more general like `gen.sh`. Also, is there a reason you moved these commands out of `gen.go` and into this script? My concern is the script evolving to do arbitrary build-like things instead of just code-gen. Naming it `gen.sh` maybe helps a little to clarify the link.",bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-23 14:10:11,183408476,"@@ -0,0 +1,25 @@
++#!/bin/bash
++
++if [ -f mocs ]; then
++    rm -rf mocs
++fi
++
++if [ -d protobuf ]; then
++    rm -rf protobuf
++fi
++
++mkdir -p  protobuf mocks/mock_messaging
++
++# Generate protos
++./protogen
++
++# Update import paths on generated protos
++repourl=github.com/hyperledger/sawtooth-sdk-go
++grep -rl '""protobuf/' protobuf/ | while IFS= read -r file; do
++    sed -i ""s|\""protobuf/|\""${repourl}/protobuf/|"" ""$file""
++done
++
++(
++cd messaging || exit
++mockgen -source connection.go >../mocks/mock_messaging/connection.go
++)",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/183408476,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r183408476,aludvik
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,"Update the above commands when you rename `sawtooth-build-go-protos` to `Dockerfile`.
+
+Also, wrt git hygiene, this commit comes before the ""Add Dockerfile"" commit, but references content in that commit. When possible, it is easier on reviewers if you order commits so that things you refer to in one commit have already been added in a previous. This enables reviewing commits one at a time.",bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-23 14:14:11,183409938,"@@ -0,0 +1,15 @@
++*Build go sdk*
++```
++go get github.com/hyperledger/sawtooth-sdk-go
++cd $GOPATH/src/github.com/hyperledger/sawtooth-sdk-go
++go generate
++```
++Docker instructions
++```
++cd sawtooth-sdk-go/docker
++docker build . -f sawtooth-build-go-protos -t sawtooth-build-go-protos
++cd ..
++docker run -v $(pwd):/project/sawtooth-sdk-go sawtooth-build-go-protos",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/183409938,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r183409938,aludvik
+https://github.com/hyperledger/sawtooth-sdk-go/pull/4,https://github.com/hyperledger/sawtooth-sdk-go/pull/4,"I did not find a way to do multiline scripts in the go generate syntax causing really long one liners, and working with variables got really strange as you would have to do things like $DOLLAR{var} to get $var and it got really ugly.",bc81fe0eef5d82840dbc4eb65b67b4b3b4a7e184,2018-04-23 14:28:05,183414955,"@@ -0,0 +1,25 @@
++#!/bin/bash
++
++if [ -f mocs ]; then
++    rm -rf mocs
++fi
++
++if [ -d protobuf ]; then
++    rm -rf protobuf
++fi
++
++mkdir -p  protobuf mocks/mock_messaging
++
++# Generate protos
++./protogen
++
++# Update import paths on generated protos
++repourl=github.com/hyperledger/sawtooth-sdk-go
++grep -rl '""protobuf/' protobuf/ | while IFS= read -r file; do
++    sed -i ""s|\""protobuf/|\""${repourl}/protobuf/|"" ""$file""
++done
++
++(
++cd messaging || exit
++mockgen -source connection.go >../mocks/mock_messaging/connection.go
++)",,2018-04-23 17:24:20,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/pulls/comments/183414955,https://github.com/hyperledger/sawtooth-sdk-go/pull/4#discussion_r183414955,rberg2

@@ -1,0 +1,68 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-sdk-java,rbuysse,https://github.com/hyperledger/sawtooth-sdk-java/pull/19,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/19,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-07 16:35:06,2019-02-09 04:42:48
+sawtooth-sdk-java,rbuysse,https://github.com/hyperledger/sawtooth-sdk-java/pull/18,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/18,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-22 22:31:41,2019-01-23 01:36:49
+sawtooth-sdk-java,eloaverona,https://github.com/hyperledger/sawtooth-sdk-java/pull/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/17,Add documentation,"This PR adds documentation to the Sawtooth Java SDK. It is heavily based on the documentation already published for the Python and JavaScript SDKs. 
+
+To build the documentation:
+
+1. You need [sphinx](http://www.sphinx-doc.org/en/stable/index.html) installed.
+2. Run `pip install sphinx_rtd_theme` to install the theme that is used in the Sawtooth docs.
+3. Inside the `docs` folder and run `make html` to build the documentation
+4. Still inside the `docs` run `open build/html/index.html`  to open the index file",closed,True,2019-01-04 19:35:49,2019-01-08 18:26:04
+sawtooth-sdk-java,eloaverona,https://github.com/hyperledger/sawtooth-sdk-java/pull/16,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/16,Update smoke test docker-compose.yaml to include devmode engine,"Smoke tests are failling as the validator image being pulled
+from docker hub is version 1.1 and it needs a consensus engine.
+This commit adds the devmode engine to the network to fix this issue.
+
+Signed-off-by: Eloá França Verona <eloafran@bitwise.io>",closed,True,2019-01-04 16:24:56,2019-01-04 16:51:54
+sawtooth-sdk-java,eloaverona,https://github.com/hyperledger/sawtooth-sdk-java/pull/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/15,Add XO Android example,"This PR adds an example of an Android client for the XO transaction processor. 
+By running the app the user can see all games in state, see the current state for a particular game, make a move and create a new game.
+The example is at ` examples/xo_android_client`
+
+  <img src=""https://user-images.githubusercontent.com/14094978/50612772-d86ba400-0ea0-11e9-883b-0183e79cfafd.png"" width=""250""> <img src=""https://user-images.githubusercontent.com/14094978/50612802-f933f980-0ea0-11e9-9c34-48ca26c3cb31.png"" width=""250"">",closed,True,2019-01-02 21:16:51,2019-01-21 22:16:07
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/14,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/14,Add profiles for jdk 1.8 and 11,"The jdk8 jars are needed for Android.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>",closed,True,2018-11-27 19:19:33,2018-11-28 19:12:01
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/13,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/13,Add jdk8 profile for jdk8 jars,"The jdk8 jars are needed for Android.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>",closed,True,2018-11-27 16:37:30,2018-11-27 17:23:56
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/12,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/12,Revert to JDK 1.8 for android compatibility,Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>,closed,True,2018-11-26 15:02:23,2018-11-26 15:04:24
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/11,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/11,Increment pom versions for tagging of repo,"This increments the poms to v0.1.2-SNAPSHOT where the version file is
+0.1.2.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>",closed,True,2018-11-12 23:04:38,2018-11-13 18:32:36
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/10,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/10,Add README.md,"This PR adds a README.md that has 3 important pieces of information
+ * The download locations for all three components of the sawtooth-sdk-java
+ * The examples available
+ * General information needed to work on the java sdk.",closed,True,2018-11-12 21:07:22,2019-02-12 15:45:45
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/9,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/9,Add a release profile to the parent pom,"This release profile provides the correct plugins for attaching a source
+jar, attaching a javadoc jar, and gpg siging both for deploying to
+Central Repository.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>",closed,True,2018-11-08 21:55:41,2018-11-12 17:01:04
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/8,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/8,"Add metadata, standardize group id necessary for publishing to Central Repository",https://central.sonatype.org/pages/requirements.html#sufficient-metadata This lists the requirements for metadata.,closed,True,2018-11-07 15:46:54,2018-11-07 17:59:03
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,Break java sdk into modules,"The artifact id is now `sawtooth-sdk-java` which contains three modules
+* sawtooth-sdk-signing
+* sawtooth-sdk-protos
+* sawtooth-sdk-transaction-processor
+
+There are several small fixes:
+* ~peg the maven version used in docker files due to a inconsistency between maven 3.5.4 and jdk 8. https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class~
+* ~Remove unneed protobuf dependency from xo and intkey~",closed,True,2018-11-01 14:46:57,2018-11-06 12:05:31
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/6,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/6,Update dockerfiles (fixes public key repo error and docker-compose.yaml),This fixes the public key error in accessing the sawtooth apt repo for python test dependencies and provides a single docker-compose.yaml entry point.,closed,True,2018-10-22 15:56:32,2018-10-23 18:45:45
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,Align java signing with the other sdks,"This aligns the java signing functionality with that of Rust and Python. ~The sign method is similar to the legacy class, and unimplemented is the verify method. I will continue to work on this, but I wanted to put forward interfaces.~
+
+All methods are tested and implemented.",closed,True,2018-10-19 21:09:40,2018-10-24 18:06:03
+sawtooth-sdk-java,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-java/pull/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/4,Change checkstyle to a modified Sun checkstyle.xml,"The modifications with respect to the Sun checkstyle are:
+ - the line length is 120 characters.
+ - empty lines are not counted in the method length check.",closed,True,2018-10-11 14:56:10,2018-10-15 15:01:11
+sawtooth-sdk-java,CarvalhoLeonardo,https://github.com/hyperledger/sawtooth-sdk-java/pull/3,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/3,Revamping of the Java SDK.,"To further parallelize the effort on the Java SDK, modularization will be helpful.
+
+* Beginning of the topological changes.
+* Signature code and tests runnable.
+* Java 10
+
+Resolves: #STL-1427
+
+See also: #STL-1175  #STL-461 #STL-504",closed,True,2018-09-11 21:27:21,2019-02-17 13:01:45
+sawtooth-sdk-java,rbuysse,https://github.com/hyperledger/sawtooth-sdk-java/pull/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/2,C001 add java sdk,,closed,True,2018-07-18 16:33:17,2018-07-31 15:59:01
+sawtooth-sdk-java,ryjones,https://github.com/hyperledger/sawtooth-sdk-java/pull/1,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/1,Create dco,,closed,True,2018-03-16 23:17:34,2018-03-16 23:18:40

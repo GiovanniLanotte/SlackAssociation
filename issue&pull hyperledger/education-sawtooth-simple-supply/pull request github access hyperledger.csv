@@ -1,0 +1,128 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/28,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/28,danintel,Fix apt-key/gpg Proxy on Bionic,"gpg (through ""apt-key adv"") now ignores http_proxy and
+https_proxy settings on Bionic.
+The solution is to use http with curl instead to download keys.
+
+Remove unused http_proxy and https_proxy initialization.
+
+Signed-off-by: danintel <daniel.anderson@intel.com>",[],1,2019-04-03 22:26:15,,2019-04-03 22:26:15,False,,,blocked,True,open
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/25,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25,QwertyJack,STL-1472 Fix 'not found' error when build docker,Signed-off-by: QwertyJack <jiyuanyi1992@gmail.com>,[],1,2018-12-12 03:18:06,,2019-04-04 02:24:23,False,,,blocked,True,open
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/23,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/23,chenette,Add course content to repo; add CC BY 4.0 license,"This version of the course includes:
+
+Creative Commons (CC BY 4.0) license on the front page of each module
+Clarification in module 1 that ZMQ is helpful but not required
+Correction for a typo in module 3.
+
+This PR also adds the CC BY 4.0 license to README.md.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>","['dplumb94', 'chenette']",2,2018-10-02 19:54:37,2018-10-03 18:36:49,2018-10-03 18:36:54,True,2018-10-03 18:36:49,chenette,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/22,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/22,chenette,Add course content to repo,"This version of the course includes:
+- Creative Commons (CC BY 4.0) license on the front page of each module
+- Clarification in module 1 that ZMQ is helpful but not required
+- Correction for a typo in module 3.
+
+NOTE: This PR supersedes #21.
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>","['dplumb94', 'chenette']",1,2018-10-01 04:02:15,2018-10-02 19:37:23,2018-10-02 20:03:07,False,,,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/21,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/21,dplumb94,Include course content in repo,"Adds the PDFs of the Sawtooth Application Development course to the repo.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",['dplumb94'],1,2018-09-06 16:33:00,2018-10-02 18:41:56,2018-10-02 18:41:56,False,,,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/20,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/20,ryjones,Update Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,['dcmiddle'],1,2018-08-17 23:53:55,2018-08-18 02:23:15,2018-08-18 02:23:20,True,2018-08-18 02:23:14,ryjones,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/19,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/19,QwertyJack,Update Dockerfile,resolv 'not found' error,[],1,2018-07-27 09:29:24,2018-12-12 03:17:23,2018-12-12 03:17:23,False,,,blocked,True,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/18,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,chenette,Add overview & client endpoint to README,"- Provide a brief overview of Simple Supply
+- Add client to the list of endpoints
+- Make minor wording changes (light edit)
+
+Signed-off-by: Anne Chenette <chenette@bitwise.io>",['chenette'],1,2018-07-09 17:11:31,2018-07-19 20:44:29,2018-07-19 20:44:32,True,2018-07-19 20:44:29,chenette,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/17,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/17,dplumb94,Add docs,"based on #15 
+
+Adds specifications and schema to the /docs directory",['dplumb94'],1,2018-06-29 15:57:55,2018-06-29 18:03:31,2018-06-29 18:03:31,True,2018-06-29 18:03:30,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/16,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16,dplumb94,Fix agent bugs,"- False error was logging on the reporting database
+- unused argument was removed which caused an error in aiohttp for certain requests, so it was re-added and ignored by pylint",['dplumb94'],2,2018-06-28 19:40:29,2018-06-29 17:55:32,2018-06-29 17:55:32,True,2018-06-29 17:55:32,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/15,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/15,dplumb94,Remove agent database fetch for post route,"Eliminates a race condition caused by fetching a resource we just issued a transaction to create.
+Instead we will just return the auth token.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",['dplumb94'],1,2018-06-28 16:08:54,2018-06-29 17:50:34,2018-06-29 17:50:34,True,2018-06-29 17:50:34,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/14,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/14,dplumb94, Allow unit tests to be run alongside other containers,"- Changes test container names so they don't conflict with other containers
+- Small fix to logging of run-docker-test",['dplumb94'],2,2018-06-26 17:04:14,2018-06-28 15:31:39,2018-06-28 15:31:40,True,2018-06-28 15:31:39,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/13,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/13,dplumb94,Fix several small issues and bugs,"- Fixes an issue with the event subscription database not updating agents `end_block_num`
+
+- Fixes remaining lint issues
+
+- Suppress unnecessary webpack warnings and fix a meaningful one",['dplumb94'],5,2018-06-25 21:48:34,2018-06-28 19:00:24,2018-06-28 19:00:24,True,2018-06-28 19:00:24,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/12,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/12,dplumb94,Add docs,,['dplumb94'],6,2018-06-19 17:26:52,2018-06-26 15:33:11,2018-06-26 15:33:11,False,,,dirty,False,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,dplumb94,Add basic app functionality,"Adds functionality corresponding to each transaction for Simple Supply to the webapp. This app provides very minimal functionality and could be improved as time allows to include dropdowns, pictures, and more in-depth views of record history. However, all of the functionality for creating, transferring, and updating records is implemented.
+
+Also fixes a few bugs that were found while creating the app.",['dplumb94'],5,2018-06-19 16:54:36,2018-06-21 18:19:27,2018-06-21 18:19:27,True,2018-06-21 18:19:27,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,dplumb94,Create initial 'Curator' app components,"
+Implements the initial components and navigation for the Curator app, built on top of Simple Supply. After running `docker-compose up`, the application can be accessed at `localhost:8040`. Most pages are placeholders.",['dplumb94'],1,2018-06-12 20:55:43,2018-06-19 15:23:11,2018-06-19 15:23:11,True,2018-06-19 15:23:11,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/9,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/9,dplumb94,Implement authentication route,"based on #8 
+
+Allows a user to authenticate with their public key and password, which will produce a new auth token",['dplumb94'],3,2018-06-11 17:43:46,2018-06-13 18:09:51,2018-06-13 18:09:51,True,2018-06-13 18:09:51,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/8,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/8,dplumb94,Implement update record functionality,based on #7 ,['dplumb94'],2,2018-06-08 20:20:01,2018-06-13 18:09:33,2018-06-13 18:09:33,True,2018-06-13 18:09:33,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/7,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7,dplumb94,Implement transfer record functionality,"based on #6 
+
+- API route and transaction creation implemented
+- Pylint function and method regex changed to allow up to 40 char names
+- TP Transfer Record functionality implemented
+- Reporting database record schema changed to include a unique ID
+- Added unit tests
+
+",['dplumb94'],3,2018-06-07 19:54:40,2018-06-11 16:44:59,2018-06-11 16:44:59,True,2018-06-11 16:44:59,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/6,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6,dplumb94,Implement record GET routes,based on #5 ,['dplumb94'],1,2018-06-06 20:16:29,2018-06-08 21:51:07,2018-06-08 21:51:07,True,2018-06-08 21:51:07,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,dplumb94,Implement record POST route,"based on #4 
+
+To test:
+
+1. Create agent by sending `POST localhost:8000/agents`
+```
+{
+	""name"": ""bob"",
+	""password"": ""qwerty""
+}
+```
+
+2. Copy auth token and add it to header
+
+3. Create record by sending `POST localhost:8000/records`
+```
+{
+	""record_id"": ""foo"",
+	""latitude"": 44.982781,
+	""longitude"": -93.271967
+}
+```",['dplumb94'],5,2018-06-05 21:57:26,2018-06-08 21:49:38,2018-06-08 21:49:38,True,2018-06-08 21:49:38,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/4,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4,dplumb94,Implement agent GET routes,"Based on #3 
+
+Adds functionality for `GET /agents` and `GET /agents/{agent_id}` routes
+",['dplumb94'],2,2018-05-30 18:55:28,2018-06-06 19:36:29,2018-06-06 19:36:30,True,2018-06-06 19:36:29,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,dplumb94,Implement subscriber and agent POST routes,"**To run:**
+`docker-compose up`
+
+**Test create agent functionality:**
+POST ` {
+	""name"": ""hello"",
+	""password"": ""world""
+}` to `localhost:8000/agents`
+
+**View database:**
+navigate to `http://localhost:8080` (the db admin page) and log in
+_System: PostgreSQL	
+Server: postgres
+Username: sawtooth
+Password: sawtooth
+Database: simple-supply_
+
+View the agents and blocks tables to see the resources
+
+**To run unit tests, run from host machine:**
+`./bin/run-tests`",['dplumb94'],9,2018-05-29 20:48:21,2018-06-05 21:37:44,2018-06-05 21:37:44,True,2018-06-05 21:37:44,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/2,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2,dplumb94,Initial Simple Supply components and setup,"This PR adds the initial Simple Supply components. To run the application, navigate to the project root directory and run: `docker-compose up`
+
+- Simple Supply REST API: **http://localhost:8000**
+- PostgreSQL Admin Panel: **http://localhost:8080**
+
+Application spec: https://docs.google.com/document/d/1k-ifo6Ep4bhuRCT_YH9LfkrGaK6DS00o8REGbS5ccLo/edit#
+
+DB Schema: https://www.lucidchart.com/invitations/accept/0c626296-0869-4cc2-bbbb-1c929b42a777",['dplumb94'],9,2018-05-14 21:23:58,2018-05-17 15:10:52,2018-05-17 15:10:52,True,2018-05-17 15:10:52,dplumb94,unknown,,closed
+education-sawtooth-simple-supply,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/1,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/1,jwagantall,Create DCO,,[],1,2018-05-14 20:00:26,2018-05-14 20:00:49,2018-05-14 20:00:49,False,,,unknown,,closed

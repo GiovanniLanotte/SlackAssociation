@@ -1,0 +1,368 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-seth,danintel,https://github.com/hyperledger/sawtooth-seth/pull/96,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/96,Fix Seth for Sawtooth 1.1 Consensus,"Sawtooth 1.1 Consensus does not work.
+The DevMode consensus engine times-out and does not connect
+to the validator and times-out.
+The solution is to open port 5050 in container devmode-engine-rust.
+
+Signed-off-by: danintel <daniel.anderson@intel.com>",closed,True,2019-03-22 16:44:03,2019-03-29 22:36:36
+sawtooth-seth,danintel,https://github.com/hyperledger/sawtooth-seth/pull/95,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/95,Fix Seth for apt-key/gpg Proxy on Bionic,"gpg (through ""apt-key adv"") ignores http_proxy and
+https_proxy settings on Bionic.
+The solution is to use http with curl instead to download keys.
+
+Signed-off-by: danintel <daniel.anderson@intel.com>",open,True,2019-03-21 22:08:53,2019-03-28 22:19:48
+sawtooth-seth,DevSlashNull,https://github.com/hyperledger/sawtooth-seth/pull/94,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/94,Update to Master,,closed,True,2019-03-13 23:16:10,2019-03-13 23:16:22
+sawtooth-seth,agunde406,https://github.com/hyperledger/sawtooth-seth/pull/93,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/93, Update Seth RPC to use sawtooth-sdk = 0.2,,closed,True,2019-02-20 20:09:11,2019-02-21 21:17:12
+sawtooth-seth,rbuysse,https://github.com/hyperledger/sawtooth-seth/pull/92,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/92,Bionic upgrade,,closed,True,2019-01-14 21:51:31,2019-01-15 18:24:37
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/91,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/91,Updating burrow,"Updates Burrow to 0.23, and fixes issue with global permissions.",open,True,2019-01-03 16:37:37,2019-01-09 10:37:16
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/90,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/90,Handle missing global permissions,"Handles issue stemming from Burrow's issue #908, where a panic occurs if the global permissions address isn't set.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2019-01-03 16:04:03,2019-01-03 16:38:08
+sawtooth-seth,momaee,https://github.com/hyperledger/sawtooth-seth/pull/89,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/89,Update Dockerfile,"default repository in github.com/hyperledger/burrow is 'developer' not 'master', so there is no folder named github.com/hyperledger/burrow/execution/evm/ and running blow command in Dockerfile fails.
+RUN go get -u \
+...
+github.com/hyperledger/burrow/execution/evm/sha3 \
+...",open,True,2018-12-24 12:21:20,2019-03-21 19:09:22
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/88,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/88,Fix Seth build process,"A recent Burrow update broke the Go CLI. This moves that CLI to the same fork that the processor has been using. This PR also fixes several Rust-related build process issues.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-12-07 15:10:25,2018-12-14 18:55:36
+sawtooth-seth,rob-Hitchens,https://github.com/hyperledger/sawtooth-seth/pull/87,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/87,Patch solc 0 5 0,"Refactor solidity contracts/examples so they compile with solc 0.5.0. 
+",closed,True,2018-11-28 18:07:33,2019-03-22 04:17:31
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/86,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/86,Update version in Cargo.tomls and VERSION,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2018-11-15 00:11:25,2018-11-15 16:30:23
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/85,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/85,Update ci dockerfiles to pull from bumper/stable,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2018-11-14 20:19:39,2018-11-14 20:53:35
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/84,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/84,Update dockerfiles to use bumper/stable apt repo,Signed-off-by: Richard Berg <rberg@bitwise.io>,closed,True,2018-11-13 21:05:08,2018-11-14 15:00:50
+sawtooth-seth,rbuysse,https://github.com/hyperledger/sawtooth-seth/pull/83,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/83,Update Cargo.toml to use crates for sdk,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-09 03:46:04,2018-11-09 19:31:28
+sawtooth-seth,rbuysse,https://github.com/hyperledger/sawtooth-seth/pull/82,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/82,Update Cargo.toml to use crates for sdk,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2018-11-09 01:08:03,2018-11-09 15:28:25
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/81,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/81,Fix documentation build,"Add pulling down of forked burrow for docs build
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-11-08 17:18:55,2018-11-08 18:01:53
+sawtooth-seth,scealiontach,https://github.com/hyperledger/sawtooth-seth/pull/80,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/80,Git clone can hang from within Dockerfile without a tty/stdin,"Newer Dockerfiles contain git clones, which can hang without a tty/stdin available.  Not sure why this doesn't show on hyperledger jenkins, but it doubtless appears in other environments than our own. 
+
+Signed-off-by: Kevin O'Donnell <kodonnel@gmail.com>",closed,True,2018-11-06 00:30:58,2018-11-13 20:39:01
+sawtooth-seth,benjamincburns,https://github.com/hyperledger/sawtooth-seth/pull/79,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/79,Fix docker ignore,"Prior to this change on my system the seth-rpc image seemed to ignore the entire contents of `rpc/src/messages`, causing a build error, as `mod.rs` could not be found. This may only be an issue on docker 18.06.1-ce however, as it doesn't seem to reproduce on Jenkins.",closed,True,2018-10-29 09:43:21,2018-11-13 20:39:58
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/78,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/78,Add dockerfiles for pushing to Docker Hub,"Adds dockerfiles suitable for publishing the various Sawtooth Seth packages to hub.docker.com for public consumption.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-24 20:18:37,2018-10-31 20:59:16
+sawtooth-seth,benjamincburns,https://github.com/hyperledger/sawtooth-seth/pull/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,Receipt fixes,"Makes it so that receipts are returned when EVM runtime errors occur (e.g. `REVERT`). Adds missing `status`, `from`, and `to` fields to the transaction receipt.",open,True,2018-10-12 05:16:35,2018-10-26 20:59:57
+sawtooth-seth,boydjohnson,https://github.com/hyperledger/sawtooth-seth/pull/76,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/76,Fix build.rs for breaking protoc-rust change,"..Default::default() accesses a now non-public member, whereas
+Customize::default() is clearer.
+
+Signed-off-by: Boyd Johnson <bjohnson@bitwise.io>
+
+This PR depends on the sdk pr being merged: https://github.com/hyperledger/sawtooth-core/pull/1891.",closed,True,2018-10-08 15:35:41,2018-10-08 19:45:14
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/75,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/75,Fixing docs reference to Go CLI container,"The docs have not yet been updated to use the Rust CLI docker container for the getting started instructions, so for now just keep them pointed at the Go CLI docker container.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-10-01 14:11:28,2018-10-01 16:00:24
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/74,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/74,Move to stable clippy,"Clippy is now available in stable, and this PR switches to that toolchain for it.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-09-14 22:35:26,2018-09-25 17:37:03
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/73,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/73,Update Burrow and un-vendorize it,"Updates Burrow to the latest version and un-vendors the dependency.
+
+There are a few incompatibilies between Seth and the newer version of Burrow, those have been fixed in this fork until we can upstream proper fixes:
+
+https://github.com/knkski/burrow
+
+See these bug reports for more info:
+
+https://github.com/hyperledger/burrow/issues/908
+https://github.com/hyperledger/burrow/issues/909
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-09-11 20:55:14,2018-10-29 19:26:12
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/72,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/72,Update JSON-RPC API according to RFC,"Implements RFC changes to JSON-RPC API. RFC in question can be found here:
+
+https://github.com/hyperledger/sawtooth-rfcs/pull/22",closed,True,2018-09-04 15:43:16,2018-11-13 18:34:18
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/71,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/71,Remove mut requirement on ValidatorClient,"The zmq library we use for sending messages doesn't actually require a mutable reference for sending and replying. This PR changes the `&mut self` references to just `&self`.
+
+Relies on https://github.com/hyperledger/sawtooth-core/pull/1834 being merged.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-28 21:50:37,2018-08-31 16:12:16
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/70,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/70,Reformat rpc's block.rs,"Reformats block.rs for ease of reading comprehension. Moves helper functions to bottom of file, converts comments to doc comments, and adds links to the Ethereum JSON-RPC API documentation for each corresponding JSON-RPC API method. Also groups imports into a single group that `cargo fmt` can sort properly.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-28 18:19:08,2018-09-24 13:52:13
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/69,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/69,Use vec![] in get_method_list,"Using the `vec![]` shorthand makes `get_method_list` more readable
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-28 17:14:02,2018-08-29 13:48:18
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/68,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/68,Rollback rustfmt version to stable,"Avoids having to deal with breaking nightly changes to formatting.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-28 16:18:09,2018-08-31 20:27:50
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/67,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/67,Sort RPC dependencies,"Increases human readability
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-28 16:13:19,2018-08-29 13:48:34
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/66,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/66,Move RPC binary location,"Having `/rpc/bin/` is unnecessary, just move everything to living under `/bin/`.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-28 16:10:21,2018-08-29 13:48:51
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/65,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/65,Remove RPC FilterManager mutability,"Because the FilterManager manages itself with interior mutability, references to FilterManager don't need to be `mut`. This PR removes the unnecessary mutability.",closed,True,2018-08-28 15:51:22,2018-09-04 21:29:20
+sawtooth-seth,ryjones,https://github.com/hyperledger/sawtooth-seth/pull/64,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/64,Add Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-21 05:40:08,2018-08-24 16:09:23
+sawtooth-seth,ryjones,https://github.com/hyperledger/sawtooth-seth/pull/63,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/63,Add Apache 2.0 LICENSE file,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-18 02:32:26,2018-08-21 06:10:16
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/62,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/62,Fix documentation papercuts,"Fixes small issues with documentation, such as typos and copy/paste errors.
+
+Fixes most of the issues from #33, without updating copyright notices
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-15 18:02:39,2018-08-24 14:18:19
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/61,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/61,Add CODEOWNERS file,"Automatically adds each maintainer to the list of reviewers for new PRs.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-15 14:42:34,2018-08-20 14:03:38
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/60,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/60,Add Kenneth Koski to maintainers list,Signed-off-by: Kenneth Koski <knkski@bitwise.io>,closed,True,2018-08-10 16:12:39,2018-10-23 18:54:28
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/59,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/59,Add Rust CLI based on JSON-RPC API,"Adds a new CLI that talks exclusively to the JSON-RPC API, and moves the old one to `cli-go/`.
+
+Implements several CLI methods that don't yet have a JSON-RPC API equivalent, as this PR was submitted separately to cut down on PR size.
+
+Doesn't include unit tests due to the CLI now being a thin client that proxies off all actual work to the API. Integration tests will be included for the CLI <-> API interactions in the JSON-RPC API follow-up PR.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-09 21:51:17,2018-08-27 17:10:14
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/58,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/58,Update Rust formatting,"The rustfmt tool updating its formatting rules, updating the Rust code to match.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-06 16:11:54,2018-08-13 19:01:42
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/57,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/57,Remove dead code,"This function is not in use, and is causing the builds to fail, so removing it
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-06 15:33:02,2018-10-23 18:54:25
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/56,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/56,Change default RPC return values,"The transaction count and balance should be 0 for non-existent accounts, not null. Additionally, the code should be blank.
+
+See https://github.com/ethereum/go-ethereum/blob/d926bf2c7e3182d694c15829a37a0ca7331cd03c/core/state/statedb.go#L199 for prior art.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-08-03 02:57:41,2018-10-23 18:54:30
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/55,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/55,Clippy lint fixes,"This PR goes through each clippy lint and adds a commit that fixes it. Particular attention should be paid to the `mutex_atomic` and `collapsible_if` lint fixes, as those were slightly less trivial than copy/pasting the clippy-suggested replacement like the other lint fixes.",closed,True,2018-07-16 20:59:08,2018-10-23 18:54:25
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/54,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/54,Add Cargo format check,"This will enforce that PRs have run `cargo fmt` before they are merged, and prevent formatting drift.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-16 15:29:36,2018-08-01 16:08:11
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/53,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/53,Add test for STL-959,"This PR is a followup on #42, and adds an integration test to prevent a regression.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-11 14:38:02,2018-07-12 19:58:16
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/52,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/52,Wait to run tests until rest-api is up,"The rest-api service is a bit slow to start up, and if it has not started accepting connections by the time the ""go test foo.go"" command runs, tests will fail. This PR adds a wrapper script for the tests that waits for the rest api to be up and responsive, then runs them as normal.
+
+For an example failure, see https://build.sawtooth.me/job/Sawtooth-Hyperledger/job/sawtooth-seth/job/PR-39/4/console
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-10 20:05:40,2018-07-11 20:53:21
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/51,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/51,Use reliable keyserver for add-apt-repository,"This should prevent the reoccurring ""no PGP data found"" build error.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-10 19:03:08,2018-07-16 14:23:14
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/50,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/50,Skip invalid addresses in contract listing,"Fixes [STL-1169](https://jira.hyperledger.org/browse/STL-1169).
+
+When a contract is successfully called, the caller account's nonce is incremented, which causes spurious addresses to show up for ""seth list {alias}"". This PR adds a change to the contract list code that checks that each address it displays is actually valid.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-10 18:56:44,2018-07-16 14:33:57
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/49,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/49,Share key dir between cli and rpc containers,"The Seth RPC container relies on keys that were generated by the CLI. Previously, we were generating those keys inside of the RPC container with a CLI call. This PR moves to sharing a key directory between the CLI and RPC containers, with the CLI container generating the keys in that directory.
+
+Remix of #28. This PR punts on the issue of using `SAWTOOTH_HOME` / `SAWTOOTH_KEYS` environment variables as per https://github.com/hyperledger/sawtooth-seth/pull/28#issuecomment-388647413. It also switches from a `get_data_dir` to a `get_key_dir`, as `get_data_dir` is then otherwise unused apart from `get_key_dir`.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-10 14:51:23,2018-10-23 18:54:24
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/48,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/48,Add .dockerignore file,"Decreases the size of the generated images by excluding directories that are unnecessary for running this code inside of Docker. Copied from `.gitignore`.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-10 14:07:32,2018-07-10 18:28:58
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/47,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/47,Add fallback keyservers to all apt-key commands.,"This should prevent the reoccurring ""no PGP data found"" build error.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-09 19:53:53,2018-07-10 15:37:48
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/46,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/46,Add fallback keyservers to all apt-key commands.,"This should prevent the reoccurring ""no PGP data found"" build error.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-09 19:48:49,2018-07-09 19:48:57
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/45,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/45,Add fallback keyservers to all apt-key commands.,"This should prevent the reoccurring ""no PGP data found"" build error.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-09 19:38:14,2018-07-09 19:47:45
+sawtooth-seth,rberg2,https://github.com/hyperledger/sawtooth-seth/pull/44,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/44,Add fallback keyservers to all apt-key commands.,"This should prevent the reoccurring ""no PGP data found"" build error.
+
+Signed-off-by: Richard Berg <rberg@bitwise.io>",closed,True,2018-07-09 18:44:22,2018-07-09 19:37:16
+sawtooth-seth,cliveb,https://github.com/hyperledger/sawtooth-seth/pull/43,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/43,This commit fixes port 3030: Connection refused with seth-rpc,"Date; Fri July 6, 17:22:23 2018 -0800
+
+	This commit fixes port 3030: Connection refused with seth-rpc
+	reported as STL-1300
+	[](https://jira.hyperledger.org/browse/STL-1300)
+
+Signed-off-by: clive boulton <clive.boulton@gmail.com>",closed,True,2018-07-07 00:36:27,2018-08-27 19:48:51
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/42,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/42,Handle nonce-less account creation,"When attempting to grab the nonce associated with an account during account creation, `Client.Get` will return `nil, nil` due to the account not yet existing. This PR updates `Client.LookupAccountNonce` to handle that scenario and default to `0` for the nonce instead.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-03 18:17:37,2018-07-10 18:23:14
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/41,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/41,Show EventType in CLI responses,"Fixes STL-699. Go was ignoring the `event_type` JSON field due to the snake cased-name. This PR adds a struct tag that makes Go associate the `EventType` struct field with the `event_type` JSON field.
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-03 16:18:55,2018-07-10 18:29:13
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/40,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/40,Fix documentation typos,"Fixes a few minor typos found in the documentation
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-02 21:05:10,2018-07-10 18:29:19
+sawtooth-seth,knkski,https://github.com/hyperledger/sawtooth-seth/pull/39,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/39,Format Rust files,"Runs `cargo fmt` over the Rust files located in `rpc/`
+
+Signed-off-by: Kenneth Koski <knkski@bitwise.io>",closed,True,2018-07-02 20:09:37,2018-07-16 15:25:30
+sawtooth-seth,ksolo,https://github.com/hyperledger/sawtooth-seth/pull/38,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/38,Update Docker Compose File for `seth-rpc` Service,"## WHY
+
+The `seth-rpc` service was failing to start due to the first portion of the command in the docker-compose file. This was causing the `curl` commands to fail.
+
+## WHAT
+
+Removing the `seth init` call with compose already running allowed the curl commands to complete as expected when following the developer guides.",closed,True,2018-07-01 23:05:25,2018-08-27 18:05:43
+sawtooth-seth,mithunshashidhara,https://github.com/hyperledger/sawtooth-seth/pull/37,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/37,seth account create myalias --wait causes segmentation violation,"After starting up seth, during account creation
+segmentation violation occurs.
+
+Resolves: STL-1241
+
+Signed-off-by: mithunshashidhara <mithunx.shashidhara@intel.com>",closed,True,2018-06-20 08:05:18,2018-08-16 07:29:44
+sawtooth-seth,cliveb,https://github.com/hyperledger/sawtooth-seth/pull/36,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/36,Removed `seth init` line from RPC service command,"After adding proxy to build.args in docker-compose-installed. Related PR is https://github.com/hyperledger/sawtooth-seth/pull/35. The RPC does not start up properly in the docker-compose file. BWO of asking and testing the `seth init` line can be removed from the RPC service command. So the RPC does not try to startup improperly.  To check the RPC endpoint is working, on a new Terminal run the following curl to test.  [documentation](https://sawtooth.hyperledger.org/docs/seth/releases/latest/seth_developers_guide/getting_started.html#creating-an-account)
+
+This is my commit message
+
+Signed-off-by: cliveb `<clive.boulton@gmail.com>`",closed,True,2018-06-19 00:52:42,2018-06-25 16:05:53
+sawtooth-seth,cliveb,https://github.com/hyperledger/sawtooth-seth/pull/35,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/35,Add proxy to build.args in docker-compose-installed file,"For Seth-RPC to properly work, add proxy to build.args is required in both docker-composed-installed, and as already accepted in PR for docker-composed file [https://github.com/hyperledger/sawtooth-seth/commit/5abdec015738ee2c7ca4386aeb844e2cf4de560c]. After adding proxy to build.args in docker-compose-installed. Related PR is #36
+
+Also
+expose:
+- 3030
+and 
+ports:
+      - '3030:3030'
+
+This is my commit message
+
+Signed-off-by: cliveb `<clive.boulton@gmail.com>`",closed,True,2018-06-19 00:14:20,2018-06-25 16:06:07
+sawtooth-seth,ltseeley,https://github.com/hyperledger/sawtooth-seth/pull/34,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/34,Fix protobuf build issue,"Fix the issue caused by seth's protobuf version being out of sync with
+the version used by sawtooth core.
+
+Signed-off-by: Logan Seeley <seeley@bitwise.io>",closed,True,2018-06-05 16:16:11,2018-06-06 15:20:22
+sawtooth-seth,daverodz,https://github.com/hyperledger/sawtooth-seth/pull/33,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/33,Fix/build dockerfiles,,closed,True,2018-05-23 13:36:07,2018-08-28 18:22:10
+sawtooth-seth,mithunshashidhara,https://github.com/hyperledger/sawtooth-seth/pull/32,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/32,seth account create myalias --wait causes segmentation violation,"After starting up seth, during account creation
+segmentation violation occurs.
+
+Resolves: STL-1241
+
+Signed-off-by: mithunshashidhara <mithunx.shashidhara@intel.com>",closed,True,2018-05-16 09:10:45,2018-06-20 07:39:24
+sawtooth-seth,mithunshashidhara,https://github.com/hyperledger/sawtooth-seth/pull/31,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/31,seth account create myalias --wait causes segmentation violation,"After starting up seth, during account creation
+segmentation violation occurs.
+
+Resolves: STL-1241
+
+Signed-off-by: mithunshashidhara <mithunx.shashidhara@intel.com>seth account create myalias --wait causes segmentation violation",closed,True,2018-05-16 08:55:39,2018-05-16 09:05:56
+sawtooth-seth,mithunshashidhara,https://github.com/hyperledger/sawtooth-seth/pull/30,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/30,seth account create myalias --wait causes segmentation violation,"After starting up seth, during account creation
+segmentation violation occurs.
+
+Resolves: STL-1241
+
+Signed-off-by: mithunshashidhara <mithunx.shashidhara@intel.com>",closed,True,2018-05-16 08:19:18,2018-05-16 08:41:31
+sawtooth-seth,askmish,https://github.com/hyperledger/sawtooth-seth/pull/29,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/29,Add proxy support for docker-compose and Dockerfiles,,closed,True,2018-05-06 14:58:14,2018-05-15 11:02:08
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/28,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/28,Remove CLI call and share key dir,"- A Seth CLI call was not removed from a Docker Compose command when Seth CLI functionality was removed from the RPC container, which caused a bug when running the Docker Compose file. This PR removes that command
+
+- The  Seth CLI uses `~/.sawtooth/keys` as the default key dir, while the Seth JSON RPC previously used `~/.sawtooth`. This PR updates the RPC to use the keys dir so that the keys can be shared between the components
+
+- Adds a mounted volume to share keys between the seth client and RPC. This way we do not need Seth CLI functionality in the RPC container",closed,True,2018-05-03 17:07:36,2018-06-12 14:30:48
+sawtooth-seth,aludvik,https://github.com/hyperledger/sawtooth-seth/pull/27,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/27,Use Hyperledger Sawtooth Go SDK,Cleanup the Dockerfiles a little and install the Go SDK from hyperledger/sawtooth-sdk-go,closed,True,2018-04-25 17:15:00,2018-04-26 16:04:54
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/26,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/26,Update jsonrpc library,"The jsonrpc library was changed and causing some errors when trying to call RPC methods. This PR updates the library and the related API calls, which has fixed the issue.",closed,True,2018-04-24 15:38:47,2018-04-24 16:22:04
+sawtooth-seth,dcmiddle,https://github.com/hyperledger/sawtooth-seth/pull/25,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/25,Remove COMMITTERS file from repo,"and update Jenkins file accordingly.
+
+Signed-off-by: Dan Middleton <dan.middleton@intel.com>",closed,True,2018-04-10 20:24:22,2018-04-10 22:27:57
+sawtooth-seth,dcmiddle,https://github.com/hyperledger/sawtooth-seth/pull/24,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/24,Remove COMMITTERS file from repo,"And update jenkinsfile accordingly
+
+Signed-off-by: Dan Middleton <dan.middleton@intel.com>",closed,True,2018-04-10 20:10:09,2018-04-10 20:23:52
+sawtooth-seth,aludvik,https://github.com/hyperledger/sawtooth-seth/pull/23,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/23,Add peterschwarz and vaporos as Maintainers,"This PR adds @peterschwarz and @vaporos as maintainers to the Sawtooth Seth repo. They have both been involved with the research, design, and development of Seth from its inception. This is evidenced by their regular involvement in code reviews. Additionally, @amundson was the first to meet with the Burrow team and conceived of the original design.
+
+Existing maintainers please indicate your vote by approving or requesting changes on this PR:
+- [x] @dplumb94
+- [x] @grkvlt
+- [x] @aludvik",closed,True,2018-04-09 17:29:16,2018-04-18 14:24:26
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/22,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/22,Fix handling of contract addresses in RPC service,"- Fixes the handling of different formats of EVM or State address for the Seth RPC processor, converting to 20 byte hex strings.
+- Corrects the output of all zero hex strings.
+- Reinstates the RPC test sequence
+
+Fixes [STL-1124](https://jira.hyperledger.org/browse/STL-1124)",closed,True,2018-04-04 17:22:44,2018-04-09 17:24:13
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/21,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/21,Build Seth debs,"Adds an ""installed"" Dockerfile for each component which builds deb files",closed,True,2018-03-29 23:14:38,2018-03-30 21:38:43
+sawtooth-seth,aludvik,https://github.com/hyperledger/sawtooth-seth/pull/20,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/20,Create initial MAINTAINERS list,"This list is intended to recognize current contributors to the
+sawtooth-seth repository who have:
+
+- Been actively involved for a substantial amount of time
+- Made significant contributions that have been critical to the success
+  of the project
+- Frequently reviewed pull requests and left thoughtful and
+  constructive feedback
+
+To come up with this list objectively, I had to use some git-fu as the repo
+also contains a lot of commits from sawtooth-core, so GitHub insights was not
+sufficient.
+
+I started by counting all commits in the repository that touched either
+`families/burrow_evm` or `families/seth` in core before the commit where the
+component was moved out of core, which was
+f6fb1bd80e12f668d9d9e70e6150b3db7ad6f7f6
+
+To accomplish this, I did:
+
+    git log -- families/burrow_evm families/seth | grep Author | awk '{ print $2 }' | sort | uniq -c | sort -r
+
+The cutoff commit was on `Thu Nov 16 15:14:54 2017 -0600`.
+
+After this point, commits to the repo only contained commits to sawtooth-seth
+(no sawtooth-core) so I was able to use GitHub insights from that date to the
+present. That list can be found here:
+
+https://github.com/hyperledger/sawtooth-seth/graphs/contributors?from=2017-11-17&to=2018-03-29&type=c
+
+I merged the commit counts from these two lists and took all the names that had
+more than 10 commits.
+
+The list has been sorted by first name.
+
+Signed-off-by: Adam Ludvik <ludvik@bitwise.io>",closed,True,2018-03-29 15:11:40,2018-04-09 18:34:30
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/19,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/19,Fix jenkinsfile,"This PR fixes the Jenkinsfile build method/paths and a couple other small bugs that caused the Jenkins build to fail.
+
+Some steps and tests have been removed for the time being, but should be re-enabled as features get fixed: 
+
+- Currently the Seth RPC test fails due to this bug: https://jira.hyperledger.org/browse/STL-1124. The test has been commented out for the time being, but a PR fixing that bug should re-enable it.
+
+- The Git archive step should be re-enabled when we do a tagged release
+
+- The docs build step should be re-enabled when we update the documentation build process",closed,True,2018-03-23 20:24:00,2018-03-29 14:36:27
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/18,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/18,Update Seth docs and intkey example,"- Update the docs Dockerfile
+- Fix intkey contract compilation warnings
+- Update getting started and contracts walkthrough based on the new Docker workflow
+
+Based on: https://github.com/hyperledger/sawtooth-seth/pull/19",closed,True,2018-03-23 19:45:42,2018-04-05 14:39:49
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/17,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/17,[WIP] Updates to Seth ,"- Adds `eth_call` implementation to RPC
+- Implement `REVERT` opcode in EVM
+- Use external `sawtooth-go-sdk` repository
+- Fix Docker Compose YAML files for integration tests
+- Add listening 0MQ socket to TP microservice
+- Adds `build_all` script for new repo layout
+- Debugging messages on console
+
+### WIP - Do not merge
+### TODO - Squash commits and remove extra debug messages",closed,True,2018-03-21 19:56:22,2018-03-21 20:28:39
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/16,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/16,Adds a build_all script to create the Docker images for Seth,,closed,True,2018-03-20 19:21:28,2018-03-22 16:24:10
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/15,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/15,Improve contract compile/deployment workflow,"- Links the new `sawtooth-seth/contracts` directory to `/project/sawtooth-seth/contracts` in the seth-cli container, so any files in this directory will be visible and editable on both the host and inside the container. The purpose is to allow a user to create and edit contracts on the host and compile them while inside the container using the installed compilation and abi generation tools. Example contracts are included in the repo at `sawtooth-seth/contracts/examples`.
+
+- Fixes a bug where `ethereumjs-abi` and `web3` were not able to be used from `/project/sawtooth-seth/` using the node cli. This was because the node packages were getting installed to the wrong directory.
+
+- Includes the `solc` compiler in the sawtooth-seth-cli image",closed,True,2018-03-20 19:20:36,2018-03-21 17:21:10
+sawtooth-seth,dplumb94,https://github.com/hyperledger/sawtooth-seth/pull/14,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/14,Reorganize repo and update build workflow,"The sawtooth-seth repo was separated from master by deleting out all non-Seth related documents and files. This has led to a disorganized and confusing directory structure. In order to give Seth a good user story and development workflow, this PR reorganizes the repo and simplifies the build process for development.
+
+In order to build and run Seth, just run`docker-compose up --build`. This will build images and start up containers for all Seth components:
+- Seth CLI
+- Seth TP
+- Block info TP
+- Settings TP
+- Sawtooth REST API
+- Sawtooth Validator
+- Seth JSON RPC
+
+In order to accomplish this, the following steps were taken:
+- Create new Dockerfiles for each Seth component
+    - These Dockerfiles will import Sawtooth 1.0 dependencies instead of cloning in
+      the whole repo
+- Update docker-compose.yaml to build an image for each component and
+  run the containers
+- Update imports in .go files and Cargo.toml to correct dependencies
+
+_Note: The Sawtooth Go SDK being used is an unofficial repo hosted at https://github.com/rberg2/sawtooth-go-sdk. Once there is an official hyperledger/sawtooth-sdk-go repo, we should switch to that._",closed,True,2018-03-13 17:49:04,2018-03-20 19:43:40
+sawtooth-seth,aludvik,https://github.com/hyperledger/sawtooth-seth/pull/13,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/13,Add Andrew Donald Kennedy to COMMITTERS,Signed-off-by: Adam Ludvik <ludvik@bitwise.io>,closed,True,2018-03-06 22:35:43,2018-03-06 23:07:07
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/12,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/12,Fixes the Dockerfiles for Seth development builds,"Updates to the documentation at the start of the Seth Dockerfiles, showing build and run commands.",closed,True,2018-02-22 20:47:36,2018-03-20 19:44:22
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/11,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/11,Update various Ethereum RPC methods,"- Adds `QUANTITY|TAG` support for the `eth_getBlockTransactionCountByNumber`,
+`eth_getBlockByNumber` and `eth_getTransactionByBlockNumberAndIndex` methods and implements the `full` boolean for return complete transaction details.
+- Adds an `eth_syncing` method that always returns false.
+- Add a `net_peerCount` method that return the total number of validator peers in the network.",closed,True,2018-02-22 16:56:41,2018-03-08 20:54:24
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/10,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/10,Only use 20 bytes of contract address in receipts,"The contract addresses used in the Ethereum RPC interface should only be 20 bytes long, so remove the leading bytes which are `00` anyway.",closed,True,2018-02-22 13:23:49,2018-02-22 20:48:38
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/9,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/9,Fix account nonce usage in RPC interface,"Set the account nonce to the correct value when creating transactions, to allow clients like Truffle to work properly. Also changes the type to `uint64` to match other occurrences and makes `GetStorage` return 0 for initial accesses to  location, as per EVM spec for `SLOAD`. ",closed,True,2018-02-15 19:36:20,2018-02-19 21:55:27
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/8,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/8,Update to getting started documentation,"Fixes the Docker Compose file to reference the Hyperledger 1.0.1 images  and start the Seth RPC server as well as correct various minor issues in it, and updates the getting started documentation with the correct commands to build and use Seth with this file.",closed,True,2018-02-09 13:53:14,2018-02-22 05:32:10
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/7,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/7,Use the 1-0 branch of sawtooth-core in the build_seth script,"Changes the `build_seth` script so that it uses the main `1-0` branch of https://github.com/hyperledger/sawtooth-core when copying files.
+
+This will fix issues noted by @aludvik with #5 when building.",closed,True,2018-02-02 22:11:53,2018-02-07 13:13:09
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/6,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/6,Make links to Sawtooth docs point at external site,"Changed some relative links that used to point at pages in the core documentation to use the URL for the pages at the published site.
+
+This is the fix suggested by @dcmiddle in #4 comments.",closed,True,2018-01-31 13:19:03,2018-01-31 15:51:53
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/5,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/5,Update SDK usage for 1.0.0 Sawtooth,Fixes build_seth script and various Go and Rust build errors caused by SDK changes. Assumes https://github.com/hyperledger/sawtooth-core/tree/1-0 will be being used/linked against.,closed,True,2017-12-20 02:24:17,2018-01-31 15:53:12
+sawtooth-seth,grkvlt,https://github.com/hyperledger/sawtooth-seth/pull/4,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/4,Build Seth docs,"Adds template files from `sawtooth-core` and update the `sawtooth-build-docs` Dockerfile and usage.
+
+**FIXME**: links to `sawtooth-core` documentation do not work",closed,True,2017-12-19 20:17:10,2018-01-30 22:53:27
+sawtooth-seth,aludvik,https://github.com/hyperledger/sawtooth-seth/pull/3,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/3,Peg seth against core commit that is compatible,Signed-off-by: Adam Ludvik <ludvik@bitwise.io>,closed,True,2017-12-05 10:16:14,2017-12-11 16:33:30
+sawtooth-seth,aludvik,https://github.com/hyperledger/sawtooth-seth/pull/2,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/2,Remove core and update build scripts,,closed,True,2017-11-17 20:04:19,2017-12-05 10:12:19
+sawtooth-seth,ryjones,https://github.com/hyperledger/sawtooth-seth/pull/1,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/1,Create DCO,,closed,True,2017-11-17 05:14:00,2017-11-17 05:15:24

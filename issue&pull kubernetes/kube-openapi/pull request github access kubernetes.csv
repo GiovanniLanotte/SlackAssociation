@@ -1,0 +1,554 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/1,https://github.com/kubernetes/kube-openapi/pull/1,mbohlool,Prevent cycles in reference walker,Addressing comments in https://github.com/kubernetes/kubernetes/pull/48861 (except the fuzzy test that will deserve its own PR).,['sttts'],1,2017-07-28 00:52:59,2017-07-28 21:24:21,2017-07-28 21:24:21,True,2017-07-28 21:24:21,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/2,https://github.com/kubernetes/kube-openapi/pull/2,mbohlool,BugFIX: Remove extra not operator,I am going to self LGTM this as it was an LGTMed PR that we had a typo in and it causes the main PR to fail.,[],1,2017-08-01 10:30:40,2017-08-01 10:31:20,2017-08-01 10:31:20,True,2017-08-01 10:31:20,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/3,https://github.com/kubernetes/kube-openapi/pull/3,gmarek,Add more debug info to openapi generator,"@mbohlool PTAL
+
+cc @sttts ",[],1,2017-08-03 07:25:26,2017-08-11 09:45:21,2017-08-11 09:45:21,True,2017-08-11 09:45:21,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/4,https://github.com/kubernetes/kube-openapi/pull/4,mbohlool,Improve performance of CloneSpec,CloneSpec should check for conflicts first and clone only if there is a conflict and a need to rename the spec. This PR addresses that (as well as adding gitignore file).,[],0,2017-08-21 08:45:50,2017-08-23 11:47:51,2017-08-23 11:47:51,True,2017-08-23 11:47:51,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/5,https://github.com/kubernetes/kube-openapi/pull/5,mbohlool,Add MergeSpecsIgnorePathConflict,MergeSpecsIgnorePathConflict is a new merge method that ignores path conflicts. It is useful if we want the destination has priority over source in serving paths.,[],1,2017-08-25 09:53:11,2017-08-25 10:01:52,2017-08-25 10:01:52,True,2017-08-25 10:01:52,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/6,https://github.com/kubernetes/kube-openapi/pull/6,mbohlool,Enable travis ci,,[],1,2017-08-25 10:02:42,2017-08-25 21:31:52,2017-08-25 21:31:52,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/7,https://github.com/kubernetes/kube-openapi/pull/7,mbohlool,Enable travis ci,,[],1,2017-08-25 21:32:25,2017-08-29 22:11:57,2017-08-29 22:11:57,True,2017-08-29 22:11:56,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/8,https://github.com/kubernetes/kube-openapi/pull/8,mbohlool,Bugfix in MergeSpecsIgnorePathConflict,We had a bug in MergeSpecsIgnorePathConflict that would fail aggregation if all paths were conflicting. This PR fixes that.,[],2,2017-08-29 22:11:23,2017-08-30 10:06:55,2017-08-30 10:06:55,True,2017-08-30 10:06:55,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/9,https://github.com/kubernetes/kube-openapi/pull/9,mengqiy,Move parsing code from kubernetes repo to this repo,"Comparing to https://github.com/kubernetes/kubernetes/tree/master/pkg/kubectl/cmd/util/openapi
+- validation is not moved since it depends on https://github.com/kubernetes/kubernetes/blob/master/pkg/kubectl/cmd/util/openapi/validation/BUILD#L40
+- openapi_cache.go & openapi_cache_test.go will be deleted in https://github.com/kubernetes/kubernetes/pull/50404/files#diff-924015a54cbffd96c80a6551d2bd05ee
+- openapi_getter.go & openapi_getter_test.go depends on client-go. Maybe should not be moved. ","['mbohlool', 'apelisse']",24,2017-08-30 22:40:18,2017-08-31 00:39:29,2017-08-31 21:04:38,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/10,https://github.com/kubernetes/kube-openapi/pull/10,mengqiy,Move openapi proto parsing and indexing,"Move openapi proto parsing and indexing from main repo to this repo.
+The code includes parsing and indexing logic.
+They are NOT depend on any other k8s repo.
+
+/assign @mbohlool @apelisse ","['mbohlool', 'apelisse', 'monopole']",1,2017-08-31 21:06:38,2017-09-01 00:12:57,2017-09-06 18:28:23,True,2017-09-01 00:12:57,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/11,https://github.com/kubernetes/kube-openapi/pull/11,jim-minter,initialise schemaTypeFormatMap once at package level,initialise schemaTypeFormatMap once at package level instead of every time GetOpenAPITypeFormat is called,[],1,2017-09-05 15:55:48,2017-09-06 09:17:46,2017-09-06 09:17:46,True,2017-09-06 09:17:46,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/12,https://github.com/kubernetes/kube-openapi/pull/12,apelisse,proto: Index by model name rather than GVK,"Remove completely the notion of Group-version-kind from this package,
+as we'll move it where it's actually relevant. This removes the
+parsing/constructing which was kind of out of place.
+
+Also allow to return the full list of models. The code in kubernetes
+will get all these models, and then index by gvk.",[],1,2017-10-16 23:44:05,2017-10-17 22:36:32,2017-10-17 22:36:32,True,2017-10-17 22:36:32,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/14,https://github.com/kubernetes/kube-openapi/pull/14,marun,Enable generation to a vendored output path,"The PR adds a way to generate OpenAPI spec in an output path in the `vendor/` folder by using the argument to ``--output-package`` verbatim.  Previously, the argument to ``--output-package`` was canonicalized to an importable package name (e.g. ``vendor/k8s.io/kubernetes`` => ``k8s.io/kubernetes``) which would result in the file being generated outside of the vendoring repo (e.g. ``$GOPATH/src/k8s.io/kubernetes`` instead of ``$GOPATH/src/k8s.io/federation/vendor/k8s.io/kubernetes``). 
+
+This is in support of generating openapi code for vendored kube by federation as per https://github.com/kubernetes/kubernetes/issues/54335.
+
+cc: @mbohlool ",['mbohlool'],1,2017-10-21 04:34:44,2017-10-24 18:23:56,2017-10-24 18:23:56,True,2017-10-24 18:23:56,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/15,https://github.com/kubernetes/kube-openapi/pull/15,apelisse,proto: Add model validation,"This new code allows someone to validate that a given object (as a
+`map[string]interface{}`) is valid against a specific model.
+
+There are no test in this code, since the old test are depending on
+apimachinery code that we can't import here. A nice follow-up would be
+to add small unit-tests to validate each individual part.",['mbohlool'],1,2017-10-27 21:18:34,2017-10-30 18:40:31,2017-10-30 18:40:31,True,2017-10-30 18:40:31,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/16,https://github.com/kubernetes/kube-openapi/pull/16,roycaihw,Add util function to convert package/type path to OpenAPI name,"Add a function to convert the package/type path (e.g. parsed by gengo) into openapi name.
+
+Examples:
+Input:  k8s.io/api/core/v1.Pod
+Output: io.k8s.api.core.v1.Pod
+
+Input:  k8s.io/api/core/v1
+Output: io.k8s.api.core.v1",['mbohlool'],1,2017-10-30 19:32:25,2017-10-30 23:52:46,2018-02-01 22:19:25,True,2017-10-30 23:52:46,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/17,https://github.com/kubernetes/kube-openapi/pull/17,apelisse,Make proto validation errors public,Error types should have been public ...,[],1,2017-11-01 18:29:56,2017-11-01 18:35:05,2017-11-01 18:35:05,True,2017-11-01 18:35:05,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/18,https://github.com/kubernetes/kube-openapi/pull/18,roycaihw,New OpenAPI endpoint,"OpenAPI endpoint that includes spec version in name, but hides all other details in the header of the request and response. 
+
+The design doc and deprecation process are tracked at: https://docs.google.com/document/d/19lEqE9lc4yHJ3WJAJxS_G7TcORIJXGHyq3wpwcH28nU. 
+
+The endpoints in [generic apiserver](https://github.com/kubernetes/kubernetes/blob/443908193d564736d02efdca4c9ba25caf1e96fb/staging/src/k8s.io/apiserver/pkg/server/routes/openapi.go#L35) and [aggregator](https://github.com/kubernetes/kubernetes/blob/443908193d564736d02efdca4c9ba25caf1e96fb/staging/src/k8s.io/kube-aggregator/pkg/controllers/openapi/aggregator.go#L112-L113) will be deprecated. ",[],1,2017-11-02 00:43:32,2018-01-30 23:21:25,2018-02-01 22:09:06,True,2018-01-30 23:21:25,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/20,https://github.com/kubernetes/kube-openapi/pull/20,sttts,Fix generator to work without pre-existing Go files in target package,"This is needed to create openapi specs in 3rdparty project via k8s.io/code-generator/generate-{,internal}-groups.sh.
+
+Compare https://github.com/kubernetes/kubernetes/pull/55472, especially https://github.com/kubernetes/kubernetes/pull/55472/commits/16e0e4eb77e955d9a166e07ad38aba4be28b8376#diff-2ab730acbe5670b4be0131fdf1787dc2R113.",['mbohlool'],1,2017-11-10 14:11:46,2017-12-05 21:07:39,2017-12-05 21:25:52,True,2017-12-05 21:07:39,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/21,https://github.com/kubernetes/kube-openapi/pull/21,ericchiang,generators: let types provide defs without importing kube-openapi,"This change lets types override their generated spec definition
+with methods that don't import kube-openapi. Doing this will let
+client-go remove its openapi imports, eliminating ~10 transitive
+dependencies for Kubernetes clients.
+
+To override the generated spec definition, a type can now implement
+the following two methods:
+
+	func (_ MicroTime) OpenAPISchemaType() []string {
+		return []string{""string""}
+	}
+
+	func (_ MicroTime) OpenAPISchemaFormat() string {
+		return ""date-time""
+	}
+
+POC can be found here: https://github.com/ericchiang/kubernetes/commit/b0282c59f05df721e769fb9d34ab52fe9a8db4a5
+
+cc @sttts @mbohlool ",['mbohlool'],1,2017-11-11 01:19:00,2017-12-11 21:52:20,2017-12-11 22:02:39,True,2017-12-11 21:52:20,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/22,https://github.com/kubernetes/kube-openapi/pull/22,luksa,Aggregator now re-uses the model definition that it had renamed previously,"Before this fix, the aggregator would create multiple identical
+copies (but with a different name) of the same object type.
+
+This fixes https://github.com/kubernetes/kubernetes/issues/55941",['mbohlool'],2,2017-11-17 12:13:48,2018-01-30 23:20:18,2018-01-30 23:20:18,True,2018-01-30 23:20:18,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/23,https://github.com/kubernetes/kube-openapi/pull/23,rutsky,Fix mapping and kind validation errors when array is passed,"""Kind"" is map with specific structure.
+",['apelisse'],1,2017-11-20 00:17:07,2018-01-08 22:22:31,2018-01-08 22:22:31,True,2018-01-08 22:22:31,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/24,https://github.com/kubernetes/kube-openapi/pull/24,luksa,"Fix schema merging, so references are updated properly","When merging two schemas with conflicting definitions of the same object,
+the aggregator would rename one of them, but wouldn't update all the
+references ($ref), because it was updating copies due to golang's
+pass-by-value.
+
+Fixes https://github.com/kubernetes/kubernetes/issues/56417",['mbohlool'],1,2017-11-27 15:02:43,2018-02-01 01:40:57,2018-02-01 01:41:05,True,2018-02-01 01:40:57,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/25,https://github.com/kubernetes/kube-openapi/pull/25,luksa,"Handle ""any value"" openapi definitions properly",This will allow us to support the k8s RawExtension object,['apelisse'],3,2017-11-27 17:45:35,2017-12-05 06:19:52,2017-12-11 23:56:11,True,2017-12-05 06:19:52,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/28,https://github.com/kubernetes/kube-openapi/pull/28,ericchiang,"remove VisitArbitrary from SchemaVisitor, make different interface","Lots of things in k8s.io/kubernetes implement SchemaVisitor, and
+adding a new interface method breaks that.[1] Instead of adding
+VisitArbitrary directly to that interface introduce a new
+SchemaVisitorArbitrary that types can optionally implement to visit
+an arbitrary type.
+
+/assign @luksa
+/assign @apelisse
+
+Modifies change in https://github.com/kubernetes/kube-openapi/pull/25
+
+Fixes https://github.com/kubernetes/kube-openapi/issues/27
+
+[1] https://github.com/kubernetes/kubernetes/pull/57059#issuecomment-350896736",['apelisse'],1,2017-12-12 00:09:25,2017-12-12 22:16:57,2017-12-12 22:32:51,True,2017-12-12 22:16:56,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/29,https://github.com/kubernetes/kube-openapi/pull/29,amir,Add the Pattern if it's specified,This is related to #26 and demonstrates the easiest way to add `spec.SchemaProps.Pattern` support to an Schema but admittedly a crude attempt. I'd like to add Pattern and Enum support given pointers on what's the preferred way.,[],9,2017-12-14 13:58:03,2018-01-23 10:24:09,2018-01-23 10:24:09,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/30,https://github.com/kubernetes/kube-openapi/pull/30,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527","['cblecker', 'mbohlool']",1,2017-12-20 18:33:07,2018-01-08 22:06:42,2018-01-08 22:06:42,True,2018-01-08 22:06:42,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/32,https://github.com/kubernetes/kube-openapi/pull/32,ericchiang,generators: elide struct type when generating maps,"./hack/verify-gofmt.sh was not happy with the generated code, which
+isn't compliant with ""gofmt -s"". Elide the struct type when
+generating OpenAPI definitions for a map value.
+
+Example failure from (https://github.com/kubernetes/kubernetes/pull/57059):
+https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/pr-logs/pull/57059/pull-kubernetes-verify/70488/
+
+Follow up to https://github.com/kubernetes/kube-openapi/pull/21
+
+/cc @mbohlool ",[],1,2018-01-06 16:54:20,2018-01-08 22:06:26,2018-01-08 22:20:34,True,2018-01-08 22:06:26,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/34,https://github.com/kubernetes/kube-openapi/pull/34,jessesuen,generators: add support for nested lists,"This change makes it possible to generate OpenAPI models when a field is a list-of-lists. 
+
+Consider the following type:
+
+```golang
+// GeoJSON
+// +k8s:openapi-gen=true
+type GeoJSON struct {
+    Name        string    `json:""name""`
+    Coordinates [][]int64 `json:""coordinates""`
+}
+```
+
+When the openapi codegen is run against it, it currently results in the following error:
+```
+ERROR: logging before flag.Parse: E0128 23:09:41.045732   55143 openapi.go:338] Error when generating: coordinates, Coordinates [][]int64
+ERROR: logging before flag.Parse: F0128 23:09:41.045761   55143 main.go:44] Error: Failed executing generator: some packages had errors:
+slice Element kind Slice is not supported in [][]int64
+```
+
+Nested lists has been supported since Swagger 2.0. See:
+https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#itemsObject
+
+![image](https://user-images.githubusercontent.com/12677113/35505140-03e6ba6e-049a-11e8-8965-dc7f4e067115.png)
+",[],1,2018-01-29 10:16:13,2018-01-30 23:14:02,2018-01-31 18:59:49,True,2018-01-30 23:14:02,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/35,https://github.com/kubernetes/kube-openapi/pull/35,roycaihw,Update comments to reflect correct deprecation schedule,,[],1,2018-02-06 19:21:13,2018-02-16 21:26:19,2018-02-16 21:26:19,True,2018-02-16 21:26:19,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/36,https://github.com/kubernetes/kube-openapi/pull/36,roycaihw,Endpoint properly handles Accept header,"Sort Accept header with q parameter
+
+**NOTE:** I manually changed `Godep.json`. `goautoneg` is used in kubernetes already. ",[],2,2018-02-07 18:30:36,2018-02-16 21:23:31,2018-02-16 21:23:31,True,2018-02-16 21:23:31,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/37,https://github.com/kubernetes/kube-openapi/pull/37,munnerz,add support for openapiv3 json output format,"This PR implements initial support for generating an OpenAPI v3 schema from a resource type.
+
+Paired with a change to the kubernetes repo to openapi-gen we can use this to generate openapiv3 schemas for validating CRDs.
+
+I've used the gengo `parser` package to parse the types, and have basically just reimplemented the existing `openAPITypeWriter` but constructing `github.com/go-openapi/spec` (i.e. the ones output by the existing openapi-gen) types and then serialising them to JSON.
+
+A schema generated for a [cert-manager Certificate resource](https://github.com/jetstack/cert-manager/blob/master/pkg/apis/certmanager/v1alpha1/types.go#L209):
+
+```json
+{
+  ""description"": ""Certificate is a type to represent a Certificate from ACME"",
+  ""properties"": {
+    ""spec"": {
+      ""properties"": {
+        ""acme"": {
+          ""properties"": {
+            ""config"": {
+              ""type"": ""array"",
+              ""additionalProperties"": {
+                ""properties"": {
+                  ""dns01"": {
+                    ""properties"": {
+                      ""provider"": {
+                        ""type"": ""string""
+                      }
+                    }
+                  },
+                  ""domains"": {
+                    ""type"": ""array"",
+                    ""additionalProperties"": {
+                      ""type"": ""string""
+                    }
+                  },
+                  ""http01"": {
+                    ""properties"": {
+                      ""ingress"": {
+                        ""type"": ""string""
+                      },
+                      ""ingressClass"": {
+                        ""type"": ""string""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        ""commonName"": {
+          ""type"": ""string""
+        },
+        ""dnsNames"": {
+          ""description"": ""DNSNames is a list of subject alt names to be used on the Certificate"",
+          ""type"": ""array"",
+          ""additionalProperties"": {
+            ""type"": ""string""
+          }
+        },
+        ""issuerRef"": {
+          ""description"": ""IssuerRef is a reference to the issuer for this certificate. If the namespace field is not set, it is assumed to be in the same namespace as the certificate. If the namespace field is set to the empty value \""\"", a ClusterIssuer of the given name will be used. Any other value is invalid."",
+          ""properties"": {
+            ""kind"": {
+              ""type"": ""string""
+            },
+            ""name"": {
+              ""type"": ""string""
+            }
+          }
+        },
+        ""secretName"": {
+          ""type"": ""string""
+        }
+      }
+    },
+    ""status"": {
+      ""properties"": {
+        ""acme"": {
+          ""properties"": {
+            ""orderURL"": {
+              ""type"": ""string""
+            }
+          }
+        },
+        ""conditions"": {
+          ""type"": ""array"",
+          ""additionalProperties"": {
+            ""properties"": {
+              ""lastTransitionTime"": {
+                ""description"": ""LastTransitionTime is the timestamp corresponding to the last status change of this condition."",
+                ""properties"": {
+                  ""Time"": {
+                    ""type"": ""string"",
+                    ""format"": ""date-time""
+                  }
+                }
+              },
+              ""message"": {
+                ""type"": ""string""
+              },
+              ""reason"": {
+                ""type"": ""string""
+              },
+              ""status"": {
+                ""type"": ""string""
+              },
+              ""type"": {
+                ""type"": ""string""
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Open questions:
+
+* If you look closely above, you can see that `lastTransitionTime` has been encoded as a struct with a field named `Time`.
+
+This isn't going to validate correctly... I notice in the existing openapi.go file, there is some mention of skipping json refs for 'well known' fields (https://github.com/kubernetes/kube-openapi/blob/master/pkg/generators/openapi.go#L403). Here it can be handled a bit differently, as we defer resolving types in the Golang generator.
+
+We need to teach the `generateMembers` function about these kinds of fields, and somehow instruct the calling method to set the `type` and `format` on *its own* schema. These feels hacky. Does anyone know how we can better handle this?
+
+* In order to skip `metadata`, `kind` and `apiVersion` fields, I have restricted the generator to only generating schemas for `spec` and `status` fields. @nikhita does CRD validation already impose this restriction? I don't see it mentioned on `kubernetes.io/docs` (https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/#validation)
+
+/cc @sttts @frankgreco @deads2k
+
+ref https://github.com/kubernetes/kubernetes/issues/59154",[],2,2018-02-12 22:37:24,,2019-03-10 17:24:08,False,,,dirty,False,open
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/38,https://github.com/kubernetes/kube-openapi/pull/38,luksa,Client-side OpenAPI schema fixes,"These changes allow the client to properly handle the server-side changes planned to be introduced in kube v1.11:
+- RawExtension type will be removed and replaced with `""type"": ""object""` without either the `additionalProperties` or the `properties` field.
+- All type definitions stemming from Go structs will contain the `""type"": ""object""` property (next to the `properties` field, which they already contain).",['apelisse'],2,2018-02-21 16:12:21,2018-05-29 15:52:34,2018-06-20 10:21:07,True,2018-05-29 15:52:34,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/39,https://github.com/kubernetes/kube-openapi/pull/39,AdamDang,"Typo fix ""definition""->""definitions""","line 162: ""all used definition in the provided spec"" .
+line 175: ""all definition used by it ""
+ ""definitions"" should be used there.",[],1,2018-03-10 14:05:50,2018-04-02 23:59:53,2018-04-13 21:22:29,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/40,https://github.com/kubernetes/kube-openapi/pull/40,AdamDang,"Typo fix ""OpenAPIDefinitions""->""GetOpenAPIDefinitions""","line 35: ""OpenAPIDefinitions is collection of all definitions.""
+It should be ""GetOpenAPIDefinitions"" here.",[],1,2018-03-10 14:18:00,2018-04-02 23:59:43,2018-04-03 00:31:56,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/41,https://github.com/kubernetes/kube-openapi/pull/41,AdamDang,"Typo fix ""to provides""->""to provide""","""... to provides access to it...""  appears 4 times in this doc.
+We should use ""...to provide access to it..."".",[],1,2018-03-10 14:45:17,2018-04-02 23:59:31,2018-04-03 00:31:36,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/42,https://github.com/kubernetes/kube-openapi/pull/42,AdamDang,"Typo fix ""it's definition.""->"" to its definition."""," in line 146: ""...and return a referable name to it's definition."" 
+""it's"" should be replaced with ""its"" .",[],1,2018-03-11 14:49:58,2018-04-02 23:59:20,2018-04-03 00:28:34,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/43,https://github.com/kubernetes/kube-openapi/pull/43,seans3,Refactor to make it easier to add extension tags,"Refactors openapi generator to make it easier to add extension tags within comments.
+Refactored ""patchMergeStrategy"" and ""patchMergeKey"" extension tags.
+No new functionality.
+Current unit tests pass.
+","['mbohlool', 'seans3']",3,2018-04-02 20:22:08,2018-04-03 18:02:49,2018-04-04 21:51:14,True,2018-04-03 18:02:49,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/44,https://github.com/kubernetes/kube-openapi/pull/44,AdamDang,Some typo fix,"all used definition->all used definitions
+to it's definition->to its definition
+OpenAPIDefinitions->GetOpenAPIDefinitions
+to provides->to provide",[],4,2018-04-03 01:35:10,2018-04-03 20:49:20,2018-04-03 20:49:35,True,2018-04-03 20:49:20,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/45,https://github.com/kubernetes/kube-openapi/pull/45,seans3,Sort map keys for deterministic testing,"Sort the map keys to ensure deterministic testing.
+Fixes possible flaky test.","['mbohlool', 'apelisse', 'seans3']",1,2018-04-03 19:12:30,2018-04-03 20:39:51,2018-04-03 20:39:51,True,2018-04-03 20:39:51,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/46,https://github.com/kubernetes/kube-openapi/pull/46,seans3,Added development section to README,"Added some notes on:
+
+1) How to resolve dependencies after cloning repo
+2) How to run unit tests on repo
+3) How to develop in Kubernetes using this repo
+4) How to run unit tests for this repo code within Kubernetes","['mbohlool', 'apelisse']",2,2018-04-04 18:33:51,2018-04-10 17:31:45,2018-04-10 17:31:45,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/47,https://github.com/kubernetes/kube-openapi/pull/47,thockin,Use k8s GCR vanity URL,,[],1,2018-04-06 17:16:50,2018-04-10 22:12:57,2018-04-10 22:12:57,True,2018-04-10 22:12:57,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/48,https://github.com/kubernetes/kube-openapi/pull/48,seans3,Add listAttribute extension,"Adds comment tag ""listAttribute"" to extension ""x-kubernetes-list-attribute""","['mbohlool', 'apelisse']",1,2018-04-10 18:03:35,2018-04-11 16:40:04,2018-04-11 16:40:04,True,2018-04-11 16:40:04,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/49,https://github.com/kubernetes/kube-openapi/pull/49,seans3,Added unit tests to util.go,Added simple unit tests to util.go,"['mbohlool', 'apelisse']",2,2018-04-10 20:39:29,2018-04-10 22:12:24,2018-04-10 22:12:24,True,2018-04-10 22:12:24,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/50,https://github.com/kubernetes/kube-openapi/pull/50,seans3,Multi-value extensions,"* Multi-value OpenAPI extensions (e.g. x-kubernetes-list-type-keys: ""port"", ""protocol"")
+* Validation of extension enum values (e.g. x-kubernetes-patch-strategy must be either ""merge"" or ""retainKeys""). This validation only logs a warning now.
+* Moved extension code into its own file.
+* Unit tests for extension code.","['lavalamp', 'mbohlool', 'apelisse']",1,2018-04-12 23:42:31,2018-04-18 23:32:18,2018-04-18 23:32:18,True,2018-04-18 23:32:18,lavalamp,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/53,https://github.com/kubernetes/kube-openapi/pull/53,liggitt,Split definitions into functions,"xref https://github.com/kubernetes/kubernetes/issues/62576
+
+Cuts package size of the generated package by up to 75% (cut openapi package in kube from 44MB to 17MB, cut openapi package in openshift from 117MB to 33MB)
+
+see result in kubernetes in  https://github.com/kubernetes/kubernetes/pull/62589 (specifically, [this commit, ignoring whitespace](https://github.com/kubernetes/kubernetes/pull/62589/commits/64716f15e3e9b28e1caa43e44d5b05be72733a4b?w=1))","['smarterclayton', 'mbohlool']",1,2018-04-15 01:55:17,2018-04-18 20:20:36,2018-04-20 14:34:46,True,2018-04-18 20:20:36,smarterclayton,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/54,https://github.com/kubernetes/kube-openapi/pull/54,jennybuckley,Allow concurrent readers of the spec in OpenAPIService,"This PR adds a public function to the OpenAPIService to allow multiple processes to read the same underlying spec, while still allowing an entire new spec to set, and adds comments telling OpenAPIService users how to avoid race conditions.",[],1,2018-04-19 20:50:47,2018-05-23 18:45:59,2018-05-23 18:46:23,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/55,https://github.com/kubernetes/kube-openapi/pull/55,seans3,More descriptive error messages for extensions,"* generateExtensions() is bifurcated into generateStructExtensions() and generateMemberExtensions(). Cross-extension validation is now possible.
+* parseExtensions() now returns a list of errors
+* add ""tag"" to extension struct (e.g. +listType) for better error reporting
+",['lavalamp'],1,2018-04-20 00:11:45,2018-04-20 21:36:56,2018-04-20 21:36:56,True,2018-04-20 21:36:56,lavalamp,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/56,https://github.com/kubernetes/kube-openapi/pull/56,apelisse,Start putting up documentation for the Go IDL,"This PR is the beginning of the documentation for the IDL. It's obviously not complete, the goal is to make sure we agree on the direction.","['lavalamp', 'mbohlool']",1,2018-04-20 19:16:07,2018-04-20 23:04:34,2018-04-23 17:06:32,True,2018-04-20 23:04:34,lavalamp,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/57,https://github.com/kubernetes/kube-openapi/pull/57,seans3,extension fields renaming,"extension struct rename two fields:
+  tag -> idlTag
+  name -> xName
+",['lavalamp'],1,2018-04-20 21:58:11,2018-04-20 23:04:05,2018-04-20 23:04:05,True,2018-04-20 23:04:05,lavalamp,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/58,https://github.com/kubernetes/kube-openapi/pull/58,apelisse,idl-doc: Further improvements,,"['lavalamp', 'pwittrock']",1,2018-04-23 17:27:58,2018-04-25 16:27:24,2018-04-25 16:27:24,True,2018-04-25 16:27:24,lavalamp,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/59,https://github.com/kubernetes/kube-openapi/pull/59,jennybuckley,Remove unnecessarily stored spec,"We store a reference, orgSpec, to the spec.Swagger (go typed openapi spec), but we never serve it. once the specBytes we serve are generated from the orgSpec we don't need a reference to the original spec anymore
+
+@mbohlool ",['mbohlool'],1,2018-04-23 21:35:00,2018-05-22 00:05:10,2018-05-22 00:05:10,True,2018-05-22 00:05:10,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/60,https://github.com/kubernetes/kube-openapi/pull/60,seans3,[WIP] Validate extension type,"* validates member (field) extensions
+* encapsulate extension attributes into struct
+* add simple extension methods: hasAllowedValues, allowedValues, hasKind, kind, validateType
+* No unit tests yet",['apelisse'],2,2018-04-24 00:14:17,2018-05-10 00:09:13,2018-05-10 00:09:13,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/61,https://github.com/kubernetes/kube-openapi/pull/61,seans3,Type validation for member/field extensions,"* validates member (field) extensions
+* encapsulate extension attributes into struct
+* add simple extension methods: hasAllowedValues, allowedValues, hasKind, kind, validateType","['lavalamp', 'apelisse']",1,2018-04-26 00:38:53,2018-05-10 20:47:43,2018-05-10 20:47:43,True,2018-05-10 20:47:43,lavalamp,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/62,https://github.com/kubernetes/kube-openapi/pull/62,AdamDang,Typo fix in openapi.go,compatability->compatibility,[],1,2018-04-27 15:54:49,2018-04-29 03:54:07,2018-05-01 01:57:53,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/63,https://github.com/kubernetes/kube-openapi/pull/63,AdamDang,Typo fix: compatability->compatibility,compatability->compatibility,['luksa'],1,2018-04-29 03:55:25,2018-05-24 22:16:16,2018-05-24 22:16:16,True,2018-05-24 22:16:16,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/64,https://github.com/kubernetes/kube-openapi/pull/64,roycaihw,Properly initialize spec.Definitions when merging specs,"fixes https://github.com/kubernetes/kubernetes/issues/63218
+
+When aggregating openapi specs, depending on sort priority, a valid openapi spec with empty [`Definitions`](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#definitions-object) may become the first [specToReturn](https://github.com/kubernetes/kubernetes/blob/d4ab47518836c750f9949b9e0d387f20fb92260b/staging/src/k8s.io/kube-aggregator/pkg/controllers/openapi/aggregator.go#L200-L214). Currently the aggregator panics on ""assignment to entry in nil map"". This PR initialize the map if it's nil. ",['mbohlool'],1,2018-05-01 20:29:29,2018-05-01 21:26:16,2018-05-01 21:51:12,True,2018-05-01 21:26:16,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/65,https://github.com/kubernetes/kube-openapi/pull/65,AdamDang,Typo fix in swagger.json: mulitple->multiple,mulitple->multiple,['luksa'],1,2018-05-02 14:17:48,2018-05-24 22:14:50,2018-05-24 22:14:50,True,2018-05-24 22:14:50,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/67,https://github.com/kubernetes/kube-openapi/pull/67,roycaihw,Allow specs to have empty Paths in aggregation,"fixes https://github.com/kubernetes/kube-openapi/issues/66
+
+Paths and PathItem may be empty, due to [ACL constraints](http://goo.gl/8us55a#securityFiltering).",['mbohlool'],1,2018-05-08 21:42:49,2018-05-08 23:32:54,2018-05-08 23:32:54,True,2018-05-08 23:32:54,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/68,https://github.com/kubernetes/kube-openapi/pull/68,roycaihw,Prepare cherry-picking #64 and #67 to release-1.10,"Preparing cherry-pick branch for two commits that need to be cherry-picked to k/k release-1.10
+
+ref #66 ",[],2,2018-05-09 01:01:56,2018-05-09 05:11:37,2018-05-09 05:21:09,True,2018-05-09 05:11:37,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/69,https://github.com/kubernetes/kube-openapi/pull/69,roycaihw,Prepare cherry-picking #64 and #67 to release-1.9,"Preparing cherry-pick branch for two commits that need to be cherry-picked to k/k release-1.9
+
+ref #66 ",[],2,2018-05-09 01:07:58,2018-05-09 05:12:06,2018-05-09 05:20:56,True,2018-05-09 05:12:06,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/70,https://github.com/kubernetes/kube-openapi/pull/70,mbohlool,cherry-picking #64 and #67 to release-1.8,Cherry-pick 1.8 branch with two commits fixing #66 ,['roycaihw'],2,2018-05-09 05:20:06,2018-05-09 23:32:56,2018-05-09 23:32:56,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/71,https://github.com/kubernetes/kube-openapi/pull/71,mbohlool,cherry-picking #64 and #67 to release-1.8,Cherry-pick 1.8 branch with two commits fixing #66,['roycaihw'],2,2018-05-09 23:33:45,2018-05-09 23:38:30,2018-05-09 23:38:30,True,2018-05-09 23:38:30,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/72,https://github.com/kubernetes/kube-openapi/pull/72,seans3,Additional approvers and reviewers,Adds additional approvers and reviewers to the OWNERS file. The merge-bot will be updated separately to make OWNERS the source of truth.,"['lavalamp', 'mbohlool', 'apelisse']",1,2018-05-10 18:25:12,2018-05-10 20:09:45,2018-05-10 20:09:46,True,2018-05-10 20:09:45,mbohlool,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/73,https://github.com/kubernetes/kube-openapi/pull/73,seans3,More listType validations,,['apelisse'],2,2018-05-15 17:16:56,2018-10-20 20:43:14,2018-10-20 20:43:14,False,,,dirty,False,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/74,https://github.com/kubernetes/kube-openapi/pull/74,jennybuckley,Allow openapi definitions to be built for a single resource,"This PR allows for the openapi definitions to be built for a single resource. Needed for server side apply.
+
+**Implementation:**
+
+Split the init([]*restful.WebService) function into three functions:
+- init(): runs before the swagger spec is built
+- buildPaths([]*restful.WebService): The function which actually builds the swagger spec
+- finalizeSwagger(): runs after the spec is built
+
+This way we can substitute a different function in for buildPaths, which doesn't need to take a web service as an argument.
+
+cc @mbohlool @apelisse @seans3 ","['mbohlool', 'apelisse']",2,2018-05-15 22:28:11,2018-05-17 23:45:51,2018-05-17 23:45:51,True,2018-05-17 23:45:51,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/76,https://github.com/kubernetes/kube-openapi/pull/76,apelisse,proto: Support/parse OneOf types in OpenAPI,"Currently implementation should be 100% backward compatible. The code
+doesn't have to support oneof just yet, as oneof will be converted to
+normal types automatically.",[],1,2018-05-29 18:26:18,2018-10-27 19:27:13,2018-10-27 19:27:13,False,,,dirty,False,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/77,https://github.com/kubernetes/kube-openapi/pull/77,apelisse,proto: Add validation tests,"The validation tests are coming from kubectl where they currently
+live. Looks like we forgot to move them here when we moved the
+validation code (they also needed to be changed slightly to use the
+different interface). Adding them here is another step toward being able
+to test without kubernetes, and will help us get more tests for oneof
+and al.",['lavalamp'],1,2018-05-29 18:39:26,2018-05-29 21:17:34,2018-05-29 21:17:34,True,2018-05-29 21:17:34,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/78,https://github.com/kubernetes/kube-openapi/pull/78,seans3,Integration tests for definitions in kube-openapi repo,"* An integration test framework for kube-openapi repo currently addressing type definitions (not paths/routes)
+* Generates OpenAPI definition code from types in ""testdata"" subdirectory
+* Compiles the OpenAPI definitions with the OpenAPI builder libraries
+* Runs the generated binary to output the JSON swagger definitions
+* Compares generated JSON swagger definitions to golden swagger defs.",['lavalamp'],1,2018-05-30 05:10:48,2018-06-11 20:49:30,2018-06-11 20:49:30,True,2018-06-11 20:49:29,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/79,https://github.com/kubernetes/kube-openapi/pull/79,apelisse,proto: Move test swagger files to testdata,"Instead of having the files in ""testing"" package, let's move them to
+""testdata"". The reason is that the testing package should be vendor-able
+without having to import the swagger test files.",['seans3'],1,2018-05-31 19:52:28,2018-05-31 20:13:57,2018-05-31 20:13:57,True,2018-05-31 20:13:57,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/80,https://github.com/kubernetes/kube-openapi/pull/80,apelisse,"proto: Add ""Empty"" fake","This can be useful if you want to test plumbing, and not the content of
+the OpenAPI.",['seans3'],1,2018-05-31 20:29:51,2018-05-31 20:41:57,2018-05-31 20:41:57,True,2018-05-31 20:41:57,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/81,https://github.com/kubernetes/kube-openapi/pull/81,AdamDang,Typo fix: identifer->identifier,identifer->identifier,['lavalamp'],2,2018-06-02 11:14:13,2018-08-24 05:20:02,2018-08-24 05:20:02,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/82,https://github.com/kubernetes/kube-openapi/pull/82,mirake,Typo fix: identifer -> identifier/mulitple -> multiple,,[],1,2018-06-13 10:47:31,2018-08-14 07:37:17,2018-08-14 07:37:17,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/83,https://github.com/kubernetes/kube-openapi/pull/83,roycaihw,API linter framework and namesMatch API rule,"Adding API linter framework https://github.com/kubernetes/kubernetes/pull/54887 to kube-openapi to provide a one stop shop experience in openapi generation and validation. 
+
+**TODO:** 
+- [x] Documentation
+- [x] Add `report-filename` flag to [cmd/openapi-gen/openapi-gen.go](https://github.com/kubernetes/kube-openapi/blob/bf40560368791a7dddfeea9b3cfcf89b34139f44/cmd/openapi-gen/openapi-gen.go), or modify [main.go in k8s/code-generator](https://github.com/kubernetes/kubernetes/blob/a2de1398f829ef38d645579160bdd6bfec8384d3/staging/src/k8s.io/code-generator/cmd/openapi-gen/main.go) if we're not ready to switch to the main in this repo yet.
+- **NOTE to reviewer**: if `reportFilename` is not provided, the linter will glog any API rule violation and return **error**; if `reportFilename` is provided, the linter will print the violations to the report file and return **nil (no error)**. This enables us to check in the known violations file in kubernetes, and then have make rules to compare with the report file and make sure it doesn't get bigger. 
+- UPDATE: experimented locally. `make generated_files` generates report file under `_output/openapi-tmp/report.csv` https://github.com/roycaihw/kubernetes/commit/2892801c5dfc14ecf4e389e56151f8e3801298df
+- [x] Vender the code in to kubernetes and update the `Makefile.generated_files` to call the generator with `report-filename` flag and compare with checked-in violations","['mbohlool', 'seans3', 'pwittrock']",4,2018-06-15 00:16:55,2018-06-29 01:24:20,2018-09-06 12:33:42,True,2018-06-29 01:24:20,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/84,https://github.com/kubernetes/kube-openapi/pull/84,liggitt,include descriptions in types with custom defs,"Include description so that custom types can be documented as well.
+
+See in action in https://github.com/kubernetes/kubernetes/pull/65256
+",['seans3'],1,2018-06-20 03:21:07,2018-06-20 17:37:06,2018-06-20 17:52:41,True,2018-06-20 17:37:06,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/85,https://github.com/kubernetes/kube-openapi/pull/85,luksa,Server-side OpenAPI fixes (RawExtension & type:object for structs),"DO NOT MERGE until v1.12, because clients v1.10 and older break when they encounter a server with these changes. A v1.11+ client won't break.
+
+This PR fixes two things:
+- adds type:object to all OpenAPI definitions created from structs
+- prevents the RawExtension type from being included in the OpenAPI schema by annotating it with `+k8s:openapi-gen:schema-type-format=object,`",[],2,2018-06-20 12:26:40,,2018-12-30 22:02:06,False,,,dirty,False,open
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/86,https://github.com/kubernetes/kube-openapi/pull/86,seans3,Added integration tests to Travis,Travis will now run integration tests as well as the package unit tests.,"['mbohlool', 'apelisse']",1,2018-06-20 17:48:28,2018-06-22 21:35:07,2018-06-22 21:35:07,True,2018-06-22 21:35:07,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/88,https://github.com/kubernetes/kube-openapi/pull/88,max8899,fix some formt error using gofmt,"fix some formt error using gofmt:
+gofmt -s -l -w .",['mbohlool'],1,2018-06-28 08:36:36,2018-09-28 07:05:18,2018-09-28 07:05:18,True,2018-09-28 07:05:18,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/89,https://github.com/kubernetes/kube-openapi/pull/89,max8899,fix some shadow variables,fix some shadow variables,"['apelisse', 'seans3']",1,2018-06-28 08:53:01,2018-06-28 17:23:26,2018-06-28 17:23:26,True,2018-06-28 17:23:26,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/90,https://github.com/kubernetes/kube-openapi/pull/90,roycaihw,Copy apimachinery sets util to avoid import cycle,"Vendoring `k8s.io/apimachinery/pkg/util/sets` introduces import cycle. This PR copies the `pkg/util/sets/string.go` to kube-openapi to avoid import cycle. Note that the code was generated by set-gen in k/k.
+
+```
+I0703 22:35:48.857] Package vendor/k8s.io/kube-openapi/cmd/openapi-gen has a cyclic dependency on staging repository packages: k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets
+I0703 22:35:49.988] Package vendor/k8s.io/kube-openapi/pkg/generators has a cyclic dependency on staging repository packages: k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets
+I0703 22:35:50.055] Package vendor/k8s.io/kube-openapi/pkg/generators/rules has a cyclic dependency on staging repository packages: k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets
+I0703 22:37:02.210] +++ exit code: 1
+I0703 22:37:02.216] +++ error: 1
+I0703 22:37:02.532] FAILED   verify-no-vendor-cycles.sh	80s
+```
+
+/assign @pwittrock 
+
+Note that afaict it's not a real import cycle, but in k/k we don't allow vendor code to import staging code. See https://github.com/kubernetes/kubernetes/pull/49252 for details. 
+
+To keep the change minimum, I didn't copy the entire `sets` package over, but just the functionality that we need (`Strings` and `Empty`).",['pwittrock'],1,2018-07-03 23:44:13,2018-07-11 00:09:25,2018-07-11 00:09:25,True,2018-07-11 00:09:25,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/92,https://github.com/kubernetes/kube-openapi/pull/92,tamalsaha,Don't throw error if resource is missing openapi definition,xref: https://github.com/kubernetes/kubernetes/issues/66285,[],1,2018-07-17 11:09:39,2018-07-26 06:00:42,2018-07-26 06:00:42,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/93,https://github.com/kubernetes/kube-openapi/pull/93,nikhita,Add CONTRIBUTING.md,"Fixes #91 
+
+xref https://github.com/kubernetes/community/issues/1832
+/cc mbohlool roycaihw ","['mbohlool', 'roycaihw']",1,2018-07-18 06:13:10,2018-07-19 23:27:39,2018-07-19 23:27:39,True,2018-07-19 23:27:39,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/94,https://github.com/kubernetes/kube-openapi/pull/94,roycaihw,Skip merge source spec with empty paths,"Follow up of https://github.com/kubernetes/kube-openapi/pull/70#discussion_r186934063
+
+/cc @mbohlool ",['mbohlool'],1,2018-07-19 21:15:52,2018-09-28 07:03:57,2018-09-28 18:30:51,True,2018-09-28 07:03:57,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/98,https://github.com/kubernetes/kube-openapi/pull/98,RA489,Correction in README.md,"Correction in README.md 
+fixes #95 ",['seans3'],1,2018-07-30 10:24:20,2018-07-31 17:05:46,2018-07-31 17:05:46,True,2018-07-31 17:05:46,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/99,https://github.com/kubernetes/kube-openapi/pull/99,hello2mao,Typo fix in pkg/generators/api_linter.go,Typo fix: mutliple -> multiple,['mbohlool'],1,2018-08-29 08:37:02,2018-09-28 07:02:36,2018-09-28 07:02:36,True,2018-09-28 07:02:36,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/100,https://github.com/kubernetes/kube-openapi/pull/100,kargakis,pkg/generators README markdown updates,/cc @mbohlool ,['mbohlool'],1,2018-09-16 10:41:30,2018-09-28 07:01:15,2018-09-28 07:01:15,True,2018-09-28 07:01:15,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/102,https://github.com/kubernetes/kube-openapi/pull/102,jennybuckley,Move getCanonicalTypeName to util package and export it,To be used by https://github.com/kubernetes/kubernetes/pull/68576,['seans3'],1,2018-09-20 21:44:00,2018-09-27 18:09:12,2018-09-27 18:09:12,True,2018-09-27 18:09:12,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/104,https://github.com/kubernetes/kube-openapi/pull/104,roycaihw,Sort API rule violations before reporting,"The API rule violations reported by openapi-gen are in format of
+
+ - `{rule-name},{package},{type},{(optional) field}`
+
+The `k8s.io/gen` performs sorting on package level and type level when walking through the input packages, but currently the API rule violations reported from openapi-gen are un-sorted on field level and rule-name level. 
+
+The partially-sorted report file makes it hard for API authors to update the exception list when necessary, e.g. https://github.com/kubernetes/kubernetes/pull/60195#discussion_r204056998, https://github.com/kubernetes/kubernetes/pull/66722
+
+This PR makes openapi-gen sort the violations before reporting to a file or stderr. As a followup I will add hack script in k/k for API authors to update the exception list automatically instead of manually.
+
+/assign @lavalamp ","['lavalamp', 'apelisse']",3,2018-09-25 21:34:04,2018-09-28 20:23:40,2018-09-28 20:24:53,True,2018-09-28 20:23:40,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/105,https://github.com/kubernetes/kube-openapi/pull/105,roycaihw,Allow using top-level Responses Definitions field in openapi v2,"This PR allows setting a `ResponseDefinitions` field in common config, which will be propagated to the top-level [Responses Definitions field](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields) during building. From the v2 specification, the field is:
+> An object to hold responses that can be used across operations. This property does not define global responses for all operations.
+
+The idea comes from the k8s issue https://github.com/kubernetes/kubernetes/issues/69014. We want to document all the possible error codes that apiserver may respond with. Presumably we will add 10+ responses to every operations under every paths. Since all the error responses have same schema in body (metav1.Status), we can put the full response definition in the top-level Responses Definitions field, and have the operation-level responses refer to it, to make the spec size smaller.
+
+Note that `go-openapi` doesn't verify if the referred definition exists when [creating a Response](https://github.com/go-openapi/spec/blob/5bae59e25b21498baea7f9d46e9c147ec106a42e/response.go#L89-L94). It's up to user to set the definition first and write the refURI properly.
+
+The next step will be changing k8s to set `ResponseDefinitions` and `CommonResponses` when [completing the openapi Config](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apiserver/pkg/server/config.go#L379-L388).
+
+/assign @mbohlool 
+cc @lswith",['mbohlool'],2,2018-10-08 17:40:29,2018-10-18 17:17:35,2018-10-18 17:48:52,True,2018-10-18 17:17:35,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/106,https://github.com/kubernetes/kube-openapi/pull/106,liggitt,Add linting test for omitempty,Would have caught https://github.com/kubernetes/kubernetes/pull/69694,"['mbohlool', 'roycaihw']",1,2018-10-15 15:54:38,2018-10-25 18:04:46,2018-10-25 18:09:29,True,2018-10-25 18:04:46,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/107,https://github.com/kubernetes/kube-openapi/pull/107,roycaihw,Add roycaihw to reviewers and update integration test README,"Add @roycaihw to reviewers in OWNER file per request from @apelisse. 
+
+Also update `test/integration/README.md` to mention that the checked-in `pkg/generated/openapi_generated.go` file [should not be updated](https://github.com/kubernetes/kube-openapi/pull/104#issuecomment-424858284). 
+
+/cc @apelisse ",['apelisse'],1,2018-10-15 19:53:06,2018-10-26 22:29:04,2018-10-26 22:30:19,True,2018-10-26 22:29:04,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/108,https://github.com/kubernetes/kube-openapi/pull/108,lavalamp,remove unneeded parameter,The context passed to the package construction shouldn't be stored.,['seans3'],1,2018-10-17 17:49:21,2018-10-17 17:55:46,2018-10-17 17:55:46,True,2018-10-17 17:55:46,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/109,https://github.com/kubernetes/kube-openapi/pull/109,lavalamp,More minor fixes.,,['apelisse'],3,2018-10-17 19:34:57,2018-10-26 22:32:12,2018-10-26 22:32:12,False,,,dirty,False,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/110,https://github.com/kubernetes/kube-openapi/pull/110,lavalamp,Convert OpenAPI to structured schema,,['apelisse'],4,2018-10-18 22:08:04,2018-10-21 20:35:53,2018-10-21 20:35:53,True,2018-10-21 20:35:53,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/111,https://github.com/kubernetes/kube-openapi/pull/111,lavalamp,Fix api linter,Includes #109.,"['roycaihw', 'seans3']",9,2018-10-22 22:54:02,2018-10-24 00:39:39,2018-10-26 22:19:31,True,2018-10-24 00:39:39,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/112,https://github.com/kubernetes/kube-openapi/pull/112,lavalamp,Move general setup to its own file.,Minor cleanup.,['seans3'],1,2018-10-24 22:54:13,2018-10-25 20:24:43,2018-10-25 20:24:43,True,2018-10-25 20:24:43,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/113,https://github.com/kubernetes/kube-openapi/pull/113,lavalamp,fix path mangling,"This makes the report file location simple and obvious rather than fighting with the generation framework.
+
+Both variations passed the integration test here but the new one also works with the random path manipulations that upstream kubernetes does.",['roycaihw'],1,2018-10-31 20:11:13,2018-10-31 20:38:00,2018-10-31 20:46:21,True,2018-10-31 20:38:00,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/115,https://github.com/kubernetes/kube-openapi/pull/115,dims,Switch from glog to klog,Change-Id: Ie5d0f09425c945da9bf24474a212adf3148daf6f,"['lavalamp', 'mbohlool', 'seans3']",1,2018-11-04 16:32:57,2018-11-06 18:26:15,2018-11-06 18:26:15,True,2018-11-06 18:26:15,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/116,https://github.com/kubernetes/kube-openapi/pull/116,dims,Missed a spot for klog flag initialization,Change-Id: I43e37728b7558702a41ceaa7e9f7b722aaa55bf7,"['lavalamp', 'mbohlool', 'roycaihw', 'seans3']",1,2018-11-09 02:23:48,2018-11-09 18:18:36,2018-11-09 18:18:36,True,2018-11-09 18:18:36,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/118,https://github.com/kubernetes/kube-openapi/pull/118,lavalamp,smd conversion: handle more string formats,,['apelisse'],2,2018-11-13 22:59:01,2018-11-14 23:30:23,2018-11-14 23:30:23,True,2018-11-14 23:30:23,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/120,https://github.com/kubernetes/kube-openapi/pull/120,mbohlool,Add type: object to all generated struct objects,"Look like we did not set type on definitions of struct type. Most of the OpenAPI tools should assume ""object"" I guess, thats why we didn't catch this.
+
+
+Ref: https://github.com/kubernetes/kubernetes/issues/56428",['roycaihw'],2,2018-11-29 23:30:36,2019-01-15 22:22:10,2019-01-15 22:22:10,True,2019-01-15 22:22:10,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/123,https://github.com/kubernetes/kube-openapi/pull/123,luxas,Make the namesMatch function vendorable,"/assign @sttts @lavalamp
+
+This is needed for moving out the API violations check from consuming kube-openapi as a binary and writing the violations to an exceptions file in `api/` of k/k to an unit test per API group that want to check its types. This is part of the k8s.io/component KEP.","['lavalamp', 'sttts']",1,2018-12-05 19:49:59,2019-01-10 12:45:07,2019-01-10 12:45:17,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/124,https://github.com/kubernetes/kube-openapi/pull/124,sttts,"aggregator: optimize 40x speed, 1/8 mem, 1/27 allocs","- avoid deep-copy
+- rename in one batch
+
+Old kube merging (with real specs) took 738ms, this reduces it to <19ms.","['liggitt', 'mbohlool']",11,2018-12-13 18:30:56,2019-01-31 21:54:50,2019-02-05 19:02:18,True,2019-01-31 21:54:50,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/125,https://github.com/kubernetes/kube-openapi/pull/125,sttts,handler: speed-up spec encoding,,[],10,2018-12-17 15:58:37,,2019-02-04 10:59:51,False,,,dirty,False,open
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/126,https://github.com/kubernetes/kube-openapi/pull/126,dims,Switch location for goautoneg vendored code,"Move to github.com/munnerz/goautoneg as bitbucket is flaky!
+
+Change-Id: I1c63240a4985b9e4ae33d23af929657d44f356a0","['lavalamp', 'mbohlool', 'roycaihw', 'seans3']",1,2018-12-18 02:34:16,2019-01-15 21:42:06,2019-01-15 21:42:06,True,2019-01-15 21:42:06,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/127,https://github.com/kubernetes/kube-openapi/pull/127,apelisse,Add SECURITY_CONTACTS,Fixes #75 ,"['lavalamp', 'mbohlool', 'roycaihw', 'seans3']",1,2018-12-21 22:03:39,2019-01-15 22:23:49,2019-01-15 22:23:49,True,2019-01-15 22:23:49,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/128,https://github.com/kubernetes/kube-openapi/pull/128,sttts,travis: fix hg SSL issue by using Ubuntu LTS 16.04 Xenial,`go get` failed in travis because of tls issues with the old Debian image in travis.,"['mbohlool', 'roycaihw', 'seans3']",1,2019-01-04 08:45:52,2019-01-15 21:44:12,2019-01-15 21:44:13,True,2019-01-15 21:44:12,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/132,https://github.com/kubernetes/kube-openapi/pull/132,roycaihw,Allow model to seed name without go type,"Allow models (e.g. CRDs) which have schema but not go types to seed canonical name. 
+
+This allows us to use the kube-openapi builder more naturally for CRDs: https://github.com/kubernetes/kubernetes/pull/71192
+
+/cc @liggitt @mbohlool @sttts ",['mbohlool'],2,2019-01-29 17:41:34,2019-02-05 22:44:25,2019-02-05 22:44:25,True,2019-02-05 22:44:25,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/133,https://github.com/kubernetes/kube-openapi/pull/133,apelisse,schemaconv: Make RawExtension into an untyped atomic scalar,"Because of how RawExtension is built, the schema we generate is slightly confused when we see them in real-life. Make them untyped since there is not much we can do right now.","['lavalamp', 'jennybuckley']",1,2019-02-01 00:50:42,2019-02-04 22:00:27,2019-02-04 22:02:29,True,2019-02-04 22:00:27,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/134,https://github.com/kubernetes/kube-openapi/pull/134,palash25,[WIP] Remove klog as a dependency,Fixes: https://github.com/kubernetes/kube-openapi/issues/117,[],1,2019-02-01 02:18:58,,2019-02-04 11:19:51,False,,,unstable,True,open
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/135,https://github.com/kubernetes/kube-openapi/pull/135,sttts,godeps: check in CI,Blocked by https://github.com/kubernetes/kube-openapi/pull/136.,"['soltysh', 'lavalamp', 'mbohlool', 'roycaihw']",3,2019-02-01 08:18:51,2019-02-02 09:21:18,2019-02-02 09:21:18,True,2019-02-02 09:21:18,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/136,https://github.com/kubernetes/kube-openapi/pull/136,sttts,aggregator: fix and extend mutating walker tests,"- fix mutating ref numbering
+- implement max depth fuzzing logic
+- test mutated subsets, not only one ref at a time","['soltysh', 'liggitt', 'roycaihw']",4,2019-02-01 10:56:14,2019-02-02 04:09:09,2019-02-02 04:09:09,True,2019-02-02 04:09:09,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/137,https://github.com/kubernetes/kube-openapi/pull/137,sttts,Add myself as reviewer,,"['lavalamp', 'mbohlool', 'seans3']",1,2019-02-01 23:20:26,2019-02-02 00:24:09,2019-02-02 00:24:09,True,2019-02-02 00:24:09,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/138,https://github.com/kubernetes/kube-openapi/pull/138,sttts,handler: fix ToProtoBinary and add tests,The json2yaml func produced wrong output and ToProtoBinary failed. There was no test whatsoever calling it.,"['soltysh', 'liggitt']",1,2019-02-05 15:49:31,2019-02-05 21:41:20,2019-02-05 21:41:20,True,2019-02-05 21:41:20,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/139,https://github.com/kubernetes/kube-openapi/pull/139,damemi,[wip]Support for openapi json output format,attempting to rebase https://github.com/kubernetes/kube-openapi/pull/37,[],3,2019-02-06 16:31:52,2019-02-06 18:59:09,2019-02-06 18:59:09,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/140,https://github.com/kubernetes/kube-openapi/pull/140,sttts,generator: make output roundtrippable,"- Extension values are JSON data. `[]string` is not a valid type therefore (only `[]interface{}` is for slices). The `[]string` objects did not roundtrip.
+- If `SchemaOrBool.Schema` is non-nil, `Allows` does not matter (both variants are semantically equivalent). But for roundtrip checks it's helpful to set `Allows` to `true` because `SchemaOrBool.UnmarshalJSON` does the same.
+- don't create empty `Properties` fields.","['liggitt', 'mbohlool', 'seans3']",4,2019-02-07 10:46:43,2019-02-07 18:18:46,2019-02-07 22:22:08,True,2019-02-07 18:18:46,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/141,https://github.com/kubernetes/kube-openapi/pull/141,sttts,aggregator: compare spec with semantic equality during merging,Depends on https://github.com/kubernetes/utils/pull/81.,[],3,2019-02-07 12:23:11,2019-02-08 13:50:59,2019-02-08 13:51:00,False,,,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/142,https://github.com/kubernetes/kube-openapi/pull/142,liggitt,Add sttts as approver,"sttts has made significant contributions to the repo, both directly and in kubernetes/kubernetes
+
+/assign @lavalamp ","['lavalamp', 'apelisse']",1,2019-02-07 16:36:46,2019-02-22 20:39:32,2019-02-22 20:39:32,True,2019-02-22 20:39:32,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/143,https://github.com/kubernetes/kube-openapi/pull/143,sttts,Add analysis of pkg/util/proto/validator,"The OpenAPI validator used in kubectl is full of wrong assumptions. We cannot reject OpenAPI spec features because openapi-gen does not generate them. Other providers (other aggregated apiservers, CRDs) can make use of them.
+
+As general rule of thumb, we have to apply: we can ignore features, making us incomplete (which we are anyway because we do not check for many/most OpenAPI features), but keeping us correct. But we cannot return errors for features we do not understand.
+
+tl/dr: less strict validation is fine.
+
+This PR add analysis comments of the following shape:
+
+- `TODO(wrong)`: here the validation is returning errors which aren't errors according to the OpenAPI standard.
+- `TODO(incomplete)`: here the valiation could return an error, but doesn't.
+
+The first class is critical and we should get rid of them ASAP. The second class is cosmetics, no need for action.
+
+Note: As we support one version of skew between master and kubectl, we have to generate reduced (= stripped) CRD validation schemata for at least one master version such that existing, old kubectl will not fall over.","['soltysh', 'liggitt', 'apelisse', 'roycaihw']",2,2019-02-08 11:04:22,2019-04-01 08:52:33,2019-04-01 08:52:33,True,2019-04-01 08:52:33,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/144,https://github.com/kubernetes/kube-openapi/pull/144,apelisse,Add apelisse to approvers for pkg/util/proto,"@seans3 is trying to retire from the approvers list, so I'm trying to at least own this part. And I'm interested in changes happening here since it impacts some things I care about :-)
+
+@lavalamp @sttts","['sttts', 'seans3']",1,2019-02-08 18:26:23,2019-03-06 00:18:00,2019-03-06 00:18:01,True,2019-03-06 00:18:00,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/145,https://github.com/kubernetes/kube-openapi/pull/145,sttts,handler: use stdlib compatible json-iter encoder for stable map order,We also just the stdlib compatible encoder in kube because it produces stable map order output.,"['liggitt', 'seans3']",1,2019-02-08 20:36:28,2019-02-08 20:55:40,2019-02-08 20:55:41,True,2019-02-08 20:55:40,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/146,https://github.com/kubernetes/kube-openapi/pull/146,roycaihw,cleanup: remove deprecated service registration,"for format-separated endpoints, which was deprecated in 1.10 and removed in 1.14
+
+now k8s uses `BuildAndRegisterOpenAPIVersionedService` and `RegisterOpenAPIVersionedService` methods in the same file to register openapi service
+
+/assign @mbohlool ","['sttts', 'mbohlool']",1,2019-02-15 01:31:00,2019-02-15 19:04:55,2019-02-15 19:04:55,True,2019-02-15 19:04:55,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/147,https://github.com/kubernetes/kube-openapi/pull/147,sttts,"util/proto: add optional, permissive spec parsing mode","When being used in kubectl to do client-side validation or for kubectl-explain, the OpenAPI code should not reject specs that have uninterpreted OpenAPI features. OpenAPI is monotonic in its fields (= weaker field values makes the whole schema weaker, not stronger) as long as the negative quantors `not` and `oneOf` are not used. This means we can just ignore unsupported fields in validation that is by definition incomplete (kubectl validation is incomplete because we have stricter server-side validation). This means:
+
+* it is ok to accept an object that will later be rejected by the server,
+* but it is bad to reject objects which are accepted by the server.
+
+Or in yet other terms: kubectl validation should be best effort, but never stricter than the server.
+
+The permissive mode switches the excessively strict validation (in respect to the formal OpenAPI semantics) to be permissive and weaker than server side validation. The only exception to this is that client-side validation will assume `additionalProperties: false` for all objects, while the server-side validation assumes `additionalPropertiers: true` by default.","['soltysh', 'liggitt', 'apelisse', 'roycaihw']",10,2019-02-21 12:41:05,,2019-02-28 17:24:55,False,,,dirty,False,open
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/148,https://github.com/kubernetes/kube-openapi/pull/148,ixdy,cmd/openapi-gen: be silent on success,This logging line isn't particularly useful; it's just noise during the build.,"['lavalamp', 'sttts', 'seans3']",1,2019-02-21 21:31:13,2019-02-25 20:44:29,2019-02-25 20:44:29,True,2019-02-25 20:44:29,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/149,https://github.com/kubernetes/kube-openapi/pull/149,sttts,handler: convert int types correctly like yaml2 does and gnostic expects,"Json always unmarshals to float64, yaml2 does best effort down-sizing of the returned numbers, returning int, int64, uint64 or float64. Gnostic expects the later.","['soltysh', 'liggitt', 'mbohlool']",1,2019-02-25 09:48:43,2019-02-28 16:07:47,2019-02-28 17:12:44,True,2019-02-28 16:07:47,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/150,https://github.com/kubernetes/kube-openapi/pull/150,sttts,aggregator: merge x-kubernetes-group-version-kind slices,"Definitions are supposed to be reused independently from the assign GVKs in the x-kubernetes-group-version-kind field. Different x-kubernetes-group-version-kind can happen if e.g. shared meta/v1 structs like `Status` or `GetOptions` appear in different API groups.
+
+Prerequisite for https://github.com/kubernetes/kubernetes/pull/74133.","['mbohlool', 'roycaihw']",1,2019-02-26 12:26:38,,2019-03-04 22:01:47,False,,,unstable,True,open
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/151,https://github.com/kubernetes/kube-openapi/pull/151,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['philips', 'spiffxp', 'sttts', 'mbohlool']",1,2019-03-08 18:09:29,2019-03-20 15:49:02,2019-03-20 15:49:02,True,2019-03-20 15:49:02,k8s-ci-robot,unknown,,closed
+kube-openapi,https://api.github.com/repos/kubernetes/kube-openapi/pulls/152,https://github.com/kubernetes/kube-openapi/pull/152,apelisse,Add parsing of openapi oneof/union semantic into smd,"Implements first part of https://github.com/kubernetes/enhancements/pull/926.
+We still need to change the OpenAPI generation to add these extensions.",['lavalamp'],1,2019-04-02 18:02:09,,2019-04-03 16:56:42,False,,,unstable,True,open

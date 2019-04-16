@@ -1,0 +1,860 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/1,https://api.github.com/repos/kubernetes/gengo/issues/1,add .travis.yml,,closed,True,2016-08-30 02:59:02,2016-08-30 03:04:40
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/2,https://api.github.com/repos/kubernetes/gengo/issues/2,set import path in .travis.yml; fix import-boss,,closed,True,2016-08-30 03:08:46,2016-08-30 03:57:33
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/3,https://api.github.com/repos/kubernetes/gengo/issues/3,Travis,,closed,True,2016-08-30 04:24:02,2016-08-30 04:25:39
+gengo,mbohlool,https://github.com/kubernetes/gengo/pull/4,https://api.github.com/repos/kubernetes/gengo/issues/4,Add Finalize method to Generator interface.,,closed,True,2016-09-02 22:31:14,2016-09-03 21:42:48
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/5,https://api.github.com/repos/kubernetes/gengo/issues/5,"Channels deserve names, too",,closed,True,2016-09-03 21:07:58,2016-09-06 05:59:14
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/6,https://api.github.com/repos/kubernetes/gengo/issues/6,Only add to tracker if it's non-local,"Import tracker was supposed to handle this case, but it seems local package was never plumbed through. Maybe lost in the protobuf addition?
+",open,True,2016-09-06 05:57:53,2018-02-26 05:12:15
+gengo,sttts,https://github.com/kubernetes/gengo/pull/7,https://api.github.com/repos/kubernetes/gengo/issues/7,generated DeepCopy without a function on a struct pointer is wrong,"Cherry pick of https://github.com/kubernetes/kubernetes/pull/32049.
+",closed,True,2016-09-07 07:31:29,2016-09-07 16:48:50
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/8,https://api.github.com/repos/kubernetes/gengo/issues/8,Cherrypick Unsorted List,"From https://github.com/kubernetes/kubernetes/pull/31112
+",closed,True,2016-09-07 23:21:40,2016-09-07 23:26:56
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/9,https://api.github.com/repos/kubernetes/gengo/issues/9,make test happy for the moment,"We should probably move this directory in, but for now make the test green.
+",closed,True,2016-09-07 23:30:07,2016-09-07 23:40:44
+gengo,smarterclayton,https://github.com/kubernetes/gengo/pull/10,https://api.github.com/repos/kubernetes/gengo/issues/10,Add a defaulter-gen that coalesces individual defaulters,"Creates top level SetObjectDefaults_ methods for specific types using
+individual type defaulter functions (named `SetDefaults_TYPE`).
+
+xref kubernetes/kubernetes#33352
+",closed,True,2016-09-25 03:50:50,2016-09-29 16:53:17
+gengo,danwinship,https://github.com/kubernetes/gengo/issues/11,https://api.github.com/repos/kubernetes/gengo/issues/11,deepcopy-gen doesn't handle pointer-to-slice correctly,"If you have a struct with a pointer to a slice, eg:
+
+```
+Ports *[]NetworkPolicyPort `json:""ports,omitempty""`
+```
+
+(because you need to distinguish ""field is not set"" from ""field is set to []"") then deepcopy-gen generates incorrect code to copy it, resulting in:
+
+```
+../../apis/extensions/zz_generated.deepcopy.go:587: invalid argument *in (type *[]NetworkPolicyPort) for len
+```
+
+because it outputs code as though the field was a slice, not a pointer-to-slice. (Presumably pointer-to-map fields have the same problem.)
+
+(kubernetes/kubernetes#25835 has more discussion of the use case.)
+
+I don't have a simple reproducer, but, eg, changing NetworkPolicyIngressRule.Ports in kubernetes/pkg/apis/extensions/types.go from `[]NetworkPolicyPort` to `*[]NetworkPolicyPort` and regenerating stuff will trigger the error above.
+",closed,False,2016-10-12 20:02:04,2018-07-18 11:06:00
+gengo,smarterclayton,https://github.com/kubernetes/gengo/pull/12,https://api.github.com/repos/kubernetes/gengo/issues/12,Extract function comments,"Allows generators like defaulters and conversions to use information
+about generated conversions.
+
+@wojtek-t extracted from the unsafe conversions work
+",closed,True,2016-10-19 04:04:15,2016-10-24 06:54:39
+gengo,thockin,https://github.com/kubernetes/gengo/pull/13,https://api.github.com/repos/kubernetes/gengo/issues/13,Fix go vet warning,"
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/gengo/13)
+<!-- Reviewable:end -->
+",closed,True,2016-10-24 06:58:14,2017-11-27 23:41:27
+gengo,thockin,https://github.com/kubernetes/gengo/issues/14,https://api.github.com/repos/kubernetes/gengo/issues/14,Unclear when strings are package names vs paths,"I started some hacking this weekend in prep for other work, and I realized that it was unclear when string fields are package names (""foo"") vs paths (""github.com/me/foo"").  So I started making a strong type for them.  I an not done with the work yet, but one thing that's clear is that at least some code (protobuf, I am looking at you) abuses types like Name to mean whatever it wants.
+
+I am filing this for discussion.  #13 is WIP
+",open,False,2016-10-24 06:58:31,2017-12-18 18:05:26
+gengo,thockin,https://github.com/kubernetes/gengo/pull/15,https://api.github.com/repos/kubernetes/gengo/issues/15,Defaulter: emit no-op files,"The tag said to process a directory.  If we don't emit the result file, the
+kubernetes Make sysyetm will detect that this file is missing and repeatedly
+try to generate it on every build.
+
+Once this goes in, I will re-vendor it into the kube repo.
+
+@wojtek-t 
+",closed,True,2016-10-26 17:28:56,2017-11-27 23:39:24
+gengo,ncdc,https://github.com/kubernetes/gengo/pull/16,https://api.github.com/repos/kubernetes/gengo/issues/16,Protobuf: allow dashes in package names,"Convert - to _ for protobuf package names to allow protobuf code generation
+support for go packages that have - in their names.
+
+xref https://github.com/kubernetes/kubernetes/pull/33412
+
+cc @smarterclayton 
+",closed,True,2016-10-27 18:29:04,2016-10-27 20:12:56
+gengo,seanchann,https://github.com/kubernetes/gengo/issues/17,https://api.github.com/repos/kubernetes/gengo/issues/17,add conversion-gen into example,"hi:
+  could be  add conversion-gen  from k8s into example dir?",closed,False,2016-11-02 11:34:51,2016-12-10 02:53:51
+gengo,liggitt,https://github.com/kubernetes/gengo/pull/18,https://api.github.com/repos/kubernetes/gengo/issues/18,"Export unregistered deep copy functions, use custom DeepCopy impls","Makes use of custom DeepCopy functions if defined (so we can define DeepCopy for types with unexported fields, and not switch to shallow copy in the middle of deep copy)
+
+Adds function that returns generated deepcopy functions if they are not registered (see use at https://github.com/kubernetes/kubernetes/pull/35728/commits/cd69db639ae098e96b371c7aa774679dc90a3acb, sample generated diff at https://github.com/kubernetes/kubernetes/pull/35728/commits/bfb3a7eb007476283870d7fd1f2e2b0d2df71927)
+
+
+<!-- Reviewable:start -->
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/gengo/18)
+<!-- Reviewable:end -->
+",closed,True,2016-11-05 05:10:17,2016-11-23 01:10:18
+gengo,ncdc,https://github.com/kubernetes/gengo/pull/19,https://api.github.com/repos/kubernetes/gengo/issues/19,Fix skipping - protobuf fields,"@smarterclayton
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/gengo/19)
+<!-- Reviewable:end -->
+",closed,True,2016-11-21 21:06:48,2016-11-21 21:58:22
+gengo,Serabe,https://github.com/kubernetes/gengo/issues/20,https://api.github.com/repos/kubernetes/gengo/issues/20,Adding Proto3 support,"We are exploring the possibility of adding proto3 support while keeping support for proto2. This is proving to be quite difficult, quite likely for a lack of knowledge on my side.
+
+The implications of switching the syntax affect several parts of the codebase that have no parameter (or at least, not an obvious one) in common.
+
+Can you provide some help/guidance on this?
+
+If this is not the appropriate channel for asking this kinds of questions, please, let us know. 
+
+Thank you!",closed,False,2016-12-12 15:05:07,2017-12-19 10:36:20
+gengo,thockin,https://github.com/kubernetes/gengo/pull/21,https://api.github.com/repos/kubernetes/gengo/issues/21,"Accumulated cleanups, logging, and a test!","As ""leisure time"" I wanted to see about applying gengo deepcopy to non-kube projects.  Not surprisingly, it didn't work in obvious ways, so I set out to fix it.  My list got long quickly, so here is part 1.
+
+This represents some better logging to help me figure out what was not working, and I added a test to check ""golden"" output.  It's rudimentary for now, but it can expand.
+",closed,True,2016-12-30 00:52:58,2017-11-27 23:39:28
+gengo,thockin,https://github.com/kubernetes/gengo/pull/22,https://api.github.com/repos/kubernetes/gengo/issues/22,Optimize deepcopy for primitives,"As part of #21 (upon which this builds, only the last 2 commits are this PR proper), I realized deepcopy was being dumb.",closed,True,2016-12-30 00:56:01,2017-11-27 23:39:30
+gengo,thockin,https://github.com/kubernetes/gengo/pull/23,https://api.github.com/repos/kubernetes/gengo/issues/23,Use strong type for pkg-paths when parsing,"This makes the code easier to comprehend.  This commit also sanitizes how
+import paths are canonicalized, which in turn allows `./path` package names to
+work.",closed,True,2016-12-30 01:00:29,2017-11-27 23:39:32
+gengo,thockin,https://github.com/kubernetes/gengo/issues/24,https://api.github.com/repos/kubernetes/gengo/issues/24,"Copyright boilerplate changes YEAR, but shouldn't",The copyrighted code is either copyright the first year it was generated or else it is copyright the year we wrote gengo.  It obviously doesn't change copyright by nature of being regenerated.  ,closed,False,2017-01-02 06:34:45,2018-03-21 19:44:38
+gengo,thockin,https://github.com/kubernetes/gengo/pull/25,https://api.github.com/repos/kubernetes/gengo/issues/25,Bump years in generated files to appease tests,,closed,True,2017-01-03 01:21:56,2017-11-27 23:39:29
+gengo,thockin,https://github.com/kubernetes/gengo/pull/26,https://api.github.com/repos/kubernetes/gengo/issues/26,Add a deepcopy testcase for pointers,,closed,True,2017-01-03 17:23:18,2017-11-27 23:39:35
+gengo,deads2k,https://github.com/kubernetes/gengo/pull/27,https://api.github.com/repos/kubernetes/gengo/issues/27,make import-boss attempt to look in the vendor folder,"As we split out the genericapiserver, we need to enforce import requirements.  `staging/k8s.io/genericapiserver` is used as a vendored folder when building kube, so the `.import_restrictions` file exists in the vendor folder.
+
+I know some effort went into removing kube references from this code, so I'm looking for recommendations to make this code generic.  I'm not very familiar with this repo.
+
+I stumbled into this problem while working on https://github.com/kubernetes/kubernetes/pull/39384 .  I can commit that pull and continue for a while without `import-boss`, but I'd really like to have it.",closed,True,2017-01-03 21:01:00,2017-02-28 13:43:07
+gengo,thockin,https://github.com/kubernetes/gengo/pull/28,https://api.github.com/repos/kubernetes/gengo/issues/28,Deepcopy tests for slices and manual DeepCopy methods,Amazing the things you find when you test.,closed,True,2017-01-04 07:32:42,2017-11-27 23:39:35
+gengo,deads2k,https://github.com/kubernetes/gengo/pull/29,https://api.github.com/repos/kubernetes/gengo/issues/29,update apimachinery package to match current state,"https://github.com/kubernetes/kubernetes/pull/39475 moves the apimachinery to a logically separate repo under staging.  This updates the packages to match what will be coming.
+
+@lavalamp ",closed,True,2017-01-05 21:10:38,2017-01-10 21:48:53
+gengo,jpeeler,https://github.com/kubernetes/gengo/issues/30,https://api.github.com/repos/kubernetes/gengo/issues/30,gengo change of behavior with generated import statements,"When using gengo in service-catalog, I found that the import statements aren't generated in the same way any more. The change of behavior started after the commit of 7ca94dd123f0f4965aac2e59ef249d8eaef14bcc, which was on Jan 3. I filed a bug https://github.com/kubernetes-incubator/service-catalog/issues/223 showing the difference in behavior. ",closed,False,2017-01-09 16:29:20,2017-01-12 23:08:54
+gengo,deads2k,https://github.com/kubernetes/gengo/pull/31,https://api.github.com/repos/kubernetes/gengo/issues/31,handle vendoring for canonicalization,"The `.ImportPath` from `build` produces a file reference, not the canonical package import path.  This results in package imports like this: `pkgfoo ""k8s.io/kubernetes/vendor/k8s.io/fake-dep/pkgfoo""`.
+
+I attempted to handle this by rewriting the import just prior to serialization, but that doesn't handle cases where the package is used to inspect functions.  Because it doesn't rewrite the package path when its discovered, the package is wrong for any comparison against that package. In particular, this check here in conversion fails https://github.com/kubernetes/kubernetes/blob/master/cmd/libs/go2idl/conversion-gen/generators/conversion.go#L144, because it compares `k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/conversion.Scope` against `k8s.io/apimachinery/pkg/conversion.Scope`.
+
+This patch will mis-identify a package that is actually called `vendor`, but it does correctly handle nesting at any level.  It does
+ 1.  `k8s.io/kubernetes/vendor/github.com/foo/bar` -> ` github.com/foo/bar`
+ 2. `k8s.io/contrib/some/vendor/github.com/foo/bar` -> ` github.com/foo/bar`
+ 3. `k8s.io/contrib/vendor/github.com/foo/bar` -> `github.com/foo/bar`
+
+I think this is better than our current state today, we have no ""vendor"" package anywhere dep'ed in today and someone would have to be kind of crazy to make it.
+
+@thockin @lavalamp ",closed,True,2017-01-10 14:37:43,2017-01-10 21:48:44
+gengo,sttts,https://github.com/kubernetes/gengo/pull/32,https://api.github.com/repos/kubernetes/gengo/issues/32,deepcopy-gen: make deepcopy statically typed and without reflection,"Counterpart of https://github.com/kubernetes/kubernetes/pull/36412
+
+TODO:
+- [x] update documentation
+- [x] add tests",closed,True,2017-01-11 18:22:18,2017-07-17 16:11:03
+gengo,smarterclayton,https://github.com/kubernetes/gengo/pull/33,https://api.github.com/repos/kubernetes/gengo/issues/33,Preserve the filesystem location of a type,"When dealing with vendored directories, we occasionally need to look at
+the file path location. Copy the absPath for the package into the
+package info so we have it available later in the gengo pipeline.
+
+@deads2k @sttts @ncdc needed for kubernetes/kubernetes#39764",closed,True,2017-01-12 17:22:36,2017-01-12 17:31:49
+gengo,smarterclayton,https://github.com/kubernetes/gengo/pull/34,https://api.github.com/repos/kubernetes/gengo/issues/34,Tolerate vendored directories being scanned,"Some packages may appear multiple times while traversing a tree (a
+package vendored by two separate sub vendors). Preserve the first to
+prevent types from being redefined.
+
+In defaulter-gen, handle paths that contain /vendor/ by treating them as
+top level packages.
+
+Extracted from kubernetes/kubernetes#39916",closed,True,2017-01-15 23:42:13,2017-01-17 05:45:43
+gengo,fate-grand-order,https://github.com/kubernetes/gengo/pull/35,https://api.github.com/repos/kubernetes/gengo/issues/35,fix typo,Signed-off-by: fate-grand-order <chenjg@harmonycloud.cn>,closed,True,2017-01-16 06:38:03,2017-01-17 06:32:16
+gengo,fate-grand-order,https://github.com/kubernetes/gengo/pull/36,https://api.github.com/repos/kubernetes/gengo/issues/36,"fix misspell ""variable"" in types.go",,closed,True,2017-01-18 03:29:00,2017-01-18 04:26:03
+gengo,smarterclayton,https://github.com/kubernetes/gengo/pull/37,https://api.github.com/repos/kubernetes/gengo/issues/37,Allow deepcopy to tolerate generating packages under /vendor/,"Adjust the output path of the package to be within the vendor directory,
+even if the source path is normalized to the short path (i.e.
+k8s.io/apimachinery/pkg/apis/meta/v1 should be generated under
+k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/apis/meta/v1).
+
+A future change to gengo should handle this for all generators rather
+than requiring per generator changes.
+
+Extracted from kubernetes/kubernetes#40178
+
+@sttts @deads2k",closed,True,2017-01-23 18:50:04,2017-01-23 19:16:49
+gengo,k82cn,https://github.com/kubernetes/gengo/pull/38,https://api.github.com/repos/kubernetes/gengo/issues/38,WIP: Generated nested obj func.,part of https://github.com/kubernetes/kubernetes/pull/39713 ,closed,True,2017-01-29 10:17:12,2017-02-13 16:16:11
+gengo,MHBauer,https://github.com/kubernetes/gengo/issues/39,https://api.github.com/repos/kubernetes/gengo/issues/39,are `--input-dirs` directories or packages,"Using lister-gen from https://github.com/kubernetes/kubernetes/tree/master/cmd/libs/go2idl/lister-gen
+
+`--input-dirs` only accepts packages and not directories. Is lister-gen using the input-dirs argument incorrectly, or is the argument supposed to represent directories and not packages?",open,False,2017-02-06 23:36:05,2018-07-18 10:44:03
+gengo,spzala,https://github.com/kubernetes/gengo/pull/40,https://api.github.com/repos/kubernetes/gengo/issues/40,Fix lint failures in the deepcopy-gen,"The changes in this patch takes care of lint failures resulted due to
+deepcopy generated files. The total numbers of such lint failures are
+around fifty errors. There are main three types of lint errors,
+1. Generated functions name have underscore in them.
+2. Generated functions are missing comment.
+3. Some of the generated functions have unnecessary 'else' block for a given
+   'if' loop.
+For example, in the generated code, few of fifity some total failures are:
+/zz_generated.deepcopy.go:60:6: don't use underscores in Go names;
+/zz_generated.deepcopy.go:60:1: exported function should have comment or
+be unexported
+/zz_generated.deepcopy.go:116:10: if block ends with a return statement,
+so drop this else and outdent its block",closed,True,2017-02-21 18:47:33,2017-07-26 13:36:23
+gengo,spzala,https://github.com/kubernetes/gengo/pull/41,https://api.github.com/repos/kubernetes/gengo/issues/41,Fix lint failures in the defaulter generated files,"The changes in this patch takes care of lint failures resulted due to
+defaulter generated files. There are main two types of lint errors,
+1. Generated functions name have underscore in them.
+2. Generated functions are missing comment.
+
+For example, in the generated code, some of the failures are:
+zz_generated.defaults.go:53:6: don't use underscores in Go names…
+zz_generated.defaults.go:38:1: exported function SetObjectDefaults_Binding
+should have comment or be unexported..",closed,True,2017-03-02 17:45:01,2017-07-26 13:37:16
+gengo,pwittrock,https://github.com/kubernetes/gengo/pull/42,https://api.github.com/repos/kubernetes/gengo/issues/42,Fix bug in generating vars / consts,,closed,True,2017-03-10 23:49:12,2017-03-10 23:53:51
+gengo,mtaufen,https://github.com/kubernetes/gengo/issues/43,https://api.github.com/repos/kubernetes/gengo/issues/43,"segfault when running make, seems to come from gengo","I get a segfault when I run make. I am rebased on latest upstream/master for k8s. This is not good.
+
+Substituted private paths w/ PATHYMCPATHFACE:
+```
+$ make
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x58 pc=0x45dcf2]
+
+goroutine 1 [running]:
+panic(0x692840, 0xc4200102e0)
+	/PATHYMCPATHFACE/go/src/runtime/panic.go:500 +0x1a1
+k8s.io/kubernetes/vendor/k8s.io/gengo/examples/defaulter-gen/generators.getManualDefaultingFunctions(0xc430007a40, 0x0, 0xc4302989c0)
+	/PATHYMCPATHFACE/go-tools/src/k8s.io/kubernetes/_output/local/go/src/k8s.io/kubernetes/vendor/k8s.io/gengo/examples/defaulter-gen/generators/defaulter.go:113 +0x102
+k8s.io/kubernetes/vendor/k8s.io/gengo/examples/defaulter-gen/generators.Packages(0xc430007a40, 0xc42001c680, 0x6db1d5, 0x6, 0xc430007a40)
+	/PATHYMCPATHFACE/go-tools/src/k8s.io/kubernetes/_output/local/go/src/k8s.io/kubernetes/vendor/k8s.io/gengo/examples/defaulter-gen/generators/defaulter.go:236 +0x6d2
+k8s.io/kubernetes/vendor/k8s.io/gengo/args.(*GeneratorArgs).Execute(0xc42001c680, 0xc420016fc0, 0x6db1d5, 0x6, 0x700988, 0x0, 0x0)
+	/PATHYMCPATHFACE/go-tools/src/k8s.io/kubernetes/_output/local/go/src/k8s.io/kubernetes/vendor/k8s.io/gengo/args/args.go:165 +0x170
+main.main()
+	/PATHYMCPATHFACE/go-tools/src/k8s.io/kubernetes/_output/local/go/src/k8s.io/kubernetes/cmd/libs/go2idl/defaulter-gen/main.go:74 +0x1fb
+make[1]: *** [gen_defaulter] Error 1
+make: *** [generated_files] Error 2
+```",closed,False,2017-04-04 19:36:17,2017-12-23 00:08:05
+gengo,sttts,https://github.com/kubernetes/gengo/pull/44,https://api.github.com/repos/kubernetes/gengo/issues/44,deepcopy: add interface promotion for embedded structs,"Based on https://github.com/kubernetes/gengo/pull/32
+
+```golang
++// In addition, if a type T embeds another type T' which implements deepcopy for
+ +// an interface, this property if promoted to T and the respecitve DeepCopyInterfaceName
+ +// is also generated, i.e. those +k8s:deepcopy-gen:interfaces tags are applied
+ +// transitively if types are anonymously embedded.
+ +//
+ +// Note: types can be tagged with +k8s:deepcopy-gen:interfaces and +k8s:deepcopy-gen=false
+ +// at the same time. Then no methods are generated, but this property can be promoted
+ +// to other types via embeddings (and those will get the auto-generated DeepCopyInterfaceName
+ +// methods). E.g. TypeMeta is such a type in Kubernetes. This makes it easy to apply the
+ +// tag one struct only, and all types embedding that struct will implement the given
+ +// interfaces. No manual tagging is neccessary then.
+ +//
+```",closed,True,2017-04-10 08:02:02,2018-01-02 08:59:35
+gengo,spzala,https://github.com/kubernetes/gengo/pull/45,https://api.github.com/repos/kubernetes/gengo/issues/45,Fix some of the straightforward lint failures in the deepcopy-gen,"The changes in this patch takes care of lint failures resulted due to
+deepcopy generated files. The total numbers of such lint failures are
+around fifty errors. There are main three types of lint errors,
+1. Generated public functions are missing comment.
+2. Some of the generated functions have unnecessary 'else' block for a given
+   'if' loop.
+The third type of lint failure requires removing underscore from function
+names, which is not modified in this PR as it requires further discussion
+and consensus.
+For example, in the generated code, few of fifity some total failures are:
+/zz_generated.deepcopy.go:60:1: exported function should have comment or
+be unexported
+/zz_generated.deepcopy.go:116:10: if block ends with a return statement,
+so drop this else and outdent its block",closed,True,2017-04-19 14:42:07,2017-04-20 13:06:46
+gengo,spzala,https://github.com/kubernetes/gengo/pull/46,https://api.github.com/repos/kubernetes/gengo/issues/46,Fix if loop related lint failures in the deepcopy-gen,"The changes in this patch takes care of lint failures due to unreachable
+else statements. For example one of the failures is,
+/zz_generated.deepcopy.go:116:10: if block ends with a return statement,
+so drop this else and outdent its block",closed,True,2017-04-20 17:51:42,2017-05-15 13:28:04
+gengo,caesarxuchao,https://github.com/kubernetes/gengo/pull/47,https://api.github.com/repos/kubernetes/gengo/issues/47,Udpates deepcopy-gen to allow input types being defined in a different pacakge,"api/v1/types.go is moved to staging in https://github.com/kubernetes/kubernetes/pull/44784, and will be moved to its own repo in the future. This breaks deepcopy-gen's assumption that types are defined at the same location as the output deepcopy functions. This PR adds required flexibility to deepcopy-gen.
+
+One can specify the location input types with `types` key, the value will be the relative dir to where the types are defined (see https://github.com/caesarxuchao/kubernetes/commit/02ea1c78c4cf36f430fed204d200f9389f80b764):
+```golang
++k8s:deepcopy-gen=package,register,types=../../../vendor/k8s.io/api/core/v1
+```
+
+The example output is at https://github.com/caesarxuchao/kubernetes/commit/d4afd56fb996d4c0dc9fe019ee51cd1906b5e24e. It's effectively the same as the manual changes i made to deepcopy functions in https://github.com/kubernetes/kubernetes/pull/44784.
+",closed,True,2017-04-24 18:57:36,2017-04-25 21:20:47
+gengo,spzala,https://github.com/kubernetes/gengo/pull/48,https://api.github.com/repos/kubernetes/gengo/issues/48,Remove literal line number,"Travis is failing lately without any obvious reason with this particular
+error with line number. Working with thockin to fix it. ",closed,True,2017-04-24 20:38:50,2017-04-24 21:17:21
+gengo,caesarxuchao,https://github.com/kubernetes/gengo/pull/49,https://api.github.com/repos/kubernetes/gengo/issues/49,remove init func from deepcopy.go,"Removing these lines: https://github.com/kubernetes/kubernetes/blob/master/pkg/api/v1/zz_generated.deepcopy.go#L31-L33
+
+They should be registered here:
+https://github.com/kubernetes/kubernetes/blob/master/pkg/api/v1/register.go#L37
+
+@lavalamp can you take a look? Thanks.",closed,True,2017-04-25 00:37:50,2017-04-27 21:18:27
+gengo,thockin,https://github.com/kubernetes/gengo/pull/50,https://api.github.com/repos/kubernetes/gengo/issues/50,Add output tests for deepcopy,These are pretty basic tests but enough to look at for a start.,closed,True,2017-04-25 04:06:22,2017-11-27 23:39:40
+gengo,spzala,https://github.com/kubernetes/gengo/pull/51,https://api.github.com/repos/kubernetes/gengo/issues/51,Add new test for deepcopy,"Add new test convering servicecatalog types related to changes made under
+https://github.com/kubernetes/gengo/pull/46",closed,True,2017-04-30 00:55:42,2017-05-31 03:40:24
+gengo,liggitt,https://github.com/kubernetes/gengo/pull/52,https://api.github.com/repos/kubernetes/gengo/issues/52,Generate defaulters for aliased types correctly,"Needed by https://github.com/kubernetes/kubernetes/pull/45294 (that PR already includes this change, so you can see it ""in action""... it's required in order to keep generating the recursive defaulting functions through aliased slice types)
+
+Otherwise, aliased slice types don't detect registered defaulters on the element types",closed,True,2017-05-11 20:09:44,2017-05-15 00:39:20
+gengo,caesarxuchao,https://github.com/kubernetes/gengo/pull/53,https://api.github.com/repos/kubernetes/gengo/issues/53,fix a bug in gengo that parses comments in doc.go multiple times,"findTypesIn might be called multiple times and thus the content of doc.go might be recorded in the universe multiple time.
+
+@lavalamp @thockin ",closed,True,2017-05-12 21:37:15,2017-05-18 21:43:02
+gengo,caesarxuchao,https://github.com/kubernetes/gengo/pull/54,https://api.github.com/repos/kubernetes/gengo/issues/54,Default-gen changes for moving API types to k8s.io/api,"Currently, the `k8s:defaulter-gen` tag is in the `k8s.io/kubernetes/pkg/apis/<group>/<version>/doc.go`, co-located with the input (API types) and the output (default func) of default-gen.
+
+After https://github.com/kubernetes/kubernetes/issues/44065 is implemented, the input/output/tag are not going to be in the same package:
+* The input, the API types will be moved to k8s.io/api;
+* The output, the generated default funcs, will stay in k8s.io/kubernetes, because only apiserver should ever need them; the tag (i.e., doc.go) will also stay in k8s.io/kubernetes.
+
+This PR adds the `k8s:defaulter-gen-input` tag, so that the API types can be supplied from a different package.
+
+@lavalamp @thockin ",closed,True,2017-05-12 21:55:11,2017-05-31 20:30:56
+gengo,caesarxuchao,https://github.com/kubernetes/gengo/pull/55,https://api.github.com/repos/kubernetes/gengo/issues/55,add a test for default-gen output,cc @lavalamp @thockin ,closed,True,2017-05-12 22:54:27,2017-07-17 22:39:33
+gengo,liggitt,https://github.com/kubernetes/gengo/pull/56,https://api.github.com/repos/kubernetes/gengo/issues/56,"Revert ""Fix if loop related lint failures in the deepcopy-gen""",This reverts commit a438c28332fb46fff47d61b9d115275885c5c818 since it produces code that won't compile (see https://github.com/kubernetes/gengo/pull/46/files#r116396781) so master is usable (we need to bump as a prereq of kubernetes/kubernetes#45294)... can revisit this if we decide we want to jump through scoping or variable name hoops to avoid this lint error (I personally don't think it's worth it),closed,True,2017-05-15 01:33:00,2017-05-15 13:15:44
+gengo,rmmh,https://github.com/kubernetes/gengo/issues/57,https://api.github.com/repos/kubernetes/gengo/issues/57,parser errors from external packages should be ignored,"There's [lots of false positives](https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/pr-logs/pull/45910/pull-kubernetes-verify/30124) like:
+
+```
+W0516 14:25:25.242] 	/go/src/k8s.io/kubernetes/_output/dockerized/go/src/golang_org/x/net/lex/httplex (from $GOPATH))
+W0516 14:25:25.243] I0516 14:25:25.243437    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:850:19: undeclared name: hpack
+W0516 14:25:25.244] I0516 14:25:25.243796    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:1834:11: undeclared name: hpack
+W0516 14:25:25.244] I0516 14:25:25.243833    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:1858:52: undeclared name: hpack
+W0516 14:25:25.244] I0516 14:25:25.243854    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:1869:51: undeclared name: hpack
+W0516 14:25:25.244] I0516 14:25:25.243880    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:5530:11: undeclared name: hpack
+W0516 14:25:25.245] I0516 14:25:25.244088    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:7400:20: undeclared name: hpack
+W0516 14:25:25.245] I0516 14:25:25.244903    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:3252:18: undeclared name: hpack
+W0516 14:25:25.245] I0516 14:25:25.244985    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:3312:46: undeclared name: hpack
+W0516 14:25:25.248] I0516 14:25:25.247794    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:7551:22: undeclared name: hpack
+W0516 14:25:25.248] I0516 14:25:25.247900    1949 parse.go:394] type checker error: /usr/local/go/src/net/http/h2_bundle.go:7687:30: undeclared name: hpack
+W0516 14:25:25.251] I0516 14:25:25.251452    1949 parse.go:346] type checking encountered some errors in ""net/http"", but ignoring.
+W0516 14:25:26.515] I0516 14:25:26.514660    1949 execute.go:214] Processing package ""v1"", disk location ""/go/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/example/v1""
+W0516 14:25:26.524] I0516 14:25:26.524049    1949 execute.go:67] Assembling file ""/go/src/k8s.io/kubernetes/_output/dockerized/go/src/k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/example/v1/zz_generated.conversion.go""
+```
+
+That make it harder to find errors in kubernetes-verify jobs. Can we suppress type checker errors for stdlib packages?",open,False,2017-05-17 00:27:45,2017-12-27 18:47:01
+gengo,cblecker,https://github.com/kubernetes/gengo/pull/58,https://api.github.com/repos/kubernetes/gengo/issues/58,Update output from parse.go to improve use of the word error,"The main reason for this stems from https://github.com/kubernetes/test-infra/issues/2783 and log highlighting in gubernator.
+
+If we're ignoring type checking on a package, then if we can stay away from the word ""error"", this would massively cut down on the logs in the verify job.
+
+Example verify with many type checker errors that end up being ignored: https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/ci-kubernetes-verify-master/4877/?log
+
+cc: @brendandburns @fejta @rmmh ",closed,True,2017-05-17 01:11:15,2017-05-17 04:27:25
+gengo,caesarxuchao,https://github.com/kubernetes/gengo/pull/59,https://api.github.com/repos/kubernetes/gengo/issues/59,fix default-gen's output path for packages in vendor directory,"Default-gen doesn't generate any code if the types are defined in vendor/. This PR fixes that. The code is copied from convernsion-gen: https://github.com/kubernetes/kubernetes/blob/v1.7.0-alpha.4/cmd/libs/go2idl/conversion-gen/generators/conversion.go#L240-L243.
+
+I encountered bug in https://github.com/kubernetes/kubernetes/pull/46294.",closed,True,2017-05-25 01:14:36,2017-05-30 18:03:04
+gengo,sttts,https://github.com/kubernetes/gengo/pull/60,https://api.github.com/repos/kubernetes/gengo/issues/60,Fix defaulting in staging/ dirs,This copies the staging/ behaviour from the deepcopy example into the defaulter.,closed,True,2017-05-30 16:24:02,2017-05-31 19:32:25
+gengo,nikhita,https://github.com/kubernetes/gengo/pull/61,https://api.github.com/repos/kubernetes/gengo/issues/61,Fix defaulter-gen for recursive types,"For recursive types, the defaulter currently goes into an infinite recursion.
+Fix to support recursive types.
+
+/cc @sttts ",closed,True,2017-06-09 17:26:51,2017-07-07 07:32:13
+gengo,jim-minter,https://github.com/kubernetes/gengo/pull/62,https://api.github.com/repos/kubernetes/gengo/issues/62,"deepcopy-gen: when deep-copying a map, pass make() a hint about the length of the destination map",,closed,True,2017-06-16 11:59:57,2017-07-01 00:27:04
+gengo,sttts,https://github.com/kubernetes/gengo/issues/63,https://api.github.com/repos/kubernetes/gengo/issues/63,Clarify ownership and merge policy,"After a couple of times with PRs not being merged here for weeks, can we clarify who can approve, lgtm and merge PRs in here? Looking at older PRs neither of these groups match the OWNERS file.",closed,False,2017-07-03 15:27:49,2018-07-18 11:04:38
+gengo,jmillikin-stripe,https://github.com/kubernetes/gengo/issues/64,https://api.github.com/repos/kubernetes/gengo/issues/64,Consider decoupling package->directory lookups from $PWD,"Branching discussion from https://github.com/kubernetes/repo-infra/pull/19
+
+Gengo currently assumes that a package `""k8s.io/foo/bar""` can always be found in `${PWD}/k8s.io/foo/bar/`, and becomes very unhappy if the generator program is called from a different directory. This makes its use from Bazel rules complicated, and requires Kubernetes BUILD files to use custom logic such as `go_genrule()` instead of Bazel's built-in `genrule()`.",open,False,2017-07-07 21:28:32,2018-07-18 10:43:25
+gengo,ericchiang,https://github.com/kubernetes/gengo/pull/65,https://api.github.com/repos/kubernetes/gengo/issues/65,generator: include canonical import path when generating files,"Canonical import paths force `go {get,build,test,install}` to
+respect the vanity import path of files. For client-go, this means
+users will get an error if they place it in the wrong GOPATH path.
+For example, `$GOPATH/src/github.com/kubernetes/client-go` would
+fail. This import comment is ignored if the file is placed in a
+""vendor"" directory.
+
+Have the generator include the import comment when generating
+packages.
+
+Ref: https://github.com/kubernetes/client-go/issues/223",closed,True,2017-07-10 18:30:55,2017-07-13 18:26:17
+gengo,sttts,https://github.com/kubernetes/gengo/pull/66,https://api.github.com/repos/kubernetes/gengo/issues/66,deepcopy: fix lint issues,"- receiver name x should be consistent with previous receiver name in for Requirement
+- comment on exported function GetGeneratedDeepCopyFuncs should be of the form ""GetGeneratedDeepCopyFuncs ...""",closed,True,2017-07-18 07:32:24,2017-07-31 10:50:56
+gengo,sttts,https://github.com/kubernetes/gengo/pull/67,https://api.github.com/repos/kubernetes/gengo/issues/67,deepcopy: remove legacy scheme registration,"This reverts commit 56b0b4977d7a7f68fad39721219afb6b29df7d8f.
+
+With https://github.com/kubernetes/kubernetes/pull/53525 this is not necessary anymore.",closed,True,2017-07-25 15:24:20,2017-12-19 16:06:04
+gengo,supereagle,https://github.com/kubernetes/gengo/issues/68,https://api.github.com/repos/kubernetes/gengo/issues/68,Method name in comment does not match generated code by deepcopy-gen,"[pkg/apis/apps/zz_generated.deepcopy.go](https://github.com/kubernetes/kubernetes/blob/master/pkg/apis/apps/zz_generated.deepcopy.go#L88-L96):
+```go
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, creating a new ControllerRevision.
+func (x *ControllerRevision) DeepCopy() *ControllerRevision {
+	if x == nil {
+		return nil
+	}
+	out := new(ControllerRevision)
+	x.DeepCopyInto(out)
+	return out
+}
+```
+
+The method name in comment does not match the real method name.",closed,False,2017-07-28 02:21:17,2017-07-28 05:21:26
+gengo,supereagle,https://github.com/kubernetes/gengo/pull/69,https://api.github.com/repos/kubernetes/gengo/issues/69,Fix error for not matched names in comments,Fix #68,closed,True,2017-07-28 03:26:33,2017-07-28 05:21:53
+gengo,sttts,https://github.com/kubernetes/gengo/pull/70,https://api.github.com/repos/kubernetes/gengo/issues/70,deepcopy: add +k8s:deepcopy-gen:skip-field tag and postDeepCopy func,"```
+// If a ""func (in *T) postDeepCopy(out *T)"" func is predefined on an object by the
+// developer, it is invoked after the generated deepcopy code. This can be used
+// in combination with a +k8s:deepcopy-gen:skip-field tag above a field to skip
+// deepcopy code generation for that field and to allow custom deepcopy code on
+// a per-field basis.
+```",open,True,2017-08-03 08:32:00,2018-01-03 09:15:40
+gengo,spiffxp,https://github.com/kubernetes/gengo/pull/71,https://api.github.com/repos/kubernetes/gengo/issues/71,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: https://github.com/kubernetes/test-infra/issues/3851",closed,True,2017-08-04 00:01:43,2017-08-04 16:36:58
+gengo,asifdxtreme,https://github.com/kubernetes/gengo/pull/72,https://api.github.com/repos/kubernetes/gengo/issues/72,Add GoReportCard Badge,,closed,True,2017-08-04 10:23:20,2017-11-27 23:43:39
+gengo,sttts,https://github.com/kubernetes/gengo/pull/73,https://api.github.com/repos/kubernetes/gengo/issues/73,deepcopy: add alias support,"~~TODO:~~
+- [x] verify that deepcopies in Kubernetes are correct.
+- [x] verify that deepcopies in Openshift are correct.
+  ",closed,True,2017-08-07 11:04:59,2018-02-27 15:08:54
+gengo,asifdxtreme,https://github.com/kubernetes/gengo/pull/74,https://api.github.com/repos/kubernetes/gengo/issues/74,Split UT and Examples in different stage in travis,"Split UT and Examples in different stages in  Travis CI so that user can debug easily what went wrong in CI
+Preview
+![image](https://user-images.githubusercontent.com/9736066/29032401-d8add454-7bc3-11e7-9325-e04906ff52d4.png)
+",closed,True,2017-08-07 14:58:19,2017-08-08 03:12:21
+gengo,mbssaiakhil,https://github.com/kubernetes/gengo/pull/75,https://api.github.com/repos/kubernetes/gengo/issues/75,Fix Typo in Contributor Code of Conduct,Fix Typo in Contributor Code of Conduct,closed,True,2017-08-13 09:46:34,2017-08-14 03:36:56
+gengo,mbssaiakhil,https://github.com/kubernetes/gengo/pull/76,https://api.github.com/repos/kubernetes/gengo/issues/76,Update Code of Conduct,Made the last sentence uniform wrt other sentences,closed,True,2017-08-15 13:26:47,2017-08-15 15:26:38
+gengo,thockin,https://github.com/kubernetes/gengo/pull/77,https://api.github.com/repos/kubernetes/gengo/issues/77,Iterate files in predictable order,This helped me debug a different issue.  Diffing logs is unfriendly without it.,closed,True,2017-08-21 22:36:17,2017-11-27 23:39:44
+gengo,lavalamp,https://github.com/kubernetes/gengo/issues/78,https://api.github.com/repos/kubernetes/gengo/issues/78,Time to version!,Gengo is slow enough moving that I think it's time to call it 1.0.0 and start paying attention to our interface changes.,closed,False,2017-09-08 17:42:34,2018-03-11 03:51:35
+gengo,lavalamp,https://github.com/kubernetes/gengo/issues/79,https://api.github.com/repos/kubernetes/gengo/issues/79,Clean up examples,"Examples should contain only 100% general things.
+
+Deep copy, defaulter, proto need to move to the kube-generator repo.
+
+Import boss can probably be deleted, since we enforce that w/ bazel now.",closed,False,2017-09-08 17:58:25,2018-03-11 03:51:34
+gengo,sttts,https://github.com/kubernetes/gengo/pull/80,https://api.github.com/repos/kubernetes/gengo/issues/80,Remove implicit magic with flag registration in generators,"This blocks further work on a Golang variant of https://github.com/kubernetes/kubernetes/pull/52186
+because we cannot instantiate multiple generators in one process.",closed,True,2017-09-28 09:06:02,2017-10-04 20:26:12
+gengo,pwittrock,https://github.com/kubernetes/gengo/issues/81,https://api.github.com/repos/kubernetes/gengo/issues/81,master doesn't work with release-1.8 kubernetes/code-generator,"kubernetes/code-generator/cmd/client-go  is missing the --go-header and -o flags.  @stts told me the issue was with the version of gengo I was using.
+
+We should have a branch for kubernetes/gengo that matches the code vendored by kubernetes/kubernetes at the same branch.
+
+To get the right version of gengo I need to pin it to a commit in my glide.yaml.  I should be able to pin all kubernetes/* repos to a release-1.* and they should work together.",closed,False,2017-10-23 16:01:48,2018-01-19 16:32:37
+gengo,stewart-yu,https://github.com/kubernetes/gengo/pull/82,https://api.github.com/repos/kubernetes/gengo/issues/82,fix wrong function name in comment,fix wrong function name in comment,closed,True,2017-10-31 00:54:25,2017-11-03 23:50:12
+gengo,ricky26,https://github.com/kubernetes/gengo/issues/83,https://api.github.com/repos/kubernetes/gengo/issues/83,deepcopy-gen doesn't work on Windows,"There are a couple of bugs which stop deepcopy-gen from working on Windows:
+- `golangTrackerLocalName` uses the path separator to split package names, but package names can contain forward-slashes as well (I'm not actually sure whether the package names which reach this function can actually contain back-slashes). I worked around this locally by using a split on either forward- or back-slashes.
+- In parser/parse.go: `strings.HasSuffix(f.name, ""/doc.go"")`. I just hacked this locally to have an `|| strings.HasSuffix(f.name, ""\doc.go"")`, it seems like this one probably *should* be using path separator.
+
+I can put together a PR if anyone has any rough suggestions about how to fix these more properly (I am not a Go expert).",closed,False,2017-11-10 12:33:33,2018-05-29 18:54:21
+gengo,allenpetersen,https://github.com/kubernetes/gengo/pull/84,https://api.github.com/repos/kubernetes/gengo/issues/84,Format files using goimports,"Format files using x/tools/imports to get the import sort order from goimports.
+
+This is to address https://github.com/kubernetes/kubernetes/issues/55542",closed,True,2017-11-27 23:06:23,2017-11-27 23:34:01
+gengo,allenpetersen,https://github.com/kubernetes/gengo/pull/85,https://api.github.com/repos/kubernetes/gengo/issues/85,Fix error formatting,This test failed using go/tip,closed,True,2017-11-27 23:40:16,2017-11-27 23:43:03
+gengo,thockin,https://github.com/kubernetes/gengo/pull/86,https://api.github.com/repos/kubernetes/gengo/issues/86,Fix go vet warning,,closed,True,2017-11-27 23:42:06,2017-11-27 23:42:28
+gengo,rfranzke,https://github.com/kubernetes/gengo/pull/87,https://api.github.com/repos/kubernetes/gengo/issues/87,Use proper trim function to remove prefix of function names,"When extracting function names from their signature we want to cut the `func ` part from the beginning.
+The current code uses `strings.TrimLeft` which removes all leading Unicode code points contained in `[f,u,n,c, ]` [1].
+
+This behaviour returns invalid function names, e.g. when the package starts with `f`, `u`, `n` or `c`.
+
+What we actually want is just removing the `func ` prefix, done by `strings.TrimPrefix` [2].
+
+[1] https://golang.org/pkg/strings/#TrimLeft
+[2] https://golang.org/pkg/strings/#TrimPrefix",closed,True,2017-12-19 15:57:52,2017-12-22 23:27:52
+gengo,spiffxp,https://github.com/kubernetes/gengo/pull/88,https://api.github.com/repos/kubernetes/gengo/issues/88,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 19:08:24,2018-01-03 00:49:10
+gengo,thockin,https://github.com/kubernetes/gengo/pull/89,https://api.github.com/repos/kubernetes/gengo/issues/89,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281",closed,True,2017-12-22 18:02:03,2017-12-22 19:30:53
+gengo,fisherxu,https://github.com/kubernetes/gengo/pull/90,https://api.github.com/repos/kubernetes/gengo/issues/90,Fix default-gen for []* type,"Now type slice are almost all non-pointer, like **Items []Pod**. 
+But this([Items []*PartialObjectMetadata](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1alpha1/types.go#L160)) slice's elem/kind is ptr
+And default-gen will hard-code add **&** before Item like a := **&in**.Spec.Template.Spec.Volumes[i] .
+when Item's kind is ptr, it shouldn't add &. Otherwise it will generate **.
+
+In my env, I add a private element in [ObjectMeta](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1alpha1/types.go#L151), and add manual default. So the generate_default will involve it and failed when compile.
+![image](https://user-images.githubusercontent.com/28776356/34404710-234c3fc8-ebea-11e7-9d48-d7619c41311c.png)
+",closed,True,2017-12-28 07:57:44,2018-01-20 06:25:37
+gengo,fisherxu,https://github.com/kubernetes/gengo/pull/91,https://api.github.com/repos/kubernetes/gengo/issues/91,fix deepcopy/sets generate of new year and remove YEAR field,"fix the new year of 2018 and remove YEAR field
+ fix issue:[#24](https://github.com/kubernetes/gengo/issues/24)
+  ",closed,True,2018-01-02 12:26:51,2018-02-01 09:45:52
+gengo,fisherxu,https://github.com/kubernetes/gengo/pull/92,https://api.github.com/repos/kubernetes/gengo/issues/92,Add Makefile for sets and fix new years,,closed,True,2018-01-03 07:06:26,2018-01-03 16:49:52
+gengo,fisherxu,https://github.com/kubernetes/gengo/pull/93,https://api.github.com/repos/kubernetes/gengo/issues/93,Add test for defaulter-gen And Fix the []* type,"  Add test for defaulter-gen and pick the [fix](https://github.com/kubernetes/gengo/pull/90) to here.
+  The fourth commit is when I cherry-pick the fix []* type [PR,](https://github.com/kubernetes/gengo/pull/90) and regenerated.
+And before the []*Items, has no **&** now.",closed,True,2018-01-09 12:11:31,2018-01-20 00:39:35
+gengo,jennybuckley,https://github.com/kubernetes/gengo/pull/94,https://api.github.com/repos/kubernetes/gengo/issues/94,Output 'Code generated by' comment if arg is set,"Upstreaming kubernetes/kubernetes#58115
+
+The format of the comment is:
+```
+// Code generated by <gemerator-name>. DO NOT EDIT.
+```
+
+It will be located directly above the package declaration.",closed,True,2018-01-11 18:33:47,2018-02-23 00:45:17
+gengo,n1koo,https://github.com/kubernetes/gengo/pull/95,https://api.github.com/repos/kubernetes/gengo/issues/95,Improve pluralisation,"Improve some of the more trivial cases of pluralisation. I bumped in to this when using CRD autogenerates and it got ""elasticsearch"" wrong :)
+
+The original implementation was pretty naive and this isn't massively better as theres so many gotchas in english language, but I tried to cover the easy cases.",closed,True,2018-01-16 15:29:01,2018-01-19 20:52:11
+gengo,tossmilestone,https://github.com/kubernetes/gengo/issues/96,https://api.github.com/repos/kubernetes/gengo/issues/96,Golint errors in generated files by `deepcopy-gen`,"When I want to enable golint with `pkg/scheduler` in k8s kubernetes/kubernetes#58234, there are files generated by `deepcopy-gen` having lint errors. e.g.:
+```
+pkg/scheduler/api/zz_generated.deepcopy.go:265:9: if block ends with a return statement, so drop this else and outdent its block (move short variable declaration to its own line if necessary)
+```
+The code:
+```golang
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *Policy) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	} else {
+		return nil
+	}
+}
+```
+I think these errors should be fixed in `deepcopy-gen` so these files can pass the golint check.
+",closed,False,2018-01-19 06:48:45,2018-01-26 09:16:28
+gengo,tossmilestone,https://github.com/kubernetes/gengo/pull/97,https://api.github.com/repos/kubernetes/gengo/issues/97,Fix golint errors in generated files by `deepcopy-gen`.,"Fix golint errors in generated files by `deepcopy-gen`.
+
+See #96 ",closed,True,2018-01-19 08:19:00,2018-01-22 19:39:28
+gengo,sttts,https://github.com/kubernetes/gengo/pull/98,https://api.github.com/repos/kubernetes/gengo/issues/98,Add myself to OWNERS,"To hopefully relieve @thockin and @lavalamp from routine work in this repo.
+",closed,True,2018-01-19 16:36:24,2018-02-23 16:18:45
+gengo,jennybuckley,https://github.com/kubernetes/gengo/pull/99,https://api.github.com/repos/kubernetes/gengo/issues/99,Remove outdated set-gen test,"Since examples/set-gen now has a Makefile, it is tested as part of the ```Run tests``` stage, there is no reason to test it this way as well.
+
+This test does not run set-gen in the usual way of calling go build and then checking the git diff.",closed,True,2018-01-24 18:42:34,2018-01-30 05:47:53
+gengo,roycaihw,https://github.com/kubernetes/gengo/pull/100,https://api.github.com/repos/kubernetes/gengo/issues/100,Add dry run mode,"to allow something like an API linter kubernetes/kubernetes#54887 to use `gengo` without creating any new package.
+
+**NOTE**: for backwards compatibility we have DryRun mode as a separate boolean. Setting it will disable Assemble and Verify modes. 
+
+cc @lavalamp ",closed,True,2018-02-20 19:15:56,2018-02-20 22:53:14
+gengo,ricky26,https://github.com/kubernetes/gengo/pull/101,https://api.github.com/repos/kubernetes/gengo/issues/101,Fix compatibility of gengo with Windows,"Swaps some usages of path and filepath and replaces some usages of PathSeperator with ""/"" in order to make consistent usage of slash-paths and filepaths in gengo. Also fixes up a couple of unit tests which fail on Windows otherwise.",closed,True,2018-02-21 09:22:59,2018-05-29 18:52:34
+gengo,thockin,https://github.com/kubernetes/gengo/pull/102,https://api.github.com/repos/kubernetes/gengo/issues/102,"Fix travis, ignore vendored Makefiles","Merge collision.
+
+@ixdy do you know how to put this repo under control of the bots and merge queue?",closed,True,2018-02-23 07:05:49,2018-02-23 07:18:16
+gengo,whisper-bye,https://github.com/kubernetes/gengo/issues/103,https://api.github.com/repos/kubernetes/gengo/issues/103,feature request: cli tools,"I am looking for the generator of proto file from golang struct,
+the go-to-protobuf looks like related about this,
+I have tried [proteus](https://github.com/src-d/proteus), but does not works well,
+this project will offer some cli tools for code gen?
+thx!",closed,False,2018-03-11 08:50:08,2018-08-08 11:20:29
+gengo,uttee,https://github.com/kubernetes/gengo/issues/104,https://api.github.com/repos/kubernetes/gengo/issues/104,Need examples and documentation for generating deep-copy functions for structs that reference ptypes,"I am trying to generate deep-copy functions for my struct that contains structpb.Struct. 
+
+// +genclient
+// +genclient:noStatus
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// My CRD
+type MyStruct struct {
+	metav1.TypeMeta   
+	metav1.ObjectMeta 
+	Spec   MySpec  
+	Status MyStatus 
+	ListOfStructs structpb.Struct 
+}
+DeepCopyInto function is not generated for ListOfStructs. How do I either generate the functions or specify my own. 
+",closed,False,2018-04-17 19:09:02,2018-04-18 00:09:18
+gengo,jessfraz,https://github.com/kubernetes/gengo/issues/105,https://api.github.com/repos/kubernetes/gengo/issues/105,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:39:22,2018-05-29 18:29:34
+gengo,sttts,https://github.com/kubernetes/gengo/pull/106,https://api.github.com/repos/kubernetes/gengo/issues/106,Create SECURITY_CONTACTS,Fixes #105,closed,True,2018-05-29 10:18:47,2018-05-29 18:29:34
+gengo,sttts,https://github.com/kubernetes/gengo/pull/107,https://api.github.com/repos/kubernetes/gengo/issues/107,deepcopy: fix []*string and map[string]*string cases,Fixes https://github.com/kubernetes/code-generator/issues/45,closed,True,2018-06-06 16:45:58,2018-06-07 17:28:24
+gengo,sttts,https://github.com/kubernetes/gengo/pull/108,https://api.github.com/repos/kubernetes/gengo/issues/108,travis: bump to Go 1.10,,closed,True,2018-06-07 17:20:50,2018-06-15 21:34:30
+gengo,sttts,https://github.com/kubernetes/gengo/issues/109,https://api.github.com/repos/kubernetes/gengo/issues/109,Deepcopy broken for deeper nested pointers of builtins as slice+map value type,"For `[]**string`, `[]***int`, `map[string]**bool` etc. we generate deepcopy code which calls `DeepCopyInto`, which is not defined for those types.
+
+xref https://github.com/kubernetes/gengo/pull/107#discussion_r193825992",closed,False,2018-06-07 17:25:21,2018-06-12 16:15:30
+gengo,sttts,https://github.com/kubernetes/gengo/pull/110,https://api.github.com/repos/kubernetes/gengo/issues/110,deepcopy: make slice+map generation uniform and nestable,"This PR uses `g.generateFor` inside slice and map deepcopy generation instead of special casing of some non-nested types. `g.generateFor` is supposed to be nestable such that we can generate code for arbitrarily nested types like  `[]*map[string]***[]*string`.
+
+Moreover, this PR
+- adds reflection deepcopy unit tests of the output
+- adds a benchmark
+- makes the generator fail early and hard when there is an unknown type case, instead of best effort code generation with `out = in.DeepCopy()`.
+
+Fixes https://github.com/kubernetes/gengo/issues/109.",closed,True,2018-06-08 16:22:15,2018-06-12 16:15:30
+gengo,sttts,https://github.com/kubernetes/gengo/pull/111,https://api.github.com/repos/kubernetes/gengo/issues/111,deepcopy: optimize nil value cases by avoiding redundant assignments,,closed,True,2018-06-19 18:07:01,2018-06-19 22:32:33
+gengo,taliesins,https://github.com/kubernetes/gengo/pull/112,https://api.github.com/repos/kubernetes/gengo/issues/112,"Passing a path of """" is undefined for different operating systems. ","Passing a path of """" is undefined for different operating systems. To make the behavior consistent with Linux pass in the current working directory.
+
+This does not work on Windows due to: https://github.com/golang/go/issues/24441",closed,True,2018-06-24 12:42:02,2018-11-29 12:17:11
+gengo,sttts,https://github.com/kubernetes/gengo/pull/113,https://api.github.com/repos/kubernetes/gengo/issues/113,Follow pkg alias convention of kube of not having _ between dirs,"We are starting excluding certain generated files from linting and verify scripts because we use underscores in import aliases. Instead, we should fix Gengo here to comply with the kube conventions.
+
+Compare https://github.com/kubernetes/kubernetes/pull/64664/files#diff-4175e534855bc6fa66d08dee56797817R29",closed,True,2018-06-29 14:28:12,2018-06-29 17:32:20
+gengo,sttts,https://github.com/kubernetes/gengo/pull/114,https://api.github.com/repos/kubernetes/gengo/issues/114,Sanitize pkg names containing _ with underscore-less alias,Package names like pkg/apis/custom_metrics were still aliased with custom_metrics. After this PR the alias is custommetrics.,closed,True,2018-06-30 09:42:47,2018-07-02 07:45:21
+gengo,sttts,https://github.com/kubernetes/gengo/pull/115,https://api.github.com/repos/kubernetes/gengo/issues/115,Assume correct path name while formatting Golang file imports,,closed,True,2018-07-02 10:22:47,2018-11-29 12:17:12
+gengo,sttts,https://github.com/kubernetes/gengo/pull/116,https://api.github.com/repos/kubernetes/gengo/issues/116,import-boss: add inverse import rules,"Allow to restrict which packages Y may import a given package X via `InverseRules` in `X/.import-restrictions`:
+
+```
+//   ""InverseRules"": [{
+//       ""SelectorRegexp"": ""k8s[.]io"",
+//       ""AllowedPrefixes"": [
+//         ""k8s.io/same-repo"",
+//         ""k8s.io/kubernetes/pkg/legacy""
+//       ],
+//       ""ForbiddenPrefixes"": [
+//         ""k8s.io/kubernetes/pkg/legacy/subpkg""
+//       ]
+//     },
+//     {
+//       ""SelectorRegexp"": ""k8s[.]io"",
+//       ""Transitive"": true,
+//       ""AllowedPrefixes"": [
+//         ""k8s.io/
+//       ],
+//       ""ForbiddenPrefixes"": [
+//         ""k8s.io/kubernetes/cmd/kubelet"",
+//         ""k8s.io/kubernetes/cmd/kubectl""
+//       ],
+//   ]
+// }
+```
+
+Example use-cases:
+- k8s.io/apiserver/pkg/features feature gates should not leak into kubectl and kubelet (e.g. for https://github.com/kubernetes/kubernetes/pull/65558).
+- k8s.io/kubernetes/pkg/master should only be imported transitively by cmd/kube-apiserver and cmd/hyperkube.
+- k8s.io/apimachinery/pkg/private should only be imported directly by k8s.io/apimachinery, with the legacy exceptions a, b, c.",open,True,2018-07-10 14:31:37,2019-04-01 07:35:40
+gengo,wzshiming,https://github.com/kubernetes/gengo/pull/117,https://api.github.com/repos/kubernetes/gengo/issues/117,"fixes, returns an empty string when the name length is less than 2",,closed,True,2018-07-14 03:05:40,2018-08-08 09:15:19
+gengo,aojea,https://github.com/kubernetes/gengo/issues/118,https://api.github.com/repos/kubernetes/gengo/issues/118,Missing CONTRIBUTING.md file,"All K8s subrepositories should have a CONTRIBUTING.md file, which at the minimum should point to https://github.com/kubernetes/community/blob/master/contributors/guide/README.md. Care should be taken that all information is in sync with the contributor guide.
+
+Subrepositories may also have contributing guidelines specific to that repository. They should be explicitly documented and explained in the CONTRIBUTING.md
+
+Ref:  https://github.com/kubernetes/community/issues/1832",closed,False,2018-07-16 09:23:30,2018-07-18 08:39:20
+gengo,nikhita,https://github.com/kubernetes/gengo/pull/119,https://api.github.com/repos/kubernetes/gengo/issues/119,Add CONTRIBUTING.md,"Fixes #118 
+
+xref https://github.com/kubernetes/community/issues/1832
+/assign sttts ",closed,True,2018-07-18 06:45:34,2018-07-18 09:28:54
+gengo,KE7,https://github.com/kubernetes/gengo/issues/120,https://api.github.com/repos/kubernetes/gengo/issues/120,Codegen attempts to deepcopy time.Time,"I have a type that contains times (time.Time). 
+
+```
+type KayTime struct {
+	// Type is the type of host repair action.
+	Type KayTime `json:""type""`
+
+	StartTime time.Time `json:""startTime""`
+
+	ExpireTime time.Time `json:""expireTime""`
+}
+```
+
+When I put the follow flag: 
+`
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+`
+
+the code generator tries to do the following which is undefined for time.Time since it's underlying type is an integer:
+
+```
+in.StartTime.DeepCopyInto(&out.StartTime)
+in.EndTime.DeepCopyInto(&out.EndTime)
+```",closed,False,2018-07-30 19:07:04,2019-01-05 11:44:30
+gengo,sttts,https://github.com/kubernetes/gengo/pull/121,https://api.github.com/repos/kubernetes/gengo/issues/121,deepcopy: unify and fix first and second closed comment logic,Fixes `// +k8s:deepcopy=true` being ignore above a whitespace line.,closed,True,2018-08-08 09:12:35,2018-11-09 09:37:35
+gengo,sttts,https://github.com/kubernetes/gengo/pull/122,https://api.github.com/repos/kubernetes/gengo/issues/122,go-to-protobuf: only make named types with package global,"Otherwise, the first occurance of e.g. ""*string"" will be made global, introducing import dependencies to totally unrelated package in the produced .proto files.",closed,True,2018-08-08 10:58:59,2018-08-08 20:03:17
+gengo,sttts,https://github.com/kubernetes/gengo/pull/123,https://api.github.com/repos/kubernetes/gengo/issues/123,Remove unmaintained go-to-protobuf,This moved to k8s.io/code-generator/cmd/go-to-protobuf.,closed,True,2018-08-08 20:05:12,2018-08-13 23:50:11
+gengo,wking,https://github.com/kubernetes/gengo/pull/124,https://api.github.com/repos/kubernetes/gengo/issues/124,examples/deepcopy-gen: Document doc.go requirement for =package,"I spent too long scratching my head wondering why I was getting:
+
+```console
+$ deepcopy-gen -i . --logtostderr --v 5
+...
+I0918 13:34:13.110855   17959 deepcopy.go:146] Considering pkg ""github.com/openshift/installer/pkg/ipnet""
+I0918 13:34:13.110870   17959 deepcopy.go:164]   no tag
+I0918 13:34:13.110878   17959 deepcopy.go:173]   considering type ""github.com/openshift/installer/pkg/ipnet.IPNet""
+I0918 13:34:13.110892   17959 main.go:87] Completed successfully.
+```
+
+despite:
+
+```console
+$ head -n4 ipnet.go
+// +k8s:deepcopy-gen=package
+
+// Package ipnet wraps net.IPNet to get CIDR serialization.
+package ipnet
+```
+
+It looks like only `doc.go` has been checked for file-level comments since the initial commit in this repository df39b41e (2015-10-15).
+
+Personally, I'd prefer if this tag could live in any file, but I haven't done the legwork to know if lifting the `doc.go` restriction would have accidental side-effects or not.",closed,True,2018-09-18 20:40:35,2018-11-13 15:44:56
+gengo,bruceauyeung,https://github.com/kubernetes/gengo/pull/125,https://api.github.com/repos/kubernetes/gengo/issues/125,report all import errors one time,"without this PR, `hack/verify-import-boss.sh` reports errors one by one (for example report only one forbidden error even if the package have more than one imports match forbidden prefixes )
+
+when i add an import restriction, i have to run `hack/verify-import-boss.sh`,and then add an allowed prefix, and then run `hack/verify-import-boss.sh`,and then add an allowed prefix, over and over again.
+it's really a waste of time.
+
+",closed,True,2018-09-29 03:07:53,2019-01-28 07:46:35
+gengo,font,https://github.com/kubernetes/gengo/issues/126,https://api.github.com/repos/kubernetes/gengo/issues/126,Add plural rules to namer for words ending in 'o',"The `namer` package, specifically the method https://github.com/font/kubernetes/blob/91e7b4fd31fcd3d5f436da26c980becec37ceefe/vendor/k8s.io/gengo/namer/plural_namer.go#L54, does not contain any rules for words ending in `o`. See https://howtospell.co.uk/making-O-words-plural for more details.",closed,False,2018-10-08 21:20:02,2019-03-07 23:20:34
+gengo,AdamDang,https://github.com/kubernetes/gengo/pull/127,https://api.github.com/repos/kubernetes/gengo/issues/127,Update main.go,Line 46: sepcifying->specifying,closed,True,2018-10-19 04:06:37,2018-10-19 08:16:23
+gengo,Kashomon,https://github.com/kubernetes/gengo/issues/128,https://api.github.com/repos/kubernetes/gengo/issues/128,Support for JSONMap in CRDs,"I have a CRD that I'm working on that is a wrapper around other objects, and so has the form
+
+
+```go
+type UnstructuredJSON map[string]interface{}
+
+type MyMessage struct {
+  Objects []UnstructuredJSON
+}
+```
+
+`map[string]interface{}` doesn't translate well with DeepCopy:
+
+```
+*out = make([]UnstructuredJSON, len(*in))
+for i := range *in {
+	if (*in)[i] != nil {
+		in, out := &(*in)[i], &(*out)[i]
+		*out = make(UnstructuredJSON, len(*in))
+		for key, val := range *in {
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				(*out)[key] = val.DeepCopyinterface{}()
+			}
+		}
+	}
+}
+```
+
+`(*out)[key] = val.DeepCopyinterface{}()` is an error
+
+I think some sort of UnstructuredJSON (called JSONMap in kubernetes Runtime) could be supported -- it's quite constrained on what can be in those `interface{}` values, but it would probably require custom copy logic.
+
+What do you think?
+
+Context: http://github.com/GoogleCloudPlatform/k8s-cluster-bundle",closed,False,2018-10-25 14:53:57,2019-03-06 12:59:44
+gengo,dims,https://github.com/kubernetes/gengo/pull/129,https://api.github.com/repos/kubernetes/gengo/issues/129,Switch from glog to klog,Change-Id: I0a8ec9a038129690d594f8dbc6a1acd611a31659,closed,True,2018-11-04 16:13:42,2018-11-06 08:40:57
+gengo,huangqg,https://github.com/kubernetes/gengo/pull/130,https://api.github.com/repos/kubernetes/gengo/issues/130,Fix some typos in example,"Fix some typos in example files:
+
+1. examples/deepcopy-gen/generators/deepcopy.go
+2. examples/deepcopy-gen/main.go",open,True,2018-11-12 14:16:56,2019-03-13 15:32:39
+gengo,huangqg,https://github.com/kubernetes/gengo/pull/131,https://api.github.com/repos/kubernetes/gengo/issues/131,"Fix spell error: secound->second, templaces->templates","Fix spell error: secound->second, templaces->templates",closed,True,2018-11-12 14:23:16,2018-11-12 14:34:35
+gengo,ahmetb,https://github.com/kubernetes/gengo/pull/132,https://api.github.com/repos/kubernetes/gengo/issues/132,parser: remove possibly really long error message,"This %#v caused an error text that's 186kb when printed. Also probably don't
+need to dump the entire object's state along with its references with the
+bunch of ast info as warning.
+
+The error I got started like:
+
+  W0106 17:57:01.925659 96841 parse.go:239] Ignoring child directory github.com/knative/build/pkg/apis/build/v1alpha1/testdata/cloudbuilders/yarn: No files for pkg ""github.com/knative/build/pkg/apis/build/v1alpha1/testdata/cloudbuilders/yarn"" [...+186 kb]",closed,True,2019-01-07 02:04:30,2019-01-16 09:14:36
+gengo,cholman-zd,https://github.com/kubernetes/gengo/issues/133,https://api.github.com/repos/kubernetes/gengo/issues/133,Deep copy gen generates invalid code if struct has an `_` field,"Running deepcopy-gen against structs that have `_` fields in them generates invalid go code.
+
+Source struct:
+
+```
+type CreateBucketConfiguration struct {
+	_ struct{} `type:""structure""`
+
+	LocationConstraint BucketLocationConstraint `type:""string"" enum:""true""`
+}
+type BucketLocationConstraint string
+```
+
+`doc.go` directives to deepcopy:
+
+```
+// +k8s:deepcopy-gen=package,register
+```
+
+deepcopy directives above structs that the above struct is a child of  (not sure if this makes a difference or not - this is autogenerated code from the operator sdk)
+
+```
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+```
+
+Output by deepcopy-gen:
+```
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *CreateBucketConfiguration) DeepCopyInto(out *CreateBucketConfiguration) {
+	*out = *in
+	out._ = in._
+	return
+}
+```
+
+Setting or accessing `_` fields is invalid. 
+
+I applied the following patch locally and it outputs correct code (ie does not attempt to copy the `_` field).  No idea if this is the _correct_ way to solve the problem though.
+
+```
+diff --git a/vendor/k8s.io/gengo/examples/deepcopy-gen/generators/deepcopy.go b/vendor/k8s.io/gengo/examples/deepcopy-gen/generators/deepcopy.go
+index 4548108..1d90578 100644
+--- a/vendor/k8s.io/gengo/examples/deepcopy-gen/generators/deepcopy.go
++++ b/vendor/k8s.io/gengo/examples/deepcopy-gen/generators/deepcopy.go
+@@ -823,6 +823,9 @@ func (g *genDeepCopy) doStruct(t *types.Type, sw *generator.SnippetWriter) {
+
+ 	// Now fix-up fields as needed.
+ 	for _, m := range ut.Members {
++		if m.Name == ""_"" {
++			continue
++		}
+ 		ft := m.Type
+ 		uft := underlyingType(ft)
+```
+
+After applying this patch, output is as expected:
+
+```
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *CreateBucketConfiguration) DeepCopyInto(out *CreateBucketConfiguration) {
+	*out = *in
+	return
+}
+```
+
+",open,False,2019-01-17 23:41:16,2019-01-17 23:41:16
+gengo,kunday,https://github.com/kubernetes/gengo/pull/134,https://api.github.com/repos/kubernetes/gengo/issues/134,Fix Code gen bug that generates invalid code if struct has _.,"Fixes bug - https://github.com/kubernetes/gengo/issues/133 
+
+The Issue has full detail from @cholman-zd and this one just lifts the ability to skip `_` fields so the codegen does not hiccup.",open,True,2019-02-01 03:03:11,2019-02-13 00:41:41
+gengo,andreasgudmundsson,https://github.com/kubernetes/gengo/pull/135,https://api.github.com/repos/kubernetes/gengo/issues/135,fix: Don't generate reserved identifiers or keywords as local package…,"… names
+
+The basename of a package import pathe can be a reserved identifier or
+a keyword as in ""butwhy/type"" which would have resulted in the
+following generated code:
+
+  import type ""butwhy/type""
+
+To avoid this scenario local package names are prefixed with an
+underscore.",open,True,2019-02-08 15:42:58,2019-02-11 15:33:54
+gengo,filmil,https://github.com/kubernetes/gengo/issues/136,https://api.github.com/repos/kubernetes/gengo/issues/136,Useless error report when hitting an unknown struct,"Some type I had in my source code had a problem. Sadly the output of the generator is not very useful to pinpoint what type exactly:
+
+```
+go generate -v ./pkg/... ./cmd/...                                            
+pkg/apis/apis.go                                          
+F0305 17:48:56.504879  139794 deepcopy.go:873] Hit an unsupported type invalid type                              
+Makefile:69: recipe for target 'generate' failed           
+```",closed,False,2019-03-06 02:03:17,2019-03-06 03:10:01
+gengo,filmil,https://github.com/kubernetes/gengo/pull/137,https://api.github.com/repos/kubernetes/gengo/issues/137,Adds type info to error messages.,"Fixes #136.
+
+Without this change, the error messages are kind of
+not very useful.
+
+See for yourself:
+
+```
+go generate -v ./pkg/... ./cmd/...
+pkg/apis/apis.go
+F0305 17:48:56.504879  139794 deepcopy.go:873] Hit an unsupported type invalid type
+Makefile:69: recipe for target 'generate' failed
+```
+
+Printing the type `t` connects the error output with what's actually
+read from source, which should help debugging.",closed,True,2019-03-06 02:09:33,2019-03-06 03:10:01
+gengo,j-vizcaino,https://github.com/kubernetes/gengo/issues/138,https://api.github.com/repos/kubernetes/gengo/issues/138,deepcopy-gen generates invalid code for interface{},"Declaring a `map[string]interface{}` member in a struct handled by deepcopy-gen generates invalid code.
+It seems there could be two options available:
+
+* for `map[string]interface{}`, generate code that leverages `runtime.DeepCopyJSON`
+* for any `interface{}`, error out instead of generating code that does not compile.
+
+Related issues: #128, https://github.com/kubernetes-sigs/kubebuilder/issues/528 and https://github.com/kubernetes-sigs/controller-tools/pull/126
+
+### Example
+
+* `foo.go`
+
+```golang
+// +k8s:deepcopy-gen=true
+type Foo struct {
+  Data map[string]interface{}
+}
+```
+
+* `zz_generated.deepcopy.go` (`DeepCopy` function omitted for clarity as it basically calls `DeepCopyInto`)
+
+```golang
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *Foo) DeepCopyInto(out *Foo) {
+	*out = *in
+	if in.Data != nil {
+		in, out := &in.Data, &out.Data
+		*out = make(map[string]interface{}, len(*in))
+		for key, val := range *in {
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				// INVALID FUNCTION NAME
+				(*out)[key] = val.DeepCopyinterface{}()
+			}
+		}
+	}
+	return
+}
+```",closed,False,2019-03-06 10:33:18,2019-04-01 08:54:47
+gengo,joelsmith,https://github.com/kubernetes/gengo/pull/139,https://api.github.com/repos/kubernetes/gengo/issues/139,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:05:28,2019-03-09 00:19:55
+gengo,j-vizcaino,https://github.com/kubernetes/gengo/pull/140,https://api.github.com/repos/kubernetes/gengo/issues/140,deepcopy: error out on interface{},"Instead of generating code that does not compile, error out immediately
+when generateFor gets called with `interface{}`
+
+This relates to #138 
+
+This PR lacks testing for this: I'll need some guidance around this please.
+
+I currently see two ways to do this:
+
+* factorize the code that handles the interface type and unit-test this function
+* add another type of end-to-end test, this time making sure that `deepcopy-gen` fails. This one seems a bit brittle as the cause of failure would need to be checked for the test to be effective.
+",closed,True,2019-03-18 15:50:28,2019-03-19 21:03:09
+gengo,andreykaipov,https://github.com/kubernetes/gengo/issues/141,https://api.github.com/repos/kubernetes/gengo/issues/141,CI is silently failing,"Running the current first step of the build shows the issue:
+```
+$ find . -name vendor -prune -o -name Makefile -execdir make test \;
+unknown flag: --logtostderr
+Usage of /tmp/defaulter-gen:
+...
+make: *** [test] Error 2
+...
+```
+
+This started happening 5 months when the repo switched over from glog to klog (https://github.com/kubernetes/gengo/pull/129). The build log for it is https://travis-ci.org/kubernetes/gengo/jobs/450604661.
+
+Since `find` wraps the error and returns zero, the CI has been silently failing since.",closed,False,2019-03-26 04:11:07,2019-03-27 21:04:50
+gengo,andreykaipov,https://github.com/kubernetes/gengo/pull/142,https://api.github.com/repos/kubernetes/gengo/issues/142,Fix silently failing CI,"Fixes https://github.com/kubernetes/gengo/issues/141
+
+The examples needed to initialize klog's flags. Also we make sure the build returns non-zero on errors so this can be caught sooner in the future.",closed,True,2019-03-26 04:27:25,2019-03-27 21:46:42
+gengo,lavalamp,https://github.com/kubernetes/gengo/issues/143,https://api.github.com/repos/kubernetes/gengo/issues/143,Update for go modules,"Let's begin publishing the module file.
+
+Let's version this thing and start respecting the semver guarantees.",open,False,2019-04-04 20:57:25,2019-04-05 17:30:27
+gengo,lavalamp,https://github.com/kubernetes/gengo/pull/144,https://api.github.com/repos/kubernetes/gengo/issues/144,initialize go module file,,open,True,2019-04-04 22:18:10,2019-04-05 02:10:03

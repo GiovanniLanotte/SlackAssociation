@@ -1,0 +1,390 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+utils,mengqiy,https://github.com/kubernetes/utils/pull/1,https://api.github.com/repos/kubernetes/utils/issues/1,add LICENSE,Copy the LICENSE from https://github.com/kubernetes/kubernetes/blob/master/LICENSE.,closed,True,2017-07-07 20:26:42,2017-07-07 20:28:12
+utils,mengqiy,https://github.com/kubernetes/utils/pull/2,https://api.github.com/repos/kubernetes/utils/issues/2,cp exec util from kubernetes/kubernetes,Removed BUILD.,closed,True,2017-07-07 20:39:01,2017-08-30 21:07:38
+utils,apelisse,https://github.com/kubernetes/utils/issues/3,https://api.github.com/repos/kubernetes/utils/issues/3,Setting-up the repository,"There are a few things that needs to be done to get this repository up and rolling:
+- [ ] Have the root directory fully ready
+  - [x] README.md #10 
+  - [x] Document how to move a pkg #11
+  - [x] Code of conduct #7
+  - [x] License #1
+  - [ ] Document process? see items below
+  - [ ] Issue and pull-request  template
+  - [ ] Verify boilerplate
+  - [ ] what do I miss here?
+- [x] test-infra: let's probably use Travis-ci #4
+- [x] Do we need a readme per ""package""? `doc.go` should do it.
+
+This is missing a ton, feel free to edit that top-level comment.",closed,False,2017-07-07 20:44:58,2017-07-20 22:42:16
+utils,apelisse,https://github.com/kubernetes/utils/pull/4,https://api.github.com/repos/kubernetes/utils/issues/4,Add travis-ci yaml file to test go code,,closed,True,2017-07-07 20:56:29,2017-07-07 21:05:44
+utils,mengqiy,https://github.com/kubernetes/utils/pull/5,https://api.github.com/repos/kubernetes/utils/issues/5,cp exec util from kubernetes/kubernetes,,closed,True,2017-07-07 21:11:06,2017-07-19 22:00:07
+utils,apelisse,https://github.com/kubernetes/utils/pull/6,https://api.github.com/repos/kubernetes/utils/issues/6,cp exec util from kubernetes/kubernetes,,closed,True,2017-07-07 21:17:26,2017-07-07 21:18:05
+utils,mengqiy,https://github.com/kubernetes/utils/pull/7,https://api.github.com/repos/kubernetes/utils/issues/7,add code-of-conduct.md,,closed,True,2017-07-07 21:26:22,2017-07-18 17:15:23
+utils,mengqiy,https://github.com/kubernetes/utils/issues/8,https://api.github.com/repos/kubernetes/utils/issues/8,Include an example how to move a pkg to this repo,"Finish the first util pkg moving and the document the steps in a separate file.
+- Copy the pkg to k8s.io/utils repo (need to preserve git history).
+- Move the pkg to the vendor directory and update godep.
+
+Create a link in README.md to that doc.",closed,False,2017-07-17 20:00:11,2017-07-20 22:41:25
+utils,mengqiy,https://github.com/kubernetes/utils/issues/9,https://api.github.com/repos/kubernetes/utils/issues/9,pkgs to be moved to utils repo,"These need to move out of k8s in order to cut kubectl out:
+- [x] k8s.io/kubernetes/pkg/util/exec  (PR: #5)
+- [ ] k8s.io/kubernetes/pkg/util/interrupt
+
+These should probably live in this repo, but are not required to move:
+- [ ] k8s.io/client-go/util/jsonpath  per https://github.com/kubernetes/kubernetes/issues/48209#issuecomment-315483101
+- [ ] apimachinery/pkg/util/sets
+
+Ref: https://github.com/kubernetes/kubernetes/issues/48209#issuecomment-314537745
+
+Feel free to edit the list above if you have more.
+",open,False,2017-07-18 17:39:48,2018-01-08 21:49:07
+utils,apelisse,https://github.com/kubernetes/utils/pull/10,https://api.github.com/repos/kubernetes/utils/issues/10,Create README,,closed,True,2017-07-19 22:48:57,2017-07-19 23:04:38
+utils,mengqiy,https://github.com/kubernetes/utils/pull/11,https://api.github.com/repos/kubernetes/utils/issues/11,add HowToMove.md,,closed,True,2017-07-20 00:40:52,2017-07-20 23:31:35
+utils,monopole,https://github.com/kubernetes/utils/pull/12,https://api.github.com/repos/kubernetes/utils/issues/12,Clarify criteria for adding code.,"Wanted to have clearer criteria for adding code, stopping well short
+of all the [policy](https://github.com/kubernetes/community/blob/master/contributors/devel/pull-requests.md) in the core repo.
+
+Provide more history about why this repo exists and how it fits with the rest.
+
+Underscore that this repo must not depend on other k8s repos.
+
+",closed,True,2017-07-21 00:05:15,2017-08-11 00:36:31
+utils,apelisse,https://github.com/kubernetes/utils/pull/13,https://api.github.com/repos/kubernetes/utils/issues/13,Add goverall,"No idea if this works, or what it does.",closed,True,2017-07-21 21:09:10,2017-07-28 04:15:21
+utils,danwinship,https://github.com/kubernetes/utils/pull/14,https://api.github.com/repos/kubernetes/utils/issues/14,Add useful test wrapper functions to FakeExec,"Migrated from https://github.com/kubernetes/kubernetes/pull/46537...
+
+----
+
+The fake implementation of pkg/util/exec for test programs is kind of really annoying to use. This PR adds some wrapper functions to make it easier, AND to automatically check that the passed-in command was what you expected (which some tests were doing but most weren't).
+
+So:
+
+    fcmd := fakeexec.FakeCmd{
+            CombinedOutputScript: []fakeexec.FakeCombinedOutputAction{
+                    // iptables version check
+                    func() ([]byte, error) { return []byte(""iptables v1.9.22""), nil },
+                    // iptables-restore version check
+                    func() ([]byte, error) { return []byte(""iptables-restore v1.9.22""), nil },
+                    // Success.
+                    func() ([]byte, error) { return []byte{}, nil },
+            },
+    }
+    fexec := fakeexec.FakeExec{
+            CommandScript: []fakeexec.FakeCommandAction{
+                    func(cmd string, args ...string) exec.Cmd { return fakeexec.InitFakeCmd(&fcmd, cmd, args...) },
+                    func(cmd string, args ...string) exec.Cmd { return fakeexec.InitFakeCmd(&fcmd, cmd, args...) },
+                    func(cmd string, args ...string) exec.Cmd { return fakeexec.InitFakeCmd(&fcmd, cmd, args...) },
+            },
+    }
+
+becomes
+
+    fexec := fakeexec.NewFakeExec(t, nil)
+    fexec.AddCommand(""iptables"", ""--version"").
+    	SetCombinedOutput(""iptables v1.9.22"", nil)
+    fexec.AddCommand(""iptables-restore"", ""--version"").
+    	SetCombinedOutput(""iptables-restore v1.9.22"", nil)
+    fexec.AddCommand(""iptables"", ""-w2"", ""-N"", ""FOOBAR"", ""-t"", ""nat"").
+    	SetCombinedOutput("""", nil)
+
+There's some discussion on the original kubernetes bug (which I'm going to rebase on top of this to cover only the ""porting pkg/util to the new interface"" part). The June 27 comment about it not passing ""make verify"" no longer seems to be a problem with the migration of fakeexec into a separate subdirectory.",closed,True,2017-08-09 16:12:31,2018-03-22 06:12:54
+utils,mbssaiakhil,https://github.com/kubernetes/utils/pull/15,https://api.github.com/repos/kubernetes/utils/issues/15,Fix few typo and grammatical issues,,closed,True,2017-08-13 09:30:13,2017-08-13 22:21:55
+utils,mengqiy,https://github.com/kubernetes/utils/pull/16,https://api.github.com/repos/kubernetes/utils/issues/16,Update HOWTOMOVE doc,"We may encounter some error when moving pkg.
+I remember this when I was working on https://github.com/kubernetes/kube-openapi/pull/9.",closed,True,2017-08-30 22:50:42,2017-08-31 21:10:41
+utils,apelisse,https://github.com/kubernetes/utils/pull/17,https://api.github.com/repos/kubernetes/utils/issues/17,Update README to include godocs references,,closed,True,2017-10-20 03:40:55,2017-10-24 16:35:51
+utils,apelisse,https://github.com/kubernetes/utils/pull/18,https://api.github.com/repos/kubernetes/utils/issues/18,Add godocs to README,,closed,True,2017-10-24 16:37:22,2017-10-24 20:41:06
+utils,apelisse,https://github.com/kubernetes/utils/pull/19,https://api.github.com/repos/kubernetes/utils/issues/19,Test against go 1.9,"Kubernetes now compiles with go 1.9, so we should definitely test
+against that version.",closed,True,2017-10-24 16:42:20,2017-10-24 22:18:38
+utils,apelisse,https://github.com/kubernetes/utils/pull/20,https://api.github.com/repos/kubernetes/utils/issues/20,Create temp package to handle temporary directories,,closed,True,2017-10-24 18:35:45,2017-10-24 21:20:48
+utils,apelisse,https://github.com/kubernetes/utils/pull/21,https://api.github.com/repos/kubernetes/utils/issues/21,temptest: Add FakeDir example,,closed,True,2017-10-24 21:24:32,2017-10-25 03:15:36
+utils,apelisse,https://github.com/kubernetes/utils/pull/22,https://api.github.com/repos/kubernetes/utils/issues/22,README: Add temp in list of libraries,,closed,True,2017-10-24 21:27:13,2017-10-26 22:08:38
+utils,apelisse,https://github.com/kubernetes/utils/pull/23,https://api.github.com/repos/kubernetes/utils/issues/23,exec: Add example,,closed,True,2017-10-24 22:41:26,2017-10-26 22:09:07
+utils,dashpole,https://github.com/kubernetes/utils/pull/24,https://api.github.com/repos/kubernetes/utils/issues/24,Add clock from apimachinery ,"My end goal is to use the clock in cAdvisor.  Because of the way that staging works in kubernetes/kubernetes, the import loop kubernetes/apimachinery -> google/cadvisor -> kubernetes/kubernetes is not allowed.
+I would copy the clock code to cadvisor, but cadvisor is currently google-owned, and I dont believe copying it from CNCF to google is permitted.
+
+cc @tallclair ",closed,True,2017-11-21 19:10:32,2017-11-21 23:15:14
+utils,dashpole,https://github.com/kubernetes/utils/pull/25,https://api.github.com/repos/kubernetes/utils/issues/25,Split real and fake clocks,"All testing was for the fake clock, so that file is now in the testing sub-dir
+
+/assign @apelisse 
+cc @thockin ",closed,True,2017-11-21 22:53:30,2017-11-22 16:56:42
+utils,anfernee,https://github.com/kubernetes/utils/pull/26,https://api.github.com/repos/kubernetes/utils/issues/26,exec supports context (timeout/cancel),"- Add function CommandContext as os/exec does
+- Clean up the code a little bit to make it more readable
+- Fix panic when calling Stop before Start
+
+Fixes: https://github.com/kubernetes/kubernetes/issues/5644",closed,True,2017-11-29 00:23:10,2017-11-29 18:24:23
+utils,anfernee,https://github.com/kubernetes/utils/pull/27,https://api.github.com/repos/kubernetes/utils/issues/27,Implement CommandContext in exec util,"With CommandContext, it supports add timeout to a command execution or
+cancel it.
+
+Fixes: kubernetes/kubernetes#5644",closed,True,2017-11-29 01:27:11,2017-12-01 16:31:06
+utils,anfernee,https://github.com/kubernetes/utils/pull/28,https://api.github.com/repos/kubernetes/utils/issues/28,Fix panic calling stop before run,,closed,True,2017-11-29 01:37:56,2017-11-29 21:45:06
+utils,anfernee,https://github.com/kubernetes/utils/pull/29,https://api.github.com/repos/kubernetes/utils/issues/29,Fix cmd.Run() which should handle error but didn't,,closed,True,2017-11-29 18:41:25,2017-11-29 18:55:28
+utils,owainlewis,https://github.com/kubernetes/utils/issues/30,https://api.github.com/repos/kubernetes/utils/issues/30,FakeExec is missing CommandContext,"The FakeExec struct is missing an implementation of the CommandContext method which was added in this PR **https://github.com/kubernetes/utils/pull/27**
+
+```go
+func (fake *FakeExec) CommandContext(ctx context.Context, cmd string, args ...string) exec.Cmd {
+}
+```",closed,False,2017-12-05 16:24:57,2017-12-19 16:29:54
+utils,anfernee,https://github.com/kubernetes/utils/pull/31,https://api.github.com/repos/kubernetes/utils/issues/31,FakeExec implements CommendContext in exec.Exec,Fixes #30,closed,True,2017-12-13 19:18:41,2017-12-20 19:41:58
+utils,apelisse,https://github.com/kubernetes/utils/pull/32,https://api.github.com/repos/kubernetes/utils/issues/32,WIP: unstructured: Walk Json/Yaml interface types,"This creates a new package that helps you navigate through an
+unstructured interface{} decoded from Json or Yaml. You can either use
+the `Unstructured` typed, but you have to check for errors at each level,
+or a `Chainable`, which will record the error if you have one and give
+it to you at the end of the chain.",closed,True,2017-12-16 00:15:32,2018-01-30 00:25:30
+utils,spiffxp,https://github.com/kubernetes/utils/pull/33,https://api.github.com/repos/kubernetes/utils/issues/33,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:26:51,2018-01-06 00:16:33
+utils,apelisse,https://github.com/kubernetes/utils/pull/34,https://api.github.com/repos/kubernetes/utils/issues/34,Unstruct,"Replaces #32. I've changed, improved and simplified the interface. The documentation looks pretty neat. I can build on top of that.
+
+This is building the basic infrastructure to create generic tools/clients that work with no compiled-in knowledge of the types.",closed,True,2018-01-30 00:15:35,2018-02-01 04:01:10
+utils,hangyan,https://github.com/kubernetes/utils/pull/35,https://api.github.com/repos/kubernetes/utils/issues/35,Fix broken link for FakeDir in Readme,,closed,True,2018-02-06 14:19:07,2018-02-08 04:42:34
+utils,jessfraz,https://github.com/kubernetes/utils/issues/36,https://api.github.com/repos/kubernetes/utils/issues/36,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:08,2018-12-21 17:31:44
+utils,munnerz,https://github.com/kubernetes/utils/pull/37,https://api.github.com/repos/kubernetes/utils/issues/37,Fix cancelling timers in FakeClock package,"This existing timer implementation used for testing does not properly support cancellation.
+
+This is because of how pointers and copies are handled in the FakeClock structure.
+
+Here, we determine whether to still retain a timer by comparing the registered waiters and the current timer/waiter, and if they do not match, we retain the timer (as it is not the timer being cancelled): https://github.com/kubernetes/utils/blob/master/clock/testing/fake_clock.go#L225-L240
+
+However, we instantiate the `fakeClockWaiter` as a non-pointer within the Timer structure, and record this structure in a slice stored on the FakeClock. You can see that happening here: https://github.com/kubernetes/utils/blob/master/clock/testing/fake_clock.go#L89-L94
+
+The issue is that on L94, we actually create a copy of the `fakeClockWaiter`, which means that the comparison on L232 will never match, and so *all* timers will be retained.
+
+This PR changes the slice in the FakeClock to be a slice of *pointers*, which resolves the issue.
+Unit tests still pass with this new adapted version, and my own tests that rely on this package are now passing too.",closed,True,2018-06-07 10:30:13,2018-06-21 17:38:29
+utils,wgliang,https://github.com/kubernetes/utils/pull/38,https://api.github.com/repos/kubernetes/utils/issues/38,Move mount code from kubernetes/kubernetes for reusing from CSI plugins,"/kind feature
+FIx [#64953](https://github.com/kubernetes/kubernetes/issues/64953)
+/cc @smarterclayton 
+
+> The mount code (pkg/util/mount) is reasonably well tested but brings in the entire Kubernetes source tree when CSI plugins have to depend on it. With a few exceptions, most of the mount code could be refactored to be a minimal set of utilities that can be layered and make it easier to develop CSI plugins. I noticed that quite a few CSI plugins take a dependency on k/k just to get that one package",closed,True,2018-06-11 07:39:57,2018-11-15 15:51:19
+utils,euank,https://github.com/kubernetes/utils/pull/39,https://api.github.com/repos/kubernetes/utils/issues/39, Fix 'timer.Reset' for the fake clock ,This bundles two fixes for the fake clock which both seem pretty trivial.,closed,True,2018-06-28 07:44:11,2018-07-03 21:00:27
+utils,aojea,https://github.com/kubernetes/utils/issues/40,https://api.github.com/repos/kubernetes/utils/issues/40,Missing CONTRIBUTING.md file,"All K8s subrepositories should have a CONTRIBUTING.md file, which at the minimum should point to https://github.com/kubernetes/community/blob/master/contributors/guide/README.md. Care should be taken that all information is in sync with the contributor guide.
+
+Subrepositories may also have contributing guidelines specific to that repository. They should be explicitly documented and explained in the CONTRIBUTING.md
+
+Ref:  https://github.com/kubernetes/community/issues/1832",closed,False,2018-07-16 09:23:40,2018-07-19 20:44:56
+utils,stewart-yu,https://github.com/kubernetes/utils/pull/41,https://api.github.com/repos/kubernetes/utils/issues/41,cp pointers util from kubernetes/kubernetes,"We need move the` k8s.io/kubernetes/pkg/util/pointer` package to` k8s.io/utils/` repo, more details please refer to [PR](https://github.com/kubernetes/kubernetes/pull/66284) in `kubernetes` repo.
+
+Following the [instruction](https://github.com/kubernetes/utils/blob/master/HOWTOMOVE.md), this PR is the first step",closed,True,2018-07-18 01:29:27,2018-07-27 16:07:01
+utils,nikhita,https://github.com/kubernetes/utils/pull/42,https://api.github.com/repos/kubernetes/utils/issues/42,Add CONTRIBUTING.md,"Fixes #40 
+xref https://github.com/kubernetes/community/issues/1832
+
+/assign apelisse",closed,True,2018-07-19 05:52:42,2018-07-20 04:29:44
+utils,stewart-yu,https://github.com/kubernetes/utils/pull/43,https://api.github.com/repos/kubernetes/utils/issues/43,add FloatPtr to pointer packages,"1、add FloatPtr to pointer packages, 
+2、fix #41 [comments](https://github.com/kubernetes/utils/pull/41#discussion_r205545516)
+/cc @sttts  @apelisse ",closed,True,2018-07-27 11:20:40,2018-08-13 00:33:41
+utils,spiffxp,https://github.com/kubernetes/utils/issues/44,https://api.github.com/repos/kubernetes/utils/issues/44,Create an OWNERS file,"ref: https://github.com/kubernetes/community/issues/1721
+ref: https://github.com/kubernetes/community/issues/2464
+
+This is listed in sigs.yaml under sig-api-machinery... but with the comment:
+```
+- name: universal-utils # There is no reason why this is in api-machinery
+      owners:
+      - https://raw.githubusercontent.com/kubernetes/utils/master/OWNERS
+```
+
+/sig api-machinery
+@kubernetes/sig-api-machinery-misc 
+/sig architecture
+@kubernetes/sig-architecture-misc-use-only-as-a-last-resort 
+
+Which SIG, if not api-machinery, does this repo (or its individual packages) belong to?
+
+Can we get an OWNERS file at the root of this repo?
+
+/assign @apelisse @thockin @mengqiy @dashpole 
+as folks who've merged PR's here in the last year
+
+/assign @lavalamp @deads2k 
+sig-api-machinery chairs
+",closed,False,2018-08-04 02:54:21,2018-08-17 17:19:40
+utils,spiffxp,https://github.com/kubernetes/utils/pull/45,https://api.github.com/repos/kubernetes/utils/issues/45,Add OWNERS file,"Populated based upon users who have previously merged code in this repo
+
+Fixes #44",closed,True,2018-08-14 16:37:36,2018-08-17 17:19:44
+utils,stewart-yu,https://github.com/kubernetes/utils/pull/46,https://api.github.com/repos/kubernetes/utils/issues/46,add stewart-yu to OWNER files,"Forgot comment to [PR](https://github.com/kubernetes/utils/pull/45), I'd like add myself to OWNER file because `/pointer` directory own to me : https://github.com/kubernetes/utils/tree/master/pointer
+Thanks",closed,True,2018-08-20 06:55:51,2018-09-19 01:35:07
+utils,smarterclayton,https://github.com/kubernetes/utils/pull/47,https://api.github.com/repos/kubernetes/utils/issues/47,Merge interrupt history from Kubernetes into k8s.io/utils,"This utility package is used by both server and client components to ensure
+a critical region for execution can handle termination and other process
+signals in a deterministic fashion. It is being moved out of k/k in order
+to facilitate future moves of kubectl and other components out of tree.",closed,True,2018-09-10 15:01:51,2019-02-24 23:01:39
+utils,andrewsykim,https://github.com/kubernetes/utils/pull/48,https://api.github.com/repos/kubernetes/utils/issues/48,copy k8s.io/kubernetes/pkg/util/netsets to k8s.io/util/netsets,"Once merged I will update k8s.io/utils vendor and replace k8s.io/kubernetes/pkg/util/net. 
+
+/assign @lavalamp ",closed,True,2018-10-10 16:15:06,2018-10-18 20:46:01
+utils,izumin5210,https://github.com/kubernetes/utils/pull/49,https://api.github.com/repos/kubernetes/utils/issues/49,Support os/exec.Cmd.Env,`exec.Cmd` is missing `os/exec.Cmd.Env`,closed,True,2018-10-11 09:36:37,2018-10-11 16:50:26
+utils,mcrute,https://github.com/kubernetes/utils/pull/50,https://api.github.com/repos/kubernetes/utils/issues/50,copy k8s.io/kubernetes/pkg/util/io to k8s.io/utils/io,"This change is a precondition of moving `k8s.io/kubernetes/pkg/util/mount` out of the kubernetes package. The whole set of work is related to kubernetes/kubernetes#69585. Once this is merged I'll update the kubernetes code to reference it and remove the package from `kubernetes/kubernetes`
+
+/kind feature
+/assign @lavalamp
+/cc @andrewsykim ",closed,True,2018-10-16 04:26:38,2018-10-16 16:50:41
+utils,mcrute,https://github.com/kubernetes/utils/pull/51,https://api.github.com/repos/kubernetes/utils/issues/51,copy k8s.io/kubernetes/pkg/util/file to k8s.io/utils/file,"This change is a precondition of moving `k8s.io/kubernetes/pkg/util/mount` out of the kubernetes package. The whole set of work is related to kubernetes/kubernetes#69585. Once this is merged I'll update the kubernetes code to reference it and remove the package from `kubernetes/kubernetes`
+
+/kind feature
+/assign @lavalamp
+/cc @andrewsykim ",closed,True,2018-10-16 04:26:39,2019-01-25 22:35:41
+utils,mcrute,https://github.com/kubernetes/utils/pull/52,https://api.github.com/repos/kubernetes/utils/issues/52,copy k8s.io/kubernetes/pkg/util/nsenter to k8s.io/utils/nsenter,"This change is a precondition of moving `k8s.io/kubernetes/pkg/util/mount` out of the kubernetes package. The whole set of work is related to kubernetes/kubernetes#69585. Once this is merged I'll update the kubernetes code to reference it and remove the package from `kubernetes/kubernetes`
+
+/kind feature
+/assign @lavalamp
+/cc @andrewsykim ",closed,True,2018-10-16 04:26:40,2018-10-17 16:39:16
+utils,mcrute,https://github.com/kubernetes/utils/pull/53,https://api.github.com/repos/kubernetes/utils/issues/53,Install realpath during testing in travis,"The nsenter tests require an implementation of realpath but Ubuntu stripped it from coreutils in 8.20-2 because they were already shipping it in a different package. From Xenial onward Ubuntu started shipping realpath with the coreutils package instead of in a different package but Xenial is not yet supported on Travis.
+
+Fixes issues in #52 
+
+/kind bugfix
+/assign @thockin ",closed,True,2018-10-17 17:56:14,2018-10-17 22:22:00
+utils,mcrute,https://github.com/kubernetes/utils/pull/54,https://api.github.com/repos/kubernetes/utils/issues/54,add tests for io and update README,"These are followup items for #50. This is part of the work related to kubernetes/kubernetes#69585
+
+/kind cleanup
+/assign @thockin 
+/cc @andrewsykim ",closed,True,2018-10-18 20:20:10,2018-10-19 22:53:49
+utils,dims,https://github.com/kubernetes/utils/pull/55,https://api.github.com/repos/kubernetes/utils/issues/55,Move pkg util strings/keymutex from kubernetes kubernetes,"- Move https://github.com/kubernetes/kubernetes/tree/master/pkg/util/strings to k8s.io/utils/strings
+- Move https://github.com/kubernetes/kubernetes/tree/master/pkg/util/keymutex to k8s.io/utils/keymutex 
+
+This is to help with the larger effort around breaking up cloud providers and moving them out of tree.
+
+Fixes https://github.com/kubernetes/utils/issues/62",closed,True,2018-10-19 11:17:40,2019-01-25 22:21:29
+utils,dims,https://github.com/kubernetes/utils/pull/56,https://api.github.com/repos/kubernetes/utils/issues/56,Run golint on the sources,Change-Id: I4068810d3618220b87b781e3f923acc535c04ad9,closed,True,2018-10-21 12:56:34,2018-10-22 19:23:59
+utils,mcrute,https://github.com/kubernetes/utils/pull/57,https://api.github.com/repos/kubernetes/utils/issues/57,copy k8s.io/kubernetes/pkg/util/net to k8s.io/util/net,"This change is a precondition to migrating cloud providers out of tree. The whole set of work is related to kubernetes/kubernetes#69585. Once this is merged I'll update the kubernetes code to reference it and remove the package from `kubernetes/kubernetes`. This was originally started in #48.
+
+/kind feature
+/assign @thockin 
+/cc @andrewsykim ",closed,True,2018-10-22 23:04:12,2019-01-25 22:21:10
+utils,andrewsykim,https://github.com/kubernetes/utils/pull/58,https://api.github.com/repos/kubernetes/utils/issues/58,add @andrewsykim @cheftako and @mcrute as reviewers,"In the interest of https://github.com/kubernetes/kubernetes/issues/69585, some of us from SIG Cloud Provider would like to help maintain this repo starting as reviewers (and hopefully as approvers in the near future).
+
+/assign @thockin @lavalamp  ",closed,True,2018-11-01 21:09:45,2018-11-02 05:51:14
+utils,mcrute,https://github.com/kubernetes/utils/pull/59,https://api.github.com/repos/kubernetes/utils/issues/59,Add Makefile and build scripts,"Adds a `Makefile` and a few hack scripts that do the same things the `.travis.yml` is currently doing. The purpose of this change is to make it easier to test modifications to this package before submitting them.
+
+/kind feature
+/assign @thockin",closed,True,2018-11-07 21:33:23,2018-11-15 13:54:10
+utils,hoegaarden,https://github.com/kubernetes/utils/pull/60,https://api.github.com/repos/kubernetes/utils/issues/60,"[exec] Implement Start, Wait & StdIOPipe methods","This change allows users to get a hold of the Std{out,err} streams of processes as `io.Reader`s. This allows e.g. to wrap those readers with a `io.limitedReader` and other standard (and non-standard) mechanisms for generic `io.Reader`s. This is currently not possible, as access to Std{out,err} is only possible via:
+- handing in a `io.Writer`s
+- inspecting the returned `[]byte`s from the `Output`/`CombinedOutput` methods
+
+Specifically, we were looking into https://github.com/kubernetes/kubernetes/issues/70890 where we would jut employ an `io.limitedReader` to stop reading input after a certain amount of data.
+
+/kind enhancement
+/cc @mariantalla ",closed,True,2018-11-14 14:14:52,2018-11-14 17:02:08
+utils,mariantalla,https://github.com/kubernetes/utils/pull/61,https://api.github.com/repos/kubernetes/utils/issues/61,[exec] Fix godoc Example,"We changed the Example to document the `New` function, as this seemed to
+be a better fitting place.
+Using a lower-case suffix does not document a specific method of a type
+but marks the example to be a generic example for that type; this also
+seemed more fitting for our example.
+
+Signed-off-by: Hannes Hörl <hhorl@pivotal.io>",closed,True,2018-11-15 16:30:11,2018-11-15 16:40:36
+utils,pohly,https://github.com/kubernetes/utils/issues/62,https://api.github.com/repos/kubernetes/utils/issues/62,move kubernetes/kubernetes/tree/master/pkg/util/keymutex into utils,"ceph-csi pulls https://github.com/kubernetes/kubernetes/tree/master/pkg/util/keymutex from kubernetes/kubernetes (https://github.com/ceph/ceph-csi/tree/master/vendor/k8s.io/kubernetes/pkg/util/keymutex) and now I would also like to use it in another CSI driver. The code itself is simple at first glance and might not cross the ""complex enough to be worth vendoring"" threshold, but it has had at least one bug in the past (https://github.com/kubernetes/kubernetes/issues/65113). Sharing future maintenance in k8s.io/utils probably is better than other projects manually copying the code or vendoring kubernetes/kubernetes.
+
+I discussed it with @msau42 on Slack (https://kubernetes.slack.com/conversation/C09R23FHP/p1544112842053400) and we agreed that it is worthwhile to ask here. If you agree that it is acceptable for k8s.io/utils, then I will proceed with preparing a PR.
+
+
+",closed,False,2018-12-06 16:43:34,2019-01-25 22:21:29
+utils,apelisse,https://github.com/kubernetes/utils/pull/63,https://api.github.com/repos/kubernetes/utils/issues/63,Create SECURITY_CONTACTS,"Mostly took a ""random"" name from k/k list.",closed,True,2018-12-21 16:21:56,2018-12-21 17:31:00
+utils,dims,https://github.com/kubernetes/utils/pull/64,https://api.github.com/repos/kubernetes/utils/issues/64,Volunteer to help with k8s.io/utils,Change-Id: I4f7650fb685709916c906dcf4e9e36162777c776,closed,True,2019-01-23 13:27:30,2019-01-24 02:50:28
+utils,dims,https://github.com/kubernetes/utils/pull/65,https://api.github.com/repos/kubernetes/utils/issues/65,Add trace from k/k repo,per discussion in https://github.com/kubernetes/kubernetes/pull/73209,closed,True,2019-01-23 18:58:30,2019-01-30 08:59:29
+utils,dims,https://github.com/kubernetes/utils/pull/66,https://api.github.com/repos/kubernetes/utils/issues/66,Add buffer from k/k repo,per discussion in kubernetes/kubernetes#73209,closed,True,2019-01-24 00:49:27,2019-01-24 12:04:01
+utils,dims,https://github.com/kubernetes/utils/pull/67,https://api.github.com/repos/kubernetes/utils/issues/67,Add integer from k/k repo,per discussion in kubernetes/kubernetes#73209,closed,True,2019-01-24 00:52:30,2019-01-24 08:04:20
+utils,andrewsykim,https://github.com/kubernetes/utils/pull/68,https://api.github.com/repos/kubernetes/utils/issues/68,k8s.io/utils should use klog,Tried to update vendor in k8s.io/kubernetes and ran into error since k8s.io/utils imports glog still. ,closed,True,2019-01-24 02:01:07,2019-01-24 17:00:58
+utils,dims,https://github.com/kubernetes/utils/issues/69,https://api.github.com/repos/kubernetes/utils/issues/69,Need tests for trace package,please see comment in https://github.com/kubernetes/utils/pull/65#issuecomment-456990325,closed,False,2019-01-24 12:06:54,2019-01-31 23:12:14
+utils,thockin,https://github.com/kubernetes/utils/pull/70,https://api.github.com/repos/kubernetes/utils/issues/70,A sketch of converting to logr,"We have 2 other users - another nsenter file and trace.  I don't know
+why we have 2 seemingly very similar nsenter executors - maybe we can
+fix that?
+
+If this seems reasonable I can check in a klogr implementation (just a
+clone of glogr.
+
+It would be nice to get rid of the default and not log at all unless the logger is specified.  Given that the logs are very high V anyway, it seems plausible.",open,True,2019-01-24 16:59:47,2019-02-05 00:14:30
+utils,matiasanaya,https://github.com/kubernetes/utils/issues/71,https://api.github.com/repos/kubernetes/utils/issues/71,integer.RoundToInt32 fails for 0.49999999999999994,"If you add the following test to `integer/integer_test.go`:
+
+```
+{
+  num: 0.49999999999999994,
+  exp: 0,
+}
+```
+
+And then run the tests, they fail:
+
+```
+go test ./integer
+--- FAIL: TestRoundToInt32 (0.00s)
+	integer_test.go:243: executing scenario 0
+	integer_test.go:243: executing scenario 1
+	integer_test.go:243: executing scenario 2
+	integer_test.go:243: executing scenario 3
+	integer_test.go:243: executing scenario 4
+	integer_test.go:243: executing scenario 5
+	integer_test.go:245: expected 0, got 1
+	integer_test.go:243: executing scenario 6
+FAIL
+FAIL	github.com/kubernetes/utils/integer	0.006s
+```
+
+Is this beyond the scope of this function? If not I can submit a PR to fix this, though would it be acceptable to use `math.Round` provided in Go 1.10 and above?",open,False,2019-01-25 03:43:12,2019-01-30 20:02:46
+utils,ashishranjan738,https://github.com/kubernetes/utils/pull/72,https://api.github.com/repos/kubernetes/utils/issues/72,Adds UT for trace package in utils,"Signed-off-by: Ashish Ranjan <ashishranjan738@gmail.com>
+
+This PR adds UT for trace package in utils repository
+
+fixes: #69 ",closed,True,2019-01-25 08:21:51,2019-01-31 23:12:14
+utils,dims,https://github.com/kubernetes/utils/pull/73,https://api.github.com/repos/kubernetes/utils/issues/73,Consolidate the Nsenter implementations (new name NSEnter),"Remove the `Executor`/`NewNsenterExecutor` which just duplicates the
+functionality already in `Nsenter`
+
+add a type alias to the older `Nsenter` export
+
+Change-Id: I89f2715b3c895d643d09dc856fa0ed8b05fa905a",closed,True,2019-01-25 20:25:19,2019-01-25 22:17:45
+utils,pohly,https://github.com/kubernetes/utils/pull/74,https://api.github.com/repos/kubernetes/utils/issues/74,keymutex: remove glog usage,"https://github.com/kubernetes/utils/pull/55 was merged shortly after
+https://github.com/kubernetes/utils/pull/68 and then brought back
+glog, which now breaks vendoring of k8s.io/utils (can't have both glog
+and klog defining the same command line flags).
+
+Instead of replacing the logging with klog, logging gets removed
+entirely. The rationale is that the log output is likely to be more
+useful and/or readable if it is done by the caller. This is also a
+first step towards removing the klog dependency from
+k8s.io/utils (https://github.com/kubernetes/utils/pull/68#issuecomment-457249328).
+
+/assign @dims",closed,True,2019-01-28 10:36:34,2019-01-29 03:06:32
+utils,rajathagasthya,https://github.com/kubernetes/utils/issues/75,https://api.github.com/repos/kubernetes/utils/issues/75,Move apimachinery/pkg/util/diff to utils,"We use that package in unit tests for some of our operators to generate diffs between actual and expected CR objects. If you think it's a good idea to add it to this repo, I'm happy to help!",open,False,2019-01-28 19:29:17,2019-01-28 19:29:17
+utils,andrewsykim,https://github.com/kubernetes/utils/pull/76,https://api.github.com/repos/kubernetes/utils/issues/76,restore OWNERS file,Was accidentally moved in https://github.com/kubernetes/utils/pull/57. This might need a manual merge @dims @thockin. ,closed,True,2019-01-29 03:03:29,2019-01-29 03:08:15
+utils,andrewsykim,https://github.com/kubernetes/utils/pull/77,https://api.github.com/repos/kubernetes/utils/issues/77,remove BAZEL build files,"Correct me if I'm wrong please, but seems like these aren't needed here and were just accidentally copied over. 
+
+/assign @dims ",closed,True,2019-01-29 18:51:21,2019-02-09 13:51:47
+utils,matiasanaya,https://github.com/kubernetes/utils/pull/78,https://api.github.com/repos/kubernetes/utils/issues/78,Fix #71: Use math.Round in integer.RoundToInt32,,open,True,2019-01-31 23:03:20,2019-02-10 21:48:12
+utils,rlenferink,https://github.com/kubernetes/utils/pull/79,https://api.github.com/repos/kubernetes/utils/issues/79,Updated OWNERS to be consistent across k8s repos,As the title says,closed,True,2019-02-04 17:45:01,2019-02-04 18:57:46
+utils,sttts,https://github.com/kubernetes/utils/pull/80,https://api.github.com/repos/kubernetes/utils/issues/80,semantic: add forked reflect based DeepEqual,"We used to have this in apimachinery and in kube itself. The actual code is kube-independent.
+
+We need this in kube-openapi. Before introducing another fork, we should move it here, for easy consumption for any party.",closed,True,2019-02-06 11:22:43,2019-02-07 11:49:22
+utils,sttts,https://github.com/kubernetes/utils/pull/81,https://api.github.com/repos/kubernetes/utils/issues/81,semantic-deep-equal: handle unexported symbols via pointer funcs,"Before this PR one could not define a comparison func for structs with unexported symbols (because `reflect` functions call are not possible with them). This PR adds a second signature using pointers. This way it is possible for example to add `func (a, b *url.URL) bool` (while `func (a, b url.URL) bool` did not work).",open,True,2019-02-07 11:15:38,2019-02-11 16:45:17
+utils,sttts,https://github.com/kubernetes/utils/pull/82,https://api.github.com/repos/kubernetes/utils/issues/82,Move object diff and field path from apimachinery,"Both packages are not apimachinery specific, but totally generic (and e.g. useful in k/kube-openapi).",closed,True,2019-02-07 11:28:52,2019-02-13 16:43:59
+utils,sttts,https://github.com/kubernetes/utils/pull/83,https://api.github.com/repos/kubernetes/utils/issues/83,semantic: document interface and hide implementation,"As a follow-up from @thockin's comments in https://github.com/kubernetes/utils/pull/81 about documentation of semantic deepequal, I propose this, hiding the forked impementation behind a well documentated interface.
+
+**Note:** the third_party code introduced in the second commit is the one we have been running in k/k since 2015 (copied from current master).
+
+**Note:** the original deepcopy version in the first commit is the current Golang tip. The original commit that added the code to Kubernetes already had the modified version. So we don't know when it was originally copied from Golang.",open,True,2019-02-08 08:41:44,2019-02-11 18:25:06
+utils,danielqsj,https://github.com/kubernetes/utils/pull/84,https://api.github.com/repos/kubernetes/utils/issues/84,fix negative slice index error in keymutex,"xref: https://github.com/kubernetes/kubernetes/issues/73858
+
+The keymutex's slice index could be negative which should not happened.
+This PR aims to make the index always positive.
+
+/assign @thockin @dims",closed,True,2019-02-19 09:05:23,2019-02-21 04:24:47
+utils,danielqsj,https://github.com/kubernetes/utils/pull/85,https://api.github.com/repos/kubernetes/utils/issues/85,Add metrics pkg including SinceInMicroseconds and SinceInSeconds,"These two functions `SinceInMicroseconds` and `SinceInSeconds` existing in each kubernetes related project.
+Search result: https://cs.k8s.io/?q=func%20sinceInMicroseconds&i=nope&files=&repos=
+
+These are util functions which can help for duration like metrics.
+I think here is the best place for them.
+
+/cc @brancz ",open,True,2019-02-22 08:40:46,2019-02-25 04:08:25
+utils,joelsmith,https://github.com/kubernetes/utils/pull/86,https://api.github.com/repos/kubernetes/utils/issues/86,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:15:43,2019-03-09 00:29:47
+utils,soltysh,https://github.com/kubernetes/utils/pull/87,https://api.github.com/repos/kubernetes/utils/issues/87,Merge interrupt history from Kubernetes into k8s.io/utils ,"This is picking up the work from https://github.com/kubernetes/utils/pull/47 with comments from @thockin addressed. I've copied the last comments from Tim inline to continue discussion. I would like to merge that so we can continue with kubectl extraction from k/k (https://github.com/kubernetes/kubernetes/pull/75516)
+
+/assign @thockin @dims @smarterclayton 
+/cc @seans3 ",open,True,2019-03-29 11:28:01,2019-03-29 17:41:47

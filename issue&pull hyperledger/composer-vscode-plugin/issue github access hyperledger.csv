@@ -1,0 +1,371 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+composer-vscode-plugin,bjrnt,https://github.com/hyperledger/composer-vscode-plugin/issues/88,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/88,Better visualization of relationships in UML diagrams,"Hello,
+
+With only the default options enables, the PlantUML output shows inheritance (e.g. `AddCar` inherits from `Transaction`, `Car` inherits from `Vehicle`) and so on. Would there be any interest in adding more information and relationships to these diagrams? 
+
+I've hacked on my own version of the extension to add additional information for relationships and concepts inside transactions, assets, etc. My goal has been to get a better image of the relationships of the various entities in use within the blockchain.
+
+As a tiny example, the following CTO file:
+```
+namespace org.example
+
+transaction AddCar {
+  o String model
+  o String year
+}
+
+transaction RemoveCar {
+  --> Car car
+}
+
+asset Vehicle identified by registration {
+  o String registration
+}
+
+asset Car extends Vehicle {
+  o String model
+  o String year
+}
+```
+might be visualized to include the relationship from `RemoveCar --> Car` as
+![screen shot 2018-10-30 at 6 51 10 pm](https://user-images.githubusercontent.com/484114/47709997-f9cbcc00-dc74-11e8-85ab-ec9a38d0bb18.png)
+
+Is this something you would be interested in merging into the extension? I realize that since the way things are visualized might often be up to individual preference, it might be difficult to find something that can fit all users, but I'd be glad to discuss this further if there is interest.",closed,False,2018-10-30 09:57:22,2018-11-13 08:29:59
+composer-vscode-plugin,mario-s,https://github.com/hyperledger/composer-vscode-plugin/issues/87,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/87,Starting client failed,"Hi,
+
+I fired up hyperledger fabric and the composer localy. So the composer is accessable on my machine at port 8080.
+
+However I have a problem with the plugin in visual studio code: it is not able to to start the clinet and raises the following exception:
+
+```
+Starting client failed
+Error: spawn /Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper.app/Contents/MacOS/Code Helper ENOENT
+	at _errnoException (util.js:1024:11)
+	at Process.ChildProcess._handle.onexit (internal/child_process.js:190:19)
+	at onErrorNT (internal/child_process.js:372:16)
+	at _combinedTickCallback (internal/process/next_tick.js:138:11)
+	at process._tickCallback (internal/process/next_tick.js:180:9)
+```
+The result is that the functionality of the plugin seems to be not available.
+
+My OS is macOS High Sierra Version 10.13.6. The Visual Studio Code Version is: 1.27.2
+
+Any help is greatly appreciated.",open,False,2018-09-21 16:02:03,2018-09-21 16:03:31
+composer-vscode-plugin,ryjones,https://github.com/hyperledger/composer-vscode-plugin/pull/86,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/86,Remove extra copies of Apache 2 license,Signed-off-by: Ry Jones <ry@linux.com>,closed,True,2018-08-21 05:36:05,2018-12-31 06:33:46
+composer-vscode-plugin,HaaLeo,https://github.com/hyperledger/composer-vscode-plugin/issues/85,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/85,As a user I want to format my .cto file via an extension command,"# Feature Request
+* Add a [`documentFormattingProvider`](https://code.visualstudio.com/docs/extensionAPI/language-support#_format-source-code-in-an-editor) ([API Reference](https://code.visualstudio.com/docs/extensionAPI/vscode-api#DocumentFormattingEditProvider)) that enables automatic formatting of `.cto` files when the `editor.action.formatDocument` command is executed
+* As first version of the feature, it would be great to support auto indentation",open,False,2018-07-09 20:04:23,2018-07-09 20:04:23
+composer-vscode-plugin,sstone1,https://github.com/hyperledger/composer-vscode-plugin/pull/84,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/84,Bump Composer and extension to v0.19.12,"https://github.com/hyperledger/composer/issues/4235
+
+New modelling language features introduced in Composer v0.19.12 need to be pushed into the Visual Studio Code extension.
+
+Signed-off-by: Simon Stone <sstone1@uk.ibm.com>",closed,True,2018-07-06 07:24:54,2018-07-06 07:48:27
+composer-vscode-plugin,mttrbrts,https://github.com/hyperledger/composer-vscode-plugin/pull/83,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/83,Add support for external models,To address https://github.com/hyperledger/composer-vscode-plugin/issues/82,closed,True,2018-06-21 16:25:48,2018-06-27 13:27:45
+composer-vscode-plugin,dselman,https://github.com/hyperledger/composer-vscode-plugin/issues/82,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/82,Update the plugin to support import/from dependencies,"CTO files can import types from CTO files over the network, using the `import typeFqn from URL` syntax. Updating the plugin to support this would be very useful, not least because these imports don't make any assumptions about local files, or whether they have been opened in the editor.
+
+Code to be updated is here:
+https://github.com/hyperledger/composer-vscode-plugin/blob/master/server/src/server.ts#L367
+
+The basic approach is to:
+
+1. Call `addModelFile(s)/updateModelFile(s)`, but disable validation: https://github.com/hyperledger/composer/blob/master/packages/composer-common/lib/modelmanager.js#L149
+2. Call `updateExternalModels` https://github.com/hyperledger/composer/blob/master/packages/composer-common/lib/modelmanager.js#L308 which will download external dependencies over the network into the `ModelManager`
+
+A good source of models for testing with external dependencies is https://models.accordproject.org
+
+
+",open,False,2018-06-08 10:45:24,2018-06-08 10:52:25
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/81,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/81,Update composer-common to fix missing module bug,Signed-off-by: m-g-k <mgk@uk.ibm.com>,closed,True,2018-06-08 09:31:23,2018-06-08 09:49:08
+composer-vscode-plugin,sweetalidinesh,https://github.com/hyperledger/composer-vscode-plugin/issues/80,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/80,Cannot find module 'lodash',"Composer plugin crash with error even though lodash snippet is installed.
+VSCode Details :
+Version 1.24.0
+Date 2018-06-06T17:35:02.816Z
+Node 7.9.0
+Architecture ia32
+
+Error: Cannot find module 'lodash'
+at Function.Module._resolveFilename (module.js:470:15)
+    at Function.Module._load (module.js:418:25)
+    at Module.require (module.js:498:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (c:\Users\sweetalidinesh\.vscode\extensions\hyperledgercomposer.composer-support-client-0.19.5\server\node_modules\composer-common\lib\cardstore\walletbackedcardstore.js:24:11)
+    at Object.<anonymous> (c:\Users\sweetalidinesh\.vscode\extensions\hyperledgercomposer.composer-support-client-0.19.5\server\node_modules\composer-common\lib\cardstore\walletbackedcardstore.js:152:3)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+[Info  - 11:02:40 AM] Connection to server got closed. Server will restart.
+module.js:472
+    throw err;",closed,False,2018-06-08 05:40:41,2018-06-08 10:11:31
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/79,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/79,Deliver FV/Integration tests for VSCode plugin,"Upon the completion of #78, the tests themselves should be delivered to enable closure of #62 
+
+This issue is to be used to deliver the test code that fulfils the test descriptions/stubs delivered by #78 ",open,False,2018-05-22 09:18:47,2018-05-22 09:18:47
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/78,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/78,Scope and outline FV/Integration tests for Plugin,"This issue is to capture delivery of required FV/Integration testing of the VSCode extension, as part of #62 
+
+[VSCode documentation](https://code.visualstudio.com/docs/extensions/testing-extensions) describes various ways to test the plugin. For clarification, the testing to be performed here is driving VSCode tests using the VSCode API to import documents/projects with a known good/bad structure and ensure that:
+- known good projects show/list no errors
+- known bad files show the correct errors
+
+It should also be possible to generate a UML diagram within this framework, though I recommend considering this under a separate issue
+
+The tests will span multiple files, since there are many Composer file types that are to be tested (ACLs, Models etc) and comprehensive testing of such items are best split out across dedicated test files, with a 'utility' file that is used to contain all common code.
+
+The delivery requirement for this issue is:
+- separate test file description for each item being tested
+- each file to contain test stubs that describe the test, but do not contain the test code itself; this is to be delivered as part of a different issue",open,False,2018-05-22 09:14:20,2018-05-22 09:34:33
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/77,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/77,Deliver unit tests for server side,"Following the delivery of #76, the unit test code is to be delivered to follow the test stub descriptions
+
+The aim is to achieve 100% code coverage- these tests should be delivered with a modification to the code coverage enforcement",open,False,2018-05-22 09:02:48,2018-05-22 09:02:55
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/76,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/76,Scope and outline unit tests required for server side,"This task is to perform the first part of the unit test delivery for the **server** side of the VSCode extension, required within #61 
+
+The deliverable here is the complete outline and delivery of test stubs that will cover the client side. 
+- all tests to be described in the mocha framework:
+
+```
+describe('such testing of VSCode extension ... ', () => {
+    describe('#myFunction', () => {
+        it('should do blah', () => {
+        });
+        it('should not do blah', () => {
+        });
+    });
+});
+```
+- no test code to be written, we are only interested in considering the required unit tests to be applied
+
+The aim here is to understand how the client side code is operating and how best to test it in a unit fashion. Once the tests have been scoped, it will be possible to move on to test code delivery and setting the code coverage requirement in istanbul to 100%",open,False,2018-05-22 09:01:53,2018-05-22 09:01:53
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/75,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/75,Deliver unit tests for client side,"Following the delivery of #74, the unit test code is to be delivered to follow the test stub descriptions
+
+The aim is to achieve 100% code coverage- these tests should be delivered with a modification to the code coverage enforcement",open,False,2018-05-22 08:59:39,2018-05-22 08:59:39
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/74,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/74,Scope and outline unit tests required for client side,"This task is to perform the first part of the unit test delivery for the client side of the VSCode extension, required within #60 
+
+The deliverable here is the complete outline and delivery of test stubs that will cover the client side. 
+- all tests to be described in the mocha framework:
+
+```
+describe('such testing of VSCode extension ... ', () => {
+    describe('#myFunction', () => {
+        it('should do blah', () => {
+        });
+        it('should not do blah', () => {
+        });
+    });
+});
+```
+- no test code to be written, we are only interested in considering the required unit tests to be applied
+
+The aim here is to understand how the client side code is operating and how best to test it in a unit fashion. Once the tests have been scoped, it will be possible to move on to test code delivery and setting the code coverage requirement in istanbul to 100%
+",open,False,2018-05-22 08:47:49,2018-05-22 09:19:01
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/73,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/73,Update to latest composer-common,"Latest composer-common contains a fix to ACL error highlighting issue #37 
+
+Signed-off-by: m-g-k <mgk@uk.ibm.com>",closed,True,2018-05-15 14:57:14,2018-05-15 15:16:58
+composer-vscode-plugin,awjh-ibm,https://github.com/hyperledger/composer-vscode-plugin/pull/72,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/72,Adding md licenses,"Adding licenses to markdown.
+
+Relates to https://github.com/hyperledger/composer/issues/1220#issuecomment-386329076",closed,True,2018-05-09 09:00:05,2018-05-09 09:32:41
+composer-vscode-plugin,Rmannn,https://github.com/hyperledger/composer-vscode-plugin/issues/71,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/71,Publish the latest version on the VSCode Marketplace,"Could you publish the latest version on the market place ?
+The last update was done the 15/12/2017, 4 months ago.
+
+Thank you",closed,False,2018-04-25 20:24:59,2018-05-02 09:23:55
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/70,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/70,Fix pUML diagram generation issues,,closed,True,2018-04-17 14:07:34,2018-04-17 16:29:03
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/69,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/69,Fix vscode issue with missing OutputConsole,Signed-off-by: m-g-k <mgk@uk.ibm.com>,closed,True,2018-04-16 10:56:51,2018-04-16 13:42:30
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/68,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/68,Fix Travis publish problem,Signed-off-by: m-g-k <mgk@uk.ibm.com>,closed,True,2018-04-04 12:49:05,2018-04-04 13:11:47
+composer-vscode-plugin,awjh-ibm,https://github.com/hyperledger/composer-vscode-plugin/pull/67,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/67,Adding licenses,Adding licenses as per https://github.com/hyperledger/composer/issues/1220,closed,True,2018-04-03 12:27:10,2018-04-07 08:00:37
+composer-vscode-plugin,sstone1,https://github.com/hyperledger/composer-vscode-plugin/pull/66,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/66,Bump version to v0.19.0,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,closed,True,2018-03-28 20:35:45,2018-03-28 21:37:00
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/65,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/65,Make licenses consistent in VSCode Extension,"**Summary**
+VSCode Extension uses VSCode and VS Language server in both client and server components respectively.  Current the extension source code is using MIT under Microsoft license.  The majority of code is written by us but using VSCode APIs and some places are using Apach 2 license.  We need to make licenses consistent within both client and server component. ",closed,False,2018-01-29 15:59:45,2018-05-22 08:24:54
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/64,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/64,As a user I want to the VSCode Composer language server as a separate module so it can be shared by other tools,"**Abstract**
+Today the VSCode plugin server and client are inside one project. The server module needs to be separated so that it can be used by Atom tool. ",open,False,2018-01-26 16:30:43,2018-01-26 16:30:43
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/63,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/63,As a user I want to have an e2e test instruction so that I can perform manual test,"**Abstract**
+This story is to provide an instruction for the users to perform a manual end to end test for VSCode extension.",closed,False,2018-01-26 16:09:42,2018-05-22 08:25:19
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/62,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/62,As a contributor I want to have integration tests for VSCode extension to help prevent regressions,"**Abstract**
+This story is for adding some integration tests for the VSCode extension client module.",open,False,2018-01-26 15:57:52,2018-05-22 08:46:31
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/61,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/61,As a contributor I want to have unit tests for VSCode composer server extension to help prevent regressions,,open,False,2018-01-26 15:49:11,2018-05-22 08:36:37
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/60,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/60,As a contributor I want to have unit tests for VSCode composer client extension to help prevent regressions,"**Abstract**
+Currently there is no unit test for the VSCode composer client extension, this story is for adding unit tests for the VSCode composer client extension.  The unit test will allow us to verify the extension functions with confidence. ",open,False,2018-01-26 15:48:13,2018-05-22 08:36:01
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/59,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/59,"set up test framework for client, server and the travis","set up auto-test framework for client, server and travis #58
+Signed-off-by: xufengli <xufengli@uk.ibm.com>",closed,True,2018-01-25 17:50:01,2018-01-31 15:03:10
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/58,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/58,As a user I want to be able to run the VSCode extension tests in both a command line and with a travis build,"**Abstract**
+This story is for setting up initial test framework so that I can auto run the unit tests from a command line or in Travis CI. 
+This includes set up mocha, ts-node and the Istanbul coverage report for the server component. 
+Both Linux and Mac operating systems are support for Travis auto test.
+
+**Implementation**
+This implementation includes below steps:
+1.  Set up mocha and ts-node for unit test framework for both server and client modules
+2. Add Istanbul coverage report for server and client modules
+3. Add test scripts for both server and client modules so that you can run npm test from each module.
+4. Add Travis scripts for auto running test in Travis CI that supports both Linux and Mac
+5. Add TSLint to validate both extension typescripts and test scripts  for both server and client modules.
+6. Updated these typescript files as result of step 5.
+7. Updated license with Apache 2 licenses in extension files.
+8. Add Apache 2 license for all new files #65 
+
+
+
+",closed,False,2018-01-24 09:21:24,2018-05-22 08:13:32
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/57,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/57,enable npm test command in the client for the Travis CI test,"Enable npm test command for the VS Code plugin test in Travis CI test environment #56.
+Signed-off-by: xufengli <xufengli@uk.ibm.com>",closed,True,2018-01-18 15:58:24,2018-01-29 13:46:14
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/56,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/56,As a user I want add unit tests  for the VSCode client extension,"**Abstract**
+With current VSCode extension, we can only run the test from the Visual Studio Code tool by running Launch Tests(client) in a DEBUG mode.
+ We want to run this test via npm command line so that we can test the unit tests so that we can run auto tests in Travis CI. 
+
+  ",closed,False,2018-01-17 13:29:18,2018-01-26 15:39:37
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/55,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/55,update the manual build and install document,"Document update for #54
+Signed-off-by: xufengli <xufengli@uk.ibm.com>",closed,True,2018-01-17 12:17:06,2018-01-17 13:29:32
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/issues/54,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/54,Update manual build and install to reflect what defined in the package script,"The VSCode Extension Manual build and install instruction does not work as below two npm commends do not match what defined inside the package.json. 
+
+- npm run compile
+- npm run package
+
+They need to be changed into these:
+
+- npm run compile:server
+- npm run package:vsix
+
+    ",closed,False,2018-01-17 11:29:11,2018-01-17 13:53:15
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/53,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/53,Update composer-common & make extension debugging work,"Allows the extension source to be debugged in vscode
+
+Signed-off-by: m-g-k <mgk@uk.ibm.com>",closed,True,2017-12-15 13:29:41,2017-12-15 16:29:49
+composer-vscode-plugin,nasht00,https://github.com/hyperledger/composer-vscode-plugin/issues/52,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/52,Fails to find namespaces unless other file is opened,"When I open a CTO file or an ACL file, the entire file is underlined red with `IllegalModelException: Failed to find namespace com.something.something`
+
+If I open the corresponding CTO file, then go back to my original file, the error goes away.
+
+If I close the file, the error comes back.
+
+Using plugin 0.15.1",open,False,2017-11-30 14:14:17,2019-02-25 11:23:03
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/51,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/51,Update composer-common and fix issues with circularly dependent model files.,"Also handles closing model files properly at last!
+
+Signed-off-by: m-g-k <mgk@uk.ibm.com>",closed,True,2017-11-17 10:58:44,2017-11-17 15:18:22
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/50,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/50,Fix #2385 … ,"Also,
+* Update to latest composer-common
+* Temp fix for circular-dependent models
+
+",closed,True,2017-11-13 17:04:49,2017-11-14 09:38:12
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/49,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/49,Update to composer-common 0.14.2,New composer-common required to support new CONTAINS query function,closed,True,2017-10-27 10:31:52,2017-11-02 13:16:27
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/48,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/48,Update composer-common to 0.14.1,Fixes issue #47,closed,True,2017-10-19 17:42:30,2017-10-23 14:42:11
+composer-vscode-plugin,mrosack,https://github.com/hyperledger/composer-vscode-plugin/issues/47,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/47,ACL parsing broken w 0.14.0?,Does a new version of this just need to be compiled and released against the 0.14.0 schema?  I'm getting validation errors against the new rules needed for the NetworkAdmin in 0.14.0.  Thanks!,closed,False,2017-10-17 12:38:57,2017-10-23 21:35:23
+composer-vscode-plugin,ryjones,https://github.com/hyperledger/composer-vscode-plugin/pull/46,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/46,Create DCO,,closed,True,2017-10-03 22:28:23,2017-10-03 22:28:37
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/45,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/45,Update Plant UML theme choices and options,,closed,True,2017-09-30 14:14:47,2017-10-01 13:37:36
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/44,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/44,Update to 0.13.1 to support decorators,Also fix warning in pUML and add better search keywords,closed,True,2017-09-29 20:21:14,2017-09-29 22:37:36
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/43,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/43,Support latest composer-common and add support for PlantUML diagram g…,"…eneration
+
+Updates version to 11.3, matching current composer-common",closed,True,2017-08-22 10:07:58,2017-08-22 15:36:52
+composer-vscode-plugin,sstone1,https://github.com/hyperledger/composer-vscode-plugin/pull/42,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/42,Bump version to v0.11.3,VSCode extension not finding namespace org.hyperledger.composer.system in query file #1887,closed,True,2017-08-17 21:41:27,2017-08-18 14:50:12
+composer-vscode-plugin,theophoric,https://github.com/hyperledger/composer-vscode-plugin/issues/41,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/41,"Expects ""identified by"" field for Transaction and Event resource types","As of [composer v0.9.0](https://github.com/hyperledger/composer/releases/tag/v0.9.0) transactions and event resources should not define an identifier.  This plugin does not reflect this change.
+
+e.g. The following code:
+```
+
+transaction IssueTokens {
+  o Long amount
+  --> Business recipient
+}
+
+```
+
+Generates the following error:
+
+```
+file: 'file:////models/fitchain.cto'
+severity: 'Error'
+message: 'IllegalModelException: line 267 column 1, to line 272 column 2. Class IssueTokens is not declared as abstract. It must define an identifying field.'
+at: '267,1'
+source: 'Composer'
+```",closed,False,2017-07-17 17:38:12,2017-08-22 15:22:13
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/40,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/40,Support new Composer Query Syntax Parsing,"Support for new "".qry"" file type (single file support to mirror composer base).
+Supports syntax highlighting and validation etc using the composer-common 0.9.0 parser
+Supports Query snippets to show simple usage example",closed,True,2017-06-30 16:13:52,2017-06-30 17:26:47
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/39,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/39,Update version number,,closed,True,2017-06-28 13:41:23,2017-06-28 16:07:02
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/38,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/38,Update to latest composer-common 0.8.1,Also adjust for fix to base issue #321 to prevent extraneous file and line numbers appearing in vscode problems view and in error hover pop-ups.,closed,True,2017-06-25 11:23:53,2017-06-26 11:51:51
+composer-vscode-plugin,pd93,https://github.com/hyperledger/composer-vscode-plugin/issues/37,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/37,Entire document is underlined when a single error is reported,"**Current Behaviour:**
+When an error is found, all the text in the document is underlined. This can make it very slow to identify the location of the error in your code. This is true for both `.cto` and `.acl` files.
+
+**Expected Behaviour:**
+Only the line of code or statement that contains the error should be highlighted.
+
+**Image:**
+![image](https://user-images.githubusercontent.com/9294862/27181757-d4fa7aa0-51d0-11e7-8334-c5b502f8a99d.png)
+",open,False,2017-06-15 12:51:27,2017-06-28 17:40:00
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/36,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/36,Update version number,,closed,True,2017-06-09 10:04:58,2017-06-09 10:07:05
+composer-vscode-plugin,rjones-lf,https://github.com/hyperledger/composer-vscode-plugin/pull/35,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/35,Create dco,,closed,True,2017-06-05 21:38:50,2017-06-05 21:41:20
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/34,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/34,Update ACL parser to deal with new syntax for transactions and operations,"**Can now handle the following syntax additions in ACLs.**
+
+**For 'transaction's:**
+transaction: ""org.acme.vehicle.auction.Offer""
+transaction(t): ""org.acme.vehicle.auction.Offer""
+
+**Lists for 'operation's, e.g.:**
+operation: ALL
+operation: UPDATE, DELETE
+operation: CREATE, READ, UPATE, DELETE
+
+**The ""ANY"" option for a 'participant' is now highlighted:**
+participant: ""ANY""
+
+**Also, ""paths"" in 'participant', 'resource', 'transaction' are highlighted, e.g in:**
+participant: ""org.acme.vehicle.auction.Member""
+
+Finally, there is a new snippet for a ""Transaction Rule"" to easily create a rule that has a transaction in it.
+
+Signed-off-by: m-g-k <m-g-k@users.noreply.github.com>
+",closed,True,2017-06-04 15:29:35,2017-06-08 12:25:22
+composer-vscode-plugin,rjones-lf,https://github.com/hyperledger/composer-vscode-plugin/pull/33,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/33,Create dcobot,,closed,True,2017-06-02 21:32:17,2017-06-02 21:33:40
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/32,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/32,Update readme and tidy up ACL support,Leave a comment,closed,True,2017-05-30 11:08:59,2017-05-30 11:48:28
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/31,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/31,Fix Syntax Highlighting on Linux (issue 30),Fix Issue #30 - ACL's on Linux,closed,True,2017-05-29 12:20:46,2017-05-29 12:26:13
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/issues/30,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/30,Syntax highlighting for ACL files not working on Linux,"Syntax highlighting for ACL files not working on Linux, but it works fine on Windows and Mac,
+
+## Context
+Reported on Rocket chat by jdockter
+
+## Expected Behavior
+It should work the same on all platforms
+
+## Actual Behavior
+Error checking works, but the colour highlighting does not.
+
+## Possible Fix
+There is a type in the syntax file name that needs fixing.
+
+## Steps to Reproduce
+Open a permissions.acl file on Ubuntu and you will not get syntax highlighting like you do on other platforms for acl files.
+
+## Existing issues
+None
+
+## Context
+Syntax highlighting for ACL files not working on Linux, but it works fine on Windows and Mac,
+
+",closed,False,2017-05-29 10:35:17,2017-05-29 12:29:38
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/29,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/29,ACL File Support for VSCode plugin - issue #383 ,,closed,True,2017-05-19 15:32:13,2017-05-19 15:38:50
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/28,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/28,#995,Add release publish instructions,closed,True,2017-05-15 11:36:28,2017-05-15 11:37:37
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/27,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/27,remove the extra 'y' in the package file,,closed,True,2017-05-12 21:18:30,2017-05-12 22:26:49
+composer-vscode-plugin,m-g-k,https://github.com/hyperledger/composer-vscode-plugin/pull/26,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/26,Support for 'events' in highlighting and snippets: Issue #807,"This is the fix for issue #807 (""As a user I can edit event definitions in VSCode"")",closed,True,2017-05-10 10:53:57,2017-05-10 13:56:30
+composer-vscode-plugin,liam-grace,https://github.com/hyperledger/composer-vscode-plugin/pull/25,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/25,Rebranding,,closed,True,2017-05-02 15:34:45,2017-05-05 14:15:47
+composer-vscode-plugin,jwagantall,https://github.com/hyperledger/composer-vscode-plugin/pull/24,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/24,Adding TravisCI notifications for build status,,closed,True,2017-04-28 17:02:37,2017-04-28 19:17:29
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/pull/23,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/23,New description on extension,"Edit on typo, with extended description and changes to pick up new URL in github",closed,True,2017-04-24 14:43:54,2017-04-24 14:51:14
+composer-vscode-plugin,nklincoln,https://github.com/hyperledger/composer-vscode-plugin/issues/22,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/22,Typo in details section,"Details section contains a typo:
+
+This VSCode extension parses .cto files using the Fabric Composer parser and reports any validatione errors. It is currently beta and may have issues. Please raise any problems you find.
+
+Very minor, but would be nice to remove it!",closed,False,2017-04-24 14:40:26,2017-04-24 14:48:31
+composer-vscode-plugin,liam-grace,https://github.com/hyperledger/composer-vscode-plugin/pull/21,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/21,Changed required repository name,,closed,True,2017-04-20 12:36:43,2017-04-21 14:12:35
+composer-vscode-plugin,sstone1,https://github.com/hyperledger/composer-vscode-plugin/pull/20,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/20,Empty commit to force build,,closed,True,2017-04-19 09:37:53,2017-04-28 19:19:34
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/19,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/19,update the release version number to v0.5.5,,closed,True,2017-03-20 14:57:17,2017-03-20 15:07:32
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/18,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/18,trigger build testfor v0.5.2,,closed,True,2017-03-17 23:04:33,2017-03-17 23:09:43
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/17,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/17,update script for trigging build,,closed,True,2017-03-17 22:36:23,2017-03-17 22:56:12
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/16,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/16,test publish,,closed,True,2017-03-17 16:23:19,2017-03-17 20:29:22
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/15,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/15,test deploy,,closed,True,2017-03-17 14:59:14,2017-03-17 15:37:28
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/14,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/14,update deploy script,,closed,True,2017-03-16 18:09:42,2017-03-17 13:43:16
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/13,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/13,retyped ],,closed,True,2017-03-16 16:41:59,2017-03-16 17:12:34
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/12,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/12,add message for debugging,,closed,True,2017-03-16 16:28:57,2017-03-16 16:40:55
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/11,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/11,add deployscript and update the logo,,closed,True,2017-03-16 15:48:48,2017-03-16 16:21:17
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/10,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/10,update the travis.yml file,,closed,True,2017-03-14 11:00:16,2017-03-14 14:34:04
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/9,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/9,add build script,check in code for #384,closed,True,2017-03-13 18:36:20,2017-03-14 10:54:31
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/8,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/8,prepare for release version 0.5.0,,closed,True,2017-03-10 13:13:32,2017-03-10 13:13:46
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/7,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/7,add travis build,,closed,True,2017-03-10 13:00:02,2017-03-10 13:00:44
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/6,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/6,change publisher name,,closed,True,2017-03-07 17:24:13,2017-03-07 17:24:23
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/5,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/5,replace icon.png with blockchain one,,closed,True,2017-03-07 16:32:22,2017-03-07 16:32:29
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/4,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/4,remove node ffrom the client engine,,closed,True,2017-03-07 09:21:00,2017-03-07 09:21:23
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/3,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/3,add vscode engine for server,,closed,True,2017-03-06 16:59:43,2017-03-06 16:59:49
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/2,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/2,add a publisher in server package,,closed,True,2017-03-06 15:25:01,2017-03-06 15:25:09
+composer-vscode-plugin,fenglianxu,https://github.com/hyperledger/composer-vscode-plugin/pull/1,https://api.github.com/repos/hyperledger/composer-vscode-plugin/issues/1,add initial client and server projects,,closed,True,2017-03-06 14:39:42,2017-03-06 14:39:52

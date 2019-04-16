@@ -1,0 +1,49 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-explorer,RealDeanZhao,https://github.com/hyperledger/sawtooth-explorer/pull/19,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/19,Support base64 encoded Chinese characters.,"atob() only supports ASCII.
+
+Note: escape() is not the web standard but most browsers support it.
+
+Signed-off-by: RealDeanZhao <zestxjest@outlook.com>",open,True,2018-10-18 04:34:53,2018-11-28 19:01:04
+sawtooth-explorer,tommling,https://github.com/hyperledger/sawtooth-explorer/pull/18,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/18,Docker file for oc,,closed,True,2018-10-01 21:32:54,2018-10-01 21:33:02
+sawtooth-explorer,tommling,https://github.com/hyperledger/sawtooth-explorer/pull/17,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/17,Docker file for oc,,closed,True,2018-10-01 21:28:58,2018-10-01 21:29:39
+sawtooth-explorer,tommling,https://github.com/hyperledger/sawtooth-explorer/pull/16,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/16,Docker file for oc,,closed,True,2018-09-28 21:41:33,2018-09-28 21:41:39
+sawtooth-explorer,tommling,https://github.com/hyperledger/sawtooth-explorer/pull/15,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/15,all in one dockerfile that builds,,closed,True,2018-09-28 21:27:51,2018-09-28 21:28:41
+sawtooth-explorer,johnjayasingh,https://github.com/hyperledger/sawtooth-explorer/pull/14,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/14,Removed Ace Editor & Added Support for Maintaining State Address,"I have added the support for storing address array in state monitor into localStorage.
+Scroll bar has been modified.
+Removed Ace-Editor and used pre tag for viewing JSON data properly",open,True,2018-09-01 15:02:52,2018-11-28 18:45:41
+sawtooth-explorer,messbees,https://github.com/hyperledger/sawtooth-explorer/pull/13,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/13,Fix docker website link,Signed-off-by: Anton Betsun <messbees@gmail.com>,open,True,2018-06-22 12:34:26,2019-02-15 18:05:48
+sawtooth-explorer,messbees,https://github.com/hyperledger/sawtooth-explorer/pull/12,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/12,Fix docker website link,"Fix docker website link in README.md
+Signed-off-by: Anton Betsun <messbees@gmail.com>",closed,True,2018-06-22 12:26:44,2018-06-22 12:29:46
+sawtooth-explorer,askmish,https://github.com/hyperledger/sawtooth-explorer/pull/11,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/11,Add proxy support for Dockerfile and docker-compose.yml files,,closed,True,2018-06-19 06:04:42,2018-07-03 20:25:40
+sawtooth-explorer,sergey-koba-mobidev,https://github.com/hyperledger/sawtooth-explorer/pull/10,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/10,fix nginx config to support options and route spa,"- need two additional headers to accept `OPTIONS` requests, which are sent by browsers, and `X-XSRF-TOKEN` header.
+- need a `/` in front of index.html to make nginx route SPA requests to index.html
+
+Probably these fixes are required because explorer uses latest nginx Docker image",closed,True,2018-06-12 08:42:32,2018-09-28 16:50:42
+sawtooth-explorer,sergey-koba-mobidev,https://github.com/hyperledger/sawtooth-explorer/pull/9,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/9,Fix nginx config,"- need two additional headers to accept `OPTIONS` requests, which are sent by browsers, and `X-XSRF-TOKEN` header.
+- need a `/` in front of index.html to make nginx route SPA requests to index.html
+
+Probably these fixes are required because explorer uses latest nginx Docker image",closed,True,2018-06-12 06:06:10,2018-06-12 08:38:28
+sawtooth-explorer,mikezaccardo,https://github.com/hyperledger/sawtooth-explorer/pull/8,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/8,Add standalone Dockerfile,,closed,True,2018-04-26 14:12:40,2018-04-26 15:14:20
+sawtooth-explorer,joewright,https://github.com/hyperledger/sawtooth-explorer/pull/7,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/7,Version 1 relayout and docker compose setup,"This updates the paging UI to match what's available in the sawtooth API. there's now only a page size selector and a Load Next {pagesize} button.
+
+It also includes some docker-compose configs for running everything via docker. At the moment, we're able to docker-compose up, view the explorer dev server at localhost:4200, and the compiled/minified front end assets at localhost:8091, and run unit tests from the ng-server container by using npm run test.",closed,True,2018-04-12 14:58:15,2018-04-16 13:30:42
+sawtooth-explorer,kidrecursive,https://github.com/hyperledger/sawtooth-explorer/pull/6,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/6,Sawtooth Version 1 Updates,"Signed-off-by: kidrecursive <chris.wilhite@pokitdok.com>
+
+This is a squashed and signed PR for @joewright's work to get the explorer up to date with Sawtooth 1.X and add docker support.",closed,True,2018-04-11 19:42:08,2018-04-12 14:59:27
+sawtooth-explorer,joewright,https://github.com/hyperledger/sawtooth-explorer/pull/5,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/5,Version 1 relayout and docker-compose setup,"This updates the paging UI to match what's available in the sawtooth API. there's now only a page size selector and a `Load Next {pagesize}` button.
+
+It also includes some docker-compose configs for running everything via docker. At the moment, we're able to `docker-compose up`, view the explorer dev server at `localhost:4200`, and the compiled/minified front end assets at `localhost:8091`, and run unit tests from the `ng-server` container by using `npm run test`.",closed,True,2018-04-11 18:00:58,2018-04-11 19:31:17
+sawtooth-explorer,mikezaccardo,https://github.com/hyperledger/sawtooth-explorer/pull/4,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/4,Add Dockerfile,Signed-off-by: Mike Zaccardo <mike@blockchaintp.com>,closed,True,2018-04-06 16:40:02,2018-04-26 14:15:42
+sawtooth-explorer,GiniH,https://github.com/hyperledger/sawtooth-explorer/pull/3,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/3,Fix Angular CLI dependency version,"An ""emergency patch"" to the angular devkit broke several builds of angular-cli. As a result, when trying to run the `sawtooth-explorer` project with `ng serve` for the first time after installing dependencies, users were getting the following error in output:
+
+`Error: Cannot find module '@angular-devkit/core'`
+
+This MR updates angular-cli to apply their fix for this, and changes the dependency to allow for patches and minor updates. It also updates the `dev_setup` script so that the global version of `angular-cli` installed will match the project version. Last, the `typescript` dependency has been changed so that it will meet the required version range for `angular-cli`.
+
+Issue referenced here: https://github.com/angular/angular-cli/issues/9276",closed,True,2018-02-26 18:14:05,2018-03-08 18:05:06
+sawtooth-explorer,GiniH,https://github.com/hyperledger/sawtooth-explorer/pull/2,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/2,Add Sawtooth Explorer project to repository,"This merge request adds the entire project to the repository.
+
+Views included are the Explorer which enables navigation between transaction, batch, and block entities, standalone detail views of those listed entities, and the State Monitor page which watches for state deltas given a list of address prefixes.
+
+The README has been updated with instructions for how to setup and run the project.",closed,True,2017-12-11 20:38:25,2017-12-19 15:55:18
+sawtooth-explorer,ryjones,https://github.com/hyperledger/sawtooth-explorer/pull/1,https://api.github.com/repos/hyperledger/sawtooth-explorer/issues/1,Create DCO,,closed,True,2017-11-27 22:55:10,2017-11-27 22:55:30

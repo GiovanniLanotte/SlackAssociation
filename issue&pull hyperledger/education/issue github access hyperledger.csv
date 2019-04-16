@@ -1,0 +1,846 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+education,SirisetyManeela,https://github.com/hyperledger/education/issues/133,https://api.github.com/repos/hyperledger/education/issues/133,container is not running,"im trying to startFabric.sh from education/LFS171x/fabric-material/tuna-app
+but im getting the following error
+
+Error response from daemon: Container e9f73f45e734185311475d59975d70e3c7c5b97d49a1cf09d0b9f13424f823de is not running
+
+maneela@ubuntu:~/edu/LFS171x/fabric-material/tuna-app$ docker info
+WARNING: Error loading config file: /home/maneela/.docker/config.json: stat /home/maneela/.docker/config.json: permission denied
+Containers: 4
+ Running: 3
+ Paused: 0
+ Stopped: 1
+Images: 9
+Server Version: 18.06.1-ce
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version:  (expected: 468a545b9edcd5932818eb9de8e72413e616e86e)
+runc version: N/A (expected: 69663f0bd4b60df09991c08812a60108003fa340)
+init version: v0.18.0 (expected: fec3683b971d9c3ef73f284f176672c44b448662)
+Security Options:
+ apparmor
+ seccomp
+  Profile: default
+Kernel Version: 4.15.0-46-generic
+Operating System: Ubuntu 18.04.2 LTS
+OSType: linux
+Architecture: x86_64
+CPUs: 1
+Total Memory: 2.908GiB
+Name: ubuntu
+ID: YKJZ:BEE6:ZXVV:CMYB:TQYW:TEYG:UQBI:SXOS:XR2N:4DPA:4W4O:HRNI
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Registry: https://index.docker.io/v1/
+Labels:
+Experimental: false
+Insecure Registries:
+ 127.0.0.0/8
+Live Restore Enabled: false
+
+please give me the solution... its very urgent",open,False,2019-03-08 09:02:51,2019-04-03 12:39:16
+education,anonydog,https://github.com/hyperledger/education/pull/132,https://api.github.com/repos/hyperledger/education/issues/132,Pin package versions,"`fabric-client` seems to have removed Client.newEventHub in later versions. That caused the following error for me when trying to add tuna or change holders in the client app:
+
+    TypeError: fabric_client.newEventHub is not a function
+
+Pinning it (and some dependencies) solved the issue for me.",open,True,2019-02-26 18:30:09,2019-02-26 18:30:09
+education,SirisetyManeela,https://github.com/hyperledger/education/issues/131,https://api.github.com/repos/hyperledger/education/issues/131,Failed to invoke,"terminal ::  
+getting this error while trying to change name of holders!!
+
+[EventHub.js]: _connect - options {}
+Failed to invoke successfully :: Error: There was a problem with the eventhub ::Error: Call dropped by load balancing policy
+
+i am using from /education/LFS171x/fabric-material/tuna-app
+
+at localhost:
+
+error:
+Change Tuna Holder
+Error: Please enter a valid Tuna Id
+Enter a catch id between 1 and 10: 
+1
+Enter name of new holder: 
+bob 
+
+after i do the above process and refresh the page values are changing!!
+
+please give me the solution its really urgent",open,False,2019-02-16 07:30:19,2019-03-08 08:58:48
+education,nimaafraz,https://github.com/hyperledger/education/issues/130,https://api.github.com/repos/hyperledger/education/issues/130,Could not find chaincode with the name 'tuna-app',"`getting all tuna from database:
+Store path:/Users/nima/.hfc-key-store
+Successfully loaded user1 from persistence
+error: [client-utils.js]: sendPeersProposal - Promise is rejected: Error: make sure the chaincode tuna-app has been successfully instantiated and try again: could not find chaincode with name 'tuna-app'
+    at /Users/nima/fabric/education/LFS171x/fabric-material/tuna-app/node_modules/grpc/src/node/src/client.js:554:15
+Query has completed, checking results
+error from query =  { Error: make sure the chaincode tuna-app has been successfully instantiated and try again: could not find chaincode with name 'tuna-app'
+    at /Users/nima/fabric/education/LFS171x/fabric-material/tuna-app/node_modules/grpc/src/node/src/client.js:554:15 code: 2, metadata: Metadata { _internal_repr: {} } }`",closed,False,2019-02-15 11:07:03,2019-02-16 17:05:07
+education,WandyLau,https://github.com/hyperledger/education/issues/129,https://api.github.com/repos/hyperledger/education/issues/129,general id validation failed,"In faber and Acme, the general id validation all failed.",open,False,2019-02-15 06:51:39,2019-02-15 06:51:39
+education,swcurran,https://github.com/hyperledger/education/pull/128,https://api.github.com/repos/hyperledger/education/issues/128,Tweak to Indy Workshop code to make startup more robust,Sometimes the Indy nodes don't start up before the Indy agents try hit the network. This tweak slows the Indy agents down a bit.,closed,True,2019-01-24 19:50:05,2019-01-24 20:35:52
+education,SaiKishanTalamarla,https://github.com/hyperledger/education/pull/127,https://api.github.com/repos/hyperledger/education/issues/127,HYYTA,NA,closed,True,2019-01-24 15:02:20,2019-02-25 20:13:28
+education,SaiKishanTalamarla,https://github.com/hyperledger/education/pull/126,https://api.github.com/repos/hyperledger/education/issues/126,Hyperledger Tuna App,NA,closed,True,2019-01-24 14:45:47,2019-02-25 20:13:40
+education,NeroVanbiervliet,https://github.com/hyperledger/education/issues/125,https://api.github.com/repos/hyperledger/education/issues/125,Missing source material for course LFS170x,"This repo does not contain the source of LFS17**0**x titled ""Blockchain: Understanding Its Uses and Implications"". 
+Is feedback accepted elsewhere or can I submit issues here as well for this course? 
+
+
+
+
+",closed,False,2019-01-23 10:18:53,2019-01-24 14:04:30
+education,tkuhrt,https://github.com/hyperledger/education/pull/124,https://api.github.com/repos/hyperledger/education/issues/124,Update readme,,closed,True,2019-01-15 18:32:54,2019-01-15 18:33:22
+education,tkuhrt,https://github.com/hyperledger/education/pull/123,https://api.github.com/repos/hyperledger/education/issues/123,Added Indy and Composer chapters to the table of contents,Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2019-01-15 18:26:03,2019-01-15 18:26:57
+education,tkuhrt,https://github.com/hyperledger/education/pull/122,https://api.github.com/repos/hyperledger/education/issues/122,Import edx content to Markdown,,closed,True,2019-01-15 18:04:14,2019-01-15 18:18:03
+education,potini3,https://github.com/hyperledger/education/issues/121,https://api.github.com/repos/hyperledger/education/issues/121,Transaction failed to be committed to the ledger due to ::TIMEOUT,"fabcar when I do node invoke.js i am getting below error message at end
+Transaction failed to be committed to the ledger due to ::TIMEOUT
+but when I am running Query.js I am getting the correct output why it is happening like this any ideas
+PS C:\Users\admin\fabric-samples\fabcar> node invoke.js
+Store path:C:\Users\admin\fabric-samples\fabcar\hfc-key-store
+(node:6988) DeprecationWarning: grpc.load: Use the @grpc/proto-loader module with grpc.loadPackageDefinition
+instead
+Successfully loaded user1 from persistence
+Assigning transaction_id:  1ec80f4fee7a7fe6b841653d59d893d29b85668f226ce9acfcef35258030ffcb
+Transaction proposal was good
+Successfully sent Proposal and received ProposalResponse: Status - 200, message - """"
+Send transaction promise and event listener promise have completed
+Successfully sent transaction to the orderer.
+Transaction failed to be committed to the ledger due to ::TIMEOUT",open,False,2018-12-28 19:11:49,2018-12-28 19:11:49
+education,potini3,https://github.com/hyperledger/education/issues/120,https://api.github.com/repos/hyperledger/education/issues/120,getting issue while running node Query.js,"I was getting error like this can any one help me this one is fabcar 
+
+Store path:C:\Users\admin\fabric-samples\fabcar\hfc-key-store
+(node:6016) DeprecationWarning: grpc.load: Use the @grpc/proto-loader module with grpc.loadPackageDefinition
+instead
+Successfully loaded user1 from persistence
+Query has completed, checking results
+error from query =  { Error: 2 UNKNOWN: access denied: channel [mychannel] creator org [Org1MSP]
+    at Object.exports.createStatusError (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\common.js:87:15)
+    at Object.onReceiveStatus (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:1188:28)
+    at InterceptingListener._callNext (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:564:42)
+    at InterceptingListener.onReceiveStatus (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:614:8)
+    at callback (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:841:24)
+  code: 2,
+  metadata: Metadata { _internal_repr: {} },
+  details: 'access denied: channel [mychannel] creator org [Org1MSP]' }",open,False,2018-12-27 17:40:22,2018-12-28 14:05:37
+education,SirisetyManeela,https://github.com/hyperledger/education/issues/119,https://api.github.com/repos/hyperledger/education/issues/119,deploying error,"im trying to install network onto hyperledger fabric peers. and im getting the following error!!
+please provide me the solution
+
+maneela@ubuntu:~/tuna/tuna-network$ composer network install --card PeerAdmin@hlfv1 --archiveFile tuna-network@0.0.1.bna
+✖ Installing business network. This may take a minute...
+Error: Error trying install business network. Error: No valid responses from any peers.
+Response from attempted peer comms was an error: Error: Failed to connect before the deadline
+Command failed
+",open,False,2018-12-26 12:46:15,2018-12-26 12:46:15
+education,robelkebede44,https://github.com/hyperledger/education/issues/118,https://api.github.com/repos/hyperledger/education/issues/118,Successfully committed the change to the ledger by the peer,"
+![git](https://user-images.githubusercontent.com/16935562/49284681-2a587e80-f44a-11e8-9ffe-c60995935799.PNG)
+
+![git2](https://user-images.githubusercontent.com/16935562/49284685-2f1d3280-f44a-11e8-80eb-a89da2536a4e.PNG)
+
+Successfully committed the change to the ledger by the peer but it is not upadating the ledger what is the problem Thank you.",closed,False,2018-11-30 09:27:48,2018-12-17 08:29:34
+education,rushikeshacharya,https://github.com/hyperledger/education/issues/117,https://api.github.com/repos/hyperledger/education/issues/117,How to manage role based access in Chaincode,"I want to put restriction on uses according to their role to call chaincode functions. For eg. In tunaFish example I do not want the Regulator or Restaurateur to call a function `recordTuna`. So how do I manage this.
+Can we restrict this access in chaincode or do we have to manange this at application side?",open,False,2018-11-23 09:28:21,2018-11-23 10:24:40
+education,tkuhrt,https://github.com/hyperledger/education/pull/115,https://api.github.com/repos/hyperledger/education/issues/115,Add Composer chapter,"Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>
+Signed-off-by: Alejandro Vicente Grabovetsky <sasha@aid.technology>
+Signed-off-by: Nicola Paoli <nicola@aid.technology>",closed,True,2018-10-29 20:11:38,2018-10-29 20:21:47
+education,tkuhrt,https://github.com/hyperledger/education/pull/114,https://api.github.com/repos/hyperledger/education/issues/114,Remove blank line to resolve merge conflict with master,Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2018-10-29 19:12:55,2018-10-29 19:13:26
+education,swcurran,https://github.com/hyperledger/education/pull/113,https://api.github.com/repos/hyperledger/education/issues/113,New instructions and scripts for running the Indy demo in just a browser - much easier,,closed,True,2018-10-20 18:22:13,2018-10-29 16:24:58
+education,alexvicegrab,https://github.com/hyperledger/education/pull/112,https://api.github.com/repos/hyperledger/education/issues/112,Fix merge issues on add-composer branch,"Curiously, this also includes some minor changes that we did earlier, but which don't appear reflected in the add-composer branch.
+
+Needed to merge #111 ",closed,True,2018-10-19 07:14:17,2018-10-20 09:08:48
+education,alexvicegrab,https://github.com/hyperledger/education/pull/111,https://api.github.com/repos/hyperledger/education/issues/111,Add composer to master,Requires #112 to resolve conflicts prior to merge,closed,True,2018-10-18 08:55:44,2018-10-29 20:23:01
+education,tkuhrt,https://github.com/hyperledger/education/pull/110,https://api.github.com/repos/hyperledger/education/issues/110,Add composer,"Signed-off-by: Nicola Paoli <nicola@aid.technology>
+Signed-off-by: Alejandro Vicente Grabovetsky <sasha@aid.technology>
+",closed,True,2018-10-18 01:41:48,2018-10-18 01:43:17
+education,swcurran,https://github.com/hyperledger/education/pull/109,https://api.github.com/repos/hyperledger/education/issues/109,Update to add-indy branch to make builds faster and clean up dockerfiles,,closed,True,2018-10-16 22:24:48,2018-10-18 01:15:08
+education,DBAti,https://github.com/hyperledger/education/issues/108,https://api.github.com/repos/hyperledger/education/issues/108,How to Add a New Peer in the fabric-material example,,open,False,2018-10-11 11:44:29,2018-10-11 11:44:29
+education,DBAti,https://github.com/hyperledger/education/pull/107,https://api.github.com/repos/hyperledger/education/issues/107,Tuna history,Added a new function to query tuna History,open,True,2018-10-11 11:28:09,2018-10-24 06:29:45
+education,nathalie-ckc,https://github.com/hyperledger/education/issues/106,https://api.github.com/repos/hyperledger/education/issues/106,"Add link to the ""how to contribute"" gist to the top-level README of this repo","Since this repo doesn't have a CONTRIBUTING.md, we should do this so that potential contributors can immediately know how to get started.  Right now, someone in-the-know has to tell you about the gist, which means you're missing out on potential contributors who don't know who to ask.
+
+https://gist.github.com/tkuhrt/10211ae0a26a91a8c030d00344f7d11b
+
+Alternatively, moving the guidelines entirely into a top-level CONTRIBUTING.md in the repo would work too.",open,False,2018-10-08 16:27:33,2018-12-18 14:42:27
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/105,https://api.github.com/repos/hyperledger/education/issues/105,Edx issue103,"Building on top of @atc-vince 's PR#104.
+
+Each item from Github issue #103 is implemented as a separate commit.  In case any of those items are not desired to be implemented, just the desired items can be cherry picked.",open,True,2018-10-08 01:35:01,2018-10-22 17:10:43
+education,atc-vince,https://github.com/hyperledger/education/pull/104,https://api.github.com/repos/hyperledger/education/issues/104,Chapter 6 & 7 Markdown w/ Images (#50)(#49),"This Pull Request contains the following:
+
+1. Chapter 6 (Sawtooth) Markdown File + Images (#50)
+2. Chapter 7 (Fabric) Markdown File + Images (#49) ",open,True,2018-10-05 22:29:54,2018-10-17 05:20:05
+education,nathalie-ckc,https://github.com/hyperledger/education/issues/103,https://api.github.com/repos/hyperledger/education/issues/103,LFS171x Chapter 7 feedback discussion before I edit the markdown,"Hi @tkuhrt and anyone else working on the LFS171x improvements,
+
+Here are my suggestions for improving Chapter 7 - Introduction to Hyperledger Fabric. If anyone feels strongly about any of them, please let me know in the next couple days. I plan to work on the markdown on the weekend (Oct 6-7).
+
+1) Key Components and Transaction Flow > Transaction Flow (Step 4)
+Typo: The ordering service, which is made up of a cluster of orderers, does not process transactions, smart contracts, or *maintains* the shared ledger. → maintain 
+
+2) Key Components and Transaction Flow > What Does the MSP Do?
+a) The diagram doesn’t describe the flow in the text. The diagram matches the text on the previous slide (Membership Service Provider (MSP)) better, so I propose to move it there.
+b) Stretch goal, if I have time: Make a flow chart that matches the flow in the text on this slide
+
+3) Installing Hyperledger Fabric > Installing Hyperledger Fabric Docker Images and Binaries
+I got errors following these steps.  Discussion forum post by tianzhong2015 at https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2017/discussion/forum/i4x-LinuxFoundationX-LFS171x-course-3T_2017/threads/5b6939f8c305ad0a19000db7 indicates that we should use version 1.2.0 to avoid the errors, and that worked for me.  
+I propose to change the command to 'curl -sSL https://goo.gl/6wtTN5 | bash -s 1.2.0'
+
+4) Installing Hyperledger Fabric > Installing Hyperledger Fabric Docker Images and Binaries
+“the blue portion in the above curl command” There is no blue portion…
+I propose to make https://goo.gl/6wtTN5 blue and make the word 'blue' blue, as has been done lower down the page.
+
+5) Installing Hyperledger Fabric > Installing Hyperledger Fabric Docker Images and Binaries
+I propose to change “perform the following command for each of the Docker images:” to “perform the following command for each of the Fabric docker images"" because, if you just did Chapter 6, you would have all the sawtooth images too & we don't mean for them to also tag those as latest.
+
+6) Installing Hyperledger Fabric > Installing Hyperledger Fabric Docker Images and Binaries
+“$ docker tag hyperledger/fabric-tools:x86_64-1.0.2 hyperledger/fabric-tools:latest”  I think there needs to be 2 red portions (both 'fabric-tools'), but just 1 is red.
+I propose to make the second 'fabric-tools' red.
+
+7) Installing Hyperledger Fabric > Installing Hyperledger Fabric
+First, the previous slide caused fabric-samples to be cloned already.  Second, you should cd into fabric-samples before you do the $PWD because you want fabric-samples/bin, but you don’t even need to do that because byfn.sh takes care of it for you on line 31.  
+I propose to just delete this slide entirely.
+
+8) Writing an Application > Getting Started (Part II)
+‘node registerAdmin.js’ fails with syntax error.  Some students also filed Github issue #64 about this.
+This post has the solution: https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2017/discussion/forum/i4x-LinuxFoundationX-LFS171x-course-3T_2017/threads/5b472605c5264809bd00139c
+I installed nvm using the instructions on the nvm github page README at https://github.com/creationix/nvm
+Then I did ‘nvm install v8.9.0’, as recommended by the discussion post
+Then I did ‘npm install’ again in the tuna-app directory, but got warnings about high risk vulnerabilities, so I ran the commands recommended in the warnings:
+* npm I npm@latest -g
+* npm install 
+* npm audit fix
+* did ‘npm install’ again & just low risk vulnerabilities remaining.  Was able to continue with the exercise from here.
+I propose to add to add another Troubleshooting section with the suggestion that you might need v8.9.0 and give the pointer to the nvm repo to install nvm, 'nvm install v8.9.0' and repeat 'npm install'",open,False,2018-10-04 19:32:30,2018-10-08 01:35:35
+education,atc-vince,https://github.com/hyperledger/education/pull/102,https://api.github.com/repos/hyperledger/education/issues/102,Chapter 8: What's Next Markdown (#51),"This Pull Request contains the following:
+
+- Chapter 8 Markdown originally done by Thaddeus
+
+- Added Table of Contents
+
+- Added Images",closed,True,2018-09-27 01:43:06,2018-10-15 01:22:25
+education,tkuhrt,https://github.com/hyperledger/education/pull/101,https://api.github.com/repos/hyperledger/education/issues/101,Don't merge me. Testing only.,,closed,True,2018-09-25 16:08:12,2018-09-25 16:26:41
+education,atc-vince,https://github.com/hyperledger/education/pull/100,https://api.github.com/repos/hyperledger/education/issues/100,Chapter 8: What's Next Markdown (#51),"This Pull Request contains the following:
+
+1. Chapter 8 changes originally created by Thaddeus (TOC added by me)
+2. Chapter 8 image files",closed,True,2018-09-25 04:27:48,2018-09-27 01:38:34
+education,atc-vince,https://github.com/hyperledger/education/pull/99,https://api.github.com/repos/hyperledger/education/issues/99,Chapter 8: Import Thaddeus' changes (#51),"This Pull Request contains the following:
+- Chapter 8 changes originally created by Thaddeus
+- Chapter 8 Table of Contents
+- Chapter 8 images",closed,True,2018-09-25 03:19:46,2018-09-25 03:50:01
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/98,https://api.github.com/repos/hyperledger/education/issues/98,Chapter 1 improvements (#89),"Not doing Point 1 of Github issue 89, as stated in the issue 89 discussion.
+
+Point 2: Remove video on DLT vs. Blockchain
+=============================================
+Remove the video, which confused students.  See Discussion forum post:
+https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2017/discussion/forum/i4x-LinuxFoundationX-LFS171x-course-3T_2017/threads/5a78c95684452a081800089c.
+
+Extend explanation that Blockchain is just a type of DLT by mentioning 2
+other types of DLTs.
+
+Point 3, Modified Point 4, Add missing link
+================================================
+Distributed Ledger Technology (DLT) > Blockchains (Continued)
+
+3. Definition of block shouldn’t be split up with mention of bitcoin
+concepts in between. I put the bitcoin example after block is
+explained, for better concept flow.
+
+4. Nonce relates to the Bitcoin example, so indicate that this list of 4
+pieces of metadata refer to the Bitcoin example (which continues with
+the Merkle Tree section in the next slide).
+
+Bonus: ""or a brief history of blockchain technology, please click here.""
+was missing the link ""here"". Added it.
+
+Point 5: Remove conceptual speed bump
+======================================
+
+Distributed Ledger Technology (DLT) > Blockchains (Continued): I propose
+to mention that Merkle tree root will be defined on the next page, to
+remove a brain speed bump for students who don't know what a Merkle tree
+is.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",open,True,2018-09-18 08:09:12,2018-09-19 00:20:27
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/97,https://api.github.com/repos/hyperledger/education/issues/97,Issue 51,"What's Next Chapter and images for Fabric 
+Signed-off-by: Thaddeus Cambron jjc6476@psu.edu",closed,True,2018-09-18 03:04:46,2018-10-16 01:40:12
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/96,https://api.github.com/repos/hyperledger/education/issues/96,Issue 51,"What' Next Chapter Images for Fabric
+Signed-off-by: thaddeus-cambron jjc6476@psu.edu",closed,True,2018-09-18 02:58:19,2018-09-18 03:14:52
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/95,https://api.github.com/repos/hyperledger/education/issues/95,Issue 51,"What' Next Chapter Images for Fabric 
+Signed-off-by: Thaddeus Cambron jjc6476@psu.edu",closed,True,2018-09-18 02:51:48,2018-09-18 03:02:17
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/94,https://api.github.com/repos/hyperledger/education/issues/94,Issue 51," What' Next Chapter Images for Fabric 
+Signed-off-by: thaddeus-cambron jjc6476@psu.edu ",closed,True,2018-09-18 02:43:30,2018-09-18 02:50:27
+education,piotrekcudny,https://github.com/hyperledger/education/issues/93,https://api.github.com/repos/hyperledger/education/issues/93,ScannerError (eDx course Sawtooth exercise),"Following the instructions from Chapter 6. > Starting Hyperledger Sawtooth I've dowloaded sawtooth-default.yaml, changed directory and tried to run docker command. Then I've stuck with an error:
+
+yaml.scanner.ScannerError: mapping values are not allowed here in ""./sawtooth-default.yaml"", line 381, column 24
+
+Do you have any idea how to solve this one?",open,False,2018-09-17 18:51:31,2018-09-17 22:47:39
+education,swcurran,https://github.com/hyperledger/education/pull/92,https://api.github.com/repos/hyperledger/education/issues/92,HL Indy chapter - replacement PR,"Signed-off-by: Stephen Curran <swcurran@gmail.com>
+
+This PR replaces the previous Indy Chapter PR - I had a DCO issue that I needed to clean up. Cleaned it by saving the changed files, closing the previous PR, removing the branch and recreating the changes.",closed,True,2018-09-16 21:54:01,2018-10-15 01:11:45
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/91,https://api.github.com/repos/hyperledger/education/issues/91,What's Next (#78),Signed-off-by: thaddeus-cambron jjc6476@psu.edu,closed,True,2018-09-16 20:32:25,2018-10-15 01:23:42
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/90,https://api.github.com/repos/hyperledger/education/issues/90,What's Next (#78),"- What' Next Chapter
+-  Images for Fabric
+Signed-off-by: Thaddeus Cambron <jjc6476@psu.edu>",closed,True,2018-09-16 14:49:31,2018-09-16 18:54:56
+education,nathalie-ckc,https://github.com/hyperledger/education/issues/89,https://api.github.com/repos/hyperledger/education/issues/89,LFS171x Chapter 1 feedback discussion before I edit the markdown,"Hi @tkuhrt and anyone else working on the LFS171x improvements,
+
+Here are my suggestions for improving Chapter 1.  If anyone feels strongly about any of them, please let me know in the next few days.  I plan to work on the markdown on Monday Sept 17, afternoon PDT.
+
+1) Distributed Ledger Technology (DLT) > Blockchains: “A blockchain is a peer-to-peer distributed ledger forged by consensus, combined with a system for ""smart contracts"" and other assistive technologies.” but then Bitcoin is the next example & Bitcoin doesn’t natively enable smart contracts.  I propose to change this to “A blockchain is a peer-to-peer distributed ledger forged by consensus.” and define Smart Contracts later on, when you are talking about blockchains that do enable smart contracts.
+
+2) Video: The Difference between DLT and Blockchains (Brian Behlendorf): I propose to remove this video because it illustrates that the difference is muddy, instead of giving a new student a clear difference.  I think we don't want to confuse students so early in the course.  I saw a [thread about the confusion on the Discussion forum](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2017/discussion/forum/i4x-LinuxFoundationX-LFS171x-course-3T_2017/threads/5a78c95684452a081800089c).  A better way to explain it is that a blockchain is a type of distributed ledger technology.  There are other types of DLT, like a hashgraph & tangle.  This can be described in text.  
+
+3) Distributed Ledger Technology (DLT) > Blockchains (Continued): Definition of block shouldn’t be split up with mention of bitcoin concepts in between.  I propose to put the bitcoin example after block is explained, for better concept flow.
+
+4) Distributed Ledger Technology (DLT) > Blockchains (Continued): ""A block commonly consists of four pieces of metadata: ... The proof of work, also known as a nonce"": I would leave out POW, since many blockchains don't use POW consensus & just give 3 pieces of metadata.  
+
+5) Distributed Ledger Technology (DLT) > Blockchains (Continued): I propose to mention that Merkle tree root will be defined on the next page, to remove a brain speed bump for students who don't know what a Merkle tree is. -> ""The Merkle tree root for the transactions included in this block. (Next slide will explain Merkle trees)""",open,False,2018-09-14 23:00:35,2018-09-18 08:09:56
+education,tijohnson,https://github.com/hyperledger/education/issues/88,https://api.github.com/repos/hyperledger/education/issues/88,Potential High Severity Security Vulnerability,"Known high severity security vulnerability detected in cryptiles < 4.1.2 defined in package-lock.json. 
+update suggested: cryptiles ~> 4.1.2. ",open,False,2018-09-13 18:37:35,2018-09-13 18:37:35
+education,alexvicegrab,https://github.com/hyperledger/education/pull/87,https://api.github.com/repos/hyperledger/education/issues/87,Add composer [extra changes],,closed,True,2018-09-12 15:26:20,2018-09-12 15:35:56
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/86,https://api.github.com/repos/hyperledger/education/issues/86,Import edx content copy,Signed-off-by: Thaddeus Cambron <jjc6476@psu.edu>,open,True,2018-09-12 13:01:11,2018-09-16 16:21:00
+education,Dwarakeshtv,https://github.com/hyperledger/education/pull/85,https://api.github.com/repos/hyperledger/education/issues/85,Import edx content copy,Signed-off-by: Thaddeus Cambron jjc6476@psu.edu,closed,True,2018-09-12 06:24:47,2018-09-12 06:25:19
+education,Dwarakeshtv,https://github.com/hyperledger/education/pull/84,https://api.github.com/repos/hyperledger/education/issues/84,Import edx content copy,Signed-off-by: Thaddeus Cambron jjc6476@psu.edu,closed,True,2018-09-12 06:21:33,2018-09-12 06:22:16
+education,Dwarakeshtv,https://github.com/hyperledger/education/pull/83,https://api.github.com/repos/hyperledger/education/issues/83,Import EDX content copy,,closed,True,2018-09-12 06:17:55,2018-09-12 06:20:32
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/82,https://api.github.com/repos/hyperledger/education/issues/82,edX Migration,Signed-off-by: Thaddeus Cambron <jjc6476@psu.edu>,open,True,2018-09-12 04:19:37,2018-09-12 05:52:10
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/81,https://api.github.com/repos/hyperledger/education/issues/81,Import edx content (#78),"Signed-off-by: Thaddeus Cambron <jjc6476@psu.edu>
+",open,True,2018-09-12 03:51:52,2018-09-14 23:15:37
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/80,https://api.github.com/repos/hyperledger/education/issues/80,Import edx Content (#51),Signed-off-by: Thaddeus Cambron <jjc6476@psu.edu>,closed,True,2018-09-11 23:38:13,2018-09-12 00:45:35
+education,swcurran,https://github.com/hyperledger/education/pull/79,https://api.github.com/repos/hyperledger/education/issues/79,Initial commit of Hyperledger Indy Chapter and Demo Code,"Signed-off-by: Stephen Curran <swcurran@gmail.com>
+
+Initial commit of the Hyperledger Indy chapter, including a still early draft of the chapter text, and an in progress code example using Indy-Node and Indy-SDK as the basis of some web-based Agents.
+
+More to do - edits and cleanup, add images, add questions, add references and continue to add guidance around the demo.
+
+",closed,True,2018-09-08 03:27:45,2018-09-16 21:42:22
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/78,https://api.github.com/repos/hyperledger/education/issues/78,"Import edx content - ""What's Next""",,closed,True,2018-09-08 01:57:37,2018-09-11 23:20:32
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/77,https://api.github.com/repos/hyperledger/education/issues/77,Address GitHub issue (#74),"Get students to read guide on writing good discussion posts by putting
+incentive in the wording. Also add specifics of what info would be
+useful for the types of problems we're seeing students hit in this
+course.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",open,True,2018-09-07 19:38:02,2018-09-07 19:38:02
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/76,https://api.github.com/repos/hyperledger/education/issues/76,"Add ""Welcome and Introduction"" chapter (#75)","Add content for this chapter from the edX course.
+
+All images are in images/welcome-intro subdirectory, except for
+Hyperledger_logo.png, which is in images/ in case it's useful to other
+chapters.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",closed,True,2018-09-06 22:29:28,2018-09-07 18:58:19
+education,nathalie-ckc,https://github.com/hyperledger/education/issues/75,https://api.github.com/repos/hyperledger/education/issues/75,"Migrate ""Welcome & Introduction"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Welcome & Introduction"" to a markdown file located at ./LFS171x/docs/welcome-intro.md in the import-edx-content branch.
+
+@tkuhrt : Please add ""edx-migration"" label & assign this issue to me.  First step to closing issue #74 .
+
+",closed,False,2018-09-06 20:15:52,2018-09-06 22:51:55
+education,nathalie-ckc,https://github.com/hyperledger/education/issues/74,https://api.github.com/repos/hyperledger/education/issues/74,Get students to read guide on writing good discussion posts by putting incentive in the wording,"Welcome & Introduction  > Welcome & Introduction  > Guidelines to Discussions
+
+Many of the students who indicate they are stuck write very un-informative Discussion posts, which makes it hard to help them.  (e.g. just pasting error & no info about their environment)  I think if no one helps them in a short time, they will likely abandon the course.
+
+Instead of ""To learn more tips about using the Discussion boards, click [here](http://blog.edx.org/getting-most-out-edx-discussion-forums)"", put something like ""If you get stuck, increase your chances of timely help by following [this guide](http://blog.edx.org/getting-most-out-edx-discussion-forums) on writing a good Discussion post""",open,False,2018-09-06 19:59:35,2018-09-07 19:38:45
+education,tkuhrt,https://github.com/hyperledger/education/pull/73,https://api.github.com/repos/hyperledger/education/issues/73,Update Chapter 1,,closed,True,2018-08-28 22:17:22,2018-08-28 22:17:50
+education,atc-vince,https://github.com/hyperledger/education/pull/72,https://api.github.com/repos/hyperledger/education/issues/72,Chapter 3 Markdown with Images (#46),"Signed-off-by: atc-vince <atchyperledger@gmail.com>
+
+Added Chapter 3 images and fixed Supply Chain II TOC link
+
+Signed-off-by: atc-vince <atchyperledger@gmail.com>
+
+Chapter 3 Markdown and commits squashed",closed,True,2018-08-23 02:22:00,2018-09-27 02:40:32
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/71,https://api.github.com/repos/hyperledger/education/issues/71,Add edX content for Iroha chapter (#48),"Added contents from edX Course Chapter 5.
+
+Based on feedback for another chapter, didn't include the ""Some rights
+reserved"" on videos and did add CC By 4.0 to the non-logo diagrams.
+
+RocketChat logo was huge, so had to use img width constraint.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",closed,True,2018-08-20 18:09:12,2018-09-06 20:38:10
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/70,https://api.github.com/repos/hyperledger/education/issues/70,Add Chapter 2 contents (#45),"Squashing a few commits from edx-issue45 together into a single commit:
+
+====
+
+Populate content from Chapter 2 of edX course.
+
+Chapter 2 is Introduction to Hyperledger.
+
+====
+
+Incorporate feedback to PR #62 for Issue #45
+
+For images, add Licensed under CC By 4.0 with link.
+
+For videos with ""some rights reserved"", remove it.
+
+Replace a., b. with 1., 2. to get indented sub-#s.
+
+Update Hyperledger Burrow link.
+
+Remove source of Hyperledger Cello image because of CC By 4.0.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",closed,True,2018-08-18 08:05:32,2018-09-06 20:20:52
+education,thaddeus-cambron,https://github.com/hyperledger/education/pull/69,https://api.github.com/repos/hyperledger/education/issues/69,"Add subdirectories in ""images""",The current structure contains a subdirectory for one chapter. This PR creats all chapter subdirectories. New users can drag and drop in the images from edX.,open,True,2018-08-15 01:10:11,2018-10-15 01:22:26
+education,joeyjoplin,https://github.com/hyperledger/education/pull/68,https://api.github.com/repos/hyperledger/education/issues/68,Updating introduction to hyperledger fabric,Edx migration,open,True,2018-08-15 00:51:53,2018-08-21 20:28:29
+education,thaddeus-cambron,https://github.com/hyperledger/education/issues/67,https://api.github.com/repos/hyperledger/education/issues/67,"Create subdirectories in ""images"" for each chapter",New GitHub users will not have to push to the repo to work on the edX transition if the subdirectories are present.,closed,False,2018-08-14 13:48:35,2018-08-16 05:05:38
+education,joeyjoplin,https://github.com/hyperledger/education/issues/66,https://api.github.com/repos/hyperledger/education/issues/66,"Please, add me to repository",,closed,False,2018-08-14 01:01:39,2018-08-14 01:02:17
+education,alexvicegrab,https://github.com/hyperledger/education/pull/65,https://api.github.com/repos/hyperledger/education/issues/65,Add Composer chapter,Provisional pull request for Hyperledger Composer material for EdX course.,closed,True,2018-08-13 17:45:05,2018-08-28 21:56:31
+education,francas,https://github.com/hyperledger/education/issues/64,https://api.github.com/repos/hyperledger/education/issues/64,node registerAdmin.js fails,"I am following the EDX course and get the error below when trying to run `node registerAdmin.js`. What am I doing wrong?
+
+auridas@auridas-VirtualBox:~/Projects/education/LFS171x/fabric-material/tuna-app$ node registerAdmin.js
+/home/auridas/Projects/education/LFS171x/fabric-material/tuna-app/node_modules/fabric-client/lib/Client.js:746
+	async _createOrUpdateChannel(request, have_envelope) {
+	      ^^^^^^^^^^^^^^^^^^^^^^
+
+SyntaxError: Unexpected identifier
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/home/auridas/Projects/education/LFS171x/fabric-material/tuna-app/node_modules/fabric-client/index.js:25:18)
+",open,False,2018-08-11 09:01:10,2019-03-31 16:44:59
+education,ansonyao,https://github.com/hyperledger/education/issues/63,https://api.github.com/repos/hyperledger/education/issues/63,Trouble to install it on mac using docker,"I am following the tutorial to install it on mac. When I run the command 
+
+`docker-compose -f sawtooth-default.yaml up`
+
+It does download the images and runs but then it stops after printing the following lines:
+sawtooth-shell-default | creating key directory: /root/.sawtooth/keys
+sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.priv
+sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.pub
+
+Anyone can point me a direction on how to get it running on my mac?",open,False,2018-08-10 04:49:05,2018-08-14 05:26:55
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/62,https://api.github.com/repos/hyperledger/education/issues/62,Add Chapter 2 contents (#45),"Populate content from Chapter 2 of edX course.
+
+Chapter 2 is Introduction to Hyperledger.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",closed,True,2018-07-31 08:13:20,2018-09-06 20:26:27
+education,arijitthehacker,https://github.com/hyperledger/education/pull/61,https://api.github.com/repos/hyperledger/education/issues/61,Update README.md,"Why is the DCO Check failing everytime ??
+Can somebody share the guidelines for it ?",open,True,2018-07-30 10:57:14,2018-07-31 04:00:15
+education,tkuhrt,https://github.com/hyperledger/education/pull/60,https://api.github.com/repos/hyperledger/education/issues/60,Import edx content,Correct minor formatting issue in the glossary (#52 and #59),closed,True,2018-07-27 19:15:52,2018-07-27 19:16:40
+education,nathalie-ckc,https://github.com/hyperledger/education/pull/59,https://api.github.com/repos/hyperledger/education/issues/59,Populate Glossary content (#52),"Grab content from the edX course and format it.
+
+Signed-off-by: nathalie-ckc <nathalie.ckc.123@gmail.com>",closed,True,2018-07-25 22:16:50,2018-07-28 04:29:30
+education,atomreclusive,https://github.com/hyperledger/education/issues/58,https://api.github.com/repos/hyperledger/education/issues/58,Trouble installing Sawtooth in Lubuntu,"I've tried installing Sawtooth on a linux only machine using the provided [file](https://raw.githubusercontent.com/hyperledger/education/master/LFS171x/sawtooth-material/sawtooth-default.yaml) and 2 versions of docker-compose (latest and 1.9.0) and 2 versions of lubuntu (16.04 and 18.04). I have a hard time getting past the key generation stage. Freezes here:
+```
+sawtooth-shell-default | creating key directory: /root/.sawtooth/keys
+sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.priv
+sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.pub
+```
+I have gotten to the block genesis stage once while running a VM under windows (16.04, docker-compose 1.9.0) but it also freezes when:
+```
+sawtooth-validator-default | [2018-07-24 04:01:11.789 INFO    chain] Chain controller initialized with chain head: ce6cec...b556 (block_num:0, state: c2ba282...4d72, previous_block_id: 0000000000000000)
+sawtooth-validator-default | [2018-07-24 04:01:11.790 INFO    publisher] Now building on top of block: ce6cec...b556 (block_num:0, state: c2ba282...4d72, previous_block_id: 0000000000000000)
+```
+Is this an issue of using this particular distro?",closed,False,2018-07-24 04:09:56,2018-08-17 16:43:45
+education,242,https://github.com/hyperledger/education/pull/57,https://api.github.com/repos/hyperledger/education/issues/57,Updated Nan to 2.10.0,Nan previous to that didn't support node 10,open,True,2018-07-13 01:45:40,2018-07-13 16:49:46
+education,morphatic,https://github.com/hyperledger/education/pull/56,https://api.github.com/repos/hyperledger/education/issues/56,"Added a ""Resources"" section",Adding a list of links so that anyone who arrives on the page will immediately have places to go to get more information about how to contribute to the HL T&E WG.,open,True,2018-07-02 15:32:01,2018-08-20 18:49:34
+education,tushargandhi87,https://github.com/hyperledger/education/issues/55,https://api.github.com/repos/hyperledger/education/issues/55,npm install in fabric demo throws error : ...nan_maybe_43_inl.h:112:15: error: no member named 'ForceSet' in 'v8::Object',"macOS Sierra 10.12.3
+node version : 10.4.0
+npm version : 6.1.0
+
+
+npm install after cloning git repository does not work. 
+Error log : 
+...
+In file included from ../src/main.cpp:1:
+In file included from ../../nan/nan.h:192:
+../../nan/nan_maybe_43_inl.h:112:15: error: no member named 'ForceSet' in 'v8::Object'
+  return obj->ForceSet(isolate->GetCurrentContext(), key, value, attribs);
+         ~~~  ^
+In file included from ../src/main.cpp:1:
+../../nan/nan.h:834:18: warning: 'MakeCallback' is deprecated: Use MakeCallback(..., async_context) [-Wdeprecated-declarations]
+    return node::MakeCallback(
+                 ^
+/Users/tushargandhi/.node-gyp/10.4.0/include/node/node.h:172:50: note: 'MakeCallback' has been explicitly marked deprecated here
+                NODE_EXTERN v8::Local<v8::Value> MakeCallback(
+                                                 ^
+In file included from ../src/main.cpp:1:
+../../nan/nan.h:849:18: warning: 'MakeCallback' is deprecated: Use MakeCallback(..., async_context) [-Wdeprecated-declarations]
+    return node::MakeCallback(
+                 ^
+/Users/tushargandhi/.node-gyp/10.4.0/include/node/node.h:165:50: note: 'MakeCallback' has been explicitly marked deprecated here
+                NODE_EXTERN v8::Local<v8::Value> MakeCallback(
+                                                 ^
+In file included from ../src/main.cpp:1:
+../../nan/nan.h:864:18: warning: 'MakeCallback' is deprecated: Use MakeCallback(..., async_context) [-Wdeprecated-declarations]
+    return node::MakeCallback(
+                 ^
+/Users/tushargandhi/.node-gyp/10.4.0/include/node/node.h:158:50: note: 'MakeCallback' has been explicitly marked deprecated here
+                NODE_EXTERN v8::Local<v8::Value> MakeCallback(
+                                                 ^
+In file included from ../src/main.cpp:1:
+../../nan/nan.h:1473:31: warning: 'MakeCallback' is deprecated: Use MakeCallback(..., async_context) [-Wdeprecated-declarations]
+    return scope.Escape(node::MakeCallback(
+                              ^
+/Users/tushargandhi/.node-gyp/10.4.0/include/node/node.h:172:50: note: 'MakeCallback' has been explicitly marked deprecated here
+                NODE_EXTERN v8::Local<v8::Value> MakeCallback(
+                                                 ^
+4 warnings and 1 error generated.
+make: *** [Release/obj.target/pkcs11/src/main.o] Error 1
+gyp ERR! build error 
+gyp ERR! stack Error: `make` failed with exit code: 2
+gyp ERR! stack     at ChildProcess.onExit (/usr/local/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:258:23)
+gyp ERR! stack     at ChildProcess.emit (events.js:182:13)
+gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:237:12)
+gyp ERR! System Darwin 16.4.0
+gyp ERR! command ""/usr/local/Cellar/node/10.4.0/bin/node"" ""/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js"" ""configure"" ""build""
+gyp ERR! cwd /Users/tushargandhi/Documents/demo/fabric/education/LFS171x/fabric-material/tuna-app/node_modules/pkcs11js
+gyp ERR! node -v v10.4.0
+gyp ERR! node-gyp -v v3.6.2
+gyp ERR! not ok 
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! pkcs11js@1.0.9 build: `node-gyp configure build`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the pkcs11js@1.0.9 build script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+npm WARN Local package.json exists, but node_modules missing, did you mean to install?
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/tushargandhi/.npm/_logs/2018-06-24T10_57_11_583Z-debug.log
+npm WARN Fabric-tuna-app@1.0.0 No repository field.
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! pkcs11js@1.0.9 install: `npm run build`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the pkcs11js@1.0.9 install script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/tushargandhi/.npm/_logs/2018-06-24T10_57_11_883Z-debug.log
+
+
+
+output of npm ls nan 
+
+npm ls nan
+Fabric-tuna-app@1.0.0 /Users/tushargandhi/Documents/demo/fabric/education/LFS171x/fabric-material/tuna-app
+├─┬ UNMET DEPENDENCY fabric-client@1.0.2
+│ └─┬ UNMET DEPENDENCY pkcs11js@1.0.9
+│   └── nan@2.7.0  deduped
+└─┬ grpc@1.6.6
+  └── nan@2.7.0 
+
+npm ERR! missing: fabric-client@1.0.2, required by Fabric-tuna-app@1.0.0
+npm ERR! missing: pkcs11js@1.0.9, required by fabric-client@1.0.2
+
+
+https://github.com/vue-generators/vue-form-generator/issues/457
+ suggests a resolution that would force nan version 2.10.0. 
+How do I go about it ? This is my first attempt at fabric hands-on.
+
+",open,False,2018-06-24 11:23:15,2019-02-05 20:17:13
+education,tkuhrt,https://github.com/hyperledger/education/pull/54,https://api.github.com/repos/hyperledger/education/issues/54,Added final exam and answers,,closed,True,2018-06-18 20:51:02,2018-06-18 20:51:45
+education,tkuhrt,https://github.com/hyperledger/education/pull/53,https://api.github.com/repos/hyperledger/education/issues/53,Import edx content,Create an initial structure for migrating the EdX course to markdown.,closed,True,2018-06-18 17:49:01,2018-06-18 17:55:49
+education,tkuhrt,https://github.com/hyperledger/education/issues/52,https://api.github.com/repos/hyperledger/education/issues/52,"Migrate ""Glossary"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Glossary"" to a markdown file located at `./LFS171x/docs/glossary.md` in the `import-edx-content` branch.",closed,False,2018-06-18 17:41:56,2018-07-27 19:04:20
+education,tkuhrt,https://github.com/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/51,"Migrate ""What's Next"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""What's Next"" to a markdown file located at `./LFS171x/docs/whats-next.md` in the `import-edx-content` branch.",open,False,2018-06-18 17:41:04,2018-09-27 02:13:23
+education,tkuhrt,https://github.com/hyperledger/education/issues/50,https://api.github.com/repos/hyperledger/education/issues/50,"Migrate ""Introduction to Hyperledger Sawtooth"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Introduction to Hyperledger Sawtooth"" to a markdown file located at `./LFS171x/docs/introduction-to-hyperledger-sawtooth.md` in the `import-edx-content` branch.",open,False,2018-06-18 17:39:27,2018-09-27 22:19:48
+education,tkuhrt,https://github.com/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/49,"Migrate ""Introduction to Hyperledger Fabric"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Introduction to Hyperledger Fabric"" to a markdown file located at `./LFS171x/docs/introduction-to-hyperledger-fabric.md` in the `import-edx-content` branch.",open,False,2018-06-18 17:38:42,2018-09-29 06:35:35
+education,tkuhrt,https://github.com/hyperledger/education/issues/48,https://api.github.com/repos/hyperledger/education/issues/48,"Migrate ""Introduction to Hyperledger Iroha"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Introduction to Hyperledger Iroha"" to a markdown file located at `./LFS171x/docs/introduction-to-hyperledger-iroha.md` in the `import-edx-content` branch.",closed,False,2018-06-18 17:37:22,2018-08-30 17:56:54
+education,tkuhrt,https://github.com/hyperledger/education/issues/47,https://api.github.com/repos/hyperledger/education/issues/47,"Migrate ""Technical Requirements"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Technical Requirements"" to a markdown file located at `./LFS171x/docs/technical-requirements.md` in the `import-edx-content` branch.",open,False,2018-06-18 17:35:06,2018-10-12 00:31:44
+education,tkuhrt,https://github.com/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/46,"Migrate ""The Promise of Business Blockchain Technologies"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""The Promise of Business Blockchain Technologies"" to a markdown file located at `./LFS171x/docs/the-promise-of-business-blockchain-technologies.md` in the `import-edx-content` branch.",closed,False,2018-06-18 17:34:00,2018-09-04 17:56:26
+education,tkuhrt,https://github.com/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/45,"Migrate ""Introduction to Hyperledger"" from EdX to Markdown ","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Introduction to Hyperledger"" to a markdown file located at `./LFS171x/docs/introduction-to-hyperledger.md` in the `import-edx-content` branch.",closed,False,2018-06-18 17:32:28,2018-08-30 17:55:14
+education,tkuhrt,https://github.com/hyperledger/education/issues/44,https://api.github.com/repos/hyperledger/education/issues/44,"Migrate ""Discovering Blockchain Technologies"" from EdX to Markdown","As part of our effort to create a second revision of the LFS171x EdX course, migrate the chapter ""Discovering Blockchain Technologies"" to a markdown file located at `./LFS171x/docs/discovering-blockchain-technologies.md` in the `import-edx-content` branch.",closed,False,2018-06-18 17:28:48,2018-06-18 17:57:49
+education,mpmckenna8,https://github.com/hyperledger/education/pull/43,https://api.github.com/repos/hyperledger/education/issues/43,Server will now only try to send one response for per request,"Server logic in controller.js will no longer log or catch errors from trying to rewrite headers. Basically every response gets a res_msg which is a string onto which either errors are appended, or if succesful the tx code is added and sent, showing the client it worked. An alternative would be to use res.write to keep adding stuff to the response.
+
+addresses https://github.com/hyperledger/education/issues/40
+
+Signed-off-by: mpmckenna8 <mpmckenna8@me.com>",open,True,2018-05-27 18:59:52,2018-05-27 18:59:52
+education,mpmckenna8,https://github.com/hyperledger/education/pull/42,https://api.github.com/repos/hyperledger/education/issues/42,Server will now only try to send one response for per request.,"Server logic in controller.js will no longer catch errors from trying to rewrite headers.  Fix is basically every response gets a res_msg which is a string onto which either errors are appended, or if succesful the tx code is added and sent, showing the client it worked. An alternative would be to use res.write to keep adding stuff to the response.
+
+Addresses https://github.com/hyperledger/education/issues/40",closed,True,2018-05-27 18:41:29,2018-05-27 18:56:46
+education,naveedh27,https://github.com/hyperledger/education/issues/41,https://api.github.com/repos/hyperledger/education/issues/41,npm install Fails in ubuntu,"Below is the error message.
+make: Leaving directory '/home/user/Blockchain/education/LFS171x/fabric-material/tuna-app/node_modules/pkcs11js/build'
+gyp ERR! build error 
+gyp ERR! stack Error: `make` failed with exit code: 2
+gyp ERR! stack     at ChildProcess.onExit (/home/user/.nvm/versions/node/v10.0.0/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:258:23)
+gyp ERR! stack     at ChildProcess.emit (events.js:182:13)
+gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:225:12)
+gyp ERR! System Linux 4.13.0-39-generic
+gyp ERR! command ""/home/user/.nvm/versions/node/v10.0.0/bin/node"" ""/home/user/.nvm/versions/node/v10.0.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js"" ""configure"" ""build""
+gyp ERR! cwd /home/user/Blockchain/education/LFS171x/fabric-material/tuna-app/node_modules/pkcs11js
+gyp ERR! node -v v10.0.0
+gyp ERR! node-gyp -v v3.6.2
+gyp ERR! not ok 
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! pkcs11js@1.0.9 build: `node-gyp configure build`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the pkcs11js@1.0.9 build script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+npm WARN Local package.json exists, but node_modules missing, did you mean to install?
+",closed,False,2018-05-26 17:46:00,2018-05-26 20:25:32
+education,mpmckenna8,https://github.com/hyperledger/education/issues/40,https://api.github.com/repos/hyperledger/education/issues/40,Tuna example change_holder function in controller.js trying to make too many responses.,"Each time res.json({whatever:stuff}) is called headers are set and a response is sent and then your next call to do that tries to reset the headers on the response and it logs:
+
+Failed to invoke successfully ::  Error: Can't set headers after they are sent.
+
+So maybe just generate a json thing and then send it at the end.
+
+https://github.com/hyperledger/education/blob/5c52ec18e15c81f88a008d1ca5e7fb8553c3fac1/LFS171x/fabric-material/tuna-app/controller.js#L449-L469
+
+Will try and make a fix and pull request shortly.
+
+",open,False,2018-05-25 21:27:30,2018-12-05 13:22:00
+education,thingsinjars,https://github.com/hyperledger/education/pull/39,https://api.github.com/repos/hyperledger/education/issues/39,Check the user is set before filtering transfers,This solves issue #11. The error is thrown on load because the user is only set after the dropdown value has changed. This doesn't attempt to filter the transfers if the user hasn't been set.,open,True,2018-05-25 14:55:15,2018-05-25 15:23:53
+education,CoachJoeConway,https://github.com/hyperledger/education/issues/38,https://api.github.com/repos/hyperledger/education/issues/38,Is there a way to persist the Sawtooth state?,"When I shutdown the Sawtooth docker container, I lose all the data added to the blockchain.
+
+Can I shutdown the docker container and persist the state of the Sawtooth blockchain to disk so that when I re-launch the docker container I get the blockchain state again?",open,False,2018-05-20 15:38:30,2018-09-18 14:12:24
+education,tkuhrt,https://github.com/hyperledger/education/pull/37,https://api.github.com/repos/hyperledger/education/issues/37,Update sawtooth 1 0,,closed,True,2018-05-18 18:21:03,2018-05-18 18:33:06
+education,dplumb94,https://github.com/hyperledger/education/pull/36,https://api.github.com/repos/hyperledger/education/issues/36,Wait until batch is committed before refresh,"The TunaChain webapp automatically refreshes when a transaction is submitted. This is only useful if it waits until the new data is committed to state before the refresh happens. This PR adds a request to the `batch_statuses` endpoint to ensure that the batch is committed before refreshing.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",closed,True,2018-05-08 19:01:06,2018-05-08 20:12:52
+education,askmish,https://github.com/hyperledger/education/pull/35,https://api.github.com/repos/hyperledger/education/issues/35,Added proxy support for docker-compose and Dockerfiles,,closed,True,2018-05-08 12:12:59,2018-05-08 20:13:46
+education,Muazzamkhan95,https://github.com/hyperledger/education/issues/34,https://api.github.com/repos/hyperledger/education/issues/34,Unable to create tuna record and getting error in console while loading the page.,"Uncaught TypeError: Cannot read property 'reduce' of undefined
+    at Object.$.get [as success] (bundle.js:30830)
+    at fire (bundle.js:13202)
+    at Object.fireWith [as resolveWith] (bundle.js:13332)
+    at done (bundle.js:19239)
+    at XMLHttpRequest.<anonymous> (bundle.js:19482)
+
+
+![screenshot from 2018-04-23 23 45 16](https://user-images.githubusercontent.com/17087133/39146546-7ff244ea-4750-11e8-8d4f-4dcb6a57d4d4.png)
+",open,False,2018-04-23 18:46:30,2018-04-23 18:46:30
+education,worthwhileindustries,https://github.com/hyperledger/education/issues/33,https://api.github.com/repos/hyperledger/education/issues/33,Can't create a tuna record,"Sends a request but, nothing happens on the UI and nothing in response.
+
+![image](https://user-images.githubusercontent.com/3536254/39089348-56565b8c-4582-11e8-938d-97c0b498ae6c.png)
+
+![image](https://user-images.githubusercontent.com/3536254/39089356-7fa62daa-4582-11e8-87c7-c8fb8956134c.png)
+",open,False,2018-04-21 22:39:12,2018-09-22 14:27:27
+education,dplumb94,https://github.com/hyperledger/education/pull/32,https://api.github.com/repos/hyperledger/education/issues/32,Update sawtooth-default.yaml to 1.0,"This updates the docker images pulled by the sawtooth-default docker-compose file to 1.0, and makes the necessary updates to the command scripts and ports of some containers.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",closed,True,2018-04-19 16:36:40,2018-05-03 21:26:09
+education,Immanuel190,https://github.com/hyperledger/education/issues/31,https://api.github.com/repos/hyperledger/education/issues/31,Loaded batch injectors: #Sawtooth,"I am trying to install sawtooth 0.8 but I am strucked after using $ docker-compose -f sawtooth-default.yaml up cmd: 
+
+sawtooth-validator-default | [2018-04-17 06:40:32.532 INFO     publisher] Now building on top of block: 864fa9ac(0, S:5f0aff2b, P:00000000)
+sawtooth-validator-default | [2018-04-17 06:40:32.537 DEBUG    publisher] Loaded batch injectors: 
+[]
+
+thanks in advance",open,False,2018-04-17 08:45:19,2018-04-17 08:45:19
+education,dplumb94,https://github.com/hyperledger/education/pull/30,https://api.github.com/repos/hyperledger/education/issues/30,Update Sawtooth TunaChain demo app to 1.0,"This PR updates the Sawtooth TunaChain demo app components to use 1.0 SDK.
+
+1. The TunaChain TP written in JavaScript was replaces with with one that is written in Python. This was done for several reasons:
+    - Most of the Hyperledger Sawtooth maintainers are more familiar with the Python SDK than the Javascript SDK
+    - Python's concise and easy to read syntax will make the example code more legible
+    - Using a different language for the TP and Client shows off the flexibility of Sawtooth as a platform
+
+2. The TunaChain client was updated to use the 1.0 SDK
+
+3. A a docker-compose file was added to be specifically used for building and running TunaChain. This obviates the need for any build tools (besides docker and docker-compose) to be installed locally on a user's machine to demo the application
+
+
+NOTE: Once the ""Blockchain for Business - An Introduction to Hyperledger Technologies"" EdX course is updated, this code should be merged with the master branch",closed,True,2018-04-13 19:33:44,2018-05-03 21:24:44
+education,dplumb94,https://github.com/hyperledger/education/pull/29,https://api.github.com/repos/hyperledger/education/issues/29,Update sawtooth-default.yaml Docker Compose file to 1.0,"This updates the docker images pulled by the sawtooth-default docker-compose file to 1.0, and makes the necessary updates to the command scripts and ports of some containers.
+
+Signed-off-by: Darian Plumb <dplumb@bitwise.io>",closed,True,2018-04-12 22:30:58,2018-04-13 00:03:08
+education,dplumb94,https://github.com/hyperledger/education/pull/28,https://api.github.com/repos/hyperledger/education/issues/28,Update Sawtooth TunaChain demo app to 1.0,"This PR updates the Sawtooth TunaChain demo app components to use 1.0 SDK.
+
+1.  The TunaChain TP written in JavaScript was replaces with with one that is written in Python. This was done for several reasons:
+
+- The Javascript TP API is not supported by the core team
+- Python's concise and easy to read syntax will make the example code more legible
+- Using a different language for the TP and Client shows off the flexibility of Sawtooth as a platform
+
+2. The TunaChain client was updated to use the 1.0 SDK
+
+3. A a docker-compose file was added to be specifically used for building and running TunaChain. This obviates the need for any build tools (besides docker and docker-compose) to be installed locally on a user's machine to demo the application",closed,True,2018-04-12 22:15:05,2018-04-13 00:02:57
+education,musicalentropy,https://github.com/hyperledger/education/issues/27,https://api.github.com/repos/hyperledger/education/issues/27,Issue with Fabric Tuna application on Linux,"When I change a Tuna Holder, the blockchain seems to be updated with the new information, however the terminal displays this :
+
+> The transaction has been committed on peer localhost:7053
+> Send transaction promise and event listener promise have completed
+> Successfully sent transaction to the orderer.
+> Successfully committed the change to the ledger by the peer
+> Failed to invoke successfully :: Error: Can't set headers after they are sent.
+> (node:14045) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 2): Error: Can't set headers after they are sent.
+
+Any idea about this error ? Thanks in advance !",open,False,2018-04-11 09:15:38,2019-03-15 18:46:30
+education,ghost,https://github.com/hyperledger/education/issues/26,https://api.github.com/repos/hyperledger/education/issues/26,Not able to see sawtooth-client-default while installing sawtooth,"While installing sawtooth using below command 
+Command: docker-compose -f sawtooth-default.yaml up
+
+I cannot see sawtooth-client-default instead, it is showing 
+
+sawtooth-shell-default | Creating key directory:  /root/ .sawtooth/keys
+sawtooth-shell-default | writing file:  /root/ .sawtooth/keys/root.priv
+sawtooth-shell-default | writing file:  /root/ .sawtooth/keys/root.pub
+
+Thus creating a problem in exec sawtooth client default
+docker exec -it sawtooth-client-default bash
+getting error:
+Error response from daemon: No such container sawtooth client default
+
+running docker ps -a gives below
+sawtooth-shell-default
+sawtooth-settings-tp-default
+sawtooth-rest-api-default
+sawtooth-intkey-tp-python-default
+sawtooth-xo-tp-python-default
+sawtooth-validator-default
+
+Can anyone help me to rectify this issue?
+
+
+
+",open,False,2018-03-18 08:39:38,2018-05-19 20:30:31
+education,gmanroney,https://github.com/hyperledger/education/issues/25,https://api.github.com/repos/hyperledger/education/issues/25,npm run build does not work - but don't think its a problem,"the website for the training course [https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2017](url) says you can execute 
+`npm run build`
+however the package.json has:   
+```
+""scripts"": {
+    ""start"": ""node index.js"",
+    ""test"": ""echo \""Error: no test specified\"" && exit 1""
+  },
+```
+Am guessing the website needs to be updated?",open,False,2018-03-03 22:51:56,2018-03-07 21:21:09
+education,glendjustus,https://github.com/hyperledger/education/issues/24,https://api.github.com/repos/hyperledger/education/issues/24,Can't create tuan record,"I can't get Create Tuna Record to work. I started the processor with the following text as the last message in the terminal: ""Initializing JSON handler for Sawtooth Tuna Chain."" Does that mean the processor is running? Any ideas what I can do to make this work?",closed,False,2018-03-01 22:47:08,2018-03-07 05:30:14
+education,coolsvap,https://github.com/hyperledger/education/pull/23,https://api.github.com/repos/hyperledger/education/issues/23,Update the sawtooth-default.yaml,"Update the sawtooth default docker-compose
+version to 2.0 since it does fails with 2.1
+
+Fixes: #22
+Signed-off-by: Swapnil Kulkarni <me@coolsvap.net>",closed,True,2018-02-18 13:22:11,2018-02-23 17:53:17
+education,coolsvap,https://github.com/hyperledger/education/issues/22,https://api.github.com/repos/hyperledger/education/issues/22,sawtooth-default.yaml does not load up with docker-compose,"When running the following command 
+
+# docker-compose -f sawtooth-default.yaml up
+
+it gives following error,
+
+ERROR: Version in ""./sawtooth-default.yaml"" is unsupported. You might be seeing this error because you're using the wrong Compose file version. Either specify a version of ""2"" (or ""2.0"") and place your service definitions under the `services` key, or omit the `version` key and place your service definitions at the root of the file to use version 1.
+For more on the Compose file format versions, see https://docs.docker.com/compose/compose-file/
+",closed,False,2018-02-18 13:21:02,2018-07-12 17:05:21
+education,tkuhrt,https://github.com/hyperledger/education/pull/21,https://api.github.com/repos/hyperledger/education/issues/21,Added note that this application is based on 0.8 of Sawtooth,,closed,True,2018-02-02 22:31:43,2018-02-02 22:34:28
+education,atishaya11,https://github.com/hyperledger/education/issues/20,https://api.github.com/repos/hyperledger/education/issues/20,Admin not getting registered,"I am not able to register the admin, and getting the following error after registeringUser.
+ Store path:/home/atishaya/.hfc-key-store
+Failed to register: Error: Failed to get admin.... run registerAdmin.js
+",open,False,2018-02-02 13:19:48,2018-02-02 13:19:48
+education,tkuhrt,https://github.com/hyperledger/education/pull/19,https://api.github.com/repos/hyperledger/education/issues/19,Change latest to 0.8 to reflect course material,Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2018-01-30 23:01:21,2018-01-30 23:59:28
+education,ghost,https://github.com/hyperledger/education/issues/18,https://api.github.com/repos/hyperledger/education/issues/18,How can i Publish nodes over same network?,"Can anyone please guide me how can I publish node on the same network. using hyperledger sawtooth.
+Below repository
+https://github.com/hyperledger/education/tree/master/LFS171x/sawtooth-material/sawtooth-tuna
+
+
+![blockchain-2018-01-25-18-53-21](https://user-images.githubusercontent.com/275278/35391641-0e721136-0201-11e8-92f9-f226db37f4b8.png)
+",open,False,2018-01-25 14:00:36,2018-01-25 14:00:36
+education,tabz11,https://github.com/hyperledger/education/issues/17,https://api.github.com/repos/hyperledger/education/issues/17,.hfc-key-store,"Hi,
+This is more a question then issue.
+I am trying to use this material, and for .hfc-key-store, and not using docker-compose.yaml so my network credentials will not be generated automatically. Is there any way I can hard code these credentials in .hfc-key-store folder so it is good for me to debug the code without putting up the whole network?",open,False,2018-01-25 12:22:57,2018-01-25 12:35:22
+education,suhasmane02,https://github.com/hyperledger/education/issues/16,https://api.github.com/repos/hyperledger/education/issues/16,Cannot start node registerAdmin.js,"running below command from education/LFS171x/fabric-material/tuna-app getting error.
+**node registerAdmin.js**
+
+module.js:471
+    throw err;
+    ^
+
+Error: Cannot find module 'fabric-client'
+    at Function.Module._resolveFilename (module.js:469:15)
+    at Function.Module._load (module.js:417:25)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/home/suhas/Hyperledger_Edu/education/LFS171x/fabric-material/tuna-app/registerAdmin.js:12:21)
+    at Module._compile (module.js:570:32)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+",open,False,2018-01-22 15:52:18,2018-07-21 09:33:57
+education,asettouf,https://github.com/hyperledger/education/pull/15,https://api.github.com/repos/hyperledger/education/issues/15,Add a go example to the sawtooth material,"Hello,
+
+after following the lesson, I realized I wasn't so confident I could understand the application so I decided to kill 2 birds with one stone. Learn go, and ensure I understood what was happening with the Sawtooth example.  And now that I have the example working, I believed it could be nice for people allergic to NodeJS to have a counterpart in a different language.
+
+As of yet the features are working, if you have any recommendations to make the code cleaner, I'll be happy to implement them.
+
+By the way, I had to commit the sawtooth_sdk as right now there is no `go get` that will easily retrieve the sdk (as opposed to fabric for instance)  because some libraries needed by the sdk are not present and must be generated by cloning their repo (cf [JIRA-STL-238](https://jira.hyperledger.org/browse/STL-238)) 
+
+Basically the equivalent of `processor/index.js` is `src/processor/main.go`  and `processor/handler.js` is `src/handler/handler.go`. The rest is the sawtooth_sdk compiled
+
+Signed-off-by: asettouf <adonis.settouf@gmail.com>
+  
+  ",open,True,2018-01-07 23:44:38,2018-01-09 13:46:59
+education,truestep,https://github.com/hyperledger/education/issues/14,https://api.github.com/repos/hyperledger/education/issues/14,Can not Create Tuna Record. Tuna record creation time is forever.,"Tuna record creation time is forever.
+Tried with both
+with sawtooth-default.yaml from master
+and with 0.8 images from this PR https://github.com/hyperledger/education/pull/12
+
+During the creation of the ""Tuna Record"" call to
+http://localhost:8080/batch_status?id=3b7062802b579ace1e1e89bb1af6b37eaee521026f46a3ed1a17db70aec38307539e7bba5d525c1ef8bfd96dafef396eae4499a0d5d30b2956db9293b807b3e3&wait%22
+returns:
+```{
+data: [
+{
+id: ""3b7062802b579ace1e1e89bb1af6b37eaee521026f46a3ed1a17db70aec38307539e7bba5d525c1ef8bfd96dafef396eae4499a0d5d30b2956db9293b807b3e3"",
+invalid_transactions: [ ],
+status: ""PENDING""
+}
+],
+link: ""http://localhost:8080/batch_status?id=3b7062802b579ace1e1e89bb1af6b37eaee521026f46a3ed1a17db70aec38307539e7bba5d525c1ef8bfd96dafef396eae4499a0d5d30b2956db9293b807b3e3&wait""""
+}
+```
+
+part of the log from dockers:
+
+> sawtooth-validator-default | [2017-12-30 22:17:47.925 DEBUG    selector_events] Using selector: ZMQSelector
+sawtooth-validator-default | [2017-12-30 22:17:47.925 INFO     interconnect] Listening on tcp://eth0:8800
+sawtooth-validator-default | [2017-12-30 22:17:47.925 DEBUG    dispatch] Added send_message function for connection ServerThread
+sawtooth-validator-default | [2017-12-30 22:17:47.926 DEBUG    dispatch] Added send_last_message function for connection ServerThread
+sawtooth-validator-default | [2017-12-30 22:17:47.927 INFO     chain] Chain controller initialized with chain head: 42cf152c(0, S:24d4c66e, P:00000000)
+sawtooth-validator-default | [2017-12-30 22:17:47.927 INFO     publisher] Now building on top of block: 42cf152c(0, S:24d4c66e, P:00000000)
+sawtooth-validator-default | [2017-12-30 22:17:47.929 DEBUG    publisher] Loaded batch injectors: []
+sawtooth-client-default | creating key directory: /root/.sawtooth/keys
+sawtooth-client-default | writing file: /root/.sawtooth/keys/root.priv
+sawtooth-client-default | writing file: /root/.sawtooth/keys/root.pub
+sawtooth-validator-default | [2017-12-30 22:17:54.502 DEBUG    interconnect] ServerThread receiving CLIENT_STATE_LIST_REQUEST message: 81 bytes
+sawtooth-validator-default | [2017-12-30 22:17:54.502 DEBUG    interconnect] ServerThread sending CLIENT_STATE_LIST_RESPONSE to b'bffc3624c2ef4caf'
+sawtooth-validator-default | [2017-12-30 22:18:02.420 DEBUG    interconnect] ServerThread receiving CLIENT_BATCH_SUBMIT_REQUEST message: 924 bytes
+sawtooth-validator-default | [2017-12-30 22:18:02.422 DEBUG    executor] no transaction processors registered for processor type transfer-chain: 0.0: application/json
+sawtooth-validator-default | [2017-12-30 22:18:02.423 INFO     executor] Waiting for transaction processor (transfer-chain, 0.0, application/json)
+",closed,False,2017-12-30 22:37:48,2018-03-01 07:03:29
+education,walmon,https://github.com/hyperledger/education/pull/13,https://api.github.com/repos/hyperledger/education/issues/13,Removing double instatiation of app,"I think the reason why all the requests use get instead of post is that for req.body didn't work, it was because app was instantiated twice thus overwriting the encoders",closed,True,2017-12-24 16:41:27,2018-05-03 21:23:07
+education,gdvyas,https://github.com/hyperledger/education/pull/12,https://api.github.com/repos/hyperledger/education/issues/12,Update sawtooth-default.yaml,"docker compose was not working with version: ""2.1"" => switched to ""2""
+Docker images were not up-to-date and Validator was giving error
+---------------------
+#17	---  Validator Timed Out	--- The request timed out while waiting for a response from the validator. It may not be running, or have encountered an internal error. The request may or may not have been processed.
+---------------------
+So, docker images name changed to latest and 0.8 is latest stable version. Once 1.0 is stable and release, we can switch back to ""latest""",closed,True,2017-12-20 06:59:03,2018-05-03 21:23:27
+education,owenrh,https://github.com/hyperledger/education/issues/11,https://api.github.com/repos/hyperledger/education/issues/11,Sawtooth-tuna - Transfer bug?,"Hi, 
+
+I'm just running through the edX **Blockchain for Business - An Introduction to Hyperledger Technologies** course. I'm hitting what appears to be a bug when attempting to perform a transfer an asset.
+
+When I perform the transfer, the transfer fields reset but nothing appears in the _Accept Tuna_ section. If I refresh the browser I get the following error in the console.
+
+`bundle.js:30428 Uncaught TypeError: Cannot read property 'public' of null
+    at transfers.filter.transfer (bundle.js:30428)
+    at Array.filter (<anonymous>)
+    at getState (bundle.js:30428)
+    at Object.$.get [as success] (bundle.js:30556)
+    at fire (bundle.js:13363)
+    at Object.fireWith [as resolveWith] (bundle.js:13493)
+    at done (bundle.js:19318)
+    at XMLHttpRequest.<anonymous> (bundle.js:19560)`
+
+this is the code in question
+
+`    // Populate transfer list for selected user
+    transfers.filter(transfer => transfer.owner === this.user.public)
+      .forEach(transfer => addAction('#transferList', transfer.asset, 'Accept'))`
+
+This is in Chrome. Using the latest repo code. Thanks.",open,False,2017-12-12 12:07:20,2018-01-08 00:36:57
+education,abelsilva,https://github.com/hyperledger/education/pull/10,https://api.github.com/repos/hyperledger/education/issues/10,Change the Sample Tuna Catch Application to use POST requests,"Using the previous GET requests, the addTuna failed when GPS coordinates had negative values because
+
+e.g.:
+`64.586734, -1.521949`",open,True,2017-11-08 23:31:48,2018-02-11 02:24:57
+education,Rapso,https://github.com/hyperledger/education/issues/9,https://api.github.com/repos/hyperledger/education/issues/9,Wrong compose version,LFS171 says you need at least 1.8.1 docker compose version but sawtooth-default.yaml  uses 2.1 version,closed,False,2017-11-03 15:19:26,2017-11-28 17:17:43
+education,alexandrag2254,https://github.com/hyperledger/education/pull/8,https://api.github.com/repos/hyperledger/education/issues/8,Add attributes,,closed,True,2017-10-26 19:46:07,2017-10-26 21:50:40
+education,alexandrag2254,https://github.com/hyperledger/education/pull/7,https://api.github.com/repos/hyperledger/education/issues/7,Add Hyperledger Fabric code to Hyperledger education repo,,closed,True,2017-10-24 01:20:15,2017-10-24 23:20:35
+education,alexandrag2254,https://github.com/hyperledger/education/pull/6,https://api.github.com/repos/hyperledger/education/issues/6,adding LFS171x sawtooth code to education folder,Signed-off-by: Alexandra Groetsema <alexandrag2254@gmail.com>,closed,True,2017-10-21 22:10:29,2017-10-23 22:28:52
+education,alexandrag2254,https://github.com/hyperledger/education/pull/5,https://api.github.com/repos/hyperledger/education/issues/5,Add Hyperledger Sawtooth material,I am adding LFS171x folder with Hyperledger Sawtooth code for Intro to Hyperledger MOOC.,closed,True,2017-10-20 06:46:44,2017-10-21 21:48:35
+education,alexandrag2254,https://github.com/hyperledger/education/pull/4,https://api.github.com/repos/hyperledger/education/issues/4,Add HL Sawtooth material ,I am adding LFS171x folder with Hyperledger Sawtooth code for Intro to Hyperledger MOOC. ,closed,True,2017-10-20 04:52:40,2017-10-20 04:53:26
+education,alexandrag2254,https://github.com/hyperledger/education/pull/3,https://api.github.com/repos/hyperledger/education/issues/3,Adding sawtooth code,"I am adding LFS171x folder with sawtooth-material folder that contains sample application for Intro to HL mooc. 
+
+Signed-off-by: alexandrag2254 <alexandrag2254@gmail.com>",closed,True,2017-10-20 04:27:02,2017-10-20 04:43:19
+education,ryjones,https://github.com/hyperledger/education/pull/2,https://api.github.com/repos/hyperledger/education/issues/2,Create DCO,DO NOT MERGE,closed,True,2017-10-03 21:27:57,2017-10-03 21:36:29
+education,rjones-lf,https://github.com/hyperledger/education/pull/1,https://api.github.com/repos/hyperledger/education/issues/1,Create clahub,,closed,True,2017-08-25 20:11:37,2017-08-25 20:12:11

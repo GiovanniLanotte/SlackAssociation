@@ -1,0 +1,212 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/32,https://github.com/hyperledger/composer-concerto/pull/32,jeromesimeon,(fix) Clean up dependencies,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+This addresses dependencies issues recorded in #30 
+
+## Checklist
+ - [x]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+## Issue/User story
+
+#30 
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-composer)
+- [x] [GitHub Issues](https://github.com/hyperledger/composer/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/composer)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+
+See #30 
+
+## Validation of the fix
+
+All tests are passing
+
+## Automated Tests
+
+All tests are passing
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],1,2019-03-29 16:51:54,2019-03-29 18:16:54,2019-03-29 18:16:54,True,2019-03-29 18:16:54,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/31,https://github.com/hyperledger/composer-concerto/pull/31,jeromesimeon,(fix) mkdirp should be a dependency,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [x]  A link to the issue/user story that the pull request relates to
+ - [x]  How to recreate the problem without the fix
+ - [x]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [x]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+
+See #30 
+
+## Steps to Reproduce
+
+See https://github.com/accordproject/ergo/issues/591
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-composer)
+- [x] [GitHub Issues](https://github.com/hyperledger/composer/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/composer)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+
+Simple dependency change.
+
+## Validation of the fix
+
+All tests are passing.
+
+## Automated Tests
+
+No new test needed.
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->",[],1,2019-03-27 15:58:41,2019-03-28 11:24:00,2019-03-29 16:43:04,False,,,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/29,https://github.com/hyperledger/composer-concerto/pull/29,jeromesimeon,(fix) pkgstamp script should use moment-mini as well,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [x]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+
+## Steps to Reproduce
+In travis
+
+## Existing issues
+
+N/A
+
+## Design of the fix
+
+Update script pkgstamp to use `moment-mini`
+
+## Validation of the fix
+
+Not easy to test without merge and test on travis
+
+## Automated Tests
+
+Only affects deployment scripts
+
+## What documentation has been provided for this pull request
+",[],1,2019-03-18 22:40:40,2019-03-18 22:45:37,2019-03-19 00:21:35,True,2019-03-18 22:45:37,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/28,https://github.com/hyperledger/composer-concerto/pull/28,jeromesimeon,"(feature) Switch DateTime representation to moment, rather than JS Date","<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [x]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [x]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [x]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+## Issue/User story
+A possible fix for issue #27 based on moment.js as a DateTime representation
+
+## Design of the fix
+
+The fix switches internal representation for values validated through CTO models to Moment, rather than JavaScript Date.
+
+Moment objects are created in a way which preserves the original timezone offset if present (using `Moment.parseZone`) during deserialization.
+
+Moment objects are serialized back to an ISO8601 string with the original timezone offset preserved.
+
+Timestamps when not present during validation are always created in the UTC timezone.
+
+## Automated Tests
+
+All tests have been migrated to the new representation, and a new serialization test checks for the timezone offset preservation.
+
+",[],8,2019-03-06 18:19:03,2019-03-18 22:27:33,2019-03-19 00:21:36,True,2019-03-18 22:27:32,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/25,https://github.com/hyperledger/composer-concerto/pull/25,dselman,Remove codegen,,[],36,2018-10-30 13:33:19,2018-10-30 13:37:05,2018-10-30 13:37:05,True,2018-10-30 13:37:05,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/24,https://github.com/hyperledger/composer-concerto/pull/24,dselman,Add automatic timestamp field for transactions and events,Fix for #23 ,[],38,2018-10-29 11:25:11,2018-10-29 11:27:55,2018-10-29 11:28:02,True,2018-10-29 11:27:54,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/22,https://github.com/hyperledger/composer-concerto/pull/22,dselman,Fix for #21 - allow transactions to have an identifying field,,[],36,2018-10-28 09:19:42,2018-10-29 08:48:30,2018-10-29 08:48:30,True,2018-10-29 08:48:30,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/20,https://github.com/hyperledger/composer-concerto/pull/20,mttrbrts,Add Travis secure user,https://github.com/alrra/travis-scripts/blob/master/docs/github-deploy-keys.md#3-add-the-environment-variables-gh_user_name-and-gh_user_email,[],3,2018-10-25 11:15:09,2018-10-25 11:31:47,2018-10-29 10:06:50,True,2018-10-25 11:31:47,mttrbrts,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/19,https://github.com/hyperledger/composer-concerto/pull/19,mttrbrts,chore: Add pkgset script,,[],1,2018-10-25 11:06:20,2018-10-25 11:14:27,2018-10-25 11:14:27,True,2018-10-25 11:14:27,mttrbrts,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/18,https://github.com/hyperledger/composer-concerto/pull/18,mttrbrts,Add travis build,,[],1,2018-10-25 10:29:58,2018-10-25 10:38:10,2018-10-25 10:38:14,True,2018-10-25 10:38:10,mttrbrts,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/17,https://github.com/hyperledger/composer-concerto/pull/17,mttrbrts,Fix #16 and add unit test,"Fixes #16 . 
+
+This allows users to add Concerto to their project without specifying a system model. This implies that all base types (Transaction, Event, Asset & Participant) will need to specify an identifying field when a system model is not provided",[],2,2018-10-23 11:24:53,2018-10-23 11:41:12,2018-10-23 11:41:19,True,2018-10-23 11:41:12,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/8,https://github.com/hyperledger/composer-concerto/pull/8,dselman,Update docs,,[],31,2018-10-10 18:12:12,2018-10-10 18:12:30,2018-10-10 18:12:30,True,2018-10-10 18:12:30,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/6,https://github.com/hyperledger/composer-concerto/pull/6,dselman,Update readme,,[],28,2018-10-10 13:03:00,2018-10-10 13:03:20,2018-10-10 13:03:21,True,2018-10-10 13:03:20,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/5,https://github.com/hyperledger/composer-concerto/pull/5,dselman,First publish,,[],26,2018-10-10 07:45:36,2018-10-10 07:48:18,2018-10-10 07:48:18,True,2018-10-10 07:48:18,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/4,https://github.com/hyperledger/composer-concerto/pull/4,dselman,Refactor code to make the ModelManager et al a standalone module,,[],22,2018-10-09 15:08:16,2018-10-09 15:08:49,2018-10-09 15:08:50,True,2018-10-09 15:08:49,dselman,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/3,https://github.com/hyperledger/composer-concerto/pull/3,dselman,Create composer-concerto,Refactor code to make the ModelManager et al a standalone module.,[],22,2018-10-09 15:02:50,2018-10-09 15:04:52,2018-10-09 15:04:52,False,,,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/2,https://github.com/hyperledger/composer-concerto/pull/2,mttrbrts,WIP Remove system models,"<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-composer)
+- [ ] [GitHub Issues](https://github.com/hyperledger/composer/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/composer)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",[],11,2018-10-03 16:41:07,2018-10-03 16:41:16,2018-10-03 16:41:16,False,,,unknown,,closed
+composer-concerto,https://api.github.com/repos/hyperledger/composer-concerto/pulls/1,https://github.com/hyperledger/composer-concerto/pull/1,mttrbrts,Add Webpack Build,,[],6,2018-10-03 11:22:33,2018-10-03 11:22:38,2018-10-03 11:22:38,False,,,unknown,,closed

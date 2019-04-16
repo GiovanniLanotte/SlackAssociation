@@ -1,0 +1,228 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/166,https://github.com/hyperledger/composer-tools/pull/166,namgk,"up node red node composer version, fix resolve bug on retrieve node","The current Node-RED nodes do not work with the latest Composer. 
+
+Also when retrieve a resource, if resolve relationship is checked, the node throw an error.",[],3,2019-02-23 01:10:05,,2019-02-23 01:12:19,False,,,blocked,True,open
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/162,https://github.com/hyperledger/composer-tools/pull/162,jt-nti,Upgrade to Fabric 1.3,Signed-off-by: James Taylor <jamest@uk.ibm.com>,[],1,2018-11-09 14:24:59,2019-02-02 18:18:46,2019-02-02 18:18:46,False,,,blocked,True,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/155,https://github.com/hyperledger/composer-tools/pull/155,davidkel,Remove amd specific entries,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-10-14 10:47:43,2018-10-15 06:28:57,2019-01-19 13:39:32,True,2018-10-15 06:28:57,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/152,https://github.com/hyperledger/composer-tools/pull/152,jt-nti,Bump version to 0.0.14,"Automatic version bump did not run after the v0.2.7 release (versions don't make any sense in composer-tools)
+
+Signed-off-by: James Taylor <jamest@uk.ibm.com>",['lesleyannjordan'],1,2018-10-10 10:00:58,2018-10-10 10:15:05,2018-10-10 10:15:05,True,2018-10-10 10:15:05,jt-nti,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/150,https://github.com/hyperledger/composer-tools/pull/150,jt-nti,Add Cloudant Service wallet,Add @mbwhite's Cloudant Service wallet from https://github.com/IBM-Blockchain-Starter-Kit/composer-wallet-cloudant,['nklincoln'],9,2018-10-08 15:19:56,2018-10-09 09:31:16,2018-10-09 09:31:16,True,2018-10-09 09:31:16,jt-nti,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/149,https://github.com/hyperledger/composer-tools/pull/149,jt-nti,Add IBM Cloud Object Service wallet,Add @mbwhite's IBM Cloud Object Storage wallet from https://github.com/IBM-Blockchain-Starter-Kit/composer-wallet-ibmcos,['nklincoln'],7,2018-10-08 14:18:51,2018-10-09 14:09:11,2018-10-09 14:09:12,True,2018-10-09 14:09:11,jt-nti,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/148,https://github.com/hyperledger/composer-tools/pull/148,jt-nti,Add IBM Cloud Object Service wallet DO NOT MERGE!,,[],6,2018-10-08 13:48:34,2018-10-08 14:17:32,2018-10-08 14:17:32,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/146,https://github.com/hyperledger/composer-tools/pull/146,davidkel,Upgrade to Fabric 1.2.1,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-09-29 09:01:37,2018-10-02 09:28:03,2018-10-14 10:47:35,True,2018-10-02 09:28:03,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/145,https://github.com/hyperledger/composer-tools/pull/145,jt-nti,Fix build,"Ironically, it looks like d26d67b6a2fc94639e3a864d6f67149d6aaaa1f8 broke the build's license check!
+
+Signed-off-by: James Taylor <jamest@uk.ibm.com>",['awjh-ibm'],1,2018-09-21 14:56:33,2018-09-21 16:31:13,2018-09-21 16:31:13,True,2018-09-21 16:31:13,jt-nti,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/144,https://github.com/hyperledger/composer-tools/pull/144,jt-nti,Add stalebot config,"Closes #143
+
+Signed-off-by: James Taylor <jamest@uk.ibm.com>",[],2,2018-09-21 14:34:38,2018-09-21 18:35:00,2018-09-21 18:35:00,True,2018-09-21 18:35:00,jt-nti,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/139,https://github.com/hyperledger/composer-tools/pull/139,bestbeforetoday,Add support for Fabric 1.2,"Contributes to hyperledger/composer#4238
+
+Defaults to Fabric 1.2 unless the FABRIC_VERSION environment variable is set.
+
+Remove eventUrl attribute for peer in createPeerAdminCard.sh since the
+old event hub is no longer used.
+
+Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>",[],1,2018-08-02 14:35:48,2018-08-10 09:49:35,2018-09-07 22:41:40,True,2018-08-10 09:49:35,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/137,https://github.com/hyperledger/composer-tools/pull/137,cazfletch,Fixed problems with latest node-red,"Fixed a problem that gave an error if no config was specified
+Fixed the promise returned from the config node
+Only do composer disconnect if there was a connection
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",[],1,2018-06-05 17:06:02,2018-06-06 08:38:13,2018-06-06 08:38:13,True,2018-06-06 08:38:13,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/136,https://github.com/hyperledger/composer-tools/pull/136,cazfletch,Fix a problem with local config,"Fixed a problem that gave an error if no config was specified
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",[],1,2018-05-29 15:06:18,2018-06-05 17:05:32,2018-06-05 17:05:32,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/133,https://github.com/hyperledger/composer-tools/pull/133,awjh-ibm,adding licenses to md,Adding licenses missed in previous iteration of license additions. Relates to https://github.com/hyperledger/composer/issues/1220#issuecomment-386329076,[],1,2018-05-09 08:51:01,2018-05-14 15:47:35,2018-05-14 15:47:36,True,2018-05-14 15:47:35,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/130,https://github.com/hyperledger/composer-tools/pull/130,cazfletch,Update to enable cloud wallets,"Added config for card store
+Added ability to upload a card
+Added ability to choose a card from a list
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",[],1,2018-04-23 16:04:58,2018-04-25 08:17:56,2018-04-25 08:17:56,True,2018-04-25 08:17:56,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/126,https://github.com/hyperledger/composer-tools/pull/126,siler23,Fixed package.json for node-red-contrib-composer so that it will conn…,"…ect to hlfv11 with composer v0.19, fixing current connector undefined error preventing use of node-red-contrib-composer",[],1,2018-04-05 12:16:32,2018-04-11 09:51:38,2018-04-12 08:32:31,True,2018-04-11 09:51:38,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/125,https://github.com/hyperledger/composer-tools/pull/125,awjh-ibm,Adding licenses,"Adding licenses requested in https://github.com/hyperledger/composer/issues/1220
+
+Adding license checker to check these are in",[],1,2018-04-05 10:03:45,2018-04-30 12:14:41,2018-04-30 12:14:41,True,2018-04-30 12:14:41,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/124,https://github.com/hyperledger/composer-tools/pull/124,aviralwal,Update README.md,Fixed spelling error and missing quotes for composer-wallet-redis README.md,[],2,2018-04-04 11:00:29,2018-04-25 08:29:14,2018-04-25 08:37:10,True,2018-04-25 08:29:14,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/123,https://github.com/hyperledger/composer-tools/pull/123,aviralwal,Fixed error in redis README.md,Signed-off-by: aviralwal <aviralagrawal260@gmail.com>,[],2,2018-04-04 10:53:55,2018-04-04 10:57:15,2018-04-04 10:57:22,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/122,https://github.com/hyperledger/composer-tools/pull/122,aviralwal,Update README.md for composer-wallet-redis,"
+Signed-off-by: aviralwal aviralagrawal260@gmail.com",[],1,2018-04-04 10:43:32,2018-04-04 10:51:28,2018-04-04 10:52:06,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/121,https://github.com/hyperledger/composer-tools/pull/121,aviralwal,Update README.md,"fix of spelling error and missing quotes in JSON
+
+Signed-off-by: Aviral Agrawal <aviralagrawal260@gmail.com>",[],1,2018-04-04 10:20:31,2018-04-04 10:38:54,2018-04-04 10:38:58,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/120,https://github.com/hyperledger/composer-tools/pull/120,davidkel,Improve Error Messages to avoid confusion,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-04-03 13:28:49,2018-04-03 13:58:12,2018-07-06 08:30:45,True,2018-04-03 13:58:12,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/119,https://github.com/hyperledger/composer-tools/pull/119,awjh-ibm,Adding licenses,Adding licenses based on scan in: https://github.com/hyperledger/composer/issues/1220,[],1,2018-04-03 10:59:34,2018-04-05 09:22:42,2018-04-05 09:22:42,False,,,dirty,False,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/118,https://github.com/hyperledger/composer-tools/pull/118,sstone1,Fix dev servers for v0.19.0,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,['sstone1'],1,2018-03-28 18:01:18,2018-03-28 18:16:19,2018-03-28 18:16:21,True,2018-03-28 18:16:19,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/117,https://github.com/hyperledger/composer-tools/pull/117,mbwhite,Redis readme,,[],2,2018-03-28 09:41:05,2018-04-25 13:52:42,2018-04-25 13:53:21,True,2018-04-25 13:52:42,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/116,https://github.com/hyperledger/composer-tools/pull/116,mbwhite,Update README.md,,[],1,2018-03-28 09:28:30,2018-03-28 09:28:40,2018-03-28 09:28:40,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/114,https://github.com/hyperledger/composer-tools/pull/114,bestbeforetoday,Change default Fabric version to 1.1,Contributes to hyperledger/composer#3684,[],1,2018-03-26 10:21:23,2018-03-28 16:10:49,2018-04-11 09:46:02,True,2018-03-28 16:10:49,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/109,https://github.com/hyperledger/composer-tools/pull/109,davidkel,fabric 1.1 ga,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-03-18 09:46:28,2018-03-18 15:21:51,2018-04-03 09:49:39,True,2018-03-18 15:21:51,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/108,https://github.com/hyperledger/composer-tools/pull/108,davidkel,fix check for composer version,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-03-14 08:21:00,2018-03-14 09:06:04,2018-03-14 09:06:08,True,2018-03-14 09:06:04,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/106,https://github.com/hyperledger/composer-tools/pull/106,EllisHenderson,Changes to the hlfv1 to use composer-cli,"Updates the createPeerAdminCard script for hlfv1 to use composer-cli to check for version.
+
+Fixes issue #105 ",[],1,2018-03-07 15:28:03,2018-03-09 09:16:00,2018-03-09 09:16:42,True,2018-03-09 09:16:00,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/104,https://github.com/hyperledger/composer-tools/pull/104,sstone1,Upgrade to Hyperledger Fabric v1.1-rc1,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,['sstone1'],1,2018-03-02 11:41:12,2018-03-02 15:00:55,2018-03-02 15:02:12,True,2018-03-02 15:00:55,nklincoln,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/103,https://github.com/hyperledger/composer-tools/pull/103,mbwhite,Incorrect use of node6 prevented npm publish,"- Updated to use the correct version of node on publish
+- Made correction found by https://github.com/lgfa29 
+- Updated the readme to reflect the changes made
+
+@nklincoln if you could take a look when you get a moment please... ",[],2,2018-03-01 17:32:00,2018-03-02 10:30:59,2018-03-02 10:30:59,True,2018-03-02 10:30:59,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/102,https://github.com/hyperledger/composer-tools/pull/102,mbwhite,Pulls in the @ampretia/composer-wallet-redis into composer-tools,,[],2,2018-03-01 15:48:25,2018-03-01 16:39:58,2018-03-01 16:39:58,True,2018-03-01 16:39:58,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/100,https://github.com/hyperledger/composer-tools/pull/100,bestbeforetoday,Build tgz and zip files on `npm install`,Resolves hyperledger/composer#3375,[],1,2018-02-09 11:14:02,2018-02-09 11:26:33,2018-02-09 11:35:01,True,2018-02-09 11:26:32,bestbeforetoday,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/99,https://github.com/hyperledger/composer-tools/pull/99,sstone1,Rebuild fabric-dev-servers packages correctly,"Add new fabric-dev-servers packages built using `npm run build-archives`.
+Resolves: https://github.com/hyperledger/composer-tools/issues/98
+
+Signed-off-by: Simon Stone <sstone1@uk.ibm.com>",['sstone1'],1,2018-02-09 10:33:22,2018-02-09 10:58:44,2018-02-09 10:58:47,True,2018-02-09 10:58:44,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/97,https://github.com/hyperledger/composer-tools/pull/97,samjsmith,Issue66 validate profile,I'll leave this hanging here for now in case anyone wants the standalone version,['jt-nti'],10,2018-02-08 17:12:14,2018-02-21 10:49:48,2018-02-21 10:50:09,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/94,https://github.com/hyperledger/composer-tools/pull/94,bestbeforetoday,Fix option to remove images in teardownAllDocker.sh script,Resolves hyperledger/composer#3295,[],2,2018-02-01 14:07:40,2018-02-02 09:37:10,2018-02-02 11:39:26,True,2018-02-02 09:37:10,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/93,https://github.com/hyperledger/composer-tools/pull/93,davidkel,Upgrade to 1.1-alpha - DO NOT MERGE UNTIL COMPOSER 0.17.3 ready to test,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-01-29 12:41:02,2018-02-01 08:47:41,2018-02-01 08:52:50,True,2018-02-01 08:47:41,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/92,https://github.com/hyperledger/composer-tools/pull/92,davidkel,backout upgrade to alpha.,"Published composer isn’t ready for it yet.
+
+Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>",[],1,2018-01-29 12:22:01,2018-01-29 12:33:01,2018-01-29 12:33:06,True,2018-01-29 12:33:01,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/91,https://github.com/hyperledger/composer-tools/pull/91,davidkel,Update to 1.1 alpha,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2018-01-28 15:11:55,2018-01-29 09:28:45,2018-03-16 08:23:13,True,2018-01-29 09:28:45,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/89,https://github.com/hyperledger/composer-tools/pull/89,samjsmith,Fix minor issues,fix minor issues raised by @mahoney1 ,[],6,2018-01-16 17:38:05,2018-01-17 11:20:33,2018-01-17 11:20:33,True,2018-01-17 11:20:33,mahoney1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/87,https://github.com/hyperledger/composer-tools/pull/87,samjsmith,Update README.md with correct URL,Update README.md with correct URL,[],4,2018-01-15 11:19:12,2018-01-15 11:42:09,2018-01-15 11:42:09,True,2018-01-15 11:42:09,samjsmith,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/85,https://github.com/hyperledger/composer-tools/pull/85,samjsmith,Add a data collection shell script,"Just a simple shell script to collect data about a user's environment and dump it out into a compressed tar file in the /tmp directory
+
+Signed-off-by: Sam Smith <smithsj@uk.ibm.com>",[],1,2018-01-11 16:44:31,2018-01-15 10:55:32,2018-01-15 10:55:32,True,2018-01-15 10:55:32,samjsmith,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/84,https://github.com/hyperledger/composer-tools/pull/84,davidkel,CCP Support,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-12-19 22:35:54,2017-12-19 22:53:52,2018-01-28 13:46:59,True,2017-12-19 22:53:52,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/83,https://github.com/hyperledger/composer-tools/pull/83,davidkel,should not delete existing card if doing noimport,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-12-07 14:21:01,2017-12-15 10:08:51,2017-12-15 10:10:03,True,2017-12-15 10:08:51,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/82,https://github.com/hyperledger/composer-tools/pull/82,davidkel,Add devmode support to dev servers for v11,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-12-03 20:09:51,2017-12-04 10:38:30,2017-12-15 10:10:11,True,2017-12-04 10:38:30,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/81,https://github.com/hyperledger/composer-tools/pull/81,davidkel,update to 0.16.0 of composer,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-11-28 17:29:06,2017-11-28 18:24:08,2017-11-28 21:30:32,True,2017-11-28 18:24:08,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/79,https://github.com/hyperledger/composer-tools/pull/79,davidkel,Add 1.1 tech preview to fabric dev servers,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-11-28 13:44:49,2017-11-28 15:57:06,2017-11-28 21:30:40,True,2017-11-28 15:57:06,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/78,https://github.com/hyperledger/composer-tools/pull/78,mwittig,"Get All/Resolve All Feature for Retrieve Action, issue #76",See issue #76 ,[],6,2017-11-28 13:11:24,2018-04-24 13:32:56,2018-04-24 13:32:56,True,2018-04-24 13:32:56,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/75,https://github.com/hyperledger/composer-tools/pull/75,cazfletch,Make Node Red Nodes Use Cards,"Updated to use cards
+Updated version of composer to 0.15
+
+contributes to hyperledger/composer-tools#74
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",[],1,2017-11-14 10:43:04,2017-11-14 11:51:50,2017-11-14 11:51:50,True,2017-11-14 11:51:50,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/73,https://github.com/hyperledger/composer-tools/pull/73,EllisHenderson,Start fabric changes,Updated zip file to include start fabric script changes. ,[],4,2017-11-13 15:03:36,2017-11-13 18:37:21,2017-11-13 18:37:21,True,2017-11-13 18:37:21,EllisHenderson,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/72,https://github.com/hyperledger/composer-tools/pull/72,EllisHenderson,Removed directory changes within startFabric.sh,Signed-off-by: Ellis Henderson <ellis.henderson@ibm.com>,[],1,2017-11-13 13:20:36,2017-11-13 13:54:00,2017-11-13 14:56:00,True,2017-11-13 13:54:00,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/69,https://github.com/hyperledger/composer-tools/pull/69,sstone1,Business network card should be a channel admin,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,['sstone1'],1,2017-11-08 21:32:51,2017-11-09 00:45:37,2017-11-09 00:45:40,True,2017-11-09 00:45:37,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/68,https://github.com/hyperledger/composer-tools/pull/68,sstone1,Delete existing business network card if required,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,['sstone1'],1,2017-11-08 20:56:11,2017-11-08 21:21:51,2017-11-08 21:21:54,True,2017-11-08 21:21:51,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/67,https://github.com/hyperledger/composer-tools/pull/67,bestbeforetoday,Add keyValStore to connection profile in PeerAdmin card,"Resolves hyperledger/composer#2605
+
+This is for (temporary) compatibility with Playground since it does not (yet)
+use the new card-based AdminConnection and BusinessNetworkConnection connect API,
+and so needs to have a keyValStore property for the hlfv1 connector to work.
+Using the new card-based API, this property will be ignored, so is safe either way.",[],1,2017-11-08 15:37:39,2017-11-08 20:22:22,2018-04-11 09:46:04,True,2017-11-08 20:22:22,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/66,https://github.com/hyperledger/composer-tools/pull/66,mbwhite,Peeradmin create fix,"The composer card create command option for the connection profile is wrong.
+
+",['mbwhite'],1,2017-11-07 16:26:01,2017-11-07 17:22:43,2017-11-07 17:22:46,True,2017-11-07 17:22:43,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/65,https://github.com/hyperledger/composer-tools/pull/65,davidkel,Upgrade dev server to 1.0.4,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-11-06 11:42:22,2017-11-06 11:50:25,2017-11-06 14:29:55,True,2017-11-06 11:50:25,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/64,https://github.com/hyperledger/composer-tools/pull/64,mbwhite,Helper for admin cards,"I've added a new script called createPeerAdminCard.sh. This can be run in the same manner as any of the scripts such as startFabric.sh
+
+This though needs to use the composer-cli and there is a version check for this at the start. Also it uses jq that is a central part of ubuntu. (aside if thisisn't available then we just keep a copy of the certificate available)
+
+This will create a peer admin card, and import it.
+
+Therefore the typicaly dev flow would be
+
+
+$ unzip fabric-dev-servers.zip
+$ ./fabric-dev-servers/startFabric.sh
+$ ./fabric-dev-servers/createPeerAdminCard.sh
+$ composer network deploy --archiveFile ./packages/block-game-network/dist/bgn.bna --card PeerAdmin@hlfv1 -A admin -S 
+$ composer card create -n block-game --file ./_cards/admin.card -j ~/.composer-connection-profiles/hlfv1/connection.json -u admin -s adminpw
+$ composer card import --file ./_cards/admin.card 
+$ composer card list        
+$ composer network list --card admin@block-game
+
+Resolves #2484",['mbwhite'],4,2017-11-06 09:47:43,2017-11-06 15:23:24,2017-11-06 15:23:32,True,2017-11-06 15:23:24,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/63,https://github.com/hyperledger/composer-tools/pull/63,davidkel,Upgrade dev server to HLF 1.0.3,"https://github.com/hyperledger/composer-tools/issues/62
+Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>",[],1,2017-10-28 09:47:21,2017-10-28 12:44:33,2017-11-06 14:29:48,True,2017-10-28 12:44:33,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/61,https://github.com/hyperledger/composer-tools/pull/61,chevdor,Switch the doc to ASCIIDOC ,"There are many benefits for using Asciidoc over Markdown.
+It is very similar to Markdown but allows using includes for instance.
+
+This makes it easier to manage and easier to read for the users.
+
+Github unfortunately does not render the includes yet but you can check it out when rendering the files locally in your browser using https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia ",[],2,2017-10-17 16:03:12,2018-01-28 19:04:53,2018-01-28 20:17:50,False,,,dirty,False,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/60,https://github.com/hyperledger/composer-tools/pull/60,nklincoln,version bump through tools,"Updated all packages prior to release
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",[],1,2017-10-12 18:21:53,2017-10-12 18:31:56,2017-10-12 18:31:56,True,2017-10-12 18:31:56,nklincoln,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/59,https://github.com/hyperledger/composer-tools/pull/59,davidkel,update node red to latest composer,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,[],1,2017-10-12 17:55:15,2017-10-12 18:06:49,2017-11-28 21:30:53,True,2017-10-12 18:06:49,nklincoln,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/58,https://github.com/hyperledger/composer-tools/pull/58,nklincoln,bump node red,"upped to v0.14.0
+
+Signed-off-by: Nick Lincoln nick.lincoln@uk.ibm.com",[],1,2017-10-12 17:51:46,2017-10-12 18:10:00,2017-10-12 18:10:00,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/57,https://github.com/hyperledger/composer-tools/pull/57,ryjones,Create DCO,DO NOT MERGE,[],1,2017-10-03 21:28:02,2017-10-03 21:36:09,2017-10-03 21:36:09,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/56,https://github.com/hyperledger/composer-tools/pull/56,cazfletch,Update Composer Version,update composer version to 0.13,[],1,2017-09-21 17:32:28,2017-09-21 17:42:07,2017-09-21 17:42:07,True,2017-09-21 17:42:07,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/54,https://github.com/hyperledger/composer-tools/pull/54,tkuhrt,Correct typo in _loader.sh,Hyperledger spelled wrong in _loader.sh,[],1,2017-09-16 00:24:48,2017-09-16 08:16:06,2017-09-16 08:16:06,True,2017-09-16 08:16:06,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/53,https://github.com/hyperledger/composer-tools/pull/53,cazfletch,update node-red nodes,"Improve error handling
+Enable mid flow node to be able to create, update, and delete
+Resolve relationships on retrieve",[],1,2017-09-11 08:29:32,2017-09-11 10:32:14,2017-09-11 10:32:14,True,2017-09-11 10:32:13,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/52,https://github.com/hyperledger/composer-tools/pull/52,ahmadsayed,make configuration in separate node,"Hi All, 
+
+I made the small modification, in node-red-contrib-composer, in the configuration part, to avoid repeating entering configuration for each node, I hope it will be useful to be shared with the main stream 
+
+![image](https://user-images.githubusercontent.com/8686508/30007676-14b71ed8-911d-11e7-93bf-aa3076e622af.png)
+
+
+![image](https://user-images.githubusercontent.com/8686508/30007670-0004cb0c-911d-11e7-94ab-7116123687b1.png)
+
+",[],4,2017-09-04 00:00:17,2017-09-07 20:16:54,2017-09-07 20:16:54,True,2017-09-07 20:16:54,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/51,https://github.com/hyperledger/composer-tools/pull/51,harsha544,Enable Composer on ppc64le and s390x  ,"This PR is aimed to address #50 via the following changes :- 
+
+1) Tweaked  *.sh files under composer-tools/packages/fabric-dev-servers/fabric-scripts/hlfv1/ to download architecture specific docker images.
+
+2) Update docker-compose.yml to make use ""$ARCH"" variable.
+
+3) Update fabric-dev-servers.tar.gz` and `fabric-dev-servers.zip` to include top level files.
+
+Signed-off-by: Krishna Harsha Voora <krishvoor@in.ibm.com>",[],1,2017-09-01 17:18:12,2017-09-05 08:46:33,2017-09-05 08:46:33,True,2017-09-05 08:46:33,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/49,https://github.com/hyperledger/composer-tools/pull/49,davidkel,Upgrade to Hyperledger Fabric v1.0.1,This pull request upgrades the artifacts to 1.0.1.,[],3,2017-08-21 07:55:10,2017-08-21 12:24:39,2017-11-06 14:43:19,True,2017-08-21 12:24:39,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/48,https://github.com/hyperledger/composer-tools/pull/48,davidkel,Upgrade Dev Server to fabric 1.0.1,"Requires a new genesis block and create channel transaction as well.
+
+Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>",[],1,2017-08-20 20:01:20,2017-08-20 20:16:09,2017-08-20 20:16:09,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/47,https://github.com/hyperledger/composer-tools/pull/47,sstone1,Remove HLFv0.6 from fabric-dev-servers,"https://github.com/hyperledger/composer/issues/1535
+
+Remove the HLFv0.6 configuration and files from the fabric-dev-servers package.
+@davidkel informs me it wasn't working anyway, and we're removing all code related to Hyperledger Fabric v0.6 support.",['sstone1'],2,2017-08-19 18:09:28,2017-08-21 07:50:07,2017-08-21 07:51:48,True,2017-08-21 07:50:07,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/45,https://github.com/hyperledger/composer-tools/pull/45,liam-grace,Bump version for unstable build,,[],1,2017-07-19 13:12:50,2017-07-19 13:27:15,2017-07-19 13:38:16,True,2017-07-19 13:27:15,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/42,https://github.com/hyperledger/composer-tools/pull/42,sstone1,Move to Hyperledger Fabric v1.0.0 (dev server),,['sstone1'],1,2017-07-11 17:36:16,2017-07-11 19:20:55,2017-07-11 19:23:47,True,2017-07-11 19:20:55,dselman,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/39,https://github.com/hyperledger/composer-tools/pull/39,davidkel,Change key val store,,[],2,2017-07-05 16:32:34,2017-07-05 16:50:14,2017-07-05 16:50:17,True,2017-07-05 16:50:14,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/38,https://github.com/hyperledger/composer-tools/pull/38,davidkel,Rc1 server,Merge when ready to do 0.9.1 release,[],4,2017-07-03 11:41:23,2017-07-05 15:46:40,2017-07-05 15:47:46,True,2017-07-05 15:46:40,davidkel,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/37,https://github.com/hyperledger/composer-tools/pull/37,cazfletch,Enable Delete,updated to allow resource to be deleted by the output node,[],1,2017-06-19 12:08:05,2017-06-19 13:22:07,2017-06-19 13:22:07,True,2017-06-19 13:22:07,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/34,https://github.com/hyperledger/composer-tools/pull/34,mbwhite,corrected the urls and some wording,,[],1,2017-06-15 11:54:12,2017-06-15 12:05:36,2017-06-15 12:07:10,True,2017-06-15 12:05:36,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/33,https://github.com/hyperledger/composer-tools/pull/33,davidkel,Move dev servers to using fabric beta,,[],16,2017-06-14 07:12:02,2017-06-14 13:03:44,2017-07-03 11:40:53,True,2017-06-14 13:03:44,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/32,https://github.com/hyperledger/composer-tools/pull/32,mbwhite,Defect cleverer docker stop,,[],37,2017-06-08 20:39:10,2017-06-08 20:47:57,2017-06-08 20:48:01,True,2017-06-08 20:47:57,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/31,https://github.com/hyperledger/composer-tools/pull/31,rjones-lf,Create dco,,[],1,2017-06-05 21:38:47,2017-06-05 21:40:59,2017-06-05 21:40:59,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/30,https://github.com/hyperledger/composer-tools/pull/30,Jakeeyturner,Deserialize received event resources,,[],1,2017-06-05 13:46:36,2017-06-05 14:06:59,2017-06-05 14:06:59,True,2017-06-05 14:06:58,Jakeeyturner,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/29,https://github.com/hyperledger/composer-tools/pull/29,rjones-lf,Create dcobot,,[],1,2017-06-02 21:32:15,2017-06-02 21:33:36,2017-06-02 21:33:36,False,,,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/28,https://github.com/hyperledger/composer-tools/pull/28,sstone1,Fix SSH push,,['sstone1'],1,2017-06-01 21:19:30,2017-06-01 21:26:41,2017-06-01 21:35:11,True,2017-06-01 21:26:41,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/27,https://github.com/hyperledger/composer-tools/pull/27,fabric-composer-app,Upgrade to lerna 2.0.0-rc.4,,[],1,2017-06-01 21:06:22,2017-06-01 21:16:52,2017-06-01 21:16:54,True,2017-06-01 21:16:52,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/26,https://github.com/hyperledger/composer-tools/pull/26,sstone1,Disable broken gh-pages push,,['sstone1'],1,2017-06-01 20:24:23,2017-06-01 20:31:19,2017-06-01 20:31:21,True,2017-06-01 20:31:18,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/25,https://github.com/hyperledger/composer-tools/pull/25,sstone1,Bump to v0.0.1,,['sstone1'],1,2017-06-01 19:47:07,2017-06-01 20:08:57,2017-06-01 20:09:00,True,2017-06-01 20:08:57,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/24,https://github.com/hyperledger/composer-tools/pull/24,mbwhite,"Update the README.md, and stop npm publishing. ","Updating the readme to moved git merge tags, reference all the repos.
+Stop the NPM publishing.
+
+/cc @caroline-church ",[],32,2017-06-01 13:21:28,2017-06-01 13:49:05,2017-06-01 13:49:06,True,2017-06-01 13:49:05,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/23,https://github.com/hyperledger/composer-tools/pull/23,cazfletch,Update Name,updated the name to remove hyperledger to make the name shorter,[],1,2017-06-01 08:59:09,2017-06-01 09:52:46,2017-06-01 09:52:46,True,2017-06-01 09:52:46,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/22,https://github.com/hyperledger/composer-tools/pull/22,sstone1,Force use of npm 4 and avoid npm 5,,['sstone1'],1,2017-05-31 22:05:35,2017-05-31 22:12:39,2017-05-31 22:12:42,True,2017-05-31 22:12:39,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/21,https://github.com/hyperledger/composer-tools/pull/21,mbwhite,Update the tools archives..,,[],29,2017-05-31 13:08:59,2017-05-31 13:09:39,2017-05-31 13:09:39,True,2017-05-31 13:09:38,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/20,https://github.com/hyperledger/composer-tools/pull/20,mbwhite,Remove the nodejs dependancy,removing the nodejs dependancy,[],26,2017-05-31 08:51:52,2017-05-31 08:52:03,2017-05-31 08:52:03,True,2017-05-31 08:52:03,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/19,https://github.com/hyperledger/composer-tools/pull/19,mbwhite,Update archive files,,[],22,2017-05-30 16:59:10,2017-05-30 16:59:17,2017-05-30 16:59:17,True,2017-05-30 16:59:17,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/18,https://github.com/hyperledger/composer-tools/pull/18,mbwhite,Merge in the fabric-dev-tools into lerna structure,"Merge the fabric-dev-tools into the lerna structure.
+Also added the timeout variable.",[],20,2017-05-30 15:34:44,2017-05-30 15:48:19,2017-05-30 15:48:19,True,2017-05-30 15:48:19,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/17,https://github.com/hyperledger/composer-tools/pull/17,cazfletch,Publish Node Red Nodes,Update build to publish node red nodes,[],1,2017-05-30 11:18:12,2017-05-30 12:41:29,2017-05-30 12:41:29,True,2017-05-30 12:41:29,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/16,https://github.com/hyperledger/composer-tools/pull/16,cazfletch,Node Red Nodes,Added node red nodes,[],1,2017-05-30 09:47:56,2017-05-30 11:02:38,2017-05-30 11:02:38,True,2017-05-30 11:02:38,cazfletch,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/15,https://github.com/hyperledger/composer-tools/pull/15,mbwhite,Update the composer tools to include the new approach to creating Fabric instances,Pull in the new script to create fabric instances. ,[],12,2017-05-25 10:37:49,2017-05-25 10:38:45,2017-05-25 10:38:45,True,2017-05-25 10:38:45,mbwhite,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/14,https://github.com/hyperledger/composer-tools/pull/14,nklincoln,naming changes,"Composer tools aspect of #835 within Hyperledger-Composer repro
+
+## Design of the fix
+Ensure correct naming through readme files
+
+## Validation of the fix
+inspection of output documentation",[],1,2017-05-05 10:30:54,2017-05-05 10:31:04,2017-05-05 10:31:04,True,2017-05-05 10:31:04,nklincoln,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/13,https://github.com/hyperledger/composer-tools/pull/13,sstone1,Empty commit to force build,,['sstone1'],1,2017-04-19 09:33:43,2017-04-28 19:19:44,2017-04-28 19:19:45,True,2017-04-28 19:19:44,sstone1,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/12,https://github.com/hyperledger/composer-tools/pull/12,fenglianxu,add two missing files,,[],1,2017-03-10 11:43:13,2017-03-10 11:43:28,2017-03-10 11:43:28,True,2017-03-10 11:43:28,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/11,https://github.com/hyperledger/composer-tools/pull/11,fenglianxu,fix the prerequist of node installation,,[],2,2017-03-09 10:57:26,2017-03-09 10:57:38,2017-03-09 10:57:38,True,2017-03-09 10:57:38,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/10,https://github.com/hyperledger/composer-tools/pull/10,fenglianxu,remove the VScode plugin from the tools as it needs to be under the r…,…oot of a git repository,[],1,2017-03-08 17:14:38,2017-03-08 17:14:52,2017-03-08 17:14:52,True,2017-03-08 17:14:52,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/9,https://github.com/hyperledger/composer-tools/pull/9,fenglianxu,update package name for client and server,,[],1,2017-03-02 16:32:58,2017-03-02 16:33:04,2017-03-02 16:33:04,True,2017-03-02 16:33:04,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/8,https://github.com/hyperledger/composer-tools/pull/8,fenglianxu,remove the composer-atom-plugin project,,[],1,2017-03-02 15:43:10,2017-03-02 15:43:17,2017-03-02 15:43:17,True,2017-03-02 15:43:17,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/7,https://github.com/hyperledger/composer-tools/pull/7,fenglianxu,change the package name to be composer-atom-plugin,,[],1,2017-02-24 12:37:31,2017-02-24 12:37:37,2017-02-24 12:37:38,True,2017-02-24 12:37:37,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/6,https://github.com/hyperledger/composer-tools/pull/6,fenglianxu,update atom plugin package,,[],1,2017-02-23 22:14:09,2017-02-23 22:14:30,2017-02-23 22:14:30,True,2017-02-23 22:14:30,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/5,https://github.com/hyperledger/composer-tools/pull/5,m-g-k,Correct syntaxes filename,"Hi @dselman , file name is incorrect in master - needs updating to match Package.json. Also updating git control so local package step works",[],2,2017-02-23 15:51:27,2017-02-27 12:42:46,2017-02-27 12:42:46,True,2017-02-27 12:42:46,dselman,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/4,https://github.com/hyperledger/composer-tools/pull/4,fenglianxu,update atom and vscode repository,update #3 ,[],1,2017-02-22 17:29:45,2017-02-22 17:30:24,2017-02-22 17:30:24,True,2017-02-22 17:30:24,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/3,https://github.com/hyperledger/composer-tools/pull/3,fenglianxu,Add the VScode plugin to the fabric-composer/tools repository,,[],3,2017-02-22 14:07:10,2017-02-22 14:07:53,2017-02-22 14:07:53,True,2017-02-22 14:07:53,fenglianxu,unknown,,closed
+composer-tools,https://api.github.com/repos/hyperledger/composer-tools/pulls/1,https://github.com/hyperledger/composer-tools/pull/1,fenglianxu,add atom plugin to the tools,add initial atom plugin code,[],1,2017-02-17 14:44:25,2017-02-17 14:46:28,2017-02-17 14:46:28,True,2017-02-17 14:46:27,liam-grace,unknown,,closed

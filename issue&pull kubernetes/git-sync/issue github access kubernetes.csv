@@ -1,0 +1,1661 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/1,https://api.github.com/repos/kubernetes/git-sync/issues/1,Move git-sync to a new repo of its very own,"This just imports the existing state of contrib/git-sync into this new repo and scrubs paths for ""contrib"".  I have some further work I want to do on this sidecar, so I thought it was time to break it out.
+",closed,True,2016-08-20 23:23:47,2016-08-22 22:56:56
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/2,https://api.github.com/repos/kubernetes/git-sync/issues/2,Overhaul git-sync,"This is a series of cleanups, bugfixes, and enhancements to git-sync.  I will be cleaning up the demo docs and adding some tests soon.  I'd like to get this to a 1.0 tagged release and never touch it again.
+
+This can be reviewed commit-by-commit.  The git logic was tested (manually) extensively, but that doesn't mean I didn't miss something.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/2)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-25 05:04:41,2016-09-16 16:06:01
+git-sync,bialad,https://github.com/kubernetes/git-sync/issues/3,https://api.github.com/repos/kubernetes/git-sync/issues/3,Host key verification failed,"> 2016/09/03 08:37:57 error syncing repo: error cloning repo ""git clone --no-checkout -b master ssh://name@name.visualstudio.com:22/repo/_git/web /git"": exit status 128: Cloning into '/git'...
+> Host key verification failed.
+> fatal: Could not read from remote repository.
+> 
+> Please make sure you have the correct access rights
+> and the repository exists.
+
+I'm getting a host verification error, which I don't even see how it's possible with the ssh_wrapper. In kubernetes I use the demo yaml-files and a secret.yaml as follows:
+
+> apiVersion: v1
+> kind: Secret
+> metadata:
+>   name: git-creds
+>   namespace: zeptio
+> type: Opaque
+> data:
+>   ssh: ""base64-private-key""
+
+This is the command I run on my local host for testing this out:
+
+`docker run --rm -e GIT_SYNC_REPO=""ssh://name@name.visualstudio.com:22/repo/_git/web"" -e GIT_SYNC_SSH=true -v /home/name/web:/git -v /home/name/git-secret:/etc/git-secret gcr.io/google_containers/git-sync`
+
+Where /home/name/git-secret contains my non-base64 coded private key.
+
+If I run 
+
+`git clone --no-checkout -b master ssh://name@name.visualstudio.com:22/repo/_git/web /git`
+
+on my local machine, using the ssh key in /home/name/git-secret, everything works fine.
+
+Any idea what could be happening here?
+",closed,False,2016-09-03 21:09:16,2016-10-02 03:27:30
+git-sync,teijinyer,https://github.com/kubernetes/git-sync/issues/4,https://api.github.com/repos/kubernetes/git-sync/issues/4,docker build fail ,"Step 5 : COPY git-sync /git-sync
+lstat git-sync: no such file or directory
+",closed,False,2016-09-08 06:59:54,2016-10-02 03:26:21
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/5,https://api.github.com/repos/kubernetes/git-sync/issues/5,bump to 2.0.0,"pushed to GCR
+
+Fixes #3 
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/5)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-02 03:25:39,2016-10-02 03:27:30
+git-sync,mumoshu,https://github.com/kubernetes/git-sync/issues/6,https://api.github.com/repos/kubernetes/git-sync/issues/6,How to notify another container in the same pod when a symlink is flipped?,"Hi, thanks for sharing this 👍 
+
+Do you have any idea about how to notify another container to reload files immediately after git-sync successfully ran?
+
+My use-case is that
+(1) git-sync periodically checks my git repo containing PHP/Ruby/etc web app sources
+(2) though my app doesn't support hot-reloading on symlink flip (which git-sync does for atomicity of updates),
+(3) I'd like my app to reload/restart once git-sync updated sources
+
+I had thought of sending signals from git-sync to notify my app for reloading.
+Kubernetes doesn't currently support sending signals between containers/pods https://github.com/kubernetes/kubernetes/issues/24957
+",closed,False,2016-10-03 03:17:11,2016-10-03 03:28:48
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/7,https://api.github.com/repos/kubernetes/git-sync/issues/7,Document or error on GIT_SYNC_DEST not being a subdirect of GIT_SYNC_ROOT,"I just ran into the issue, that the symlink created for GIT_SYNC_DEST is not an absolute link therefore it needs to be a subdir of GIT_SYNC_ROOT to function. Furthermore the GIT_SYNC_ROOT directory also has to be mounted as volume or else the symlink might fail due to filesystem boundaries.
+",closed,False,2016-10-04 13:22:41,2016-10-08 20:52:07
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/8,https://api.github.com/repos/kubernetes/git-sync/issues/8,Subsequent syncs fail due to destination path not being empty,"During some initial tests following error came up:
+`text error syncing repo: error running command: exit status 128: ""fatal: destination path '/etc/source' already exists and is not an empty directory.\n""`
+This seems to only happen on subsequent sync runs. Before the directory is empty and syncs successfully.
+
+Some ENVs for a better context:
+        - name: GIT_SYNC_BRANCH
+          value: master
+        - name: GIT_SYNC_SSH
+          value: ""true""
+        - name: GIT_SYNC_ONE_TIME
+          value: ""false""
+        - name: GIT_SYNC_WAIT
+          value: ""2""
+        - name: GIT_SYNC_ROOT
+          value: /etc/source/
+        - name: GIT_SYNC_DEST
+          value: /etc/source/files
+",closed,False,2016-10-04 14:06:01,2017-02-15 16:49:46
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/9,https://api.github.com/repos/kubernetes/git-sync/issues/9,"Better flag help, error on bad --dest, v2.0.1","<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/9)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-08 00:21:40,2016-10-08 00:22:00
+git-sync,TaiSHiNet,https://github.com/kubernetes/git-sync/issues/10,https://api.github.com/repos/kubernetes/git-sync/issues/10,Use alpine as a base,"I've tried alpine and size is reduced by ~100 mb but the mv version that comes with it doesn't have `--no-target-directory` option
+Inputs?
+",closed,False,2016-10-08 13:19:25,2016-10-31 08:39:34
+git-sync,TaiSHiNet,https://github.com/kubernetes/git-sync/issues/11,https://api.github.com/repos/kubernetes/git-sync/issues/11,Head incorrectly resolved,"When I update the repo, app recognizes a new fetch is required but misreads 'head':
+
+```
+I1012 16:30:46.724601       1 main.go:353] update required
+I1012 16:30:46.856616       1 main.go:265] rev HEAD resolves to 55f6f1fe46a888a40a2f0764f33acdfb169cebf6
+E1012 16:30:46.857805       1 main.go:156] error syncing repo: error running command: exit status 128: ""fatal: '/usr/local/src/repo/rev-55f6f1fe46a888a40a2f0764f33acdfb169cebf6' already exists\n""
+```
+
+```
+$ git --no-pager log --decorate=short --pretty=oneline -n 1
+108a2acc0d9da231bbf9420ada28277c3c68f9c6 (HEAD -> master, origin/master, origin/HEAD) fix #7
+```
+",closed,False,2016-10-12 16:38:36,2016-10-14 04:40:56
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/12,https://api.github.com/repos/kubernetes/git-sync/issues/12,Fix when a tag/rev moves,"I know this used to work.  I must have broken it at some point. Manually
+verified for HEAD and a real tag.
+
+Also fix some logging so it is less chatty by default.
+
+Fixes #11
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/12)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-13 04:48:08,2016-10-14 03:39:14
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/13,https://api.github.com/repos/kubernetes/git-sync/issues/13,v2.0.2 not pushed to google_containers/git-sync,"Platform specific repos are up to date: https://gcr.io/v2/google_containers/git-sync-amd64/tags/list
+The plain git-sync is not. v2.0.2 is still missing. https://gcr.io/v2/google_containers/git-sync/tags/list
+
+cc @thockin 
+",closed,False,2016-10-20 18:39:05,2016-10-21 05:02:37
+git-sync,ursuad,https://github.com/kubernetes/git-sync/issues/14,https://api.github.com/repos/kubernetes/git-sync/issues/14,Doesn't work correctly for a branch other than master,"When it starts up, it checks out the correct revision of the correct branch. The next run, it checks the latest revision of the master branch, even if it says it checks out from `origin/kubernetes`:
+
+This are the variables that I'm running with:
+I replaced the git repo user/name, because it's a private repo.
+
+```
+GIT_SYNC_BRANCH=kubernetes
+GIT_SYNC_SSH=true
+GIT_SYNC_DEST=git
+GIT_SYNC_REPO=git@github.com:my-github-user/my-github-repo.git
+```
+
+And the logs:
+
+```
+I1026 17:09:48.023905       1 main.go:302] cloned git@github.my-github-user/my-github-repo.git
+I1026 17:09:48.025887       1 main.go:251] syncing to HEAD (82abe61bbd80b47d2275178d7fed190a89ed621a)
+I1026 17:09:48.809439       1 main.go:259] added worktree /git/rev-82abe61bbd80b47d2275178d7fed190a89ed621a for origin/kubernetes
+I1026 17:09:49.259858       1 main.go:279] reset worktree /git/rev-82abe61bbd80b47d2275178d7fed190a89ed621a to 82abe61bbd80b47d2275178d7fed190a89ed621a
+I1026 17:09:50.471179       1 main.go:353] update required
+I1026 17:09:50.471212       1 main.go:251] syncing to HEAD (eb893e897072ba4b788e832b0ccab7138d860b06)
+I1026 17:09:50.956608       1 main.go:259] added worktree /git/rev-eb893e897072ba4b788e832b0ccab7138d860b06 for origin/kubernetes
+I1026 17:09:51.569854       1 main.go:279] reset worktree /git/rev-eb893e897072ba4b788e832b0ccab7138d860b06 to eb893e897072ba4b788e832b0ccab7138d860b06
+```
+",closed,False,2016-10-26 17:44:39,2016-10-28 16:01:09
+git-sync,ursuad,https://github.com/kubernetes/git-sync/issues/15,https://api.github.com/repos/kubernetes/git-sync/issues/15,git-sync not working with Hugo. ,"I tried the demo setup and played around a bit with the files. 
+
+There seems to be an issue with the `git-sync` writing the checked out files resulting in a `SystemEvent: REMOVE` in Hugo resulting in an empty website. Manually editing the files from the `git-sync` container works.
+
+My current setup is with Hugo `--verboseLog=true` enabled. 
+
+Steps taken:
+1) Have a git repo with a few `.md` files
+2) Launch the pod
+**Expected**
+The website is displayed with all the pages
+**Actual result**
+Just as expected
+**Hugo Logs**
+
+```
+$ kubectl logs my-hugo-pod-kgijd hugo -f
++ '[' '!' -d /src/git/site/themes ']'
++ ln -s /themes /src/git/site/themes
+++ eval echo server '--source=${HUGO_SRC}' '--theme=${HUGO_THEME}' '--buildDrafts=${HUGO_BUILD_DRAFT}' '--baseUrl=${HUGO_BASE_URL}' --watch '--destination=${HUGO_DEST}' --appendPort=false --log --verbose '--verboseLog=${HUGO_VERBOSE_LOG}'
++++ echo server --source=/src/git/site --theme=hugo-theme-bootstrap4-blog --buildDrafts=true --baseUrl=minion-address:30258 --watch --destination=/dest --appendPort=false --log --verbose --verboseLog=true
++ hugo server --source=/src/git/site --theme=hugo-theme-bootstrap4-blog --buildDrafts=true --baseUrl=minion-address:30258 --watch --destination=/dest --appendPort=false --log --verbose --verboseLog=true
+INFO: 2016/10/26 23:58:42 hugo.go:405: Using config file: /src/git/site/config.toml
+INFO: 2016/10/26 23:58:42 hugo.go:517: using a UnionFS for static directory comprised of:
+INFO: 2016/10/26 23:58:42 hugo.go:518: Base: /src/git/site/themes/hugo-theme-bootstrap4-blog/static
+INFO: 2016/10/26 23:58:42 hugo.go:519: Overlay: /src/git/site/static/
+INFO: 2016/10/26 23:58:42 hugo.go:551: syncing static files to /dest/
+Started building sites ...
+INFO: 2016/10/26 23:58:42 site.go:1489: found taxonomies: map[string]string{""tag"":""tags"", ""category"":""categories""}
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/tags/themes/page/1"" translated to ""tags/themes/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/tags/go/page/1"" translated to ""tags/go/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/tags/hugo/page/1"" translated to ""tags/hugo/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/tags/templates/page/1"" translated to ""tags/templates/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/tags/development/page/1"" translated to ""tags/development/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/tags/golang/page/1"" translated to ""tags/golang/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/categories/golang/page/1"" translated to ""categories/golang/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/categories/development/page/1"" translated to ""categories/development/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/post/page/1"" translated to ""post/page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/page/1"" translated to ""page/1/index.html""
+INFO: 2016/10/26 23:58:42 htmlredirect.go:116: Alias ""/page/1"" translated to ""page/1/index.html""
+WARN: 2016/10/26 23:58:42 site.go:2373: ""404.html"" is rendered empty
+Built site for language en:
+0 draft content
+0 future content
+0 expired content
+5 pages created
+0 non-page files copied
+10 paginator pages created
+6 tags created
+2 categories created
+total in 79 ms
+WARN: 2016/10/26 23:58:42 hugo.go:568: Skip DataDir: lstat /src/git/site/data: no such file or directory
+WARN: 2016/10/26 23:58:42 hugo.go:573: Skip I18nDir: lstat /src/git/site/i18n: no such file or directory
+WARN: 2016/10/26 23:58:42 hugo.go:578: Skip LayoutDir: lstat /src/git/site/layouts: no such file or directory
+Watching for changes in /src/git/site/{content,static,themes}
+WARN: 2016/10/26 23:58:42 hugo.go:568: Skip DataDir: lstat /src/git/site/data: no such file or directory
+WARN: 2016/10/26 23:58:42 hugo.go:573: Skip I18nDir: lstat /src/git/site/i18n: no such file or directory
+WARN: 2016/10/26 23:58:42 hugo.go:578: Skip LayoutDir: lstat /src/git/site/layouts: no such file or directory
+Serving pages from /dest
+Web Server is available at //minion-address:30258/ (bind address 127.0.0.1)
+Press Ctrl+C to stop
+```
+
+3) Edit  any of the `.md` files.
+**Expected**
+The file will be seen as changed and the website will be rebuilt with the same number of pages
+**Actual result**
+The website is empty, all the sources are marked as REMOVE in Hugo and  and 0 pages get generated.
+**Hugo Logs**
+
+```
+INFO: 2016/10/26 23:52:28 hugo.go:703: Received System Events: [""/src/git/site/content/index.md"": REMOVE ""/src/git/site/content/post/hugoisforlovers.md"": REMOVE ""/src/git/site/content/post/creating-a-new-theme.md"": REMOVE ""/src/git/site/content/post/migrate-from-jekyll.md"": REMOVE ""/src/git/site/content/post/goisforlovers.md"": REMOVE ""/src/git/site/content/post"": REMOVE ""/src/git/site/content/post"": REMOVE ""/src/git/site/content"": REMOVE]
+
+Change detected, rebuilding site
+2016-10-26 23:52 +0000
+Source changed /src/git/site/content/index.md
+Source changed /src/git/site/content/post/hugoisforlovers.md
+Source changed /src/git/site/content/post/creating-a-new-theme.md
+Source changed /src/git/site/content/post/migrate-from-jekyll.md
+Source changed /src/git/site/content/post/goisforlovers.md
+Source changed /src/git/site/content/post
+Source changed /src/git/site/content
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/tags/themes/page/1"" translated to ""tags/themes/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/tags/go/page/1"" translated to ""tags/go/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/tags/golang/page/1"" translated to ""tags/golang/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/tags/development/page/1"" translated to ""tags/development/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/tags/hugo/page/1"" translated to ""tags/hugo/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/tags/templates/page/1"" translated to ""tags/templates/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/categories/development/page/1"" translated to ""categories/development/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/categories/golang/page/1"" translated to ""categories/golang/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/post/page/1"" translated to ""post/page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/page/1"" translated to ""page/1/index.html""
+INFO: 2016/10/26 23:52:28 htmlredirect.go:116: Alias ""/page/1"" translated to ""page/1/index.html""
+WARN: 2016/10/26 23:52:28 site.go:2373: ""404.html"" is rendered empty
+Built site for language en:
+0 draft content
+0 future content
+0 expired content
+0 pages created
+0 non-page files copied
+9 paginator pages created
+6 tags created
+2 categories created
+total in 47 ms
+```
+
+**Manually editing the files Works**
+In a separate test case, if I ssh into the `git-sync` container and manually edit the files, Hugo correctly sees the file as modified and regenerates the correct number of pages.
+
+**Hugo Logs**
+
+```
+INFO: 2016/10/27 00:01:07 hugo.go:703: Received System Events: [""/src/git/site/content/post/hugoisforlovers.md"": WRITE]
+
+Change detected, rebuilding site
+2016-10-27 00:01 +0000
+Source changed /src/git/site/content/post/hugoisforlovers.md
+INFO: 2016/10/27 00:01:07 site.go:1096: rereading /src/git/site/content/post/hugoisforlovers.md
+INFO: 2016/10/27 00:01:07 site.go:1489: found taxonomies: map[string]string{""tag"":""tags"", ""category"":""categories""}
+INFO: 2016/10/27 00:01:07 htmlredirect.go:116: Alias ""/tags/templates/page/1"" translated to ""tags/templates/page/1/index.html""
+INFO: 2016/10/27 00:01:07 htmlredirect.go:116: Alias ""/tags/hugo/page/1"" translated to ""tags/hugo/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/tags/development/page/1"" translated to ""tags/development/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/tags/themes/page/1"" translated to ""tags/themes/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/tags/go/page/1"" translated to ""tags/go/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/tags/golang/page/1"" translated to ""tags/golang/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/categories/development/page/1"" translated to ""categories/development/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/categories/golang/page/1"" translated to ""categories/golang/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/post/page/1"" translated to ""post/page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/page/1"" translated to ""page/1/index.html""
+INFO: 2016/10/27 00:01:08 htmlredirect.go:116: Alias ""/page/1"" translated to ""page/1/index.html""
+WARN: 2016/10/27 00:01:08 site.go:2373: ""404.html"" is rendered empty
+Built site for language en:
+0 draft content
+0 future content
+0 expired content
+5 pages created
+0 non-page files copied
+10 paginator pages created
+6 tags created
+2 categories created
+total in 82 ms
+```
+",closed,False,2016-10-27 00:30:45,2018-02-20 14:34:59
+git-sync,ursuad,https://github.com/kubernetes/git-sync/pull/16,https://api.github.com/repos/kubernetes/git-sync/issues/16,Fixed updating from a specific branch,"This fixes #14 by fetching the revision from the correct branch.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/16)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-27 10:53:23,2016-10-27 11:30:45
+git-sync,ursuad,https://github.com/kubernetes/git-sync/pull/17,https://api.github.com/repos/kubernetes/git-sync/issues/17,Fixed updating from a specific branch,"This fixes #14 by fetching the revision from the correct branch.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/17)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-27 11:30:14,2016-10-28 14:54:35
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/18,https://api.github.com/repos/kubernetes/git-sync/issues/18,add a test,"@stp-ip can you say what part of this test doesn't work for you?  It passes for me.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/18)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-27 17:21:31,2016-10-28 16:41:11
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/19,https://api.github.com/repos/kubernetes/git-sync/issues/19,Fix non-master branches and tags,"This plus the test should ensure no regressions.  Git makes it tricky to do
+some things on a remote that you would think to do on a local repo.
+`ls-remote` gives me the info I need with only one test for ""HEAD"" vs anything
+else.
+
+Fixes #14 
+
+@stp-ip
+@ursuad
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/19)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-28 15:06:48,2016-10-28 16:01:09
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/20,https://api.github.com/repos/kubernetes/git-sync/issues/20,Use build template,"Faster builds and versions from tags.  Also use alpine as a base image.  We  need alpine for other architectures...
+
+Fixes #10 
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/20)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-28 15:56:24,2016-11-02 06:23:06
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/21,https://api.github.com/repos/kubernetes/git-sync/issues/21,Fix tag variable,"Fix small bug in Makefile
+
+<!-- Reviewable:start -->
+
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/21)
+<!-- Reviewable:end -->
+",closed,True,2016-11-02 06:21:52,2016-11-02 06:22:05
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/22,https://api.github.com/repos/kubernetes/git-sync/issues/22,Using user and group nobody creates chmod error,"Due to nobody:nobody not having enough permissions the chmod fails and a ssh secret file can't be used.
+Currently working on using defaultMode so that can be removed completely. ",closed,False,2016-11-05 13:16:03,2016-12-22 11:55:53
+git-sync,TerraTech,https://github.com/kubernetes/git-sync/pull/23,https://api.github.com/repos/kubernetes/git-sync/issues/23,Makefile: Fix bashism when building on Ubuntu + dash," Reference: https://wiki.ubuntu.com/DashAsBinSh#A.5B
+
+ Ubuntu's /bin/sh is /bin/dash and '==' triggers an error:
+ >> /bin/sh: 1: [: amd64: unexpected operator
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/23)
+<!-- Reviewable:end -->
+",closed,True,2016-11-11 22:10:24,2017-03-22 00:50:30
+git-sync,TerraTech,https://github.com/kubernetes/git-sync/pull/24,https://api.github.com/repos/kubernetes/git-sync/issues/24,main.go: Fixes git error: did you mean `--depth` (with two dashes ?),"re: Subject
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/24)
+<!-- Reviewable:end -->
+",closed,True,2016-11-13 08:49:27,2016-11-13 10:42:06
+git-sync,ApsOps,https://github.com/kubernetes/git-sync/pull/25,https://api.github.com/repos/kubernetes/git-sync/issues/25,Remove chmod command since we can specify permissions for a Secret Volume,"- Fixed because of https://github.com/kubernetes/kubernetes/pull/28936
+
+@thockin Should we just suggest the user to set correct permissions, or should we fail unless correct permissions are set?",closed,True,2016-12-19 16:25:16,2017-01-04 01:56:44
+git-sync,sourcesoft,https://github.com/kubernetes/git-sync/pull/26,https://api.github.com/repos/kubernetes/git-sync/issues/26,fix typos in readme.md,,closed,True,2016-12-31 12:19:53,2017-02-06 20:31:53
+git-sync,fate-grand-order,https://github.com/kubernetes/git-sync/pull/27,https://api.github.com/repos/kubernetes/git-sync/issues/27,"fix misspell ""recommended"" in main.go",,closed,True,2017-01-17 07:26:39,2017-01-17 16:57:41
+git-sync,ideahitme,https://github.com/kubernetes/git-sync/issues/28,https://api.github.com/repos/kubernetes/git-sync/issues/28,Use env var `GIT_SSH_COMMAND` instead,"The ssh-wrapper seems unnecessary to me, as the command can be set as: 
+`GITHUB_SSH_COMMAND=""ssh -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /etc/git-secret/ssh""`",closed,False,2017-01-25 10:29:50,2017-01-27 06:15:41
+git-sync,ideahitme,https://github.com/kubernetes/git-sync/pull/29,https://api.github.com/repos/kubernetes/git-sync/issues/29,"clean up Dockerfile, remove ssh-wrapper.sh and set env var",Fixes #28,closed,True,2017-01-26 18:05:52,2017-01-27 06:15:41
+git-sync,ideahitme,https://github.com/kubernetes/git-sync/issues/30,https://api.github.com/repos/kubernetes/git-sync/issues/30,e2e test is broken for Mac OS X ,"**OS**: Mac OS X Sierra 10.12.3
+**Steps**: `make test`
+**Error:**: 
+```
+Running tests:
+ok  	k8s.io/git-sync/cmd/git-sync	0.046s
+?   	k8s.io/git-sync/pkg/version	[no test files]
+
+Checking gofmt: PASS
+
+Checking go vet: PASS
+
+building: bin/amd64/git-sync
+Sending build context to Docker daemon 8.736 MB
+Step 1/10 : FROM alpine:3.4
+ ---> 0766572b4bac
+Step 2/10 : MAINTAINER Tim Hockin <thockin@google.com>
+ ---> Using cache
+ ---> 0eac37411a22
+Step 3/10 : ADD bin/amd64/git-sync /git-sync
+ ---> Using cache
+ ---> 65a54a0c5443
+Step 4/10 : ENV GIT_SYNC_DEST /git
+ ---> Using cache
+ ---> 6bade5a07d01
+Step 5/10 : RUN apk update --no-cache && apk add     ca-certificates     coreutils     git     openssh-client
+ ---> Using cache
+ ---> 8cb820470a33
+Step 6/10 : RUN mv /usr/bin/ssh /usr/bin/ssh-binary
+ ---> Using cache
+ ---> c55cce37bd39
+Step 7/10 : ADD ssh-wrapper.sh /usr/bin/ssh
+ ---> Using cache
+ ---> 1a61fe46952d
+Step 8/10 : RUN chmod 755 /usr/bin/ssh
+ ---> Using cache
+ ---> 029ee069f00d
+Step 9/10 : USER nobody:nobody
+ ---> Using cache
+ ---> cca0e247c918
+Step 10/10 : ENTRYPOINT /git-sync
+ ---> Using cache
+ ---> 71aaf60e7e1b
+Successfully built 71aaf60e7e1b
+container: e2e/git-sync-amd64:v2.0.4-2-g5e2d975
+test root is /tmp/git-sync-test.17388
+Initialized empty Git repository in /private/tmp/git-sync-test.17388/repo/.git/
+testcase head-once: PASS
+testcase default-sync: FAIL:  /tmp/git-sync-test.17388/root/link does not exist or is not a symlink
+ytussupbekov      2457   0.1  0.1 556625368  10996 s000  S+   12:21AM   0:00.02 docker run -i -u 2064180707:113584762 -v /tmp/git-sync-test.17388:/tmp/git-sync-test.17388 e2e/git-sync-amd64:v2.0.4-2-g5e2d975 --logtostderr --v=5 --wait=0.1 --repo=/tmp/git-sync-test.17388/repo --root=/tmp/git-sync-test.17388/root --dest=link
+ytussupbekov      2461   0.0  0.0  2442020    808 s000  S+   12:21AM   0:00.00 grep git-sync
+make: *** [test] Error 1
+```
+
+**Cause**: The reason being `/tmp` directory itself in Mac OS X is a symlink to `/private/tmp`. Suggested fix could be to identify architecture `darwin`-> and run tests in `/private/tmp`. For other architecture, keep it as it is. Though I am not entirely sure on the state of `test_e2e.sh` and usefulness of having the test running in Mac OS X. Thoughts?",closed,False,2017-01-26 23:24:23,2017-01-27 06:44:08
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/31,https://api.github.com/repos/kubernetes/git-sync/issues/31,bump e2e timeouts,Fixes #30 ,closed,True,2017-01-27 06:24:01,2017-01-27 06:44:08
+git-sync,ursuad,https://github.com/kubernetes/git-sync/issues/32,https://api.github.com/repos/kubernetes/git-sync/issues/32,Issue cloning github repo with credentials,"The git-sync container keeps crashing:
+
+This are the variables I tried to run it with:
+```
+  Environment Variables:
+      GIT_SYNC_REPO:		https://github.com/GITHUB_USER/GIT_REPO.git
+      GIT_SYNC_BRANCH:	master
+      GIT_SYNC_DEST:		git
+      GIT_SYNC_USERNAME:	<set to the key 'username' in secret 'github-secret'>
+      GIT_SYNC_PASSWORD:	<set to the key 'password' in secret 'github-secret'>
+```
+Of course, the `GITHUB_USER` and the `GIT_REPO` are set to the correct values when I deploy, 
+
+The Image I'm using is:
+```
+gcr.io/google_containers/git-sync:v2.0.4
+```
+
+
+```
+$ kubectl logs dp-analytics-blog-kgsnh -c git-sync
+ERROR: can't create .netrc file: error setting up git credentials exit status 255: error: could not lock config file //.gitconfig: Permission denied
+```
+",closed,False,2017-02-02 12:52:58,2017-02-17 16:50:33
+git-sync,ursuad,https://github.com/kubernetes/git-sync/issues/33,https://api.github.com/repos/kubernetes/git-sync/issues/33,Issue cloning from Github with SSH,"Because of #32 I tried switching to SSH, but the container keeps crashing again. 
+
+The logs are:
+```
+$ kubectl logs dp-analytics-blog-2fjnv -c git-sync
+I0202 13:28:42.608581       1 main.go:162] starting up: [""/git-sync""]
+E0202 13:28:43.307843       1 main.go:169] error syncing repo: error running command: exit status 128: ""Cloning into '/git'...\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n""
+```
+
+Just to test, I replaced the container command with:
+```
+#        command: [""cat""]
+#        args: [""/etc/git-secret/ssh""]
+```
+I got the SSH key from the output, removed all my local keys from the SSH agent, imported that key (from the container) with `ssh-add` and it worked to clone the repo.  So it must be something from the container?
+
+
+My config:
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: my-rc-name
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: my-pod-name
+      labels:
+        application: my-app
+        component: my-comp
+        environment: my-env
+    spec:
+      containers:
+      - name: git-sync
+        image: gcr.io/google_containers/git-sync:v2.0.4
+#        command: [""cat""]
+#        args: [""/etc/git-secret/ssh""]
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: git-secret
+          mountPath: /etc/git-secret
+        env:
+        - name: GIT_SYNC_REPO
+          value: ""git@github.com:GITHUB_USER/GITHUB_REPO.git""
+        - name: GIT_SYNC_SSH
+          value: ""true""
+        - name: GIT_SYNC_BRANCH
+          value: master
+        - name: GIT_SYNC_DEST
+          value: git
+        - name: GIT_SYNC_DEPTH
+          value: ""1""
+      volumes:
+      - name: html
+        emptyDir: {}
+      - name: git-secret
+        secret:
+          secretName: github-secret-ssh
+          defaultMode: 0400
+```",closed,False,2017-02-02 13:36:28,2019-01-12 20:23:49
+git-sync,dohnto,https://github.com/kubernetes/git-sync/issues/34,https://api.github.com/repos/kubernetes/git-sync/issues/34,"Load key ""/etc/git-secret/ssh"": Permission denied","Hello, 
+
+I am using this version of git sync `1a9138765af75007d88f77c985f4f2af200b1227`
+I build a docker image using `make container REGISTRY=X TAG=Y`
+
+And I am using following setup:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: server
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - mountPath: /mypath
+      name: git-volume
+  - image: MY_IMAGE:git-sync-amd64:v2.0.4-6-g1a91387
+    name: git-sync
+    env:
+    - name: GIT_SYNC_REPO
+      value: ""git@MY_REPO""
+    - name: GIT_SYNC_SSH
+      value: ""true""
+    #command:
+    #- tail
+    #- -f
+    #- /dev/null
+    args:
+    - -dest
+    - foo
+    - --v=9
+    volumeMounts:
+    - mountPath: /etc/git-secret
+      name: git-secret
+    - name: git-volume
+      mountPath: /git
+  volumes:
+  - name: git-secret
+    secret:
+      secretName: creds
+      defaultMode: 256
+  - name: git-volume
+    emptyDir: {}
+```
+
+But I cannot clone the repository.
+
+When I use the commend version with `tail -f /dev/null` and execute into the container and I run manually:
+
+```bash
+# export GIT_SSH_COMMAND=""ssh -vv -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i/etc/git-secret/ssh""
+# git clone git@MY_REPO
+...
+Load key ""/etc/git-secret/ssh"": Permission denied
+...
+# ls -l /etc/git-secret/ssh
+lrwxrwxrwx 1 root root 10 Feb  2 16:21 /etc/git-secret/ssh -> ..data/ssh
+# -l /etc/git-secret/..data/ssh 
+-r-------- 1 root root 1675 Feb  2 16:21 /etc/git-secret/..data/ssh
+# whoami 
+nobody
+```",closed,False,2017-02-02 16:39:36,2017-02-17 16:41:31
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/35,https://api.github.com/repos/kubernetes/git-sync/issues/35,Use bare name for DEST in example,"Using a path for DEST will fail in subsequent syncs #8.
+Using a bare name in examples.",closed,True,2017-02-15 08:49:06,2017-02-15 16:49:07
+git-sync,mgilbir,https://github.com/kubernetes/git-sync/issues/36,https://api.github.com/repos/kubernetes/git-sync/issues/36,GIT_SYNC_ONE_TIME not honored,"When I set the `one-time` flag along with a revision via the `rev` flag the program goes into the `sleepForever` call on https://github.com/kubernetes/git-sync/blob/master/cmd/git-sync/main.go#L185, never reaching the test for the `one-time` flag on line 187.
+
+Would you accept a PR on this or you prefer to tackle it yourselves?",closed,False,2017-02-15 14:39:42,2017-09-16 16:41:19
+git-sync,sjernigan,https://github.com/kubernetes/git-sync/pull/37,https://api.github.com/repos/kubernetes/git-sync/issues/37,Update ssh.md,"Adding requirement for runAsRoot and suggested configuration for defaultMode.  These are required after previous change to remove the chmod on the key.
+
+See disccussion #33 and #34 #",closed,True,2017-02-17 16:09:05,2017-02-17 16:40:46
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/38,https://api.github.com/repos/kubernetes/git-sync/issues/38,Remove need to runAsUser: 0,"Running the container as root is not perfect. Especially, when other containers using the files are non-root.
+",closed,False,2017-02-17 16:44:40,2018-12-19 16:32:00
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/39,https://api.github.com/repos/kubernetes/git-sync/issues/39,Add runAsUser to demo example,Fixes #32,closed,True,2017-02-17 16:50:00,2017-02-17 16:51:21
+git-sync,Analect,https://github.com/kubernetes/git-sync/issues/40,https://api.github.com/repos/kubernetes/git-sync/issues/40,scope for using ssh to push back to a repo; folder hierarchies shift,"I was able to get git-sync working with these settings.  I also was having trouble getting `GIT_SYNC_ONE_TIME` working and so just added an arbitrarily high `GIT_SYNC_WAIT` to achieve that single first pull/clone.
+
+```
+{
+			""name"": ""git-sync"",
+			""image"": ""gcr.io/google_containers/git-sync-amd64:v2.0.4"",
+			""imagePullPolicy"": ""Always"",
+			""env"": [{
+				""name"": ""GIT_SYNC_REPO"",
+				""value"": ""git@mygitserver.com:group/test-repo""
+			}, {
+				""name"": ""GIT_SYNC_BRANCH"",
+				""value"": ""master""
+			},{
+				""name"": ""GIT_SYNC_DEST"",
+				""value"": ""master""
+			}, {
+				""name"": ""GIT_SYNC_SSH"",
+				""value"": ""true""
+			}, {
+				""name"": ""GIT_SYNC_WAIT"",
+				""value"": ""99999""
+			}],
+			""securityContext"": {
+				""runAsUser"": 0
+			},
+			""volumeMounts"": [{
+				""name"": ""git-secret"",
+				""mountPath"": ""/etc/git-secret""
+			}, {
+				""name"": ""repo"",
+				""mountPath"": ""/git""
+			}]
+		}
+```
+
+My other container (to which the above acts as a sidecar) includes the following settings:
+
+```
+{
+				""name"": ""git-secret"",
+				""mountPath"": ""/etc/git-secret""
+			}, {
+				""name"": ""repo"",
+				""mountPath"": ""/home/jovyan/repo""
+			}
+```
+So that has given me ssh capability back in the main container and synced files to `/home/jovyan/repo`, which is all fine.
+
+Perhaps the next part is by design, but maybe someone more familiar with the workings of this can explain or perhaps suggest a work-around.
+
+My main objective is to clone a repo to a compute environment I'm working with and have the ability to push back changes to the repo before I leave that compute environment.
+
+So in my main container running that compute environment, the `repo` has been cloned and mounted to `/home/jovyan/repo` and, as per the logs from the git-sync container below, folders have been added for `master` and `rev-f9d0af287de930b7495145c716b1d4fcca88673e` .
+
+```
+cloned git@mygitserver.com:group/test-repo.git
+2017-02-26T10:35:14.794399416Z I0226 10:35:14.794334       1 main.go:268] syncing to HEAD (f9d0af287de930b7495145c716b1d4fcca88673e)
+2017-02-26T10:35:15.341912965Z I0226 10:35:15.341767       1 main.go:281] added worktree /git/rev-f9d0af287de930b7495145c716b1d4fcca88673e for origin/master
+2017-02-26T10:35:15.346189283Z I0226 10:35:15.346089       1 main.go:301] reset worktree /git/rev-f9d0af287de930b7495145c716b1d4fcca88673e to f9d0af287de930b7495145c716b1d4fcca88673e
+```
+
+Back on my compute environment, it is the `repo` folder that is the git folder (see output from running `git status`) and eventhough both the `master` and `rev-f9***` folders have `.git` sub-directories (see red arrow below), these aren't recognised as git repos.
+
+The problem is, based on this new imposed structure, git thinks I have deleted all my files from my repos root folder (see 3) and added them into sub-folders (see 1).  If I add these changes and push back to my repo, then it's going to get all screwed up.
+
+Am I using this tool the wrong way, or was it not intended to manage the `pushing` changes back to the repo, but instead just emphasising the `pulling` part.
+
+![image](https://cloud.githubusercontent.com/assets/4063815/23339073/324b8966-fc12-11e6-9ca2-e21a726a0b95.png)
+
+I would appreciate anyone's insights on this. Thanks.",closed,False,2017-02-26 11:09:42,2017-03-22 13:38:48
+git-sync,VikramTiwari,https://github.com/kubernetes/git-sync/pull/41,https://api.github.com/repos/kubernetes/git-sync/issues/41,Update README.md,fix file names for creating kubernetes pods and services,closed,True,2017-03-02 06:10:25,2017-03-02 11:57:49
+git-sync,VikramTiwari,https://github.com/kubernetes/git-sync/issues/42,https://api.github.com/repos/kubernetes/git-sync/issues/42,no git-sync latest,"Not sure why it is so, but there is no `git-sync:latest` image in the container registry.
+
+This is causing the demo code to break.
+
+Ref: gcr.io/google_containers/git-sync",closed,False,2017-03-04 06:53:46,2017-03-06 04:45:01
+git-sync,VikramTiwari,https://github.com/kubernetes/git-sync/issues/43,https://api.github.com/repos/kubernetes/git-sync/issues/43,is git-sync copying files as a root user?,"If this is true then `git-sync` cannot be used for the static-file based server along with nginx.
+
+- git-sync copies files as a root user in a volume
+- If I attach that volume to nginx then it gives 403 forbidden error
+
+Could there be any other issue for this behaviour?",closed,False,2017-03-04 07:21:32,2017-03-22 03:50:56
+git-sync,VikramTiwari,https://github.com/kubernetes/git-sync/pull/44,https://api.github.com/repos/kubernetes/git-sync/issues/44,update pod config,"- Fixes #42
+- now uses v2.0.4 which is current latest
+
+NOTE: Hugo is not versioned on GCR hence still using the latest image.",closed,True,2017-03-06 04:43:36,2017-03-06 04:45:01
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/45,https://api.github.com/repos/kubernetes/git-sync/issues/45,[WIP] Document atomic switching and related issues,"Symlinks as used for the atomic switch might lead to issues
+in various applications.
+
+Closes: #15",closed,True,2017-03-22 03:42:32,2017-09-15 17:34:28
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/46,https://api.github.com/repos/kubernetes/git-sync/issues/46,Update OWNERS to latest state,Use latest governance state from Kubernetes and document current maintainers.,closed,True,2017-03-22 03:51:38,2017-04-09 20:38:03
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/47,https://api.github.com/repos/kubernetes/git-sync/issues/47,Update demo,"Restructure demo to reflect the most demanded use-case.
+Caddy + git-sync with auto-tls.
+
+* [ ] templates
+  * [ ] cli flags
+  * [ ] correct git-sync repo (gcr.io/google_containers/git-sync:{VERSION} -> gcr.io/v2/google_containers/git-sync-amd64:{VERSION})
+  * [ ] imagePullPolicy (not latest)
+  * [ ] use static site -> don't generate blog
+  * [x] workaround with runAsRoot for initial PoC
+* [ ] documentation
+  * [ ] document git-sync usage is mostly pulling in static data such as media, html etc.
+* [ ] create minimal caddy container image (https://hub.docker.com/r/abiosoft/caddy/ includes git and doesn't make sense with git-sync)",open,False,2017-03-22 04:01:29,2018-12-17 19:46:10
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/48,https://api.github.com/repos/kubernetes/git-sync/issues/48,Split out ENV/cli-flags configuration,"Split ENV configuration into own documentation file.
+docs/config.md
+
+* [ ] ENVs
+* [ ] CLI
+* [ ] links to ssh specifics
+",open,False,2017-03-22 04:06:16,2019-01-23 16:21:18
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/49,https://api.github.com/repos/kubernetes/git-sync/issues/49,Cleanup readme,"* [ ] Add Kubernetes usage with link to demo
+* [ ] Remove plain docker container usage of git-sync
+* [ ] Add cli usage of git-sync using flags
+* [ ] Add link to documentation of using ENVs
+
+",open,False,2017-03-22 04:06:33,2018-06-05 00:04:45
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/50,https://api.github.com/repos/kubernetes/git-sync/issues/50,Update deps,"* [ ] update golang version
+* [ ] update deps
+* [ ] test",closed,False,2017-03-22 04:10:01,2017-09-15 17:31:04
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/51,https://api.github.com/repos/kubernetes/git-sync/issues/51,Update copyright,,closed,True,2017-03-22 04:22:30,2017-03-22 04:26:40
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/52,https://api.github.com/repos/kubernetes/git-sync/issues/52,"Revert ""Update copyright""",Reverts kubernetes/git-sync#51,closed,True,2017-03-22 04:25:31,2017-03-22 04:27:51
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/53,https://api.github.com/repos/kubernetes/git-sync/issues/53,Add non atomic behaviour,"Add flag and logic to disable symlink usage and just pull in new changes via git pull.
+
+This could be used as a workaround for various issues and additional use-cases, but introduces inconsistent state so this should be heavily warned about.
+
+Flag: ```GIT_SYNC_ATOMIC```",open,False,2017-03-22 13:41:36,2019-01-24 00:18:44
+git-sync,sdurrheimer,https://github.com/kubernetes/git-sync/issues/54,https://api.github.com/repos/kubernetes/git-sync/issues/54,Add sparse checkout feature,"Hi there,
+
+Would be nice if we could sparse checkout a specified list of folders/files.",open,False,2017-03-23 07:00:53,2019-03-24 15:06:03
+git-sync,aledbf,https://github.com/kubernetes/git-sync/issues/55,https://api.github.com/repos/kubernetes/git-sync/issues/55,Multiple zombie processes after a couple of days running,"Today I found a pod that is running since `Mon, 27 Mar 2017 19:20:53 -0300` has 1745 zombie child processes. The deployment is configured with this env variables:
+```yaml
+        - name: GIT_SYNC_REPO
+          value: http://xxxxxxxxx.git
+        - name: GIT_SYNC_DEST
+          value: data
+        - name: GIT_SYNC_WAIT
+          value: ""300""
+        - name: GIT_SYNC_USERNAME
+          value: xxxxxxxxx
+        - name: GIT_SYNC_PASSWORD
+          value: xxxxxxxxx
+        - name: GIT_SYNC_MAX_SYNC_FAILURES
+          value: ""999999""
+        - name: GIT_SYNC_PERMISSIONS
+          value: ""755""
+        - name: GIT_SYNC_ROOT
+          value: /git
+```
+
+**image:** gcr.io/google_containers/git-sync-amd64:v2.0.4
+
+```console
+11349 ?        Sl     0:00  \_ /usr/bin/containerd-shim 014cc79294083c25fe69e13acb30cb35977585b086806466ff269c3841116225 /var/run/docker/libcontainerd/014cc79294083c25fe69e13acb30cb35977585b086806466ff269c3841116225 docker-runc
+11366 ?        Ssl    0:08  |   \_ /git-sync
+11416 ?        Z      0:00  |       \_ [git-credential-] <defunct>
+10949 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+30826 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+21644 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 8790 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+27684 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+15016 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 1260 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+20780 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 7507 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+26587 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+13586 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+32364 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+19541 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 6487 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+25368 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+12562 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+30987 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+18188 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 4824 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+24131 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+11333 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+30182 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+17435 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 3827 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+22832 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+10001 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+28827 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+16080 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 2909 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+22296 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+ 9650 ?        Z      0:00  |       \_ [git-remote-http] <defunct>
+.......
+```",closed,False,2017-03-31 17:53:24,2018-01-05 22:38:38
+git-sync,aledbf,https://github.com/kubernetes/git-sync/pull/56,https://api.github.com/repos/kubernetes/git-sync/issues/56,Avoid zombie processes,,closed,True,2017-03-31 18:49:35,2017-03-31 22:08:18
+git-sync,aledbf,https://github.com/kubernetes/git-sync/pull/57,https://api.github.com/repos/kubernetes/git-sync/issues/57,Avoid zombie processes,,closed,True,2017-03-31 22:09:09,2017-05-23 12:38:53
+git-sync,pieterlange,https://github.com/kubernetes/git-sync/pull/58,https://api.github.com/repos/kubernetes/git-sync/issues/58,Use secure defaults (check hostkeys),Somewhat related: https://bridge.grumpy-troll.org/2017/04/golang-ssh-security/,closed,True,2017-04-21 13:11:44,2017-04-25 00:51:24
+git-sync,pieterlange,https://github.com/kubernetes/git-sync/issues/59,https://api.github.com/repos/kubernetes/git-sync/issues/59,Reminder to flip the default host checking to 'true' on 3.0 version bump,Ref: #58,closed,False,2017-04-26 13:57:24,2017-09-18 18:18:47
+git-sync,pieterlange,https://github.com/kubernetes/git-sync/issues/60,https://api.github.com/repos/kubernetes/git-sync/issues/60,Cut a new release,"Almost half of the commits in this repo never made it to a released version.
+
+Maybe it's time to cut a new release so we can get more feedback from the users and people don't have to compile their own image.",closed,False,2017-05-11 09:48:43,2017-05-30 09:33:06
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/61,https://api.github.com/repos/kubernetes/git-sync/issues/61,Add a RELEASING doc,Add a short doc on cutting a release.,closed,True,2017-05-30 04:56:28,2017-05-30 06:51:56
+git-sync,japettyjohn,https://github.com/kubernetes/git-sync/pull/62,https://api.github.com/repos/kubernetes/git-sync/issues/62,added submodule support,Added option to init and update submodules. If depth is specified it uses shallow submodules.,closed,True,2017-06-02 22:11:06,2018-07-23 22:49:56
+git-sync,mbssaiakhil,https://github.com/kubernetes/git-sync/pull/63,https://api.github.com/repos/kubernetes/git-sync/issues/63,Fix typo in Events Code of Conduct,,closed,True,2017-08-13 11:30:36,2017-08-14 03:38:20
+git-sync,mbssaiakhil,https://github.com/kubernetes/git-sync/pull/64,https://api.github.com/repos/kubernetes/git-sync/issues/64,Update Code of Conduct,Made the last sentence uniform wrt other sentences,closed,True,2017-08-15 13:12:31,2017-08-15 15:26:28
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/issues/65,https://api.github.com/repos/kubernetes/git-sync/issues/65,Sidecar crashes with unreachable git repo,Instead of failing hard it should log an error and not take down the whole pod.,closed,False,2017-08-21 09:30:41,2018-12-17 19:57:46
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/66,https://api.github.com/repos/kubernetes/git-sync/issues/66,Update RELEASING doc a bit,,closed,True,2017-09-15 16:49:10,2017-09-15 16:49:44
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/67,https://api.github.com/repos/kubernetes/git-sync/issues/67,Fix one-shot sync of a rev,Fixes #36 ,closed,True,2017-09-15 17:06:24,2017-09-15 17:31:23
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/68,https://api.github.com/repos/kubernetes/git-sync/issues/68,Update golang version to 1.9,Fixes #50,closed,True,2017-09-15 17:26:30,2017-09-15 17:31:04
+git-sync,pieterlange,https://github.com/kubernetes/git-sync/pull/69,https://api.github.com/repos/kubernetes/git-sync/issues/69,Flip the known_hosts enforcement to true so the git hosts actually get verified.,"Ref: #59 
+Ref: #58 ",closed,True,2017-09-15 23:29:13,2017-09-18 18:18:02
+git-sync,App-247,https://github.com/kubernetes/git-sync/issues/70,https://api.github.com/repos/kubernetes/git-sync/issues/70,Question: Works with Bitbucket repos?,I tried unsuccessfully to clone a private repo on Bitbucket. With repositories in github works wonderfully. This works for Bitbucket repos? Thanks.,closed,False,2017-09-19 10:34:04,2017-09-19 16:21:29
+git-sync,jorianvo,https://github.com/kubernetes/git-sync/issues/71,https://api.github.com/repos/kubernetes/git-sync/issues/71,e2e is broken on MacOS - pkill failure,"**OS:** Mac OS X Sierra 10.12.6
+**Make version:** GNU Make 3.81
+**Steps:** make test
+**Error:**
+```shell
+$ make test
+Running tests:
+ok  	k8s.io/git-sync/cmd/git-sync	0.005s
+?   	k8s.io/git-sync/pkg/version	[no test files]
+
+Checking gofmt: PASS
+
+Checking go vet: PASS
+
+building: bin/amd64/git-sync
+container: e2e/git-sync-amd64:v2.0.5-13-g267a78b-dirty
+test root is /tmp/git-sync-test.28622
+Initialized empty Git repository in /private/tmp/git-sync-test.28622/repo/.git/
+testcase head-once: PASS
+testcase default-sync: make: *** [test] Error 1
+```
+
+The issue seems to be the `pkill git-sync` it is unable to match a process and returns 1. The container remains also running:
+```
+$ docker ps
+CONTAINER ID        IMAGE                                         COMMAND                  CREATED             STATUS              PORTS                    NAMES
+0e6fe071a1ef        e2e/git-sync-amd64:v2.0.5-13-g267a78b-dirty   ""/git-sync --logto...""   3 minutes ago       Up 3 minutes                                 modest_jennings
+```
+And is matched by `ps`:
+```
+$ ps auxw | grep git-sync
+user 26736   0.0  0.0  2451236    828 s003  S+    8:52PM   0:00.00 grep --color=auto --exclude-dir=.bzr --exclude-dir=CVS --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn git-sync
+user 26525   0.0  0.1 556638724   9780 s003  S     8:47PM   0:00.40 docker run -i -u 501:20 -v /tmp/git-sync-test.28622:/tmp/git-sync-test.28622 e2e/git-sync-amd64:v2.0.5-13-g267a78b-dirty --logtostderr --v=5 --wait=0.1 --repo=/tmp/git-sync-test.28622/repo --root=/tmp/git-sync-test.28622/root --dest=link
+```
+
+I actually want to work on issue #54, so I thought I first get all tests working, but if irrelevant I'm happy to drop this issue",closed,False,2017-09-19 18:58:39,2017-09-22 15:51:18
+git-sync,ngtuna,https://github.com/kubernetes/git-sync/issues/72,https://api.github.com/repos/kubernetes/git-sync/issues/72,ERROR: --dest must be a bare name,"I ran the example on README and it gave me this below error:
+
+```
+$ docker run -d -v /tmp/git-data:/git gcr.io/google-containers/git-sync-amd64:v2.0.5-13-g267a78b --repo=https://github.com/ngtuna/k8s_notes --branch=master --wait=30
+827186f9ea9ad2194eb252386126722c980bb707460a951b179122ab7b53b833
+
+Tunas-MacBook-Pro:git-sync tuna$ docker logs -f 827186f9ea9ad2194eb252386126722c980bb707460a951b179122ab7b53b833
+ERROR: --dest must be a bare name
+Usage of /git-sync:
+```",closed,False,2017-09-20 14:58:28,2018-02-07 08:01:48
+git-sync,jorianvo,https://github.com/kubernetes/git-sync/pull/73,https://api.github.com/repos/kubernetes/git-sync/issues/73,Improve e2e tests,This commit will fix issue #71 and is tested on both MacOS and Ubuntu.,closed,True,2017-09-21 20:43:27,2017-09-22 09:30:28
+git-sync,alexryan,https://github.com/kubernetes/git-sync/issues/74,https://api.github.com/repos/kubernetes/git-sync/issues/74,docker build -t myrepo/hugo hugo/ => Failed to recurse into submodule path 'sublime-hugo-theme',"
+```
+ 😈   >docker build -t myrepo/hugo hugo/
+Sending build context to Docker daemon  5.632kB
+Step 1/13 : FROM golang
+...
+Submodule path 'would-have-been-cool-in-the-80s': checked out '7933ce7d6aad4ecf38edc217340c1004dd8f01fb'
+Failed to recurse into submodule path 'sublime-hugo-theme'
+The command '/bin/sh -c git clone --recursive https://github.com/spf13/hugoThemes.git /themes' returned a non-zero code: 1
+```
+",closed,False,2017-09-30 23:59:51,2017-10-03 09:07:08
+git-sync,jinseo-jang,https://github.com/kubernetes/git-sync/issues/75,https://api.github.com/repos/kubernetes/git-sync/issues/75,sync git submodule ,"Hi there.
+is it possible to synchronize git submodule as well?
+if possible, I'd like to know how to use arguments.
+
+**[e.g]**
+_env:
+  - name: GIT_SYNC_REPO
+    value: {{ .Values.formsdesignerRepo }}
+  - name: GIT_SYNC_USERNAME
+    value: {{ .Values.githubUsername }}
+  - name: GIT_SYNC_PASSWORD
+    value: {{ .Values.githubPassword }}
+  - name: GIT_SYNC_DEST
+    value: git
+  - name: GIT_SYNC_BRANCH_",open,False,2017-11-02 23:20:15,2018-02-16 01:58:02
+git-sync,leozilla,https://github.com/kubernetes/git-sync/issues/76,https://api.github.com/repos/kubernetes/git-sync/issues/76,Dockerfile build fails on arm,"Step 5/7 fails when building for arm on a Raspberry pi 3 running 4.4.50-hypriotos-v7+
+
+```
+HypriotOS/armv7: pirate@node01 in ~/git-sync on master*
+$ make container REGISTRY=leozilla/git-sync TAG=0.1.0 ARCH=arm
+```
+
+```
+Step 5/7 : RUN apk update --no-cache && apk add     ca-certificates     coreutils     git     openssh-client
+ ---> Running in a7d10f45e7b2
+/bin/sh: apk: not found
+The command '/bin/sh -c apk update --no-cache && apk add     ca-certificates     coreutils     git     openssh-client' returned a non-zero code: 127
+Makefile:109: recipe for target '.container-leozilla_git-sync_git-sync-arm-v2.0.5-15-gdac3f77' failed
+```
+
+I tried to change the RUN instruction to
+
+```
+Step 5/7 : RUN busybox /bin/apk update --no-cache && busybox /bin/apk add     ca-certificates     coreutils     git     openssh-client
+ ---> Running in 4a2dd9194a9e
+apk: applet not found
+The command '/bin/sh -c busybox /bin/apk update --no-cache && busybox /bin/apk add     ca-certificates     coreutils     git     openssh-client' returned a non-zero code: 127
+Makefile:109: recipe for target '.container-leozilla_git-sync_git-sync-arm-v2.0.5-15-gdac3f77-dirty' failed
+```
+
+Is this project supposed to work on arm/with busybox?
+",closed,False,2017-11-23 15:28:10,2018-07-21 18:22:52
+git-sync,deyceg,https://github.com/kubernetes/git-sync/issues/77,https://api.github.com/repos/kubernetes/git-sync/issues/77,Credentials specified by env vars not working,"k8s cluster: v1.7.1
+git-sync: v2.0.4/v2.0.5
+
+The container fails to start because the credentials aren't passed to the `git` command. However, whats interesting is that if you `ssh` in to the container and run `git-sync --help` you can visibility see the env vars have been read by the go program and are set as ""defaults"".
+
+If I override the container entrypoint and run `./git-sync -username <username> -password <password> then it works just fine.
+
+This obviously isn't ideal because you can see the credentials in plaintext.",open,False,2017-11-30 19:31:23,2018-03-01 16:20:08
+git-sync,spiffxp,https://github.com/kubernetes/git-sync/pull/78,https://api.github.com/repos/kubernetes/git-sync/issues/78,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:32:23,2018-01-03 00:48:46
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/79,https://api.github.com/repos/kubernetes/git-sync/issues/79,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281",closed,True,2017-12-22 18:02:09,2017-12-22 19:30:42
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/80,https://api.github.com/repos/kubernetes/git-sync/issues/80,Pushes go to staging-k8s.gcr.io,"Context: https://github.com/kubernetes/kubernetes/pull/57824
+
+xref kubernetes/release#281",closed,True,2018-01-17 22:20:59,2018-01-19 17:22:05
+git-sync,andjelx,https://github.com/kubernetes/git-sync/issues/81,https://api.github.com/repos/kubernetes/git-sync/issues/81,Add webhook call on successful sync,"I'd like to contribute into the project adding webhook call on successful sync.
+The case is: we trigger Prometheus to reload it's alerts \ rules stored in git repo.
+
+The parameters are as below:
+```
+var doWebhook = flag.Bool(""webhook"", envBool(""WEBHOOK_ENABLED"", false),
+	""trigger webhook on sucessfull git sync"")
+var webhook = flag.String(""webhook-url"", envString(""WEBHOOK_URL"", """"),
+	""the url to send a request to when git synced"")
+var webhookMethod = flag.String(""webhook-method"", envString(""WEBHOOK_METHOD"", ""POST""),
+	""the HTTP method url to use to send the webhook"")
+var webhookStatusCode = flag.Int(""webhook-status-code"", envInt(""WEBHOOK_CODE"", 200),
+	""the HTTP status code indicating successful triggering of reload"")
+```",closed,False,2018-01-31 12:51:44,2018-11-25 09:40:10
+git-sync,frankfarzan,https://github.com/kubernetes/git-sync/pull/82,https://api.github.com/repos/kubernetes/git-sync/issues/82,Don't set GIT_SYNC_DEST in Dockerfile.,"I'm guessing this is an artifact of previous refactorings.
+Currently, GIT_SYNC_ROOT defaults to /git and GIT_SYNC_DEST
+defaults to leaf dir of repo.",closed,True,2018-02-06 03:25:01,2018-02-06 05:01:22
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/83,https://api.github.com/repos/kubernetes/git-sync/issues/83,add -- to gcloud CLI,,closed,True,2018-02-07 05:26:08,2018-02-07 07:58:14
+git-sync,arturozv,https://github.com/kubernetes/git-sync/pull/84,https://api.github.com/repos/kubernetes/git-sync/issues/84,add usage docs,"Hi, thanks for the project! 
+I've been having to check the source code to check what options does the cli have. It would be nice to have them on a more friendly format",closed,True,2018-02-13 22:02:37,2018-09-27 15:35:56
+git-sync,andjelx,https://github.com/kubernetes/git-sync/pull/85,https://api.github.com/repos/kubernetes/git-sync/issues/85,Webhook call on sucessfull sync added,,closed,True,2018-02-15 17:04:47,2018-12-17 19:11:43
+git-sync,wanghanlin,https://github.com/kubernetes/git-sync/pull/86,https://api.github.com/repos/kubernetes/git-sync/issues/86,Update ssh.md,,closed,True,2018-03-10 07:32:02,2018-03-30 03:53:04
+git-sync,mandrean,https://github.com/kubernetes/git-sync/pull/87,https://api.github.com/repos/kubernetes/git-sync/issues/87,Run Go build-image without TTY,AFAIK it's not necessary to run the build-image with TTY and the `-t` flag can just be omitted as it breaks some CI builds trying to run `make container` when TTY isn't allowed.,closed,True,2018-03-29 09:07:53,2018-04-23 13:00:39
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/88,https://api.github.com/repos/kubernetes/git-sync/issues/88,"Add debug, enable pprof by flag",,closed,True,2018-03-30 03:41:37,2018-07-02 21:36:18
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/89,https://api.github.com/repos/kubernetes/git-sync/issues/89,Use k8s GCR vanity URL,,closed,True,2018-04-06 17:15:36,2018-04-06 17:15:47
+git-sync,geekdave,https://github.com/kubernetes/git-sync/issues/90,https://api.github.com/repos/kubernetes/git-sync/issues/90,Question: Usage outside kubernetes?,"Wondering if this can be used as a standalone docker container outside of kubernetes.  I see in docs/ssh.md, it mentions using kubernetes secrets.  I'd like to use git over ssh, with public key auth, but just on a standalone VM running docker.
+
+Thanks!",closed,False,2018-04-24 22:54:19,2018-04-25 16:05:51
+git-sync,g4s8,https://github.com/kubernetes/git-sync/issues/91,https://api.github.com/repos/kubernetes/git-sync/issues/91,Error when using credentials,"When I add `username` and `password` to `git-sync` command it failed with error:
+```
+ERROR: can't create .netrc file: error setting up git credentials exit status 255: error: could not lock config file //.gitconfig: Permission denied
+```",closed,False,2018-05-08 14:16:28,2018-07-20 14:24:55
+git-sync,brycecr,https://github.com/kubernetes/git-sync/pull/92,https://api.github.com/repos/kubernetes/git-sync/issues/92,Add gitcookie configuration option,"Add an option to specify a git http cookie file in the k8s yaml
+that will be configured as the global git cookie file in the git-sync
+client.
+
+This is a useful access mechanism for some some hosted repositories
+where SSH and passwords are not easily available, such as Google Cloud
+Source Repositories.",closed,True,2018-05-17 15:32:14,2018-06-01 21:45:07
+git-sync,jessfraz,https://github.com/kubernetes/git-sync/issues/93,https://api.github.com/repos/kubernetes/git-sync/issues/93,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:38:35,2018-05-24 15:57:58
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/94,https://api.github.com/repos/kubernetes/git-sync/issues/94,Add security contacts,"Security contacts according to template (https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS)
+
+Fixes: #93 ",closed,True,2018-05-24 15:54:06,2018-05-24 16:55:41
+git-sync,mattjmcnaughton,https://github.com/kubernetes/git-sync/pull/95,https://api.github.com/repos/kubernetes/git-sync/issues/95,Fix README,"The README instructs the user to overwrite the TAG variable to set the
+tag on `make container`. However, the user should actually overwrite the
+`VERSION` variable.",closed,True,2018-06-01 00:58:01,2018-06-05 13:44:50
+git-sync,mattjmcnaughton,https://github.com/kubernetes/git-sync/pull/96,https://api.github.com/repos/kubernetes/git-sync/issues/96,Update kubernetes demo/config for example,"A couple of changes to make the kubernetes config work
+and follow best practices.
+
+- Use `deployment` instead of `pod`.
+- Use correct image names.
+
+After these changes, running `kubectl create -f demo/config/` creates a
+working deployment/service.",closed,True,2018-06-05 13:44:25,2018-08-16 12:45:04
+git-sync,TimBozeman,https://github.com/kubernetes/git-sync/pull/97,https://api.github.com/repos/kubernetes/git-sync/issues/97,Add chown flag.,"Hiya,
+
+Thank you for git-sync. It's pretty awesome! I just signed the CLA. Can we add a chown flag please?",closed,True,2018-06-18 21:56:27,2018-06-19 16:07:44
+git-sync,TimBozeman,https://github.com/kubernetes/git-sync/pull/98,https://api.github.com/repos/kubernetes/git-sync/issues/98,Add chown flag. This could be used when the file owner needs to be different than the containers.,"Hiya,
+
+Thank you for git-sync. It's pretty awesome! I just signed the CLA. Can we add a chown flag please?",closed,True,2018-06-19 16:08:31,2018-07-03 21:59:48
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/99,https://api.github.com/repos/kubernetes/git-sync/issues/99,Clean up doc on GIT_COOKIE_FILE,Was reading this doc and saw it wasn't as clear as it could be.,closed,True,2018-07-02 21:36:55,2018-07-02 21:37:26
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/100,https://api.github.com/repos/kubernetes/git-sync/issues/100,Update images and allow non-root use of gitcookie,@TimBozeman re #98 ,closed,True,2018-07-03 18:22:25,2018-07-03 22:00:12
+git-sync,AndersonChoi,https://github.com/kubernetes/git-sync/pull/101,https://api.github.com/repos/kubernetes/git-sync/issues/101,Rename variable wait to interval,The interval seems to be a better word than wait.,open,True,2018-07-11 13:46:57,2019-01-15 16:43:27
+git-sync,odracci,https://github.com/kubernetes/git-sync/pull/102,https://api.github.com/repos/kubernetes/git-sync/issues/102,GIT_SYNC_BRANCH accepts either a branch or a tag,"Currently git-sync uses GIT_SYNC_REV to check-out a tag or an hash, if
+one-time is set is not necessary to lookup the hash of the tag because
+is enough to use GIT_SYNC_BRANCH to clone the repository.
+With this change is possible to clone a repository by a tag or a branch using
+GIT_SYNC_BRANCH in case one-time is set to true.",open,True,2018-07-30 21:38:02,2019-03-18 21:46:39
+git-sync,kobozo,https://github.com/kubernetes/git-sync/issues/103,https://api.github.com/repos/kubernetes/git-sync/issues/103,Permission denied on /git/.git,"E0803 13:22:58.321408       1 main.go:186] error syncing repo: error running command: exit status 1: ""Cloning into '/git'...\n/git/.git: Permission denied\n""
+
+My make command
+`make container REGISTRY=local VERSION=latest`
+
+The command I execute after build
+`docker run --rm local/git-sync --repo=https://github.com/kubernetes/git-sync --branch=master --wait=30`
+
+What I already tried
+`
+RUN mkdir /git/`
+`RUN chmod 775 /git/
+`",closed,False,2018-08-03 13:26:25,2018-08-08 18:37:21
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/104,https://api.github.com/repos/kubernetes/git-sync/issues/104,Make the default checkout root be under HOME),Fixes #103 ,closed,True,2018-08-08 18:36:14,2018-08-08 19:01:56
+git-sync,rlguarino,https://github.com/kubernetes/git-sync/issues/105,https://api.github.com/repos/kubernetes/git-sync/issues/105,Git-Sync goes into a crash-loop forever if it fails after the initial clone,"A period of network issues seems to have surfaced an issue with git-sync for us.
+
+Git-Sync can get its self stuck in a crash-loop if it exits after it's done the initial clone. It's very difficult to tell if this is failing after the clone on the initial sync or on a subsequent sync failure that is over the limit of `GIT_SYNC_MAX_SYNC_FAILURES`. Both cases results in the same error message, but we can expect both cases to happen in production. 
+
+Here are some example logs:
+```
+ross@xenon:~$ kubectl logs kube-applier-6949c7675b-g626g -c git-sync
+I0820 20:43:42.280722       1 main.go:164] starting up: [""/git-sync""]
+I0820 20:43:47.214284       1 main.go:326] cloned ssh://<redacted>.git
+I0820 20:43:47.215581       1 main.go:270] syncing to HEAD (c5d769d3bd5d18c99e22f0b3e06e1d1280170808)
+E0820 20:43:52.225918       1 main.go:171] error syncing repo: error running command: exit status 128: ""fatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n""
+
+# Wait for Kubernetes to restart the pod.
+
+ross@xenon:~$ kubectl logs kube-applier-6949c7675b-g626g -c git-sync
+I0820 20:44:09.678487       1 main.go:164] starting up: [""/git-sync""]
+E0820 20:44:09.679825       1 main.go:171] error syncing repo: error running command: exit status 128: ""fatal: destination path '/git' already exists and is not an empty directory.\n""
+```
+
+From that point on the container will never work again, the entire pod must be restarted for it to work. Unless I'm mistaken the source of the errors isn't important since it could come from anything between git-sync and the git server being broken temporarily.
+
+Should I instead try to force the pod to restart if git-sync restarts? That seems a little extreme to me.",closed,False,2018-08-20 21:00:08,2018-08-21 17:39:40
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/106,https://api.github.com/repos/kubernetes/git-sync/issues/106,Clean up failed clones,"If an initial clone crashes, it can leave the git-root in a bad state
+such that git can't retry the clone.  This change forces it to clean up
+the mess and retry.
+
+Fixes #105 ",closed,True,2018-08-20 23:18:33,2018-08-21 15:04:47
+git-sync,rlguarino,https://github.com/kubernetes/git-sync/issues/107,https://api.github.com/repos/kubernetes/git-sync/issues/107,GIT_SSH_COMMAND is overwritten,"I'm specifically trying to add `-vvv` to the ssh command by setting `GIT_SSH_COMMAND=ssh -vvv` in my pod. PR #29 added behavior that sets `GIT_SSH_COMMAND` instead of using a wrapper, which make sense but make this impossible.
+
+I think it would be nice if `GIT_SSH_COMMAND` could still be used to set flags since that's how google and stackoverflow suggest people enable more verbose logs. However, I'm not sure if it would make sense to try and merge the user defined set of arguments with the settings git-sync needs to configure, it seems risky and prone to weird errors.
+
+It might be easier to just add a new option to git-sync for enabling verbose ssh commands.
+
+Does anyone have opinions?",open,False,2018-08-21 16:33:08,2018-12-17 19:59:30
+git-sync,rlguarino,https://github.com/kubernetes/git-sync/pull/108,https://api.github.com/repos/kubernetes/git-sync/issues/108,Add `ssh-extra-args` argument for git & ssh,"This CL adds a new parameter to git-sync that lets users specify extra
+arguments to pass to ssh when git is configured to clone over ssh. The
+args are appended to the list of arguments that git-sync already
+adds to the `GIT_SSH_COMMAND` environment variable.
+
+Closes #107",closed,True,2018-08-22 18:45:14,2018-08-30 17:40:35
+git-sync,recall704,https://github.com/kubernetes/git-sync/pull/109,https://api.github.com/repos/kubernetes/git-sync/issues/109,add Env list to README,update doc,closed,True,2018-08-27 08:24:06,2018-08-28 06:42:26
+git-sync,diericx,https://github.com/kubernetes/git-sync/pull/110,https://api.github.com/repos/kubernetes/git-sync/issues/110,Send a POST request when the symlink has updated,"Adds an ENV/Flag variable ```flSymlinkUpdatePostUrl``` that takes in a url. If this is set, whenever the symlink is updated git-sync will make a POST request to this URL.
+
+**Motivation:** When using git-sync to update the configs for a container in a pod, we found ourselves having to reload the services in the container by making a POST request or SIGHUP. Integrating this directly into git-sync makes this much more straight forward as it seems to be a common pattern. ",closed,True,2018-08-29 18:04:06,2019-01-23 00:24:27
+git-sync,spiffxp,https://github.com/kubernetes/git-sync/issues/111,https://api.github.com/repos/kubernetes/git-sync/issues/111,Use tide for PR merging,"This is a [core repository](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md#core-repositories).  As such, it [needs to use the same merge automation as the rest of the project](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md#rules-1)
+
+I have a PR open that will address this at an org-wide level: https://github.com/kubernetes/test-infra/pull/9342.  It will:
+- enable the approve plugin, to allow use of the `/approve` plugin
+- enable the blunderbuss plugin, to assign reviews based on OWNERS files
+- add all repos in the kubernetes org to tide's query
+
+Can one of the repo maintainers here drop an LGTM (or objections) on the linked PR?  Alternatively, if I hear no objections by Monday 10am PT of next week, I will merge the PR.",closed,False,2018-09-11 22:24:42,2018-09-17 17:11:16
+git-sync,jmcarp,https://github.com/kubernetes/git-sync/pull/112,https://api.github.com/repos/kubernetes/git-sync/issues/112,Update example volume mount,"Since the default clone path is $HOME/git and the docker image sets $HOME to /tmp, we have to mount the volume at `/tmp/git` for the container to write files to the volume. As written, the example doesn't write to the volume.",closed,True,2018-09-18 03:25:43,2018-12-17 18:57:15
+git-sync,geekdave,https://github.com/kubernetes/git-sync/issues/113,https://api.github.com/repos/kubernetes/git-sync/issues/113,Health check via /healthz endpoint,"Just wondering if anyone has a preferred liveness probe / healthcheck command to ensure that a git-sync sidecar is healthy.  Without this, it seems there could be a risk of the git-sync sidecar silently failing, causing an expected config change not to be delivered.",open,False,2018-10-02 05:18:46,2019-01-22 22:36:43
+git-sync,kaarolch,https://github.com/kubernetes/git-sync/pull/114,https://api.github.com/repos/kubernetes/git-sync/issues/114,Update url image,Update image repo in demo example for git-sync. Previous location's required auth to download it. ,closed,True,2018-10-03 19:50:04,2018-10-04 03:57:29
+git-sync,george-angel,https://github.com/kubernetes/git-sync/issues/115,https://api.github.com/repos/kubernetes/git-sync/issues/115,Add a timeout for commands,"We have observed a situation where a command, in our case `git ls-remote -q origin refs/heads/master` gets stuck running for ~2h.
+
+It succeeds on the retry, but we are left with a stale repository for hours.
+
+Could we add a general timeout of say 5 minutes or any value that would cover most sane operations to: `cmd.CombinedOutput()` https://github.com/kubernetes/git-sync/blob/296093b9df34f7b02e15b12744e140ee1c2eb8f9/cmd/git-sync/main.go#L469 ?
+
+Or allow callers to set timeout in per operation basis. Happy to PR, need guidance on design.
+
+```
+kube-applier-5d6658fb78-7fvnx git-sync I1004 14:45:20.740365      30 main.go:374] local hash:  0c50140fce1d54b1b603649635eae3aaf61223fc
+kube-applier-5d6658fb78-7fvnx git-sync I1004 14:45:20.740387      30 main.go:375] remote hash: 0c50140fce1d54b1b603649635eae3aaf61223fc
+kube-applier-5d6658fb78-7fvnx git-sync I1004 14:45:20.740397      30 main.go:380] no update required
+kube-applier-5d6658fb78-7fvnx git-sync I1004 14:45:20.740413      30 main.go:196] next sync in 0s
+kube-applier-5d6658fb78-7fvnx git-sync I1004 14:45:20.740452      30 main.go:435] run(""/git/repo""): git rev-list -n1 HEAD
+kube-applier-5d6658fb78-7fvnx git-sync I1004 14:45:20.742580      30 main.go:435] run(""/git/repo""): git ls-remote -q origin refs/heads/master
+kube-applier-5d6658fb78-7fvnx git-sync E1004 16:50:02.298279      30 main.go:176] unexpected error syncing repo: error running command: exit status 128: ""fatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n""
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:02.298310      30 main.go:177] waiting 0s before retrying
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:02.298348      30 main.go:435] run(""/git/repo""): git rev-list -n1 HEAD
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:02.300759      30 main.go:435] run(""/git/repo""): git ls-remote -q origin refs/heads/master
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:07.961125      30 main.go:374] local hash:  0c50140fce1d54b1b603649635eae3aaf61223fc
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:07.961161      30 main.go:375] remote hash: 78015b311e3755beabca38040f30d34d0d68b97a
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:07.961176      30 main.go:377] update required
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:07.961222      30 main.go:270] syncing to HEAD (78015b311e3755beabca38040f30d34d0d68b97a)
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:07.961244      30 main.go:435] run(""/git""): git fetch --tags origin master
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:12.410303      30 main.go:435] run(""/git""): git worktree add /git/rev-78015b311e3755beabca38040f30d34d0d68b97a origin/master
+kube-applier-5d6658fb78-7fvnx git-sync I1004 16:50:16.435896      30 main.go:283] added worktree /git/rev-78015b311e3755beabca38040f30d34d0d68b97a for origin/master
+```",closed,False,2018-10-04 19:41:42,2019-01-15 16:40:24
+git-sync,colin-streicher,https://github.com/kubernetes/git-sync/issues/116,https://api.github.com/repos/kubernetes/git-sync/issues/116,Cannot sync tags,"I've been trying to understand what is happening, and I'm a little mystified. This seems like something that would have been caught much earlier, so this is most likely a user issue. 
+
+What happens is when I try to sync a tag, I get the following error. Conversely, when I use a git hash, things seems to work as expected. Some of the variables are set in the environment, if there are any that would be useful to know, please let me know. 
+
+/git # mkdir /test
+/git # GIT_SYNC_BRANCH=""master"" GIT_SYNC_REV=""latest"" GIT_SYNC_DEPTH=""100"" GIT_SYNC_ROOT=/test /git-sync 
+I1105 22:09:10.266422     306 main.go:179] starting up: [""/git-sync""]
+I1105 22:09:10.616432     306 main.go:354] cloned git@github.com:<removed>
+I1105 22:09:10.617700     306 main.go:285] syncing to latest (e9f359bb7ccbfe2e912f386373c3bcf45b497fbc)
+I1105 22:09:10.869244     306 main.go:298] added worktree /test/rev-e9f359bb7ccbfe2e912f386373c3bcf45b497fbc for origin/master
+I1105 22:09:10.872336     306 main.go:318] reset worktree /test/rev-e9f359bb7ccbfe2e912f386373c3bcf45b497fbc to e9f359bb7ccbfe2e912f386373c3bcf45b497fbc
+I1105 22:09:11.085670     306 main.go:405] update required
+I1105 22:09:11.085703     306 main.go:285] syncing to latest ()
+I1105 22:09:11.295549     306 main.go:298] added worktree /test/rev- for origin/master
+E1105 22:09:11.296808     306 main.go:186] error syncing repo: error running command: exit status 128: ""fatal: ambiguous argument '': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\n""
+
+If this happens not to be user error, I would suggest it likely is not expected behaviour. 
+",closed,False,2018-11-05 22:18:18,2018-11-09 18:16:37
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/117,https://api.github.com/repos/kubernetes/git-sync/issues/117,Switch to rev-parse,"This handles non-annotated tags, which were not handled well before.  It
+does mean that we use the hash of the (annotated) tag object instead of
+the commit, but that seems OK.
+
+Added a test case.
+
+Fixes #116 ",closed,True,2018-11-06 17:14:08,2018-11-09 23:01:26
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/118,https://api.github.com/repos/kubernetes/git-sync/issues/118,bump go to 1.11,,closed,True,2018-11-09 18:20:18,2018-11-09 18:20:31
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/119,https://api.github.com/repos/kubernetes/git-sync/issues/119,Update the build to use manifest-lists,,closed,True,2018-11-09 22:20:03,2018-11-09 23:06:06
+git-sync,thockin,https://github.com/kubernetes/git-sync/issues/120,https://api.github.com/repos/kubernetes/git-sync/issues/120,Should rename (compatibly) the --dest flag to --link or something,`--dest` and `$GIT_SYNC_DEST` are somewhat obtuse.,open,False,2018-12-17 19:34:51,2019-03-18 21:46:07
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/121,https://api.github.com/repos/kubernetes/git-sync/issues/121,Fix hugo demo and docs,"The hugo demo runs again.
+
+Also removed docs on need to run as root.  Pretty sure you do not need
+to.
+
+Fixes #38 
+
+xref #47",closed,True,2018-12-17 19:46:56,2018-12-19 16:32:01
+git-sync,chris060986,https://github.com/kubernetes/git-sync/pull/122,https://api.github.com/repos/kubernetes/git-sync/issues/122,Allow to build container behind a proxy,Allows to specifiy a proxy to build the container behind a proxy like cntlm.,closed,True,2018-12-20 13:26:43,2019-01-23 16:27:11
+git-sync,george-angel,https://github.com/kubernetes/git-sync/pull/123,https://api.github.com/repos/kubernetes/git-sync/issues/123,Add a configurable timeout to the sync process,Fixes https://github.com/kubernetes/git-sync/issues/115,closed,True,2019-01-03 14:04:34,2019-01-15 16:40:24
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/124,https://api.github.com/repos/kubernetes/git-sync/issues/124,fix e2e script to work with os/arch tags,Fix tests after recent changes to produce manifests modified the tag names.,closed,True,2019-01-04 19:36:14,2019-01-04 19:36:22
+git-sync,xychu,https://github.com/kubernetes/git-sync/pull/125,https://api.github.com/repos/kubernetes/git-sync/issues/125,"Trim "".git"" suffix in git repo URL","Both GitHub and GitLab web provides URL with "".git"" suffix,
+and `git clone`'s default behavior is to get rid of it,
+so it's better to trim it as the default destination.",closed,True,2019-01-14 08:58:33,2019-01-15 16:18:19
+git-sync,luckymagic7,https://github.com/kubernetes/git-sync/issues/126,https://api.github.com/repos/kubernetes/git-sync/issues/126,(Query) How can I clone GitLab private repository to my k8s container safely(ssh or https no matter)?,"I want to cloning git repository to my k8s container.
+
+I can get success with `github` repository. The yaml file likes below:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: syncrepo-volume-pod-test
+spec:
+  containers:
+  - image: k8s.gcr.io/git-sync:v3.0.1
+    name: test-server
+    volumeMounts:
+    - name: git-source
+      mountPath: /tmp/git
+    env:
+    - name: GIT_SYNC_REPO
+      value: https://github.com/myrepo.git  ##Changing value
+    - name: GIT_SYNC_DEST
+      value: git-sync
+  volumes:
+  - name: git-source
+    emptyDir: {}
+```
+
+But when I change `GIT_SYNC_REPO` to GitLab repository the error comes out:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: syncrepo-volume-pod-test
+spec:
+  containers:
+  - image: k8s.gcr.io/git-sync:v3.0.1
+    name: test-server
+    volumeMounts:
+    - name: git-source
+      mountPath: /tmp/git
+    env:
+    - name: GIT_SYNC_REPO
+      value: https://gitlab.privatedomain.com/myrepo.git  ##Changing value
+    - name: GIT_SYNC_DEST
+      value: git-sync
+  volumes:
+  - name: git-source
+    emptyDir: {}
+```
+
+`kubectl logs syncrepo-volume-pod-test` says:
+```
+I0114 13:05:33.800696       1 main.go:179] starting up: [""/git-sync""]
+E0114 13:05:33.841060       1 main.go:186] error syncing repo: error running command: exit status 128: ""Cloning into '/tmp/git'...\nfatal: could not read Username for 'https://gitlab.privatedomain.com': No such device or address\n""
+```
+
+I can pass my gitlab account and gitlab password like below, but I think it's very insecure:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: syncrepo-volume-pod-test
+spec:
+  containers:
+  - image: k8s.gcr.io/git-sync:v3.0.1
+    name: test-server
+    volumeMounts:
+    - name: git-source
+      mountPath: /tmp/git
+    env:
+    - name: GIT_SYNC_REPO
+      value: https://GIT_ID:GIT_PASS@gitlab.privatedomain.com/myrepo.git  ##Changing value
+    - name: GIT_SYNC_DEST
+      value: git-sync
+  volumes:
+  - name: git-source
+    emptyDir: {}
+```
+I can see my account and password information at the pod description:
+`kubectl describe pod syncrepo-volume-pod-test`
+
+```
+Name:         syncrepo-volume-pod-test
+Namespace:    default
+.
+.
+.
+
+Restart Count:  0
+    Requests:
+      cpu:  100m
+    Environment:
+      GIT_SYNC_REPO:  https://realID:realPASSWORD@gitlab.privatedomain.com/myrepo.git  ##Not Good
+      GIT_SYNC_DEST:  git-sync
+    Mounts:
+      /tmp/git from git-source (rw)
+
+.
+.
+.
+```
+
+I read the docs about `ssh` https://github.com/kubernetes/git-sync/blob/master/docs/ssh.md
+but it didn't work...
+
+Also tried to `https`, but I don't know what the `gitcookie` is...
+
+Sorry, my English is bad.
+
+Can you please give me some hints or help?
+
+Thanks!",closed,False,2019-01-14 13:18:27,2019-01-15 14:47:21
+git-sync,luckymagic7,https://github.com/kubernetes/git-sync/issues/127,https://api.github.com/repos/kubernetes/git-sync/issues/127,Can I use a git-sync container as an initContainer instead of sidecar?,"Hi again!
+
+This is my pod.yaml:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: syncrepo-volume-pod-test
+spec:
+  containers:
+  - image: alpine
+    name: test
+    volumeMounts:
+    - name: git-source
+      mountPath: /tmp/git
+  initContainers:
+  - image: k8s.gcr.io/git-sync:v3.0.1
+    name: git-data
+    volumeMounts:
+    - name: git-source
+      mountPath: /tmp/git
+    env:
+    - name: GIT_SYNC_REPO
+      value: https://gitlab.privatedomain.com/myrepo.git
+    - name: GIT_SYNC_BRANCH
+      value: production
+    - name: GIT_SYNC_DEPTH
+      value: ""1""
+    - name: GIT_SYNC_DEST
+      value: git-sync
+    - name: GIT_SYNC_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: git-creds
+          key: username
+    - name: GIT_SYNC_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: git-creds
+          key: password
+  volumes:
+  - name: git-source
+    emptyDir: {}
+```
+
+I successfully create a Pod, but the `git-data` initContainer doesn't exit.
+` kubectl describe pod syncrepo-volume-pod-test`:
+```
+Name:         syncrepo-volume-pod-test
+Namespace:    default
+.
+.
+.
+Init Containers:
+  git-data:
+    Container ID:   docker://a28da707768a4607e9f9b96d579a791fa2417356b90a3f7fac1372635522c929
+    Image:          k8s.gcr.io/git-sync:v3.0.1
+    Image ID:       docker-pullable://k8s.gcr.io/git-sync@sha256:fc4152d373e79ca680704713f7b748dd25f63f87b4a17c4edfd7bb7bc5a11be0
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+.
+.
+.
+```
+
+I think the initContainer must exit after successfully proceed its command, and then the main container(in this case `test`) can run.
+
+Can you please give me a hint?
+
+Thanks! 😄 ",closed,False,2019-01-15 15:17:38,2019-01-18 18:18:14
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/128,https://api.github.com/repos/kubernetes/git-sync/issues/128,OWNERS wants 'approvers' not 'maintainers',,closed,True,2019-01-15 16:40:03,2019-01-15 16:43:55
+git-sync,willthames,https://github.com/kubernetes/git-sync/issues/129,https://api.github.com/repos/kubernetes/git-sync/issues/129,Enforcing 0400 permission on git ssh key has other security implications,"Because kubernetes secret volumes are mounted as owned by root, this means that if /etc/git-secret/ssh is mounted as a secret volume, to meet the 0400 permission requirement, the key is readable only by root. 
+
+This means that the container needs to run as root, which is a bad practice (and might breach some PodSecurityPolicies) 
+
+There is no amazing workaround for this - the [canonical discussion](https://github.com/kubernetes/kubernetes/issues/2630) suggests using fsGroups, which would work well, but would need 0440 permissions to be readable by a non-root user.
+
+Could we have a flag that turns the permission checking off, or allows a more permissive permission ot be set?",closed,False,2019-01-16 06:49:16,2019-02-11 20:38:26
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/issues/130,https://api.github.com/repos/kubernetes/git-sync/issues/130,Metrics on git-sync state,"I have a variety of use-cases that require a sidecar such as this. For this type of a service (async syncer from git) I need to have some metrics so that I can monitor the health of the syncer.
+
+Specifically I'm looking for:
+- last_sync_time: this allows me to see that is in-fact pulling things
+- total_error_count: this shows me that there are errors in pulling
+
+I'm more than happy to submit the PR for this, I just wanted to get some input first -- specifically on how these metrics would be exposed. Personally I'm using prometheus exporters for most of my world, but this daemon doesn't currently have an HTTP endpoint -- would it be okay to add one? If not, what metrics format would be acceptable?",closed,False,2019-01-17 19:38:28,2019-01-23 16:24:10
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/131,https://api.github.com/repos/kubernetes/git-sync/issues/131,Add Webhook on git-sync update,"This is a continuation of #110. I have pulled over all the commits from that PR and addressed the majority of the comments therein.
+
+The outstanding questions I know of:
+
+- do we need multiple webhooks (array vs single): multiple seems nice and its minimal change, but no strong opinion though either way
+- https://github.com/kubernetes/git-sync/pull/110/files#r242277494 -- left as a global for now to avoid passing it through the various functions -- although it seems a bit odd it ends up being smaller/cleaner code.",closed,True,2019-01-17 23:56:15,2019-01-23 18:23:19
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/132,https://api.github.com/repos/kubernetes/git-sync/issues/132,Add flags/env-vars for additional SSH options,"This simply moves the hard-coded values into flag options, with defaults being the options they were previously.",closed,True,2019-01-18 00:01:23,2019-01-22 21:55:11
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/133,https://api.github.com/repos/kubernetes/git-sync/issues/133,Add option to allow for unlimited failures,"As it stands today git-sync will exit (which will in-turn cause the pod to die) if a git pull fails a number of times. If this failure was due to a remote (such as the git remote being unavailable, such as a github outage) it may be undesirable for your pods to churn. This add the option for the user to define `-1` as the failure limit which allows git-sync to retry indefinitely.",closed,True,2019-01-18 00:02:06,2019-01-22 18:34:19
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/134,https://api.github.com/repos/kubernetes/git-sync/issues/134,Upgrade from Godeps to dep,,closed,True,2019-01-18 00:02:54,2019-01-18 00:15:20
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/135,https://api.github.com/repos/kubernetes/git-sync/issues/135,Add metrics to the git-sync process,"To provide metrics git-sync needs an http endpoint. This is currently done by adding a CLI flag which defines the bind address, if this is set then the http server is started. 
+
+This adds metrics for total count and latency of git-sync attempts split by status
+
+Fixes #130",closed,True,2019-01-18 00:08:26,2019-01-23 18:23:26
+git-sync,thockin,https://github.com/kubernetes/git-sync/issues/136,https://api.github.com/repos/kubernetes/git-sync/issues/136,Add liveness and readiness endpoints,Liveness is simple.  Readiness should only return when it has a good sync.,closed,False,2019-01-22 17:27:20,2019-01-22 17:47:49
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/137,https://api.github.com/repos/kubernetes/git-sync/issues/137,Switch from godeps to `go mod`,"Split vendor/dep changes from #135
+
+cc @thockin @stp-ip ",closed,True,2019-01-22 19:22:37,2019-01-22 21:30:03
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/138,https://api.github.com/repos/kubernetes/git-sync/issues/138,Use depth option when doing fetches,"Previously the `depth` flag was only used for the initial clone-- so
+although you might start with a depth=10 as more commits show up you are
+always >10. With this diff we enforce that depth on each fetch, this way
+old-commits can get GCd off to reduce the size of the local checkout
+required.
+
+Related to #54",closed,True,2019-01-23 00:24:34,2019-01-23 18:23:10
+git-sync,jacksontj,https://github.com/kubernetes/git-sync/pull/139,https://api.github.com/repos/kubernetes/git-sync/issues/139,e2e test for #135 and #131,cc @thockin ,closed,True,2019-01-23 19:06:22,2019-01-23 21:02:11
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/140,https://api.github.com/repos/kubernetes/git-sync/issues/140,Clean up / document build and release,"In writing better RELEASING docs, I realized the build was repeating
+steps.  In fixing that I fixed some make deps, but realized I *still*
+can't make the build ideal.
+
+At least it is written down now...",closed,True,2019-01-25 18:47:01,2019-01-25 21:37:02
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/141,https://api.github.com/repos/kubernetes/git-sync/issues/141,Build rel tweaks,"This syncs to the latest template I maintain.  It reduces replicated work when possible.  We don't handle multiple platforms here yet, but we should.",closed,True,2019-01-28 19:43:40,2019-01-28 20:51:45
+git-sync,EugeneChung,https://github.com/kubernetes/git-sync/pull/142,https://api.github.com/repos/kubernetes/git-sync/issues/142,~ -> $HOME,"On Mac, ~ is not translated to the home directory. I guess $HOME is more portable.",closed,True,2019-01-31 08:15:48,2019-01-31 08:39:51
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/143,https://api.github.com/repos/kubernetes/git-sync/issues/143,Fix bad perms on make,"Missed this commit before, sorry!",closed,True,2019-02-01 16:25:14,2019-02-01 18:12:28
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/144,https://api.github.com/repos/kubernetes/git-sync/issues/144,Fix SSH,"* Create a git-sync user to run as, with an entry in /etc/passwd and
+writable homedir
+
+* Remove our own validation of key perms - let SSH do that.
+
+* Update docs
+
+Fixes #129 ",closed,True,2019-02-02 01:19:38,2019-02-11 20:38:27
+git-sync,xamox,https://github.com/kubernetes/git-sync/issues/145,https://api.github.com/repos/kubernetes/git-sync/issues/145,Username environment variable not working.,"When trying to run just git-sync it prompts for username even though it exists in as an environment variable.  The strange thing is if I do a git-sync --help it will even show the default username it takes from the environment
+
+
+```
+  -username string
+    	the username to use (default ""REDACTED-gitsync\n"")
+```
+
+My hack around was I just had to override my kube template to use:
+
+```
+          command: [ ""/bin/sh"", ""-c"", ""--"" ]
+          args: [ ""/git-sync -username REDACTED-gitsync"" ]
+```
+and it worked.  It also used all the environment variables just fine, it just appears to be when not passing the username it does not like it.",open,False,2019-02-11 19:54:36,2019-02-11 23:53:24
+git-sync,PhilippeDupont,https://github.com/kubernetes/git-sync/issues/146,https://api.github.com/repos/kubernetes/git-sync/issues/146,git-sync ssh as an initContainer,"Following https://github.com/kubernetes/git-sync/pull/144 : 
+
+I don't want to force all volumes in the pod to be limited to user 65533, so how can we use it as an initContainer ?
+
+
+
+",closed,False,2019-02-13 17:24:43,2019-02-14 16:44:14
+git-sync,PhilippeDupont,https://github.com/kubernetes/git-sync/pull/147,https://api.github.com/repos/kubernetes/git-sync/issues/147,Fix typo,,closed,True,2019-02-14 10:07:19,2019-03-26 01:05:18
+git-sync,huanwei,https://github.com/kubernetes/git-sync/pull/148,https://api.github.com/repos/kubernetes/git-sync/issues/148,rename dest,"Signed-off-by: huanwei <huan@harmonycloud.cn>
+
+fix issue #120 ",open,True,2019-02-19 07:32:28,2019-03-05 08:02:35
+git-sync,paphillon,https://github.com/kubernetes/git-sync/issues/149,https://api.github.com/repos/kubernetes/git-sync/issues/149,Support for GitHub webhooks,"Hi, thanks for this excellent neat project! I implemented and worked like a charm. However, it will be great if we can add GitHub webhooks support instead of polling to reduce the chattiness. Increasing the wait time helps, but then that would be the expected delay for the sync. With webhook the changes can be pulled instantaneous. 
+
+The added complexity would be ingress routes, firewalls (if any), authentication to reach the end-point, might not be favorable in cloud deployment, but on-prem this should be pretty straightforward if using enterprise gitHub",open,False,2019-02-27 06:59:03,2019-03-10 08:06:15
+git-sync,KarstenSiemer,https://github.com/kubernetes/git-sync/issues/150,https://api.github.com/repos/kubernetes/git-sync/issues/150,Clone via SSH fails because of custom port,"Hello,
+
+first of all i'd like to thank everyone for putting all this work into this project.
+I'd like to clone and update a private bitbucket repository via ssh (only option).
+The problem is, that the bitbucket installation is only allowing connetions on port 8081.
+This container has no option to use any other port than default.
+Pr's for ssh-extra-args and GIT_SSH_COMMAND for setting such things seem to have been dropped.
+
+When i change the entry point of the container to sleep and exec into it, i can clone my repo like this:
+```
+eval `ssh-agent -s`
+ssh-add /etc/git-secret/ssh
+cd /git
+git clone ssh://git@xxxxxxxx:8081/organisation/repo.git
+```
+
+Using the entry point and it's setting, this is failing like this:
+```
+E0305 12:31:42.457689       1 main.go:294] error syncing repo: error running command: exit status 128: ""Cloning into '/git'...\nfatal: Could not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n""
+```
+
+This is the yaml of my deployment:
+```
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: """"
+    app.kubernetes.io/component: grafana
+    app.kubernetes.io/instance: grafana
+    app.kubernetes.io/managed-by: helm-kustomize
+    app.kubernetes.io/name: grafana
+    app.kubernetes.io/part-of: grafana
+    chart: """"
+    heritage: """"
+    release: """"
+  name: gm-grafana
+  namespace: system-monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: """"
+      app.kubernetes.io/component: grafana
+      app.kubernetes.io/instance: grafana
+      app.kubernetes.io/managed-by: helm-kustomize
+      app.kubernetes.io/name: grafana
+      app.kubernetes.io/part-of: grafana
+      chart: """"
+      heritage: """"
+      release: """"
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: """"
+        app.kubernetes.io/component: grafana
+        app.kubernetes.io/instance: grafana
+        app.kubernetes.io/managed-by: helm-kustomize
+        app.kubernetes.io/name: grafana
+        app.kubernetes.io/part-of: grafana
+        chart: """"
+        heritage: """"
+        release: """"
+    spec:
+      containers:
+      - env:
+        - name: GF_SECURITY_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              key: admin-user
+              name: gm-grafana
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: admin-password
+              name: gm-grafana
+        image: somerepo/grafana/grafana:6.0.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 60
+          timeoutSeconds: 30
+        name: grafana
+        ports:
+        - containerPort: 80
+          name: service
+          protocol: TCP
+        - containerPort: 3000
+          name: grafana
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          runAsUser: 472
+        volumeMounts:
+        - mountPath: /var/lib/grafana/git
+          name: git
+        - mountPath: /etc/grafana/grafana.ini
+          name: config
+          subPath: grafana.ini
+        - mountPath: /etc/grafana/ldap.toml
+          name: ldap
+          subPath: ldap.toml
+        - mountPath: /var/lib/grafana
+          name: storage
+          subPath: null
+        - mountPath: /etc/grafana/provisioning/datasources/datasources.yaml
+          name: config
+          subPath: datasources.yaml
+        - mountPath: /etc/grafana/provisioning/dashboards/dashboardproviders.yaml
+          name: config
+          subPath: dashboardproviders.yaml
+      - env:
+        - name: GIT_SYNC_REPO
+          value: git@xxxxxxxx:8081/organisation/repo.git
+        - name: GIT_SYNC_BRANCH
+          value: master
+        - name: GIT_SYNC_SSH
+          value: ""true""
+        - name: GIT_SYNC_PERMISSIONS
+          value: ""0777""
+        - name: GIT_SYNC_DEST
+          value: repo
+        - name: GIT_SYNC_ROOT
+          value: /git
+        image: k8s.gcr.io/git-sync:v3.1.1
+        name: git-sync
+        securityContext:
+          runAsUser: 65533
+        volumeMounts:
+        - mountPath: /etc/git-secret
+          name: git-secret
+        - mountPath: /git
+          name: git
+      securityContext:
+        fsGroup: 65533
+      serviceAccountName: gm-grafana
+      volumes:
+      - emptyDir: {}
+        name: git
+      - name: git-secret
+        secret:
+          defaultMode: 288
+          secretName: grafana-git-creds
+      - configMap:
+          name: gm-grafana
+        name: config
+      - name: ldap
+        secret:
+          items:
+          - key: ldap-toml
+            path: ldap.toml
+          secretName: gm-grafana
+      - name: storage
+        persistentVolumeClaim:
+          claimName: gm-grafana
+```
+
+I think because of the "":"" notation inside the git url it is try to connect as user 8081 instead of using it as a port
+
+Kubernetes version: v1.13.2
+git-sync version: k8s.gcr.io/git-sync:v3.1.1",open,False,2019-03-05 14:51:36,2019-03-24 15:17:46
+git-sync,thanhtungka91,https://github.com/kubernetes/git-sync/issues/151,https://api.github.com/repos/kubernetes/git-sync/issues/151,does it support mac os x?,"is it support for max os x?
+`Makefile:55: *** Unsupported target platform 'darwin/amd64'.  Stop.`",closed,False,2019-03-07 10:00:19,2019-03-08 09:31:18
+git-sync,joelsmith,https://github.com/kubernetes/git-sync/pull/152,https://api.github.com/repos/kubernetes/git-sync/issues/152,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:05:45,2019-03-09 00:20:11
+git-sync,thomasv314,https://github.com/kubernetes/git-sync/pull/153,https://api.github.com/repos/kubernetes/git-sync/issues/153,Add circleci,,closed,True,2019-03-11 15:26:16,2019-03-11 15:27:03
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/154,https://api.github.com/repos/kubernetes/git-sync/issues/154,Use debian-base as base image,"All of the main Kubernetes components are switching to it, since we can
+maintain it more easily.",closed,True,2019-03-12 00:16:26,2019-03-24 13:21:06
+git-sync,Vampouille,https://github.com/kubernetes/git-sync/pull/155,https://api.github.com/repos/kubernetes/git-sync/issues/155,Add libnss_wrapper and a wrapper to use it,"Compile libnss_wrapper from source and create a script that populate at
+runtime passwd/group databases with current running user.",open,True,2019-03-18 13:30:16,2019-03-19 07:51:02
+git-sync,aleksey005,https://github.com/kubernetes/git-sync/issues/156,https://api.github.com/repos/kubernetes/git-sync/issues/156,How to create a .gitsyncignor for selective sync file,Tell me if there is an opportunity to somehow filter the list from the repository files? Analog .dockerignore file?,closed,False,2019-03-22 07:36:16,2019-03-22 09:07:59
+git-sync,thockin,https://github.com/kubernetes/git-sync/pull/157,https://api.github.com/repos/kubernetes/git-sync/issues/157,Convert to use go modules,,closed,True,2019-03-22 17:50:05,2019-03-25 15:20:31
+git-sync,stp-ip,https://github.com/kubernetes/git-sync/pull/158,https://api.github.com/repos/kubernetes/git-sync/issues/158,Convert to use go modules,"Based on #157 
+
+This fixes a few things.
+* use vendor for tests, build etc. `-mod=vendor`
+* remove need for git in alpine container as vendor is used `-mod=vendor`
+* fix permission and GOPATH issues from package installations by removing manual installation via `go test -i` as that is discouraged since v1.10 due to the go cache afaik",closed,True,2019-03-24 14:35:49,2019-03-25 16:32:01
+git-sync,cjwagner,https://github.com/kubernetes/git-sync/issues/159,https://api.github.com/repos/kubernetes/git-sync/issues/159,This repo should not require 'strict' status contexts.,"This repo currently has strict status context requirements enabled: https://github.com/kubernetes/test-infra/blob/b6737faf9879cba0aed01b782057aee47ad2664c/prow/config.yaml#L128
+
+The `strict` setting corresponds to ""Require branches to be up to date before merging"" below:
+![image](https://user-images.githubusercontent.com/5334145/54947756-4fd92e80-4ef8-11e9-8f94-d882c6a2a58a.png)
+
+This setting requires that PR branches be rebased off the latest base branch commit meaning that if multiple PRs are open and one merges, other PRs must always rebase before merging. This is a simplistic method that GitHub provides for ensuring that PRs are tested against the most recent base branch commit before merging.
+
+Tide uses a strictly superior method to provide the same guarantees without requiring PRs to be rebased whenever something else merges. This is possible because ProwJobs don't run on the PR head commits, they run on the merge commits and the base branch commit used in the merge is recorded. Tide can use this information to ensure that PRs are tested against the most recent changes without requiring PRs to be rebased unless there is an actual merge conflict.
+
+Enabling the `strict` context requirements in a repo managed by Tide forces PR authors to rebase their PRs whenever something else merges even though this provides no benefit at all. Additionally, it is causing Tide to get stuck trying to merge some PRs because Tide doesn't know how to properly handle this merge requirement (since it doesn't makes sense to ever use this requirement with Tide).
+
+Please remove this `strict: true` configuration ASAP:
+https://github.com/kubernetes/test-infra/blob/b6737faf9879cba0aed01b782057aee47ad2664c/prow/config.yaml#L128",closed,False,2019-03-25 20:41:47,2019-03-25 23:02:20
+git-sync,sloanahrens,https://github.com/kubernetes/git-sync/issues/160,https://api.github.com/repos/kubernetes/git-sync/issues/160,How do I find the folder where git-sync puts my repository?,"I have what seems to be a working implementation of this (in kubernetes, as a side-car container) but it does me no good because I can't find the code that git-sync is syncing.
+
+I used the `dest` command option, but it will only let me use a relative path (an absolute path causes an error) and there seems to be no indication I can find of where that path is relative *to*.
+
+What am I missing?",closed,False,2019-03-27 15:59:34,2019-03-27 16:22:47
+git-sync,filmil,https://github.com/kubernetes/git-sync/issues/161,https://api.github.com/repos/kubernetes/git-sync/issues/161,Add an option to keep retrying even if first sync attempt fails,"I'd like to have a settable option by which `git-sync` will not abort on a failed first `git sync` attempt, but would keep retrying.
+
+This seems a bit counter-intuitive.  I've found, however, that restarting a git-sync deployment that is seeing a transient error is less confusing than a git-sync that has reached a full 5 minute backoff delay and then gets fixed -- because if you are not careful you may miss the fact that you are seeing a backed-off git-sync.
+
+In practice, we end up power-cycling git-sync anyways.  At which point, we may as well keep git-sync up and running.
+
+Long story short, PR upcoming.",closed,False,2019-04-02 01:26:18,2019-04-03 05:05:42
+git-sync,filmil,https://github.com/kubernetes/git-sync/pull/162,https://api.github.com/repos/kubernetes/git-sync/issues/162,git-sync: adds flag to skip abort on first error,"Adds the flag to allow git-sync to soldier on on first failure.  This
+is useful if the git-sync lifecycle is managed by a controller that
+has its own ways of reporting sync failures.
+
+Fixes #161.",closed,True,2019-04-02 01:50:50,2019-04-03 07:40:51
+git-sync,filmil,https://github.com/kubernetes/git-sync/pull/163,https://api.github.com/repos/kubernetes/git-sync/issues/163,git-sync: removes special exit on first error,"Old code used to exit at any error seen on first sync attempt.  This
+didn't prove useful in practice, so removing that special case.
+
+This may make git-sync slower to recover after user fixes a
+non-retryable error, as now flMaxSyncFailures are needed before the pod
+fails.  It may make sense in practice.
+
+Fixes #161, in a different way than is proposed in PR #162.",closed,True,2019-04-02 17:09:16,2019-04-03 05:05:43

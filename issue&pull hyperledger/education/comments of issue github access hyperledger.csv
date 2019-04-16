@@ -1,0 +1,683 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/education/issues/133,https://api.github.com/repos/hyperledger/education/issues/comments/479471339,https://github.com/hyperledger/education/issues/133#issuecomment-479471339,Privet-mir,"clean you env and remove all stopped containers then run startFabric.sh
+to remove all stopped and running containers.
+docker stop  $(docker ps -aq)
+docker rm $(docker ps -aq)",2019-04-03 12:39:16,2019-04-03 12:39:16
+https://api.github.com/repos/hyperledger/education/issues/131,https://api.github.com/repos/hyperledger/education/issues/comments/470854969,https://github.com/hyperledger/education/issues/131#issuecomment-470854969,SirisetyManeela,can anyone please answer me this.. it is still not solved,2019-03-08 08:58:48,2019-03-08 08:58:48
+https://api.github.com/repos/hyperledger/education/issues/125,https://api.github.com/repos/hyperledger/education/issues/comments/456862129,https://github.com/hyperledger/education/issues/125#issuecomment-456862129,tkuhrt,Best to provide that feedback directly via the EdX platform.,2019-01-23 16:10:35,2019-01-23 16:10:35
+https://api.github.com/repos/hyperledger/education/issues/125,https://api.github.com/repos/hyperledger/education/issues/comments/457207638,https://github.com/hyperledger/education/issues/125#issuecomment-457207638,NeroVanbiervliet,"Thanks, I'll close this issue. ",2019-01-24 14:04:30,2019-01-24 14:04:30
+https://api.github.com/repos/hyperledger/education/issues/120,https://api.github.com/repos/hyperledger/education/issues/comments/450207859,https://github.com/hyperledger/education/issues/120#issuecomment-450207859,vishal3152,"the user credentials are invalid
+
+On Thu, 27 Dec 2018, 21:40 potini3, <notifications@github.com> wrote:
+
+> I was getting error like this can any one help me this one is fabcar
+>
+> Store path:C:\Users\admin\fabric-samples\fabcar\hfc-key-store
+> (node:6016) DeprecationWarning: grpc.load: Use the @grpc/proto-loader
+> module with grpc.loadPackageDefinition
+> instead
+> Successfully loaded user1 from persistence
+> Query has completed, checking results
+> error from query = { Error: 2 UNKNOWN: access denied: channel [mychannel]
+> creator org [Org1MSP]
+> at Object.exports.createStatusError
+> (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\common.js:87:15)
+> at Object.onReceiveStatus
+> (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:1188:28)
+> at InterceptingListener._callNext
+> (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:564:42)
+> at InterceptingListener.onReceiveStatus
+> (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:614:8)
+> at callback
+> (C:\Users\admin\fabric-samples\fabcar\node_modules\fabric-client\node_modules\grpc\src\client_interceptors.js:841:24)
+> code: 2,
+> metadata: Metadata { _internal_repr: {} },
+> details: 'access denied: channel [mychannel] creator org [Org1MSP]' }
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/120>, or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AdAWgW-ZEufgHBmkNK6bdnn3At55Vi8oks5u9QYHgaJpZM4ZjB0P>
+> .
+>
+",2018-12-27 18:42:27,2018-12-27 18:42:27
+https://api.github.com/repos/hyperledger/education/issues/120,https://api.github.com/repos/hyperledger/education/issues/comments/450208702,https://github.com/hyperledger/education/issues/120#issuecomment-450208702,potini3,"Hi Vishal,
+
+How do I ressolve it. I believe it is taking my credentials from hfc-key-store directly. These values are created when I run registerUser.js",2018-12-27 18:47:35,2018-12-27 18:47:35
+https://api.github.com/repos/hyperledger/education/issues/120,https://api.github.com/repos/hyperledger/education/issues/comments/450209495,https://github.com/hyperledger/education/issues/120#issuecomment-450209495,vishal3152,"make sure that your connection profile client org is same user belongs to
+
+On Thu, 27 Dec 2018, 22:47 potini3, <notifications@github.com> wrote:
+
+> Hi Vishal,
+>
+> How do I ressolve it. I believe it is taking my credentials from
+> hfc-key-store directly. These values are created when I run registerUser.js
+>
+> —
+> You are receiving this because you commented.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/120#issuecomment-450208702>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AdAWgcuw4_vt95iVL_uoVvKWhFKyphehks5u9RXHgaJpZM4ZjB0P>
+> .
+>
+",2018-12-27 18:52:59,2018-12-27 18:52:59
+https://api.github.com/repos/hyperledger/education/issues/120,https://api.github.com/repos/hyperledger/education/issues/comments/450363840,https://github.com/hyperledger/education/issues/120#issuecomment-450363840,potini3,"Today I deleted my hfc-key-store and restarted the fabric ./startfabric.sh and I got this error in the end of the Script
+Error: error getting endorser client for channel: endorser client failed to conn                                                                                                                ect to peer0.org1.example.com:7051: failed to create new connection: context dea                                                                                                                dline exceeded
+
+But I proceed to  ./startfabric.sh node
+It worked fine and I ran enrollAdmin and registerUser after that I ran
+Node query.js I didn't get any errors but It did not get any response I got like this below how to resolve this
+
+PS C:\Users\admin\fabric-samples\fabcar> node Query.js
+Store path:C:\Users\admin\fabric-samples\fabcar\hfc-key-store
+(node:6384) DeprecationWarning: grpc.load: Use the @grpc/proto-loader module with grpc.loadPackageDefinition
+instead
+Successfully loaded user1 from persistence
+Query has completed, checking results
+Response is  []
+
+
+and also when I proceed to node invoke.js I am getting the error below
+
+PS C:\Users\admin\fabric-samples\fabcar> node invoke.js
+Store path:C:\Users\admin\fabric-samples\fabcar\hfc-key-store
+(node:4812) DeprecationWarning: grpc.load: Use the @grpc/proto-loader module with grpc.loadPackageDefinition
+instead
+Successfully loaded user1 from persistence
+Assigning transaction_id:  c211f8835de0f6ff9f13062f233be23e9e007a2d575bfb97eb6f6de98638b75f
+Transaction proposal was bad
+Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...
+Failed to invoke successfully :: Error: Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...",2018-12-28 14:03:38,2018-12-28 14:05:37
+https://api.github.com/repos/hyperledger/education/issues/118,https://api.github.com/repos/hyperledger/education/issues/comments/443175051,https://github.com/hyperledger/education/issues/118#issuecomment-443175051,vishal3152,"There could be multiple issues::
+1. Your chaincode might need endorsement from more than one peer(of different orgs). But you might have collected from one and would have send the transaction to order. You should read the emitted block to know exact status of commit.",2018-11-30 11:24:43,2018-11-30 11:24:43
+https://api.github.com/repos/hyperledger/education/issues/118,https://api.github.com/repos/hyperledger/education/issues/comments/443177079,https://github.com/hyperledger/education/issues/118#issuecomment-443177079,robelkebede44,"@vishal3152  thank you for the answer but i am a new to fabric how to read the emitted block
+",2018-11-30 11:33:26,2018-11-30 11:33:26
+https://api.github.com/repos/hyperledger/education/issues/118,https://api.github.com/repos/hyperledger/education/issues/comments/443182591,https://github.com/hyperledger/education/issues/118#issuecomment-443182591,vishal3152,"This is one of the way :-
+ ```
+var startBlockListener = async function () {
+     const client = await Client.loadFromConfig(""<file path>"");
+     const channel = client.getChannel(""<channelName>"");
+     var eh = channel.getChannelEventHubsForOrg()[0];// read from network-config.json
+     var block_reg = eh.registerBlockEvent((block) => {
+        console.log('New block received: ' + block.number);
+            // read block here
+   }
+ eh.connect();
+}
+startBlockListener().then(() => {});
+```",2018-11-30 11:57:58,2018-11-30 12:22:50
+https://api.github.com/repos/hyperledger/education/issues/118,https://api.github.com/repos/hyperledger/education/issues/comments/445516726,https://github.com/hyperledger/education/issues/118#issuecomment-445516726,robelkebede44,"const Fabric_Client = require('fabric-client');
+
+var Client = new Fabric_Client();
+
+var startBlockListener = async function () {
+    const client = await Client.loadFromConfig(""<file path>"");
+
+
+
+ TypeError: Client.loadFromConfig is not a function",2018-12-09 07:22:58,2018-12-09 07:22:58
+https://api.github.com/repos/hyperledger/education/issues/117,https://api.github.com/repos/hyperledger/education/issues/comments/441203698,https://github.com/hyperledger/education/issues/117#issuecomment-441203698,vishal3152,"You should handle this in the chaincode.  Attribute-based access control can be of help here. You can query the role attribute in your chaincode and put access restriction as required.
+
+https://hyperledger-fabric-ca.readthedocs.io/en/latest/users-guide.html",2018-11-23 10:24:40,2018-11-23 10:24:40
+https://api.github.com/repos/hyperledger/education/issues/113,https://api.github.com/repos/hyperledger/education/issues/comments/432735346,https://github.com/hyperledger/education/pull/113#issuecomment-432735346,swcurran,"@tkuhrt - sorry to bug on vacation, but could you please checkout this PR?  I've got a number of people anxiously waiting on this PR. I'm at IIW Conference and there is a lot of interest in this.
+
+Thanks!",2018-10-24 16:43:52,2018-10-24 16:43:52
+https://api.github.com/repos/hyperledger/education/issues/111,https://api.github.com/repos/hyperledger/education/issues/comments/430967195,https://github.com/hyperledger/education/pull/111#issuecomment-430967195,alexvicegrab,"Tried to fix the signoff issue as well, but the actions suggested:
+
+```
+git checkout add-composer
+git rebase HEAD~2 --signoff
+git push --force origin add-composer
+```
+
+Don't appear to change anything",2018-10-18 11:03:37,2018-10-18 11:03:37
+https://api.github.com/repos/hyperledger/education/issues/111,https://api.github.com/repos/hyperledger/education/issues/comments/430968366,https://github.com/hyperledger/education/pull/111#issuecomment-430968366,alexvicegrab,"Aha, my bad, wrong version or repository.
+
+Now I get:
+
+```
+git push --force origin add-composer
+ERROR: Permission to hyperledger/education.git denied to alexvicegrab.
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+```",2018-10-18 11:08:26,2018-10-18 11:08:26
+https://api.github.com/repos/hyperledger/education/issues/111,https://api.github.com/repos/hyperledger/education/issues/comments/434064879,https://github.com/hyperledger/education/pull/111#issuecomment-434064879,tkuhrt,Closing in favor of #115. I am not really sure why it did not let me merge master into this branch.,2018-10-29 20:23:01,2018-10-29 20:23:01
+https://api.github.com/repos/hyperledger/education/issues/107,https://api.github.com/repos/hyperledger/education/issues/comments/432529542,https://github.com/hyperledger/education/pull/107#issuecomment-432529542,DBAti,Any comment here?,2018-10-24 06:29:45,2018-10-24 06:29:45
+https://api.github.com/repos/hyperledger/education/issues/106,https://api.github.com/repos/hyperledger/education/issues/comments/448243297,https://github.com/hyperledger/education/issues/106#issuecomment-448243297,sofiter,I added the file and made a pull request for this issue.,2018-12-18 14:42:27,2018-12-18 14:42:27
+https://api.github.com/repos/hyperledger/education/issues/105,https://api.github.com/repos/hyperledger/education/issues/comments/427780534,https://github.com/hyperledger/education/pull/105#issuecomment-427780534,atc-vince,"Since we currently have multiple Pull Requests in flight, do we need to keep track of the order they are to be merged (assuming a passed review)?
+
+If so, the order appears to be as follows:
+1. PR#102 (Chapter 8)
+2. PR#104 (Chapter 6 & 7)
+3. PR#105 (Issue #103)
+
+> On Oct 7, 2018, at 9:35 PM, Nathalie Chan King Choy <notifications@github.com> wrote:
+> 
+> Building on top of @atc-vince 's PR#104.
+> 
+> Each item from Github issue #103 is implemented as a separate commit. In case any of those items are not desired to be implemented, just the desired items can be cherry picked.
+> 
+> You can view, comment on, or merge this pull request online at:
+> 
+>   https://github.com/hyperledger/education/pull/105
+> 
+> Commit Summary
+> 
+> Chapter 8: What's Next Markdown
+> Chapters 6 & 7 Markdown w/ Images
+> Issue #103 item 1: Fix typo
+> Issue #103 item 2: Move diagram to relevant slide
+> Issue #103 item 3: Update version in command
+> Issue #103 item 4: Indicate what we want replaced
+> Issue #103 item 5: Specify 'fabric'
+> Issue #103 item 6: specify what to replace
+> Issue #103 item 7: Delete redundant slide
+> Issue #103 item 8: Add troubleshooting tips
+> File Changes
+> 
+> M LFS171x/docs/introduction-to-hyperledger-fabric.md (1545)
+> M LFS171x/docs/introduction-to-hyperledger-sawtooth.md (969)
+> M LFS171x/docs/whats-next.md (65)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Demonstrated_Tuna_Fishing_Scenario.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Fabric_demonstrated_scenario_actors.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Fabric_installation_1.jpg     (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Invoke_method_queryTuna_and_changeTuna.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Invoke_method_queryTuna_and_queryAllTuna.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Invoke_method_recordTuna.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Key_Components_-_Transaction_Proposal.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Key_Components_Channels.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/State_Database.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/The_role_of_membership_service_provider.jpg (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Transaction_Flow_Step_4.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Transaction_Flow_Step_5.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Transaction_Flow_Step_6.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Transaction_flow_step_2.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/Transaction_flow_step_3.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-application-flow.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-application-flowbasics.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-application1.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-changeTunaHolder.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-changedRecord.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-createTunaRecord.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-filestructure.png     (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-query.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-queryAfterCreate.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric-queryAll.png (0)
+> A LFS171x/images/introduction-to-hyperledger-fabric/fabric_sale_scenario.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/2_-__Sawtooth__Demonstrated_Scenario__1_.jpg (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Accept_Tuna.jpg (0)   
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Application_Flow.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/File_structure_of_TunaChain_Application.jpeg (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Hyperledger_Sawtooth_Components.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Miriam_can_use_the_client_application_to_query_the_ledger.jpg (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Regulators_may_use_the_client_application_to_query_the_ledger__to_verify_legitimacy.jpg (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Sarah_uses_the_client_application_to_record_all_caught_tuna_to_the_ledger.jpg (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Sawtooth_Application.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Sawtooth_Network.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/The_processing_plant_may_use_the_client_application_to_query_the_ledger.jpg (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Tuna_Create.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Tuna_Create_New_Key_Pair.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Tuna_Holder_drop_down.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Tuna_List.png (0)
+> A LFS171x/images/introduction-to-hyperledger-sawtooth/Tuna_Transfer.png (0)
+> A LFS171x/images/whats-next/Hyperledger_Global_Meetups.png (0)
+> A LFS171x/images/whats-next/Hyperledger_Working_Groups.png (0)   
+> Patch Links:
+> 
+> https://github.com/hyperledger/education/pull/105.patch
+> https://github.com/hyperledger/education/pull/105.diff
+> —
+> You are receiving this because you were mentioned.
+> Reply to this email directly, view it on GitHub, or mute the thread.
+",2018-10-08 10:03:51,2018-10-08 10:03:51
+https://api.github.com/repos/hyperledger/education/issues/105,https://api.github.com/repos/hyperledger/education/issues/comments/427865358,https://github.com/hyperledger/education/pull/105#issuecomment-427865358,nathalie-ckc,"I just realized that in deleting the redundant slide for item 7, the table of contents didn't get updated.  I'll fix that today.",2018-10-08 14:51:25,2018-10-08 14:51:25
+https://api.github.com/repos/hyperledger/education/issues/105,https://api.github.com/repos/hyperledger/education/issues/comments/427952093,https://github.com/hyperledger/education/pull/105#issuecomment-427952093,nathalie-ckc,"OK, just pushed that change for item 7.  Feel free to cherry pick whichever items from issue #103 that you think are valid, and leave behind the rest.",2018-10-08 19:28:49,2018-10-08 19:28:49
+https://api.github.com/repos/hyperledger/education/issues/105,https://api.github.com/repos/hyperledger/education/issues/comments/431901299,https://github.com/hyperledger/education/pull/105#issuecomment-431901299,DBAti,"Hi Nathalie,
+
+Thanks for the email, the issue I was facing is about the
+deprecated functions ""eventhub"" I have solved it for, My point in the
+meeting was to have it somewhere in the example or we should add to pull
+the docker image of 1.2.0 or match it with the node SDK, it took 5-6 hours
+to understand the issue which should not be the case, the only thing I want
+to point out is the Docker image and node SDK should pull the version.
+
+Best Regards,
+
+*Ati*Senior PHP Developer
+
+
+On Mon, Oct 22, 2018 at 9:22 PM Nathalie Chan King Choy <
+notifications@github.com> wrote:
+
+> *@nathalie-ckc* commented on this pull request.
+> ------------------------------
+>
+> In LFS171x/docs/introduction-to-hyperledger-fabric.md
+> <https://github.com/hyperledger/education/pull/105#discussion_r227031728>:
+>
+> > @@ -415,7 +415,7 @@ If you need further details on these prerequisites, visit Chapter 4, _Technical
+>  Next, we will download the latest released Docker images for Hyperledger Fabric, and tag them with the **latest** tag. Execute the command from within the directory into which you will extract the platform-specific binaries:
+>
+>  ```
+> -$ curl -sSL https://goo.gl/6wtTN5 | bash -s 1.1.0
+> +$ curl -sSL https://goo.gl/6wtTN5 | bash -s 1.2.0
+>
+> @DBAti <https://github.com/DBAti>, you mentioned in today's Training &
+> Education Working Group call that you hit issues with the 1.3 Fabric stuff?
+> I just went to the end of the 1st example with the 1.3.0 instruction above
+> that Tracy gave. I didn't have time to go through entire chapter with 1.3.
+> Please could you let us know the details of what you encountered?
+>
+> —
+> You are receiving this because you were mentioned.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/pull/105#discussion_r227031728>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AQF6yRLgfgtEb83I9xBDu-NyXTslOsUxks5unempgaJpZM4XMJE7>
+> .
+>
+",2018-10-22 17:10:43,2018-10-22 17:10:43
+https://api.github.com/repos/hyperledger/education/issues/104,https://api.github.com/repos/hyperledger/education/issues/comments/430493040,https://github.com/hyperledger/education/pull/104#issuecomment-430493040,atc-vince,@tkuhrt I've applied all requested changes to the two (2) Markdown files.,2018-10-17 05:20:05,2018-10-17 05:20:05
+https://api.github.com/repos/hyperledger/education/issues/103,https://api.github.com/repos/hyperledger/education/issues/comments/427700747,https://github.com/hyperledger/education/issues/103#issuecomment-427700747,nathalie-ckc,"Regarding items 4 and 6 above: It looks like Github Markdown [doesn't support coloring text] (https://stackoverflow.com/questions/11509830/how-to-add-color-to-githubs-readme-md-file), so I will just specify the value of text that we want replaced. ",2018-10-08 00:44:35,2018-10-08 00:47:19
+https://api.github.com/repos/hyperledger/education/issues/103,https://api.github.com/repos/hyperledger/education/issues/comments/427704405,https://github.com/hyperledger/education/issues/103#issuecomment-427704405,nathalie-ckc,Submitted PR#105 to address this issue.,2018-10-08 01:35:35,2018-10-08 01:35:35
+https://api.github.com/repos/hyperledger/education/issues/100,https://api.github.com/repos/hyperledger/education/issues/comments/424926414,https://github.com/hyperledger/education/pull/100#issuecomment-424926414,atc-vince,Abandoned PR due to issues with DCO.  Will create a new PR instead,2018-09-27 01:38:34,2018-09-27 01:38:34
+https://api.github.com/repos/hyperledger/education/issues/99,https://api.github.com/repos/hyperledger/education/issues/comments/424197808,https://github.com/hyperledger/education/pull/99#issuecomment-424197808,atc-vince,Closed Pull Request in order to create a new one... hopefully one that will pass DCO checks,2018-09-25 03:43:52,2018-09-25 03:43:52
+https://api.github.com/repos/hyperledger/education/issues/98,https://api.github.com/repos/hyperledger/education/issues/comments/422602718,https://github.com/hyperledger/education/pull/98#issuecomment-422602718,tkuhrt,"Thank you. I will wait on merging this, but I will forward to Flavia for inclusion in v2 course. I would love to get all the updates in place.",2018-09-19 00:20:27,2018-09-19 00:20:27
+https://api.github.com/repos/hyperledger/education/issues/97,https://api.github.com/repos/hyperledger/education/issues/comments/422239932,https://github.com/hyperledger/education/pull/97#issuecomment-422239932,thaddeus-cambron,DCO fails,2018-09-18 03:14:06,2018-09-18 03:14:06
+https://api.github.com/repos/hyperledger/education/issues/97,https://api.github.com/repos/hyperledger/education/issues/comments/430071106,https://github.com/hyperledger/education/pull/97#issuecomment-430071106,tkuhrt,Addressed by #104 and #102 ,2018-10-16 01:40:11,2018-10-16 01:40:11
+https://api.github.com/repos/hyperledger/education/issues/96,https://api.github.com/repos/hyperledger/education/issues/comments/422240061,https://github.com/hyperledger/education/pull/96#issuecomment-422240061,thaddeus-cambron,DCO Fails,2018-09-18 03:14:52,2018-09-18 03:14:52
+https://api.github.com/repos/hyperledger/education/issues/95,https://api.github.com/repos/hyperledger/education/issues/comments/422238233,https://github.com/hyperledger/education/pull/95#issuecomment-422238233,thaddeus-cambron,.,2018-09-18 03:02:17,2018-09-18 03:02:17
+https://api.github.com/repos/hyperledger/education/issues/94,https://api.github.com/repos/hyperledger/education/issues/comments/422236358,https://github.com/hyperledger/education/pull/94#issuecomment-422236358,thaddeus-cambron,closing PR,2018-09-18 02:50:27,2018-09-18 02:50:27
+https://api.github.com/repos/hyperledger/education/issues/93,https://api.github.com/repos/hyperledger/education/issues/comments/422135475,https://github.com/hyperledger/education/issues/93#issuecomment-422135475,tkuhrt,Can you post line 381 from your sawtooth-default.yaml file? https://github.com/hyperledger/education/blob/master/LFS171x/sawtooth-material/sawtooth-default.yaml only has 77 lines.,2018-09-17 19:12:57,2018-09-17 19:13:45
+https://api.github.com/repos/hyperledger/education/issues/93,https://api.github.com/repos/hyperledger/education/issues/comments/422141007,https://github.com/hyperledger/education/issues/93#issuecomment-422141007,piotrekcudny,"You are correct, there are 77. And that's what confuses me most...",2018-09-17 19:31:11,2018-09-17 19:31:11
+https://api.github.com/repos/hyperledger/education/issues/93,https://api.github.com/repos/hyperledger/education/issues/comments/422196537,https://github.com/hyperledger/education/issues/93#issuecomment-422196537,tkuhrt,"Can you check your file just to be sure that it matches the above link? Also, what operating system and docker-compose version are you using?",2018-09-17 22:47:39,2018-09-17 22:47:39
+https://api.github.com/repos/hyperledger/education/issues/92,https://api.github.com/repos/hyperledger/education/issues/comments/422581261,https://github.com/hyperledger/education/pull/92#issuecomment-422581261,tkuhrt,"Can you change this PR to merge to an add-indy branch? That way, we can keep it separate until we make this part live?",2018-09-18 22:37:32,2018-09-18 22:37:32
+https://api.github.com/repos/hyperledger/education/issues/92,https://api.github.com/repos/hyperledger/education/issues/comments/422590858,https://github.com/hyperledger/education/pull/92#issuecomment-422590858,swcurran,"> Can you change this PR to merge to an add-indy branch? That way, we can keep it separate until we make this part live?
+
+Tracy - I think you can do that when you merge the PR.
+
+Alternatively, from what I checked with one of our devs, you could create the branch before I submit the PR.  I could then just cancel this one and redo the changes so that I can target that branch.
+
+I would say, when we decide to merge, you try to target a new ""add-indy"" branch.  If that doesn't work, the surest way is for 
+
+* me to cancel the PR
+* you to create the branch,
+* me to refork the repo, reapply the changes with new commits and then do another PR.
+
+Let me know what you think.",2018-09-18 23:20:20,2018-09-18 23:20:20
+https://api.github.com/repos/hyperledger/education/issues/92,https://api.github.com/repos/hyperledger/education/issues/comments/422601395,https://github.com/hyperledger/education/pull/92#issuecomment-422601395,tkuhrt,Created the branch and changed it by clicking the Edit above to specify which branch to merge to.,2018-09-19 00:12:45,2018-09-19 00:12:45
+https://api.github.com/repos/hyperledger/education/issues/91,https://api.github.com/repos/hyperledger/education/issues/comments/429681537,https://github.com/hyperledger/education/pull/91#issuecomment-429681537,tkuhrt,Resolved by PR #102 ,2018-10-15 01:23:41,2018-10-15 01:23:41
+https://api.github.com/repos/hyperledger/education/issues/89,https://api.github.com/repos/hyperledger/education/issues/comments/421510416,https://github.com/hyperledger/education/issues/89#issuecomment-421510416,tkuhrt,"I am okay with point 1, 2, 3, and 5.
+I am also okay with point 4, but you will need to change the image in the `Merkle Tree` section to reflect this change.",2018-09-14 23:35:39,2018-09-14 23:35:39
+https://api.github.com/repos/hyperledger/education/issues/89,https://api.github.com/repos/hyperledger/education/issues/comments/421510963,https://github.com/hyperledger/education/issues/89#issuecomment-421510963,alexvicegrab,"On 1) Bitcoin has smart contracts. They just are not Turing Complete 
+
+e.g. You can have quite complex functionality on the Bitcoin blockchain using its scripting language (https://en.bitcoin.it/wiki/Colored_Coins)",2018-09-14 23:39:51,2018-09-14 23:41:40
+https://api.github.com/repos/hyperledger/education/issues/89,https://api.github.com/repos/hyperledger/education/issues/comments/421607501,https://github.com/hyperledger/education/issues/89#issuecomment-421607501,nathalie-ckc,"@alexvicegrab : Thanks for the clarification.  I won't do (1) then.
+
+@tkuhrt : For (4), looking at the caption on the image in the Merkle Tree section, it's specifically labelled as being a Bitcoin example.  So, since Blockchains (Continued) already discusses Bitcoin, how about I just make the statement more specific, to indicate we're talking about the Bitcoin example: ""A *Bitcoin* block ~~commonly~~ consists of four pieces of metadata""?",2018-09-15 17:54:25,2018-09-15 17:54:25
+https://api.github.com/repos/hyperledger/education/issues/89,https://api.github.com/repos/hyperledger/education/issues/comments/422297652,https://github.com/hyperledger/education/issues/89#issuecomment-422297652,nathalie-ckc,Submitted PR #98 to address this issue,2018-09-18 08:09:56,2018-09-18 08:09:56
+https://api.github.com/repos/hyperledger/education/issues/81,https://api.github.com/repos/hyperledger/education/issues/comments/421498612,https://github.com/hyperledger/education/pull/81#issuecomment-421498612,nathalie-ckc,"@thaddeus-cambron , when I had the problem of GitHub's checker telling me I had the DCO problem even though the sign-off was there (PR 62), I created a new branch, copied the files over. On my new branch, my previous commits were squashed & the commit signed-off.  Then I submitted a new PR (70) with that new branch.  It seems to have worked.  ",2018-09-14 22:17:29,2018-09-14 22:17:29
+https://api.github.com/repos/hyperledger/education/issues/81,https://api.github.com/repos/hyperledger/education/issues/comments/421507861,https://github.com/hyperledger/education/pull/81#issuecomment-421507861,thaddeus-cambron,Thank you very much @nathalie-ckc I will try your recommendation this evening.,2018-09-14 23:15:37,2018-09-14 23:15:37
+https://api.github.com/repos/hyperledger/education/issues/78,https://api.github.com/repos/hyperledger/education/issues/comments/419990425,https://github.com/hyperledger/education/pull/78#issuecomment-419990425,tkuhrt,Missing DCO signoff. Use the information in step 10 of the following [gist](https://gist.github.com/tkuhrt/10211ae0a26a91a8c030d00344f7d11b) to add the sign-off,2018-09-10 17:16:07,2018-09-10 17:16:07
+https://api.github.com/repos/hyperledger/education/issues/76,https://api.github.com/repos/hyperledger/education/issues/comments/419266316,https://github.com/hyperledger/education/pull/76#issuecomment-419266316,tkuhrt,Fixes #75 ,2018-09-06 22:49:15,2018-09-06 22:49:15
+https://api.github.com/repos/hyperledger/education/issues/75,https://api.github.com/repos/hyperledger/education/issues/comments/419261994,https://github.com/hyperledger/education/issues/75#issuecomment-419261994,nathalie-ckc,Created pull request #76 to address this issue,2018-09-06 22:30:03,2018-09-06 22:30:03
+https://api.github.com/repos/hyperledger/education/issues/74,https://api.github.com/repos/hyperledger/education/issues/comments/419223081,https://github.com/hyperledger/education/issues/74#issuecomment-419223081,nathalie-ckc,"Please assign to me. I'm going to add a .md file for the ""Welcome and Intro"" and then make this change.",2018-09-06 20:03:02,2018-09-06 20:03:02
+https://api.github.com/repos/hyperledger/education/issues/74,https://api.github.com/repos/hyperledger/education/issues/comments/419229543,https://github.com/hyperledger/education/issues/74#issuecomment-419229543,tkuhrt,"Sounds good. Let's get the Welcome and Introduction merged first, and then you can make a separate PR for this.",2018-09-06 20:26:03,2018-09-06 20:26:03
+https://api.github.com/repos/hyperledger/education/issues/74,https://api.github.com/repos/hyperledger/education/issues/comments/419545025,https://github.com/hyperledger/education/issues/74#issuecomment-419545025,nathalie-ckc,"Submitted PR #77 . Thanks, Tracy!",2018-09-07 19:38:45,2018-09-07 19:38:45
+https://api.github.com/repos/hyperledger/education/issues/72,https://api.github.com/repos/hyperledger/education/issues/comments/417892838,https://github.com/hyperledger/education/pull/72#issuecomment-417892838,atc-vince,"@tkuhrt Hi Tracy, 
+Requested changes implemented.  Links in TOC also tested.
+-Vince",2018-09-01 22:54:01,2018-09-01 22:54:01
+https://api.github.com/repos/hyperledger/education/issues/71,https://api.github.com/repos/hyperledger/education/issues/comments/414421405,https://github.com/hyperledger/education/pull/71#issuecomment-414421405,tkuhrt,"Since the Github and Rocket.Chat images will be used for multiple chapters, can we move these to the images subdirectory?",2018-08-20 18:44:25,2018-08-20 18:44:25
+https://api.github.com/repos/hyperledger/education/issues/71,https://api.github.com/repos/hyperledger/education/issues/comments/414497212,https://github.com/hyperledger/education/pull/71#issuecomment-414497212,tkuhrt,"Nathalie, these changes look good. There are a few issues with the repository, where people have committed things directly to the repo without appropriate DCOs. Until we get that resolved, I will hold off on merging the changes.",2018-08-20 23:31:13,2018-08-20 23:31:13
+https://api.github.com/repos/hyperledger/education/issues/71,https://api.github.com/repos/hyperledger/education/issues/comments/414534951,https://github.com/hyperledger/education/pull/71#issuecomment-414534951,thaddeus-cambron,"If the DCO exclusion involves any of my commits, I will look into this tomorrow.",2018-08-21 03:05:47,2018-08-21 03:13:07
+https://api.github.com/repos/hyperledger/education/issues/71,https://api.github.com/repos/hyperledger/education/issues/comments/415322165,https://github.com/hyperledger/education/pull/71#issuecomment-415322165,nathalie-ckc,Updated my fork to remove the non-maintainer committed commits to match fixed import-edx-content (be9ab02) and re-based and force pushed back to my origin.  That seems to have fixed my PR branch as well to just be mine on top of be9ab02.,2018-08-23 07:40:39,2018-08-23 07:40:39
+https://api.github.com/repos/hyperledger/education/issues/71,https://api.github.com/repos/hyperledger/education/issues/comments/415324733,https://github.com/hyperledger/education/pull/71#issuecomment-415324733,ryjones,LGTM,2018-08-23 07:50:19,2018-08-23 07:50:19
+https://api.github.com/repos/hyperledger/education/issues/71,https://api.github.com/repos/hyperledger/education/issues/comments/417410946,https://github.com/hyperledger/education/pull/71#issuecomment-417410946,tkuhrt,Resolves Issue #48 ,2018-08-30 17:56:30,2018-08-30 17:56:30
+https://api.github.com/repos/hyperledger/education/issues/70,https://api.github.com/repos/hyperledger/education/issues/comments/414503590,https://github.com/hyperledger/education/pull/70#issuecomment-414503590,tkuhrt,"Just like the other PR, I am going to hold off on merging this until we get the branch issue resolved. Otherwise, this PR looks good.",2018-08-21 00:04:26,2018-08-21 00:04:26
+https://api.github.com/repos/hyperledger/education/issues/70,https://api.github.com/repos/hyperledger/education/issues/comments/415322269,https://github.com/hyperledger/education/pull/70#issuecomment-415322269,nathalie-ckc,Updated my fork to remove the non-maintainer committed commits to match fixed import-edx-content (be9ab02) and re-based and force pushed back to my origin.  That seems to have fixed my PR branch as well to just be mine on top of be9ab02.,2018-08-23 07:41:02,2018-08-23 07:41:02
+https://api.github.com/repos/hyperledger/education/issues/70,https://api.github.com/repos/hyperledger/education/issues/comments/415324825,https://github.com/hyperledger/education/pull/70#issuecomment-415324825,ryjones,LGTM,2018-08-23 07:50:37,2018-08-23 07:50:37
+https://api.github.com/repos/hyperledger/education/issues/67,https://api.github.com/repos/hyperledger/education/issues/comments/413427035,https://github.com/hyperledger/education/issues/67#issuecomment-413427035,thaddeus-cambron,It looks like someone else is making PRs on this so taking my self off.,2018-08-16 05:05:38,2018-08-16 05:05:38
+https://api.github.com/repos/hyperledger/education/issues/66,https://api.github.com/repos/hyperledger/education/issues/comments/412717636,https://github.com/hyperledger/education/issues/66#issuecomment-412717636,joeyjoplin,open by mistake,2018-08-14 01:02:17,2018-08-14 01:02:17
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/413948709,https://github.com/hyperledger/education/pull/65#issuecomment-413948709,tkuhrt,Any chance we can get this pull request against a branch? We don't want to update the master branch until the course material has been released.,2018-08-17 18:18:24,2018-08-17 18:18:24
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/413952624,https://github.com/hyperledger/education/pull/65#issuecomment-413952624,alexvicegrab,"@tkuhrt, pulling against branch add-composer",2018-08-17 18:32:47,2018-08-17 18:32:47
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/414432446,https://github.com/hyperledger/education/pull/65#issuecomment-414432446,tkuhrt,"Thanks @alexvicegrab. Can you check out some of the work that we are doing on the import-edx-content branch (e.g., https://github.com/hyperledger/education/blob/import-edx-content/LFS171x/docs/discovering-blockchain-technologies.md)? I am wondering if we might follow this format for the new Composer chapter so that when we get all of these changes added to the master branch, they will be similar. In the meantime, I will review the material and see if I have any additional comments.",2018-08-20 19:21:54,2018-08-20 19:21:54
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/414601870,https://github.com/hyperledger/education/pull/65#issuecomment-414601870,alexvicegrab,"Hi Tracy, we'll work on your suggestions and make the section more in line with the current version, as you suggested (https://github.com/hyperledger/education/blob/import-edx-content/LFS171x/docs/discovering-blockchain-technologies.md)",2018-08-21 08:55:00,2018-08-21 08:55:16
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/415166508,https://github.com/hyperledger/education/pull/65#issuecomment-415166508,tkuhrt,"Thanks, Sasha and Nicola. I finally was able to run through setting up a VM and running through the install an example on the VM. I left a few more comments on the source code. This looks really great! People are going to get a ton out of this material!",2018-08-22 20:21:40,2018-08-22 20:21:40
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/415427609,https://github.com/hyperledger/education/pull/65#issuecomment-415427609,alexvicegrab,"Hi @tkuhrt, we will review your comments, thank you!",2018-08-23 14:10:25,2018-08-23 14:10:25
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/415480236,https://github.com/hyperledger/education/pull/65#issuecomment-415480236,alexvicegrab,"@tkuhrt, I think I implemented all of your above suggestions. Please let us know if there are any further improvements. Thank you again!",2018-08-23 16:27:52,2018-08-23 16:27:52
+https://api.github.com/repos/hyperledger/education/issues/65,https://api.github.com/repos/hyperledger/education/issues/comments/416362346,https://github.com/hyperledger/education/pull/65#issuecomment-416362346,tkuhrt,Thanks for being so patient and resolving my comments. This looks good to me. I will commit it to the add-composer branch.,2018-08-27 20:44:26,2018-08-27 20:44:26
+https://api.github.com/repos/hyperledger/education/issues/64,https://api.github.com/repos/hyperledger/education/issues/comments/414832353,https://github.com/hyperledger/education/issues/64#issuecomment-414832353,DamianLikszo,"I had the same problem and I fixed it.
+You must have:
+* node runtime LTS version 8.9.0 or higher, up to 9.0 ( Node v9.0+ is not supported )
+* npm tool version 5.5.1 or higher
+
+Check It.",2018-08-21 21:46:14,2018-08-21 22:08:18
+https://api.github.com/repos/hyperledger/education/issues/64,https://api.github.com/repos/hyperledger/education/issues/comments/426638972,https://github.com/hyperledger/education/issues/64#issuecomment-426638972,deb21,same issue . not working ,2018-10-03 13:33:50,2018-10-03 13:33:50
+https://api.github.com/repos/hyperledger/education/issues/64,https://api.github.com/repos/hyperledger/education/issues/comments/427130774,https://github.com/hyperledger/education/issues/64#issuecomment-427130774,nathalie-ckc,"If you encounter problems in the course, it's always good to search the course Discussion forum to see if someone else found the solution.  That's how I found this post by Indiefire & using nvm to get node v8.9.0 worked for me: https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS171x+3T2017/discussion/forum/i4x-LinuxFoundationX-LFS171x-course-3T_2017/threads/5b472605c5264809bd00139c
+
+I've got a bunch of other feedback I want to submit for Chapter 7 for the effort to improve the edX course material in the import-edx-content branch, so I'll suggest to add that info to the troubleshooting tips.",2018-10-04 18:53:44,2018-10-04 18:53:44
+https://api.github.com/repos/hyperledger/education/issues/64,https://api.github.com/repos/hyperledger/education/issues/comments/441207041,https://github.com/hyperledger/education/issues/64#issuecomment-441207041,vishal3152,"I had faced the same issue.  Here is a utility application that does the same with ease.
+https://github.com/vishal3152/RegisterUser",2018-11-23 10:39:26,2018-11-23 10:39:26
+https://api.github.com/repos/hyperledger/education/issues/64,https://api.github.com/repos/hyperledger/education/issues/comments/478357820,https://github.com/hyperledger/education/issues/64#issuecomment-478357820,francas,"Thanks, installing node 8.9.0 worked for me as well.",2019-03-31 16:44:59,2019-03-31 16:44:59
+https://api.github.com/repos/hyperledger/education/issues/63,https://api.github.com/repos/hyperledger/education/issues/comments/411974679,https://github.com/hyperledger/education/issues/63#issuecomment-411974679,thaddeus-cambron,"I can look at it tomorrow morning if no one else is available to help you
+trouble shoot. I will reinstall tomorrow morning.
+
+Thaddeus
+
+On Thu, Aug 9, 2018, 9:49 PM Anson Yao <notifications@github.com> wrote:
+
+> I am following the tutorial to install it and mac. When I run the command
+>
+> docker-compose -f sawtooth-default.yaml up
+>
+> It does download the images and runs but then it stops after printing the
+> following lines:
+> sawtooth-shell-default | creating key directory: /root/.sawtooth/keys
+> sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.priv
+> sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.pub
+>
+> Anyone can point me a direction on how to get it running on my mac?
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/63>, or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AcJxJqe16QqG7Jkw2R0YRte3JJkh9VSDks5uPRDDgaJpZM4V3lZa>
+> .
+>
+",2018-08-10 04:51:54,2018-08-10 04:51:54
+https://api.github.com/repos/hyperledger/education/issues/63,https://api.github.com/repos/hyperledger/education/issues/comments/411979981,https://github.com/hyperledger/education/issues/63#issuecomment-411979981,ansonyao,"I followed the steps after the installation on tutorials and they are working. Seems it is just the console stopped printing after 
+
+```
+sawtooth-shell-default | creating key directory: /root/.sawtooth/keys
+sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.priv
+sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.pub
+```
+
+and it is different from what is expected.",2018-08-10 05:33:36,2018-08-10 05:34:27
+https://api.github.com/repos/hyperledger/education/issues/63,https://api.github.com/repos/hyperledger/education/issues/comments/411980272,https://github.com/hyperledger/education/issues/63#issuecomment-411980272,thaddeus-cambron,"👍
+
+On Thu, Aug 9, 2018, 10:33 PM Anson Yao <notifications@github.com> wrote:
+
+> I followed the steps after the installation on tutorials and they are
+> working. Seems it is just the console stopped printing after ```
+> sawtooth-shell-default | creating key directory: /root/.sawtooth/keys
+> sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.priv
+> sawtooth-shell-default | writing file: /root/.sawtooth/keys/root.pub
+>
+> —
+> You are receiving this because you commented.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/63#issuecomment-411979981>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AcJxJgtIReAjcXyWI7g8U5L7su84HDlpks5uPRsxgaJpZM4V3lZa>
+> .
+>
+",2018-08-10 05:35:43,2018-08-10 05:35:43
+https://api.github.com/repos/hyperledger/education/issues/63,https://api.github.com/repos/hyperledger/education/issues/comments/412758493,https://github.com/hyperledger/education/issues/63#issuecomment-412758493,atomreclusive,"I've also run into the same issue ([here](https://github.com/hyperledger/education/issues/58)) with the key generation, though, I have gotten a little past it by installing lower versions of docker and docker-compose. Currently, I'm usin Docker 17.03.1 and Docker-compose 1.9.0. 
+
+Maybe you could try something similar and see if your luck is better than mine.",2018-08-14 05:26:55,2018-08-14 05:26:55
+https://api.github.com/repos/hyperledger/education/issues/62,https://api.github.com/repos/hyperledger/education/issues/comments/413950703,https://github.com/hyperledger/education/pull/62#issuecomment-413950703,tkuhrt,"Thanks for the pull request, Nathalie. I will be reviewing this today.",2018-08-17 18:25:41,2018-08-17 18:25:41
+https://api.github.com/repos/hyperledger/education/issues/62,https://api.github.com/repos/hyperledger/education/issues/comments/414034278,https://github.com/hyperledger/education/pull/62#issuecomment-414034278,nathalie-ckc,"@tkuhrt I have made the requested changes & also rebased my branch to upstream/import-edx-content.  
+
+I'm not sure what happened with commit b48db7b (the most recent).  I got a merge conflict with my origin branch... maybe because I was trying to avoid syncing my fork to commits 7d7c4f9 .. 9b79ea5 because I wasn't sure if they would be accepted or reverted.  Anyway, I resolved the merge conflict and somehow I am now failing DCO, even though I used ""git commit -s"" and I see my sign-off line. :(",2018-08-18 05:45:56,2018-08-18 05:45:56
+https://api.github.com/repos/hyperledger/education/issues/62,https://api.github.com/repos/hyperledger/education/issues/comments/414040530,https://github.com/hyperledger/education/pull/62#issuecomment-414040530,nathalie-ckc,"Please refer to new pull request #70, which replaces this one.  It's the same thing, including fixes for Tracy's feedback.  However, it passes all the checks & the commits are squashed into one.",2018-08-18 08:07:24,2018-08-18 08:07:24
+https://api.github.com/repos/hyperledger/education/issues/62,https://api.github.com/repos/hyperledger/education/issues/comments/414413060,https://github.com/hyperledger/education/pull/62#issuecomment-414413060,tkuhrt,"Thanks, Nathalie. Reviewing that now.",2018-08-20 18:17:26,2018-08-20 18:17:26
+https://api.github.com/repos/hyperledger/education/issues/58,https://api.github.com/repos/hyperledger/education/issues/comments/413923413,https://github.com/hyperledger/education/issues/58#issuecomment-413923413,atomreclusive,"Nevermind. I was expecting more from the output in the terminal. After watching the installation video in the edX course a few slides later, I see that wasn't an issue.",2018-08-17 16:43:45,2018-08-17 16:43:45
+https://api.github.com/repos/hyperledger/education/issues/57,https://api.github.com/repos/hyperledger/education/issues/comments/404700991,https://github.com/hyperledger/education/pull/57#issuecomment-404700991,242,"Signed-off-by: Sa <logged@gmail.com>
+",2018-07-13 01:47:08,2018-07-13 01:47:35
+https://api.github.com/repos/hyperledger/education/issues/57,https://api.github.com/repos/hyperledger/education/issues/comments/404889858,https://github.com/hyperledger/education/pull/57#issuecomment-404889858,tkuhrt,"Hi, 242. You will need to re-submit this pull request with the sign-off included in the first commit. DCO will not accept it otherwise.",2018-07-13 16:49:46,2018-07-13 16:49:46
+https://api.github.com/repos/hyperledger/education/issues/56,https://api.github.com/repos/hyperledger/education/issues/comments/414422960,https://github.com/hyperledger/education/pull/56#issuecomment-414422960,tkuhrt,"Hi, Morgan. Thanks for the PR. I made a comment on the change. Also, changes require DCO signoff (use the `-s` option for `git commit`) before they can be merged into the repo. Can you update this PR to reflect those two items?",2018-08-20 18:49:33,2018-08-20 18:49:33
+https://api.github.com/repos/hyperledger/education/issues/55,https://api.github.com/repos/hyperledger/education/issues/comments/403819640,https://github.com/hyperledger/education/issues/55#issuecomment-403819640,sornss,"How about:
+
+npm uninstall nan
+npm install https://github.com/nodejs/nan
+
+and try again",2018-07-10 13:21:54,2018-07-10 13:21:54
+https://api.github.com/repos/hyperledger/education/issues/55,https://api.github.com/repos/hyperledger/education/issues/comments/405103448,https://github.com/hyperledger/education/issues/55#issuecomment-405103448,tushargandhi87,"@sornss 
+I have tried that earlier but no luck.
+
+The problem is that package.json file of git project points to nan 2.7.0 .. whereas It should point to nan 2.10.0.. 
+
+What changes do I make to make it right ? ",2018-07-15 16:47:38,2018-07-15 16:47:38
+https://api.github.com/repos/hyperledger/education/issues/55,https://api.github.com/repos/hyperledger/education/issues/comments/408840821,https://github.com/hyperledger/education/issues/55#issuecomment-408840821,arijitthehacker,"Try Removing the **node_modules** folder. Then try npm install.
+Also from what I see your problem is not with nan but with fabric-client.
+Try 
+``npm install fabric-client``
+``npm instal fabric-ca-client``",2018-07-30 12:06:11,2018-07-30 12:06:11
+https://api.github.com/repos/hyperledger/education/issues/55,https://api.github.com/repos/hyperledger/education/issues/comments/409192716,https://github.com/hyperledger/education/issues/55#issuecomment-409192716,binarysun,"I also ran into this problem. Attempting an `npm update` also failed, with npm suggesting I change ownership of the .config file in my home dir:
+
+`sudo chown -R $USER:$(id -gn $USER) /home/<username>/.config
+`
+
+After I did this I ran `npm update` followed by `npm install`. This seems to have fixed the issue.",2018-07-31 11:50:16,2018-07-31 11:50:16
+https://api.github.com/repos/hyperledger/education/issues/55,https://api.github.com/repos/hyperledger/education/issues/comments/460787517,https://github.com/hyperledger/education/issues/55#issuecomment-460787517,RadkaKittova,Same problem here. Nothing helps so far.. but I am using Mac,2019-02-05 20:17:13,2019-02-05 20:17:13
+https://api.github.com/repos/hyperledger/education/issues/53,https://api.github.com/repos/hyperledger/education/issues/comments/398140858,https://github.com/hyperledger/education/pull/53#issuecomment-398140858,tkuhrt,"Imports material for issue #44 (and initial structure for #45, #46, #47, #48, #49, #50, #51, #52)",2018-06-18 17:55:16,2018-06-18 17:55:16
+https://api.github.com/repos/hyperledger/education/issues/52,https://api.github.com/repos/hyperledger/education/issues/comments/406659035,https://github.com/hyperledger/education/issues/52#issuecomment-406659035,nathalie-ckc,"Hi Tracy,
+I would like to sign up for this issue. I think I am a member of the Hyperledger Github organization, but I am still not able to assign myself the issue.  I am going by these instructions, but with my permission level I don't have the tick-box mentioned: https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/
+
+Please could you assign it to me?
+
+Thanks,
+Nathalie",2018-07-20 16:47:35,2018-07-20 16:47:35
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/412698990,https://github.com/hyperledger/education/issues/51#issuecomment-412698990,tkuhrt,"I did not include the transcripts in the work that I did (https://github.com/hyperledger/education/blob/import-edx-content/LFS171x/docs/discovering-blockchain-technologies.md). With YouTube, you can enable CC. I figured that was good enough. Happy to hear other thoughts though.",2018-08-13 23:23:28,2018-08-13 23:23:28
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/412702142,https://github.com/hyperledger/education/issues/51#issuecomment-412702142,thaddeus-cambron,"The longer videos may make the text too verbose and spoken word does not always translate well into text. A speaker may have inflections or use habitual words that do not makes sense in written form, making the content confusing for some learners. I will follow your example above.",2018-08-13 23:39:24,2018-08-13 23:39:24
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/412866956,https://github.com/hyperledger/education/issues/51#issuecomment-412866956,thaddeus-cambron,"Text and videos are complete. I need to push a ""whats-next"" directory with chapter images to the main ""images"" directory",2018-08-14 13:13:12,2018-08-14 13:13:12
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/413555078,https://github.com/hyperledger/education/issues/51#issuecomment-413555078,thaddeus-cambron,this is complete but needs review,2018-08-16 13:58:48,2018-08-16 13:59:05
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/419556348,https://github.com/hyperledger/education/issues/51#issuecomment-419556348,thaddeus-cambron,"Does this still need my attention? If so, I am set up to do a commitment from my local.",2018-09-07 20:26:46,2018-09-07 20:26:46
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/419561402,https://github.com/hyperledger/education/issues/51#issuecomment-419561402,tkuhrt,"Yes, this still needs to be completed.",2018-09-07 20:47:41,2018-09-07 20:47:41
+https://api.github.com/repos/hyperledger/education/issues/51,https://api.github.com/repos/hyperledger/education/issues/comments/424933655,https://github.com/hyperledger/education/issues/51#issuecomment-424933655,atc-vince,"Copied Thaddeus' work and added TOC and images. Created PR#102, which passes DCO check.  Ready for review.",2018-09-27 02:13:23,2018-09-27 02:13:23
+https://api.github.com/repos/hyperledger/education/issues/50,https://api.github.com/repos/hyperledger/education/issues/comments/419556436,https://github.com/hyperledger/education/issues/50#issuecomment-419556436,thaddeus-cambron,"Does this still need my attention? If so, I am set up to do a commitment from my local",2018-09-07 20:27:06,2018-09-07 20:27:06
+https://api.github.com/repos/hyperledger/education/issues/50,https://api.github.com/repos/hyperledger/education/issues/comments/419561328,https://github.com/hyperledger/education/issues/50#issuecomment-419561328,tkuhrt,"Yes, this still needs to be completed.",2018-09-07 20:47:25,2018-09-07 20:47:25
+https://api.github.com/repos/hyperledger/education/issues/50,https://api.github.com/repos/hyperledger/education/issues/comments/419594593,https://github.com/hyperledger/education/issues/50#issuecomment-419594593,thaddeus-cambron,"OK, will do.",2018-09-07 23:52:01,2018-09-07 23:52:01
+https://api.github.com/repos/hyperledger/education/issues/50,https://api.github.com/repos/hyperledger/education/issues/comments/424966277,https://github.com/hyperledger/education/issues/50#issuecomment-424966277,atc-vince,@tkuhrt can this issue be reassigned to me?  ,2018-09-27 05:46:31,2018-09-27 05:46:31
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/413061554,https://github.com/hyperledger/education/issues/49#issuecomment-413061554,joeyjoplin,Working on this task,2018-08-15 00:53:18,2018-08-15 00:53:18
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/413062191,https://github.com/hyperledger/education/issues/49#issuecomment-413062191,thaddeus-cambron,You will eventually need the images. I am creating a PR right now to get the chapter subdirectories into the main images directory,2018-08-15 00:57:35,2018-08-15 00:57:35
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/413143658,https://github.com/hyperledger/education/issues/49#issuecomment-413143658,joeyjoplin,"Thanks Thaddeus
+
+Em ter, 14 de ago de 2018 21:57, Thaddeus Cambron <notifications@github.com>
+escreveu:
+
+> You will eventually need the images. I am creating a PR right now to get
+> the chapter subdirectories into the main images directory
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/49#issuecomment-413062191>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AoRKeAKJRx0zC8HVtWMeZHk7H5q26pZLks5uQ3IAgaJpZM4UsL6W>
+> .
+>
+",2018-08-15 09:27:16,2018-08-15 09:27:16
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/419950046,https://github.com/hyperledger/education/issues/49#issuecomment-419950046,tkuhrt,"@joeyjoplin : Are you still working on this? If not, we others will take this on.",2018-09-10 15:15:13,2018-09-10 15:15:13
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/419951262,https://github.com/hyperledger/education/issues/49#issuecomment-419951262,joeyjoplin,"Hi Tracy, please take this on.
+Regards,
+
+Em seg, 10 de set de 2018 12:15, Tracy Kuhrt <notifications@github.com>
+escreveu:
+
+> @joeyjoplin <https://github.com/joeyjoplin> : Are you still working on
+> this? If not, we others will take this on.
+>
+> —
+> You are receiving this because you were mentioned.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/49#issuecomment-419950046>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AoRKeCVTErYXOiPaOhKMxLSRZDD1eHz4ks5uZoIPgaJpZM4UsL6W>
+> .
+>
+",2018-09-10 15:18:39,2018-09-10 15:18:39
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/419952057,https://github.com/hyperledger/education/issues/49#issuecomment-419952057,tkuhrt,@nathalie-ckc : Looks like this is available if you want to work on it.,2018-09-10 15:20:50,2018-09-10 15:20:50
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/419953576,https://github.com/hyperledger/education/issues/49#issuecomment-419953576,thaddeus-cambron,"I have this half way done in my repo
+",2018-09-10 15:25:03,2018-09-10 15:25:03
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/419953631,https://github.com/hyperledger/education/issues/49#issuecomment-419953631,thaddeus-cambron,https://rawgit.com/thaddeus-cambron/education/import-edx-content/LFS171x/docs/introduction-to-hyperledger-fabric.md,2018-09-10 15:25:13,2018-09-10 15:25:13
+https://api.github.com/repos/hyperledger/education/issues/49,https://api.github.com/repos/hyperledger/education/issues/comments/425620788,https://github.com/hyperledger/education/issues/49#issuecomment-425620788,atc-vince,@tkuhrt : Please assign this one to me as well. I've got both Chapters 6 & 7 in branch issue_50 of my repo.,2018-09-29 06:35:35,2018-09-29 06:35:35
+https://api.github.com/repos/hyperledger/education/issues/48,https://api.github.com/repos/hyperledger/education/issues/comments/414411193,https://github.com/hyperledger/education/issues/48#issuecomment-414411193,nathalie-ckc,Created Pull Request #71 to address this issue.,2018-08-20 18:11:00,2018-08-20 18:11:00
+https://api.github.com/repos/hyperledger/education/issues/48,https://api.github.com/repos/hyperledger/education/issues/comments/414497156,https://github.com/hyperledger/education/issues/48#issuecomment-414497156,nathalie-ckc,"Review feedback addressed and pushed to branch used in pull request #71.  Thanks for reviewing, Tracy!",2018-08-20 23:30:55,2018-08-20 23:30:55
+https://api.github.com/repos/hyperledger/education/issues/48,https://api.github.com/repos/hyperledger/education/issues/comments/417400829,https://github.com/hyperledger/education/issues/48#issuecomment-417400829,nathalie-ckc,Should be resolved by PR #71 .  Please close this issue.,2018-08-30 17:26:37,2018-08-30 17:26:37
+https://api.github.com/repos/hyperledger/education/issues/47,https://api.github.com/repos/hyperledger/education/issues/comments/413074054,https://github.com/hyperledger/education/issues/47#issuecomment-413074054,thaddeus-cambron,Should I update dependencies and tooling to the latest versions in the markdown?,2018-08-15 02:19:52,2018-08-15 02:19:52
+https://api.github.com/repos/hyperledger/education/issues/47,https://api.github.com/repos/hyperledger/education/issues/comments/429165342,https://github.com/hyperledger/education/issues/47#issuecomment-429165342,atc-vince,"I have the Chapter 4 markdown file (as it currently appears in edX.org) in a local branch (issue_47). Will create a PR as soon as my other pending PRs are reviewed/merged. 
+
+Don’t want to make a mess with all the PRs... ;-)",2018-10-12 00:31:44,2018-10-12 00:31:44
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/413382983,https://github.com/hyperledger/education/issues/46#issuecomment-413382983,atc-vince,Started working on this section...,2018-08-16 00:32:03,2018-08-16 00:32:03
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/413427801,https://github.com/hyperledger/education/issues/46#issuecomment-413427801,atc-vince,Completed draft.  Feedback welcome.,2018-08-16 05:11:36,2018-08-16 05:11:36
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/414488939,https://github.com/hyperledger/education/issues/46#issuecomment-414488939,tkuhrt,"Hi, Vince ( @atc-vince ). I could not find a Pull Request for the changes you made. I see a number of commits, but they do not have the appropriate DCO sign-off. Can you tell me how you got these changes committed to the branch? I am afraid we are going to have to undo them so that we can get the appropriate DCO sign-offs.",2018-08-20 22:50:34,2018-08-20 22:50:34
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/415089935,https://github.com/hyperledger/education/issues/46#issuecomment-415089935,atc-vince,"Hi Tracy (@tkuhrt), I wasn’t aware of the workflow process at the time when the commits were made. I tried to revert the commits, but the write access to the file had been already been deactivated. I’m good with starting over, and was waiting on guidance on how to properly “wipe the slate”.",2018-08-22 16:14:53,2018-08-22 16:14:53
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/415090756,https://github.com/hyperledger/education/issues/46#issuecomment-415090756,tkuhrt,"Hi, Vince (@atc-vince). We did wipe the commits yesterday; however, we did maintain a copy of the work that you have already done so that we could have you re-submit the file. I was going to put together a gist with information on doing just that. I will send that your way hopefully by the end of today. I appreciate your help with this, and I am sorry for the confusion/frustration that this may have caused. I am glad that you are still willing to work on this. Look for more information soon.",2018-08-22 16:17:39,2018-08-22 16:17:39
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/415093586,https://github.com/hyperledger/education/issues/46#issuecomment-415093586,atc-vince,"Hi Tracy (@tkuhrt) thanks for clearing the commits. I have a copy of the file so no need to resend. I’ll work on it (properly!) tonight. ;-)
+
+Additionally, I can also assist with updating the documentation so that new WG Members can avoid repeating this scenario in the future. Apologies as well for the inconvenience.",2018-08-22 16:26:18,2018-08-22 16:26:18
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/415100458,https://github.com/hyperledger/education/issues/46#issuecomment-415100458,tkuhrt,"Hi, Vince (@atc-vince). Glad to hear. I have created a [Gist on how to contribute to the education repo](https://gist.github.com/tkuhrt/10211ae0a26a91a8c030d00344f7d11b). I would love your feedback on this Gist so that we can improve it for others who want to contribute.
+
+Thanks alot for your help on this work.",2018-08-22 16:48:39,2018-08-22 16:48:39
+https://api.github.com/repos/hyperledger/education/issues/46,https://api.github.com/repos/hyperledger/education/issues/comments/415199978,https://github.com/hyperledger/education/issues/46#issuecomment-415199978,atc-vince,Hi Tracy (@tkuhrt) thanks for the gist. Will run through it and provide feedback (if any).,2018-08-22 22:17:38,2018-08-22 22:17:38
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/400293268,https://github.com/hyperledger/education/issues/45#issuecomment-400293268,nathalie-ckc,"I would like to sign up for this issue.  I don't have permissions to assign it to myself.
+-Nathalie",2018-06-26 12:41:13,2018-06-26 12:41:13
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/401008404,https://github.com/hyperledger/education/issues/45#issuecomment-401008404,tkuhrt,"Hi, @nathalie-ckc. This particular issue has already been merged, and it should have been closed. I will do that now. We would love to have you sign up for another issue https://github.com/hyperledger/education/labels/edx-migration.  Let me make sure that you are part of the organization so that you can assign an issue to yourself.",2018-06-28 11:49:48,2018-06-28 11:49:48
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/406668052,https://github.com/hyperledger/education/issues/45#issuecomment-406668052,tkuhrt,Wasn't really completed. Sorry for the confusion. Re-opened.,2018-07-20 17:19:17,2018-07-20 17:19:17
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/410877195,https://github.com/hyperledger/education/issues/45#issuecomment-410877195,nathalie-ckc,Submitted Pull Request #62 last week to address this issue.,2018-08-06 22:49:45,2018-08-06 22:49:45
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/414040588,https://github.com/hyperledger/education/issues/45#issuecomment-414040588,nathalie-ckc,"Please use Pull Request #70 instead of #62.  It's the same content, just with the checks passing & everything in 1 commit.",2018-08-18 08:08:39,2018-08-18 08:09:49
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/414500295,https://github.com/hyperledger/education/issues/45#issuecomment-414500295,nathalie-ckc,"Review feedback addressed and pushed to branch used in pull request #70. Thanks, Tracy!",2018-08-20 23:47:09,2018-08-20 23:47:09
+https://api.github.com/repos/hyperledger/education/issues/45,https://api.github.com/repos/hyperledger/education/issues/comments/417401252,https://github.com/hyperledger/education/issues/45#issuecomment-417401252,nathalie-ckc,Should be addressed by PR #70 . Please close this issue.,2018-08-30 17:27:55,2018-08-30 17:27:55
+https://api.github.com/repos/hyperledger/education/issues/41,https://api.github.com/repos/hyperledger/education/issues/comments/392286079,https://github.com/hyperledger/education/issues/41#issuecomment-392286079,naveedh27,"Problem is with node version 10.
+Changed to version 9. Working.",2018-05-26 20:25:32,2018-05-26 20:25:32
+https://api.github.com/repos/hyperledger/education/issues/40,https://api.github.com/repos/hyperledger/education/issues/comments/444483009,https://github.com/hyperledger/education/issues/40#issuecomment-444483009,ciseng,"I had this issue. I commented out the res.json  on line 454 because the next results check at 460 also adds transaction ID, and tries to send it (res.json calls res.send() as far as I know)",2018-12-05 13:22:00,2018-12-05 13:22:00
+https://api.github.com/repos/hyperledger/education/issues/38,https://api.github.com/repos/hyperledger/education/issues/comments/422409523,https://github.com/hyperledger/education/issues/38#issuecomment-422409523,colincmcc,"You could run the Sawtooth components as services rather than docker containers or use [docker volumes](https://docs.docker.com/storage/volumes/)  to persist the generated lmdb files.  The files that store the blockchain info are located in `/var/lib/sawtooth/` . Though, I'm not sure which docker container houses them.",2018-09-18 14:12:24,2018-09-18 14:12:24
+https://api.github.com/repos/hyperledger/education/issues/33,https://api.github.com/repos/hyperledger/education/issues/comments/384364527,https://github.com/hyperledger/education/issues/33#issuecomment-384364527,Enllave,"It could be a problem with CORS, try installing an extension in Chrome like: Allow-Control-Allow-Origin: *",2018-04-25 17:15:20,2018-04-25 17:15:20
+https://api.github.com/repos/hyperledger/education/issues/33,https://api.github.com/repos/hyperledger/education/issues/comments/392353506,https://github.com/hyperledger/education/issues/33#issuecomment-392353506,mpmckenna8,Are there any logs from the server showing if it got the request?,2018-05-27 18:37:11,2018-05-27 18:37:11
+https://api.github.com/repos/hyperledger/education/issues/33,https://api.github.com/repos/hyperledger/education/issues/comments/423747765,https://github.com/hyperledger/education/issues/33#issuecomment-423747765,aschmidt75,"I'm facing the same issue (on chrome and brave), server says:
+```
+sawtooth-rest-api   | [2018-09-22 14:25:17.494 INFO     helpers] OPTIONS /batches HTTP/1.1: 405 status, 212 size, in 0.000333 s
+tunachain-client    | 172.20.0.1 - - [22/Sep/2018:14:25:17 +0000] ""OPTIONS /api/batches HTTP/1.1"" 405 23
+```
+every time i hit 'create' of 'Create Tune record'.
+
+But it's CORS:
+```
+Failed to load http://localhost:8000/api/batches: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://127.0.0.1:8000' is therefore not allowed access.
+```",2018-09-22 14:25:58,2018-09-22 14:27:27
+https://api.github.com/repos/hyperledger/education/issues/30,https://api.github.com/repos/hyperledger/education/issues/comments/382505336,https://github.com/hyperledger/education/pull/30#issuecomment-382505336,boydjohnson,"@dplumb94 Good work. I don't notice anything out of sorts. The code is really easy to follow. I notice we don't handle hash collisions, but we didn't in the previous example, so that is probably ok.",2018-04-18 19:41:07,2018-04-18 19:41:07
+https://api.github.com/repos/hyperledger/education/issues/27,https://api.github.com/repos/hyperledger/education/issues/comments/392425712,https://github.com/hyperledger/education/issues/27#issuecomment-392425712,mpmckenna8,"Not just on linux, just a general mistake with express which is easy to make.  I fixed this in https://github.com/hyperledger/education/pull/43.
+
+Just needs to be merged or you can use: https://github.com/mpmckenna8/education/tree/better_server",2018-05-28 05:48:55,2018-05-28 22:10:43
+https://api.github.com/repos/hyperledger/education/issues/27,https://api.github.com/repos/hyperledger/education/issues/comments/402762813,https://github.com/hyperledger/education/issues/27#issuecomment-402762813,sosherio,"I used the alternative repository, but I get the exact same error.",2018-07-05 15:33:17,2018-07-05 15:33:17
+https://api.github.com/repos/hyperledger/education/issues/27,https://api.github.com/repos/hyperledger/education/issues/comments/473401705,https://github.com/hyperledger/education/issues/27#issuecomment-473401705,Renu353,"Hi,am working on tuna fish.. I had tried adding extra columns along with vessel,holder etc. I came to know that it is taking upto eight columns only more than that it is giving error in inserting tuna fish..please help me with this issue.",2019-03-15 18:46:30,2019-03-15 18:46:30
+https://api.github.com/repos/hyperledger/education/issues/26,https://api.github.com/repos/hyperledger/education/issues/comments/375426241,https://github.com/hyperledger/education/issues/26#issuecomment-375426241,Enllave,"It appears that you have not downloaded the correct file. Try it with: https://github.com/hyperledger/education/blob/master/LFS171x/sawtooth-material/sawtooth-default.yaml
+",2018-03-22 19:16:53,2018-03-22 19:16:53
+https://api.github.com/repos/hyperledger/education/issues/26,https://api.github.com/repos/hyperledger/education/issues/comments/378493268,https://github.com/hyperledger/education/issues/26#issuecomment-378493268,aswinkumarrhex,"Hi, 
+was searching the net for my issue posted here 
+https://github.com/delventhalz/transfer-chain-js/issues/4
+
+reposting here so some help leads to my solution .
+thank you !
+ASwin",2018-04-04 06:22:28,2018-04-04 06:22:28
+https://api.github.com/repos/hyperledger/education/issues/26,https://api.github.com/repos/hyperledger/education/issues/comments/390430706,https://github.com/hyperledger/education/issues/26#issuecomment-390430706,rajchaudhary043,"Run this to start client session -
+
+docker exec -it sawtooth-shell-default bash
+
+More details - https://sawtooth.hyperledger.org/docs/core/releases/0.8.7/app_developers_guide/docker.html",2018-05-19 20:30:31,2018-05-19 20:30:31
+https://api.github.com/repos/hyperledger/education/issues/25,https://api.github.com/repos/hyperledger/education/issues/comments/371021342,https://github.com/hyperledger/education/issues/25#issuecomment-371021342,sweta2003,"You will have to install composer cli before running ""npm install""
+(https://hyperledger.github.io/composer/latest/installing/development-tools)
+Run the following commands --
+npm install -g composer-cli
+npm install -g composer-rest-server
+npm install -g generator-hyperledger-composer
+npm install -g yo
+",2018-03-07 04:45:06,2018-03-07 04:45:06
+https://api.github.com/repos/hyperledger/education/issues/25,https://api.github.com/repos/hyperledger/education/issues/comments/371288804,https://github.com/hyperledger/education/issues/25#issuecomment-371288804,gmanroney,Ok will try that out. ,2018-03-07 21:21:09,2018-03-07 21:21:09
+https://api.github.com/repos/hyperledger/education/issues/24,https://api.github.com/repos/hyperledger/education/issues/comments/371027711,https://github.com/hyperledger/education/issues/24#issuecomment-371027711,glendjustus,"I was able to create a tuna record in a VM, where I don't have the browser configured to block tracking, pop-ups, etc.",2018-03-07 05:30:11,2018-03-07 05:30:11
+https://api.github.com/repos/hyperledger/education/issues/23,https://api.github.com/repos/hyperledger/education/issues/comments/368087321,https://github.com/hyperledger/education/pull/23#issuecomment-368087321,tkuhrt,"Check to make sure that you have Docker version 17.03.1-ce or greater, and Docker Compose version 1.9.0 or greater. These versions are required for the version 2.1 to work successfully.",2018-02-23 17:53:16,2018-02-23 17:53:16
+https://api.github.com/repos/hyperledger/education/issues/22,https://api.github.com/repos/hyperledger/education/issues/comments/368087039,https://github.com/hyperledger/education/issues/22#issuecomment-368087039,tkuhrt,"This error is caused by the version of Docker and Docker Compose that you have installed. From the course material ""Check to make sure that you have Docker version 17.03.1-ce or greater, and Docker Compose version 1.9.0 or greater"".",2018-02-23 17:52:24,2018-02-23 17:52:24
+https://api.github.com/repos/hyperledger/education/issues/22,https://api.github.com/repos/hyperledger/education/issues/comments/404548375,https://github.com/hyperledger/education/issues/22#issuecomment-404548375,DJWG,"Hi, how do you update the composer from 1.8 to 1.9 ? I tried to follow the instructions on https://github.com/docker/compose/releases but I couldn't update it. Can anybody please give me detailed step by step ""how to"", sorry but I am totally new to this. cheers!",2018-07-12 15:16:39,2018-07-12 15:16:39
+https://api.github.com/repos/hyperledger/education/issues/22,https://api.github.com/repos/hyperledger/education/issues/comments/404578082,https://github.com/hyperledger/education/issues/22#issuecomment-404578082,tkuhrt,"Hi, DJWG.
+
+Can you provide a bit more detail? What operating system are you using?
+What exact steps did you follow?
+
+On Thu, Jul 12, 2018 at 8:16 AM DJWG <notifications@github.com> wrote:
+
+> Hi, how do you update the composer from 1.8 to 1.9 ? I tried to follow the
+> instructions on https://github.com/docker/compose/releases but I couldn't
+> update it. Can anybody please give me detailed step by step ""how to"", sorry
+> but I am totally new to this. cheers!
+>
+> —
+> You are receiving this because you modified the open/close state.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/education/issues/22#issuecomment-404548375>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AFrQ9r6MWeOrlJQ-YVFMgr-WbWaa3kuEks5uF2hegaJpZM4SJr-T>
+> .
+>
+",2018-07-12 16:51:27,2018-07-12 16:51:27
+https://api.github.com/repos/hyperledger/education/issues/22,https://api.github.com/repos/hyperledger/education/issues/comments/404582117,https://github.com/hyperledger/education/issues/22#issuecomment-404582117,DJWG,"Hi,
+
+I am using ubuntu 64 on a virtual machine, just like in the installation guide for windows. 
+
+I followed the link provided in the chapter ""installing docker"" https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+I went through all steps and then installed the composer as discribed in the next section:
+
+$ sudo apt update
+
+$ sudo apt install docker-compose
+
+but my version is then docker version 18.03.1 and compose version 1.8.0",2018-07-12 17:05:21,2018-07-12 17:05:21
+https://api.github.com/repos/hyperledger/education/issues/19,https://api.github.com/repos/hyperledger/education/issues/comments/361776321,https://github.com/hyperledger/education/pull/19#issuecomment-361776321,tkuhrt,Got a LGTM from Zac on #sawtooth https://chat.hyperledger.org/channel/sawtooth?msg=RWwsEZ37Cdi8PRDxa,2018-01-30 23:59:28,2018-01-30 23:59:28
+https://api.github.com/repos/hyperledger/education/issues/16,https://api.github.com/repos/hyperledger/education/issues/comments/359568391,https://github.com/hyperledger/education/issues/16#issuecomment-359568391,alexandrag2254,"What operating system are you using? Are you using Windows? If so, you may not have all the elements for npm. Try to run ""npm install --global windows-build-tools"" and then rerun ""npm install"". Check out: https://www.npmjs.com/package/windows-build-tools.",2018-01-22 21:19:58,2018-01-22 21:19:58
+https://api.github.com/repos/hyperledger/education/issues/16,https://api.github.com/repos/hyperledger/education/issues/comments/359728989,https://github.com/hyperledger/education/issues/16#issuecomment-359728989,suhasmane02,"**Operating System:** (Ubuntu 16.04)
+Linux suses-ubuntu 4.4.0-103-generic #126-Ubuntu SMP Mon Dec 4 16:23:28 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
+
+**npm version**
+{ npm: '5.6.0',
+  ares: '1.10.1-DEV',
+  http_parser: '2.7.0',
+  icu: '58.2',
+  modules: '48',
+  node: '6.12.0',
+  openssl: '1.0.2m',
+  uv: '1.15.0',
+  v8: '5.1.281.108',
+  zlib: '1.2.11' }
+
+Please let me know, if anything else is needed.",2018-01-23 09:20:21,2018-01-23 09:20:21
+https://api.github.com/repos/hyperledger/education/issues/16,https://api.github.com/repos/hyperledger/education/issues/comments/375971733,https://github.com/hyperledger/education/issues/16#issuecomment-375971733,youngnacs,I have similar problem and stuck there. Did you have any solution for this issue yet? Can you share it if you found?  Thanks.,2018-03-25 13:46:11,2018-03-25 13:46:11
+https://api.github.com/repos/hyperledger/education/issues/16,https://api.github.com/repos/hyperledger/education/issues/comments/406783816,https://github.com/hyperledger/education/issues/16#issuecomment-406783816,Carstig,"I had the same problem (under OS X) and assumed I could skip `npm install`. That was wrong.
+
+As I was under OSX I had to ensure I was using the right python version. Found this `npm config set python /usr/bin/python2.7` 
+
+Then I ran `npm install`
+",2018-07-21 09:33:24,2018-07-21 09:33:57
+https://api.github.com/repos/hyperledger/education/issues/15,https://api.github.com/repos/hyperledger/education/issues/comments/356104233,https://github.com/hyperledger/education/pull/15#issuecomment-356104233,tkuhrt,@asettouf : Thank you for the PR. I am wondering if it would make more sense to include this in the SDK examples directory of Hyperledger Sawtooth instead of including it in this material. Since the material in this repository was specifically for the source code covered in the edx.org LFS171x course people may expect the course to also cover the Go code.,2018-01-08 21:36:31,2018-01-08 21:36:31
+https://api.github.com/repos/hyperledger/education/issues/15,https://api.github.com/repos/hyperledger/education/issues/comments/356114044,https://github.com/hyperledger/education/pull/15#issuecomment-356114044,asettouf,"@tkuhrt  I believe you're making a good point of integrating the example with sawtooth directly, especially given that the Go SDK is about to get some modifications soon (https://jira.hyperledger.org/browse/STL-974). Is it ok if I use the client you already wrote? 
+
+As for this PR I would see 3 possibilities on your side:
+
+- Reject the current PR and keep the repository as it is
+- Reject the current PR and add a link as an ""additional resource"" from the course to the future example 
+- Accept the PR, and put a mention to it as an example of how to do the same in Go 
+",2018-01-08 22:15:26,2018-01-09 13:46:59
+https://api.github.com/repos/hyperledger/education/issues/14,https://api.github.com/repos/hyperledger/education/issues/comments/354885867,https://github.com/hyperledger/education/issues/14#issuecomment-354885867,truestep,just forgot to run the processor,2018-01-02 21:57:05,2018-01-02 21:57:05
+https://api.github.com/repos/hyperledger/education/issues/14,https://api.github.com/repos/hyperledger/education/issues/comments/369496132,https://github.com/hyperledger/education/issues/14#issuecomment-369496132,glendjustus,"I can't get Create Tuna Record to work. I started the processor with the following text as the last message in the terminal: ""Initializing JSON handler for Sawtooth Tuna Chain."" Does that mean the processor is running? Any ideas what I can do to make this work?",2018-03-01 07:03:29,2018-03-01 07:03:29
+https://api.github.com/repos/hyperledger/education/issues/13,https://api.github.com/repos/hyperledger/education/issues/comments/356101581,https://github.com/hyperledger/education/pull/13#issuecomment-356101581,tkuhrt,"@walmon : Thank you for the PR. Before we can consider this PR, you will need to sign-off on the change. Please see the `-s` option of `git commit`.",2018-01-08 21:26:11,2018-01-08 21:26:11
+https://api.github.com/repos/hyperledger/education/issues/12,https://api.github.com/repos/hyperledger/education/issues/comments/356101030,https://github.com/hyperledger/education/pull/12#issuecomment-356101030,tkuhrt,"@gdvyas : Thank you for your PR. Please note that this PR cannot be considered until you pass the DCO check. Please see the `-s` option of `git commit` to sign off this PR. Also, I am not sure what this pull request accomplishes? We do not want to change the version of the Docker Compose file. What does changing the Docker images do other than ensuring that 0.8 of Hyperledger Sawtooth is pulled? How does it fix issue #14 ?",2018-01-08 21:24:13,2018-01-08 21:24:13
+https://api.github.com/repos/hyperledger/education/issues/10,https://api.github.com/repos/hyperledger/education/issues/comments/342997288,https://github.com/hyperledger/education/pull/10#issuecomment-342997288,abelsilva,"also, the `server.js` was calling
+
+`var app = express();`
+
+two times, I removed the second call",2017-11-08 23:33:02,2017-11-08 23:33:02
+https://api.github.com/repos/hyperledger/education/issues/10,https://api.github.com/repos/hyperledger/education/issues/comments/356099420,https://github.com/hyperledger/education/pull/10#issuecomment-356099420,tkuhrt,"@abelsilva : `.editorconfig` would be specific to your environmet and not needed to be committed to the repository. Also, you will need to sign off your commit before we could consider merging this. Please see the `-s` option on `git commit`",2018-01-08 21:18:00,2018-01-08 21:18:00
+https://api.github.com/repos/hyperledger/education/issues/10,https://api.github.com/repos/hyperledger/education/issues/comments/364713717,https://github.com/hyperledger/education/pull/10#issuecomment-364713717,abelsilva,@tkuhrt all done,2018-02-11 02:24:57,2018-02-11 02:24:57
+https://api.github.com/repos/hyperledger/education/issues/9,https://api.github.com/repos/hyperledger/education/issues/comments/346033820,https://github.com/hyperledger/education/issues/9#issuecomment-346033820,umtyzc,"Hi , I could not start the download without changing the sawtooth-default.yaml file version ""2.1"" to ""2.0"".",2017-11-21 13:57:31,2017-11-21 13:57:31
+https://api.github.com/repos/hyperledger/education/issues/9,https://api.github.com/repos/hyperledger/education/issues/comments/347593668,https://github.com/hyperledger/education/issues/9#issuecomment-347593668,tkuhrt,"@Rapso : The version specified in the sawtooth-default.yaml version specifies the compose file version, not the version of docker-compose that is required. See: https://docs.docker.com/compose/compose-file/compose-versioning/. In this document, you will see the following statement: ""In addition to Compose file format versions shown in the table, the Compose itself is on a release schedule, as shown in Compose releases, but file format versions do not necessairly increment with each release. For example, Compose file format 3.0 was first introduced in Compose release 1.10.0, and versioned gradually in subsequent releases.""
+
+However, I also see this: ""An upgrade of version 2 that introduces new parameters only available with Docker Engine version 1.12.0+. Version 2.1 files are supported by Compose 1.9.0+."" Looks like we need to update the course to say that docker-compose version required is 1.9.0+. I will work on getting this updated today.",2017-11-28 17:09:27,2017-11-28 17:09:27
+https://api.github.com/repos/hyperledger/education/issues/9,https://api.github.com/repos/hyperledger/education/issues/comments/347596160,https://github.com/hyperledger/education/issues/9#issuecomment-347596160,tkuhrt,Updated in the course to specify that 1.9.0 or greater is required for docker-compose. Thanks for your report!,2017-11-28 17:17:43,2017-11-28 17:17:43
+https://api.github.com/repos/hyperledger/education/issues/2,https://api.github.com/repos/hyperledger/education/issues/comments/333983979,https://github.com/hyperledger/education/pull/2#issuecomment-333983979,CLAassistant,"[![CLA assistant check](https://cla-assistant.io/pull/badge/not_signed)](https://cla-assistant.io/hyperledger/education?pullRequest=2) <br/>Thank you for your submission, we really appreciate it. Like many open source projects, we ask that you sign our [Contributor License Agreement](https://cla-assistant.io/hyperledger/education?pullRequest=2) before we can accept your contribution.<br/><sub>You have signed the CLA already but the status is still pending? Let us [recheck](https://cla-assistant.io/check/hyperledger/education?pullRequest=2) it.</sub>",2017-10-03 21:28:03,2017-10-03 21:28:03
+https://api.github.com/repos/hyperledger/education/issues/1,https://api.github.com/repos/hyperledger/education/issues/comments/325023657,https://github.com/hyperledger/education/pull/1#issuecomment-325023657,CLAassistant,"[![CLA assistant check](https://cla-assistant.io/pull/badge/not_signed)](https://cla-assistant.io/hyperledger/education?pullRequest=1) <br/>Thank you for your submission, we really appreciate it. Like many open source projects, we ask that you sign our [Contributor License Agreement](https://cla-assistant.io/hyperledger/education?pullRequest=1) before we can accept your contribution.<br/><sub>You have signed the CLA already but the status is still pending? Let us [recheck](https://cla-assistant.io/check/hyperledger/education?pullRequest=1) it.</sub>",2017-08-25 20:11:43,2017-08-25 20:11:43

@@ -1,0 +1,204 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+api,caesarxuchao,https://github.com/kubernetes/api/issues/1,https://api.github.com/repos/kubernetes/api/issues/1,Preserving the history,"I've been playing with `git filter-branch` commands to preserve the history of k8s.io/kubernetes/pkg/api and k8s.io/kubernetes/pkg/apis, the result is https://github.com/caesarxuchao/api.
+
+It has ~4000 commits (~half of them are merge commits) that touched pkg/api and pkg/apis. If you run `git log --follow core/v1/types.go` from HEAD, it will show you all the commits that changed pkg/api/v1/types.go, and the commit where i moved pkg/api/v1/types.go to core/v1/types.go. I think in terms of ""preserving commit history"", it's good enough.
+
+I also append `Kubernetes-commit: xxx` to the commit messages so people can find the original commit in k8s.io/kubernetes.
+
+Please let me know if you have other concerns.
+
+If no one objects, i'll push the commits to the master branch of k8s.io/api.
+
+@lavalamp @justinsb @bgrant0607 @kubernetes/sig-api-machinery-misc ",closed,False,2017-06-15 22:43:47,2017-06-22 05:02:33
+api,lxpollitt,https://github.com/kubernetes/api/pull/2,https://api.github.com/repos/kubernetes/api/issues/2,Clarify documentation for ContainerPort Name field,The definition of IANA_SVC_NAME is not visible in the auto-generated API reference.,closed,True,2017-08-15 02:28:09,2017-08-15 22:21:21
+api,huangjiasingle,https://github.com/kubernetes/api/issues/3,https://api.github.com/repos/kubernetes/api/issues/3,k8s.io/api/authentication/v1/zz_generated.deepcopy.go:61: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no fieldor method DeepCopyInto,"the code of master can't build success! it's some error like : 
+
+```
+../../project/src/k8s.io/api/authentication/v1/zz_generated.deepcopy.go:61: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no fieldor method DeepCopyInto)
+# k8s.io/api/certificates/v1beta1
+../../project/src/k8s.io/api/certificates/v1beta1/zz_generated.deepcopy.go:65: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/certificates/v1beta1/zz_generated.deepcopy.go:93: in.LastUpdateTime.DeepCopyInto undefined (type v1.Time has no field or method DeepCopyInto)
+# k8s.io/api/authorization/v1beta1
+../../project/src/k8s.io/api/authorization/v1beta1/zz_generated.deepcopy.go:77: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/authorization/v1beta1/zz_generated.deepcopy.go:138: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/authorization/v1beta1/zz_generated.deepcopy.go:201: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/api/admissionregistration/v1alpha1
+../../project/src/k8s.io/api/admissionregistration/v1alpha1/zz_generated.deepcopy.go:140: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/admissionregistration/v1alpha1/zz_generated.deepcopy.go:240: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/api/authentication/v1beta1
+../../project/src/k8s.io/api/authentication/v1beta1/zz_generated.deepcopy.go:61: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/api/storage/v1
+../../project/src/k8s.io/api/storage/v1/zz_generated.deepcopy.go:53: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/api/rbac/v1alpha1
+../../project/src/k8s.io/api/rbac/v1alpha1/zz_generated.deepcopy.go:89: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/rbac/v1alpha1/zz_generated.deepcopy.go:123: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field ormethod DeepCopyInto)
+../../project/src/k8s.io/api/rbac/v1alpha1/zz_generated.deepcopy.go:265: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field ormethod DeepCopyInto)
+../../project/src/k8s.io/api/rbac/v1alpha1/zz_generated.deepcopy.go:299: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field ormethod DeepCopyInto)
+# k8s.io/api/scheduling/v1alpha1
+../../project/src/k8s.io/api/scheduling/v1alpha1/zz_generated.deepcopy.go:53: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/client-go/tools/clientcmd/api
+../../project/src/k8s.io/client-go/tools/clientcmd/api/zz_generated.deepcopy.go:111: val.DeepCopyObject undefined (type runtime.Object has no field or method DeepCopyObject)
+../../project/src/k8s.io/client-go/tools/clientcmd/api/zz_generated.deepcopy.go:166: val.DeepCopyObject undefined (type runtime.Object has no field or method DeepCopyObject)
+../../project/src/k8s.io/client-go/tools/clientcmd/api/zz_generated.deepcopy.go:230: val.DeepCopyObject undefined (type runtime.Object has no field or method DeepCopyObject)
+../../project/src/k8s.io/client-go/tools/clientcmd/api/zz_generated.deepcopy.go:266: val.DeepCopyObject undefined (type runtime.Object has no field or method DeepCopyObject)
+../../project/src/k8s.io/client-go/tools/clientcmd/api/zz_generated.deepcopy.go:293: val.DeepCopyObject undefined (type runtime.Object has no field or method DeepCopyObject)
+# k8s.io/api/policy/v1beta1
+../../project/src/k8s.io/api/policy/v1beta1/zz_generated.deepcopy.go:67: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field ormethod DeepCopyInto)
+../../project/src/k8s.io/api/policy/v1beta1/zz_generated.deepcopy.go:74: (*in).DeepCopyInto undefined (type *v1.DeleteOptions has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/policy/v1beta1/zz_generated.deepcopy.go:103: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/policy/v1beta1/zz_generated.deepcopy.go:180: (*in).DeepCopyInto undefined (type *v1.LabelSelector has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/policy/v1beta1/zz_generated.deepcopy.go:212: invalid indirect of val.DeepCopy() (type v1.Time)
+# k8s.io/api/authorization/v1
+../../project/src/k8s.io/api/authorization/v1/zz_generated.deepcopy.go:77: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/authorization/v1/zz_generated.deepcopy.go:138: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no fieldor method DeepCopyInto)
+../../project/src/k8s.io/api/authorization/v1/zz_generated.deepcopy.go:201: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no fieldor method DeepCopyInto)
+# k8s.io/api/storage/v1beta1
+../../project/src/k8s.io/api/storage/v1beta1/zz_generated.deepcopy.go:53: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/api/rbac/v1beta1
+../../project/src/k8s.io/api/rbac/v1beta1/zz_generated.deepcopy.go:89: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/rbac/v1beta1/zz_generated.deepcopy.go:123: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/rbac/v1beta1/zz_generated.deepcopy.go:265: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/rbac/v1beta1/zz_generated.deepcopy.go:299: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+# k8s.io/api/core/v1
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:897: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1013: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1079: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1440: in.StartedAt.DeepCopyInto undefined (type v1.Time has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1457: in.StartedAt.DeepCopyInto undefined (type v1.Time has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1458: in.FinishedAt.DeepCopyInto undefined (type v1.Time has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1788: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1967: in.ObjectMeta.DeepCopyInto undefined (type v1.ObjectMeta has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1970: in.FirstTimestamp.DeepCopyInto undefined (type v1.Time has no field or methodDeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1971: in.LastTimestamp.DeepCopyInto undefined (type v1.Time has no field or method DeepCopyInto)
+../../project/src/k8s.io/api/core/v1/zz_generated.deepcopy.go:1971: too many errors
+```",closed,False,2017-08-23 08:29:08,2018-05-12 08:46:53
+api,feiskyer,https://github.com/kubernetes/api/issues/4,https://api.github.com/repos/kubernetes/api/issues/4,Not syncing?,Seems the repo hasn't synced for a week.,closed,False,2017-09-05 09:26:31,2017-12-19 13:50:27
+api,paralin,https://github.com/kubernetes/api/issues/5,https://api.github.com/repos/kubernetes/api/issues/5,Invalid receiver type *List (List is an interface type),"I'm continuously running into this error:
+
+```
+# k8s.io/api/core/v1
+../../../k8s.io/api/core/v1/generated.pb.go:513:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:514:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:515:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:4177:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:4187:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:11017:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:13991:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/generated.pb.go:26053:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/zz_generated.deepcopy.go:2678:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/zz_generated.deepcopy.go:2693:6: invalid receiver type *List (List is an interface type)
+../../../k8s.io/api/core/v1/zz_generated.deepcopy.go:2693:6: too many errors
+```
+
+metav1.List is an interface, you can't have a `*List`. Why is this even a thing? What versions can I revert to to fix this?",closed,False,2017-09-17 23:45:49,2018-05-12 08:46:52
+api,u2takey,https://github.com/kubernetes/api/pull/6,https://api.github.com/repos/kubernetes/api/issues/6,fix stale link,,closed,True,2017-09-19 14:24:28,2017-09-19 15:31:34
+api,davidstack,https://github.com/kubernetes/api/pull/7,https://api.github.com/repos/kubernetes/api/issues/7,remove  unused comment,this file has  in k8s.io/api,closed,True,2017-10-11 14:38:03,2017-10-12 01:31:08
+api,jinankjain,https://github.com/kubernetes/api/issues/8,https://api.github.com/repos/kubernetes/api/issues/8,Missing allowPrivilegeEscalation bool in PodSecurityContext,This flag was added in k8s 1.8 https://kubernetes.io/docs/api-reference/v1.8/ ,closed,False,2017-10-14 22:38:28,2017-11-07 13:32:52
+api,nikhita,https://github.com/kubernetes/api/pull/9,https://api.github.com/repos/kubernetes/api/issues/9,Remove README and LICENSE,"Addresses https://github.com/kubernetes/kubernetes/issues/54398.
+
+/cc @sttts ",closed,True,2017-10-23 11:58:10,2017-12-18 12:21:46
+api,wcg2008zl,https://github.com/kubernetes/api/issues/10,https://api.github.com/repos/kubernetes/api/issues/10,"'undefined: ""k8s.io/api/core/v1"".RBDPersistentVolumeSource","hi:
+ when I build kubectl on my PC,  I found this error:'undefined: ""k8s.io/api/core/v1"".RBDPersistentVolumeSource' ,  and i  cant find ""RBDPersistentVolumeSource"" defined in the package ""k8s.io/api/core/v1"" , how to fix this ? thanks !
+",closed,False,2017-10-27 07:30:35,2018-03-23 01:18:24
+api,andyxning,https://github.com/kubernetes/api/pull/11,https://api.github.com/repos/kubernetes/api/issues/11,add message file to node,"This PR is a first part for adding message when cordon/uncordon/drain a node for kubernetes. For more info please take a look at [Kubernetes #55527](https://github.com/kubernetes/kubernetes/issues/55527).
+
+
+/cc @smarterclayton @caesarxuchao @brendandburns ",closed,True,2017-11-22 16:44:53,2017-11-23 02:41:07
+api,chakri-nelluri,https://github.com/kubernetes/api/issues/12,https://api.github.com/repos/kubernetes/api/issues/12,ScaleIOPersistentVolumeSource not available in release-1.8.2 tag & release-1.8 branch.,"# k8s.io/kubernetes/pkg/api/v1
+../../../.go/src/k8s.io/kubernetes/pkg/api/v1/defaults.go:380: undefined: ""k8s.io/api/core/v1"".ScaleIOPersistentVolumeSource
+../../../.go/src/k8s.io/kubernetes/pkg/api/v1/zz_generated.conversion.go:3172: undefined: ""k8s.io/api/core/v1"".ScaleIOPersistentVolumeSource
+../../../.go/src/k8s.io/kubernetes/pkg/api/v1/zz_generated.conversion.go:4463: undefined: ""k8s.io/api/core/v1"".ScaleIOPersistentVolumeSource
+../../../.go/src/k8s.io/kubernetes/pkg/api/v1/zz_generated.conversion.go:4478: undefined: ""k8s.io/api/core/v1"".ScaleIOPersistentVolumeSource
+../../../.go/src/k8s.io/kubernetes/pkg/api/v1/zz_generated.conversion.go:4482: undefined: ""k8s.io/api/core/v1"".ScaleIOPersistentVolumeSource
+../../../.go/src/k8s.io/kubernetes/pkg/api/v1/zz_generated.conversion.go:4497: undefined: ""k8s.io/api/core/v1"".ScaleIOPersistentVolumeSource
+make[3]: *** [armada/armada] Error 2
+",closed,False,2017-11-29 02:36:14,2017-12-20 06:56:39
+api,spiffxp,https://github.com/kubernetes/api/pull/13,https://api.github.com/repos/kubernetes/api/issues/13,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:31:13,2017-12-20 20:13:08
+api,LiliC,https://github.com/kubernetes/api/issues/14,https://api.github.com/repos/kubernetes/api/issues/14,Update outdated description of the repo,"Currently the description at the top of this repo seems to be outdated, at least the ""Soon-to-be"" part:
+
+> Soon-to-be the canonical location of the Kubernetes API definition.
+
+cc @lavalamp ",closed,False,2018-01-14 20:35:05,2018-01-17 17:35:47
+api,jessfraz,https://github.com/kubernetes/api/issues/15,https://api.github.com/repos/kubernetes/api/issues/15,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:07,2018-06-02 04:20:15
+api,MrHohn,https://github.com/kubernetes/api/issues/16,https://api.github.com/repos/kubernetes/api/issues/16,v1.11.0-beta.X releases does not exist,"From https://github.com/kubernetes/kubernetes/releases, both `v1.11.0-beta.1` and `v1.11.0-beta.0` are tagged in kubernetes/kubernetes, would the same version be tagged here as well? I did see the alpha one (e.g. `kubernetes-1.11.0-alpha.2`) but not beta.
+
+(We are experiencing some compilation issue while updating vendor.)",closed,False,2018-06-01 17:10:11,2018-06-08 19:57:50
+api,brianredbeard,https://github.com/kubernetes/api/pull/17,https://api.github.com/repos/kubernetes/api/issues/17,doc: Clarifying state of the API schema,"Previously this README.md stated that in the future, this repo would
+contain the schema for the API server.  At this point it squarely does
+and is regularly receiving protobuf generated defitions which are
+critical to many Kubernetes components.
+
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",closed,True,2018-08-27 16:43:59,2018-08-27 16:45:46
+api,joelsmith,https://github.com/kubernetes/api/pull/21,https://api.github.com/repos/kubernetes/api/issues/21,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:52:05,2019-03-09 01:18:34
+api,dongqi1990,https://github.com/kubernetes/api/pull/22,https://api.github.com/repos/kubernetes/api/issues/22,B 1.13.2,"Sorry, we do not accept changes directly against this repository. Please see
+CONTRIBUTING.md for information on where and how to contribute instead.
+",closed,True,2019-03-13 10:14:37,2019-03-13 10:15:05
+api,BuddhiWathsala,https://github.com/kubernetes/api/issues/23,https://api.github.com/repos/kubernetes/api/issues/23,Ingress failed to list *v1beta1.Ingress: ingresses.extensions is forbidden,"I have used `extensions/v1beta1` library to create ingress in my operator. I'm using `operator-sdk` to develop the operator. Here is the ingress structure creation code I have used.
+```
+func (reconcileSiddhiProcess *ReconcileSiddhiProcess) loadBalancerForSiddhiProcess(m *siddhiv1alpha1.SiddhiProcess) *extensionsv1beta1.Ingress {
+	ingress := &extensionsv1beta1.Ingress{
+		TypeMeta: metav1.TypeMeta{
+			APIVersion: ""extensions/v1beta1"",
+			Kind:       ""Ingress"",
+		},
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      m.Name,
+			Namespace: m.Namespace,
+			Annotations: map[string]string{
+				""kubernetes.io/ingress.class"": ""nginx"",
+				""nginx.ingress.kubernetes.io/rewrite-target"": ""/"",
+				""nginx.ingress.kubernetes.io/ssl-redirect"": ""false"",
+				""nginx.ingress.kubernetes.io/force-ssl-redirect"": ""false"",
+				""nginx.ingress.kubernetes.io/ssl-passthrough"": ""true"",
+				""nginx.ingress.kubernetes.io/affinity"": ""cookie"",
+				""nginx.ingress.kubernetes.io/session-cookie-name"": ""route"",
+				""nginx.ingress.kubernetes.io/session-cookie-hash"": ""sha1"",
+			},
+		},
+		Spec: extensionsv1beta1.IngressSpec{
+			Rules: []extensionsv1beta1.IngressRule{
+				{
+					IngressRuleValue: extensionsv1beta1.IngressRuleValue{
+						HTTP: &extensionsv1beta1.HTTPIngressRuleValue{
+							Paths: []extensionsv1beta1.HTTPIngressPath{
+								{
+									Path:    ""/"",
+									Backend: extensionsv1beta1.IngressBackend{ServiceName: m.Name, ServicePort: intstr.IntOrString{Type: Int, IntVal: 8006}},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+```
+When I build the operator image and deploy in my `minikube` cluster and the Service and Deployment created successfully. But Ingress did not create and gives an error like below.
+
+```
+E0401 15:22:25.956017  1 reflector.go:134] sigs.k8s.io/controller-runtime/pkg/cache/internal/informers_map.go:196: Failed to list *v1beta1.Ingress: ingresses.extensions is forbidden: User ""system:serviceaccount:default:siddhi-operator"" cannot list resource ""ingresses"" in API group ""extensions"" in the namespace ""default""
+```
+
+I just change the namespace and do it. But it also gives the same error.
+",open,False,2019-04-01 15:52:22,2019-04-01 15:52:22

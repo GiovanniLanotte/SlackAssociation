@@ -1,0 +1,1911 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25,"I tried this change on Ubuntu 16.04.6 (Xenial) and I get this error (below). Perhaps your problem is specific to another Ubuntu version or another distribution?
+
+```
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ nodejs : Conflicts: nodejs-legacy
+          Conflicts: npm
+E: Unable to correct problems, you have held broken packages.
+ERROR: Service 'simple-supply-shell' failed to build: The command '/bin/sh -c curl -sL https://deb.nodesource.com/setup_6.x | bash -     && apt-get install -y nodejs npm nodejs-legacy' returned a non-zero code: 100
+```",7d5867bc052bf105c592b2e82b886e8222a700e6,2019-04-03 18:23:45,271872785,"@@ -27,7 +27,7 @@ RUN apt-get install -y --allow-unauthenticated -q \
+     python3-sawtooth-rest-api
+ 
+ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+-    && apt-get install -y nodejs
++    && apt-get install -y nodejs npm nodejs-legacy",5,2019-04-03 18:24:32,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/271872785,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25#discussion_r271872785,danintel
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25,You are right; it's a version specific problem. Mine ubuntu is 14.04 .,7d5867bc052bf105c592b2e82b886e8222a700e6,2019-04-04 02:24:23,271997406,"@@ -27,7 +27,7 @@ RUN apt-get install -y --allow-unauthenticated -q \
+     python3-sawtooth-rest-api
+ 
+ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+-    && apt-get install -y nodejs
++    && apt-get install -y nodejs npm nodejs-legacy",5,2019-04-04 02:24:23,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/271997406,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25#discussion_r271997406,QwertyJack
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,"I'd recommend:
+
+> data, **creates** batches and transactions, and manages user information",9c6747ed7c244f5675e5cf15466550516e85431f,2018-07-10 15:38:54,201392377,"@@ -1,17 +1,44 @@
+ # Sawtooth Simple Supply
+ 
++Sawtooth Simple Supply is a basic example of a distributed supply-chain
++application. It provides asset transfer with location tracking, which allows
++users to transfer assets and track them as they move through a supply chain.
++
++Sawtooth Simple Supply is built on Hyperledger Sawtooth, an enterprise
++blockchain platform. To learn more about Hyperledger Sawtooth, see the
++[sawtooth-core repository](https://github.com/hyperledger/sawtooth-core) and the
++[Hyperledger Sawtooth documentation](https://sawtooth.hyperledger.org/docs/).
++
++The Simple Supply components in this repository include:
++
++- A transaction processor that handles the Simple Supply transaction logic
++
++- A custom REST API that provides HTTP/JSON endpoints for querying blockchain
++  data, handles batches and transactions, and manages user information",,2018-07-19 16:09:00,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/201392377,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18#discussion_r201392377,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,"I don't see a difference.  Should the verbs change to match ""querying"" instead of ""provides""? That is, should this be:
+
+... for querying blockchain data, handling batches and transactions, and managing user information...
+
+The difference is whether this sentence means that the REST API provides these three things (so verbs would match ""provides"") or the endpoints do (in which case, the verbs would match ""querying""). ",9c6747ed7c244f5675e5cf15466550516e85431f,2018-07-10 15:44:58,201394690,"@@ -1,17 +1,44 @@
+ # Sawtooth Simple Supply
+ 
++Sawtooth Simple Supply is a basic example of a distributed supply-chain
++application. It provides asset transfer with location tracking, which allows
++users to transfer assets and track them as they move through a supply chain.
++
++Sawtooth Simple Supply is built on Hyperledger Sawtooth, an enterprise
++blockchain platform. To learn more about Hyperledger Sawtooth, see the
++[sawtooth-core repository](https://github.com/hyperledger/sawtooth-core) and the
++[Hyperledger Sawtooth documentation](https://sawtooth.hyperledger.org/docs/).
++
++The Simple Supply components in this repository include:
++
++- A transaction processor that handles the Simple Supply transaction logic
++
++- A custom REST API that provides HTTP/JSON endpoints for querying blockchain
++  data, handles batches and transactions, and manages user information",,2018-07-19 16:09:00,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/201394690,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18#discussion_r201394690,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18,"Sorry about that, had a typo in my comment. It should be ""creates"" rather than ""handles""
+",9c6747ed7c244f5675e5cf15466550516e85431f,2018-07-11 15:27:51,201735665,"@@ -1,17 +1,44 @@
+ # Sawtooth Simple Supply
+ 
++Sawtooth Simple Supply is a basic example of a distributed supply-chain
++application. It provides asset transfer with location tracking, which allows
++users to transfer assets and track them as they move through a supply chain.
++
++Sawtooth Simple Supply is built on Hyperledger Sawtooth, an enterprise
++blockchain platform. To learn more about Hyperledger Sawtooth, see the
++[sawtooth-core repository](https://github.com/hyperledger/sawtooth-core) and the
++[Hyperledger Sawtooth documentation](https://sawtooth.hyperledger.org/docs/).
++
++The Simple Supply components in this repository include:
++
++- A transaction processor that handles the Simple Supply transaction logic
++
++- A custom REST API that provides HTTP/JSON endpoints for querying blockchain
++  data, handles batches and transactions, and manages user information",,2018-07-19 16:09:00,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/201735665,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/18#discussion_r201735665,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16,"Can’t you use an underscore in front of unused variables, and the linter won’t complain?",322269d5c02a55833d664e531ab1835d46f6e0d9,2018-06-28 20:21:20,198972864,"@@ -120,7 +120,7 @@ def __init__(self, loop, messenger, database):
+         return json_response(
+             {'data': 'Create record transaction submitted'})
+ 
+-    async def list_records(self):
++    async def list_records(self, request):  # pylint: disable=unused-argument",,2018-06-29 17:53:42,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/198972864,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16#discussion_r198972864,peterschwarz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16,Ah I did not know about that. Seemed to work. Updated,322269d5c02a55833d664e531ab1835d46f6e0d9,2018-06-28 20:34:27,198976723,"@@ -120,7 +120,7 @@ def __init__(self, loop, messenger, database):
+         return json_response(
+             {'data': 'Create record transaction submitted'})
+ 
+-    async def list_records(self):
++    async def list_records(self, request):  # pylint: disable=unused-argument",,2018-06-29 17:53:42,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/198976723,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/16#discussion_r198976723,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,Is this message accurate? Looks like from your spec like you changed more than just CreateRecord to use this JSON response.,2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 16:30:45,196850657,"@@ -117,12 +117,8 @@ def __init__(self, loop, messenger, database):
+             record_id=body.get('record_id'),
+             timestamp=get_time())
+ 
+-        record = await self._database.fetch_record_resource(
+-            body.get('record_id'))
+-        if record is None:
+-            raise ApiInternalError(
+-                'Transaction committed but not yet reported')
+-        return json_response(record)
++        return json_response(
++            {'data': 'Create record transaction submitted'})",11,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196850657,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196850657,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,I am pleased there is another Mithril developer out there now.,2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 17:42:25,196882215,"@@ -0,0 +1,68 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')",20,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196882215,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196882215,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,"Is hard-coding this to have five columns going to be a problem for you?
+
+Suggest:  `{ colSpan: vnode.attrs.headers.length }`",2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 17:45:50,196883377,"@@ -0,0 +1,50 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Table = {
++  oninit (vnode) {
++    if (!vnode.attrs.noRowsText) {
++      vnode.attrs.noRowsText = 'No rows available'
++    }
++  },
++
++  view (vnode) {
++    return [
++      m('table.table',
++        m('thead',
++          m('tr',
++            vnode.attrs.headers.map((header) => m('th', header)))),
++        m('tbody',
++          vnode.attrs.rows.length > 0
++          ? vnode.attrs.rows
++              .map((row) =>
++                m('tr',
++                  row.map((col) => m('td', col))))
++          : m('tr',
++              m('td.text-center', {colSpan: 5},",,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196883377,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196883377,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,"Since this is an educational curriculum, I would probably drop ""clever"" styling like this. I would replace it with:
+```javascript
+if (!_.isArray(columns)) {
+  columns = [columns]
+}
+```",2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 17:53:15,196885963,"@@ -0,0 +1,57 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++const _ = require('lodash')
++
++// Basis for info fields with headers
++const labeledField = (header, field) => {
++  return m('.field-group.mt-5', header, field)
++}
++
++const fieldHeader = (label, ...additions) => {
++  return m('.field-header', [
++    m('span.h5.mr-3', label),
++    additions
++  ])
++}
++
++// Simple info field with a label
++const staticField = (label, info) => labeledField(fieldHeader(label), info)
++
++/**
++ * Returns a header styled to be a page title
++ */
++const title = title => m('h3.text-center.mb-3', title)
++
++/**
++ * Returns a row of any number of columns, suitable for placing in a container
++ */
++const row = columns => {
++  if (!_.isArray(columns)) columns = [columns]",,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196885963,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196885963,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,"Do you need live refreshing? The way I implemented it is a very bad pattern, and should not be imitated by you or your students.
+
+Ideally this is a web socket. Only keep if you absolutely must have live-reloading and absolutely do not have time to do web sockets.",2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 17:56:48,196887081,"@@ -14,15 +14,50 @@
+  * limitations under the License.
+  * ----------------------------------------------------------------------------
+  */
++
+ 'use strict'
+ 
+ const m = require('mithril')
++const sortBy = require('lodash/sortBy')
++const Table = require('../components/tables.js')
++const api = require('../services/api')
+ 
+ const AgentList = {
++  oninit (vnode) {
++    vnode.state.agents = []
++
++    const refresh = () => {
++      api.get('agents').then((agents) => {
++        vnode.state.agents = sortBy(agents, 'name')
++      })
++        .then(() => { vnode.state.refreshId = setTimeout(refresh, 2000) })",,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196887081,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196887081,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,"Publickey + password seems like an odd pattern. For one it requires users to copy/paste. Is there a different credential they can use like username or email? Or if they know their private key, could they login just by pasting in their private key (no password)?",2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 17:59:23,196887917,"@@ -19,15 +19,47 @@
+ 
+ const m = require('mithril')
+ 
++const api = require('../services/api')
++const forms = require('../components/forms')
++
+ /**
+- * The Form for authorizing an existing user.
++ * The Form for authorizing an existing agent.
+  */
+ const LoginForm = {
+   view (vnode) {
+-    return [
+-      m('.header.text-center.mb-2',
+-        m('h4', 'Login Form Placeholder'))
+-    ]
++    const setter = forms.stateSetter(vnode.state)
++
++    return m('.login-form', [
++      m('form', {
++        onsubmit: (e) => {
++          e.preventDefault()
++          const credentials = {
++            public_key: vnode.state.publicKey,
++            password: vnode.state.password
++          }
++          api.post('authentication', credentials)
++            .then(res => {
++              api.setAuth(res.authorization)
++              m.route.set('/')
++            })
++            .catch(api.alertError)
++        }
++      },
++      m('legend', 'Login Agent'),
++      forms.textInput(setter('publicKey'), 'Public Key'),
++      forms.passwordInput(setter('password'), 'Password'),",37,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196887917,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196887917,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,"Also, even if you keep it, 5 seconds or 10 seconds is probably more reasonable that 2.",2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-20 18:03:06,196889008,"@@ -14,15 +14,50 @@
+  * limitations under the License.
+  * ----------------------------------------------------------------------------
+  */
++
+ 'use strict'
+ 
+ const m = require('mithril')
++const sortBy = require('lodash/sortBy')
++const Table = require('../components/tables.js')
++const api = require('../services/api')
+ 
+ const AgentList = {
++  oninit (vnode) {
++    vnode.state.agents = []
++
++    const refresh = () => {
++      api.get('agents').then((agents) => {
++        vnode.state.agents = sortBy(agents, 'name')
++      })
++        .then(() => { vnode.state.refreshId = setTimeout(refresh, 2000) })",,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196889008,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r196889008,delventhalz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11,I had made this change for some other routes previously but forgot to update the spec. Probably should have been a separate commit. I will add this to the message.,2d7eaa4a0698f5849710028eb4da0a63212beb92,2018-06-21 15:23:10,197175750,"@@ -117,12 +117,8 @@ def __init__(self, loop, messenger, database):
+             record_id=body.get('record_id'),
+             timestamp=get_time())
+ 
+-        record = await self._database.fetch_record_resource(
+-            body.get('record_id'))
+-        if record is None:
+-            raise ApiInternalError(
+-                'Transaction committed but not yet reported')
+-        return json_response(record)
++        return json_response(
++            {'data': 'Create record transaction submitted'})",11,2018-06-21 18:17:10,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/197175750,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/11#discussion_r197175750,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"Change ""minimalistic, general purpose"" to ""simple, general-purpose""",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:08:43,195202377,"@@ -0,0 +1,56 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a minimalistic, general purpose supply chain solution built',",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195202377,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195202377,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"Also, perhaps ""solution"" could be ""application""?",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:09:51,195202657,"@@ -0,0 +1,56 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a minimalistic, general purpose supply chain solution built',",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195202657,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195202657,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"Change ""which can be used to record"" to ""that records""",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:11:10,195203007,"@@ -0,0 +1,56 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a minimalistic, general purpose supply chain solution built',
++          ' using the Hyperledger Sawtooth blockchain platform. It maintains',
++          ' a distributed ledger which can be used to record the provenance',",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195203007,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195203007,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"change ""with an illustrative example: "" to ""with an example web app for artwork loans.""",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:18:03,195204804,"@@ -0,0 +1,56 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a minimalistic, general purpose supply chain solution built',
++          ' using the Hyperledger Sawtooth blockchain platform. It maintains',
++          ' a distributed ledger which can be used to record the provenance',
++          ' and location of assets as they are transferred among various',
++          ' agents in a supply chain.'),
++        m('p',
++          m('em', 'Curator'),
++          ' demonstrates this functionality with an illustrative example:',",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195204804,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195204804,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"Change ""tracking"" to ""It tracks""",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:27:27,195207250,"@@ -0,0 +1,56 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a minimalistic, general purpose supply chain solution built',
++          ' using the Hyperledger Sawtooth blockchain platform. It maintains',
++          ' a distributed ledger which can be used to record the provenance',
++          ' and location of assets as they are transferred among various',
++          ' agents in a supply chain.'),
++        m('p',
++          m('em', 'Curator'),
++          ' demonstrates this functionality with an illustrative example:',
++          ' tracking the provenance and location of works of art as they are',
++          ' transported to and from different museums or collectors.'),",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195207250,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195207250,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"""Log in"" and ""Sign up"" should each be two words.  
+
+I can explain why, if you have a spare 30 minutes. :-) ",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:32:41,195208706,"@@ -0,0 +1,122 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++'use strict'
++
++// These requires inform webpack which styles to build
++require('bootstrap')
++require('../styles/main.scss')
++
++const m = require('mithril')
++
++const api = require('./services/api')
++const navigation = require('./components/navigation')
++
++const AgentList = require('./views/agent_list')
++const RegisterArtworkForm = require('./views/register_artwork_form')
++const Dashboard = require('./views/dashboard')
++const LoginForm = require('./views/login_form')
++const ArtworkList = require('./views/artwork_list')
++const SignupForm = require('./views/signup_form')
++
++/**
++ * A basic layout component that adds the navbar to the view.
++ */
++const Layout = {
++  view (vnode) {
++    return [
++      vnode.attrs.navbar,
++      m('.content.container', vnode.children)
++    ]
++  }
++}
++
++const loggedInNav = () => {
++  const links = [
++    ['/register', 'Register Artwork'],
++    ['/artworks', 'View Artwork Registry'],
++    ['/agents', 'View Agents']
++  ]
++  return m(navigation.Navbar, {}, [
++    navigation.links(links),
++    navigation.link('/profile', 'Profile'),
++    navigation.button('/logout', 'Logout')
++  ])
++}
++
++const loggedOutNav = () => {
++  const links = [
++    ['/artworks', 'View Artwork Registry'],
++    ['/agents', 'View Agents']
++  ]
++  return m(navigation.Navbar, {}, [
++    navigation.links(links),
++    navigation.button('/login', 'Login/Signup')",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195208706,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195208706,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"I find this confusing: ""register a new agent using the Login/Signup link"".  Does the act of logging in register a new agent? Or perhaps signing up does this?  I think this first sentence needs some clarification.
+
+In any case, it should be ""Log in/Sign up link"" (per my comment in  main.js that both ""Log in"" and ""Sign up"" should be two words). ",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-13 19:36:21,195209722,"@@ -0,0 +1,56 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a minimalistic, general purpose supply chain solution built',
++          ' using the Hyperledger Sawtooth blockchain platform. It maintains',
++          ' a distributed ledger which can be used to record the provenance',
++          ' and location of assets as they are transferred among various',
++          ' agents in a supply chain.'),
++        m('p',
++          m('em', 'Curator'),
++          ' demonstrates this functionality with an illustrative example:',
++          ' tracking the provenance and location of works of art as they are',
++          ' transported to and from different museums or collectors.'),
++        m('p',
++          'To use ',
++          m('em', 'Curator'),
++          ', register a new agent using the Login/Signup link on the navbar',",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195209722,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r195209722,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10,"Nitpick: ""general-purpose"" should have a hyphen (to help parse all those adjectives before ""application"").  But I shall approve this PR because it's a very minor issue.",cb2003315580cb0e502ee0a483855cebc6d3e696,2018-06-18 22:52:02,196249511,"@@ -0,0 +1,57 @@
++/**
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ----------------------------------------------------------------------------
++ */
++
++'use strict'
++
++const m = require('mithril')
++
++const Dashboard = {
++  view(vnode) {
++    return [
++      m('.header.text-center.mb-4',
++        m('h4', 'Welcome To'),
++        m('h1.mb-3', 'Curator'),
++        m('h5',
++          m('em',
++            'Powered by ',
++            m('strong', 'Sawtooth Simple Supply')))),
++      m('.blurb',
++        m('p',
++          m('em', 'Sawtooth Simple Supply'),
++          ' is a simple, general purpose supply chain application built',",,2018-06-19 14:35:31,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/196249511,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/10#discussion_r196249511,chenette
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/9,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/9,Just wondering if this makes more sense as a verb:  `authenticate` vs `authentication`,87f81d8ba6676a0c65945d785ea63e50554d283d,2018-06-13 17:48:59,195177315,"@@ -12,12 +12,12 @@ securityDefinitions:
+     in: header
+     name: Authorization
+ paths:
+-  /authorization:
++  /authentication:",5,2018-06-13 17:49:03,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/195177315,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/9#discussion_r195177315,peterschwarz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7,"I think you should be able to do `latest_owner = max(record.owners, key: lambda x: x.timestamp).agent_id` instead of this explicit looping logic.",abde407cd8b4f07eb773221890aa2fd7456af0db,2018-06-08 16:43:26,194116265,"@@ -97,6 +102,36 @@ def _create_record(state, public_key, payload):
+         timestamp=payload.timestamp)
+ 
+ 
++def _transfer_record(state, public_key, payload):
++    if state.get_agent(payload.data.receiving_agent) is None:
++        raise InvalidTransaction('Agent with the public key {} does '
++                                 'not exist'.format(public_key))
++
++    record = state.get_record(payload.data.record_id)
++    if record is None:
++        raise InvalidTransaction('Record with the record id {} does not '
++                                 'exist'.format(payload.data.record_id))
++
++    if not _validate_record_owner(agent_id=public_key, record=record):
++        raise InvalidTransaction(
++            'Transaction signer is not the owner of the record')
++
++    state.transfer_record(
++        receiving_agent=payload.data.receiving_agent,
++        record_id=payload.data.record_id,
++        timestamp=payload.timestamp)
++
++
++def _validate_record_owner(agent_id, record):
++    latest_owner = ''
++    latest_timestamp = -1
++    for owner in record.owners:",,2018-06-11 16:25:12,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/194116265,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7#discussion_r194116265,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7,"Should these also be based of the type? In other words, if it is `TRANSFER_RECORD`, but doesn't have a `'transfer_record'` field, it should be an invalid transaction.",abde407cd8b4f07eb773221890aa2fd7456af0db,2018-06-08 21:42:00,194188166,"@@ -35,6 +35,9 @@ def data(self):
+         if self._transaction.HasField('create_record'):
+             return self._transaction.create_record
+ 
++        if self._transaction.HasField('transfer_record'):",,2018-06-11 16:25:12,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/194188166,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/7#discussion_r194188166,peterschwarz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6,"Not sure that we should be using doubles, since their can be variance on these.",822a3c513b876e1114c2a59c7e110bfbdadd0ba7,2018-06-07 19:34:05,193865097,"@@ -27,8 +27,8 @@ message Record {
+ 
+     message Location {
+         // Coordinates are expected to be in millionths of a degree
+-        sint64 latitude = 1;
+-        sint64 longitude = 2;
++        double latitude = 1;",,2018-06-08 21:50:50,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193865097,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6#discussion_r193865097,peterschwarz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6,changed to ints to prevent any float issues,822a3c513b876e1114c2a59c7e110bfbdadd0ba7,2018-06-08 17:29:42,194128409,"@@ -27,8 +27,8 @@ message Record {
+ 
+     message Location {
+         // Coordinates are expected to be in millionths of a degree
+-        sint64 latitude = 1;
+-        sint64 longitude = 2;
++        double latitude = 1;",,2018-06-08 21:50:50,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/194128409,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/6#discussion_r194128409,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,This pylint disable should have the message name instead of the code.,ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 17:45:14,193499466,"@@ -184,3 +211,12 @@ def generate_auth_token(secret_key, public_key):
+ def deserialize_auth_token(secret_key, token):
+     serializer = Serializer(secret_key)
+     return serializer.loads(token)
++
++
++class DecimalEncoder(json.JSONEncoder):
++    def default(self, o):  # pylint: disable=E0202",,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193499466,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193499466,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,"This seems like it should be at most debug level, not info.",ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 17:50:03,193501114,"@@ -72,6 +77,36 @@ def _create_agent(state, public_key, payload):
+         timestamp=payload.timestamp)
+ 
+ 
++def _create_record(state, public_key, payload):
++    if state.get_agent(public_key) is None:
++        raise InvalidTransaction('Agent with the public key {} does '
++                                 'not exist'.format(public_key))
++
++    if payload.data.record_id == '':
++        raise InvalidTransaction('No record ID provided')
++
++    if state.get_record(payload.data.record_id):
++        raise InvalidTransaction('Identifier {} belongs to an existing '
++                                 'record'.format(payload.data.record_id))
++
++    _validate_latlng(payload.data.latitude, payload.data.longitude)
++
++    state.set_record(
++        public_key=public_key,
++        latitude=payload.data.latitude,
++        longitude=payload.data.longitude,
++        record_id=payload.data.record_id,
++        timestamp=payload.timestamp)
++
++
++def _validate_latlng(latitude, longitude):
++    LOGGER.info('latitude: %s', latitude)",,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193501114,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193501114,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,"These can be rewritten as `if not -90 < latitude < 90`, `if not -180 < longitude < 180`.",ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 17:51:30,193501626,"@@ -72,6 +77,36 @@ def _create_agent(state, public_key, payload):
+         timestamp=payload.timestamp)
+ 
+ 
++def _create_record(state, public_key, payload):
++    if state.get_agent(public_key) is None:
++        raise InvalidTransaction('Agent with the public key {} does '
++                                 'not exist'.format(public_key))
++
++    if payload.data.record_id == '':
++        raise InvalidTransaction('No record ID provided')
++
++    if state.get_record(payload.data.record_id):
++        raise InvalidTransaction('Identifier {} belongs to an existing '
++                                 'record'.format(payload.data.record_id))
++
++    _validate_latlng(payload.data.latitude, payload.data.longitude)
++
++    state.set_record(
++        public_key=public_key,
++        latitude=payload.data.latitude,
++        longitude=payload.data.longitude,
++        record_id=payload.data.record_id,
++        timestamp=payload.timestamp)
++
++
++def _validate_latlng(latitude, longitude):
++    LOGGER.info('latitude: %s', latitude)
++    if latitude < -90 or latitude > 90:",,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193501626,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193501626,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,Accidentally forgot to delete it when I was debugging. I will fix that,ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 17:51:54,193501757,"@@ -72,6 +77,36 @@ def _create_agent(state, public_key, payload):
+         timestamp=payload.timestamp)
+ 
+ 
++def _create_record(state, public_key, payload):
++    if state.get_agent(public_key) is None:
++        raise InvalidTransaction('Agent with the public key {} does '
++                                 'not exist'.format(public_key))
++
++    if payload.data.record_id == '':
++        raise InvalidTransaction('No record ID provided')
++
++    if state.get_record(payload.data.record_id):
++        raise InvalidTransaction('Identifier {} belongs to an existing '
++                                 'record'.format(payload.data.record_id))
++
++    _validate_latlng(payload.data.latitude, payload.data.longitude)
++
++    state.set_record(
++        public_key=public_key,
++        latitude=payload.data.latitude,
++        longitude=payload.data.longitude,
++        record_id=payload.data.record_id,
++        timestamp=payload.timestamp)
++
++
++def _validate_latlng(latitude, longitude):
++    LOGGER.info('latitude: %s', latitude)",,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193501757,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193501757,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,"Also, should these be inclusive bounds?",ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 17:53:02,193502163,"@@ -72,6 +77,36 @@ def _create_agent(state, public_key, payload):
+         timestamp=payload.timestamp)
+ 
+ 
++def _create_record(state, public_key, payload):
++    if state.get_agent(public_key) is None:
++        raise InvalidTransaction('Agent with the public key {} does '
++                                 'not exist'.format(public_key))
++
++    if payload.data.record_id == '':
++        raise InvalidTransaction('No record ID provided')
++
++    if state.get_record(payload.data.record_id):
++        raise InvalidTransaction('Identifier {} belongs to an existing '
++                                 'record'.format(payload.data.record_id))
++
++    _validate_latlng(payload.data.latitude, payload.data.longitude)
++
++    state.set_record(
++        public_key=public_key,
++        latitude=payload.data.latitude,
++        longitude=payload.data.longitude,
++        record_id=payload.data.record_id,
++        timestamp=payload.timestamp)
++
++
++def _validate_latlng(latitude, longitude):
++    LOGGER.info('latitude: %s', latitude)
++    if latitude < -90 or latitude > 90:",,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193502163,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193502163,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,"Minor style question: would it make more sense for this to be if/elif/else, since that's the way this actually behaves?",ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 18:42:48,193518461,"@@ -32,6 +32,9 @@ def data(self):
+         if self._transaction.HasField('create_agent'):
+             return self._transaction.create_agent
+ 
++        if self._transaction.HasField('create_record'):",4,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193518461,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193518461,ltseeley
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5,Doing it in the way you described was because it would require disabling the [no-else-return](https://pylint.readthedocs.io/en/latest/technical_reference/features.html#id23) pylint message. Since they are functionally equivalent (each branch will return) and the readability is not too much of an issue due to the simplicity of the method I didn't think it was worth it.,ff8ffb5c095d83c44946d15842c4868adec5a8ef,2018-06-06 20:07:42,193542364,"@@ -32,6 +32,9 @@ def data(self):
+         if self._transaction.HasField('create_agent'):
+             return self._transaction.create_agent
+ 
++        if self._transaction.HasField('create_record'):",4,2018-06-08 18:13:21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193542364,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/5#discussion_r193542364,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4,This should still be part of a single transaction - one event should equal one PostGres transaction.,ca772ca3be9240149bb133e780e3869bc5e1eb27,2018-06-04 16:19:23,192800437,"@@ -162,3 +168,105 @@ def disconnect(self):
+         LOGGER.info('Disconnecting from database')
+         if self._conn is not None:
+             self._conn.close()
++
++    def commit(self):
++        self._conn.commit()
++
++    def drop_fork(self, block_num):
++        """"""Deletes all resources from a particular block_num
++        """"""
++        delete_agents = """"""
++        DELETE FROM agents WHERE start_block_num >= {}
++        """""".format(block_num)
++        update_agents = """"""
++        UPDATE agents SET end_block_num = null
++        WHERE end_block_num >= {}
++        """""".format(block_num)
++
++        delete_record_locations = """"""
++        DELETE FROM record_owners WHERE record_id =
++        (SELECT record_id FROM records WHERE start_block_num >= {})
++        """""".format(block_num)
++        delete_record_owners = """"""
++        DELETE FROM record_owners WHERE record_id =
++        (SELECT record_id FROM records WHERE start_block_num >= {})
++        """""".format(block_num)
++        delete_records = """"""
++        DELETE FROM records WHERE start_block_num >= {}
++        """""".format(block_num)
++        update_records = """"""
++        UPDATE records SET end_block_num = null
++        WHERE end_block_num >= {}
++        """""".format(block_num)
++
++        delete_blocks = """"""
++        DELETE FROM blocks WHERE block_num >= {}
++        """""".format(block_num)
++
++        with self._conn.cursor() as cursor:
++            cursor.execute(delete_agents)
++            cursor.execute(update_agents)
++            cursor.execute(delete_record_locations)
++            cursor.execute(delete_record_owners)
++            cursor.execute(delete_records)
++            cursor.execute(update_records)
++            cursor.execute(delete_blocks)
++
++        self._conn.commit()",,2018-06-06 17:46:55,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192800437,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4#discussion_r192800437,peterschwarz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4,You might consider adding a function `_make_agent_json_from_resource` or something like that to avoid duplicating the field names in `list_agents` and `fetch_agent`.,ca772ca3be9240149bb133e780e3869bc5e1eb27,2018-06-06 17:25:47,193493450,"@@ -77,10 +78,26 @@ def __init__(self, loop, messenger, database):
+         return json_response(response)
+ 
+     async def list_agents(self, request):
+-        raise HTTPNotImplemented()
++        resource_list = await self._database.fetch_all_agent_resources()
++        agent_list = [{
++            'publicKey': resource['public_key'],
++            'name': resource['name'],
++            'timestamp': resource['timestamp']
++        } for resource in resource_list]
++        return json_response(agent_list)
+ 
+     async def fetch_agent(self, request):
+-        raise HTTPNotImplemented()
++        public_key = request.match_info.get('agent_id', '')
++        resource = await self._database.fetch_agent_resource(public_key)
++        if resource is None:
++            raise ApiNotFound(
++                'Agent with public key {} was not found'.format(public_key))
++        agent = {",,2018-06-06 17:46:55,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193493450,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/4#discussion_r193493450,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,What happens if this tries to close without having been opened?,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 16:35:10,192450474,"@@ -0,0 +1,90 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++from sawtooth_rest_api.messaging import Connection
++from sawtooth_rest_api.protobuf import client_batch_submit_pb2
++from sawtooth_rest_api.protobuf import validator_pb2
++
++from sawtooth_signing import create_context
++from sawtooth_signing import CryptoFactory
++from sawtooth_signing import secp256k1
++
++from simple_supply_rest_api.errors import ApiBadRequest
++from simple_supply_rest_api.errors import ApiInternalError
++
++from simple_supply_rest_api.transaction_creation import \
++    make_create_agent_transaction
++
++
++class Messenger(object):
++    def __init__(self, validator_url):
++        self._connection = Connection(validator_url)
++        self._context = create_context('secp256k1')
++        self._crypto_factory = CryptoFactory(self._context)
++        self._batch_signer = self._crypto_factory.new_signer(
++            self._context.new_random_private_key())
++
++    def open_validator_connection(self):
++        self._connection.open()
++
++    def close_validator_connection(self):",42,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192450474,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192450474,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"Seems like this should be higher, maybe 0.1?",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 16:36:44,192450831,"@@ -17,4 +17,12 @@
+ 
+ 
+ FAMILY_NAME = 'simple_supply'
++FAMILY_VERSION = '0.0'",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192450831,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192450831,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,Is it a `CreateAgentAction` transaction or a `CreateAgent` transaction?,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 16:38:48,192451334,"@@ -0,0 +1,97 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# -----------------------------------------------------------------------------
++
++import hashlib
++
++from sawtooth_rest_api.protobuf import batch_pb2
++from sawtooth_rest_api.protobuf import transaction_pb2
++
++from simple_supply_addressing import addresser
++
++from simple_supply_protobuf import payload_pb2
++
++
++def make_create_agent_transaction(transaction_signer,
++                                  batch_signer,
++                                  name,
++                                  timestamp):
++    """"""Make a CreateAgentAction transaction and wrap it in a batch",30,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192451334,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192451334,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,Is this supposed to be the same list? You could just say `address_list = [addresser...]` and then later do `inputs=address_list` and `outputs=address_list`.,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 16:41:55,192452092,"@@ -0,0 +1,97 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# -----------------------------------------------------------------------------
++
++import hashlib
++
++from sawtooth_rest_api.protobuf import batch_pb2
++from sawtooth_rest_api.protobuf import transaction_pb2
++
++from simple_supply_addressing import addresser
++
++from simple_supply_protobuf import payload_pb2
++
++
++def make_create_agent_transaction(transaction_signer,
++                                  batch_signer,
++                                  name,
++                                  timestamp):
++    """"""Make a CreateAgentAction transaction and wrap it in a batch
++
++    Args:
++        transaction_signer (sawtooth_signing.Signer): The transaction key pair
++        batch_signer (sawtooth_signing.Signer): The batch key pair
++        name (str): The agent's name
++        timestamp (int): Unix UTC timestamp of when the agent is created
++
++    Returns:
++        batch_pb2.Batch: The transaction wrapped in a batch
++
++    """"""
++
++    inputs = [addresser.get_agent_address(",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192452092,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192452092,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"If I understand it right, this can be simplified as follows:
+
+```
+for x in blah:
+    try:
+        do_thing()  # if unsuccessful, try again
+        log('succeeded')  # this only executes if the thing succeeded
+        return  # we're done here
+    except someerror:
+        handle_error()
+
+    # no need for else clause, since the early return will prevent any of this from executing
+
+    do_thing()  # last attempt, come what may
+    log('succeeded')  # this won't get executed if the last try failed
+```",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 17:01:38,192456977,"@@ -13,14 +13,59 @@
+ # limitations under the License.
+ # ------------------------------------------------------------------------------
+ 
++import asyncio
++import logging
++
++import aiopg
++import psycopg2
++
++
++LOGGER = logging.getLogger(__name__)
++
+ 
+ class Database(object):
+-    """"""Simple object for managing a connection to a postgres database
++    """"""Manages connection to the postgres database and makes async queries
+     """"""
+-    def __init__(self, host, port, name, user, password):
+-        self._host = host
+-        self._port = port
+-        self._name = name
+-        self._user = user
+-        self._password = password
++    def __init__(self, host, port, name, user, password, loop):
++        self._dsn = 'dbname={} user={} password={} host={} port={}'.format(
++            name, user, password, host, port)
++        self._loop = loop
+         self._conn = None
++
++    async def connect(self, retries=5, initial_delay=1, backoff=2):
++        """"""Initializes a connection to the database
++
++        Args:
++            retries (int): Number of times to retry the connection
++            initial_delay (int): Number of seconds wait between reconnects
++            backoff (int): Multiplies the delay after each retry
++        """"""
++        LOGGER.info('Connecting to database')
++
++        delay = initial_delay
++        for attempt in range(retries):",45,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192456977,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192456977,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,There should be a comment explaining this formatting (I assume there's a good reason for it).,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 17:03:47,192457504,"@@ -18,8 +18,12 @@
+ 
+ import aiopg
+ import psycopg2
++from psycopg2.extras import RealDictCursor
+ 
+ 
++LATEST_BLOCK_NUM = """"""",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192457504,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192457504,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"IIRC SupplyChain initially had something like this, but it was taken out because there was something bad about it. I would double check with someone who knows the details and make sure this is needed and that it is correct.",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 17:11:49,192459364,"@@ -27,11 +39,40 @@ def family_name(self):
+ 
+     @property
+     def family_versions(self):
+-        return ['0.0']
++        return [addresser.FAMILY_VERSION]
+ 
+     @property
+     def namespaces(self):
+         return [addresser.NAMESPACE]
+ 
+     def apply(self, transaction, context):
+-        raise InternalError('Not implemented')
++        header = transaction.header
++        payload = SimpleSupplyPayload(transaction.payload)
++        state = SimpleSupplyState(context)
++
++        _validate_timestamp(payload.timestamp)
++
++        if payload.action == payload_pb2.SimpleSupplyPayload.CREATE_AGENT:
++            _create_agent(
++                state=state,
++                public_key=header.signer_public_key,
++                payload=payload)
++        else:
++            raise InvalidTransaction('Unhandled action')
++
++
++def _create_agent(state, public_key, payload):
++    if state.get_agent(public_key):
++        raise InvalidTransaction('Account with the public key {} already '
++                                 'exists'.format(public_key))
++    state.set_agent(
++        public_key=public_key,
++        name=payload.data.name,
++        timestamp=payload.timestamp)
++
++
++def _validate_timestamp(timestamp):",64,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192459364,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192459364,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"Can this dictionary be defined more declaratively? If not (and really, even if so), there should be a docstring description of what the result will look like. Otherwise this thing will be impossible to maintain.",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 17:26:05,192462719,"@@ -0,0 +1,70 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++from simple_supply_addressing.addresser import AddressSpace
++from simple_supply_addressing.addresser import get_address_type
++from simple_supply_protobuf.agent_pb2 import AgentContainer
++from simple_supply_protobuf.record_pb2 import RecordContainer
++
++
++CONTAINERS = {
++    AddressSpace.AGENT: AgentContainer,
++    AddressSpace.RECORD: RecordContainer
++}
++
++
++def data_to_dicts(address, data):
++    data_type = get_address_type(address)
++
++    if data_type == AddressSpace.OTHER_FAMILY:
++        return []
++
++    try:
++        container = CONTAINERS[data_type]
++    except KeyError:
++        raise TypeError('Unknown data type: {}'.format(data_type))
++
++    entries = _parse_proto(container, data).entries
++    return data_type, [_proto_to_dict(pb) for pb in entries]
++
++
++def _parse_proto(proto_class, data):
++    deserialized = proto_class()
++    deserialized.ParseFromString(data)
++    return deserialized
++
++
++def _proto_to_dict(proto):",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192462719,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192462719,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,How deep is this recursion expected to go?,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 17:26:24,192462790,"@@ -0,0 +1,70 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++from simple_supply_addressing.addresser import AddressSpace
++from simple_supply_addressing.addresser import get_address_type
++from simple_supply_protobuf.agent_pb2 import AgentContainer
++from simple_supply_protobuf.record_pb2 import RecordContainer
++
++
++CONTAINERS = {
++    AddressSpace.AGENT: AgentContainer,
++    AddressSpace.RECORD: RecordContainer
++}
++
++
++def data_to_dicts(address, data):
++    data_type = get_address_type(address)
++
++    if data_type == AddressSpace.OTHER_FAMILY:
++        return []
++
++    try:
++        container = CONTAINERS[data_type]
++    except KeyError:
++        raise TypeError('Unknown data type: {}'.format(data_type))
++
++    entries = _parse_proto(container, data).entries
++    return data_type, [_proto_to_dict(pb) for pb in entries]
++
++
++def _parse_proto(proto_class, data):
++    deserialized = proto_class()
++    deserialized.ParseFromString(data)
++    return deserialized
++
++
++def _proto_to_dict(proto):
++    result = {}
++
++    for field in proto.DESCRIPTOR.fields:
++        key = field.name
++        value = getattr(proto, key)
++
++        if field.type == field.TYPE_MESSAGE:
++            if field.label == field.LABEL_REPEATED:
++                result[key] = [_proto_to_dict(p) for p in value]",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192462790,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192462790,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,Does this mean you're running the linters on the generated protobuf files?,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-01 17:30:46,192463875,"@@ -31,6 +31,7 @@ lint() {
+ }
+ 
+ ret_val=0
++export PYTHONPATH=$PYTHONPATH:$TOP_DIR/protobuf",4,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192463875,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192463875,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"No, this is just so that the generated protobufs are able to be imported while linting",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 17:20:05,192818014,"@@ -31,6 +31,7 @@ lint() {
+ }
+ 
+ ret_val=0
++export PYTHONPATH=$PYTHONPATH:$TOP_DIR/protobuf",4,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192818014,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192818014,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,@peterschwarz @delventhalz Any thoughts about this?,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 21:06:07,192880471,"@@ -27,11 +39,40 @@ def family_name(self):
+ 
+     @property
+     def family_versions(self):
+-        return ['0.0']
++        return [addresser.FAMILY_VERSION]
+ 
+     @property
+     def namespaces(self):
+         return [addresser.NAMESPACE]
+ 
+     def apply(self, transaction, context):
+-        raise InternalError('Not implemented')
++        header = transaction.header
++        payload = SimpleSupplyPayload(transaction.payload)
++        state = SimpleSupplyState(context)
++
++        _validate_timestamp(payload.timestamp)
++
++        if payload.action == payload_pb2.SimpleSupplyPayload.CREATE_AGENT:
++            _create_agent(
++                state=state,
++                public_key=header.signer_public_key,
++                payload=payload)
++        else:
++            raise InvalidTransaction('Unhandled action')
++
++
++def _create_agent(state, public_key, payload):
++    if state.get_agent(public_key):
++        raise InvalidTransaction('Account with the public key {} already '
++                                 'exists'.format(public_key))
++    state.set_agent(
++        public_key=public_key,
++        name=payload.data.name,
++        timestamp=payload.timestamp)
++
++
++def _validate_timestamp(timestamp):",64,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192880471,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192880471,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"Good point, `CreateAgent` would probably make more sense",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 21:06:54,192880668,"@@ -0,0 +1,97 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# -----------------------------------------------------------------------------
++
++import hashlib
++
++from sawtooth_rest_api.protobuf import batch_pb2
++from sawtooth_rest_api.protobuf import transaction_pb2
++
++from simple_supply_addressing import addresser
++
++from simple_supply_protobuf import payload_pb2
++
++
++def make_create_agent_transaction(transaction_signer,
++                                  batch_signer,
++                                  name,
++                                  timestamp):
++    """"""Make a CreateAgentAction transaction and wrap it in a batch",30,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192880668,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192880668,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,I believe any issues are handled in the Connection class: https://github.com/hyperledger/sawtooth-core/blob/master/rest_api/sawtooth_rest_api/messaging.py#L326,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 21:12:09,192882150,"@@ -0,0 +1,90 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++from sawtooth_rest_api.messaging import Connection
++from sawtooth_rest_api.protobuf import client_batch_submit_pb2
++from sawtooth_rest_api.protobuf import validator_pb2
++
++from sawtooth_signing import create_context
++from sawtooth_signing import CryptoFactory
++from sawtooth_signing import secp256k1
++
++from simple_supply_rest_api.errors import ApiBadRequest
++from simple_supply_rest_api.errors import ApiInternalError
++
++from simple_supply_rest_api.transaction_creation import \
++    make_create_agent_transaction
++
++
++class Messenger(object):
++    def __init__(self, validator_url):
++        self._connection = Connection(validator_url)
++        self._context = create_context('secp256k1')
++        self._crypto_factory = CryptoFactory(self._context)
++        self._batch_signer = self._crypto_factory.new_signer(
++            self._context.new_random_private_key())
++
++    def open_validator_connection(self):
++        self._connection.open()
++
++    def close_validator_connection(self):",42,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192882150,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192882150,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"However, the transaction is named CreateAgentAction (same as supplychain 0.8) so if I were to improve this I would do it in another PR.",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 21:21:06,192884400,"@@ -0,0 +1,97 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# -----------------------------------------------------------------------------
++
++import hashlib
++
++from sawtooth_rest_api.protobuf import batch_pb2
++from sawtooth_rest_api.protobuf import transaction_pb2
++
++from simple_supply_addressing import addresser
++
++from simple_supply_protobuf import payload_pb2
++
++
++def make_create_agent_transaction(transaction_signer,
++                                  batch_signer,
++                                  name,
++                                  timestamp):
++    """"""Make a CreateAgentAction transaction and wrap it in a batch",30,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192884400,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192884400,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"This is true, but not in the general case for Simple Supply transactions. My reasoning for doing it this way was to make it as general and easy to follow as possible. It may not be obvious to someone that the inputs and outputs for a transaction are not always the same. But I could see an argument for changing it. Let me know what you think.",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 21:24:12,192885187,"@@ -0,0 +1,97 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# -----------------------------------------------------------------------------
++
++import hashlib
++
++from sawtooth_rest_api.protobuf import batch_pb2
++from sawtooth_rest_api.protobuf import transaction_pb2
++
++from simple_supply_addressing import addresser
++
++from simple_supply_protobuf import payload_pb2
++
++
++def make_create_agent_transaction(transaction_signer,
++                                  batch_signer,
++                                  name,
++                                  timestamp):
++    """"""Make a CreateAgentAction transaction and wrap it in a batch
++
++    Args:
++        transaction_signer (sawtooth_signing.Signer): The transaction key pair
++        batch_signer (sawtooth_signing.Signer): The batch key pair
++        name (str): The agent's name
++        timestamp (int): Unix UTC timestamp of when the agent is created
++
++    Returns:
++        batch_pb2.Batch: The transaction wrapped in a batch
++
++    """"""
++
++    inputs = [addresser.get_agent_address(",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192885187,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192885187,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,I'm using this multi-line string formatting for all of the database queries.  Some of them get long and this format helps the readability. To keep it consistent I used the format for this variable as well. It could be changed to be a regular string if you think that would be more clear.,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-04 22:00:36,192893523,"@@ -18,8 +18,12 @@
+ 
+ import aiopg
+ import psycopg2
++from psycopg2.extras import RealDictCursor
+ 
+ 
++LATEST_BLOCK_NUM = """"""",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/192893523,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r192893523,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"The Simple Supply protos only have one level of repeated fields, though this method should be able to handle any level necessary",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-05 15:13:57,193111732,"@@ -0,0 +1,70 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++from simple_supply_addressing.addresser import AddressSpace
++from simple_supply_addressing.addresser import get_address_type
++from simple_supply_protobuf.agent_pb2 import AgentContainer
++from simple_supply_protobuf.record_pb2 import RecordContainer
++
++
++CONTAINERS = {
++    AddressSpace.AGENT: AgentContainer,
++    AddressSpace.RECORD: RecordContainer
++}
++
++
++def data_to_dicts(address, data):
++    data_type = get_address_type(address)
++
++    if data_type == AddressSpace.OTHER_FAMILY:
++        return []
++
++    try:
++        container = CONTAINERS[data_type]
++    except KeyError:
++        raise TypeError('Unknown data type: {}'.format(data_type))
++
++    entries = _parse_proto(container, data).entries
++    return data_type, [_proto_to_dict(pb) for pb in entries]
++
++
++def _parse_proto(proto_class, data):
++    deserialized = proto_class()
++    deserialized.ParseFromString(data)
++    return deserialized
++
++
++def _proto_to_dict(proto):
++    result = {}
++
++    for field in proto.DESCRIPTOR.fields:
++        key = field.name
++        value = getattr(proto, key)
++
++        if field.type == field.TYPE_MESSAGE:
++            if field.label == field.LABEL_REPEATED:
++                result[key] = [_proto_to_dict(p) for p in value]",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193111732,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r193111732,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,Updated,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-05 16:22:17,193136459,"@@ -13,14 +13,59 @@
+ # limitations under the License.
+ # ------------------------------------------------------------------------------
+ 
++import asyncio
++import logging
++
++import aiopg
++import psycopg2
++
++
++LOGGER = logging.getLogger(__name__)
++
+ 
+ class Database(object):
+-    """"""Simple object for managing a connection to a postgres database
++    """"""Manages connection to the postgres database and makes async queries
+     """"""
+-    def __init__(self, host, port, name, user, password):
+-        self._host = host
+-        self._port = port
+-        self._name = name
+-        self._user = user
+-        self._password = password
++    def __init__(self, host, port, name, user, password, loop):
++        self._dsn = 'dbname={} user={} password={} host={} port={}'.format(
++            name, user, password, host, port)
++        self._loop = loop
+         self._conn = None
++
++    async def connect(self, retries=5, initial_delay=1, backoff=2):
++        """"""Initializes a connection to the database
++
++        Args:
++            retries (int): Number of times to retry the connection
++            initial_delay (int): Number of seconds wait between reconnects
++            backoff (int): Multiplies the delay after each retry
++        """"""
++        LOGGER.info('Connecting to database')
++
++        delay = initial_delay
++        for attempt in range(retries):",45,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193136459,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r193136459,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,Decided to add a tolerance of 5 mins to mitigate out of sync system clocks,afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-05 16:22:41,193136602,"@@ -27,11 +39,40 @@ def family_name(self):
+ 
+     @property
+     def family_versions(self):
+-        return ['0.0']
++        return [addresser.FAMILY_VERSION]
+ 
+     @property
+     def namespaces(self):
+         return [addresser.NAMESPACE]
+ 
+     def apply(self, transaction, context):
+-        raise InternalError('Not implemented')
++        header = transaction.header
++        payload = SimpleSupplyPayload(transaction.payload)
++        state = SimpleSupplyState(context)
++
++        _validate_timestamp(payload.timestamp)
++
++        if payload.action == payload_pb2.SimpleSupplyPayload.CREATE_AGENT:
++            _create_agent(
++                state=state,
++                public_key=header.signer_public_key,
++                payload=payload)
++        else:
++            raise InvalidTransaction('Unhandled action')
++
++
++def _create_agent(state, public_key, payload):
++    if state.get_agent(public_key):
++        raise InvalidTransaction('Account with the public key {} already '
++                                 'exists'.format(public_key))
++    state.set_agent(
++        public_key=public_key,
++        name=payload.data.name,
++        timestamp=payload.timestamp)
++
++
++def _validate_timestamp(timestamp):",64,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193136602,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r193136602,dplumb94
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"In that case you could say `agent_address = get_agent_address` (or whatever) and then say `inputs = [agent_address]` and `outputs = [agent_address]`. I think that would get the point across without unnecessarily recalculating the address.
+
+Maybe add a comment like ""The agent will be stored at this address, and this transaction reads from that address and (potentially) writes to it."".",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-05 17:21:38,193154647,"@@ -0,0 +1,97 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# -----------------------------------------------------------------------------
++
++import hashlib
++
++from sawtooth_rest_api.protobuf import batch_pb2
++from sawtooth_rest_api.protobuf import transaction_pb2
++
++from simple_supply_addressing import addresser
++
++from simple_supply_protobuf import payload_pb2
++
++
++def make_create_agent_transaction(transaction_signer,
++                                  batch_signer,
++                                  name,
++                                  timestamp):
++    """"""Make a CreateAgentAction transaction and wrap it in a batch
++
++    Args:
++        transaction_signer (sawtooth_signing.Signer): The transaction key pair
++        batch_signer (sawtooth_signing.Signer): The batch key pair
++        name (str): The agent's name
++        timestamp (int): Unix UTC timestamp of when the agent is created
++
++    Returns:
++        batch_pb2.Batch: The transaction wrapped in a batch
++
++    """"""
++
++    inputs = [addresser.get_agent_address(",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193154647,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r193154647,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3,"This was copied from somewhere else, so it doesn't matter.",afdd93d2819aa7cf4ccaa8ea62ac20a5a7b3a934,2018-06-05 17:47:57,193162936,"@@ -0,0 +1,70 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++from simple_supply_addressing.addresser import AddressSpace
++from simple_supply_addressing.addresser import get_address_type
++from simple_supply_protobuf.agent_pb2 import AgentContainer
++from simple_supply_protobuf.record_pb2 import RecordContainer
++
++
++CONTAINERS = {
++    AddressSpace.AGENT: AgentContainer,
++    AddressSpace.RECORD: RecordContainer
++}
++
++
++def data_to_dicts(address, data):
++    data_type = get_address_type(address)
++
++    if data_type == AddressSpace.OTHER_FAMILY:
++        return []
++
++    try:
++        container = CONTAINERS[data_type]
++    except KeyError:
++        raise TypeError('Unknown data type: {}'.format(data_type))
++
++    entries = _parse_proto(container, data).entries
++    return data_type, [_proto_to_dict(pb) for pb in entries]
++
++
++def _parse_proto(proto_class, data):
++    deserialized = proto_class()
++    deserialized.ParseFromString(data)
++    return deserialized
++
++
++def _proto_to_dict(proto):",,2018-06-05 21:19:29,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/193162936,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#discussion_r193162936,nick-drozd
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2,"I think this probably makes more sense as a post - patch implies that you are modifying the record directly.  Since these are (potentially) asynchronous changes, it probably makes sense to be posts",41e9e6566ba606334f192aa4d8ea0af14c891b7a,2018-05-15 18:28:03,188390488,"@@ -0,0 +1,147 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++import argparse
++import asyncio
++import logging
++import sys
++
++from zmq.asyncio import ZMQEventLoop
++
++from sawtooth_sdk.processor.log import init_console_logging
++
++from sawtooth_rest_api.messaging import Connection
++
++from aiohttp import web
++
++from simple_supply_rest_api.route_handler import RouteHandler
++from simple_supply_rest_api.database import Database
++
++
++LOGGER = logging.getLogger(__name__)
++
++
++def parse_args(args):
++    parser = argparse.ArgumentParser(
++        description='Starts the Simple Supply REST API')
++
++    parser.add_argument(
++        '-B', '--bind',
++        help='identify host and port for api to run on',
++        default='localhost:8000')
++    parser.add_argument(
++        '-C', '--connect',
++        help='specify URL to connect to a running validator',
++        default='tcp://localhost:4004')
++    parser.add_argument(
++        '-t', '--timeout',
++        help='set time (in seconds) to wait for a validator response',
++        default=500)
++    parser.add_argument(
++        '--db-name',
++        help='The name of the database',
++        default='simple-supply')
++    parser.add_argument(
++        '--db-host',
++        help='The host of the database',
++        default='localhost')
++    parser.add_argument(
++        '--db-port',
++        help='The port of the database',
++        default='5432')
++    parser.add_argument(
++        '--db-user',
++        help='The authorized user of the database',
++        default='sawtooth')
++    parser.add_argument(
++        '--db-password',
++        help=""The authorized user's password for database access"",
++        default='sawtooth')
++    parser.add_argument(
++        '-v', '--verbose',
++        action='count',
++        default=0,
++        help='enable more verbose output to stderr')
++
++    return parser.parse_args(args)
++
++
++def start_rest_api(host, port, validator_connection, database):
++    loop = asyncio.get_event_loop()
++    validator_connection.open()
++    app = web.Application(loop=loop)
++    app.on_cleanup.append(lambda app: validator_connection.close())
++
++    handler = RouteHandler(loop, validator_connection, database)
++
++    app.router.add_post('/authorization', handler.authorize)
++
++    app.router.add_post('/agents', handler.create_agent)
++    app.router.add_get('/agents', handler.list_agents)
++    app.router.add_get('/agents/{agent_id}', handler.fetch_agent)
++
++    app.router.add_post('/records', handler.create_record)
++    app.router.add_get('/records', handler.list_records)
++    app.router.add_get('/records/{record_id}', handler.fetch_record)
++    app.router.add_patch(",,2018-05-15 20:25:14,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/188390488,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2#discussion_r188390488,peterschwarz
+https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2,Good point - updated the PR,41e9e6566ba606334f192aa4d8ea0af14c891b7a,2018-05-15 20:26:43,188424981,"@@ -0,0 +1,147 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++import argparse
++import asyncio
++import logging
++import sys
++
++from zmq.asyncio import ZMQEventLoop
++
++from sawtooth_sdk.processor.log import init_console_logging
++
++from sawtooth_rest_api.messaging import Connection
++
++from aiohttp import web
++
++from simple_supply_rest_api.route_handler import RouteHandler
++from simple_supply_rest_api.database import Database
++
++
++LOGGER = logging.getLogger(__name__)
++
++
++def parse_args(args):
++    parser = argparse.ArgumentParser(
++        description='Starts the Simple Supply REST API')
++
++    parser.add_argument(
++        '-B', '--bind',
++        help='identify host and port for api to run on',
++        default='localhost:8000')
++    parser.add_argument(
++        '-C', '--connect',
++        help='specify URL to connect to a running validator',
++        default='tcp://localhost:4004')
++    parser.add_argument(
++        '-t', '--timeout',
++        help='set time (in seconds) to wait for a validator response',
++        default=500)
++    parser.add_argument(
++        '--db-name',
++        help='The name of the database',
++        default='simple-supply')
++    parser.add_argument(
++        '--db-host',
++        help='The host of the database',
++        default='localhost')
++    parser.add_argument(
++        '--db-port',
++        help='The port of the database',
++        default='5432')
++    parser.add_argument(
++        '--db-user',
++        help='The authorized user of the database',
++        default='sawtooth')
++    parser.add_argument(
++        '--db-password',
++        help=""The authorized user's password for database access"",
++        default='sawtooth')
++    parser.add_argument(
++        '-v', '--verbose',
++        action='count',
++        default=0,
++        help='enable more verbose output to stderr')
++
++    return parser.parse_args(args)
++
++
++def start_rest_api(host, port, validator_connection, database):
++    loop = asyncio.get_event_loop()
++    validator_connection.open()
++    app = web.Application(loop=loop)
++    app.on_cleanup.append(lambda app: validator_connection.close())
++
++    handler = RouteHandler(loop, validator_connection, database)
++
++    app.router.add_post('/authorization', handler.authorize)
++
++    app.router.add_post('/agents', handler.create_agent)
++    app.router.add_get('/agents', handler.list_agents)
++    app.router.add_get('/agents/{agent_id}', handler.fetch_agent)
++
++    app.router.add_post('/records', handler.create_record)
++    app.router.add_get('/records', handler.list_records)
++    app.router.add_get('/records/{record_id}', handler.fetch_record)
++    app.router.add_patch(",,2018-05-15 20:26:43,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/pulls/comments/188424981,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/2#discussion_r188424981,dplumb94

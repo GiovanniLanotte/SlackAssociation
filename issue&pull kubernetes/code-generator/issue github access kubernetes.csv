@@ -1,0 +1,1167 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+code-generator,lavalamp,https://github.com/kubernetes/code-generator/issues/1,https://api.github.com/repos/kubernetes/code-generator/issues/1,"Add a README, LICENSE, and CHANGELOG to this repo",,closed,False,2017-09-07 23:16:46,2018-08-09 12:44:02
+code-generator,eparis,https://github.com/kubernetes/code-generator/pull/2,https://api.github.com/repos/kubernetes/code-generator/issues/2,Introduce content from kubernetes-template-project,This did not include a README or a RELEASE file.,closed,True,2017-09-07 23:30:35,2018-01-15 15:34:18
+code-generator,sttts,https://github.com/kubernetes/code-generator/pull/3,https://api.github.com/repos/kubernetes/code-generator/issues/3,Add LICENSE and README.md,,closed,True,2017-09-08 08:16:25,2017-09-08 16:25:29
+code-generator,hongchaodeng,https://github.com/kubernetes/code-generator/issues/4,https://api.github.com/repos/kubernetes/code-generator/issues/4,Seeking advice for using deepcopy-gen,"I tried to use deepcopy-gen on custom resource, but it doesn't work: 1. no xxx.deepcopy.go file was generated; 2. saw many confusing errors in log message.
+
+Created this issue to seek help and advice for usng deepcopy-gen.
+
+Here's what I did:
+
+- Add tag to my custom resource:
+	```Go
+	// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+	// EtcdClusterList is a list of etcd clusters.
+	type EtcdClusterList struct {
+		metav1.TypeMeta `json:"",inline""`
+		// Standard list metadata
+		// More info: http://releases.k8s.io/HEAD/docs/devel/api-conventions.md#metadata
+		metav1.ListMeta `json:""metadata,omitempty""`
+		Items           []EtcdCluster `json:""items""`
+	}
+
+	// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+	type EtcdCluster struct {
+		metav1.TypeMeta   `json:"",inline""`
+		metav1.ObjectMeta `json:""metadata,omitempty""`
+		Spec              ClusterSpec   `json:""spec""`
+		Status            ClusterStatus `json:""status""`
+	}
+	```
+  For more information, check out https://github.com/coreos/etcd-operator/blob/master/pkg/apis/etcd/v1beta1/cluster.go .
+- Compile deepcopy-gen from code-generator repo at a8e1019df0df00506fe1db5232a2af30ff4c87aa
+- Run command:
+  ```
+  deepcopy-gen -i github.com/coreos/etcd-operator/pkg/apis/etcd/v1beta1 --go-header-file=""$GOPATH/src/k8s.io/kubernetes/hack/boilerplate/boilerplate.go.txt"" -v=4 --logtostderr --bounding-dirs ""github.com/coreos/etcd-operator/pkg/apis"" --output-file-base zz_generated.deepcopy
+  ```
+
+No generated file comes out.
+Here's the log message:
+https://gist.github.com/hongchaodeng/2a8725a8c5b314aa2e401c72d119f0ce
+
+Let me know if you need more details.
+
+Some resources:
+- https://github.com/openshift/origin/blob/2ff4203c2979623908b83bbb05f1f542bf567e56/cmd/service-catalog/go/src/github.com/kubernetes-incubator/service-catalog/Makefile#L175-L181",closed,False,2017-09-18 22:48:52,2017-12-06 12:16:41
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/issues/5,https://api.github.com/repos/kubernetes/code-generator/issues/5,How to use go-to-protobuf,"I would like to generate proto files for my kubernetes CRDs using go-to-protobuf. I tried to look int to the main Kubernetes repo and could not figure out how to do that. Can you give me some pointers on how to generate protobuf file from the hand written GO CRD types.
+
+Any help is greatly appreciated!
+",closed,False,2017-09-20 00:17:13,2017-10-18 03:32:38
+code-generator,maleck13,https://github.com/kubernetes/code-generator/issues/6,https://api.github.com/repos/kubernetes/code-generator/issues/6,Suggestiong add boilerplate header file to this repo,"When using this repo, it still looks for the boilerplate header which is located in the kubernetes repo
+https://github.com/kubernetes/kubernetes/blob/master/hack/boilerplate/boilerplate.go.txt
+
+Wondering would it be better to have the boilerplate as part of this repo?",closed,False,2017-10-01 15:03:29,2018-02-13 11:41:44
+code-generator,maleck13,https://github.com/kubernetes/code-generator/issues/7,https://api.github.com/repos/kubernetes/code-generator/issues/7,In conversion gen if the pkg is wrong it results in nil pointer error,"When using the conversion-gen tool recently, I had accidentally misspelled the package name in the comments for conversion-gen. When I ran the conversion-gen tool it gave me an error.
+
+The command I ran was:
+```
+ conversion-gen --input-dirs github.com/maleck13/kubeop-bot/pkg/apis/kubeopbot/v1alpha1 --input-dirs github.com/maleck13/kubeop-bot/pkg/apis/kubeopbot -o ${HOME}/projects/src --go-header-file ./artifacts/boilerplate/boilerplate.go.txt -O zz_generated.conversion 
+```
+
+The error was
+
+```k8s.io/apimachinery/pkg/apis/meta/v1,k8s.io/apimachinery/pkg/conversion,k8s.io/apimachinery/pkg/runtime
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x68 pc=0x124f4e0]
+
+goroutine 1 [running]:
+k8s.io/kubernetes/cmd/libs/go2idl/conversion-gen/generators.getManualConversionFunctions(0xc4267f9440, 0x0, 0xc42683de60)
+	/Users/kelly/work/go/src/k8s.io/kubernetes/cmd/libs/go2idl/conversion-gen/generators/conversion.go:143 +0x1a0
+k8s.io/kubernetes/cmd/libs/go2idl/conversion-gen/generators.Packages(0xc4267f9440, 0xc4200a4480, 0x12ec128, 0x6, 0xc4267f9440)
+	/Users/kelly/work/go/src/k8s.io/kubernetes/cmd/libs/go2idl/conversion-gen/generators/conversion.go:286 +0xc4b
+k8s.io/kubernetes/vendor/k8s.io/gengo/args.(*GeneratorArgs).Execute(0xc4200a4480, 0xc42001cdb0, 0x12ec128, 0x6, 0x12faed0, 0x12fa90b, 0x5f)
+	/Users/kelly/work/go/src/k8s.io/kubernetes/vendor/k8s.io/gengo/args/args.go:165 +0x1e6
+main.main()
+	/Users/kelly/work/go/src/k8s.io/kubernetes/cmd/libs/go2idl/conversion-gen/main.go:76 +0x28c
+
+```
+
+It took quite some time to track down that the issue was I had misspelled as shown below in the package in the comment:
+```
+// +k8s:conversion-gen=github.com/maleck13/kubeop-bot/pkg/apis/kubopbot
+```
+
+I tracked down the issue to the following line of code:
+https://github.com/kubernetes/code-generator/blob/master/cmd/conversion-gen/generators/conversion.go#L294
+
+Changing this to the following:
+```
+	p := context.Universe[pp]
+			if p == nil {
+				glog.Errorf(""package %s was not found"", pp)
+				continue
+			}
+```
+
+Made it much clearer what was happening. I am happy to create a PR with this change back against the main kubernetes repo, but wasn't sure if perhaps in this case it should exit instead of just log the error?
+",closed,False,2017-10-08 13:20:25,2017-12-28 03:58:43
+code-generator,nilebox,https://github.com/kubernetes/code-generator/issues/8,https://api.github.com/repos/kubernetes/code-generator/issues/8,conversion-gen shouldn't import kubernetes packages by default,"If the project doesn't include dependency on kubernetes/kubernetes repo, the `conversion-gen` ends with panic (see https://github.com/kubernetes/code-generator/issues/7), because by default it includes packages from this repo: [conversion-gen/main.go#L59](https://github.com/kubernetes/code-generator/blob/master/cmd/conversion-gen/main.go#L59)
+
+The workaround is to pass the `--extra-peer-dirs` flag with explicit list of packages, but it doesn't feel right - either this flag should be mandatory, or the default package list should be minimal.
+",closed,False,2017-10-10 00:46:08,2018-06-07 08:59:17
+code-generator,chancez,https://github.com/kubernetes/code-generator/issues/9,https://api.github.com/repos/kubernetes/code-generator/issues/9,Cannot set namespace of informers created by informer factory,"Currently the generated code outputs an interface like this:
+
+```
+// Interface provides access to all the informers in this group version.
+type Interface interface {
+	// Foos returns a FooInformer.
+	Foos() FooInformer
+	// Bars returns a BarInformer.
+	Bars() BarInformer
+	// FooBars returns a FooBarInformer.
+	FooBars() FooBarInformer
+}
+```
+
+These informers return an interface like this:
+
+```
+type FooInformer interface {
+	Informer() cache.SharedIndexInformer
+	Lister() v1alpha1.FooLister
+}
+```
+
+However there is no way to specify you want an informer restricted to a particular namespace. The only alternative seems to be to use the method `NewFooInformer` constructor, but then I'm creating all my Informers and Listers myself. ",closed,False,2017-10-11 23:42:04,2017-11-09 18:15:14
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/pull/10,https://api.github.com/repos/kubernetes/code-generator/issues/10,Add go flags to go-to-protobuf,,closed,True,2017-10-20 02:28:49,2017-10-26 00:36:38
+code-generator,ash2k,https://github.com/kubernetes/code-generator/issues/11,https://api.github.com/repos/kubernetes/code-generator/issues/11,Make generators consumable as Bazel rules,"It'd be nice to be able to use generators in a Bazel-based build as rules. E.g. a rule for client generation, a rule for deep copy functions generation, etc. Like e.g. `rules_go`.
+
+/cc @ixdy ",closed,False,2017-10-20 11:24:41,2019-02-25 06:08:38
+code-generator,nikhita,https://github.com/kubernetes/code-generator/pull/12,https://api.github.com/repos/kubernetes/code-generator/issues/12,Remove README and LICENSE,"Addresses https://github.com/kubernetes/kubernetes/issues/54398.
+
+/cc @sttts ",closed,True,2017-10-23 11:44:20,2017-10-25 19:17:22
+code-generator,pwittrock,https://github.com/kubernetes/code-generator/issues/13,https://api.github.com/repos/kubernetes/code-generator/issues/13,release1.8 client-gen doesn't accept --go-header or -o flags,,closed,False,2017-10-23 15:50:31,2017-10-30 09:20:00
+code-generator,pwittrock,https://github.com/kubernetes/code-generator/issues/14,https://api.github.com/repos/kubernetes/code-generator/issues/14,Support auto configuring code generators with meta code-generator cmd,"User story: As a contributor, I would like to run the set of of supported code-generators against a project following the Kubernetes code structure and conventions without having to manually configure each of them and understand each of their specific semantics.
+
+Background: The [code-generator](https://github.com/kubernetes/code-generator) repo has a dozen different code generator commands.  Each of the code generator commands takes a different set of flags derived from the directories present in the project.  Configure each code generator for every new project or API extension should not be necessary.  Instead, we should automatically configure each code generator based which directories are present.
+
+Proof of concept implemented [here](https://github.com/kubernetes-incubator/apiserver-builder/blob/master/cmd/apiserver-boot/boot/build/generate.go)",closed,False,2017-10-27 16:53:47,2017-10-30 22:04:25
+code-generator,pwittrock,https://github.com/kubernetes/code-generator/issues/15,https://api.github.com/repos/kubernetes/code-generator/issues/15,Provide binary release of code generators,"User story: As a user, I want a simple way to get executables for the code generators at a specific kubernetes release version. 
+
+`go get` gets the code generators at head, but the generators sometimes break backward compatibility.  In order to get the code generators, I need to get the code at a specific release version and then manually build them.  It would be simpler for some contributors if we provided them binary distributions of all of the code generators.",closed,False,2017-10-27 17:24:59,2018-03-26 18:59:52
+code-generator,ash2k,https://github.com/kubernetes/code-generator/issues/16,https://api.github.com/repos/kubernetes/code-generator/issues/16,glog doesn't like it when non-standard flag package is used,"Note the `ERROR: logging before flag.Parse`:
+```console
+client-gen \
+>         --input-base ""github.com/atlassian/smith/pkg/apis/"" \
+>         --input ""smith/v1"" \
+>         --clientset-path ""github.com/atlassian/smith/pkg/client/clientset_generated/"" \
+>         --clientset-name ""clientset""
+
+ERROR: logging before flag.Parse: F1029 14:26:52.019063   88249 client_generator.go:312] Failed loading boilerplate: open /Users/ash2k/gopath/src/k8s.io/kubernetes/hack/boilerplate/boilerplate.go.txt: no such file or directory
+goroutine 1 [running]:
+github.com/golang/glog.stacks(0xc42000e000, 0xc4264e8c60, 0xc1, 0x109)
+        vendor/github.com/golang/glog/glog.go:769 +0xcf
+github.com/golang/glog.(*loggingT).output(0x148ffa0, 0xc400000003, 0xc4253b5ce0, 0x146030e, 0x13, 0x138, 0x0)
+        vendor/github.com/golang/glog/glog.go:720 +0x345
+github.com/golang/glog.(*loggingT).printf(0x148ffa0, 0xc400000003, 0x1306ffd, 0x1e, 0xc42ad21928, 0x1, 0x1)
+        vendor/github.com/golang/glog/glog.go:655 +0x14c
+github.com/golang/glog.Fatalf(0x1306ffd, 0x1e, 0xc42ad21928, 0x1, 0x1)
+        vendor/github.com/golang/glog/glog.go:1148 +0x67
+k8s.io/code-generator/cmd/client-gen/generators.Packages(0xc424dfc2a0, 0xc420010240, 0x12ff74b, 0x6, 0xc424dfc2a0)
+        vendor/k8s.io/code-generator/cmd/client-gen/generators/client_generator.go:312 +0xdf
+k8s.io/gengo/args.(*GeneratorArgs).Execute(0xc420010240, 0xc420080f00, 0x12ff74b, 0x6, 0x13151b8, 0x1, 0x4)
+        vendor/k8s.io/gengo/args/args.go:176 +0x1d4
+main.main()
+        vendor/k8s.io/code-generator/cmd/client-gen/main.go:199 +0x65e
+```",open,False,2017-10-29 03:28:08,2018-12-12 18:53:00
+code-generator,pwittrock,https://github.com/kubernetes/code-generator/pull/17,https://api.github.com/repos/kubernetes/code-generator/issues/17,Proposal for meta-generator,"This is a proposal in the form of what would be the user facing documentation for a meta code generation tool.
+
+kubernetes/kubernetes#53524",closed,True,2017-10-30 21:04:00,2017-11-02 16:25:09
+code-generator,n3wscott,https://github.com/kubernetes/code-generator/issues/18,https://api.github.com/repos/kubernetes/code-generator/issues/18,Feature Request: Add the ability to support gomock go:gen comments?,"It would be handy if there were mocks of the generated interfaces from these generators. Seems like it would not be a huge deal to add given that these are already autogenerated. 
+
+Thoughts?
+
+Example:
+
+```
+package doer
+
+//go:generate mockgen -destination=../mocks/mock_doer.go -package=mocks github.com/sgreben/testing-with-gomock/doer Doer
+
+type Doer interface {
+    DoSomething(int, string) error
+}
+```
+
+Source: https://blog.codecentric.de/en/2017/08/gomock-tutorial/",closed,False,2017-10-30 23:03:33,2018-02-28 21:24:42
+code-generator,mtaufen,https://github.com/kubernetes/code-generator/issues/19,https://api.github.com/repos/kubernetes/code-generator/issues/19,generate-groups.sh doesn't like API groups that use `.` in the name,"Two things, actually:
+- If I name a group `thing.k8s.io`, `generate-groups.sh` requires that the version directories be in a directory named `thing.k8s.io`.
+- If you comply, then `generate-groups.sh` will try to import e.g. the `v1alpha1` package as `thing.k8s.iov1alpha1 ""...""`, which is not a valid go import. gofmt then fails on the `.`s and everything explodes.",closed,False,2017-11-01 22:01:59,2018-07-09 21:43:12
+code-generator,ianlewis,https://github.com/kubernetes/code-generator/issues/20,https://api.github.com/repos/kubernetes/code-generator/issues/20,Imports lowercased,"Several packages are lowercased during package generation. This causes import errors if, for instance, your Github account uses uppercase characters.
+
+Some packages are also generated under lowercased paths so these packages are generated under a different directory than your project. For example my project might be in $GOPATH/src/github.com/IanLewis/myapp and code-generator will generate some files under $GOPATH/src/github.com/ianlewis/myapp",closed,False,2017-11-02 07:09:08,2018-10-05 11:45:33
+code-generator,markmandel,https://github.com/kubernetes/code-generator/issues/21,https://api.github.com/repos/kubernetes/code-generator/issues/21,Generator only works if k8s.io/apimachinery is in the $GOPATH,"Whenever I attempt to run `update-codegen.sh` , but constantly get the below stacktrace.
+
+```
+Generating deepcopy funcs
+F1104 02:57:44.419529      35 main.go:79] Error: Failed executing generator: some packages had errors:
+type ""k8s.io/apimachinery/pkg/runtime.Object"" in k8s:deepcopy-gen:interfaces tag of type k8s.io/apimachinery/pkg/runtime.Object is not an interface, but: """"
+goroutine 1 [running]:
+k8s.io/code-generator/vendor/github.com/golang/glog.stacks(0xc420136b00, 0xc42012b080, 0x104, 0x15a)
+        /go/src/k8s.io/code-generator/vendor/github.com/golang/glog/glog.go:766 +0xa7
+k8s.io/code-generator/vendor/github.com/golang/glog.(*loggingT).output(0x83eb60, 0xc400000003, 0xc4200cf1e0, 0x81ea9f, 0x7, 0x4f, 0x0)
+        /go/src/k8s.io/code-generator/vendor/github.com/golang/glog/glog.go:717 +0x348
+k8s.io/code-generator/vendor/github.com/golang/glog.(*loggingT).printf(0x83eb60, 0x3, 0x6ebfc7, 0x9, 0xc4200e7f48, 0x1, 0x1)
+        /go/src/k8s.io/code-generator/vendor/github.com/golang/glog/glog.go:655 +0x14f
+k8s.io/code-generator/vendor/github.com/golang/glog.Fatalf(0x6ebfc7, 0x9, 0xc4200e7f48, 0x1, 0x1)
+        /go/src/k8s.io/code-generator/vendor/github.com/golang/glog/glog.go:1145 +0x67
+main.main()
+        /go/src/k8s.io/code-generator/cmd/deepcopy-gen/main.go:79 +0x253
+```
+
+I created a simple test case using a Dockerfile below, using the sample-controller example, which replicates the problem.
+
+```docker
+FROM golang:1.9.2
+
+ENV PATH=$PATH:/go/bin
+RUN go get -u k8s.io/code-generator/...
+RUN go get -d github.com/kubernetes/sample-controller
+RUN mkdir -p /go/src/k8s.io/kubernetes/hack/boilerplate && touch /go/src/k8s.io/kubernetes/hack/boilerplate/boilerplate.go.txt
+WORKDIR /
+RUN CODEGEN_PKG=/go/src/k8s.io/code-generator /go/src/github.com/kubernetes/sample-controller/hack/update-codegen.sh
+```
+
+Help?",closed,False,2017-11-04 03:03:53,2018-05-28 20:14:04
+code-generator,mvladev,https://github.com/kubernetes/code-generator/issues/22,https://api.github.com/repos/kubernetes/code-generator/issues/22,Hyphen as last subdomain in groupName breaks client generation,"When using groupName as `example.code-generation.k8s.io` the client generation works.
+Changing it to `code-generation.k8s.io` causes the generated clients to be broken:
+
+https://github.com/mvladev/code-generation:
+
+```
+Generating deepcopy funcs
+Generating clientset for example:v1 at github.com/mvladev/code-generation/client/clientset
+ERROR: logging before flag.Parse: F1106 07:49:42.418067   80131 main.go:69] Error: Failed executing generator: some packages had errors:
+errors in package ""github.com/mvladev/code-generation/client/clientset/versioned"":
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/clientset.go"" (6:6: expected 'STRING', found '-' (and 10 more errors)).
+
+errors in package ""github.com/mvladev/code-generation/client/clientset/versioned/scheme"":
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/scheme/register.go"" (8:6: expected 'STRING', found '-' (and 4 more errors)).
+
+errors in package ""github.com/mvladev/code-generation/client/clientset/versioned/fake"":
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/fake/clientset_generated.go"" (4:10: expected 'STRING', found '-' (and 9 more errors)).
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/fake/register.go"" (4:6: expected 'STRING', found '-' (and 4 more errors)).
+
+errors in package ""github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1"":
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1/code-generator_client.go"" (11:10: expected type, found '-' (and 2 mor
+e errors)).
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1/testtype.go"" (40:26: missing ',' in parameter list).
+
+errors in package ""github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1/fake"":
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1/fake/fake_testtype.go"" (16:16: expected ';', found '-' (and 1 more er
+rors)).
+unable to format file ""/Users/i068969/git/go/src/github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1/fake/fake_code-generator_client.go"" (10:14: expected type, found '-'
+(and 2 more errors)).
+```
+
+
+- bad imports `code-generatorv1 ""github.com/mvladev/code-generation/client/clientset/versioned/typed/code-generator/v1""`
+- interfaces have hyphen in them `Code-generatorV1() code-generatorv1.Code-generatorV1Interface`",open,False,2017-11-06 06:12:20,2019-03-12 18:11:39
+code-generator,mrIncompetent,https://github.com/kubernetes/code-generator/pull/23,https://api.github.com/repos/kubernetes/code-generator/issues/23,Remove ToLower for imports / package names,The current ToLower breaks repos which are not all lowercase. Like in my case: mrIncompetent,closed,True,2017-11-25 00:34:57,2017-11-25 00:44:33
+code-generator,markmandel,https://github.com/kubernetes/code-generator/issues/24,https://api.github.com/repos/kubernetes/code-generator/issues/24,Autogenerate register.go files,"Looking at register.go - it looks like these could be generated via this tool as well.
+
+When implementing a CRD it's not very clear what to put in these files, and a simple copy paste from the `sample-controller` with minor edits works, but it seems like this could be easily solved via code generation, which would also solve the documentation issue.
+
+Extra context:
+https://kubernetes.slack.com/archives/C0EG7JC6T/p1511820482000365
+
+Friction log:
+https://docs.google.com/a/google.com/document/d/1N1pBov7Odpg_u-kILHcswYh4VO-aMlYQdFIH64DYeek/edit?disco=AAAABhkn5r4",closed,False,2017-11-27 23:44:26,2018-12-12 17:57:43
+code-generator,xh3b4sd,https://github.com/kubernetes/code-generator/issues/25,https://api.github.com/repos/kubernetes/code-generator/issues/25,type net.IP has no field or method DeepCopy,When generating clients for types that refer to `net.IP` the code generator generates invalid go code which is not able to compile. See for instance https://github.com/giantswarm/apiextensions/pull/16. I am wondering how this is supposed to work. Can somebody elaborate on this? Our workaround was to rather use type `string` than `net.IP` but I feel like this should be fixed upstream. Cheers. ,closed,False,2017-11-30 13:37:41,2018-05-05 15:08:06
+code-generator,wackxu,https://github.com/kubernetes/code-generator/pull/26,https://api.github.com/repos/kubernetes/code-generator/issues/26,add dependency for release-1.8,"When I use release-1.8, I use glide to add this into vendor, but when I run `generate-groups.sh`, there is something wrong, because `code-generator` can not found its dependency. So I add the dependency for people to easy use.
+
+/assign @sttts ",closed,True,2017-12-05 10:48:12,2017-12-12 10:31:35
+code-generator,pbarker,https://github.com/kubernetes/code-generator/issues/27,https://api.github.com/repos/kubernetes/code-generator/issues/27,docs,"Hey, this project looks super useful, but its still very unclear on how to utilize it. Would it be possible to get some better docs?",closed,False,2017-12-06 22:59:42,2018-10-04 21:27:06
+code-generator,erictune,https://github.com/kubernetes/code-generator/issues/28,https://api.github.com/repos/kubernetes/code-generator/issues/28,Generate json-schema from go types,"When you create a CRD, it can have a schema defined using json-schema.
+
+In github.com/kubernetes/sample-controller the client libraries for a controller are generated from a go API definition, and CRDs are created, but there is no schema for the CRD, which means less validation.
+
+It would be nice to generate the json-schema for the CRD from the Go types.  So, this is proposing a new generator that generates json-schema for CRDs from go types.
+",open,False,2017-12-12 03:40:25,2018-10-09 18:23:27
+code-generator,spiffxp,https://github.com/kubernetes/code-generator/pull/29,https://api.github.com/repos/kubernetes/code-generator/issues/29,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:31:44,2017-12-20 20:13:58
+code-generator,mattkelly,https://github.com/kubernetes/code-generator/issues/30,https://api.github.com/repos/kubernetes/code-generator/issues/30,Generated files should follow golang standard for machine-generated files to avoid golint issues,"# Overview
+
+Files generated by `code-generator` currently have a lot of issues picked up by `golint`. There are a few options to fix this:
+
+- Fix the actual lint issues in the generated code
+    - This would require fixing the existing generated code and putting a process in place for the future to prevent lint issues in generated code from being merged
+- Ignore the generated files in some other way
+    - This requires all users to implement their own solution to this problem
+- Follow the [golang convention for machine-generated files](https://github.com/golang/go/issues/13560#issuecomment-288457920) so `golint` automatically skips them
+    - I think this is the most appropriate solution because the golang community has standardized on it, it's trivial to implement, and it avoids adding more process
+
+# Proposed Solution
+
+I propose that we add the following comment line just below the [boilerplate header](https://github.com/kubernetes/kubernetes/pull/57656):
+
+```
+// Code generated by <generator-name>. DO NOT EDIT.
+```
+
+There are already lines similar to this generated but they do not match the desired regex, so we can just modify them. For example: https://github.com/kubernetes/kubernetes/search?utf8=✓&q=%22Do+not+edit+it+manually%22&type=Code. 
+
+After some quick poking around, this will require modifying not only `code-generator` but also [kubernetes/gengo](https://github.com/kubernetes/gengo) for example.
+
+I've tested manually editing an auto-generated file to add this line and it does result in `golint` ignoring the file as expected.
+
+I'm not very familiar with the process for auto-generated code in Kubernetes itself - would we want to re-generate all of the generated code as part of the PR for this issue?
+
+I'm happy to take this on this weekend if we feel that it's a good solution.",closed,False,2017-12-30 02:57:01,2018-02-27 22:12:32
+code-generator,frankgreco,https://github.com/kubernetes/code-generator/issues/31,https://api.github.com/repos/kubernetes/code-generator/issues/31,Place DeepCopy Funcs in Separate package than types,"As the actual types are in the same package as the generated DeepCopy funcs, the GoDoc has a lot of extra noise in it.",closed,False,2018-01-12 22:07:58,2018-11-14 10:04:47
+code-generator,perotinus,https://github.com/kubernetes/code-generator/issues/32,https://api.github.com/repos/kubernetes/code-generator/issues/32,go-to-protobuf should not always run goimports ,"Currently, when running `go-to-protobuf`, `goimports` and `gofmt` are run under the assumption that they are in the PATH. This does not always hold true. There is an option to `skip-generated-rewrite`, but that is said to be for debugging only.
+
+It should be possible to run `go-to-protobuf` without running `goimports` and `gofmt` on the generated product, if desired.",closed,False,2018-01-25 23:33:35,2018-06-25 01:55:47
+code-generator,chancez,https://github.com/kubernetes/code-generator/issues/33,https://api.github.com/repos/kubernetes/code-generator/issues/33,sub-informers not started if not accessed before informerFactory.Start(),"I was looking at the generated informer factory code produced by code-generator, and couldn't figure out where the actual informers were being created, and found the following (sample-controller):
+-  `InformerFor()` is where informers are created`: https://github.com/kubernetes/sample-controller/blob/master/pkg/client/informers/externalversions/factory.go#L114
+- `InformerFor()` is only called when you actually access the informers from the factory, eg: `factory.SampleController().V1alpha1().Foo().Informer()`, this causes the factory to call `InformerFor()` with the Foo informer's constructor.
+- `Start()` expects informers to already be created, as it simply iterates over the factories internal informer map: https://github.com/kubernetes/sample-controller/blob/master/pkg/client/informers/externalversions/factory.go#L68-L78
+
+What this means is calling `Start()` before calling `factory.SampleController().V1alpha1().Foo().Informer()` will result in no informers being started.
+
+While it's pretty typical to access these informers before starting them due to needing to setup resourceHandlers, it's possible a controller isn't actually using handlers, and might just be using the informers and listers as a caching mechanism, in which case, the user likely isn't directly calling the `.Informer()` methods at any point before accessing the lister.",closed,False,2018-02-15 23:22:07,2018-07-16 01:08:10
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/issues/34,https://api.github.com/repos/kubernetes/code-generator/issues/34,Support building inside Docker image,"We are using code-generator Docker image to generate client etc for our controllers.
+
+We build a docker image from this Dockerfile: https://github.com/appscode/gengo-builder/blob/release-1.9/gengo/Dockerfile
+
+We had to make one change to the generate-*.sh scripts included in this repo is to avoid running `go install`. Here is the commit: https://github.com/appscode/code-generator/commit/93af39dc6086b9dc2235c3a34d844b5704c65d59
+
+This is what our final codegen script looks like: https://github.com/appscode/voyager/blob/master/hack/codegen.sh
+
+My question is:
+- Can the generate*.sh add an option to not run `go install`?
+
+",closed,False,2018-02-19 18:44:57,2018-07-28 23:12:52
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/issues/35,https://api.github.com/repos/kubernetes/code-generator/issues/35,Provide an explicit way to tell that a package is for internal types aka allow json tags in internal types,"code-generate currently uses a super unintuitive way to determine that a package is for `internal` types. It checks that the `ObjectMeta` field does not have `json` tag. 
+https://github.com/kubernetes/code-generator/blob/893b4433a4ba929dd0dacebf7c8956682d7a5d5f/cmd/lister-gen/generators/lister.go#L174
+
+This is really a bummer when you just copy the versioned types as the internal types and can't figure out why the generated code is not what it should be (and failing to compile). I just spent better part of last 6 hours trying to debug. Eventually reading the lister-gen code pointed me to right direction.  Anyone having the same issue, the fix was to remove the `json: ` tags from internal Go types.
+
+Can explicit tag added to note that a package is internal types?",closed,False,2018-03-14 11:14:01,2018-08-13 15:20:23
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/issues/36,https://api.github.com/repos/kubernetes/code-generator/issues/36,Support code generation for repositories that use both CRD and EAS,"I have a repo, where we only had CRDs. So, I used the generate-groups.sh script.
+Now, we have added an EAS in the same repo.
+Now, I have to use generate-internal-groups.sh for all types
+because I want to have a single client package.
+So, I am forced to add internal types even for CRDs now.
+
+It will be good not to have to have internal types for CRDs.
+
+cc; @sttts ",closed,False,2018-03-14 11:54:30,2018-03-14 12:53:38
+code-generator,asymmetric,https://github.com/kubernetes/code-generator/issues/37,https://api.github.com/repos/kubernetes/code-generator/issues/37,EvalSymlinks: too many links,"I'm getting an `EvalSymlinks: too many links` error when trying to generate a client:
+
+    CODEGEN_PKG=../../../k8s.io/code-generator hack/update-codegen.sh
+
+on [this](https://github.com/kinvolk/habitat-operator/tree/14ae480d50bae24dd3260a0ade8d0300da3f387b) repo.
+
+While looking into this, it seems that the error happens when generating code for the `fake` package:
+
+```shell
+❯ env CODEGEN_PKG=../../../k8s.io/code-generator hack/update-codegen.sh
+Generating deepcopy funcs
+path /home/asymmetric/code/go/src/github.com/habitat-sh/habitat-operator/pkg/apis/habitat/v1beta1
+Generating clientset for habitat:v1beta1 at github.com/habitat-sh/habitat-operator/pkg/client/clientset
+path /home/asymmetric/code/go/src/github.com/habitat-sh/habitat-operator/pkg/client/clientset/versioned
+path /home/asymmetric/code/go/src/github.com/habitat-sh/habitat-operator/pkg/client/clientset/versioned/scheme
+path /home/asymmetric/code/go/src/github.com/habitat-sh/habitat-operator/pkg/client/clientset/versioned/fake
+EvalSymlinks: too many links
+```
+
+(Note: I added the debugging statement that prints `path`).
+
+This seems to be happening [here](https://github.com/golang/tools/blob/77106db15f689a60e7d4e085d967ac557b918fb2/imports/fix.go#L798), which is called indirectly as part of the client code generation.
+
+```
+❯ uname -omr
+4.13.0-37-generic x86_64 GNU/Linux
+```
+
+Not sure if this helps, let me know if you need additional info or if I should open the issue on `gengo` or `kubernetes`.
+",closed,False,2018-03-26 13:19:50,2018-12-30 11:22:28
+code-generator,trstringer,https://github.com/kubernetes/code-generator/issues/38,https://api.github.com/repos/kubernetes/code-generator/issues/38,generate-groups.sh not creating lister and informer,"When I invoke `generate-groups.sh` by specifying all generators, informers and listers are not created in my package. Logging doesn't give any indication of failures. Below is a repro for me.
+
+Is there something I'm doing wrong in my workflow to generate and scaffold out the code for a custom resource controller?
+
+```
+$ GITHUB_USERNAME=trstringer
+$ cd $GOPATH/src/github.com/$GITHUB_USERNAME
+$ mkdir testcontroller
+$ cd testcontroller
+$ mkdir -p $GOPATH/src/github.com/$GITHUB_USERNAME/testcontroller/pkg/apis/testresource/v1
+$ echo ""package v1"" >> $GOPATH/src/github.com/$GITHUB_USERNAME/testcontroller/pkg/apis/testresource/v1/root.go
+$ go get k8s.io/code-generator/...
+$ cd $GOPATH/src/k8s.io/code-generator
+$ ./generate-groups.sh all github.com/$GITHUB_USERNAME/testcontroller/pkg/client github.com/$GITHUB_USERNAME/testcontroller/pkg/apis testresource:v1
+Generating deepcopy funcs
+Generating clientset for testresource:v1 at github.com/trstringer/testcontroller/pkg/client/clientset                                                           
+Generating listers for testresource:v1 at github.com/trstringer/testcontroller/pkg/client/listers                                                                                       
+Generating informers for testresource:v1 at github.com/trstringer/testcontroller/pkg/client/informers    
+$ cd $GOPATH/src/github.com/$GITHUB_USERNAME/testcontroller
+$ tree
+.
+└── pkg
+    ├── apis
+    │   └── testresource
+    │       └── v1
+    │           └── root.go
+    └── client
+        └── clientset
+            └── versioned
+                ├── clientset.go
+                ├── doc.go
+                ├── fake
+                │   ├── clientset_generated.go
+                │   ├── doc.go
+                │   └── register.go
+                ├── scheme
+                │   ├── doc.go
+                │   └── register.go
+                └── typed
+                    └── testresource
+                        └── v1
+                            ├── doc.go
+                            ├── fake
+                            │   ├── doc.go
+                            │   └── fake_testresource_client.go
+                            ├── generated_expansion.go
+                            └── testresource_client.go
+
+13 directories, 13 files
+```
+
+It's also worth mentioning that after the above repro, I modified the `generate-groups.sh` bash script and I added `set -x` at the top. I took the `informer-gen` and `lister-gen` commands and ran them manually. They both had zero return codes showing success, but the code was still not placed in the target package.
+
+// cc @ritazh",closed,False,2018-04-12 18:04:30,2018-04-13 15:15:46
+code-generator,etsangsplk,https://github.com/kubernetes/code-generator/issues/39,https://api.github.com/repos/kubernetes/code-generator/issues/39,"Inconsistency of generated informers and the rest when CRD names ends in ""s"" and if CRD name has capital letters within the word","For example:
+if crd kind singualr is kinesis  ->> the generated code for informers becomes kinesises , it automatically try to ""correct"" the word by adding an ""e"", but they keep kinesiss for the rest of the generated code. The crd requires plural is just adding a s to singular in order to properly create it in the k8s master.  So I cannot fix one without failing the other.
+
+Another example: 
+If my crd is called dyanmodbtable but in pkg/api/xxx/v1alpha../types.go.
+the struct I called it DynamoDbTable, again generated informers will use “DynamodbTableList” to register informers and listers. Note that is gets put ""D""bTable as ""d""btable. 
+error message when starting controller:
+*v1alpha1.DynamoDbTable: no kind “DynamodbTableList” is registered for version 
+
+Steps to invooke code-generater
+client-gen:
+	rm -rf vendor/k8s.io/code-generator
+	git clone https://github.com/kubernetes/code-generator  vendor/k8s.io/code-generator
+	cd vendor/k8s.io/code-generator && git checkout tags**/kubernetes-1.9.0**
+	./code-gen/update-codegen.sh
+
+Why are we autocorrect types all the time? If so, can we make it consistent so that when create the crd on k8s, it errors out?   Or better yet, fails the code-generation if the naming fails some rules. IT is not obvious and hard to debug.
+",closed,False,2018-04-20 18:12:25,2018-09-18 19:31:53
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/issues/40,https://api.github.com/repos/kubernetes/code-generator/issues/40,deepcopy-gen does not work with circular references,"I am trying to generate deepcopy where two types depend on each other. `DeepCopyInto` method is not generated for the alias type.
+
+Here is an example repo that shows the bug: https://github.com/tamalsaha/kube-deepcopy-bug
+Types: https://github.com/tamalsaha/kube-deepcopy-bug/blob/master/apis/demo/v1alpha1/types.go
+
+cc: @sttts ",closed,False,2018-04-22 13:10:29,2018-04-22 14:10:01
+code-generator,LiliC,https://github.com/kubernetes/code-generator/issues/41,https://api.github.com/repos/kubernetes/code-generator/issues/41,deepcopy file fails to generate if there is a missing doc.go file,"While running the deepcopy file generation, there were no error msgs indicating that something fails, just the file was not generated. Took me a bit longer to figure out I forgot to create the `doc.go` file. I think it would be useful to error out if the doc.go file is not in the correct path. I ran the following command with no doc.go file and got the same output as when it was successful:
+
+```
+./generate-groups.sh deepcopy github.com/lilic/k8s-start-stop/pkg/client github.com/lilic/k8s-start-stop/pkg/apis/ ""schedule:v1alpha1""
+
+Generating deepcopy funcs
+```
+
+cc @nikhita @sttts ",closed,False,2018-04-24 19:38:25,2018-09-23 13:30:19
+code-generator,tamalsaha,https://github.com/kubernetes/code-generator/issues/42,https://api.github.com/repos/kubernetes/code-generator/issues/42,Support generating Get method custom options in genclient,"We have a use-case where we pass extra options via query parameter to our EAS. We implement the  [`GetterWithOptions`](https://github.com/kubernetes/apiserver/blob/master/pkg/registry/rest/rest.go#L122:4) interface in rest storage.
+
+Currently there is no way to generate `Get` method with custom options. I am thinking supporting `input` arg for `Get` verb. Example:
+`// +genclient:method=Get,verb=get,input=github.com/my/app/v1beta1.MyCustomOptions`
+
+Does this sound acceptable?",closed,False,2018-05-09 17:50:26,2018-10-07 14:31:06
+code-generator,jessfraz,https://github.com/kubernetes/code-generator/issues/43,https://api.github.com/repos/kubernetes/code-generator/issues/43,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:10,2018-06-02 04:21:34
+code-generator,from-nibly,https://github.com/kubernetes/code-generator/issues/44,https://api.github.com/repos/kubernetes/code-generator/issues/44,generate-groups.sh no openapi,is there a reason the openapi-gen command is excluded from the generate-groups.sh file? can it be included?,closed,False,2018-05-30 17:15:05,2018-09-27 19:35:36
+code-generator,wryun,https://github.com/kubernetes/code-generator/issues/45,https://api.github.com/repos/kubernetes/code-generator/issues/45,deepcopy-gen does not generate correctly for []*string,"```
+zz_generated.deepcopy.go:104:13: (*in)[i].DeepCopyInto undefined (type *string has no field or method DeepCopyInto)
+```
+(i.e. attempts to call DeepCopyInfo on each *string in the array)
+
+@sttts @ash2k ",closed,False,2018-06-06 01:00:00,2018-06-21 11:15:16
+code-generator,grantr,https://github.com/kubernetes/code-generator/issues/46,https://api.github.com/repos/kubernetes/code-generator/issues/46,Why not generate defaulters in generate-groups.sh?,"I'm writing a CRD that uses defaulters. The documentation for generate-groups.sh states that it can generate defaulters (`the generators comma separated to run (deepcopy,defaulter,client,lister,informer) or ""all"".`) but it doesn't actually.
+
+Is this intentional? Defaulters do get generated for internal types, but I haven't seen a clear definition of internal versus external so I don't know what types should be internal, or why defaulters (and conversions) only apply to internal types.",closed,False,2018-06-15 18:55:07,2018-11-12 20:45:11
+code-generator,cmoulliard,https://github.com/kubernetes/code-generator/issues/47,https://api.github.com/repos/kubernetes/code-generator/issues/47,lister.go:78] unable to find ObjectMeta for any types in package,"When I run the following command 
+
+```
+ROOT_PACKAGE=""github.com/cmoulliard/k8s-team-crd""
+CUSTOM_RESOURCE_NAME=""team""
+CUSTOM_RESOURCE_VERSION=""v1""
+go get -u k8s.io/code-generator/...
+cd $GOPATH/src/k8s.io/code-generator
+./generate-groups.sh all ""$ROOT_PACKAGE/pkg/client"" ""$ROOT_PACKAGE/pkg/apis"" ""$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION""
+```
+
+on this project - https://github.com/cmoulliard/k8s-team-crd
+
+I get this error 
+
+```
+Generating deepcopy funcs
+Generating clientset for team:v1 at github.com/cmoulliard/k8s-team-crd/pkg/client/clientset
+Generating listers for team:v1 at github.com/cmoulliard/k8s-team-crd/pkg/client/listers
+F0704 21:12:08.493297    2640 lister.go:78] unable to find ObjectMeta for any types in package github.com/cmoulliard/k8s-team-crd/pkg/apis/team/v1
+```",closed,False,2018-07-04 19:18:22,2018-07-05 05:11:41
+code-generator,cmoulliard,https://github.com/kubernetes/code-generator/issues/48,https://api.github.com/repos/kubernetes/code-generator/issues/48,"Disable to generate ""Resource""SpecList and ""Resource""SpecExpansion","During the code-generation process, the following interface is created
+
+```
+// TeamSpecInterface has methods to work with TeamSpec resources.
+type TeamSpecInterface interface {
+	Create(*v1.TeamSpec) (*v1.TeamSpec, error)
+	Update(*v1.TeamSpec) (*v1.TeamSpec, error)
+	Delete(name string, options *metav1.DeleteOptions) error
+	DeleteCollection(options *metav1.DeleteOptions, listOptions metav1.ListOptions) error
+	Get(name string, options metav1.GetOptions) (*v1.TeamSpec, error)
+	List(opts metav1.ListOptions) (*v1.TeamSpecList, error)
+	Watch(opts metav1.ListOptions) (watch.Interface, error)
+	Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1.TeamSpec, err error)
+	TeamSpecExpansion
+}
+```
+
+using this type + tags description
+
+```
+import (
+	meta_v1 ""k8s.io/apimachinery/pkg/apis/meta/v1""
+)
+
+// +genclient
+// +genclient:noStatus
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// Team describes a Team
+type Team struct {
+	meta_v1.TypeMeta   `json:"",inline""`
+	meta_v1.ObjectMeta `json:""metadata,omitempty""`
+
+	Spec   TeamSpec   `json:""spec,omitempty""`
+}
+
+// TeamSpec defines the spec for a Team resource
+type TeamSpec struct {
+	Name         string `json:""name""`
+	Description  string `json:""description""`
+	Size         int    `json:""size,omitempty""`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// TeamList is a list of Team resources
+type TeamList struct {
+	meta_v1.TypeMeta `json:"",inline""`
+	meta_v1.ListMeta `json:""metadata""`
+
+	Items []Team `json:""items""`
+}
+
+```
+
+When I run the `main.go` file, then these errors are reported
+
+```
+go run main.go                                                                                                        
+# github.com/cmoulliard/k8s-team-crd/pkg/client/clientset/versioned/typed/team/v1
+pkg/client/clientset/versioned/typed/team/v1/teamspec.go:43:34: undefined: ""github.com/cmoulliard/k8s-team-crd/pkg/apis/team/v1"".TeamSpecList
+pkg/client/clientset/versioned/typed/team/v1/teamspec.go:46:2: undefined: TeamSpecExpansion
+pkg/client/clientset/versioned/typed/team/v1/teamspec.go:77:60: undefined: ""github.com/cmoulliard/k8s-team-crd/pkg/apis/team/v1"".TeamSpecList
+```
+
+Is there a way to tell to the generator to avoid to generate such `v1.TeamSpecList`, `TeamSpecExpansion` ?
+
+
+
+",closed,False,2018-07-05 07:23:58,2018-12-02 11:26:02
+code-generator,fudali113,https://github.com/kubernetes/code-generator/issues/49,https://api.github.com/repos/kubernetes/code-generator/issues/49,UpdateStatus  error: the server could not find the requested resource,"I've customized a CRD object
+```yaml
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: goodjobs.goodjob.k8s.io
+spec:
+  group: goodjob.k8s.io
+  version: v1alpha1
+  names:
+    kind: GoodJob
+    plural: goodjobs
+  scope: Namespaced
+```
+my code:
+```go
+_, err := clientset.GoodjobV1alpha1().GoodJobs(newGoodjob.Namespace).Get(goodjob.Name, metav1.GetOptions{})
+if err != nil {
+	log.Printf(""get GoodJob error, error: %s"", err.Error())
+}
+_, err = clientset.GoodjobV1alpha1().GoodJobs(newGoodjob.Namespace).UpdateStatus(goodjob)
+if err != nil {
+	log.Printf(""update GoodJob status error, error: %s"", err.Error())
+}
+```
+i can Get it, but update status get an `error: the server could not find the requested resource (put goodjobs.goodjob.k8s.io test)`
+
+
+logs:
+```
+2018/07/08 00:01:29 old ---> {""kind"":""GoodJob"",""apiVersion"":""goodjob.k8s.io/v1alpha1"",""metadata"":{""name"":""test"",""namespace"":""good-job"",""selfLink"":""/apis/goodjob.k8s.io/v1alpha1/namespaces/good-job/goodjobs/test"",""uid"":""8aa1eea4-81f2-11e8-8d5d-00163e0c1991"",""resourceVersion"":""15617721"",""creationTimestamp"":""2018-07-07T14:32:14Z"",""annotations"":{""kubectl.kubernetes.io/last-applied-configuration"":""{\""apiVersion\"":\""goodjob.k8s.io/v1alpha1\"",\""kind\"":\""GoodJob\"",\""metadata\"":{\""annotations\"":{},\""name\"":\""test\"",\""namespace\"":\""good-job\""},\""spec\"":{\""shard\"":{\""shards\"":[\""1-3\"",\""4-6\"",\""7-9\""],\""type\"":\""config\""},\""template\"":{\""metadata\"":{\""name\"":\""test\""}}},\""status\"":{\""status\"":1}}\n""}},""spec"":{""template"":{""metadata"":{""name"":""test"",""creationTimestamp"":null},""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}}},""shard"":{""type"":""config"",""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}},""shards"":[""1-3"",""4-6"",""7-9""]},""parallel"":0},""status"":{""status"":1,""pipeline"":"""",""shards"":null,""successes"":null,""fails"":null,""logs"":null}}
+2018/07/08 00:01:29 new ---> {""metadata"":{""name"":""test"",""namespace"":""good-job"",""selfLink"":""/apis/goodjob.k8s.io/v1alpha1/namespaces/good-job/goodjobs/test"",""uid"":""8aa1eea4-81f2-11e8-8d5d-00163e0c1991"",""resourceVersion"":""15617866"",""creationTimestamp"":""2018-07-07T14:32:14Z"",""annotations"":{""kubectl.kubernetes.io/last-applied-configuration"":""{\""apiVersion\"":\""goodjob.k8s.io/v1alpha1\"",\""kind\"":\""GoodJob\"",\""metadata\"":{\""annotations\"":{},\""name\"":\""test\"",\""namespace\"":\""good-job\""},\""spec\"":{\""shard\"":{\""shards\"":[\""1-3\"",\""4-6\"",\""7-9\""],\""type\"":\""config\""},\""template\"":{\""metadata\"":{\""name\"":\""test\""}}},\""status\"":{\""status\"":0}}\n""}},""spec"":{""template"":{""metadata"":{""name"":""test"",""creationTimestamp"":null},""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}}},""shard"":{""type"":""config"",""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}},""shards"":[""1-3"",""4-6"",""7-9""]},""parallel"":0},""status"":{""status"":0,""pipeline"":"""",""shards"":null,""successes"":null,""fails"":null,""logs"":null}}
+2018/07/08 00:01:34 old ---> {""metadata"":{""name"":""test"",""namespace"":""good-job"",""selfLink"":""/apis/goodjob.k8s.io/v1alpha1/namespaces/good-job/goodjobs/test"",""uid"":""8aa1eea4-81f2-11e8-8d5d-00163e0c1991"",""resourceVersion"":""15617866"",""creationTimestamp"":""2018-07-07T14:32:14Z"",""annotations"":{""kubectl.kubernetes.io/last-applied-configuration"":""{\""apiVersion\"":\""goodjob.k8s.io/v1alpha1\"",\""kind\"":\""GoodJob\"",\""metadata\"":{\""annotations\"":{},\""name\"":\""test\"",\""namespace\"":\""good-job\""},\""spec\"":{\""shard\"":{\""shards\"":[\""1-3\"",\""4-6\"",\""7-9\""],\""type\"":\""config\""},\""template\"":{\""metadata\"":{\""name\"":\""test\""}}},\""status\"":{\""status\"":0}}\n""}},""spec"":{""template"":{""metadata"":{""name"":""test"",""creationTimestamp"":null},""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}}},""shard"":{""type"":""config"",""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}},""shards"":[""1-3"",""4-6"",""7-9""]},""parallel"":0},""status"":{""status"":0,""pipeline"":"""",""shards"":null,""successes"":null,""fails"":null,""logs"":null}}
+2018/07/08 00:01:34 new ---> {""metadata"":{""name"":""test"",""namespace"":""good-job"",""selfLink"":""/apis/goodjob.k8s.io/v1alpha1/namespaces/good-job/goodjobs/test"",""uid"":""8aa1eea4-81f2-11e8-8d5d-00163e0c1991"",""resourceVersion"":""15617874"",""creationTimestamp"":""2018-07-07T14:32:14Z"",""annotations"":{""kubectl.kubernetes.io/last-applied-configuration"":""{\""apiVersion\"":\""goodjob.k8s.io/v1alpha1\"",\""kind\"":\""GoodJob\"",\""metadata\"":{\""annotations\"":{},\""name\"":\""test\"",\""namespace\"":\""good-job\""},\""spec\"":{\""shard\"":{\""shards\"":[\""1-3\"",\""4-6\"",\""7-9\""],\""type\"":\""config\""},\""template\"":{\""metadata\"":{\""name\"":\""test\""}}},\""status\"":{\""status\"":1}}\n""}},""spec"":{""template"":{""metadata"":{""name"":""test"",""creationTimestamp"":null},""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}}},""shard"":{""type"":""config"",""template"":{""metadata"":{""creationTimestamp"":null},""spec"":{""containers"":null}},""shards"":[""1-3"",""4-6"",""7-9""]},""parallel"":0},""status"":{""status"":1,""pipeline"":"""",""shards"":null,""successes"":null,""fails"":null,""logs"":null}}
+2018/07/08 00:14:12 update GoodJob status error, error: the server could not find the requested resource (put goodjobs.goodjob.k8s.io test)
+```",closed,False,2018-07-08 05:09:47,2018-10-07 12:31:29
+code-generator,antoineco,https://github.com/kubernetes/code-generator/issues/50,https://api.github.com/repos/kubernetes/code-generator/issues/50,deepcopy: val.DeepCopyinterface undefined,"The following types:
+
+```golang
+
+type Foo struct {
+	metav1.TypeMeta
+	metav1.ObjectMeta
+	Spec FooSpec
+}
+
+type FooSpec struct {
+	Parameters map[string]interface{}
+}
+```
+
+yield the following code:
+
+```golang
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *FooSpec) DeepCopyInto(out *FooSpec) {
+	*out = *in
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]interface{}, len(*in))
+		for key, val := range *in {
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				(*out)[key] = val.DeepCopyinterface{}()
+			}
+		}
+	}
+	return
+}
+```
+
+which yields the following compiler error:
+
+`val.DeepCopyinterface undefined (type interface {} is interface with no methods`",closed,False,2018-07-17 15:51:01,2018-09-04 00:28:56
+code-generator,xieydd,https://github.com/kubernetes/code-generator/issues/51,https://api.github.com/repos/kubernetes/code-generator/issues/51,generate-groups.sh Error,"When I run office example,I meet this error.Someone help me ?
+```
+sh /home/xieyd/go//src/github.com/xieydd/kubenetes-crd/hack/generate-groups.sh all github.com/xieydd/kubenetes-crd/pkg/client  github.com/xieydd/kubenetes-crd/pkg/api v1alpha
+/home/xieyd/go//src/github.com/xieydd/kubenetes-crd/hack/generate-groups.sh: line 53: `codegen::join': not a valid identifier
+make: *** [init] Error 2
+```",closed,False,2018-07-23 12:58:13,2018-07-24 06:27:55
+code-generator,cocotton,https://github.com/kubernetes/code-generator/issues/52,https://api.github.com/repos/kubernetes/code-generator/issues/52,Unable to use slices and maps inside anonymous structures,"I'm writing a Kubernetes Controller listening on an *Environment* Custom Resource.
+
+The *pkg/apis/environment/v1alpha1/types.go* has the following content:
+
+    package v1alpha1
+
+    import (
+    	meta_v1 ""k8s.io/apimachinery/pkg/apis/meta/v1""
+    )
+    
+    // +genclient
+    // +genclient:noStatus
+    // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+    
+    // Environment describes an Environment resource
+    type Environment struct {
+    	meta_v1.TypeMeta   `json:"",inline""`
+    	meta_v1.ObjectMeta `json:""metadata,omitempty""`
+    	Spec               EnvironmentSpec `json:""spec""`
+    }
+    
+    // EnvironmentSpec contains the specs for an Environment resource
+    type EnvironmentSpec struct {
+    	Services []Service `json:""services""`
+    }
+    
+    // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+    
+    // EnvironmentList is a list of Environment resources
+    type EnvironmentList struct {
+    	meta_v1.TypeMeta `json:"",inline""`
+    	meta_v1.ListMeta `json:""metadata""`
+    
+    	Items []Environment `json:""items""`
+    }
+    
+    // Service describes a Service in the Environment Custom Resource
+    type Service struct {
+    	Code       string `json:""code""`
+    	Parameters struct {
+    		Foo map[string]string `json:""foo""`
+    		Bar int               `json:""bar""`
+    	} `json:""parameters""`
+    }
+
+ 
+After running the k8s.io/code-generator/generate-groups.sh script, I end up with a faulty *pkg/apis/environment/v1alpha1/zz_generated.deepcopy.go* file. The problem comes from this generated method:
+
+    // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+    func (in *Service) DeepCopyInto(out *Service) {
+    	*out = *in
+    	in.Parameters.DeepCopyInto(&out.Parameters)
+    	return
+    }
+
+Trying to build or run this code will give me the following error
+
+    pkg/apis/environment/v1alpha1/zz_generated.deepcopy.go:113:15: in.Parameters.DeepCopyInto undefined (type struct { Foo map[string]string ""json:\""foo\""""; Bar int ""json:\""bar\"""" } has no field or method DeepCopyInto)
+
+As soon as I have a *Map* or a *Slice* inside an anonymous struct included in the *Parameters* struct, I encounter this error.
+
+**WORKAROUND**
+
+A workaround to this is to create a named type that will contain the map. For example I refactored the *Service* struct like this:
+
+    // Service describes a Service in the Environment Custom Resource
+    type Service struct {
+    	Code       string `json:""code""`
+    	Parameters FooBar `json:""parameters""`
+    }
+    
+    type FooBar struct {
+    	Foo map[string]string `json:""foo""`
+    	Bar int               `json:""bar""`
+    }
+
+The generated `func (in *Service) DeepCopyInto(out *Service)` does not change, but the following 2 new methods are created:
+
+    // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+    func (in *FooBar) DeepCopyInto(out *FooBar) {
+    	*out = *in
+    	if in.Foo != nil {
+    		in, out := &in.Foo, &out.Foo
+    		*out = make(map[string]string, len(*in))
+    		for key, val := range *in {
+    			(*out)[key] = val
+    		}
+    	}
+    	return
+    }
+    
+    // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new FooBar.
+    func (in *FooBar) DeepCopy() *FooBar {
+    	if in == nil {
+    		return nil
+    	}
+    	out := new(FooBar)
+    	in.DeepCopyInto(out)
+    	return out
+    }
+
+And now, I don't have any issues building and running the code.
+
+Is there a way to use maps and slices inside of anonymous func with the code-generator?",closed,False,2018-08-01 12:14:23,2018-11-30 01:17:06
+code-generator,rbtcollins,https://github.com/kubernetes/code-generator/issues/53,https://api.github.com/repos/kubernetes/code-generator/issues/53,Support for different plural forms (feature request),"We have a custom resource with a non-s plural form (Lets say a Bison CRD) - the plural of Bison is Bison.
+
+The API server etc all seem to handle this fine, but I can't see a tag to control this in code-gen at the moment. Right now I'm handling that by post-processing the generated code (sed -e /bisons/bison/) but this is suboptimal.
+
+",open,False,2018-08-13 11:36:01,2019-03-12 18:22:50
+code-generator,sgnn7,https://github.com/kubernetes/code-generator/issues/54,https://api.github.com/repos/kubernetes/code-generator/issues/54,Add ability to create binary versions of k8s/code-generator helpers,"Currently, given that there is no good option to run code generators in a [go modules](https://github.com/kubernetes/kubernetes/issues/67566) environment and given the need for some people to run the code generators in a minimal environment, some type of build script should be ideally available for this task to create portable binary runners.
+
+Relevant go mod Issue: https://github.com/kubernetes/kubernetes/issues/67566
+Related issue: (closed for age): https://github.com/kubernetes/code-generator/issues/15
+
+I intend to have a PR open for this today
+
+/kind feature
+/sig api-machinery",closed,False,2018-08-24 17:05:53,2018-08-24 17:14:10
+code-generator,asdfsx,https://github.com/kubernetes/code-generator/issues/55,https://api.github.com/repos/kubernetes/code-generator/issues/55,Failed making a parser,"I'm trying to create a brand new apiserver using code-generator. So I create an empty golang project, and add this project into vendor
+```
+mkdir ${GOPATH}/src/github.com/asdfsx/getkubeconfig
+cd ${GOPATH}/src/github.com/asdfsx/getkubeconfig
+glide init
+glide get k8s.io/code-generator#kubernetes-1.11.3
+```
+then I try to generator the code as follow
+```
+vendor/k8s.io/code-generator/generate-groups.sh \
+all \
+github.com/asdfsx/getkubeconfig/pkg/client \
+github.com/asdfsx/getkubeconfig/pkg/apis \
+example:v1
+```
+but got the error
+```
+Generating deepcopy funcs
+F0910 19:18:35.552948   12153 main.go:81] Error: Failed making a parser: unable to add directory ""github.com/asdfsx/getkubeconfig/pkg/apis/example/v1"": unable to import ""github.com/asdfsx/getkubeconfig/pkg/apis/example/v1"": cannot find package ""github.com/asdfsx/getkubeconfig/pkg/apis/example/v1"" in any of:
+        /Users/sunxia/gocode/src/github.com/asdfsx/getkubeconfig/vendor/github.com/asdfsx/getkubeconfig/pkg/apis/example/v1 (vendor tree)
+        /usr/local/opt/go/libexec/src/github.com/asdfsx/getkubeconfig/pkg/apis/example/v1 (from $GOROOT)
+        /Users/sunxia/gocode/src/github.com/asdfsx/getkubeconfig/pkg/apis/example/v1 (from $GOPATH)
+```
+
+and if I create the direcotry `/Users/sunxia/gocode/src/github.com/asdfsx/getkubeconfig/pkg/apis/example/v1` then the error change to 
+```
+Generating deepcopy funcs
+F0910 19:19:51.352507   12172 main.go:81] Error: Failed making a parser: unable to add directory ""github.com/asdfsx/getkubeconfig/pkg/apis/example/v1"": No files for pkg ""github.com/asdfsx/getkubeconfig/pkg/apis/example/v1"": map[parser.importPathString][]parser.parsedFile{}
+```
+Can someone tell me what's going wrong? thx a lot!",closed,False,2018-09-10 11:22:24,2018-09-11 07:22:51
+code-generator,wking,https://github.com/kubernetes/code-generator/issues/56,https://api.github.com/repos/kubernetes/code-generator/issues/56,Should consumers use deepcopy-gen from here or gengo?,"The implementations are clearly related, but not identical:
+
+```console
+$ diff -ru gengo/examples/deepcopy-gen code-generator/cmd/deepcopy-gen
+Only in code-generator/cmd/deepcopy-gen: args
+Only in gengo/examples/deepcopy-gen: generators
+Only in gengo/examples/deepcopy-gen: .gitignore
+diff -ru gengo/examples/deepcopy-gen/main.go code-generator/cmd/deepcopy-gen/main.go
+--- gengo/examples/deepcopy-gen/main.go	2018-09-18 15:00:39.748725576 -0700
++++ code-generator/cmd/deepcopy-gen/main.go	2018-09-18 14:54:36.693265814 -0700
+@@ -16,21 +16,16 @@
+ 
+ // deepcopy-gen is a tool for auto-generating DeepCopy functions.
+ //
+-// Given a list of input directories, it will generate DeepCopy and DeepCopyInto
+-// methods that efficiently perform a full deep-copy of each type. If these
+-// already exist (are predefined by the developer), they are used instead of
+-// generating new ones.
++// Given a list of input directories, it will generate functions that
++// efficiently perform a full deep-copy of each type.  For any type that
++// offers a `.DeepCopy()` method, it will simply call that.  Otherwise it will
++// use standard value assignment whenever possible.  If that is not possible it
++// will try to call its own generated copy function for the type, if the type is
++// within the allowed root packages.  Failing that, it will fall back on
++// `conversion.Cloner.DeepCopy(val)` to make the copy.  The resulting file will
++// be stored in the same directory as the processed source package.
+ //
+-// If interfaces are referenced in types, it is expected that corresponding
+-// DeepCopyInterfaceName methods exist, e.g. DeepCopyObject for runtime.Object.
+-// These can be predefined by the developer or generated through tags, see below.
+-// They must be added to the interfaces themselves manually, e.g.
+-//   type Object interface {
+-//     ...
+-//     DeepCopyObject() Object
+-//   }
+-//
+-// All generation is governed by comment tags in the source.  Any package may
++// Generation is governed by comment tags in the source.  Any package may
+ // request DeepCopy generation by including a comment in the file-comments of
+ // one file, of the form:
+ //   // +k8s:deepcopy-gen=package
+@@ -40,44 +35,45 @@
+ //   // +k8s:deepcopy-gen=true
+ //
+ // When generating for a whole package, individual types may opt out of
+-// DeepCopy generation by specifying a comment on the type definition of the form:
++// DeepCopy generation by specifying a comment on the of the form:
+ //   // +k8s:deepcopy-gen=false
+ //
+-// Additional DeepCopyInterfaceName methods can be generated by sepcifying a
+-// comment on the type definition of the form:
+-//   // +k8s:deepcopy-gen:interfaces=k8s.io/kubernetes/runtime.Object,k8s.io/kubernetes/runtime.List
+-// This leads to the generation of DeepCopyObject and DeepCopyList with the given
+-// interfaces as return types. We say that the tagged type implements deepcopy for the
+-// interfaces.
+-//
+-// The deepcopy funcs for interfaces using ""+k8s:deepcopy-gen:interfaces"" use the pointer
+-// of the type as receiver. For those special cases where the non-pointer object should
+-// implement the interface, this can be done with:
+-//   // +k8s:deepcopy-gen:nonpointer-interfaces=true
++// Note that registration is a whole-package option, and is not available for
++// individual types.
+ package main
+ 
+ import (
+-	""k8s.io/gengo/args""
+-	""k8s.io/gengo/examples/deepcopy-gen/generators""
++	""flag""
++	""path/filepath""
+ 
+ 	""github.com/golang/glog""
+ 	""github.com/spf13/pflag""
++	""k8s.io/gengo/args""
++	""k8s.io/gengo/examples/deepcopy-gen/generators""
++
++	generatorargs ""k8s.io/code-generator/cmd/deepcopy-gen/args""
++	""k8s.io/code-generator/pkg/util""
+ )
+ 
+ func main() {
+-	arguments := args.Default()
++	genericArgs, customArgs := generatorargs.NewDefaults()
+ 
+ 	// Override defaults.
+-	arguments.OutputFileBaseName = ""deepcopy_generated""
++	// TODO: move this out of deepcopy-gen
++	genericArgs.GoHeaderFilePath = filepath.Join(args.DefaultSourceTree(), util.BoilerplatePath())
+ 
+-	// Custom args.
+-	customArgs := &generators.CustomArgs{}
+-	pflag.CommandLine.StringSliceVar(&customArgs.BoundingDirs, ""bounding-dirs"", customArgs.BoundingDirs,
+-		""Comma-separated list of import paths which bound the types for which deep-copies will be generated."")
+-	arguments.CustomArgs = customArgs
++	genericArgs.AddFlags(pflag.CommandLine)
++	customArgs.AddFlags(pflag.CommandLine)
++	flag.Set(""logtostderr"", ""true"")
++	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
++	pflag.Parse()
++
++	if err := generatorargs.Validate(genericArgs); err != nil {
++		glog.Fatalf(""Error: %v"", err)
++	}
+ 
+ 	// Run it.
+-	if err := arguments.Execute(
++	if err := genericArgs.Execute(
+ 		generators.NameSystems(),
+ 		generators.DefaultNameSystem(),
+ 		generators.Packages,
+Only in gengo/examples/deepcopy-gen: Makefile
+Only in gengo/examples/deepcopy-gen: output_tests
+```
+
+If this repository is supposed to be the canonical home, I'd expect the tests to move over here and all of `examples/deepcopy-gen` to be removed from gengo (to be replaced with a link pointing at this repo, if folks wanted an example of gengo in action?).  As it stands, I'm not clear if I should be recommending:
+
+```console
+$ go get -u k8s.io/gengo/examples/deepcopy-gen
+```
+
+or:
+
+```console
+$ go get -u k8s.io/code-generator/cmd/deepcopy-gen
+```",closed,False,2018-09-18 22:04:17,2019-02-15 23:30:23
+code-generator,tcolgate,https://github.com/kubernetes/code-generator/issues/57,https://api.github.com/repos/kubernetes/code-generator/issues/57,go modules support,"The generators insist on putting generated code into the GOPATH, rather than relative to the local directory the tool is running in.
+
+For the simplest use case of generating code for a single controller, it seems like it should be possible to support building/generating outsisde of a GOPATH, using go modules. It's not clear to me what other use cases this tool supports, and/or if using it outside of GOPATH makes sense (hopefully it can, as I think GOPATH's long term support is in question)",open,False,2018-10-03 12:09:04,2019-03-12 18:11:39
+code-generator,jsobon-codi,https://github.com/kubernetes/code-generator/issues/58,https://api.github.com/repos/kubernetes/code-generator/issues/58,"Type k8s.io/apimachinery/pkg/runtime.Object is not an interface, but: """"","I have a simple setup, generating a client for Pod and Pod list, yet it fails on `Generating deepcopy funcs` step with the following error on two different machines:
+```shell
+F1024 07:57:45.408268    1013 main.go:81] Error: Failed executing generator: some packages had errors:
+type ""k8s.io/apimachinery/pkg/runtime.Object"" in k8s:deepcopy-gen:interfaces tag of type k8s.io/apimachinery/pkg/runtime.Object is not an interface, but: """"
+```
+I have set up the following Dockerfile, so that anybody can reproduce (in a way):  
+```Dockerfile
+FROM golang:1.10.1-stretch
+WORKDIR $GOPATH
+
+COPY . src/github.com/jsobon-codi/my-client
+WORKDIR src/github.com/jsobon-codi/my-client
+
+RUN go get -u k8s.io/code-generator/...
+RUN go get -d k8s.io/sample-controller
+
+RUN cp -r $GOPATH/src/k8s.io/sample-controller/pkg/apis/samplecontroller ./pkg/apis/samplecontroller.k8s.io
+
+RUN bash -xe ./scripts/update-codegen.sh
+```
+
+Which results in this error message:
+``` shell
+$ docker build -t my-client .
+Sending build context to Docker daemon  31.85MB
+Step 1/8 : FROM golang:1.10.1-stretch
+(...)
+Step 2/8 : WORKDIR $GOPATH
+(...)
+Step 3/8 : COPY . src/github.com/jsobon-codi/my-client
+(...)
+Step 4/8 : WORKDIR src/github.com/jsobon-codi/my-client
+(...)
+Step 5/8 : RUN go get -u k8s.io/code-generator/...
+(...)
+Step 6/8 : RUN go get -d k8s.io/sample-controller
+(...)
+Step 7/8 : RUN cp -r $GOPATH/src/k8s.io/sample-controller/pkg/apis/samplecontroller ./pkg/apis/samplecontroller.k8s.io
+(...)
+Step 8/8 : RUN bash -xe ./scripts/update-codegen.sh
+(...)
++ ROOT_PACKAGE=github.com/jsobon-codi/my-client
++ CUSTOM_API_GROUP_NAME=samplecontroller.k8s.io
++ CUSTOM_RESOURCE_VERSION=v1alpha1
++ go get -u k8s.io/code-generator/...
++ cd /go/src/k8s.io/code-generator
++ ./generate-groups.sh all github.com/jsobon-codi/my-client/pkg/client github.com/jsobon-codi/my-client/pkg/apis samplecontroller.k8s.io:v1alpha1
+Generating deepcopy funcs
+F1024 11:34:42.764488     321 main.go:81] Error: Failed executing generator: some packages had errors:
+type ""k8s.io/apimachinery/pkg/runtime.Object"" in k8s:deepcopy-gen:interfaces tag of type k8s.io/apimachinery/pkg/runtime.Object is not an interface, but: """"
+The command '/bin/sh -c bash -xe ./scripts/update-codegen.sh' returned a non-zero code: 255
+```
+I know this might be too specific, but I'll appreciate any hints and/or help.
+",closed,False,2018-10-25 09:07:30,2019-03-02 03:08:16
+code-generator,luguoxiang,https://github.com/kubernetes/code-generator/issues/59,https://api.github.com/repos/kubernetes/code-generator/issues/59,Why informer-gen need genclient:nonNamespaced annotated by SecondClosestCommentLines,"I created a custom resource named Installation and add following annotation so that code-generator can generate code for me. The annotation works for deepcopy-gen and client-gen, but it seems informer-gen can not recognize  ""genclient:nonNamespaced"".
+```
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +genclient
+// +genclient:nonNamespaced
+type Installation struct {
+```
+After reading the code informer-gen/generaters/versioninterfaces.go , It seems the annotation must be written like following(SecondClosestCommentLines):
+```
+// +genclient:nonNamespaced
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +genclient
+```
+Why informer-gen need the annotation written like this?
+",open,False,2018-10-30 05:41:41,2019-01-28 16:12:14
+code-generator,dims,https://github.com/kubernetes/code-generator/pull/60,https://api.github.com/repos/kubernetes/code-generator/issues/60,Switch from glog to klog,"Change-Id: I49cb7d59bd8798cb5a41c7e9a19aa59fdb260aca
+
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",closed,True,2018-11-09 03:57:10,2018-11-09 03:57:53
+code-generator,booxter,https://github.com/kubernetes/code-generator/pull/61,https://api.github.com/repos/kubernetes/code-generator/issues/61,Expose object tracker for fake clientsets,"Not every object kind can be registered via tracker .Add() called as part of
+SimpleClientset initialization. This is because .Add() relies on
+UnsafeGuessKindToResource to convert object kinds into resource type names,
+which is broken for some resources. An example of an affected kind is
+NetworkAttachmentDefinitions CRD that uses network-attachment-definitions as
+its resource type name. When UnsafeGuessKindToResource is called for this kind,
+it returns networkattachmentdefinitions (without dashes).
+
+As per the comment inside .Add, kinds affected by UnsafeGuessKindToResource
+deficiencies should instead register objects using tracker .Create() method.
+Problem is, current SimpleClientset struct definition doesn't expose the object
+tracker in any way, which makes it impossible to properly register these kinds
+at all.
+
+To address the issue, this change modifies the definition of SimpleClientset
+struct to expose the object tracker used via Tracker() method.
+
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",closed,True,2018-11-14 23:10:58,2018-11-14 23:30:27
+code-generator,kylehodgetts,https://github.com/kubernetes/code-generator/issues/62,https://api.github.com/repos/kubernetes/code-generator/issues/62,No documentation for genclient tags,"I'm trying to find a list of tags available and what they all do but I can't find them in the repo. Does such a document exist?
+
+https://medium.com/@trstringer/create-kubernetes-controllers-for-core-and-custom-resources-62fc35ad64a3
+
+This is the best upto date article I've found regarding code generation",open,False,2019-01-10 13:57:29,2019-02-05 14:06:32
+code-generator,owenliang,https://github.com/kubernetes/code-generator/issues/63,https://api.github.com/repos/kubernetes/code-generator/issues/63,The lister doesn't use the right key format when namespace is empty.,"The key format in informer's store is ""namespace/name"" if namespace is not empty else ""name"" only.
+
+But the generated lister doesn't follow this rule:
+```
+// Get retrieves the Nginx from the indexer for a given namespace and name.
+func (s nginxNamespaceLister) Get(name string) (*v1.Nginx, error) {
+	obj, exists, err := s.indexer.GetByKey(s.namespace + ""/"" + name)
+	if err != nil {
+		return nil, err
+	}
+	if !exists {
+		return nil, errors.NewNotFound(v1.Resource(""nginx""), name)
+	}
+	return obj.(*v1.Nginx), nil
+}
+
+```
+
+and result into not founding error below：
+
+```
+        // key is ""my-nginx""
+	if namespace, name, err = cache.SplitMetaNamespaceKey(key); err != nil {
+		goto FAIL
+	}
+        // namespace is empty, name is my-nginx
+	if nginx, err = nginxController.NginxInformer.Lister().Nginxes(namespace).Get(name); err != nil {
+		goto FAIL
+	}
+```
+
+nginx.mycompany.com ""my-nginx"" not found
+
+
+So I have to fix it by myself:
+
+```
+
+// Get retrieves the Nginx from the indexer for a given namespace and name.
+func (s nginxNamespaceLister) Get(name string) (*v1.Nginx, error) {
+	var (
+		key string
+	)
+
+	if len(s.namespace) != 0 {
+		key = s.namespace + ""/"" + name
+	} else {
+		key = name
+	}
+
+	obj, exists, err := s.indexer.GetByKey(key)
+	if err != nil {
+		return nil, err
+	}
+	if !exists {
+		return nil, errors.NewNotFound(v1.Resource(""nginx""), name)
+	}
+	return obj.(*v1.Nginx), nil
+}
+
+```
+
+any help, thanks.",open,False,2019-01-11 08:34:40,2019-01-11 08:34:40
+code-generator,followumesh,https://github.com/kubernetes/code-generator/issues/64,https://api.github.com/repos/kubernetes/code-generator/issues/64,unable to find ObjectMeta for any types in package github.com/sample-controller/pkg/apis/myreq/v1,"I referred to issue #47. However, it appears to be something else.
+I'd appreciate any hints and/or help.
+```
+Generating clientset for myreq:v1 at github.com/sample-controller/pkg/client/clientset
+Generating listers for myreq:v1 at github.com/sample-controller/pkg/client/listers
+F0301 19:22:28.701110   12084 lister.go:78] unable to find ObjectMeta for any types in package github.com/sample-controller/pkg/apis/myreq/v1
+
+```",open,False,2019-03-02 03:28:19,2019-03-02 03:32:07
+code-generator,Cospotato,https://github.com/kubernetes/code-generator/issues/65,https://api.github.com/repos/kubernetes/code-generator/issues/65,Cannot generate code,"## What I do?
+
+```
+vendor/k8s.io/code-generator/generate-groups.sh all git.0x233.cn/cospotato/sandbox-controller/pkg/client git.0x233.cn/cospotato/sample-controller/pkg/apis ""samplecontroller:v1alpha1""
+```
+
+## What I get?
+
+```
+Generating deepcopy funcs
+F0304 17:22:55.438673   12528 main.go:82] Error: Failed making a parser: unable to add directory ""git.0x233.cn/cospotato/sample-controller/pkg/apis/samplecontroller/v1alpha1"": unable to import ""git.0x233.cn/cospotato/sample-controller/pkg/apis/samplecontroller/v1alpha1"": cannot find package ""git.0x233.cn/cospotato/sample-controller/pkg/apis/samplecontroller/v1alpha1"" in any of:
+        /Users/CosPotato/go/src/git.0x233.cn/cospotato/sample-controller/vendor/git.0x233.cn/cospotato/sample-controller/pkg/apis/samplecontroller/v1alpha1 (vendor tree)
+        /usr/local/go/src/git.0x233.cn/cospotato/sample-controller/pkg/apis/samplecontroller/v1alpha1 (from $GOROOT)
+        /Users/CosPotato/go/src/git.0x233.cn/cospotato/sample-controller/pkg/apis/samplecontroller/v1alpha1 (from $GOPATH)
+
+```
+
+## echo $GOPATH
+
+```
+/Users/CosPotato/go
+```
+
+### pwd
+
+```
+/Users/CosPotato/go/src/git.0x233.cn/cospotato/sample-controller
+```",closed,False,2019-03-04 09:27:34,2019-03-04 09:59:12
+code-generator,joelsmith,https://github.com/kubernetes/code-generator/pull/66,https://api.github.com/repos/kubernetes/code-generator/issues/66,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:52:49,2019-03-09 01:19:23
+code-generator,ll837448792,https://github.com/kubernetes/code-generator/issues/67,https://api.github.com/repos/kubernetes/code-generator/issues/67,deepcopy-gen cannot recognize alias,"I have a type like:
+
+type MyType string
+And deepcopy-gen report following error：
+
+deepcopy.go:866] Hit an unsupported type invalid type
+
+![my code](https://user-images.githubusercontent.com/21979752/54881999-b296df80-4e90-11e9-8521-2bd86705b807.png)
+
+So I have to remove the alias and use string directly. Does i miss something ?
+
+![execute error info](https://user-images.githubusercontent.com/21979752/54881915-ef160b80-4e8f-11e9-9c32-f9eaa7e85c93.png)
+
+Maybe the problem same as issues：https://github.com/kubernetes-incubator/apiserver-builder-alpha/issues/279 
+
+the bug fixed by https://github.com/kubernetes-incubator/apiserver-builder-alpha/pull/321
+",closed,False,2019-03-24 15:59:21,2019-03-24 22:55:03

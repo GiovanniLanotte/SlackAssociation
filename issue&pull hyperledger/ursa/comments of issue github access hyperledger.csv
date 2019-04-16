@@ -1,0 +1,68 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/ursa/issues/16,https://api.github.com/repos/hyperledger/ursa/issues/comments/476944090,https://github.com/hyperledger/ursa/pull/16#issuecomment-476944090,dhuseby,I couldn't tell exactly what failed in the CI pass from the logs I saw. Mike?,2019-03-27 02:42:19,2019-03-27 02:42:19
+https://api.github.com/repos/hyperledger/ursa/issues/16,https://api.github.com/repos/hyperledger/ursa/issues/comments/476944262,https://github.com/hyperledger/ursa/pull/16#issuecomment-476944262,dhuseby,"Oh, a download of a docker image failed.",2019-03-27 02:42:56,2019-03-27 02:42:56
+https://api.github.com/repos/hyperledger/ursa/issues/6,https://api.github.com/repos/hyperledger/ursa/issues/comments/448404301,https://github.com/hyperledger/ursa/pull/6#issuecomment-448404301,mikelodder7,"> The signature interface and implementations look different between ursa and crypto-lib can you clarify?
+
+They shouldn't. Which part is different?",2018-12-18 23:01:55,2018-12-18 23:01:55
+https://api.github.com/repos/hyperledger/ursa/issues/6,https://api.github.com/repos/hyperledger/ursa/issues/comments/448427255,https://github.com/hyperledger/ursa/pull/6#issuecomment-448427255,dcmiddle,"> > The signature interface and implementations look different between ursa and crypto-lib can you clarify?
+> 
+> They shouldn't. Which part is different?
+
+https://pastebin.com/9hCf74h5",2018-12-19 00:45:47,2018-12-19 00:45:47
+https://api.github.com/repos/hyperledger/ursa/issues/6,https://api.github.com/repos/hyperledger/ursa/issues/comments/448641955,https://github.com/hyperledger/ursa/pull/6#issuecomment-448641955,mikelodder7,"> > > The signature interface and implementations look different between ursa and crypto-lib can you clarify?
+> > 
+> > 
+> > They shouldn't. Which part is different?
+> 
+> https://pastebin.com/9hCf74h5
+
+I'm not seeing any changes. When I do a diff on crypto-lib and ursa I don't see any difference in API.
+The implementations slightly changed due to a newer version of secp256k1 from 0.10 to 0.12 and amcl. The tests remain the same. Its still API compatible.",2018-12-19 15:46:42,2018-12-19 15:46:42
+https://api.github.com/repos/hyperledger/ursa/issues/6,https://api.github.com/repos/hyperledger/ursa/issues/comments/448656734,https://github.com/hyperledger/ursa/pull/6#issuecomment-448656734,dcmiddle,"> > > > The signature interface and implementations look different between ursa and crypto-lib can you clarify?
+> > > 
+> > > 
+> > > They shouldn't. Which part is different?
+> > 
+> > 
+> > https://pastebin.com/9hCf74h5
+> 
+> I'm not seeing any changes. When I do a diff on crypto-lib and ursa I don't see any difference in API.
+> The implementations slightly changed due to a newer version of secp256k1 from 0.10 to 0.12 and amcl. The tests remain the same. Its still API compatible.
+
+Sorry somehow lost most of the paste into pastebin. 
+https://pastebin.com/FES0fu0d
+",2018-12-19 16:26:18,2018-12-19 16:26:18
+https://api.github.com/repos/hyperledger/ursa/issues/6,https://api.github.com/repos/hyperledger/ursa/issues/comments/449420142,https://github.com/hyperledger/ursa/pull/6#issuecomment-449420142,mikelodder7,"> We need to edit the readme file to get rid of the Hypleredger labs references.
+
+I'm not seeing any references to Hyperledger labs anymore.",2018-12-21 15:37:34,2018-12-21 15:37:34
+https://api.github.com/repos/hyperledger/ursa/issues/5,https://api.github.com/repos/hyperledger/ursa/issues/comments/446682246,https://github.com/hyperledger/ursa/pull/5#issuecomment-446682246,mikelodder7,This looks fine. Once you fix the DCO I can merge it. See the steps for fixing it [here](https://github.com/hyperledger/ursa/pull/5/checks),2018-12-12 17:57:34,2018-12-12 17:57:34
+https://api.github.com/repos/hyperledger/ursa/issues/5,https://api.github.com/repos/hyperledger/ursa/issues/comments/446978850,https://github.com/hyperledger/ursa/pull/5#issuecomment-446978850,dhuseby,"+1
+
+Thanks for updating the docs.  In the future I'd like to see us use a more robust file integrity mechanism.  Something like [minisign](https://jedisct1.github.io/minisign/) or the OpenBSD signify tool.",2018-12-13 14:03:12,2018-12-13 14:03:12
+https://api.github.com/repos/hyperledger/ursa/issues/5,https://api.github.com/repos/hyperledger/ursa/issues/comments/447331670,https://github.com/hyperledger/ursa/pull/5#issuecomment-447331670,hartm,"This is, in general, a good change.  But why is the checksum using a SHA-1 hash instead of a more modern (and less broken) hash function?
+
+And +1 to Dave.  We will need a more robust tool in the long run. ",2018-12-14 13:53:00,2018-12-14 13:53:00
+https://api.github.com/repos/hyperledger/ursa/issues/5,https://api.github.com/repos/hyperledger/ursa/issues/comments/454558981,https://github.com/hyperledger/ursa/pull/5#issuecomment-454558981,mikelodder7,No longer applicable.,2019-01-15 21:30:48,2019-01-15 21:30:48
+https://api.github.com/repos/hyperledger/ursa/issues/4,https://api.github.com/repos/hyperledger/ursa/issues/comments/446626308,https://github.com/hyperledger/ursa/pull/4#issuecomment-446626308,EvertonMelo,"please confirm the way to iterate with the repository, whether it will be through Github (mirror) or https://gerrit.hyperledger.org/",2018-12-12 15:23:48,2018-12-12 15:23:48
+https://api.github.com/repos/hyperledger/ursa/issues/4,https://api.github.com/repos/hyperledger/ursa/issues/comments/446681590,https://github.com/hyperledger/ursa/pull/4#issuecomment-446681590,mikelodder7,"The way to iterate is definitely through GitHub. I can accept this PR once you apply your DCO.
+It should be easy to do `git commit --amend --signoff`",2018-12-12 17:55:38,2018-12-12 17:55:38
+https://api.github.com/repos/hyperledger/ursa/issues/4,https://api.github.com/repos/hyperledger/ursa/issues/comments/446712645,https://github.com/hyperledger/ursa/pull/4#issuecomment-446712645,EvertonMelo,"@mikelodder7 Okay, I WILL got this",2018-12-12 19:26:23,2018-12-12 19:26:23
+https://api.github.com/repos/hyperledger/ursa/issues/4,https://api.github.com/repos/hyperledger/ursa/issues/comments/446979324,https://github.com/hyperledger/ursa/pull/4#issuecomment-446979324,dhuseby,+1,2018-12-13 14:04:38,2018-12-13 14:04:38
+https://api.github.com/repos/hyperledger/ursa/issues/4,https://api.github.com/repos/hyperledger/ursa/issues/comments/454558904,https://github.com/hyperledger/ursa/pull/4#issuecomment-454558904,mikelodder7,Out of date now and no longer applicable,2019-01-15 21:30:32,2019-01-15 21:30:32
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443276566,https://github.com/hyperledger/ursa/pull/2#issuecomment-443276566,jovfer,@mikelodder7 fill free to close this PR and re-open from your repo,2018-11-30 17:24:51,2018-11-30 17:24:51
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443289277,https://github.com/hyperledger/ursa/pull/2#issuecomment-443289277,mikelodder7,I actually think let’s just use this to start. That’s @jovfer ,2018-11-30 18:07:21,2018-11-30 18:07:21
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443348750,https://github.com/hyperledger/ursa/pull/2#issuecomment-443348750,dcmiddle,"Is the intent of this PR to bring over the history correlated with crypto-lib/libhl-crypto prior to the point that we worked on the joint signing API?
+I see a wrappers directory in this PR that is not part of crypto-lib. Is that intentional? ",2018-11-30 21:43:58,2018-11-30 21:43:58
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443375600,https://github.com/hyperledger/ursa/pull/2#issuecomment-443375600,hartm,"@dcmiddle Yes, the point is to bring over the history.",2018-11-30 23:58:14,2018-11-30 23:58:14
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443389797,https://github.com/hyperledger/ursa/pull/2#issuecomment-443389797,mikelodder7,Yes I couldn’t get the history the first time but have worked it out now,2018-12-01 01:57:45,2018-12-01 01:57:45
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443581594,https://github.com/hyperledger/ursa/pull/2#issuecomment-443581594,dcmiddle,"Let me rephrase... where do the two histories correlate and can you clarify why there's an additional directory structure that doesn't exist in crypto-lib?
+i.e. are you trying to replace this commit https://github.com/hyperledger-labs/crypto-lib/commit/7d271e9bf62859720054c32d74119090a77a7c72 with the original indy history and then lay the rest of the crypto-lib history over it? or is this at a later point right before we added the common signing API... ?",2018-12-03 03:54:27,2018-12-03 03:54:27
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/443804107,https://github.com/hyperledger/ursa/pull/2#issuecomment-443804107,mikelodder7,"> Let me rephrase... where do the two histories correlate and can you clarify why there's an additional directory structure that doesn't exist in crypto-lib?
+> i.e. are you trying to replace this commit [hyperledger-labs/crypto-lib@7d271e9](https://github.com/hyperledger-labs/crypto-lib/commit/7d271e9bf62859720054c32d74119090a77a7c72) with the original indy history and then lay the rest of the crypto-lib history over it? or is this at a later point right before we added the common signing API... ?
+
+
+Yes so this would be the starting point for ursa then take existing crypt-lib and lay it on top of it. 
+crypto-lib started just like this then I began to modify it to have crypto-lib looks today. So this is the first PR. The next one would take crypto-lib as is and merge it with this. The third one would take z-mix and merge it.",2018-12-03 17:53:39,2018-12-03 20:16:38
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/444523850,https://github.com/hyperledger/ursa/pull/2#issuecomment-444523850,dcmiddle,Ok that works for me. I added Manu as a reviewer so we have a second diverse reviewer.,2018-12-05 15:24:15,2018-12-05 15:24:15
+https://api.github.com/repos/hyperledger/ursa/issues/2,https://api.github.com/repos/hyperledger/ursa/issues/comments/444525592,https://github.com/hyperledger/ursa/pull/2#issuecomment-444525592,mikelodder7,@vaporos would be another good one or @dhuseby,2018-12-05 15:28:48,2018-12-05 15:28:48
+https://api.github.com/repos/hyperledger/ursa/issues/1,https://api.github.com/repos/hyperledger/ursa/issues/comments/440059906,https://github.com/hyperledger/ursa/pull/1#issuecomment-440059906,jwagantall,DCO enabled now,2018-11-19 22:10:18,2018-11-19 22:10:18

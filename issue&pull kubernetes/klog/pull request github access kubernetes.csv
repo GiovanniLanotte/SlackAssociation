@@ -1,0 +1,485 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+klog,https://api.github.com/repos/kubernetes/klog/pulls/1,https://github.com/kubernetes/klog/pull/1,dims,Switch package names after initial import,"Added a .travis.yml as well for testing
+
+Change-Id: Idf891e1bc4333e69da9535113702d802efd7993d",[],1,2018-10-25 22:28:11,2018-10-25 22:36:36,2018-10-25 22:36:37,False,,,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/2,https://github.com/kubernetes/klog/pull/2,dims,Switch package names after initial import,Change-Id: Idf891e1bc4333e69da9535113702d802efd7993d,[],1,2018-10-25 22:38:07,2018-10-25 22:38:16,2018-11-20 20:29:06,True,2018-10-25 22:38:16,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/3,https://github.com/kubernetes/klog/pull/3,dims,Add .travis.yml,Change-Id: I56aee7ef85509e0336b1b1fc239cfd1003e5b2ee,[],1,2018-10-25 22:40:45,2018-10-25 22:58:32,2018-11-20 20:29:05,True,2018-10-25 22:58:32,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/4,https://github.com/kubernetes/klog/pull/4,dims,Add option log-file,"- Move all flag initialization to a single init() block
+- add a new option `log-file`
+- Avoid creating directories when `log-file` is specified
+
+Change-Id: I76a79dcbcec0587f8056637577bf53ece370896a",[],1,2018-10-25 23:24:04,2018-10-25 23:26:30,2018-11-20 20:29:04,True,2018-10-25 23:26:30,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/5,https://github.com/kubernetes/klog/pull/5,dims,Ability to redirect glog output to an alternate destination,Change-Id: Ic1ab5beaaf65db686078add4fb71948ce1e8b638,[],1,2018-10-25 23:38:03,2018-10-25 23:42:40,2018-11-20 20:29:05,True,2018-10-25 23:42:40,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/6,https://github.com/kubernetes/klog/pull/6,dims,Do not check flag parsing,"Undo the change from:
+https://github.com/golang/glog/commit/65d674618f712aa808a7d0104131b9206fc3d5ad
+
+As this change is NOT present in the vendored glog in k/k:
+https://github.com/golang/glog/compare/44145f04b68cf362d9c4df2182967c2275eaefed...HEAD
+
+Also, it just breaks stuff (see comments in url above)
+
+Change-Id: I90774b10929064c241d2a41c2b30d8bb9be833ca",[],1,2018-10-26 00:01:55,2018-10-26 00:32:10,2018-11-20 20:29:03,True,2018-10-26 00:32:10,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/7,https://github.com/kubernetes/klog/pull/7,dims,Add examples,"- Added example for the `SetOutput` API
+- Added example for the `log_file` command line option
+
+Change-Id: I8e34a3d3a3667975e56056859314e098d5a370e9",[],1,2018-10-26 00:47:51,2018-10-26 00:53:09,2018-11-20 20:29:03,True,2018-10-26 00:53:09,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/8,https://github.com/kubernetes/klog/pull/8,dims,Avoid initializing flags in init(),"- Require explicit `InitFlags` to initialize the flags
+
+Change-Id: Iebb46ae1a9baa8e05cc38ca501dc17221f2a1cb0",[],1,2018-10-26 16:33:11,2018-10-26 16:35:48,2018-11-20 20:29:02,True,2018-10-26 16:35:48,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/9,https://github.com/kubernetes/klog/pull/9,dims,Update README,Change-Id: I27f5780b39622496c744112b76b236af879417a2,[],1,2018-10-26 16:59:32,2018-10-26 17:00:20,2018-11-20 20:29:02,True,2018-10-26 17:00:20,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/10,https://github.com/kubernetes/klog/pull/10,dims,Example on coexisting with older glog,Change-Id: I08060ea81a1b53c5001447af9a602b5d42b3516c,[],1,2018-10-26 21:08:00,2018-10-26 21:25:07,2018-11-20 20:29:02,True,2018-10-26 21:25:07,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/11,https://github.com/kubernetes/klog/pull/11,monotek,Removed doubled wording from README.md ,,['dims'],2,2018-10-31 02:59:24,2018-11-02 13:42:12,2018-11-02 13:42:12,True,2018-11-02 13:42:12,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/12,https://github.com/kubernetes/klog/pull/12,dims,Add OWNERS and other template files,Change-Id: Iaccfe8a93c29808737c44edf09b6281c168b3b1a,"['thockin', 'tallclair']",1,2018-11-02 01:57:49,2018-11-02 11:28:18,2018-11-02 11:28:18,True,2018-11-02 11:28:18,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/13,https://github.com/kubernetes/klog/pull/13,dims,glog wrapper that redirects to klog,"implements the glog API, but redirects to klog implementation.
+
+Makes it easy to use `dep` overrides to quickly switch/try the klog
+implementation.
+
+Change-Id: Ibdf4b25ed3b17e761c3fdea449f80add76a9070f","['justinsb', 'thockin', 'tallclair']",1,2018-11-02 02:07:25,2018-11-08 23:46:04,2018-11-08 23:46:04,True,2018-11-08 23:46:04,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/14,https://github.com/kubernetes/klog/pull/14,dims,Oops! missed a couple of spots for imports,"Fix up the example directory, imports point to an older repo used for proof-of-concept",['neolit123'],1,2018-11-13 18:05:37,2018-11-13 19:59:59,2018-11-13 19:59:59,True,2018-11-13 19:59:59,dims,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/16,https://github.com/kubernetes/klog/pull/16,dims,Add a short HOWTO,Change-Id: I35a59bebd603ac84a480c977e29a97bc7b8d643c,['BenTheElder'],1,2018-11-14 03:13:17,2018-11-14 18:15:55,2018-11-14 18:15:55,True,2018-11-14 18:15:55,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/17,https://github.com/kubernetes/klog/pull/17,vincepri,Add common PR/Issues templates,Signed-off-by: Vince Prignano <vince@vincepri.com>,['dims'],1,2018-11-14 23:15:00,2018-11-15 03:02:20,2018-11-15 03:02:20,True,2018-11-15 03:02:20,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/20,https://github.com/kubernetes/klog/pull/20,munnerz,Add SetLogger function to intercept klog output with logr,"This is an example of how we can modify klog and the work required in order to allow intercepting logs, including preserving the `V` level and severity.
+
+In order to do this, I've had to change the type signature of `Verbose` from `type Verbose bool` to:
+
+```
+type Verbose struct {
+	enabled bool
+	logr    logr.InfoLogger
+}
+```
+
+Consequently, it requires a corresponding change in k/k in the instances where `if klog.V(x) {` (replacing them with `if klog.V(x).Enabled()`).
+
+The total changeset in k/k to get `bazel build //...` to pass:
+
+```
+ pkg/cloudprovider/providers/gce/cloud/gen.go                | 160 +++++++++++++++++++++++++++++++++++++++++++++++++--------------------------------------------------
+ pkg/cloudprovider/providers/vsphere/vclib/connection.go     |   2 +-
+ pkg/controller/nodelifecycle/node_lifecycle_controller.go   |   4 +--
+ pkg/controller/volume/attachdetach/reconciler/reconciler.go |   6 ++--
+ pkg/kubectl/cmd/util/helpers.go                             |   2 +-
+ pkg/kubelet/eviction/helpers.go                             |   4 +--
+ pkg/proxy/endpoints.go                                      |   2 +-
+ pkg/scheduler/algorithm/predicates/predicates.go            |   8 ++---
+ pkg/scheduler/algorithm/priorities/interpod_affinity.go     |   2 +-
+ pkg/scheduler/algorithm/priorities/resource_allocation.go   |   2 +-
+ pkg/scheduler/algorithm/priorities/resource_limits.go       |   2 +-
+ pkg/scheduler/algorithm/priorities/selector_spreading.go    |   2 +-
+ pkg/scheduler/core/generic_scheduler.go                     |   6 ++--
+ plugin/pkg/auth/authorizer/rbac/rbac.go                     |   2 +-
+ staging/src/k8s.io/apiserver/pkg/server/httplog/httplog.go  |   4 +--
+ staging/src/k8s.io/apiserver/pkg/util/trace/trace.go        |   4 +--
+ staging/src/k8s.io/client-go/rest/request.go                |   8 ++---
+ staging/src/k8s.io/client-go/transport/round_trippers.go    |   8 ++---
+ 18 files changed, 114 insertions(+), 114 deletions(-)
+```
+
+We can still preserve the old behaviour in the `k8s.io/klog/glog` package, for those that are using the dep `replace` method to implement glog.
+
+ref #19","['pohly', 'DirectXMan12', 'thockin']",7,2018-11-15 00:26:32,,2019-03-15 23:29:17,False,,,dirty,False,open
+klog,https://api.github.com/repos/kubernetes/klog/pulls/21,https://github.com/kubernetes/klog/pull/21,munnerz,Add go_import_path option to .travis.yml,"In CI right now, `k8s.io/klog` is being fetched at `master` when `k8s.io/klog/glog` is tested, as it imports `k8s.io/klog`.
+
+Travis supports setting a custom path to clone your repo at for exactly this reason, and this PR adds the option to the .travis.yml file 😄 
+
+(see #20 for an example)",['dims'],1,2018-11-15 00:44:07,2018-11-15 01:13:40,2018-11-15 01:13:40,True,2018-11-15 01:13:40,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/27,https://github.com/kubernetes/klog/pull/27,vincepri,Update example/readme when using klog and glog,"Signed-off-by: Vince Prignano <vince@vincepri.com>
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+This PR shows an alternative method to make `klog` and `glog` coexist. The approach has been tested and merged into [cluster-api](https://github.com/kubernetes-sigs/cluster-api/pull/610) and proven to be effective.
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #26 
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+
+```","['dims', 'neolit123']",2,2018-12-01 16:20:47,2018-12-03 19:15:10,2018-12-03 19:15:10,True,2018-12-03 19:15:10,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/29,https://github.com/kubernetes/klog/pull/29,christopherhein,Adds link to k8s/community logging conventions,"**What this PR does / why we need it**:
+Per @dims comment https://github.com/kubernetes/community/pull/3016 this adds a link to the logging conventions on k8s/community.
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #28
+
+**Special notes for your reviewer**:
+n/a
+
+**Release note**:
+```release-note
+Adds link to the README.md about logging conventions
+```
+
+Signed-off-by: Christopher Hein <me@christopherhein.com>",['DirectXMan12'],1,2018-12-06 20:18:40,2018-12-08 03:05:51,2018-12-08 03:05:52,True,2018-12-08 03:05:51,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/30,https://github.com/kubernetes/klog/pull/30,shsjshentao,stderrthreshold is useless if logtostderr is set,"stderrthreshold is useless if logtostderr is set.
+This pr can ignore logs which log level is under stderrthreshold.
+Like: 
+flag.Set(""logtostderr"",""true"")
+flag.Set(""stderrthreshold"",""ERROR"")",[],1,2018-12-07 06:38:59,2018-12-07 06:44:33,2018-12-07 06:44:33,False,,,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/31,https://github.com/kubernetes/klog/pull/31,shsjshentao,stderrthreshold is useless if logtostderr is set,"stderrthreshold is useless if logtostderr is set.
+This pr can ignore logs which log level is under stderrthreshold.
+Like:
+flag.Set(""logtostderr"",""true"")
+flag.Set(""stderrthreshold"",""ERROR"")
+
+**Does this PR introduce a user-facing change?**:
+<!--  
+If no, just write ""NONE"".
+If yes, a release note is required:
+Enter your extended release note in the block below. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+-->
+```release-note
+The flag ""stderrthreshold"" will take effect if flag ""logtostderr"" is set to ""true"".
+In previous version, it will print all level logs whatever ""stderrthreshold"" is set.
+```",['dims'],1,2018-12-07 06:45:14,2018-12-24 20:43:49,2018-12-24 20:43:49,True,2018-12-24 20:43:49,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/32,https://github.com/kubernetes/klog/pull/32,MalloZup,Clearify that loglevel is expressed with integers,"**What this PR does / why we need it**:
+This PR make clear that the verbosity is depending on integers not on string like (debug, info, etc)
+
+**Which issue(s) this PR fixes** 
+Fixes https://github.com/kubernetes/kubernetes/issues/35054
+**Release note**:
+```release-note
+document and clarify more kubectl --v
+```","['dims', 'lavalamp']",1,2018-12-18 10:44:30,2018-12-21 13:53:12,2018-12-21 13:53:12,True,2018-12-21 13:53:12,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/33,https://github.com/kubernetes/klog/pull/33,nikhita,Add the code of conduct,"For https://github.com/kubernetes/community/issues/3053
+
+The content is from https://github.com/kubernetes/kubernetes-template-project.
+
+/assign @dims 
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+NONE
+```",['dims'],1,2018-12-27 11:43:29,2018-12-27 13:44:21,2018-12-27 13:44:21,True,2018-12-27 13:44:20,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/36,https://github.com/kubernetes/klog/pull/36,dims,k8s.io/klog/glog does not work,"if the proxy is in a sub directory, it does not work with `dep` so let's
+drop this
+
+Change-Id: I26829711ab878758e2e8fd8bad3b6a3f779cc0a8
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #24
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+Drop the glog proxy to klog as it does not work well in sub directories.
+```",['vincepri'],1,2019-01-25 00:45:45,2019-01-25 02:46:51,2019-01-25 02:46:51,True,2019-01-25 02:46:51,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/37,https://github.com/kubernetes/klog/pull/37,dims,Add support for logr,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+
+We have libraries like k8s.io/utils that need logging, we should have a way to use the `logr` in these scenarios. For example see https://github.com/kubernetes/utils/pull/70
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+Now supports github.com/go-logr/logr based interfaces backed by klog
+```","['DirectXMan12', 'vincepri', 'thockin']",11,2019-01-25 01:23:31,2019-01-25 22:27:26,2019-01-25 22:27:26,True,2019-01-25 22:27:26,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/39,https://github.com/kubernetes/klog/pull/39,vincepri,Default logtostderr to true,"Signed-off-by: Vince Prignano <vincepri@vmware.com>
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+This PR changes the default `logtostderr` to ""true"", more details and discussion can be found in #38.
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #38
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+The `logtostderr` flag now defaults to true.
+```",['DirectXMan12'],1,2019-01-29 23:40:44,2019-01-31 19:36:18,2019-01-31 19:44:02,True,2019-01-31 19:36:18,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/40,https://github.com/kubernetes/klog/pull/40,vincepri,Reduce default flushInterval to 5s,"Signed-off-by: Vince Prignano <vincepri@vmware.com>
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+More details in #18. I think it's clear that a lower default could be beneficial to multiple projects.
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #18
+
+**Special notes for your reviewer**:
+This should be a good short term solution, making it a configurable flag would require initializing the flushDaemon somewhere else (maybe a different Init function?). Given that it seems most users set the value to 5s, I thought making that the default would be a good first step.
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+
+```",['dims'],1,2019-01-29 23:48:25,2019-01-29 23:57:05,2019-01-29 23:57:05,True,2019-01-29 23:57:05,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/41,https://github.com/kubernetes/klog/pull/41,rlenferink,Adding consistency to OWNERS files,"Adding same documentation statement to k8s OWNERS files.
+Updated this one as well for consistency.
+
+```release-note
+NONE
+```","['DirectXMan12', 'thockin']",1,2019-02-04 17:37:25,2019-02-04 19:33:45,2019-02-04 19:33:46,True,2019-02-04 19:33:45,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/42,https://github.com/kubernetes/klog/pull/42,vincepri,Use info in default stderrThreshold,"Signed-off-by: Vince Prignano <vincepri@vmware.com>
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+This PR is a follow-up to #39, it sets the default threshold for stderr logging to `INFO`.
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+The default stderrThreshold has been set to info instead of error, you can use `-stderrthreshold=ERROR` to revert to the old behavior.
+```",['dims'],1,2019-02-04 22:25:28,2019-02-07 18:44:07,2019-02-07 18:44:08,True,2019-02-07 18:44:07,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/45,https://github.com/kubernetes/klog/pull/45,dims,Bootstrapping a team to take care of klog,"Change-Id: Ie566088f45712e6a38fcfbc0ddaf98a07387c5b5
+
+<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+
+**Which issue(s) this PR fixes** *(optional, in `fixes #<issue number>(, fixes #<issue_number>, ...)` format, will close the issue(s) when PR gets merged)*:
+Fixes #44
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+NONE
+```","['justinsb', 'DirectXMan12', 'neolit123', 'detiber']",1,2019-02-13 19:51:47,2019-02-13 20:28:10,2019-02-13 20:28:10,True,2019-02-13 20:28:10,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/46,https://github.com/kubernetes/klog/pull/46,christopherhein,go-logr link missing protocol,"**What this PR does / why we need it**:
+The link in the `klogr` sub directory didn't have the protocol so the link 404'ed with - https://github.com/kubernetes/klog/blob/master/klogr/github.com/go-logr/logr 
+
+**Special notes for your reviewer**:
+
+_Please confirm that if this PR changes any image versions, then that's the sole change this PR makes._
+
+N/A
+
+**Release note**:
+```release-note
+NONE
+```
+
+Signed-off-by: Christopher Hein <me@christopherhein.com>","['dims', 'neolit123']",1,2019-02-22 01:36:57,2019-02-22 02:38:57,2019-02-22 03:11:53,True,2019-02-22 02:38:57,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/47,https://github.com/kubernetes/klog/pull/47,munnerz,klogr: Fix handling of duplicate key/values & add unit tests,"**What this PR does / why we need it**:
+
+Adds 6 unit tests to cover some basic functionality of klogr's structured output handling.
+
+I created these tests as I've noticed a bug in the 'deduplication' handling when multiple kv pairs with the same key are specified.
+
+Output:
+
+```
+--- FAIL: TestInfo (0.00s)
+    --- PASS: TestInfo/should_print_different_log_level_if_set (0.00s)
+    --- PASS: TestInfo/should_log_with_values_passed_to_keysAndValues (0.00s)
+    --- PASS: TestInfo/should_print_duplicate_keys_with_the_same_value (0.00s)
+    --- FAIL: TestInfo/should_print_duplicate_keys_with_different_values_when_all_values_are_passed_to_Info (0.00s)
+        klogr_test.go:86: expected "" \""level\""=0 \""msg\""=\""test\""  \""akey\""=\""avalue\"" \""akey\""=\""avalue2\""\n"" did not match actual "" \""level\""=0 \""msg\""=\""test\""  \""akey\""=\""avalue2\"" \""akey\""=\""avalue2\""\n""
+    --- PASS: TestInfo/should_print_duplicate_keys_with_the_same_value_when_one_is_set_on_logger (0.00s)
+    --- PASS: TestInfo/should_print_duplicate_keys_with_different_values_when_one_is_set_on_logger (0.00s)
+```
+
+**Special notes for your reviewer**:
+
+~The `should_print_duplicate_keys_with_different_values_when_all_values_are_passed_to_Info` test is failing - should I fix the actual implementation as part of this PR?~
+
+~As you can see, the 2nd value is *always* set even if the two tuples have different values: `\""akey\""=\""avalue2\"" \""akey\""=\""avalue2\""` (notice that `avalue2` is set twice)~
+
+I've updated this PR to include handling of duplicate key/value tuples as well, so all the tests should now pass 😄 
+
+**Release note**:
+```release-note
+NONE
+```
+
+/cc @dims @thockin @pohly ","['DirectXMan12', 'neolit123']",4,2019-02-25 13:45:58,2019-02-27 23:29:32,2019-02-28 10:03:16,True,2019-02-27 23:29:32,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/48,https://github.com/kubernetes/klog/pull/48,jaredallard,feat(README): add why klog,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**: Adds context to why this repo was created
+
+**Which issue(s) this PR fixes**: Fixes #43
+
+**Special notes for your reviewer**: Took my first crack at it, LMK if it's missing the point entirely!
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+NONE
+```","['dims', 'DirectXMan12', 'neolit123', 'detiber', 'yagonobre']",1,2019-02-27 06:16:16,2019-03-06 18:22:51,2019-03-06 18:22:51,True,2019-03-06 18:22:51,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/49,https://github.com/kubernetes/klog/pull/49,mtaufen,Open existing log files with O_APPEND at startup,"**What this PR does / why we need it**:
+
+klog shouldn't erase old log files when components restart,
+and should also ensure it doesn't overwrite old logs in
+existing files when restarts happen.
+
+Previously, files were opened with O_TRUNC at both startup
+and rotation time. While, in the latter case, this ensures
+a fresh log file, it doesn't make sense in the former case.
+
+We probably don't see this cause issues in many production environments these days because journald is a very popular log sink. @yujuhong also noticed some logs overwritten at the beginning in Windows tests, which may have been caused by klog not opening the files as append-only (to be clear, it seems that the files on Windows weren't truncated correctly either, which requires further research figure out).
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+Existing log files are now opened with O_APPEND at startup, instead of O_TRUNC. Rotation still uses O_TRUNC.
+```
+
+@dims @liggitt @yujuhong @pjh ","['dims', 'liggitt']",1,2019-02-28 21:19:30,2019-03-01 01:06:17,2019-03-01 01:06:17,True,2019-03-01 01:06:17,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/50,https://github.com/kubernetes/klog/pull/50,mtaufen,Revert default changes,"**What this PR does / why we need it**:
+Reverts recent, potentially breaking changes to flag defaults. These block vendoring the latest version of klog into upstream Kubernetes, because they could break user deployments of core Kubernetes components. If these changes are eventually included, they need to be included in a way that respects the upstream deprecation policy (see below).
+
+This PR reverts three other PRs:
+1. #42, which changes the stderrthreshold default to INFO
+    - This could cause significant, unexpected increases in logging verbosity.
+2. ~#39, which changes the logtostderr default to true~
+    - ~This, especially, could break existing logging configurations because when set, it disables logs from being sent to files, even if --log_file is set.~ EDIT: See below conversation, we decided to keep #39 due to pre-existing overrides in k/k, but still revert the other two.
+3. #31, which conditions tostderr output on stderrthreshold
+    - Without the addition of #42, this could have resulted in default behavior that silently drops (Info) logs sent to stderr when logtostderr is true. With the revert of #42, this should also be reverted.
+
+Adding these changes back in can be revisited and discussed during code slush, but I would like to back them out in order to get the O_APPEND fix into Kubernetes 1.14.
+
+If we decide to include these changes in upstream Kubernetes, we need to follow the official policy of announcing deprecation of old defaults and waiting the appropriate amount of time before changing them: https://kubernetes.io/docs/reference/using-api/deprecation-policy/. In the future, we need to figure out how to more carefully coordinate changes to defaults in this repo with deprecation policies of other Kubernetes projects.
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+Recent commits that changed --stderrthreshold default from ERROR to INFO and conditioned --tostderr output on --stderrthreshold have been reverted.
+```","['dims', 'DirectXMan12', 'liggitt']",2,2019-03-04 23:09:32,2019-03-06 01:58:05,2019-03-06 01:58:05,True,2019-03-06 01:58:05,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/51,https://github.com/kubernetes/klog/pull/51,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['dims', 'DirectXMan12', 'detiber']",1,2019-03-08 18:06:54,2019-03-11 22:06:39,2019-03-11 22:06:39,True,2019-03-11 22:06:38,k8s-ci-robot,unknown,,closed
+klog,https://api.github.com/repos/kubernetes/klog/pulls/52,https://github.com/kubernetes/klog/pull/52,adrianlzt,Flag to skip headers in log files,"<!--  Thanks for sending a pull request!  Here are some tips for you:
+1. If this is your first time, read our contributor guidelines https://git.k8s.io/community/contributors/guide/pull-requests.md#the-pull-request-submit-process and developer guide https://git.k8s.io/community/contributors/devel/development.md#development-guide
+2. If you want *faster* PR reviews, read how: https://git.k8s.io/community/contributors/guide/pull-requests.md#best-practices-for-faster-reviews
+3. Follow the instructions for writing a release note: https://git.k8s.io/community/contributors/guide/release-notes.md
+4. If the PR is unfinished, see how to mark it: https://git.k8s.io/community/contributors/guide/pull-requests.md#marking-unfinished-pull-requests
+5. If this PR changes image versions, please title this PR ""Bump <image name> from x.x.x to y.y.y.""
+-->
+
+**What this PR does / why we need it**:
+Short-lived procs reusing the same logfile in append mode (now default), ends with a file full of headers hidding the real useful info.
+
+**Which issue(s) this PR fixes**:
+
+**Special notes for your reviewer**:
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+New `skip_log_headers` flag to skip writting headers in log files.
+```",['yagonobre'],1,2019-04-03 17:39:11,2019-04-04 20:33:21,2019-04-04 20:33:21,True,2019-04-04 20:33:21,k8s-ci-robot,unknown,,closed

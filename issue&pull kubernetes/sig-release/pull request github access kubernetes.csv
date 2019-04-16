@@ -1,0 +1,1318 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/16,https://github.com/kubernetes/sig-release/pull/16,mbssaiakhil,Fix Typos in SIG Release,,[],1,2017-08-13 11:15:36,2017-08-21 16:41:25,2017-08-21 16:41:25,True,2017-08-21 16:41:25,jdumars,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/21,https://github.com/kubernetes/sig-release/pull/21,jpbetz,"Highlight ""base:release-1.6"" style github search in patch manager guide",,['enisoc'],1,2017-10-17 21:41:20,2018-01-08 20:17:18,2019-02-11 21:36:27,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/28,https://github.com/kubernetes/sig-release/pull/28,spiffxp,What am I doing right now as CI signal lead,"This could be worded / structured better but I want it to live someplace more ""real"" than [a PR comment](https://github.com/kubernetes/test-infra/pull/5306#issuecomment-341277823)
+
+/cc @detiber 
+you're secondary
+
+/cc @enisoc 
+you're the release lead, does this sound right
+
+/cc @ericchiang 
+you did this last time, what am I missing",['enisoc'],1,2017-11-03 19:47:48,2017-11-06 22:26:09,2017-11-07 00:34:59,True,2017-11-06 22:26:09,enisoc,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/35,https://github.com/kubernetes/sig-release/pull/35,spiffxp,Flesh out CI Signal responsibilities during code freeze,"FYI @ericchiang @krzyzacy @enisoc 
+
+Am I missing any dashboards or habits here? e.g.: I'm specifically planning on ignoring:
+- https://k8s-testgrid.appspot.com/sig-release-master-kubectl-skew
+- https://k8s-testgrid.appspot.com/sig-release-master-upgrade-optional
+
+I might occasionally look at the -all dashboard, but I'm not planning on tracking it per se.
+
+In an ideal world I'd just have one dashboard to look at for the release, rather than flipping between two.  It's also confusing to me that there aren't upgrade dashboards for a given release.",['enisoc'],1,2017-11-20 21:07:31,2017-11-27 22:32:29,2017-11-27 23:30:24,True,2017-11-27 22:32:29,enisoc,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/42,https://github.com/kubernetes/sig-release/pull/42,spiffxp,Add release-managers.md,Get this out of kubernetes/community.wiki in service of kubernetes/community#116,[],2,2017-12-15 01:55:31,2017-12-15 17:26:34,2017-12-15 17:28:47,True,2017-12-15 17:26:34,jdumars,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/45,https://github.com/kubernetes/sig-release/pull/45,tpepper,update versioning link,"The versioning.md file's moved from k/k to community.  As it stands the
+README here in sig-release gives a 404 for the old url referenced.  This
+commit brings the link up to date.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['idvoretskyi'],1,2017-12-16 02:09:23,2017-12-19 22:19:45,2017-12-19 22:19:46,True,2017-12-19 22:19:45,idvoretskyi,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/46,https://github.com/kubernetes/sig-release/pull/46,idvoretskyi,Release info added from the features repo,"Kubernetes 1.3-1.9 releases info moved from the https://github.com/kubernetes/features repo (existing release-1.* directories from the features repo will be removed after this PR will be merged).
+
+FYI @pwittrock @calebamiles @grodrigues3 @spiffxp @jdumars ",['stp-ip'],2,2017-12-18 14:11:53,2017-12-18 16:34:35,2017-12-18 16:34:35,True,2017-12-18 16:34:35,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/47,https://github.com/kubernetes/sig-release/pull/47,spiffxp,Add root OWNERS file to sig-release,"This is in service of kubernetes/sig-release#44
+
+See individual commits for details",['idvoretskyi'],2,2017-12-18 15:40:31,2017-12-18 16:01:01,2017-12-18 16:25:20,True,2017-12-18 16:01:01,idvoretskyi,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/48,https://github.com/kubernetes/sig-release/pull/48,spiffxp,Refresh ephemera/ files,"They were originally copied from kubernetes/community/contributors/devel/release and then never tombstoned or deprecated over there, so they caught updates.
+
+If this repo makes sense as the authoritative source for this content, I'd like to tombstone the copies in kubernetes/community to point to here.
+
+I also thought @enisoc's patch manager playbook was useful so moved it someplace more permanent sounding.",['idvoretskyi'],3,2017-12-18 17:20:45,2017-12-18 18:13:37,2017-12-18 23:27:08,True,2017-12-18 18:13:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/49,https://github.com/kubernetes/sig-release/pull/49,enisoc,[1.10] Release Team,"This file will be used to collect volunteers for the 1.10 [release team roles](https://github.com/kubernetes/sig-release#kubernetes-release-team-roles).
+
+To volunteer, send a pull request to add yourself to [release-1.10/release_team.md](https://github.com/kubernetes/sig-release/blob/master/releases/release-1.10/release_team.md).
+
+### Notes
+
+* The overall release team lead should have experience on a previous release team. However, anyone who's interested but hasn't been on a release team before is encouraged to volunteer as a shadow.
+* The Patch Manager, Branch Manager, and Test Infra roles still need to be Googlers due to technical limitations in our current test/release infrastructure.","['calebamiles', 'jdumars']",1,2017-12-18 23:29:59,2017-12-19 17:12:25,2018-01-04 19:51:00,True,2017-12-19 17:12:25,calebamiles,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/50,https://github.com/kubernetes/sig-release/pull/50,idvoretskyi,Update company affiliation of Caleb Miles,,"['spiffxp', 'calebamiles']",1,2017-12-19 16:29:37,2017-12-21 23:26:36,2017-12-21 23:36:20,True,2017-12-21 23:26:36,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/51,https://github.com/kubernetes/sig-release/pull/51,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",['cblecker'],1,2017-12-20 18:40:14,2017-12-21 16:09:36,2018-01-04 16:41:37,True,2017-12-21 16:09:36,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/52,https://github.com/kubernetes/sig-release/pull/52,spiffxp,Add code-slush to ephemera from kubernetes/community.wiki,"I personally think this is too out of date or redundant to be useful, but the meaning of code slush came up during today's 1.9 retro so I'm adding back the code-slush.md file that used to live in kuberentes/community.wiki",['jdumars'],1,2017-12-21 19:03:24,2017-12-22 17:10:37,2017-12-22 17:48:57,True,2017-12-22 17:10:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/53,https://github.com/kubernetes/sig-release/pull/53,spiffxp,Add sig-release-members to approvers,This mirrors the fact that they have write privileges to the repo right now,['idvoretskyi'],1,2017-12-21 21:04:30,2017-12-22 17:11:37,2017-12-22 20:02:03,True,2017-12-22 17:11:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/54,https://github.com/kubernetes/sig-release/pull/54,spiffxp,Remove references to kubernetes/community/wiki,ref: kubernetes/community#116,"['idvoretskyi', 'jdumars']",2,2017-12-21 23:23:54,2017-12-22 17:09:37,2017-12-22 17:49:14,True,2017-12-22 17:09:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/55,https://github.com/kubernetes/sig-release/pull/55,idvoretskyi,"Removing ""Secondary release manager"" role (dup by the Lead Shadow)","Removing the ""Secondary release manager"" role as it's duplicated by the Release Lead Shadow.",[],6,2017-12-22 17:08:03,2018-01-04 20:50:59,2018-01-04 20:51:04,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/56,https://github.com/kubernetes/sig-release/pull/56,idvoretskyi,Release Lead Secondary renamed to the Release Lead Shadow,Fixes https://github.com/kubernetes/sig-release/pull/55#issuecomment-353639955,['enisoc'],3,2017-12-22 17:23:51,2017-12-22 21:05:36,2017-12-22 22:33:23,True,2017-12-22 21:05:36,k8s-ci-robot,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/57,https://github.com/kubernetes/sig-release/pull/57,enisoc,Update patch manager playbook,"Add more nuance to the section about directly applying `approved`.
+The patch manager has long been considered a de facto OWNER of their
+branch, but this clarifies that judgment is required when using this
+power; it should not be automatic.
+
+Also fix some broken links.
+
+/assign @liggitt @mbohlool @jpbetz ","['jpbetz', 'liggitt', 'mbohlool']",1,2017-12-22 18:24:07,2017-12-22 19:48:37,2017-12-22 19:48:37,True,2017-12-22 19:48:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/58,https://github.com/kubernetes/sig-release/pull/58,jdumars,Update release_team.md,This is the initial and incomplete release team roster.  Subsequent PRs will be added as more volunteers are identified.,[],1,2017-12-27 16:17:01,2017-12-29 20:21:11,2017-12-29 20:21:19,True,2017-12-29 20:21:11,jdumars,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/59,https://github.com/kubernetes/sig-release/pull/59,jdumars,Create the initial 1.10 schedule draft,,"['idvoretskyi', 'jdumars']",1,2017-12-29 20:44:30,2017-12-30 02:15:35,2017-12-30 17:11:23,True,2017-12-30 02:15:35,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/60,https://github.com/kubernetes/sig-release/pull/60,jdumars,Updated marketing lead,Added Natasha Woods from the CNCF as marketing lead.,['idvoretskyi'],1,2018-01-02 18:00:27,2018-01-02 18:14:38,2018-01-02 18:19:40,True,2018-01-02 18:14:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/61,https://github.com/kubernetes/sig-release/pull/61,jdumars,"Change from ""marketing"" to ""communications""","In the process of documenting this role (PR soon!), it became clear that this is not a ""marketing"" role, but instead a communications coordinator position between CNCF, media, PM, and the release team.  There is an assumption that the CNCF will have a person dedicated to their marketing efforts already.",['idvoretskyi'],1,2018-01-02 19:58:25,2018-01-03 16:07:21,2018-01-03 16:09:43,True,2018-01-03 16:07:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/63,https://github.com/kubernetes/sig-release/pull/63,jdumars,"Update ""marketing lead"" to ""communications lead""",,['idvoretskyi'],1,2018-01-03 17:18:35,2018-01-03 17:27:21,2018-03-26 17:28:37,True,2018-01-03 17:27:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/64,https://github.com/kubernetes/sig-release/pull/64,jberkus,Volunteered to be bug wrassler again.,Adding my name in.  I should choose a shadow within the next couple days.,['enisoc'],1,2018-01-04 19:33:38,2018-01-04 19:45:20,2018-01-04 19:45:21,True,2018-01-04 19:45:20,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/65,https://github.com/kubernetes/sig-release/pull/65,cblecker,Add OWNERS for PST docs,"Adds OWNERS file for PST documentation, and github usernames to the docs itself.","['spiffxp', 'idvoretskyi']",1,2018-01-04 22:57:23,2018-01-05 22:06:12,2018-01-06 02:40:41,True,2018-01-05 22:06:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/66,https://github.com/kubernetes/sig-release/pull/66,jdumars,Create communications coordinator guide,Draft already reviewed/LGTM by current and past role holders.,['idvoretskyi'],2,2018-01-05 14:37:32,2018-01-05 15:30:14,2018-01-05 16:31:27,True,2018-01-05 15:30:14,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/67,https://github.com/kubernetes/sig-release/pull/67,jdumars,Update for consistency,"Remove legacy references to ""marketing lead""",['idvoretskyi'],1,2018-01-05 16:34:41,2018-01-05 17:32:13,2018-01-05 22:03:57,True,2018-01-05 17:32:13,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/68,https://github.com/kubernetes/sig-release/pull/68,spiffxp,Avoid reference to kubernetes wiki,ref: kubernetes/kubernetes#57689,['cblecker'],1,2018-01-05 19:00:14,2018-01-05 19:21:13,2018-01-05 19:25:35,True,2018-01-05 19:21:13,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/69,https://github.com/kubernetes/sig-release/pull/69,jdumars,Create release leader documentation,"As of release 1.10, this is the most current view of the release process.",['idvoretskyi'],5,2018-01-06 17:06:51,2018-01-15 23:25:24,2018-03-26 17:28:38,True,2018-01-15 23:25:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/70,https://github.com/kubernetes/sig-release/pull/70,calebamiles,propose caleb miles as 1.10 branch manager,,['enisoc'],1,2018-01-08 20:31:32,2018-01-08 22:30:11,2018-01-08 22:30:11,True,2018-01-08 22:30:11,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/71,https://github.com/kubernetes/sig-release/pull/71,jberkus,Added Tim Pepper as shadow bug triage.,,['jdumars'],1,2018-01-08 23:20:22,2018-01-09 00:02:11,2018-01-09 00:02:11,True,2018-01-09 00:02:11,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/72,https://github.com/kubernetes/sig-release/pull/72,jessfraz,security release: update the policy for announce mailing list,"cc PST 
+
+@tallclair @cjcullen @liggitt @philips ",['idvoretskyi'],2,2018-01-08 23:49:45,2018-01-12 19:09:23,2018-01-12 19:38:04,True,2018-01-12 19:09:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/73,https://github.com/kubernetes/sig-release/pull/73,jessfraz,release process: add roles and define membership,"cc PST 
+
+from https://docs.google.com/document/d/1fepegB3d-yCL5RoiuiPd6Ot6mPx2L_MBAl6Q2CEuqrI/edit
+@tallclair @cjcullen @liggitt @philips ",['idvoretskyi'],2,2018-01-08 23:51:20,2018-01-12 19:10:27,2018-01-12 19:38:05,True,2018-01-12 19:10:27,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/74,https://github.com/kubernetes/sig-release/pull/74,krzyzacy,Add myself as 1.10 ci signal guy,"I'm always happy to stare at CI results more frequently :-)
+
+/assign @jdumars ",['jdumars'],1,2018-01-09 00:31:47,2018-01-09 00:33:12,2018-01-09 00:33:17,True,2018-01-09 00:33:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/75,https://github.com/kubernetes/sig-release/pull/75,spiffxp,Cleanup TBDs in CI Signal docs,,['jdumars'],1,2018-01-09 23:42:17,2018-01-10 00:13:12,2018-01-10 00:16:40,True,2018-01-10 00:13:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/76,https://github.com/kubernetes/sig-release/pull/76,idvoretskyi,Feature tracking spreadsheet added to the 1.10 schedule,"For some reason, it hasn't been added before :(","['idvoretskyi', 'jdumars']",4,2018-01-10 13:04:08,2018-01-15 23:40:23,2018-01-15 23:45:11,True,2018-01-15 23:40:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/77,https://github.com/kubernetes/sig-release/pull/77,qedrakmar,Added myself as shadow to Release Notes,"Discussed this with Nick Chase, and he approved.",['jdumars'],1,2018-01-12 23:00:37,2018-01-13 02:28:21,2018-01-13 02:28:21,True,2018-01-13 02:28:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/78,https://github.com/kubernetes/sig-release/pull/78,nickchase,Added release notes draft for 1.10,,['bgrant0607'],2,2018-01-16 17:33:11,2018-01-16 18:39:27,2018-01-16 18:39:27,True,2018-01-16 18:39:27,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/79,https://github.com/kubernetes/sig-release/pull/79,jberkus,Added incomplete draft of Bug Triage role.  Still needed: more exampl…,…e searches and reports.  Will get finished out in the 1.10 cycle.,['jdumars'],3,2018-01-18 23:47:02,2018-03-20 18:37:32,2018-03-20 18:39:06,True,2018-03-20 18:37:32,calebamiles,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/80,https://github.com/kubernetes/sig-release/pull/80,Bradamant3,add draft docs playbook,"draft/wip. Still TODO:
+- add links to new doc generation processes/docs in k8s/website
+- remove out-of-date content from `update-release-docs-old.md`, add still relevant content to new version
+- check for any other updates (original of this version from 1.7-1.8)",['jdumars'],3,2018-01-19 13:59:04,2018-03-19 23:01:59,2018-03-19 23:01:59,True,2018-03-19 23:01:59,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/81,https://github.com/kubernetes/sig-release/pull/81,idvoretskyi,SIG-Release leads updated,cc @jdumars @calebamiles ,['spiffxp'],3,2018-01-22 18:45:26,2018-01-23 20:34:31,2018-03-26 17:28:39,True,2018-01-23 20:34:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/82,https://github.com/kubernetes/sig-release/pull/82,spiffxp,Touchup boilerplate,"Some misc changes based on kubernetes-template-project
+- add a contributing.md that mentions the CLA
+- correct owners doc links",['idvoretskyi'],1,2018-01-22 18:48:03,2018-01-22 18:50:31,2018-01-22 18:53:43,True,2018-01-22 18:50:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/83,https://github.com/kubernetes/sig-release/pull/83,idvoretskyi,Remove members.md,"Removing members.md as dup https://github.com/kubernetes/community/blob/master/sig-release/README.md
+
+cc @jdumars @calebamiles @kubernetes/sig-release-pr-reviews ",['jdumars'],1,2018-01-22 23:22:25,2018-01-23 00:01:31,2018-01-23 00:01:31,True,2018-01-23 00:01:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/84,https://github.com/kubernetes/sig-release/pull/84,shyamjvs,Change 1.10 PRM to @MaciekPytel,"As unfortunately, I wouldn't be able to make it for this release.
+
+/cc @MaciekPytel @wojtek-t",['idvoretskyi'],1,2018-02-01 12:55:28,2018-02-12 16:10:51,2018-02-12 16:25:11,True,2018-02-12 16:10:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/87,https://github.com/kubernetes/sig-release/pull/87,spiffxp,Add status/ prefix to approved-for-milestone label,The unprefixed label is deprecated and will be removed at some point,['jberkus'],1,2018-02-26 22:02:01,2018-02-26 22:26:45,2018-02-26 22:40:45,True,2018-02-26 22:26:45,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/90,https://github.com/kubernetes/sig-release/pull/90,jdumars,Update release team to reflect participation,"Over the course of the release, things change. This reflects the reality of who has participated. This needs to be accurate because some roles require verified experience in the team in order to assume.  I added a section at the bottom to thank people who played long-term, undocumented support roles.  Without them, the release would not be possible.",['dims'],2,2018-03-19 13:25:56,2018-03-19 23:01:00,2018-03-19 23:02:21,True,2018-03-19 23:01:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/91,https://github.com/kubernetes/sig-release/pull/91,jdumars,Calendar updates to match reality,"Moved code freeze lifting and associated activities to 3/19, release to 3/26.",['idvoretskyi'],1,2018-03-19 19:41:42,2018-03-19 20:30:00,2018-03-26 17:28:40,True,2018-03-19 20:30:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/92,https://github.com/kubernetes/sig-release/pull/92,nickchase,Initial version of release notes markdown,,"['calebamiles', 'jdumars', 'tpepper']",22,2018-03-24 01:52:44,2018-03-26 21:50:04,2018-03-26 21:58:00,True,2018-03-26 21:50:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/93,https://github.com/kubernetes/sig-release/pull/93,jdumars,"Swapping ""kiwi"" for Left Shark",,"['jberkus', 'idvoretskyi', 'cblecker']",2,2018-03-26 14:49:52,2018-03-26 16:55:03,2018-03-26 18:38:53,True,2018-03-26 16:55:03,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/94,https://github.com/kubernetes/sig-release/pull/94,jdumars,"Official ""Left Shark"" logo",,['calebamiles'],1,2018-03-26 19:14:52,2018-03-26 19:34:02,2019-02-11 21:25:20,True,2018-03-26 19:34:02,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/95,https://github.com/kubernetes/sig-release/pull/95,jdumars,Update release team to reflect participation,,['calebamiles'],1,2018-03-26 20:33:43,2018-03-26 20:39:04,2019-02-11 21:25:53,True,2018-03-26 20:39:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/96,https://github.com/kubernetes/sig-release/pull/96,nickchase,Second round of release notes changes,CRI summary,"['calebamiles', 'tpepper']",1,2018-03-26 22:09:54,2018-03-26 22:12:03,2018-03-26 22:12:03,True,2018-03-26 22:12:03,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/97,https://github.com/kubernetes/sig-release/pull/97,jdumars,Update release_team.md,,"['BenTheElder', 'krzyzacy', 'cblecker']",1,2018-03-27 00:19:08,2018-03-27 00:26:02,2019-02-11 21:25:03,True,2018-03-27 00:26:02,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/98,https://github.com/kubernetes/sig-release/pull/98,jdumars,Translate Google doc burndown meeting into MD,This is the complete meeting history for the 1.10 release. Some future generation may want to do technoarchaeology to understand the origin of kubosapiens.,['idvoretskyi'],1,2018-03-27 14:40:26,2018-03-27 14:48:04,2018-03-27 15:39:08,True,2018-03-27 14:48:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/99,https://github.com/kubernetes/sig-release/pull/99,calebamiles,Adds a list of code freeze exceptions filed during 1.10 release cycle,...for any other poor soul who needs this information for their SuperMegaGiantBigCorp,"['idvoretskyi', 'jdumars']",3,2018-03-27 23:59:54,2018-03-28 16:51:04,2018-03-28 16:51:04,True,2018-03-28 16:51:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/100,https://github.com/kubernetes/sig-release/pull/100,calebamiles,Add mostly empty release team directory for 1.11,...but note that Josh is our Release Team Lead and Ihor will likely lead features again. The idea is to merge this skeleton quickly and then add the rest of the release info as it's available,"['jberkus', 'calebamiles', 'jdumars']",1,2018-03-28 00:18:09,2018-03-28 00:24:04,2018-03-28 04:59:08,True,2018-03-28 00:24:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/101,https://github.com/kubernetes/sig-release/pull/101,calebamiles,"Adds 1.11 volunteers for test infra, branch manager",...per discussion in SIG Release slack channel,"['jberkus', 'calebamiles', 'jdumars']",1,2018-03-28 00:43:15,2018-03-28 05:01:06,2018-03-28 05:01:06,True,2018-03-28 05:01:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/102,https://github.com/kubernetes/sig-release/pull/102,idvoretskyi,Add Kaitlyn Barnard as a communications lead for 1.11,cc @kbarnard10 ,['jberkus'],2,2018-03-28 04:04:33,2018-03-28 05:03:06,2018-03-28 15:09:16,True,2018-03-28 05:03:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/103,https://github.com/kubernetes/sig-release/pull/103,MaciekPytel,Add 1.10 relase managers,,['calebamiles'],2,2018-03-28 09:45:07,2018-03-28 15:58:08,2018-03-28 15:58:08,True,2018-03-28 15:58:08,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/104,https://github.com/kubernetes/sig-release/pull/104,nickchase,Removed detailed storage metrics from relnotes,Added by mistake,"['idvoretskyi', 'jdumars']",1,2018-03-28 15:39:02,2018-03-28 15:41:06,2018-03-28 15:41:06,True,2018-03-28 15:41:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/105,https://github.com/kubernetes/sig-release/pull/105,AishSundar,Adds 1.11 volunteers CI Signal,"/cc @jberkus
+/cc @calebamiles ","['calebamiles', 'AishSundar']",2,2018-03-28 16:30:40,2018-03-28 16:58:04,2018-03-28 16:58:04,True,2018-03-28 16:58:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/106,https://github.com/kubernetes/sig-release/pull/106,tpepper,add Tim Pepper as bug triage,"I was shadow to Josh Berkus' wrangling for 1.10.  With him moving up to
+release lead, I'm similarly moving up to issue wrangler lead.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['idvoretskyi'],0,2018-03-28 17:02:47,2018-04-02 15:22:35,2018-04-02 15:23:54,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/107,https://github.com/kubernetes/sig-release/pull/107,jberkus,Create draft schedule for discussion.  Add CJW as Test Infra shadow.,"This is a DRAFT schedule for 1.11.  I'd like to finalize it by Monday.
+
+I haven't changed the essential time relationships of the release weeks from 1.10.  However, there are some concerns:
+
+1. the American July 4th holiday comes right after the release.  This is a potential source of problems in that (a) it makes for a weird start for 1.12 and (b) if the release slips by more than a couple days we may need to shift it by over a week.
+
+2. A few deadlines happen during KubeCon.EU.  Do these need to be moved?",[],1,2018-03-28 19:18:18,2018-03-30 15:39:25,2018-03-30 15:39:25,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/108,https://github.com/kubernetes/sig-release/pull/108,colemickens,v1.11 release team - add colemickens as shadow bug triage,"Hello. I'd like to volunteer to do `Bug Triage` for the v1.11 release cycle. (I skimmed the README, but didn't see a formal process for this, hopefully this is sufficient.)","['jberkus', 'idvoretskyi', 'calebamiles', 'tpepper']",2,2018-03-29 17:41:04,2018-04-04 00:16:07,2018-04-04 00:16:07,True,2018-04-04 00:16:07,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/109,https://github.com/kubernetes/sig-release/pull/109,jberkus,"Added Docs, Bugs, Notes Leads, added Test Infra shadow.",Per folks volunteering in SIG-release,['enisoc'],1,2018-03-30 15:43:28,2018-03-30 19:59:03,2018-03-30 19:59:03,True,2018-03-30 19:59:03,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/110,https://github.com/kubernetes/sig-release/pull/110,jberkus,Revised draft 1.11 release schedule.,"This is after revisions per comments on #107, and discussion in #sig-release.  
+
+Current approach to calendar issues is:
+
+1. Begin code freeze the day after Memorial Day.
+2. Move release to Tuesday of the week before July 4th week; this gives us 2 days or so of slippage before we have to jump the release a whole week.",['idvoretskyi'],5,2018-03-30 15:49:20,2018-04-03 13:09:09,2018-04-03 13:09:09,True,2018-04-03 13:09:08,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/111,https://github.com/kubernetes/sig-release/pull/111,jberkus,Add Cole Mickens as shadow bug triage.,,[],1,2018-04-03 16:56:49,2018-04-03 23:40:40,2018-04-03 23:40:40,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/112,https://github.com/kubernetes/sig-release/pull/112,jberkus,Fixed schedule agreement bug between text and grid.,"OOps, forgot to update dates in the text to match the grid.   Please merge ASAP.","['dims', 'jdumars']",1,2018-04-03 17:07:18,2018-04-03 17:23:07,2018-05-16 22:05:01,True,2018-04-03 17:23:07,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/113,https://github.com/kubernetes/sig-release/pull/113,nickchase,Added downgrade notice to release notes draft,,"['calebamiles', 'msau42']",1,2018-04-03 23:14:33,2018-04-04 00:14:25,2018-04-04 00:14:25,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/114,https://github.com/kubernetes/sig-release/pull/114,idvoretskyi,1.11 features tracking spreadsheet added,,['calebamiles'],1,2018-04-04 07:50:49,2018-04-04 18:12:09,2018-04-04 18:12:10,True,2018-04-04 18:12:09,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/116,https://github.com/kubernetes/sig-release/pull/116,justaugustus,release-1.11: Add Stephen Augustus as Features Shadow,"I'm volunteering as tribute for Features Shadow on v1.11 :)
+
+/assign @jberkus @idvoretskyi ","['jberkus', 'idvoretskyi']",1,2018-04-04 21:51:34,2018-04-05 06:01:08,2018-04-05 06:01:08,True,2018-04-05 06:01:08,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/117,https://github.com/kubernetes/sig-release/pull/117,marpaia,release-1.11: Add Mike Arpaia as Release Notes Shadow,"I'm volunteering to shadow Release Notes for 1.11!
+
+/assign @jberkus @nickchase",['jberkus'],1,2018-04-04 22:22:06,2018-04-06 10:44:09,2018-04-06 18:16:12,True,2018-04-06 10:44:09,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/118,https://github.com/kubernetes/sig-release/pull/118,zacharysarah,"Docs team: correction, addition",Corliesson < Corleissen,"['jberkus', 'calebamiles']",3,2018-04-05 17:19:35,2018-04-06 16:56:09,2018-04-06 16:56:09,True,2018-04-06 16:56:09,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/119,https://github.com/kubernetes/sig-release/pull/119,jberkus,111 new links,Populated all of the bit.ly links.,['enisoc'],2,2018-04-06 21:10:56,2018-04-06 22:25:08,2018-05-16 22:05:01,True,2018-04-06 22:25:08,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/120,https://github.com/kubernetes/sig-release/pull/120,gjtempleton,Remove merge artefacts from 111 release schedule,"Simply removes a couple of artefacts from the release schedule markdown.
+
+I've assumed the friendly bitly link is the better one to leave in place here.","['jberkus', 'idvoretskyi', 'tpepper']",1,2018-04-09 15:47:09,2018-04-09 18:21:09,2018-04-09 18:21:10,True,2018-04-09 18:21:09,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/121,https://github.com/kubernetes/sig-release/pull/121,zacharysarah,Add shadows for docs,"- Added Misty Stanley-Jones
+- Added Tom van Waardhuizen",['calebamiles'],1,2018-04-09 18:43:57,2018-04-09 19:54:10,2018-04-09 19:54:11,True,2018-04-09 19:54:10,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/122,https://github.com/kubernetes/sig-release/pull/122,zacharysarah,Correct final docs date,Update deadline for final docs from May 11th to **June** 11th.,['jberkus'],1,2018-04-09 20:51:37,2018-04-12 18:19:56,2018-04-12 18:19:56,True,2018-04-12 18:19:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/123,https://github.com/kubernetes/sig-release/pull/123,AishSundar,Update CI Signal role in README.md,"From my understanding and past history, the CI Signal lead also monitors and tracks issues with the Upgrade / downgrade tests as well. Modifying the README to reflect this.","['spiffxp', 'jberkus']",2,2018-04-09 21:08:56,2018-04-11 16:51:56,2018-04-11 16:51:56,True,2018-04-11 16:51:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/128,https://github.com/kubernetes/sig-release/pull/128,shubheksha,Update link to slack channel,"Current link points to the archived channel, changed it to #sig-release","['justaugustus', 'jdumars']",1,2018-04-13 17:51:08,2018-04-13 18:31:00,2018-04-13 18:31:00,True,2018-04-13 18:31:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/129,https://github.com/kubernetes/sig-release/pull/129,jberkus,Add conditionally shortened code freeze to schedule.,"@AishSundar @spiffxp @idvoretskyi @calebamiles please evaluate/merge, thanks.","['idvoretskyi', 'justaugustus', 'AishSundar']",1,2018-04-13 20:33:30,2018-04-15 22:30:00,2018-05-16 22:04:59,True,2018-04-15 22:30:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/131,https://github.com/kubernetes/sig-release/pull/131,kbarnard10,Add Andrew Hatfield as Communications shadow,,['calebamiles'],2,2018-04-16 22:14:23,2018-04-18 19:29:01,2018-04-18 19:29:01,True,2018-04-18 19:29:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/132,https://github.com/kubernetes/sig-release/pull/132,foxish,foxish@ taking on patch release manager responsibilities,cc @calebamiles @kubernetes/sig-release-members ,['jberkus'],1,2018-04-18 15:52:15,2018-04-18 18:20:00,2018-04-18 18:20:01,True,2018-04-18 18:20:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/133,https://github.com/kubernetes/sig-release/pull/133,calebamiles,Adds OWNERS file for 1.11 release; update OWNERS at root.,- also make sure the SIG leads are listed explicitly at the root,"['idvoretskyi', 'jdumars']",1,2018-04-18 20:40:37,2018-04-18 20:44:01,2018-04-18 20:44:01,True,2018-04-18 20:44:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/134,https://github.com/kubernetes/sig-release/pull/134,jberkus,Added folks to OWNERS files who need to be able to approve things.,"- added self to OWNERS_ALIASES in main repo
+- added Tim Pepper, Nick Chase and Aish Sundar to owners for 1.11 subdirectory
+
+Per discussion today in #sig-release channel.",['idvoretskyi'],1,2018-04-19 00:03:59,2018-04-19 03:37:01,2018-05-16 22:04:58,True,2018-04-19 03:37:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/136,https://github.com/kubernetes/sig-release/pull/136,nickchase,Add release_notes_draft.md with proposed new tags,"This document is the skeleton for the release notes for Kubernetes Release 1.11. It includes explanations of four separate release-note-related tags, two of which (release-note-before-upgrading and release-note-feature) do not yet exist, and will have to be created.",['jberkus'],3,2018-04-20 23:08:40,2018-04-20 23:16:01,2018-04-20 23:16:01,True,2018-04-20 23:16:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/137,https://github.com/kubernetes/sig-release/pull/137,AdamDang,Update release-lead.md,to to->to,['idvoretskyi'],1,2018-04-22 15:02:35,2018-04-23 13:55:01,2018-05-01 02:17:25,True,2018-04-23 13:55:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/138,https://github.com/kubernetes/sig-release/pull/138,jberkus,Update release-1.11.md,Add link to CI-Signal report.,['calebamiles'],1,2018-04-23 23:58:20,2018-04-26 09:39:04,2019-02-11 21:25:16,True,2018-04-26 09:39:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/139,https://github.com/kubernetes/sig-release/pull/139,zacharysarah,Update the docs release playbook,"This PR:
+- Adds new information
+- Removes stale information
+- closes https://github.com/kubernetes/website/issues/8143
+- ref #192 ","['tfogo', 'jimangel', 'zparnold']",1,2018-04-25 20:38:41,2018-09-27 18:44:36,2018-09-27 18:44:36,True,2018-09-27 18:44:36,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/140,https://github.com/kubernetes/sig-release/pull/140,zacharysarah,Add a date for docs PR placeholder PRs,"This PR:
+- Adds a date (Friday, May 25) by which placeholders PRs must be open for docs",['jberkus'],2,2018-04-25 21:08:25,2018-05-17 00:02:29,2018-05-17 00:02:29,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/141,https://github.com/kubernetes/sig-release/pull/141,marpaia,Add pending release notes to draft,"This PR adds pending release notes for 1.11. I copied the changelog from v1.10.0 to to 3dbcd1d (current master while I was working on this (April 25)). The notes in this doc so far are categorized into the following hierarchy:
+
+- Before Upgrading
+  - New Deprecations
+  - Removed Deprecations
+  - Alpha, Beta, Stable
+- Other Notable Changes
+  - New Stuff
+  - Version Upgrades
+  - Not Very Notable
+- Bug Fixes
+  - User Facing
+  - General Fixes and Reliability
+
+I think that there are a lot of items in here that could be removed (ie: most of the ""not very notable"" and ""general fixes and reliability"" sections). I also think that a lot of cool trends are also becoming apparent (`kubectl`, apiserver, CRDs, GCP & Azure, Windows, and more).
+
+I also think that this document could benefit from some good copy editing to make it all read more consistently, but I wanted to see if we could delete some of the notes before doing that.
+
+/assign @nickchase ","['idvoretskyi', 'nickchase']",1,2018-04-26 04:23:51,2018-04-27 06:18:19,2018-04-27 06:18:20,True,2018-04-27 06:18:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/142,https://github.com/kubernetes/sig-release/pull/142,AdamDang,Typo fix ip addres->ip address,"Line 667: 
+IP addres->IP address",['enisoc'],1,2018-04-26 13:02:42,2018-04-27 06:17:13,2018-05-01 02:08:14,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/144,https://github.com/kubernetes/sig-release/pull/144,nickchase,Release notes edit 4/24/18 dataset,This is the initial edit of the generated release notes.,['calebamiles'],2,2018-04-28 22:47:22,2018-05-02 21:36:53,2018-05-02 21:36:53,True,2018-05-02 21:36:53,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/146,https://github.com/kubernetes/sig-release/pull/146,tpepper,add release diagrams,"I made these for my KubeCon EU 2018 presentation and they seem to be
+useful in giving a visual idea of the overall flow for people.  I'm not
+sure if there's a more portable and reusable way to export a Google
+Drawing than just dumping a PNG file, if so I'm open to suggestions.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['calebamiles', 'jdumars']",1,2018-05-03 13:36:01,2018-05-16 23:13:50,2018-05-16 23:13:50,True,2018-05-16 23:13:50,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/147,https://github.com/kubernetes/sig-release/pull/147,mohammedzee1000,Adding myself as a shadow for CI Signal role.,"This PR adds me, Mohammed Zeeshan Ahmed, as the shadow for
+the CI Signal Lead.
+
+Signed-off-by: Mohammed Zeeshan Ahmed <mohammed.zee1000@gmail.com>","['pwittrock', 'AishSundar']",2,2018-05-08 05:05:06,2018-05-08 17:02:53,2018-05-08 17:02:53,True,2018-05-08 17:02:53,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/149,https://github.com/kubernetes/sig-release/pull/149,mistyhacks,Add Misty to release team for 1.11,"Signed-off-by: Misty Stanley-Jones <mistyhacks@google.com>
+
+cc/ @zacharysarah @zparnold
+
+/assign @jberkus ","['spiffxp', 'jberkus', 'idvoretskyi']",1,2018-05-14 18:17:37,2018-05-16 22:08:51,2018-05-16 22:08:51,True,2018-05-16 22:08:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/151,https://github.com/kubernetes/sig-release/pull/151,jberkus,Update release schedule to reflect delay in beginning code freeze per…,"… code freeze delay plans.
+
+@dims @tpepper @idvoretskyi @calebamiles someone please approve, thanks!","['dims', 'idvoretskyi']",1,2018-05-16 22:06:18,2018-05-16 22:07:51,2018-05-16 22:07:51,True,2018-05-16 22:07:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/152,https://github.com/kubernetes/sig-release/pull/152,jberkus,"Add docs deadline per @zacharysarah, in order to fix merge conflict.",Mostly because I messed up and clobbered @zacharysarah's edits.,['AishSundar'],1,2018-05-16 23:25:19,2018-05-16 23:42:52,2018-05-16 23:42:52,True,2018-05-16 23:42:52,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/153,https://github.com/kubernetes/sig-release/pull/153,marpaia,Import of latest (unsorted) release notes,"This PR currently contains an import of the release notes from the last time I imported release notes (3bdcd1d) until now (f86ec3f). These aren't sorted yet, but I figured it would be best to get this PR up and then coordinate with @nickchase on working through all of these together.
+
+For the record, I generated these notes with the following command from `$GOPATH/src/k8s.io/release`:
+
+```
+./bazel-bin/toolbox/relnotes/relnotes 3bdcd1d..f86ec3f
+```
+
+/assign @nickchase","['idvoretskyi', 'nickchase']",1,2018-05-17 23:48:15,2018-05-18 02:55:52,2018-05-18 06:18:10,True,2018-05-18 02:55:52,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/156,https://github.com/kubernetes/sig-release/pull/156,calebamiles,Update README to include writable link to the agenda,"...edit rights given to kubernetes-sig-release@ mailing list, and comment rights given to kubernetes-dev@ mailing list",['jdumars'],1,2018-05-22 20:12:19,2018-05-22 21:57:26,2019-02-11 21:25:33,True,2018-05-22 21:57:26,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/159,https://github.com/kubernetes/sig-release/pull/159,jberkus,Change times of burndown meetings.,"Fix a couple more dates to reflect the new code freeze schedule.
+Fixes #148",['tpepper'],1,2018-05-25 19:11:55,2018-05-25 19:31:32,2018-05-25 19:31:32,True,2018-05-25 19:31:32,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/161,https://github.com/kubernetes/sig-release/pull/161,jessfraz,security release process: add toc,"makes it easier to find things, thanks!",['idvoretskyi'],1,2018-05-30 13:58:38,2018-05-30 17:44:57,2018-05-30 17:45:15,True,2018-05-30 17:44:57,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/162,https://github.com/kubernetes/sig-release/pull/162,jessfraz,security: add bug bar,cc @philips @liggitt @tallclair @cjcullen ,"['philips', 'jdumars']",2,2018-05-30 14:54:10,2018-07-13 16:21:26,2018-07-13 16:38:13,True,2018-07-13 16:21:26,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/163,https://github.com/kubernetes/sig-release/pull/163,calebamiles,Special thanks to cblecker,for jumping in to help triage PRs into the submit queue,"['jberkus', 'calebamiles', 'jdumars']",2,2018-05-30 19:20:02,2018-05-31 03:27:58,2019-02-11 21:25:28,True,2018-05-31 03:27:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/164,https://github.com/kubernetes/sig-release/pull/164,jdumars,Added security contacts per issue 158,cc @jessfraz @calebamiles ,['jessfraz'],1,2018-05-31 03:24:05,2018-05-31 12:22:56,2018-05-31 12:22:56,True,2018-05-31 12:22:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/166,https://github.com/kubernetes/sig-release/pull/166,justaugustus,Add Stephen Augustus as Features Lead for 1.12,/cc @idvoretskyi @jberkus ,['idvoretskyi'],1,2018-06-04 21:50:36,2018-06-04 22:08:54,2018-06-04 22:08:54,True,2018-06-04 22:08:54,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/168,https://github.com/kubernetes/sig-release/pull/168,justaugustus,Add first-round drafts for k8s 1.12 Release Team,"ref: #167 
+
+/assign @tpepper @jberkus @jdumars 
+/cc @tpepper @AishSundar @kacole2
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['jberkus', 'jdumars', 'tpepper']",18,2018-06-05 22:35:10,2018-06-15 22:28:30,2018-06-15 22:28:30,True,2018-06-15 22:28:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/169,https://github.com/kubernetes/sig-release/pull/169,nickchase,Preliminary sorting of latest changes,Editing still pending.,['calebamiles'],1,2018-06-06 07:29:09,2018-06-07 18:55:27,2018-06-07 18:55:27,True,2018-06-07 18:55:27,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/172,https://github.com/kubernetes/sig-release/pull/172,PatrickLang,Adding 'other notable changes' section for SIG-Windows,This is calling out the key improvements from SIG-Windows and also clarifies what features need to use an updated Windows Server version.,"['calebamiles', 'nickchase']",1,2018-06-07 18:40:33,2018-06-13 00:25:29,2018-06-13 00:30:36,True,2018-06-13 00:25:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/173,https://github.com/kubernetes/sig-release/pull/173,nickchase,Added major themes section,,['calebamiles'],1,2018-06-08 17:12:11,2018-06-08 17:31:57,2018-06-08 17:31:57,True,2018-06-08 17:31:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/174,https://github.com/kubernetes/sig-release/pull/174,marpaia,Import of latest (unsorted) release notes,This PR currently contains an unsorted import of the release notes from the last time I imported release notes (f86ec3f) until now (a7a081b).,"['calebamiles', 'nickchase']",1,2018-06-08 18:02:22,2018-06-11 02:28:00,2018-06-11 02:28:01,True,2018-06-11 02:28:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/175,https://github.com/kubernetes/sig-release/pull/175,justaugustus,Add 1.11 Exceptions List,"/assign @calebamiles @jberkus 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['jberkus', 'idvoretskyi', 'calebamiles']",1,2018-06-11 04:05:09,2018-06-11 20:38:28,2018-06-11 20:38:29,True,2018-06-11 20:38:28,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/176,https://github.com/kubernetes/sig-release/pull/176,nickchase,Sorted release notes from f86ec3f to a7a081b,,['calebamiles'],1,2018-06-11 16:22:11,2018-06-11 20:42:33,2018-06-11 20:42:33,True,2018-06-11 20:42:33,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/177,https://github.com/kubernetes/sig-release/pull/177,DirectXMan12,[1.11] Mark Heapster as deprecated,"The Heapster project has been deprecated, so we should warn about that
+in the Kubernetes 1.11 release notes.","['calebamiles', 'nickchase', 'brancz']",1,2018-06-11 18:16:51,2018-06-14 19:38:29,2018-06-14 19:51:58,True,2018-06-14 19:38:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/178,https://github.com/kubernetes/sig-release/pull/178,nikhita,Remove non-existent commands from release notes draft,"`/release-note-before-upgrading` and `/release-note-feature` are not valid commands and do not exist (double-checked with sig-testing on slack).
+
+The only valid release-note labels are: https://github.com/kubernetes/test-infra/blob/2218d2ce9cda2b5dcbaecebbd3779191ae641d73/prow/plugins/releasenote/releasenote.go#L36-L39
+
+/cc nickchase marpaia ",['calebamiles'],1,2018-06-12 15:10:55,2018-06-14 19:42:29,2018-06-14 19:43:04,True,2018-06-14 19:42:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/179,https://github.com/kubernetes/sig-release/pull/179,nikhita,Update CRD topics in release notes draft,"Updates CRD related topics in release notes draft.
+
+/cc sttts nickchase 
+/assign nickchase ","['calebamiles', 'nickchase']",1,2018-06-12 18:21:43,2018-06-14 19:43:29,2018-06-14 19:43:41,True,2018-06-14 19:43:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/180,https://github.com/kubernetes/sig-release/pull/180,bsalamat,update release notes of 1.11 for SIG-Scheduling,,"['calebamiles', 'nickchase']",1,2018-06-14 01:11:20,2018-06-14 19:40:29,2018-06-25 18:03:55,True,2018-06-14 19:40:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/181,https://github.com/kubernetes/sig-release/pull/181,liggitt,update 1.11 release note draft with sig-auth highlights,,['nickchase'],1,2018-06-15 17:47:34,2018-07-16 00:35:58,2018-07-16 00:35:58,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/182,https://github.com/kubernetes/sig-release/pull/182,tpepper,update bug triage process doc,"This commit extend's the initial bug triage process 1.9 / 1.10
+release info from Josh Berkus based on my 1.10 / 1.11 release
+learnings.  I've attempted to highlight that the role covers ""bugs"",
+which spans GitHub issue and PR type artifacts, adding a number of
+example GitHub search queries for different types of issues and PRs
+during the various phases of the release.  I also note the connection
+to Feature and CI Signal leads in the process.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['jberkus'],1,2018-06-16 00:23:19,2018-06-29 00:45:22,2018-06-29 00:45:22,True,2018-06-29 00:45:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/183,https://github.com/kubernetes/sig-release/pull/183,tpepper,1.12 timeline,"In general the timeline across the calendar quarter for the release is similar to past releases.  A few points to highlight:
+
+Shifts in 1.11 timeline especially around code slush and freeze are carrying forward into 1.12.  This is now the schedule intent, but if CI signal is not green as we get toward the intended sluch and freeze we may need to elongate them by starting them earlier.  This would be communicated early and broadly if it is an incoming risk to the release stability mid-cycle.
+
+During the feature definition phase we will re-emphasize past intent to have initial docs drafts as well as test cases arriving in conjunction with the code at or ahead of code freeze.
+
+In the final days of the cycle we lack the time (twelve week cycle versus desire for shorter freeze versus wanting freeze as late as possible) to dedicate more time for CI signal from long running tests during the ""thaw"" period when cherry picks from master present instability risk.  We may postponing more incoming cherry picks to the point release depending on risk assessments.","['justaugustus', 'AishSundar']",1,2018-06-16 02:02:48,2018-07-03 18:49:21,2018-07-03 18:49:21,True,2018-07-03 18:49:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/184,https://github.com/kubernetes/sig-release/pull/184,justaugustus,Update OWNERS for 1.12 Release,"* updates OWNERS docs links
+* adds Tim Pepper to top-level `release-team-leads` alias
+* adds OWNERS for 1.12 Release
+
+/assign @tpepper ","['idvoretskyi', 'tpepper']",3,2018-06-16 03:33:09,2018-06-16 05:37:32,2018-06-16 05:37:32,True,2018-06-16 05:37:32,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/185,https://github.com/kubernetes/sig-release/pull/185,justaugustus,Additional 1.12 RT members,"Signed-off-by: Stephen Augustus <foo@agst.us>
+
+/assign @tpepper 
+/hold
+/sig release","['tpepper', 'nickchase']",2,2018-06-19 11:11:45,2018-06-20 05:22:06,2019-04-04 17:55:47,True,2018-06-20 05:22:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/186,https://github.com/kubernetes/sig-release/pull/186,hoegaarden,Hannes Hoerl applying for branch manager shadow,As discussed with @tpepper ,['tpepper'],1,2018-06-19 16:14:59,2018-06-19 16:39:31,2018-06-19 16:39:32,True,2018-06-19 16:39:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/194,https://github.com/kubernetes/sig-release/pull/194,Lion-Wei,Update IPVS topics in release notes draft,,"['calebamiles', 'nickchase']",1,2018-06-20 09:38:09,2018-06-27 18:06:59,2018-06-27 18:06:59,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/195,https://github.com/kubernetes/sig-release/pull/195,jberkus,Add release theme: A Long-Expected Release,This is the new release theme.  Eleventy-One!,['zparnold'],2,2018-06-20 16:08:17,2018-06-20 17:08:07,2018-06-20 17:09:37,True,2018-06-20 17:08:07,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/197,https://github.com/kubernetes/sig-release/pull/197,nikhita,Fix link to 1.8 release team doc,"Just a link fix. Came across this, so thought I'd send a PR.
+
+/cc @calebamiles ",['tpepper'],1,2018-06-21 10:20:01,2018-06-21 17:47:51,2018-06-21 17:47:51,True,2018-06-21 17:47:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/199,https://github.com/kubernetes/sig-release/pull/199,tpepper,1.12: add to branch manager lead/shadow,"I've got two more volunteers on branch management:  Doug MacEachern
+to lead, and Travis Rhoden to shadow.  The set of four shadows on
+branch manager should generate a good set of questions and along
+with Caleb Miles' help get process documentation created for the
+role and a solid pipeline for future leads on role.  Also these
+folks should be good candidates to shadow and eventually lead in
+the patch release manager role as their short term experience on
+release branch management can translate there.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['calebamiles'],1,2018-06-21 17:38:05,2018-06-22 01:30:31,2018-06-22 01:30:32,True,2018-06-22 01:30:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/200,https://github.com/kubernetes/sig-release/pull/200,justaugustus,Add Tim Fogarty as a 1.12 Docs Shadow,Signed-off-by: Stephen Augustus <foo@agst.us>,"['tpepper', 'zparnold']",1,2018-06-23 00:09:30,2018-06-23 16:25:05,2018-06-23 16:25:05,True,2018-06-23 16:25:05,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/201,https://github.com/kubernetes/sig-release/pull/201,bsalamat,Add a section about the risks of priority and preemption,"Add a section about the risks of priority and preemption.
+
+/sig scheduling",['davidopp'],2,2018-06-23 22:09:57,2018-06-27 21:20:34,2018-06-28 07:20:59,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/202,https://github.com/kubernetes/sig-release/pull/202,nickchase,Sorted release notes (checkpoint),"Major themes are still missing but I thought we should go ahead and get this into the repo.  Note that active editing is still in the Google doc, at https://docs.google.com/document/d/1MoHdmqSpWT4dJ3AcONwPwquNa2NIBa1dhpb0g8xyyoI/edit",[],1,2018-06-24 22:28:23,2018-06-27 18:41:39,2018-06-27 18:41:39,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/204,https://github.com/kubernetes/sig-release/pull/204,AishSundar,CI Signal lead updates and process improvements,"Fixes: kubernetes#189
+
+Update README.md and ci-signal-playbook.md post various CI Signal process improvements in 1.11. I specifically talk about
+
+- Various CI Signal lead tasks / deliverable across the various stages in the release cycle
+- Weekly CI signal report format and details for broadcasting test and release health","['dims', 'jberkus', 'mohammedzee1000', 'AishSundar']",1,2018-06-25 18:39:13,2018-07-03 16:57:20,2018-07-03 16:57:20,True,2018-07-03 16:57:20,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/206,https://github.com/kubernetes/sig-release/pull/206,nickchase,Daily checkpoint for almost-final 1.11 release notes,"There should be few changes, if any, after this point.",['calebamiles'],1,2018-06-27 08:35:50,2018-06-27 15:35:23,2018-06-27 15:35:23,True,2018-06-27 15:35:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/207,https://github.com/kubernetes/sig-release/pull/207,nickchase,Final conversion to Markdown for Release Notes 1.11,GDoc is now locked for editing.,['jdumars'],1,2018-06-27 20:34:32,2018-06-27 20:53:22,2018-06-27 20:58:49,True,2018-06-27 20:53:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/208,https://github.com/kubernetes/sig-release/pull/208,jberkus,"Final update to release team.  Added a bunch of special thanks, and r…",…emoved one shadow who had to drop out before the cycle began.,['calebamiles'],1,2018-06-28 01:02:01,2018-06-28 01:04:22,2018-06-28 01:04:22,True,2018-06-28 01:04:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/209,https://github.com/kubernetes/sig-release/pull/209,kbarnard10,Add Kristen Evans as Communications Shadow,"Kristen will be running point on PR / media briefings for the 1.12 release, as she did for 1.11. I'd like to add her as an official shadow so she can be closer to the release process and learn the role.",['justaugustus'],1,2018-06-28 21:07:33,2018-06-28 21:09:24,2018-06-28 21:09:24,True,2018-06-28 21:09:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/211,https://github.com/kubernetes/sig-release/pull/211,guineveresaenger,Adds Slack handle for Guinevere Saenger,My Slack handle is slightly different from my github username; this avoids confusion.,['justaugustus'],1,2018-06-29 20:43:34,2018-06-29 21:27:20,2018-06-29 21:27:21,True,2018-06-29 21:27:20,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/212,https://github.com/kubernetes/sig-release/pull/212,marpaia,Add @marpaia to 1.12 release team,"I added myself as a Release Notes Shadow for 1.12 again as I'd like to continue working on release note generation tooling for this release (see https://github.com/kubernetes/release/pull/575 for some initial work so far) and it would be useful to be on the release team distribution lists when possible.
+
+I also added myself to the `OWNERS` so that I can help approve commits to the release notes drafts.","['justaugustus', 'nickchase']",1,2018-07-01 19:25:46,2018-07-03 19:55:22,2018-07-03 19:55:22,True,2018-07-03 19:55:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/213,https://github.com/kubernetes/sig-release/pull/213,surajnarwade,Fix broken link,,"['jdumars', 'tpepper', 'mohammedzee1000']",1,2018-07-02 14:38:29,2018-07-02 19:30:18,2018-07-02 19:30:18,True,2018-07-02 19:30:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/214,https://github.com/kubernetes/sig-release/pull/214,marpaia,1.12 Release Notes Draft,"I generated these notes using the `release-notes` tool that I'm working on in https://github.com/kubernetes/release/pull/575. I would like to just continuously re-render these notes until it comes time to give them to the individual SIGs as the release burns down. So if there are any edits that we'd like to structurally incorporate into this document, let's encode it in the code so that we can keep re-applying the same patterns for notes sorting (if possible).
+
+For each note, we have the following information available to use for document organization decision making:
+
+- The note text itself
+- All the commit info (SHA, author, etc)
+- Labels on the PR (`kind/bug`, `release-note-action-required`, `sig-node`, etc)
+- The PR description and comments
+
+Right now, I'm using all the SIG labels I can find to pre-sort and then using the `kind/bug` and `release-note-action-required` label to add the ""Bug Fixes"" and ""Action Required"" sections respectively. Everything that doesn't have a SIG label or one of those two labels goes into ""Other Notable Changes"".
+
+/assign @nickchase ","['calebamiles', 'nickchase']",13,2018-07-02 17:20:59,2018-07-23 08:26:19,2018-07-23 16:21:06,True,2018-07-23 08:26:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/215,https://github.com/kubernetes/sig-release/pull/215,tpepper,minor Bug Triage Lead docs updates,Added a few more bits of information noticed during review and discussion with other leads as we update the set of docs for the release team roles.,"['justaugustus', 'guineveresaenger']",2,2018-07-03 00:39:36,2018-07-03 03:14:19,2018-07-03 16:14:17,True,2018-07-03 03:14:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/216,https://github.com/kubernetes/sig-release/pull/216,justaugustus,Reorganize SIG Release documentation,"This shuffles some of the documentation around to more explicitly delineate the Release Team as a subproject of the SIG Release and not necessarily the owners of `k/sig-release`.
+
+No attempts have been made to refine the content of the documentation; that's happening as a series of issues assigned to the 1.11 Release Team members.
+
+/cc @calebamiles @jdumars @jberkus @tpepper ","['calebamiles', 'jdumars', 'tpepper']",9,2018-07-03 03:00:29,2018-07-03 22:40:20,2018-07-03 22:40:20,True,2018-07-03 22:40:20,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/217,https://github.com/kubernetes/sig-release/pull/217,tpepper,scrub issue milestone reference,"The issues in milestone document's content was linked (mostly broken
+the last couple cycles) from each release's ""release-X.Y.md"" overview
+document.  Before fixing the broken link for 1.12, scrubbed the doc
+for current accuracy minimally also.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['AishSundar'],1,2018-07-03 21:42:37,2018-07-03 21:58:21,2018-07-03 21:58:21,True,2018-07-03 21:58:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/218,https://github.com/kubernetes/sig-release/pull/218,nikhita,Add 1.11 release managers,"Updates the release managers doc.
+
+/cc jberkus foxish ","['jberkus', 'justaugustus']",1,2018-07-06 11:26:28,2018-07-09 22:46:17,2018-07-09 22:46:18,True,2018-07-09 22:46:17,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/219,https://github.com/kubernetes/sig-release/pull/219,nikhita,Add 1.12 release managers,"Fixes https://github.com/kubernetes/sig-release/pull/218#issuecomment-403509389
+
+",['tpepper'],1,2018-07-10 07:16:16,2018-07-10 14:21:27,2018-07-10 14:21:27,True,2018-07-10 14:21:27,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/220,https://github.com/kubernetes/sig-release/pull/220,nikhita,Add task to add release schedule to community calendar,"Fixes https://github.com/kubernetes/sig-release/issues/125
+
+/cc jberkus tpepper justaugustus ",['justaugustus'],1,2018-07-11 04:24:01,2018-07-13 09:39:45,2018-07-13 09:39:45,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/222,https://github.com/kubernetes/sig-release/pull/222,zparnold,Update release-1.12.md,Copying the 1.11 release that had a docs pr open deadline ahead of code freeze. That worked and I'd like to do the same with this release. Apologies for not opening sooner.,"['justaugustus', 'tpepper']",1,2018-07-14 21:36:29,2018-07-15 21:56:56,2018-07-15 21:56:56,True,2018-07-15 21:56:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/225,https://github.com/kubernetes/sig-release/pull/225,tpepper,process docs: update for release lead,"I've updated a few small things I noted during the beginning of the
+cycle.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['jberkus'],1,2018-07-20 16:11:19,2018-07-20 18:42:16,2018-07-20 21:23:51,True,2018-07-20 18:42:16,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/226,https://github.com/kubernetes/sig-release/pull/226,jberkus,"Add several more instructions to release lead guide, particularly inf…","…ormation about choosing a team, required time commitments, and some updates on process and requirements since the guide was first written.  Not finished yet, but still helpful updates.",['justaugustus'],2,2018-07-21 00:30:02,2018-09-04 17:51:19,2018-09-04 17:51:19,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/228,https://github.com/kubernetes/sig-release/pull/228,tpepper,1.12 release timeline fixups,"An astute observer has noted some editing gaps on the timeline, which
+are fixed here.  The initial text and table were correct, but the later
+definitions sections had a couple off-by-one month issues.
+
+Fixes #227
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['AishSundar'],1,2018-07-23 20:19:52,2018-07-23 20:51:19,2018-07-23 20:51:19,True,2018-07-23 20:51:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/229,https://github.com/kubernetes/sig-release/pull/229,spiffxp,Relace priority/failing-testing with kind/failing-test,"There are also some other fixes in here, notably:
+
+- priority/flake isn't a thing, it's kind/flake
+- use priority/critical-urgent for ci signal issues
+
+/hold
+This updates docs as part of kubernetes/community#1579. The hold
+can be canceled once I've gotten permission from the community to
+proceed","['tpepper', 'AishSundar']",1,2018-07-23 22:30:45,2018-07-26 00:12:56,2018-07-30 17:15:06,True,2018-07-26 00:12:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/230,https://github.com/kubernetes/sig-release/pull/230,guineveresaenger,Deletes cherrypicks-md file and uses k/community's cherry-picks.md as…,"… single source of truth
+
+Cherry picks are a contributor issue, and we should not have duplicate files with differnet histories sitting around. All cherry-pick instructions should live in the contributors section of k/community.
+
+Fixes https://github.com/kubernetes/community/issues/1760 (see discussion).",['spiffxp'],1,2018-07-24 00:07:08,2018-07-24 00:46:25,2018-07-24 23:03:07,True,2018-07-24 00:46:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/231,https://github.com/kubernetes/sig-release/pull/231,justaugustus,[RFC] Add Features Lead Handbook,"Documenting the Features Lead process.
+WIP, but I'm getting this out of a [Google Doc](https://docs.google.com/document/d/1WPB0N4kjVN_CY205dBEzs9KULWgkBeW1GASV4YHaK_w/edit?usp=sharing) and up for review. :)
+
+Closes: #124 
+
+/sig release pm
+/cc @idvoretskyi @jdumars @jberkus @tpepper 
+/hold
+","['idvoretskyi', 'tpepper']",1,2018-07-24 22:11:20,2018-07-28 04:48:58,2018-07-28 04:48:58,True,2018-07-28 04:48:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/232,https://github.com/kubernetes/sig-release/pull/232,spiffxp,Setup OWNERS files for each role handbook,"Followup to https://github.com/kubernetes/test-infra/pull/8798
+
+When I'm updating the docs for a given release-team role, I want prow to auto-request reviews from people who currently or have previously staffed that role.  
+
+I populated aliases based on 1.7 forward.
+
+I would have used a regex-based OWNERS file, but that doesn't cooperate with the `approve` plugin right now (https://github.com/kubernetes/test-infra/issues/7690) so I had to breakup into dirs per role.
+
+I searched org:kubernetes for references to the role handbooks and found none, so I haven't dropped tombstones, though I can be convinced if necessary.
+
+WDYT?
+","['justaugustus', 'tpepper']",4,2018-07-24 23:24:23,2018-07-25 10:09:56,2018-07-25 17:41:13,True,2018-07-25 10:09:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/234,https://github.com/kubernetes/sig-release/pull/234,tpepper,add short url for 1.12 release info,"Discussion in SIG ContribEx slack indicated info on the current release
+isn't easy enough to find.  It doesn't help that links to the release
+specific info in this repo are long.  So here's a shortened url for 1.12
+and easier sharing to point people at it.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['mrbobbytables', 'AishSundar']",1,2018-07-25 15:43:18,2018-07-25 15:52:56,2018-07-25 15:52:56,True,2018-07-25 15:52:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/235,https://github.com/kubernetes/sig-release/pull/235,marpaia,Add latest release notes to draft document,"This PR updates the release notes draft with the latest release notes from k/k.
+
+/assign @nickchase @tpepper ","['tpepper', 'nickchase']",1,2018-07-25 21:16:16,2018-07-25 21:24:57,2018-07-25 21:34:51,True,2018-07-25 21:24:57,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/236,https://github.com/kubernetes/sig-release/pull/236,tpepper,docu: more small release lead role updates,"Fixed the embedded html links within the table, and added more words on
+release themes.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['AishSundar'],1,2018-07-25 21:57:38,2018-07-27 21:04:58,2018-07-27 21:04:58,True,2018-07-27 21:04:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/239,https://github.com/kubernetes/sig-release/pull/239,justaugustus,Add notes on Milestone Maintainers,"This adds a quick note on the `milestone-maintainers` GitHub team, as requested here: https://github.com/kubernetes/community/issues/2424
+
+We should follow-up with detailed information on the process.
+
+/sig release
+/cc @tpepper @jberkus @AishSundar @spiffxp @dims 
+
+rel:
+- https://github.com/kubernetes/features/issues/590#issuecomment-406127490
+- https://kubernetes.slack.com/archives/C2C40FMNF/p1532626731000397","['spiffxp', 'tpepper']",1,2018-07-26 21:49:21,2018-08-20 18:52:32,2018-08-20 18:53:37,True,2018-08-20 18:52:32,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/240,https://github.com/kubernetes/sig-release/pull/240,tpepper,move ephemera/issues.md to community repo devel guide,"This document describes how the community targets issues and PRs
+to a milestone release.  As such I think it fits best in the developer
+guide.  A portion of the information on escalating issues relates
+to the release team, but is already covered in the release-team
+role handbooks and that escalation process is good to have visible
+to developers broadly so they understand that they're liable to be
+pinged by the release team for clarifying information.
+
+And fix up associated links.
+
+See also kubernetes/community#2430
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['spiffxp'],3,2018-07-27 20:47:13,2018-08-31 15:27:42,2018-08-31 15:27:42,True,2018-08-31 15:27:42,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/242,https://github.com/kubernetes/sig-release/pull/242,spiffxp,Describe ephemera and redirect to actual release-team README,"Since there's an issue open about updating the release team README,
+why don't we avoid confusion and get rid of the stale copy, while
+simultaneously describe what `ephemera/` is meant for
+
+ref: https://github.com/kubernetes/sig-release/issues/238",['justaugustus'],1,2018-07-30 22:08:49,2018-07-30 22:13:41,2018-07-31 00:00:24,True,2018-07-30 22:13:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/246,https://github.com/kubernetes/sig-release/pull/246,justaugustus,Add Michael Scott Singh as a 1.12 Features Shadow,"Adding one more Features Shadow :)
+
+/sig release
+
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+",['tpepper'],1,2018-07-31 20:31:17,2018-07-31 23:14:39,2018-07-31 23:14:39,True,2018-07-31 23:14:39,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/247,https://github.com/kubernetes/sig-release/pull/247,marpaia,Add latest release notes to draft document,"This PR updates the release notes draft with the latest release notes from k/k.
+
+/assign @nickchase @tpepper","['tpepper', 'nickchase']",1,2018-07-31 22:31:00,2018-07-31 23:45:40,2018-08-01 02:22:47,True,2018-07-31 23:45:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/248,https://github.com/kubernetes/sig-release/pull/248,tpepper,update alpha cadence,"As it's been explained to me, the first alpha (alpha.0) is autocreated
+at the time of the prior release's branch creation.  For...reasons?
+
+That leaves the second alpha (alpha.1) as the first point where the
+current release team builds an alpha release and the new release branch
+manager gets to work out any process and permissions kinks.
+
+Looking back it appears there's been legacy copy/pasted info implying
+the first alpha was .1 and happened in week 2, but that hasn't been the
+case.  This commit brings the calendar for 1.12 in line with what
+happened on prior releases and is happening for 1.12.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['calebamiles', 'AishSundar']",1,2018-08-02 00:23:19,2018-08-02 04:11:28,2018-08-02 04:11:28,True,2018-08-02 04:11:28,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/250,https://github.com/kubernetes/sig-release/pull/250,marpaia,Updates to the Release Notes Draft,/assign @nickchase,['nickchase'],4,2018-08-02 00:43:24,2018-08-24 03:43:59,2018-08-24 03:43:59,True,2018-08-24 03:43:59,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/252,https://github.com/kubernetes/sig-release/pull/252,wadadli,update release-team.md  remove my middle name to better reflect my name in other places,,['justaugustus'],1,2018-08-03 20:39:14,2018-08-03 22:11:19,2018-08-03 22:11:19,True,2018-08-03 22:11:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/253,https://github.com/kubernetes/sig-release/pull/253,spiffxp,Add old release branch CI removal as part of test-infra duties,"See commits for details
+
+Fixes: #244
+
+/cc @cjwagner @tpepper
+/sig release
+/kind cleanup","['tpepper', 'cjwagner']",2,2018-08-06 17:44:58,2018-08-07 17:49:30,2018-08-07 20:19:19,True,2018-08-07 17:49:30,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/255,https://github.com/kubernetes/sig-release/pull/255,krzyzacy,create test-infra role playbook,"Those are the things I've picked up things from my mind when I just *did them* for the previous releases... (more than I expected, but helpful)
+
+Create an initial doc about my thoughts on this role (since release-1.4), and feel free to add more to it.
+
+/sig testing
+/assign @cjwagner @spiffxp @tpepper @BenTheElder 
+also cc shadows: @amwat @prwitt @ravisantoshgudimetla ","['spiffxp', 'BenTheElder', 'tpepper', 'cjwagner', 'amwat']",1,2018-08-14 00:23:16,2018-08-16 16:04:00,2018-08-16 17:49:39,True,2018-08-16 16:04:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/256,https://github.com/kubernetes/sig-release/pull/256,liggitt,Update email address,,['jessfraz'],1,2018-08-14 20:10:28,2018-08-14 20:26:29,2018-12-03 16:06:21,True,2018-08-14 20:26:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/257,https://github.com/kubernetes/sig-release/pull/257,krzyzacy,fix top level owner alias,"per https://github.com/kubernetes/sig-release/pull/255#issuecomment-413338175
+
+/assign @spiffxp @jdumars @calebamiles ","['spiffxp', 'idvoretskyi', 'calebamiles', 'jdumars']",1,2018-08-16 04:21:26,2018-08-16 05:25:02,2018-08-16 17:50:01,True,2018-08-16 05:25:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/261,https://github.com/kubernetes/sig-release/pull/261,tpepper,updates to release lead handbook,"The details of what happens week to week have morphed slightly over
+time and the handbook schedule has drifted out of sync relative to
+the copy/paste/modified release schedule documents in
+releases/release-X.YY/release-X.YY.md.  I've updated here based on
+discripancies noted during the first half of the cycle and anticipated
+emphasis in the remaining part.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['justaugustus', 'AishSundar']",1,2018-08-21 04:27:30,2018-09-04 21:27:28,2018-09-04 21:27:29,True,2018-09-04 21:27:28,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/262,https://github.com/kubernetes/sig-release/pull/262,tpepper,add branch manager role handbook,"Working through past documentation with the help of past branch and
+patch managers, and walking through alpha/beta builds and release and
+branch fast forward, we think this document captures the current state
+of branch management.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['dougm', 'jdumars']",1,2018-08-21 20:41:32,2018-08-27 21:52:24,2018-08-27 21:52:24,True,2018-08-27 21:52:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/263,https://github.com/kubernetes/sig-release/pull/263,spiffxp,Release READMEs,"Scratching an itch. Now instead of a bare directory listing, you get
+the release info, plus a directory listing.  Yay using GitHub's UI
+
+I tried using symbolic links to preserve, but the GitHub UI doesn't
+follow them. So drop tombstones instead. Personally I would rather
+drop the old files entirely, but since they're linked from more than
+code I can't change incoming links.",['justaugustus'],1,2018-08-22 16:16:56,2018-08-22 16:42:38,2018-08-22 16:58:41,True,2018-08-22 16:42:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/264,https://github.com/kubernetes/sig-release/pull/264,justaugustus,Update RT Lead docs to remove references to `release-x.y.md`,"- Update RT Lead docs to remove references to `release-x.y.md`
+- Add note about updating blockade config for previous releases
+
+Follow-on to #263 
+rel: https://kubernetes.slack.com/archives/C2C40FMNF/p1534957335000100
+
+/assign @tpepper 
+/cc @spiffxp ","['calebamiles', 'tpepper']",2,2018-08-25 04:32:53,2018-09-06 04:04:14,2018-09-06 04:04:14,True,2018-09-06 04:04:14,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/265,https://github.com/kubernetes/sig-release/pull/265,justaugustus,Add `sig/release` label to OWNERS,"Everything in this repo is governed under SIG Release; issues / PRs such be tagged as such.
+This PR automatically labels issues / PRs opened with `sig/release`.
+
+/sig release",['tpepper'],1,2018-08-25 04:54:21,2018-08-27 21:24:25,2018-08-27 21:54:23,True,2018-08-27 21:24:25,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/266,https://github.com/kubernetes/sig-release/pull/266,philips,security-release-process: document kubernetes-security GH managers,This was underdocumented before.,['cblecker'],1,2018-08-28 20:01:20,2018-08-28 23:10:54,2018-08-28 23:10:54,True,2018-08-28 23:10:54,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/267,https://github.com/kubernetes/sig-release/pull/267,nikhita,README: update meeting notes link,"The [current link](https://docs.google.com/document/d/1Q6Ux-vsiRuiXhXSkVqGr9FUZifqVGRdCWkzVI1UT4l0/edit#heading=h.gjdgxs) points to a document which has notes only from the 2017 meetings.
+
+The [new link](https://docs.google.com/document/d/1Fu6HxXQu8wl6TwloGUEOXVzZ1rwZ72IAhglnaAMCPqA/edit) has 2018 meeting notes as well. This link was taken from https://github.com/kubernetes/community/blob/master/sig-release/README.md.
+
+/assign tpepper ","['jdumars', 'tpepper']",1,2018-08-30 14:00:36,2018-08-31 18:28:41,2018-09-01 15:31:28,True,2018-08-31 18:28:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/268,https://github.com/kubernetes/sig-release/pull/268,tpepper,remove references to status/approved-for-milestone,"We've lazy consensus decided to remove the requirement on
+status/approved-for-milestone labels in code slush and freeze, but
+current release's documentation and bug triage role documentation retain
+outdated references.  Other role handbooks have references which are
+scrubbed in other pending PRs.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['spiffxp', 'AishSundar']",1,2018-08-31 00:25:09,2018-08-31 16:57:51,2018-08-31 16:57:51,True,2018-08-31 16:57:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/270,https://github.com/kubernetes/sig-release/pull/270,justaugustus,Add features archives for past releases (1.3 - 1.11),"Per Caleb's suggestion in https://github.com/kubernetes/sig-release/pull/231#issuecomment-407727489:
+> ... I would also suggest exporting the features tracking spreadsheet as a CSV for archival in the release-X.Y directory as one of the tasks but otherwise looks good to me. Thanks!
+
+Closes: https://github.com/kubernetes/sig-release/issues/233
+
+/assign @calebamiles @tpepper 
+/sig pm
+/sig release
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['idvoretskyi', 'calebamiles', 'tpepper']",1,2018-09-04 03:39:55,2018-09-06 03:38:44,2018-09-06 03:38:44,True,2018-09-06 03:38:43,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/271,https://github.com/kubernetes/sig-release/pull/271,justaugustus,Add Release Team selection criteria,"Let's lay out some of the details about selecting a Release Team...
+
+This covers:
+- selecting leads
+- selecting the Release Team Lead
+- building a pool of role shadows
+- timing
+- qualities of a Release Team member
+- promoting diversity
+
+/assign @tpepper @AishSundar @jdumars @calebamiles @jberkus 
+/sig release
+/hold
+
+rel: https://github.com/kubernetes/sig-release/pull/226
+Signed-off-by: Stephen Augustus <foo@agst.us>","['jberkus', 'calebamiles', 'jdumars', 'tpepper', 'AishSundar']",4,2018-09-04 06:54:31,2018-09-05 02:39:06,2018-09-05 02:39:06,True,2018-09-05 02:39:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/272,https://github.com/kubernetes/sig-release/pull/272,nikopen,Update Slack + Github handle,,['justaugustus'],1,2018-09-04 15:31:22,2018-09-04 16:55:40,2018-09-04 16:55:41,True,2018-09-04 16:55:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/273,https://github.com/kubernetes/sig-release/pull/273,marpaia,Update the release notes draft with latest commits,"This PR contains the latest notes from master.
+
+/assign @nickchase @tpepper ","['tpepper', 'nickchase']",1,2018-09-04 16:25:34,2018-09-05 20:38:23,2018-09-05 20:38:23,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/274,https://github.com/kubernetes/sig-release/pull/274,onyiny-ang,Adds release-notes role to role-handbooks,"This PR adds documentation for the release-notes lead and shadows.
+
+","['marpaia', 'tpepper', 'nickchase', 'AishSundar']",7,2018-09-04 16:47:54,2018-09-27 16:55:15,2018-09-27 16:55:15,True,2018-09-27 16:55:15,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/275,https://github.com/kubernetes/sig-release/pull/275,guineveresaenger,Reflect current state of automation in bug triage handbook,"Since the milestone munger was removed together with the `status` labels, all references should be removed from the handbook.
+Minor grammar/style fixes as well.",['tpepper'],1,2018-09-04 22:58:28,2018-09-06 20:16:00,2018-09-06 20:16:00,True,2018-09-06 20:16:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/277,https://github.com/kubernetes/sig-release/pull/277,marpaia,Add release notes to 70a0089 in prep for HackMD doc,/assign @nickchase ,"['calebamiles', 'nickchase']",1,2018-09-05 20:36:22,2018-09-06 04:03:01,2018-09-06 04:03:01,True,2018-09-06 04:03:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/278,https://github.com/kubernetes/sig-release/pull/278,calebamiles,tombstone old release information (subprojects),"...affects `release-1.{3,4,5,6}/` directories","['spiffxp', 'justaugustus', 'tpepper']",1,2018-09-05 23:07:11,2018-09-06 04:53:13,2019-02-11 21:36:20,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/279,https://github.com/kubernetes/sig-release/pull/279,justaugustus,PR: Assemble Kubernetes 1.13 Release Team,"...and just like that, we begin again. :)
+
+Here's the initial PR for assembling the Kubernetes 1.13 Release Team.
+
+/hold
+/assign @AishSundar @tpepper 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['idvoretskyi', 'tpepper', 'AishSundar']",1,2018-09-06 04:04:30,2018-09-11 16:59:38,2018-09-11 16:59:38,True,2018-09-11 16:59:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/286,https://github.com/kubernetes/sig-release/pull/286,justaugustus,Remove top-level branch mgr table and redirect to `/releases`,"Fixes: #285 
+/sig release
+/assign @philips @tpepper 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['philips', 'tpepper', 'AishSundar']",1,2018-09-08 20:47:39,2018-09-20 00:29:34,2018-09-20 00:29:35,True,2018-09-20 00:29:34,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/287,https://github.com/kubernetes/sig-release/pull/287,justaugustus,Convert HTML to Markdown in role-handbooks,"...I'm honestly not sure if this is better or worse than it was before.
+
+/assign @tpepper @AishSundar 
+/sig release
+/shrug
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['idealhack', 'tpepper', 'AishSundar']",1,2018-09-08 23:04:33,2018-09-20 00:27:19,2018-09-20 00:27:20,True,2018-09-20 00:27:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/289,https://github.com/kubernetes/sig-release/pull/289,justaugustus,Add Aish to OWNERS_ALIASES as an RT Lead,"/sig release
+/assign @tpepper @spiffxp 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['spiffxp', 'tpepper']",1,2018-09-11 23:07:22,2018-09-11 23:15:55,2018-09-11 23:15:55,True,2018-09-11 23:15:55,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/291,https://github.com/kubernetes/sig-release/pull/291,justaugustus,More additions to the 1.13 Release Team,"Just a note that these additions are subject to change. We're still shuffling a few people around.
+
+/sig release
+/assign @AishSundar 
+/hold
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['spiffxp', 'AishSundar']",1,2018-09-12 01:48:33,2018-09-14 16:31:58,2018-09-14 16:31:58,True,2018-09-14 16:31:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/292,https://github.com/kubernetes/sig-release/pull/292,spiffxp,Add upgrade job version guide,"I have been hearing lots of confusion over whether or not a given fix
+has made it into an upgrade job. Often times this is of the form ""I
+think the fix got merged, but it didn't make it into the release for
+some reason""
+
+This guide shows how to quickly determine what versions of kubernetes a
+job is upgrading FROM and TO. Very few jobs actually use releases. If
+you don't trust the job, the guide shows how you can get a k/k commit
+SHA out of the build log, and use that with github's ui to see exactly
+which commits/merges made it in for that job.",['AishSundar'],1,2018-09-12 18:11:15,2018-09-12 20:37:40,2018-09-19 23:59:46,True,2018-09-12 20:37:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/293,https://github.com/kubernetes/sig-release/pull/293,tpepper,docs: note security responsibility in release lead role,"There's now a security list for security team activities, which the
+lead needs to follow.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['AishSundar'],1,2018-09-12 19:03:51,2018-09-12 19:14:38,2018-09-12 19:14:38,True,2018-09-12 19:14:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/294,https://github.com/kubernetes/sig-release/pull/294,AishSundar,Release 1.13 timeline and schedule,"Here's a straw-man PR for the 1.13 release schedule. In general the timeline across the calendar quarter for this release is highly crunched due to 2 Kubecons (Shangai, Nov 13-15 and Seattle, Dec 11-13), US Thanksgiving (Nov, 22-23) and the holiday season during last 2 weeks of December.  
+
+I have highlighted some main points below in an attempt to explain my rationale around the schedule and welcome any input/feedback:
+
+* The release cycle length is only **10 weeks** long (reasons stated above).
+*  Total feature planning and development time are reduced by a week each (both are in keeping with release 1.9, which was also a shorter cycle).
+    * Start of release cycle to Feature freeze is **3 weeks** vs traditional 4 weeks.
+    * Time between Feature freeze and Code freeze is **3.5 weeks** vs traditional 4.5 weeks.
+* Code slush and Code freeze will continue to follow a shortened timeframe, of 1 week and 2 weeks respectively, in keeping with 1.11 and 1.12 cycles. But if CI signal is not green as we get toward the intended slush and freeze we may need to elongate them by starting them earlier. This would be communicated early and broadly if it is an incoming risk to the release stability mid-cycle.
+* Code thaw is **only 3 days long**! This is mainly to get the release out before Kubecon Seattle which falls in the 2nd week of December. Releasing post Kubecon (3rd week of December) will be risky due to contributors' potential unavailability and is also the least preferred option in terms of media attention and PR. Hence, aiming for a release in the 1st week of December will still give us some wiggle room to release during Kubecon in the event of possible slip.  
+
+With all that said, **feature load and planning by SIGs will play the most crucial factor in keeping this release on track**. Delivering features on time **with quality** will help stabilize CI signal faster and release on time. During the feature definition phase we will meet with SIGs to re-emphasize release cycle length and encourage them to gauge and plan their feature aspirations accordingly. We carry on the past intent to have initial docs drafts as well as test cases arriving in conjunction with the code at or ahead of code freeze.
+
+In the final days of the cycle in an attempt to thaw and stabilize the release sooner we may postpone more incoming cherry picks to the point release depending on risk assessments.","['spiffxp', 'jberkus', 'jdumars', 'tpepper']",1,2018-09-14 03:53:58,2018-09-26 15:55:15,2018-09-26 15:55:15,True,2018-09-26 15:55:15,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/295,https://github.com/kubernetes/sig-release/pull/295,justaugustus,Even more additions to the 1.13 Release Team,"/assign @AishSundar 
+/sig release
+
+Signed-off-by: Stephen Augustus <foo@agst.us>",['AishSundar'],1,2018-09-14 19:20:11,2018-09-14 20:29:43,2018-09-14 20:29:43,True,2018-09-14 20:29:43,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/297,https://github.com/kubernetes/sig-release/pull/297,justaugustus,Update 1.12 Features Shadows,"/assign @tpepper @AishSundar 
+Signed-off-by: Stephen Augustus <foo@agst.us>","['tpepper', 'AishSundar']",1,2018-09-16 01:15:53,2018-09-16 06:28:49,2018-09-16 06:28:49,True,2018-09-16 06:28:49,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/298,https://github.com/kubernetes/sig-release/pull/298,justaugustus,Rename Features to Enhancements,"/sig release
+/assign @kacole2 @AishSundar @tpepper 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['idvoretskyi', 'tpepper', 'kacole2', 'AishSundar']",1,2018-09-16 21:05:27,2018-09-27 14:03:12,2018-09-27 16:17:39,True,2018-09-27 14:03:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/301,https://github.com/kubernetes/sig-release/pull/301,tpepper,release 1.12: note shifted release target,"We've delayed the release two days to Sept. 27.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['dims', 'marpaia']",1,2018-09-19 18:06:34,2018-09-19 18:42:33,2018-09-19 18:42:33,True,2018-09-19 18:42:33,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/302,https://github.com/kubernetes/sig-release/pull/302,dims,Request that we publish Debs and RPMs for beta and release candidates,Change-Id: I3eac113f7ad23b0e813d9fb59fbd9241887da9ec,[],1,2018-09-19 18:48:39,2018-09-24 19:20:09,2018-09-24 19:20:09,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/303,https://github.com/kubernetes/sig-release/pull/303,spiffxp,Address post-merge review comments,"Followup to https://github.com/kubernetes/sig-release/pull/292
+
+/cc @tpepper",['tpepper'],1,2018-09-19 23:58:31,2018-09-20 00:18:24,2018-09-20 23:07:31,True,2018-09-20 00:18:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/304,https://github.com/kubernetes/sig-release/pull/304,krzyzacy,add a release-blocking-jobs.md define a list of release-blocking jobs,"this is the current state of the world for release-1.12, if we agree to this list then we can bikeshed other release dashboards.
+
+Things on master-blocking but not release-blocking:
+- conformance - openstack
+- kubeadm
+- package-pushd
+- gce-scale-correctness
+- gce-scale-performance
+
+Things on older release-blocking dashboard
+- kubeadm-x-on-y
+- kubeadm-upgrade-x-to-y
+
+(caveat on the difference: nobody was managing kubeadm jobs on 1.12 branch, also the gce-scale-* jobs are too expensive to run on each branch)
+
+/sig testing
+/sig release
+
+(wonder where this file should live)
+xref https://github.com/kubernetes/test-infra/issues/9363
+
+cc @spiffxp @MaciekPytel @tpepper @AishSundar @foxish 
+","['spiffxp', 'AishSundar']",1,2018-09-20 05:11:18,2018-09-29 00:15:23,2018-09-29 00:15:23,True,2018-09-29 00:15:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/305,https://github.com/kubernetes/sig-release/pull/305,guineveresaenger,Removes outdated reference to github munger,What it says on the box.,['dougm'],1,2018-09-20 16:55:47,2018-09-20 17:40:22,2018-09-20 17:40:23,True,2018-09-20 17:40:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/306,https://github.com/kubernetes/sig-release/pull/306,justaugustus,Additional shadows for 1.13 Release Team,"/assign @AishSundar 
+/hold
+
+Signed-off-by: Stephen Augustus <foo@agst.us>",['AishSundar'],1,2018-09-21 04:38:16,2018-09-22 04:22:07,2018-09-22 04:22:07,True,2018-09-22 04:22:07,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/308,https://github.com/kubernetes/sig-release/pull/308,philips,security-release-process: require certified Kubernetes distributions,"Certification creates a clean cut decision process for the PST to decide
+whether a person or organization can join the list. It beats the
+alternative which is the PST trying to make a judgement call on their
+own.
+
+Further clarify that you will be removed from the list if your project
+stops meeting criteria and encourage use of email aliases.",['jessfraz'],1,2018-09-24 19:47:51,2018-09-24 20:15:24,2018-09-26 02:23:09,True,2018-09-24 20:15:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/310,https://github.com/kubernetes/sig-release/pull/310,AishSundar,Remove release specific blockade config update from lead's tasks,Talking to @justaugustus looks like we are not using blockades for release jobs anymore in prow plugins.yaml. So updating the handbook to reflect this.,['justaugustus'],1,2018-09-26 22:49:14,2018-09-26 22:59:09,2018-09-26 22:59:09,True,2018-09-26 22:59:09,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/311,https://github.com/kubernetes/sig-release/pull/311,tallclair,Clarify bug bar for information disclosure & lower severity of some cases,"It's hard to cover every possible scenario, but in the case of non-identifying information disclosure where it is hard to imagine what an attacker would do with the data, I do not think we should consider that a High vulnerability.
+
+/cc @cjcullen @jessfraz @philips @liggitt ",['jessfraz'],1,2018-09-26 23:11:18,2018-09-26 23:50:36,2018-09-26 23:50:36,True,2018-09-26 23:50:36,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/312,https://github.com/kubernetes/sig-release/pull/312,tpepper,1.12,How about we ship it?,"['marpaia', 'AishSundar']",2,2018-09-27 01:59:58,2018-09-27 02:08:09,2018-09-27 02:08:09,True,2018-09-27 02:08:09,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/313,https://github.com/kubernetes/sig-release/pull/313,cjwagner,Update Test-Infra role handbook with instructions for Tide.,"/cc @krzyzacy @amwat @AishSundar
+/kind documentation","['spiffxp', 'AishSundar', 'amwat']",1,2018-09-27 02:59:52,2018-09-28 23:44:33,2018-09-29 00:15:36,True,2018-09-28 23:44:33,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/314,https://github.com/kubernetes/sig-release/pull/314,nickchase,Transfer Release Notes from Google Docs to Github,,"['idvoretskyi', 'BenTheElder']",1,2018-09-27 06:32:10,2018-09-27 16:11:18,2018-09-27 16:11:18,True,2018-09-27 16:11:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/315,https://github.com/kubernetes/sig-release/pull/315,onyiny-ang,Removes overlapping release team selection info,This PR removes information regarding release team selection recommended before #274 was merged.,['AishSundar'],1,2018-09-27 17:35:34,2018-09-27 17:46:06,2019-02-22 22:16:10,True,2018-09-27 17:46:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/316,https://github.com/kubernetes/sig-release/pull/316,tfogo,[WIP] Update docs handbook,"Follow up from #139.
+
+/cc @zparnold 
+
+Zach, do you have write access to this branch?",['jimangel'],2,2018-09-27 19:03:39,2019-02-11 17:00:16,2019-02-11 17:00:17,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/317,https://github.com/kubernetes/sig-release/pull/317,tpepper,docs: final release day notes,"We're rolling through last actions on release day and have noted
+there could be a more explicit checklist for the release team lead
+in the roll handbook.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['AishSundar'],1,2018-09-27 23:22:53,2018-09-27 23:37:51,2018-09-27 23:37:51,True,2018-09-27 23:37:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/318,https://github.com/kubernetes/sig-release/pull/318,jberkus,"Adjusting CI signal shadow membership, since I can't reasonably handl…","…e more than two shadows.  Everyone has been informed.
+
+Aish and I met about this today and after a long discussion picked the two shadows, which for 1.13 will be Mortent & Maria.",['AishSundar'],1,2018-09-28 22:31:20,2018-09-28 22:41:03,2018-09-28 22:41:03,True,2018-09-28 22:41:03,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/322,https://github.com/kubernetes/sig-release/pull/322,guineveresaenger,Bug triage handbook updates,"This PR will clarify the point that bugs may appear either as GitHub issues or as standalone PRs (no associated issue), and that should both be labeled as `kind/bug`.",['AishSundar'],5,2018-10-01 04:44:11,2018-10-01 21:14:43,2018-10-02 01:15:17,True,2018-10-01 21:14:43,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/323,https://github.com/kubernetes/sig-release/pull/323,nikopen,fix ci signal link,,['idealhack'],3,2018-10-01 18:47:12,2018-10-11 08:08:07,2018-10-11 08:08:07,True,2018-10-11 08:08:07,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/325,https://github.com/kubernetes/sig-release/pull/325,AishSundar,Add a RC2 date on 1.13 release calendar,"Following up on the comments from 1.12 Retro to have 2 RC builds during the release cycle. I thought we had in on the schedule, but looks like I confused this with the 2 Beta cuts.
+
+/assign @dims 
+
+/cc @spiffxp @dougm 
+
+","['dims', 'dougm', 'spiffxp']",1,2018-10-04 18:57:34,2018-10-04 23:10:04,2018-10-04 23:10:04,True,2018-10-04 23:10:04,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/328,https://github.com/kubernetes/sig-release/pull/328,philips,Mailing list changes,"Update documentation around security@kubernetes.io, the release managers use of mailing lists, and distributors announce lists.
+
+https://github.com/kubernetes/sig-release/issues/326","['jessfraz', 'enisoc']",3,2018-10-05 18:02:31,2018-10-09 17:59:11,2018-10-09 17:59:11,True,2018-10-09 17:59:11,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/330,https://github.com/kubernetes/sig-release/pull/330,nikopen,Add bit.ly/k8s113-bugtriage,prototype automation of bug triage sheet using googlesheet functions,['AishSundar'],1,2018-10-07 22:51:05,2018-10-08 16:34:49,2018-10-08 16:34:49,True,2018-10-08 16:34:48,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/332,https://github.com/kubernetes/sig-release/pull/332,philips,security: document mailing lists,The list refactor needs to be documented from https://github.com/kubernetes/sig-release/issues/326,['jessfraz'],1,2018-10-08 23:15:23,2018-10-09 15:52:31,2018-10-09 15:52:31,True,2018-10-09 15:52:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/333,https://github.com/kubernetes/sig-release/pull/333,cjwagner,Test-Infra handbook updates.,"I addressed some of the follow up requested on https://github.com/kubernetes/sig-release/pull/313. 
+I didn't add examples for all the CI job updates as we will now be doing things differently from last release (creating new jobs for every branch instead of reusing some jobs for multiple branches).
+I'll update the docs and add examples as we figure out the details for that.
+
+/assign @AishSundar 
+/cc @krzyzacy @amwat @imkin ","['AishSundar', 'amwat']",1,2018-10-09 01:44:08,2018-10-09 17:32:16,2018-10-09 17:40:55,True,2018-10-09 17:32:16,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/334,https://github.com/kubernetes/sig-release/pull/334,philips,security-release-process: add release template,"Add a release template with details on the best practices of explaining
+how to identify vulnerability, how to upgrade, and details on the fix.",['tallclair'],1,2018-10-09 19:34:18,2018-10-30 19:22:24,2018-10-30 19:22:24,True,2018-10-30 19:22:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/335,https://github.com/kubernetes/sig-release/pull/335,nikopen,add nikopen to bug triage,,['calebamiles'],1,2018-10-09 20:26:38,2018-10-09 20:57:14,2018-10-09 20:57:14,True,2018-10-09 20:57:14,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/336,https://github.com/kubernetes/sig-release/pull/336,dims,Request an additional alpha release,"Why do we need an extra alpha release?
+
+- In v1.12, towards the end we did not have proper tags in the repositories published by publish bot from staging/ as we ran into different issues. So to exercise the tools earlier in the cycle, both both and release tooling will be helpful for the patch branch manager and shadows as well the folks manning the bots.
+- Different teams (for example https://github.com/kubernetes-incubator/external-storage) depend on the tags we publish, so more times we cut the tag, the easier it will be for folks to keep up with master and keep things up-to-date. (Example i am dealing with right now is that pkg/util/version moved into apimachinery and if we don't cut an extra alpha, it will be 2 weeks before any consumers can sync with the changes going on in k/k master)
+
+I don't know if the alpha.1 has any other connotation/meaning in the larger scheme of the release process. Hope i have made my case :)
+
+cc @AishSundar @tpepper @calebamiles","['dougm', 'AishSundar']",2,2018-10-10 02:00:09,2018-10-10 17:21:55,2018-10-11 13:40:23,True,2018-10-10 17:21:54,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/338,https://github.com/kubernetes/sig-release/pull/338,AdamDang,Update README.md,"line 9: is be->is to be
+line 9: recuse->refuse (I guess here should be 'refuse')",['AishSundar'],1,2018-10-14 04:26:54,2018-10-14 07:12:39,2018-10-14 07:12:39,True,2018-10-14 07:12:39,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/340,https://github.com/kubernetes/sig-release/pull/340,justaugustus,RT Lead language fix,"Signed-off-by: Stephen Augustus <foo@agst.us>
+
+I saw #338 fly by and I wanted to un-fix the fix.
+- `s/A guiding principle for the lead is to be an arbiter of decisions/The Release Team Lead should be an arbiter of decisions` (the former has weird mouth feel)
+- `s/refuse/recuse` (this was already correct prior to the PR)","['spiffxp', 'AishSundar']",1,2018-10-16 05:11:32,2018-10-16 18:45:25,2018-10-16 18:45:26,True,2018-10-16 18:45:25,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/341,https://github.com/kubernetes/sig-release/pull/341,justaugustus,Update OWNERS_ALIASES to only include N-3 RT personnel,"Fixes: #281 
+
+/sig release
+/assign @calebamiles @spiffxp @AishSundar @tpepper 
+
+(let me now if the comments break automation and I'll remove them)","['spiffxp', 'calebamiles', 'tpepper', 'AishSundar']",2,2018-10-16 05:47:59,2018-10-16 21:45:39,2018-10-16 21:45:39,True,2018-10-16 21:45:39,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/342,https://github.com/kubernetes/sig-release/pull/342,justaugustus,s/features/enhancements,"Fixes: #299 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['spiffxp', 'idvoretskyi', 'AishSundar']",1,2018-10-16 06:50:28,2018-10-16 07:46:38,2018-10-16 07:46:38,True,2018-10-16 07:46:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/343,https://github.com/kubernetes/sig-release/pull/343,justaugustus,Add Release Team roles table in README,"Fixes: #238 
+
+/assign @AishSundar @spiffxp 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['spiffxp', 'AishSundar']",1,2018-10-16 07:43:35,2018-10-16 18:37:33,2018-10-16 18:37:33,True,2018-10-16 18:37:33,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/345,https://github.com/kubernetes/sig-release/pull/345,guineveresaenger,"Removes reference to ""cherry-pick candidate"" label, which is no longe…",…r used,"['mrbobbytables', 'AishSundar', 'nikopen']",3,2018-10-17 04:11:47,2018-10-18 21:57:47,2018-10-18 23:34:06,True,2018-10-18 21:57:47,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/346,https://github.com/kubernetes/sig-release/pull/346,spiffxp,Add release blocking job criteria,"The Kubernetes community has developed an over-reliance on e2e tests that are flaky, slow, and seemingly unmaintained. We, the release team, end up spending much of our time rationalizing and explaining away failing or flaky tests as red-but-green, or ignoring meaningful failures under the guise of perpetual-failure being the expected normal state. 
+
+This results in delays leading up to release, contributes to the reputation of .0 releases being beta-quality at best, and allows regressions to slip through the cracks in patch releases.
+
+This PR proposes release blocking job criteria based on https://github.com/kubernetes/sig-release/issues/24 to help us eliminate noise and improve signal
+
+The criteria spelled out here are less strict than the criteria in that issue but this is based on what the jobs look like today.
+
+Once this PR lands I would like to move the release-blocking jobs toward the criteria listed, and refine as described in the TODO's. e.g.:
+
+- take the gke jobs off of release-blocking boards
+- make a release-master-informing board and migrate jobs to it
+- update ci signal docs accordingly
+- hunt down job owners and update job descriptions
+- propose and implement the use of sig-foo-alerts googlegroups for testgrid alerts
+- implement a velodrome dashboard that shows how well release blocking jobs are
+  meeting these criteria
+
+I plan on using https://github.com/kubernetes/sig-release/issues/347 as the umbrella issue for that","['jberkus', 'AishSundar']",1,2018-10-20 20:42:29,2018-10-30 17:19:15,2018-10-30 17:23:34,True,2018-10-30 17:19:15,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/348,https://github.com/kubernetes/sig-release/pull/348,justaugustus,Update SIG info (contact info / charter),"A wild SIG charter has appeared...
+
+/assign @calebamiles @jdumars @tpepper
+Signed-off-by: Stephen Augustus <foo@agst.us>","['spiffxp', 'calebamiles', 'jdumars', 'tpepper']",1,2018-10-24 03:16:16,2018-11-12 18:42:02,2018-11-12 18:42:02,True,2018-11-12 18:42:02,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/349,https://github.com/kubernetes/sig-release/pull/349,justaugustus,Add exceptions process,"I'd like to move the exceptions process out of `k/enhancements` and closer to the location where exceptions should be filed.
+
+This should merge prior to https://github.com/kubernetes/enhancements/pull/632.
+
+/assign @idvoretskyi @kacole2 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['idvoretskyi', 'kacole2']",1,2018-10-24 06:41:35,2018-10-24 10:36:08,2018-10-24 10:36:09,True,2018-10-24 10:36:08,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/352,https://github.com/kubernetes/sig-release/pull/352,AdamDang,Fix a typo in features.csv,Line 19: Persistant->Persistent,"['justaugustus', 'jdumars']",1,2018-10-26 02:12:53,2018-10-31 01:27:48,2018-10-31 01:59:30,True,2018-10-31 01:27:48,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/355,https://github.com/kubernetes/sig-release/pull/355,xiezongzhe,fix typo,kubenetes->kubernetes,"['justaugustus', 'jdumars']",1,2018-10-30 09:57:19,2018-11-16 14:35:16,2018-11-16 14:35:17,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/356,https://github.com/kubernetes/sig-release/pull/356,idealhack,Add the additional 1.13 alpha.3 release to timeline,"As the calendar says, It will happen tomorrow.
+
+/assign @AishSundar @dougm
+","['dougm', 'AishSundar']",1,2018-10-30 15:57:22,2018-10-30 16:21:21,2018-10-30 16:21:21,True,2018-10-30 16:21:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/357,https://github.com/kubernetes/sig-release/pull/357,justaugustus,Add features 1.12 tracking sheet,Signed-off-by: Stephen Augustus <foo@agst.us>,"['idvoretskyi', 'kacole2']",1,2018-10-31 06:07:33,2018-10-31 14:35:06,2018-10-31 14:35:06,True,2018-10-31 14:35:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/359,https://github.com/kubernetes/sig-release/pull/359,justaugustus,Update OWNERS*,"- Update SIG Release Leads
+- Rescope `approvers`, so only SIG Release Leads are top-level approvers
+
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+/assign @calebamiles @jdumars @tpepper ","['calebamiles', 'jdumars', 'tpepper']",1,2018-11-04 06:42:45,2018-11-06 17:06:18,2018-11-06 17:06:18,True,2018-11-06 17:06:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/360,https://github.com/kubernetes/sig-release/pull/360,marpaia,Initial draft of 1.13 release notes,"After fixing [a few bugs](https://github.com/marpaia/release-notes/pull/8) in my little release note generation tool, I put together a first draft of a commit-powered release notes document.
+
+/assign @justaugustus @AishSundar","['justaugustus', 'AishSundar']",2,2018-11-05 22:12:54,2018-11-06 20:27:18,2018-11-06 20:27:27,True,2018-11-06 20:27:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/361,https://github.com/kubernetes/sig-release/pull/361,calebamiles,Update shared calendar link,....the old CoreOS one seems to have been finally reclaimed,"['justaugustus', 'jdumars', 'tpepper']",1,2018-11-06 16:59:36,2018-11-06 17:07:44,2019-02-11 21:25:37,True,2018-11-06 17:07:44,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/362,https://github.com/kubernetes/sig-release/pull/362,jberkus,Add link to LWKD for release notes handbook.,,['AishSundar'],1,2018-11-07 19:56:04,2018-11-07 20:06:50,2018-11-07 20:06:50,True,2018-11-07 20:06:50,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/363,https://github.com/kubernetes/sig-release/pull/363,jessfraz,security: add new members process,"cc @philips @cjcullen @tallclair @liggitt 
+
+Thanks @philips for doing the heavy lifting here I just did the markdown :)",['philips'],1,2018-11-08 01:45:17,2018-11-09 05:35:29,2018-11-09 05:35:29,True,2018-11-09 05:35:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/364,https://github.com/kubernetes/sig-release/pull/364,justaugustus,Update RT OWNERS,"- Alphabetize top-level OWNERS
+- Add `release-team/OWNERS`
+- Add `reviewers` section for `releases/release-x.yy/OWNERS`
+
+Two notes here:
+- `sig-release-leads` and `release-team-lead-role` are top-level reviewers, so they have been removed from the individual `release-x.yy/OWNERS`
+- Adding a `release-team/OWNERS` allows for reviews / `/lgtm`s from recent RT members, but note that approval for top-level changes is restricted to SIG Release Chairs (because of the inherent ephemeral nature of the Release Team)
+
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+(This is partially in support of the SIG Release Membership concept introduced in the charter PR: https://github.com/kubernetes/sig-release/pull/348)","['calebamiles', 'jdumars', 'tpepper']",1,2018-11-08 10:35:44,2018-11-15 09:26:29,2018-11-15 09:26:30,True,2018-11-15 09:26:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/365,https://github.com/kubernetes/sig-release/pull/365,marpaia,Copy editing the Release Notes role handbook,This PR contains a few copy-edits and markdown formatting changes to the Release Notes Handbook.,['AishSundar'],2,2018-11-09 00:25:26,2018-11-29 18:19:24,2018-11-29 18:19:45,True,2018-11-29 18:19:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/366,https://github.com/kubernetes/sig-release/pull/366,mooncak,Fix typos: privleges ->privileges,Fix typos: privleges ->privileges,['nickchase'],1,2018-11-10 14:03:05,2018-11-13 02:23:22,2018-11-13 02:23:23,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/367,https://github.com/kubernetes/sig-release/pull/367,shubheksha,Fix broken link and some typos,"- Fix broken link for meeting mins
+- Add link to the milestone burndown google group which is to be joined for the calendar invite",['AishSundar'],3,2018-11-10 15:44:05,2018-11-10 20:46:01,2018-11-10 20:46:01,True,2018-11-10 20:46:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/371,https://github.com/kubernetes/sig-release/pull/371,AishSundar,Fix Code Freeze date in Release Calendar,Fixing the Code freeze date in 1.13 README to match the Release Calendar,['liggitt'],1,2018-11-15 02:45:25,2018-11-15 02:53:12,2018-11-15 02:53:12,True,2018-11-15 02:53:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/373,https://github.com/kubernetes/sig-release/pull/373,justaugustus,Cleanup features spreadsheets formatting,"- CRLF --> LF for csvs
+- Fix typo in 1.8 features csv
+
+Signed-off-by: Stephen Augustus <foo@agst.us>
+","['idealhack', 'jdumars']",1,2018-11-16 14:32:52,2018-11-16 14:41:56,2018-11-16 14:41:57,True,2018-11-16 14:41:56,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/375,https://github.com/kubernetes/sig-release/pull/375,nikopen,handbook fixes: bot does not kick issues out by itself,"soften the language, explain the criteria for moving issues, fix erroneous sentences
+
+more PRs to follow soon",['AishSundar'],2,2018-11-18 16:46:04,2018-11-18 16:56:18,2018-11-18 20:30:05,True,2018-11-18 16:56:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/376,https://github.com/kubernetes/sig-release/pull/376,tallclair,Nominating Jonathan Pulsifer for PST associate,"/assign @jonpulsifer
+/assign @philips @cjcullen @liggitt @jessfraz
+
+/committee steering","['philips', 'liggitt', 'jessfraz', 'cjcullen']",1,2018-11-20 00:15:47,2018-11-20 02:15:03,2018-11-20 02:36:04,True,2018-11-20 02:15:03,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/377,https://github.com/kubernetes/sig-release/pull/377,justaugustus,Add 1.14 Release Team,"First round of 1.14 RT members. I'll keep this open until we select the leads and that we can add shadows in a subsequent PR.
+
+rel: #372 
+
+/assign @spiffxp @AishSundar 
+/hold
+
+Signed-off-by: Stephen Augustus <foo@agst.us>","['spiffxp', 'idealhack', 'AishSundar']",1,2018-11-20 01:33:09,2018-11-28 01:41:59,2018-11-28 01:41:59,True,2018-11-28 01:41:59,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/379,https://github.com/kubernetes/sig-release/pull/379,cjwagner,Update 1.13 roster to reflect active t-i shadows.,"/assign @justaugustus 
+cc @AishSundar ",['justaugustus'],1,2018-11-22 03:00:11,2018-11-22 03:07:42,2018-11-22 03:07:42,True,2018-11-22 03:07:42,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/384,https://github.com/kubernetes/sig-release/pull/384,chrisohaver,Add note about externalName behavior change in kubedns/coredns,"CoreDNS and kube-dns differ in the way they handle Services with externalNames that _look like_ IP addresses.  CoreDNS follows the DNS spec here, whereas kube-dns does not.
+This results in an apparent behavior change when moving from kube-dns to coredns.
+
+More detail here: coredns/coredns#2324",[],1,2018-11-26 17:16:36,2018-11-26 18:56:35,2018-11-26 18:56:36,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/386,https://github.com/kubernetes/sig-release/pull/386,marpaia,"Final 1.13 release notes, copied in from Google Doc","This PR updates the `release-notes-draft.md` file for the 1.13 release to contain the ""final"" set of release notes. This document should (correct me if I'm wrong please) get copied into the `CHANGELOG-1.13.md` file in k/k by `anago` when the 1.13.0 tag is cut (CC: @dougm and @tpepper for confirmation).
+
+/assign @AishSundar ","['dougm', 'justaugustus', 'AishSundar']",11,2018-11-28 20:44:40,2018-11-29 04:18:30,2018-11-29 17:00:14,True,2018-11-29 04:18:30,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/387,https://github.com/kubernetes/sig-release/pull/387,marpaia,Update release notes to bump Cluster Autoscaler to 1.13.0 from 1.13.0-rc2,"Now that freeze was lifted by @AishSundar, this PR contains a final scrape of the latest notes from k/k. There was just one note since yesterday: Cluster Autoscaler was bumped from 1.13.0-rc2 to 1.13.0. All in all, the 1.13 release note document was generated from `ad58349` to `9c50dd0`.
+
+/assign @AishSundar ",['AishSundar'],1,2018-11-29 04:34:17,2018-11-29 04:40:42,2018-11-29 04:50:11,True,2018-11-29 04:40:42,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/388,https://github.com/kubernetes/sig-release/pull/388,liggitt,"Added links, moved items to owning sig",,['marpaia'],1,2018-11-29 17:21:44,2018-11-29 18:11:41,2018-12-03 16:06:21,True,2018-11-29 18:11:41,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/389,https://github.com/kubernetes/sig-release/pull/389,marpaia,Updating release notes for SIG Storage and SIG AWS,"This PR contains:
+
+- A new known issue courtesy of @saad-ali describing CSI sidecar container latency
+- An updated link to cloud-provider-aws courtesy of @d-nishi 
+- A new known issue courtesy of @uablrek describing IPV6 issues with proxy-mode
+- A few minor copy edits
+
+/assign @AishSundar ","['saad-ali', 'AishSundar']",2,2018-11-29 18:48:26,2018-11-29 19:38:50,2018-11-29 21:24:39,True,2018-11-29 19:38:50,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/391,https://github.com/kubernetes/sig-release/pull/391,kacole2,Update Timeline and Responsibilities for Enhancement Lead Handbook,"Updated the Milestone Activities + Timing section to put the timing and responsiblity associated needed for the role.
+
+Signed-off-by: Kendrick Coleman <kendrickc@vmware.com>",['justaugustus'],1,2018-11-29 21:03:29,2018-11-30 05:49:31,2018-11-30 07:59:54,True,2018-11-30 05:49:31,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/398,https://github.com/kubernetes/sig-release/pull/398,marpaia,Add external dependencies section to release notes,"This PR is a work in-progress towards an updated ""External Dependencies"" section for the 1.13 release notes.",['AishSundar'],11,2018-12-03 16:29:13,2018-12-03 20:26:49,2018-12-03 20:42:02,True,2018-12-03 20:26:49,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/399,https://github.com/kubernetes/sig-release/pull/399,liggitt,Update 1.13.0 draft release notes for CVE-2018-1002105,xref https://groups.google.com/forum/#!topic/kubernetes-announce/GVllWCg6L88,"['marpaia', 'AishSundar']",1,2018-12-03 17:13:36,2018-12-03 17:38:07,2018-12-05 04:22:25,True,2018-12-03 17:38:07,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/401,https://github.com/kubernetes/sig-release/pull/401,marpaia,Update release notes role to describe the current process for external dependencies,"This PR addresses #400 by expanding the release notes role handbook to add some information and references on external dependencies in release notes.
+
+/assign @spiffxp","['spiffxp', 'AishSundar']",1,2018-12-03 19:06:05,2018-12-03 19:26:40,2018-12-03 19:26:51,True,2018-12-03 19:26:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/402,https://github.com/kubernetes/sig-release/pull/402,jberkus,"Made CI Signal requirements more detailed, and broke them down into s…","…pecific requirements and qualifications in order to support the new Shadow selection process.
+
+/kind documentation
+/assign @justaugustus
+cc:
+@AishSundar @mariantalla  
+","['justaugustus', 'mariantalla']",1,2018-12-03 19:23:03,2018-12-17 10:04:26,2018-12-17 10:04:26,True,2018-12-17 10:04:26,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/403,https://github.com/kubernetes/sig-release/pull/403,AishSundar,1.13 Release Theme reveal !,Lets get the release theme in !,"['dougm', 'marpaia']",1,2018-12-04 00:43:27,2018-12-04 00:46:37,2018-12-04 02:53:41,True,2018-12-04 00:46:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/404,https://github.com/kubernetes/sig-release/pull/404,nikhita,Add note about publishing-bot,"@AishSundar Following up on our conversation on Slack about adding this to the release handbook.
+
+I'm not entirely sure if this is the right place to add it, but it seems the closest and the question asked on #sig-release was in the context of the branch release management, so this seemed apt.
+
+/cc @AishSundar @sttts @dougm @dims @neolit123 
+
+
+
+","['justaugustus', 'AishSundar']",1,2018-12-04 08:34:28,2019-01-20 09:58:58,2019-01-20 09:58:59,True,2019-01-20 09:58:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/406,https://github.com/kubernetes/sig-release/pull/406,philips,security-release-process: add Joel Smith Associate,"Joel Smith has been assisting with the [Kubernetes WG Security Audit][audit]
+and is a member of the of the OpenShift engineering team.
+
+[audit]: https://github.com/kubernetes/community/tree/master/wg-security-audit",['liggitt'],1,2018-12-05 04:08:59,2018-12-05 04:14:57,2018-12-05 04:14:57,True,2018-12-05 04:14:57,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/407,https://github.com/kubernetes/sig-release/pull/407,liggitt,Update security release process documentation,"When this document was written, it presupposed a private release process, especially as it relates to pre-announcing security-related releases publicly.
+
+Until we are able to pre-build and stage release artifacts for security releases, there is a gap of multiple hours between when fixes are pushed to public branches and when release artifacts for all release branches are available. Pre-announcing security-related changes will be landing during that time and drawing attention to the issues before fixed versions are available has consistently been deemed more harmful than helpful.
+
+This PR updates this document to reflect the current security release process. As capability for private release build/staging is achieved, we can consider how to reintroduce public pre-release notification to the process.
+
+/cc @kubernetes/product-security-team @philips ",['philips'],1,2018-12-05 15:44:14,2018-12-05 18:48:12,2018-12-14 23:56:48,True,2018-12-05 18:48:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/408,https://github.com/kubernetes/sig-release/pull/408,ttousai,Add Stable Branch Management Team,"This PR adds a Stable Branch Management Team (two leads and shadows) which replaces the Patch Release Manager role. 
+
+This seems like a natural progression from the historically one patch manager zero shadows to two leads (a.k.a team) no shadows and now a team of lead + shadows.
+
+cc @tpepper @aleksandra-malinowska",[],1,2018-12-05 16:49:26,2018-12-06 02:12:05,2018-12-06 02:12:06,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/409,https://github.com/kubernetes/sig-release/pull/409,gtirloni,Fix a couple of 404's in release-team/README,,"['justaugustus', 'nikopen']",1,2018-12-11 07:47:11,2018-12-15 09:38:33,2018-12-15 09:38:33,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/413,https://github.com/kubernetes/sig-release/pull/413,liggitt,security-release-process: add Micah Hausler associate,"Micah has been helping with testing security-related fixes (specifically for https://github.com/kubernetes/kubernetes/issues/71411 and https://github.com/kubernetes/kubernetes/pull/71980) and is a member of the amazon engineering team
+
+cc @kubernetes/product-security-team","['philips', 'jessfraz']",1,2018-12-15 00:04:59,2019-01-02 19:06:28,2019-01-02 20:38:02,True,2019-01-02 19:06:28,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/422,https://github.com/kubernetes/sig-release/pull/422,shyamjvs,Move out ephemera/scalability-validation.md,"As the right place for this doc to live is under `community/sig-scalability/`. I've created PR https://github.com/kubernetes/community/pull/3056 to add the doc there.
+
+/cc @wojtek-t @tpepper ","['tpepper', 'wojtek-t']",1,2018-12-28 21:54:09,2019-01-02 21:45:42,2019-01-02 21:50:56,True,2019-01-02 21:45:42,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/423,https://github.com/kubernetes/sig-release/pull/423,liggitt,document cve request process,"/assign @philips 
+fixes #282 ","['philips', 'jessfraz']",1,2019-01-02 21:53:19,2019-01-02 22:27:24,2019-02-14 02:54:36,True,2019-01-02 22:27:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/424,https://github.com/kubernetes/sig-release/pull/424,micahhausler,Updated security release procedure,* Added distributor notice to security release procedure,['jessfraz'],1,2019-01-02 21:54:34,2019-01-02 22:33:51,2019-01-02 22:33:52,True,2019-01-02 22:33:51,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/429,https://github.com/kubernetes/sig-release/pull/429,aleksandra-malinowska,Add 1.13 patch releases info,"Quick draft w/ information about 1.13 patch release schedule proposed in #427. It's not meant to be perfect/include everything - I suspect we may have to iterate on it to find out what's most useful.
+
+/kind documentation
+/cc @tpepper @spiffxp 
+",['tpepper'],1,2019-01-04 18:14:06,2019-01-08 20:42:59,2019-01-08 20:42:59,True,2019-01-08 20:42:59,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/430,https://github.com/kubernetes/sig-release/pull/430,nikopen,Bug Triage handbook sync & cleanup,"Updating to the current state of world.
+
+It is now mostly complete (expecting a few mistakes I missed), overall:
+- ~60% rewritten
+- greatly softened language
+- fixed most pain points of previous release, clarifications
+- pre-code slush + code slush merged into 'code freeze is coming' lasting approx 2 weeks
+- added 'Filtering' and 'Issue Categorization' sections
+
+There are still some scattered todos which will be introduced at a later stage, i.e. standardized tracking automation, clarifications on external projects depending on k/k e.g. kubeadm, etc.","['tpepper', 'guineveresaenger']",17,2019-01-04 21:09:43,2019-02-01 20:22:35,2019-02-01 20:22:35,True,2019-02-01 20:22:35,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/431,https://github.com/kubernetes/sig-release/pull/431,spiffxp,Initial draft of the 1.14 release schedule,"There are some role-specific things I forgot to add to the schedule, and I'd like to take a fresh pass at some of the detailed paragraphs.
+
+I'm trying to tackle https://github.com/kubernetes/sig-release/issues/319 while I'm here by providing linkable descriptions of what I interpret as the different phases of the release",['justaugustus'],5,2019-01-08 01:32:22,2019-01-12 00:56:18,2019-01-12 02:39:18,True,2019-01-12 00:56:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/433,https://github.com/kubernetes/sig-release/pull/433,justaugustus,Update Release Team Selection (Shadow questionnaire),"Fixes: #368 
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @spiffxp @BenTheElder @marpaia @jberkus ","['spiffxp', 'jberkus', 'BenTheElder', 'marpaia']",1,2019-01-09 03:15:30,2019-01-10 00:02:14,2019-01-10 00:02:14,True,2019-01-10 00:02:14,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/434,https://github.com/kubernetes/sig-release/pull/434,justaugustus,Add 1.14 Lead Shadows,"Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @spiffxp ",['spiffxp'],1,2019-01-09 03:42:35,2019-01-09 19:14:43,2019-01-09 19:14:43,True,2019-01-09 19:14:42,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/435,https://github.com/kubernetes/sig-release/pull/435,tpepper,release lead role handbook: encourage global mindset,"In various places our documentation on release team roles and operations
+have a legacy bias towards the Pacific timezone.  This is no longer
+necessary and is unhealthy.  We should strive to be a globally inclusive
+community.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['jberkus', 'justaugustus']",1,2019-01-09 22:25:52,2019-01-14 20:54:11,2019-01-14 20:54:11,True,2019-01-14 20:54:11,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/436,https://github.com/kubernetes/sig-release/pull/436,feiskyer,Add 1.12 patch release info,/assign @tpepper @spiffxp ,"['spiffxp', 'tpepper']",1,2019-01-10 02:33:11,2019-01-10 20:06:37,2019-01-10 22:36:51,True,2019-01-10 20:06:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/438,https://github.com/kubernetes/sig-release/pull/438,philips,security release: update docs on triage,"we have an on-call rotation so update the doc about first come first
+serve.",['liggitt'],1,2019-01-11 18:41:41,2019-01-14 19:18:39,2019-01-14 19:18:39,True,2019-01-14 19:18:39,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/439,https://github.com/kubernetes/sig-release/pull/439,philips,security release: Distributor list,"Fixes #416 
+
+Todo
+- [x] Figure out ralph@uk.ibm.com
+- [x] Figure out etune",['liggitt'],5,2019-01-11 19:37:16,2019-01-14 15:11:50,2019-01-14 15:11:50,True,2019-01-14 15:11:49,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/442,https://github.com/kubernetes/sig-release/pull/442,spiffxp,Remove code slush,"We decided a clear warning to brace for code freeze was sufficient,
+and a whole extra delineated phase wasn't worth the effort. We'll
+still remind folks not to do mean things like land massive changes
+or refactors N days before code freeze.
+
+ref: https://github.com/kubernetes/sig-release/issues/269",['justaugustus'],8,2019-01-12 02:50:03,2019-01-15 00:46:59,2019-01-15 01:27:25,True,2019-01-15 00:46:59,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/443,https://github.com/kubernetes/sig-release/pull/443,jimangel,temp fix docs link,"Updating the broken link for docs as a temp fix. Post 1.14 release, these docs will be updated for the 1.15 folks. I also plan on modifying the directory structure to match the other handbooks (README.md).
+
+cc @justaugustus 
+
+Ref: https://github.com/kubernetes/sig-release/issues/192",['justaugustus'],1,2019-01-13 17:15:24,2019-01-13 22:56:40,2019-01-13 22:56:40,True,2019-01-13 22:56:40,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/444,https://github.com/kubernetes/sig-release/pull/444,spiffxp,Update TODO's,"Went ahead and copy-pasted the 1.13 docs to 1.14 docs and made bitly links
+
+Added info about kubernetes-release-team@",['justaugustus'],2,2019-01-14 18:45:48,2019-01-14 19:16:55,2019-01-15 02:16:19,True,2019-01-14 19:16:55,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/445,https://github.com/kubernetes/sig-release/pull/445,spiffxp,Update OWNERS for release-team,"This mildly conflates two concerns:
+- I think the OWNERS of the release-team subproject should be distinct from the SIG Release Chairs
+- I think the current and former release-team leads should have /approve access to release-team playbooks
+
+I'm opting to addres the second concern here. We can replace aliases with specific people once we've had a chance to discuss at SIG Release","['calebamiles', 'BenTheElder']",1,2019-01-14 19:04:26,2019-01-14 19:09:16,2019-01-15 02:16:11,True,2019-01-14 19:09:16,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/446,https://github.com/kubernetes/sig-release/pull/446,calebamiles,"Revert ""Update OWNERS for release-team""",Reverts kubernetes/sig-release#445 as @justaugustus had concerns,"['spiffxp', 'justaugustus']",1,2019-01-14 19:23:08,2019-01-15 00:59:14,2019-02-11 21:36:36,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/448,https://github.com/kubernetes/sig-release/pull/448,tpepper,branch and patch release manager role handbooks update,Running through the 1.13.2 patch release process I found a number of places where the documentation had gotten stale or was lacking on clarity.  This PR has two commits to separate some small cleaning of the branch manager role handbook from a partial rewrite of the patch manager handbook.,"['dougm', 'hoegaarden']",2,2019-01-15 04:10:34,2019-01-28 19:07:31,2019-01-28 19:07:31,True,2019-01-28 19:07:30,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/452,https://github.com/kubernetes/sig-release/pull/452,foxish,Update with 1.11 patch release details,cc @tpepper,"['spiffxp', 'tpepper']",3,2019-01-17 19:19:46,2019-01-17 20:53:29,2019-02-11 21:25:11,True,2019-01-17 20:53:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/453,https://github.com/kubernetes/sig-release/pull/453,justaugustus,Add dirs for RelEng and Licensing subprojects,"Placeholders and initial OWNERS for RelEng and Licensing subprojects
+Labels will be in place once kubernetes/test-infra#10852 merges.
+sigs.yaml update in kubernetes/community#3119
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @tpepper @spiffxp @nikhita ","['dims', 'spiffxp', 'idealhack', 'calebamiles', 'tpepper', 'nikhita']",1,2019-01-20 09:12:34,2019-01-23 12:02:30,2019-01-23 12:02:30,True,2019-01-23 12:02:30,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/455,https://github.com/kubernetes/sig-release/pull/455,amwat,Add 1.14 test infra shadows.,"/assign @spiffxp 
+
+/cc @imkin @munnerz @taragu ","['spiffxp', 'munnerz', 'justaugustus']",1,2019-01-21 17:13:53,2019-01-22 02:13:54,2019-01-22 02:13:54,True,2019-01-22 02:13:54,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/459,https://github.com/kubernetes/sig-release/pull/459,dstrebel,Adding 1.14 Shadows For Release Notes,"/assign @spiffxp
+
+/cc @jeefy @onyiny-ang @alenkacz","['spiffxp', 'justaugustus']",1,2019-01-22 03:58:41,2019-01-22 04:09:24,2019-01-22 04:09:24,True,2019-01-22 04:09:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/461,https://github.com/kubernetes/sig-release/pull/461,dstrebel,Initial draft of 1.14 release notes,"First draft of a commit-powered release notes document starting from git sha fa6d17f to current date.
+
+/assign @spiffxp @marpaia","['spiffxp', 'marpaia']",1,2019-01-22 04:59:25,2019-01-24 16:19:47,2019-01-24 16:19:47,True,2019-01-24 16:19:47,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/462,https://github.com/kubernetes/sig-release/pull/462,claurence,Update release_team.md,updating release team with the enhancement shadows ,['justaugustus'],1,2019-01-22 19:29:51,2019-01-23 06:01:54,2019-01-23 06:01:54,True,2019-01-23 06:01:54,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/463,https://github.com/kubernetes/sig-release/pull/463,lachie83,Add 1.14 enhancement shadows,"Signed-off-by: Lachlan Evenson <lachlan.evenson@microsoft.com>
+
+Add 1.14 Enhancement release shadows.
+
+cc @claurence ",['claurence'],1,2019-01-22 22:35:10,2019-01-22 23:18:57,2019-01-22 23:18:57,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/464,https://github.com/kubernetes/sig-release/pull/464,jimangel,adding sig-docs shadows,,['justaugustus'],1,2019-01-23 04:33:37,2019-01-23 06:00:15,2019-01-23 06:00:15,True,2019-01-23 06:00:15,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/466,https://github.com/kubernetes/sig-release/pull/466,nikopen,Bug Triage squadron,/hold,['justaugustus'],1,2019-01-24 07:38:09,2019-01-24 16:18:00,2019-01-24 16:18:00,True,2019-01-24 16:18:00,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/467,https://github.com/kubernetes/sig-release/pull/467,mariantalla,Add tips for CI signal team on working with other SIGs,"This PR adds more detail on what sort of work with other SIGs the CI signal team can support with.
+
+Related: https://github.com/kubernetes/community/pull/3143 ; which adds information for contributors (not necessarily on the CI signal team) to triage and escalate test failures.
+
+cc @jberkus 
+
+@spiffxp @BenTheElder :  A lot of the content in this PR comes from the testing.md file mentioned in kubernetes/sig-release#428 , and it's points I thought were mostly useful to CI signal but not as much to other contirbutors. Thoughts? Anything to add/remove/reword?",['spiffxp'],4,2019-01-24 13:49:58,2019-02-11 19:25:23,2019-02-12 06:36:42,True,2019-02-11 19:25:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/469,https://github.com/kubernetes/sig-release/pull/469,hoegaarden,Add 1.14 release branch management shadows,"/cc @bubblemelon @melyndah @SlickNik
+
+/assign @spiffxp @justaugustus ","['spiffxp', 'justaugustus']",1,2019-01-24 21:39:27,2019-01-25 08:37:02,2019-01-25 08:37:02,True,2019-01-25 08:37:02,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/470,https://github.com/kubernetes/sig-release/pull/470,mariantalla,Add CI signal shadows for 1.14 release,"/cc @smourapina @mortent @kacole2 
+
+/assign @spiffxp @justaugustus ","['spiffxp', 'justaugustus']",1,2019-01-25 17:50:52,2019-01-25 18:15:30,2019-01-25 18:15:30,True,2019-01-25 18:15:30,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/472,https://github.com/kubernetes/sig-release/pull/472,jimangel,adding docs deadlines,"Added docs deadlines based on the following:
+
+Docs deadline - Open placeholder PRs (~3.5 weeks before release): **Friday March 1st**
+Docs deadline - PRs ready for review: (~2 weeks before release): **Monday March 11th**
+Docs complete - All PRs reviewed and ready to merge (~1 week before release): **Monday March 18th**
+
+Also minor nit 's/release-1.14/dev-1.14/' for the PR branch.
+
+cc: @spiffxp @justaugustus ",['zacharysarah'],1,2019-01-27 18:37:22,2019-01-28 21:19:12,2019-01-28 22:03:58,True,2019-01-28 21:19:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/473,https://github.com/kubernetes/sig-release/pull/473,mariantalla,Add Jorge Alarcon as CI signal shadow for 1.14,"Apologies for separating this from https://github.com/kubernetes/sig-release/pull/470, it's due to me not being very competent with slack usernames (embarrassing but true).
+
+/cc @alejandrox1
+/assign @spiffxp @justaugustus","['spiffxp', 'justaugustus']",1,2019-01-28 14:15:15,2019-01-28 14:19:44,2019-01-28 14:19:44,True,2019-01-28 14:19:44,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/475,https://github.com/kubernetes/sig-release/pull/475,onlydole,Add Jorge and Taylor as communications shadows,,['spiffxp'],1,2019-01-28 21:12:38,2019-01-28 21:17:33,2019-01-28 21:17:33,True,2019-01-28 21:17:33,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/476,https://github.com/kubernetes/sig-release/pull/476,spiffxp,[wip] clarify release-1.14 docs around enhancements freeze,"As I'm working on this, I realize that the ""exceptions"" doc as written
+does _not_ really apply to enhancements that didn't make it in by enhancements
+freeze. I can't decide whether we should not link to it, and make up a process
+on the fly... or heavily reword it
+
+ref: https://github.com/kubernetes/sig-release/blob/master/releases/EXCEPTIONS.md",[],2,2019-01-29 04:06:28,2019-01-30 16:17:28,2019-01-31 17:22:54,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/478,https://github.com/kubernetes/sig-release/pull/478,hoegaarden,Branch Manager Handbook: Add note to request mailing list access,"When cutting v1.14.0-alpha.2 I noticed that my mails show up on kubernetes-dev@ but not on kubernetes-announce@ list.
+
+/cc @tpepper @spiffxp @kubernetes/sig-release ","['idealhack', 'justaugustus']",1,2019-01-29 12:04:52,2019-01-29 15:00:41,2019-01-29 15:00:41,True,2019-01-29 15:00:41,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/480,https://github.com/kubernetes/sig-release/pull/480,claurence,Create exception.yml for 1.14 release ,"creating an exception file for the 1.14 release enhancements 
+
+",['justaugustus'],2,2019-01-30 14:12:37,2019-01-30 22:07:35,2019-01-30 22:07:35,True,2019-01-30 22:07:35,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/481,https://github.com/kubernetes/sig-release/pull/481,claurence,Update EXCEPTIONS.md,Updating the exception doc to have relevant 1.14 info and adding context about exceptions after enhancement freeze,['justaugustus'],1,2019-01-30 15:13:58,2019-01-30 22:04:30,2019-01-30 22:04:30,True,2019-01-30 22:04:30,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/482,https://github.com/kubernetes/sig-release/pull/482,liggitt,Release 1.14 readme week4 updates,"Builds on https://github.com/kubernetes/sig-release/pull/476 to add https://github.com/kubernetes/sig-release/pull/476/files#r252319391
+
+",['spiffxp'],3,2019-01-30 16:08:18,2019-01-30 16:20:52,2019-02-14 02:54:36,True,2019-01-30 16:20:52,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/483,https://github.com/kubernetes/sig-release/pull/483,justaugustus,Fix link to exceptions,"Follow-on to https://github.com/kubernetes/sig-release/pull/482
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>",['hoegaarden'],1,2019-01-30 21:49:49,2019-01-30 21:55:12,2019-01-30 21:55:13,True,2019-01-30 21:55:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/484,https://github.com/kubernetes/sig-release/pull/484,hoegaarden,"Fix link to exceptions, another attempt",Follow-on to #483,['justaugustus'],1,2019-01-30 22:06:41,2019-01-30 22:18:23,2019-01-30 22:18:23,True,2019-01-30 22:18:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/485,https://github.com/kubernetes/sig-release/pull/485,neolit123,release-notes: update README about updating external dependencies,"Include step-by-step guide on how to update entries in the
+external dependencies section of the release notes.
+
+/kind documentation
+/priority important-longterm
+/assign @tpepper @marpaia @dstrebel 
+","['marpaia', 'tpepper', 'dstrebel']",1,2019-01-31 23:58:46,2019-02-01 00:39:05,2019-02-01 00:39:56,True,2019-02-01 00:39:05,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/487,https://github.com/kubernetes/sig-release/pull/487,neolit123,release-notes: add note about lwkd.info,"add note for LWKD as required by @jberkus 
+
+/kind documentation
+/priority important-longterm
+/assing @marpaia 
+",['spiffxp'],1,2019-02-01 03:01:57,2019-02-07 22:19:05,2019-02-07 22:23:18,True,2019-02-07 22:19:05,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/489,https://github.com/kubernetes/sig-release/pull/489,dstrebel,Update Draft of Release notes,"Updating release notes draft from 
+
+-start-sha=""fa6d17f400a94068b56b7d0f211f3cc9db290db6"" 
+ -end-sha=""0bd35d1b684d440a12c5963f5cc8518f9404084f""",['nikopen'],1,2019-02-04 04:35:07,2019-02-04 18:25:57,2019-02-04 18:25:57,True,2019-02-04 18:25:57,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/491,https://github.com/kubernetes/sig-release/pull/491,rlenferink,Updated OWNERS file to include link to docs,,"['spiffxp', 'justaugustus']",1,2019-02-05 18:44:06,2019-02-07 22:29:25,2019-02-07 22:29:25,True,2019-02-07 22:29:25,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/492,https://github.com/kubernetes/sig-release/pull/492,claurence,Update exception.yaml for 1.14,Adding in the approved exception requests for the 1.14 release cycle,['justaugustus'],14,2019-02-07 22:03:13,2019-02-14 02:09:29,2019-02-14 02:09:29,True,2019-02-14 02:09:29,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/495,https://github.com/kubernetes/sig-release/pull/495,onyiny-ang,02-11 Update Draft of Release Notes,"Updates release notes draft for February 11th with:
+
+-start-sha fa6d17f400a94068b56b7d0f211f3cc9db290db6 
+-end-sha f7c4389b793cd6cf0de8d67f2c5db28b3985ad59
+",['spiffxp'],1,2019-02-11 19:30:47,2019-02-11 19:34:46,2019-02-11 19:34:46,True,2019-02-11 19:34:46,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/497,https://github.com/kubernetes/sig-release/pull/497,spiffxp,Add v1.14 Release Calendar,,['idvoretskyi'],1,2019-02-11 22:53:34,2019-02-12 12:18:02,2019-02-12 12:18:02,True,2019-02-12 12:18:02,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/498,https://github.com/kubernetes/sig-release/pull/498,jimangel,Updating docs handbook (draft 1),"This is a continuation of: https://github.com/kubernetes/sig-release/pull/316
+Resolves: https://github.com/kubernetes/sig-release/issues/192
+
+This is a WIP and the [sig-docs 1.14 release team](https://github.com/kubernetes/sig-release/blob/master/releases/release-1.14/release_team.md) will modify throughout the release and finalize it after 1.14 drops.
+
+/cc @justaugustus @zacharysarah ",['justaugustus'],2,2019-02-12 00:22:14,2019-02-22 05:04:41,2019-02-22 05:04:41,True,2019-02-22 05:04:41,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/502,https://github.com/kubernetes/sig-release/pull/502,liggitt,Update distributors announce list,cc @kubernetes/product-security-team ,['philips'],1,2019-02-14 03:05:35,2019-02-21 15:15:50,2019-02-21 15:15:51,True,2019-02-21 15:15:50,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/503,https://github.com/kubernetes/sig-release/pull/503,justaugustus,Add subproject aliases and update releng OWNERS,"Add aliases for subprojects:
+- licensing
+- release-engineering
+
+Update release-engineering OWNERS:
+- sync the current [OWNERS of k/release](https://github.com/kubernetes/release/blob/master/OWNERS_ALIASES#L8-L13) with the subproject OWNERS.
+
+(This is mostly to bolster OWNERS, but release engineering should feel free to update/remove as appropriate once this merges.)
+
+(Updated the commit message to reflect.)
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>","['calebamiles', 'tpepper', 'ixdy']",1,2019-02-14 04:00:21,2019-02-15 20:17:13,2019-02-15 20:17:13,True,2019-02-15 20:17:13,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/504,https://github.com/kubernetes/sig-release/pull/504,nikhita,licensing: add list of whitelisted licenses,"This is a follow up of https://github.com/kubernetes/community/pull/3231 and https://github.com/kubernetes/community/pull/3239.
+
+This PR adds the list of approved whitelisted licenses by the CNCF Governing Board, as per the [slide deck](https://docs.google.com/presentation/d/1tbH15qF7bXOp8veRKHlWSeH6w1NWkMN3qmIwB6LvvgU/edit#slide=id.p1) shared by @swinslow. (Ref: https://github.com/kubernetes/steering/issues/57#issuecomment-458968990)
+
+/cc @swinslow @dims @justaugustus 
+members involved in the sig-release licensing subproject
+
+/cc @thockin @cblecker @sttts @apelisse @BenTheElder @soltysh 
+dep-approvers
+
+/hold
+Even though @swinslow made changes to the doc in https://github.com/kubernetes/community/pull/3239, I still want to make sure that this is explicitly lgtm'ed by him because it includes lots of legalese 
+
+/sig release
+/area licensing",['justaugustus'],1,2019-02-14 07:59:03,2019-02-14 15:34:37,2019-02-14 15:35:07,True,2019-02-14 15:34:37,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/505,https://github.com/kubernetes/sig-release/pull/505,jeefy,Generate weekly draft,"Generated weekly release notes draft
+
+-start-sha fa6d17f400a94068b56b7d0f211f3cc9db290db6 
+-end-sha f7eb5769c2dc4bc701802da639451d0f6cd56a18",['marpaia'],1,2019-02-18 15:53:12,2019-02-18 18:10:10,2019-02-18 18:10:10,True,2019-02-18 18:10:10,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/507,https://github.com/kubernetes/sig-release/pull/507,nikopen,remove 'none' line,"seems that when `/release-note none` is applied to a kind/feature PR, it is fetched as 'none' in the release notes.
+
+https://github.com/kubernetes/kubernetes/pull/74182#issuecomment-464554714",['marpaia'],1,2019-02-19 00:27:38,2019-02-19 18:35:35,2019-02-19 18:35:36,True,2019-02-19 18:35:35,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/510,https://github.com/kubernetes/sig-release/pull/510,mrbobbytables,Add discuss.k8s.io announce to security announcement template,"Adds the email address associated with the Discuss [Announcements Category](https://discuss.kubernetes.io/c/announcements) to the security fix announcement template.
+
+/cc @castrojo ",['tallclair'],1,2019-02-19 21:38:59,2019-03-06 18:32:50,2019-03-06 18:32:50,True,2019-03-06 18:32:50,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/511,https://github.com/kubernetes/sig-release/pull/511,nikopen,Prow mention and query link,,['guineveresaenger'],1,2019-02-20 02:12:17,2019-02-20 17:09:43,2019-02-20 17:09:43,True,2019-02-20 17:09:43,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/512,https://github.com/kubernetes/sig-release/pull/512,marpaia,Add Release Team Onboarding Guide to enumerate access requirements,"As we discussed in https://github.com/kubernetes/sig-release/issues/479, this PR adds an initial onboarding guide which aims to be a top-level list of things that all Release Team members need to do, lists they need to join/be added to, GitHub teams, etc.
+
+/area release-team
+
+/assign @justaugustus 
+/assign @BenTheElder 
+/assign @spiffxp 
+
+Closes: #479 ","['spiffxp', 'justaugustus', 'BenTheElder']",2,2019-02-21 04:18:00,2019-02-24 01:52:17,2019-02-24 01:52:17,True,2019-02-24 01:52:17,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/513,https://github.com/kubernetes/sig-release/pull/513,hoegaarden,Update branch manager handbook,"- Some reformatting and typo fixes
+- Add considerations on when to run `branchff`
+- Add notes about 1st beta / branch generation
+  - staging takes longer
+  - test-infra needs to be notified to setup test jobs
+
+/area release-team
+/assign @tpepper @spiffxp 
+/cc @dougm
+
+xref: #506
+Fixes: #509","['dougm', 'spiffxp', 'tpepper']",5,2019-02-21 13:23:19,2019-02-25 17:11:07,2019-02-25 17:11:07,True,2019-02-25 17:11:06,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/514,https://github.com/kubernetes/sig-release/pull/514,knisbet,Add gravitational to private distributors list,Request to add gravitational to private distributors list,['philips'],1,2019-02-21 22:05:13,2019-02-28 18:39:17,2019-02-28 20:36:59,True,2019-02-28 18:39:17,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/515,https://github.com/kubernetes/sig-release/pull/515,onyiny-ang,Add templates and update links for release-notes role-handbook,"- Added templates and respective links for:
+  - email message to sig leads for major theme input
+  - creating bucket issue for release `known issues` in `kubernetes/kubernetes`
+
+- Updates links to release notes tool which now lives in `kubernetes/release`","['marpaia', 'jeefy', 'dstrebel']",2,2019-02-22 17:59:03,2019-02-22 21:47:24,2019-02-22 22:15:42,True,2019-02-22 21:47:24,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/517,https://github.com/kubernetes/sig-release/pull/517,justaugustus,Add notes on milestone maintainer privs and requesting access,"Closes: kubernetes/enhancements#590
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @spiffxp @calebamiles @tpepper","['spiffxp', 'calebamiles', 'tpepper']",1,2019-02-23 06:57:51,2019-02-23 20:47:02,2019-02-23 20:47:02,True,2019-02-23 20:47:02,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/519,https://github.com/kubernetes/sig-release/pull/519,hoegaarden,Add issue template for cutting a release,"Based on the issues we used in `v1.14` and the comments from @tpepper over at [#sig-release](https://kubernetes.slack.com/archives/C2C40FMNF/p1550859116017200?thread_ts=1550784819.010800&cid=C2C40FMNF).
+
+/cc @tpepper @spiffxp 
+
+/area release-team
+/kind documentation
+","['spiffxp', 'justaugustus']",2,2019-02-25 11:33:08,2019-02-25 16:46:49,2019-02-25 16:46:49,True,2019-02-25 16:46:49,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/521,https://github.com/kubernetes/sig-release/pull/521,jeefy,Weekly draft notes update,"Generated weekly release notes draft
+
+-start-sha fa6d17f400a94068b56b7d0f211f3cc9db290db6
+-end-sha 3b11f958105b3be9ced8a3d760f353a2ba411882",['marpaia'],1,2019-02-25 15:54:29,2019-02-26 23:00:22,2019-02-26 23:00:22,True,2019-02-26 23:00:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/522,https://github.com/kubernetes/sig-release/pull/522,nikopen,small link fix,,['guineveresaenger'],1,2019-02-25 17:13:09,2019-02-25 23:26:28,2019-02-26 01:41:08,True,2019-02-25 23:26:28,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/523,https://github.com/kubernetes/sig-release/pull/523,amwat,Update test-infra handbook,"Remove priority/critical-urgent from code freeze criteria. 
+ref: https://github.com/kubernetes/sig-release/issues/456
+/assign @spiffxp 
+
+Also add some more useful links.
+/cc @imkin @taragu @munnerz ",['spiffxp'],1,2019-02-25 19:43:48,2019-02-25 20:34:26,2019-02-25 22:42:52,True,2019-02-25 20:34:26,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/524,https://github.com/kubernetes/sig-release/pull/524,hoegaarden,Fix issue template for release cuts,"Bug fix for https://github.com/kubernetes/sig-release/pull/519 -- with a wrong header GitHub won't show it as a template.
+
+/cc @tpepper @spiffxp
+/assign @justaugustus 
+
+/area release-team
+/kind documentation",['justaugustus'],1,2019-02-25 22:18:49,2019-02-26 04:30:26,2019-02-27 11:46:00,True,2019-02-26 04:30:26,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/526,https://github.com/kubernetes/sig-release/pull/526,spiffxp,Add role-handbooks README,"Presently github is displaying the docs/README.md in the UI whenever
+users visit the role-handbooks directory. I am hoping an actual
+README.md in role-handbooks' root will override that.
+
+/kind documentation",['marpaia'],1,2019-02-26 21:54:36,2019-02-26 23:02:19,2019-02-26 23:26:07,True,2019-02-26 23:02:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/527,https://github.com/kubernetes/sig-release/pull/527,hoegaarden,Update release cut issue template,"... with learnings from https://github.com/kubernetes/sig-release/issues/520
+
+/sig release
+/area release-eng
+/kind documentation
+/cc @Bubblemelon
+/assign @justaugustus ",['justaugustus'],1,2019-02-27 11:55:36,2019-03-03 04:49:22,2019-03-03 04:49:22,True,2019-03-03 04:49:22,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/528,https://github.com/kubernetes/sig-release/pull/528,mariantalla,Delete ephemera/testing.md,"The content of this file has been split to other documentation, primarily contributor-facing
+(via https://github.com/kubernetes/community/pull/3143) and secondarily release-team-facing (via https://github.com/kubernetes/sig-release/pull/467).
+
+Will hold until 2019-03-01 to collect feedback (to make sure I haven't left anything out).
+
+Related: https://github.com/kubernetes/sig-release/issues/428
+
+/hold
+/kind cleanup
+/cc @spiffxp @BenTheElder @kubernetes/sig-release ","['spiffxp', 'justaugustus', 'BenTheElder']",1,2019-02-27 16:01:34,2019-03-04 10:12:15,2019-03-04 10:12:15,True,2019-03-04 10:12:15,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/532,https://github.com/kubernetes/sig-release/pull/532,spiffxp,Use kubernetes-sig-release@ for public meeting invites,We're not using kubernete-release-burndown@ anymore for v1.14,['jimangel'],1,2019-02-28 16:42:31,2019-02-28 16:55:11,2019-02-28 17:59:29,True,2019-02-28 16:55:11,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/533,https://github.com/kubernetes/sig-release/pull/533,ericbannon,Update private-distributors-list.md,Request to add Platform9 to the private distributors list ,['philips'],3,2019-02-28 19:50:39,2019-03-07 02:24:08,2019-03-12 20:16:46,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/534,https://github.com/kubernetes/sig-release/pull/534,tpepper,patch release docs: update schedule information,"We started a schedule document, but haven't kept it up to date.  I've
+added reminders in the role handbook to update the schedule ahead of and
+after releases.  I've also de-duplicated some of the schedule document
+to hopefully make it more readable.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['spiffxp'],1,2019-02-28 22:33:45,2019-03-21 16:47:44,2019-03-21 16:47:44,True,2019-03-21 16:47:44,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/535,https://github.com/kubernetes/sig-release/pull/535,onyiny-ang,Update release notes draft for March 1st,"Update for the March 1st burndown meeting 
+
+-start-sha fa6d17f400a94068b56b7d0f211f3cc9db290db6 
+-end-sha 983cf51c53431170e11d1d41a820ee6bd7bd4bcc","['spiffxp', 'marpaia']",1,2019-03-01 06:12:00,2019-03-01 18:16:36,2019-03-01 18:16:36,True,2019-03-01 18:16:36,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/536,https://github.com/kubernetes/sig-release/pull/536,onyiny-ang,Update of release notes for March 4th,"Update for the March 4th burndown meeting
+
+-start-sha fa6d17f400a94068b56b7d0f211f3cc9db290db6
+-end-sha 8770e0cd39655a8c6ca90c7fd2fa141bc7b4614a",['spiffxp'],1,2019-03-04 18:34:43,2019-03-04 18:38:48,2019-03-04 18:38:48,True,2019-03-04 18:38:48,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/537,https://github.com/kubernetes/sig-release/pull/537,nikhita,security: add tombstone files to redirect to new docs,"Ref https://github.com/kubernetes/steering/issues/89#issuecomment-470243000
+
+The Product Security Committee has been created and the new docs exist at https://github.com/kubernetes/security. This PR adds tombstone files with redirects to new docs.
+
+I've added the same deletion time as the developer guide in k/community (https://github.com/kubernetes/community/pull/3196) so that we can nuke everything at once. :)
+
+Rationale behind choose 1 July 2019 or v1.15 (whichever is sooner):
+v1.14 gets released on 25 March. The next release (1.15) is usually after three months so that would be late June or early July. July also gives us enough time to cleanup any links if needed.
+
+cc @kubernetes/product-security-committee 
+/assign @philips ","['philips', 'justaugustus']",1,2019-03-06 19:44:29,2019-03-06 19:54:48,2019-03-06 19:55:41,True,2019-03-06 19:54:48,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/538,https://github.com/kubernetes/sig-release/pull/538,listx,add listx to release-engineering OWNERS as a reviewer,"listx is now a kubernetes org member [1].
+
+[1]: https://github.com/kubernetes/org/issues/513
+
+/cc @sumitranr @justaugustus @spiffxp ",['justaugustus'],1,2019-03-07 01:55:50,2019-03-07 06:04:58,2019-03-08 02:28:03,True,2019-03-07 06:04:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/540,https://github.com/kubernetes/sig-release/pull/540,onyiny-ang,Update of release notes for March 8th,"Update for the March 8th burndown meeting
+
+-start-sha fa6d17f400a94068b56b7d0f211f3cc9db290db6
+-end-sha 583ff363fa1d2e0b0c9757dc1ea338e34287dd2c",['spiffxp'],1,2019-03-08 17:50:16,2019-03-08 18:17:57,2019-03-08 18:17:57,True,2019-03-08 18:17:57,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/541,https://github.com/kubernetes/sig-release/pull/541,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,['justaugustus'],1,2019-03-08 18:14:53,2019-03-08 18:42:58,2019-03-09 00:28:57,True,2019-03-08 18:42:58,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/542,https://github.com/kubernetes/sig-release/pull/542,dstrebel,Update Release notes draft,,[],1,2019-03-13 15:06:26,2019-03-13 17:23:12,2019-03-13 17:23:12,False,,,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/544,https://github.com/kubernetes/sig-release/pull/544,nikopen,remove inactive shadows,,['justaugustus'],1,2019-03-14 11:13:06,2019-03-14 18:20:28,2019-03-14 18:20:28,True,2019-03-14 18:20:28,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/547,https://github.com/kubernetes/sig-release/pull/547,dstrebel,Updated Releases Notes Draft,Draft from working document,['marpaia'],1,2019-03-15 10:39:50,2019-03-26 00:26:10,2019-03-26 00:26:43,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/548,https://github.com/kubernetes/sig-release/pull/548,justaugustus,Add initial 1.15 Release Team members,"Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+ref: #545
+/assign @claurence 
+/hold",['claurence'],1,2019-03-16 21:58:03,2019-03-20 21:18:59,2019-03-20 21:18:59,True,2019-03-20 21:18:59,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/549,https://github.com/kubernetes/sig-release/pull/549,mariantalla,Document priority labels for CI signal,"This PR documents how the CI signal team currently decides `priority/` labels for issues it opens against failng/flaking tests.
+
+xref: https://github.com/kubernetes/sig-release/issues/465
+
+/area release-team
+/cc @spiffxp @smourapina @alejandrox1 @kacole2 @mortent @jberkus ",['alejandrox1'],1,2019-03-18 10:57:14,2019-03-18 14:05:15,2019-03-18 14:05:15,True,2019-03-18 14:05:15,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/550,https://github.com/kubernetes/sig-release/pull/550,onyiny-ang,Update of release notes draft for March 18,"-start-sha: fa6d17f400a94068b56b7d0f211f3cc9db290db6 
+-end-sha: b61baea13594f8cacd8e7db86aa68cbd967b9a5e
+",[],1,2019-03-18 17:39:11,2019-03-26 00:26:29,2019-03-26 00:27:02,False,,,dirty,False,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/552,https://github.com/kubernetes/sig-release/pull/552,spiffxp,Fix links to community,Some of the links on k8s114 readme went to tombstones or missing files,['idealhack'],1,2019-03-19 03:39:27,2019-03-19 04:08:22,2019-03-19 04:08:22,True,2019-03-19 04:08:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/553,https://github.com/kubernetes/sig-release/pull/553,spiffxp,Update patch release docs for v1.14,"See individual commits for details.
+
+Part 1 is the last of https://github.com/kubernetes/sig-release/issues/428
+
+Part 2 is updating patch release team info for v1.14",['tpepper'],2,2019-03-19 04:21:20,2019-03-22 15:40:21,2019-03-26 01:06:46,True,2019-03-22 15:40:21,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/554,https://github.com/kubernetes/sig-release/pull/554,alejandrox1,Updated CI signal handbook - filing issue,"Updating the handbook with the procedure CI signal used this release for filling issues.
+
+/area release-team
+/cc @spiffxp @smourapina @kacole2 @mortent @jberkus 
+
+Signed-off-by: Jorge Alarcon Ochoa <alarcj137@gmail.com>",['mariantalla'],1,2019-03-20 01:51:53,,2019-03-28 09:53:47,False,,,unstable,True,open
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/555,https://github.com/kubernetes/sig-release/pull/555,joelsmith,Update security release page URL now that security docs have been moved,See https://github.com/kubernetes/security/pull/1 for background info,"['justaugustus', 'nikhita']",1,2019-03-20 03:02:45,2019-03-20 03:18:26,2019-03-20 03:18:26,True,2019-03-20 03:18:26,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/556,https://github.com/kubernetes/sig-release/pull/556,joelsmith,Change even more PST references to PSC,"Sorry that I missed these on the last PR (#555). This time I did case-insensitive
+searching, so hopefully that's all of them.",['justaugustus'],1,2019-03-20 03:28:23,2019-03-20 03:32:23,2019-03-20 03:32:23,True,2019-03-20 03:32:23,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/557,https://github.com/kubernetes/sig-release/pull/557,claurence,update enhancement handbook,Not too many changes - hopefully non controversial,['idvoretskyi'],1,2019-03-20 15:33:11,2019-03-20 15:37:11,2019-03-20 15:37:11,True,2019-03-20 15:37:11,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/558,https://github.com/kubernetes/sig-release/pull/558,hoegaarden,Updates for the role handbook for release branch management,"/kind documentation
+/cc @Bubblemelon 
+/assign @dougm @tpepper","['dougm', 'tpepper']",7,2019-03-21 11:03:25,,2019-04-05 17:53:17,False,,,unstable,True,open
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/560,https://github.com/kubernetes/sig-release/pull/560,onyiny-ang,Add @jeefy as release notes shadow,Further to #529 @jeefy will also be joining the 1.15 release team as a release notes shadow.,['justaugustus'],1,2019-03-21 21:03:25,2019-03-21 21:53:38,2019-03-21 21:55:47,True,2019-03-21 21:53:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/561,https://github.com/kubernetes/sig-release/pull/561,onlydole,Add Taylor Dolezal as a communications shadow for 1.15 release.,,[],1,2019-03-22 17:21:46,,2019-03-22 17:22:08,False,,,unstable,True,open
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/562,https://github.com/kubernetes/sig-release/pull/562,tpepper,patch release role handbook: small fixes,"Fixed a broken url and one example stumbling on the shell difference
+between ~ and $HOME.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['spiffxp'],1,2019-03-22 23:31:37,2019-03-26 00:29:39,2019-03-26 00:29:39,True,2019-03-26 00:29:38,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/563,https://github.com/kubernetes/sig-release/pull/563,jeefy,Final draft for 1.14 release notes,"It's the [Final Countdown](https://www.youtube.com/watch?v=bagCdMUuevQ)
+
+The PR is based off of the current [HackMD draft](https://hackmd.io/3i4KgKSASPSCO8F1kQTyAg)
+
+Unless there is something glaringly wrong, I'd merge this sooner and then make any iterations required before burndown Monday. :)
+
+/assign @dstrebel @spiffxp 
+/cc @onyiny-ang @alenkacz","['spiffxp', 'marpaia', 'dstrebel']",1,2019-03-23 04:01:42,2019-03-25 15:09:12,2019-03-25 15:09:12,True,2019-03-25 15:09:12,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/564,https://github.com/kubernetes/sig-release/pull/564,justaugustus,Update OWNERS (1.15 Edition),"- Define Release Team subproject owners
+- Add 1.15 Release Team role leads
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @tpepper @AishSundar @jberkus @spiffxp
+/area release-team","['spiffxp', 'jberkus', 'calebamiles', 'tpepper', 'AishSundar']",1,2019-03-23 04:06:40,,2019-04-04 17:48:29,False,,,unstable,True,open
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/565,https://github.com/kubernetes/sig-release/pull/565,onyiny-ang,Additional spelling/grammar fixes to #563,"Corrected a number of release notes for relatively minor mistakes as well as one case of `release-notes-none`  that produced a note and one case of only the first line of a multiline note being pulled in.
+This will remain a draft until #563 merges.","['spiffxp', 'marpaia', 'dstrebel']",1,2019-03-25 03:33:16,2019-03-25 21:18:18,2019-03-26 00:59:51,True,2019-03-25 21:18:18,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/566,https://github.com/kubernetes/sig-release/pull/566,hoegaarden,Add note that official releases take longer,"... to stage / build
+
+/kind documentation
+/area release-eng
+/cc @Bubblemelon @dougm @tpepper ",['spiffxp'],1,2019-03-25 14:56:48,2019-03-25 15:25:14,2019-03-25 15:25:14,True,2019-03-25 15:25:14,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/567,https://github.com/kubernetes/sig-release/pull/567,tpepper,patch release: schedule updates for April,"With the release of 1.14, 1.11 is no longer a supported release.  Big
+thanks to Anirudh Ramanathan (@foxish) for supporting this branch.
+
+Next patch release timing is to be determined, some time in April 2019
+most likely.
+
+Primary contact now for the patch release team is
+kubernetes-patch-release-team@googlegroups.com.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['spiffxp', 'justaugustus', 'feiskyer', 'foxish', 'aleksandra-malinowska']",1,2019-03-25 21:59:15,2019-04-05 18:09:19,2019-04-05 18:09:20,True,2019-04-05 18:09:19,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/568,https://github.com/kubernetes/sig-release/pull/568,spiffxp,Add draft caturnetes logo,,['dims'],1,2019-03-25 22:24:43,2019-03-25 22:28:17,2019-03-26 00:23:04,True,2019-03-25 22:28:17,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/569,https://github.com/kubernetes/sig-release/pull/569,yuwenma,Track containers not rebased to distroless,"As part of the effort on sig-release KEP ""[Rebase k8s images to distroless](https://github.com/kubernetes/enhancements/pull/900/files#)"", we allow certain kinds of images rebasing to k8s.gcr.io/debian-base instead of distroless for now. This list is used to track containers not rebased to distroless in v1.15.","['justaugustus', 'calebamiles']",1,2019-03-27 16:36:32,2019-03-28 19:34:01,2019-03-28 19:34:01,True,2019-03-28 19:34:01,k8s-ci-robot,unknown,,closed
+sig-release,https://api.github.com/repos/kubernetes/sig-release/pulls/570,https://github.com/kubernetes/sig-release/pull/570,dankohn,Change to cite CNCF Whitelist Policy by reference,"CNCF would appreciate if SIG Release would switch to citing the CNCF Whitelist Policy by reference rather than including a copy of it here. We will notify the SIG Release team if any changes to the policy are approved by the CNCF Governing Board in the future.
+
+Cc @swinslow ",['justaugustus'],1,2019-03-28 18:32:42,2019-03-28 18:46:00,2019-03-29 12:39:11,True,2019-03-28 18:46:00,k8s-ci-robot,unknown,,closed

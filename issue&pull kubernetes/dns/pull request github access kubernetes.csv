@@ -1,0 +1,608 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+dns,https://api.github.com/repos/kubernetes/dns/pulls/1,https://github.com/kubernetes/dns/pull/1,bowei,Move dnsmasq-metrics from contrib; rename to `sidecar`,,"['bowei', 'MrHohn']",8,2016-12-19 19:57:10,2016-12-19 21:16:29,2016-12-23 00:55:07,True,2016-12-19 21:16:29,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/2,https://github.com/kubernetes/dns/pull/2,bowei,Add README.md from dnsmasq-metrics,,['MrHohn'],1,2016-12-19 21:28:13,2016-12-19 21:36:20,2016-12-19 21:36:20,True,2016-12-19 21:36:20,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/3,https://github.com/kubernetes/dns/pull/3,bowei,Small tweaks,"* add VERSION to the build stamps
+* add travis build badge to the README",['MrHohn'],2,2016-12-19 21:49:25,2016-12-19 21:55:25,2016-12-19 21:55:25,True,2016-12-19 21:55:25,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/4,https://github.com/kubernetes/dns/pull/4,bowei,Add record type option to --probe,"This allows for the query to be customized. kube-dns currently does
+not handle ANY queries properly.",['MrHohn'],1,2016-12-19 23:39:15,2016-12-19 23:42:23,2016-12-19 23:42:23,True,2016-12-19 23:42:23,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/5,https://github.com/kubernetes/dns/pull/5,chentao1596,Use formatting mode,"I think we should use formatting mode rather than plus, do you think so? thank you!",[],1,2016-12-20 02:10:49,2016-12-21 18:19:10,2016-12-22 13:18:24,True,2016-12-21 18:19:10,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/6,https://github.com/kubernetes/dns/pull/6,bowei,Move dnsmasq image build from kubernetes/contrib to kubernetes/dns,,[],0,2016-12-21 00:10:05,2016-12-23 00:04:01,2016-12-23 00:04:01,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/7,https://github.com/kubernetes/dns/pull/7,bowei,Move dnsmasq image build from kubernetes/contrib to kubernetes/dns,This integrates the dnsmasq build process with the rest of the repo.,['MrHohn'],2,2016-12-23 00:05:11,2016-12-23 00:29:53,2016-12-23 00:29:53,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/8,https://github.com/kubernetes/dns/pull/8,bowei,Move dnsmasq image build from kubernetes/contrib to kubernetes/dns,This integrates the dnsmasq build process with the rest of the repo.,['MrHohn'],2,2016-12-23 00:30:29,2016-12-23 00:42:58,2016-12-23 00:54:44,True,2016-12-23 00:42:58,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/11,https://github.com/kubernetes/dns/pull/11,bowei,"Port over sidecar e2e to go, make more robust to flakes",,['MrHohn'],1,2016-12-28 23:32:38,2016-12-29 01:22:19,2016-12-29 01:22:19,True,2016-12-29 01:22:19,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/12,https://github.com/kubernetes/dns/pull/12,bowei,WIP: try out gcloud,,[],7,2016-12-29 00:39:19,2017-02-19 04:00:11,2017-02-21 18:21:17,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/13,https://github.com/kubernetes/dns/pull/13,bowei,Ports sidecar e2e harness to go,,['MrHohn'],1,2016-12-29 21:32:56,2016-12-29 22:24:13,2017-01-04 19:30:53,True,2016-12-29 22:24:13,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/14,https://github.com/kubernetes/dns/pull/14,bowei,Missing check for error after ReadAll,Caught by ineffassign,['MrHohn'],1,2016-12-30 00:23:58,2016-12-30 00:28:21,2017-01-04 19:30:43,True,2016-12-30 00:28:21,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/15,https://github.com/kubernetes/dns/pull/15,bowei,Fix golint issue,Uneccessary `else`,"['bowei', 'MrHohn']",1,2016-12-30 00:31:01,2016-12-30 01:44:11,2017-01-04 19:31:24,True,2016-12-30 01:44:11,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/16,https://github.com/kubernetes/dns/pull/16,chentao1596,Fix some go style mistakes about fmt.Errorf,"I think we should follow this request: https://github.com/golang/go/wiki/CodeReviewComments#error-strings, thank you!",[],2,2016-12-31 16:04:17,2017-01-04 06:35:39,2017-01-04 06:35:39,True,2017-01-04 06:35:39,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/17,https://github.com/kubernetes/dns/pull/17,bowei,Move kube-dns code to this repository,"This takes all of the git history from kubernetes repository and applies the patches to this repository.
+
+",['MrHohn'],68,2017-01-04 00:22:32,2017-01-04 00:37:02,2017-01-04 19:31:10,True,2017-01-04 00:37:02,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/18,https://github.com/kubernetes/dns/pull/18,bowei,Fix dnsmasq build (now links -static),"Also adds validation in `make test` that checks that dnsmasq can
+be executed.",['MrHohn'],1,2017-01-05 01:15:27,2017-01-05 01:29:57,2017-01-05 19:33:00,True,2017-01-05 01:29:57,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/19,https://github.com/kubernetes/dns/pull/19,bowei,update readme,,['MrHohn'],2,2017-01-05 19:29:49,2017-01-05 19:35:09,2017-01-27 01:11:16,True,2017-01-05 19:35:09,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/20,https://github.com/kubernetes/dns/pull/20,bowei,Remove static linking -- build with alpine instead,"This really ensures that there are no issues with the build env vs
+runtime environment.",['MrHohn'],1,2017-01-05 21:38:00,2017-01-05 22:11:50,2017-01-27 01:10:28,True,2017-01-05 22:11:50,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/21,https://github.com/kubernetes/dns/pull/21,xialonglee,fix typo,"fix typo function comments
+cc @brendandburns 
+
+**ps:**
+this pr is same with pr https://github.com/kubernetes/kubernetes/pull/38621 that not merged yet before moving codes of kube-dns to this repo.
+i close the original one and open a new here",[],1,2017-01-07 04:58:10,2017-01-07 06:05:38,2017-01-07 06:05:38,True,2017-01-07 06:05:38,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/22,https://github.com/kubernetes/dns/pull/22,xialonglee,fix kubecfg-file flag description of kube-dns,"this pr is same with https://github.com/kubernetes/kubernetes/pull/39314 that was not merged yet before moving codes of kube-dns to here.
+so i open new one.",[],2,2017-01-07 05:25:40,2017-01-09 22:36:44,2017-01-09 22:36:44,True,2017-01-09 22:36:44,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/23,https://github.com/kubernetes/dns/pull/23,xialonglee,Use const value,"same with https://github.com/kubernetes/kubernetes/pull/38955 that not merged yet.
+open a new pr here.",[],2,2017-01-07 05:40:40,2017-01-07 06:17:18,2017-01-07 06:17:18,True,2017-01-07 06:17:18,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/24,https://github.com/kubernetes/dns/pull/24,bowei,Adds DNS-schema specification,"Original patch: https://github.com/kubernetes/kubernetes/pull/38408
+
+Add a DNS-schema spec to create a baseline for any DNS-based
+service discovery component to follow.
+
+Rewrite describing records that must exist
+
+Re-wrote the specification to indicate the records that must exist.
+This change the behavior of a few queries that were acting something
+like wildcards. For example, querying for an SRV record with the
+service name and no _port._proto prefix is no longer required to
+return any records.
+
+Other minor updates to link to external references and correct typos.
+
+Fix formatting of headless SRV answer example.
+
+Add reference to rcode
+
+Add numbering, cleanup non-ASCII characters, address deprecation warning",[],1,2017-01-10 06:33:47,2017-01-10 18:13:01,2017-01-27 01:10:13,True,2017-01-10 18:13:01,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/25,https://github.com/kubernetes/dns/pull/25,sadlil,Reverse DNS records for named headless services,"Add reverse DNS records for pods' IPs to named headless services' with Pod Hosts FQDN (`<podHostName>.<serviceName>.<namespace>.svc.cluster.local`).
+
+Original PR: kubernetes/kubernetes#38376
+
+Resolves Issues
+ - kubernetes/kubernetes#26752
+ - kubernetes/kubernetes#33470
+
+Spec:
+**Records for a Named Headless Service**
+Type: PTR
+f a ready endpoint exists with IP equal to the IP of exists, and the endpoint has a non-empty hostname with value <hostname>, then a PTR record with <hostname>.<service>.<ns>.svc.<zone> will be returned.
+
+@thockin @bowei @smarterclayton @harryge00",['bowei'],2,2017-01-11 06:33:01,2017-01-13 19:45:12,2017-09-11 05:31:20,True,2017-01-13 19:45:12,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/26,https://github.com/kubernetes/dns/pull/26,MrHohn,Clean up container after build/test,"Found a bunch of exited `golang:1.7-alpine` containers on my local machine.
+```
+$ docker ps --all
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+1bd16b284f1f        golang:1.7-alpine   ""/bin/sh -c '        ""   6 minutes ago       Exited (0) 6 minutes ago                       modest_goldwasser
+a2c4ac382013        golang:1.7-alpine   ""/bin/sh -c '        ""   6 minutes ago       Exited (0) 6 minutes ago                       distracted_cray
+080b878b0c86        golang:1.7-alpine   ""/bin/sh -c '        ""   6 minutes ago       Exited (0) 6 minutes ago                       prickly_mccarthy
+6f1351502f77        golang:1.7-alpine   ""/bin/sh -c '        ""   12 days ago         Exited (1) 12 days ago                         stupefied_booth
+f44e690a0784        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         backstabbing_jennings
+703c1e56f08d        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         infallible_euler
+c0ffd881b35b        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         admiring_hodgkin
+5f4256b00db5        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         furious_borg
+8f688a878fce        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         agitated_hopper
+7e874c7bd9b2        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (2) 2 weeks ago                         lonely_snyder
+0635c83c7639        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         peaceful_shannon
+e62f582e1909        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (2) 2 weeks ago                         sad_ardinghelli
+ac117cf78ef0        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         high_panini
+d5f2b6b36ef7        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         pensive_ptolemy
+35a753ca41e7        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         zen_pasteur
+ac0c5b280ccc        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         clever_shockley
+5025dc324cdb        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         serene_kowalevski
+badfd65c04ac        golang:1.7-alpine   ""/bin/sh -c '        ""   2 weeks ago         Exited (0) 2 weeks ago                         furious_hypatia
+```
+
+Probably better to remove them after build/test.
+
+@bowei ",['bowei'],1,2017-01-11 22:21:13,2017-01-11 22:43:58,2017-10-05 00:56:42,True,2017-01-11 22:43:58,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/27,https://github.com/kubernetes/dns/pull/27,MrHohn,Call Parse() to avoid noisy logs.,"Saw noisy logs from kube-dns on the latest k8s cluster:
+```
+ERROR: logging before flag.Parse: I0113 02:27:21.529444       1 dns.go:267] New service: kubernetes-dashboard
+ERROR: logging before flag.Parse: I0113 02:27:21.529467       1 dns.go:267] New service: kube-dns
+ERROR: logging before flag.Parse: I0113 02:27:21.529490       1 dns.go:377] Added SRV record &{Host:kube-dns.kube-system.svc.cluster.local. Port:53 Priority:10 Weight:10 Text: Mail:false Ttl:30 TargetStrip:0 Group: Key:}
+ERROR: logging before flag.Parse: I0113 02:27:21.529510       1 dns.go:377] Added SRV record &{Host:kube-dns.kube-system.svc.cluster.local. Port:53 Priority:10 Weight:10 Text: Mail:false Ttl:30 TargetStrip:0 Group: Key:}
+ERROR: logging before flag.Parse: I0113 02:27:21.529533       1 dns.go:267] New service: kubernetes
+ERROR: logging before flag.Parse: I0113 02:27:21.529554       1 dns.go:377] Added SRV record &{Host:kubernetes.default.svc.cluster.local. Port:443 Priority:10 Weight:10 Text: Mail:false Ttl:30 TargetStrip:0 Group: Key:}
+ERROR: logging before flag.Parse: I0113 02:27:21.529579       1 dns.go:267] New service: default-http-backend
+ERROR: logging before flag.Parse: I0113 02:27:21.529601       1 dns.go:377] Added SRV record &{Host:default-http-backend.kube-system.svc.cluster.local. Port:80 Priority:10 Weight:10 Text: Mail:false Ttl:30 TargetStrip:0 Group: Key:}
+ERROR: logging before flag.Parse: I0113 02:27:21.529623       1 dns.go:267] New service: monitoring-grafana
+```
+
+Found a workaround from kubernetes/kubernetes#17162, also adopts it here. The noisy logs seems to be introduced by golang/glog@65d6746.
+
+@bowei ",['bowei'],2,2017-01-13 02:33:10,2017-01-18 06:16:58,2017-10-05 00:56:43,True,2017-01-18 06:16:58,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/28,https://github.com/kubernetes/dns/pull/28,corlettb,Adding an option to passthrough upstream nameservers to skydns.,"Currently the upstream nameservers are hardcoded to be taken from
+/etc/resolv.conf.
+
+Allowing this option to be passed in can offer greater flexibility
+for varying setups where kube-dns is not run within a container.",['bowei'],1,2017-01-13 11:51:23,2017-01-31 19:28:18,2017-02-02 20:20:00,True,2017-01-31 19:28:18,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/30,https://github.com/kubernetes/dns/pull/30,luxas,WIP: Make manifest lists of the dns images,"... and base everything on busybox to minimize the delta between amd64 and non-amd64 images
+
+Also I tried to make the Makefiles simpler, let me know what you think @bowei and others!
+
+A manifest list is an image that's kind of a placeholder for other arch-specific images, so basically if we have `k8s-dns-dnsmasq:version` in a manifest and are using docker; docker will fetch the right `-arch` version for us automatically!
+
+Tested it locally, and it seems like I got it working. I also added s390x to the list",['bowei'],1,2017-01-13 23:21:02,2018-05-11 19:59:00,2018-05-11 19:59:00,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/31,https://github.com/kubernetes/dns/pull/31,GheRivero,Fixed sidecar running group for arm arch,"The base image used to build the containers for the arm arch
+(both arm and arm64) uses the pair nobody:nogroup while amd64
+arch uses nobody:nobody",['bowei'],2,2017-01-14 00:03:51,2017-01-22 18:48:50,2017-01-22 18:48:50,True,2017-01-22 18:48:50,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/32,https://github.com/kubernetes/dns/pull/32,johnbelamaric,Fix typo,,[],1,2017-01-15 14:59:35,2017-01-15 16:36:45,2017-01-15 16:36:45,True,2017-01-15 16:36:45,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/34,https://github.com/kubernetes/dns/pull/34,ryan-ibm,Adding s390x support,Adding s390x support,['bowei'],1,2017-01-18 06:00:18,2017-01-23 19:14:57,2017-02-15 13:09:05,True,2017-01-23 19:14:57,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/36,https://github.com/kubernetes/dns/pull/36,bowei,Godep,Adds a wrapper script for dealing with godep,"['bowei', 'MrHohn']",3,2017-01-23 07:54:58,2017-01-23 19:19:56,2017-01-23 19:19:56,True,2017-01-23 19:19:56,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/37,https://github.com/kubernetes/dns/pull/37,bowei,Godep went up a version,,"['bowei', 'MrHohn']",1,2017-01-23 19:25:57,2017-01-23 19:34:41,2017-01-23 19:37:17,True,2017-01-23 19:34:41,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/39,https://github.com/kubernetes/dns/pull/39,liggitt,Add support for pulling config from a directory,"now that optional configmaps are possible, kube-dns should support pulling config from a mounted directory
+
+this PR refactors the existing API-based configmap source and adds a directory-based source
+
+c.f.
+https://github.com/kubernetes/kubernetes/pull/36775#issuecomment-261412030
+https://github.com/kubernetes/kubernetes/pull/38816
+https://github.com/kubernetes/kubernetes/pull/39981",['bowei'],2,2017-01-24 16:28:56,2017-01-25 18:48:11,2017-01-26 21:44:32,True,2017-01-25 18:48:11,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/40,https://github.com/kubernetes/dns/pull/40,cmluciano,Lock client-go at release 2.0,WIP lock client-go to release v2.0.0-alpha.1,['bowei'],2,2017-01-24 21:37:56,2017-02-04 05:25:22,2017-02-07 08:38:17,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/41,https://github.com/kubernetes/dns/pull/41,bowei,E2e,Adds rudimentary e2e testing for kube-dns,['MrHohn'],6,2017-01-25 22:17:01,2017-01-26 23:56:40,2017-01-27 01:09:38,True,2017-01-26 23:56:40,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/42,https://github.com/kubernetes/dns/pull/42,liggitt,Fix initial condition with empty config dir,"Found an edge case with an empty configdir on startup. The file source returns an empty result (version="""", data={}) for an empty dir.
+
+sync#processResult() thought it had already processed this version, since the zero-value for latestVersion is """", so it returned `nil, nil`
+
+This meant the initial config returned from Once() was nil, rather than a default config, which makes a nil dereference possible
+
+Once() should *always* build a config from the result in non-error cases",['bowei'],2,2017-01-26 22:26:27,2017-01-27 00:48:12,2017-01-27 01:37:58,True,2017-01-27 00:48:12,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/44,https://github.com/kubernetes/dns/pull/44,cmluciano,Change shebang to sh instead of bash,Bash is not available in the golang container that this script runs in.,['bowei'],1,2017-01-31 16:03:57,2017-02-01 19:20:22,2017-02-01 21:58:04,True,2017-02-01 19:20:21,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/46,https://github.com/kubernetes/dns/pull/46,cmluciano,add vagrantfile for local development,"This file will launch a Ubuntu 16.04 VM with virtualbox.
+It install tools necessary to build/test DNS as well as some
+dependencies like Kubernetes.
+
+Closes #45",[],1,2017-02-01 16:44:10,2017-02-01 18:48:34,2017-02-01 21:58:16,True,2017-02-01 18:48:34,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/47,https://github.com/kubernetes/dns/pull/47,bowei,Only containerize and push a subset of the binaries built,"Utility binaries used for testing should not be containerized
+and pushed.",['MrHohn'],1,2017-02-01 22:19:39,2017-02-01 22:24:29,2017-02-21 18:15:01,True,2017-02-01 22:24:29,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/50,https://github.com/kubernetes/dns/pull/50,jbeda,Make sure that the probe name is a FQDN.,"Add the trailing dot if it is missing.  Fixes #49.
+
+Not sure how to test this.  I think it should be pretty darn safe.  Here is the impl of Fqdn: https://github.com/miekg/dns/blob/master/defaults.go#L227.",['bowei'],1,2017-02-02 23:30:55,2017-02-02 23:51:09,2017-02-02 23:51:09,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/53,https://github.com/kubernetes/dns/pull/53,ronaldpetty,Update README.md,"Changed verbiage, we build images not containers.  Didn't change the make command though as I don't fully appreciate what might go wrong if that changes (assuming automatic processes do `make containers`).",[],1,2017-02-10 10:29:03,2018-02-19 05:01:59,2018-02-19 05:01:59,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/54,https://github.com/kubernetes/dns/pull/54,bowei,Fixes pushing to registry name with ':',https://github.com/kubernetes/dns/issues/43,['MrHohn'],1,2017-02-14 06:37:56,2017-02-14 17:15:29,2017-02-21 18:14:52,True,2017-02-14 17:15:29,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/56,https://github.com/kubernetes/dns/pull/56,gajju26,Making k8s-dns-kube-dns and k8s-dns-dnsmasq images available for s390x,"In this PR I have changed the version of ""gcr.io/google_containers/kube-cross"" image. The existing version has Go does not support s390x. With ""v1.7.4-1"" version it builds the dnsmasq binary and builds successfully for s390x. Also modified s390x support in ""rules.mk"" and ""images/dnsmasq/Makefile""",[],1,2017-02-15 12:47:25,2017-02-15 19:31:23,2017-02-15 19:31:23,True,2017-02-15 19:31:23,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/57,https://github.com/kubernetes/dns/pull/57,bowei,Dnsmasq nanny,"This adds dnsmasq-nanny, a helper process that wraps dnsmasq and configures it in response to the kube-dns configmap. This implements two configuration options:
+* stubDomains: a map of additional stub domains that are resolved by outside nameservers
+* upstreamNameservers: a list of upstream nameservers to use in place of the one from /etc/resolv.conf",['MrHohn'],6,2017-02-17 07:19:50,2017-02-17 22:18:33,2017-02-21 18:14:28,True,2017-02-17 22:18:33,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/58,https://github.com/kubernetes/dns/pull/58,bowei,Make travis test building all architectures,,['MrHohn'],1,2017-02-17 22:22:04,2017-02-17 23:27:59,2017-02-21 18:14:18,True,2017-02-17 23:27:59,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/59,https://github.com/kubernetes/dns/pull/59,bowei,Add --no-resolv when upstream nameservers are specified,,[],1,2017-02-17 23:40:32,2017-02-18 00:16:54,2017-02-21 18:14:07,True,2017-02-18 00:16:54,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/62,https://github.com/kubernetes/dns/pull/62,bowei,Use default config if none exist at startup,Also adds some glog flush() to ensure we see more of the log output,['MrHohn'],1,2017-02-19 03:59:29,2017-02-20 17:28:26,2017-02-21 18:14:35,True,2017-02-20 17:28:26,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/63,https://github.com/kubernetes/dns/pull/63,wojtek-t,Use protobufs for communication with apiserver,@bowei @thockin ,[],1,2017-02-23 11:40:44,2017-02-23 19:08:27,2017-02-23 19:08:32,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/64,https://github.com/kubernetes/dns/pull/64,wojtek-t,Use protobufs for communication with apiserver,,[],1,2017-02-23 19:07:22,2017-02-23 20:04:49,2017-02-23 20:04:49,True,2017-02-23 20:04:49,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/69,https://github.com/kubernetes/dns/pull/69,shashidharatd,Support specifying port number for nameserver in stubDomains,"Fixes: #68
+
+cc  @bowei  @madhusudancs @kubernetes/sig-federation-misc",[],1,2017-03-10 15:03:18,2017-03-11 00:35:53,2017-03-11 00:35:53,True,2017-03-11 00:35:53,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/71,https://github.com/kubernetes/dns/pull/71,CallMeFoxie,Fix version on startup,"Hi,
+It seems that during startup the kube-dns service is reporting (static) version of kubernetes:
+$ make bin/amd64/kube-dns
+building : bin/amd64/kube-dns
+$ bin/amd64/kube-dns 
+I0317 11:24:42.981414   27628 dns.go:49] version: v1.5.2-beta.0+$Format:%h$
+...
+
+which is defined in vendor/k8s.io/kubernetes/pkg/version/base.go and seems rather wrong/useless. We should report kube-dns version instead, which is compiled-in during compile time.
+
+After applying this fix:
+$ make bin/amd64/kube-dns
+building : bin/amd64/kube-dns
+$ bin/amd64/kube-dns 
+I0317 11:27:32.043009   30292 dns.go:49] version: 1.14.1-dirty
+
+which looks more appropriate.
+
+Have a nice day,
+Ashley",[],2,2017-03-17 10:35:09,2017-04-16 07:36:51,2017-04-16 07:36:51,True,2017-04-16 07:36:51,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/74,https://github.com/kubernetes/dns/pull/74,r2d4,Fix printf in cmd/kube-dns/app/server.go,"Fixes logging message
+> 2017-04-07T22:56:44.901399945Z I0407 22:56:44.900224       1 server.go:70] Using configuration read from directory: /kube-dns-config%!(EXTRA time.Duration=10s)
+",[],1,2017-04-07 23:05:49,2017-04-07 23:43:17,2017-04-07 23:57:16,True,2017-04-07 23:43:17,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/78,https://github.com/kubernetes/dns/pull/78,MrHohn,Fix confusing logging when initialize server,"The logging we have when initializing services and endpoints is confusing:
+```
+DNS server not ready, retry in 500 milliseconds
+```
+
+Modify the message a bit to clarify what it is doing.",['bowei'],1,2017-04-19 20:15:16,2017-04-20 01:12:28,2017-10-05 00:56:45,True,2017-04-20 01:12:28,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/79,https://github.com/kubernetes/dns/pull/79,MrHohn,Fix race condition in reverseRecordMap access,"Fix kubernetes/kubernetes#44711.
+
+We don't have a explicit lock for `reverseRecordMap`, all the R/Ws are protected through `cacheLock`, so I followed the same pattern.
+
+@bowei 
+cc @etiennetremel",['bowei'],1,2017-04-20 17:18:47,2017-05-03 16:24:35,2017-10-05 00:56:46,True,2017-05-03 16:24:35,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/84,https://github.com/kubernetes/dns/pull/84,alexbrand,Support kube-master-url flag without kubeconfig,"When the `client-go` package was introduced, the `kube-master-url` flag was rendered unusable. With this PR, the user can now specify the master URL without having to provide a kubeconfig file.
+
+Fixes #72 ",[],1,2017-05-09 17:25:42,2017-05-10 21:38:42,2017-05-10 21:38:42,True,2017-05-10 21:38:42,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/87,https://github.com/kubernetes/dns/pull/87,jkinkead,Use BSD-compatible sed command in dnsmasq Makefile.,"Fixes #86 .
+
+This invocation should work in both BSD & Linux `sed`. Note that I remove the backup file being created.",[],2,2017-05-10 18:50:56,2017-05-10 22:13:13,2017-05-10 22:13:13,True,2017-05-10 22:13:13,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/89,https://github.com/kubernetes/dns/pull/89,johnbelamaric,Add missing ExternalName service,,['bowei'],2,2017-05-11 20:32:20,2017-09-26 07:10:55,2017-09-26 07:10:55,True,2017-09-26 07:10:55,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/90,https://github.com/kubernetes/dns/pull/90,cmluciano,Update Godeps to client-go 3,"These commits now track the release-3 branch of
+client-go. The code changes are mostly related to
+swapping client-go functions with apimachinery.
+
+Closes #35",[],2,2017-05-15 18:13:49,2017-07-07 18:00:00,2017-07-07 18:00:00,True,2017-07-07 18:00:00,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/95,https://github.com/kubernetes/dns/pull/95,SleepyBrett,better latency buckets 0.5ms to 9.78s,The current state of latency buckets is a linear progression from 10ms to 5s. I think the bottom end of the latencies are more important especially when probing dnsmasq. This pull request uses exponential buckets starting at 0.5ms and proceeding (with a factor of 1.02) to about 10s.,['bowei'],1,2017-05-24 15:33:27,2018-02-24 17:11:51,2018-02-24 17:11:51,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/101,https://github.com/kubernetes/dns/pull/101,sadlil,Fix PTR Record generation,Ref : https://github.com/kubernetes/dns/pull/25#issuecomment-304734753,"['bowei', 'thockin']",4,2017-05-30 08:24:58,2018-03-11 04:52:32,2018-03-11 04:52:32,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/103,https://github.com/kubernetes/dns/pull/103,DavadDi,fix assertIsService return result,"
+```go
+func assertIsService(obj interface{}) (*v1.Service, bool) {
+	if service, ok := obj.(*v1.Service); ok {
+		return service, ok
+	} else {
+		glog.Errorf(""Type assertion failed! Expected 'Service', got %T"", service)
+		return nil, ok   // should return false
+	}
+}
+```
+calling function:
+
+```go
+func (kd *KubeDNS) newService(obj interface{}) {
+	if service, ok := assertIsService(obj); ok { // if obj is not service object，service is nil, 
+        // ....
+	
+        // if service is nil, but ok is true, service.Spec.Type will panic
+        if service.Spec.Type == v1.ServiceTypeExternalName {
+		kd.newExternalNameService(service)
+		return
+	}
+
+       // ....
+}
+```",[],1,2017-06-01 01:37:31,2017-06-01 01:51:35,2017-06-01 01:51:55,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/104,https://github.com/kubernetes/dns/pull/104,DavadDi,fix assertIsService result,"```go
+func assertIsService(obj interface{}) (*v1.Service, bool) {
+	if service, ok := obj.(*v1.Service); ok {
+		return service, ok
+	} else {
+		glog.Errorf(""Type assertion failed! Expected 'Service', got %T"", service)
+		return nil, ok   // should return false
+	}
+}
+```
+calling function:
+
+```go
+func (kd *KubeDNS) newService(obj interface{}) {
+	if service, ok := assertIsService(obj); ok { // if obj is not service object，service is nil, 
+        // ....
+	
+        // if service is nil, but ok is true, service.Spec.Type will panic
+        if service.Spec.Type == v1.ServiceTypeExternalName {
+		kd.newExternalNameService(service)
+		return
+	}
+
+       // ....
+}
+```",[],1,2017-06-01 02:00:13,2017-06-02 01:39:50,2017-06-02 01:39:50,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/105,https://github.com/kubernetes/dns/pull/105,cmluciano,Bump to Go version 1.8,Signed-off-by: Christopher M. Luciano <cmluciano@us.ibm.com>,['MrHohn'],1,2017-06-12 15:41:34,2017-06-16 20:03:52,2017-06-16 20:03:53,True,2017-06-16 20:03:52,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/106,https://github.com/kubernetes/dns/pull/106,cmluciano,Update dep script to support darwin,Signed-off-by: Christopher M. Luciano <cmluciano@us.ibm.com>,"['bowei', 'MrHohn']",1,2017-06-12 17:02:20,2017-06-16 06:14:31,2017-06-16 13:13:40,True,2017-06-16 06:14:31,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/107,https://github.com/kubernetes/dns/pull/107,ixdy,Always --pull during docker build,"Without --pull, it's possible to use old base images which may have fixed vulnerabilities upstream.
+
+x-ref kubernetes/kubernetes#47386
+
+After merging this, we should probably re-tag and rebuild the dns images with updated base images.
+
+@bowei ",['MrHohn'],1,2017-06-13 02:00:48,2017-06-13 22:04:23,2017-06-13 22:04:23,True,2017-06-13 22:04:23,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/108,https://github.com/kubernetes/dns/pull/108,ixdy,Update dnsmasq image to use go1.7.6 and alpine:3.6,"Updated golang dependency includes the fix for https://github.com/golang/go/issues/20040.
+Updated alpine dependency includes fixes for CVE-2016-9841 and CVE-2016-9843.
+
+Note that we should probably build a new dnsmasq image before building the rest, since dnsmasq-nanny depends on it.
+
+@MrHohn @bowei 
+
+x-ref https://github.com/kubernetes/kubernetes/issues/47386",[],1,2017-06-13 21:13:31,2017-06-14 17:44:41,2017-06-14 19:41:21,True,2017-06-14 17:44:41,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/112,https://github.com/kubernetes/dns/pull/112,asac,use armhf instead of armel for ARCH=arm busybox base images (Fixes #111),signed CLA...,[],1,2017-06-25 13:27:45,2017-06-25 14:34:03,2017-06-25 14:48:10,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/113,https://github.com/kubernetes/dns/pull/113,asac,use armhf instead of armel for ARCH=arm busybox base images (Fixes #111),(resubmit after signing CLA)...,[],1,2017-06-25 14:34:42,2017-06-25 14:48:08,2017-06-25 14:48:10,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/114,https://github.com/kubernetes/dns/pull/114,asac,use armhf instead of armel for ARCH=arm busybox base images (Fixes #111),(last attempt after double checking email in github etc... if CLA is still an issue i have to give on this for now :/) .. and sorry for the noise :),[],1,2017-06-25 14:50:34,2017-06-25 16:54:10,2017-06-25 16:54:10,True,2017-06-25 16:54:10,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/115,https://github.com/kubernetes/dns/pull/115,bowei,Make record processing logging to V(3) to avoid log spam,Log level was V(2),['MrHohn'],1,2017-06-25 17:23:22,2017-06-26 05:39:05,2017-06-26 05:39:05,True,2017-06-26 05:39:05,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/120,https://github.com/kubernetes/dns/pull/120,zhxcai,Add some error and info log for debug,,[],3,2017-06-29 12:23:59,2017-07-18 16:46:43,2017-07-18 16:46:44,True,2017-07-18 16:46:43,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/123,https://github.com/kubernetes/dns/pull/123,guillaumerose,Handle same hostname for multiple pods in a headless service,"This code improves the handling of headless services pointing at pods sharing
+the same hostname.
+
+ + For each hostname, A records should point at the list of pods IPs.
+   Currently, only the last pod gets its A record.
+ + For the service, a A record should be created for each pod.
+
+Fixes https://github.com/kubernetes/dns/issues/116
+
+cc @dgageot",[],1,2017-07-07 12:51:26,2018-03-19 08:54:40,2018-03-19 08:54:40,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/126,https://github.com/kubernetes/dns/pull/126,feiskyer,Fix dnsmasq-nanny dockerfile,dnsmasq-nanny dockerfile should honor user-specified REGISTRY instead of always using `gcr.io/google_containers`.,[],1,2017-07-14 10:38:07,2017-07-14 15:40:21,2017-07-14 22:27:16,True,2017-07-14 15:40:20,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/127,https://github.com/kubernetes/dns/pull/127,MrHohn,Use alpine as base image on all platforms,"Ack https://github.com/kubernetes/contrib/pull/2670#issuecomment-315712954.
+
+@guirish Would you be able to test the s390x image? Thanks.
+
+/assign @bowei 
+
+cc @GheRivero @gajju26 ","['bowei', 'luxas']",1,2017-07-17 17:53:29,2017-07-17 18:25:24,2017-10-05 00:53:58,True,2017-07-17 18:25:24,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/128,https://github.com/kubernetes/dns/pull/128,allencloud,enable http pprof in kube-dns,"I think it is useful for a webserver to have a pprof debug functionality.
+So I add this to kube-dns.
+
+Signed-off-by: allencloud <allen.sun@daocloud.io>",[],1,2017-07-24 09:53:10,2017-08-01 17:33:59,2017-08-01 17:33:59,True,2017-08-01 17:33:59,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/129,https://github.com/kubernetes/dns/pull/129,fgimenez,diagnoser's initial implementation,"This is an initial and unfinished implementation of the tool described in kubernetes/kubernetes#45934 and #102, the aim is to validate the approach before implementing all the suggested checks.",['bowei'],3,2017-07-25 06:57:34,2018-03-11 16:03:34,2018-03-11 16:03:34,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/130,https://github.com/kubernetes/dns/pull/130,MrHohn,Avoid noisy logs in sidecar,"Fixes #98.
+
+This is the same fix as #27, but in sidecar this time.",['bowei'],1,2017-07-26 20:29:13,2017-07-26 22:47:36,2017-08-30 23:13:54,True,2017-07-26 22:47:35,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/133,https://github.com/kubernetes/dns/pull/133,feiskyer,[POC] Support specifying namespace,Closes #132.,[],1,2017-08-07 01:16:30,2018-01-03 01:29:07,2018-01-03 01:29:07,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/134,https://github.com/kubernetes/dns/pull/134,andyxning,fix go switch,"This PR will remove `break` statement from `switch` as it is useless in go. The default behavior is to `break` after a `case`.
+
+/cc @bowei  ",[],1,2017-08-08 15:53:35,2017-08-08 17:44:03,2017-08-09 00:57:12,True,2017-08-08 17:44:03,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/135,https://github.com/kubernetes/dns/pull/135,andyxning,code refactor,"This PR refactor the code to use `metricsClient` struct field instead of a local variable `client`.
+
+/cc @bowei ",[],3,2017-08-11 14:21:41,2017-08-29 18:18:33,2017-08-30 00:09:43,True,2017-08-29 18:18:33,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/136,https://github.com/kubernetes/dns/pull/136,fisherxu,Fix: update `kube2sky` to `kube-dns` in comment of server.go ,"I think the  `kube2sky` should be  `kube-dns`, so I fix it.","['bowei', 'MrHohn']",1,2017-08-12 09:40:12,2017-08-14 17:19:04,2017-08-15 03:39:14,True,2017-08-14 17:19:04,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/137,https://github.com/kubernetes/dns/pull/137,mbssaiakhil,Fix Typo in Events Code of Conduct,,['thockin'],1,2017-08-13 10:19:25,2017-08-14 03:38:08,2017-08-14 03:38:08,True,2017-08-14 03:38:08,thockin,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/139,https://github.com/kubernetes/dns/pull/139,feiskyer,"Revert ""enable http pprof in kube-dns""",Reverts kubernetes/dns#128 for fixing #138.,[],1,2017-08-14 10:05:30,2017-08-23 18:04:48,2017-08-24 01:20:39,True,2017-08-23 18:04:48,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/143,https://github.com/kubernetes/dns/pull/143,andyxning,code clean for e2e,"Code clean for e2e test logic. There is no functionality change. 
+
+/cc @bowei ",[],1,2017-08-21 04:16:58,2017-08-21 18:38:04,2017-08-21 21:47:46,True,2017-08-21 18:38:04,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/144,https://github.com/kubernetes/dns/pull/144,Rajadeepan,Fix Broken link,Fix Broken link,[],6,2017-08-21 19:01:53,2018-01-31 07:05:32,2018-01-31 07:05:32,True,2018-01-31 07:05:32,thockin,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/145,https://github.com/kubernetes/dns/pull/145,andyxning,fix kube-dns e2e test for health check service,"Fix #138 .
+
+Add health check service validation before doing a query in kube-dns e2e query.
+
+As for now, #139 has not been merged, so this PR will definitely does not pass the CI. But after #139 is merged, i will rebase this PR.
+
+/cc @bowei @feiskyer @MrHohn ",[],1,2017-08-23 10:31:36,2017-08-24 02:55:02,2017-08-24 03:20:26,True,2017-08-24 02:55:02,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/146,https://github.com/kubernetes/dns/pull/146,andyxning,fix make file,"remove useless build volume mapping when build binaries.
+
+By removing `-v $$(pwd)/bin/$(ARCH):/go/bin`, we can avoid an empty dir  `bin/ARCH/linux_ARCH`.
+
+/cc @bowei ",[],3,2017-08-24 06:50:56,2017-09-24 17:19:04,2017-09-24 17:19:04,True,2017-09-24 17:19:04,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/148,https://github.com/kubernetes/dns/pull/148,leblancd,Add support for nameservers with IPv6 addresses,"This change fixes a couple of places in the kube-dns code where
+IPv6 addresses are not being handled correctly for nameservers found
+in a minion's resolv.conf file.
+
+This change is needed in order to get kube-dns to operate in a
+Kubernetes cluster that is IPv6-only. See Kubernetes issue 51371
+(https://github.com/kubernetes/kubernetes/issues/51371).
+
+fixes #147",['bowei'],2,2017-09-01 22:41:21,2017-10-23 17:30:59,2017-10-23 21:42:50,True,2017-10-23 17:30:59,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/151,https://github.com/kubernetes/dns/pull/151,leblancd,Add support for SRV probes to be IPv4/IPv6 agnostic,"This change adds support for kube-dns sidecar probes that use
+DNS type SRV queries.  This will allow kube-dns sidecar probes
+to be configured using SRV queries such that the
+configuration/manifest will be agnostic of whether kube-proxy
+is operating in IPv4 vs IPv6 mode (i.e. whether kube-dns
+is resolving kubernetes services to IPv4 vs IPv6 addresses).
+
+This change will help resolve a kubeadm issue/PR that has been
+filed:
+    kubernetes/kubernetes#51371
+    kubernetes/kubernetes#51378
+although the approach in the above issue/PR will need to be
+changed to use SRV rather than ANY type sidecar probes, since
+the SkyDNS software that kube-dns uses does not support queries
+of type ANY, and the maintainer believes that using SRV type
+queries is a better approach. See:
+    skynetservices/skydns#323
+
+Changes included in this PR:
+- Add support for sidecar probes of type SRV.
+- Add a unit test for the probeOptions Set() method.
+- Minor tweak to regexp used to check configured probe labels
+  so that it looks at the entire configured label.
+- Fixed an index out of bounds bug for ""invalid type for DNS""
+  error messages.
+
+fixes #150",['aanm'],1,2017-09-08 15:04:00,2017-09-19 18:06:11,2017-09-19 18:06:11,True,2017-09-19 18:06:11,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/152,https://github.com/kubernetes/dns/pull/152,bowei,Add ability to apply custom patches to the dnsmasq build,"Patches in the patches/* are applied to the dnsmasq code in
+lexigraphical order.",[],1,2017-09-22 19:58:40,2017-09-23 20:32:52,2017-09-23 20:32:52,True,2017-09-23 20:32:52,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/154,https://github.com/kubernetes/dns/pull/154,bowei,Update dnsmasq to version 2.78,This fixes externally exploitable security vulnerabilities in dnsmasq.,['MrHohn'],2,2017-10-02 22:48:47,2017-10-02 23:48:49,2017-10-02 23:48:49,True,2017-10-02 23:48:49,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/157,https://github.com/kubernetes/dns/pull/157,rramkumar1,Dns probe metric refactor,,['bowei'],3,2017-10-09 15:28:20,2017-10-10 20:17:22,2017-10-10 20:17:28,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/161,https://github.com/kubernetes/dns/pull/161,spiffxp,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: kubernetes/test-infra#3851",['MrHohn'],1,2017-10-31 23:24:11,2017-11-01 01:05:54,2017-11-01 02:49:08,True,2017-11-01 01:05:54,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/163,https://github.com/kubernetes/dns/pull/163,weiwei04,set user-agent,"set user-agent for client-go
+
+before
+
+```
+client=""kube-dns/v0.0.0 (linux/amd64) kubernetes/$Format""
+```
+
+after
+
+```
+client=""kube-dns/1.14.4-2-g5584e04""
+```
+
+Signed-off-by: Wei Wei <weiwei.inf@gmail.com>",['MrHohn'],1,2017-11-07 11:05:55,2017-11-09 03:40:54,2017-11-09 05:26:04,True,2017-11-09 03:40:54,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/167,https://github.com/kubernetes/dns/pull/167,wu8685,enable skyDNS round robin A/AAAA records,"After issue #116 fixed, I hope we can enable skyDNS round robin to support load balance for headless service.",[],2,2017-11-20 11:56:13,2018-09-05 14:21:56,2019-03-11 11:30:27,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/168,https://github.com/kubernetes/dns/pull/168,bboreham,Better buckets for DNS probe latency,"Use exponential-sized buckets and start at a much lower interval: instead of 500 buckets from 10ms to 500ms, use 16 buckets from 0.25ms to 8 seconds.  Much more precise data with 30 times less storage.
+
+Fixes #149 
+
+From an offline conversation with one of the Prometheus maintainers I am told that changing the bucket set will disrupt results for one averaging period, i.e. if you display `rate(...[5m])` then your chart will be wrong for the five minutes covering the change.  But with a minimum resolution of 10ms the old data is only useful when your DNS is a bit broken, so I think this one-time loss is OK.",['MrHohn'],1,2017-11-28 12:16:13,2018-01-08 17:15:59,2018-01-08 17:15:59,True,2018-01-08 17:15:59,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/172,https://github.com/kubernetes/dns/pull/172,rramkumar1,Metric refactor,"Refactor to use Prometheus Counter instead of Gauge for metrics defined in pkg/sidecar/metrics.go
+Also adds a new test server_test.go in sidecar package.",['bowei'],5,2017-11-29 20:01:04,2017-11-29 20:02:57,2017-11-29 20:18:41,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/173,https://github.com/kubernetes/dns/pull/173,rramkumar1,Refactor to use Prometheus Counter instead of Gauge,Refactors package sidecar to use Prometheus Counters instead of Gauges. Metrics can be found in pkg/sidecar/metrics.go. Also adds a new test called server_test.go in package sidecar,['bowei'],3,2017-11-29 20:16:43,2017-12-05 19:42:59,2017-12-05 20:00:33,True,2017-12-05 19:42:59,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/179,https://github.com/kubernetes/dns/pull/179,lcfang,delete some unused parameters,delete some unused parameters,['MrHohn'],1,2017-12-12 08:56:23,2018-02-27 21:25:55,2018-02-28 01:18:35,True,2018-02-27 21:25:55,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/181,https://github.com/kubernetes/dns/pull/181,spiffxp,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527","['cblecker', 'MrHohn']",1,2017-12-20 18:31:59,2018-01-08 18:58:40,2018-01-08 19:13:42,True,2018-01-08 18:58:40,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/183,https://github.com/kubernetes/dns/pull/183,thockin,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174 and https://github.com/kubernetes/kubernetes/pull/57824
+
+xref https://github.com/kubernetes/release/issues/281",[],2,2017-12-22 18:01:22,2018-02-02 05:01:02,2018-02-02 05:01:02,True,2018-02-02 05:01:02,thockin,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/185,https://github.com/kubernetes/dns/pull/185,rramkumar1,Add validation for upstreamNameserver port,Fixes #178. Add validation for a port number for upstream nameservers specified in the config map.,['bowei'],2,2018-01-02 23:41:11,2018-01-23 19:17:44,2018-01-23 19:17:44,True,2018-01-23 19:17:44,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/188,https://github.com/kubernetes/dns/pull/188,adriancooney,Ignore.,Send metrics to Datadog rather than updating Prometheus endpoints.,[],3,2018-01-11 12:13:29,2018-01-11 14:04:57,2018-01-11 14:07:22,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/191,https://github.com/kubernetes/dns/pull/191,langyenan,"Support DNS A record in the form of ""podName.namespace.pod.cluster.local""","This PR assigns a DNS A record for EVERY Pod in the form of ""podName.namespace.pod.cluster.local"" without needing of service.
+
+**Special notes for your reviewer**:
+Before this PR, every pod has a DNS entry based on pod IP, which is kind of inconvenient. (why would I use DNS if I already know other's IP)
+
+**Release note**:
+```release-note
+assign a DNS A record for EVERY Pod in the form of ""podName.namespace.pod.cluster.local"" without needing of service.
+``` ",[],1,2018-01-25 12:31:17,2018-02-01 07:34:28,2018-02-01 07:34:29,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/192,https://github.com/kubernetes/dns/pull/192,oilbeater,reduce binary size,"remove symbol tables and debug info to reduce binary size, see https://golang.org/cmd/link/",[],1,2018-01-29 15:34:47,2018-03-26 15:22:59,2018-03-26 15:22:59,False,,,dirty,False,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/193,https://github.com/kubernetes/dns/pull/193,oilbeater,update go version to 1.9.3,As kubernetes already updated to 1.9.3,"['bowei', 'thockin']",1,2018-02-01 09:12:03,2018-02-06 00:41:17,2018-02-06 00:41:18,True,2018-02-06 00:41:17,thockin,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/194,https://github.com/kubernetes/dns/pull/194,Nefelim4ag,Replace sha1 hash with ~x5 faster spooky hash,"Time for hashing 100000 Int s
+sha1:  44.198325ms
+spooky:  7.308553ms",[],1,2018-02-05 15:47:50,2018-02-06 05:16:04,2018-02-06 12:12:47,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/197,https://github.com/kubernetes/dns/pull/197,oomichi,Separate the initialization logs for each resource,"To investigate issues easily when facing it, this commit separates
+the log for each resource, services and endpoints.
+
+fixes: #196 ",['MrHohn'],1,2018-02-09 03:25:19,2018-03-25 05:29:03,2018-03-25 05:29:03,True,2018-03-25 05:29:03,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/202,https://github.com/kubernetes/dns/pull/202,tomwilkie,Update vendored k8s to 1.9,"Update the vendored kubernetes to 1.9, the client-go code to a matching version etc.
+
+Also switch from godep to dep.  Godep is **dep**recated.
+
+Fixes #200 ",['MrHohn'],4,2018-02-27 20:37:24,2018-08-22 07:45:37,2018-08-22 07:45:37,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/206,https://github.com/kubernetes/dns/pull/206,MrHohn,Fix travis: include vendor folder in build.sh,"Did a bit digging and found the CI build was broken after bumping to Go 1.9+ (https://github.com/kubernetes/dns/pull/193).
+
+From Go 1.9 release notes, looks like command `go install ./...` will no longer matches package in vendor folder (https://golang.org/doc/go1.9#vendor-dotdotdot), which breaks our CI build because we are expecting `bin/amd64/ginkgo`.
+
+This PR adds the vendor folder back for installing. Might not be the best choice but I think it at least works.
+
+Fix https://github.com/kubernetes/dns/issues/203.",['bowei'],1,2018-03-02 01:18:04,2018-03-21 23:56:57,2018-03-21 23:56:57,True,2018-03-21 23:56:57,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/210,https://github.com/kubernetes/dns/pull/210,sergeylanzman,fix bug with delete externalName service,"On delete service from namespace kube-dns get event  EndpointAdd. 
+Func addDNSUsingEndpoints generate RecordsForHeadlessService in cache to service type externalName. 
+After this delete from a cache, it's deleted an empty record, but a record of Entries for externalName stuck forever.
+Solution: don't generate the empty record for externalName",['MrHohn'],2,2018-03-08 22:29:55,2018-03-25 05:25:54,2018-03-25 17:31:05,True,2018-03-25 05:25:54,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/211,https://github.com/kubernetes/dns/pull/211,AdamDang,"Typo fix ""...is use to ...""->""...is used to ...""",a grammatical error in line 326.,[],2,2018-03-11 07:32:45,2018-04-19 04:04:06,2018-04-19 04:04:06,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/212,https://github.com/kubernetes/dns/pull/212,AdamDang,"Typo fix delete duplicated ""the the""","""the"" is duplicated in line 40.",[],1,2018-03-11 12:11:44,2018-03-12 01:48:45,2018-03-18 15:45:47,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/214,https://github.com/kubernetes/dns/pull/214,Nefelim4ag,Delete docker pull from Makefiles,"That fixув building on closed clusters,
+where for security reasons no internet connection are available
+and needed images are unpacked to build machine
+
+Docker will pull missing images self
+
+For dnsmasq --pull useless because specific version of image
+are set in file, so no new images will come.
+
+Signed-off-by: Timofey Titovets <nefelim4ag@gmail.com>",['bowei'],1,2018-03-20 16:38:35,,2019-01-02 19:41:33,False,,,blocked,True,open
+dns,https://api.github.com/repos/kubernetes/dns/pulls/215,https://github.com/kubernetes/dns/pull/215,rramkumar1,Implement HasSynced() of skydns Backend interface,"This PR fixes #186. 
+
+We implement the HasSynced() interface that skydns defines. In the case that the endpoints and services have not been initally synced from the API server, skydns will now refuse the connection instead of returning NXDOMAIN.
+","['bowei', 'MrHohn']",1,2018-03-20 17:39:47,2018-03-22 22:16:16,2018-03-22 22:22:47,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/216,https://github.com/kubernetes/dns/pull/216,rramkumar1,Fix dnsmasq metric panic,"Fixes an issue that arises when the dnsmasq container is restarted on ConfigMap updated. In that case, the previous value of a metric is greater than the current value, which results in us adding a negative delta to the Prometheus Counter. This fix ensures that if the delta is negative, we add 0 to avoid a panic.
+
+/assign @bowei ",[],1,2018-03-20 17:41:15,2018-03-21 22:16:08,2018-03-21 22:16:11,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/217,https://github.com/kubernetes/dns/pull/217,fanzy618,Switch from godep to dep ,"Switch from godep to dep.
+
+Fixes #213",[],1,2018-03-21 13:09:53,2018-03-21 13:26:22,2018-03-21 13:26:22,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/218,https://github.com/kubernetes/dns/pull/218,MrHohn,[TEST] Update vendor skydns,,[],3,2018-03-22 20:54:06,2018-03-22 22:17:01,2018-03-22 22:17:01,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/219,https://github.com/kubernetes/dns/pull/219,rramkumar1,Implement HasSynced() of skydns Backend interface,"This PR fixes #186.
+
+We implement the HasSynced() interface that skydns defines. In the case that the endpoints and services have not been initally synced from the API server, skydns will now refuse the connection instead of returning NXDOMAIN.
+",['MrHohn'],1,2018-03-22 22:23:49,2018-03-23 00:37:31,2018-05-04 22:48:26,True,2018-03-23 00:37:30,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/220,https://github.com/kubernetes/dns/pull/220,grayluck,Forward PTR record lookup from kubedns to upstream server.,"Fixes #198
+
+Approach: Let kubedns sync config to skydns nameservers, allowing skydns to do the request forwarding. ","['bowei', 'MrHohn']",1,2018-03-23 00:19:13,2018-04-05 20:17:53,2018-04-09 18:19:40,True,2018-04-05 20:17:53,bowei,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/221,https://github.com/kubernetes/dns/pull/221,bowei,Add check hash of downloaded dnsmasq source,Fixes https://github.com/kubernetes/dns/issues/165,['MrHohn'],2,2018-03-26 20:48:41,2018-03-26 21:22:13,2018-03-26 21:25:32,True,2018-03-26 21:22:13,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/222,https://github.com/kubernetes/dns/pull/222,YEXINGZHE54,Update cache.go,"currently, EvictRandom will clean up all cached entries when cache is full. fix it, only clean additional ones",[],1,2018-03-31 09:20:33,2018-04-01 17:50:59,2018-04-01 17:50:59,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/223,https://github.com/kubernetes/dns/pull/223,thockin,Pass 2: k8s GCR vanity URL,,['MrHohn'],1,2018-04-06 15:47:30,2018-04-09 16:56:11,2018-04-09 16:56:11,True,2018-04-09 16:56:11,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/225,https://github.com/kubernetes/dns/pull/225,grayluck,Fix external name not solving by reloading resolv.conf.,"Now skydns will be configured with resolv.conf when nameserver is empty.
+
+Fixes#224 (https://github.com/kubernetes/dns/issues/224)
+
+\assign @MrHohn ",['MrHohn'],3,2018-04-14 00:10:55,2018-04-16 21:56:10,2018-04-16 21:56:10,True,2018-04-16 21:56:10,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/229,https://github.com/kubernetes/dns/pull/229,grayluck,Update miekg/dns to v1.0.5,"Due to this issue https://github.com/miekg/dns/pull/642, dep miekg/dns is upgraded to v1.0.5 to prevent kubedns from panic when resolv.conf contains `attempt`. golang.org/x/net is upgraded to release-branch.go1.9.
+
+Fixes #228
+/assign @MrHohn ",['MrHohn'],1,2018-05-04 04:49:52,2018-05-04 22:26:52,2018-05-04 22:26:53,True,2018-05-04 22:26:52,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/232,https://github.com/kubernetes/dns/pull/232,krmayankk,fix pod hostname to be podname for dns srv records,"Fixes https://github.com/kubernetes/dns/issues/116 and https://github.com/kubernetes/kubernetes/issues/47992
+
+Verified this works now 
+```
+/ # nslookup my-service.new-hire
+Server:    10.254.208.255
+Address 1: 10.254.208.255 kube-dns.kube-system.svc.cluster.local
+
+Name:      my-service.new-hire
+Address 1: 10.251.156.52 nginx-deployment-6fc8cd7954-q8p99.my-service.new-hire.svc.cluster.local
+Address 2: 10.251.156.7 nginx-deployment-6fc8cd7954-w44gr.my-service.new-hire.svc.cluster.local
+```","['bowei', 'thockin']",1,2018-05-18 07:59:10,2019-02-03 22:14:44,2019-02-03 22:14:44,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/241,https://github.com/kubernetes/dns/pull/241,MrHohn,Add SECURITY_CONTACTS file,"Fixed https://github.com/kubernetes/dns/issues/237.
+
+/assign @rramkumar1 
+cc @bowei @jessfraz ",['rramkumar1'],1,2018-06-04 16:56:42,2018-06-07 18:20:50,2018-06-07 18:20:57,True,2018-06-07 18:20:50,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/245,https://github.com/kubernetes/dns/pull/245,chrisohaver,DNS Spec: Headless service with no ready endpoints ,"Proposing that a headless service without any ready endpoints should return `NXDOMAIN`, to match current behavior of kube-dns and CoreDNS.
+
+I'm proposing we update the spec to match the implementation of kube-dns, because the spec was initially based on kube-dns behavior.
+
+If we don't update the spec, then we should open bugs for kube-dns (and CoreDNS) and fix.
+
+see #234","['bowei', 'thockin', 'johnbelamaric']",2,2018-06-12 15:20:41,2018-08-21 15:40:45,2018-08-21 15:40:45,True,2018-08-21 15:40:45,thockin,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/251,https://github.com/kubernetes/dns/pull/251,cmluciano,Bump build image to go 1.10.3,Signed-off-by: Christopher M. Luciano <cmluciano@us.ibm.com>,['MrHohn'],2,2018-08-08 20:14:29,2018-08-09 16:59:56,2018-08-09 16:59:57,True,2018-08-09 16:59:56,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/258,https://github.com/kubernetes/dns/pull/258,pedrosland,Fix DNS query to get metrics from Dnsmasq,"This PR fixes the DNS queries to get metrics such as `hits.bind.`
+
+Without this change, the sidecar doesn't report `kubedns_dnsmasq_hits` or similar metrics and it produces logs like:
+
+```
+W0910 16:07:40.684579   18427 server.go:64] Error getting metrics from dnsmasq: invalid number of Answer records for hits.bind.: 0
+```
+
+It seems that Dnsmasq requires the recursive flag to respond to these queries. Using dig confirms this. 
+
+Working:
+```
+dig chaos txt hits.bind.
+```
+Not working:
+```
+dig +norecurse chaos txt hits.bind.
+```
+",['MrHohn'],1,2018-09-10 21:28:20,2018-10-06 01:09:18,2018-10-06 01:09:19,True,2018-10-06 01:09:18,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/259,https://github.com/kubernetes/dns/pull/259,dims,Build and push manifests for container images,"We build and push images for various architectures, but are not
+publishing a single manifest that can be used to look up the images.
+test/images in main k/k repository and kube images in k/release already
+publish manifests for all the image we need for e2e testing, so we
+should do the same as the 2 images in this repository are part of the
+conformance e2e test suite.
+
+Change-Id: I3f923e6246fc04e4c36cb29cb5be1f40fbdcd8a4","['bowei', 'BenTheElder', 'MrHohn']",1,2018-09-11 00:21:21,2018-09-14 16:57:19,2018-09-14 21:35:52,True,2018-09-14 16:57:19,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/260,https://github.com/kubernetes/dns/pull/260,stepyu,fix parameter description,,['thockin'],1,2018-09-13 07:55:39,2018-09-13 16:52:31,2018-09-13 16:52:31,True,2018-09-13 16:52:31,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/261,https://github.com/kubernetes/dns/pull/261,dims,Publish manifests for all 3 sets of images,"Previous attempt pushed just one image. Now we iterate over
+and push manifests for all 3 images, dnsmasq-nanny, kube-dns, sidecar.
+
+problem was reported in https://github.com/kubernetes/dns/pull/259#issuecomment-421448697
+
+cc @MrHohn @bowei ",['MrHohn'],1,2018-09-15 22:40:47,2018-09-17 05:25:17,2018-09-19 00:49:20,True,2018-09-17 05:25:17,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/262,https://github.com/kubernetes/dns/pull/262,matt-potter,update dnsmasq to 2.79,"Specifically this provides min-port at a sane default (1024), which would aid our deployments with kube-aws, where are are unable to pass custom flags to the dnsmasq process",['bowei'],3,2018-09-19 14:00:23,,2019-02-19 19:16:04,False,,,blocked,True,open
+dns,https://api.github.com/repos/kubernetes/dns/pulls/264,https://github.com/kubernetes/dns/pull/264,MrHohn,Bump alpine base image to 3.8.1,"Fixes #263 .
+
+/assign @prameshj",['rramkumar1'],1,2018-09-20 18:07:39,2018-09-20 18:30:56,2018-09-20 18:30:56,True,2018-09-20 18:30:55,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/267,https://github.com/kubernetes/dns/pull/267,mkumatag,Purge the manifest after the push,Triggered by https://github.com/kubernetes/kubernetes/issues/69104#issuecomment-424799217,"['bowei', 'MrHohn']",1,2018-09-27 14:54:51,2018-09-27 18:59:27,2018-09-27 19:06:05,True,2018-09-27 18:59:27,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/268,https://github.com/kubernetes/dns/pull/268,ixdy,Remove unused NOBODY/ARG_NOBODY arg from docker build,"`NOBODY` and `ARG_NOBODY` were added in #31 because amd64 and the other architectures were using different base images, but its need was basically but removed in #127 when all architectures were converted to use alpine.
+
+The names were also confusing (they apply to the group, not the user), so let's just remove them and hardcode the group in the Dockerfile again.",['MrHohn'],1,2018-10-01 18:17:55,2018-10-01 23:04:44,2018-10-01 23:04:44,True,2018-10-01 23:04:44,MrHohn,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/269,https://github.com/kubernetes/dns/pull/269,prameshj,Migrate from Godep to dep for managing dependencies.,,"['bowei', 'MrHohn']",5,2018-10-30 18:38:25,2018-10-31 06:10:15,2018-10-31 06:10:15,True,2018-10-31 06:10:15,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/270,https://github.com/kubernetes/dns/pull/270,prameshj,Run coredns as a nodelocal dnscache,This change introduces a dnscache program that runs coredns and sets up iptables rules and interface for connectivity.,['bowei'],3,2018-11-01 17:28:36,2018-11-07 22:10:53,2018-11-09 18:03:30,True,2018-11-07 22:10:52,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/271,https://github.com/kubernetes/dns/pull/271,prameshj,Update go-dependencies.md,,['MrHohn'],1,2018-11-05 22:43:23,2018-11-05 23:07:07,2018-11-05 23:07:08,True,2018-11-05 23:07:07,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/272,https://github.com/kubernetes/dns/pull/272,prameshj,Follow up changes to node-cache PR,Addressed review comments from https://github.com/kubernetes/dns/pull/270,['bowei'],1,2018-11-07 23:26:41,2018-11-08 00:10:44,2018-11-08 00:10:45,True,2018-11-08 00:10:44,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/274,https://github.com/kubernetes/dns/pull/274,prameshj,Upgrade CoreDNS to 1.2.6,"this contains a fix in the loop plugin that was incorrectly detecting a loop when upstream dns was unavailable.
+coredns/coredns#2255","['justinsb', 'bowei', 'MrHohn', 'johnbelamaric']",2,2018-11-11 21:56:28,2018-11-12 18:41:58,2018-11-12 18:41:58,True,2018-11-12 18:41:58,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/275,https://github.com/kubernetes/dns/pull/275,xichengliudui,Delete the redundant code,These 'else {}' is not needed,"['bowei', 'MrHohn']",1,2018-11-12 06:03:39,2018-11-14 01:43:34,2018-11-14 01:43:38,False,,,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/278,https://github.com/kubernetes/dns/pull/278,cricketliu,Update specification.md,Simple grammatical fix (subject-verb agreement).,"['bowei', 'johnbelamaric']",1,2018-11-27 00:03:09,2019-03-27 23:26:49,2019-03-27 23:26:49,True,2019-03-27 23:26:49,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/279,https://github.com/kubernetes/dns/pull/279,andy2046,allow service name for stubDomains,"Fixes #82 
+
+it should work for not only kubernetes service name but also private dns record (e.g. dns.my.domain defined in GKE private dns) ",['bowei'],5,2018-12-02 17:02:27,2019-01-05 06:38:12,2019-01-05 06:39:16,True,2019-01-05 06:38:11,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/280,https://github.com/kubernetes/dns/pull/280,justinsb,Create script to run node-local-dns cache without kubelet support,This enables node-local-dns to be used experimentally prior to kubelet support.,[],1,2018-12-06 03:44:06,,2019-01-25 23:39:35,False,,,blocked,True,open
+dns,https://api.github.com/repos/kubernetes/dns/pulls/281,https://github.com/kubernetes/dns/pull/281,justinsb,Add dns-stress-test tool,"This performs DNS queries (~100 per second per pod), reporting timing
+results to StackDriver.  It demonstrates the significant improvements
+attainable with the node-local-dns cache.",[],1,2018-12-06 04:29:52,,2019-01-14 17:22:49,False,,,blocked,True,open
+dns,https://api.github.com/repos/kubernetes/dns/pulls/284,https://github.com/kubernetes/dns/pull/284,MrHohn,Check error for SetDefaults(),"Ref https://github.com/kubernetes/dns/issues/283#issuecomment-451000345, we should check the error returned by `SetDefaults()`. Error in `SetDefaults()` might lead to a broken DNS server.
+
+/assign @bowei 
+cc @thebag25",['bowei'],1,2019-01-02 22:19:20,2019-01-03 18:34:31,2019-01-03 18:34:31,True,2019-01-03 18:34:31,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/286,https://github.com/kubernetes/dns/pull/286,prameshj,Run checks before starting CoreDNS,"https://github.com/kubernetes/dns/issues/282
+There is sometimes a race in link creation and ip assignment.
+If ip assignment is done too soon, the ip address does not persist.",['MrHohn'],2,2019-01-23 20:14:18,2019-01-23 20:41:57,2019-01-23 20:41:57,True,2019-01-23 20:41:57,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/287,https://github.com/kubernetes/dns/pull/287,prameshj,Adding myself to OWNERS,,['MrHohn'],1,2019-01-23 22:17:37,2019-01-23 22:21:28,2019-01-23 22:21:28,True,2019-01-23 22:21:28,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/290,https://github.com/kubernetes/dns/pull/290,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['thockin', 'prameshj']",1,2019-03-08 18:04:20,2019-03-08 18:26:57,2019-03-09 00:18:48,True,2019-03-08 18:26:57,k8s-ci-robot,unknown,,closed
+dns,https://api.github.com/repos/kubernetes/dns/pulls/291,https://github.com/kubernetes/dns/pull/291,prameshj,Add retry logic when iptables checks fail,"Nodelocaldns runs background checks to ensure its custom iptables rules are present. On failure, the pod restarts.
+When deployed in an environment with other pods also using iptables heavily, there can be xtables lock contention. Adding a retry logic instead of exiting on first failure. 
+Fixes #292 ",['bowei'],3,2019-03-09 01:00:46,,2019-04-03 23:29:49,False,,,blocked,True,open
+dns,https://api.github.com/repos/kubernetes/dns/pulls/294,https://github.com/kubernetes/dns/pull/294,yuwenma,Rebase container images from alpine to distroless.,"Updated containers:kube-dns, sidecar
+Context:[KEP: Rebase k8s images to distroless](https://github.com/kubernetes/enhancements/pull/900)
+Test: 
+1. `make images` can create the following images
+staging-k8s.gcr.io/k8s-dns-sidecar-amd64 
+staging-k8s.gcr.io/k8s-dns-node-cache-amd64
+staging-k8s.gcr.io/k8s-dns-kube-dns-amd64
+staging-k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64
+staging-k8s.gcr.io/k8s-dns-dnsmasq-amd64 
+
+2. `docker run -e <with required flags like service host/port> <Kube-DNS-IMAGE-ID>`
+can successfully upstart a container.","['bowei', 'MrHohn', 'prameshj']",1,2019-03-28 19:57:28,,2019-04-02 23:34:58,False,,,blocked,True,open

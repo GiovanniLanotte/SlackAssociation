@@ -1,0 +1,1095 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,"pysha3 is required only for python < 3.6
+```
+pysha3;python_version<""3.6""
+```",55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-05 11:37:28,262460380,"@@ -5,21 +5,32 @@
+ 
+ setuptools.setup(
+     name='iroha',
+-    version='0.0.3',
++    version='{{ PYPI_VERSION }}',
+     description='Python library for Hyperledger Iroha',
+     long_description=long_description,
+     long_description_content_type='text/markdown',
++    author='Soramitsu Co Ltd',
++    author_email='ci@soramitsu.co.jp',
+     license='Apache-2.0',
+     url='https://github.com/hyperledger/iroha-python',
+     packages=setuptools.find_packages(
+         exclude=['dist', 'build', '*.pyc', '.DS_Store',
+                  '.vscode',  '.idea', '__pycache__', '*.bak']),
+     install_requires=[
+-        'grpcio-tools',
+-        'pysha3;python_version<""3.6""'
++        'protobuf>=3.5.2.post1',
++        'grpcio-tools>=1.12.1',
++        'pysha3',",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/262460380,https://github.com/hyperledger/iroha-python/pull/29#discussion_r262460380,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Please don't forget to uncomment this and remove hardcoded version below.,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-05 11:38:04,262460558,"@@ -0,0 +1,46 @@
++#!/usr/bin/env groovy
++
++def doPythonWheels() {
++    // version = sh(script: 'git describe --tags \$(git rev-list --tags --max-count=1) || true', returnStdout: true).trim()",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/262460558,https://github.com/hyperledger/iroha-python/pull/29#discussion_r262460558,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,"All these files of keys are not needed.
+
+All that we require for tests is single peer with config, genesis.block, admin@test.{priv,pub}, node0.{priv,pub} keys from hyperledger/iroha/examples ",55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-05 11:39:34,262460992,"@@ -0,0 +1 @@
++d7a82f32288ab60d12dc8c1d15110b1712ae99a8a9529d56944deb3267bb219e",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/262460992,https://github.com/hyperledger/iroha-python/pull/29#discussion_r262460992,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Please add a trailing newline.,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:33:39,266862934,"@@ -0,0 +1,16 @@
++#!/usr/bin/env groovy
++
++def cancelSameJobBuilds() {
++    def jobname = env.JOB_NAME
++    def buildnum = env.BUILD_NUMBER.toInteger()
++    def job = Jenkins.instance.getItemByFullName(jobname)
++
++    if (jobname =~ /^.*\/${job.name}$/) {
++        for (build in job.builds) {
++            if (!build.isBuilding()) { continue; }
++            if (buildnum == build.getNumber().toInteger()) { continue; }
++            build.doStop();
++        }
++    }
++}
++return this",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266862934,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266862934,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Let's uncomment the version. Will we have some fallback version?,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:35:27,266863544,"@@ -0,0 +1,46 @@
++#!/usr/bin/env groovy
++
++def doPythonWheels() {
++    // version = sh(script: 'git describe --tags \$(git rev-list --tags --max-count=1) || true', returnStdout: true).trim()",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266863544,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266863544,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,"IROHA_HOST_ADDR=iroha
+Will ""iroha"" contain a port?",55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:40:17,266865229,"@@ -0,0 +1,50 @@
++#!/usr/bin/env groovy
++
++def doPythonWheels() {
++    // version = sh(script: 'git describe --tags \$(git rev-list --tags --max-count=1) || true', returnStdout: true).trim()
++    version = ""0.0.1""
++    if (env.GIT_LOCAL_BRANCH != ""master"") {
++        version += "".dev"" + env.BUILD_NUMBER
++    }
++
++    sh(script: ""sed -i.bak 's/{{ PYPI_VERSION }}/${version}/g' setup.py;"")
++
++    iC = docker.image('quay.io/pypa/manylinux1_x86_64')
++    iC.inside(""-v ${WORKSPACE}:/io"") {
++        sh(script: '/opt/python/cp35-cp35m/bin/pip wheel --no-deps /io/ -w /io/wheelhouse/', returnStdout: true)
++    }
++}
++
++def publishWheels() {
++    checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++    withCredentials([usernamePassword(credentialsId: 'ci_nexus', passwordVariable: 'CI_NEXUS_PASSWORD', usernameVariable: 'CI_NEXUS_USERNAME')]) {
++        sh(script: ""find wheelhouse -type f -name \""iroha*.whl\"" -exec curl -u ${CI_NEXUS_USERNAME}:${CI_NEXUS_PASSWORD} --upload-file {} https://nexus.iroha.tech/repository/artifacts/iroha-python/{} \\;"")
++    }
++    if (env.GIT_LOCAL_BRANCH == '' && checkTag) {
++        iC = docker.image('quay.io/pypa/manylinux1_x86_64')
++        iC.inside("""") {
++            sh(script: '/opt/python/cp35-cp35m/bin/pip install twine', returnStdout: true)
++            sh ""/opt/python/cp35-cp35m/bin/twine upload --skip-existing -u ${ci_pypi_username} -p ${ci_pypi_password} --repository-url https://test.pypi.org/legacy/ wheelhouse/iroha*.whl""
++        }
++    }
++}
++
++def testWheels() {
++    def scmVars = checkout scm
++    def tests = ['tx-example.py', 'batch-example.py', 'blocks-query.py']
++    for (String item : tests) {
++        DOCKER_NETWORK = ""${scmVars.CHANGE_ID}-${scmVars.GIT_COMMIT}-${BUILD_NUMBER}""
++        writeFile file: "".env"", text: ""SUBNET=${DOCKER_NETWORK}\nIROHA_VERSION=${IROHA_VERSION}""
++        sh(returnStdout: true, script: ""docker-compose -f docker/docker-compose.yaml pull"")
++        sh(returnStdout: true, script: ""docker-compose -f docker/docker-compose.yaml up --build -d"")
++        iC = docker.image('python:3.5-slim')
++        iC.inside(""--network='${DOCKER_NETWORK}'"") {
++            sh(script: ""find wheelhouse -type f -name \""iroha*.whl\"" -exec pip install {} \\;"")
++            sh(script: ""while ! timeout 2 bash -c \""echo > /dev/tcp/iroha/50051\""; do sleep 2; done"")
++            sh(script: ""IROHA_HOST_ADDR=iroha ./examples/${item}"")",48,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266865229,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266865229,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,How to bump version later?,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:41:59,266865867,"@@ -0,0 +1,76 @@
++pipeline {
++  environment {
++    DOCKER_NETWORK = ''
++    IROHA_VERSION = '1.0.0_rc4-hotfix1'",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266865867,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266865867,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,I prefer to remove all d3 mentions in order to avoid any confusion.,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:42:50,266866180,"@@ -0,0 +1,76 @@
++pipeline {
++  environment {
++    DOCKER_NETWORK = ''
++    IROHA_VERSION = '1.0.0_rc4-hotfix1'
++  }
++  options {
++    skipDefaultCheckout()
++    buildDiscarder(logRotator(numToKeepStr: '20'))
++    timestamps()
++  }
++  agent any
++  stages {
++    stage ('Stop same job builds') {
++      agent { label 'master' }
++      steps {
++        script {
++          def scmVars = checkout scm
++          // need this for develop->master PR cases
++          // CHANGE_BRANCH is not defined if this is a branch build
++          try {
++            scmVars.CHANGE_BRANCH_LOCAL = scmVars.CHANGE_BRANCH
++          }
++          catch(MissingPropertyException e) { }
++          if (scmVars.GIT_LOCAL_BRANCH != ""develop"" && scmVars.CHANGE_BRANCH_LOCAL != ""develop"") {
++            def builds = load "".jenkinsci/cancel-builds-same-job.groovy""
++            builds.cancelSameJobBuilds()
++          }
++        }
++      }
++    }
++    stage('Linux') {
++      agent { label 'd3-build-agent||docker-build-agent' }",32,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266866180,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266866180,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Please add a trailing newline.,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:43:30,266866400,"@@ -0,0 +1,76 @@
++pipeline {
++  environment {
++    DOCKER_NETWORK = ''
++    IROHA_VERSION = '1.0.0_rc4-hotfix1'
++  }
++  options {
++    skipDefaultCheckout()
++    buildDiscarder(logRotator(numToKeepStr: '20'))
++    timestamps()
++  }
++  agent any
++  stages {
++    stage ('Stop same job builds') {
++      agent { label 'master' }
++      steps {
++        script {
++          def scmVars = checkout scm
++          // need this for develop->master PR cases
++          // CHANGE_BRANCH is not defined if this is a branch build
++          try {
++            scmVars.CHANGE_BRANCH_LOCAL = scmVars.CHANGE_BRANCH
++          }
++          catch(MissingPropertyException e) { }
++          if (scmVars.GIT_LOCAL_BRANCH != ""develop"" && scmVars.CHANGE_BRANCH_LOCAL != ""develop"") {
++            def builds = load "".jenkinsci/cancel-builds-same-job.groovy""
++            builds.cancelSameJobBuilds()
++          }
++        }
++      }
++    }
++    stage('Linux') {
++      agent { label 'd3-build-agent||docker-build-agent' }
++      stages {
++        stage('Prepare') {
++          steps {
++            script {
++              iC = docker.image('hyperledger/iroha:develop-build')
++              iC.inside("""") {
++                  scmVars = checkout scm
++                  sh(script: ""./scripts/download-schema.py"")
++                  sh(script: ""./scripts/compile-proto.py"")
++              }
++            }
++          }
++        }
++        stage('Build wheels') {
++          steps {
++            script {
++              def wheels = load "".jenkinsci/linux-build-wheels.groovy""
++              wheels.doPythonWheels()
++            }
++          }
++        }
++        stage('Tests') {
++          steps {
++            script {
++              def wheels = load "".jenkinsci/linux-build-wheels.groovy""
++              wheels.testWheels()
++            }
++          }
++        }
++        stage('Publish wheels') {
++          steps {
++            script {
++              def wheels = load "".jenkinsci/linux-build-wheels.groovy""
++              archiveArtifacts artifacts: 'wheelhouse/iroha*.whl', allowEmptyArchive: true
++              if (currentBuild.result == ""SUCCESS"") {
++                wheels.publishWheels()
++              }
++            }
++          }
++        }
++      }
++    }
++  }
++}",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266866400,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266866400,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Let's take the latest version of config.docker from the main repository.,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:44:53,266866908,"@@ -0,0 +1,11 @@
++{
++  ""block_store_path"" : ""/tmp/block_store/"",
++  ""torii_port"" : 50051,
++  ""internal_port"" : 10001,
++  ""pg_opt"" : ""host=iroha-postgres port=5432 user=postgres password=mysecretpassword"",
++  ""max_proposal_size"" : 10,
++  ""proposal_delay"" : 5000,
++  ""vote_delay"" : 5000,
++  ""load_delay"" : 5000,
++  ""mst_enable"" : true
++}",11,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266866908,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266866908,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Why do we need to sleep?,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-19 12:45:25,266867130,"@@ -0,0 +1,6 @@
++#!/bin/sh
++#while ! curl http://d3-iroha-postgres:5432/ 2>&1 | grep '52'
++#do
++#done
++sleep 30",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/266867130,https://github.com/hyperledger/iroha-python/pull/29#discussion_r266867130,igor-egorov
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,This is a legacy name for the agent. We cannot change it easily. It is not really related to D3,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 08:40:29,267659408,"@@ -0,0 +1,76 @@
++pipeline {
++  environment {
++    DOCKER_NETWORK = ''
++    IROHA_VERSION = '1.0.0_rc4-hotfix1'
++  }
++  options {
++    skipDefaultCheckout()
++    buildDiscarder(logRotator(numToKeepStr: '20'))
++    timestamps()
++  }
++  agent any
++  stages {
++    stage ('Stop same job builds') {
++      agent { label 'master' }
++      steps {
++        script {
++          def scmVars = checkout scm
++          // need this for develop->master PR cases
++          // CHANGE_BRANCH is not defined if this is a branch build
++          try {
++            scmVars.CHANGE_BRANCH_LOCAL = scmVars.CHANGE_BRANCH
++          }
++          catch(MissingPropertyException e) { }
++          if (scmVars.GIT_LOCAL_BRANCH != ""develop"" && scmVars.CHANGE_BRANCH_LOCAL != ""develop"") {
++            def builds = load "".jenkinsci/cancel-builds-same-job.groovy""
++            builds.cancelSameJobBuilds()
++          }
++        }
++      }
++    }
++    stage('Linux') {
++      agent { label 'd3-build-agent||docker-build-agent' }",32,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267659408,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267659408,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,I would recommend pulling this config file from Iroha repository during the build to avoid supporting an up-to-date version of it in this repo.,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 08:49:41,267661944,"@@ -0,0 +1,11 @@
++{
++  ""block_store_path"" : ""/tmp/block_store/"",
++  ""torii_port"" : 50051,
++  ""internal_port"" : 10001,
++  ""pg_opt"" : ""host=iroha-postgres port=5432 user=postgres password=mysecretpassword"",
++  ""max_proposal_size"" : 10,
++  ""proposal_delay"" : 5000,
++  ""vote_delay"" : 5000,
++  ""load_delay"" : 5000,
++  ""mst_enable"" : true
++}",11,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267661944,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267661944,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,See my comment about `config.docker`,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 08:50:22,267662126,"@@ -0,0 +1,125 @@
++{",1,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267662126,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267662126,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Python 4 ? :),55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 08:53:24,267662951,"@@ -18,10 +25,8 @@
+ if sys.version_info[0] < 3:
+     raise Exception('Python 3 or a more recent version is required.')",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267662951,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267662951,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Lets make it `admin@soramitsu.co.jp`. We do not really have this email,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 08:56:16,267663831,"@@ -5,21 +5,32 @@
+ 
+ setuptools.setup(
+     name='iroha',
+-    version='0.0.3',
++    version='{{ PYPI_VERSION }}',
+     description='Python library for Hyperledger Iroha',
+     long_description=long_description,
+     long_description_content_type='text/markdown',
++    author='Soramitsu Co Ltd',
++    author_email='ci@soramitsu.co.jp',",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267663831,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267663831,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Lets publish a link to the uploaded wheel on Nexus,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 09:00:32,267665209,"@@ -0,0 +1,76 @@
++pipeline {
++  environment {
++    DOCKER_NETWORK = ''
++    IROHA_VERSION = '1.0.0_rc4-hotfix1'
++  }
++  options {
++    skipDefaultCheckout()
++    buildDiscarder(logRotator(numToKeepStr: '20'))
++    timestamps()
++  }
++  agent any
++  stages {
++    stage ('Stop same job builds') {
++      agent { label 'master' }
++      steps {
++        script {
++          def scmVars = checkout scm
++          // need this for develop->master PR cases
++          // CHANGE_BRANCH is not defined if this is a branch build
++          try {
++            scmVars.CHANGE_BRANCH_LOCAL = scmVars.CHANGE_BRANCH
++          }
++          catch(MissingPropertyException e) { }
++          if (scmVars.GIT_LOCAL_BRANCH != ""develop"" && scmVars.CHANGE_BRANCH_LOCAL != ""develop"") {
++            def builds = load "".jenkinsci/cancel-builds-same-job.groovy""
++            builds.cancelSameJobBuilds()
++          }
++        }
++      }
++    }
++    stage('Linux') {
++      agent { label 'd3-build-agent||docker-build-agent' }
++      stages {
++        stage('Prepare') {
++          steps {
++            script {
++              iC = docker.image('hyperledger/iroha:develop-build')
++              iC.inside("""") {
++                  scmVars = checkout scm
++                  sh(script: ""./scripts/download-schema.py"")
++                  sh(script: ""./scripts/compile-proto.py"")
++              }
++            }
++          }
++        }
++        stage('Build wheels') {
++          steps {
++            script {
++              def wheels = load "".jenkinsci/linux-build-wheels.groovy""
++              wheels.doPythonWheels()
++            }
++          }
++        }
++        stage('Tests') {
++          steps {
++            script {
++              def wheels = load "".jenkinsci/linux-build-wheels.groovy""
++              wheels.testWheels()
++            }
++          }
++        }
++        stage('Publish wheels') {
++          steps {
++            script {
++              def wheels = load "".jenkinsci/linux-build-wheels.groovy""
++              archiveArtifacts artifacts: 'wheelhouse/iroha*.whl', allowEmptyArchive: true
++              if (currentBuild.result == ""SUCCESS"") {
++                wheels.publishWheels()
++              }
++            }
++          }
++        }",72,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267665209,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267665209,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Shall we separate dev builds from master builds on Nexus? I think it is best to have a separate dev folder with the latest build(s?) and latest folder with just a single build from `master` branch that is replaced with each commit,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 09:08:55,267667756,"@@ -0,0 +1,50 @@
++#!/usr/bin/env groovy
++
++def doPythonWheels() {
++    // version = sh(script: 'git describe --tags \$(git rev-list --tags --max-count=1) || true', returnStdout: true).trim()
++    version = ""0.0.1""
++    if (env.GIT_LOCAL_BRANCH != ""master"") {
++        version += "".dev"" + env.BUILD_NUMBER
++    }
++
++    sh(script: ""sed -i.bak 's/{{ PYPI_VERSION }}/${version}/g' setup.py;"")
++
++    iC = docker.image('quay.io/pypa/manylinux1_x86_64')
++    iC.inside(""-v ${WORKSPACE}:/io"") {
++        sh(script: '/opt/python/cp35-cp35m/bin/pip wheel --no-deps /io/ -w /io/wheelhouse/', returnStdout: true)
++    }
++}
++
++def publishWheels() {
++    checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++    withCredentials([usernamePassword(credentialsId: 'ci_nexus', passwordVariable: 'CI_NEXUS_PASSWORD', usernameVariable: 'CI_NEXUS_USERNAME')]) {
++        sh(script: ""find wheelhouse -type f -name \""iroha*.whl\"" -exec curl -u ${CI_NEXUS_USERNAME}:${CI_NEXUS_PASSWORD} --upload-file {} https://nexus.iroha.tech/repository/artifacts/iroha-python/{} \\;"")",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267667756,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267667756,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,Where is it used? I don't see any references to this file,55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-03-21 09:26:28,267673253,"@@ -0,0 +1,59 @@
++# Use the `golang` image to build a statically linked binary.",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/267673253,https://github.com/hyperledger/iroha-python/pull/29#discussion_r267673253,bakhtin
+https://github.com/hyperledger/iroha-python/pull/29,https://github.com/hyperledger/iroha-python/pull/29,"`master` folder on Nexus should also contain a wheel with the `latest` suffix. See my previous comment. It will help in locating the latest version of the wheels. Thus, there should be two upload commands if it is a `master` wheel: one that uploads it as usual (you already have it) and another that overwrites the previous `latest` tag.",55c43a6fca727e6306eadf1ce7f1f8b6fb0ae601,2019-04-02 06:44:10,271152260,"@@ -18,7 +19,8 @@ def doPythonWheels() {
+ def publishWheels() {
+     checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
+     withCredentials([usernamePassword(credentialsId: 'ci_nexus', passwordVariable: 'CI_NEXUS_PASSWORD', usernameVariable: 'CI_NEXUS_USERNAME')]) {
+-        sh(script: ""find wheelhouse -type f -name \""iroha*.whl\"" -exec curl -u ${CI_NEXUS_USERNAME}:${CI_NEXUS_PASSWORD} --upload-file {} https://nexus.iroha.tech/repository/artifacts/iroha-python/{} \\;"")
++        sh(script: ""find wheelhouse -type f -name \""iroha*.whl\"" -exec curl -u ${CI_NEXUS_USERNAME}:${CI_NEXUS_PASSWORD} --upload-file {} https://nexus.iroha.tech/repository/artifacts/iroha-python/${repo}/{} \\;"")",,2019-04-03 06:53:51,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/271152260,https://github.com/hyperledger/iroha-python/pull/29#discussion_r271152260,bakhtin
+https://github.com/hyperledger/iroha-python/pull/21,https://github.com/hyperledger/iroha-python/pull/21,"pylint は パッケージ名で指定できます
+pylint iroha で良いと思います",37070214af6296e5d65b4b1d5ae127346eae246b,2017-10-03 11:45:36,142378534,"@@ -7,16 +7,13 @@ jobs:
+     steps:
+       - checkout
+       - run:
+-          name: pip3 install
+-          command: |
+-            pip install -r requirements.txt
+-      - run:
+           name: tox
+           command: |
++            pip install -r requirements.txt
+             make all
+             tox
+       - run:
+           name: lint
+           command: |
+-            pylint `find src -name '?*py'`
++            pylint `find iroha -name '?*py'`",,2017-10-03 11:50:28,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142378534,https://github.com/hyperledger/iroha-python/pull/21#discussion_r142378534,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/21,https://github.com/hyperledger/iroha-python/pull/21,これは不要になっていそうです,37070214af6296e5d65b4b1d5ae127346eae246b,2017-10-03 11:49:05,142379101,"@@ -8,13 +8,12 @@
+ MAX_DELAY = 1000 * 3600 * 24  # max-delay between tx creation and validation
+ 
+ cmp = {}",,2017-10-03 11:50:28,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142379101,https://github.com/hyperledger/iroha-python/pull/21#discussion_r142379101,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/21,https://github.com/hyperledger/iroha-python/pull/21,tests についてもそれでカバー可能？,37070214af6296e5d65b4b1d5ae127346eae246b,2017-10-03 11:49:19,142379137,"@@ -7,16 +7,13 @@ jobs:
+     steps:
+       - checkout
+       - run:
+-          name: pip3 install
+-          command: |
+-            pip install -r requirements.txt
+-      - run:
+           name: tox
+           command: |
++            pip install -r requirements.txt
+             make all
+             tox
+       - run:
+           name: lint
+           command: |
+-            pylint `find src -name '?*py'`
++            pylint `find iroha -name '?*py'`",,2017-10-03 11:50:28,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142379137,https://github.com/hyperledger/iroha-python/pull/21#discussion_r142379137,satellitex
+https://github.com/hyperledger/iroha-python/pull/21,https://github.com/hyperledger/iroha-python/pull/21,パッケージになっていればできます。,37070214af6296e5d65b4b1d5ae127346eae246b,2017-10-03 11:58:04,142380509,"@@ -7,16 +7,13 @@ jobs:
+     steps:
+       - checkout
+       - run:
+-          name: pip3 install
+-          command: |
+-            pip install -r requirements.txt
+-      - run:
+           name: tox
+           command: |
++            pip install -r requirements.txt
+             make all
+             tox
+       - run:
+           name: lint
+           command: |
+-            pylint `find src -name '?*py'`
++            pylint `find iroha -name '?*py'`",,2017-10-03 11:58:04,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142380509,https://github.com/hyperledger/iroha-python/pull/21#discussion_r142380509,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,"これ，ip と port をどちらも渡されないとデフォルト値が使用されない気がしますが，仕様ですか？
+",0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 01:06:55,142293280,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++
++        """"""
+         logger.info(""Constract Conncection"")
++        self.ip = ""0.0.0.0""
++        self.port = ""8080""
++        if ""ip"" in connection_env and ""port"" in connection_env:",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142293280,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142293280,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,"これは str かどうかを検査している処理ですか？であれば，明示的に type を書いたほうが良い気がしますが，そうしていない意図を教えていただけませんか？
+また，type 検査は `type` よりも `isinstance` を使うとより良いと思います",0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 01:08:16,142293402,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++
++        """"""
+         logger.info(""Constract Conncection"")
++        self.ip = ""0.0.0.0""
++        self.port = ""8080""
++        if ""ip"" in connection_env and ""port"" in connection_env:
++            self.set_env(ip=connection_env[""ip""],port=connection_env[""port""])
++            self.gen_stub()
++
++
++    def set_env(self,**connection_env):
++        """"""
++        Set environemnt of connect iroha
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++        """"""
++        logger.debug(""Connection.set_env"")
++        ip = connection_env[""ip""]
++        port = connection_env[""port""]
++        if type(ip) != type(""""):",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142293402,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142293402,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,同上です,0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 01:08:24,142293417,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++
++        """"""
+         logger.info(""Constract Conncection"")
++        self.ip = ""0.0.0.0""
++        self.port = ""8080""
++        if ""ip"" in connection_env and ""port"" in connection_env:
++            self.set_env(ip=connection_env[""ip""],port=connection_env[""port""])
++            self.gen_stub()
++
++
++    def set_env(self,**connection_env):
++        """"""
++        Set environemnt of connect iroha
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++        """"""
++        logger.debug(""Connection.set_env"")
++        ip = connection_env[""ip""]
++        port = connection_env[""port""]
++        if type(ip) != type(""""):
++            raise exception.InvalidIpException(ip)
++        if not stateless_validator.verify_ip(ip):
++            raise exception.InvalidIpException(ip)
++        if type(port) != type(""""):",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142293417,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142293417,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,（どうでもいいですが）port は integer なのが一般的ですが， str にしている意図とかってありますか？,0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 01:58:13,142298086,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142298086,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142298086,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,（どうでもいいですが）このコード，CIに組み込みたくないですか？,0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 01:59:12,142298196,"@@ -0,0 +1,74 @@
++import time",1,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142298196,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142298196,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,TODO？,0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 02:00:16,142298309,"@@ -86,9 +164,21 @@ def debug_proto_transaction(self):
+         return self.tx
+ 
+     def issue(self):
++        """"""
++        Issue to iroha with this transaction
++        """"""
+         logger.debug(""Transaction.issue"")
+-        # TODO
++        self.connection.tx_stub().Torii(self.tx)
+ 
+     def check(self):
++        """"""
++        Check this transaction status for iroha
++        Returns:
++            TxStatusResponse: Transaction Status Code
++        """"""
+         logger.debug(""Transaction.check"")
+-        # TODO
++        # TODO thinking now",165,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142298309,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142298309,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,integer に直します,0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 02:34:24,142300942,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142300942,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142300942,satellitex
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,"仕様のつもりでしたが、あるやつをとりあえずセットしてStubまで作ってくれたほうが便利ですね…
+変更します",0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 02:37:17,142301161,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++
++        """"""
+         logger.info(""Constract Conncection"")
++        self.ip = ""0.0.0.0""
++        self.port = ""8080""
++        if ""ip"" in connection_env and ""port"" in connection_env:",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142301161,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142301161,satellitex
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,"OldTypeの人間だった。
+isinstance を使います。",0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 02:38:29,142301262,"@@ -1,18 +1,96 @@
+ import grpc
+ from schema.endpoint_pb2 import CommandServiceStub, QueryServiceStub
+-from src.helper import logger
++from src.helper import logger, stateless_validator, exception
+ 
+ class Connection:
+-    def __init__(self):
++    """"""
++    Connection has managed to connection to iroha.
++    """"""
++    def __init__(self,**connection_env):
++        """"""
++        Connection establish to iroha.
++        If connection_env is empty, nothing to do.
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++
++        """"""
+         logger.info(""Constract Conncection"")
++        self.ip = ""0.0.0.0""
++        self.port = ""8080""
++        if ""ip"" in connection_env and ""port"" in connection_env:
++            self.set_env(ip=connection_env[""ip""],port=connection_env[""port""])
++            self.gen_stub()
++
++
++    def set_env(self,**connection_env):
++        """"""
++        Set environemnt of connect iroha
++
++        Args:
++            **connection_env: Arbitrary keyword arguments.
++                ip ( str ): ip address string of iroha. ( default ""0.0.0.0"" )
++                port (str): port number string of iroha. (default : ""8080"" )
++        """"""
++        logger.debug(""Connection.set_env"")
++        ip = connection_env[""ip""]
++        port = connection_env[""port""]
++        if type(ip) != type(""""):",,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142301262,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142301262,satellitex
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,別でBranch切ってやろうかと思います。（Irohaとの接続が少々重いため）,0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 02:39:00,142301311,"@@ -0,0 +1,74 @@
++import time",1,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142301311,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142301311,satellitex
+https://github.com/hyperledger/iroha-python/pull/20,https://github.com/hyperledger/iroha-python/pull/20,"これToriiReponseの型をラップするかどうか悩んでいます。
+ToriiResponse が今変更になりそう（detailがつく？）なので保留中",0a3ab8f688a2e549b9136775ff27e2c50e993515,2017-10-03 02:40:41,142301455,"@@ -86,9 +164,21 @@ def debug_proto_transaction(self):
+         return self.tx
+ 
+     def issue(self):
++        """"""
++        Issue to iroha with this transaction
++        """"""
+         logger.debug(""Transaction.issue"")
+-        # TODO
++        self.connection.tx_stub().Torii(self.tx)
+ 
+     def check(self):
++        """"""
++        Check this transaction status for iroha
++        Returns:
++            TxStatusResponse: Transaction Status Code
++        """"""
+         logger.debug(""Transaction.check"")
+-        # TODO
++        # TODO thinking now",165,2017-10-03 08:25:39,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142301455,https://github.com/hyperledger/iroha-python/pull/20#discussion_r142301455,satellitex
+https://github.com/hyperledger/iroha-python/pull/18,https://github.com/hyperledger/iroha-python/pull/18,"status_code や message , __init__, to_dict 等は不要な気がします。(これはどこで利用される予定ですか？)
+",0ab124bae6440e47c6e3b96f54dd1c387b69c6ee,2017-09-29 10:49:23,141840496,"@@ -1,5 +1,46 @@
+-class NotCommandException(Exception):
+-    def __init__(self, value):
+-        self.value = value
+-    def __str__(self):
+-        return repr(self.value)
+\ No newline at end of file
++from __future__ import absolute_import, division, print_function, unicode_literals
++
++class IrohaPythonExceptipn(Exception):
++    status_code = 500",,2017-10-02 08:01:37,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141840496,https://github.com/hyperledger/iroha-python/pull/18#discussion_r141840496,a-r-g-v
+https://github.com/hyperledger/iroha-python/pull/18,https://github.com/hyperledger/iroha-python/pull/18,IrohaPythonException 😢 (p -> o),0ab124bae6440e47c6e3b96f54dd1c387b69c6ee,2017-09-30 16:36:05,142009787,"@@ -1,5 +1,26 @@
+-class NotCommandException(Exception):
+-    def __init__(self, value):
+-        self.value = value
+-    def __str__(self):
+-        return repr(self.value)
+\ No newline at end of file
++from __future__ import absolute_import, division, print_function, unicode_literals
++
++class IrohaPythonExceptipn(Exception):",,2017-10-02 08:01:37,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142009787,https://github.com/hyperledger/iroha-python/pull/18#discussion_r142009787,motxx
+https://github.com/hyperledger/iroha-python/pull/18,https://github.com/hyperledger/iroha-python/pull/18,porto -> proto,0ab124bae6440e47c6e3b96f54dd1c387b69c6ee,2017-09-30 16:37:16,142009813,"@@ -0,0 +1,49 @@
++from schema.response_pb2 import Query as QuerySchema
++
++from src.helper import logger, crypto, stateless_validator
++from src.primitive.signatories import Signatories
++from src.query.request import wrap_query
++
++class Query:
++    def __init__(self):
++        logger.debug(""Create Query Construct"")
++        self.query = QuerySchema(
++            payload = QuerySchema.Payload(
++                created_time = crypto.now()
++            )
++            # TODO query has signature
++        )
++        self.signatories = Signatories()
++
++
++    def set_creator_account_id(self,creator_account_id):
++        logger.debug(""Query.set_creator_account_id"")
++        self.query.payload.creator_account_id = creator_account_id
++
++    def set_query_counter(self,query_counter):
++        logger.debug(""Query.set_tx_counter"")
++        self.query.payload.query_counter = query_counter
++
++    def time_stamp(self):
++        logger.debug(""Query.time_stamp"")
++        self.query.payload.created_time = crypto.now()
++
++    def hash(self):
++        logger.debug(""Query.hash"")
++        return crypto.sign_hash(self.query.payload)
++
++    def verify(self):
++        logger.debug(""Query.verify"")
++        return stateless_validator.query(self.query)
++
++    def set_request(self,request):
++        logger.debug(""Query.set_request"")
++        wrap_query(self.query.payload,request)
++
++    def debug_proto_query(self):
++        logger.debug(""debug_porto_query"")",,2017-10-02 08:01:37,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142009813,https://github.com/hyperledger/iroha-python/pull/18#discussion_r142009813,motxx
+https://github.com/hyperledger/iroha-python/pull/18,https://github.com/hyperledger/iroha-python/pull/18,keypair,0ab124bae6440e47c6e3b96f54dd1c387b69c6ee,2017-09-30 16:55:51,142010234,"@@ -0,0 +1,174 @@
++from schema.response_pb2 import AccountResponse, AccountAssetResponse, QueryResponse, TransactionsResponse, ErrorResponse, SignatoriesResponse
++from schema.response_pb2 import Account, AccountAsset
++from schema.primitive_pb2 import Signature
++from schema.transaction_pb2 import Transaction
++from src.helper import logger, crypto
++from src.primitive.amount import int2amount
++from src.query.response import Response
++
++import unittest
++
++
++class RequestTest(unittest.TestCase):
++    def setUp(self):
++        logger.setInfo()
++        logger.info(""RequestTest"")
++        self.keyapir = crypto.create_key_pair()",,2017-10-02 08:01:37,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/142010234,https://github.com/hyperledger/iroha-python/pull/18#discussion_r142010234,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,create_tx,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:24:51,141633251,"@@ -5,13 +5,24 @@
+                         print_function, unicode_literals)
+ 
+ from src.helper import logger
++from src.transaction.transaction import Transaction
+ 
+ class Creator:
+     def __init__(self):
+         logger.info(""Constract Creator"")
+ 
+     def set_account_id(self, account_id):
++        logger.debug(""Creator.set_account_id"")
+         self.creator_account_id = account_id
+ 
+     def set_keys(self, keys):
++        logger.debug(""set_keys"")
+         self.signatories = keys
++
++    def create_tx(self):
++        logger.debug(""cerate_tx"")",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141633251,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141633251,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Bease64 -> Base64,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:27:34,141634102,"@@ -242,7 +242,11 @@ def verify_asset_id(asset_id):
+     return True
+ 
+ def verify_pubkey(pubkey):
+-    key = crypto.b64decode(pubkey)
++    try:
++        key = crypto.b64decode(pubkey)
++    except:
++        logger.info(""Stateless Public Key not Bease64 Encode"")",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141634102,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141634102,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Better to remove magic number.,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:30:03,141634868,"@@ -242,7 +242,11 @@ def verify_asset_id(asset_id):
+     return True
+ 
+ def verify_pubkey(pubkey):
+-    key = crypto.b64decode(pubkey)
++    try:
++        key = crypto.b64decode(pubkey)
++    except:
++        logger.info(""Stateless Public Key not Bease64 Encode"")
++        return False
+     if len(key) == 32:",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141634868,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141634868,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Mockではないので、crypto.KeyPair.public_key は pubkey に統一した方がいいのかも,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:39:01,141637482,"@@ -0,0 +1,32 @@
++from src.helper import logger, crypto
++
++from schema.primitive_pb2 import Signature
++
++class Signatories:
++    def __init__(self):
++        self.signatories = []
++
++    def append(self, keypair):
++        logger.debug(""Signatories.append"")
++        if len(list(filter( lambda signatory : signatory.public_key == keypair.public_key, self.signatories))) == 0:
++            self.signatories.append(keypair)
++
++    def sign(self,tx):
++        logger.debug(""Signatories.sign"")
++        payload = tx.payload
++        signs = []
++        for signatory in self.signatories:
++            if len(list(filter( lambda signature : signature.pubkey == signatory.public_key, tx.signatures))) == 0:",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141637482,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141637482,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,"(別PRのTODOだと思いますが) value, precision
+
+蛇足ですが、precisionは現状Assetのprecisionと同じ値であることが必要です
+https://github.com/hyperledger/iroha/blob/develop/irohad/model/execution/impl/command_executor.cpp#L182-L184",be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:49:25,141640394,"@@ -0,0 +1,87 @@
++import unittest
++
++from src.helper import logger,crypto
++from src.transaction.command import wrap_cmd
++from schema.commands_pb2 import Command
++from schema.primitive_pb2 import Amount
++
++class CommandTest(unittest.TestCase):
++    def setUp(self):
++        logger.setDebug()
++        logger.debug(""CommandTest"")
++        self.keypair = crypto.create_key_pair()
++
++    def test_wrap_cmd_create_account(self):
++        create_ac = Command(
++            create_account = Command.CreateAccount(
++                account_name = ""rihito"",
++                domain_id = ""light.wing"",
++                main_pubkey = self.keypair.public_key
++            )
++        )
++        self.assertEqual(create_ac,wrap_cmd(create_ac.create_account))
++
++
++    def test_wrap_cmd_add_signatory(self):
++        add_sig = Command(
++            add_signatory = Command.AddSignatory(
++                account_id = ""rihito@light.wing"",
++                pubkey = self.keypair.public_key
++            )
++        )
++        self.assertEqual(add_sig,wrap_cmd(add_sig.add_signatory))
++
++    def test_wrap_cmd_set_account_quorum(self):
++        set_ac_q = Command(
++            set_account_quorum = Command.SetAccountQuorum(
++                account_id = ""rihito@light.wing"",
++                quorum = 100
++            )
++        )
++        self.assertEqual(set_ac_q, wrap_cmd(set_ac_q.set_account_quorum))
++
++    def test_wrap_cmd_create_domain(self):
++        create_d = Command(
++            create_domain = Command.CreateDomain(
++                domain_name=""ichigo.mashimaro""
++            )
++        )
++        self.assertEqual(create_d, wrap_cmd(create_d.create_domain))
++
++    def test_wrap_cmd_create_asset(self):
++        create_as = Command(
++            create_asset = Command.CreateAsset(
++                asset_name=""yen"",
++                domain_id=""ichigo.mashimaro"",
++                precision=3
++            )
++        )
++        self.assertEqual(create_as, wrap_cmd(create_as.create_asset))
++
++    # TODO use amount
++    def test_wrap_cmd_add_asset_quantity(self):
++        add_asset_q = Command(
++            add_asset_quantity = Command.AddAssetQuantity(
++                account_id=""chika@ichigo.mashimaro"",
++                asset_id=""ichigo.mashimaro/yen"",
++                amount=Amount(
++                    integer_part=100,",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141640394,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141640394,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Construct,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:52:31,141641361,"@@ -5,13 +5,24 @@
+                         print_function, unicode_literals)
+ 
+ from src.helper import logger
++from src.transaction.transaction import Transaction
+ 
+ class Creator:
+     def __init__(self):
+         logger.info(""Constract Creator"")",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141641361,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141641361,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Remove a magic number.,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 14:53:23,141641631,"@@ -16,13 +16,11 @@ def generate():
+     publist = []
+     for i in range(32):
+         publist.append(public_key[i])
+-    print(publist)
+     publicKey64 = base64.b64encode(bytes(publist))
+ 
+     prilist = []
+     for i in range(64):",8,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141641631,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141641631,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Remove a magic number.,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 15:02:45,141644403,"@@ -16,13 +16,11 @@ def generate():
+     publist = []
+     for i in range(32):",2,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141644403,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141644403,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,"関数ごとにログの有り無しの違いってありますか？
+(開発者用デバッグログ `logger.debug()` の有り無しの基準)",be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 15:05:54,141645366,"@@ -0,0 +1,80 @@
++from src.helper import logger,crypto
++
++from schema.transaction_pb2 import Transaction as TransactionSchema
++
++from src.primitive.signatories import Signatories
++from src.transaction import command as helper_command
++from src.helper import stateless_validator
++
++class Transaction:
++    def __init__(self):
++        logger.info(""Create Transaction Constract"")
++        self.tx = TransactionSchema(
++            payload = TransactionSchema.Payload(
++                created_time = crypto.now()
++            ),
++            signatures = []
++        )
++        self.signatories = Signatories()
++
++
++    def set_creator_account_id(self,creator_account_id):
++        self.tx.payload.creator_account_id = creator_account_id",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141645366,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141645366,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Construct,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 15:35:22,141653992,"@@ -0,0 +1,80 @@
++from src.helper import logger,crypto
++
++from schema.transaction_pb2 import Transaction as TransactionSchema
++
++from src.primitive.signatories import Signatories
++from src.transaction import command as helper_command
++from src.helper import stateless_validator
++
++class Transaction:
++    def __init__(self):
++        logger.info(""Create Transaction Constract"")",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141653992,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141653992,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Remove magic numbers.,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 15:46:02,141657086,"@@ -72,7 +70,6 @@ def sign(message, public, private):
+     siglist = []
+     for i in range(64):",16,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141657086,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141657086,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,signatoryが重複する場合、tx.signaturesは重複分だけのサイズを持つ仕様ですか,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 16:08:39,141664241,"@@ -0,0 +1,32 @@
++from src.helper import logger, crypto
++
++from schema.primitive_pb2 import Signature
++
++class Signatories:
++    def __init__(self):
++        self.signatories = []
++
++    def append(self, keypair):
++        logger.debug(""Signatories.append"")
++        if len(list(filter( lambda signatory : signatory.public_key == keypair.public_key, self.signatories))) == 0:
++            self.signatories.append(keypair)
++
++    def sign(self,tx):
++        logger.debug(""Signatories.sign"")
++        payload = tx.payload
++        signs = []
++        for signatory in self.signatories:
++            if len(list(filter( lambda signature : signature.pubkey == signatory.public_key, tx.signatures))) == 0:",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141664241,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141664241,motxx
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,大概忘れたいらだけなので指摘していただけるとありがたいです :pray:,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 16:46:20,141673629,"@@ -0,0 +1,80 @@
++from src.helper import logger,crypto
++
++from schema.transaction_pb2 import Transaction as TransactionSchema
++
++from src.primitive.signatories import Signatories
++from src.transaction import command as helper_command
++from src.helper import stateless_validator
++
++class Transaction:
++    def __init__(self):
++        logger.info(""Create Transaction Constract"")
++        self.tx = TransactionSchema(
++            payload = TransactionSchema.Payload(
++                created_time = crypto.now()
++            ),
++            signatures = []
++        )
++        self.signatories = Signatories()
++
++
++    def set_creator_account_id(self,creator_account_id):
++        self.tx.payload.creator_account_id = creator_account_id",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141673629,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141673629,satellitex
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,Signatories も Signatures も要素は unique になる仕様です,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 16:49:56,141674556,"@@ -0,0 +1,32 @@
++from src.helper import logger, crypto
++
++from schema.primitive_pb2 import Signature
++
++class Signatories:
++    def __init__(self):
++        self.signatories = []
++
++    def append(self, keypair):
++        logger.debug(""Signatories.append"")
++        if len(list(filter( lambda signatory : signatory.public_key == keypair.public_key, self.signatories))) == 0:
++            self.signatories.append(keypair)
++
++    def sign(self,tx):
++        logger.debug(""Signatories.sign"")
++        payload = tx.payload
++        signs = []
++        for signatory in self.signatories:
++            if len(list(filter( lambda signature : signature.pubkey == signatory.public_key, tx.signatures))) == 0:",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141674556,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141674556,satellitex
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,ed25519 ライブラリの方は、一先ず許してください．お願いします :pray:,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-28 16:50:42,141674744,"@@ -72,7 +70,6 @@ def sign(message, public, private):
+     siglist = []
+     for i in range(64):",16,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141674744,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141674744,satellitex
+https://github.com/hyperledger/iroha-python/pull/16,https://github.com/hyperledger/iroha-python/pull/16,public_key -> pubkey として、 private_key は何にしましょう。,be4303ccd2129c584061b2970f9d49ff2ba06f43,2017-09-29 04:19:10,141787494,"@@ -0,0 +1,32 @@
++from src.helper import logger, crypto
++
++from schema.primitive_pb2 import Signature
++
++class Signatories:
++    def __init__(self):
++        self.signatories = []
++
++    def append(self, keypair):
++        logger.debug(""Signatories.append"")
++        if len(list(filter( lambda signatory : signatory.public_key == keypair.public_key, self.signatories))) == 0:
++            self.signatories.append(keypair)
++
++    def sign(self,tx):
++        logger.debug(""Signatories.sign"")
++        payload = tx.payload
++        signs = []
++        for signatory in self.signatories:
++            if len(list(filter( lambda signature : signature.pubkey == signatory.public_key, tx.signatures))) == 0:",,2017-09-29 06:01:27,https://api.github.com/repos/hyperledger/iroha-python/pulls/comments/141787494,https://github.com/hyperledger/iroha-python/pull/16#discussion_r141787494,satellitex

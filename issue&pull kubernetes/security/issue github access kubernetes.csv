@@ -1,0 +1,131 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+security,joelsmith,https://github.com/kubernetes/security/pull/1,https://api.github.com/repos/kubernetes/security/issues/1,"Copy docs from sig-release, rename PST to PSC","The first commit is strictly a copy of the old docs from sig-release.
+The second commit contains the renames and URL updates.
+
+See https://github.com/kubernetes/steering/issues/89",closed,True,2019-02-26 22:47:14,2019-03-04 18:18:02
+security,joelsmith,https://github.com/kubernetes/security/pull/2,https://api.github.com/repos/kubernetes/security/issues/2,Change github.com/kubernets URLs to git.k8s.io,,closed,True,2019-03-04 18:28:24,2019-03-04 19:29:25
+security,philips,https://github.com/kubernetes/security/pull/3,https://api.github.com/repos/kubernetes/security/issues/3,security-release-process: nominate Joel Smith as full time member,"Nomination email sent to kubernetes-security-discuss
+
+https://groups.google.com/forum/#!forum/kubernetes-security-discuss
+
+I want to nominate Joel Smith to join the Product Security Committee as
+a full member. He has been an associate member since December 4th 2018
+and in that role over the last three months he has helped on a number of
+tasks including:
+
+- Evaluation of the Kubernetes Security Audit vendors
+- Review of publicly handled CSI logging bug
+- Documentation moves for Security Committee formation
+
+Further, Joel joined as an associate member based on his experience as
+part of the OpenShift Online Security team which is a hosted
+Kubernetes-base product.
+
+Our process for accepting this nomination is lazy consensus and I will
+close the round of consensus on March 15th, 2019 to leave time for any
+comments or question. If the nomination is accepted Joel will take on
+the full responsibilities of a Security Committee member and take on a
+weekly rotation for security@kubernetes.io on-call rotation.",closed,True,2019-03-05 18:20:06,2019-03-20 01:03:57
+security,gclem,https://github.com/kubernetes/security/pull/4,https://api.github.com/repos/kubernetes/security/issues/4,New private-distributors membership,"Review done with Brandon, about this submission request for OVH Group.",closed,True,2019-03-05 18:33:53,2019-03-14 16:34:45
+security,philips,https://github.com/kubernetes/security/pull/5,https://api.github.com/repos/kubernetes/security/issues/5,Platform9,,closed,True,2019-03-07 02:14:52,2019-03-07 02:15:13
+security,philips,https://github.com/kubernetes/security/pull/6,https://api.github.com/repos/kubernetes/security/issues/6,private-distributors-list: add Platform9,Fixes https://github.com/kubernetes/sig-release/pull/533,closed,True,2019-03-07 02:16:10,2019-03-12 19:18:41
+security,philips,https://github.com/kubernetes/security/pull/7,https://api.github.com/repos/kubernetes/security/issues/7,private-distributors-list: add Gravitational,Replaces https://github.com/kubernetes/sig-release/pull/514<Paste>,closed,True,2019-03-07 02:22:05,2019-03-14 22:46:10
+security,joelsmith,https://github.com/kubernetes/security/issues/8,https://api.github.com/repos/kubernetes/security/issues/8,SECURITY_CONTACTS files in all Kubernetes project repos have old link,"Now that the new Product Security Committee has superseded the Product Security Team, and now that documents have been moved from https://github.com/kubernetes/sig-release to this repo, all of the `SECURITY_CONTACTS` files across all other Kubernetes project repositories need to be updated. They contain a link to the old location and reference the old PST. I will open PRs across the other repositories, but I need an issue to track all of those open PRs.
+
+More information about the creation of the Product Security Committee and the docs move:
+
+Create the Product Security Committee: https://github.com/kubernetes/steering/issues/89
+Create Product Security Committee, update references from PST to PSC: https://github.com/kubernetes/community/pull/3311
+Copy docs from sig-release, rename PST to PSC: https://github.com/kubernetes/security/pull/1
+security: add tombstone files to redirect to new docs: https://github.com/kubernetes/sig-release/pull/537
+
+edit: Sorry that I titled all the PRs `SECURITY_OWNERS` instead of `SECURITY_CONTACTS`. Hopefully that wasn't too confusing.",open,False,2019-03-08 17:13:23,2019-03-20 16:07:15
+security,philips,https://github.com/kubernetes/security/issues/9,https://api.github.com/repos/kubernetes/security/issues/9,Clarify how distributors should communicate during embargoed issues ,"From [CVE-2018-1002105 post-mortem](https://github.com/kubernetes/kubernetes/issues/71411)
+
+""Is there a channel for discussion between members of the distributors list?""
+
+Many of the members are secresponse aliases, so not all recipients of the distributors announcement emails will be members of the mailing list.
+
+/assign @philips",open,False,2019-03-11 17:12:14,2019-03-11 17:12:15
+security,philips,https://github.com/kubernetes/security/pull/10,https://api.github.com/repos/kubernetes/security/issues/10,Private distributors: add OVH,replaces https://github.com/kubernetes/security/pull/4,closed,True,2019-03-14 16:34:11,2019-03-14 22:48:08
+security,philips,https://github.com/kubernetes/security/issues/11,https://api.github.com/repos/kubernetes/security/issues/11,Joel Smith: Onboarding to PST,"- [x] Add/remove from https://github.com/kubernetes/community/blob/master/sigs.yaml#L2602
+- [x] Add/remove from OpsGenie rotation
+- [x] https://groups.google.com/a/kubernetes.io/forum/#!forum/security owner
+- [x] https://groups.google.com/a/kubernetes.io/forum/#!forum/security owner
+- [x] https://groups.google.com/forum/#!forum/kubernetes-security-discuss owner
+- [x] https://groups.google.com/a/kubernetes.io/forum/#!forum/distributors-announce owner
+- [x] https://github.com/kubernetes-security/security-disclosures/issues access
+- [ ] ???
+
+After doing this write an onboarding doc.",open,False,2019-03-15 17:46:16,2019-03-20 17:14:39
+security,liggitt,https://github.com/kubernetes/security/issues/12,https://api.github.com/repos/kubernetes/security/issues/12,Add distributors pre-announcement template,"From [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411) [post-mortem](https://docs.google.com/document/d/1tGpqEM56cSBPfl-qxIs_CGdlABMZXEKEDhCI7eOwGT0/edit#)
+
+Add distributor pre-announcement template that has placeholders for explicit “you may do X with the embargoed patch or information” statements, add instructions for how to ask for clarification (who to contact), and inclusion of tests for cluster vulnerability
+
+/assign
+
+moved from https://github.com/kubernetes/sig-release/issues/418",open,False,2019-03-18 15:40:57,2019-03-18 15:40:58
+security,liggitt,https://github.com/kubernetes/security/issues/13,https://api.github.com/repos/kubernetes/security/issues/13,Update security announcement template,"From [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411) [post-mortem](https://docs.google.com/document/d/1tGpqEM56cSBPfl-qxIs_CGdlABMZXEKEDhCI7eOwGT0/edit#)
+
+Update announcement template to include placeholders for concrete steps to determine if a cluster has a vulnerable version/configuration
+
+/assign
+
+moved from https://github.com/kubernetes/sig-release/issues/419",open,False,2019-03-18 15:41:27,2019-03-18 15:41:28
+security,liggitt,https://github.com/kubernetes/security/issues/14,https://api.github.com/repos/kubernetes/security/issues/14,Update checklist for pre-disclosure review process,"Update security release process and disclosure checklist to include fix team, release team, and PST in review of pre-disclosure announcement draft
+
+From [CVE-2018-1002105](https://github.com/kubernetes/kubernetes/issues/71411) [post-mortem](https://docs.google.com/document/d/1tGpqEM56cSBPfl-qxIs_CGdlABMZXEKEDhCI7eOwGT0/edit#)
+
+/assign",open,False,2019-03-18 15:41:48,2019-03-18 15:41:57
+security,jessfraz,https://github.com/kubernetes/security/pull/15,https://api.github.com/repos/kubernetes/security/issues/15,"remove jess from PST, thanks :)",cc @philips ,closed,True,2019-03-20 14:27:15,2019-03-20 16:35:02
+security,philips,https://github.com/kubernetes/security/issues/16,https://api.github.com/repos/kubernetes/security/issues/16,offboard Jess Frazelle,"- [ ] Add/remove from https://github.com/kubernetes/community/blob/master/sigs.yaml#L2602
+- [x] Add/remove from OpsGenie rotation
+- [x] https://groups.google.com/a/kubernetes.io/forum/#!forum/security owner
+- [x] https://groups.google.com/a/kubernetes.io/forum/#!forum/security-discuss-private owner
+- [x] https://groups.google.com/forum/#!forum/kubernetes-security-discuss owner
+- [x] https://groups.google.com/a/kubernetes.io/forum/#!forum/distributors-announce owner
+- [x] https://github.com/kubernetes-security/security-disclosures/issues access
+- [ ] ???
+
+Via https://github.com/kubernetes/security/pull/15",open,False,2019-03-20 16:50:26,2019-03-20 17:14:44
+security,philips,https://github.com/kubernetes/security/issues/17,https://api.github.com/repos/kubernetes/security/issues/17,document the things the security committee owns,"This list is roughly right:
+
+- [ ]  product-security-committee in https://github.com/kubernetes/community/blob/master/sigs.yaml
+- [ ] Kubernetes OpsGenie rotation https://app.opsgenie.com/teams/dashboard/633ac733-665f-4d62-871e-cbc011f37037
+- [ ] https://groups.google.com/a/kubernetes.io/forum/#!forum/security owner
+- [ ] https://groups.google.com/a/kubernetes.io/forum/#!forum/security-discuss-private owner
+- [ ] https://groups.google.com/forum/#!forum/kubernetes-security-discuss owner
+- [ ] https://groups.google.com/a/kubernetes.io/forum/#!forum/distributors-announce owner
+- [ ] https://github.com/kubernetes-security/security-disclosures/issues access
+- [ ] ???",open,False,2019-03-20 17:17:37,2019-03-20 17:17:37
+security,philips,https://github.com/kubernetes/security/pull/18,https://api.github.com/repos/kubernetes/security/issues/18,security-release-process: update philips's email,Use redhat.com email over coreos.com email due to losing filters,closed,True,2019-03-21 05:24:40,2019-03-21 23:15:27
+security,philips,https://github.com/kubernetes/security/pull/19,https://api.github.com/repos/kubernetes/security/issues/19,email-templates: fix to -> do,,closed,True,2019-03-21 16:28:56,2019-03-27 03:50:50
+security,tallclair,https://github.com/kubernetes/security/pull/20,https://api.github.com/repos/kubernetes/security/issues/20,Update a few more PSC member references,"/assign @philips 
+
+I removed the individual PSC member emails from the distributors list. Membership is already captured by security@kubernetes.io.",closed,True,2019-03-22 18:00:11,2019-03-22 18:44:51
+security,jonpulsifer,https://github.com/kubernetes/security/pull/21,https://api.github.com/repos/kubernetes/security/issues/21,Update @jonpulsifer's email and delete some spaces,"These emails are better respected in another inbox, my filter game is
+not that strong.
+
+Signed-off-by: Jonathan Pulsifer <jonathan.pulsifer@shopify.com>
+
+😄 ",closed,True,2019-03-28 02:49:55,2019-03-30 00:25:58
+security,liggitt,https://github.com/kubernetes/security/pull/22,https://api.github.com/repos/kubernetes/security/issues/22,"Update CVE request details, add issue publishing requirement","/cc @philips 
+
+/hold
+for DWF -> MITRE switch",open,True,2019-03-28 16:12:51,2019-03-28 16:13:06
+security,tallclair,https://github.com/kubernetes/security/pull/23,https://api.github.com/repos/kubernetes/security/issues/23,Change distributor applications from email to issues,"Reasons for doing so:
+
+- Eliminate non-vulnerability reports from security@kubernetes.io
+- Provide public record of justifications for distributors list membership
+- Easier to track process
+
+Downsides:
+
+- Requires the person filling in the application to have a github account
+- Makes the application public record (+/-)
+
+In some ways, having someone apply with a PR to edit the documented list would be even cleaner, but you can't have multiple PR templates.",closed,True,2019-03-28 23:38:01,2019-04-04 19:31:44
+security,philips,https://github.com/kubernetes/security/pull/24,https://api.github.com/repos/kubernetes/security/issues/24,private-distributors-list: testing PR template,"Hrm, this didn't work.",closed,True,2019-04-04 19:18:56,2019-04-04 19:26:26
+security,tallclair,https://github.com/kubernetes/security/pull/25,https://api.github.com/repos/kubernetes/security/issues/25,Change distributor applications from email to issues,"git reflog FTW
+
+/assign @philips ",closed,True,2019-04-04 19:51:08,2019-04-04 20:09:19

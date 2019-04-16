@@ -1,0 +1,122 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/49,https://github.com/hyperledger/fabric-samples/pull/49,preminem,fix balance-transfer script,This seems like an obvious oversight.,[],1,2019-01-25 08:25:16,2019-01-26 06:54:22,2019-01-26 06:54:22,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/48,https://github.com/hyperledger/fabric-samples/pull/48,mervecankus,"Removed ""one"" word used twice consecutively","Removed one of the ""one"" word used twice consecutively in the comment above the loadFromConfig method call",[],1,2019-01-09 06:02:34,2019-01-11 03:29:35,2019-01-11 03:29:35,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/47,https://github.com/hyperledger/fabric-samples/pull/47,suman123das123,Update README.md,added default peers in instantiation command.,[],1,2019-01-08 12:15:03,2019-01-10 00:37:02,2019-01-10 00:37:02,False,,,unstable,True,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/46,https://github.com/hyperledger/fabric-samples/pull/46,hag3,Add filtering function to the dkcl function,"The original dkcl function deletes all containers regardless of whether they were started by this sample or not (e.g. rancher/agent).
+Doing so would corrupt the host's environment and cause inconvenience. So I added conditional filtering to the dkfc function.",[],18,2018-12-11 03:12:53,2018-12-29 00:31:38,2018-12-29 00:31:38,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/45,https://github.com/hyperledger/fabric-samples/pull/45,siddjain,add nodejs sample showing abac (attribute based access control),"run the sample like:
+```
+./start.sh -l node
+```
+",[],4,2018-11-27 22:19:22,2018-12-29 00:31:32,2018-12-29 00:31:32,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/44,https://github.com/hyperledger/fabric-samples/pull/44,ClementGautier,"""Build you first network"" on Kubernetes","This is a simple implementation of the ""Build your first network"" that works on Kubernetes.
+",[],1,2018-11-17 12:12:56,2018-11-17 12:13:18,2018-11-17 12:13:51,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/43,https://github.com/hyperledger/fabric-samples/pull/43,bjzhang03,solve the warning in the first-network project,"Signed-off-by: bjzhang03 <bjzhang03@foxmail.com>
+1.Add the policy in `first-network/org3-artifacts/configtx.yaml`
+2.Add the channelID when generate the gensis files
+",[],1,2018-10-25 07:45:01,2018-12-29 00:31:26,2018-12-29 00:31:26,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/42,https://github.com/hyperledger/fabric-samples/pull/42,bjzhang03,solve the warning in the first-network project,"1. Add the policy in the `first-network/org3-artifacts/configtx.yaml `
+2.Add the channelID when generate the gensis files",[],5,2018-10-25 07:39:50,2018-10-25 07:42:00,2018-10-25 07:42:00,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/41,https://github.com/hyperledger/fabric-samples/pull/41,bjzhang03,solve the warning in the first-network project,"1.Add the policy in the `first-network/org3-artifacts/configtx.yaml` to solve the problem of warning.
+2.Add the channelID when generate the gensis file.
+",[],5,2018-10-25 07:18:52,2018-10-25 07:35:19,2018-10-25 07:35:19,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/40,https://github.com/hyperledger/fabric-samples/pull/40,sebastianpaulp,Block Query by hash Fixed,"**### Block Query by hash Fixed in balance transfer app.**
+
+changes 
+1.
+file path
+fabric-samples/**### balance-transfer/app/query.js**
+L 118
+let response_payload = await channel.queryBlockByHash(Buffer.from(hash,'**hex**'), peer);
+
+2.
+file path
+fabric-samples/**### balance-transfer/testAPIs.sh**
+Assigned block info to variable BLOCK_INFO, assign previous block hash to variable HASH and pass it to query block by hash endpoint
+
+",[],1,2018-10-24 11:38:16,2018-10-26 04:42:52,2018-10-26 04:42:52,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/39,https://github.com/hyperledger/fabric-samples/pull/39,ajaysheoran2323,Release 1.2,Lokking for 1.2 release,[],10,2018-10-24 07:55:54,2018-10-24 07:56:30,2018-10-24 07:56:30,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/38,https://github.com/hyperledger/fabric-samples/pull/38,ghulamMustafaRaza,Add validation if person a have amount to be transfer then transfer,,[],1,2018-10-12 11:57:23,2018-10-17 13:25:07,2018-10-17 13:25:07,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/37,https://github.com/hyperledger/fabric-samples/pull/37,JiangSir2501170033,Release 1.0,,[],18,2018-10-01 18:44:47,2018-10-17 13:25:22,2018-10-17 13:25:22,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/36,https://github.com/hyperledger/fabric-samples/pull/36,sambhavdutt,Update Delay in CouchDB tests.,Update Delay in CouchDB tests.,[],1,2018-09-14 21:16:19,2018-09-20 01:52:46,2018-09-20 01:52:46,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/35,https://github.com/hyperledger/fabric-samples/pull/35,sambhavdutt,Increase Delay for BYFN CouchDB tests.,"After Baseimage 0.4.11, the BYFN CouchDB tests are timing out with the default 3 second delay. This change is to increase the delay time to 15 seconds.",[],1,2018-09-14 17:53:04,2018-09-20 01:53:04,2018-09-20 01:53:04,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/34,https://github.com/hyperledger/fabric-samples/pull/34,sambhavdutt, Increase Delay for BYFN CouchDB tests.,"After Baseimage 0.4.11, the BYFN CouchDB tests are timing out with the default 3 second delay. This change is to increase the delay time to 15 seconds.",[],1,2018-09-14 17:42:56,2018-09-20 01:52:30,2018-09-20 01:52:30,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/33,https://github.com/hyperledger/fabric-samples/pull/33,mayankpratyush,Master,,[],17,2018-09-13 16:04:29,2018-09-20 01:52:18,2018-09-20 01:52:18,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/32,https://github.com/hyperledger/fabric-samples/pull/32,mayankpratyush,Master,,[],15,2018-09-13 16:03:26,2018-09-13 16:03:49,2018-09-13 16:03:49,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/31,https://github.com/hyperledger/fabric-samples/pull/31,basavarajmullur,Release 1.0,,[],18,2018-09-09 15:39:11,2018-09-20 01:52:04,2018-09-20 01:52:05,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/30,https://github.com/hyperledger/fabric-samples/pull/30,Dpk28,Bug Fix,"Missing ""username"" parameter when calling getClientForOrg() function from getRegisteredUser() function.",[],1,2018-08-20 11:17:32,2018-08-22 07:49:20,2018-08-22 11:30:11,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/29,https://github.com/hyperledger/fabric-samples/pull/29,eetti,Updated marbles_chaincode.js,"There was a spelling mistake in the code.
+I changed args[0].lenth to changed args[0].length",[],2,2018-08-14 16:04:58,2018-08-22 07:49:26,2018-08-22 07:49:26,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/28,https://github.com/hyperledger/fabric-samples/pull/28,tarekbadrshalaan,add Policies to cofigtx.yaml,"because of non Policies specificiations , it WARN
+
+`Default policy emission is deprecated, please include policy specificiations ` 
+
+after edit i got no warning  
+
+so please feel free to ask about more edit or update ",[],1,2018-08-09 20:41:42,2018-08-22 07:49:33,2018-08-22 07:49:33,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/27,https://github.com/hyperledger/fabric-samples/pull/27,FansinZhao,avoid download file twice,avoid download file twice,[],2,2018-08-06 08:52:08,2018-08-22 07:49:44,2018-08-22 07:49:44,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/26,https://github.com/hyperledger/fabric-samples/pull/26,faint32,Release 1.0,,[],18,2018-08-02 02:07:37,2018-08-02 02:08:55,2018-08-02 02:08:55,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/25,https://github.com/hyperledger/fabric-samples/pull/25,vinaychaudharyofficial,Read.me updated with use case,"Signed-off-by : Vinay Chaudhary <vinay.it2012@gmail.com>
+",[],4,2018-07-06 19:08:27,2018-07-17 04:02:19,2018-07-17 04:02:19,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/24,https://github.com/hyperledger/fabric-samples/pull/24,guanpengchn,Fix parameter order and a spelling error,Fix parameter order and a spelling error. Please check it.,[],1,2018-07-05 08:22:37,2018-07-05 10:28:07,2018-07-05 10:28:07,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/23,https://github.com/hyperledger/fabric-samples/pull/23,vinaychaudharyofficial,README file update,I have updated the readme.md file to ease the use of fabric samples. Please review and committed.,[],3,2018-06-28 11:51:45,2018-07-05 10:28:25,2018-07-05 10:28:25,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/22,https://github.com/hyperledger/fabric-samples/pull/22,kryptome,Fixed  broken Instruction link,Updated broken Link from http://hyperledger-fabric.readthedocs.io/en/latest/samples.html to http://hyperledger-fabric.readthedocs.io/en/release-1.1/getting_started.html,[],1,2018-06-27 12:41:02,2018-06-27 12:47:32,2018-06-27 12:47:32,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/21,https://github.com/hyperledger/fabric-samples/pull/21,hi5san,Fix TLS envvars typo,"The fabric-ca TLS environment variable names for cert file and key file are incorrect:
+- FABRIC_CA_SERVER_**CA**_CERTFILE
+- FABRIC_CA_SERVER_**CA**_KEYFILE
+
+I believe they should be:
+
+- FABRIC_CA_SERVER_**TLS**_CERTFILE
+- FABRIC_CA_SERVER_**TLS**_KEYFILE
+
+like the working example from first-network:
+https://github.com/hyperledger/fabric-samples/blob/f05a132586ae9ca7ce86b9e56ae4bd3b084bc959/first-network/docker-compose-e2e-template.yaml#L24-L25
+
+This could create confusion (error) for beginners when they try to enable TLS in basic-network.",[],1,2018-06-26 02:53:45,2018-06-26 10:37:39,2018-06-26 10:37:39,False,,,clean,True,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/20,https://github.com/hyperledger/fabric-samples/pull/20,gologo13,Remove needless imports in fabcar.,"Hi, I found needless imports in fabcar when I was doing this great tutorial.
+Thank you.
+http://hyperledger-fabric.readthedocs.io/en/latest/write_first_app.html",[],1,2018-06-17 08:51:19,2018-06-27 12:47:45,2018-06-27 15:04:52,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/19,https://github.com/hyperledger/fabric-samples/pull/19,HalfWater,Master,,[],46,2018-06-08 13:05:23,2018-06-08 13:05:50,2018-06-08 13:05:50,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/18,https://github.com/hyperledger/fabric-samples/pull/18,tboloo,"Added env var support in docker-compose, updated documentation","Added .env specyfing default tag for the fabric docker images, which means that one does not have to explicitly  pull and retag images. Documentation updated accordingly.",[],1,2018-04-25 07:32:19,2018-06-27 12:48:00,2018-06-27 12:48:00,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/17,https://github.com/hyperledger/fabric-samples/pull/17,ylu999,Avoid to clear unrelated containers,Basically add a filter when doing docker ps on function clearContainers,[],1,2018-04-22 22:35:38,2018-06-27 12:48:11,2018-06-27 12:48:11,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/16,https://github.com/hyperledger/fabric-samples/pull/16,LoddyQ,Update docker-compose-couch-org3.yaml,CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS for 2 peers were wrong.,[],1,2018-04-11 13:28:23,2018-04-11 15:04:52,2018-04-11 15:04:52,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/15,https://github.com/hyperledger/fabric-samples/pull/15,sebastianpaulp,update getBlockByHash,update in getBlockByHash,[],1,2018-04-05 13:09:27,2018-04-05 13:37:42,2018-04-05 13:37:42,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/14,https://github.com/hyperledger/fabric-samples/pull/14,123sun456,Release,,[],16,2018-04-03 03:25:16,2018-04-05 02:21:34,2018-04-05 02:21:34,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/13,https://github.com/hyperledger/fabric-samples/pull/13,kotsashish,Release 1.0,,[],16,2018-03-30 05:11:47,2018-03-30 05:12:44,2018-03-30 05:12:44,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/12,https://github.com/hyperledger/fabric-samples/pull/12,zhayujie,balance transfer: fix register response error,"It responses empty secret value after successfully register and enroll, and the value of ""enrollmentSecret"" in persistence is also empty string. The added code set the ""_enrollmentSecret"" value of the User object and update the user context in persistence again.
+",[],1,2018-03-28 13:11:35,2018-03-28 14:53:20,2018-03-28 14:53:20,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/11,https://github.com/hyperledger/fabric-samples/pull/11,zhayujie,balance transfer: fix register response,"It responses empty secret value after successfully register and enroll, and the value of ""enrollmentSecret"" in persistence is also empty string. The added code set the ""_enrollmentSecret"" value of the User object and update the user context in persistence again.",[],1,2018-03-28 12:52:16,2018-03-28 14:53:04,2018-03-28 14:53:04,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/10,https://github.com/hyperledger/fabric-samples/pull/10,krtk6160,Added user1 role to fix registration error,"Without the role specified in the call to the register function, an error is returned, demanding an identity type be provided in the call.
+`Failed to register: Error: fabric-ca request register failed with errors [[{""code"":0,""message"":""No identity type provided. Please provide identity type""}]]
+`
+Adding `role: 'client'` in the register function call fixes this.
+
+Signed-off-by: Kartik Shah krtk.6160@gmail.com",[],1,2018-02-23 06:57:41,2018-02-23 07:00:14,2018-04-29 10:28:40,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/9,https://github.com/hyperledger/fabric-samples/pull/9,armujahid,"Fix ""No identity type provided"" Error","Fix the following errors:
+[[{""code"":0,""message"":""No identity type provided. Please provide identity type""}]]",[],1,2018-01-20 20:35:25,2018-01-20 20:40:25,2018-01-23 14:36:33,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/8,https://github.com/hyperledger/fabric-samples/pull/8,paullang,Fix typo in registerUser.js,,[],1,2017-12-31 02:13:27,2017-12-31 04:41:01,2017-12-31 04:41:01,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/7,https://github.com/hyperledger/fabric-samples/pull/7,jinwoochu,update script/fabric-preload.sh version && fabcar example Automatic script update,update docker images version.,[],2,2017-11-21 01:15:07,2017-11-21 04:59:47,2017-11-21 05:23:33,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/6,https://github.com/hyperledger/fabric-samples/pull/6,lezwon,Added quotes to $PWD,"Without quotes the shell executables fail to run, when the directory path
+has spaces in Windows",[],1,2017-09-03 07:39:25,2017-10-12 04:31:40,2017-10-12 04:31:40,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/5,https://github.com/hyperledger/fabric-samples/pull/5,jordangraft,Updated the initial channel configuration and block for FAB-5309,"https://jira.hyperledger.org/browse/FAB-5309
+
+Was receiving this error:
+```
+Rejecting CONFIG_UPDATE because: Error authorizing update: Error validating DeltaSet: invalid mod_policy for element [Policy] /Channel/Application/Writers: mod_policy not set
+```
+
+When following this tutorial http://hyperledger-fabric.readthedocs.io/en/latest/chaincode4ade.html
+
+To recreate the issue:
+```
+git pull
+cd chaincode-docker-devmode
+docker-compose -f docker-compose-simple.yaml up
+```
+
+Solution was to regenerate the myc.tx and orderer.block using configtxgen v1.0.1",[],1,2017-08-27 13:55:51,2017-10-12 04:31:50,2017-10-12 04:31:50,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/4,https://github.com/hyperledger/fabric-samples/pull/4,M0Rf30,byfn.sh: CURRENT_DIR issue with long paths fixed,"Double quoted CURRENT_DIR var to allow right expansion for long paths. Before it caused a ""too many arguments"" for cd command",[],1,2017-08-17 16:52:39,2017-08-18 00:32:47,2017-08-21 17:47:00,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/3,https://github.com/hyperledger/fabric-samples/pull/3,rddill-IBM,"update to byfn.sh exec, fix bug in networkUp function","This is posted in StackOverflow [here](https://stackoverflow.com/questions/45679395/hyperledger-fabric-first-network-fails-with-bad-request/45694630#45694630). The networkUp function in byfn.sh calls docker compose twice, once prior to the ```IF_COUCHDB``` test and a second time within the scope of that if statement. The networkUp function also fails to set the DELAY argument on either of the docker-compose requests within the if statement. In this pull request, I've commented out line 113 (the duplicate docker-compose request) and added ```DELAY=$CLI_DELAY``` to each of the docker-compose statements inside the if structure. The default setting of 3 seconds is now passed correctly to docker-compose and the network up function processes correctly.",[],23,2017-08-15 14:20:15,2017-08-18 00:33:02,2017-08-18 00:33:02,False,,,unknown,,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/2,https://github.com/hyperledger/fabric-samples/pull/2,edwardcapriolo,Requires GRPC,,[],1,2017-06-24 18:04:04,2017-06-24 21:51:06,2017-06-24 21:51:06,False,,,dirty,False,closed
+fabric-samples,https://api.github.com/repos/hyperledger/fabric-samples/pulls/1,https://github.com/hyperledger/fabric-samples/pull/1,batidiane,Error to generate Orderer Genesis block,Add FABRIC_CFG_PATH variable to allow configtxgen to find configuration file,[],2,2017-06-22 13:51:57,2017-06-24 21:50:44,2017-06-27 12:50:03,False,,,dirty,False,closed

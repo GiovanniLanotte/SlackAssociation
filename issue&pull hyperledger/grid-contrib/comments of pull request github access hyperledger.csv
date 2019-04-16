@@ -1,0 +1,136 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,middleware tools? feels like 'domain models' and 'smart contracts' are a better emphasis here. thoughts?,73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-09 23:27:56,264018172,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.
++
++This repository is intended for community-contributed software, including
++example middleware tools and reference implementations for smart contracts",,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264018172,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264018172,davececchi
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,"mention the contribs Monday meeting here, maybe?",73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-09 23:29:32,264018202,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.
++
++This repository is intended for community-contributed software, including
++example middleware tools and reference implementations for smart contracts
++(also called ""transaction families""). This software is designed to work with
++the Hyperledger Grid platform software in the [grid
++repository](https://github.com/hyperledger/grid).
++
++For example, the Grid Track and Trace transaction family provides an off-chain
++smart contract that tracks goods as they move through a supply chain. For more
++information, see the [Grid Track and Trace
++documentation](https://grid.hyperledger.org/docs/grid/nightly/master/family_specification.html)
++and the
++[grid/track_and_trace](https://github.com/hyperledger/grid-contrib/tree/master/track_and_trace)
++subdirectory in this repository.
++
++
++## How to Contribute
++
++We welcome contributions to this repository, either as changes to existing
++software or as new example tools and reference implementations. Please follow
++the [guidelines for
++contributing](https://grid.hyperledger.org/community/contributing/). For more
++information, please join the [#grid discussion
++channel](https://chat.hyperledger.org/channel/grid) or [Hyperledger Grid
++mailing list](https://lists.hyperledger.org/g/grid).
++
++
++## More Information",35,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264018202,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264018202,davececchi
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,"@davececchi - How does ""including example domain models and smart contracts"" sound?  
+
+Or would you keep the ""reference implementations"" piece?  I.e., ""including example domain models and reference implementations for smart contracts""?
+
+A third option would be to drop ""example"": ""including domain models and {reference implementations of} smart contracts"".
+",73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-11 21:21:37,264435844,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.
++
++This repository is intended for community-contributed software, including
++example middleware tools and reference implementations for smart contracts",,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264435844,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264435844,chenette
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,"Follow-up question: Is a domain model the same thing as a data mode""?  (The grid repo README uses the term ""data model"").",73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-11 21:23:26,264436537,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.
++
++This repository is intended for community-contributed software, including
++example middleware tools and reference implementations for smart contracts",,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264436537,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264436537,chenette
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,s/blockchain/distributed ledger/,73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-12 19:11:36,264841839,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.",,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264841839,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264841839,jsmitchell
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,"Remove ""off-chain"" - that will be inaccurate when deployed w/Sabre.",73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-12 19:13:42,264842597,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.
++
++This repository is intended for community-contributed software, including
++example middleware tools and reference implementations for smart contracts
++(also called ""transaction families""). This software is designed to work with
++the Hyperledger Grid platform software in the [grid
++repository](https://github.com/hyperledger/grid).
++
++For example, the Grid Track and Trace transaction family provides an off-chain
++smart contract that tracks goods as they move through a supply chain. For more",,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264842597,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264842597,vaporos
+https://github.com/hyperledger/grid-contrib/pull/5,https://github.com/hyperledger/grid-contrib/pull/5,"We should put that at ""Join the Discussion"" link. ""Contributors Meeting"" != ""Meeting about contrib repo.""",73488dbc8e984c0a07cfb68dfb1a733aff82d3df,2019-03-12 19:15:33,264843285,"@@ -1 +1,52 @@
+-# grid-contrib
+\ No newline at end of file
++# grid-contrib
++
++The grid-contrib repository contains contributed software for
++[Hyperledger Grid](https://grid.hyperledger.org), a framework for building
++supply chain solutions for blockchain platforms.
++
++This repository is intended for community-contributed software, including
++example middleware tools and reference implementations for smart contracts
++(also called ""transaction families""). This software is designed to work with
++the Hyperledger Grid platform software in the [grid
++repository](https://github.com/hyperledger/grid).
++
++For example, the Grid Track and Trace transaction family provides an off-chain
++smart contract that tracks goods as they move through a supply chain. For more
++information, see the [Grid Track and Trace
++documentation](https://grid.hyperledger.org/docs/grid/nightly/master/family_specification.html)
++and the
++[grid/track_and_trace](https://github.com/hyperledger/grid-contrib/tree/master/track_and_trace)
++subdirectory in this repository.
++
++
++## How to Contribute
++
++We welcome contributions to this repository, either as changes to existing
++software or as new example tools and reference implementations. Please follow
++the [guidelines for
++contributing](https://grid.hyperledger.org/community/contributing/). For more
++information, please join the [#grid discussion
++channel](https://chat.hyperledger.org/channel/grid) or [Hyperledger Grid
++mailing list](https://lists.hyperledger.org/g/grid).
++
++
++## More Information",35,2019-03-12 20:23:58,https://api.github.com/repos/hyperledger/grid-contrib/pulls/comments/264843285,https://github.com/hyperledger/grid-contrib/pull/5#discussion_r264843285,vaporos

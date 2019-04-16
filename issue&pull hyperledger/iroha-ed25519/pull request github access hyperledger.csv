@@ -1,0 +1,57 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/23,https://github.com/hyperledger/iroha-ed25519/pull/23,Warchant,Add fuzzing targets,,[],2,2019-03-09 15:10:25,2019-03-11 10:25:08,2019-03-11 10:25:11,True,2019-03-11 10:25:08,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/22,https://github.com/hyperledger/iroha-ed25519/pull/22,Warchant,Fix UB caused by left shift of negative values,"Fix undefined behavior described in: https://github.com/jedisct1/libsodium/issues/333#issuecomment-165375457
+
+Discovered by @luckychess ",[],1,2019-03-09 13:37:07,2019-03-11 13:19:56,2019-03-11 13:19:59,True,2019-03-11 13:19:56,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/21,https://github.com/hyperledger/iroha-ed25519/pull/21,Warchant,Fixes for Hunter CI,,[],2,2019-02-16 12:14:39,2019-02-17 10:36:58,2019-02-17 10:37:01,True,2019-02-17 10:36:58,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/20,https://github.com/hyperledger/iroha-ed25519/pull/20,Warchant,Add namespace to cmake config,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,[],1,2019-02-15 12:32:30,2019-02-15 12:44:34,2019-02-15 12:44:37,True,2019-02-15 12:44:34,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/19,https://github.com/hyperledger/iroha-ed25519/pull/19,Warchant,Update to 2.0.0,"- [x] make hash context opaque - this allows us to make (any) Windows builds
+- [x] add hunter to ed25519 - this allows us to import openssl / gtest / benchmark easily on any platform; and make reproducible builds. This step was necessary before hunterization of this package.
+- [x] add `bcryptgenrandom` random number generator for Windows
+- [x] remove `amd64-64-24k` (without PIC) - it does not add value to the codebase
+- [x] add appveyor integration for Windows CI
+- [x] throw away `generate_export_header`, replace with manually written header. Add export keyword for exported C methods.
+- [x] add `sha2_sphlib` implementation
+ 
+Fixes #14 ",['Warchant'],22,2019-02-14 21:05:53,2019-02-14 22:44:03,2019-02-14 22:44:07,True,2019-02-14 22:44:03,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/18,https://github.com/hyperledger/iroha-ed25519/pull/18,Warchant,Fix badges,Signed-off-by: Bogdan Vaneev <warchantua@gmail.com>,[],1,2018-07-10 13:33:40,2018-07-10 13:38:08,2018-07-10 13:38:11,True,2018-07-10 13:38:08,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/17,https://github.com/hyperledger/iroha-ed25519/pull/17,Warchant,Add missing close() calls for files,,[],1,2018-07-10 13:25:51,2018-07-10 13:28:56,2018-07-10 13:28:59,True,2018-07-10 13:28:56,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/16,https://github.com/hyperledger/iroha-ed25519/pull/16,lebdron,Add missing close() calls for files,Fix issues with system filedescriptor table being flooded with descriptors during long runs of binaries using the lib.,[],1,2018-07-10 13:15:45,2018-07-10 13:21:41,2018-07-10 13:23:06,True,2018-07-10 13:21:41,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/15,https://github.com/hyperledger/iroha-ed25519/pull/15,Warchant,Fix full source inclusion,"When this project is included as `add_subdirectory(...)`, then 
+
+```
+CMake Error: File /Users/bogdan/tools/ed25519-cli/cmake/configurable_file_content.in does not exist.
+CMake Error at iroha-ed25519/cmake/functions.cmake:88 (configure_file):
+  configure_file Problem configuring file
+Call Stack (most recent call first):
+  iroha-ed25519/cmake/ed25519_export.cmake:5 (configure_file_content)
+  iroha-ed25519/CMakeLists.txt:55 (ed25519_export)
+```
+
+arises.
+
+This PR fixes this.",[],1,2018-07-07 15:35:38,2018-07-07 15:43:27,2018-07-10 13:38:20,False,,,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/13,https://github.com/hyperledger/iroha-ed25519/pull/13,Warchant,Add tests generation for all combinations,"- fix https://github.com/hyperledger/iroha-ed25519/issues/6
+- add automatic test generation: since we use multiple EDIMPL, HASH, RANDOM implementations, which can be selected at link-time, it is hard to test everything on CI. With automatic test generation it is a little bit easier - all combinations are tested.
+- setup travis CI to test library on Linux and Mac, with both clang and gcc",[],7,2018-05-06 05:13:40,2018-06-07 06:30:28,2018-06-07 06:30:30,True,2018-06-07 06:30:28,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/12,https://github.com/hyperledger/iroha-ed25519/pull/12,lebdron,Replace extern int with  headers for context size,"Signed-off-by: Andrei Lebedev <lebdron@gmail.com>
+
+Replace extern int with configure-time headers for context size because MSVC does not support variable-length arrays",[],2,2018-04-07 17:30:20,2018-04-07 18:31:54,2018-04-07 19:30:36,True,2018-04-07 18:31:54,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/11,https://github.com/hyperledger/iroha-ed25519/pull/11,lebdron,Add bcryptgenrandom,"Signed-off-by: Andrei Lebedev <lebdron@gmail.com>
+
+Add bcryptgenrandom implementation for randombytes, so that there is a native randombytes implementation for Windows.",[],1,2018-04-07 17:05:02,2018-04-07 18:32:26,2018-04-07 19:30:33,True,2018-04-07 18:32:26,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/7,https://github.com/hyperledger/iroha-ed25519/pull/7,Warchant,Cmake fixes; fix so library compilation error,"- use STATIC target for tests, use sources for libed25519.so
+- use exportmap to filter global methods in SO, this fixes compilation
+  error of ed25519  https://github.com/hyperledger/iroha-ed25519/issues/6
+- move test/ed25519/tosha3 to util/tosha3
+- to simplify CI pipeline, approach ""build what you use"" was cancelled.
+  Currently all targets are available by default (so you can write make <target>) but excluded from 'all' (i.e. make all will not build certain targets)
+
+",['Warchant'],9,2018-03-30 15:50:53,2018-04-02 19:41:30,2018-04-02 19:41:34,True,2018-04-02 19:41:30,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/5,https://github.com/hyperledger/iroha-ed25519/pull/5,Warchant,Prepare for hunterization,Prepare iroha-ed25519 to be included as hunter package.,[],1,2018-02-08 15:02:32,2018-02-08 15:02:45,2018-02-08 15:02:51,True,2018-02-08 15:02:45,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/4,https://github.com/hyperledger/iroha-ed25519/pull/4,ryjones,Create dcotrigger,,[],1,2018-02-05 15:54:54,2018-02-05 16:00:33,2018-02-05 16:00:33,False,,,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/3,https://github.com/hyperledger/iroha-ed25519/pull/3,laSinteZ,"fix: const ""size"" not matching size of message",,[],1,2018-01-17 15:31:30,2018-01-22 12:12:43,2018-01-22 12:12:43,True,2018-01-22 12:12:43,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/2,https://github.com/hyperledger/iroha-ed25519/pull/2,lebdron,Replace static libs with object libs to be included in final library,"ed, hash, and random implementations were compiled and installed as separate static libraries, which required manual linking to each of them.
+
+Fixes introduced allow to use a single `ed25519` library, which contains all required symbols.",[],1,2017-12-19 03:33:17,2017-12-19 03:45:24,2017-12-19 04:15:27,True,2017-12-19 03:45:24,Warchant,unknown,,closed
+iroha-ed25519,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/1,https://github.com/hyperledger/iroha-ed25519/pull/1,l4l,Make amd64 asm code PIC,,[],1,2017-12-05 11:57:09,2017-12-05 13:03:25,2017-12-05 13:03:25,True,2017-12-05 13:03:25,Warchant,unknown,,closed

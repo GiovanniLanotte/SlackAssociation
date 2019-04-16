@@ -1,0 +1,498 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+examples,https://api.github.com/repos/kubernetes/examples/pulls/1,https://github.com/kubernetes/examples/pull/1,sebgoa,Migrate kubernetes/kubernetes/examples,"PR to migrate the examples to dedicated kubernetes/examples repo.
+
+This preserves history.
+
+Cleanup of source in kubernetes/kubernetes will happen after this gets merged.",[],1629,2017-05-01 14:40:51,2017-05-19 20:42:17,2017-05-19 20:42:17,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/2,https://github.com/kubernetes/examples/pull/2,sebgoa,Migration,"This a copy of the the kubernetes/kubernetes /examples directory
+Keeping the history intact.
+
+It moves all current examples into a /staging directory to prepare for a cleanup .",['ahmetb'],1664,2017-05-19 21:05:56,2017-05-22 21:24:51,2017-05-22 21:27:35,True,2017-05-22 21:24:51,bgrant0607,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/5,https://github.com/kubernetes/examples/pull/5,ahmetb,"Move maintained examples to root, update README",Signed-off-by: Ahmet Alp Balkan <ahmetb@google.com>,['sebgoa'],1,2017-05-24 17:21:06,2017-05-24 17:28:59,2017-05-24 17:30:59,True,2017-05-24 17:28:59,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/6,https://github.com/kubernetes/examples/pull/6,ahmetb,Fix broken cassandra link in README,/assign @sebgoa,['sebgoa'],1,2017-05-24 17:35:19,2017-05-24 18:24:35,2017-05-24 18:24:35,True,2017-05-24 18:24:35,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/8,https://github.com/kubernetes/examples/pull/8,nikhita,Fix links in guidelines,It used relative links before migration. Now they need to be updated.,['ahmetb'],1,2017-05-28 12:27:59,2017-06-13 08:54:22,2017-06-15 12:45:55,True,2017-06-13 08:54:22,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/9,https://github.com/kubernetes/examples/pull/9,mikeplavsky,missing `create` for kubectl,,['ahmetb'],1,2017-06-11 19:29:25,2017-06-13 08:53:28,2017-06-13 08:53:28,True,2017-06-13 08:53:28,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/13,https://github.com/kubernetes/examples/pull/13,chrislovecnm,[WIP] cassandra: Clean-up removing old examples,"I am working on getting some changes pushed to our container.  Once that is done I can test with a stable container.
+
+Fixes https://github.com/kubernetes/examples/issues/10, https://github.com/kubernetes/examples/issues/7
+
+TODO
+
+- [ ] add new container to manifest
+- [ ] update docs with new container
+- [ ] some testing",[],1,2017-06-22 19:24:40,2018-03-10 05:29:34,2018-03-10 05:29:34,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/14,https://github.com/kubernetes/examples/pull/14,chrislovecnm,"We do not have a git ignore, modified version from core",,"['ahmetb', 'sebgoa']",1,2017-06-22 19:28:24,2017-06-27 12:44:53,2017-06-27 12:44:53,True,2017-06-27 12:44:53,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/16,https://github.com/kubernetes/examples/pull/16,ahmetb,Move tutorial contents out of examples repo,"The tutorials are now migrated to kubernetes.io website. Setting up redirection
+pointers from the README files here to keep maintaining these tutorials at a
+single place.
+
+/assign @jeffmendoza
+cc: @sebgoa
+
+Fixes #12.
+
+Signed-off-by: Ahmet Alp Balkan <ahmetb@google.com>",['jeffmendoza'],1,2017-06-26 19:25:51,2017-07-05 23:14:24,2017-07-05 23:14:24,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/17,https://github.com/kubernetes/examples/pull/17,erikschlegel,Adding security support for cassandra container. Published revised co…,…ntainer to .,[],1,2017-06-30 02:13:57,2017-06-30 02:42:34,2017-06-30 04:01:28,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/18,https://github.com/kubernetes/examples/pull/18,farcaller,Updated rbd volume example to use yaml configs with better readability,"This PR turns barely-readable poorly formatted json to more compact yaml in the examples, that are supposed to be consumed by humans.
+
+(moved from https://github.com/kubernetes/kubernetes/pull/48032)","['ahmetb', 'sebgoa']",1,2017-07-01 08:18:05,2017-07-17 17:08:25,2017-07-17 17:08:29,True,2017-07-17 17:08:25,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/19,https://github.com/kubernetes/examples/pull/19,maisem,Adding cassandra test-server image,"@mml 
+This is required for kubernetes/kubernetes#47200.",[],2,2017-07-05 19:36:40,2017-07-11 17:10:51,2017-07-11 17:10:51,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/20,https://github.com/kubernetes/examples/pull/20,ahmetb,Add redirection notices to tutorials,"This adds an EXCLUDE_FROM_DOCS section (removed by docs script, to be added on https://github.com/kubernetes/kubernetes.github.io/pull/4291) to the
+tutorials and fixes relative-link issues in the tutorial contents.
+
+/cc @sebgoa",[],1,2017-07-05 23:49:27,2017-07-08 23:33:34,2017-07-08 23:33:34,True,2017-07-08 23:33:34,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/21,https://github.com/kubernetes/examples/pull/21,zouyee,update url for cluster build,,['ahmetb'],1,2017-07-11 06:13:26,2017-07-13 21:07:58,2017-07-13 21:07:58,True,2017-07-13 21:07:58,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/22,https://github.com/kubernetes/examples/pull/22,ahmetb,Fix relative links in cassandra/README.md,/assign @sebgoa,['sebgoa'],1,2017-07-11 17:09:20,2017-07-11 20:05:25,2017-07-11 20:05:25,True,2017-07-11 20:05:24,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/25,https://github.com/kubernetes/examples/pull/25,humblec,Add `volumeoptions` Storageclass parameter to README.,Ref# https://github.com/kubernetes/kubernetes/pull/44174,['ahmetb'],1,2017-07-18 06:22:23,2017-07-30 08:44:48,2017-07-30 08:44:48,True,2017-07-30 08:44:48,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/26,https://github.com/kubernetes/examples/pull/26,jianglingxia,the page link unused,"the link outdate ,then update it!",['ahmetb'],1,2017-07-19 06:27:54,2017-07-19 16:31:40,2017-07-19 16:31:40,True,2017-07-19 16:31:40,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/27,https://github.com/kubernetes/examples/pull/27,jianglingxia,outdated link,outdated link,['ahmetb'],1,2017-07-19 06:34:43,2017-07-19 16:28:27,2017-07-19 16:28:27,True,2017-07-19 16:28:27,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/28,https://github.com/kubernetes/examples/pull/28,codablock,Add fsType parameters to persistent volume provisioning examples,Adds examples for the fsType parameter added by https://github.com/kubernetes/kubernetes/pull/45345,"['ahmetb', 'sebgoa']",1,2017-07-19 11:33:31,2017-07-30 08:44:18,2017-07-30 08:44:18,True,2017-07-30 08:44:18,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/30,https://github.com/kubernetes/examples/pull/30,colindev,"fix miss properties ""storageClassName"" and change nfs-server",,['sebgoa'],4,2017-07-20 09:21:43,2017-07-30 19:19:31,2017-07-30 19:19:31,True,2017-07-30 19:19:31,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/31,https://github.com/kubernetes/examples/pull/31,php-coder,staging/podsecuritypolicy/rbac: sync example with kubernetes repo,"This PR imports changes from https://github.com/kubernetes/kubernetes/pull/45975 and https://github.com/kubernetes/kubernetes/pull/48862
+
+CC @simo5",['sebgoa'],1,2017-07-20 16:53:40,2017-07-30 08:46:40,2017-07-30 10:59:11,True,2017-07-30 08:46:40,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/32,https://github.com/kubernetes/examples/pull/32,enisoc,Remove unnecessary `initialized` annotation.,"The `pod.alpha.kubernetes.io/initialized` annotation is deprecated and the default in StatefulSet is `true` so it is unnecessary.
+
+ref https://github.com/kubernetes/kubernetes/issues/41605",['ahmetb'],1,2017-07-20 22:14:07,2017-07-24 02:56:20,2017-07-24 02:56:20,True,2017-07-24 02:56:20,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/33,https://github.com/kubernetes/examples/pull/33,charrywanganthony,Fix a wrong hyperlink,Fix a wrong hyperlink. It should be directed to redis-master-service.yaml.,[],1,2017-07-22 02:43:58,2017-07-24 02:16:49,2017-07-24 02:16:49,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/34,https://github.com/kubernetes/examples/pull/34,afoerster,Fix spark example links,Links were broken after spark example move to 'staging' dir,[],1,2017-07-22 11:46:50,2017-07-22 11:51:00,2017-07-22 11:51:00,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/35,https://github.com/kubernetes/examples/pull/35,afoerster,Fix spark example links,Links were broken after spark example move to 'staging' dir,[],1,2017-07-22 11:51:16,2017-07-30 08:39:54,2017-07-30 08:39:54,True,2017-07-30 08:39:54,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/36,https://github.com/kubernetes/examples/pull/36,charrywanganthony,Fix a wrong link,Fix a wrong hyperlink. It should be directed to redis-master-service.yaml.,['ahmetb'],1,2017-07-24 02:17:15,2017-07-24 02:55:47,2017-07-24 02:55:47,True,2017-07-24 02:55:47,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/38,https://github.com/kubernetes/examples/pull/38,cody-clark,Polishing the Cassandra Tutorial,"- Tutorial template applied
+- Per [issue #7](https://github.com/kubernetes/examples/issues/7) and [issue #10](https://github.com/kubernetes/examples/issues/10) Replication Controller and DaemonSet sections and `.yaml` files deleted.
+- Edited steps to be more task-oriented ",[],7,2017-07-25 19:29:03,2017-07-27 19:28:50,2017-11-27 22:53:42,True,2017-07-27 19:28:50,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/39,https://github.com/kubernetes/examples/pull/39,Pensu,Adding Dockerfile for ppc64le for cluster-dns example,This PR adds the dockerfile for ppc64le for frontend and backend pod.,[],1,2017-07-26 09:32:01,2017-09-21 09:41:18,2017-09-21 09:41:18,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/41,https://github.com/kubernetes/examples/pull/41,ahmetb,Fix relative link in guestbook/README.md,,[],1,2017-07-27 21:10:25,2017-07-27 21:10:45,2017-07-27 21:10:45,True,2017-07-27 21:10:45,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/42,https://github.com/kubernetes/examples/pull/42,cody-clark,Fixed links and formatting,,['ahmetb'],3,2017-07-27 21:54:28,2017-07-27 22:01:22,2017-08-01 18:36:41,True,2017-07-27 22:01:22,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/43,https://github.com/kubernetes/examples/pull/43,mkumatag,Multi arch guestbook example,Guestbook example is part of [Conformance tests](https://github.com/kubernetes/kubernetes/blob/master/test/e2e/kubectl/kubectl.go#L354). So this PR is for converting this example multi architecture to support conformance tests on all possible architectures.,"['ahmetb', 'mkumatag']",2,2017-07-28 15:57:46,2017-08-16 11:34:36,2017-09-07 18:20:23,True,2017-08-16 11:34:36,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/45,https://github.com/kubernetes/examples/pull/45,rfay,Switch from annotations to storageClassName in minio example,"I was running through the minio example and note that it uses the deprecated `volume.alpha.kubernetes.io/storage-class: anything` annotation instead of the newer `storageClassName: standard`
+
+This PR just switches to `storageClassName: standard`","['ahmetb', 'sebgoa']",1,2017-08-01 16:17:12,2017-08-04 17:39:49,2017-08-04 17:39:49,True,2017-08-04 17:39:49,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/46,https://github.com/kubernetes/examples/pull/46,cody-clark,Guestbook revisions + Minikube Default Frontend Service,,['ahmetb'],10,2017-08-01 22:01:26,2017-08-04 21:15:44,2017-08-04 21:15:44,True,2017-08-04 21:15:44,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/47,https://github.com/kubernetes/examples/pull/47,laurilehmijoki,Fix typo,,[],1,2017-08-03 07:13:59,2017-10-22 13:43:50,2017-10-22 13:43:50,False,,,dirty,False,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/49,https://github.com/kubernetes/examples/pull/49,liggitt,Namespaced PSP permissions,,"['ericchiang', 'pweil-']",2,2017-08-03 20:09:36,2017-08-30 18:17:47,2017-08-30 18:17:47,True,2017-08-30 18:17:47,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/52,https://github.com/kubernetes/examples/pull/52,netroby,Update wordpress to 4.8.1,,['ahmetb'],2,2017-08-05 00:55:45,2017-08-10 17:50:46,2017-08-10 17:50:46,True,2017-08-10 17:50:46,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/53,https://github.com/kubernetes/examples/pull/53,fisherxu,Fix typo,"I think the 'kubernets' should be start with 'K', so I fix it.",['ahmetb'],1,2017-08-05 05:37:36,2017-08-08 16:54:06,2017-08-08 16:54:07,True,2017-08-08 16:54:06,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/54,https://github.com/kubernetes/examples/pull/54,Jim-Lin,Update Elasticsearch to 5.6.2,"- fix example file path and some log information
+- modify yaml file in order to run 5.5.1",[],5,2017-08-07 17:43:06,2017-10-02 22:04:40,2017-10-02 22:04:53,True,2017-10-02 22:04:40,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/55,https://github.com/kubernetes/examples/pull/55,ahmetb,guestbook: Fix code import links,"merging directly to unblock
+https://github.com/kubernetes/kubernetes.github.io/pull/4631",[],1,2017-08-07 21:02:13,2017-08-07 21:02:24,2017-08-07 21:02:24,True,2017-08-07 21:02:24,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/56,https://github.com/kubernetes/examples/pull/56,cody-clark,Working download links for manifest files,,['ahmetb'],1,2017-08-07 22:18:39,2017-08-07 22:57:56,2017-08-07 22:57:56,True,2017-08-07 22:57:56,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/57,https://github.com/kubernetes/examples/pull/57,cody-clark,Adding callouts ,"removing {start=""#""}, and minor edits for consistency with other tutorials",[],1,2017-08-08 19:48:02,2017-08-14 18:28:23,2017-08-17 19:42:24,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/59,https://github.com/kubernetes/examples/pull/59,leifmadsen,Clean up the example GlusterFS README,"Clean up the GlusterFS example volume README markdown file by
+word wrapping long paragraphs to 80 chars, fixing the first
+bullet list markdown syntax, and adding a 'json' code block
+type mark.
+
+Signed-off-by: Leif Madsen <lmadsen@redhat.com>",['ahmetb'],1,2017-08-11 20:48:24,2017-08-11 21:00:19,2017-08-11 21:00:19,True,2017-08-11 21:00:19,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/60,https://github.com/kubernetes/examples/pull/60,hzxuzhonghu,Update guidelines.md,,['ahmetb'],3,2017-08-12 08:26:49,2017-08-15 03:01:04,2017-08-15 03:03:38,True,2017-08-15 03:01:04,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/61,https://github.com/kubernetes/examples/pull/61,seeekr,fix typo in staging/storage/mysql-galera/README.md,,['ahmetb'],1,2017-08-12 14:00:35,2017-08-14 16:38:25,2017-08-14 17:05:18,True,2017-08-14 16:38:25,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/62,https://github.com/kubernetes/examples/pull/62,mbssaiakhil,Fix typo and grammatical issue,Fix typo and grammatical issue in Example Guidelines,['ahmetb'],1,2017-08-13 10:16:40,2017-08-14 16:37:20,2017-08-14 16:37:20,True,2017-08-14 16:37:20,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/63,https://github.com/kubernetes/examples/pull/63,ianchakeres,Added imageFormat and imageFeatures for rbd,"In https://github.com/kubernetes/kubernetes/pull/45805 two additional parameters were added to rbd.
+
+This PR adds those two parameters to the README and rbd example. ",[],1,2017-08-13 16:17:19,2017-08-18 07:59:22,2017-08-18 07:59:22,True,2017-08-18 07:59:22,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/64,https://github.com/kubernetes/examples/pull/64,cody-clark,Adding Callouts and Fixing Links,"Adding callout formatting and other small fixes to Cassandra tutorial.
+Fixing download links for Guestbook.",['ahmetb'],5,2017-08-14 18:32:45,2017-08-14 21:08:04,2017-08-14 21:08:04,True,2017-08-14 21:08:04,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/65,https://github.com/kubernetes/examples/pull/65,cody-clark,Polishing MySQL / WordPress Tutorial,,['ahmetb'],9,2017-08-16 00:02:46,2017-08-17 22:47:00,2017-08-17 22:47:19,True,2017-08-17 22:47:00,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/66,https://github.com/kubernetes/examples/pull/66,cody-clark,Updating to reflect new Secret creation,,[],1,2017-08-17 18:13:31,2017-08-17 19:29:19,2017-08-17 19:41:19,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/67,https://github.com/kubernetes/examples/pull/67,cody-clark,Updating to reflect new Secret creation,,[],2,2017-08-17 18:13:45,2017-08-17 19:29:16,2017-08-17 19:41:00,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/68,https://github.com/kubernetes/examples/pull/68,islinwb,Update README.md,fix typos,['ahmetb'],2,2017-08-18 16:55:25,2017-08-20 02:35:39,2017-08-20 02:44:53,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/69,https://github.com/kubernetes/examples/pull/69,islinwb,Fix typos,,['ahmetb'],1,2017-08-18 18:21:48,2017-08-18 20:06:41,2017-08-20 02:44:55,True,2017-08-18 20:06:41,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/70,https://github.com/kubernetes/examples/pull/70,ahmetb,Fix includecode syntax in wordpress/README,Will directly commit as trivial change.,[],1,2017-08-18 20:17:25,2017-08-18 20:17:39,2017-08-18 20:17:40,True,2017-08-18 20:17:39,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/71,https://github.com/kubernetes/examples/pull/71,ahmetb,Fix broken include code path on wordpress/README,"This stuff takes A LOT OF back and forth between this repo and docs repo to
+figure out something that works right. I'll move tutorial content to the docs
+repo ASAP.",[],1,2017-08-18 20:27:05,2017-08-18 20:27:30,2017-08-18 20:27:30,True,2017-08-18 20:27:29,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/72,https://github.com/kubernetes/examples/pull/72,ahmetb,guestbook: Move image build instructions out,"This section does not belong to the README.md which gets rendered at
+https://kubernetes.io/docs/tutorials/stateless-application/guestbook/.
+Moving these instructions to MAINTENANCE.md.
+
+My bad for missing this during the review.
+
+I will merge this directly to unblock the import to the docs site. Let me know
+if you have any objections later on.
+/cc @sebgoa @mkumatag
+",[],1,2017-08-18 22:17:23,2017-08-18 22:17:42,2017-08-18 22:17:42,True,2017-08-18 22:17:42,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/73,https://github.com/kubernetes/examples/pull/73,islinwb,Update docs in cassandra/,"fix typos in cassandra/README.md, cassandra/java/README.md.","['ahmetb', 'sebgoa']",1,2017-08-19 01:43:52,2017-08-19 08:08:20,2017-08-19 08:08:20,True,2017-08-19 08:08:20,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/74,https://github.com/kubernetes/examples/pull/74,islinwb,Fixed misspelling and typos in staging/spark/README.md,,"['ahmetb', 'sebgoa']",1,2017-08-19 02:19:34,2017-08-20 02:35:57,2017-08-20 02:42:54,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/75,https://github.com/kubernetes/examples/pull/75,islinwb,Fix typo in  staging/javaee/README.md,"Line 81: ""it's"" --> ""its""","['ahmetb', 'sebgoa']",1,2017-08-20 02:50:32,2017-08-20 12:41:20,2017-08-20 12:41:20,True,2017-08-20 12:41:20,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/76,https://github.com/kubernetes/examples/pull/76,islinwb,Update staging/spark/README.md,"Line 26: removed the redundant ""installed"";
+Line 114: fixed misspelling of ""necessary"".","['ahmetb', 'sebgoa']",1,2017-08-20 06:33:17,2017-08-20 12:43:06,2017-08-20 12:43:06,True,2017-08-20 12:43:06,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/77,https://github.com/kubernetes/examples/pull/77,islinwb,Fix typos in /staging/volumes/flocker/README.md,,"['ahmetb', 'sebgoa']",1,2017-08-20 07:27:40,2017-08-20 12:44:56,2017-08-20 12:44:56,True,2017-08-20 12:44:56,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/78,https://github.com/kubernetes/examples/pull/78,islinwb,Update README.md,fixed typos,"['ahmetb', 'sebgoa']",1,2017-08-21 02:29:40,2017-08-21 17:59:25,2017-08-21 17:59:25,True,2017-08-21 17:59:25,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/79,https://github.com/kubernetes/examples/pull/79,Miyurz,Fixed README with the correct results and added the role to redis master,"A couple of fixes in README.md. For instance, when you delete the redis-master pod , the sentinel pods do not decrease to 2. Infact, its just the reds server pods that loses its pod. 
+
+Also, added a word of caution for the newbies and the impatient to not run all commands consecutively but rather wait for th redid-master pod to come up and then delete it.",[],2,2017-08-21 19:36:49,2017-08-31 04:41:42,2017-08-31 04:41:42,True,2017-08-31 04:41:42,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/81,https://github.com/kubernetes/examples/pull/81,kaustavha,fix(wordpress): Fix link and displayed document in section on wordpress,"Found a small bug on the kubernetes docs site, the displayed code was for mysql a second time instead of the wordpress deployment yaml. This fixes that. 
+Will i have to run ` ./update-imported-tutorials.sh ` as stated here https://github.com/kubernetes/kubernetes.github.io/edit/master/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume.md after this gets merged or is there a CI/CD thing thatll handle that?
+",[],1,2017-08-21 23:07:59,2017-09-05 16:56:41,2017-09-05 19:25:32,False,,,dirty,False,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/82,https://github.com/kubernetes/examples/pull/82,islinwb,fix typos in staging/runtime-constraints/README.md,,[],1,2017-08-22 01:47:14,2017-09-18 11:02:12,2017-09-18 11:02:12,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/83,https://github.com/kubernetes/examples/pull/83,mbssaiakhil,Fix Minor Typo,Fix Minor Typo in Using Persistent Volumes with MySQL and WordPress,[],1,2017-08-22 15:17:39,2017-08-22 16:55:55,2017-08-25 11:28:20,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/85,https://github.com/kubernetes/examples/pull/85,ahmetb,Redirect tutorials to the docs site,/assign @sebgoa,['sebgoa'],1,2017-08-23 20:46:58,2017-08-26 19:42:11,2017-08-26 19:42:11,True,2017-08-26 19:42:11,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/86,https://github.com/kubernetes/examples/pull/86,gtaylor,Correct aws_ebs README.md's IAM instructions,"/assign @sebgoa
+
+The masters manage EBS volumes for the nodes, so only they need the IAM permissions mentioned in the README.","['justinsb', 'ahmetb', 'sebgoa']",1,2017-08-25 15:36:50,2017-08-25 17:14:45,2017-08-25 17:14:45,True,2017-08-25 17:14:45,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/87,https://github.com/kubernetes/examples/pull/87,andyzhangx,Azure disk examples,"**What this PR does / why we need it**:
+This PR shows examples for mounting azure disk from v1.7.2, including managed disk support.
+
+Original PR is https://github.com/kubernetes/kubernetes/pull/49468, per @sebgoa request, I have created this new PR. Original PR has already been reviewed by azure team.",['ahmetb'],2,2017-08-28 03:03:03,2017-10-10 15:39:57,2017-10-10 15:39:57,True,2017-10-10 15:39:57,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/88,https://github.com/kubernetes/examples/pull/88,dillaman,rbd: default image format to v2 instead of deprecated v1,"Image format v1 has been deprecated since the Infernalis release of
+Ceph over two years ago.",['ahmetb'],1,2017-08-30 00:18:17,2018-02-27 18:30:54,2018-02-27 18:30:54,True,2018-02-27 18:30:54,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/91,https://github.com/kubernetes/examples/pull/91,vladimirvivien,ScaleIO - documentation update ,This PR is for documenting changes and updates for the ScaleIO volume plugin.,['ahmetb'],1,2017-09-01 15:29:08,2017-09-05 17:00:08,2017-09-05 17:00:08,True,2017-09-05 17:00:08,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/94,https://github.com/kubernetes/examples/pull/94,Lion-Wei,fix broken link ,,['ahmetb'],1,2017-09-12 11:12:34,2017-09-12 16:12:27,2017-09-12 16:12:28,True,2017-09-12 16:12:27,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/95,https://github.com/kubernetes/examples/pull/95,OguzPastirmaci,Update OMS example with the link to the latest instructions,,['ahmetb'],1,2017-09-12 20:39:28,2017-09-30 23:01:32,2017-09-30 23:01:32,True,2017-09-30 23:01:32,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/96,https://github.com/kubernetes/examples/pull/96,BaluDontu,"Add ""Storage Policy Management for containers"" to vSphere docs",Add content for using Storage Policy Management for containers using vSphere Cloud Provider.,[],1,2017-09-14 23:37:37,2017-09-18 17:02:07,2017-09-18 17:02:07,True,2017-09-18 17:02:07,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/97,https://github.com/kubernetes/examples/pull/97,Pensu,Making targets for multi-arch for cluster-dns example,This PR ensures multi-arch targets for both frontend and backend images for cluster-dns examples. ,[],1,2017-09-19 08:25:50,2018-03-12 15:26:34,2018-03-12 15:26:34,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/98,https://github.com/kubernetes/examples/pull/98,php-coder,staging/podsecuritypolicy/rbac/README.md: update paths to YAML files,"Update paths in examples to reflect the current place of the YAML files.
+
+CC @simo5",['eparis'],1,2017-09-20 12:59:47,2017-10-19 19:24:35,2017-10-19 20:45:57,True,2017-10-19 19:24:35,eparis,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/99,https://github.com/kubernetes/examples/pull/99,php-coder,Update privileged PSP to allow all capabilities,"kubernetes/kubernetes#51337 adds support for using `*` as a value in the `allowedCapabilities` field. This PR updates examples to use a this feature for the ""privileged"" PSP.
+
+PTAL @pweil-
+CC @simo5",['eparis'],1,2017-09-20 13:03:05,2017-09-30 22:57:41,2017-10-01 10:00:07,True,2017-09-30 22:57:41,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/100,https://github.com/kubernetes/examples/pull/100,Pensu,Making targets for multi-arch for https-nginx example,"This PR aims to push a image for https-nginx example in gcr repo. 
+It also ensures to make targets for multi-arch deployment.",[],1,2017-09-21 07:11:41,2018-03-11 20:07:33,2018-03-11 20:07:33,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/101,https://github.com/kubernetes/examples/pull/101,Pensu,Making targets for multi-arch for explorer,This PR ensures multi-arch targets for explorer example.,[],1,2017-09-21 10:06:00,2018-03-11 20:07:33,2018-03-11 20:07:33,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/106,https://github.com/kubernetes/examples/pull/106,antoineco,elasticsearch: Add Role and RoleBinding for RBAC,"Adds example Role and RoleBinding needed by [io.fabric8:elasticsearch-cloud-kubernetes](https://github.com/fabric8io/elasticsearch-cloud-kubernetes).
+
+Fixes #105",['ahmetb'],1,2017-10-04 14:19:58,2017-10-05 07:57:30,2017-10-05 07:57:30,True,2017-10-05 07:57:30,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/108,https://github.com/kubernetes/examples/pull/108,kingdonb,WIP: convert to a very basic Helm chart,with only one parameter (the clusterIP of the NFS service),[],3,2017-10-08 17:12:51,2017-10-22 19:35:41,2017-10-23 01:19:46,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/110,https://github.com/kubernetes/examples/pull/110,jaytaylor,Fixed paths in Elasticsearch production cluster README.,Fixed paths in Elasticsearch production cluster README.,['ahmetb'],1,2017-10-16 20:37:02,2017-10-16 21:00:27,2017-10-16 21:00:27,True,2017-10-16 21:00:27,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/112,https://github.com/kubernetes/examples/pull/112,chenhonggc,Modified version for .yaml,For k8s version(1.8),['ahmetb'],1,2017-10-19 02:49:01,2017-10-19 03:07:22,2017-10-19 10:00:22,True,2017-10-19 03:07:22,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/113,https://github.com/kubernetes/examples/pull/113,vladimirvivien,ScaleIO update for changes to secret and namespace,"This PR documents the changes implemented to the way the ScaleIO Kubernetes volume plugin handles secret and secret namespace in PVs.
+
+See https://github.com/kubernetes/kubernetes/pull/54013",[],1,2017-10-19 20:21:09,2018-03-04 16:09:53,2018-03-04 16:09:53,False,,,dirty,False,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/115,https://github.com/kubernetes/examples/pull/115,todaywasawesome,"Fix ""front-end"" grammar","""front-end"" only applies as an adjective to some thing like ""front-end developer"" though, ""frontend developer"" is pretty well accepted. Talking about a front end (noun) means there's no need for a hyphen. See this discussion for a full breadth of usage guideline POVs. https://english.stackexchange.com/questions/34447/is-it-front-end-frontend-or-front-end",[],1,2017-10-24 23:31:54,2017-10-25 04:35:29,2017-10-25 04:35:29,True,2017-10-25 04:35:29,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/116,https://github.com/kubernetes/examples/pull/116,php-coder,podsecuritypolicy/rbac: update instruction,"Overhaul of the instruction that includes:
+- remove `ALLOW_ANY_TOKEN=true` that doesn't exist
+- remove `ENABLE_RBAC=true` that doesn't exist (and enabled by default)
+- remove `RUNTIME_CONFIG=""extensions/v1beta1=true,extensions/v1beta1/podsecuritypolicy=true""` as it's enabled by default
+- mention that `local-up-cluster.sh` creates PSP policies, roles, and binding by default
+- fix names of the roles, policies, and bindings
+- mention about the latest changes that affects PSPs ordering
+
+Fixes https://github.com/kubernetes/examples/issues/37
+
+PTAL @liggitt @pweil- @tallclair 
+CC @simo5",[],6,2017-10-25 17:40:40,2017-11-27 21:36:02,2017-11-27 21:46:06,True,2017-11-27 21:36:02,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/117,https://github.com/kubernetes/examples/pull/117,zouyee,Update storage to v1,Update storage to v1,[],1,2017-10-26 07:24:19,2017-10-27 04:13:38,2017-10-27 04:13:38,True,2017-10-27 04:13:38,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/118,https://github.com/kubernetes/examples/pull/118,zouyee,sync from kubernetes/kubernetes,"/cc @ahmetb
+ref https://github.com/kubernetes/kubernetes/pull/54577",[],1,2017-10-27 05:01:12,2017-10-30 02:53:59,2017-10-30 02:53:59,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/119,https://github.com/kubernetes/examples/pull/119,zouyee,[staging/storage.vitess]update youtube/vitess/example/kubernetes,"sync from youtube/vitess/example/kubernetes
+/cc @ahmetb",['ahmetb'],1,2017-10-28 09:08:18,2017-12-01 06:31:37,2017-12-01 06:31:37,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/120,https://github.com/kubernetes/examples/pull/120,zouyee,[staging/exaplem.minio]update minio apps apigroupversion,/cc @ahmetb PTAL,[],0,2017-10-28 13:06:36,2017-11-02 03:37:43,2017-11-02 03:37:51,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/121,https://github.com/kubernetes/examples/pull/121,zouyee,[guestbook]update guestbook apps apigroupversion,,[],1,2017-10-28 15:49:00,2017-10-30 07:50:15,2017-10-30 07:50:15,True,2017-10-30 07:50:15,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/122,https://github.com/kubernetes/examples/pull/122,zouyee,[staging/elasticsearch] update rbac apiversion,,['ahmetb'],1,2017-10-28 16:02:41,2017-10-30 07:56:44,2017-10-30 07:56:44,True,2017-10-30 07:56:44,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/123,https://github.com/kubernetes/examples/pull/123,zouyee,[staging/newrelic-infrastructure]move newrelic-infrastructure from k8s core repo,"move newrelic-infrastructure from k8s core repo
+ @roberthbailey PTAL",['ahmetb'],1,2017-10-28 16:03:11,2017-12-01 06:31:50,2017-12-01 06:31:50,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/124,https://github.com/kubernetes/examples/pull/124,zouyee,[staging/storageos] move storageos to examples,@ahmetb PTAL,[],2,2017-10-28 16:43:46,2018-03-05 08:04:27,2018-03-06 01:34:24,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/125,https://github.com/kubernetes/examples/pull/125,zouyee,[staging/storage.hazelcast]Update hazelcast-deployment apiversion,Update hazelcast-deployment.yaml,['ahmetb'],1,2017-10-28 17:17:06,2017-10-30 07:56:20,2017-10-30 07:56:20,True,2017-10-30 07:56:20,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/126,https://github.com/kubernetes/examples/pull/126,zouyee,[staging/cloud-controller-manager] move cloud-controller-manager to ex,move cloud-controller-manager to examples,[],1,2017-10-28 17:18:07,2017-12-01 06:32:10,2017-12-01 06:32:10,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/127,https://github.com/kubernetes/examples/pull/127,zouyee,[staging/cpu-manager] move cpu-mnagaer to examples,move cpu-mnagaer to examples,[],1,2017-10-28 17:18:28,2017-12-01 06:32:31,2017-12-01 06:32:31,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/128,https://github.com/kubernetes/examples/pull/128,zouyee,[staging/newrelic]update daemonset apiversion,,['ahmetb'],1,2017-10-28 17:52:57,2017-10-30 07:54:25,2017-10-30 07:54:25,True,2017-10-30 07:54:25,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/129,https://github.com/kubernetes/examples/pull/129,zouyee,[staging/openshift-origin]update deploy apiversion,,['ahmetb'],1,2017-10-28 17:55:40,2017-10-30 07:54:54,2017-10-30 07:54:54,True,2017-10-30 07:54:54,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/130,https://github.com/kubernetes/examples/pull/130,zouyee,[staging/podssecuritypolicy]update rbac apiversion,,['ahmetb'],1,2017-10-28 18:02:08,2017-10-30 07:54:05,2017-10-30 07:54:05,True,2017-10-30 07:54:05,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/131,https://github.com/kubernetes/examples/pull/131,zouyee,[staging/sysdig-cloud]update apps apiversion,/assgin @roberthbailey,['ahmetb'],1,2017-10-28 18:02:58,2017-10-30 07:53:31,2017-10-30 07:53:31,True,2017-10-30 07:53:31,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/133,https://github.com/kubernetes/examples/pull/133,RochesterinNYC,[staging/elasticsearch] Fix README.md broken links,- Fixes broken links and images ,['ahmetb'],2,2017-10-30 21:29:24,2017-10-31 17:29:45,2017-10-31 17:29:45,True,2017-10-31 17:29:45,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/134,https://github.com/kubernetes/examples/pull/134,cookingcodewithme,[staging/storage/redis] update scripts for redis to be able to use statefulset.,"update run.sh for improving reliability and performance.
+- Disabling AOF and SAVE will improve performance of redis on k8s. 
+- AOF and SAVE will be disabled if volumeMounts(redis-master-data) is not defined.
+- AOF and SAVE can be manually turn on and off thru env variables.
+- StatefulSet is an easy way to setup redis-sentinel test environment on k8s.
+- Restarted master node will be a slave node properly with StatefulSet.
+",[],2,2017-10-31 06:29:50,2018-04-01 07:09:50,2018-04-01 07:09:50,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/135,https://github.com/kubernetes/examples/pull/135,bottkars,changed errata in Thin / Thick provisionned,,['ahmetb'],1,2017-10-31 08:52:50,2017-10-31 17:30:49,2017-10-31 17:30:49,True,2017-10-31 17:30:49,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/136,https://github.com/kubernetes/examples/pull/136,ahmetb,delete kubectl-container,"This is not an example and was here when we were releasing the
+gcr.io/google_containers/kubectl image actively (stopped doing that in 2015).
+This is now unused and does not work, therefore removing.
+
+/cc @sebgoa",['sebgoa'],1,2017-11-09 00:46:04,2017-12-20 08:17:30,2017-12-20 08:17:30,True,2017-12-20 08:17:30,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/138,https://github.com/kubernetes/examples/pull/138,jhvhs,Improve guestbook usability,Clear the input box after successful entry submission.,[],1,2017-11-14 00:16:25,2018-06-24 20:50:28,2019-03-20 15:27:37,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/140,https://github.com/kubernetes/examples/pull/140,chenhonggc,fix some invalid links,I think some links of concepts are invalid.,[],4,2017-11-17 08:35:48,2017-11-17 19:47:01,2017-11-17 19:47:01,True,2017-11-17 19:47:01,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/142,https://github.com/kubernetes/examples/pull/142,apupier,Remove unused Java import package,Signed-off-by: Aurélien Pupier <apupier@redhat.com>,['aledbf'],1,2017-11-21 16:31:27,2018-02-21 03:16:46,2018-02-21 08:01:28,True,2018-02-21 03:16:46,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/143,https://github.com/kubernetes/examples/pull/143,apupier,Provide xsd configuration for pom files,"it allows to provide completion and validation when editing the files in
+most IDEs
+
+Signed-off-by: Aurélien Pupier <apupier@redhat.com>",['ahmetb'],1,2017-11-21 16:45:46,2018-02-19 20:04:05,2018-02-20 07:00:41,True,2018-02-19 20:04:05,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/150,https://github.com/kubernetes/examples/pull/150,abrarshivani,Fix link for pod yaml in vSphere Volumes README,"This PR fixes the link in vSphere Volumes README file for pod yaml and also adds the yaml file.
+Fixes https://github.com/vmware/kubernetes/issues/342
+
+//cc @divyenpatel 
+",['sebgoa'],1,2017-11-28 05:15:03,2017-11-30 20:09:41,2017-11-30 20:09:42,True,2017-11-30 20:09:41,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/151,https://github.com/kubernetes/examples/pull/151,howinator,Fix syntax highlighting of YAML in java side car,"Github supports YAML syntax highlighting.
+This PR adds that formatting to the code blocks in the Java side car
+example.",[],1,2017-11-28 17:25:41,2017-11-28 19:02:14,2017-11-28 19:02:14,True,2017-11-28 19:02:14,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/156,https://github.com/kubernetes/examples/pull/156,chanchikwan,Minor typesetting fix,,['sebgoa'],1,2017-12-08 23:20:59,2018-02-07 17:54:56,2018-02-07 17:54:56,True,2018-02-07 17:54:55,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/159,https://github.com/kubernetes/examples/pull/159,pashok2398,Fix yaml path based on the new location,,['ahmetb'],1,2017-12-13 12:26:47,2017-12-18 07:13:07,2017-12-18 07:13:07,True,2017-12-18 07:13:07,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/160,https://github.com/kubernetes/examples/pull/160,kovyrin,Small typo fix,Trivial typo fix in a README.,['sebgoa'],1,2017-12-17 14:52:22,2018-02-07 17:54:00,2018-02-07 18:12:42,True,2018-02-07 17:54:00,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/161,https://github.com/kubernetes/examples/pull/161,spiffxp,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",['cblecker'],1,2017-12-20 18:32:04,2017-12-20 19:35:21,2018-01-04 16:42:43,True,2017-12-20 19:35:21,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/163,https://github.com/kubernetes/examples/pull/163,thockin,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281","['ahmetb', 'fejta', 'ixdy']",1,2017-12-22 18:00:55,2017-12-23 18:22:36,2017-12-23 18:22:36,True,2017-12-23 18:22:36,thockin,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/164,https://github.com/kubernetes/examples/pull/164,huxiaoliang,Improve k8s DNS example usability,"the command in example should be straightforward asap, user just
+do copy and paste to move on. This change is align with spark
+example to set CLUSTER_NAME and USER_NAME, refer to below link for
+the defails:
+
+https://github.com/kubernetes/examples/tree/master/staging/spark",['ahmetb'],1,2017-12-25 08:23:11,2018-01-31 06:19:21,2018-01-31 06:19:21,True,2018-01-31 06:19:21,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/167,https://github.com/kubernetes/examples/pull/167,misterikkit,Update scheduler code locations,"The scheduler code was moved in [kubernetes #57852](https://github.com/kubernetes/kubernetes/pull/57852), and we should update docs do reflect the new location.
+
+/sig scheduling
+/sig docs",['sebgoa'],1,2018-01-05 00:51:11,2018-02-07 17:53:19,2018-02-07 17:53:19,True,2018-02-07 17:53:19,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/168,https://github.com/kubernetes/examples/pull/168,misterikkit,Delete all BUILD files.,"As discussed in #167.
+
+There is no CI set up for the examples repo, so BUILD files are not
+needed. They can be easily regenerated in the future, and it's one less
+thing to keep up to date.
+
+/assign @ahmetb ","['ahmetb', 'sebgoa']",1,2018-01-09 21:03:48,2018-01-18 23:31:57,2018-01-18 23:31:57,True,2018-01-18 23:31:57,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/170,https://github.com/kubernetes/examples/pull/170,humblec,Add `volumenameprefix` storageclass parameter in GlusterFS dynamic PV provisioning example section.,"
+Signed-off-by: Humble Chirammal <hchiramm@redhat.com>",['sebgoa'],1,2018-01-15 07:24:10,2018-01-16 16:44:59,2018-01-16 16:45:00,True,2018-01-16 16:44:59,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/172,https://github.com/kubernetes/examples/pull/172,humblec,Correct GlusterFS description with proper upstream URLs.,Signed-off-by: Humble Chirammal <hchiramm@redhat.com>,['sebgoa'],1,2018-01-16 17:02:39,2018-01-16 17:09:33,2018-01-16 17:09:33,True,2018-01-16 17:09:33,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/174,https://github.com/kubernetes/examples/pull/174,thockin,Pushes go to staging-k8s.gcr.io,"Context: https://github.com/kubernetes/kubernetes/pull/57824
+
+xref kubernetes/release#281",['ahmetb'],1,2018-01-17 22:24:06,2018-01-19 17:25:41,2018-01-19 17:25:41,True,2018-01-19 17:25:41,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/176,https://github.com/kubernetes/examples/pull/176,zioproto,There is now a easier solution to create TLS certs.,https://github.com/kubernetes/kubernetes/issues/14017,['ahmetb'],3,2018-01-18 12:58:02,2018-01-18 21:46:47,2018-01-18 21:46:47,True,2018-01-18 21:46:47,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/177,https://github.com/kubernetes/examples/pull/177,humblec,Update README with changes introduced by PR#58513,Signed-off-by: Humble Chirammal <hchiramm@redhat.com>,['ahmetb'],1,2018-01-24 11:00:52,2018-01-25 18:44:14,2018-01-25 18:44:14,True,2018-01-25 18:44:14,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/179,https://github.com/kubernetes/examples/pull/179,taoyu27,typo error in 'RBD Ceph' segment of README,,[],1,2018-01-26 02:52:31,2018-01-26 03:12:27,2018-01-26 03:12:27,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/180,https://github.com/kubernetes/examples/pull/180,taoyu27,typo error in 'Ceph RBD' segment of readme,Signed-off-by: yutao <yutao@chinacloud.com.cn>,['sebgoa'],1,2018-01-26 03:44:26,2018-02-07 17:51:35,2018-02-07 17:51:35,True,2018-02-07 17:51:35,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/181,https://github.com/kubernetes/examples/pull/181,cimomo,Update the workloads API version for the Guestbook example to 1.9,Update the workloads API version for the Guestbook example to 1.9.,"['ahmetb', 'eparis']",2,2018-01-26 08:58:11,2018-02-01 19:07:33,2018-02-01 20:34:09,True,2018-02-01 19:07:33,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/182,https://github.com/kubernetes/examples/pull/182,liubin,Fix typo,,['ahmetb'],1,2018-01-26 10:42:45,2018-01-26 18:14:52,2018-01-26 18:14:52,True,2018-01-26 18:14:52,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/183,https://github.com/kubernetes/examples/pull/183,Rcluoyi,Update apiversion of deployment in v1.9 for openshift-origin example,"Update apiversion of deployment in v1.9 for openshift-origin example
+Signed-off-by: renchao <renchao@chinacloud.com.cn>",[],1,2018-01-31 15:48:57,2018-02-01 00:51:46,2018-02-01 00:51:46,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/184,https://github.com/kubernetes/examples/pull/184,jeis2497052,Propose small spelling changes,are these changes OK ?,['ahmetb'],1,2018-01-31 16:27:40,2018-01-31 17:17:26,2018-01-31 17:17:26,True,2018-01-31 17:17:26,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/185,https://github.com/kubernetes/examples/pull/185,Davidchinacloud,[https-nginx] broken link in readme,Signed-off-by: LinWengang <linwengang@chinacloud.com.cn>,[],1,2018-02-01 01:17:34,2018-02-01 02:08:32,2018-02-01 02:08:32,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/186,https://github.com/kubernetes/examples/pull/186,Davidchinacloud,Dev,,[],0,2018-02-01 02:12:09,2018-02-01 02:14:45,2018-02-01 02:14:45,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/187,https://github.com/kubernetes/examples/pull/187,Davidchinacloud,[https-nginx] broken link in readme,Signed-off-by: LinWengang <linwengang@chinacloud.com.cn>,[],7,2018-02-01 03:17:53,2018-02-02 03:16:54,2018-02-02 03:16:54,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/188,https://github.com/kubernetes/examples/pull/188,JounQin,fix broken and outdated links,,['idvoretskyi'],1,2018-02-01 06:42:29,2018-02-03 18:09:29,2018-02-03 22:53:00,True,2018-02-03 18:09:29,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/189,https://github.com/kubernetes/examples/pull/189,Davidchinacloud,[https-nginx and spark ] broken link in readme,Signed-off-by: LinWengang <linwengang@chinacloud.com.cn>,['idvoretskyi'],1,2018-02-02 03:45:31,2018-02-03 18:09:05,2018-02-05 04:21:21,True,2018-02-03 18:09:05,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/191,https://github.com/kubernetes/examples/pull/191,Davidchinacloud,[storm] fix broken and outdated links in readme,Signed-off-by: LinWengang <linwengang@chinacloud.com.cn>,[],3,2018-02-05 04:22:16,2018-02-08 16:55:55,2018-02-09 03:37:28,True,2018-02-08 16:55:55,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/192,https://github.com/kubernetes/examples/pull/192,Davidchinacloud,[cassandra staging ] update workloads API version to apps/v1 in k8s v1.9.0,Signed-off-by: LinWengang <linwengang@chinacloud.com.cn>,['ahmetb'],3,2018-02-05 08:34:49,2018-02-07 17:38:40,2018-02-09 03:40:43,True,2018-02-07 17:38:40,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/193,https://github.com/kubernetes/examples/pull/193,Davidchinacloud,update all Deployment API version to apps/v1 in k8s v1.9.0 and add ac…,"update all Deployment API version to apps/v1 in k8s v1.9.0 and add accurate annotations for the old version of k8s how to use API version。
+
+Signed-off-by: LinWengang <linwengang@chinacloud.com.cn>",['ahmetb'],1,2018-02-09 06:11:51,2018-02-12 02:24:00,2018-02-12 02:24:00,True,2018-02-12 02:24:00,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/195,https://github.com/kubernetes/examples/pull/195,jheyduk,add missing comment,I just added a missing comment sign,['ahmetb'],1,2018-02-12 17:52:23,2018-02-12 22:12:15,2018-02-24 21:47:30,True,2018-02-12 22:12:15,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/196,https://github.com/kubernetes/examples/pull/196,humblec,Update README with new supported SC parameters.,Signed-off-by: Humble Chirammal <hchiramm@redhat.com>,"['ahmetb', 'jsafrane']",1,2018-02-16 05:05:12,2018-02-16 17:54:19,2018-02-16 17:54:19,True,2018-02-16 17:54:19,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/198,https://github.com/kubernetes/examples/pull/198,aledbf,cassandra: Replace deprecated ubuntu-slim image with debian-base from k8s,"**What this PR does / why we need it**:
+
+Replaces the deprecated ubuntu-slim image with ` k8s.gcr.io/debian-base-amd64:0.3`.
+Also adds a script for the build process to improve the legibility of the process and better error messages.
+
+**Release note**:
+<!--  Write your release note:
+1. Enter your extended release note in the below block. If the PR requires additional action from users switching to the new release, include the string ""action required"".
+2. If no release note is required, just write ""NONE"".
+-->
+```release-note
+NONE
+```
+
+closes #153",['ahmetb'],1,2018-02-20 19:11:02,2018-02-21 02:35:29,2018-02-21 04:56:13,True,2018-02-21 02:35:28,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/199,https://github.com/kubernetes/examples/pull/199,aledbf,Improve cassandra deployment,"This PR ports two fixes that ""disappear"" in the migration from `kubernetes/kubernetes`
+- https://github.com/kubernetes/kubernetes/commit/c165e9084ff0710ec54095d69c86eb3594f2f0f9#diff-a21f09fe308ab1a86e11b8330930566b
+- https://github.com/kubernetes/kubernetes/commit/82241e4c0d2f73b03d8d4bd0cfe73860fca62b06#diff-a21f09fe308ab1a86e11b8330930566b
+
+Also removes the `CASSANDRA_AUTO_BOOTSTRAP` setting. I cannot found a PR that changed the default.
+
+fixes #175",['ahmetb'],1,2018-02-21 17:03:00,2018-02-21 17:45:27,2018-02-21 17:45:28,True,2018-02-21 17:45:27,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/200,https://github.com/kubernetes/examples/pull/200,aledbf,Add controller required for tests in kubernetes/kubernetes,This file is used in several tests in kubernetes/kubernetes,['ahmetb'],1,2018-02-22 00:03:04,2018-02-23 03:47:13,2018-02-23 03:47:13,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/201,https://github.com/kubernetes/examples/pull/201,aledbf,Use docker to build cassandra jar file,"Test image: `aledbf/cassandra:v15`
+
+This PR also replaces the java code with a go shared library.
+
+fixes #190 
+fixes #147",['ahmetb'],1,2018-02-22 01:53:47,2018-04-12 16:26:56,2018-11-27 17:29:54,True,2018-04-12 16:26:55,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/202,https://github.com/kubernetes/examples/pull/202,aledbf,Add owners file to cassandra example,,['ahmetb'],1,2018-02-23 03:28:07,2018-02-26 20:00:52,2018-02-26 20:00:53,True,2018-02-26 20:00:52,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/203,https://github.com/kubernetes/examples/pull/203,ahmetb,Update owners for k/examples,cc: @sebgoa  @idvoretskyi ,['idvoretskyi'],1,2018-02-26 19:30:50,2018-02-26 22:53:52,2018-02-26 22:53:52,True,2018-02-26 22:53:52,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/205,https://github.com/kubernetes/examples/pull/205,resouer,Add preempt verb for scheduler,"Ref: https://github.com/kubernetes/kubernetes/pull/58717
+
+More configure examples should be added later.",['k82cn'],1,2018-02-27 22:55:01,2018-04-09 16:39:09,2018-04-09 17:10:48,True,2018-04-09 16:39:09,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/206,https://github.com/kubernetes/examples/pull/206,php-coder,staging/podsecuritypolicy/rbac: use PSP from policy API group,"This PR updates PSP examples to use `policy/v1beta1` API group. This make them identical to what we already have in the kubernetes `examples/` directory.
+
+Related PRs in k8s repo: https://github.com/kubernetes/kubernetes/pull/54933 and https://github.com/kubernetes/kubernetes/pull/60145
+
+PTAL @liggitt @tallclair 
+CC @simo5",['ahmetb'],1,2018-02-28 17:44:44,2018-02-28 17:59:51,2018-03-02 17:19:22,True,2018-02-28 17:59:51,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/207,https://github.com/kubernetes/examples/pull/207,gsacavdm,elasticsearch prod: Add Role and RoleBinding for RBAC,Replicating #106 for the elastic search production cluster.,['ahmetb'],1,2018-03-02 12:58:07,2018-03-05 22:46:48,2018-03-05 22:47:43,True,2018-03-05 22:46:48,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/208,https://github.com/kubernetes/examples/pull/208,php-coder,podsecuritypolicy/rbac/README.md: update to use PSP from policy API group,"This is a follow-up to https://github.com/kubernetes/examples/pull/206 where I forgot to update `README.md` file.
+
+PTAL @liggitt @tallclair
+CC @simo5",['idvoretskyi'],1,2018-03-02 17:26:24,2018-03-21 20:46:03,2018-03-22 09:56:48,True,2018-03-21 20:46:03,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/209,https://github.com/kubernetes/examples/pull/209,jpiper,Fix PodSecurityPolicy Examples,I discovered that the PSP examples weren't working and it turned out to be a simple fix - PSP objects are under extensions/v1beta1 so the ClusterRole wasn't actually granting anything.,[],1,2018-03-07 08:02:23,2018-03-07 09:07:59,2018-03-07 09:07:59,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/210,https://github.com/kubernetes/examples/pull/210,serathius,Import kubernetes updates,"examples directory state from https://github.com/kubernetes/kubernetes/commit/b79fe1073017907a59a869413d659f74e90b0443
+
+Process:
+* start with kubernetes master
+* remove all content and history for all directories beside `examples` directory using `git filter-branch --filter-subdirectory`
+* remove all commits that overwrite README with references to this repo
+* find newest common commit in history and following it commit to move examples to staging directory
+* rebase kubernetes repo for `examples` to this commit
+* merge with this repo master
+
+Strategy for merge:
+* Remove all BUILD files
+* Move new examples to staging directory
+* Remove changes to main directory 
+* Try to fix files based on git blame, and which links work which not
+
+First stage for https://github.com/kubernetes/kubernetes/issues/60887",['ahmetb'],73,2018-03-08 00:07:21,2018-03-14 18:26:27,2018-03-14 18:26:27,True,2018-03-14 18:26:27,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/211,https://github.com/kubernetes/examples/pull/211,serathius,[guestbook-go] Use multi-stage build,"Makes building images more streamlined and removes requirement to handle separate build image.
+
+cc @ahmetb ",['ahmetb'],1,2018-03-08 09:18:43,2018-03-20 16:10:36,2018-03-20 16:10:36,True,2018-03-20 16:10:36,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/212,https://github.com/kubernetes/examples/pull/212,noelbundick,Add details on mounting existing Azure Managed Disks,"This PR adds examples for how to use preexisting Managed Disks with Pods
+
+The information was gathered from the following sources:
+* [AzureDiskVolumeSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.9/#azurediskvolumesource-v1-core)
+* [validation.go](https://github.com/kubernetes/kubernetes/blob/ae1fc13aee81e66b9b74a5fb881ff3f90463ff4e/pkg/apis/core/validation/validation.go#L1291)
+* [types.go](https://github.com/kubernetes/kubernetes/blob/master/pkg/apis/core/types.go#L1365)
+* [Volumes with Azure Disks](https://docs.microsoft.com/en-us/azure/aks/azure-disk-volume)
+",['ahmetb'],1,2018-03-10 00:41:32,2018-04-02 20:38:17,2018-04-02 20:38:17,True,2018-04-02 20:38:17,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/213,https://github.com/kubernetes/examples/pull/213,jonyhy96,fix yaml file  format,"fix the format of dns-backend-service.yaml
+```release-note
+NONE
+```",[],1,2018-03-15 02:51:34,2018-03-27 01:28:33,2018-03-27 01:28:33,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/215,https://github.com/kubernetes/examples/pull/215,Raab70,Fix NFS tutorial README links,The commands/links in the README for the NFS tutorial were stale since moving stuff to staging. ,['idvoretskyi'],3,2018-03-20 01:47:33,2018-03-28 04:41:56,2018-03-28 04:42:14,True,2018-03-28 04:41:56,idvoretskyi,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/216,https://github.com/kubernetes/examples/pull/216,foo0x29a,change the order of objects' creation,"Even though the ReplicationController object is not the recommended way to set up replication in the current version of Kubernetes (v1.9), following the configuration best practices present in the documentation of Kubernetes v1.6 (https://v1-6.docs.kubernetes.io/docs/concepts/configuration/overview/), ""It’s typically best to create a service before corresponding replication controllers"".",['ahmetb'],1,2018-03-20 03:59:04,2018-03-20 18:30:40,2018-03-20 18:30:40,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/217,https://github.com/kubernetes/examples/pull/217,ahmetb,https-nginx: Correct tls.[crt|key] mount,Fixes #194.,['idvoretskyi'],1,2018-03-20 16:04:44,2018-03-20 20:00:48,2018-03-20 21:18:36,True,2018-03-20 20:00:48,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/219,https://github.com/kubernetes/examples/pull/219,ilievlad,Update selenium examples to use deployments and newer selenium,I've updated the selenium examples with to use deployments and selenium:3.11.,['idvoretskyi'],1,2018-03-23 14:21:05,2018-04-04 08:01:08,2018-04-04 08:01:08,True,2018-04-04 08:01:08,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/221,https://github.com/kubernetes/examples/pull/221,chenpengdev,fix typo,,"['ahmetb', 'sebgoa']",1,2018-03-27 10:54:45,2018-03-28 17:29:18,2018-03-28 17:29:18,True,2018-03-28 17:29:18,ahmetb,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/222,https://github.com/kubernetes/examples/pull/222,DonMartin76,Add a sample for using azureFile for PVs,"The example for azureFile previously just had a sample of how to directly mount an Azure Files storage into a Pod. I thought it would be nice to also have an example which uses a persistent volume/persistent volume claim, which can be done in the same way. I also added how to get the storage account key via code (using the az command line), and how to create a secret using `kubectl` directly instead of via a `Secret` manifest (which is somewhat clunky).","['ahmetb', 'andyzhangx']",3,2018-04-03 14:18:21,2018-04-14 02:27:00,2018-04-14 02:27:00,True,2018-04-14 02:27:00,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/224,https://github.com/kubernetes/examples/pull/224,mindprince,Provide a more ideal example for scheduler extender policy.,"We now use default predicates/priorities if they are unspecified in the policy
+config (kubernetes/kubernetes#59363).
+
+The other example in ./scheduler-policy-config.json shows how to use priorities
+and predicates.
+
+Let's use this example to show how to use extenders. When you are using
+extenders you don't necessarily want to mess with priorities and predicates
+(kubernetes/kubernetes#45188).
+
+This was previously kubernetes/kubernetes#62186",['ahmetb'],1,2018-04-09 21:48:04,2018-04-09 22:26:09,2018-04-09 23:01:18,True,2018-04-09 22:26:09,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/226,https://github.com/kubernetes/examples/pull/226,ahmetb,cassandra: fix the broken build,"Also udpated gcloud docker with --project so that I don't have to do
+""gcloud config set core/project"" every time. Also ""gcloud docker --"" is going
+away soon, so the Makefile will likely require updating again.
+
+/assign @aledbf",['aledbf'],2,2018-04-12 19:17:53,2018-09-09 22:02:44,2018-09-09 22:02:44,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/227,https://github.com/kubernetes/examples/pull/227,foo0x29a,Fix cloud-dns README links,The links and paths used as argument in the `kubectl` command were outdated.,"['idvoretskyi', 'ahmetb']",1,2018-04-17 03:10:29,2018-05-02 08:53:58,2018-05-02 08:53:58,True,2018-05-02 08:53:58,idvoretskyi,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/228,https://github.com/kubernetes/examples/pull/228,humblec,Add `snapfactor` readme for glusterfs provisioner examples.,"Ref PR# https://github.com/kubernetes/kubernetes/pull/62378
+
+Signed-off-by: Humble Chirammal <hchiramm@redhat.com>","['ahmetb', 'eparis']",1,2018-04-18 17:33:02,2018-04-27 19:11:21,2018-04-27 19:11:21,True,2018-04-27 19:11:21,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/229,https://github.com/kubernetes/examples/pull/229,carlossscastro,Update New Relic Infrastructure Readme,"We noticed a deprecated link on this doc to the old server monitor.
+
+Did a few other small changes to align the verbiage with New Relic naming conventions.","['idvoretskyi', 'ahmetb']",1,2018-04-19 10:11:13,2018-05-02 08:52:29,2018-05-02 08:52:29,True,2018-05-02 08:52:29,idvoretskyi,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/230,https://github.com/kubernetes/examples/pull/230,nilesh32,Add guestbook-telemetry.yaml,Required for the guestbook-go to work,[],32,2018-04-19 22:30:38,2018-04-19 22:31:21,2018-04-19 22:31:21,False,,,dirty,False,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/231,https://github.com/kubernetes/examples/pull/231,nktaushanov,Add CASSANDRA_TRICKLE_FSYNC config to the Cassandra docker image,,['aledbf'],1,2018-04-26 13:52:39,2018-10-27 18:26:13,2018-10-27 18:26:13,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/232,https://github.com/kubernetes/examples/pull/232,adelton,Creation of PSP by hack/local-up-cluster.sh is not as automatic as the README suggests.,"Without the symlinks, `hack/local-up-cluster.sh` reports
+
+```
+Create podsecuritypolicy policies for RBAC.
+error: the path ""/home/test/kubernetes/examples/podsecuritypolicy/rbac/policies.yaml"" does not exist
+error: the path ""/home/test/kubernetes/examples/podsecuritypolicy/rbac/roles.yaml"" does not exist
+error: the path ""/home/test/kubernetes/examples/podsecuritypolicy/rbac/bindings.yaml"" does not exist
+```",['idvoretskyi'],1,2018-05-03 20:12:11,2018-05-24 16:16:36,2018-05-24 16:16:36,True,2018-05-24 16:16:36,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/239,https://github.com/kubernetes/examples/pull/239,idvoretskyi,SECURITY_CONTACTS added,"cc @jessfraz @ahmetb @sebgoa 
+
+Signed-off-by: Ihor Dvoretskyi <ihor@linux.com>","['ahmetb', 'jessfraz']",1,2018-06-19 14:48:47,2018-06-19 18:09:33,2018-06-19 18:09:33,True,2018-06-19 18:09:33,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/242,https://github.com/kubernetes/examples/pull/242,AdamDang,Typo fix: Endpont->Endpoint,Line 28: Endpont->Endpoint,['idvoretskyi'],1,2018-06-22 09:02:55,2018-06-22 10:41:07,2018-06-22 10:41:07,True,2018-06-22 10:41:07,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/243,https://github.com/kubernetes/examples/pull/243,hosungsmsft,Add Azure Disk-based NFS volume option,"We'd like this example to include an option to do the same on Azure with an Azure Disk-based persistent volume, so here goes this PR.
+
+Sorry that I haven't looked how CI works here, and I'll fix any issues as this PR goes along.
+
+Thanks,
+Hosung Song
+","['idvoretskyi', 'feiskyer']",1,2018-06-29 19:11:15,2018-06-30 05:16:20,2018-06-30 05:16:20,True,2018-06-30 05:16:20,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/244,https://github.com/kubernetes/examples/pull/244,comxd,fix README links,,"['idvoretskyi', 'idealhack', 'sebgoa']",1,2018-07-03 23:43:21,2018-07-04 07:34:23,2018-07-04 07:34:23,True,2018-07-04 07:34:23,sebgoa,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/246,https://github.com/kubernetes/examples/pull/246,Haleygo,Update README.md,"missing ""pod""",[],1,2018-07-06 16:04:10,2018-07-19 09:14:11,2018-07-19 09:14:11,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/247,https://github.com/kubernetes/examples/pull/247,Haleygo,Update README.md,content mistake,[],1,2018-07-06 16:09:25,2018-07-19 09:13:59,2018-07-19 09:13:59,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/248,https://github.com/kubernetes/examples/pull/248,Haleygo,Update README.md,content mistake,['idvoretskyi'],1,2018-07-06 16:21:48,2018-07-07 16:18:18,2018-07-07 16:18:18,True,2018-07-07 16:18:18,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/252,https://github.com/kubernetes/examples/pull/252,nikhita,Add CONTRIBUTING.md,"Fixes #251 
+xref https://github.com/kubernetes/community/issues/1832
+
+/cc idvoretskyi ahmetb sebgoa ",['idvoretskyi'],1,2018-07-19 05:27:36,2018-07-19 09:13:43,2018-07-20 04:29:26,True,2018-07-19 09:13:42,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/253,https://github.com/kubernetes/examples/pull/253,bgiorgini,Update README.md,Include the `staging` folder in the paths.,['idvoretskyi'],1,2018-07-25 03:30:08,2018-08-23 21:03:16,2018-08-23 21:03:16,True,2018-08-23 21:03:16,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/254,https://github.com/kubernetes/examples/pull/254,anonshellsllc,Update owners for k/examples,,[],1,2018-07-26 13:59:43,2018-08-19 03:42:30,2018-08-19 03:42:30,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/255,https://github.com/kubernetes/examples/pull/255,dims,guestbook : Remove explicit install for php-pear,"Looks like `pear` is installed by default and there is no separate package named `php-pear` anymore
+
+Fixes #256","['ahmetb', 'mkumatag']",1,2018-07-30 15:22:06,2018-07-30 15:54:59,2018-07-30 15:54:59,True,2018-07-30 15:54:59,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/257,https://github.com/kubernetes/examples/pull/257,dims,Build and push manifests for container images,"We build and push images for various architectures, but are not
+publishing a single manifest that can be used to look up the images.
+test/images in main k/k repository and kube images in k/release already
+publish manifests for all the image we need for e2e testing, so we
+should do the same as the 2 images in this repository are part of the
+conformance e2e test suite.
+
+Bumping version numbers as well.
+
+Change-Id: I5f87af9e5ad15da86b9e99bcb7a60a81870d0836","['ahmetb', 'ixdy', 'mkumatag']",1,2018-08-02 20:42:47,2018-08-02 20:51:29,2018-08-02 22:29:08,True,2018-08-02 20:51:29,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/258,https://github.com/kubernetes/examples/pull/258,dims,oops! fix the image name when we run docker push,Change-Id: I1533e8be7a6292830c0a9eacc545d8fddd897b26,"['ahmetb', 'ixdy']",1,2018-08-02 22:28:44,2018-08-02 23:02:28,2018-08-02 23:02:28,True,2018-08-02 23:02:28,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/259,https://github.com/kubernetes/examples/pull/259,dims,Remove stray debug echo from Makefile,"oops #2
+
+Change-Id: Ief434608f87afeb956a471ae35217b106a763739","['ahmetb', 'mkumatag']",1,2018-08-03 02:20:28,2018-08-03 02:56:01,2018-08-03 18:38:04,True,2018-08-03 02:56:01,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/261,https://github.com/kubernetes/examples/pull/261,fqsghostcloud,fix README.md,fix README.md,"['idvoretskyi', 'ahmetb']",1,2018-08-14 01:41:35,2018-08-16 23:47:09,2018-08-16 23:47:09,True,2018-08-16 23:47:09,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/262,https://github.com/kubernetes/examples/pull/262,wangxy518,Update jvm.options,a url has been changed.,['idvoretskyi'],1,2018-08-17 07:00:55,2018-08-17 11:10:12,2018-08-17 11:10:13,True,2018-08-17 11:10:12,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/263,https://github.com/kubernetes/examples/pull/263,hrishin,added liveness probes to mysql deployment,Added `livenessProbe` for mysql deployment.,['idvoretskyi'],1,2018-08-26 08:18:34,2018-08-31 16:02:57,2018-08-31 16:02:57,True,2018-08-31 16:02:57,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/264,https://github.com/kubernetes/examples/pull/264,yjl-lgx,updete,,[],4,2018-09-01 07:06:51,2019-02-01 21:26:48,2019-02-01 21:26:48,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/265,https://github.com/kubernetes/examples/pull/265,mmsakura,Correct documentation formatting standards,,[],2,2018-09-01 07:37:55,2019-02-01 21:26:47,2019-02-01 21:26:47,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/266,https://github.com/kubernetes/examples/pull/266,yjl-lgx,Yjl lgx patch tow,,[],3,2018-09-01 09:49:59,2019-01-10 16:41:44,2019-01-10 16:41:45,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/267,https://github.com/kubernetes/examples/pull/267,benjamink,Use init-containers instead of sidecar model,"Converted the example to use an [init-container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) instead of the sidecar model as the init-container is a bit cleaner & light-weight.  The container that exclusively copies a war file into place does not have to continue running after its job is done.  Therefore using an init-container allows the container with the war file to run, copy its payload into place & then terminate.
+
+Also, using an init-container ensures that the copying of the payload _must_ complete _before_ the Tomcat container can start.  This removes the chance for a race condition (however unlikely) in which Tomcat starts before the war file is copied in place.",['idvoretskyi'],3,2018-09-06 20:34:16,2018-09-07 14:50:19,2018-09-07 14:50:19,True,2018-09-07 14:50:19,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/269,https://github.com/kubernetes/examples/pull/269,cod-y,Cod y patch 2,,[],6,2018-09-10 20:24:31,2018-09-10 20:25:06,2018-09-10 20:25:06,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/270,https://github.com/kubernetes/examples/pull/270,wangxy518,Update cassandra.yaml,these urls have been updated.,[],1,2018-09-13 06:31:22,2018-10-29 12:08:29,2018-10-29 12:08:29,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/271,https://github.com/kubernetes/examples/pull/271,ldx,Fix javaweb examples,,['ahmetb'],3,2018-09-18 23:15:48,2018-09-19 16:44:17,2018-09-19 17:39:37,True,2018-09-19 16:44:17,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/273,https://github.com/kubernetes/examples/pull/273,wangxy518,Update cassandra.yaml,some urls have been changed.,['idealhack'],1,2018-09-25 01:52:01,2019-02-13 10:30:17,2019-02-13 10:30:18,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/274,https://github.com/kubernetes/examples/pull/274,mkumatag,Purge the manifest after the push,"Triggered by https://github.com/kubernetes/kubernetes/issues/69104#issuecomment-424799217
+
+/cc @ixdy @dims ",['ixdy'],1,2018-09-27 15:05:58,2018-10-04 12:41:43,2018-10-04 12:41:43,True,2018-10-04 12:41:43,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/275,https://github.com/kubernetes/examples/pull/275,oz123,Update alpine linux version in Dockerfile,"Alpine version 3.4 is EOL since 2018-05-01.
+See https://wiki.alpinelinux.org/wiki/Alpine_Linux:Releases
+
+Signed-off-by: Oz N Tiram <oz.tiram@gmail.com>",['idvoretskyi'],1,2018-10-05 02:41:45,2018-10-05 18:53:52,2018-10-05 18:53:52,True,2018-10-05 18:53:51,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/278,https://github.com/kubernetes/examples/pull/278,foo0x29a,Fix cpu-manager README links,The links and paths used as argument in the ```kubectl``` command were outdated.,['idvoretskyi'],1,2018-10-10 03:37:38,2018-10-13 13:32:09,2018-10-13 13:32:09,True,2018-10-13 13:32:09,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/279,https://github.com/kubernetes/examples/pull/279,disrani-px,Fix mountpath for cassandra,,"['idvoretskyi', 'aledbf']",1,2018-10-11 04:50:33,2018-10-11 20:02:02,2018-10-11 20:02:02,True,2018-10-11 20:02:02,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/280,https://github.com/kubernetes/examples/pull/280,ebriand,change simple nginx example to use kubectl create instead of kubectl run,"Fix #277 
+
+I updated the simple nginx example to only use not deprecated commands.","['idvoretskyi', 'sebgoa']",1,2018-10-12 12:45:03,2018-10-13 13:30:53,2018-10-13 13:30:53,True,2018-10-13 13:30:52,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/281,https://github.com/kubernetes/examples/pull/281,AdamDang,Update README.md,Fix some typos to improve this document.,"['idvoretskyi', 'ahmetb']",1,2018-10-25 12:18:16,2018-10-25 14:34:01,2018-10-25 14:34:02,True,2018-10-25 14:34:01,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/283,https://github.com/kubernetes/examples/pull/283,reegnz,Use new env vars to parameterize selenium nodes,"The new variable names got introduced about 10 months ago and it was
+indicated that they will be used in the ling term instead of the older,
+less descriptive variable names.","['idvoretskyi', 'idealhack']",1,2018-10-30 16:57:47,2019-03-08 11:51:30,2019-03-08 11:51:30,True,2019-03-08 11:51:30,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/284,https://github.com/kubernetes/examples/pull/284,reegnz,Bump image versions in selenium example,,['idvoretskyi'],1,2018-10-30 17:01:50,2019-01-31 09:47:42,2019-01-31 09:47:42,True,2019-01-31 09:47:42,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/286,https://github.com/kubernetes/examples/pull/286,reegnz,Remove trailing whitespaces,,"['idvoretskyi', 'idealhack']",1,2018-10-30 18:35:35,2019-01-10 18:26:50,2019-01-10 18:26:50,True,2019-01-10 18:26:50,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/288,https://github.com/kubernetes/examples/pull/288,mooncak,"Fix typos: conecepts->concepts, lauched->launched","Fix typos: conecepts->concepts, lauched->launched",['idvoretskyi'],1,2018-11-10 12:42:22,2018-11-10 18:10:55,2018-11-10 18:10:55,True,2018-11-10 18:10:55,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/289,https://github.com/kubernetes/examples/pull/289,mario-mazo,Updated selenium hub health probes to recommended endpoints,"Probing the hub on `/grid/console` might end up in constant restarts due to locks.
+the recommended way is using `/wd/hub/status`.
+Even the helm chart updated this
+https://github.com/helm/charts/pull/7554
+",[],1,2018-11-10 19:47:03,2018-11-10 19:56:32,2018-11-10 19:56:48,False,,,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/290,https://github.com/kubernetes/examples/pull/290,mario-mazo,Updated selenium hub health probes to recommended endpoints,"Probing the hub on `/grid/console` might end up in constant restarts due to locks.
+the recommended way is using `/wd/hub/status`.
+Even the helm chart updated this
+https://github.com/helm/charts/pull/7554",['idvoretskyi'],1,2018-11-10 20:07:25,2019-01-10 16:44:59,2019-01-10 16:44:59,True,2019-01-10 16:44:59,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/291,https://github.com/kubernetes/examples/pull/291,humblec,Add `customepnameprefix` storage class option.,"customepnameprefix has been added to glusterfs storage class
+via PR# https://github.com/kubernetes/kubernetes/pull/69419
+This patch add its documentation to example files and README.
+
+Signed-off-by: hchiramm <hchiramm@redhat.com>","['idvoretskyi', 'ahmetb', 'jsafrane', 'sebgoa', 'eparis']",3,2018-11-12 06:17:44,2018-11-26 21:04:56,2018-11-26 21:04:56,True,2018-11-26 21:04:56,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/294,https://github.com/kubernetes/examples/pull/294,runzexia,update redis image address,,['idvoretskyi'],1,2019-01-18 03:47:31,2019-01-22 15:57:55,2019-01-22 15:57:56,True,2019-01-22 15:57:55,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/295,https://github.com/kubernetes/examples/pull/295,IronPan,Use fixed NFS dns name,,"['idvoretskyi', 'idealhack']",1,2019-01-18 09:05:53,2019-02-13 12:12:34,2019-02-13 12:12:34,True,2019-02-13 12:12:34,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/296,https://github.com/kubernetes/examples/pull/296,rlenferink,Update OWNERS files to include link to docs,Included a link to the OWNERS docs in the OWNERS file itself,['ahmetb'],1,2019-01-30 19:23:38,2019-01-30 23:45:00,2019-01-30 23:45:01,True,2019-01-30 23:45:00,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/299,https://github.com/kubernetes/examples/pull/299,ahmetb,Remove ahmetb from OWNERS,"Sadly I no longer have time to help maintain this repo and have not been able
+to return to the review requests timely. It's better I don't get assigned to
+these.",['idvoretskyi'],1,2019-02-13 22:01:34,2019-02-13 22:34:46,2019-02-13 22:49:34,True,2019-02-13 22:34:46,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/301,https://github.com/kubernetes/examples/pull/301,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['idvoretskyi', 'nikhita']",1,2019-03-08 18:04:54,2019-03-09 11:25:28,2019-03-09 11:25:28,True,2019-03-09 11:25:28,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/302,https://github.com/kubernetes/examples/pull/302,bclau,Fixes python 3 support for cluster-dns images scripts,"The cluster-dns images' scripts are only working with Python 2.
+
+Considering that Python 2 support will be dropped in 2020, it
+would be a good idea to transition towards Python 3 support.
+
+This commit the cluster-dns Python scripts to work on both
+Python versions.",['idvoretskyi'],1,2019-03-20 10:52:29,2019-03-20 11:12:25,2019-03-20 11:12:25,True,2019-03-20 11:12:24,k8s-ci-robot,unknown,,closed
+examples,https://api.github.com/repos/kubernetes/examples/pulls/303,https://github.com/kubernetes/examples/pull/303,bclau,cluster-dns: Writes bytes on response,"In Python3, strings are unicode, while in Python2 they're bytes. This causes an issue when writing the request response, since it expects bytes.",[],1,2019-03-20 14:20:22,,2019-03-20 17:17:15,False,,,unstable,True,open
+examples,https://api.github.com/repos/kubernetes/examples/pulls/304,https://github.com/kubernetes/examples/pull/304,mmumshad,Fix service dns name,Should be http://dns-backend.development.svc.cluster.local:8000 instead of http://dns-backend.development.cluster.local:8000,[],1,2019-03-21 04:10:34,,2019-03-21 15:36:46,False,,,unstable,True,open
+examples,https://api.github.com/repos/kubernetes/examples/pulls/305,https://github.com/kubernetes/examples/pull/305,bsalamat,Improve scheduler policy configuration examples,"
+/sig scheduling",[],1,2019-03-25 19:20:02,,2019-03-25 19:21:37,False,,,unstable,True,open

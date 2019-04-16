@@ -1,0 +1,240 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/pull/15,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/15,[WIP] (fix) Clean up dependencies,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+Remove unneeded dependencies (see https://github.com/hyperledger/composer-concerto/issues/30)
+
+## Checklist
+ - [x]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+
+See https://github.com/hyperledger/composer-concerto/issues/30
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-composer)
+- [x] [GitHub Issues](https://github.com/hyperledger/composer/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/composer)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+
+See https://github.com/hyperledger/composer-concerto/issues/30
+
+## Validation of the fix
+
+All tests pass
+
+## Automated Tests
+
+All tests pass
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->",closed,True,2019-03-29 17:05:59,2019-03-29 18:21:57
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/pull/14,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/14,(system) Move Writer and FileWriter to Concerto; Remove moment dependency ; Latest concerto,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [x]  Design of the fix
+ - [x]  How to prove that the fix works
+ - [x]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+
+This fixes a circular dependency between Concerto and Concero-tools by moving Writer/FileWriter classes from the latter to the former.
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-composer)
+- [ ] [GitHub Issues](https://github.com/hyperledger/composer/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/composer)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+
+In the latest versions, concerto-tools 0.50.7 depends on concerto 0.60 or later, which itself depends on concerto-tools 0.50.1, which creates confusion. Simply moving utility classes Writer and FileWriter from concerto-tools to concerto allows to avoid this circular dependency.
+
+This also removes the unneeded dependency to the `moment` library.
+
+## Validation of the fix
+
+This has been tested against a version of concerto where the FileWriter and Writer classes have been moved. This WIP since the tests will only pass after a new version of Concerto has been published with the proposed changes.
+
+## Automated Tests
+
+All the existing tests are passing with no change and 100% coverage.
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->",closed,True,2019-03-18 14:49:26,2019-03-19 21:17:01
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/pull/13,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/13,(refactor) Add get/set and plugin for Java target & Remove Corda target,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+This PR:
+ - adds getters/setters to the Java target (using options when calling the fields visitor)
+ - makes Java fields private
+ - adds a simple kind of plugin for the Java visitor to let users parameterize code-generation
+ - removes the Corda target which can now be implemented using the provided plugin
+
+A variant of the Corda target is expected to be provided in the Accord Project Cicero library.
+
+## Issue/User story
+
+This PR avoids duplication between alternative Java-based target formats (e.g., Corda and Java).
+
+## Automated Tests
+
+Testing is provided for default Java plugin (empty) and abstract plugin (raising errors).
+
+",closed,True,2019-02-10 18:04:58,2019-02-13 13:54:07
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/pull/12,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/12,(fix) Enums should also be made Corda-serializable,"Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Issue/User story
+Enum definitions should also be made serializable in the Corda format.
+
+## Automated Tests
+Corda tests have been updated accordingly.
+",closed,True,2019-01-24 18:31:55,2019-01-24 22:20:26
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/11,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/11,bump version,"Signed-off-by: Dan Selman <danscode@selman.org>
+",closed,True,2019-01-23 10:23:34,2019-01-23 10:23:42
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/pull/10,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/10,(feature) Add a new target format (Corda) for the Java-based Corda le…,"…dger
+
+Signed-off-by: Jerome Simeon <jeromesimeon@me.com>
+
+<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+I want to be able to generate Java classes ready for use in the Corda distributed ledger.
+
+## Design of the fix
+The current design is based on the Java target format, with a few simple changes to make the classes serialization according to Corda.
+
+Rather than using options on the Java target, a Corda target allows for future changes (e.g., converting certain types such as dates, or monetary amounts to Corda classes).
+
+## Automated Tests
+All the Java tests have been ported for Corda.
+
+## What documentation has been provided for this pull request
+The README includes Corda has a target format.",closed,True,2019-01-18 21:53:00,2019-01-21 16:46:51
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/issues/9,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/9,java.time.Instant rather than java.util.Date in the Java target format?,"<!--- Provide a general summary of the issue in the Title above -->
+
+Is it recommended best practice to use Java.time rather than the older (and considered poorly designed) Java.util.date, as currently used by the composer-concerto-tools Java target.
+
+## Context
+<!--- Provide a more detailed introduction to the issue itself, and why you consider it to be a bug -->
+
+This isn't a bug, but a suggestion for improvement.
+
+## Expected Behavior
+<!--- Tell us what should happen -->
+
+CTO concepts making use of the `DateTime` atomic types should generate Java classes with fields using `java.time.Instant`.
+
+## Actual Behavior
+<!--- Tell us what happens instead -->
+
+CTO concepts making use of the `DateTime` atomic types generate Java classes with fields using `java.util.Date`.
+
+## Possible Fix
+<!--- Not obligatory, but suggest a fix or reason for the bug -->
+
+Maybe, just this line to change:
+https://github.com/hyperledger/composer-concerto-tools/blob/895bbfeb6270eb9de27c389c51bbcb8d672ef743/lib/codegen/fromcto/java/javavisitor.js#L295
+",open,False,2019-01-18 21:22:11,2019-02-10 18:12:40
+composer-concerto-tools,jeromesimeon,https://github.com/hyperledger/composer-concerto-tools/pull/8,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/8,(fix) remove dependency on acorn,"Signed-off-by: Dan Selman <danscode@selman.org>
+
+PR for missing 0.50.5 commits
+",closed,True,2019-01-17 15:39:58,2019-01-21 16:24:34
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/7,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/7,Fix for XMLSchema generator with imports,,closed,True,2018-10-30 18:32:07,2018-10-30 18:32:16
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/6,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/6,Fix bug in JSONSchemaVisitor,"<!--- Provide a general summary of the pull request in the Title above -->
+
+## Checklist
+ - [ ]  A link to the issue/user story that the pull request relates to
+ - [ ]  How to recreate the problem without the fix
+ - [ ]  Design of the fix
+ - [ ]  How to prove that the fix works
+ - [ ]  Automated tests that prove the fix keeps on working
+ - [ ]  Documentation - any JSDoc, website, or Stackoverflow answers?
+
+
+## Issue/User story
+<!--- What issue / user story is this for -->
+
+## Steps to Reproduce
+<!--- Provide a link to a live example, or an unambiguous set of steps to -->
+<!--- reproduce this bug include code to reproduce, if relevant -->
+1.
+2.
+3.
+4.
+
+
+## Existing issues
+<!-- Have you searched for any existing issues or are their any similar issues that you've found? -->
+- [ ] [Stack Overflow issues](http://stackoverflow.com/tags/hyperledger-composer)
+- [ ] [GitHub Issues](https://github.com/hyperledger/composer/issues)
+- [ ] [Rocket Chat history](https://chat.hyperledger.org/channel/composer)
+
+<!-- please include any links to issues here -->
+
+## Design of the fix
+<!-- Focus on why you designed this fix this way, and what was discounted. Do not describe just the code - we can read that! -->
+
+## Validation of the fix
+<!-- Over and above the tests, what has been done to prove this works? -->
+
+## Automated Tests
+<!-- Please describe the automated tests that are put in place to stop this recurring -->
+
+## What documentation has been provided for this pull request
+<!-- JSDocs, WebSite and answers to Stack Overflow questions are possible documentation sources -->
+",closed,True,2018-10-30 14:35:42,2018-10-30 14:38:20
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/5,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/5,update to concerto 0.60,"Signed-off-by: Dan Selman <danscode@selman.org>
+",closed,True,2018-10-30 13:41:38,2018-10-30 13:41:45
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/4,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/4,jsdoc fixes and update exports,"Signed-off-by: Dan Selman <danscode@selman.org>
+",closed,True,2018-10-30 13:16:15,2018-10-30 13:16:21
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/3,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/3,update readme,"Signed-off-by: Dan Selman <danscode@selman.org>
+",closed,True,2018-10-30 12:02:23,2018-10-30 12:02:29
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/2,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/2,Added CLI to generate code,"Signed-off-by: Dan Selman <danscode@selman.org>
+",closed,True,2018-10-30 11:55:35,2018-10-30 11:55:44
+composer-concerto-tools,dselman,https://github.com/hyperledger/composer-concerto-tools/pull/1,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/1,refactor to use composer-concerto,Signed-off-by: Dan Selman <danscode@selman.org>,closed,True,2018-10-29 14:40:51,2018-10-29 17:58:35

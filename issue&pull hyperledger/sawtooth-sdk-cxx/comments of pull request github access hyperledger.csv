@@ -1,0 +1,384 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12," More information should be added to this error message, for example  event_type, kv_pairs,  and data.",17eb3024a12fb46d75b7b65115c5c3234c17a901,2019-03-11 16:18:51,264313067,"@@ -129,5 +130,34 @@ void GlobalStateImpl::DeleteState(const std::vector<std::string>& addresses) con
+     future->GetMessage(Message::TP_STATE_DELETE_RESPONSE, &response);
+ }
+ 
++
++void GlobalStateImpl::AddEvent(const std::string& event_type ,
++	const std::vector<KeyValue>& kv_pairs , const std::string& event_data) const {
++    Event *event = new Event();
++    event->set_event_type(event_type);
++    for (auto kv : kv_pairs) {
++        Event_Attribute* attr = event->add_attributes();
++        attr->set_key(kv.first);
++        attr->set_value(kv.second);
++    }
++    event->set_data(event_data);
++
++    TpEventAddRequest request;
++    TpEventAddResponse response;
++    request.set_context_id(this->context_id);
++    request.set_allocated_event(event);
++
++    FutureMessagePtr future = this->message_stream->SendMessage(
++        Message::TP_EVENT_ADD_REQUEST, request);
++    future->GetMessage(Message::TP_EVENT_ADD_RESPONSE, &response);
++
++    if(response.status() == TpEventAddResponse::ERROR){
++        std::stringstream error;
++        error << ""Failed to add event"";",,2019-03-19 06:55:33,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/264313067,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12#discussion_r264313067,agunde406
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,Have included event_type & event_data for the same,17eb3024a12fb46d75b7b65115c5c3234c17a901,2019-03-18 07:17:46,266315888,"@@ -129,5 +130,34 @@ void GlobalStateImpl::DeleteState(const std::vector<std::string>& addresses) con
+     future->GetMessage(Message::TP_STATE_DELETE_RESPONSE, &response);
+ }
+ 
++
++void GlobalStateImpl::AddEvent(const std::string& event_type ,
++	const std::vector<KeyValue>& kv_pairs , const std::string& event_data) const {
++    Event *event = new Event();
++    event->set_event_type(event_type);
++    for (auto kv : kv_pairs) {
++        Event_Attribute* attr = event->add_attributes();
++        attr->set_key(kv.first);
++        attr->set_value(kv.second);
++    }
++    event->set_data(event_data);
++
++    TpEventAddRequest request;
++    TpEventAddResponse response;
++    request.set_context_id(this->context_id);
++    request.set_allocated_event(event);
++
++    FutureMessagePtr future = this->message_stream->SendMessage(
++        Message::TP_EVENT_ADD_REQUEST, request);
++    future->GetMessage(Message::TP_EVENT_ADD_RESPONSE, &response);
++
++    if(response.status() == TpEventAddResponse::ERROR){
++        std::stringstream error;
++        error << ""Failed to add event"";",,2019-03-19 06:55:33,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/266315888,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12#discussion_r266315888,raneja14
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,The new commit is missing sign off and should just be squashed with the first commit instead.,17eb3024a12fb46d75b7b65115c5c3234c17a901,2019-03-18 12:35:32,266417994,"@@ -129,5 +130,34 @@ void GlobalStateImpl::DeleteState(const std::vector<std::string>& addresses) con
+     future->GetMessage(Message::TP_STATE_DELETE_RESPONSE, &response);
+ }
+ 
++
++void GlobalStateImpl::AddEvent(const std::string& event_type ,
++	const std::vector<KeyValue>& kv_pairs , const std::string& event_data) const {
++    Event *event = new Event();
++    event->set_event_type(event_type);
++    for (auto kv : kv_pairs) {
++        Event_Attribute* attr = event->add_attributes();
++        attr->set_key(kv.first);
++        attr->set_value(kv.second);
++    }
++    event->set_data(event_data);
++
++    TpEventAddRequest request;
++    TpEventAddResponse response;
++    request.set_context_id(this->context_id);
++    request.set_allocated_event(event);
++
++    FutureMessagePtr future = this->message_stream->SendMessage(
++        Message::TP_EVENT_ADD_REQUEST, request);
++    future->GetMessage(Message::TP_EVENT_ADD_RESPONSE, &response);
++
++    if(response.status() == TpEventAddResponse::ERROR){
++        std::stringstream error;
++        error << ""Failed to add event"";",,2019-03-19 06:55:33,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/266417994,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12#discussion_r266417994,agunde406
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12,Done,17eb3024a12fb46d75b7b65115c5c3234c17a901,2019-03-19 06:58:42,266751422,"@@ -129,5 +130,34 @@ void GlobalStateImpl::DeleteState(const std::vector<std::string>& addresses) con
+     future->GetMessage(Message::TP_STATE_DELETE_RESPONSE, &response);
+ }
+ 
++
++void GlobalStateImpl::AddEvent(const std::string& event_type ,
++	const std::vector<KeyValue>& kv_pairs , const std::string& event_data) const {
++    Event *event = new Event();
++    event->set_event_type(event_type);
++    for (auto kv : kv_pairs) {
++        Event_Attribute* attr = event->add_attributes();
++        attr->set_key(kv.first);
++        attr->set_value(kv.second);
++    }
++    event->set_data(event_data);
++
++    TpEventAddRequest request;
++    TpEventAddResponse response;
++    request.set_context_id(this->context_id);
++    request.set_allocated_event(event);
++
++    FutureMessagePtr future = this->message_stream->SendMessage(
++        Message::TP_EVENT_ADD_REQUEST, request);
++    future->GetMessage(Message::TP_EVENT_ADD_RESPONSE, &response);
++
++    if(response.status() == TpEventAddResponse::ERROR){
++        std::stringstream error;
++        error << ""Failed to add event"";",,2019-03-19 06:58:42,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/266751422,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/12#discussion_r266751422,raneja14
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/5,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/5,"This docs paragraph doesn't seem to apply, there is no docs subdirectory in this repository.",50a767e995aa05cdbcdff908e89229479323b5de,2018-10-25 02:25:18,228016925,"@@ -193,3 +193,12 @@ build process. If you'd like to copy it out, you can run the following:
+   ```
+ 
+ You can find the .deb package in the root of `sawtooth-sdk-cxx`.
++
++License
++-------
++
++Hyperledger Sawtooth software is licensed under the [Apache License Version 2.0](LICENSE) software license.
++
++Hyperledger Sawtooth documentation in the [docs](docs) subdirectory is licensed under",,2018-10-26 10:58:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/228016925,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/5#discussion_r228016925,vaporos
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,s/core/sdk-cxx,313f432b28270c14326a946def7eba6de6528309,2018-06-20 20:41:13,196935345,"@@ -0,0 +1,74 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++# Description:
++#   Builds an image to be used when developing in C++. The default CMD is to
++#   run build_cxx.
++#
++#   The image is also used by unit and integration tests. Docker is used to
++#   interact with and orchestrate the creation of other docker containers.
++#
++# Build:
++#   $ cd sawtooth-sdk-cxx
++#   $ docker build . -t sawtooth-sdk-cxx-local
++#
++# Run:
++#   $ cd sawtooth-core",,2018-07-30 14:49:15,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/196935345,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2#discussion_r196935345,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,"Error:
+```
+docker run -v $(pwd):/project/sawtooth-sdk-cxx sawtooth-sdk-cxx-local
+...
+CMake Error at /usr/share/cmake-3.5/Modules/CPackDeb.cmake:577 (message):
+  CPackDeb: Debian package requires a package version
+Call Stack (most recent call first):
+  /usr/share/cmake-3.5/Modules/CPackDeb.cmake:778 (cpack_deb_prepare_package_vars)
+  
+
+
+CPack Error: Error while execution CPackDeb.cmake
+CPack Error: Problem compressing the directory
+CPack Error: Error when generating package: sawtooth-cxx-sdk
+Makefile:94: recipe for target 'package' failed
+make: *** [package] Error 1
+```",313f432b28270c14326a946def7eba6de6528309,2018-06-20 20:43:00,196935823,"@@ -0,0 +1,74 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++# Description:
++#   Builds an image to be used when developing in C++. The default CMD is to
++#   run build_cxx.
++#
++#   The image is also used by unit and integration tests. Docker is used to
++#   interact with and orchestrate the creation of other docker containers.
++#
++# Build:
++#   $ cd sawtooth-sdk-cxx
++#   $ docker build . -t sawtooth-sdk-cxx-local
++#
++# Run:
++#   $ cd sawtooth-core
++#   $ docker run -v $(pwd):/project/sawtooth-sdk-cxx sawtooth-sdk-cxx-local
++
++FROM ubuntu:xenial
++
++RUN echo ""deb [arch=amd64] http://repo.sawtooth.me/ubuntu/ci xenial universe"" >> /etc/apt/sources.list \
++ && (apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ || apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 8AA7AF1F1091A5FD) \
++ && apt-get update \
++ && apt-get install -y -q \
++    apt-transport-https \
++    autoconf  \
++    automake  \
++    build-essential \
++    ca-certificates \
++    cmake  \
++    curl \
++    git \
++    g++  \
++    libcrypto++-dev \
++    liblog4cxx-dev \
++    libtool \
++    libzmqpp-dev \
++    libffi-dev \
++    libssl-dev \
++    make \
++    protobuf \
++    python3-pip \
++    unzip \
++ && apt-get clean \
++ && rm -rf /var/lib/apt/lists/* \
++ && pip3 install \
++    cpplint
++
++EXPOSE 4004/tcp
++
++RUN mkdir -p /project/sawtooth-core/ \
++ && mkdir -p /var/log/sawtooth \
++ && mkdir -p /var/lib/sawtooth \
++ && mkdir -p /etc/sawtooth \
++ && mkdir -p /etc/sawtooth/keys
++
++ENV PATH=$PATH:/project/sawtooth-sdk-cxx/bin
++
++ENV VERSION=AUTO_STRICT
++WORKDIR /project/sawtooth-sdk-cxx
++CMD build_cxx",74,2018-07-30 14:49:15,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/196935823,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2#discussion_r196935823,dcmiddle
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,s/address string/namespace string/,313f432b28270c14326a946def7eba6de6528309,2018-07-23 20:06:11,204536639,"@@ -0,0 +1,112 @@
++/*
++ Copyright 2017 Intel Corporation
++
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------
++*/
++#include ""address_mapper.h""
++
++#include <exception>
++#include <iostream>
++#include <string>
++
++#include ""cryptopp/sha.h""
++#include ""cryptopp/filters.h""
++#include ""cryptopp/hex.h""
++#include ""log4cxx/logger.h""
++
++const size_t MERKLE_ADDRESS_LENGTH = 70;
++const size_t NAMESPACE_PREFIX_LENGTH = 6;
++
++static log4cxx::LoggerPtr  logger(log4cxx::Logger::getLogger
++    (""sawtooth.address_mapper""));
++
++// Helper function to generate an SHA512 hash and return it as a hex
++// encoded string.
++static std::string SHA512(const std::string& message) {
++    std::string digest;
++    CryptoPP::SHA512 hash;
++
++    CryptoPP::StringSource hasher(message, true,
++        new CryptoPP::HashFilter(hash,
++          new CryptoPP::HexEncoder (
++             new CryptoPP::StringSink(digest), false)));
++
++    return digest;
++}
++
++// Check that a string only contains valid lower case hex characters.
++static bool IsHex(const std::string& str) {
++    return str.find_first_not_of(""0123456789abcdef"") ==
++        std::string::npos;
++}
++
++// Checks if an address string meets the constraints of an address.
++// These are that it is exactly 70 characters long and contains only
++// lowercase hexadecimal characters.
++static void CheckIfValidAddr(const std::string& addr) {
++    if (addr.length() != MERKLE_ADDRESS_LENGTH) {
++        std::stringstream out;
++        out << ""Address does not contain 70 ""
++            << ""characters: "" << addr.length() << "" != 70"";
++        throw AddressFormatError(out.str());
++    } else if (!IsHex(addr)) {
++        throw AddressFormatError(""Address must contain only "" \
++            ""lowercase hexadecimal characters"");
++    }
++}
++
++// Checks if an address string meets the constraints of an address.",69,2018-07-30 14:49:15,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/204536639,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2#discussion_r204536639,danintel
+https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2,"This comment was not addressed, so I created new PR #3 to fix this.",313f432b28270c14326a946def7eba6de6528309,2018-07-30 23:12:51,206351228,"@@ -0,0 +1,112 @@
++/*
++ Copyright 2017 Intel Corporation
++
++ Licensed under the Apache License, Version 2.0 (the ""License"");
++ you may not use this file except in compliance with the License.
++ You may obtain a copy of the License at
++
++     http://www.apache.org/licenses/LICENSE-2.0
++
++ Unless required by applicable law or agreed to in writing, software
++ distributed under the License is distributed on an ""AS IS"" BASIS,
++ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ See the License for the specific language governing permissions and
++ limitations under the License.
++------------------------------------------------------------------------------
++*/
++#include ""address_mapper.h""
++
++#include <exception>
++#include <iostream>
++#include <string>
++
++#include ""cryptopp/sha.h""
++#include ""cryptopp/filters.h""
++#include ""cryptopp/hex.h""
++#include ""log4cxx/logger.h""
++
++const size_t MERKLE_ADDRESS_LENGTH = 70;
++const size_t NAMESPACE_PREFIX_LENGTH = 6;
++
++static log4cxx::LoggerPtr  logger(log4cxx::Logger::getLogger
++    (""sawtooth.address_mapper""));
++
++// Helper function to generate an SHA512 hash and return it as a hex
++// encoded string.
++static std::string SHA512(const std::string& message) {
++    std::string digest;
++    CryptoPP::SHA512 hash;
++
++    CryptoPP::StringSource hasher(message, true,
++        new CryptoPP::HashFilter(hash,
++          new CryptoPP::HexEncoder (
++             new CryptoPP::StringSink(digest), false)));
++
++    return digest;
++}
++
++// Check that a string only contains valid lower case hex characters.
++static bool IsHex(const std::string& str) {
++    return str.find_first_not_of(""0123456789abcdef"") ==
++        std::string::npos;
++}
++
++// Checks if an address string meets the constraints of an address.
++// These are that it is exactly 70 characters long and contains only
++// lowercase hexadecimal characters.
++static void CheckIfValidAddr(const std::string& addr) {
++    if (addr.length() != MERKLE_ADDRESS_LENGTH) {
++        std::stringstream out;
++        out << ""Address does not contain 70 ""
++            << ""characters: "" << addr.length() << "" != 70"";
++        throw AddressFormatError(out.str());
++    } else if (!IsHex(addr)) {
++        throw AddressFormatError(""Address must contain only "" \
++            ""lowercase hexadecimal characters"");
++    }
++}
++
++// Checks if an address string meets the constraints of an address.",69,2018-07-30 23:12:51,https://api.github.com/repos/hyperledger/sawtooth-sdk-cxx/pulls/comments/206351228,https://github.com/hyperledger/sawtooth-sdk-cxx/pull/2#discussion_r206351228,danintel

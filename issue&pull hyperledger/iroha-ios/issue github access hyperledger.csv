@@ -1,0 +1,160 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/91,https://api.github.com/repos/hyperledger/iroha-ios/issues/91,Serialisation factory ,"- serialisation/deserialisation of transactions add
+- serialisation of query requests add
+- deserialisation of query response add",closed,True,2019-03-26 18:40:37,2019-03-26 19:12:23
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/90,https://api.github.com/repos/hyperledger/iroha-ios/issues/90,Serialization factory,"Implementation of serialisation factory which includes:
+- serialization/deserialization of transactions;
+- serialization of query requests;
+- deserialization of query responses;",closed,True,2019-03-26 12:49:46,2019-03-26 17:20:38
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/89,https://api.github.com/repos/hyperledger/iroha-ios/issues/89,Error pointers initialization,,closed,True,2019-03-05 08:09:26,2019-03-05 08:10:33
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/88,https://api.github.com/repos/hyperledger/iroha-ios/issues/88,Error pointers initialization,"When passing error object by reference it should be initialized as nil
+
+Signed-off-by: Russel <emkil.russel@gmail.com>",closed,True,2019-03-05 07:31:51,2019-03-05 07:45:49
+iroha-ios,Stayer,https://github.com/hyperledger/iroha-ios/pull/87,https://api.github.com/repos/hyperledger/iroha-ios/issues/87,Feature/pipeline,"This PR allows to automate CI for this library:
+1. prepare (check libraries, download iroha)
+2. geneate Schema using protoc
+3. (optional) If there is `master` tree and it was tagged, automatically push cocoa pod to https://cocoapods.org/pods/IrohaCommunication 
+
+```
+brew install protobuf c-ares
+git clone --depth 1 https://github.com/grpc/grpc/
+cd grpc
+make grpc_objective_c_plugin
+cp bins/opt/grpc_objective_c_plugin /usr/local/bin/protoc-gen-objcgrpc
+```",closed,True,2019-02-22 09:16:43,2019-04-03 06:21:49
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/86,https://api.github.com/repos/hyperledger/iroha-ios/issues/86,Get protobuf encoded transaction data,,closed,True,2019-02-11 21:07:20,2019-02-11 21:08:39
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/85,https://api.github.com/repos/hyperledger/iroha-ios/issues/85,Get protobuf encoded transaction data,,closed,True,2019-02-11 20:44:56,2019-02-11 21:06:49
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/84,https://api.github.com/repos/hyperledger/iroha-ios/issues/84,Develop,- contacts info add readme,closed,True,2019-01-24 16:19:53,2019-01-24 16:20:41
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/83,https://api.github.com/repos/hyperledger/iroha-ios/issues/83,contacts info add to readme,Signed-off-by: Russel <emkil.russel@gmail.com>,closed,True,2019-01-24 15:50:07,2019-01-24 16:07:39
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/82,https://api.github.com/repos/hyperledger/iroha-ios/issues/82,Release 3.0.0,,closed,True,2019-01-24 14:21:34,2019-01-24 14:21:54
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/81,https://api.github.com/repos/hyperledger/iroha-ios/issues/81,Release 3.0.0,,closed,True,2019-01-24 14:20:21,2019-01-24 14:20:45
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/80,https://api.github.com/repos/hyperledger/iroha-ios/issues/80,Podspec,,closed,True,2019-01-24 13:46:06,2019-01-24 13:46:25
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/79,https://api.github.com/repos/hyperledger/iroha-ios/issues/79,Podspec,This reverts commit de7fcc164b26fac6a7a2b4b4039a2d25f89b2434.,closed,True,2019-01-24 13:45:19,2019-01-24 13:59:58
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/78,https://api.github.com/repos/hyperledger/iroha-ios/issues/78,New library implementation,,closed,True,2019-01-24 12:13:20,2019-01-24 12:16:42
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/77,https://api.github.com/repos/hyperledger/iroha-ios/issues/77,Rebasing master branch with develop for further develop->master merge,,closed,True,2019-01-24 12:06:54,2019-01-24 12:07:57
+iroha-ios,unklayman,https://github.com/hyperledger/iroha-ios/pull/76,https://api.github.com/repos/hyperledger/iroha-ios/issues/76,New library implementation,,closed,True,2019-01-24 11:16:58,2019-01-24 11:28:54
+iroha-ios,ERussel,https://github.com/hyperledger/iroha-ios/pull/75,https://api.github.com/repos/hyperledger/iroha-ios/issues/75,New library implementation,"- Full Iroha API support implementation add
+- Cocoapods support add",closed,True,2019-01-19 12:40:53,2019-01-24 15:18:56
+iroha-ios,darwinharianto,https://github.com/hyperledger/iroha-ios/issues/74,https://api.github.com/repos/hyperledger/iroha-ios/issues/74,"message: ""query signatories did not pass validation"" when making new account on example","I tried to follow build the code at simulator. 
+
+Steps to reproduce error: 
+1. Compile the code
+2. Run it on simulator
+3. See the logs 😄 
+
+
+```
+ ==================================== Keypair ====================================
+| Public key: [889f6b881e331be21487db77dcf32c5f8d3d5e8066e78d2feac4239fe91d416f]  |
+| Private key: [0f0ce16d2afbb8eca23c7d8c2724f0c257a800ee2bbd54688cec6b898e3f7e33] |
+ =================================================================================
+
+Transaction to Iroha: 
+
+{""commands"":[{""createAccount"":{""accountName"":""lexa"",""domainId"":""test"",""mainPubkey"":""cmNlhnQvsUnxMMmnriN8/H5firRoYEUZePFdguTnmEs=""}}],""creatorAccountId"":""admin@test"",""createdTime"":""1542337977000"",""quorum"":1} 
+
+{}
+Query to Iroha: 
+
+{""meta"":{""createdTime"":""1542337983000"",""creatorAccountId"":""admin@test"",""queryCounter"":""1""},""getAccount"":{""accountId"":""lexa@test""}} 
+
+SwiftyIrohaExample.Iroha_Protocol_QueryResponse:
+error_response {
+  reason: STATEFUL_INVALID
+  message: ""query signatories did not pass validation""
+}
+query_hash: ""f7bcb22ae8c8dbcd856ba63f6dd82dc919d341802723d6fd7918b68aa817ad25""
+```
+
+What should I do to create new account?",closed,False,2018-11-16 03:28:13,2019-01-25 02:16:01
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/73,https://api.github.com/repos/hyperledger/iroha-ios/issues/73,Change repository link in README.md,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-06-16 11:11:24,2018-06-18 21:52:43
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/72,https://api.github.com/repos/hyperledger/iroha-ios/issues/72,Fix get asset info command,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-06-13 16:44:11,2018-06-18 21:52:44
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/71,https://api.github.com/repos/hyperledger/iroha-ios/issues/71,Update transport layer,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-06-12 19:55:36,2018-06-18 21:52:46
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/70,https://api.github.com/repos/hyperledger/iroha-ios/issues/70,Add use insecure connection flag to GRPC generated service,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-06-10 22:37:32,2018-06-18 21:52:45
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/69,https://api.github.com/repos/hyperledger/iroha-ios/issues/69,Update dependencies versions and add new generated service,,closed,True,2018-06-10 21:54:08,2018-06-18 21:52:46
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/68,https://api.github.com/repos/hyperledger/iroha-ios/issues/68,Add ios device compiled c++ libs,,closed,True,2018-06-10 13:56:55,2018-06-10 13:57:18
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/67,https://api.github.com/repos/hyperledger/iroha-ios/issues/67,Update README.md,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-06-10 12:50:35,2018-06-10 12:51:18
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/66,https://api.github.com/repos/hyperledger/iroha-ios/issues/66,Update readme.md,,closed,True,2018-06-05 22:39:36,2018-06-10 12:34:33
+iroha-ios,BlackCat1397,https://github.com/hyperledger/iroha-ios/issues/65,https://api.github.com/repos/hyperledger/iroha-ios/issues/65,Example don't work.,"Trying to launch IrohaSwifty example.
+Getting invalid transactions. Also timestamp is not timestamp but transaction counter.
+
+[2018-06-04 18:27:10.452054845][th:71][warning] CommandService Stateless invalid tx: Signature: [[Wrong signature [ece91bae02bd02ff32812565aa3472dbaa895ffe0bf8dc780452c52340f78043c6f29ed15e5f82aa3b49f6c17af9cfaa197e9e81838f36a669451ee3fd78eb03;407e57f50ca48969b08ba948171bb2435e035d82cec417e18e4a38f5fb113f83] ]]
+Transaction: [[bad timestamp: too old, timestamp: 1, now: 1528126030442 ]]
+",closed,False,2018-06-05 10:01:16,2018-06-11 10:31:18
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/64,https://api.github.com/repos/hyperledger/iroha-ios/issues/64,Fix wrong pointer logic in keypair obj-c,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-05-12 20:51:14,2018-06-05 22:38:21
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/63,https://api.github.com/repos/hyperledger/iroha-ios/issues/63,Fix wrong data from hex string converting,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-05-12 18:08:57,2018-05-12 18:09:03
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/62,https://api.github.com/repos/hyperledger/iroha-ios/issues/62,Fix problem with wrong public key format,Signed-off-by: MukhinAlexey <mukhinalexeym@gmail.com>,closed,True,2018-05-12 14:51:48,2018-06-05 22:38:22
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/61,https://api.github.com/repos/hyperledger/iroha-ios/issues/61,Change GRPC module to Pod dependency,,closed,True,2018-05-07 20:23:00,2018-06-05 22:38:22
+iroha-ios,DenDoronin,https://github.com/hyperledger/iroha-ios/pull/60,https://api.github.com/repos/hyperledger/iroha-ios/issues/60,Removed 'Proto' group from the SwiftyIrohaExample project - redundant…,"Removed 'Proto' group from the SwiftyIrohaExample project - redundant since classes were generated
+
+Signed-off-by: DenDoronin <den.doronind@gmail.com>",closed,True,2018-04-12 14:01:46,2018-05-05 18:45:38
+iroha-ios,MukhinAlexey,https://github.com/hyperledger/iroha-ios/pull/59,https://api.github.com/repos/hyperledger/iroha-ios/issues/59,Update repo for new shared model library,,closed,True,2018-03-29 06:11:54,2018-06-05 22:38:23
+iroha-ios,hao44le,https://github.com/hyperledger/iroha-ios/issues/58,https://api.github.com/repos/hyperledger/iroha-ios/issues/58,Support for iOS10 & Swift 4?,,closed,False,2018-02-23 13:43:16,2018-05-12 17:45:40
+iroha-ios,YoshikiShibata,https://github.com/hyperledger/iroha-ios/issues/57,https://api.github.com/repos/hyperledger/iroha-ios/issues/57,IrohaSwift.podspec.json is incorrect.,All podspec.json files under https://github.com/CocoaPods/Specs/tree/master/Specs/4/5/2/IrohaSwift are pointing to not the correct repository (https://github.com/hyperledger/iroha-ios)  but  a wrong repository (https://github.com/soramitsu/iroha-ios.git) . Please fix them.,closed,False,2018-02-13 01:27:24,2018-06-05 19:13:44
+iroha-ios,ryjones,https://github.com/hyperledger/iroha-ios/pull/56,https://api.github.com/repos/hyperledger/iroha-ios/issues/56,Create dcotrigger,,closed,True,2017-10-14 18:24:57,2017-10-14 18:25:26
+iroha-ios,ryjones,https://github.com/hyperledger/iroha-ios/pull/55,https://api.github.com/repos/hyperledger/iroha-ios/issues/55,Create DCO,DO NOT MERGE,closed,True,2017-10-03 21:27:51,2017-10-03 21:37:17
+iroha-ios,rjones-lf,https://github.com/hyperledger/iroha-ios/pull/54,https://api.github.com/repos/hyperledger/iroha-ios/issues/54,Create cla.md,,closed,True,2017-06-17 08:18:16,2017-06-17 08:20:52
+iroha-ios,rjones-lf,https://github.com/hyperledger/iroha-ios/pull/53,https://api.github.com/repos/hyperledger/iroha-ios/issues/53,Create clahub,This PR exists to trigger CLAHUB. DO NOT MERGE,closed,True,2017-06-02 17:51:17,2017-06-17 08:20:52
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/issues/52,https://api.github.com/repos/hyperledger/iroha-ios/issues/52,implement HTTP Client,"implement simple http client in Swift
+
+- [ ] get
+- [ ] post
+- [ ] put
+- [ ] delete",closed,False,2017-05-17 05:30:46,2017-09-04 06:47:44
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/51,https://api.github.com/repos/hyperledger/iroha-ios/issues/51,separated include dir & libs dir,,closed,True,2017-04-25 10:39:51,2017-04-25 10:39:56
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/50,https://api.github.com/repos/hyperledger/iroha-ios/issues/50,added Target in Package.swift,,closed,True,2017-04-25 08:09:46,2017-04-25 08:09:52
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/49,https://api.github.com/repos/hyperledger/iroha-ios/issues/49,Fix/directry structure,,closed,True,2017-04-25 07:57:57,2017-04-25 07:58:15
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/48,https://api.github.com/repos/hyperledger/iroha-ios/issues/48,move 'IrohaSwiftTests' inner 'Tests',,closed,True,2017-04-25 07:26:49,2017-04-25 07:27:19
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/47,https://api.github.com/repos/hyperledger/iroha-ios/issues/47,fixed directory name for use SPM,,closed,True,2017-04-25 07:05:40,2017-04-25 07:05:47
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/46,https://api.github.com/repos/hyperledger/iroha-ios/issues/46,Feature/package manager,,closed,True,2017-04-25 06:55:39,2017-04-25 06:55:52
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/45,https://api.github.com/repos/hyperledger/iroha-ios/issues/45,fixed project hierarchy,,closed,True,2016-12-25 09:23:28,2016-12-25 09:23:33
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/44,https://api.github.com/repos/hyperledger/iroha-ios/issues/44,fixed this app can operate correctly,,closed,True,2016-12-25 09:15:14,2016-12-25 09:15:22
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/43,https://api.github.com/repos/hyperledger/iroha-ios/issues/43,fixed this app can operate correctly,,closed,True,2016-12-25 09:13:54,2016-12-25 09:13:59
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/42,https://api.github.com/repos/hyperledger/iroha-ios/issues/42,added environmrnt variables Color and Unit,,closed,True,2016-12-24 17:16:41,2016-12-24 17:16:46
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/41,https://api.github.com/repos/hyperledger/iroha-ios/issues/41,added environment variable Host,,closed,True,2016-12-24 13:36:16,2016-12-24 13:36:21
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/40,https://api.github.com/repos/hyperledger/iroha-ios/issues/40,added environment variable Host,,closed,True,2016-12-24 13:31:49,2016-12-24 13:31:54
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/39,https://api.github.com/repos/hyperledger/iroha-ios/issues/39,fixed license,,closed,True,2016-12-22 00:40:49,2016-12-22 00:40:53
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/38,https://api.github.com/repos/hyperledger/iroha-ios/issues/38,add ATS,,closed,True,2016-12-22 00:36:13,2016-12-22 00:36:17
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/37,https://api.github.com/repos/hyperledger/iroha-ios/issues/37,Demo/point feature/vc,,closed,True,2016-12-19 06:06:28,2016-12-19 06:06:33
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/36,https://api.github.com/repos/hyperledger/iroha-ios/issues/36,Demo/point feature/ui,,closed,True,2016-12-09 08:58:51,2016-12-09 08:58:56
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/35,https://api.github.com/repos/hyperledger/iroha-ios/issues/35,fixed signature and verify message to don't use sha3 hash,,closed,True,2016-12-08 12:17:51,2018-06-18 21:52:52
+iroha-ios,takemiyamakoto,https://github.com/hyperledger/iroha-ios/pull/34,https://api.github.com/repos/hyperledger/iroha-ios/issues/34,add license,,closed,True,2016-10-26 01:14:58,2018-06-18 21:52:53
+iroha-ios,takemiyamakoto,https://github.com/hyperledger/iroha-ios/pull/33,https://api.github.com/repos/hyperledger/iroha-ios/issues/33,update links,"update readme
+",closed,True,2016-10-24 06:31:18,2016-10-24 06:31:26
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/32,https://api.github.com/repos/hyperledger/iroha-ios/issues/32,1.0.0a5,,closed,True,2016-10-22 03:35:46,2016-10-22 03:35:50
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/31,https://api.github.com/repos/hyperledger/iroha-ios/issues/31,"add sha3 384, 512 function and test",,closed,True,2016-10-22 02:50:12,2016-10-22 02:50:16
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/30,https://api.github.com/repos/hyperledger/iroha-ios/issues/30,delete all api,,closed,True,2016-10-22 02:20:57,2016-10-22 02:22:04
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/29,https://api.github.com/repos/hyperledger/iroha-ios/issues/29,Use a singleton data manager in framework,"- [x] Manager Class
+- [x] Fixed APIs
+- [x] Fixed Example Project.
+",closed,True,2016-09-30 23:56:31,2016-10-01 14:13:22
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/28,https://api.github.com/repos/hyperledger/iroha-ios/issues/28,fixed signature message & licence ,"- [ ] @MizukiSonoko 
+",closed,True,2016-09-28 02:09:46,2016-09-28 06:57:23
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/27,https://api.github.com/repos/hyperledger/iroha-ios/issues/27,Fixed sign message in api,"- [ ] @MizukiSonoko 
+",closed,True,2016-09-27 13:54:45,2016-09-28 02:10:04
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/26,https://api.github.com/repos/hyperledger/iroha-ios/issues/26,Swift3,,closed,True,2016-09-26 16:44:09,2016-09-26 16:44:13
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/25,https://api.github.com/repos/hyperledger/iroha-ios/issues/25,Swift3,,closed,True,2016-09-25 17:02:29,2016-09-25 17:02:35
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/24,https://api.github.com/repos/hyperledger/iroha-ios/issues/24,create readme,,closed,True,2016-09-25 16:25:39,2016-09-25 16:25:43
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/23,https://api.github.com/repos/hyperledger/iroha-ios/issues/23,Demo app,,closed,True,2016-09-24 09:53:20,2016-09-24 09:53:26
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/22,https://api.github.com/repos/hyperledger/iroha-ios/issues/22,Fix framework,,closed,True,2016-09-24 06:40:31,2016-09-24 06:45:19
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/21,https://api.github.com/repos/hyperledger/iroha-ios/issues/21,Demo app,,closed,True,2016-09-23 14:30:51,2016-09-23 14:30:57
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/20,https://api.github.com/repos/hyperledger/iroha-ios/issues/20,create Account Information View,,closed,True,2016-09-22 05:35:53,2016-09-22 05:36:00
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/19,https://api.github.com/repos/hyperledger/iroha-ios/issues/19,fixed ip&port to access point,,closed,True,2016-09-21 12:22:11,2016-09-21 12:22:17
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/18,https://api.github.com/repos/hyperledger/iroha-ios/issues/18,Demo app,,closed,True,2016-09-21 12:12:17,2016-09-21 12:12:25
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/17,https://api.github.com/repos/hyperledger/iroha-ios/issues/17,separate ed25519 wrapper functions,,closed,True,2016-09-19 08:23:56,2016-09-19 08:24:00
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/16,https://api.github.com/repos/hyperledger/iroha-ios/issues/16,fixed  ed25519 functions to private,,closed,True,2016-09-19 08:09:07,2016-09-19 08:09:11
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/15,https://api.github.com/repos/hyperledger/iroha-ios/issues/15,create signature api,,closed,True,2016-09-19 07:57:43,2016-09-19 07:57:47
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/14,https://api.github.com/repos/hyperledger/iroha-ios/issues/14,Create api,,closed,True,2016-09-19 05:55:52,2016-09-19 05:55:57
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/13,https://api.github.com/repos/hyperledger/iroha-ios/issues/13,Create keychain model,,closed,True,2016-09-19 05:20:24,2016-09-19 05:20:30
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/12,https://api.github.com/repos/hyperledger/iroha-ios/issues/12,Create api,,closed,True,2016-09-19 03:31:24,2016-09-19 03:31:28
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/11,https://api.github.com/repos/hyperledger/iroha-ios/issues/11,create apis,,closed,True,2016-09-18 16:58:14,2016-09-18 16:58:18
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/10,https://api.github.com/repos/hyperledger/iroha-ios/issues/10,create date extension,,closed,True,2016-09-18 16:55:56,2016-09-18 16:56:01
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/9,https://api.github.com/repos/hyperledger/iroha-ios/issues/9,create HttpRequest Model,,closed,True,2016-09-18 16:54:14,2016-09-18 16:54:21
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/8,https://api.github.com/repos/hyperledger/iroha-ios/issues/8,create podspec file,,closed,True,2016-09-18 06:37:25,2016-09-18 06:37:32
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/7,https://api.github.com/repos/hyperledger/iroha-ios/issues/7,dealloc mutable pointer,,closed,True,2016-09-18 05:16:02,2016-09-18 05:16:07
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/6,https://api.github.com/repos/hyperledger/iroha-ios/issues/6,fixed array to base64 string,,closed,True,2016-09-18 04:59:00,2016-09-18 04:59:04
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/5,https://api.github.com/repos/hyperledger/iroha-ios/issues/5,add base64 library,,closed,True,2016-09-18 03:29:20,2016-09-18 03:29:26
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/4,https://api.github.com/repos/hyperledger/iroha-ios/issues/4,Create ed25519 wrapper,,closed,True,2016-09-18 03:25:41,2016-09-18 03:26:03
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/3,https://api.github.com/repos/hyperledger/iroha-ios/issues/3,create example project,,closed,True,2016-09-17 16:47:13,2016-09-17 16:47:17
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/2,https://api.github.com/repos/hyperledger/iroha-ios/issues/2,add ed25519 in project,,closed,True,2016-09-17 15:28:53,2016-09-17 15:28:58
+iroha-ios,kj3104,https://github.com/hyperledger/iroha-ios/pull/1,https://api.github.com/repos/hyperledger/iroha-ios/issues/1,add ed25519 submodule,,closed,True,2016-09-17 15:26:16,2016-09-17 15:26:19

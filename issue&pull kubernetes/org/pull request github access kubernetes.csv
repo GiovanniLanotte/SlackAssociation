@@ -1,0 +1,1158 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+org,https://api.github.com/repos/kubernetes/org/pulls/1,https://github.com/kubernetes/org/pull/1,cblecker,Commit initial copy of members list,,['fejta'],1,2018-06-21 03:44:30,2018-06-21 22:29:51,2018-06-21 22:33:13,True,2018-06-21 22:29:51,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/2,https://github.com/kubernetes/org/pull/2,cblecker,Update meta org,"This updates the meta org as follows:
+- Pull a copy of the OWNERS_ALIASES from k/community
+- Updates membership as of 7/16
+- Adds a folder of team members for sig-contributor-experience. Example of what it would look like to have sig-responsible teams.",['fejta'],1,2018-07-06 22:06:52,2018-07-07 19:49:18,2018-07-07 19:49:22,True,2018-07-07 19:49:18,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/3,https://github.com/kubernetes/org/pull/3,cblecker,Add issue templates,This adds issue templates to allow users to submit common kinds of requests.,['idvoretskyi'],1,2018-08-07 23:25:27,2018-08-08 17:40:30,2018-08-08 17:49:46,True,2018-08-08 17:40:30,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/5,https://github.com/kubernetes/org/pull/5,cblecker,"Update org configurations - Aug 8, 2018","- Update OWNERS files
+- Add org configs for all active orgs
+- Dump current org membership for all active orgs.",['fejta'],2,2018-08-08 19:17:53,2018-08-09 03:23:40,2018-08-09 03:33:19,True,2018-08-09 03:23:40,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/8,https://github.com/kubernetes/org/pull/8,fejta,Script to apply declared config,"Plus other initial infrastructure
+
+/assign @spiffxp @cblecker 
+
+Primarily supporting the following:
+```shell
+bazel test //config:all  # Test all the various config/kubernetes-foo orgs
+bazel run //admin:update # Run peribolos on all the files
+```
+
+Docs at https://github.com/fejta/org/blob/infra/admin/README.md","['spiffxp', 'calebamiles', 'cblecker']",2,2018-08-11 01:13:10,2018-08-23 04:11:40,2018-08-23 04:11:44,True,2018-08-23 04:11:40,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/11,https://github.com/kubernetes/org/pull/11,nikhita,ISSUE_TEMPLATE/membership: fix markdown rendering,"In the current issue template for membership, the last few points are not displayed in ""List of contributions"": https://github.com/kubernetes/org/blob/master/.github/ISSUE_TEMPLATE/membership.md#list-of-contributions-to-the-kubernetes-project. I think it's because the points are listed in angle brackets (`<Issues responded to>`), which markdown treats as html.
+
+/assign cblecker ","['cblecker', 'spzala']",1,2018-08-14 08:39:48,2018-08-14 18:09:05,2018-08-14 18:09:05,True,2018-08-14 18:09:05,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/27,https://github.com/kubernetes/org/pull/27,fejta,Vendor ability to read prow configs,"First commit is some `.gitignore` entries
+
+Second commit is `hack/update-deps.sh` (see the [test-infra](https://github.com/kubernetes/test-infra/blob/master/hack/update-deps.sh) version of this script) on #8.
+
+Once we get this and `0c141977c30f2b684db1a1fdd8e5a1f320badea9` in we can add presubmits to validate all the `hack/verify-*` scripts pass before merge (let me know if you want me to add the hack scripts into this PR or the next one).
+
+/assign @calebamiles @spiffxp @cblecker  ","['spiffxp', 'calebamiles', 'cblecker']",2,2018-08-21 22:51:56,2018-08-21 23:25:30,2018-08-21 23:25:54,True,2018-08-21 23:25:30,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/28,https://github.com/kubernetes/org/pull/28,fejta,Add some bazel and hack rules,"Once these are checked in I can add presubmit jobs for this repo
+
+
+/assign @calebamiles @spiffxp @cblecker ","['spiffxp', 'calebamiles', 'cblecker']",1,2018-08-21 23:30:52,2018-08-21 23:59:28,2019-01-17 07:26:55,True,2018-08-21 23:59:28,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/41,https://github.com/kubernetes/org/pull/41,fejta,Allow hack/*-gofmt.sh to work without installing gosdk,"Also ensures the correct version of gofmt is used
+
+/hold
+Want this PR to pass presubmits after https://github.com/kubernetes/test-infra/pull/9133 merges
+","['spiffxp', 'calebamiles', 'cblecker']",1,2018-08-23 05:18:00,2018-08-23 18:24:20,2018-08-24 19:34:36,True,2018-08-23 18:24:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/44,https://github.com/kubernetes/org/pull/44,cblecker,Update from dump - Aug 30,,['spiffxp'],1,2018-08-27 15:40:07,2018-08-30 23:45:19,2018-08-31 01:47:23,True,2018-08-30 23:45:19,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/55,https://github.com/kubernetes/org/pull/55,cblecker,Update membership - Sept 3,"fixes #53.
+fixes #54.",['idvoretskyi'],1,2018-09-03 22:58:11,2018-09-04 14:17:35,2018-09-04 14:17:55,True,2018-09-04 14:17:34,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/62,https://github.com/kubernetes/org/pull/62,spiffxp,Update org membership - sep 4,"I manually invited all of these people, and updated the configs accordingly.
+
+Fixes #50
+Fixes #57
+Fixes #59
+Fixes #61 
+Fixes #63",['cblecker'],1,2018-09-05 00:56:07,2018-09-05 17:10:32,2018-09-05 19:03:24,True,2018-09-05 17:10:32,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/67,https://github.com/kubernetes/org/pull/67,fejta,Fix README.md and update.sh script,/assign @spiffxp @calebamiles @cblecker ,"['spiffxp', 'calebamiles', 'cblecker']",1,2018-09-05 14:26:20,2018-09-05 17:18:29,2018-09-06 04:26:21,True,2018-09-05 17:18:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/68,https://github.com/kubernetes/org/pull/68,spiffxp,Add proposed cri-tools admins to kubernetes-sigs,"Fixes #64 
+Fixes #65 
+",['idvoretskyi'],1,2018-09-05 19:17:23,2018-09-06 17:30:04,2018-09-06 21:05:20,True,2018-09-06 17:30:04,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/72,https://github.com/kubernetes/org/pull/72,spiffxp,Add yujuhong to kubernetes-sigs org,Fixes #71,['cblecker'],1,2018-09-06 21:10:08,2018-09-06 21:51:15,2018-09-06 23:07:06,True,2018-09-06 21:51:15,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/73,https://github.com/kubernetes/org/pull/73,spiffxp,Add runcom to kubernetes-sigs org,Fixues #66,['cblecker'],1,2018-09-06 21:15:30,2018-09-06 21:59:21,2018-09-06 23:06:59,True,2018-09-06 21:59:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/74,https://github.com/kubernetes/org/pull/74,spiffxp,Add brahmaroutu to kubernetes org,Fixes #69,['cblecker'],1,2018-09-06 21:18:15,2018-09-06 22:07:18,2018-09-06 23:07:02,True,2018-09-06 22:07:18,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/77,https://github.com/kubernetes/org/pull/77,spiffxp,Add kacole2 to kubernetes org,Fixes #75,['cblecker'],1,2018-09-07 20:10:20,2018-09-07 20:24:42,2018-09-07 20:26:05,True,2018-09-07 20:24:42,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/79,https://github.com/kubernetes/org/pull/79,spiffxp,Add caesarxuchao to kubernetes-sigs org,Fixes #78,['cblecker'],1,2018-09-07 22:39:19,2018-09-07 22:45:41,2018-09-08 02:38:45,True,2018-09-07 22:45:41,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/85,https://github.com/kubernetes/org/pull/85,spiffxp,Add pigletfly to kubernetes org,Fixes #81,['idvoretskyi'],1,2018-09-11 17:06:06,2018-09-11 17:13:00,2018-09-11 17:39:43,True,2018-09-11 17:13:00,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/89,https://github.com/kubernetes/org/pull/89,cblecker,Update org configs - Sept 12,"Took another dump.
+
+Looks like (at)theairkit deleted their account.
+@amwat, @BenTheElder, @munnerz, @krzyzacy added in #86 
+@jennybuckley added in #70 
+
+/assign @spiffxp @fejta ","['spiffxp', 'fejta']",1,2018-09-12 22:35:48,2018-09-12 22:44:43,2018-09-12 22:45:59,True,2018-09-12 22:44:43,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/90,https://github.com/kubernetes/org/pull/90,fejta,Much whitespace. Very tab.,"/hold
+
+This ought to fail the presubmit",[],1,2018-09-12 22:54:31,2018-09-24 17:26:59,2018-09-24 17:27:03,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/94,https://github.com/kubernetes/org/pull/94,spiffxp,Add owners for kubernetes-sigs/sig-storage-lib-external-provisioner,ref: https://github.com/kubernetes/org/issues/88,['fejta'],1,2018-09-18 17:51:13,2018-09-18 19:00:47,2018-09-18 19:14:23,True,2018-09-18 19:00:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/95,https://github.com/kubernetes/org/pull/95,spiffxp,Add members,"Fixes #91
+Fixes #93",['cblecker'],1,2018-09-18 19:38:52,2018-09-18 20:04:54,2018-09-27 20:35:48,True,2018-09-18 20:04:54,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/96,https://github.com/kubernetes/org/pull/96,cblecker,Add required admins,,['fejta'],1,2018-09-18 20:02:06,2018-09-18 21:34:45,2018-09-18 22:01:24,True,2018-09-18 21:34:45,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/97,https://github.com/kubernetes/org/pull/97,cblecker,Fix syntax on required-admins,/assign @fejta ,['fejta'],1,2018-09-18 22:53:06,2018-09-19 00:26:35,2018-09-19 00:39:51,True,2018-09-19 00:26:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/98,https://github.com/kubernetes/org/pull/98,cblecker,Add additional users to kubernetes-incubator,There were some users in kubernetes/org#16 that didn't end up getting PR'd and didn't accept their invite right away. This adds them to the config so they don't get deleted as soon as they accept their invite.,['spiffxp'],1,2018-09-19 00:50:50,2018-09-19 00:57:42,2018-09-19 01:32:57,True,2018-09-19 00:57:42,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/99,https://github.com/kubernetes/org/pull/99,cblecker,Update k8s.io/test-infra to 36f61e5,"pulls in https://github.com/kubernetes/test-infra/pull/9476
+
+/assign @fejta ","['spiffxp', 'fejta']",1,2018-09-19 02:23:22,2018-09-19 17:35:12,2018-09-19 17:35:20,True,2018-09-19 17:35:12,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/100,https://github.com/kubernetes/org/pull/100,cblecker,Add my sockpuppet to all orgs .. for science!,Will revert when I confirm that everything works :),['spiffxp'],1,2018-09-19 18:37:53,2018-09-19 18:43:45,2018-09-19 18:43:58,True,2018-09-19 18:43:45,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/101,https://github.com/kubernetes/org/pull/101,cblecker,"Revert ""Merge pull request #100 from cblecker/puppeteer""","This reverts commit af52a033aa8cea1da1ba025b1b59f919d0748c2c, reversing
+changes made to 916928f00e4bbe38dbeb4eef4e069ef373ac5a5b.",['spiffxp'],1,2018-09-19 18:51:29,2018-09-19 18:57:51,2018-09-19 18:58:15,True,2018-09-19 18:57:51,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/106,https://github.com/kubernetes/org/pull/106,cblecker,Add new memberships for September 21,"fixes #102, fixes #103, fixes #104, fixes #105 ",['spiffxp'],4,2018-09-21 18:22:36,2018-09-21 18:46:44,2018-09-21 19:10:59,True,2018-09-21 18:46:43,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/109,https://github.com/kubernetes/org/pull/109,cblecker,Add additional memberships for Sept 21,"fixes #107, fixes #108",['spiffxp'],2,2018-09-21 19:22:28,2018-09-21 21:23:38,2018-09-21 22:08:00,True,2018-09-21 21:23:37,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/111,https://github.com/kubernetes/org/pull/111,cblecker,Add nikhita to kubernetes-sigs,fixes #110 ,['idvoretskyi'],1,2018-09-22 22:21:02,2018-09-23 07:37:25,2018-09-23 22:01:33,True,2018-09-23 07:37:25,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/114,https://github.com/kubernetes/org/pull/114,fejta,Require org members to be sorted,"/assign @cblecker @spiffxp @nikhiljindal 
+
+a) Do we want to enforce this (we already enforce the absence of duplicates)
+b) Do we want to enforce case sensitive sorting?","['spiffxp', 'cblecker']",1,2018-09-24 17:28:24,2018-09-24 18:34:07,2018-09-24 18:35:43,True,2018-09-24 18:34:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/116,https://github.com/kubernetes/org/pull/116,cblecker,New membership for ameukam,fixes #115.,['idvoretskyi'],1,2018-09-25 17:20:52,2018-09-25 19:13:15,2018-09-25 19:15:42,True,2018-09-25 19:13:15,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/119,https://github.com/kubernetes/org/pull/119,spiffxp,Add dougm and nikopen,"Fixes #113
+Fixes #117",['cblecker'],1,2018-09-27 20:39:25,2018-09-27 21:35:00,2018-09-27 22:15:29,True,2018-09-27 21:35:00,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/128,https://github.com/kubernetes/org/pull/128,cblecker,bump periobolos to 85f0831,/assign @fejta ,['fejta'],1,2018-10-02 17:57:07,2018-10-02 18:06:14,2018-10-02 18:06:14,True,2018-10-02 18:06:14,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/130,https://github.com/kubernetes/org/pull/130,cblecker,Add new memberships - October 2,"fixes #120.
+fixes #126.
+fixes #127.
+",['fejta'],3,2018-10-02 18:07:03,2018-10-02 18:54:06,2018-10-02 19:20:35,True,2018-10-02 18:54:05,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/131,https://github.com/kubernetes/org/pull/131,spiffxp,"Add bertinatto to kubernetes, kubernetes-sigs",Fixes #125,['cblecker'],1,2018-10-02 21:07:55,2018-10-02 21:17:56,2018-10-03 21:06:06,True,2018-10-02 21:17:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/132,https://github.com/kubernetes/org/pull/132,spiffxp,Add k82cn to kubernetes-sigs,"Currently a member of the
+kubernetes-incubator/admins-kube-arbitrator team
+
+Planning to move kubernetes-incubator/kube-arbitrator repo over
+to kuberentes-sigs
+
+ref: #112",[],1,2018-10-02 22:16:52,2018-10-03 01:13:43,2018-10-03 01:14:01,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/135,https://github.com/kubernetes/org/pull/135,spiffxp,Add members - October 2,"ref: #112 (in lieu of #132)
+Fixes #134",['cblecker'],2,2018-10-03 01:16:40,2018-10-03 16:51:59,2018-10-03 21:06:52,True,2018-10-03 16:51:59,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/138,https://github.com/kubernetes/org/pull/138,spiffxp,Add some members,"Fixes: #133
+Fixes: #136",['fejta'],2,2018-10-03 21:13:18,2018-10-03 21:38:29,2018-10-03 22:32:10,True,2018-10-03 21:38:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/140,https://github.com/kubernetes/org/pull/140,cblecker,Add justaugustus and mrbobbytables as front line membership reviewers,/cc @justaugustus @mrbobbytables ,"['spiffxp', 'justaugustus', 'calebamiles']",1,2018-10-04 23:04:02,2018-10-06 00:39:50,2018-10-06 00:40:23,True,2018-10-06 00:39:50,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/142,https://github.com/kubernetes/org/pull/142,justaugustus,"Add chaosaffe to k, k-sigs orgs","Fixes: #139 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>",['cblecker'],1,2018-10-06 04:36:27,2018-10-06 06:14:52,2018-10-06 06:14:52,True,2018-10-06 06:14:51,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/143,https://github.com/kubernetes/org/pull/143,justaugustus,"Add m00nf1sh to k, k-sigs orgs","Fixes: #121 
+
+/assign @cblecker 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>",['cblecker'],1,2018-10-06 06:12:15,2018-10-06 06:59:11,2018-10-06 06:59:11,True,2018-10-06 06:59:11,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/144,https://github.com/kubernetes/org/pull/144,flaper87,Add flaper87 to the kubernetes-sig org,,"['dims', 'justaugustus', 'cblecker']",1,2018-10-08 11:34:27,2018-10-08 14:52:49,2018-10-08 14:52:49,True,2018-10-08 14:52:48,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/145,https://github.com/kubernetes/org/pull/145,Lion-Wei,Add Lion-Wei and m1093782566 to kubernetes-sigs,"GitHub Username
+@Lion-Wei 
+
+Organization you are requesting membership in
+@kubernetes-sigs
+
+Requirements
+I am already a member of @kubernetes.","['idvoretskyi', 'justaugustus']",1,2018-10-08 11:43:42,2018-10-08 15:15:41,2018-10-09 01:10:46,True,2018-10-08 15:15:41,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/146,https://github.com/kubernetes/org/pull/146,mrbobbytables,Add liyinan926 to Kubernetes Org,Fixes #129 ,['idvoretskyi'],1,2018-10-08 11:44:56,2018-10-08 15:06:06,2018-10-09 00:48:14,True,2018-10-08 15:06:06,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/150,https://github.com/kubernetes/org/pull/150,spiffxp,Use area/github-* labels in issue templates,"Depends on https://github.com/kubernetes/test-infra/pull/9738
+
+ref: https://github.com/kubernetes/org/issues/149
+
+/cc @fejta @cblecker",['cblecker'],1,2018-10-09 01:12:10,2018-10-10 02:44:34,2018-10-10 16:22:38,True,2018-10-10 02:44:34,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/152,https://github.com/kubernetes/org/pull/152,mrbobbytables,Add chrisohaver to Kubernetes Org,fixes #148 ,"['spiffxp', 'cblecker']",1,2018-10-09 14:34:56,2018-10-09 15:46:14,2018-10-10 01:19:00,True,2018-10-09 15:46:14,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/156,https://github.com/kubernetes/org/pull/156,mrbobbytables,Add warmchang to kubernetes and kubernetes-incubator orgs,fixes #151 ,['cblecker'],1,2018-10-10 21:36:06,2018-10-10 21:54:41,2018-10-16 20:05:27,True,2018-10-10 21:54:41,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/160,https://github.com/kubernetes/org/pull/160,justaugustus,Add dstrebel + pohly,"Fixes: #122, #155 
+
+/area github-membership","['spiffxp', 'cblecker']",2,2018-10-11 16:24:39,2018-10-11 16:56:10,2018-10-11 16:56:10,True,2018-10-11 16:56:10,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/161,https://github.com/kubernetes/org/pull/161,justaugustus,"Add alvaroaleman to k, k-sigs orgs","Fixes: #158 
+
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+/area github-membership",['cblecker'],1,2018-10-11 17:06:16,2018-10-11 17:12:35,2018-10-11 17:12:35,True,2018-10-11 17:12:34,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/165,https://github.com/kubernetes/org/pull/165,spiffxp,Update the repo-create template with more questions,"These are questions I find myself guessing the answer to or
+having to ask as followup requests to the initial create
+
+I'm also adding ""staging"" as an option since we tend to
+create a bunch of those and they have slightly different
+requirements from new or migrated repos
+
+/cc @cblecker @calebamiles
+Since you've also handled repo creation in the past",['cblecker'],1,2018-10-12 20:49:32,2018-10-19 23:14:18,2018-10-20 17:48:56,True,2018-10-19 23:14:18,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/166,https://github.com/kubernetes/org/pull/166,justaugustus,Add gyuho + tizhou86,"Fixes: https://github.com/kubernetes/org/issues/163
+Fixes: https://github.com/kubernetes/org/issues/157
+
+/area github-membership",['cblecker'],2,2018-10-12 21:04:52,2018-10-12 21:50:19,2018-10-12 21:50:19,True,2018-10-12 21:50:18,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/167,https://github.com/kubernetes/org/pull/167,mrbobbytables,Add chentao1596 to Kubernetes Org,"fixes #162
+
+/area github-membership",['cblecker'],1,2018-10-14 12:30:18,2018-10-14 16:43:56,2018-10-16 20:05:22,True,2018-10-14 16:43:55,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/171,https://github.com/kubernetes/org/pull/171,mrbobbytables,Add jinzhejz and mcrute to Kubernetes and Kubernetes-sigs Orgs,"fixes #168 
+fixes #169 
+
+/area github-membership",['cblecker'],2,2018-10-16 20:38:26,2018-10-16 22:46:33,2018-10-25 18:53:44,True,2018-10-16 22:46:33,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/176,https://github.com/kubernetes/org/pull/176,cblecker,Add new memberships - October 18th,"fixes #170
+fixes #173
+fixes #175",['mrbobbytables'],3,2018-10-18 19:45:35,2018-10-18 20:14:36,2018-10-23 21:30:31,True,2018-10-18 20:14:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/177,https://github.com/kubernetes/org/pull/177,spiffxp,Add marquiz to kubernetes-sigs,Fixes #174,['cblecker'],1,2018-10-20 17:50:43,2018-10-20 18:28:53,2019-01-18 19:52:49,True,2018-10-20 18:28:53,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/183,https://github.com/kubernetes/org/pull/183,mrbobbytables,Add jingxu97 to kubernetes-sigs org,"fixes #181
+
+/area github-membership","['justaugustus', 'grodrigues3']",1,2018-10-23 02:06:49,2018-10-23 07:00:48,2018-10-25 18:53:45,True,2018-10-23 07:00:48,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/185,https://github.com/kubernetes/org/pull/185,justaugustus,Add new members (181023),"Fixes: #184 
+Related: #179 ","['calebamiles', 'cblecker']",3,2018-10-23 23:07:43,2018-10-24 17:49:52,2018-10-24 17:49:52,True,2018-10-24 17:49:52,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/187,https://github.com/kubernetes/org/pull/187,justaugustus,Add more kube-batch contributors to k-sigs,"Fixes: #178 
+Fixes: #182","['cblecker', 'mrbobbytables']",2,2018-10-24 10:00:33,2018-10-24 17:56:53,2018-10-24 17:56:53,True,2018-10-24 17:56:53,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/188,https://github.com/kubernetes/org/pull/188,iamemilio,update membership,@egarcia in slack :),[],1,2018-10-24 15:31:40,2018-10-24 15:32:20,2018-10-24 15:32:20,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/191,https://github.com/kubernetes/org/pull/191,fejta,Add --merge-teams and --ignore-teams flags to the merge binary,"/assign @cblecker @spiffxp 
+
+This will allow us to delegate team membership to sigs.
+
+Try out with `bazel run //cmd/merge -- --org-part=kubernetes=$PWD/config/kubernetes/org.yaml --merge-teams`
+
+When we want to turn this on switch `--ignore-teams` to `--merge-teams` in `//config:gen-config.yaml`","['spiffxp', 'cblecker']",2,2018-10-24 23:29:21,2018-10-25 17:27:12,2018-10-25 17:28:11,True,2018-10-25 17:27:12,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/192,https://github.com/kubernetes/org/pull/192,mrbobbytables,Add members to kubernetes / kubernetes-sigs orgs,"fixes #186 
+fixes #189 
+fixes #190 
+",['cblecker'],3,2018-10-25 14:17:49,2018-10-25 18:11:36,2018-11-01 23:31:48,True,2018-10-25 18:11:36,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/194,https://github.com/kubernetes/org/pull/194,cblecker,Add liggitt to k-sigs,fixes #193,['justaugustus'],1,2018-10-25 23:23:26,2018-10-25 23:38:13,2018-10-25 23:40:24,True,2018-10-25 23:38:13,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/199,https://github.com/kubernetes/org/pull/199,cblecker,Add new org members - Oct 26,"fixes #197.
+fixes #198.","['justaugustus', 'nikhita']",2,2018-10-26 22:08:09,2018-10-27 10:15:43,2018-10-27 19:41:00,True,2018-10-27 10:15:43,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/207,https://github.com/kubernetes/org/pull/207,mrbobbytables,Add members to kubernetes and kubernetes-sigs org,"fixes #200 
+fixes #201 
+
+/area github-membership",['cblecker'],2,2018-10-30 12:56:04,2018-10-30 17:36:31,2018-11-01 23:31:46,True,2018-10-30 17:36:30,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/212,https://github.com/kubernetes/org/pull/212,justaugustus,Add new members (181030),"Fixes: #202 
+Fixes: #203 
+Fixes: #204 
+Fixes: #205 
+Fixes: #206 
+Fixes: #209 
+Fixes: #210 
+Fixes: #211 
+
+/assign @cblecker ","['cblecker', 'mrbobbytables']",8,2018-10-31 03:38:49,2018-11-01 16:48:14,2018-11-01 16:48:14,True,2018-11-01 16:48:12,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/215,https://github.com/kubernetes/org/pull/215,mrbobbytables,Add yue9944882 to kubernetes-incubator org,"fixes #214
+
+/area github-membership",['cblecker'],1,2018-11-01 23:40:29,2018-11-01 23:56:47,2018-11-07 22:28:39,True,2018-11-01 23:56:46,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/220,https://github.com/kubernetes/org/pull/220,cblecker,New memberships - Nov 3,"fixes #216 
+fixes #218 ",['mrbobbytables'],2,2018-11-03 20:47:33,2018-11-03 20:54:05,2018-11-03 20:54:33,True,2018-11-03 20:54:04,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/221,https://github.com/kubernetes/org/pull/221,mrbobbytables,Add hardikdr and neolit123 to orgs,"fixes #216 
+fixes #218 
+
+/area github-membership",[],2,2018-11-03 20:48:58,2018-11-03 20:50:08,2018-11-07 22:28:40,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/224,https://github.com/kubernetes/org/pull/224,mrbobbytables,Add immutableT and idealhack to orgs.,"fixes #222 
+fixes #223 
+
+/area github-membership",['justaugustus'],2,2018-11-07 13:01:30,2018-11-07 17:47:38,2018-11-07 22:28:41,True,2018-11-07 17:47:37,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/226,https://github.com/kubernetes/org/pull/226,mrbobbytables,Add animeshsingh and jbartosik to orgs,"fixes #219 
+fixes #225 
+
+/area github-membership",['cblecker'],2,2018-11-07 22:41:12,2018-11-07 22:56:29,2018-11-14 04:36:44,True,2018-11-07 22:56:28,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/228,https://github.com/kubernetes/org/pull/228,justaugustus,Add wenjiaswe to kubernetes org,"Fixes: #227 
+Signed-off-by: Stephen Augustus <foo@agst.us>",['mrbobbytables'],1,2018-11-08 14:32:03,2018-11-08 15:15:54,2018-11-08 15:15:54,True,2018-11-08 15:15:53,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/234,https://github.com/kubernetes/org/pull/234,mrbobbytables,Add members 09-11-2018,"fixes #229
+fixes #230 
+fixes #231 
+fixes #232 
+fixes #233 
+fixes #235 
+
+/area github-membership","['idvoretskyi', 'justaugustus', 'cblecker']",6,2018-11-09 12:35:07,2018-11-09 18:57:24,2018-11-14 04:36:42,True,2018-11-09 18:57:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/241,https://github.com/kubernetes/org/pull/241,mrbobbytables,Add aoxn and zhangqx2010 to kubernetes org,"fixes #236 
+fixes #238 
+
+/area github-membership",['cblecker'],2,2018-11-14 04:32:30,2018-11-14 05:16:19,2018-11-19 21:53:07,True,2018-11-14 05:16:19,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/247,https://github.com/kubernetes/org/pull/247,mrbobbytables,Add fleeto and cofyc to orgs,"fixes #242 
+fixes #245 
+
+/area github-membership",['justaugustus'],2,2018-11-16 13:30:06,2018-11-16 18:16:04,2018-11-19 21:53:09,True,2018-11-16 18:16:04,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/249,https://github.com/kubernetes/org/pull/249,mrbobbytables,"Add danielqsj to kubernetes, kubernetes-sigs orgs","fixes #246 
+
+/area github-membership",['cblecker'],1,2018-11-17 20:37:37,2018-11-17 23:38:37,2018-11-19 21:53:10,True,2018-11-17 23:38:36,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/252,https://github.com/kubernetes/org/pull/252,mrbobbytables,Add chenrui333 and chrigl to orgs.,"fixes #237 
+fixes #251 
+
+/area github-membership",[],2,2018-11-19 19:50:56,2018-11-19 19:59:30,2018-11-19 21:53:13,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/253,https://github.com/kubernetes/org/pull/253,mrbobbytables,Add members 19112018,"fixes #237 
+fixes #240 
+fixes #251 
+
+/area github-membership",['cblecker'],3,2018-11-19 20:04:47,2018-11-19 20:12:17,2018-11-19 21:53:16,True,2018-11-19 20:12:17,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/257,https://github.com/kubernetes/org/pull/257,justaugustus,Members 181119,"Fixes: #243 
+Fixes: #256 ","['cblecker', 'mrbobbytables']",2,2018-11-20 03:25:15,2018-11-20 18:25:38,2018-11-20 18:25:38,True,2018-11-20 18:25:38,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/259,https://github.com/kubernetes/org/pull/259,cblecker,Add new members for Nov 20,"fixes #250
+also ref #248 to add sig-docs folks to k-sigs",['mrbobbytables'],2,2018-11-20 20:42:32,2018-11-20 20:56:37,2018-11-20 20:56:51,True,2018-11-20 20:56:36,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/263,https://github.com/kubernetes/org/pull/263,mrbobbytables,Add yastij  and jonpusifer to orgs,"fixes #261 
+fixes #262 
+
+/area github-membership",['cblecker'],2,2018-11-21 17:09:56,2018-11-21 17:53:19,2018-11-23 14:36:39,True,2018-11-21 17:53:18,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/265,https://github.com/kubernetes/org/pull/265,justaugustus,New Members (181122),"Gobble, gobble!",['cblecker'],2,2018-11-22 19:26:53,2018-11-22 20:29:54,2018-11-22 20:29:54,True,2018-11-22 20:29:54,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/270,https://github.com/kubernetes/org/pull/270,cblecker,Add balajismaniam to kubernetes-sigs,ref https://github.com/kubernetes/org/issues/172,['justaugustus'],1,2018-11-27 20:02:26,2018-11-27 20:09:30,2018-11-27 20:10:34,True,2018-11-27 20:09:30,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/271,https://github.com/kubernetes/org/pull/271,justaugustus,Add hhoover to kubernetes org,"Fixes: #267 
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+/assign @cblecker ",['cblecker'],1,2018-11-27 21:05:16,2018-11-27 22:19:52,2018-11-27 22:19:52,True,2018-11-27 22:19:51,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/273,https://github.com/kubernetes/org/pull/273,justaugustus,Add soggiest to kubernetes org,"Fixes: #272 
+Signed-off-by: Stephen Augustus <foo@agst.us>
+
+/assign @cblecker ",['cblecker'],1,2018-11-28 04:57:39,2018-11-28 06:57:44,2018-11-28 06:57:44,True,2018-11-28 06:57:44,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/278,https://github.com/kubernetes/org/pull/278,mrbobbytables,Add users 2018-11-29,"fixes #274
+fixes #276 
+fixes #277 
+
+/area github-membership",['justaugustus'],3,2018-11-29 23:23:25,2018-11-29 23:35:11,2018-12-16 15:06:04,True,2018-11-29 23:35:10,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/279,https://github.com/kubernetes/org/pull/279,cblecker,Bump dependencies,"Brings in peribolos fix, as well as updated dependencies from k8s.io/test-infra",['fejta'],1,2018-11-29 23:33:22,2018-11-30 00:42:14,2018-11-30 00:52:16,True,2018-11-30 00:42:14,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/282,https://github.com/kubernetes/org/pull/282,mrbobbytables,Add members 2018-11-30,"fixes #275 
+fixes #281 
+
+/area github-membership",['justaugustus'],2,2018-12-01 03:01:55,2018-12-01 04:37:36,2018-12-16 15:06:03,True,2018-12-01 04:37:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/293,https://github.com/kubernetes/org/pull/293,cblecker,Include teams.yaml in bazel srcs,,['fejta'],2,2018-12-08 01:11:50,2018-12-10 18:19:17,2018-12-10 18:19:39,True,2018-12-10 18:19:17,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/296,https://github.com/kubernetes/org/pull/296,mrbobbytables,Add members 2018-12-10,"fixes #266 
+fixes #283 
+fixes #288 
+fixes #289 
+fixes #290 
+fixes #291 
+fixes #292 
+fixes #295 
+
+/area github-membership",['cblecker'],8,2018-12-11 02:08:24,2018-12-11 02:34:38,2018-12-16 15:06:02,True,2018-12-11 02:34:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/305,https://github.com/kubernetes/org/pull/305,calebamiles,"Add piosz, brancz, dashpole to kubernetes-sigs",as required to fully implement https://github.com/kubernetes/org/issues/285,['cblecker'],3,2018-12-13 03:16:09,2018-12-13 18:51:24,2018-12-13 18:51:24,True,2018-12-13 18:51:24,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/306,https://github.com/kubernetes/org/pull/306,mrbobbytables,Add members 2018-12-13,"fixes #297 
+fixes #298 
+fixes #299 
+fixes #300 
+fixes #303
+
+/area github-membership",['calebamiles'],5,2018-12-13 18:17:53,2018-12-13 18:25:27,2018-12-16 15:06:01,True,2018-12-13 18:25:26,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/307,https://github.com/kubernetes/org/pull/307,calebamiles,Add Monkeyanator to kubernetes-sigs,"- per [287][]
+
+[287]: https://github.com/kubernetes/org/issues/287","['calebamiles', 'cblecker', 'mrbobbytables']",1,2018-12-13 19:19:14,2018-12-13 19:35:38,2018-12-13 19:35:38,True,2018-12-13 19:35:38,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/309,https://github.com/kubernetes/org/pull/309,cblecker,Add kubernetes members to kubernetes-sigs for windows-testing repo,ref https://github.com/kubernetes/org/issues/258,['justaugustus'],2,2018-12-17 00:52:24,2018-12-17 02:27:32,2018-12-17 09:11:01,True,2018-12-17 02:27:32,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/313,https://github.com/kubernetes/org/pull/313,mrbobbytables,Add member 2018-12-18,"fixes #310 
+fixes #311 
+fixes #312 
+
+/area github-membership",['justaugustus'],3,2018-12-18 22:13:34,2018-12-18 22:27:22,2018-12-24 16:16:58,True,2018-12-18 22:27:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/319,https://github.com/kubernetes/org/pull/319,mrbobbytables,Add members 2018-12-19,"fixes #315 
+fixes #316 
+
+/area github-membership","['justaugustus', 'cblecker']",2,2018-12-20 02:40:34,2018-12-20 04:36:58,2018-12-24 16:17:00,True,2018-12-20 04:36:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/320,https://github.com/kubernetes/org/pull/320,nikhita,Remove WIP note in README,"Peribolos is no longer WIP. \o/
+
+/assign @fejta @cblecker ","['fejta', 'cblecker']",1,2018-12-20 20:32:19,2018-12-20 20:38:34,2018-12-20 20:39:09,True,2018-12-20 20:38:34,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/325,https://github.com/kubernetes/org/pull/325,mrbobbytables,Add members 2018-12-24,"fixes #323 
+
+/area github-membership",['cblecker'],1,2018-12-24 16:21:26,2018-12-24 16:35:07,2019-01-03 20:34:00,True,2018-12-24 16:35:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/326,https://github.com/kubernetes/org/pull/326,mrbobbytables,Add members 2018-12-26,"fixes #302 
+
+/area github-membership",['justaugustus'],1,2018-12-26 21:40:31,2018-12-26 23:11:48,2019-01-03 20:33:59,True,2018-12-26 23:11:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/328,https://github.com/kubernetes/org/pull/328,mrbobbytables,Add members 2019-01-03,"fixes #327 
+
+/area github-membership",['cblecker'],1,2019-01-03 18:47:28,2019-01-03 19:34:14,2019-01-03 20:33:58,True,2019-01-03 19:34:13,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/329,https://github.com/kubernetes/org/pull/329,cblecker,Update GitHub template metadata,"GitHub now allows you to specify titles and labels by default as a part of the template. Update our templates to use this.
+
+ref: https://help.github.com/articles/creating-issue-templates-for-your-repository/",['spiffxp'],1,2019-01-03 22:10:56,2019-01-03 23:08:25,2019-01-03 23:12:32,True,2019-01-03 23:08:25,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/332,https://github.com/kubernetes/org/pull/332,cblecker,Add members to kubernetes-sigs,"- Add @adelina-t to kubernetes-sigs so she can be given permissions to kubernetes-sigs/windows-testing.
+- Add @krousey and @kris-nova to kubernetes-sigs so they can be given permissions to kubernetes-sigs/cluster-api via a group (as opposed to outside collab access)
+
+All three are members of @kubernetes.",['justaugustus'],3,2019-01-04 22:19:26,2019-01-04 22:39:23,2019-01-04 22:39:35,True,2019-01-04 22:39:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/333,https://github.com/kubernetes/org/pull/333,mrbobbytables,Add members 2019-01-07,"fixes #304 
+
+/area github-membership","['justaugustus', 'cblecker']",1,2019-01-07 21:36:15,2019-01-08 01:45:00,2019-01-08 13:53:57,True,2019-01-08 01:45:00,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/335,https://github.com/kubernetes/org/pull/335,cblecker,Bump org dependencies,Update WORKSPACE and dep dependencies for k8s.io/org. This will bring in some peribolos fixes.,['fejta'],3,2019-01-07 22:42:22,2019-01-08 19:23:29,2019-01-08 19:50:14,True,2019-01-08 19:23:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/337,https://github.com/kubernetes/org/pull/337,cblecker,Enable team management for peribolos,"🙊!
+
+This might actually work.
+fixes #336
+
+/assign @fejta @spiffxp 
+/hold","['spiffxp', 'fejta']",3,2019-01-08 23:50:33,2019-01-11 21:37:02,2019-01-11 21:37:52,True,2019-01-11 21:37:01,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/338,https://github.com/kubernetes/org/pull/338,mrbobbytables,Add members 2019-01-08,"fixes #334 
+
+/area github-membership","['justaugustus', 'cblecker']",1,2019-01-09 01:04:30,2019-01-09 01:12:23,2019-01-23 12:24:28,True,2019-01-09 01:12:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/340,https://github.com/kubernetes/org/pull/340,mrbobbytables,Add members 2019-01-09,"fixes #339 
+
+/area github-membership",['justaugustus'],1,2019-01-09 23:45:02,2019-01-10 00:30:53,2019-01-23 12:23:12,True,2019-01-10 00:30:53,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/345,https://github.com/kubernetes/org/pull/345,cblecker,"Revert ""Enable peribolos for team management""",This reverts commit fd5f8c4966bd7c325bf0a0b752361c9bc559f7e6.,['fejta'],1,2019-01-11 23:23:08,2019-01-12 00:26:22,2019-01-12 00:26:41,True,2019-01-12 00:26:22,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/346,https://github.com/kubernetes/org/pull/346,justaugustus,Add SIG Release teams,"Fixes: kubernetes/sig-release#241
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/sig release",['cblecker'],1,2019-01-12 00:28:25,2019-01-12 20:39:26,2019-01-12 20:56:14,True,2019-01-12 20:39:25,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/347,https://github.com/kubernetes/org/pull/347,spiffxp,Add release-1.14 team members,"Specifically:
+ - claurence is enhancements (was enhancements shadow for 1.13)
+ - nwoods3 is comms (was comms for 1.9, 1.10)",[],1,2019-01-12 02:32:01,2019-01-12 02:44:08,2019-01-18 19:52:26,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/348,https://github.com/kubernetes/org/pull/348,nikhita,Add nikhita to sig contributor-experience teams,"I'd like to help/participate in reviews and discussions related to sig contributor-experience. :)
+
+/cc @cblecker @parispittman @Phillels 
+/assign @cblecker ",['cblecker'],3,2019-01-12 14:48:33,2019-01-12 20:31:46,2019-01-12 20:56:07,True,2019-01-12 20:31:46,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/349,https://github.com/kubernetes/org/pull/349,cblecker,Add members to cncf-conformance-wg,"Aaron added these two members to the team yesterday. This syncs the config for them.
+
+/assign @spiffxp 
+/approve ","['spiffxp', 'justaugustus']",1,2019-01-12 20:53:49,2019-01-12 21:15:21,2019-01-12 21:16:39,True,2019-01-12 21:15:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/350,https://github.com/kubernetes/org/pull/350,nikhita,Add a test to check if team members are org members,"This would be useful to fail early if someone who is added as a team maintainer or member is not an org member. See https://github.com/kubernetes/org/pull/346#pullrequestreview-191923294 for an example.
+
+This PR also validates:
+
+- a user is not mentioned as both an org admin and org member
+- a user is not mentioned as both a team maintainer and member
+- no duplicates exist in the list of team maintainers and members
+
+/assign @cblecker @fejta ","['fejta', 'cblecker']",2,2019-01-12 21:55:50,2019-01-14 20:42:42,2019-02-20 03:56:00,True,2019-01-14 20:42:42,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/351,https://github.com/kubernetes/org/pull/351,justaugustus,Update SIG Release teams,"- Add dims and liggitt as SIG Release-designated milestone maintainers
+- Prune `kubernetes-release-managers` team
+- Add 1.14 RT to `sig-release` team
+- Prune `sig-release-admins`
+
+Closes: kubernetes/sig-release#353
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @tpepper @cblecker ","['calebamiles', 'cblecker', 'tpepper']",1,2019-01-12 22:27:34,2019-01-15 01:00:20,2019-01-15 01:00:20,True,2019-01-15 01:00:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/353,https://github.com/kubernetes/org/pull/353,danielqsj,Add danielqsj as a member to sig instrumentation teams,"I'd like to help/participate in reviews and discussions related to sig instrumentation.
+
+/cc @brancz @piosz @fabxc  ","['justaugustus', 'brancz']",1,2019-01-14 10:36:25,2019-01-15 00:51:56,2019-01-15 00:51:56,True,2019-01-15 00:51:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/356,https://github.com/kubernetes/org/pull/356,cblecker,Run org tests against merged configuration,"Found that the org tests were running against the single configuration, not the fully merged team configuration.
+
+/assign @fejta 
+/cc @nikhita ",['fejta'],2,2019-01-14 21:14:39,2019-01-14 21:39:33,2019-01-14 21:42:56,True,2019-01-14 21:39:33,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/357,https://github.com/kubernetes/org/pull/357,cblecker,Add test to ensure that org admins are never team members,"Org admins are always listed as team maintainers in the API. This ensures that an org admin is never listed as just a member.. they can either be a maintainer, or not on the team at all.","['justaugustus', 'fejta']",2,2019-01-14 22:28:55,2019-01-15 00:41:44,2019-01-15 00:44:14,True,2019-01-15 00:41:44,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/358,https://github.com/kubernetes/org/pull/358,justaugustus,Add new members (190114),"- kubernetes (claurence, ibrasho, nwoods3)
+- kubernetes-sigs (interma)
+
+Fixes: #301 
+Fixes: #352 
+Fixes: #354 
+Fixes: #355 
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>",['cblecker'],1,2019-01-14 22:59:33,2019-01-14 23:06:44,2019-01-14 23:06:44,True,2019-01-14 23:06:42,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/359,https://github.com/kubernetes/org/pull/359,fejta,Use go modules instead of dep for dependency management,"* Use go 1.11
+* Update skylib, rules_go, gazelle repos to match test-infra
+* Create `//:go` target, as well as `//:update-minor` and `//:update-patch` targets for updating deps.
+* Get `kazel` and `peribolos` from `@io_kubernetes_build` and `@io_k8s_test_infra` repos
+* Run `go mod init` to create `k8s.io/org` module
+* Make hack/update-deps.sh use `go mod` instead of `dep`
+  - Runs `go mod tidy && go mod vendor` to manage vendor dir
+  - Runs `//:gazelle -- update-repos --from-file=go.mod` to manage `go_repositories()`
+
+/assign @cblecker 
+
+",['cblecker'],6,2019-01-15 01:07:02,2019-01-17 23:04:26,2019-01-17 23:04:46,True,2019-01-17 23:04:26,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/361,https://github.com/kubernetes/org/pull/361,justaugustus,Add MaciekPytel to kubernetes-release-managers,"Until we take care of kubernetes/kubernetes#72860
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @cblecker 
+/cc @MaciekPytel ","['idealhack', 'cblecker']",1,2019-01-15 02:54:42,2019-01-15 03:27:02,2019-01-15 03:27:02,True,2019-01-15 03:27:02,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/365,https://github.com/kubernetes/org/pull/365,mrbobbytables,Add members 2019-01-15,"fixes #294 
+fixes #362 
+fixes #360 
+fixes #364 
+
+/area github-membership",['cblecker'],4,2019-01-15 20:15:09,2019-01-15 20:21:41,2019-01-23 12:23:11,True,2019-01-15 20:21:38,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/367,https://github.com/kubernetes/org/pull/367,mrbobbytables,Add eduartua to kubernetes org.,"fixes #366 
+
+/area github-membership",['cblecker'],1,2019-01-15 22:36:26,2019-01-15 22:43:51,2019-01-23 12:23:11,True,2019-01-15 22:43:50,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/368,https://github.com/kubernetes/org/pull/368,cblecker,Update test-infra-admins,"Syncs the updates that @krzyzacy made
+
+/assign @krzyzacy 
+/approve",['krzyzacy'],1,2019-01-15 23:02:57,2019-01-15 23:48:25,2019-01-15 23:55:09,True,2019-01-15 23:48:25,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/369,https://github.com/kubernetes/org/pull/369,cblecker,Re-enable Peribolos Team Sync,"/assign @fejta 
+/hold","['idvoretskyi', 'fejta']",1,2019-01-15 23:26:38,2019-01-17 00:47:47,2019-01-17 10:27:21,True,2019-01-17 00:47:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/370,https://github.com/kubernetes/org/pull/370,idealhack,Add idealhack as a member to sig-contribex teams,"I'd like to help/participate in issues and PRs related to sig-contribex. :)
+
+Hum... this yaml is not alphabetized, how do we do that?
+
+/cc @parispittman @cblecker @nikhita",['cblecker'],1,2019-01-16 13:28:10,2019-01-16 18:03:56,2019-01-16 18:03:56,True,2019-01-16 18:03:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/371,https://github.com/kubernetes/org/pull/371,idealhack,Add idealhack as a member to sig-release team,"I'd like to help/participate in issues and PRs related to sig-release. :)
+
+/cc @justaugustus @tpepper @calebamiles ",['justaugustus'],1,2019-01-16 13:29:09,2019-01-16 23:45:59,2019-01-16 23:45:59,True,2019-01-16 23:45:59,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/372,https://github.com/kubernetes/org/pull/372,nikhita,Fix isSorted function in tests,"The `List()` method creates a sorted list. :neutral_face: 
+
+https://github.com/kubernetes/org/blob/45f511fb4217606e29cb01fa3f27e91d194cb5e5/config/config_test.go#L83-L91
+
+This was introduced in https://github.com/kubernetes/org/pull/350, so this PR reverts the change to the `isSorted` function.
+
+/kind bug
+/assign @cblecker @fejta ","['fejta', 'cblecker']",1,2019-01-16 15:44:20,2019-01-17 08:30:50,2019-01-17 09:00:16,True,2019-01-17 08:30:50,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/375,https://github.com/kubernetes/org/pull/375,neolit123,re-add fabriziopandini to milestone maintainers,"original request was here, pre-prune:
+https://github.com/orgs/kubernetes/teams/kubernetes-milestone-maintainers/discussions/5
+
+/assign @tpepper @fabriziopandini 
+cc @timothysc @luxas 
+","['justaugustus', 'tpepper', 'fabriziopandini', 'luxas']",1,2019-01-17 16:02:34,2019-01-18 08:44:56,2019-01-18 08:44:56,True,2019-01-18 08:44:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/376,https://github.com/kubernetes/org/pull/376,mxinden,config/kubernetes: Add mxinden to sig-instrumentation,"Following https://github.com/kubernetes/org/pull/353 as an example, I would like to help in sig-instrumentation. Hence being added here would be great.
+
+Let me know if this is the wrong way to approach this.
+
+//CC @brancz 
+
+",['brancz'],1,2019-01-17 16:08:49,2019-01-18 01:41:07,2019-01-18 01:41:07,True,2019-01-18 01:41:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/377,https://github.com/kubernetes/org/pull/377,claurence,add claurence to milestone-maintainers,"As 1.14 enhancements lead I think I should be able to add milestones to issues in the enhancements repo 
+
+@spiffxp @justaugustus lmk if this isn't something I should have access to do",['justaugustus'],1,2019-01-17 18:29:56,2019-01-18 21:40:28,2019-01-18 21:40:29,True,2019-01-18 21:40:28,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/378,https://github.com/kubernetes/org/pull/378,mrbobbytables,Add members 2019-01-17,"fixes #373 
+fixes #374 
+
+/area github-membership",['cblecker'],2,2019-01-18 00:32:05,2019-01-18 00:38:34,2019-01-23 12:23:10,True,2019-01-18 00:38:33,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/380,https://github.com/kubernetes/org/pull/380,cblecker,Split out sig teams into subdirectories,,['justaugustus'],1,2019-01-18 03:06:26,2019-01-18 03:14:02,2019-01-18 03:14:07,True,2019-01-18 03:14:02,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/383,https://github.com/kubernetes/org/pull/383,nikhita,Sort all teams and a test for it,"This PR sorts all teams and adds a test to ensure that teams are sorted.
+
+/cc @cblecker @fejta @idealhack ",['idealhack'],2,2019-01-18 14:42:08,2019-01-18 17:09:23,2019-01-18 18:51:33,True,2019-01-18 17:09:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/384,https://github.com/kubernetes/org/pull/384,spiffxp,Update kubernetes-csi teams for csi-release-tools,This is in service of #342 but I cleaned up team descriptions while I was here,['cblecker'],2,2019-01-18 21:18:21,2019-01-18 21:30:46,2019-01-26 02:24:58,True,2019-01-18 21:30:46,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/386,https://github.com/kubernetes/org/pull/386,spiffxp,Add members 2019-01-18,"fixes #381
+fixes #385
+
+/area github-membership",['cblecker'],2,2019-01-19 02:11:15,2019-01-19 02:18:15,2019-01-19 02:18:33,True,2019-01-19 02:18:15,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/387,https://github.com/kubernetes/org/pull/387,spiffxp,Add 1.14 release team members to sig-release github teams,"Add 1.14 release team members to the kubernetes/milestone-maintainers team
+ - I expect that at a minimum everyone in the 1.14 release team roles should have /milestone privileges.
+ - Role shadows I am willing to let roles decide for themselves.
+
+Add 1.14 release team lead + shadows to the kubernetes/kubernetes-release-managers team:
+- solely for ""just in case"" purposes, and you can totally convince me we should be revoked down the line, just following the description of the team
+- provide coverage in case branch manager doesn't have availability
+
+Also, having just gone through the exercise of doing a commit per user, I did not enjoy it. I know that's the process we use for adjusting org membership, but it doesn't feel like it scales very well. But I did it this time just to try it out",['justaugustus'],10,2019-01-19 02:40:20,2019-01-19 03:08:07,2019-01-26 02:24:29,True,2019-01-19 03:08:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/388,https://github.com/kubernetes/org/pull/388,justaugustus,Update SIG Azure teams,"Fixes: kubernetes-sigs/cluster-api-provider-azure#48
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @cblecker @dstrebel @khenidak @feiskyer 
+
+For visibility:
+/cc @lachie83 @tariq1890 @soggiest ","['feiskyer', 'cblecker', 'dstrebel', 'soggiest', 'khenidak']",1,2019-01-21 03:42:33,2019-01-22 19:57:15,2019-01-22 19:57:15,True,2019-01-22 19:57:15,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/390,https://github.com/kubernetes/org/pull/390,jsafrane,Add csi-misc team to tag all developers,"For CSI development we need to tag all developers in PRs and issues. IMO, we don't need separate csi-pr-reviews and csi-bugs teams, everybody does everything, `@csi-misc` in any `kubernetes-csi` repo should be enough.
+
+Do we need the same team in `kubernetes/` repos?
+
+/hold
+for discussion in sig-storage first.
+
+@chakri-nelluri @davidz627 @gnufied @lpabon @pohly @rootfs @sbezverk @vladimirvivien @xing-yang @saad-ali  @childsb , PTAL. Feel free to suggest other members or remove yourself.
+","['justaugustus', 'cblecker', 'nikhita']",1,2019-01-21 10:55:24,2019-02-12 08:57:20,2019-02-12 08:57:21,True,2019-02-12 08:57:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/391,https://github.com/kubernetes/org/pull/391,soltysh,Update sig-cli teams,"This updates sig-cli teams based on who's currently leading the SIG. 
+
+/assign @cblecker 
+/cc @pwittrock @seans3 ","['cblecker', 'seans3', 'nikhita']",1,2019-01-21 12:38:41,2019-01-24 12:03:35,2019-01-24 12:10:21,True,2019-01-24 12:03:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/394,https://github.com/kubernetes/org/pull/394,justaugustus,Add SIG PM teams,"Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @idvoretskyi @jdumars @cblecker ","['idvoretskyi', 'calebamiles', 'jdumars', 'cblecker']",2,2019-01-22 05:13:07,2019-01-22 06:40:54,2019-01-22 06:40:54,True,2019-01-22 06:40:54,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/400,https://github.com/kubernetes/org/pull/400,mrbobbytables,Add members 2019-01-22,"fixes #389 
+fixes #392 
+fixes #393 
+fixes #396 
+fixes #398
+
+/area github-membership",['cblecker'],4,2019-01-22 20:37:53,2019-01-22 20:42:30,2019-01-23 12:23:09,True,2019-01-22 20:42:28,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/401,https://github.com/kubernetes/org/pull/401,cblecker,Create new wg-component-standard team,"fixes #363
+
+/assign @luxas 
+
+Let me know if that looks good to you.","['justaugustus', 'luxas']",2,2019-01-23 03:07:10,2019-01-23 10:34:23,2019-01-23 10:37:41,True,2019-01-23 10:34:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/402,https://github.com/kubernetes/org/pull/402,cblecker,Create teams for dashboard-metrics-scraper repo,"ref #343
+
+This adds @bryk, @floreks, @jeefy, and @maciaszczykm to k-sigs (they're all already members of @kubernetes), and then creates the teams for the new dashboard-metrics-scraper repo",['justaugustus'],5,2019-01-23 03:17:38,2019-01-23 06:26:16,2019-01-23 08:21:25,True,2019-01-23 06:26:16,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/404,https://github.com/kubernetes/org/pull/404,nikhita,Add nikhita to community-maintainers team,"This PR also moves the `community-maintainers` and `community-admins` team from `org.yaml` to `sig-contributor-experience/teams.yaml`.
+
+I wish to be added to this team so that I can help manage the [contribex project board](https://github.com/orgs/kubernetes/projects/1). I am a technical lead for sig-contribex.
+
+/cc @cblecker @parispittman @Phillels 
+/assign @cblecker ",['cblecker'],2,2019-01-23 15:35:07,2019-01-23 17:13:23,2019-01-23 19:06:32,True,2019-01-23 17:13:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/405,https://github.com/kubernetes/org/pull/405,dims,Add dims to k8s.io/utils,Change-Id: Ib1c453e2889fa9afe16f0afdb16d81be343922b8,['cblecker'],1,2019-01-23 18:09:29,2019-01-23 18:39:56,2019-01-23 18:39:56,True,2019-01-23 18:39:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/406,https://github.com/kubernetes/org/pull/406,cblecker,Add bash-firefighters team,":bash_fire:
+
+@kubernetes/sig-testing anyone else want in on this?
+cc: @fejta @BenTheElder @cjwagner @ixdy @stevekuznetsov ",['spiffxp'],1,2019-01-23 18:32:11,2019-01-24 00:04:40,2019-01-24 00:18:31,True,2019-01-24 00:04:40,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/413,https://github.com/kubernetes/org/pull/413,spiffxp,"[wip] Add nikhita, drop grodrigues3 from github admin team","/hold
+awaiting steering committee approval, ref: https://github.com/kubernetes/community/pull/3148
+
+Also using [wip] because I'm extra paranoid",[],1,2019-01-23 23:55:29,2019-01-24 00:09:24,2019-01-24 00:12:18,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/414,https://github.com/kubernetes/org/pull/414,cblecker,Promote nikhita to GitHub Administration Team,"awaiting steering committee approval, ref: https://github.com/kubernetes/community/pull/3148
+
+/hold
+/assign @spiffxp ","['spiffxp', 'fejta']",1,2019-01-24 00:09:11,2019-01-24 18:31:56,2019-01-24 18:32:24,True,2019-01-24 18:31:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/416,https://github.com/kubernetes/org/pull/416,mrbobbytables,Add members 2019-01-24,"fixes #395
+fixes #399 
+fixes #408 
+fixes #409 
+fixes #411 
+fixes #412 
+fixes #415 
+
+/area github-membership",['cblecker'],7,2019-01-24 15:51:52,2019-01-24 19:57:52,2019-01-27 23:21:13,True,2019-01-24 19:57:49,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/417,https://github.com/kubernetes/org/pull/417,tstromberg,Update minikube-admins & minikube-maintainers,"minikube-admins: +balopat,+tstromberg,-pwittrock
+minikube-maintainers: +afbjorklund
+
+Context: https://github.com/kubernetes/minikube/issues/3345",['cblecker'],1,2019-01-24 21:40:55,2019-01-24 21:57:21,2019-01-24 21:57:22,True,2019-01-24 21:57:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/419,https://github.com/kubernetes/org/pull/419,rlenferink,"Add rlenferink to kubernetes-sigs, kubernetes-client orgs.","### GitHub Username
+@rlenferink 
+
+### Organization you are requesting membership in
+@kubernetes-sigs
+@kubernetes-client
+
+I'm a member of @kubernetes already
+
+----------
+
+/area github-membership
+/cc @mrbobbytables 
+/assign @cblecker ","['justaugustus', 'cblecker', 'mrbobbytables']",1,2019-01-25 19:19:56,2019-01-26 00:33:28,2019-01-29 22:19:10,True,2019-01-26 00:33:28,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/420,https://github.com/kubernetes/org/pull/420,mrbobbytables,Add members 2019-01-25,"fixes #407
+fixes #410
+
+/area github-membership",['justaugustus'],2,2019-01-25 22:34:12,2019-01-26 00:41:11,2019-01-27 23:21:11,True,2019-01-26 00:41:11,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/422,https://github.com/kubernetes/org/pull/422,mrbobbytables,Add members 2019-01-27,"fixes #421 
+
+/area github-membership",['cblecker'],1,2019-01-27 23:25:58,2019-01-27 23:31:58,2019-02-04 17:47:35,True,2019-01-27 23:31:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/423,https://github.com/kubernetes/org/pull/423,cblecker,Add teams for etcdadm repo,ref: https://github.com/kubernetes/org/issues/308,['justaugustus'],1,2019-01-27 23:57:57,2019-01-28 00:13:35,2019-01-28 06:42:14,True,2019-01-28 00:13:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/424,https://github.com/kubernetes/org/pull/424,zouyee,add zouyee to sig-node,"I'd like to help in reviews and fix work related to sig-node.
+/cc @nikhita ","['derekwaynecarr', 'dchen1107']",1,2019-01-28 03:34:45,2019-03-28 09:20:18,2019-03-28 09:20:19,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/428,https://github.com/kubernetes/org/pull/428,mrbobbytables,Add members 2019-01-28,"fixes #426 
+fixes #427 
+
+/area github-membership",['cblecker'],2,2019-01-28 22:47:38,2019-01-28 23:39:37,2019-02-04 17:47:34,True,2019-01-28 23:39:36,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/429,https://github.com/kubernetes/org/pull/429,spiffxp,Move test-infra-* GitHub teams to sig-testing,,['BenTheElder'],1,2019-01-29 03:18:39,2019-01-29 03:50:56,2019-01-30 15:46:33,True,2019-01-29 03:50:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/431,https://github.com/kubernetes/org/pull/431,rlenferink,Fixed broken link to OWNERS docs in OWNERS file,"Fixed broken link
+
+/assign @cblecker ",['cblecker'],1,2019-01-29 22:18:49,2019-01-29 23:21:45,2019-01-30 16:46:17,True,2019-01-29 23:21:45,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/434,https://github.com/kubernetes/org/pull/434,jeefy,Update SIG-UI (Dashboard) groups ,"Updating groups to reflect our [OWNER_ALIASES](https://github.com/kubernetes/dashboard/blob/master/OWNERS_ALIASES) accurately and the [sigs.yaml ](https://github.com/kubernetes/community/blob/master/sigs.yaml#L1989) changes. 
+
+Let me know if I did something wrong. :) 
+
+/sig ui",['mrbobbytables'],1,2019-01-30 14:17:09,2019-01-31 05:09:59,2019-01-31 05:09:59,True,2019-01-31 05:09:59,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/435,https://github.com/kubernetes/org/pull/435,rlenferink,Updated OWNERS files to include link to docs,"As per PR #431 all the other OWNER files are updated to include the link to the documentation as well now.
+
+/assign @cblecker ","['cblecker', 'brancz']",1,2019-01-30 17:48:07,2019-01-31 00:44:47,2019-03-06 17:35:01,True,2019-01-31 00:44:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/436,https://github.com/kubernetes/org/pull/436,rlenferink,"Add rlenferink to kubernetes-csi, kubernetes-incubator orgs.","### GitHub Username
+@rlenferink 
+
+### Organization you are requesting membership in
+@kubernetes-csi
+@kubernetes-incubator
+
+I'm a member of @kubernetes already
+
+----------
+
+/area github-membership
+/cc @mrbobbytables 
+/assign @cblecker ","['cblecker', 'mrbobbytables']",1,2019-01-30 19:29:20,2019-01-31 04:55:12,2019-01-31 16:36:45,True,2019-01-31 04:55:12,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/437,https://github.com/kubernetes/org/pull/437,rlenferink,Add members 2019-01-30,"fixes #430 
+fixes #432 
+fixes #433 
+
+/area github-membership
+/cc @mrbobbytables ",['mrbobbytables'],3,2019-01-30 19:52:20,2019-01-31 00:37:17,2019-01-31 16:36:25,True,2019-01-31 00:37:17,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/439,https://github.com/kubernetes/org/pull/439,soltysh,Add soltysh to kubernetes-sig members org,,['justaugustus'],1,2019-01-31 11:33:08,2019-01-31 13:24:09,2019-01-31 14:13:23,True,2019-01-31 13:24:09,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/440,https://github.com/kubernetes/org/pull/440,soltysh,Update kubectl groups per current SIG leadership,/assign @pwittrock @seans3 ,"['seans3', 'pwittrock']",1,2019-01-31 11:33:32,2019-01-31 21:42:18,2019-02-01 11:46:11,True,2019-01-31 21:42:18,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/442,https://github.com/kubernetes/org/pull/442,mikesplain,Add myself to k8s.io/kops,"Adding myself to kops to help Justin with some overrides, given aws e2e issues and issue triage.
+
+cc @justinsb ","['justaugustus', 'nikhita']",1,2019-01-31 21:16:38,2019-02-13 17:51:47,2019-02-20 00:39:39,True,2019-02-13 17:51:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/445,https://github.com/kubernetes/org/pull/445,nikhita,Add code-of-conduct-committee team,"I wanted to explictly at-mention the code of conduct committee in https://github.com/kubernetes/community/pull/3194 but found that there was no such team.
+
+We already have a team for the steering committee (which is pretty useful for at-mentioning). I think it'd be useful to have this team as well.
+
+Members of the team are the members of the CoC mentioned here: https://github.com/kubernetes/community/tree/master/committee-code-of-conduct
+
+/cc @Bradamant3 @carolynvs @eparis @jdumars @parispittman ",['idealhack'],1,2019-02-04 14:20:42,2019-02-07 08:13:10,2019-02-08 12:33:52,True,2019-02-07 08:13:10,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/446,https://github.com/kubernetes/org/pull/446,mrbobbytables,Add members 2019-02-04,"fixes #443 
+fixes #444 
+
+/area github-membership",['justaugustus'],2,2019-02-04 17:59:16,2019-02-04 19:04:22,2019-02-06 02:11:11,True,2019-02-04 19:04:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/450,https://github.com/kubernetes/org/pull/450,mrbobbytables,Add members 2019-02-05,"fixes #447 
+fixes #448
+fixes #449
+
+/area github-membership",['cblecker'],3,2019-02-05 23:14:54,2019-02-06 00:30:01,2019-02-06 02:11:12,True,2019-02-06 00:30:01,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/452,https://github.com/kubernetes/org/pull/452,roberthbailey,Update group membership for roberthbailey.,/assign @mrbobbytables ,"['cblecker', 'mrbobbytables']",1,2019-02-06 03:36:43,2019-02-06 08:37:49,2019-02-06 08:37:49,True,2019-02-06 08:37:49,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/454,https://github.com/kubernetes/org/pull/454,mrbobbytables,Add members 2019-02-06,"fixes #453 
+
+/area github-membership",['cblecker'],1,2019-02-06 22:08:03,2019-02-06 23:34:32,2019-02-13 00:28:57,True,2019-02-06 23:34:31,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/458,https://github.com/kubernetes/org/pull/458,Katharine,Add Katharine to kubernetes-sigs,"I'm already a member of the Kubernetes org.
+
+It would be handy to be able to express opinions in e.g. kubernetes-sigs/kind without the bot [yelling at everyone involved](https://github.com/kubernetes-sigs/kind/pull/285).
+
+/area github-membership",['mrbobbytables'],1,2019-02-08 18:48:55,2019-02-08 18:56:57,2019-02-08 18:56:57,True,2019-02-08 18:56:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/459,https://github.com/kubernetes/org/pull/459,detiber,Add vincepri to cluster-api-provider-aws-maintaners,,"['spiffxp', 'justaugustus', 'mrbobbytables']",1,2019-02-08 21:46:58,2019-02-13 00:54:20,2019-02-13 00:54:21,True,2019-02-13 00:54:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/460,https://github.com/kubernetes/org/pull/460,vincepri,Add vincepri to cluster-api-maintainers,/assign @timothysc @roberthbailey,"['spiffxp', 'timothysc', 'justaugustus', 'cblecker', 'roberthbailey']",1,2019-02-08 21:55:25,2019-02-09 20:37:14,2019-02-09 20:37:14,True,2019-02-09 20:37:14,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/463,https://github.com/kubernetes/org/pull/463,mrbobbytables,Add members 2019-02-08,"fixes #456 
+fixes #461 
+fixes #462 
+
+/area github-membership",['justaugustus'],3,2019-02-08 23:33:49,2019-02-11 15:23:23,2019-02-13 00:28:58,True,2019-02-11 15:23:22,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/466,https://github.com/kubernetes/org/pull/466,mrbobbytables,Add members 2019-02-11,"fixes #455
+fixes #457 
+fixes #464 
+fixes #465
+
+/area github-membership",['justaugustus'],4,2019-02-11 22:09:35,2019-02-11 23:52:29,2019-02-13 00:28:59,True,2019-02-11 23:52:28,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/469,https://github.com/kubernetes/org/pull/469,spiffxp,Add teams for kubernetes-sigs/windows-gmsa access,ref: https://github.com/kubernetes/org/issues/451,['mrbobbytables'],2,2019-02-12 00:54:04,2019-02-12 04:57:34,2019-02-19 17:14:03,True,2019-02-12 04:57:34,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/473,https://github.com/kubernetes/org/pull/473,mrbobbytables,Add members 2019-02-12,"fixes #438 
+fixes #471 
+
+/area github-membership",['cblecker'],2,2019-02-13 00:25:32,2019-02-13 00:46:24,2019-02-14 23:58:07,True,2019-02-13 00:46:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/474,https://github.com/kubernetes/org/pull/474,mrbobbytables,Correct jichenjc membership,"I incorrect added @jichenjc to the @kubernetes-sigs org instead of @kubernetes org in PR #400.
+
+This PR reverts the commit: https://github.com/kubernetes/org/pull/400/commits/492582a6d75a4442a0c4e71218f6141686bdeed1 and correctly adds @jichenjc to the @kubernetes org. 
+
+I double checked that the other membership requests in that PR were processed correctly. 
+
+ref: https://github.com/kubernetes/org/issues/389#issuecomment-463019923
+
+Sorry about that @jichenjc :( ",['cblecker'],2,2019-02-13 02:23:47,2019-02-13 02:31:10,2019-02-14 23:58:06,True,2019-02-13 02:31:10,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/481,https://github.com/kubernetes/org/pull/481,mrbobbytables,Add members 2019-02-13,"fixes #472 
+fixes #475 
+fixes #476 
+fixes #477 
+fixes #478 
+fixes #480 
+
+/area github-membership",['justaugustus'],6,2019-02-14 03:05:57,2019-02-14 04:14:59,2019-02-14 23:58:05,True,2019-02-14 04:14:58,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/489,https://github.com/kubernetes/org/pull/489,mrbobbytables,Add members 2019-02-14,"fixes #482 
+fixes #483 
+fixes #484 
+fixes #485 
+
+/area github-membership","['justaugustus', 'nikhita']",4,2019-02-15 02:02:51,2019-02-15 12:41:00,2019-02-20 02:24:37,True,2019-02-15 12:40:59,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/491,https://github.com/kubernetes/org/pull/491,justaugustus,"Update Azure teams + add ritazh to k,k-sigs","Fixes: #490 
+
+/assign @cblecker ","['cblecker', 'mrbobbytables', 'nikhita']",2,2019-02-15 02:28:26,2019-02-15 04:59:49,2019-02-15 04:59:49,True,2019-02-15 04:59:49,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/493,https://github.com/kubernetes/org/pull/493,dims,Add dims as maintainer for k/k8s.io repo,cc @lavalamp @rmmh @thockin @ixdy ,"['idvoretskyi', 'justaugustus', 'nikhita']",1,2019-02-15 14:45:37,2019-02-16 02:11:40,2019-02-16 02:11:41,True,2019-02-16 02:11:40,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/496,https://github.com/kubernetes/org/pull/496,justaugustus,sig-pm: Add project-board-maintainers team,"Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @idvoretskyi @jdumars ","['idvoretskyi', 'calebamiles', 'jdumars', 'cblecker']",1,2019-02-16 20:15:06,2019-02-19 00:51:47,2019-02-19 14:24:41,True,2019-02-19 00:51:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/497,https://github.com/kubernetes/org/pull/497,mrbobbytables,Add members 2019-02-16,"fixes #487 
+fixes #492 
+fixes #494 
+fixes #495 
+
+/area github-membership",['justaugustus'],4,2019-02-17 01:28:06,2019-02-17 02:39:30,2019-02-20 02:24:38,True,2019-02-17 02:39:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/498,https://github.com/kubernetes/org/pull/498,justaugustus,sig-pm: Update `enhancements-maintainers` team,"This cleans up the enhancements-maintainers team to only include SIG PM maintainers.
+Ref: https://github.com/kubernetes/enhancements/issues/590#issuecomment-464413261
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @idvoretskyi @jdumars ","['idvoretskyi', 'calebamiles', 'jdumars']",1,2019-02-17 03:39:21,2019-02-22 22:02:29,2019-02-22 22:02:29,True,2019-02-22 22:02:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/502,https://github.com/kubernetes/org/pull/502,mrbobbytables,Add members 2019-02-18,"fixes #499 
+fixes #500
+fixes #501 
+
+/area github-membership",['cblecker'],3,2019-02-18 23:43:45,2019-02-18 23:51:39,2019-02-20 02:24:39,True,2019-02-18 23:51:38,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/505,https://github.com/kubernetes/org/pull/505,spiffxp,Add teams for kubernetes-sigs/kubebuilder-declarative-pattern,"I started the pattern of sig-api-machinery having its own dir
+for teams, and moved teams out of kubernetes-sigs/org.yaml that
+were related to the server-sdk subproject while I was here. I
+also updated their descriptions.
+
+ref: https://github.com/kubernetes/org/issues/418",['cblecker'],1,2019-02-19 22:25:18,2019-02-20 00:54:29,2019-02-20 00:54:30,True,2019-02-20 00:54:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/506,https://github.com/kubernetes/org/pull/506,nikhita,Move structured-merge-diff and yaml teams to api-machinery dir,"Follow up of #505 
+
+https://github.com/kubernetes-sigs/structured-merge-diff and https://github.com/kubernetes-sigs/yaml are apimachinery subprojects.
+
+Ref: https://github.com/kubernetes/community/tree/master/sig-api-machinery#subprojects",['justaugustus'],1,2019-02-20 01:11:22,2019-02-20 03:59:49,2019-02-20 03:59:49,True,2019-02-20 03:59:49,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/507,https://github.com/kubernetes/org/pull/507,mrbobbytables,Add members 2019-02-19,"fixes #503 
+fixes #504 
+
+/area github-membership","['justaugustus', 'nikhita']",2,2019-02-20 02:25:37,2019-02-20 02:42:18,2019-02-24 00:55:24,True,2019-02-20 02:42:16,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/512,https://github.com/kubernetes/org/pull/512,spiffxp,Add k8s-github-robot alongside k8s-ci-robot in all orgs,"The bot formerly known as k8s-merge-robot is going to do more things in more orgs
+
+ref: https://github.com/kubernetes/test-infra/issues/11402",['justaugustus'],1,2019-02-20 22:17:21,2019-02-20 22:35:44,2019-02-20 22:52:50,True,2019-02-20 22:35:44,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/514,https://github.com/kubernetes/org/pull/514,mrbobbytables,Add members 2019-02-20,"fixes #508 
+fixes #509 
+fixes #511 
+fixes #513 
+
+/area github-membership",['justaugustus'],4,2019-02-21 02:50:45,2019-02-21 04:39:12,2019-02-24 00:55:22,True,2019-02-21 04:39:12,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/517,https://github.com/kubernetes/org/pull/517,nikhita,Add teams for kubernetes-csi/csi-driver-image-populator,Adds teams for providing admin access and write access for https://github.com/kubernetes/org/issues/486.,['mrbobbytables'],1,2019-02-22 11:55:35,2019-02-22 12:32:39,2019-02-22 12:40:54,True,2019-02-22 12:32:39,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/521,https://github.com/kubernetes/org/pull/521,nikhita,Add team for kubernetes-csi.github.io,"Ref: https://github.com/kubernetes/org/issues/519
+
+Currently, @lpabon has direct collaborator admin access and @saad-ali has direct collaborator write access to https://github.com/kubernetes-csi/kubernetes-csi.github.io.
+
+This PR creates a team consisting of @lpabon and @saad-ali to provide admin access to the repo.
+
+Once this gets merged, the postsubmit runs and the GitHub team gets created, I'll remove direct collaborator access and give the team admin access.",['cblecker'],1,2019-02-22 22:49:26,2019-02-22 23:01:48,2019-02-22 23:04:49,True,2019-02-22 23:01:48,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/522,https://github.com/kubernetes/org/pull/522,spiffxp,prune sig-testing teams,"ref: https://github.com/kubernetes/test-infra/issues/11465
+
+
+These were individual commits, but probably not needed, so:
+
+- Drop test-infra-reviewers in favor of sig-testing-pr-reviews
+- Demote all sig-testing team maintainers to members
+- ... except those who are GitHub Owners because GitHub, apparently
+- Add akutz
+- Fix Katharine's case
+- Update team descriptions
+- test-infra-admins ~= kubernetes/test-infra/OWNERS
+- test-infra-maintainers ~= kubernetes/test-infra/OWNERS
+- sig-testing-pr-reviews contains test-infra-admins
+",['cblecker'],1,2019-02-22 23:30:51,2019-02-28 16:14:46,2019-02-28 21:06:12,True,2019-02-28 16:14:46,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/523,https://github.com/kubernetes/org/pull/523,justaugustus,sig-release: Update kubernetes-milestone-maintainers description,"Add note about team now having write access to k/enhancements
+
+ref: https://github.com/kubernetes/enhancements/issues/590#issuecomment-466560650
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @spiffxp @calebamiles @tpepper ","['spiffxp', 'calebamiles', 'cblecker', 'tpepper']",1,2019-02-23 06:04:34,2019-02-23 06:40:26,2019-02-23 06:40:26,True,2019-02-23 06:40:26,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/524,https://github.com/kubernetes/org/pull/524,mrbobbytables,Add members 2019-02-23,"fixes #515 
+
+/area github-membership","['justaugustus', 'nikhita']",1,2019-02-24 00:56:28,2019-02-24 04:55:53,2019-02-26 00:55:05,True,2019-02-24 04:55:53,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/525,https://github.com/kubernetes/org/pull/525,erikerlandson,Update team and owner descriptions for Big Data for new User Group category,"This is a compantion to https://github.com/kubernetes/community/pull/3304
+","['justaugustus', 'rlenferink']",1,2019-02-25 23:49:10,,2019-03-21 00:34:33,False,,,blocked,True,open
+org,https://api.github.com/repos/kubernetes/org/pulls/526,https://github.com/kubernetes/org/pull/526,mariantalla,Add 1.14 CI Signal team as milestone maintainers,"All CI signal team members create issues for failing tests and flakes on the sig-release dashboards. Adding them as milestone maintainers allows them to assign the respective issues to the 1.14 release milestone, which means we can be more effective with keeping track of fixes expected to land by the release date.
+
+cc @alejandrox1 @smourapina @mortent @kacole2 
+
+/assign @spiffxp ","['spiffxp', 'justaugustus']",2,2019-02-26 18:24:34,2019-02-26 20:58:52,2019-02-26 20:58:52,True,2019-02-26 20:58:52,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/533,https://github.com/kubernetes/org/pull/533,zacharysarah,One-character typo fix,e/a,['nikhita'],1,2019-02-27 09:39:14,2019-02-27 09:45:40,2019-02-27 09:47:18,True,2019-02-27 09:45:39,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/534,https://github.com/kubernetes/org/pull/534,nikhita,Add teams for French localization,"Fixes https://github.com/kubernetes/org/issues/532
+
+/assign @zacharysarah ","['justaugustus', 'zacharysarah']",1,2019-02-27 09:56:47,2019-02-27 12:17:19,2019-03-01 05:13:51,True,2019-02-27 12:17:19,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/536,https://github.com/kubernetes/org/pull/536,yue9944882,Sync up team members for apiserver-builder-alpha,"/assign @pwittrock 
+
+Syncing up team members since we renamed repo as we decided on slack discussion ",['pwittrock'],1,2019-02-27 12:09:29,2019-02-27 17:19:02,2019-02-27 17:19:02,True,2019-02-27 17:19:02,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/538,https://github.com/kubernetes/org/pull/538,nikhita,Rename PST team to PSC,"/assign @cblecker @fejta 
+
+Ref: https://github.com/kubernetes/steering/issues/89","['justaugustus', 'fejta', 'cblecker']",1,2019-02-27 18:24:49,2019-03-04 19:16:22,2019-03-04 19:16:22,True,2019-03-04 19:16:22,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/539,https://github.com/kubernetes/org/pull/539,mrbobbytables,Add members 2019-02-27,"fixes #527 
+fixes #529 
+fixes #530 
+fixes #531 
+fixes #535 
+fixes #537 
+
+/area github-membership",['cblecker'],6,2019-02-27 20:29:53,2019-02-27 20:38:25,2019-02-28 12:17:16,True,2019-02-27 20:38:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/541,https://github.com/kubernetes/org/pull/541,adohe,add adohe to kubernetes-incubator,"I'd like to help in reviews and fix work related to apiserver-builder.
+/cc @nikhita ",['nikhita'],1,2019-02-28 04:40:20,2019-02-28 05:00:39,2019-02-28 05:00:40,True,2019-02-28 05:00:39,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/544,https://github.com/kubernetes/org/pull/544,andrewsykim,add admins for cloud-provider-alibaba repo,Admins are based on people in the [OWNERS](https://github.com/kubernetes/cloud-provider-alibaba-cloud/blob/master/OWNERS) file. ,['nikhita'],1,2019-02-28 18:29:34,2019-02-28 18:35:46,2019-03-01 05:22:36,True,2019-02-28 18:35:46,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/545,https://github.com/kubernetes/org/pull/545,smourapina,Add smourapina (CI Signal 1.14) as milestone maintainer,"As CI Signal team member, I need to have the ability to assign issues created to the 1.14 release milestone, and so will need to be added as milestone maintainer.
+
+cc @mariantalla 
+",['spiffxp'],1,2019-02-28 19:34:27,2019-02-28 20:22:21,2019-02-28 20:22:21,True,2019-02-28 20:22:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/546,https://github.com/kubernetes/org/pull/546,rlenferink,Add sig docs it teams and update fr teams,"PR is adding the Italian localization teams. The members are already in the appropriate OWNERS files => [kubernetes/website/OWNERS_ALIASES](https://github.com/kubernetes/website/blob/12036aa614ff0e4ac5bdfce102642b7e5e4cb2b5/OWNERS_ALIASES#L166)
+
+Next to that some small improvements
+- Ignoring `.idea` files when opening the project with a Jetbrains editor
+- Swapped `sig-docs-fr-reviews` and `sig-docs-fr-owners` to follow the rest of the file: first owners, then review teams
+- Fixed indentation for `sig-docs-ko-reviews`","['cblecker', 'Bradamant3', 'nikhita']",8,2019-02-28 21:05:28,2019-03-05 18:30:07,2019-03-05 18:30:40,True,2019-03-05 18:30:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/548,https://github.com/kubernetes/org/pull/548,mrbobbytables,Add members 2019-02-28,"fixes #540 
+fixes #543 
+
+/area github-membership",['cblecker'],2,2019-03-01 03:25:08,2019-03-01 03:49:29,2019-03-05 02:21:41,True,2019-03-01 03:49:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/552,https://github.com/kubernetes/org/pull/552,rjbez17,Add rjbez17 to conformance wg members,,"['dims', 'spiffxp']",2,2019-03-02 00:52:46,2019-03-02 02:23:07,2019-03-02 02:23:52,True,2019-03-02 02:23:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/554,https://github.com/kubernetes/org/pull/554,spiffxp,Add rjbez17 to kubernetes org.,Fixes #553,['BenTheElder'],1,2019-03-02 01:48:23,2019-03-02 02:03:15,2019-03-02 02:03:15,True,2019-03-02 02:03:15,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/555,https://github.com/kubernetes/org/pull/555,mrbobbytables,Add members 2019-03-01,"fixes #518
+fixes #550
+
+/area github-membership",['nikhita'],2,2019-03-02 02:40:14,2019-03-02 07:24:56,2019-03-05 02:21:40,True,2019-03-02 07:24:55,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/556,https://github.com/kubernetes/org/pull/556,mrbobbytables,Add members 2019-03-03,"fixes #547 
+fixes #549 
+
+/area github-membership","['justaugustus', 'nikhita']",2,2019-03-04 00:49:46,2019-03-04 04:02:30,2019-03-05 02:21:39,True,2019-03-04 04:02:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/558,https://github.com/kubernetes/org/pull/558,nikhita,Add publishing-bot-reviewers team,"Adds a team so that we can use it to cc folks for reviews/issues related to the publishing-bot.
+
+Ref: https://github.com/kubernetes/publishing-bot/blob/master/OWNERS
+
+/cc @sttts @dims @mfojtik @caesarxuchao ",['sttts'],1,2019-03-04 12:55:56,2019-03-06 08:26:03,2019-03-06 08:28:19,True,2019-03-06 08:26:03,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/560,https://github.com/kubernetes/org/pull/560,nikhita,Add sboeuf and rhatdan to cri-o-maintainers team,"Fixes https://github.com/kubernetes/org/issues/559
+
+/cc @sboeuf @mrunalp @rhatdan 
+
+/hold 
+for lgtm by @mrunalp ",['mrunalp'],1,2019-03-04 20:38:43,2019-03-04 20:47:43,2019-03-04 20:48:11,True,2019-03-04 20:47:43,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/561,https://github.com/kubernetes/org/pull/561,mrbobbytables,Add members 2019-03-04,"fixes #557 
+
+/area github-membership",['nikhita'],1,2019-03-05 02:26:32,2019-03-05 04:37:17,2019-03-07 01:16:26,True,2019-03-05 04:37:17,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/562,https://github.com/kubernetes/org/pull/562,spiffxp,Setup teams and org membership for k8s-container-image-promoter,"ref: https://github.com/kubernetes/org/issues/551
+
+All members I'm adding to kubernetes-sigs to satisfy the repo migration request are already members of kubernetes, so I opted to handle in this PR instead of asking for issues to be filed",['listx'],4,2019-03-05 02:30:35,2019-03-05 03:02:33,2019-03-05 15:30:53,True,2019-03-05 03:02:33,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/565,https://github.com/kubernetes/org/pull/565,nikhita,Add soggiest to milestone-maintainers team,"Fixes https://github.com/kubernetes/org/issues/564
+
+/assign @justaugustus @spiffxp 
+/hold
+I'd like a lgtm from a SIG Release lead or the release team lead
+
+@soggiest your GitHub username in https://github.com/kubernetes/sig-release/blob/master/releases/release-1.14/release_team.md is slightly incorrect :P 
+","['spiffxp', 'justaugustus']",1,2019-03-05 17:35:56,2019-03-05 20:28:04,2019-03-05 20:28:04,True,2019-03-05 20:28:04,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/566,https://github.com/kubernetes/org/pull/566,nikhita,Migrate team maintainers to members,"Fixes the config part of https://github.com/kubernetes/org/issues/563. Because of how the GH API works, note that org admins still need to be in the maintainers list.
+
+/hold
+I wrote some quick and hacky go code to generate this...which meant that the comments next to names got lost (eg in milestone-maintainers) with the generation. Still need to fix that but wanted to get the PR out first.
+
+/cc @spiffxp @idealhack @rlenferink ","['spiffxp', 'idealhack', 'rlenferink']",3,2019-03-05 20:06:52,2019-03-07 19:04:09,2019-03-08 05:09:12,True,2019-03-07 19:04:09,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/568,https://github.com/kubernetes/org/pull/568,cblecker,Add teams for Azure CSI repo migrations,"ref: #344
+
+Only adding @andyzhangx, as he's the only one listed in the repo OWNERS file. Additional manual write access can be provided at a later time. Once the repo moves over, using the bots and labels to merge things is the standardized way to do thing
+
+/assign @nikhita ",['nikhita'],2,2019-03-06 00:57:56,2019-03-06 03:14:02,2019-03-06 23:34:27,True,2019-03-06 03:14:02,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/569,https://github.com/kubernetes/org/pull/569,cblecker,Add dlipovetsky to etcdadm teams,ref https://github.com/kubernetes/org/issues/308#issuecomment-458360650,['nikhita'],1,2019-03-06 01:26:46,2019-03-06 03:22:05,2019-03-06 23:34:32,True,2019-03-06 03:22:05,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/570,https://github.com/kubernetes/org/pull/570,detiber,add ncdc to cluster-api-maintaners and cluster-api-provider-aws-maintainers,Adding Andy Goldstein (ncdc) to the `cluster-api-maintainers` and `cluster-api-provider-aws-maintainers` groups for `kubernetes-sigs` to allow for issue management and milestone management ACLs for the `cluster-api` and `cluster-api-provider-aws` projects.,"['timothysc', 'justaugustus']",1,2019-03-06 15:19:23,2019-03-06 16:10:06,2019-03-06 16:10:06,True,2019-03-06 16:10:06,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/572,https://github.com/kubernetes/org/pull/572,gnufied,Add brad as resizer repo admin,Fixes https://github.com/kubernetes/org/issues/571,['nikhita'],1,2019-03-06 16:16:53,2019-03-06 16:54:04,2019-03-06 16:54:04,True,2019-03-06 16:54:04,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/575,https://github.com/kubernetes/org/pull/575,mrbobbytables,Add members 2019-03-06,"fixes #510 
+fixes #567
+
+/area github-membership",['nikhita'],2,2019-03-07 04:12:36,2019-03-07 04:55:01,2019-03-11 22:12:15,True,2019-03-07 04:55:00,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/576,https://github.com/kubernetes/org/pull/576,nikhita,Add teams for k-sigs/multi-tenancy,"Ref: https://github.com/kubernetes/org/issues/528
+
+Adds teams to provide write access and admin access to https://github.com/kubernetes-sigs/multi-tenancy.",['mrbobbytables'],3,2019-03-07 05:37:01,2019-03-08 12:51:28,2019-03-08 12:51:28,True,2019-03-08 12:51:27,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/577,https://github.com/kubernetes/org/pull/577,umohnani8,Add umohnani8 to cri-o maintainers team,"Signed-off-by: Urvashi Mohnani <umohnani@redhat.com>
+
+@mrunalp PTAL","['mrunalp', 'justaugustus']",1,2019-03-07 06:31:22,2019-03-11 16:31:32,2019-03-11 16:31:32,True,2019-03-11 16:31:32,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/578,https://github.com/kubernetes/org/pull/578,xmudrii,Add xmudrii to kubernetes-milestone-maintainers,"This PR adds @xmudrii to kubernetes-milestone-maintainers as per #574 
+
+Fixes #574
+
+/cc @nikhita ",['justaugustus'],1,2019-03-07 08:29:42,2019-03-07 13:47:04,2019-03-07 13:48:22,True,2019-03-07 13:47:04,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/580,https://github.com/kubernetes/org/pull/580,detiber,Add randomvariable to cluster-api-provider-aws-maintainers,Add @randomvariable to cluster-api-provider-aws-maintainers to be able to do Milestone management,['ncdc'],1,2019-03-07 16:27:46,2019-03-07 16:37:00,2019-03-07 16:37:00,True,2019-03-07 16:37:00,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/582,https://github.com/kubernetes/org/pull/582,mrbobbytables,Add members 2019-03-07,"fixes #516 
+fixes #573 
+
+/area github-membership",['nikhita'],2,2019-03-08 03:11:00,2019-03-08 04:59:29,2019-03-11 22:12:13,True,2019-03-08 04:59:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/583,https://github.com/kubernetes/org/pull/583,Sai-Adarsh,Updated kubernetes-client owners with sai-adarsh,"Would like to join a GitHub team of kubernetes-client, and highly interested to join as a reviewer. Have previously merged a fix (https://github.com/kubernetes-client/python/pull/734). ",['justaugustus'],1,2019-03-08 07:07:37,2019-03-08 07:38:53,2019-03-08 07:39:50,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/585,https://github.com/kubernetes/org/pull/585,krmayankk,Add krmayankk to kubernetes-milestone-maintainers team,,['justaugustus'],1,2019-03-08 08:35:03,2019-03-11 03:07:27,2019-03-11 16:17:43,True,2019-03-11 03:07:27,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/586,https://github.com/kubernetes/org/pull/586,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,['justaugustus'],1,2019-03-08 18:12:20,2019-03-09 11:09:30,2019-03-09 11:09:30,True,2019-03-09 11:09:30,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/591,https://github.com/kubernetes/org/pull/591,nikhita,Revert migrate maintainers to members for kubernetes-incubator,"Peribolos [fails](https://prow.k8s.io/view/gcs/kubernetes-jenkins/logs/post-org-peribolos/201) with a 403 when it tries to update memberships for certain teams in kubernetes-incubator. This temporarily unblocks peribolos so other changes can be synced.
+
+
+```
+{""client"":""github"",""component"":""peribolos"",""level"":""info"",""msg"":""UpdateTeamMembership(2113629, euank, false)"",""time"":""2019-03-11T03:17:04Z""}
+{""component"":""peribolos"",""error"":""is the account using at least one of the following oauth scopes?: admin:org, repo"",""level"":""warning"",""msg"":""UpdateTeamMembership(2113629, euank, false) failed"",""time"":""2019-03-11T03:17:07Z""}
+{""component"":""peribolos"",""level"":""fatal"",""msg"":""Configuration failed: failed to configure kubernetes-incubator teams: failed to update maintainers-rktlet members: 1 errors: [is the account using at least one of the following oauth scopes?: admin:org, repo]"",""time"":""2019-03-11T03:17:07Z""}
+```
+
+The relevant diff from https://github.com/kubernetes/org/pull/566: https://github.com/kubernetes/org/pull/566/files#diff-3b95bdd66ee80ec3ebbed25503db3376
+
+Note: I am only reverting the change for k-incubator here because teams in other orgs have been synced (some teams in kuberntes-incubator have also been synced but it should be ok to have that change reverted). I'm also not completely sure that this will fix the error, but it seems the best solution to me right now. I have created https://github.com/kubernetes/test-infra/pull/11720 to help debug better in the future. 
+
+For some more context, the relevant slack discussion: https://kubernetes.slack.com/archives/C1TU9EB9S/p1552055216157000
+
+/hold
+Holding for lgtm from @spiffxp or @fejta 
+
+/cc @spiffxp @mrbobbytables @justaugustus @rlenferink @idealhack 
+/assign @spiffxp @fejta ","['spiffxp', 'fejta']",2,2019-03-11 13:57:21,2019-03-11 14:23:29,2019-03-11 14:28:46,True,2019-03-11 14:23:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/592,https://github.com/kubernetes/org/pull/592,nikhita,Revert 'Revert migrate maintainers to members for k-incubator',"Reverts #591 
+
+#591 fixed peribolos and it's now green...but we still need to migrate maintainers to members for k-incubator.
+
+/cc @spiffxp @mrbobbytables @justaugustus @rlenferink @idealhack 
+/assign @spiffxp @fejta 
+/hold","['spiffxp', 'fejta', 'rlenferink']",1,2019-03-11 16:39:58,,2019-03-31 20:49:50,False,,,dirty,False,open
+org,https://api.github.com/repos/kubernetes/org/pulls/593,https://github.com/kubernetes/org/pull/593,mrbobbytables,Add members 2019-03-11,"fixes #479 
+fixes #587
+fixes #589
+fixes #590
+
+/area github-membership",['nikhita'],4,2019-03-11 22:45:05,2019-03-12 01:36:38,2019-03-18 01:39:22,True,2019-03-12 01:36:37,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/597,https://github.com/kubernetes/org/pull/597,roberthbailey,Clean up group membership for roberthbailey,"This is primarily to reduce email load. 
+
+/assign @spiffxp ","['spiffxp', 'nikhita']",1,2019-03-13 19:36:21,2019-03-14 08:10:24,2019-03-14 08:10:24,True,2019-03-14 08:10:24,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/598,https://github.com/kubernetes/org/pull/598,taragu,Add dummy team for testing prow project plugin,"Create a dummy team to test prow project plugin to add issues/PRs to github projects (https://github.com/kubernetes/test-infra/pull/10982). No ACL is needed. 
+FYI @stevekuznetsov @spiffxp ",['fejta'],1,2019-03-13 22:34:55,2019-03-13 22:52:24,2019-03-13 22:52:25,True,2019-03-13 22:52:24,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/600,https://github.com/kubernetes/org/pull/600,mrbobbytables,Add members 2019-03-13,"fixes #594 
+fixes #595 
+fixes #596 
+
+/area github-membership",['nikhita'],3,2019-03-14 03:53:50,2019-03-14 08:18:25,2019-03-18 01:39:21,True,2019-03-14 08:18:24,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/601,https://github.com/kubernetes/org/pull/601,feiskyer,Update teams for sig-azure,"
+* Add missing teams for cloud-provider-azure repo
+* Update members for csi repos
+
+/assign @justaugustus @cblecker ","['justaugustus', 'cblecker']",1,2019-03-14 06:10:50,2019-03-14 08:40:25,2019-03-14 14:53:52,True,2019-03-14 08:40:25,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/602,https://github.com/kubernetes/org/pull/602,nikhita,Remove owners team in kubernetes-incubator org,"The [GitHub Admin team](https://github.com/kubernetes/community/tree/master/github-management#github-administration-team) is responsible for having admin privileges across all Kubernetes orgs.
+
+/assign @idvoretskyi @spiffxp ","['spiffxp', 'idvoretskyi', 'justaugustus', 'rlenferink']",1,2019-03-14 12:26:16,2019-03-15 16:32:57,2019-03-15 16:32:57,True,2019-03-15 16:32:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/604,https://github.com/kubernetes/org/pull/604,imkin,Add wg-lts leads owner alias and wg-lts team,"Added the WG_LTS chairs/organizers to the leads alias
+
+https://github.com/kubernetes/community/tree/master/wg-lts
+
+",['nikhita'],2,2019-03-14 19:33:38,2019-03-15 05:22:57,2019-03-15 05:22:57,True,2019-03-15 05:22:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/606,https://github.com/kubernetes/org/pull/606,easeway,Add tashimi to multi-tenancy sub-project teams,@tashimi (Tasha Drew) from VMware is lead of kubernetes-wg-multitenancy.,['nikhita'],1,2019-03-15 00:25:53,2019-03-15 05:30:57,2019-03-15 05:30:57,True,2019-03-15 05:30:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/607,https://github.com/kubernetes/org/pull/607,mrbobbytables,Add members 2019-03-14,"fixes #470 
+fixes #603
+
+/area github-membership
+
+/pony pie
+ it's π day :P",['nikhita'],2,2019-03-15 01:56:57,2019-03-15 05:14:57,2019-03-18 01:39:20,True,2019-03-15 05:14:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/610,https://github.com/kubernetes/org/pull/610,easeway,Add srampal to multi-tenancy teams,srampal (Sanjeev Rampal) is one of the key contributors driving the multi-tenancy proposal in wg-multitenancy.,['nikhita'],1,2019-03-15 18:07:59,2019-03-17 13:08:56,2019-03-17 13:08:56,True,2019-03-17 13:08:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/615,https://github.com/kubernetes/org/pull/615,brendandburns,Add brendandburns to kubernetes-client owners,"This is needed for me to use Azure pipelines for CI/CD for CSharp and other projects.
+
+(I'm also the primary maintainer for most of the client libraries)
+
+Thanks!",[],1,2019-03-16 16:43:08,2019-03-17 18:19:40,2019-03-17 18:19:40,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/616,https://github.com/kubernetes/org/pull/616,justaugustus,Add new members (3/16/19),"Fixes: #614, fixes: #612, fixes: #609, fixes: #608","['mrbobbytables', 'nikhita']",4,2019-03-16 18:59:03,2019-03-17 13:16:57,2019-03-17 13:16:57,True,2019-03-17 13:16:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/617,https://github.com/kubernetes/org/pull/617,justaugustus,sig-pm: Update teams,"- Following discussions at Open Source Leadership Summit this week with @jdumars and I, @lachie83 has stepped up to help us out with SIG PM. Adding him to the relevant teams.
+- @idvoretskyi has been working with SIG ContribEx on their project mgmt needs (https://github.com/kubernetes/community/issues/3079). Adding him to `project-board-maintainers`.
+- @mattfarina has offered his assistance in grooming (https://github.com/kubernetes/community/issues/3267#issuecomment-466419304). Adding him to `project-board-maintainers`.
+
+Signed-off-by: Stephen Augustus <saugustus@vmware.com>
+
+/assign @calebamiles @idvoretskyi @jdumars ","['idvoretskyi', 'calebamiles', 'jdumars']",1,2019-03-16 20:37:15,2019-03-16 21:10:57,2019-03-16 21:10:57,True,2019-03-16 21:10:57,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/618,https://github.com/kubernetes/org/pull/618,rlenferink,Add client go teams,"Created the missing teams for the kubernetes-client repos (#615). 
+Added a description to the python-base-admins team as well.
+
+@nikhita can you assign the repository permissions to the teams?
+@brendandburns is this sufficient for you to setup the CI/CD pipelines?
+
+/assign @nikhita",['nikhita'],2,2019-03-17 14:07:28,2019-03-17 18:20:56,2019-03-18 05:31:26,True,2019-03-17 18:20:56,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/620,https://github.com/kubernetes/org/pull/620,mrbobbytables,Add members 2019-03-17,"fixes #611 
+fixes #613 
+fixes #619 
+
+/area github-membership","['justaugustus', 'nikhita']",3,2019-03-18 01:50:06,2019-03-18 06:23:13,2019-04-02 00:20:28,True,2019-03-18 06:23:12,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/622,https://github.com/kubernetes/org/pull/622,brendandburns,Add brendandburns to kubernetes-client github admins.,"@nikhita @justaugustus 
+
+Let's try this again, many thanks!
+
+Ref #618 #615 ","['justaugustus', 'nikhita']",1,2019-03-18 15:44:19,2019-03-29 13:51:56,2019-03-29 13:51:56,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/624,https://github.com/kubernetes/org/pull/624,nikhita,Add community-milestone-maintainers team,"For https://github.com/kubernetes/community/issues/3443
+
+This team will have the power to use the `/milestone` command in the community repo. Membership in this team requires an entry in an OWNERS file (reviewer or approver) for a contribex subproject in the community repo.
+
+Once this merges and the team is created, I'll add the team here: https://github.com/kubernetes/test-infra/blob/b9778912cf2e162c9f2b005cdff2a48be7f4a593/prow/plugins.yaml#L214.
+
+/hold
+/assign @parispittman ","['spiffxp', 'parispittman']",1,2019-03-18 18:39:50,2019-03-19 04:34:21,2019-03-19 07:34:14,True,2019-03-19 04:34:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/625,https://github.com/kubernetes/org/pull/625,mrbobbytables,Add members 2019-03-18,"fixes #542 
+fixes #621 
+
+/area github-membership",['spiffxp'],2,2019-03-19 00:52:58,2019-03-19 03:52:21,2019-04-02 00:20:27,True,2019-03-19 03:52:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/628,https://github.com/kubernetes/org/pull/628,zacharysarah,"Add milestone team, clean up teams in general","For https://github.com/kubernetes/test-infra/issues/11687#issuecomment-474388190.
+
+This PR specifies who can use `/milestone` in the website repo. 
+
+Membership in this team requires an entry in a `sig-docs-**-owners` alias for a localization project in k/website. (See https://github.com/kubernetes/website/pull/13287) Note that `website-milestone-maintainers` imports membership by reference to language owner groups.
+
+This PR also updates sig-docs team membership based on `k/website/OWNERS_ALIASES`. ",['nikhita'],5,2019-03-19 21:05:21,2019-03-22 20:34:47,2019-03-22 20:41:08,False,,,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/629,https://github.com/kubernetes/org/pull/629,nikhita,Add teams for kubernetes-client/perl,"Ref: https://github.com/kubernetes/org/issues/626
+
+/cc @yue9944882 @mbohlool 
+/assign @yue9944882 ",['yue9944882'],1,2019-03-20 03:14:32,2019-03-20 03:20:29,2019-03-20 03:43:55,True,2019-03-20 03:20:29,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/631,https://github.com/kubernetes/org/pull/631,nikhita,Add teams for addon-operators,"Ref: https://github.com/kubernetes/org/issues/630
+
+I also moved sig-cluster-lifecycle teams from `org.yaml` to the sig-specific directory (as per https://github.com/kubernetes/community/tree/master/sig-cluster-lifecycle#subprojects)
+
+/assign @dholbach @luxas ","['errordeveloper', 'luxas']",2,2019-03-20 11:04:14,2019-03-20 11:14:23,2019-03-20 11:15:20,True,2019-03-20 11:14:23,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/633,https://github.com/kubernetes/org/pull/633,hex108,Add hex108 to kubernetes-sigs members,Fix https://github.com/kubernetes/org/issues/632,['nikhita'],1,2019-03-20 14:18:43,2019-03-20 14:25:06,2019-03-20 14:25:06,True,2019-03-20 14:25:06,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/634,https://github.com/kubernetes/org/pull/634,nikhita,Grant SCL leads admin access to all SCL subproject repos,"Ref: https://github.com/kubernetes/org/issues/630#issuecomment-474871018
+
+@luxas was not a member of k-sigs so I've added him to the org here.
+
+/assign @timothysc ",['timothysc'],2,2019-03-20 15:14:16,2019-03-20 15:31:01,2019-03-21 06:28:43,True,2019-03-20 15:31:01,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/636,https://github.com/kubernetes/org/pull/636,neolit123,add neolit123 to kubernetes-milestone-maintainers,"we had a discussion today about this in the kubeadm office hours meeting and i got approval from a SIG chair (@timothysc) and a tech lead (@fabriziopandini).
+
+i have read the details about the milestone maintainers role:
+https://github.com/kubernetes/sig-release/blob/master/release-team/README.md#milestone-maintainers
+
+this is a primary ""super power"" i'm interested in, because our k/e items descriptions need update:
+> Milestone maintainers also have write access to kubernetes/enhancements, which allows them to keep enhancement tracking issue descriptions up-to-date.
+
+---
+
+> for SIGs: Request approval from a SIG Chair or Technical Lead
+
+/assign @timothysc @fabriziopandini 
+
+> Once your request is approved by the appropriate group, you can now assign to the PR to a SIG Release Chair for final approval.
+
+/assign @tpepper @justaugustus 
+
+","['timothysc', 'justaugustus', 'tpepper', 'fabriziopandini']",1,2019-03-20 19:12:23,2019-03-20 19:17:43,2019-03-20 20:38:42,True,2019-03-20 19:17:43,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/638,https://github.com/kubernetes/org/pull/638,spiffxp,Update OWNERS and SECURITY_CONTACTS,"Drop steering-committee to address #637
+
+Add myself to SECURITY_CONTACTS",['idvoretskyi'],2,2019-03-20 21:30:09,2019-03-20 21:41:00,2019-03-20 22:52:00,True,2019-03-20 21:41:00,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/639,https://github.com/kubernetes/org/pull/639,mrbobbytables,Add members 2019-03-20,"fixes #627 
+
+/area github-membership",['justaugustus'],1,2019-03-21 00:25:19,2019-03-21 04:31:38,2019-04-02 00:20:27,True,2019-03-21 04:31:37,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/644,https://github.com/kubernetes/org/pull/644,zacharysarah,Add milestone team for SIG Docs,"For https://github.com/kubernetes/test-infra/issues/11687#issuecomment-474388190.
+
+This PR specifies who can use `/milestone` in the website repo. Membership in the team milestone requires an entry in a sig-docs-**-owners alias for a localization project in k/website. (See kubernetes/website#13287)
+
+Reboot of https://github.com/kubernetes/org/pull/628#issuecomment-475772806 for clean commit history.
+
+/sig docs
+/assign @nikhita 
+
+
+This PR also updates sig-docs team membership based on `k/website/OWNERS_ALIASES`. ",['nikhita'],1,2019-03-22 20:40:47,2019-03-23 07:11:06,2019-03-23 07:37:54,True,2019-03-23 07:11:06,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/645,https://github.com/kubernetes/org/pull/645,mrbobbytables,Add members 2019-03-22,"fixes #623 
+fixes #640 
+fixes #641 
+
+/area github-membership",['nikhita'],3,2019-03-23 00:58:18,2019-03-23 01:41:08,2019-04-02 00:20:25,True,2019-03-23 01:41:07,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/646,https://github.com/kubernetes/org/pull/646,saschagrunert,Add saschagrunert to cri-o-maintainers team,"Hey, this is the necessary follow up of https://github.com/kubernetes-sigs/cri-o/pull/2149 and adds me to the list of cri-o maintainers.",['mrunalp'],1,2019-03-23 08:30:07,2019-03-26 07:43:16,2019-03-26 07:43:16,True,2019-03-26 07:43:16,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/647,https://github.com/kubernetes/org/pull/647,bene2k1,Add German language team members,Add German speaking team members for documentation,['nikhita'],1,2019-03-25 09:33:49,2019-03-26 08:09:17,2019-03-26 08:09:17,True,2019-03-26 08:09:17,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/649,https://github.com/kubernetes/org/pull/649,steveperry-53,Add tengqm to reference-docs maintainers.,@tengqm is one of the primary maintainers of the ref doc generation code. This gives him Write access to the reference-docs repo.,['rlenferink'],3,2019-03-25 19:50:23,2019-03-27 03:44:48,2019-03-27 03:44:49,True,2019-03-27 03:44:48,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/650,https://github.com/kubernetes/org/pull/650,tpepper,team add: kubernetes-patch-release-team,"Shift the patch release team out from under the release management team.
+This gives the community an easy single place to GitHub @ on the
+multiple issues, master pull requests, and branch cherry picks that are
+involved in stable branch management.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['justaugustus'],1,2019-03-25 22:57:06,2019-03-26 00:44:47,2019-03-26 00:44:47,True,2019-03-26 00:44:47,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/652,https://github.com/kubernetes/org/pull/652,mrbobbytables,Add members 2019-03-25,"fixes #648
+
+/area github-membership",['justaugustus'],1,2019-03-26 02:04:39,2019-03-26 07:53:17,2019-04-02 00:20:24,True,2019-03-26 07:53:17,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/653,https://github.com/kubernetes/org/pull/653,nikhita,Don't ask approvers and security contacts for staging repos,"All files are automatically populated from the staging directory in k/k.
+
+Example - https://github.com/kubernetes/org/issues/642
+
+/cc @spiffxp @mrbobbytables @justaugustus @rlenferink ",['dims'],1,2019-03-26 08:30:16,2019-03-26 12:59:20,2019-03-26 13:34:58,True,2019-03-26 12:59:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/654,https://github.com/kubernetes/org/pull/654,jimangel,adding jimangel to kubernetes-incubator,"ref: https://github.com/kubernetes/org/pull/649
+
+/cc @nikhita @steveperry-53",['nikhita'],1,2019-03-26 14:31:11,2019-03-26 14:37:27,2019-03-26 18:14:14,True,2019-03-26 14:37:27,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/656,https://github.com/kubernetes/org/pull/656,rlenferink,Updated descriptions for sig-docs-[de|en]-owners,"Using the same description format for all localization teams now.
+
+/cc @zacharysarah 
+/assign @nikhita 
+/sig docs","['zacharysarah', 'mistyhacks', 'nikhita']",1,2019-03-26 21:59:55,2019-03-27 18:16:49,2019-03-27 18:18:03,True,2019-03-27 18:16:49,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/657,https://github.com/kubernetes/org/pull/657,adisky,Add adisky to cloud provider OpenStack Maintainers,,"['dims', 'hogepodge']",1,2019-03-27 13:27:57,2019-03-28 04:54:44,2019-03-28 04:54:44,True,2019-03-28 04:54:44,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/659,https://github.com/kubernetes/org/pull/659,zacharysarah,"Remove chenopis, add jaredbhatti","This PR updates SIG Docs leads by removing @chenopis and adding @jaredbhatti. 
+
+See also: https://github.com/kubernetes/community/pull/3523
+
+/assign @Bradamant3 @chenopis @jaredbhatti 
+/sig docs","['cblecker', 'jaredbhatti', 'Bradamant3', 'chenopis']",1,2019-03-27 18:41:30,2019-03-28 04:54:51,2019-03-28 04:54:51,True,2019-03-28 04:54:51,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/661,https://github.com/kubernetes/org/pull/661,mrbobbytables,Add members 2019-03-27,"fixes #655 
+fixes #658
+fixes #660
+
+/area github-membership",['nikhita'],3,2019-03-28 02:21:38,2019-03-28 04:48:45,2019-04-02 00:20:23,True,2019-03-28 04:48:44,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/664,https://github.com/kubernetes/org/pull/664,tpepper,patch-release-team: re-add @foxish for 1.11.10,"We're thinking we'll do at least one last build here to clear the
+pending cherry picks and potentially also to deliver packages that have
+a fixup around runtime dependencies' metadata.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>",['justaugustus'],1,2019-03-28 22:05:15,2019-03-28 22:09:58,2019-03-28 22:09:58,True,2019-03-28 22:09:58,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/665,https://github.com/kubernetes/org/pull/665,yue9944882,Add bburns to openapi perl admin/write,,"['rlenferink', 'nikhita']",1,2019-03-29 04:43:59,2019-03-29 13:46:13,2019-03-29 13:46:13,True,2019-03-29 13:46:13,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/666,https://github.com/kubernetes/org/pull/666,nikhita,Add slack-infra-admins team,"Ref: https://github.com/kubernetes/org/issues/663
+
+Also reorganize teams for sig-contribex.
+
+/cc @Katharine @jeefy @mrbobbytables 
+",['mrbobbytables'],1,2019-03-29 10:40:59,2019-03-29 11:26:13,2019-03-29 11:27:03,True,2019-03-29 11:26:13,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/668,https://github.com/kubernetes/org/pull/668,nikhita,Add teams for cli-experimental,"Ref: https://github.com/kubernetes/org/issues/662
+
+Also reorganize teams for sig-cli.
+
+/assign @pwittrock ",['pwittrock'],1,2019-03-29 15:06:06,2019-03-29 15:10:14,2019-03-29 15:17:12,True,2019-03-29 15:10:14,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/669,https://github.com/kubernetes/org/pull/669,frapposelli,Add folks to cluster-api-vsphere,"This is a long overdue PR to add relevant folks to the cluster-api-vsphere repo under kubernetes-sigs
+
+/cc @sflxn @sidharthsurana @figo","['spiffxp', 'figo', 'cblecker']",1,2019-03-29 21:16:15,2019-03-29 23:17:10,2019-03-29 23:17:11,True,2019-03-29 23:17:10,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/672,https://github.com/kubernetes/org/pull/672,nikhita,Add teams for krew and krew-index,"Ref: https://github.com/kubernetes/org/issues/599
+
+Some members of the team [sig-cli-maintainers ](https://github.com/kubernetes/org/blob/94ded1dc4a1cf58aab6ab2e332058da1f1f347dc/config/kubernetes/sig-cli/teams.yaml#L41-L53) were not members of kubernetes-sigs so I've added them to the org (all kubernetes org members are implcitly eligible for kubernetes-sigs membership)
+
+/assign @ahmetb @soltysh @juanvallejo ","['ahmetb', 'soltysh', 'juanvallejo']",6,2019-04-01 15:49:01,2019-04-01 16:34:36,2019-04-01 16:40:57,True,2019-04-01 16:34:36,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/673,https://github.com/kubernetes/org/pull/673,mrbobbytables,Correct github handle for Brendan Burns in OWNERS_ALIASES,"Ref: https://github.com/kubernetes/community/pull/3539
+
+/cc @brendandburns ",['cblecker'],1,2019-04-01 16:45:31,2019-04-01 16:50:35,2019-04-02 00:20:22,True,2019-04-01 16:50:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/674,https://github.com/kubernetes/org/pull/674,mrbobbytables,Add members 2019-04-01,"fixes #670 
+fixes #671 
+
+/area github-membership",['justaugustus'],2,2019-04-02 00:25:39,2019-04-02 04:52:36,2019-04-02 04:52:36,True,2019-04-02 04:52:35,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/677,https://github.com/kubernetes/org/pull/677,nikhita,Add teams for aws-*-csi-driver repos,"Ref: https://github.com/kubernetes/org/issues/467 and https://github.com/kubernetes/org/issues/468
+
+/assign @d-nishi @leakingtapan ","['leakingtapan', 'd-nishi']",1,2019-04-02 15:50:01,2019-04-02 15:55:21,2019-04-02 15:55:55,True,2019-04-02 15:55:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/679,https://github.com/kubernetes/org/pull/679,mrbobbytables,Add members 2019-04-02,"fixes #676 
+fixes #678 
+
+/area github-membership",['nikhita'],2,2019-04-03 01:53:02,2019-04-03 02:53:44,2019-04-03 02:53:44,True,2019-04-03 02:53:43,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/680,https://github.com/kubernetes/org/pull/680,rlenferink,Removed lledru from sig-docs,"Due to time constraints @lledru asked to step down from sig-docs.
+Many thanks for your sig-docs contributions @lledru 🎉 
+
+/cc @lledru 
+/assign @bradamant3
+ref. https://github.com/kubernetes/website/pull/13596","['mrbobbytables', 'Bradamant3']",1,2019-04-03 16:58:26,2019-04-04 23:31:24,2019-04-05 07:45:44,True,2019-04-04 23:31:24,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/685,https://github.com/kubernetes/org/pull/685,raelga,Add sig-docs-es members,"Owners and reviewers for the Spanish translation team joined at https://github.com/kubernetes/website/pull/13543
+
+/assign @zacharysarah",['zacharysarah'],1,2019-04-04 21:01:13,,2019-04-05 16:36:07,False,,,blocked,True,open
+org,https://api.github.com/repos/kubernetes/org/pulls/686,https://github.com/kubernetes/org/pull/686,mrbobbytables,Add members 2019-04-04,"fixes #682 
+fixes #684 
+
+/area github-membership",['justaugustus'],2,2019-04-04 23:46:38,2019-04-05 01:31:19,2019-04-05 01:31:19,True,2019-04-05 01:31:19,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/691,https://github.com/kubernetes/org/pull/691,mrbobbytables,Add members 2019-04-05,"fixes #687 
+fixes #688 
+fixes #689 
+fixes #690 
+
+/area github-membership",['nikhita'],4,2019-04-05 10:53:11,2019-04-05 11:07:22,2019-04-05 11:07:22,True,2019-04-05 11:07:21,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/692,https://github.com/kubernetes/org/pull/692,nikhita,Add team for dep-approvers,"OWNERS files don't support regex right now, which means we can't require dep-approvers to be able to approve `go.mod` and `go.sum` changes. Ref: https://github.com/kubernetes/kubernetes/pull/76167
+
+Add a team for it so that it's easier to cc them for a review, before cc'ing a root approver.
+
+Ref: https://github.com/kubernetes/kubernetes/blob/06150f798e271ec048cd03fef98908b7a23c4486/OWNERS_ALIASES#L290-L297
+
+/cc @cblecker @liggitt @sttts @BenTheElder @dims ",['dims'],1,2019-04-05 13:38:44,2019-04-05 13:43:21,2019-04-05 14:37:24,True,2019-04-05 13:43:20,k8s-ci-robot,unknown,,closed
+org,https://api.github.com/repos/kubernetes/org/pulls/693,https://github.com/kubernetes/org/pull/693,nikhita,"Remove quinton-hoole-2, keep quinton-hoole","https://github.com/quinton-hoole-2 no longer exists, @quinton-hoole is the real one now :)
+
+This should make peribolos green.",['cblecker'],1,2019-04-05 14:38:16,2019-04-05 14:43:21,2019-04-05 14:48:40,True,2019-04-05 14:43:21,k8s-ci-robot,unknown,,closed

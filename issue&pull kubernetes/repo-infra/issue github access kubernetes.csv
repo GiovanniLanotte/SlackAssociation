@@ -1,0 +1,838 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+repo-infra,pmorie,https://github.com/kubernetes/repo-infra/pull/1,https://api.github.com/repos/kubernetes/repo-infra/issues/1,Add README initial content,So people know what this is.,closed,True,2016-12-15 17:56:42,2016-12-15 19:01:12
+repo-infra,pmorie,https://github.com/kubernetes/repo-infra/pull/2,https://api.github.com/repos/kubernetes/repo-infra/issues/2,Add boilerplate verification,"Add boilerplate verification and instructions on using this repository.
+
+cc @sarahnovotny ",closed,True,2016-12-19 16:12:16,2016-12-20 16:12:02
+repo-infra,duglin,https://github.com/kubernetes/repo-infra/pull/3,https://api.github.com/repos/kubernetes/repo-infra/issues/3,Add .glide to skipped dirs and add info about vendoring repo,Signed-off-by: Doug Davis <dug@us.ibm.com>,closed,True,2016-12-23 17:53:06,2017-01-03 16:13:27
+repo-infra,mikedanese,https://github.com/kubernetes/repo-infra/pull/4,https://api.github.com/repos/kubernetes/repo-infra/issues/4,move build defs from release to repo-infra,"They originally went to release because there was no
+good place to put them.",closed,True,2017-01-04 19:42:58,2017-01-09 22:32:06
+repo-infra,mikedanese,https://github.com/kubernetes/repo-infra/pull/5,https://api.github.com/repos/kubernetes/repo-infra/issues/5,Add go_genrule,Original PR here https://github.com/kubernetes/release/pull/238,closed,True,2017-01-11 18:04:59,2017-01-26 23:04:55
+repo-infra,pmorie,https://github.com/kubernetes/repo-infra/pull/6,https://api.github.com/repos/kubernetes/repo-infra/issues/6,Make 2017 a valid boilerplate year,Pretty much what it sounds like.,closed,True,2017-01-16 20:38:38,2017-01-16 22:29:38
+repo-infra,DirectXMan12,https://github.com/kubernetes/repo-infra/pull/7,https://api.github.com/repos/kubernetes/repo-infra/issues/7,[WIP] codegen and codecgen,"This PR adds support update-codegen and update-codecgen.
+
+This is very much a WIP, but I figured I'd post it for educational purposes.
+Currently, it requires that repo-infra be vendored in, not used as a submodule.",closed,True,2017-02-17 04:24:28,2018-01-03 16:26:58
+repo-infra,ingvagabund,https://github.com/kubernetes/repo-infra/pull/8,https://api.github.com/repos/kubernetes/repo-infra/issues/8,extend the boilerplate list of years with automatically generated list,To make it work forever!!!,closed,True,2017-02-20 15:08:26,2017-02-20 15:12:49
+repo-infra,ideahitme,https://github.com/kubernetes/repo-infra/pull/9,https://api.github.com/repos/kubernetes/repo-infra/issues/9,Add go-tools verification scripts ,"Scripts are mostly taken from the main kubernetes repository with slight changes. I added `verify-go-src.sh` script which runs each of the scripts inside repo-infra/go-tools directory. Normally user would just call `repo-infra/verify/verify-go-src.sh -v` from Travis (maybe indirectly) which in turn would run checks for `gofmt, gometalinter, govet` on all `.go` files excluding `/vendor`. Only added these checks to keep it project agnostic (e.g. exclude stuff like swagger/godep/bazel). 
+
+/cc @eparis @pmorie ",closed,True,2017-02-22 01:22:33,2017-02-24 15:54:40
+repo-infra,eparis,https://github.com/kubernetes/repo-infra/pull/10,https://api.github.com/repos/kubernetes/repo-infra/issues/10,Add a .travis.yml,It just runs boilerplate on the repo-infra repo,closed,True,2017-02-22 17:45:07,2017-02-24 16:12:35
+repo-infra,justinsb,https://github.com/kubernetes/repo-infra/pull/11,https://api.github.com/repos/kubernetes/repo-infra/issues/11,Add update-gofmt script,Mirroring the structure we have in the main k8s repo.,closed,True,2017-02-26 22:48:13,2018-03-10 01:25:33
+repo-infra,mikebrow,https://github.com/kubernetes/repo-infra/issues/12,https://api.github.com/repos/kubernetes/repo-infra/issues/12,gometalinter vet vs govet,"I was reviewing the choices made on go verification options.  
+
+1) Is there a reason for running with gometalinter's vet and govet?  
+
+2) I see the need for boilerplate checking but not sure if we should be running that on every file. For example, do we need to add a copyright on gofmt.sh was that really developed for kubernetes or is it a copy? 
+
+3) On the gometalinter options there are many choices here and other projects have made different choices. Would it be ok to introduce some way to override choices?  Or was there a reason these were chosen over other options some design choice made? For example, this repo disables all verifications even new ones that may come along.. and picks only the ones that are desired for all who use this repo. Maybe some projects would want to enable more? Maybe some projects would want to exclude more warnings/errors?",closed,False,2017-04-17 13:58:48,2018-05-22 15:48:21
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/13,https://api.github.com/repos/kubernetes/repo-infra/issues/13,Update the gcs_upload rule and add a new release_filegroup rule,"The gcs_upload rule has the following new features:
+* Optionally specify subdirectories for groups of artifacts
+* Replace format strings in GCS paths with workspace status info (e.g. git describe)
+    
+Two new md5sum and sha1sum macros are added.
+    
+The release_filegroup rule automatically creates three filegroups and a bunch of genrules based on the list of targets provided:
+* A filegroup with just the provided targets
+* A filegroup containing all of the md5 and sha1 hash files (-hashes)
+* A filegroup containing both of the above (-and-hashes)
+
+@mikedanese @spxtr ",closed,True,2017-04-18 00:15:28,2017-04-19 18:36:08
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/14,https://api.github.com/repos/kubernetes/repo-infra/issues/14,Improve the progress message on md5 and sha1 genrules,"Minor cosmetic improvement; changes lines from
+```
+Executing genrule //build:kube-proxy.docker_tag_genmd5sum
+```
+to
+```
+Computing md5sum //build:kube-proxy.docker_tag_genmd5sum
+```
+/assign @spxtr @mikedanese ",closed,True,2017-04-19 18:25:51,2017-04-19 19:42:17
+repo-infra,Random-Liu,https://github.com/kubernetes/repo-infra/issues/15,https://api.github.com/repos/kubernetes/repo-infra/issues/15,Why ignore `.tool` in verify-gometalinter.sh?,Is there any convention? What is `.tool` for?,closed,False,2017-04-21 20:58:08,2018-03-01 17:09:50
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/16,https://api.github.com/repos/kubernetes/repo-infra/issues/16,Run buildifier on travis,"Most of our Bazel-enabled repos already check BUILD formatting through gazel, so we don't need to run buildifier there (or create a generic buildifier verification script).
+
+We don't yet have any checks on this repo, however, where we have some Skylark files, so let's enforce proper style.",closed,True,2017-05-01 23:48:01,2017-05-02 00:00:57
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/17,https://api.github.com/repos/kubernetes/repo-infra/issues/17,"Support staging to multiple paths, and create local dir if necessary","The pull e2e jobs currently rely on the `_output/gcs-stage` directory for release artifacts, but we don't create that for bazel builds. Some jobs (e.g. gke) also require us to upload artifacts to gcs.
+
+With this change, we can do something like
+```console
+bazel run //:ci-artifacts /tmp/bazel/{STABLE_BUILD_SCM_REVISION} gs://kubernetes-release-dev/bazel/{STABLE_BUILD_SCM_REVISION}
+```
+and everything should just magically get into the right places.",closed,True,2017-05-02 21:38:51,2017-05-03 22:05:21
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/18,https://api.github.com/repos/kubernetes/repo-infra/issues/18,Update go_genrule to work with recent rules_go changes,The upstream Bazel go rules were updated recently to limit the public API and to prepare for Bazel toolchain work. This PR adapts these changes and kicks the can down the road a bit. (Things may very well break again with further Bazel toolchain changes.),closed,True,2017-06-05 22:31:15,2017-06-06 23:13:54
+repo-infra,jmillikin-stripe,https://github.com/kubernetes/repo-infra/pull/19,https://api.github.com/repos/kubernetes/repo-infra/issues/19,Allow go_genrule to work from external dependencies.,"The previous code assumed that `$(pwd)` was the root of the workspace that
+uses `go_genrule`. This isn't true when using Bazel's external
+dependencies, which place the code under `external/${DEP_NAME}/`.
+
+This change is a bit hacky. Ideally the `go_genrule` implementation
+wouldn't make assumptions about the code layout and would use
+`$(location)` to find paths, but that would be a much larger change.
+Special-casing build paths starting with `external/` was easier and
+non-invasive.",closed,True,2017-07-06 20:17:17,2017-07-14 21:48:54
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/20,https://api.github.com/repos/kubernetes/repo-infra/issues/20,Import gazel into kubernetes/repo-infra as kazel,"First step of https://github.com/kubernetes/kubernetes/issues/47558: I'm importing `gazel` as-is, with the full git history.
+
+Next steps will involve pulling the rules_go functionality out of `kazel` and making sure it can interoperate with `gazelle`.",closed,True,2017-07-06 23:24:47,2017-07-07 18:17:48
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/21,https://api.github.com/repos/kubernetes/repo-infra/issues/21,kazel: don't follow symlinks when walking tree,"As discussed [on slack](https://kubernetes.slack.com/archives/C5NV3MT97/p1499389296559715), I don't think we need to follow symlinks anymore, assuming we're walking the whole tree.
+
+We apparently needed this functionality to follow symlinks from `vendor/k8s.io` into `staging/k8s.io`, but if we just walk `staging/` this may not be necessary. I'm still validating to see if this actually works.
+
+The motivation is that
+* `gazelle` walks the whole tree by default, so it'd be easier to make that work correctly
+* some of the other modules in `kazel` (e.g. sourcerer) don't handle symlinks correctly
+
+x-ref https://github.com/kubernetes/kubernetes/issues/47558
+/assign @mikedanese @spxtr ",closed,True,2017-07-07 18:24:04,2017-07-19 22:44:31
+repo-infra,duglin,https://github.com/kubernetes/repo-infra/pull/22,https://api.github.com/repos/kubernetes/repo-infra/issues/22,Add a tool to verify that script files stop upon seeing an error,"see: https://github.com/kubernetes-incubator/service-catalog/issues/317
+
+Signed-off-by: Doug Davis <dug@us.ibm.com>",closed,True,2017-07-10 16:26:13,2017-08-30 17:00:19
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/23,https://api.github.com/repos/kubernetes/repo-infra/issues/23,Use gometalinter's built-in recursion instead of find,"Our Travis checks are currently broken here due to some recent changes to `gometalinter` (https://github.com/alecthomas/gometalinter/issues/317).
+
+This is arguably the more correct way to write this, anyhow.
+
+@ideahitme @eparis ",closed,True,2017-07-11 02:08:16,2017-07-11 22:36:41
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/24,https://api.github.com/repos/kubernetes/repo-infra/issues/24,Update bazel to latest on travis and use apt to install,"Not sure why everything started breaking now that I'm paying attention to this repo. :)
+
+/assign @spxtr @mikedanese ",closed,True,2017-07-12 23:24:36,2017-07-13 12:14:13
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/25,https://api.github.com/repos/kubernetes/repo-infra/issues/25,gcs_uploader: rsync -m only to remote paths,"I believe this will fix the frequent ""stage"" errors in pull-kubernetes-e2e-gce-bazel that look like
+```
+W0726 00:36:29.722] Starting synchronization
+W0726 00:36:29.739] Copying file:///tmp/bazel-gcs.HaK7ZO/bin/linux/amd64/cloud-controller-manager.deb...
+W0726 00:36:29.744] Copying file:///tmp/bazel-gcs.HaK7ZO/bin/linux/amd64/cloud-controller-manager.docker_tag...
+W0726 00:36:29.748] [Errno 17] File exists: '/go/src/k8s.io/kubernetes/_output/gcs-stage/v1.8.0-alpha.2.830+af39adfac13a67/bin/linux/amd64'
+```
+
+/assign @mikedanese @spxtr ",closed,True,2017-07-27 19:16:45,2017-07-27 21:32:11
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/26,https://api.github.com/repos/kubernetes/repo-infra/issues/26,Update rules_go dependency and fix go_genrule,"* bazelbuild/rules_go#620 and bazelbuild/rules_go#623 changed how toolchain rules return named providers, so we need to use the private `get_go_toolchain` function
+* bazelbuild/rules_go#634 reworked the internals of `go_library`, so we need to use the private `GoSource` provider now
+
+The first part of this was suggested in https://github.com/bazelbuild/rules_go/issues/630#issuecomment-317645822.
+
+I randomly guessed at the second part (re: `GoSource` provider) - it seems like it works, but I don't really understand what it's doing. Reaching into all of these private modules seems pretty gross, but I'm not sure if there's a better way.
+
+/assign @mikedanese @spxtr 
+cc @ianthehat @jayconrod ",closed,True,2017-07-27 20:45:47,2017-07-28 18:05:19
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/27,https://api.github.com/repos/kubernetes/repo-infra/issues/27,Add ManageGoRules option to kazel,"This should allow us to use `gazelle` along with the sourcerer and generator functionality we need from `kazel`. Part of https://github.com/kubernetes/kubernetes/issues/47558.
+
+It is a bit messy. At some point we should probably refactor this to remove all of the go-rule functionality that we no longer need.
+
+I've tested this on `repo-infra`, where it basically seems to work. I'll try a larger test on `test-infra` next.
+
+/assign @mikedanese @spxtr ",closed,True,2017-07-27 23:10:15,2017-08-03 00:13:50
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/28,https://api.github.com/repos/kubernetes/repo-infra/issues/28,Additional gazelle-compatibility fixes,"More testing revealed that my fix in #27 for the openapi generated rules was problematic:
+* even with `ManageGoRules = false`, `kazel` would add rules under `vendor/` depending on the setting of `VendorMultipleBuildFiles` matching what `gazelle` was going
+* similarly, it would add `cgo_genrule` rules (which `gazelle` no longer uses)
+
+Instead, this only walks the tree when necessary, and instead explicitly updates the `pkg/generated/openapi` package if necessary.
+
+Additional changes:
+* `all-srcs` rules are now declared with public visibility, since we may not have a default visibility set anymore
+* `licenses()` rules are no longer added to new files, since they aren't really used in bazel and were probably wrong to start with
+
+/assign @spxtr @mikedanese ",closed,True,2017-08-03 01:00:48,2017-08-07 18:38:15
+repo-infra,fisherxu,https://github.com/kubernetes/repo-infra/pull/29,https://api.github.com/repos/kubernetes/repo-infra/issues/29,Fix: Modify the entry level in README.md,"I see the entry level in the end of README.md is incorrect， it‘s 1-6 now. But in fact  it should  be like:
+1...
+2... 
+---i...
+---ii...
+------a...
+------b...
+So I fix it.",closed,True,2017-08-03 12:05:31,2017-08-03 21:35:12
+repo-infra,asifdxtreme,https://github.com/kubernetes/repo-infra/pull/30,https://api.github.com/repos/kubernetes/repo-infra/issues/30,Added build status Badge in Readme,Added Travis CI build status badge in Readme,closed,True,2017-08-03 16:06:10,2017-08-03 21:46:59
+repo-infra,asifdxtreme,https://github.com/kubernetes/repo-infra/pull/31,https://api.github.com/repos/kubernetes/repo-infra/issues/31,Add GoReportcard Badge in Readme,,closed,True,2017-08-04 01:15:00,2017-08-07 18:38:46
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/32,https://api.github.com/repos/kubernetes/repo-infra/issues/32,kazel K8sOpenAPIGen should respect SkippedPaths too,"Some of the non-Bazel kubernetes build scripts toss Go source under `_output/dockerized/go`; we should not go looking for OpenAPI packages there.
+
+Still testing this (trying to figure out what set of steps actually copies code into `_output/dockerized/go` but I think this will work.
+
+/assign @mikedanese @spxtr 
+cc @thockin @nikhita @sttts ",closed,True,2017-08-07 19:32:44,2017-08-16 21:28:35
+repo-infra,rickypai,https://github.com/kubernetes/repo-infra/issues/33,https://api.github.com/repos/kubernetes/repo-infra/issues/33,go get kazel does not work,"according to the documentation,
+
+`$ go get k8s.io/repo-infra/kazel` should just work but I get this message:
+
+```
+$ go get k8s.io/repo-infra/kazel
+package k8s.io/repo-infra/kazel: unrecognized import path ""k8s.io/repo-infra/kazel"" (parse https://k8s.io/repo-infra/kazel?go-get=1: no go-import meta tags ())
+```
+
+some info:
+
+```
+$ go version
+go version go1.8.3 darwin/amd64
+```",closed,False,2017-08-08 23:11:14,2018-03-09 19:19:34
+repo-infra,mbssaiakhil,https://github.com/kubernetes/repo-infra/pull/34,https://api.github.com/repos/kubernetes/repo-infra/issues/34,Fix Typo in Kubernetes repository infrastructure,,closed,True,2017-08-13 11:04:40,2017-08-17 00:38:08
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/35,https://api.github.com/repos/kubernetes/repo-infra/issues/35,Use a unique tmpdir for each go_genrule invocation,"In some cases we can't rely on tmpfs sandboxing to make `/tmp` unique (e.g. https://github.com/kubernetes/kubernetes/issues/49569, but I think this is also problematic on Mac OS).
+
+This PR makes the tmpdir unique so we stop running into these issues.
+Tested locally, build still works.
+
+/assign @spxtr @mikedanese @BenTheElder ",closed,True,2017-08-23 18:38:12,2017-08-23 20:06:08
+repo-infra,thockin,https://github.com/kubernetes/repo-infra/issues/36,https://api.github.com/repos/kubernetes/repo-infra/issues/36,kazel should write non-error output to stdout,"```
+$ ./hack/update-bazel.sh >/dev/null
+wrote ""BUILD.bazel""
+```
+
+tssk tssk.",open,False,2017-08-25 06:02:20,2019-01-24 21:23:02
+repo-infra,mtaufen,https://github.com/kubernetes/repo-infra/issues/37,https://api.github.com/repos/kubernetes/repo-infra/issues/37,err walking generated: openapi-gen path outside of kubernetes: .,"I'm getting `err walking generated: openapi-gen path outside of kubernetes: .` when I run `hack/update-bazel.sh` on Kubernetes.
+
+Error comes from here https://github.com/kubernetes/repo-infra/blob/master/kazel/generator.go#L101.
+
+Looks like it needs to qualify the path before checking it?",closed,False,2017-08-25 15:45:21,2017-09-07 07:00:10
+repo-infra,kad,https://github.com/kubernetes/repo-infra/pull/38,https://api.github.com/repos/kubernetes/repo-infra/issues/38,Ability to set version in debian packages,This makes the bazel rules for debs and rpms on par.,closed,True,2017-08-31 15:24:32,2017-08-31 18:05:28
+repo-infra,mikedanese,https://github.com/kubernetes/repo-infra/pull/39,https://api.github.com/repos/kubernetes/repo-infra/issues/39,add kwargs to k8s_deb,,closed,True,2017-08-31 18:01:36,2017-08-31 18:02:09
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/40,https://api.github.com/repos/kubernetes/repo-infra/issues/40,Update go_genrule to work for rules_go toolchains changes,"Maybe this is the last fix for a while?
+
+I think this works, though I'm not 100% sure. For some reason, bazel is blowing up when I try to build things in kubernetes/kubernetes, but not all targets, and not the ones affected by this change.
+
+Since this locks us into bazel 0.5.4+, I also added a rule (copied from tensorflow) that we can use to enforce bazel versions.
+
+/assign @mikedanese @spxtr 
+cc @ianthehat @jayconrod",closed,True,2017-08-31 23:58:46,2017-09-18 23:27:09
+repo-infra,wongma7,https://github.com/kubernetes/repo-infra/issues/41,https://api.github.com/repos/kubernetes/repo-infra/issues/41,Support hack/.golint_failures or some variation of for exempting directories from golint?,"golint can be excessively naggy, enough so that huge portions of k8s/k8s are listed in hack/.golint_failures. When outside repos use repo-infra and copy/reuse code from k8s/k8s, golint will have many complaints: for example, cloudprovider aws https://github.com/kubernetes/kubernetes/blob/master/hack/.golint_failures#L151 is exempted from golint upstream, so when we copy it into our repo, we get lots of errors like here: https://travis-ci.org/kubernetes-incubator/external-storage/jobs/270804007.
+
+This would entail disabling golint in the verify-gometalinter script and using a separate verify-golint script that respects hack/.golint_failures.
+
+cc https://github.com/kubernetes-incubator/external-storage/pull/331",closed,False,2017-09-01 17:44:16,2018-03-10 20:44:33
+repo-infra,mikedanese,https://github.com/kubernetes/repo-infra/pull/42,https://api.github.com/repos/kubernetes/repo-infra/issues/42,add a faster pkg_tar builder,This implements the parts of pkg_tar builder that we use and is way faster. I can build all of release-tars on my workstation in ~35 seconds.,closed,True,2017-09-02 00:21:09,2017-11-11 03:23:06
+repo-infra,wongma7,https://github.com/kubernetes/repo-infra/pull/43,https://api.github.com/repos/kubernetes/repo-infra/issues/43,Allow repos to skip golint for packages in '.golintignore',fix https://github.com/kubernetes/repo-infra/issues/41,closed,True,2017-09-05 18:43:49,2018-03-11 00:48:34
+repo-infra,db-vmw,https://github.com/kubernetes/repo-infra/issues/44,https://api.github.com/repos/kubernetes/repo-infra/issues/44,Rolling update for statefulset is NOT working,"Hi,
+'m following the document: "" https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#updating-statefulsets "" for updating my statefulset to use new image version (rolling update).
+
+On issuing the command:
+kubectl patch statefulset my_statefulset_name -p '{""spec"":{""updateStrategy"":{""type"":""RollingUpdate""}}}'
+Output: my_statefulset_name patched.
+
+On issuing the command:
+kubectl patch statefulset my_statefulset_name --type='json' -p='[{""op"": ""replace"", ""path"": ""/spec/template/spec/containers/0/image"", ""value"":""my_image""}]'
+Output: my_statefulset_name patched
+
+But, nothing happens, I don't see any pods recreating with the new image mentioned. What's happening here? Where to find the logs on what's going wrong here? kubectl describe pod was not helpful.
+
+Note:
+ If I manually delete the pods, the new pods comes up with new image specified as part of patch command. Is this the expected behavior?
+
+After running the command,
+kubectl patch statefulset my_statefulset_name --type='json' -p='[{""op"": ""replace"", ""path"": ""/spec/template/spec/containers/0/image"", ""value"":""my_image""}]' , I do see the stateful set my_statefulset_name updating with the new image ID
+(i.e. kubectl describe statefulset my_statefulset_name shows the ""my_image"" (new image specified). But, the pods doesn't update themselfs to the new image mentioned (my_image)
+
+
+Yaml file refers to apiVersion: apps/v1beta1",closed,False,2017-09-26 18:19:03,2018-02-10 02:58:24
+repo-infra,mml,https://github.com/kubernetes/repo-infra/pull/45,https://api.github.com/repos/kubernetes/repo-infra/issues/45,"Generate ""package-go-srcs"" and ""all-go-srcs"".","They are analogous to ""package-srcs"" and ""all-srcs"".
+
+@ixdy ",closed,True,2017-10-10 21:32:08,2018-07-27 01:27:54
+repo-infra,mml,https://github.com/kubernetes/repo-infra/pull/46,https://api.github.com/repos/kubernetes/repo-infra/issues/46,Fancy walk,,closed,True,2017-10-13 18:15:38,2018-07-27 01:27:53
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/47,https://api.github.com/repos/kubernetes/repo-infra/issues/47,"Explicitly set go env, since go_toolchain.env has been removed","https://github.com/bazelbuild/rules_go/pull/922 removed `env` from `go_toolchain`.
+
+There's also a newer `tmp` attribute in `go_toolchain.stdlib`; I'm not sure if we should be using it.
+
+/assign @mikedanese ",closed,True,2017-10-19 22:27:04,2017-11-13 22:10:13
+repo-infra,marun,https://github.com/kubernetes/repo-infra/pull/48,https://api.github.com/repos/kubernetes/repo-infra/issues/48,kazel: Use GoPrefix for openapi base import,"This allows subprojects like federation to generate for openapi as per https://github.com/kubernetes/kubernetes/issues/54335.
+
+cc: @mbohlool ",closed,True,2017-10-21 04:08:07,2017-10-23 06:37:31
+repo-infra,cblecker,https://github.com/kubernetes/repo-infra/pull/49,https://api.github.com/repos/kubernetes/repo-infra/issues/49,Fix stdlib dep,"Attempt to fix:
+```
+W1109 18:31:47.806] ERROR: /workspace/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets/BUILD:23:1: in go_genrule rule //vendor/k8s.io/apimachinery/pkg/util/sets:set-gen: 
+W1109 18:31:47.807] Traceback (most recent call last):
+W1109 18:31:47.807] 	File ""/workspace/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets/BUILD"", line 23
+W1109 18:31:47.807] 		go_genrule(name = 'set-gen')
+W1109 18:31:47.808] 	File ""/root/.cache/bazel/_bazel_root/e9f728bbd90b3fba632eb31b20e1dacd/external/io_kubernetes_build/defs/go.bzl"", line 54, in _go_genrule_impl
+W1109 18:31:47.808] 		depset(go_toolchain.data.stdlib)
+W1109 18:31:47.808] 	File ""/root/.cache/bazel/_bazel_root/e9f728bbd90b3fba632eb31b20e1dacd/external/io_kubernetes_build/defs/go.bzl"", line 54, in depset
+W1109 18:31:47.808] 		go_toolchain.data.stdlib
+W1109 18:31:47.809] 'struct' object has no attribute 'stdlib'
+W1109 18:31:47.809] Available attributes: crosstool, package_list.
+W1109 18:31:48.040] ERROR: Analysis of target '//vendor/k8s.io/kube-aggregator:kube-aggregator' failed; build aborted.
+```",closed,True,2017-11-09 19:29:20,2017-11-15 00:40:24
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/50,https://api.github.com/repos/kubernetes/repo-infra/issues/50,Use the new method for aquiring the go_toolchain struct,"This fixes `go_genrule` for newer versions of `rules_go`. #49 didn't quite fix it, but this seems to, for now.
+
+I also experimented with using the `go_path` rule to eliminate most of our logic, but the openapi generator is opinionated in all of the wrong ways and requires more elaborate work to fix.
+
+This fix buys us some time, at least until `go_prefix` is deprecated.
+
+@cblecker @mikedanese @spxtr @BenTheElder ",closed,True,2017-11-14 22:30:40,2017-11-17 22:23:20
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/51,https://api.github.com/repos/kubernetes/repo-infra/issues/51,Add a commit into history that doesn't use modes in go_genrule,"#50 fixed `go_genrule` for `rules_go` at HEAD, but `rules_go` at HEAD is broken in various ways and we want to bump to a slightly older version.
+
+In order to do that, we can't use some of the newer functionality (namely modes), so I've created a commit which doesn't use modes and then reverted it.
+
+This is a bit gross, but that's pretty standard at this point...
+
+@cblecker @BenTheElder @mikedanese @spxtr ",closed,True,2017-11-17 22:56:53,2017-11-17 23:31:49
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/52,https://api.github.com/repos/kubernetes/repo-infra/issues/52,More go_genrule updates,"A very small change due to refactoring in https://github.com/bazelbuild/rules_go/commit/95b702c5331b5d01445fe485c25fc80f3f9e0dcf.
+
+/assign @BenTheElder @mikedanese ",closed,True,2017-12-04 21:32:42,2017-12-19 19:38:55
+repo-infra,spiffxp,https://github.com/kubernetes/repo-infra/pull/53,https://api.github.com/repos/kubernetes/repo-infra/issues/53,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:39:57,2018-01-04 16:41:44
+repo-infra,cblecker,https://github.com/kubernetes/repo-infra/pull/54,https://api.github.com/repos/kubernetes/repo-infra/issues/54,Use dep for repo-infra deps,Also fixes path for `github.com/bazelbuild/buildtools/build`,closed,True,2017-12-24 02:15:18,2018-01-10 01:05:15
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/55,https://api.github.com/repos/kubernetes/repo-infra/issues/55,Remove the buggy bazel check_version function,"This function doesn't handle two-digit version numbers like ""0.10"" correctly. Rather than fix it here, we should just be using the fixed version added to bazelbuild/bazel-skylib in https://github.com/bazelbuild/bazel-skylib/pull/13.
+
+x-ref bazelbuild/bazel#4425
+
+/assign @BenTheElder @mikedanese ",closed,True,2018-01-12 18:01:45,2018-01-18 21:57:25
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/56,https://api.github.com/repos/kubernetes/repo-infra/issues/56,Update go_genrule to use go_context and GoArchive,"Once again, I only somewhat understand what I'm doing here, but this seems to work with https://github.com/bazelbuild/rules_go/commit/74f462a85da545486722a73f211aac72fec28763.
+
+I'm sure we're doing terrible things with `depset`s here, which likely affects performance in the analysis phase. Maybe at some point we should reexamine this (or just figure out how to apply the upstream `go_path` rule).
+
+We should also probably figure out how to migrate away from `go_prefix`, since I think that is being deprecated.
+
+/assign @mikedanese @BenTheElder 
+cc @ianthehat (in case he wants to comment on anything terrible I'm doing)",closed,True,2018-01-18 23:07:52,2018-01-19 00:41:27
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/57,https://api.github.com/repos/kubernetes/repo-infra/issues/57,Add a wrapper macro for pkg_tar which uses the fast build_tar,"The intent of this is that you can just replace
+```python
+load(""@bazel_tools//tools/build_defs/pkg:pkg.bzl"", ""pkg_tar"")
+```
+with
+```python
+load(""@io_kubernetes_build//defs:pkg.bzl"", ""pkg_tar"")
+```
+
+and magically tarballs will build faster.
+
+(An added benefit is that our implementation of fast `build_tar` doesn't include the leading `./`, so we can finally stop using my fork of bazelbuild/bazel.)
+
+/assign @BenTheElder @mikedanese ",closed,True,2018-01-18 23:23:52,2018-01-18 23:30:33
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/58,https://api.github.com/repos/kubernetes/repo-infra/issues/58,Add a top-level OWNERS file to enable approvers and tide,,closed,True,2018-01-19 00:46:25,2018-01-19 00:52:27
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/59,https://api.github.com/repos/kubernetes/repo-infra/issues/59,Add a workspace_binary rule to run a binary from the workspace root,"This lets you do something clever like this in `kubernetes/test-infra/BUILD`:
+```
+load(""@io_kubernetes_build//defs:run_in_workspace.bzl"", ""workspace_binary"")
+
+workspace_binary(
+     name = ""dep"",
+     cmd = ""//vendor/github.com/golang/dep/cmd/dep"",
+) 
+```
+
+And then you can run `bazel run //:dep -- ensure` and everything works like you expect.
+
+/assign @BenTheElder @mikedanese @spxtr 
+cc @stevekuznetsov ",closed,True,2018-01-27 00:19:10,2018-01-27 00:37:18
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/60,https://api.github.com/repos/kubernetes/repo-infra/issues/60,Allow specifying a different root file for workspace_binary,"A small enhancement on #60: allow overriding the root file used, in case `WORKSPACE` is weird or missing in some way.
+
+/assign @BenTheElder ",closed,True,2018-01-27 00:36:54,2018-01-29 21:54:33
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/issues/61,https://api.github.com/repos/kubernetes/repo-infra/issues/61,support debs in tools/build_tar,"I think then we'd be able to swap it in for the python-based archiver building docker images, which should make the kubernetes build even faster.
+
+cc @mikedanese @mattmoor 
+
+(also at some point we should consider contributing our fast build_tar upstream. maybe the new bazelbuild/rules_pkg repo?)",open,False,2018-01-30 23:19:01,2019-03-11 15:46:12
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/62,https://api.github.com/repos/kubernetes/repo-infra/issues/62,Use go_rule() and go_context() for go_genrule(),"I'm attempting to update bazelbuild/rules_go on kubernetes/kubernetes, but `go_genrule` is broken once again:
+```console
+ERROR: [elided]/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets/BUILD:23:1: in go_genrule rule //vendor/k8s.io/apimachinery/pkg/util/sets:set-gen:
+Traceback (most recent call last):
+        File ""[elided]/src/k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/sets/BUILD"", line 23
+                go_genrule(name = 'set-gen')
+        File ""[elided]/.cache/bazel/_bazel_jgrafton/75e5737b0f848bf1b7c3ab3303c8bf72/external/io_kubernetes_build/defs/go.bzl"", line 59, in _go_genrule_impl
+                depset(go.stdlib.files)
+        File ""[elided]/.cache/bazel/_bazel_jgrafton/75e5737b0f848bf1b7c3ab3303c8bf72/external/io_kubernetes_build/defs/go.bzl"", line 59, in depset
+                go.stdlib.files
+object of type 'NoneType' has no field 'files'
+ERROR: Analysis of target '//staging/src/k8s.io/apiserver/pkg/authentication/request/headerrequest:go_default_library' failed; build aborted: Analysis of target '//vendor/k8s.io/apimachinery/pkg/util/sets:set-gen' failed; build aborted
+```
+
+This appears to be at least partially due to https://github.com/bazelbuild/rules_go/pull/1295.
+
+Looking at the changes, I've inferred that we probably need to depend on the new `@io_bazel_rules_go//:stdlib` label, which I've done here.
+
+Everything builds, so this is probably the correct fix?
+/shrug
+/assign @BenTheElder @mikedanese 
+/cc @ianthehat
+
+/hold
+since this will want to be sequenced with the rules_go bump in kubernetes/kubernetes
+which also requires a gazelle bump
+which first requires https://github.com/bazelbuild/bazel-gazelle/pull/125",closed,True,2018-02-09 02:28:39,2018-02-14 00:43:50
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/63,https://api.github.com/repos/kubernetes/repo-infra/issues/63,Require boilerplate on Bazel Skylark source files,"Not the most important thing in the world, but we should probably be doing this?
+/shrug
+/assign @BenTheElder ",closed,True,2018-02-16 01:56:35,2018-02-16 02:04:42
+repo-infra,serathius,https://github.com/kubernetes/repo-infra/pull/64,https://api.github.com/repos/kubernetes/repo-infra/issues/64,Implement deb support,"closes #61 
+
+Adds dependencies github.com/blakesmith/ar github.com/ulikunitz/xz 
+I'm new to golang so it's possible I made simple mistakes. I can easily fix when found.  ",open,True,2018-02-20 22:17:29,2019-03-29 02:07:45
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/65,https://api.github.com/repos/kubernetes/repo-infra/issues/65,vendor gazelle (at 0.10.1) and its dependencies,"This is pre-work to better support vendoring kazel in other repositories (e.g. https://github.com/kubernetes/test-infra/issues/7416), along with a variety of other small tweaks:
+* vendor gazelle and its dependencies at the versions gazelle 0.10.1 is using. (I can't seem to get dep to use github.com/pelletier/go-toml at v1.0.1 - the `[[override]]` seems to have no effect - but gazelle still builds and functions properly, so :man_shrugging: )
+* use vendored gazelle and in-tree kazel in the bazel scripts (basically stealing from https://github.com/kubernetes/kubernetes/pull/57600)
+* rename the `BUILD` files to `BUILD.bazel` (similar to https://github.com/kubernetes/test-infra/pull/6250)
+
+/assign @BenTheElder @mikedanese 
+or anyone else who has opinions",closed,True,2018-03-26 19:52:19,2018-03-26 22:53:02
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/issues/66,https://api.github.com/repos/kubernetes/repo-infra/issues/66,kazel openapi generator is matching itself,"As I just noticed in https://github.com/kubernetes/kubernetes/pull/57600/files#r178665554, the fuzzy logic in kazel includes itself when it's been vendored:
+https://github.com/kubernetes/repo-infra/blob/06471ba92308f7bfff038aa0850f31cbb7254ea3/kazel/generator.go#L78-L80
+
+We could turn this into a regex, which might do a better job of detecting real build tags, but it'd probably be even better to use the `go/build` package to find tags.
+
+cc @mikedanese @spxtr ",closed,False,2018-04-02 22:17:53,2018-04-11 21:54:56
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/67,https://api.github.com/repos/kubernetes/repo-infra/issues/67,Use a smarter regexp for openapi tag detection,"I tried a few other options:
+* using `go/parser` to scan only comments
+* using regexp's multiline flag to try to better detect real comments
+
+but both of these were significantly slower than this approach, taking 5-7s to run. 
+
+For comparison, both this implementation and the existing, buggy `Contains()` implementation take around 1.5s. (Using the regex seems to be about .1-.2s slower, but that is probably allowable.)
+
+I've also this implementation a bit more generic in preparation for kazel learning how to handle additional codegen tags.
+
+Fixes #66.
+
+/assign @mikedanese ",closed,True,2018-04-11 20:13:51,2018-04-11 21:54:56
+repo-infra,ayushpateria,https://github.com/kubernetes/repo-infra/issues/68,https://api.github.com/repos/kubernetes/repo-infra/issues/68,Don't check for OpenAPI tags in skipped paths,"The generator used to generate `vendored_targets` for `generated/openapi/BUILD`, adds the targets even for packages which are under `SkippedPaths`. Because of this, gazelle is picking up `_examples` package in [#55472](https://github.com/kubernetes/kubernetes/pull/55472/files#diff-131ac6e37da99a2ddda1d8d259521f34R69).
+
+Fix to follow.",closed,False,2018-04-12 22:49:13,2018-05-17 07:29:30
+repo-infra,ayushpateria,https://github.com/kubernetes/repo-infra/pull/69,https://api.github.com/repos/kubernetes/repo-infra/issues/69,Don't check for OpenAPI tags in skipped paths,"Fixes #68
+
+We were checking `SkippedPaths` regex rules against the whole path. IMO this should be just on the base. Kubernetes currently uses `^_.*` for `SkippedPaths`, which doesn't work as desired.",closed,True,2018-04-12 22:49:52,2018-05-17 07:29:07
+repo-infra,pmorie,https://github.com/kubernetes/repo-infra/issues/70,https://api.github.com/repos/kubernetes/repo-infra/issues/70,This repo should have a release strategy,So we don't have to pin to SHAs.,open,False,2018-04-23 18:34:49,2018-12-11 12:22:51
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/71,https://api.github.com/repos/kubernetes/repo-infra/issues/71,Install latest stable go for travis and reformat bzl files,"Maybe this will work? Ultimately we should convert this to a prow job, but this is initially the least amount of effort needed to get things building again, I think.
+
+/assign @BenTheElder ",closed,True,2018-05-17 21:57:15,2018-05-18 00:38:51
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/72,https://api.github.com/repos/kubernetes/repo-infra/issues/72,Rewrite go_genrule using go_path,"The `go_path` rule from rules_go 0.12 seems to provide everything we need for our codegen, so instead of building a GOPATH ourselves, we can just use that rule as an input.
+
+I guess it's possible there are bits I'm missing, but this seems to work correctly for set-gen and openapi, at least (the two uses of `go_genrule` we currently have in the repo). One unknown is something like federation, which uses the kubernetes repo in weird ways.
+
+/assign @fejta @BenTheElder 
+cc @mikedanese @jayconrod as FYI
+
+/hold
+because this will want to be synchronized with the kubernetes PR that uses this",closed,True,2018-05-18 22:29:54,2018-05-21 23:11:56
+repo-infra,jessfraz,https://github.com/kubernetes/repo-infra/issues/73,https://api.github.com/repos/kubernetes/repo-infra/issues/73,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:40:25,2019-01-07 19:36:55
+repo-infra,MHBauer,https://github.com/kubernetes/repo-infra/issues/74,https://api.github.com/repos/kubernetes/repo-infra/issues/74,verify-description.sh should move to this repo,"https://github.com/kubernetes/kubernetes/blob/v1.10.4/hack/verify-description.sh
+
+Another reusable verify script. We copied it into kubernetes-incubator/service-catalog.",open,False,2018-06-08 00:43:28,2019-03-11 12:43:12
+repo-infra,njuettner,https://github.com/kubernetes/repo-infra/pull/75,https://api.github.com/repos/kubernetes/repo-infra/issues/75,Linters need more time to run,"gometalinter needs more time in Kubernetes Incubator Project ExternalDNS. I would suggest to bump it up a bit.
+
+Currently TravisCI won't pass the tests correctly due to the deadline of 50s.
+
+Thoughts?",closed,True,2018-06-22 12:32:35,2018-06-28 17:09:23
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/76,https://api.github.com/repos/kubernetes/repo-infra/issues/76,go_genrule: include go stdlib srcs in dependencies,"Code generators like openapi-gen seem to need full access to the Go stdlib sources, not just the compiled libraries.
+
+Additionally, the go rules set `$GOROOT` using a relative path, which causes issues when we chdir.
+
+Fix both of these issues, and expose a standard `$GO_GENRULE_EXECROOT` environment variable too, to make it easier to write these genrules correctly.
+
+This fixes the issues described in https://github.com/kubernetes/kubernetes/pull/65501#issuecomment-400761696.
+
+/assign @BenTheElder @fejta @mikedanese ",closed,True,2018-06-27 18:55:05,2018-08-27 21:18:16
+repo-infra,aojea,https://github.com/kubernetes/repo-infra/issues/77,https://api.github.com/repos/kubernetes/repo-infra/issues/77,Missing CONTRIBUTING.md file,"All K8s subrepositories should have a CONTRIBUTING.md file, which at the minimum should point to https://github.com/kubernetes/community/blob/master/contributors/guide/README.md. Care should be taken that all information is in sync with the contributor guide.
+
+Subrepositories may also have contributing guidelines specific to that repository. They should be explicitly documented and explained in the CONTRIBUTING.md
+
+Ref:  https://github.com/kubernetes/community/issues/1832",closed,False,2018-07-16 09:23:39,2018-07-24 00:14:24
+repo-infra,nikhita,https://github.com/kubernetes/repo-infra/pull/78,https://api.github.com/repos/kubernetes/repo-infra/issues/78,Add CONTRIBUTING.md,"Fixes #77 
+xref https://github.com/kubernetes/community/issues/1832
+
+/assign ixdy mikedanese ",closed,True,2018-07-19 05:48:44,2019-01-12 12:17:19
+repo-infra,mvladev,https://github.com/kubernetes/repo-infra/pull/79,https://api.github.com/repos/kubernetes/repo-infra/issues/79,Add SkippedOpenAPIGenPaths configuration,"Typical use-case for this additional configuration is the following
+
+User has a couple of packages:
+
+- `pkg/apis/foo/v1beta1` with `+k8s:openapi-gen=true`
+- `pkg/apis/_test/v1` with `+k8s:openapi-gen=true`
+- `third_party`
+- `pkg/server`
+
+And wants the generate `BUILD` files for everything except `third_party` and `OpenAPI` definitions only for `pkg/apis/foo/v1beta1` while ignoring `pkg/apis/_test/v1`.
+
+```json
+{
+	""GoPrefix"": ""foo.corp/baz"",
+	""SkippedPaths"": [
+		""^third_party/.*""
+	],
+	""SkippedOpenAPIGenPaths"": [
+		""^pkg/apis/_test/.*""
+	],
+	""AddSourcesRules"": true,
+	""K8sOpenAPIGen"": true
+}
+```
+
+This is a prerequisite for kubernetes/kubernetes#65440",closed,True,2018-07-19 12:52:27,2019-01-12 12:14:26
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/80,https://api.github.com/repos/kubernetes/repo-infra/issues/80,Rework k8s codegen tag support in kazel,"Rather than searching for the `openapi-gen` tag and managing a special `openapi_library` rule, save relevant tag information in a `.bzl` file, which can then be parsed by a Skylark macro in a genrule.
+
+There are three configuration knobs:
+* `K8sCodegenBzlFile`: what `.bzl` file to generate
+* `K8sCodegenBoilerplateFile`: the necessary boilerplate text to include in the generated file
+* `K8sCodegenTags`: a list of tags to include in the generated bzl file
+
+For example, on k/k, if I use the following `.kazelcfg.json`:
+```json
+{
+        ""GoPrefix"": ""k8s.io/kubernetes"",
+        ""SkippedPaths"": [
+                ""^_.*"",
+                ""/_"",
+                ""^third_party/etcd.*""
+        ],
+        ""AddSourcesRules"": true,
+        ""K8sCodegenBzlFile"": ""build/generated.bzl"",
+        ""K8sCodegenBoilerplateFile"": ""hack/boilerplate/boilerplate.generatebzl.txt"",
+        ""K8sCodegenTags"": [
+                ""openapi-gen""
+        ]
+}
+```
+then running this new kazel binary produces the following `build/generated.bzl`:
+```python
+# Copyright The Kubernetes Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the ""License"");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an ""AS IS"" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# #################################################
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+# This file is autogenerated by kazel. DO NOT EDIT.
+# # # # # # # # # # # # # # # # # # # # # # # # # #
+# #################################################
+#
+# The go prefix passed to kazel
+go_prefix = ""k8s.io/kubernetes""
+
+# The list of codegen tags kazel is configured to find
+kazel_configured_tags = [""openapi-gen""]
+
+# tags_values_pkgs is a dictionary mapping {k8s build tag: {tag value: [pkgs including that tag:value]}}
+tags_values_pkgs = {""openapi-gen"": {
+    ""false"": [
+        ""staging/src/k8s.io/api/admission/v1beta1"",
+        ""staging/src/k8s.io/api/core/v1"",
+        ""staging/src/k8s.io/apimachinery/pkg/apis/testapigroup/v1"",
+        ""staging/src/k8s.io/apiserver/pkg/apis/example/v1"",
+        ""staging/src/k8s.io/apiserver/pkg/apis/example2/v1"",
+    ],
+    ""true"": [
+        ""cmd/cloud-controller-manager/app/apis/config/v1alpha1"",
+        ""pkg/apis/abac/v0"",
+        ""pkg/apis/abac/v1beta1"",
+        ""pkg/apis/auditregistration"",
+        ""pkg/version"",
+        ""staging/src/k8s.io/api/admissionregistration/v1alpha1"",
+        ""staging/src/k8s.io/api/admissionregistration/v1beta1"",
+        ""staging/src/k8s.io/api/apps/v1"",
+        ""staging/src/k8s.io/api/apps/v1beta1"",
+        ""staging/src/k8s.io/api/apps/v1beta2"",
+        ""staging/src/k8s.io/api/auditregistration/v1alpha1"",
+...
+        ""staging/src/k8s.io/kube-aggregator/pkg/apis/apiregistration/v1beta1"",
+        ""staging/src/k8s.io/kube-controller-manager/config/v1alpha1"",
+        ""staging/src/k8s.io/kube-proxy/config/v1alpha1"",
+        ""staging/src/k8s.io/kube-scheduler/config/v1alpha1"",
+        ""staging/src/k8s.io/kubelet/config/v1beta1"",
+        ""staging/src/k8s.io/metrics/pkg/apis/custom_metrics/v1beta1"",
+        ""staging/src/k8s.io/metrics/pkg/apis/custom_metrics/v1beta2"",
+        ""staging/src/k8s.io/metrics/pkg/apis/external_metrics/v1beta1"",
+        ""staging/src/k8s.io/metrics/pkg/apis/metrics/v1alpha1"",
+        ""staging/src/k8s.io/metrics/pkg/apis/metrics/v1beta1"",
+    ],
+}}
+
+```
+
+This can be combined with the openapi-specific changes in https://github.com/kubernetes/kubernetes/pull/65501, and would be extensible to other code generators in the future.
+
+/assign @fejta @BenTheElder ",closed,True,2018-07-27 23:23:26,2019-01-12 11:57:04
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/81,https://api.github.com/repos/kubernetes/repo-infra/issues/81,go_genrule: include Go SDK srcs in dependencies,"Code generators like openapi-gen seem to need full access to the Go stdlib sources, not just the compiled libraries.
+
+Additionally, the go rules set $GOROOT using a relative path, which causes issues when we chdir.
+
+Fix both of these issues, and expose a standard $GO_GENRULE_EXECROOT environment variable too, to make it easier to write these genrules correctly.
+
+This fixes the issues described in https://github.com/kubernetes/kubernetes/pull/65501#issuecomment-400761696.
+
+This is a redo of #76, where github got confused.
+
+/assign @BenTheElder @fejta",closed,True,2018-08-27 21:19:04,2018-08-27 22:14:22
+repo-infra,mariantalla,https://github.com/kubernetes/repo-infra/pull/82,https://api.github.com/repos/kubernetes/repo-infra/issues/82,Script to automatically add licence headers,"This PR adds a `ensure-boilerplate.sh` script; when run, it will add copyright/licence headers to applicable files.
+
+Where a valid licence header is already present, the script will not update or otherwise change it. Similarly for files that it is configured to `skip`.
+
+As discussed with [sig-contributor-experience](https://docs.google.com/document/d/1qf-02B7EOrItQgwXFxgqZ5qjW0mtfu5qkYIF1Hl4ZLI/edit#) this is copied from [pivotal-k8s/kubernetes-contrib-tools](https://github.com/pivotal-k8s/kubernetes-contrib-tools) - we'll deprecate the latter once this PR is merged.
+
+/cc @hoegaarden ",open,True,2018-09-07 15:48:35,2019-03-30 13:19:34
+repo-infra,dims,https://github.com/kubernetes/repo-infra/pull/83,https://api.github.com/repos/kubernetes/repo-infra/issues/83,Add support for sha512 hashes for binaries,"mirror the change in https://github.com/kubernetes/release/pull/630
+
+Change-Id: I0e5c3e21237e582d216f02b56273769790364994",closed,True,2018-09-20 17:03:56,2019-01-12 12:12:23
+repo-infra,randomvariable,https://github.com/kubernetes/repo-infra/pull/84,https://api.github.com/repos/kubernetes/repo-infra/issues/84,buildtar: Always make package directory,"Fixes https://github.com/kubernetes/kubernetes/issues/64018
+allowing kubernetes-cni.deb to install correctly.",closed,True,2018-09-21 13:03:05,2018-10-19 18:59:33
+repo-infra,chrismcbride,https://github.com/kubernetes/repo-infra/pull/85,https://api.github.com/repos/kubernetes/repo-infra/issues/85,Make go_genrule usable with golang/mock/mockgen,"Not sure if you are interested in PRs for this, but I had to make some tweaks to go_genrule to get it to work with mockgen. I split up the changes in two 3 separate commits in case you dont want all of this.",closed,True,2018-09-21 21:09:07,2019-01-12 12:08:20
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/issues/86,https://api.github.com/repos/kubernetes/repo-infra/issues/86,go_genrule's $GOROOT missing srcs and bin directory with race detector enabled,"For some reason, updating to go1.11+ breaks `openapi-gen`, but only when `--features=race` is enabled:
+
+```console
+$ bazel build --features=race pkg/generated/openapi/...
+
+INFO: Build options have changed, discarding analysis cache.
+INFO: Analysed 5 targets (0 packages loaded).
+INFO: Found 5 targets...
+ERROR: /usr/local/google/home/jgrafton/code/kubernetes/src/k8s.io/kubernetes/pkg/generated/openapi/BUILD:9:1: error executing shell command: '/bin/bash -c set -e
+export GO_GENRULE_EXECROOT=$(pwd)
+export GOPATH=$GO_GENRULE_EXECROOT/bazel-out/k8-fastbuild/bin/pkg/generated/openapi/zz_generated.openapi~gopath
+export GOROOT=$GO_GENRULE_EXECR...' failed (Exit 1): bash failed: error executing command
+  (cd /usr/local/google/home/jgrafton/.cache/bazel/_bazel_jgrafton/75e5737b0f848bf1b7c3ab3303c8bf72/execroot/__main__ && \
+  exec env - \
+    CGO_ENABLED=1 \
+    GOARCH=amd64 \
+    GOOS=linux \
+    GOROOT=bazel-out/k8-fastbuild/bin/external/io_bazel_rules_go/linux_amd64_race_stripped/stdlib% \
+    GOROOT_FINAL=GOROOT \
+    PATH=bazel-out/k8-fastbuild/bin/external/io_bazel_rules_go/linux_amd64_race_stripped/stdlib%/bin:/bin:/usr/bin \
+  /bin/bash -c 'set -e
+export GO_GENRULE_EXECROOT=$(pwd)
+export GOPATH=$GO_GENRULE_EXECROOT/bazel-out/k8-fastbuild/bin/pkg/generated/openapi/zz_generated.openapi~gopath
+export GOROOT=$GO_GENRULE_EXECROOT/bazel-out/k8-fastbuild/bin/external/io_bazel_rules_go/linux_amd64_race_stripped/stdlib%
+cd $GOPATH/src/k8s.io/kubernetes/; $GO_GENRULE_EXECROOT/bazel-out/host/bin/vendor/k8s.io/kube-openapi/cmd/openapi-gen/linux_amd64_race_stripped/openapi-gen --v 1 --logtostderr --go-header-file $GO_GENRULE_EXECROOT/hack/boilerplate/boilerplate.go.txt --output-file-base zz_generated.openapi --output-package k8s.io/kubernetes/pkg/generated/openapi --report-filename tmp_api_violations.report --input-dirs k8s.io/kubernetes/cmd/cloud-controller-manager/app/apis/config/v1alpha1,k8s.io/kubernetes/pkg/apis/abac/v0,k8s.io/kubernetes/pkg/apis/abac/v1beta1,k8s.io/kubernetes/pkg/version,k8s.io/kubernetes/vendor/k8s.io/api/admission/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/admissionregistration/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/api/admissionregistration/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/apps/v1,k8s.io/kubernetes/vendor/k8s.io/api/apps/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/apps/v1beta2,k8s.io/kubernetes/vendor/k8s.io/api/authentication/v1,k8s.io/kubernetes/vendor/k8s.io/api/authentication/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/authorization/v1,k8s.io/kubernetes/vendor/k8s.io/api/authorization/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/autoscaling/v1,k8s.io/kubernetes/vendor/k8s.io/api/autoscaling/v2beta1,k8s.io/kubernetes/vendor/k8s.io/api/autoscaling/v2beta2,k8s.io/kubernetes/vendor/k8s.io/api/batch/v1,k8s.io/kubernetes/vendor/k8s.io/api/batch/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/batch/v2alpha1,k8s.io/kubernetes/vendor/k8s.io/api/certificates/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/coordination/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/core/v1,k8s.io/kubernetes/vendor/k8s.io/api/events/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/extensions/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/imagepolicy/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/api/networking/v1,k8s.io/kubernetes/vendor/k8s.io/api/policy/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/rbac/v1,k8s.io/kubernetes/vendor/k8s.io/api/rbac/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/api/rbac/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/scheduling/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/api/scheduling/v1beta1,k8s.io/kubernetes/vendor/k8s.io/api/settings/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/api/storage/v1,k8s.io/kubernetes/vendor/k8s.io/api/storage/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/api/storage/v1beta1,k8s.io/kubernetes/vendor/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/api/resource,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/apis/meta/v1,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/apis/meta/v1beta1,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/apis/testapigroup/v1,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/runtime,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/util/intstr,k8s.io/kubernetes/vendor/k8s.io/apimachinery/pkg/version,k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/audit/v1,k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/audit/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/audit/v1beta1,k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/example/v1,k8s.io/kubernetes/vendor/k8s.io/apiserver/pkg/apis/example2/v1,k8s.io/kubernetes/vendor/k8s.io/client-go/pkg/apis/clientauthentication/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/client-go/pkg/apis/clientauthentication/v1beta1,k8s.io/kubernetes/vendor/k8s.io/client-go/pkg/version,k8s.io/kubernetes/vendor/k8s.io/csi-api/pkg/apis/csi/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/kube-aggregator/pkg/apis/apiregistration/v1,k8s.io/kubernetes/vendor/k8s.io/kube-aggregator/pkg/apis/apiregistration/v1beta1,k8s.io/kubernetes/vendor/k8s.io/kube-controller-manager/config/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/kube-proxy/config/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/kube-scheduler/config/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/kubelet/config/v1beta1,k8s.io/kubernetes/vendor/k8s.io/metrics/pkg/apis/custom_metrics/v1beta1,k8s.io/kubernetes/vendor/k8s.io/metrics/pkg/apis/custom_metrics/v1beta2,k8s.io/kubernetes/vendor/k8s.io/metrics/pkg/apis/external_metrics/v1beta1,k8s.io/kubernetes/vendor/k8s.io/metrics/pkg/apis/metrics/v1alpha1,k8s.io/kubernetes/vendor/k8s.io/metrics/pkg/apis/metrics/v1beta1 && cp $GOPATH/src/k8s.io/kubernetes/pkg/generated/openapi/zz_generated.openapi.go $GO_GENRULE_EXECROOT/bazel-out/k8-fastbuild/genfiles/pkg/generated/openapi/zz_generated.openapi.go && rm tmp_api_violations.report')
+
+Use --sandbox_debug to see verbose messages from the sandbox
+E1003 17:47:36.869706       4 openapi.go:365] Error when generating: Duration, Duration invalid type
+2018/10/03 17:47:36 OpenAPI code generation error: Failed executing generator: some packages had errors:
+cannot generate spec for type invalid type
+INFO: Elapsed time: 13.249s, Critical Path: 12.61s
+INFO: 1 process: 1 linux-sandbox.
+FAILED: Build did NOT complete successfully
+```
+
+Digging in, this appears to be because we are setting `GOROOT` to `go_context().root` instead of `go_context().sdk.root_file.dirname`.
+
+When there aren't any features enabled, `.root` and `.sdk.root_file.dirname` point to the same location, the precompiled go stdlib and sources.
+
+When we enable a feature like the race detector, `rules_go` compiles the stdlib, and then `go_context().root` points to this compiled library. There's no tools or sources in this directory, though, just a `pkg` directory, which causes problems for `openapi-gen`. (I have no idea how this worked before, since I see the same behavior when using `go1.10.4`.)
+
+Ideally, I'd like to have `GOROOT` point at a directory that contains the downloaded, precompiled `go_sdk` as well as the feature-compiled sdk, but I'm not sure if that's possible with `rules_go` currently. Or am I misunderstanding this completely?
+
+cc @BenTheElder @cblecker @jayconrod",closed,False,2018-10-04 00:54:56,2018-10-11 07:28:14
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/87,https://api.github.com/repos/kubernetes/repo-infra/issues/87,go_genrule: set GOROOT to the downloaded SDK rather than compiled stdlib,"This is a potential fix for #86.
+
+I've tested it with @cblecker's patch bumping to go1.11, and have confirmed that the `zz_generated.openapi.go` file built under bazel (both with and without the race detector feature) matches the file built under `make generated_files`.
+
+I think for `go_genrule` it probably makes more sense to point to the SDK rather than the compiled library, since we don't handle any compilation features anyway.
+
+cc @jayconrod @chrismcbride if they have any thoughts.",closed,True,2018-10-04 01:26:54,2018-10-11 07:28:37
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/88,https://api.github.com/repos/kubernetes/repo-infra/issues/88,build_tar: ensure root directory exists when adding from a tar file,"Based on @randomvariable's #84.
+
+Addresses kubernetes/kubernetes#64018 allowing kubernetes-cni.deb to install correctly.
+
+/assign @mikedanese @BenTheElder ",closed,True,2018-10-19 18:57:44,2019-01-12 12:06:25
+repo-infra,dims,https://github.com/kubernetes/repo-infra/pull/89,https://api.github.com/repos/kubernetes/repo-infra/issues/89,Switch from glog to klog,Change-Id: I8dcb22debc5c04ff6845cb798386fbb3b2156651,closed,True,2018-11-04 14:25:38,2019-01-12 12:03:02
+repo-infra,njuettner,https://github.com/kubernetes/repo-infra/pull/90,https://api.github.com/repos/kubernetes/repo-infra/issues/90,Adjust gometalinter's by using an env,"[ExternalDNS](https://github.com/kubernetes-incubator/external-dns) still uses repo-infra and it's underlying gometalinter tests. We already bumped the `gometalinter` deadline timeout but it seems it's not enough anymore. Currently all PR's are failing due to timeout exceeds for gometalinter.
+
+We're guessing that TravisCI instances are not that big or have only a spare capacity to run such tests.
+
+I would highly appreciate if we could merge this PR 😄🤞. 
+ 
+This would allow us to use an env var in Travis, so that we can adjust the timeout when we need it.
+
+Signed-off-by: Nick Jüttner <nick@zalando.de>",closed,True,2018-11-14 10:58:06,2019-01-12 11:58:26
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/91,https://api.github.com/repos/kubernetes/repo-infra/issues/91,kazel: remove support for managing Go rules,"This is a follow-on to https://github.com/kubernetes/repo-infra/pull/80, inspired by https://github.com/kubernetes/repo-infra/pull/80#discussion_r229140501. You probably only want to look at the last two commits for now.
+
+We haven't used kazel to manage go rules for quite a while, and I'm pretty sure it wouldn't even generate valid rules anymore. Let's remove all this unnecessary code.
+
+/assign @fejta @BenTheElder ",closed,True,2018-11-29 19:46:49,2019-01-12 11:28:31
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/92,https://api.github.com/repos/kubernetes/repo-infra/issues/92,Fix build for bazel 0.20.0+,"We need to use the starlark implementation of `http_archive`, and we need an updated `rules_go` too.
+
+/assign @BenTheElder @fejta ",closed,True,2018-12-04 23:19:03,2019-01-12 11:30:22
+repo-infra,nikhita,https://github.com/kubernetes/repo-infra/pull/93,https://api.github.com/repos/kubernetes/repo-infra/issues/93,Add SECURITY_CONTACTS file,"Fixes #73 
+
+Want to avoid getting spammed in #73 :)
+
+The list of names/users here is the same as those listed as approvers for this repo.
+
+/assign @ixdy @mikedanese ",closed,True,2019-01-05 12:13:18,2019-01-12 11:27:10
+repo-infra,hoegaarden,https://github.com/kubernetes/repo-infra/pull/94,https://api.github.com/repos/kubernetes/repo-infra/issues/94,Add script to update & verify repo-infra when subtree'ed in,"This could be a way to keep `repo-infra` up to date in other repos which have `subtree add`ed `repo-infra`, see also https://github.com/kubernetes/repo-infra/pull/82#issuecomment-452683686.
+
+/cc @nikhita 
+/cc @tao12345666333 
+/cc @ixdy 
+/cc @mariantalla ",open,True,2019-01-11 10:54:15,2019-03-29 02:10:32
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/95,https://api.github.com/repos/kubernetes/repo-infra/issues/95,Use a correct Bazel workspace name for repo-infra,"The Bazel workspace name should really match the repo name, so changing `io_kubernetes_build` to `io_k8s_repo_infra`.
+
+Whenever projects update their `repo-infra` dependency, they'll need to switch the name as well.
+
+x-ref https://github.com/kubernetes/test-infra/pull/10757
+
+/assign @fejta @BenTheElder ",closed,True,2019-01-17 21:52:19,2019-01-17 22:13:05
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/96,https://api.github.com/repos/kubernetes/repo-infra/issues/96,pkg_tar: update references to @io_k8s_repo_infra and add smoke test,"oops.
+
+/assign @fejta @BenTheElder ",closed,True,2019-01-17 22:14:25,2019-01-17 22:19:48
+repo-infra,nikhita,https://github.com/kubernetes/repo-infra/issues/97,https://api.github.com/repos/kubernetes/repo-infra/issues/97,Use repo-infra in kubernetes/kubernetes,"@hoegaarden and @mariantalla have been working on improving the scripts in https://github.com/kubernetes/repo-infra/pull/94 and https://github.com/kubernetes/repo-infra/pull/82. (thank you so much for those btw! :smile: )
+
+To make sure we make full use of these improvements, we'll need to use k/repo-infra in k/k. This issue is meant as a place to discuss if we want to do so (if not, any improvements in scripts should be redirected to k/k) and if yes, what challenges we currently face to make it possible.
+
+/cc @ixdy @mikedanese @cblecker 
+
+/sig contributor-experience
+repo-infra is contribex subproject
+",open,False,2019-01-23 15:20:59,2019-02-06 16:30:15
+repo-infra,mikedanese,https://github.com/kubernetes/repo-infra/issues/98,https://api.github.com/repos/kubernetes/repo-infra/issues/98,build_tar does not handle duplicate files in the same way that the reference impl does,"We just add both. Using the reference build_tar, you get a warning:
+
+```
+Duplicate file in archive: ./kubernetes/server/bin/cloud-controller-manager, picking first occurrence
+Duplicate file in archive: ./kubernetes/server/bin/cloud-controller-manager.docker_tag, picking first occurrence
+Duplicate file in archive: ./kubernetes/server/bin/cloud-controller-manager.tar, picking first occurrence
+```",closed,False,2019-01-26 19:41:29,2019-01-28 19:56:52
+repo-infra,mikedanese,https://github.com/kubernetes/repo-infra/pull/99,https://api.github.com/repos/kubernetes/repo-infra/issues/99,support path conflict resolution in buildtar,"Match the reference implementation by prioritizing the first file.
+
+Fixes https://github.com/kubernetes/repo-infra/issues/98",closed,True,2019-01-28 19:33:56,2019-01-28 19:56:56
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/issues/100,https://api.github.com/repos/kubernetes/repo-infra/issues/100,add missing functionality to build_tar,"Our Go implementation of build_tar has fallen behind some of the features in the [upstream Python implementation of build_tar](https://github.com/bazelbuild/bazel/blob/master/tools/build_defs/pkg/build_tar.py):
+- `--manifest`: JSON manifest of contents to add to the layer
+- `--empty_file`: add an empty file
+- `--empty_dir`: add an empty dir (Kubernetes would use this, currently we create a dummy archive instead)
+- `--empty_root_dir`: this defaults to `""./""` upstream; we currently don't support this, but could add it for compatibility (and then set to `""kubernetes/""` or `""""` for our usage, similar to what's being discussed in https://github.com/bazelbuild/bazel/issues/7293)
+- `--mtime`: ""Set mtime on tar file entries. May be an integer or the value ""portable"", to get the value 2000-01-01, which is usable with non *nix OSes"" (https://github.com/bazelbuild/bazel/commit/25d202fc1545f4aaba821df75a8bf3fb57284da1)
+- deb support - tracked in https://github.com/kubernetes/repo-infra/issues/61
+
+cc @mikedanese ",open,False,2019-01-31 21:19:26,2019-03-29 06:29:53
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/101,https://api.github.com/repos/kubernetes/repo-infra/issues/101,Update gazelle to 0.16.0 and rules_go to 0.17.0,"We were using a pretty old version of gazelle here which was doing incorrect things with the `importmap`s in `vendor/`. Updating to fix those issues.
+
+/assign @fejta @BenTheElder ",closed,True,2019-02-01 19:11:26,2019-02-02 01:11:38
+repo-infra,fejta,https://github.com/kubernetes/repo-infra/pull/102,https://api.github.com/repos/kubernetes/repo-infra/issues/102,Add fejta to owners,/assign @ixdy @mikedanese ,closed,True,2019-02-08 21:41:52,2019-02-12 11:26:38
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/103,https://api.github.com/repos/kubernetes/repo-infra/issues/103,bazel: update macros to support multi-arch and create a CROSSTOOL for gcc crossbuild-essential packages,"This PR is basically 2-3 changes combined, but it probably makes sense to look at them together, since all of them are needed for the bazel cross-compilation PR in kubernetes/kubernetes (https://github.com/kubernetes/kubernetes/pull/73930). (I can separate them if you feel very strongly, however.)
+
+1. Support `select()` in `release_filegroup`: I achieve this by adding a separate attribute (`conditioned_srcs`), creating hash rules for all possible outputs, and then using `select()`s to only reference the correct hashes for the platform that's been configured.
+2. Add a `goarch` attribute to the `k8s_deb` and `deb_data` macros and create a new macro for `pkg_rpm` which translate to the corresponding architecture name expected for that package type. For example, `arm64` is in some places instead referred to as `aarch64`, so handle the translation transparently.
+3. Create a Go program to generate a `CROSSTOOL` file, and then check this generated `CROSSTOOL` file in. I initially generated this file by running `bazel build` inside a debian container with `gcc` installed. I took the resulting auto-generated `CROSSTOOL`, copied it, removed parts that didn't seem relevant, and figured out which pieces needed to be overridden with the gcc-cross binaries and libraries.
+
+The `CROSSTOOL` bit is somewhat fragile, since it basically requires the `crossbuild-essential-PLATFORM` packages to be installed. It also can't be auto-generated at build time, since I believe it's used in the analysis phase, and I didn't want to create a `repository_rule` (at least not for this first pass).
+
+It is possible to use `clang` instead, and in that case it'd even be possible to automatically download `clang` as a dependency, but we still need a sysroot (libc, includes, etc) for each platform, and those don't seem to be obviously available anywhere. (The chromium project has some prebuilt sysroots, but not one for every platform we need.)
+
+An example of using this `CROSSTOOL` on my linux machine:
+
+```
+bazel build --crosstool_top=@io_k8s_repo_infra//tools:toolchain --cpu=arm --compiler=gcc  --platforms=@io_bazel_rules_go//go/toolchain:linux_arm //cmd/kubectl
+```
+
+/assign @BenTheElder @fejta 
+cc @liztio ",closed,True,2019-02-11 19:22:26,2019-02-14 00:47:58
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/104,https://api.github.com/repos/kubernetes/repo-infra/issues/104,Two tar fixes,"I have no idea how this ever worked:
+- Bazel's `pkg_tar` defaults `mode = ""0555""`, which means that directories inside the tarball are not writable, which causes problems during extraction. If we override that default to `""""`, we can let `build_tar` choose an appropriate default. (The upstream `build_tar` also has this functionality, even.)
+- When creating parent directories, our `build_tar` used the mode of whatever was being added, which meant the directories might be missing the `x` or `w` bit. I blatantly stole the upstream approach to set the `x` bit when the `r` bit is set, and have also ensured that all parent directories have user mode RWX.
+
+/assign @mikedanese @fejta @BenTheElder ",closed,True,2019-02-14 20:14:08,2019-02-14 23:47:49
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/105,https://api.github.com/repos/kubernetes/repo-infra/issues/105,Only save the hash in hash files (and add test),"@mtaufen discovered a bug I introduced in #103: by removing the `awk {print $$1}` (which I thought was there for a different reason), we were including the both the hash and filename in the hash files, rather than just the hashes.
+
+For example, the file `testdata/testfile.txt.md5` should contain the following:
+```
+6c840392943ddfc0d213a8786ddcf913
+```
+
+but my bug made it contain the following instead:
+```
+6c840392943ddfc0d213a8786ddcf913  defs/testdata/testfile.txt
+```
+
+I've fixed this bug, and also added a small test to validate this functionality.
+
+/assign @BenTheElder @fejta ",closed,True,2019-02-21 19:38:19,2019-02-21 20:23:31
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/106,https://api.github.com/repos/kubernetes/repo-infra/issues/106,Fix Travis,"Travis uses some non-bash sh, which fails on `set -o pipefail`, so explicitly use bash instead.
+
+Also make Bazel output on Travis less spammy.
+
+Follow-up to #105 (which shouldn't have merged).
+
+/assign @BenTheElder ",closed,True,2019-02-21 21:09:18,2019-02-21 23:31:20
+repo-infra,joelsmith,https://github.com/kubernetes/repo-infra/pull/107,https://api.github.com/repos/kubernetes/repo-infra/issues/107,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:13:28,2019-03-09 00:27:35
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/issues/108,https://api.github.com/repos/kubernetes/repo-infra/issues/108,numerous incompatibilities with bazel 0.24.0+,"It looks like bazel 0.24.0 flipped a number of flags that broke things in this repo:
+* `--incompatible_disallow_dict_plus` was enabled by default, resulting in `go_genrule` breaking:
+```
+ERROR: ... in _go_genrule rule //staging/src/k8s.io/apimachinery/pkg/util/sets:set-gen:
+Traceback (most recent call last):
+        File "".../k8s.io/kubernetes/staging/src/k8s.io/apimachinery/pkg/util/sets/BUILD"", line 25
+                _go_genrule(name = 'set-gen')
+        File "".../external/io_k8s_repo_infra/defs/go.bzl"", line 82, in _go_genrule_impl
+                ctx.action(inputs = (list(all_srcs) + resol...), <5 more arguments>)
+        File "".../external/io_k8s_repo_infra/defs/go.bzl"", line 85, in ctx.action
+                ctx.configuration.default_shell_env + go.env
+The `+` operator for dicts is deprecated and no longer supported. Please use the `update` method instead. You can temporarily enable the `+` operator by passing the flag --incompatible_disallow_dict_plus=fals
+```
+* The `pkg_tar` Starlark implementation seems to be [including `-mtime` now](https://github.com/bazelbuild/bazel/commit/25d202fc1545f4aaba821df75a8bf3fb57284da1):
+```
+flag provided but not defined: -mtime
+Usage of bazel-out/host/bin/external/io_k8s_repo_infra/tools/build_tar/linux_amd64_stripped/build_tar:
+  -compression gz
+        Compression (gz or `bz2`), default is none.
+  -deb value
+        A debian package to add to the layer
+  -directory string
+        Directory in which to store the file inside the layer
+  -file value
+        A file to add to the layer
+  -flagfile string
+        Path to flagfile
+  -link value
+        Add a symlink a inside the layer ponting to b if a:b is specified
+  -mode string
+        Force the mode on the added files (in octal).
+  -modes value
+        Specific mode to apply to specific file (from the file argument), e.g., path/to/file=0455.
+  -output string
+        The output file, mandatory
+  -owner string
+        Specify the numeric default owner of all files, e.g., 0.0 (default ""0.0"")
+  -owner_name string
+        Specify the owner name of all files, e.g. root.root.
+  -owner_names value
+        Specify the owner names of individual files, e.g. path/to/file=root.root.
+  -owners value
+        Specify the numeric owners of individual files, e.g. path/to/file=0.0.
+  -tar value
+        A tar file to add to the layer
+Target //build/release-tars:release-tars failed to build
+```
+  (See also https://github.com/kubernetes/repo-infra/issues/100)
+* The `cc_toolchain` rule seems to have changed its attributes; trying to cross-compile gives lots of errors about missing attributes. (Might be related to https://github.com/bazelbuild/bazel/issues/6861?)
+
+There might be other issues, these were just the first ones I noticed.",closed,False,2019-03-27 23:07:36,2019-03-29 05:40:13
+repo-infra,fejta,https://github.com/kubernetes/repo-infra/pull/109,https://api.github.com/repos/kubernetes/repo-infra/issues/109,Modernize repo-infra,"/assign @Katharine @ixdy 
+
+Import hack libraries from test-infra, in preparation for
+
+* Using prow instead of travis for unit testing
+* Go modules instead of dep
+* Centralizing all our hack scripting
+
+
+ref https://github.com/kubernetes/test-infra/pull/11987",closed,True,2019-03-29 00:39:54,2019-03-29 08:01:16
+repo-infra,fejta,https://github.com/kubernetes/repo-infra/pull/110,https://api.github.com/repos/kubernetes/repo-infra/issues/110,mod/migrate.sh k8s.io/repo-infra,"/assign @Katharine @ixdy 
+
+ref https://github.com/kubernetes/test-infra/pull/11987",closed,True,2019-03-29 00:54:57,2019-03-29 21:27:34
+repo-infra,ixdy,https://github.com/kubernetes/repo-infra/pull/111,https://api.github.com/repos/kubernetes/repo-infra/issues/111,Fix bazel 0.24 incompatibilities,"Several `--incompatible` flags were flipped in bazel 0.24, causing a number of things to break as noted in #108.
+
+I made some additional changes to `go_genrule` and the `cc_toolchain` target anticipating breaking changes coming in bazel 0.25+. At least a few of these preemptive changes require bazel 0.23+. (Thankfully, I think nothing was broken before bazel 0.24, so we can safely update CI to bazel 0.23 first.)
+
+Fixes #108.
+x-ref #100.
+
+/assign @fejta @mikedanese 
+",closed,True,2019-03-29 01:18:46,2019-03-29 05:48:17
+repo-infra,fejta,https://github.com/kubernetes/repo-infra/pull/112,https://api.github.com/repos/kubernetes/repo-infra/issues/112,"Move all test logic out of travis, into hack/verify-all.sh","This will make it trivial to migrate the job to prow
+
+/assign @Katharine @ixdy 
+
+ref https://github.com/kubernetes/test-infra/pull/11987",closed,True,2019-03-29 01:35:28,2019-03-29 08:00:45
+repo-infra,fejta,https://github.com/kubernetes/repo-infra/pull/113,https://api.github.com/repos/kubernetes/repo-infra/issues/113,Support --mtime flag,"https://github.com/bazelbuild/bazel/commit/25d202fc1545f4aaba821df75a8bf3fb57284da1#diff-c1e1cca79dc0d65a1615802308293d12 which is in 0.24.0 started adding this flag
+
+/assign @ixdy @mikedanese 
+
+
+ref https://github.com/kubernetes/test-infra/pull/11987",closed,True,2019-03-29 01:43:37,2019-03-29 19:12:05

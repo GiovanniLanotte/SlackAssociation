@@ -1,0 +1,229 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/111,https://github.com/hyperledger/indy-hipe/pull/111,dbluhm,Draft HIPE: Testing messages,This HIPE describes messages used for testing.,[],4,2019-04-02 15:36:47,,2019-04-02 20:40:24,False,,,clean,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/110,https://github.com/hyperledger/indy-hipe/pull/110,dhh1128,propose HIPE: Introductions,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],9,2019-03-29 08:51:46,,2019-03-29 16:26:29,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/109,https://github.com/hyperledger/indy-hipe/pull/109,brentzundel,Anoncreds protocol,This HIPE is a description of the cryptography used in the anoncreds protocol as it is currently implemented. ,[],54,2019-03-26 01:51:08,,2019-04-01 16:37:11,False,,,clean,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/108,https://github.com/hyperledger/indy-hipe/pull/108,dhh1128,propose design: DKMS v4,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+Contains a 4th-generation summary of findings on decentralized key management.",[],32,2019-03-22 10:18:51,2019-03-29 22:11:02,2019-03-29 22:11:02,True,2019-03-29 22:11:02,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/107,https://github.com/hyperledger/indy-hipe/pull/107,dhh1128,Normalize 'did' and 'did_doc' field names in creq/cresp,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2019-03-22 03:37:22,2019-03-22 03:38:11,2019-03-22 03:47:30,True,2019-03-22 03:38:11,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/106,https://github.com/hyperledger/indy-hipe/pull/106,dhh1128,non-HIPE: update negotiation diagram to use 'proposal',Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2019-03-21 16:35:20,2019-03-21 18:00:12,2019-03-21 18:00:13,True,2019-03-21 18:00:12,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/105,https://github.com/hyperledger/indy-hipe/pull/105,Artemkaaas,"Cross-Domain Messaging: Changed format of ""msg"" field.","Motivation:
+Libindy `pack` function in the current implementation builds JSON object and then does a conversion to bytes.
+- Setting bytes as is to A2A `msg` field is super inefficient because of the following message JSON serialization.
+- Applying additional base64 wrapping increase message size also
+
+Solution: There the next possible options:
+- converting the object back from bytes (as I suggested in PR) before setting as a value
+- converting bytes to string some simple way
+- changing of `pack` function to return JSON string instead of conversion to bytes.
+
+Signed-off-by: artem.ivanov <artem.ivanov@dsr-company.com>",['dhh1128'],3,2019-03-19 14:57:27,,2019-04-03 21:27:50,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/104,https://github.com/hyperledger/indy-hipe/pull/104,dhh1128,propose HIPE: connection management protocols,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],18,2019-03-17 03:59:59,,2019-04-03 21:36:14,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/103,https://github.com/hyperledger/indy-hipe/pull/103,ckochenower,Remove redundant text,Signed-off-by: Corin Kochenower <corin.kochenower@evernym.com>,[],2,2019-03-14 15:56:03,2019-03-14 21:18:04,2019-03-14 21:18:04,True,2019-03-14 21:18:04,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/102,https://github.com/hyperledger/indy-hipe/pull/102,lovesh,minor fixes to wire-message-format HIPE,Signed-off-by: lovesh harchandani <lovesh.bond@gmail.com>,[],2,2019-03-14 13:07:21,2019-03-14 21:17:07,2019-03-14 23:06:09,True,2019-03-14 21:17:07,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/101,https://github.com/hyperledger/indy-hipe/pull/101,TelegramSam,Assign HIPE Numbers,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2019-03-14 04:31:21,2019-03-14 04:32:11,2019-03-27 16:54:26,True,2019-03-14 04:32:11,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/100,https://github.com/hyperledger/indy-hipe/pull/100,dhh1128,FCP HIPE: repudiation explainer,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],3,2019-03-08 18:36:19,,2019-03-18 15:35:27,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/99,https://github.com/hyperledger/indy-hipe/pull/99,dhh1128,tweak a2a-->DIDComm,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],4,2019-03-05 18:17:48,,2019-03-29 18:46:43,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/98,https://github.com/hyperledger/indy-hipe/pull/98,dhh1128,propose HIPE: DIDComm explainer,,[],2,2019-03-05 17:51:40,,2019-03-29 18:36:25,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/97,https://github.com/hyperledger/indy-hipe/pull/97,tbca-ericcheng,Update Wallet Broken Links,"The broken link was missing an 's' in docs in the two following links:
+https://github.com/hyperledger/indy-sdk/tree/master/docs/design/009-wallet-export-import
+https://github.com/hyperledger/indy-sdk/tree/master/docs/design/003-wallet-storage",[],1,2019-02-28 23:56:27,2019-03-03 04:28:09,2019-03-03 04:28:09,True,2019-03-03 04:28:09,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/96,https://github.com/hyperledger/indy-hipe/pull/96,tplooker,DRAFT HIPE: Oauth ephemeral challenge protocol integration,"This is a very early draft of how the OAuth integration is intended to work with the ephemeral challenge protocol, there is much still to discuss, such as the `ephemeral challenge message` being signed inside a JWS structure.",[],9,2019-02-27 23:48:56,,2019-04-03 04:15:14,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/95,https://github.com/hyperledger/indy-hipe/pull/95,tplooker,DRAFT HIPE: Ephemeral challenge protocol,"Initial draft HIPE, one of a series up and coming.",[],5,2019-02-26 22:57:47,,2019-04-03 03:14:11,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/94,https://github.com/hyperledger/indy-hipe/pull/94,TelegramSam,Propose HIPE: Transports,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],3,2019-02-26 16:00:50,,2019-03-21 23:25:40,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/93,https://github.com/hyperledger/indy-hipe/pull/93,kdenhartog,DRAFT: HIPE process changes,"Signed-off-by: Kyle Den Hartog <kdenhar@gmail.com>
+
+[Rendered text](https://github.com/kdenhartog/indy-hipe/tree/process-update)",[],7,2019-02-18 23:57:20,2019-03-22 02:58:05,2019-03-22 02:58:05,False,,,dirty,False,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/92,https://github.com/hyperledger/indy-hipe/pull/92,tplooker,propose HIPE: Revised did doc conventions,"Initial update to the diddoc conventions for routing via verkey.
+
+I have shrunk this document to be more about only the did doc conventions. This creates less context when reading it on its own, but my preference would be for downstream documentation to point to this for greater context.
+
+Signed-off-by: Tobias Looker <tplooker@gmail.com>",[],5,2019-02-13 05:54:27,,2019-02-27 00:57:51,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/91,https://github.com/hyperledger/indy-hipe/pull/91,TelegramSam,Added Sam as Maintainer,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2019-02-12 22:59:46,2019-02-12 23:52:28,2019-03-27 16:57:25,True,2019-02-12 23:52:28,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/90,https://github.com/hyperledger/indy-hipe/pull/90,TelegramSam,fixed accepted numbers,Signed-off-by: Sam Curren <telegramsam@gmail.com>,[],1,2019-02-11 16:28:46,2019-02-11 16:29:07,2019-03-27 16:56:24,True,2019-02-11 16:29:07,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/89,https://github.com/hyperledger/indy-hipe/pull/89,KitHat,proposed HIPE: Credential Exchange Message Family,,[],17,2019-02-08 11:55:29,,2019-03-30 00:07:17,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/88,https://github.com/hyperledger/indy-hipe/pull/88,glowkey,proposed HIPE: CommittedAnswer protocol,Signed-off-by: Douglas Wightman <douglas.wightman@evernym.com>,[],7,2019-02-07 16:43:31,,2019-04-03 16:52:34,False,,,clean,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/87,https://github.com/hyperledger/indy-hipe/pull/87,mikelodder7,FCP HIPE: Ursa Migration,,[],5,2019-02-06 16:29:41,2019-03-14 04:18:40,2019-03-14 04:18:40,True,2019-03-14 04:18:40,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/86,https://github.com/hyperledger/indy-hipe/pull/86,dhh1128,FCP HIPE: Agents explainer,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],11,2019-01-31 21:10:42,,2019-03-18 15:35:39,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/85,https://github.com/hyperledger/indy-hipe/pull/85,dhh1128,FCP HIPE: mediators and relays,signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],4,2019-01-30 23:19:26,,2019-03-18 15:35:47,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/84,https://github.com/hyperledger/indy-hipe/pull/84,dhh1128,minor HIPE update: adjust to ~ as decorator prefix,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2019-01-26 16:05:25,2019-01-28 14:13:27,2019-01-28 14:13:27,True,2019-01-28 14:13:27,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/83,https://github.com/hyperledger/indy-hipe/pull/83,dhh1128,FCP HIPE: JSON-LD compatibility,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],4,2019-01-25 18:55:53,,2019-03-29 19:15:05,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/82,https://github.com/hyperledger/indy-hipe/pull/82,TelegramSam,Initial admin messages HIPE,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],2,2019-01-21 15:13:48,,2019-02-11 22:25:28,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/81,https://github.com/hyperledger/indy-hipe/pull/81,TelegramSam,FCP: BasicMessage HIPE,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],4,2019-01-16 16:58:58,2019-03-14 04:17:58,2019-03-27 16:55:12,True,2019-03-14 04:17:58,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/80,https://github.com/hyperledger/indy-hipe/pull/80,dhh1128,"FCP HIPE Update: minor tweak to introduce ""Native Object"" in File Format HIPE",Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],5,2019-01-15 20:42:07,2019-01-28 15:06:13,2019-01-28 15:06:13,True,2019-01-28 15:06:13,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/79,https://github.com/hyperledger/indy-hipe/pull/79,kdenhartog,DRAFT: digital signatures decorator and message family,"Signed-off-by: Kyle Den Hartog <kdenhar@gmail.com>
+
+[rendered text](https://github.com/kdenhartog/indy-hipe/tree/sigs/text/digital-signatures)",[],7,2019-01-07 23:43:43,,2019-03-22 03:00:35,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/78,https://github.com/hyperledger/indy-hipe/pull/78,dhh1128,propose HIPE: attachments,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+Describes a general-purpose attachment mechanism.",[],27,2019-01-03 02:45:23,,2019-04-03 19:03:30,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/77,https://github.com/hyperledger/indy-hipe/pull/77,dhh1128,propose HIPE: ACKs,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+Explains how one party can request, and another party can send, acknowledgment
+messages (ACKs) to confirm receipt and clarify the status of complex processes.",[],7,2018-12-27 08:06:05,,2019-04-03 17:06:39,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/76,https://github.com/hyperledger/indy-hipe/pull/76,dhh1128,FCP HIPE: date and time conventions,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+This is the conventions portion of an earlier PR, #68. We decided to split that PR into two separate HIPEs, so this partiatlly supersedes that.",[],6,2018-12-27 04:05:56,2019-02-11 16:22:40,2019-02-11 16:22:40,True,2019-02-11 16:22:40,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/75,https://github.com/hyperledger/indy-hipe/pull/75,tplooker,propose HIPE: Agent message routing,"As discussed in the Agent WG call on Dec 5, this HIPE defines the following 
+
+- New message types for the routing family to maintain routing records.
+- Two examples of message delivery featuring routing and maintenance of routing records.
+
+Please pay close attention to some of the un-resolved questions around this implementation as I am not convinced with all aspects.",[],13,2018-12-20 05:02:11,,2019-01-12 21:01:15,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/74,https://github.com/hyperledger/indy-hipe/pull/74,michaeldboyd,Enable readthedocs support for indy-hipe,"First, I recognize that this looks like a large PR, but the changes I've made were pretty simple. 
+
+As discussed in the HIPE [0025-indy-docs-framework](https://github.com/hyperledger/indy-hipe/blob/master/text/0025-indy-docs-framework/README.md) we would like to have a centralized site for our documentation. The changes I have made are outlined in that HIPE. 
+
+I've added the following files:
+- `conf.py`  - used to build the documentation with sphinx
+- `Makefile` - proves users a way to build and test the sphinx docs locally
+- `text/index.rst` - specifies the menu structure for readthedocs
+
+I've changed the following things:
+- Changed the `0000-template.md` and all of the current hipes to have only 1 `<h1>` header. This is an unfortunate requirement of readthedocs to autogenerate the sidebar list of all the pages as specified in the `index.rst`. I've changed them to increase by a depth of 1 for every layer deeper they go. 
+- Changed every HIPE's `<h1>` title to be the HIPE number and name in the following way: `0025-indy-docs-framework --> 0025: Indy Docs Framework`
+- Minor punctuation edits found during the review of the hipes.
+
+Thanks for taking the time to review! I'm happy to make more or less adjustments based on feedback.",[],15,2018-12-18 19:21:50,2019-01-31 00:20:24,2019-01-31 00:20:24,True,2019-01-31 00:20:24,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/73,https://github.com/hyperledger/indy-hipe/pull/73,dhh1128,FCP HIPE: protocol-discovery protocol,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],18,2018-12-18 02:00:18,,2019-04-03 13:04:40,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/72,https://github.com/hyperledger/indy-hipe/pull/72,dhh1128,propose HIPE: ~please_duplex to ask for 2-way sync comms,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],8,2018-12-16 00:17:42,,2019-02-11 22:57:15,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/71,https://github.com/hyperledger/indy-hipe/pull/71,dhh1128,propose HIPE: decorators,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+Describes the theory and conventions associated with A2A decorators.",[],3,2018-12-15 11:02:42,,2019-01-26 15:42:55,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/70,https://github.com/hyperledger/indy-hipe/pull/70,TelegramSam,Assigning HIPE Numbers,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2018-12-13 14:29:54,2018-12-13 14:30:08,2018-12-13 14:30:08,True,2018-12-13 14:30:08,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/69,https://github.com/hyperledger/indy-hipe/pull/69,dhh1128,propose HIPE: protocols explainer,,[],25,2018-12-12 09:14:15,,2019-02-07 15:38:39,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/68,https://github.com/hyperledger/indy-hipe/pull/68,dhh1128,propose HIPE: message timing decorator,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],7,2018-12-12 05:57:45,,2019-01-26 16:23:46,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/67,https://github.com/hyperledger/indy-hipe/pull/67,dhh1128,FCP HIPE: trust ping protocol,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+Describe how agents could ping one another to prove connectivity and security.",[],10,2018-12-12 04:31:55,2019-03-14 04:17:04,2019-03-14 04:17:04,True,2019-03-14 04:17:04,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/66,https://github.com/hyperledger/indy-hipe/pull/66,lovesh,fix typos,Signed-off-by: lovesh harchandani <lovesh.bond@gmail.com>,[],1,2018-12-04 23:21:52,2018-12-06 00:22:50,2018-12-06 00:22:54,True,2018-12-06 00:22:50,lovesh,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/65,https://github.com/hyperledger/indy-hipe/pull/65,swcurran,Propose HIPE: Error reporting,"A HIPE that proposes a new message type (""problem-report"") for handling some categories of errors, and provides recommendations on the handling of a broad range of error categories, including the timeouts.",[],23,2018-12-03 10:52:15,,2019-03-22 22:34:55,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/64,https://github.com/hyperledger/indy-hipe/pull/64,dhh1128,FCP HIPE: localized messages,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],21,2018-12-01 05:19:32,,2019-04-03 12:54:01,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/63,https://github.com/hyperledger/indy-hipe/pull/63,michaeldboyd,FCP HIPE: Indy documentation framework,[view HIPE here](https://github.com/michaeldboyd/indy-rfc/tree/master/text/0025-indy-docs-framework),[],14,2018-11-28 21:44:42,2018-12-13 14:26:47,2018-12-13 14:26:47,True,2018-12-13 14:26:47,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/62,https://github.com/hyperledger/indy-hipe/pull/62,kdenhartog,Agent file format,added message about encryption so we can move this HIPE to FCP.,[],3,2018-11-27 00:00:19,2018-11-27 00:00:36,2018-11-27 00:00:36,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/61,https://github.com/hyperledger/indy-hipe/pull/61,dhh1128,FCP HIPE: agent file format,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,"['TelegramSam', 'nage', 'dhh1128']",9,2018-11-13 20:34:52,2018-12-13 14:26:09,2018-12-13 14:26:10,True,2018-12-13 14:26:09,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/60,https://github.com/hyperledger/indy-hipe/pull/60,dhh1128,propose HIPE: message tracing,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],2,2018-11-13 05:26:39,,2019-04-03 17:12:54,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/59,https://github.com/hyperledger/indy-hipe/pull/59,dhh1128,propose HIPE: message tracing,Propose a convention for tracing messages to aid troubleshooting.,[],13,2018-11-13 05:12:00,2018-11-13 05:29:34,2018-12-07 02:17:22,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/58,https://github.com/hyperledger/indy-hipe/pull/58,TelegramSam,Adding HIPE number,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2018-11-12 19:25:11,2018-11-12 19:25:23,2018-11-12 19:25:23,True,2018-11-12 19:25:23,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/57,https://github.com/hyperledger/indy-hipe/pull/57,TelegramSam,merge approved HIPE,,[],9,2018-11-12 17:53:35,2018-11-12 17:53:57,2018-11-12 17:53:58,True,2018-11-12 17:53:57,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/56,https://github.com/hyperledger/indy-hipe/pull/56,swcurran,Proposed HIPE: Change the HIPE process to not be PR-centric,This is a proposed HIPE to change from the current PR-based HIPE incubation process to one based on merged PRs in different folders based on the status of the HIPE. Challenges with the existing process are presented and a HIPE life-cycle process is proposed.,[],9,2018-11-08 19:59:35,2019-01-07 17:20:26,2019-01-07 17:20:26,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/55,https://github.com/hyperledger/indy-hipe/pull/55,JanLin,New HIPE consent receipt,"Hi,
+I have created a new HIPE on the topic of consent receipt. There has been a lot of discussion on the subject and this is an initial proposal to help document what is needed to be supported in Indy and how it will work practice with use cases. Hope the draft is clear but if any further clarification that is needed before being accepted let me know. Eventually a sequence diagram and demo will be created to further support the draft.
+Thanks,
+Jan Lindquist",['dhh1128'],28,2018-11-08 16:49:08,,2018-12-04 04:47:32,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/54,https://github.com/hyperledger/indy-hipe/pull/54,TelegramSam,FCP HIPE: Connection Protocol,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],19,2018-11-02 13:28:18,2019-03-14 04:16:28,2019-03-27 16:55:54,True,2019-03-14 04:16:28,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/53,https://github.com/hyperledger/indy-hipe/pull/53,TelegramSam,Update Message Type HIPE to include guidelines,Signed-off-by: Sam Curren <telegramsam@gmail.com>,[],2,2018-10-31 13:54:51,2018-11-30 22:10:39,2019-01-21 15:21:08,True,2018-11-30 22:10:39,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/52,https://github.com/hyperledger/indy-hipe/pull/52,dhh1128,Assign number to HIPE,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2018-10-29 17:11:08,2018-10-29 17:11:22,2018-10-29 17:11:22,True,2018-10-29 17:11:22,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/51,https://github.com/hyperledger/indy-hipe/pull/51,dhh1128,Give number to HIPE,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2018-10-29 16:34:33,2018-10-29 16:34:45,2018-10-29 16:34:45,True,2018-10-29 16:34:45,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/50,https://github.com/hyperledger/indy-hipe/pull/50,lovesh,FCP HIPE: support multiple key types,,[],13,2018-10-23 03:21:01,,2019-02-22 19:09:11,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/49,https://github.com/hyperledger/indy-hipe/pull/49,ianco,"Wallet Storage Plug-in - Postgres Lessons Learned, Outstanding Issues","This HIPE describes a common set of tools and framework for developing wallet storage plug-ins, including:
+
+- Standard rust software components to facilitate building new plug-ins (in rust)
+- Standard test suite for verifying correct implementation of the plug-in
+- Standard interfaces and constants exposed from the Indy-sdk shared library
+
+A Postgres plug-in has been developed to illustrate the proposed framework, and to be used to facilitate discussion of how the above points will be implemented.  The initial codebase for the Postgres plug-in is available in PR https://github.com/hyperledger/indy-sdk/pull/1238.
+",[],13,2018-10-22 21:48:38,2019-01-20 02:45:04,2019-01-20 02:45:04,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/48,https://github.com/hyperledger/indy-hipe/pull/48,lovesh,FCP HIPE: support multiple keys and endpoints for a DID,,[],18,2018-10-22 18:35:24,,2019-03-12 13:09:03,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/47,https://github.com/hyperledger/indy-hipe/pull/47,sklump,FCP universal-codec HIPE,"Proposal for universal JSON-driven codec layer to build into indy-sdk.
+
+Is this even a good idea? The process of design and implementation has raised some existential questions. Further discussion required to arrive at consensus regarding best way forward.
+
+Signed-off-by: sklump <srklump@hotmail.com>",[],3,2018-10-16 16:53:31,,2019-03-21 10:52:24,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/46,https://github.com/hyperledger/indy-hipe/pull/46,mikelodder7,propose HIPE: Agent connection protocol,"This is meant to replace [HIPE 18](https://github.com/hyperledger/indy-hipe/pull/18)
+
+[Rendered Text](https://github.com/mikelodder7/indy-hipe/blob/agent-connection-protocol/text/agent-connection-protocol/README.md)",[],38,2018-10-12 14:28:58,2018-11-12 17:00:38,2018-11-12 17:00:54,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/45,https://github.com/hyperledger/indy-hipe/pull/45,sergey-shilov,FCP INDY-1704: create a multi-sig-actions HIPE doc.,Signed-off-by: Sergey Shilov <sergey.shilov@dsr-company.com>,['mikelodder7'],3,2018-09-27 16:47:27,2019-03-14 04:15:44,2019-03-14 04:15:44,True,2019-03-14 04:15:44,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/44,https://github.com/hyperledger/indy-hipe/pull/44,peacekeeper,Fix small ABNF bug.,Signed-off-by: Markus Sabadello <markus@danubetech.com>,[],1,2018-09-20 15:39:32,2018-09-20 18:01:04,2018-09-20 18:01:04,True,2018-09-20 18:01:04,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/43,https://github.com/hyperledger/indy-hipe/pull/43,kdenhartog,FCP HIPE: Wire Messages (formerly AMES),"This is the JWM work, but it's been renamed to prevent confusion. I'm expecting it to diverge further from the JWE spec some more in order to align with other multiplex designs. It details the format of the serialization and the API that should be used to use this functionality. I expect there to be some discussion and changes in relation to multiplexing described [here](https://github.com/sovrin-foundation/protocol/blob/master/janus/message-packaging.md#multiplexing-authcrypt-messages)
+
+[rendered text](https://github.com/kdenhartog/indy-hipe/tree/AMES/text/0028-wire-message-format)",[],61,2018-09-18 00:23:36,2019-01-25 23:26:36,2019-03-14 12:28:22,True,2019-01-25 23:26:36,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/42,https://github.com/hyperledger/indy-hipe/pull/42,dhh1128,supersedes PR 22,PR 22 mingled authcrypt/anoncrypt description with some modifications of another HIPE about wire messages. That HIPE is not ready to merge yet. This PR includes just the pulls that are needed to accept the docs for authcrypt/anoncrypt.,[],5,2018-09-17 16:45:41,2018-09-17 16:46:50,2018-09-17 16:46:50,True,2018-09-17 16:46:50,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/41,https://github.com/hyperledger/indy-hipe/pull/41,dhh1128,add HIPE num,,[],3,2018-09-17 16:09:50,2018-09-17 16:09:58,2018-09-17 16:09:58,True,2018-09-17 16:09:58,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/40,https://github.com/hyperledger/indy-hipe/pull/40,dhh1128,add HIPE num,,[],3,2018-09-17 15:52:07,2018-09-17 15:52:18,2018-09-17 15:52:18,True,2018-09-17 15:52:18,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/39,https://github.com/hyperledger/indy-hipe/pull/39,dhh1128,add HIPE num,,[],2,2018-09-17 15:45:36,2018-09-17 15:45:49,2018-09-17 15:45:49,True,2018-09-17 15:45:49,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/38,https://github.com/hyperledger/indy-hipe/pull/38,mikelodder7,FCP propose HIPE: Add Forward Secrecy to Agent-to-Agent communication,,[],29,2018-09-05 16:02:21,2018-11-12 19:22:51,2018-11-12 19:22:51,True,2018-11-12 19:22:51,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/37,https://github.com/hyperledger/indy-hipe/pull/37,swcurran,propose HIPE: DID Doc Conventions,Cancelled the previous PR (#21) and this is the third of three HIPEs. This one covers conventions to be used in DIDDocs.,[],21,2018-08-17 22:27:43,2018-11-12 17:53:59,2018-11-12 17:53:59,True,2018-11-12 17:53:59,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/36,https://github.com/hyperledger/indy-hipe/pull/36,swcurran,propose HIPE: Wire messages,Cancelled the previous PR (#21) and this is the second of three HIPEs. This one covers wire messages.,[],21,2018-08-17 22:25:07,2018-12-01 06:40:10,2018-12-01 06:40:24,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/35,https://github.com/hyperledger/indy-hipe/pull/35,swcurran,merge HIPE: Cross Domain Messaging,Cancelled the previous PR (#21) and this is the first of three HIPEs. This one covers cross-domain messaging.,[],21,2018-08-17 22:19:58,2018-10-29 17:08:14,2018-10-29 17:08:14,True,2018-10-29 17:08:14,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/34,https://github.com/hyperledger/indy-hipe/pull/34,dhh1128,Give number to wallet HIPE,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2018-08-14 20:43:39,2018-08-14 20:57:33,2018-08-14 21:01:06,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/33,https://github.com/hyperledger/indy-hipe/pull/33,devin-fisher,give wallets a HIPE number,"NOT a HIPE
+
+Signed-off-by: Devin Fisher <devin.fisher@evernym.com>",[],1,2018-08-14 20:25:32,2018-08-14 20:58:13,2018-08-14 20:58:13,True,2018-08-14 20:58:13,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/32,https://github.com/hyperledger/indy-hipe/pull/32,TelegramSam,propose HIPE: message-type-spec-guidelines,initial submission.,[],3,2018-08-11 13:44:45,2018-10-31 13:19:30,2018-11-12 17:51:11,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/31,https://github.com/hyperledger/indy-hipe/pull/31,devin-fisher,propose HIPE: Relationship State,"Currently a work-in-progress!
+
+The architectural theory is mostly missing. Please see [this document by Jason Law](https://docs.google.com/document/d/1dFmQ_5NlAIrCYx7AYvvEeYlyvzv-2u3cpQqWTadJbPA/edit) that is the bases of what will go into this portion of the hipe. 
+
+Technical details are rough but flushing out. They are coming from a POC that evernym is researching. 
+([See POC - code only](https://github.com/lovesh/indy-sdk/tree/rsm))",[],22,2018-08-06 19:12:01,,2018-12-28 19:23:45,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/30,https://github.com/hyperledger/indy-hipe/pull/30,dbluhm,FCP HIPE: Message Threading,Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>,[],14,2018-08-03 23:20:34,2019-01-07 18:02:43,2019-01-07 18:02:43,True,2019-01-07 18:02:43,TelegramSam,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/29,https://github.com/hyperledger/indy-hipe/pull/29,keichiri,FCP HIPE: libvcx integration,"This is a HIPE explaining only the integration of libvcx code into Indy-SDK repo.
+
+This does not deal with explaining what is libvcx, how it works etc. That will (if we decide is required) be a part of a separate HIPE",[],5,2018-08-03 17:12:11,,2019-01-28 17:04:13,False,,,behind,True,open
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/28,https://github.com/hyperledger/indy-hipe/pull/28,keichiri,Libvcx integration,"This is a HIPE explaining only the integration of libvcx code into Indy-SDK repo.
+
+This does not deal with explaining what is libvcx, how it works etc. That will (if we decide is required) be a part of a separate HIPE",[],5,2018-08-03 16:11:16,2018-08-03 17:11:17,2018-08-03 17:11:17,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/27,https://github.com/hyperledger/indy-hipe/pull/27,emees96,Update README.md,"Signed-off-by: Ellie <emees96@gmail.com>
+
+",[],2,2018-08-02 18:57:40,2018-08-06 16:36:38,2018-08-06 16:36:38,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/26,https://github.com/hyperledger/indy-hipe/pull/26,devin-fisher,approved HIPE: indy repos,A new hipe that details the repos in the Indy Project.,[],16,2018-08-02 18:57:14,2018-09-17 15:48:45,2018-09-17 15:48:45,True,2018-09-17 15:48:45,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/25,https://github.com/hyperledger/indy-hipe/pull/25,ryMarsh44,added maintainers list,Signed-off-by: Ryan Marsh <ryan.marsh44@gmail.com>,[],3,2018-08-02 18:52:41,2018-08-20 15:08:49,2018-08-20 15:08:49,True,2018-08-20 15:08:49,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/24,https://github.com/hyperledger/indy-hipe/pull/24,mjmckean,Propose HIPE: Indy Docs Repo,"[indy-docs-repo HIPE](https://github.com/mjmckean/indy-hipe/tree/master/text/indy-docs-repo)
+
+Signed-off-by: Michael Joseph McKean <mjmckean11@gmail.com>",[],8,2018-07-26 21:52:46,2018-12-18 17:00:02,2018-12-18 17:00:02,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/23,https://github.com/hyperledger/indy-hipe/pull/23,burdettadam,approved HIPE: Maintainer Procedures,"This documents the best practices used for maintaining Hyperledger
+Indy Projects and details procedure for contributing to Hyperledger
+Indy source code and adding new maintainers. This HIPE includes a
+standard to incorporate CODING-CONVENTIONS markdown file in every
+project, outlining coding best practices. As well as a MAINTAINERS
+markdown file outlining maintainers and contributors.
+
+Signed-off-by: Adam Burdett <burdettadam@gmail.com>",['dhh1128'],8,2018-07-25 19:46:05,2018-09-17 16:05:51,2018-09-17 16:05:51,True,2018-09-17 16:05:51,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/22,https://github.com/hyperledger/indy-hipe/pull/22,kdenhartog,approved HIPE: Description of AnonCrypt and AuthCrypt,"Signed-off-by: Kyle Den Hartog <kdenhar@gmail.com>
+
+This is intended to capture a comment made by @vimmerru which excellently articulated how AnonCrypt and AuthCrypt currently worked. I wanted to add this as documentation for others to understand what is happening during this process.",[],25,2018-07-13 01:26:27,2018-09-17 16:49:27,2018-09-17 16:49:27,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/21,https://github.com/hyperledger/indy-hipe/pull/21,swcurran,Initial rough draft of an Agent2Agent Transport Layer HIPE,"Signed-off-by: Stephen Curran <swcurran@gmail.com>
+
+A first cut of the Transport Layer HIPE to get the conversation started. It's a surprisingly simple set of messages - just two.  As such, it is probably too simple and I'm missing a lot. Regardless, I hope it will get the conversation going.  The document is desperately needing some pictures, but I wanted to get this out to the community for discussion.
+
+Hack away!",[],14,2018-07-11 21:57:42,2018-08-17 22:05:16,2018-08-17 22:05:16,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/20,https://github.com/hyperledger/indy-hipe/pull/20,dhh1128,propose hipe: wallet design,,[],10,2018-07-11 07:27:30,2018-08-02 15:18:55,2018-08-02 15:18:55,True,2018-08-02 15:18:55,nage,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/19,https://github.com/hyperledger/indy-hipe/pull/19,dbluhm,FCP HIPE: Message Types,[Rendered text](https://github.com/dbluhm/indy-hipe/tree/message-types/text/message-types),['dhh1128'],16,2018-07-06 22:16:06,2018-10-29 16:26:25,2018-10-29 16:26:25,True,2018-10-29 16:26:25,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/18,https://github.com/hyperledger/indy-hipe/pull/18,ryanwest6,Propose HIPE: Connection Protocol,https://github.com/ryanwest6/indy-hipe/blob/master/text/connection-protocol/README.md,[],42,2018-07-06 20:52:41,2018-11-30 22:18:09,2018-11-30 22:18:09,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/17,https://github.com/hyperledger/indy-hipe/pull/17,dbluhm,approved HIPE: Agent Message Structure,"This HIPE is pretty basic but important for establishing some type of standard for agent developers.
+
+It's my hope that more of the recent discussion around agents be formalized as HIPEs in the near future.",[],7,2018-06-26 03:06:25,2018-09-17 15:43:54,2018-09-17 15:43:54,True,2018-09-17 15:43:54,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/16,https://github.com/hyperledger/indy-hipe/pull/16,vimmerru, propose HIPE: Concurrency Improvement,"Libindy show provide better requests concurrency and performance in parallel requests
+processing environment.
+
+Note that this proposal can look a bit technical for HIPE, but some possible
+options can significantly affect community and libindy developer experience.
+So i suggest to discuss it this way.",[],7,2018-06-01 11:57:34,2018-08-02 15:18:18,2018-08-02 15:18:18,True,2018-08-02 15:18:18,nage,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/15,https://github.com/hyperledger/indy-hipe/pull/15,devin-fisher,Edits -- NOT A HIPE,"Edits to the main readme and template NOT A HIPE
+
+Signed-off-by: Devin Fisher <devin.fisher@evernym.com>",[],2,2018-05-30 22:20:23,2018-05-31 16:34:41,2018-06-13 21:58:56,True,2018-05-31 16:34:41,nage,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/14,https://github.com/hyperledger/indy-hipe/pull/14,dhh1128,'improvement prop' --> 'enhancement prop',Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2018-05-23 15:26:00,2018-05-23 15:26:08,2018-05-23 15:26:08,True,2018-05-23 15:26:08,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/13,https://github.com/hyperledger/indy-hipe/pull/13,dhh1128,Rename RFC --> HIPE,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],2,2018-05-22 16:51:55,2018-05-23 15:00:26,2018-05-23 15:00:32,True,2018-05-23 15:00:26,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/12,https://github.com/hyperledger/indy-hipe/pull/12,dhh1128,approved HIPE: agent test suite,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],11,2018-05-21 16:48:35,2018-09-17 15:36:54,2018-09-17 15:36:54,True,2018-09-17 15:36:54,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/11,https://github.com/hyperledger/indy-hipe/pull/11,dhh1128,propose RFC: agent test suite,This PR has been superseded by https://github.com/hyperledger/indy-rfc/pull/12,[],10,2018-05-18 03:29:01,2018-05-21 16:41:49,2018-05-21 23:06:15,False,,,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/10,https://github.com/hyperledger/indy-hipe/pull/10,dhh1128,Explain relationship to sovrin-rfc,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2018-05-15 19:22:05,2018-05-15 19:22:12,2018-05-15 19:22:12,True,2018-05-15 19:22:12,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/9,https://github.com/hyperledger/indy-hipe/pull/9,dhh1128,FCP HIPE: SSI Notation,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],17,2018-05-10 19:44:57,2018-09-17 15:14:48,2018-09-17 15:14:48,True,2018-09-17 15:14:48,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/8,https://github.com/hyperledger/indy-hipe/pull/8,dhh1128,propose HIPE: credential revocation,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],10,2018-05-10 19:42:11,2018-07-12 09:33:16,2019-01-08 19:39:21,True,2018-07-12 09:33:16,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/7,https://github.com/hyperledger/indy-hipe/pull/7,dhh1128,Revise template and readme,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2018-05-10 19:29:49,2018-05-10 19:29:56,2018-05-10 19:29:56,True,2018-05-10 19:29:56,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/6,https://github.com/hyperledger/indy-hipe/pull/6,dhh1128,undo premature merges,,[],3,2018-05-10 17:00:56,2018-05-10 19:11:33,2018-05-10 19:11:33,True,2018-05-10 19:11:33,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/5,https://github.com/hyperledger/indy-hipe/pull/5,dhh1128,ssi rfc updates,,[],2,2018-05-09 17:06:36,2018-05-09 17:06:45,2018-05-09 17:06:45,True,2018-05-09 17:06:45,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/4,https://github.com/hyperledger/indy-hipe/pull/4,dhh1128,RFC for Indy's revocation feature,,[],9,2018-05-03 22:59:20,2018-05-09 11:31:17,2018-05-09 11:31:17,True,2018-05-09 11:31:17,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/3,https://github.com/hyperledger/indy-hipe/pull/3,dhh1128,Improve README,"Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>
+
+Removed a couple rust-isms from the README, including heavy mention of sub-teams. Fixed some broken hyperlinks.",[],1,2018-05-03 22:10:59,2018-05-03 22:11:13,2018-05-03 22:11:13,True,2018-05-03 22:11:13,dhh1128,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/2,https://github.com/hyperledger/indy-hipe/pull/2,dhh1128,Preliminary boilerplate and structure,,[],3,2018-04-23 20:55:26,2018-04-30 15:34:55,2018-04-30 15:34:55,True,2018-04-30 15:34:55,nage,unknown,,closed
+indy-hipe,https://api.github.com/repos/hyperledger/indy-hipe/pulls/1,https://github.com/hyperledger/indy-hipe/pull/1,ryjones,Create DCO,,[],1,2018-02-16 19:11:51,2018-02-16 19:21:13,2018-02-16 19:21:13,False,,,unknown,,closed

@@ -1,0 +1,1305 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/composer-sample-networks/pull/146,https://github.com/hyperledger/composer-sample-networks/pull/146,"A typo in the sentence ""Actions no written...""",2a42db6f9f125f6de6b8fc2389864dbf56ca97db,2018-02-05 17:08:39,166040940,"@@ -0,0 +1,132 @@
++# Vehicle Manufacture Network
++
++> This network tracks the manufacture of vehicles from an initial order request through to their completion by the manufacturer. A regulator is able to provide oversight throughout this whole process. 
++
++## Models within this business network
++
++### Participants
++`Person` `Manufacturer` `Regulator`
++
++### Assets
++
++`Order` `Vehicle`
++
++### Transactions
++
++`PlaceOrder` `UpdateOrderStatus` `SetupDemo`
++
++### Events
++
++`PlaceOrderEvent` `UpdateOrderStatusEvent`
++
++## Example use of this business network
++A `Person` uses a manufacturer's application to build their desired car and order it. The application submits a `PlaceOrder` transaction which creates a new `Order` asset containing the details of the vehicle the `Person` wishes to have made for them. The `Manufacturer` begins work on the car and as it proceeds through stages of production the `Manufacturer` submits `UpdateOrderStatus` transactions to mark the change in status for the `Order` e.g. updating the status from PLACED to SCHEDULED_FOR_MANUFACTURE. Once the `Manufacturer` has completed production for the `Order` they register the car by submitting an `UpdateOrderStatus` transaction with the status VIN_ASSIGNED (also providing the VIN to register against) and a `Vehicle` asset is formally added to the registry using the details specified in the `Order`. Once the car is registered then the `Manufacturer` submits an `UpdateOrderStatus` transaction with a status of OWNER_ASSIGNED at which point the owner field of the `Vehicle` is set to match the orderer field of the `Order`. The regulator would perform oversight over this whole process. 
++
++## Testing this network within playground
++Navigate to the **Test** tab and then submit a `SetupDemo` transaction:
++
++```
++{
++  ""$class"": ""org.base.SetupDemo""
++}
++```
++
++This will generate three `Manufacturer` participants, fourteen `Person` participants, a single `Regulator` participant and thirteen `Vehicle` assets. 
++
++Next order your car (an orange Arium Gamora) by submitting a PlaceOrder transaction:
++
++```
++{
++  ""$class"": ""org.base.PlaceOrder"",
++  ""orderId"": ""1234"",
++  ""vehicleDetails"": {
++    ""$class"": ""org.base.VehicleDetails"",
++    ""make"": ""resource:org.base.Manufacturer#Arium"",
++    ""modelType"": ""Gamora"",
++    ""colour"": ""Sunburst Orange""
++  },
++  ""options"": {
++    ""trim"": ""executive"",
++    ""interior"": ""red rum"",
++    ""extras"": [""tinted windows"", ""extended warranty""]
++  },
++  ""orderer"": ""resource:org.base.Person#Paul""
++}
++```
++
++This `PlaceOrder` transaction generates a new `Order` asset in the registry and emits a `PlaceOrderEvent` event.
++
++Now simulate the order being accepted by the manufacturer by submitting an `UpdateOrderStatus` transaction:
++
++```
++{
++  ""$class"": ""org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus"",
++  ""orderStatus"": ""SCHEDULED_FOR_MANUFACTURE"",
++  ""order"": ""resource:org.acme.vehicle.lifecycle.manufacturer.Order#1234""
++}
++```
++
++This `UpdateOrderStatus` transaction updates the orderStatus of the `Order` with orderId 1234 in the asset registry and emits an `UpdateOrderStatusEvent` event.
++
++Simulate the manufacturer registering the vehicle with the regulator by submitting an `UpdateOrderStatus` transaction:
++
++```
++{
++  ""$class"": ""org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus"",
++  ""orderStatus"": ""VIN_ASSIGNED"",
++  ""order"": ""resource:org.acme.vehicle.lifecycle.manufacturer.Order#1234"",
++  ""vin"": 'abc123'
++}
++```
++
++This `UpdateOrderStatus` transaction updates the orderStatus of the `Order` with orderId 1234 in the asset registry, create a new `Vehicle` based of that `Order` in the asset registry and emits an `UpdateOrderStatusEvent` event.
++
++Next assign the owner of the vehicle using an `UpdateOrderStatus` transaction:
++
++```
++{
++  ""$class"": ""org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus"",
++  ""orderStatus"": ""OWNER_ASSIGNED"",
++  ""order"": ""resource:org.acme.vehicle.lifecycle.manufacturer.Order#1234"",
++  ""vin"": 'abc123'
++}
++```
++
++This `UpdateOrderStatus` transaction updates the orderStatus of the `Order` with orderId 1234 in the asset registry, update the `Vehicle` asset with VIN abc123 to have an owner of Paul (who we intially marked as the orderer in the `PlaceOrder` transaction) and status of ACTIVE and also emits an `UpdateOrderStatusEvent` event.
++
++Finally complete the ordering process by marking the order as `DELIVERED` through submitting another `UpdateOrderStatus` transaction:
++
++```
++{
++  ""$class"": ""org.acme.vehicle.lifecycle.manufacturer.UpdateOrderStatus"",
++  ""orderStatus"": ""DELIVERED"",
++  ""order"": ""resource:org.acme.vehicle.lifecycle.manufacturer.Order#1234""
++}
++```
++
++This `UpdateOrderStatus` transaction updates the orderStatus of the `Order` with orderId 1234 in the asset registry and emits an `UpdateOrderStatusEvent` event.
++
++This Business Network definition has been used to create demo applications that simulate the scenario outlined above. You can find more detail on these at https://github.com/hyperledger/composer-sample-applications/tree/master/packages/vehicle-lifecycle
++
++## Permissions in this business network for modelled participants
++Within this network permissions are outlines for the participants outlining what they can and can't do. The rules in the permissions.acl file explicitly ALLOW participants to perform actions. Actions no written for a participant in that file are blocked.",,2018-02-07 09:50:47,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/166040940,https://github.com/hyperledger/composer-sample-networks/pull/146#discussion_r166040940,cazfletch
+https://github.com/hyperledger/composer-sample-networks/pull/146,https://github.com/hyperledger/composer-sample-networks/pull/146,"not sure if ""base.js"" is a good name for the script file now there is only one",2a42db6f9f125f6de6b8fc2389864dbf56ca97db,2018-02-05 17:10:56,166041584,"@@ -0,0 +1,266 @@
++/*",,2018-02-07 09:50:47,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/166041584,https://github.com/hyperledger/composer-sample-networks/pull/146#discussion_r166041584,cazfletch
+https://github.com/hyperledger/composer-sample-networks/pull/146,https://github.com/hyperledger/composer-sample-networks/pull/146,"not sure if ""org.base.cto"" is a good name for the model file now there is only one",2a42db6f9f125f6de6b8fc2389864dbf56ca97db,2018-02-05 17:11:39,166041772,"@@ -0,0 +1,106 @@
++/*",,2018-02-07 09:50:47,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/166041772,https://github.com/hyperledger/composer-sample-networks/pull/146#discussion_r166041772,cazfletch
+https://github.com/hyperledger/composer-sample-networks/pull/146,https://github.com/hyperledger/composer-sample-networks/pull/146,think the namespace could be better named,2a42db6f9f125f6de6b8fc2389864dbf56ca97db,2018-02-05 17:12:21,166041968,"@@ -0,0 +1,106 @@
++/*
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++namespace org.base",,2018-02-07 09:50:47,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/166041968,https://github.com/hyperledger/composer-sample-networks/pull/146#discussion_r166041968,cazfletch
+https://github.com/hyperledger/composer-sample-networks/pull/146,https://github.com/hyperledger/composer-sample-networks/pull/146,do we still need vehicleStatus,2a42db6f9f125f6de6b8fc2389864dbf56ca97db,2018-02-05 17:14:32,166042658,"@@ -0,0 +1,106 @@
++/*
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ * http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ */
++
++namespace org.base
++
++// BASE DEFINTIONS
++
++concept VehicleDetails {
++  --> Manufacturer make
++  o String modelType
++  o String colour
++}
++
++abstract participant Company identified by companyId {
++  o String companyId
++  o String name
++}
++
++participant Person identified by username {
++  o String username
++  o String email optional
++}
++
++
++// MANUFACTURE DEFINITIONS
++participant Manufacturer extends Company { 
++}
++
++enum OrderStatus {
++  o PLACED
++  o SCHEDULED_FOR_MANUFACTURE
++  o VIN_ASSIGNED
++  o OWNER_ASSIGNED
++  o DELIVERED
++}
++
++concept Options {
++  o String trim
++  o String interior
++  o String[] extras
++}
++
++asset Order identified by orderId {
++  o String orderId
++  o VehicleDetails vehicleDetails
++  o OrderStatus orderStatus
++  o Options options
++  --> Person orderer
++}
++
++transaction PlaceOrder {
++  o String orderId
++  o VehicleDetails vehicleDetails
++  o Options options
++  --> Person orderer
++}
++
++event PlaceOrderEvent {
++  o String orderId
++  o VehicleDetails vehicleDetails
++  --> Person orderer
++}
++
++transaction UpdateOrderStatus {
++  o OrderStatus orderStatus
++  o String vin optional
++  --> Order order
++}
++
++event UpdateOrderStatusEvent {
++  o OrderStatus orderStatus
++  o Order order
++}
++
++
++// REGULATOR DEFINITIONS
++participant Regulator extends Company { 
++}
++
++enum VehicleStatus {",,2018-02-07 09:50:47,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/166042658,https://github.com/hyperledger/composer-sample-networks/pull/146#discussion_r166042658,cazfletch
+https://github.com/hyperledger/composer-sample-networks/pull/141,https://github.com/hyperledger/composer-sample-networks/pull/141,I was expecting to see the other global functions like getAssetRegistry here as in the other examples,01e5bb8f9f56057c3289a316a9da1660db374392,2018-01-07 20:06:10,160058795,"@@ -12,109 +12,95 @@
+  * limitations under the License.
+  */
+ 
++/* global emit */",,2018-01-15 13:45:50,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/160058795,https://github.com/hyperledger/composer-sample-networks/pull/141#discussion_r160058795,davidkel
+https://github.com/hyperledger/composer-sample-networks/pull/140,https://github.com/hyperledger/composer-sample-networks/pull/140,Could we not do await here ?,08902c90270a10377e2bc25f7a79afdf90b0b058,2018-01-07 15:03:06,160051769,"@@ -12,56 +12,44 @@
+  * limitations under the License.
+  */
+ 
++/* global getAssetRegistry getFactory emit query */
++
+ /**
+  * Track the trade of a commodity from one trader to another
+  * @param {org.acme.trading.Trade} trade - the trade to be processed
+  * @transaction
+  */
+-function tradeCommodity(trade) {
++async function tradeCommodity(trade) { // eslint-disable-line no-unused-vars
+ 
+     // set the new owner of the commodity
+     trade.commodity.owner = trade.newOwner;
+-    return getAssetRegistry('org.acme.trading.Commodity')
+-        .then(function (assetRegistry) {
++    const assetRegistry = await getAssetRegistry('org.acme.trading.Commodity');
+ 
+-            // emit a notification that a trade has occurred
+-            var tradeNotification = getFactory().newEvent('org.acme.trading', 'TradeNotification');
+-            tradeNotification.commodity = trade.commodity;
+-            emit(tradeNotification);
++    // emit a notification that a trade has occurred
++    const tradeNotification = getFactory().newEvent('org.acme.trading', 'TradeNotification');
++    tradeNotification.commodity = trade.commodity;
++    emit(tradeNotification);
+ 
+-            // persist the state of the commodity
+-            return assetRegistry.update(trade.commodity);
+-        });
++    // persist the state of the commodity
++    await assetRegistry.update(trade.commodity);
+ }
+ 
+ /**
+  * Remove all high volume commodities
+  * @param {org.acme.trading.RemoveHighQuantityCommodities} remove - the remove to be processed
+  * @transaction
+  */
+-function removeHighQuantityCommodities(remove) {
+-
+-    return getAssetRegistry('org.acme.trading.Commodity')
+-        .then(function (assetRegistry) {
+-            return query('selectCommoditiesWithHighQuantity')
+-                    .then(function (results) {
+-
+-                        var promises = [];
+-
+-                        for (var n = 0; n < results.length; n++) {
+-                            var trade = results[n];
++async function removeHighQuantityCommodities(remove) { // eslint-disable-line no-unused-vars
+ 
+-                            // emit a notification that a trade was removed
+-                            var removeNotification = getFactory().newEvent('org.acme.trading', 'RemoveNotification');
+-                            removeNotification.commodity = trade;
+-                            emit(removeNotification);
++    const assetRegistry = await getAssetRegistry('org.acme.trading.Commodity');
++    const results = await query('selectCommoditiesWithHighQuantity');
+ 
+-                            // remove the commodity
+-                            promises.push(assetRegistry.remove(trade));
+-                        }
++    const promises = results.map(trade => {
++        const removeNotification = getFactory().newEvent('org.acme.trading', 'RemoveNotification');
++        removeNotification.commodity = trade;
++        emit(removeNotification);
++        return assetRegistry.remove(trade);",,2018-01-08 12:32:02,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/160051769,https://github.com/hyperledger/composer-sample-networks/pull/140#discussion_r160051769,davidkel
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,"Not sure if there was a merge problem here but this logic is not correct. This loop should just be working with `vehiclesToScrap` (as the line above does), not with `vehicles`.",aae054436c3f400fde96374f7649aeed84dae2db,2017-10-25 12:37:56,146841818,"@@ -82,43 +82,31 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  var vehiclesToScrap = vehicles.filter(function(vehicle) {
++                      return vehicle.vehicleStatus !== 'SCRAPPED';
++                 });
++                 for (var x = 0; x < vehiclesToScrap.length; x++) {
++                     vehiclesToScrap[x].vehicleStatus = 'SCRAPPED';
++                     vehicles[x].vehicleStatus = 'SCRAPPED';",,2017-10-30 07:27:16,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/146841818,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r146841818,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,"As above, this should be using `vehiclesToScrap` not `vehicles`.",aae054436c3f400fde96374f7649aeed84dae2db,2017-10-25 12:38:25,146841926,"@@ -82,43 +82,31 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  var vehiclesToScrap = vehicles.filter(function(vehicle) {
++                      return vehicle.vehicleStatus !== 'SCRAPPED';
++                 });
++                 for (var x = 0; x < vehiclesToScrap.length; x++) {
++                     vehiclesToScrap[x].vehicleStatus = 'SCRAPPED';
++                     vehicles[x].vehicleStatus = 'SCRAPPED';
++                     var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
++                     scrapVehicleEvent.vehicle = vehicles[x];",,2017-10-30 07:27:16,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/146841926,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r146841926,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,"To avoid confusion any possible confusion over which array is being indexed within the loop, you might consider using `vehiclesToScrap.forEach(function(vehicle) { ... });` instead of the `for` loop. Either is logically OK though.",aae054436c3f400fde96374f7649aeed84dae2db,2017-10-25 12:44:09,146843300,"@@ -82,43 +82,31 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  var vehiclesToScrap = vehicles.filter(function(vehicle) {
++                      return vehicle.vehicleStatus !== 'SCRAPPED';
++                 });
++                 for (var x = 0; x < vehiclesToScrap.length; x++) {",,2017-10-30 07:27:16,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/146843300,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r146843300,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,"I am more conversant with old programming writing style. The for loop serves the purpose then its fine. However, I have corrected the other code and in event now the vehicles are updated from vehiclesToScrap list",aae054436c3f400fde96374f7649aeed84dae2db,2017-10-27 08:00:52,147345558,"@@ -82,43 +82,31 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  var vehiclesToScrap = vehicles.filter(function(vehicle) {
++                      return vehicle.vehicleStatus !== 'SCRAPPED';
++                 });
++                 for (var x = 0; x < vehiclesToScrap.length; x++) {",,2017-10-30 07:27:16,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/147345558,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r147345558,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,👍 ,aae054436c3f400fde96374f7649aeed84dae2db,2017-10-27 13:18:44,147408252,"@@ -82,43 +82,31 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  var vehiclesToScrap = vehicles.filter(function(vehicle) {
++                      return vehicle.vehicleStatus !== 'SCRAPPED';
++                 });
++                 for (var x = 0; x < vehiclesToScrap.length; x++) {",,2017-10-30 07:27:16,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/147408252,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r147408252,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,Just a small niggle but we really should fix this: the indentation is wrong on several lines within this function (including this one). Sorry I didn't spot this earlier; it's easy to miss just looking at the diffs. I'm not sure why eslint is not picking this up as an error in the build.,aae054436c3f400fde96374f7649aeed84dae2db,2017-10-27 13:20:34,147408695,"@@ -82,43 +82,30 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {",,2017-10-30 07:27:16,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/147408695,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r147408695,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/104,https://github.com/hyperledger/composer-sample-networks/pull/104,"I am using ""vi"" editor and file appears to be properly indented there. Yet I have removed spaces at a few places.",aae054436c3f400fde96374f7649aeed84dae2db,2017-10-30 07:31:45,147631029,"@@ -82,43 +82,30 @@ function scrapVehicle(scrapVehicle) {
+  * @transaction
+  */
+ function scrapAllVehiclesByColour(scrapAllVehicles) {
+-    console.log('scrapVehicle');
++    console.log('scrapAllVehiclesByColour');
+ 
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {",,2017-10-30 07:31:45,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/147631029,https://github.com/hyperledger/composer-sample-networks/pull/104#discussion_r147631029,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"Removing / changing this line looks to make the `var q` definition and assignment above redundant, so it should be removed.",8188d2bbb3c493a848b5004945331265f2570ba9,2017-09-26 15:10:49,141087273,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));",20,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/141087273,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r141087273,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"I agree with earlier review comments from @nklincoln that throwing an error when there are no vehicles of the requested colour seems like unfriendly behaviour for the caller of this transaction; they are just expecting any cars of the specified colour to be scrapped, not to have to deal with exceptions which they cannot predict will happen in advance of the call.",8188d2bbb3c493a848b5004945331265f2570ba9,2017-09-26 15:17:41,141089466,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
++                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/141089466,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r141089466,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"Rather than wrapping a number of calls to assetRegistry.update() in a Promise.all(), it might be better (and more efficient) to make a single call to assetRegistry.updateAll().",8188d2bbb3c493a848b5004945331265f2570ba9,2017-09-26 15:21:31,141090794,"@@ -121,4 +119,4 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+             }
+             return Promise.all(promises);",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/141090794,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r141090794,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,This seems redundant. Just rename the `currentResult` variable above to `vehicle`.,8188d2bbb3c493a848b5004945331265f2570ba9,2017-09-26 15:26:57,141092539,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
++                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);
+             }
+ 
+             var factory = getFactory();
+             var promises =[];
+             var serializer = getSerializer();
+             for (var x = 0; x < resultArray.length; x++) {
+                 var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
++                var vehicle = currentResult;",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/141092539,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r141092539,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,This looks like it will be re-scrapping vehicles that are already scrapped. Perhaps we should filter to vehicles that do not have a `vehicleStatus` of `'SCRAPPED'`.,8188d2bbb3c493a848b5004945331265f2570ba9,2017-09-26 15:35:15,141095100,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
++                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);
+             }
+ 
+             var factory = getFactory();
+             var promises =[];
+             var serializer = getSerializer();
+             for (var x = 0; x < resultArray.length; x++) {
+                 var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
++                var vehicle = currentResult;
+                 vehicle.vehicleStatus = 'SCRAPPED';",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/141095100,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r141095100,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"It might be worth adding a precondition check to see that the car you expect to be scrapped is not already scrapped before the transaction runs. If you do, you will find that the precondition check fails as the car has already been scrapped by the previous test. The before() function that does the test set up needs to be changed to beforeEach() to ensure a clean environment before each test.",8188d2bbb3c493a848b5004945331265f2570ba9,2017-09-26 16:29:39,141110601,"@@ -124,4 +124,29 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleId = '123456789';
++            var scrapVehicleTransaction = factory.newTransaction(NS_D, 'ScrapAllVehiclesByColour');
++            scrapVehicleTransaction.colour = 'Beige';
++            return businessNetworkConnection.submitTransaction(scrapVehicleTransaction)",25,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/141110601,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r141110601,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"The comment incorporated and var q has been removed
+",8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-03 08:01:05,142334693,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));",20,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142334693,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142334693,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,The review comment has been incorporated,8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-03 08:01:59,142334873,"@@ -124,4 +124,29 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleId = '123456789';
++            var scrapVehicleTransaction = factory.newTransaction(NS_D, 'ScrapAllVehiclesByColour');
++            scrapVehicleTransaction.colour = 'Beige';
++            return businessNetworkConnection.submitTransaction(scrapVehicleTransaction)",25,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142334873,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142334873,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,Incorporated and code has been changed accordingly,8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-03 08:03:32,142335155,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
++                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142335155,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142335155,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,Incorporated the review comment,8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-03 08:03:52,142335219,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
++                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);
+             }
+ 
+             var factory = getFactory();
+             var promises =[];
+             var serializer = getSerializer();
+             for (var x = 0; x < resultArray.length; x++) {
+                 var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
++                var vehicle = currentResult;",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142335219,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142335219,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,Incorporated and code has been modified accordingly.  ,8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-03 08:04:29,142335311,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour, resultArray.length);
++                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);
+             }
+ 
+             var factory = getFactory();
+             var promises =[];
+             var serializer = getSerializer();
+             for (var x = 0; x < resultArray.length; x++) {
+                 var currentResult = resultArray[x];
+-                var vehicle = serializer.fromJSON(currentResult.Record);
+-
++                var vehicle = currentResult;
+                 vehicle.vehicleStatus = 'SCRAPPED';",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142335311,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142335311,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,Incorporated and code has been changed accordingly.     ,8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-03 08:04:55,142335391,"@@ -121,4 +119,4 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+             }
+             return Promise.all(promises);",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142335391,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142335391,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"This is going to update all of the vehicles returned by the query, regardless of whether or not they have been modified (scrapped) by this transaction. Ideally we would just update the vehicles we are scrapping.
+
+You could manually build an array of scrapped vehicles in your loop, or (perhaps clearer) filter out the ones already scrapped beforehand, e.g.
+```
+var vehiclesToScrap = vehicles.filter(function(vehicle) {
+    return vehicle.vehicleStatus !== 'SCRAPPED';
+});
+```",8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-04 09:47:01,142626276,"@@ -87,36 +87,23 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+             return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = currentResult;
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  for (var x = 0; x < vehicles.length; x++) {
++                      if (vehicles[x].vehicleStatus != 'SCRAPPED') {
++                          vehicles[x].vehicleStatus = 'SCRAPPED';
++                          var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
++                          scrapVehicleEvent.vehicle = vehicles[x];
++                          emit(scrapVehicleEvent);
++                      }
++                  } 
++                  return assetRegistry.updateAll(vehicles);",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142626276,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142626276,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/95,https://github.com/hyperledger/composer-sample-networks/pull/95,"Incorporated
+",8188d2bbb3c493a848b5004945331265f2570ba9,2017-10-05 05:48:18,142851885,"@@ -87,36 +87,23 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     var NS_D = 'org.vda';
+     var assetRegistry;
+ 
+-    // create the query
+-    var q = {
+-        selector: {
+-            'vehicleDetails.colour': scrapAllVehicles.colour
+-        }
+-    };
+-
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+             return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+-        .then(function (resultArray) {
+-            if (resultArray.length < 1 ) {
+-                throw new Error('No vehicles found with ' + scrapAllVehicles.colour +' '+resultArray.length);
+-            }
+-
+-            var factory = getFactory();
+-            var promises =[];
+-            var serializer = getSerializer();
+-            for (var x = 0; x < resultArray.length; x++) {
+-                var currentResult = resultArray[x];
+-                var vehicle = currentResult;
+-                vehicle.vehicleStatus = 'SCRAPPED';
+-                var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
+-                scrapVehicleEvent.vehicle = vehicle;
+-                emit(scrapVehicleEvent);
+-                promises.push(assetRegistry.update(vehicle));
+-
+-            }
+-            return Promise.all(promises);
++        .then(function (vehicles) {
++             if (vehicles.length >=1 ) {
++                  var factory = getFactory();
++                  for (var x = 0; x < vehicles.length; x++) {
++                      if (vehicles[x].vehicleStatus != 'SCRAPPED') {
++                          vehicles[x].vehicleStatus = 'SCRAPPED';
++                          var scrapVehicleEvent = factory.newEvent(NS_D, 'ScrapVehicleEvent');
++                          scrapVehicleEvent.vehicle = vehicles[x];
++                          emit(scrapVehicleEvent);
++                      }
++                  } 
++                  return assetRegistry.updateAll(vehicles);",,2017-10-16 10:48:58,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/142851885,https://github.com/hyperledger/composer-sample-networks/pull/95#discussion_r142851885,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,should this throw if no matching colours are found? Seems quite dangerous if a user is pruning a list?,4d21f9cea304608796617e245c2bc024910ce28d,2017-09-13 09:48:35,138573330,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {",18,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/138573330,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r138573330,nklincoln
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,unrequired var,4d21f9cea304608796617e245c2bc024910ce28d,2017-09-13 09:52:31,138574221,"@@ -124,4 +124,32 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleToScrap = 'Beige';
++            var assetRegistry;",,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/138574221,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r138574221,nklincoln
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,"exceptionally pedantic request, but could this be 'scrapVehicleByColourTxn' as I got a little confused reading the test code.",4d21f9cea304608796617e245c2bc024910ce28d,2017-09-13 09:58:54,138575694,"@@ -124,4 +124,32 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleToScrap = 'Beige';
++            var assetRegistry;
++            var vehicleId = '123456789';
++
++            var scrapVehicle = factory.newTransaction(NS_D, 'ScrapAllVehiclesByColour');",,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/138575694,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r138575694,nklincoln
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,"you could set the color here directly, which would make the test case code smaller",4d21f9cea304608796617e245c2bc024910ce28d,2017-09-13 09:59:29,138575816,"@@ -124,4 +124,32 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleToScrap = 'Beige';
++            var assetRegistry;
++            var vehicleId = '123456789';
++
++            var scrapVehicle = factory.newTransaction(NS_D, 'ScrapAllVehiclesByColour');
++            scrapVehicle.colour =  vehicleToScrap;",,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/138575816,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r138575816,nklincoln
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,Now I have removed this print. Actually this is an extra print - for debugging,4d21f9cea304608796617e245c2bc024910ce28d,2017-09-15 10:01:56,139110170,"@@ -97,21 +97,19 @@ function scrapAllVehiclesByColour(scrapAllVehicles) {
+     return getAssetRegistry(NS_D + '.Vehicle')
+         .then(function (ar){
+             assetRegistry = ar;
+-            return queryNative(JSON.stringify(q));
++            return query('selectAllCarsByColour', {'colour':scrapAllVehicles.colour});
+         })
+         .then(function (resultArray) {
+-            console.log('TP function received query result: ', JSON.stringify(resultArray));
+             if (resultArray.length < 1 ) {",18,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/139110170,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r139110170,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,"Have removed these variables now
+",4d21f9cea304608796617e245c2bc024910ce28d,2017-09-15 10:02:51,139110376,"@@ -124,4 +124,32 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleToScrap = 'Beige';
++            var assetRegistry;",,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/139110376,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r139110376,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,"I have made this change but this require model file vda.cto to change which is in composer-sample-models repository. I have updated the file. But since it is a separate repository I have to raise a separate PR 1500 #36 for it.
+",4d21f9cea304608796617e245c2bc024910ce28d,2017-09-15 10:04:51,139110809,"@@ -124,4 +124,32 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleToScrap = 'Beige';
++            var assetRegistry;
++            var vehicleId = '123456789';
++
++            var scrapVehicle = factory.newTransaction(NS_D, 'ScrapAllVehiclesByColour');",,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/139110809,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r139110809,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/91,https://github.com/hyperledger/composer-sample-networks/pull/91,Incorporated this suggestion,4d21f9cea304608796617e245c2bc024910ce28d,2017-09-15 10:05:25,139110914,"@@ -124,4 +124,32 @@ describe('Vehicle Lifecycle Network', function() {
+                 });
+         });
+     });
+-});
+\ No newline at end of file
++
++    describe('ScrapAllVehiclesByColour', function() {
++        it('should select vehicles by colour and change vehicles status to SCRAPPED', function() {
++            /* vehicle with beige colour
++               and id 123456789 resides
++               in reposritory
++            */
++            var vehicleToScrap = 'Beige';
++            var assetRegistry;
++            var vehicleId = '123456789';
++
++            var scrapVehicle = factory.newTransaction(NS_D, 'ScrapAllVehiclesByColour');
++            scrapVehicle.colour =  vehicleToScrap;",,2017-09-19 08:19:22,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/139110914,https://github.com/hyperledger/composer-sample-networks/pull/91#discussion_r139110914,shacshar
+https://github.com/hyperledger/composer-sample-networks/pull/90,https://github.com/hyperledger/composer-sample-networks/pull/90,No idea what SID stands for. Please use a more descriptive variable name.,73c81e2171eeae33687699a7426d035aefec66ef,2017-09-08 17:41:25,137848690,"@@ -27,8 +27,27 @@ function onRegisterPropertyForSale(propertyForSale) {
+     console.log('### onRegisterPropertyForSale ' + propertyForSale.toString());
+     propertyForSale.title.forSale = true;
+ 
+-    return getAssetRegistry('net.biz.digitalPropertyNetwork.LandTitle').then(function(result) {
+-        return result.update(propertyForSale.title);
+-    }
+-    );
+-}
++    var SID;",,2017-09-22 13:02:31,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/137848690,https://github.com/hyperledger/composer-sample-networks/pull/90#discussion_r137848690,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/90,https://github.com/hyperledger/composer-sample-networks/pull/90,salesRegistry looks to only be used in the code block of the following then(). It could just be returned as an input argument to the then() block that uses it rather than assigned to a var scoped to the enclosing function.,73c81e2171eeae33687699a7426d035aefec66ef,2017-09-08 17:44:01,137849301,"@@ -27,8 +27,27 @@ function onRegisterPropertyForSale(propertyForSale) {
+     console.log('### onRegisterPropertyForSale ' + propertyForSale.toString());
+     propertyForSale.title.forSale = true;
+ 
+-    return getAssetRegistry('net.biz.digitalPropertyNetwork.LandTitle').then(function(result) {
+-        return result.update(propertyForSale.title);
+-    }
+-    );
+-}
++    var SID;
++    var salesRegistry;
++    
++    SID = propertyForSale.seller.personId + propertyForSale.title.titleId;
++    
++    console.log('###' + 'SID =' + SID);
++
++    return getAssetRegistry('net.biz.digitalPropertyNetwork.SalesAgreement')
++        .then(function (result) {
++            salesRegistry = result;",,2017-09-22 13:02:31,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/137849301,https://github.com/hyperledger/composer-sample-networks/pull/90#discussion_r137849301,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/90,https://github.com/hyperledger/composer-sample-networks/pull/90,I don't think this needs to be a nested then(). It should just be another then() in the top-level chain.,73c81e2171eeae33687699a7426d035aefec66ef,2017-09-08 17:46:15,137849784,"@@ -27,8 +27,27 @@ function onRegisterPropertyForSale(propertyForSale) {
+     console.log('### onRegisterPropertyForSale ' + propertyForSale.toString());
+     propertyForSale.title.forSale = true;
+ 
+-    return getAssetRegistry('net.biz.digitalPropertyNetwork.LandTitle').then(function(result) {
+-        return result.update(propertyForSale.title);
+-    }
+-    );
+-}
++    var SID;
++    var salesRegistry;
++    
++    SID = propertyForSale.seller.personId + propertyForSale.title.titleId;
++    
++    console.log('###' + 'SID =' + SID);
++
++    return getAssetRegistry('net.biz.digitalPropertyNetwork.SalesAgreement')
++        .then(function (result) {
++            salesRegistry = result;
++        })
++        .then(function () {
++            salesRecord = getFactory().newResource('net.biz.digitalPropertyNetwork', ""SalesAgreement"", SID);
++            salesRecord.seller = propertyForSale.seller;
++            salesRecord.title = propertyForSale.title;
++            return salesRegistry.add(salesRecord);
++        })
++        .then(function () {
++            return getAssetRegistry('net.biz.digitalPropertyNetwork.LandTitle').then(function (result) {",,2017-09-22 13:02:31,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/137849784,https://github.com/hyperledger/composer-sample-networks/pull/90#discussion_r137849784,bestbeforetoday
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,"This doesn't make sense. Suggested change to: 
+`This business network defines:`
+or
+`The model file in this business network defines:`",7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 11:22:47,127436501,"@@ -1,22 +1,58 @@
+ # Animal Tracking Network
+-Defines an Animal Movement business network based on UK DEFRA government regulations https://www.gov.uk/animal-movement-england.
+ 
+-Farmers can move animals between farms/fields and the UK government farming regulator has
+-visibility into the locations of all animals and all animal movements between farms.
++> This is an Animal Tracking Business Network based on UK DEFRA government regulations (https://www.gov.uk/animal-movement-england). Farmers can move animals between farms/fields and the UK government farming regulator has visibility into the locations of all animals and all animal movements between farms.
+ 
+-- Each Farmer owns a Business that is identified by a Single Business Identifier (SBI)
+-- Each Farmer owns a set of Animals
+-- Each Business owns a set of Fields
+-- Each Field contains a set of Animals owned by the Farmer
+-- Animals can be transfered between Farmers or between Fields
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127436501,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127436501,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,Same as above.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 11:51:36,127440500,"@@ -1,8 +1,66 @@
+-# Hyperledger Composer Bond Reference Data Demo
++# Bond Network
+ 
+-Example business network that stores information about financial bonds on the blockchain. It allows
+-the issuer of a bond to update the bond information whilst other members of the business network can
+-only read the bond data.
++> The Bond Network allows the issuer of a bond to update the bond information whilst other members of the business network can only read the bond data.
+ 
+-The data model for a bond is based on the FpML schema:
+-http://www.fpml.org/spec/fpml-5-3-2-wd-2/html/reporting/schemaDocumentation/schemas/fpml-asset-5-3_xsd/elements/bond.html
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127440500,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127440500,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,Same as above.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 11:57:50,127441395,"@@ -1,26 +1,24 @@
+-# Car Auction Business Network
++# Car Auction Network
+ 
+ > This is an interactive, distributed, car auction demo. List assets for sale (setting a reserve price), and watch as assets that have met their reserve price are automatically transferred to the highest bidder at the end of the auction.
+ 
+-In the **Define** tab for this network there is defined:
+-
+-**Assets:**
+-`Vehicle` `VehicleListing`
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127441395,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127441395,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,One more here.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 11:59:45,127441675,"@@ -1,84 +1,75 @@
+ # Digital Property Network
+ 
+-Defines a business network where house sellers can list their properties for sale.
++> This Defines a business network where house sellers can list their properties for sale.
+ 
+-Note that this network **references** the digital property model, via an npm dependency declared in package.json:
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127441675,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127441675,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,And here.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:03:48,127442190,"@@ -1,3 +1,64 @@
+-# Hyperledger Composer Marbles Demo
++# Marbles Network
+ 
+-The Hyperledger Composer team has built an interactive, distributed, marble trading demo, backed by Hyperledger Fabric. Invite participants to join your distributed marble exchange, list marbles for sale and exchange marbles between participants.
++> This is an interactive and distributed, marble trading demo. List marbles for sale and exchange marbles between participants.
++
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127442190,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127442190,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,"receipts -> receipt.
+factory -> factor.",7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:18:32,127444277,"@@ -1,34 +1,55 @@
+-# Hyperledger Composer Perishable Goods Demo
++# Perishable Goods Network
+ 
+-Example business network that shows growers, shippers and importers defining contracts for the price
+-of perishable goods, based on temperature readings received for shipping containers.
++> Example business network that shows growers, shippers and importers defining contracts for the price of perishable goods, based on temperature readings received for shipping containers.
+ 
+-The business network defines a parameterizable contract between growers and importers. The contract stipulates
+-that:
++The business network defines a contract between growers and importers. The contract stipulates that: On receipts of the shipment the importer pays the grower the unit price x the number of units in the shipment. Shipments that arrive late are free. Shipments that have breached the low temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory. Shipments that have breached the high temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory.",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444277,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444277,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,Same problem as above.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:18:51,127444318,"@@ -1,34 +1,55 @@
+-# Hyperledger Composer Perishable Goods Demo
++# Perishable Goods Network
+ 
+-Example business network that shows growers, shippers and importers defining contracts for the price
+-of perishable goods, based on temperature readings received for shipping containers.
++> Example business network that shows growers, shippers and importers defining contracts for the price of perishable goods, based on temperature readings received for shipping containers.
+ 
+-The business network defines a parameterizable contract between growers and importers. The contract stipulates
+-that:
++The business network defines a contract between growers and importers. The contract stipulates that: On receipts of the shipment the importer pays the grower the unit price x the number of units in the shipment. Shipments that arrive late are free. Shipments that have breached the low temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory. Shipments that have breached the high temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory.
+ 
+-1. On receipts of the shipment the importer pays the grower the unit price x the number of units in the shipment
+-2. Shipments that arrive late are free
+-3. Shipments that have breached the low temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory
+-4. Shipments that have breached the high temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444318,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444318,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,What's the purpose of this line?,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:19:16,127444368,"@@ -1,34 +1,55 @@
+-# Hyperledger Composer Perishable Goods Demo
++# Perishable Goods Network
+ 
+-Example business network that shows growers, shippers and importers defining contracts for the price
+-of perishable goods, based on temperature readings received for shipping containers.
++> Example business network that shows growers, shippers and importers defining contracts for the price of perishable goods, based on temperature readings received for shipping containers.
+ 
+-The business network defines a parameterizable contract between growers and importers. The contract stipulates
+-that:
++The business network defines a contract between growers and importers. The contract stipulates that: On receipts of the shipment the importer pays the grower the unit price x the number of units in the shipment. Shipments that arrive late are free. Shipments that have breached the low temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory. Shipments that have breached the high temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory.
+ 
+-1. On receipts of the shipment the importer pays the grower the unit price x the number of units in the shipment
+-2. Shipments that arrive late are free
+-3. Shipments that have breached the low temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory
+-4. Shipments that have breached the high temperate threshold have a penalty applied proportional to the magnitude of the breach x a penalty factory
++In the **Define** tab this in Business Network defines:
+ 
+-### Running Locally (Unit Test)
++**Participants**
++`Grower` `Importer` `Shipper`
+ 
+-`git clone` the repository for the sample, `cd` into its directory and then run `npm install` followed by `npm test`. The unit test will run and should pass.
++**Assets**
++`Contract` `Shipment`
+ 
+-### Demo inside Hyperledger Composer
++**Transactions**
++`TemperatureReading` `ShipmentReceived` `SetupDemo`
+ 
+-Import the sample into Hyperledger Composer using the `Import/Replace` button.
++Summarise how the elements of the Business Network interact!",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444368,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444368,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,Same as above.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:20:27,127444537,"@@ -1,3 +1,59 @@
+-# Hyperledger Composer Access Control Demo
++# Personally Identifiable Information  Network
+ 
+-A business network where members can grant/revoke access to their personal information to other members.
++> A business network where members can grant/revoke access to their personal information to other members.
++
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444537,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444537,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,"Again, what's this line doing?",7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:20:41,127444565,"@@ -1,3 +1,59 @@
+-# Hyperledger Composer Access Control Demo
++# Personally Identifiable Information  Network
+ 
+-A business network where members can grant/revoke access to their personal information to other members.
++> A business network where members can grant/revoke access to their personal information to other members.
++
++In the **Define** tab this in Business Network defines:
++
++**Participant**
++`Member`
++
++**Transaction**
++`AuthorizeAccess` `RevokeAccess`
++
++Summarise how the elements of the Business Network interact!",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444565,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444565,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,Same again,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:21:16,127444641,"@@ -1,11 +1,68 @@
+-# Hyperledger Composer Commodities Trading Demo
++# Trade Network
+ 
+-Example business network that illustrates commodity trading.
++> This Business Network illustrates commodity trading.
+ 
+-This business network shows the main features of the Hyperleger Composer programming model:
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444641,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444641,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,I'm very confused by this line.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:21:31,127444678,"@@ -1,11 +1,68 @@
+-# Hyperledger Composer Commodities Trading Demo
++# Trade Network
+ 
+-Example business network that illustrates commodity trading.
++> This Business Network illustrates commodity trading.
+ 
+-This business network shows the main features of the Hyperleger Composer programming model:
++In the **Define** tab this in Business Network defines:
+ 
+-- Transaction processor functions (chaincode) written in JavaScript
+-- Emitting events from TP functions
+-- Composer Query Language (CQL) named queries
+-   - Called from TP functions
+-   - Called from JS client API
+\ No newline at end of file
++**Participant**
++`Trader`
++
++**Asset**
++`Commodity`
++
++**Transaction(s)**
++`Transaction`
++
++**Event**
++`TradeNotification `
++
++Summarise how the elements of the Business Network interact!",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444678,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444678,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/71,https://github.com/hyperledger/composer-sample-networks/pull/71,Same again.,7aba1c53e32f89d3ca2afb31f7fb2b2f6e1a1b69,2017-07-14 12:23:08,127444880,"@@ -1,3 +1,66 @@
+-# Hyperledger Composer Vehicle Lifecycle Demo
++# Vehicle Lifecycle Network
+ 
+-Vehicle Lifecycle demo.
++> This network tracks the Lifecycle of Vehicles from manufacture to being scrapped involving private owners, manufacturers and scrap merchants. A regulator is able to provide oversight throughout this whole process.
++
++In the **Define** tab this in Business Network defines:",,2017-07-14 12:31:51,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/127444880,https://github.com/hyperledger/composer-sample-networks/pull/71#discussion_r127444880,EdProsser
+https://github.com/hyperledger/composer-sample-networks/pull/61,https://github.com/hyperledger/composer-sample-networks/pull/61,Think this clashes with the system Transaction,152fbcbe1680ccf00e329901f1e917b809dbc79b,2017-06-27 15:34:44,124311150,"@@ -36,14 +36,13 @@ participant Member extends User {
+ participant Auctioneer extends User {
+ }
+ 
+-transaction Offer identified by transactionId {
+-  o String transactionId
++transaction Offer {
+   o Double bidPrice
+   --> VehicleListing listing
+   --> Member member
+ }
+ 
+-transaction CloseBidding identified by transactionId {
++transaction CloseBidding {
+   o String transactionId",,2017-06-27 16:27:10,https://api.github.com/repos/hyperledger/composer-sample-networks/pulls/comments/124311150,https://github.com/hyperledger/composer-sample-networks/pull/61#discussion_r124311150,jt-nti

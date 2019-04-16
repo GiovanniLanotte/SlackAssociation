@@ -1,0 +1,35 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+sawtooth-sdk-dotnet,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/7,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/7,rbuysse,Fix CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,['rbuysse'],1,2019-02-07 16:34:18,2019-02-07 18:47:26,2019-02-07 18:47:26,True,2019-02-07 18:47:26,tmarkovski,unknown,,closed
+sawtooth-sdk-dotnet,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/6,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/6,tmarkovski,Add docker to generate protos and build SDK locally,"This PR updates the Dockerfile to automatically generate the model files from the *.proto definitions, for those looking to buld the SDK themselves. These files are not included in the repo, but are required to build the solution.
+Readme file updated with instructions.",[],1,2019-02-05 22:49:17,,2019-02-12 15:44:42,False,,,blocked,True,open
+sawtooth-sdk-dotnet,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/3,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/3,rbuysse,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,['rbuysse'],1,2019-01-22 22:26:58,2019-01-22 22:43:44,2019-01-22 22:43:44,True,2019-01-22 22:43:44,rbuysse,unknown,,closed
+sawtooth-sdk-dotnet,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/2,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/2,tmarkovski,Sawtooth SDK for .NET Core,"Sawtooth SDK for .NET Core
+
+This is a .NET implementation of the SDK. It features full support for the client libraries. The SDK targets netstandard2.0, making it usable in all .NET Core applications, including mobile frameworks like Xamarin.
+
+Features
+- Transaction Processor
+  - ITransactionHandler interface - main handler implementation 
+  - TransactionContext - provides access to methods for managing the state as well as events and receipt data
+- Client modules
+  - ISigner and Signer implementation - support for signing and verifying signatures. Signer class also includes methods for generating key pairs
+  - ValidatorClient - class that wraps access to the ZMQ based on the same stream logic as the transaction processor. Provides method to get/submit batches and transactions as well as sending any message
+
+The SDK uses the Task Parallel Library to provide idiomatic method signatures for working with request/response messaging.
+
+Dependencies
+- BouncyCastle
+- Google.Protobuf
+- NetMQ
+
+Examples
+Two projects implementing the ""intkey"" processor family are included in the examples as well as a tutorial on running the code.
+
+Protobufs
+Protobufs are generated using Google.Protobuf.Tools package that provides ""protoc"" binaries for all platforms.
+
+Unit Tests
+Basic unit tests with xUnit are included. Better code coverage with additional unit tests will be added soon.
+
+Signed-off-by: Tomislav Markovski <tmarkovski@gmail.com>","['vaporos', 'aludvik']",1,2018-03-19 19:41:06,2018-04-26 03:03:16,2019-02-06 14:49:48,True,2018-04-26 03:03:16,vaporos,unknown,,closed
+sawtooth-sdk-dotnet,https://api.github.com/repos/hyperledger/sawtooth-sdk-dotnet/pulls/1,https://github.com/hyperledger/sawtooth-sdk-dotnet/pull/1,ryjones,Create dco,,[],1,2018-03-16 23:17:33,2018-03-16 23:18:38,2018-03-16 23:18:38,False,,,unknown,,closed

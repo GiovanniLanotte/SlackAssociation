@@ -1,0 +1,1192 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/indy-crypto/issues/147,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/454798572,https://github.com/hyperledger/indy-crypto/pull/147#issuecomment-454798572,ArthurManz,Awesome!,2019-01-16 14:28:28,2019-01-16 14:28:28
+https://api.github.com/repos/hyperledger/indy-crypto/issues/147,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/455473525,https://github.com/hyperledger/indy-crypto/pull/147#issuecomment-455473525,KitHat,@mikelodder7 changed it,2019-01-18 08:59:27,2019-01-18 08:59:27
+https://api.github.com/repos/hyperledger/indy-crypto/issues/139,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/442117917,https://github.com/hyperledger/indy-crypto/pull/139#issuecomment-442117917,KitHat,"Yes, it will.
+The problem is that previous hex serialization was platform-dependent -- see [IS-1093](https://jira.hyperledger.org/browse/IS-1093) and [IS-1043](https://jira.hyperledger.org/browse/IS-1043)
+We were serializing inner representation of BIG in AMCL instead of raw bytes.",2018-11-27 16:13:59,2018-11-27 16:13:59
+https://api.github.com/repos/hyperledger/indy-crypto/issues/139,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/442119492,https://github.com/hyperledger/indy-crypto/pull/139#issuecomment-442119492,mikelodder7,Okay so this is to fix a known bug. Since you've referenced it now in this PR I'll go ahead and merge it once it passes tests.,2018-11-27 16:18:10,2018-11-27 16:18:26
+https://api.github.com/repos/hyperledger/indy-crypto/issues/134,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436991780,https://github.com/hyperledger/indy-crypto/pull/134#issuecomment-436991780,aknuds1,"@mikelodder7 As I realized that my initial PR for adding JS bindings only supported Node.js, I figured out in the meantime how to support the browser. Basically, it must apparently be done via Webpack. At least that's the only solution I could get to work and the wasm-bindgen folks mentioned that's what they use.
+
+The original Node.js support should work as before with this PR, while also letting people use the library in the browser.",2018-11-08 13:22:30,2018-11-08 13:23:11
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435863116,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-435863116,ArthurManz,Any idea when this would be merged and when could we use it in Indy SDK?,2018-11-05 12:53:07,2018-11-05 12:53:07
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435876311,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-435876311,mikelodder7,Talk to the maintainers. I’m hoping not too long.,2018-11-05 13:38:57,2018-11-05 13:38:57
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435887675,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-435887675,ArthurManz,I will ask on the Slack channel! Thanks! :smile: ,2018-11-05 14:08:10,2018-11-05 14:08:10
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436706473,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-436706473,mikelodder7,">Are the changes introduced here internal to the library, or could they break upstream dependencies?
+
+
+They are internal. Indy-SDK would not see any of this.",2018-11-07 17:25:00,2018-11-07 17:25:11
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/438205323,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-438205323,jovfer,"> They are internal. Indy-SDK would not see any of this.
+
+@mikelodder7 @brentzundel Unfortunately it's not true. This PR contains breaking changes. And new master is incompatible with current stable.",2018-11-13 09:55:28,2018-11-13 09:55:37
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/438265045,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-438265045,mikelodder7,Please explain. When I looked into Indy SDK it only calls add predicate. I didn’t see anything about this that is serialized and the interfaces don’t change,2018-11-13 13:27:07,2018-11-13 13:27:07
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/438268613,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-438268613,jovfer,"@mikelodder7 
+IndySDK use `ProofBuilder` like
+```
+Prover::new_proof_builder();
+...
+.add_sub_proof_request
+...
+.finalize() -> Proof
+```
+then IndySDK serialize `Proof` as part of output JSON string for application. This string is used by Proover to present the proof for Verifier
+```
+pub struct Proof {
+    proofs: Vec<SubProof>,
+    aggregated_proof: AggregatedProof,
+}
+...
+pub struct SubProof {
+    primary_proof: PrimaryProof,
+    non_revoc_proof: Option<NonRevocProof>
+}
+...
+pub struct PrimaryProof {
+    eq_proof: PrimaryEqualProof,
+    ~~~old~~~ge_proofs: Vec<PrimaryPredicateGEProof>~~~old~~~ now changed to
+    ~~~new~~~ne_proofs: Vec<PrimaryPredicateInequalityProof>~~~new~~~
+}
+```
+So old Verifier wouldn't be able to parse new structure with field `ne_proofs`.
+And new Verifier wouldn't be able to parse proof from old Proover as it will contain `ge_proofs` field.
+And seems like it's a reason of failure of IndySDK tests in your PR before update tests https://github.com/hyperledger/indy-sdk/pull/1283#issuecomment-438184363
+",2018-11-13 13:38:49,2018-11-13 13:59:18
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/438284987,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-438284987,mikelodder7,"So what do you recommend to convert to newer version?
+
+There is no versioning in place. I have ideas to do this but want your opinion ",2018-11-13 14:28:20,2018-11-13 14:28:20
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/438289258,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-438289258,jovfer,"1) The easiest way may be to just ""duplicate"" `ge_proofs` field and add 3 new like `gt_proofs`, `le_proofs` and `lt_proofs`.
+2) AFAIR design discussion there is an option to create new anoncreds type. Now it's ""CL"" but we can implement the new one. I don't like this option, as current changes is just extending existing implementation to fit math model.
+3) we can try to introduce versioning here. E.g. append ver field and assume omitted as ver.0
+
+@mikelodder7 please share your options too
+@vimmerru have I forgotten smth from our discussions about versioning in IndyCrypto?",2018-11-13 14:40:31,2018-11-13 14:40:31
+https://api.github.com/repos/hyperledger/indy-crypto/issues/132,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/438355846,https://github.com/hyperledger/indy-crypto/pull/132#issuecomment-438355846,mikelodder7,"I vote for option 3,1,2 in that order. The problem occurs when deserializing in that in consumes the stream so you can only convert once. So what have you done before to handle this?",2018-11-13 17:17:51,2018-11-13 17:17:51
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435893179,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-435893179,aknuds1,"I'd like to fix the CI failure, but I can't see what goes wrong as the [CI link](https://ci.evernym.com/job/Indy%20Crypto%20CI/job/PR-131/4/display/redirect) is unresponsive for me.",2018-11-05 14:24:43,2018-11-05 14:24:43
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435960614,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-435960614,lovesh,"@aknuds1 The CI link is private (surprise !) but here are the logs
+```
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/error.rs:68:13
+
+   |
+
+68 |             Repr::Single { text, .. } => panic!(""{}"", text),
+
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Repr::Single { text, .. }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/error.rs:69:13
+
+   |
+
+69 |             Repr::SynError(error) => panic!(""{}"", error),
+
+   |             ^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Repr::SynError(error)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/error.rs:70:13
+
+   |
+
+70 |             Repr::Multi { diagnostics } => diagnostics[0].panic(),
+
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Repr::Multi { diagnostics }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/error.rs:95:13
+
+   |
+
+95 |             Repr::Single { text, span } => {
+
+   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Repr::Single { text, span }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/error.rs:106:13
+
+    |
+
+106 |             Repr::Multi { diagnostics } => {
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Repr::Multi { diagnostics }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/error.rs:111:13
+
+    |
+
+111 |             Repr::SynError(err) => {
+
+    |             ^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Repr::SynError(err)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/ast.rs:267:16
+
+    |
+
+267 |         if let Some(class) = &self.class {
+
+    |                ^^^^^^^^^^^ help: consider using a reference: `&Some(class)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/ast.rs:282:13
+
+    |
+
+282 |             Some(class) => shared::struct_function_export_name(&class.to_string(), &fn_name),
+
+    |             ^^^^^^^^^^^ help: consider using a reference: `&Some(class)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/ast.rs:283:13
+
+    |
+
+283 |             None => shared::free_function_export_name(&fn_name),
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:39:20
+
+   |
+
+39 |             if let ast::ImportKind::Type(t) = &i.kind {
+
+   |                    ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Type(t)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:48:20
+
+   |
+
+48 |             if let Some(ns) = &i.js_namespace {
+
+   |                    ^^^^^^^^ help: consider using a reference: `&Some(ns)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:371:17
+
+    |
+
+371 |                 Some(class) => quote! { #class::#name },
+
+    |                 ^^^^^^^^^^^ help: consider using a reference: `&Some(class)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:372:17
+
+    |
+
+372 |                 None => quote! { #name },
+
+    |                 ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:376:17
+
+    |
+
+376 |         for (i, syn::ArgCaptured { ty, .. }) in self.function.arguments.iter().enumerate() {
+
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::ArgCaptured { ty, .. }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:427:16
+
+    |
+
+427 |         if let syn::Type::Reference(_) = syn_ret {
+
+    |                ^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::Type::Reference(_)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:516:13
+
+    |
+
+516 |             None => """",
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:517:13
+
+    |
+
+517 |             Some(comment) => comment,
+
+    |             ^^^^^^^^^^^^^ help: consider using a reference: `&Some(comment)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:779:24
+
+    |
+
+779 |                   if let ast::MethodKind::Operation(ast::Operation {
+
+    |  ________________________^
+
+780 | |                     is_static: false, ..
+
+781 | |                 }) = kind
+
+    | |__________________^
+
+help: consider using a reference
+
+    |
+
+779 |                 if let &ast::MethodKind::Operation(ast::Operation {
+
+780 |                     is_static: false, ..
+
+781 |                 }) = kind
+
+    |
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:791:13
+
+    |
+
+791 |             Some(ty) => quote! { -> #ty },
+
+    |             ^^^^^^^^ help: consider using a reference: `&Some(ty)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:792:13
+
+    |
+
+792 |             None => quote!(),
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:801:17
+
+    |
+
+801 |         for (i, syn::ArgCaptured { pat, ty, .. }) in self.function.arguments.iter().enumerate() {
+
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::ArgCaptured { pat, ty, .. }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:803:17
+
+    |
+
+803 | /                 syn::Pat::Ident(syn::PatIdent {
+
+804 | |                     by_ref: None,
+
+805 | |                     ident,
+
+806 | |                     subpat: None,
+
+807 | |                     ..
+
+808 | |                 }) => ident.clone(),
+
+    | |__________________^
+
+help: consider using a reference
+
+    |
+
+803 |                 &syn::Pat::Ident(syn::PatIdent {
+
+804 |                     by_ref: None,
+
+805 |                     ident,
+
+806 |                     subpat: None,
+
+807 |                     ..
+
+808 |                 }) => ident.clone(),
+
+    |
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:809:17
+
+    |
+
+809 |                 syn::Pat::Wild(_) => syn::Ident::new(&format!(""__genarg_{}"", i), Span::call_site()),
+
+    |                 ^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::Pat::Wild(_)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:834:13
+
+    |
+
+834 |             Some(syn::Type::Reference(_)) => {
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Some(syn::Type::Reference(_))`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:840:13
+
+    |
+
+840 |             Some(ref ty) => {
+
+    |             ^^^^^^^^^^^^ help: consider using a reference: `&Some(ref ty)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:852:13
+
+    |
+
+852 |             None => {
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:888:13
+
+    |
+
+888 |             None => """",
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:889:13
+
+    |
+
+889 |             Some(doc_string) => doc_string,
+
+    |             ^^^^^^^^^^^^^^^^ help: consider using a reference: `&Some(doc_string)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:958:13
+
+    |
+
+958 |             Some(ref t) => quote! { <#t as WasmDescribe>::describe(); },
+
+    |             ^^^^^^^^^^^ help: consider using a reference: `&Some(ref t)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:959:13
+
+    |
+
+959 |             None => quote! { <() as WasmDescribe>::describe(); },
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+    --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/codegen.rs:1090:16
+
+     |
+
+1090 |         if let Some(class) = &self.class {
+
+     |                ^^^^^^^^^^^ help: consider using a reference: `&Some(class)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:105:9
+
+    |
+
+105 |         ast::ImportKind::Function(f) => ImportKind::Function(shared_import_function(f, intern)?),
+
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Function(f)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:106:9
+
+    |
+
+106 |         ast::ImportKind::Static(f) => ImportKind::Static(shared_import_static(f, intern)),
+
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Static(f)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:107:9
+
+    |
+
+107 |         ast::ImportKind::Type(f) => ImportKind::Type(shared_import_type(f, intern)),
+
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Type(f)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:108:9
+
+    |
+
+108 |         ast::ImportKind::Enum(f) => ImportKind::Enum(shared_import_enum(f, intern)),
+
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Enum(f)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:116:9
+
+    |
+
+116 |         ast::ImportFunctionKind::Method { class, kind, ..  } => {
+
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportFunctionKind::Method { class, kind, ..  }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:148:9
+
+    |
+
+148 |         ast::ImportFunctionKind::Normal => None,
+
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportFunctionKind::Normal`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:118:17
+
+    |
+
+118 |                 ast::MethodKind::Constructor => MethodKind::Constructor,
+
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::MethodKind::Constructor`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:119:17
+
+    |
+
+119 |                 ast::MethodKind::Operation(ast::Operation { is_static, kind }) => {
+
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::MethodKind::Operation(ast::Operation { is_static, kind })`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:122:25
+
+    |
+
+122 |                         ast::OperationKind::Regular => OperationKind::Regular,
+
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::OperationKind::Regular`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:123:25
+
+    |
+
+123 |                         ast::OperationKind::Getter(g) => {
+
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::OperationKind::Getter(g)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:129:25
+
+    |
+
+129 |                         ast::OperationKind::Setter(s) => {
+
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::OperationKind::Setter(s)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:136:25
+
+    |
+
+136 |                         ast::OperationKind::IndexingGetter => OperationKind::IndexingGetter,
+
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::OperationKind::IndexingGetter`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:137:25
+
+    |
+
+137 |                         ast::OperationKind::IndexingSetter => OperationKind::IndexingSetter,
+
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::OperationKind::IndexingSetter`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:138:25
+
+    |
+
+138 |                         ast::OperationKind::IndexingDeleter => OperationKind::IndexingDeleter,
+
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::OperationKind::IndexingDeleter`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:285:13
+
+    |
+
+285 |             None => dst.byte(0),
+
+    |             ^^^^ help: consider using a reference: `&None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:286:13
+
+    |
+
+286 |             Some(val) => {
+
+    |             ^^^^^^^^^ help: consider using a reference: `&Some(val)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+ --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+  |
+
+8 | |
+
+  | |________^
+
+...
+
+34|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+  |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+ --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+  |
+
+8 | |
+
+  | |___________________________________________^
+
+...
+
+34|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+  |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+ --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+  |
+
+8 | |
+
+  | |__________________________________________________________________________^
+
+...
+
+34|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+  |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+ --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+  |
+
+9 | | pub fn encode(program: &ast::Program) -> Result<Vec<u8>, Diagnostic> {
+
+  | |__________________________^
+
+...
+
+34|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+  |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:368:1
+
+    |
+
+368 | shared_api!(encode_api);
+
+    | ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Constructor`
+
+    |
+
+    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+   |
+
+13 | |     Ok(e.finish())
+
+   | |___________________________________________^
+
+...
+
+341|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+   |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:368:1
+
+    |
+
+368 | shared_api!(encode_api);
+
+    | ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&Regular`
+
+    |
+
+    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+   |
+
+16 | | struct Interner {
+
+   | |________________^
+
+...
+
+341|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+   |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:341:33
+
+   |
+
+16 | | struct Interner {
+
+   | |______________________________________^
+
+...
+
+341|               ($($arms)* $name(val) => { $dst.byte($cnt); val.encode($dst) })
+
+   |  _________________________________^
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:368:1
+
+    |
+
+368 | shared_api!(encode_api);
+
+    | ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&IndexingGetter`
+
+    |
+
+    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:368:1
+
+    |
+
+368 | shared_api!(encode_api);
+
+    | ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&IndexingSetter`
+
+    |
+
+    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/encode.rs:368:1
+
+    |
+
+368 | shared_api!(encode_api);
+
+    | ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&IndexingDeleter`
+
+    |
+
+    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+  --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:21:16
+
+   |
+
+21 |         if let Some(inner) = self {
+
+   |                ^^^^^^^^^^^ help: consider using a reference: `&Some(inner)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:129:13
+
+    |
+
+129 |             ast::ImportKind::Static(s) => s.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Static(s)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:130:13
+
+    |
+
+130 |             ast::ImportKind::Function(fun) => fun.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Function(fun)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:131:13
+
+    |
+
+131 |             ast::ImportKind::Type(ty) => ty.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Type(ty)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:132:13
+
+    |
+
+132 |             ast::ImportKind::Enum(enm) => enm.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportKind::Enum(enm)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:152:13
+
+    |
+
+152 |             syn::Type::Reference(ref r) => r.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::Type::Reference(ref r)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:153:13
+
+    |
+
+153 |             syn::Type::Path(ref p) => p.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::Type::Path(ref p)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:208:13
+
+    |
+
+208 |             syn::PathArguments::AngleBracketed(data) => {
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::PathArguments::AngleBracketed(data)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:214:13
+
+    |
+
+214 |             syn::PathArguments::Parenthesized(data) => {
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::PathArguments::Parenthesized(data)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:221:13
+
+    |
+
+221 |             syn::PathArguments::None => {}
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::PathArguments::None`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:232:13
+
+    |
+
+232 |             syn::GenericArgument::Lifetime(_) => {}
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::GenericArgument::Lifetime(_)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:233:13
+
+    |
+
+233 |             syn::GenericArgument::Type(ty) => ty.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::GenericArgument::Type(ty)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:234:13
+
+    |
+
+234 |             syn::GenericArgument::Binding(_) => {}    // TODO
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::GenericArgument::Binding(_)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:235:13
+
+    |
+
+235 |             syn::GenericArgument::Const(_) => {}      // TODO
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::GenericArgument::Const(_)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:236:13
+
+    |
+
+236 |             syn::GenericArgument::Constraint(_) => {} // TODO
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&syn::GenericArgument::Constraint(_)`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:257:13
+
+    |
+
+257 |             ast::ImportFunctionKind::Method { ty, .. } => ty.imported_types(f),
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportFunctionKind::Method { ty, .. }`
+
+
+
+error[E0658]: non-reference pattern used to match a reference (see issue #42640)
+
+   --> /home/indy/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm-bindgen-backend-0.2.27/src/defined.rs:258:13
+
+    |
+
+258 |             ast::ImportFunctionKind::Normal => {}
+
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using a reference: `&ast::ImportFunctionKind::Normal`
+
+
+
+error: aborting due to 76 previous errors
+
+
+
+error: Could not compile `wasm-bindgen-backend`.
+
+warning: build failed, waiting for other jobs to finish...
+
+error: build failed
+
+script returned exit code 101
+```",2018-11-05 17:26:11,2018-11-05 17:26:11
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435978014,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-435978014,aknuds1,"@lovesh Thanks, I found I had inadvertently introduced a default dependency on wasm-bindgen in Cargo.toml. I fixed it, hopefully the CI build goes through now. Does the CI have to be private?",2018-11-05 18:16:17,2018-11-05 18:16:17
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/435990217,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-435990217,aknuds1,@lovesh Looks as if I fixed the build :),2018-11-05 18:51:17,2018-11-05 18:51:17
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436444164,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436444164,lovesh,@aknuds1 Thanks for this PR. Can't speak to private nature of CI. And can't speak for others but i don't think i can get to it till end of this week.,2018-11-06 23:14:32,2018-11-06 23:16:11
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436709071,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436709071,aknuds1,"@mikelodder7 Thanks :) The exact details elude me right now, but I moved e.g. error code parts out of ffi so they could be used by the bls feature without pulling in ffi, which is a subset we don't want when building the bls WASM bindings.
+
+As for your second question, I'm not 100% sure if it's technically feasible. Let me have a closer look when I have the time and get back to you.
+
+About your final question, I answered your change comment.",2018-11-07 17:32:28,2018-11-07 17:32:28
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436766197,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436766197,mikelodder7,"I think its fine to move it there. I just wanted to know the reasoning. Its fine to leave that.
+
+What about my FFI questions?
+Can I work with you on this? It would help to explain the exact problem you are having and what exactly you need?",2018-11-07 20:29:00,2018-11-07 20:30:07
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436767293,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436767293,aknuds1,"@mikelodder7 Hey, I've got some time now to review my changes as per your questions. Do you want to communicate via some kind of chat?",2018-11-07 20:32:52,2018-11-07 20:32:52
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436768321,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436768321,mikelodder7,"> @mikelodder7 Hey, I've got some time now to review my changes as per your questions. Do you want to communicate via some kind of chat?
+
+I'm available at chat.hyperledger.org. You can chat with me there at @MALodder",2018-11-07 20:36:28,2018-11-07 20:36:28
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436769063,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436769063,aknuds1,@mikelodder7 OK catch you there!,2018-11-07 20:39:06,2018-11-07 20:39:06
+https://api.github.com/repos/hyperledger/indy-crypto/issues/131,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/436778324,https://github.com/hyperledger/indy-crypto/pull/131#issuecomment-436778324,aknuds1,Thanks for reviewing and merging @mikelodder7!,2018-11-07 21:09:59,2018-11-07 21:09:59
+https://api.github.com/repos/hyperledger/indy-crypto/issues/127,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/422856118,https://github.com/hyperledger/indy-crypto/pull/127#issuecomment-422856118,aknuds1,Duplicate.,2018-09-19 15:52:19,2018-09-19 15:52:19
+https://api.github.com/repos/hyperledger/indy-crypto/issues/126,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/422856463,https://github.com/hyperledger/indy-crypto/pull/126#issuecomment-422856463,aknuds1,"I also forked this library to upgrade openssl, as it wouldn't build on OS X for me otherwise:
+
+```
+$ rustc --version
+rustc 1.29.0 (aa3ca1994 2018-09-11)
+$ cargo build
+   Compiling openssl v0.9.24
+error: failed to run custom build command for `openssl v0.9.24`
+process didn't exit successfully: `/Users/arve/Projects/indy-crypto/libindy-crypto/target/debug/build/openssl-de72db301f305406/build-script-build` (exit code: 101)
+--- stderr
+thread 'main' panicked at 'Unable to detect OpenSSL version', /Users/arve/.cargo/registry/src/github.com-1ecc6299db9ec823/openssl-0.9.24/build.rs:16:14
+```
+
+After upgrading as Axel has done here, it works :)",2018-09-19 15:53:16,2018-09-19 15:53:34
+https://api.github.com/repos/hyperledger/indy-crypto/issues/126,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/425970819,https://github.com/hyperledger/indy-crypto/pull/126#issuecomment-425970819,vimmerru,Bumping of openssl wrapper version doesn't cause bumping of openssl version. We use the version that is present on this system or pre-compiled one.,2018-10-01 16:23:27,2018-10-01 16:23:27
+https://api.github.com/repos/hyperledger/indy-crypto/issues/126,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/425983494,https://github.com/hyperledger/indy-crypto/pull/126#issuecomment-425983494,AxelNennker,That is correct. I have installed openssl 1.1.1 on my Ubuntu 16.04 and now I can't build libindy anymore because openssl 0.9.x does not know about it. Patching libindy locally does not help because indy-crypto does use 0.9 as well. I've send a PR to indy-crypto as well and Mike approved it too.,2018-10-01 17:00:19,2018-10-01 17:00:19
+https://api.github.com/repos/hyperledger/indy-crypto/issues/126,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/426019088,https://github.com/hyperledger/indy-crypto/pull/126#issuecomment-426019088,vimmerru,"We support Windows, MacOS, Android (3 arch), iOS (3 arch), Ubuntu 16.04, Fedora. To accept the changes we need to integrate new openssl to all platforms and CI/CD pipelines. ",2018-10-01 18:46:20,2018-10-01 18:46:20
+https://api.github.com/repos/hyperledger/indy-crypto/issues/126,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/426197803,https://github.com/hyperledger/indy-crypto/pull/126#issuecomment-426197803,AxelNennker,"Merging this PR does not change the system's openssl development headers and libraries.
+What changed in the 0.10 version of the openssl crate is the way the crate names stuff e.g. finish2 is now finish again as before in Rust. This PR reflect this Rust-only renaming.
+This PR enables developers to use newer versions of openssl it does not effect the current version.
+
+Openssl 1.1.1 was released on September 11th. Developers who upgraded openssl (which usually is a wise thing to do immediately) can't build libindy.
+
+Maybe add a note to https://github.com/hyperledger/indy-sdk/#how-to-build-indy-sdk-from-source that currently openssl 1.1.1 is not supported.",2018-10-02 08:49:51,2018-10-02 08:49:51
+https://api.github.com/repos/hyperledger/indy-crypto/issues/126,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/426202729,https://github.com/hyperledger/indy-crypto/pull/126#issuecomment-426202729,aknuds1,"Provided that @AxelNennker is correct about backwards compatibility with older OpenSSL versions, I wholeheartedly agree that we should upgrade to the new Rust crate as otherwise it won't build with new versions of OpenSSL in the system (as you can see from my error report above).",2018-10-02 09:06:28,2018-10-02 09:06:52
+https://api.github.com/repos/hyperledger/indy-crypto/issues/121,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/407790646,https://github.com/hyperledger/indy-crypto/pull/121#issuecomment-407790646,jovfer,@mikelodder7 could you verify security part of this commit please?,2018-07-25 15:15:15,2018-07-25 15:15:15
+https://api.github.com/repos/hyperledger/indy-crypto/issues/121,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/407902222,https://github.com/hyperledger/indy-crypto/pull/121#issuecomment-407902222,mikelodder7,Reviewing now,2018-07-25 21:30:02,2018-07-25 21:30:02
+https://api.github.com/repos/hyperledger/indy-crypto/issues/116,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/405985380,https://github.com/hyperledger/indy-crypto/pull/116#issuecomment-405985380,mikelodder7,Looks good. I think we can merge it after my #115 PR,2018-07-18 16:04:39,2018-07-18 16:04:39
+https://api.github.com/repos/hyperledger/indy-crypto/issues/116,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/406186620,https://github.com/hyperledger/indy-crypto/pull/116#issuecomment-406186620,vimmerru,As i understand if we merge this #115 will be merged automatically.,2018-07-19 07:47:41,2018-07-19 07:48:44
+https://api.github.com/repos/hyperledger/indy-crypto/issues/115,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/405933904,https://github.com/hyperledger/indy-crypto/pull/115#issuecomment-405933904,jovfer,"@mikelodder7 I don't have permissions to write into your branch, so I've raised #116 with one more check. Please review it.",2018-07-18 13:38:32,2018-07-18 13:38:32
+https://api.github.com/repos/hyperledger/indy-crypto/issues/115,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/405980115,https://github.com/hyperledger/indy-crypto/pull/115#issuecomment-405980115,mikelodder7,I can pull it into my branch. I’m not sure if we need the extra check but it doesn’t slow it down much so I think it’s okay,2018-07-18 15:50:04,2018-07-18 15:50:04
+https://api.github.com/repos/hyperledger/indy-crypto/issues/115,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/406048704,https://github.com/hyperledger/indy-crypto/pull/115#issuecomment-406048704,jovfer,Without second check runtime crash is possible. Please see test in my PR,2018-07-18 19:35:05,2018-07-18 19:35:05
+https://api.github.com/repos/hyperledger/indy-crypto/issues/112,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/403855494,https://github.com/hyperledger/indy-crypto/pull/112#issuecomment-403855494,mikelodder7,Approved,2018-07-10 15:03:13,2018-07-10 15:03:13
+https://api.github.com/repos/hyperledger/indy-crypto/issues/106,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/387095710,https://github.com/hyperledger/indy-crypto/pull/106#issuecomment-387095710,jovfer,I also don't like this hotfix. I will create alternative PR with more changes (may be total changes starting from Credential Public Key structure) and we can compare both solutions.,2018-05-07 15:06:53,2018-05-08 10:08:19
+https://api.github.com/repos/hyperledger/indy-crypto/issues/106,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/387350618,https://github.com/hyperledger/indy-crypto/pull/106#issuecomment-387350618,jovfer,After discussion with @ashcherbakov we decide to improve this hotfix but do not change structure of Credential Public Key.,2018-05-08 09:58:39,2018-05-08 09:58:39
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/383619746,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-383619746,vimmerru,"@mikelodder7 @dhh1128 
+
+Mike, will these changes allow to work with Credentials issued before this PR merged?",2018-04-23 15:36:36,2018-04-23 15:36:36
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/383639349,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-383639349,mikelodder7,"Yes but there will need be some indy-sdk changes to handle it. So for example. Instead of hardcoding the attribute master secret as a property in the code, indy-sdk can add it as a hidden attribute for issuance and common attribute for proofs. Other than that everything should still work.",2018-04-23 16:32:52,2018-04-23 16:32:52
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/383818143,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-383818143,vimmerru,"@mikelodder7 
+
+To be more clear:
+
+1. We have credential issued with current indy-crypto stable
+2. We want to make proof and verify it with your PR
+
+Will it work? Do we have all serialization and math compatible?",2018-04-24 06:28:03,2018-04-24 06:28:03
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/383909401,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-383909401,mikelodder7,"Credential signatures have not changed and neither has the master secret struct. Is there anything else that I’m missing that is serialized?
+
+For new credentials this code expects the caller to indicate which attributes are not included in the schema (master secret, or others) and add them as hidden attributes ( the issuer never sees them but signs). 
+
+Proofs need that information too. Proofs also have a new function call for indicating a common attribute (an attribute that is the same across all credentials, the master secret, but their could be more). Those are the only major changes.",2018-04-24 12:18:54,2018-04-24 12:18:54
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/383909521,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-383909521,mikelodder7,As for the math it’s essentially the same as before ,2018-04-24 12:19:19,2018-04-24 12:19:19
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/386587933,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-386587933,vimmerru,"@mikelodder7 
+
+To merge this PR we will need that all indy-sdk tests pass after this PR. Have you tried this? If tests fail we need the branch of libindy ready to merge with corresponded fixes.
+
+Otherwise after this merge we will be blocked in indy-sdk development. At least we need clear plan how to achieve this with exact dates.",2018-05-04 12:36:32,2018-05-04 12:46:00
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/386588903,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-386588903,vimmerru,"@jovfer 
+
+Could you try to execute libindy tests with this branch of indy-crypto?",2018-05-04 12:40:30,2018-05-04 12:40:30
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/386605667,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-386605667,jovfer,"@vimmerru this PR contains public API changes, so it incompatible with current libindy master at compile time",2018-05-04 13:44:22,2018-05-04 13:44:22
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/386636226,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-386636226,mikelodder7,Do I need to make a PR for indy-sdk to fix any tests to match this PR?,2018-05-04 15:25:44,2018-05-04 15:25:44
+https://api.github.com/repos/hyperledger/indy-crypto/issues/105,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/386647137,https://github.com/hyperledger/indy-crypto/pull/105#issuecomment-386647137,vimmerru,We need this PR to merge this. Also it must be merged before 1.5 release of libindy if there will be Credentails format interoperability issues. Otherwise we will need to make this code as new signature type.,2018-05-04 16:01:53,2018-05-04 16:01:53
+https://api.github.com/repos/hyperledger/indy-crypto/issues/102,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/382644845,https://github.com/hyperledger/indy-crypto/pull/102#issuecomment-382644845,AxelNennker,Created a new PR because changing something and creating a PR using github's web UI does not allow to sign-off. ,2018-04-19 07:55:08,2018-04-19 07:55:08
+https://api.github.com/repos/hyperledger/indy-crypto/issues/81,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/373161861,https://github.com/hyperledger/indy-crypto/pull/81#issuecomment-373161861,vimmerru,@jovfer @Artemkaaas  We need to fix DCO issue,2018-03-14 20:23:02,2018-03-14 20:23:02
+https://api.github.com/repos/hyperledger/indy-crypto/issues/78,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/366635659,https://github.com/hyperledger/indy-crypto/pull/78#issuecomment-366635659,jovfer,This PR is included into #79 ,2018-02-19 09:40:56,2018-02-19 09:40:56
+https://api.github.com/repos/hyperledger/indy-crypto/issues/70,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/364126938,https://github.com/hyperledger/indy-crypto/pull/70#issuecomment-364126938,vimmerru,@lovesh Do you have PoA that describes your objectives and design? We can't validate PRs without understanding the changes purpose.,2018-02-08 14:25:28,2018-02-08 14:25:28
+https://api.github.com/repos/hyperledger/indy-crypto/issues/70,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/364140926,https://github.com/hyperledger/indy-crypto/pull/70#issuecomment-364140926,lovesh,"@vimmerru This is just a refactoring, sent you a PM",2018-02-08 15:09:56,2018-02-08 15:09:56
+https://api.github.com/repos/hyperledger/indy-crypto/issues/59,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/354111599,https://github.com/hyperledger/indy-crypto/pull/59#issuecomment-354111599,jovfer,"@vimmerru @Artemkaaas we shouldn't create direct PR from hyperledger RC branch to the master.
+@Artemkaaas close this one, and create new from your branch based on RC and updated with last changes in master",2017-12-27 13:08:54,2017-12-27 13:08:54
+https://api.github.com/repos/hyperledger/indy-crypto/issues/39,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/346017847,https://github.com/hyperledger/indy-crypto/pull/39#issuecomment-346017847,jovfer,moved to #41 ,2017-11-21 12:53:51,2017-11-21 12:53:51
+https://api.github.com/repos/hyperledger/indy-crypto/issues/34,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/332822811,https://github.com/hyperledger/indy-crypto/pull/34#issuecomment-332822811,CLAassistant,[![CLA assistant check](https://cla-assistant.io/pull/badge/signed)](https://cla-assistant.io/hyperledger/indy-crypto?pullRequest=34) <br/>All committers have signed the CLA.,2017-09-28 12:36:48,2017-09-28 12:37:36
+https://api.github.com/repos/hyperledger/indy-crypto/issues/3,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/327744781,https://github.com/hyperledger/indy-crypto/pull/3#issuecomment-327744781,CLAassistant,[![CLA assistant check](https://cla-assistant.io/pull/badge/signed)](https://cla-assistant.io/hyperledger/indy-crypto?pullRequest=3) <br/>All committers have signed the CLA.,2017-09-07 09:25:37,2017-09-07 09:26:56
+https://api.github.com/repos/hyperledger/indy-crypto/issues/2,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/326553916,https://github.com/hyperledger/indy-crypto/pull/2#issuecomment-326553916,CLAassistant,[![CLA assistant check](https://cla-assistant.io/pull/badge/signed)](https://cla-assistant.io/hyperledger/indy-crypto?pullRequest=2) <br/>All committers have signed the CLA.,2017-09-01 11:07:12,2017-09-01 15:06:21
+https://api.github.com/repos/hyperledger/indy-crypto/issues/1,https://api.github.com/repos/hyperledger/indy-crypto/issues/comments/326359582,https://github.com/hyperledger/indy-crypto/pull/1#issuecomment-326359582,CLAassistant,"[![CLA assistant check](https://cla-assistant.io/pull/badge/not_signed)](https://cla-assistant.io/hyperledger/indy-crypto?pullRequest=1) <br/>Thank you for your submission, we really appreciate it. Like many open source projects, we ask that you sign our [Contributor License Agreement](https://cla-assistant.io/hyperledger/indy-crypto?pullRequest=1) before we can accept your contribution.<br/><sub>You have signed the CLA already but the status is still pending? Let us [recheck](https://cla-assistant.io/check/hyperledger/indy-crypto?pullRequest=1) it.</sub>",2017-08-31 17:02:36,2017-08-31 17:02:36

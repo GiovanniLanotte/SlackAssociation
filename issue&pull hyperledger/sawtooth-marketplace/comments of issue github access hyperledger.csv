@@ -1,0 +1,77 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/82,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/414555410,https://github.com/hyperledger/sawtooth-marketplace/pull/82#issuecomment-414555410,ryjones,The goal is to get projects using the same license file.,2018-08-21 05:37:18,2018-08-21 05:37:18
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/82,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/414705178,https://github.com/hyperledger/sawtooth-marketplace/pull/82#issuecomment-414705178,flatout,"What is the plan for Rights-Managed assets? 
+https://www.w3.org/TR/odrl-model/",2018-08-21 14:58:48,2018-08-21 14:58:48
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/81,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/391590883,https://github.com/hyperledger/sawtooth-marketplace/pull/81#issuecomment-391590883,askmish,@varasudha194 Could you limit your Commit message subject/title to about 50-72 characters. And put a detailed description of what changes are going in in the commit message body.,2018-05-24 05:15:22,2018-05-24 05:15:22
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/81,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/475759140,https://github.com/hyperledger/sawtooth-marketplace/pull/81#issuecomment-475759140,dplumb94,Closed due to inactivity,2019-03-22 19:54:21,2019-03-22 19:54:21
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/79,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/354308505,https://github.com/hyperledger/sawtooth-marketplace/pull/79#issuecomment-354308505,boydjohnson,This PR supercedes #77 ,2017-12-28 15:46:46,2017-12-28 15:46:46
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/77,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/354018772,https://github.com/hyperledger/sawtooth-marketplace/pull/77#issuecomment-354018772,delventhalz,@peterschwarz `@mini.coin`? Is there a standard way to make up fake email addresses?,2017-12-26 22:15:01,2017-12-26 22:15:13
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/77,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/354019138,https://github.com/hyperledger/sawtooth-marketplace/pull/77#issuecomment-354019138,peterschwarz,"Merely making sure that we're careful about the fake addresses we choose.  You could use `@minicoin.example`, since `.example` will never be a TLD: https://en.wikipedia.org/wiki/.example",2017-12-26 22:19:03,2017-12-26 22:19:03
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/75,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353998266,https://github.com/hyperledger/sawtooth-marketplace/pull/75#issuecomment-353998266,peterschwarz,"Drop a `LICENSE` file in the docs dir with the following:
+
+```
+Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/
+```",2017-12-26 18:27:38,2017-12-26 18:27:38
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/75,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/354024583,https://github.com/hyperledger/sawtooth-marketplace/pull/75#issuecomment-354024583,delventhalz,@peterschwarz Done.,2017-12-26 23:28:11,2017-12-26 23:28:11
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/74,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/354017804,https://github.com/hyperledger/sawtooth-marketplace/pull/74#issuecomment-354017804,delventhalz,"Looks like you can kill the TP with this PR in.
+
+Steps:
+1) Setup new Components
+2) Seed data
+3) Use web app to create new offer with Sawbuck Central limited to a particular pubkey
+4) Attempt to accept that offer with a different account
+
+Causes a `'dict' object has no attribute 'intersection'` error.
+
+```
+sawtooth-validator    | [2017-12-26 21:58:23.316 DEBUG    interconnect] ServerThread receiving CLIENT_BATCH_SUBMIT_REQUEST message: 1740 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.321 DEBUG    interconnect] ServerThread sending CLIENT_BATCH_SUBMIT_RESPONSE to b'5b4dc0b686794893'
+sawtooth-validator    | [2017-12-26 21:58:23.324 DEBUG    interconnect] ServerThread sending TP_PROCESS_REQUEST to b'2e2561e467f54a5d'
+sawtooth-validator    | [2017-12-26 21:58:23.331 DEBUG    interconnect] ServerThread receiving TP_STATE_GET_REQUEST message: 177 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.334 DEBUG    tp_state_handlers] GET: [('cd6744e109c32e1f9b1b2d03f7b3bccb3cd74584ddf8ed2dc2264b993574a6352846bf', b'\n\x95\x02\n$08777479-b5b8-41e7-a3f0-1735892d507d\x12\x10Sawbucks for Zac\x1a""Special Sawbuck Offer just for Zac""B032be79ff63595177650a9ea4f6d8f7fccbe4dd8ee8d960c55dc2cfa3715ffcf7a*$d7b122d6-6bbb-40e0-a6a2-09135c7ea2a40\x80\x89zJG\x08\xca\x01\x12B0310857cd625832e80ff2edf971d14b5ff382b1ec7ce96536ea5b3b98be124dc9bP\x01')]
+sawtooth-validator    | [2017-12-26 21:58:23.335 DEBUG    interconnect] ServerThread sending TP_STATE_GET_RESPONSE to b'2e2561e467f54a5d'
+sawtooth-validator    | [2017-12-26 21:58:23.338 DEBUG    interconnect] ServerThread receiving TP_STATE_GET_REQUEST message: 177 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.339 DEBUG    tp_state_handlers] GET: [('cd67447151c2ccb9b00a1d5c9b26ca0d085edc33f12d51313e2632ab1e284ce5ab9673', b'\n\xba\x01\n$d7b122d6-6bbb-40e0-a6a2-09135c7ea2a4\x12\tSawbucket\x1a1An unlimited supply of precious precious Sawbucks""B032be79ff63595177650a9ea4f6d8f7fccbe4dd8ee8d960c55dc2cfa3715ffcf7a*\x07Sawbuck0\xfe\xff\xff\xff\xff\xff\xff\x1f')]
+sawtooth-validator    | [2017-12-26 21:58:23.340 DEBUG    interconnect] ServerThread sending TP_STATE_GET_RESPONSE to b'2e2561e467f54a5d'
+sawtooth-validator    | [2017-12-26 21:58:23.343 DEBUG    interconnect] ServerThread receiving TP_STATE_GET_REQUEST message: 177 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.345 DEBUG    tp_state_handlers] GET: [('cd67440326592abb03801c54b18e52cc72f4bcf7a56fafd75e90618a65b1c9a24e4621', b'\n\x87\x01\n\x07Sawbuck\x124Sawtooth loyalty points, better than cryptocurrency!\x1aB032be79ff63595177650a9ea4f6d8f7fccbe4dd8ee8d960c55dc2cfa3715ffcf7a""\x02\x08d')]
+sawtooth-validator    | [2017-12-26 21:58:23.346 DEBUG    interconnect] ServerThread sending TP_STATE_GET_RESPONSE to b'2e2561e467f54a5d'
+sawtooth-validator    | [2017-12-26 21:58:23.351 DEBUG    interconnect] ServerThread receiving TP_STATE_GET_REQUEST message: 177 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.352 DEBUG    tp_state_handlers] GET: [('cd67447b9d20e22e61a3945204ed4210a6b343db00065f2b29578f170e77af61a14467', b'\n\x91\x01\n$87a98bce-4285-4a8e-9525-0e70bb4d20a7\x12\tSawbucket\x1a\x0eBob\'s Sawbucks""B027e9206f27f2d1e0e2315a376d70a804a68c787195ec412ea13f4123cfd06be7e*\x07Sawbuck0\xd0\x0f')]
+sawtooth-validator    | [2017-12-26 21:58:23.353 DEBUG    interconnect] ServerThread sending TP_STATE_GET_RESPONSE to b'2e2561e467f54a5d'
+sawtooth-validator    | [2017-12-26 21:58:23.356 DEBUG    interconnect] ServerThread receiving TP_STATE_GET_REQUEST message: 177 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.358 DEBUG    tp_state_handlers] GET: [('cd67440326592abb03801c54b18e52cc72f4bcf7a56fafd75e90618a65b1c9a24e4621', b'\n\x87\x01\n\x07Sawbuck\x124Sawtooth loyalty points, better than cryptocurrency!\x1aB032be79ff63595177650a9ea4f6d8f7fccbe4dd8ee8d960c55dc2cfa3715ffcf7a""\x02\x08d')]
+sawtooth-validator    | [2017-12-26 21:58:23.358 DEBUG    interconnect] ServerThread sending TP_STATE_GET_RESPONSE to b'2e2561e467f54a5d'
+market-processor      | Error: 'dict' object has no attribute 'intersection'
+sawtooth-validator    | [2017-12-26 21:58:23.372 DEBUG    interconnect] ServerThread sending PING_REQUEST to b'2e2561e467f54a5d'
+sawtooth-validator    | [2017-12-26 21:58:23.374 DEBUG    interconnect] ServerThread sending PING_REQUEST to b'eb22d5ddae2b4606'
+sawtooth-validator    | [2017-12-26 21:58:23.390 DEBUG    interconnect] ServerThread receiving CLIENT_BATCH_STATUS_REQUEST message: 205 bytes
+sawtooth-settings-tp  | [2017-12-26 21:58:23.394 DEBUG    core] received message of type: PING_REQUEST
+sawtooth-validator    | [2017-12-26 21:58:23.400 DEBUG    interconnect] ServerThread receiving PING_RESPONSE message: 70 bytes
+sawtooth-validator    | [2017-12-26 21:58:23.402 DEBUG    interconnect] message round trip: PING_RESPONSE 0.02772212028503418
+market-processor exited with code 0
+```",2017-12-26 22:02:31,2017-12-26 22:11:29
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/74,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/354136311,https://github.com/hyperledger/sawtooth-marketplace/pull/74#issuecomment-354136311,boydjohnson,@delventhalz Try re-pulling the branch. This seem like an issue that we had earlier in the day yesterday. I can't reproduce with the current PR.,2017-12-27 16:13:44,2017-12-27 16:13:54
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/71,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353678200,https://github.com/hyperledger/sawtooth-marketplace/pull/71#issuecomment-353678200,boydjohnson,"The best way to test this one is to create an Account through Sawbuck Manager, accept the 1000 free sawbucks offer, accept the Bronze Status offer, and then using Postman (post your email and password to /authorization to get the Bearer Token) get /accounts to get the Bronze Status holding id, and then try to create an offer with that Holding. You will get back an error that Bronze Statuses are not transferable.",2017-12-22 21:35:57,2017-12-22 21:35:57
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/69,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353237039,https://github.com/hyperledger/sawtooth-marketplace/pull/69#issuecomment-353237039,boydjohnson,"I have noticed that Ledger Sync blows up with this PR, due to the extra state space. I will seek advice on that tomorrow morning,.",2017-12-21 02:02:31,2017-12-21 02:02:31
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/69,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353631222,https://github.com/hyperledger/sawtooth-marketplace/pull/69#issuecomment-353631222,boydjohnson,"To test this PR, from the Sawbuck Manager, make a new account. Accept the 1000 Free Sawbucks offer and then try to Accept the offer again. You will get an error on the 2nd attempt.",2017-12-22 16:26:54,2017-12-22 16:27:13
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/68,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353419925,https://github.com/hyperledger/sawtooth-marketplace/pull/68#issuecomment-353419925,boydjohnson,What you should see for assets with OWNERS_HOLDING_INFINITE and ALL_HOLDINGS_INFINITE is that their Holdings won't decrease when they are involved in an offer.,2017-12-21 18:15:04,2017-12-21 18:15:04
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/67,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353146175,https://github.com/hyperledger/sawtooth-marketplace/pull/67#issuecomment-353146175,boydjohnson,When the AcceptOffer modal opens I get in the console log: TypeError: holdings.find(...) is undefined.,2017-12-20 18:35:31,2017-12-20 18:35:31
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/67,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353158877,https://github.com/hyperledger/sawtooth-marketplace/pull/67#issuecomment-353158877,boydjohnson,TypeError: account is undefined  Apparently this is the first thing that is undefined in the console log and then the holdings.find.,2017-12-20 19:24:44,2017-12-20 19:24:44
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/67,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/353182797,https://github.com/hyperledger/sawtooth-marketplace/pull/67#issuecomment-353182797,boydjohnson,Tested locally and was able to accept offers.,2017-12-20 21:08:21,2017-12-20 21:08:21
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/63,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/352562349,https://github.com/hyperledger/sawtooth-marketplace/pull/63#issuecomment-352562349,dplumb94,Got an error when I ran lint. Otherwise I tested locally and the functionality worked.,2017-12-18 21:26:30,2017-12-18 21:26:30
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/55,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/352072869,https://github.com/hyperledger/sawtooth-marketplace/pull/55#issuecomment-352072869,delventhalz,@boydjohnson Python is bad. I added a fix.,2017-12-15 18:05:13,2017-12-15 18:05:13
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/50,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/351234541,https://github.com/hyperledger/sawtooth-marketplace/pull/50#issuecomment-351234541,delventhalz,"Also, a hook needs to be added so this test passes:
+```
+fail: POST (200) /offers duration: 271ms
+fail: statusCode: Status code is not '200'
+body: 
+{
+  ""error"": ""Bad Request: Failed to create Offer, Holding id eiusmod listed as source does not refer to a Holding.""
+}
+statusCode: 400
+```",2017-12-12 23:54:46,2017-12-12 23:55:18
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/39,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/350850007,https://github.com/hyperledger/sawtooth-marketplace/pull/39#issuecomment-350850007,delventhalz,Added URL safe encoding to API request.,2017-12-11 20:35:23,2017-12-11 20:35:23
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/2,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/348202082,https://github.com/hyperledger/sawtooth-marketplace/pull/2#issuecomment-348202082,cianx,"This project should also have LICENSE, CONTRIBUTING.md at the root and README.md content on how to bring up a dev environment. ",2017-11-30 14:23:50,2017-11-30 14:23:50
+https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/2,https://api.github.com/repos/hyperledger/sawtooth-marketplace/issues/comments/348272681,https://github.com/hyperledger/sawtooth-marketplace/pull/2#issuecomment-348272681,delventhalz,"LICENSE, README, and CONTRIBUTING added. Other comments addressed.",2017-11-30 18:10:23,2017-11-30 18:10:23

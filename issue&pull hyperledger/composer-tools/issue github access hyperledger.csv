@@ -1,0 +1,784 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+composer-tools,namgk,https://github.com/hyperledger/composer-tools/pull/166,https://api.github.com/repos/hyperledger/composer-tools/issues/166,"up node red node composer version, fix resolve bug on retrieve node","The current Node-RED nodes do not work with the latest Composer. 
+
+Also when retrieve a resource, if resolve relationship is checked, the node throw an error.",open,True,2019-02-23 01:10:05,2019-02-23 01:12:19
+composer-tools,eladelrom,https://github.com/hyperledger/composer-tools/issues/165,https://api.github.com/repos/hyperledger/composer-tools/issues/165,Error: Error trying to start business network. Error: Failed to connect to any peer event hubs,"My enviourment:
+Composer version: v0.20.6
+MacOS 10.14.2
+Node v8.15.0
+npm v6.4.1
+
+ I followed: Step 1: Getting Hyperledger Fabric running and Starting Hyperledger Fabric as per commands and had Hyperledger Fabric and creation of PeerAdminCard went well. 
+
+I was also able to install a .bna file with no errors;
+> composer network install -a some-network.bna -c PeerAdmin@hlfv1
+
+✔ Installing business network. This may take a minute...
+Successfully installed business network some-network, version 0.0.2-deploy.3
+Command succeeded
+
+When I try to start the network utilizing the network 
+
+> composer network start --networkName some-network --networkVersion 0.0.2-deploy.3 -A admin -S adminpw -c PeerAdmin@hlfv1 --file networkadmin.card
+
+I am getting the following errors:
+
+Starting business network hello-network at version 0.0.2-deploy.3
+
+Processing these Network Admins: 
+	userName: admin
+
+✖ Starting business network definition. This may take a minute...
+Error: Error trying to start business network. Error: Failed to connect to any peer event hubs. It is required that at least 1 event hub has been connected to receive the commit event
+Command failed
+
+Please advice.
+
+
+",open,False,2019-01-31 10:25:15,2019-04-01 11:12:13
+composer-tools,akrav79,https://github.com/hyperledger/composer-tools/issues/164,https://api.github.com/repos/hyperledger/composer-tools/issues/164,Error using composer-wallet-ibmcos + Composer-rest-server in the cloud,"Using composer-wallet-ibmcos I successfully store cards in the Cloud.
+
+Then I have uploaded Composer-Rest-Server as Cloud-app and have  launched 
+"" ~$ cf set-env {My_APP} NODE-ENV""
+This works great  too.
+
+But when app start it’s try to find admin card on path “./composer/cards/client-data”.
+It seems that Rest-Server container that I pushed into the Cloud have some presets
+and do not understand ""type"":""composer-wallet-ibmcos""
+
+Where can I find good container?",closed,False,2018-12-30 17:27:10,2019-03-27 17:09:56
+composer-tools,advait1987,https://github.com/hyperledger/composer-tools/issues/163,https://api.github.com/repos/hyperledger/composer-tools/issues/163,node-red-contrib-composer gives error with 0.20.4 runtime.,"node-red-contrib-composer gives error with 0.20.4 runtime. I get following debug message when trying to create a transaction in node-red.
+
+ ""Error: creating resource error Error trying to ping. Error: Composer runtime (0.20.4) is not compatible with client (0.19.18)""",closed,False,2018-11-21 12:06:58,2018-11-23 11:52:19
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/162,https://api.github.com/repos/hyperledger/composer-tools/issues/162,Upgrade to Fabric 1.3,Signed-off-by: James Taylor <jamest@uk.ibm.com>,closed,True,2018-11-09 14:24:59,2019-02-02 18:18:46
+composer-tools,hickscorp,https://github.com/hyperledger/composer-tools/issues/161,https://api.github.com/repos/hyperledger/composer-tools/issues/161,Not ready for 1.3.0.,"The samples from `hlfv12` work great with HLF v1.3.0 out of the box. That is, until re-generating cryptographic material. After following the `howtobuild.txt` directives, the genesis and channel tx make the whole stack crash.
+
+For example, the `orderer` container complains about an invalid CA:
+
+```
+orderer.example.com       | 2018-10-26 19:08:33.375 UTC [orderer/commmon/multichannel] newLedgerResources -> PANI 050 Error creating channelconfig bundle: initializing channelconfig failed: could not create channel Orderer sub-group config: setting up the MSP manager failed: the supplied identity is not valid: x509: certificate signed by unknown authority (possibly because of ""x509: ECDSA verification failure"" while trying to verify candidate authority certificate ""ca.example.com"")
+orderer.example.com       | panic: Error creating channelconfig bundle: initializing channelconfig failed: could not create channel Orderer sub-group config: setting up the MSP manager failed: the supplied identity is not valid: x509: certificate signed by unknown authority (possibly because of ""x509: ECDSA verification failure"" while trying to verify candidate authority certificate ""ca.example.com"")
+```",closed,False,2018-10-26 19:10:20,2019-01-13 08:33:06
+composer-tools,hickscorp,https://github.com/hyperledger/composer-tools/issues/160,https://api.github.com/repos/hyperledger/composer-tools/issues/160,Not ready for HLF 1.3.0: `configtx.yaml`.,"When generating channel artifacts, recent versions of `configtxgen` (Eg 1.3.0 on go1.10.4) give lots of warnings, possibly breaking:
+
+```
+2018-10-26 20:02:57.431 WEST [common/tools/configtxgen] main -> WARN 001 Omitting the channel ID for configtxgen for output operations is deprecated.  Explicitly passing the channel ID will be required in the future, defaulting to 'testchainid'.
+2018-10-26 20:02:57.431 WEST [common/tools/configtxgen] main -> INFO 002 Loading configuration
+2018-10-26 20:02:57.435 WEST [common/tools/configtxgen/encoder] NewChannelGroup -> WARN 003 Default policy emission is deprecated, please include policy specifications for the channel group in configtx.yaml
+2018-10-26 20:02:57.435 WEST [common/tools/configtxgen/encoder] NewOrdererGroup -> WARN 004 Default policy emission is deprecated, please include policy specifications for the orderer group in configtx.yaml
+2018-10-26 20:02:57.436 WEST [common/tools/configtxgen/encoder] NewOrdererOrgGroup -> WARN 005 Default policy emission is deprecated, please include policy specifications for the orderer org group OrdererOrg in configtx.yaml
+2018-10-26 20:02:57.436 WEST [common/tools/configtxgen/encoder] addSignaturePolicyDefaults -> WARN 006 Specifying AdminPrincipal is deprecated and will be removed in a future release, override the admin principal with explicit policies.
+2018-10-26 20:02:57.436 WEST [common/tools/configtxgen/encoder] NewOrdererOrgGroup -> WARN 007 Default policy emission is deprecated, please include policy specifications for the orderer org group Org1 in configtx.yaml
+2018-10-26 20:02:57.436 WEST [common/tools/configtxgen/encoder] addSignaturePolicyDefaults -> WARN 008 Specifying AdminPrincipal is deprecated and will be removed in a future release, override the admin principal with explicit policies.
+2018-10-26 20:02:57.437 WEST [common/tools/configtxgen] doOutputBlock -> INFO 009 Generating genesis block
+2018-10-26 20:02:57.437 WEST [common/tools/configtxgen] doOutputBlock -> INFO 00a Writing genesis block
+```
+
+The same happens when generating the channel tx:
+
+```
+2018-10-26 20:04:25.974 WEST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-26 20:04:25.978 WEST [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
+2018-10-26 20:04:25.978 WEST [common/tools/configtxgen/encoder] NewApplicationGroup -> WARN 003 Default policy emission is deprecated, please include policy specifications for the application group in configtx.yaml
+2018-10-26 20:04:25.978 WEST [common/tools/configtxgen/encoder] NewApplicationOrgGroup -> WARN 004 Default policy emission is deprecated, please include policy specifications for the application org group Org1 in configtx.yaml
+2018-10-26 20:04:25.978 WEST [common/tools/configtxgen/encoder] addSignaturePolicyDefaults -> WARN 005 Specifying AdminPrincipal is deprecated and will be removed in a future release, override the admin principal with explicit policies.
+2018-10-26 20:04:25.979 WEST [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 006 Writing new channel tx
+```
+
+It'd be great to receive directives on how to implement the deprecated ""auto-defaults"".",closed,False,2018-10-26 19:04:54,2019-01-13 08:33:19
+composer-tools,hickscorp,https://github.com/hyperledger/composer-tools/issues/159,https://api.github.com/repos/hyperledger/composer-tools/issues/159,Invalid `configtx.yaml` file.,"Some YML parssers will trip on the fact that the `Profiles` section is declared first while referring to references of sections declared afterward (On my Linux box, it fails as it doesn't know `*OrdererDefaults` and `*ApplicationDefaults`).
+
+The file should be changed to allow such parsers (Eg move the `Profiles` sections all the way to the end of the file.",closed,False,2018-10-26 19:02:00,2019-01-13 08:33:32
+composer-tools,hickscorp,https://github.com/hyperledger/composer-tools/issues/158,https://api.github.com/repos/hyperledger/composer-tools/issues/158,Inconsistent output when re-generating crypto material.,"When following the `howtobuild.txt` instructions in the `composer` folder, the output is different in terms of expected number of files.
+Some files are missing that might impact running services and make the environment unusable once re-generated:
+
+```
+crypto-config/ordererOrganizations/example.com/users/Admin@example.com/tls/server.crt
+crypto-config/ordererOrganizations/example.com/users/Admin@example.com/tls/server.key
+crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/tls/server.crt
+crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/tls/server.key
+```
+
+New files that didn't exist before get generated:
+
+```
+composer/crypto-config/ordererOrganizations/example.com/msp/admincerts/ca.example.com-cert.pem
+composer/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/tls/client.crt
+composer/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/tls/client.key
+composer/crypto-config/peerOrganizations/org1.example.com/msp/admincerts/ca.org1.example.com-cert.pem
+composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/tls/client.crt
+composer/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/tls/client.key
+```",closed,False,2018-10-26 18:58:48,2019-01-13 08:32:35
+composer-tools,vojta-novak,https://github.com/hyperledger/composer-tools/issues/157,https://api.github.com/repos/hyperledger/composer-tools/issues/157,Installation problem,"It is not possible to install this tool into NodeRed. I tried it in the IBM cloud and so locally.
+![image](https://user-images.githubusercontent.com/26152389/47281052-7dcce680-d5d9-11e8-920f-67e439112d60.png)
+![image](https://user-images.githubusercontent.com/26152389/47281043-786f9c00-d5d9-11e8-8066-7fd1145d59ed.png)
+And local Node-Red
+![hypernode](https://user-images.githubusercontent.com/26152389/47302671-6403c180-d622-11e8-815d-235475872c1b.PNG)
+",closed,False,2018-10-22 07:05:17,2019-01-14 00:00:07
+composer-tools,ls-jarlstrom,https://github.com/hyperledger/composer-tools/issues/156,https://api.github.com/repos/hyperledger/composer-tools/issues/156,composer-wallet-redis: The $NODE_CONFIG environment variable is malformed JSON,"The desc property, in the node_config example, is missing an end quote
+{
+  ""composer"": {
+    ""wallet"": {
+      ""type"": ""composer-wallet-redis"",
+      ""desc"": ""Uses a local redis instance,
+...
+
+should be 
+
+{
+  ""composer"": {
+    ""wallet"": {
+      ""type"": ""composer-wallet-redis"",
+      **""desc"": ""Uses a local redis instance"",**
+...
+",closed,False,2018-10-20 21:21:06,2019-02-09 22:43:44
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/155,https://api.github.com/repos/hyperledger/composer-tools/issues/155,Remove amd specific entries,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-10-14 10:47:43,2019-01-19 13:39:32
+composer-tools,ztanaka1971,https://github.com/hyperledger/composer-tools/issues/154,https://api.github.com/repos/hyperledger/composer-tools/issues/154,fabric-scripts doesn't work for hlfv12 except amd64 architecture ,"fabric-dev-servers/fabric-scripts always uses amd64 docker images even on other architecture like s390x for hlfv12. It looks like scripts for hlfv12 has fixed architecture ""amd64"". 
+
+> linux1@fabric2:/data/fabric-tools/fabric-scripts/hlfv12> grep amd *
+> grep: composer: Is a directory
+> downloadFabric.sh:    pullFabricImage ${imageName} amd64-1.2.1
+> downloadFabric.sh:pullFabricImage ca amd64-1.2.1
+> linux1@fabric2:/data/fabric-tools/fabric-scripts/hlfv12> grep -r amd *
+> composer/docker-compose.yml:    image: hyperledger/fabric-ca:amd64-1.2.1
+> composer/docker-compose.yml:    image: hyperledger/fabric-orderer:amd64-1.2.1
+> composer/docker-compose.yml:    image: hyperledger/fabric-peer:amd64-1.2.1
+> composer/docker-compose-dev.yml:    image: hyperledger/fabric-ca:amd64-1.2.1
+> composer/docker-compose-dev.yml:    image: hyperledger/fabric-orderer:amd64-1.2.1
+> composer/docker-compose-dev.yml:    image: hyperledger/fabric-peer:amd64-1.2.1
+> downloadFabric.sh:    pullFabricImage ${imageName} amd64-1.2.1
+> downloadFabric.sh:pullFabricImage ca amd64-1.2.1
+
+Is this expected ??
+https://github.com/hyperledger/composer-tools/commit/457ff391c7c9c3f0b86a647e5651fe1f42e9e39d#diff-f9f477ffd61109a4f6f37ad56f54a9af
+",closed,False,2018-10-12 06:02:08,2018-10-31 21:23:58
+composer-tools,siddjain,https://github.com/hyperledger/composer-tools/issues/153,https://api.github.com/repos/hyperledger/composer-tools/issues/153,createPeerAdminCard.sh No version of composer-cli has been detected,"Hello,
+
+I am getting started with HL Fabric. I get this error while trying to run createPeerAdminCard.sh. can anyone help me?
+
+```
+$ ./createPeerAdminCard.sh 
+Development only script for Hyperledger Fabric control
+Running 'createPeerAdminCard.sh'
+FABRIC_VERSION is unset, assuming hlfv12
+FABRIC_START_TIMEOUT is unset, assuming 15 (seconds)
+
+No version of composer-cli has been detected, you need to install composer-cli at v0.20 or higher
+
+```
+
+Further info to help in debugging:
+
+```
+$ ls /usr/lib/node_modules/
+composer-cli         composer-rest-server            gulp  yo
+composer-playground  generator-hyperledger-composer  npm
+```
+
+```
+$ composer --help
+/usr/lib/node_modules/composer-cli/node_modules/composer-common/lib/cardstore/businessnetworkcardstore.js:54
+    async get(cardName) {
+          ^^^
+
+SyntaxError: Unexpected identifier
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/usr/lib/node_modules/composer-cli/node_modules/composer-common/index.js:56:43)
+```",closed,False,2018-10-11 23:49:32,2019-03-15 13:10:14
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/152,https://api.github.com/repos/hyperledger/composer-tools/issues/152,Bump version to 0.0.14,"Automatic version bump did not run after the v0.2.7 release (versions don't make any sense in composer-tools)
+
+Signed-off-by: James Taylor <jamest@uk.ibm.com>",closed,True,2018-10-10 10:00:58,2018-10-10 10:15:05
+composer-tools,tijohnson,https://github.com/hyperledger/composer-tools/issues/151,https://api.github.com/repos/hyperledger/composer-tools/issues/151,Potential security vulnerability ,"
+Known  critical severity security vulnerability detected in growl < 1.10.0 defined in package-lock.json
+package-lock.json update suggested: growl ~> 1.10.0.
+
+",closed,False,2018-10-09 17:12:18,2018-12-23 00:28:58
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/150,https://api.github.com/repos/hyperledger/composer-tools/issues/150,Add Cloudant Service wallet,Add @mbwhite's Cloudant Service wallet from https://github.com/IBM-Blockchain-Starter-Kit/composer-wallet-cloudant,closed,True,2018-10-08 15:19:56,2018-10-09 09:31:16
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/149,https://api.github.com/repos/hyperledger/composer-tools/issues/149,Add IBM Cloud Object Service wallet,Add @mbwhite's IBM Cloud Object Storage wallet from https://github.com/IBM-Blockchain-Starter-Kit/composer-wallet-ibmcos,closed,True,2018-10-08 14:18:51,2018-10-09 14:09:12
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/148,https://api.github.com/repos/hyperledger/composer-tools/issues/148,Add IBM Cloud Object Service wallet DO NOT MERGE!,,closed,True,2018-10-08 13:48:34,2018-10-08 14:17:32
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/issues/147,https://api.github.com/repos/hyperledger/composer-tools/issues/147,Contribute wallet implementations,Add @mbwhite's composer-wallet-cloudant and composer-wallet-ibmcos wallet implementations which are currently resting in the [IBM-Blockchain-Starter-Kit](https://github.com/IBM-Blockchain-Starter-Kit) organisation.,closed,False,2018-10-08 12:09:58,2018-11-24 10:54:49
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/146,https://api.github.com/repos/hyperledger/composer-tools/issues/146,Upgrade to Fabric 1.2.1,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-09-29 09:01:37,2018-10-14 10:47:35
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/145,https://api.github.com/repos/hyperledger/composer-tools/issues/145,Fix build,"Ironically, it looks like d26d67b6a2fc94639e3a864d6f67149d6aaaa1f8 broke the build's license check!
+
+Signed-off-by: James Taylor <jamest@uk.ibm.com>",closed,True,2018-09-21 14:56:33,2018-09-21 16:31:13
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/pull/144,https://api.github.com/repos/hyperledger/composer-tools/issues/144,Add stalebot config,"Closes #143
+
+Signed-off-by: James Taylor <jamest@uk.ibm.com>",closed,True,2018-09-21 14:34:38,2018-09-21 18:35:00
+composer-tools,greg2git,https://github.com/hyperledger/composer-tools/issues/143,https://api.github.com/repos/hyperledger/composer-tools/issues/143,i can see an issue open since May but others even before then,"are there any plans to close them by anyone?
+thx, greg",closed,False,2018-09-07 22:45:18,2018-09-21 18:35:00
+composer-tools,kishorejoga,https://github.com/hyperledger/composer-tools/issues/142,https://api.github.com/repos/hyperledger/composer-tools/issues/142,Unable unzip in Ubuntu 16.04,"Hello,
+
+I have downloaded fabric-dev-servers.zip from 
+https://github.com/hyperledger/composer-tools/tree/master/packages/fabric-dev-servers
+
+But when I am trying to unzip in Ubuntu 16.04, system prompts cannot unzip, I have tried downloading 7zip and tried unziping still not working.
+
+Also I have downloaded indiviual files and when i try to run ./downloadFabric.sh, system throws exceptions like HTML exceptions like < >.
+
+Have you seen any issues like this to unzip these files in Ubuntu...
+But I am able to unzip in Windows.
+
+Any inputs on this would is much appreciated.
+
+Regards,
+KishoreJ.",closed,False,2018-09-03 16:37:04,2018-09-04 06:21:02
+composer-tools,Grendel61,https://github.com/hyperledger/composer-tools/issues/141,https://api.github.com/repos/hyperledger/composer-tools/issues/141,Error in v1.2 of fabric-dev-servers - Missing key/value in fabric-dev-servers/hlfv11/createPeerAdmin.sh ,"Unfortunately, there is a severe error in the Fabric-Dev-Servers v1.2 for hlfv11 Fabric setups. The error results in the improper creation of DevServer_connection.json, and subsequently causes the `composer card import` for the PeerAdmin@hlfv1 network card to fail. As a result a user can't setup a hlfv11 business network with the new Composer Tools Fabric-Dev-Servers v1.2 download. 
+
+It took some time to track this down, because the error is in a JSON layout inside the createPeerAdmin.sh bash file. It appears there was an omission in v1.2 as Composer Tools v1.1 Fabric-Dev-Servers obviously had the correct code. 
+
+When hlfv11/createPeerAdmin runs the terminal output is:
+
+```
+Successfully created business network card file to
+        Output file: /tmp/PeerAdmin@hlfv1.card
+
+Command succeeded
+
+
+Failed to import the business network card
+keyword:    required
+dataPath:   .peers['peer0.org1.example.com']
+schemaPath: #/required
+params:
+  missingProperty: eventUrl
+message:    should have required property 'eventUrl'
+
+Error: Errors found in the connection profile in the card
+Command failed
+
+There are no Business Network Cards available.
+
+Command succeeded
+```
+
+The eventURL key/value is missing from the DevServer_connection.json cat. 
+
+Beginning on line 123 of hlfv1/createPeerAdmin.sh ...
+```
+""peers"": {
+        ""peer0.org1.example.com"": {
+            ""url"": ""grpc://${HOST}:7051"",
+        }
+    },
+```
+
+Should be ... 
+```
+    ""peers"": {
+        ""peer0.org1.example.com"": {
+            ""url"": ""grpc://${HOST}:7051"",
+            ""eventUrl"": ""grpc://${HOST}:7053""
+        }
+    },
+```
+
+The only work around is to edit the hlfv11/createPeerAdmin.sh ",closed,False,2018-08-30 15:19:50,2018-09-04 12:05:55
+composer-tools,greg2git,https://github.com/hyperledger/composer-tools/issues/140,https://api.github.com/repos/hyperledger/composer-tools/issues/140,createPeerAdminCard.sh keeps failing at line 74,"with this message: ""No version of composer-cli has been detected, you need to install composer-cli at v0.20 or higher"" after running npm install -g composer-cli and getting this: 
+/usr/bin/composer -> /usr/lib/node_modules/composer-cli/cli.js
++ composer-cli@0.20.0
+",closed,False,2018-08-27 21:30:27,2018-08-28 16:20:03
+composer-tools,bestbeforetoday,https://github.com/hyperledger/composer-tools/pull/139,https://api.github.com/repos/hyperledger/composer-tools/issues/139,Add support for Fabric 1.2,"Contributes to hyperledger/composer#4238
+
+Defaults to Fabric 1.2 unless the FABRIC_VERSION environment variable is set.
+
+Remove eventUrl attribute for peer in createPeerAdminCard.sh since the
+old event hub is no longer used.
+
+Signed-off-by: Mark S. Lewis <mark_lewis@uk.ibm.com>",closed,True,2018-08-02 14:35:48,2018-09-07 22:41:40
+composer-tools,ywandy,https://github.com/hyperledger/composer-tools/issues/138,https://api.github.com/repos/hyperledger/composer-tools/issues/138,Failed to build fabric-scripts/hlfv11/composer/howtobuild.txt,"I just follow this txt ,but i failed when i exec ```configtxgen -profile ComposerOrdererGenesis -outputBlock ./composer-genesis.block ```  
+
+How can i due with it
+
+This is my error output:
+```
+# yewei @ xinou-work in ~/code/composer-proj/fds/fabric-scripts/hlfv11/composer [17:38:36]
+$ configtxgen -profile ComposerOrdererGenesis -outputBlock ./composer-genesis.block
+2018-07-31 17:38:41.170 CST [common/tools/configtxgen] main -> WARN 001 Omitting the channel ID for configtxgen is deprecated.  Explicitly passing the channel ID will be required in the future, defaulting to 'testchainid'.
+2018-07-31 17:38:41.170 CST [common/tools/configtxgen] main -> INFO 002 Loading configuration
+2018-07-31 17:38:41.170 CST [common/tools/configtxgen/localconfig] Load -> CRIT 003 Error reading configuration:  While parsing config: yaml: unknown anchor 'OrdererDefaults' referenced
+2018-07-31 17:38:41.170 CST [common/tools/configtxgen] func1 -> CRIT 004 Error reading configuration: While parsing config: yaml: unknown anchor 'OrdererDefaults' referenced
+panic: Error reading configuration: While parsing config: yaml: unknown anchor 'OrdererDefaults' referenced [recovered]
+        panic: Error reading configuration: While parsing config: yaml: unknown anchor 'OrdererDefaults' referenced
+
+goroutine 1 [running]:
+github.com/hyperledger/fabric/vendor/github.com/op/go-logging.(*Logger).Panic(0xc4201cbe00, 0xc4203ea4e0, 0x1, 0x1)
+        /w/workspace/fabric-nightly-release-job-release-1.2-x86_64/gopath/src/github.com/hyperledger/fabric/vendor/github.com/op/go-logging/logger.go:188 +0xbd
+main.main.func1()
+        /w/workspace/fabric-nightly-release-job-release-1.2-x86_64/gopath/src/github.com/hyperledger/fabric/common/tools/configtxgen/main.go:254 +0x1ae
+panic(0xc6ea00, 0xc4203ea4d0)
+        /opt/go/go1.10.linux.amd64/src/runtime/panic.go:505 +0x229
+github.com/hyperledger/fabric/vendor/github.com/op/go-logging.(*Logger).Panic(0xc4201cbc50, 0xc420492ae0, 0x2, 0x2)
+        /w/workspace/fabric-nightly-release-job-release-1.2-x86_64/gopath/src/github.com/hyperledger/fabric/vendor/github.com/op/go-logging/logger.go:188 +0xbd
+github.com/hyperledger/fabric/common/tools/configtxgen/localconfig.Load(0x7fffbed3860f, 0x16, 0x0, 0x0, 0x0, 0x1)
+        /w/workspace/fabric-nightly-release-job-release-1.2-x86_64/gopath/src/github.com/hyperledger/fabric/common/tools/configtxgen/localconfig/config.go:277 +0x469
+main.main()
+        /w/workspace/fabric-nightly-release-job-release-1.2-x86_64/gopath/src/github.com/hyperledger/fabric/common/tools/configtxgen/main.go:265 +0xce7
+```",closed,False,2018-07-31 09:45:48,2018-09-09 09:45:10
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/137,https://api.github.com/repos/hyperledger/composer-tools/issues/137,Fixed problems with latest node-red,"Fixed a problem that gave an error if no config was specified
+Fixed the promise returned from the config node
+Only do composer disconnect if there was a connection
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",closed,True,2018-06-05 17:06:02,2018-06-06 08:38:13
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/136,https://api.github.com/repos/hyperledger/composer-tools/issues/136,Fix a problem with local config,"Fixed a problem that gave an error if no config was specified
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",closed,True,2018-05-29 15:06:18,2018-06-05 17:05:32
+composer-tools,jdockter,https://github.com/hyperledger/composer-tools/issues/135,https://api.github.com/repos/hyperledger/composer-tools/issues/135,Error stopping node: TypeError: Cannot read property 'disconnect' of undefined,"After installing latest node-red-contrib-composer node I'm getting the following error when I try to deploy after putting composer-out node into a flow:
+
+25 May 13:09:57 - [debug] red/nodes/flows.stop : stopping flow : 140a86d5.8f85b9
+25 May 13:09:57 - [trace] Stopping node inject:b64922ff.1745
+25 May 13:09:57 - [trace] Stopping node debug:2f455e04.e40ac2
+25 May 13:09:57 - [trace] Stopping node hyperledger-composer-out:b9dcefc.e087b1
+25 May 13:09:57 - [trace] Stopped node inject:b64922ff.1745 (1ms)
+25 May 13:09:57 - [trace] Stopped node debug:2f455e04.e40ac2 (2ms)
+25 May 13:09:57 - [error] [hyperledger-composer-out:Local] Error stopping node: TypeError: Cannot read property 'disconnect' of undefined
+25 May 13:09:57 - [debug] TypeError: Cannot read property 'disconnect' of undefined
+    at HyperledgerComposerOutNode.node.on (/home/ibm/.node-red/node_modules/node-red-contrib-composer/nodes/hyperledger-composer.js:457:43)
+    at HyperledgerComposerOutNode.Node.close (/home/ibm/.nvm/versions/node/v8.9.0/lib/node_modules/node-red/red/runtime/nodes/Node.js:102:22)
+    at /home/ibm/.nvm/versions/node/v8.9.0/lib/node_modules/node-red/red/runtime/nodes/flows/Flow.js:166:47
+",closed,False,2018-05-25 20:38:49,2018-10-06 11:09:10
+composer-tools,booboothefool,https://github.com/hyperledger/composer-tools/issues/134,https://api.github.com/repos/hyperledger/composer-tools/issues/134,How to connect to Hyperledger from a different container?,"If I am running Node.js app locally, I am able to connect to Hyperledger with connection.json localhost:
+```
+{""name"":""hlfv1"",""x-type"":""hlfv1"",""x-commitTimeout"":300,""version"":""1.0.0"",""client"":{""organization"":""Org1"",""connection"":{""timeout"":{""peer"":{""endorser"":""300"",""eventHub"":""300"",""eventReg"":""300""},""orderer"":""300""}}},""channels"":{""composerchannel"":{""orderers"":[""orderer.example.com""],""peers"":{""peer0.org1.example.com"":{}}}},""organizations"":{""Org1"":{""mspid"":""Org1MSP"",""peers"":[""peer0.org1.example.com""],""certificateAuthorities"":[""ca.org1.example.com""]}},""orderers"":{""orderer.example.com"":{""url"":""grpc://localhost:7050""}},""peers"":{""peer0.org1.example.com"":{""url"":""grpc://localhost:7051"",""eventUrl"":""grpc://localhost:7053""}},""certificateAuthorities"":{""ca.org1.example.com"":{""url"":""http://localhost:7054"",""caName"":""ca.org1.example.com""}}}
+```
+
+Now if I am running Node.js app in Docker container, on same Docker network `composer_default` as the peer/orderer/ca, what IP should I be using to connect?
+
+I have tried name of container `http://ca.org1.example.com:7054`, but it gives me error: `Error: Error trying login and get user Context. Error: Error trying to enroll user or load channel configuration. Error: Calling enrollment endpoint failed with error [Error: connect ETIMEDOUT 92.242.140.21:7054]`.
+
+Any advice would be appreciated. Thanks!",closed,False,2018-05-25 15:44:11,2018-05-25 18:23:30
+composer-tools,awjh-ibm,https://github.com/hyperledger/composer-tools/pull/133,https://api.github.com/repos/hyperledger/composer-tools/issues/133,adding licenses to md,Adding licenses missed in previous iteration of license additions. Relates to https://github.com/hyperledger/composer/issues/1220#issuecomment-386329076,closed,True,2018-05-09 08:51:01,2018-05-14 15:47:36
+composer-tools,jt-nti,https://github.com/hyperledger/composer-tools/issues/132,https://api.github.com/repos/hyperledger/composer-tools/issues/132,Broken repository link in composer-wallet-redis,"The repository URL for composer-wallet-redis should link to the composer-tools repository but it is currently pointing to a non-existent github repository
+
+```
+""repository"": {
+    ""type"": ""git"",
+    ""url"": ""https://github.com/hyperledger/composer-wallet-redis.git""
+  },
+```",closed,False,2018-05-08 10:28:39,2018-10-06 11:09:08
+composer-tools,Grendel61,https://github.com/hyperledger/composer-tools/issues/131,https://api.github.com/repos/hyperledger/composer-tools/issues/131,"Hyperledger Composer - Failed to load logger module ./winstonInjector.js: Cannot find module "".""","I'm running HyperLedger Composer Playground
+
+My Current Environment - 
+
+```
+├── composer-cli@0.19.1
+├── composer-playground@0.19.1
+├── composer-rest-server@0.19.1
+├── generator-hyperledger-composer@0.19.1
+├── npm@5.6.0
+├── wscat@2.1.1
+└── yo@2.0.2
+```
+
+I'm seeing this error in my console:
+ 
+`Failed to load logger module ./winstonInjector.js: Cannot find module "".""` 
+
+Obviously the console.log isn't working, but otherwise I'm operating fine. The wistonInjector.js file seems to be in place in my fabric-tools directory. I reinstalled the fabric-tools directory, and restarted the playground. No change. 
+
+Thanks in advance for your help. ",closed,False,2018-04-23 18:54:55,2018-08-30 10:04:54
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/130,https://api.github.com/repos/hyperledger/composer-tools/issues/130,Update to enable cloud wallets,"Added config for card store
+Added ability to upload a card
+Added ability to choose a card from a list
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",closed,True,2018-04-23 16:04:58,2018-04-25 08:17:56
+composer-tools,Grendel61,https://github.com/hyperledger/composer-tools/issues/129,https://api.github.com/repos/hyperledger/composer-tools/issues/129,Can't generate PeerAdmin@hlfv11,"I've gone through the tutorials a few times. 
+
+- I'm updated to the latest V0.19.1 of the CLI.  Did your NPX suggestion.
+- Runtime is 0.19.1
+- I did the export `FABRIC_VERSION=hlfv11. `
+- When I start the fabric I get `FABRIC_VERSION is set to 'hlfv11'`
+- I deleted the `.composer` directory. 
+- Downloaded the latest tools
+
+However, each time I run ./createPeerAdminCard.sh it creates a PeerAdmin@hlfv1 card. I was expecting it would create an PeerAdmin@hlfv11, but it doesn't. I'm worried this impacting my fabric? Causing some problems I'm having with the Composer-Playground-API port sporadically? 
+
+Your help is appreciated. ",closed,False,2018-04-20 21:41:24,2018-08-17 07:14:54
+composer-tools,deltatrip,https://github.com/hyperledger/composer-tools/issues/128,https://api.github.com/repos/hyperledger/composer-tools/issues/128,"Error: creating resource error Failed to load connector module ""composer-connector-undefined"" for connection type ""undefined"". Cannot find module 'composer-connector-undefined'","Hi, 
+
+I have upgraded to composer v0.19.0 and now when trying to get it connect via node red I do receive the following error: 
+`[error] [hyperledger-composer-out:carauction-network] Error: creating resource error Failed to load connector module ""composer-connector-undefined"" for connection type ""undefined"". Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'-Cannot find module 'composer-connector-undefined'
+`
+
+Is this the same issue as in this pull request? 
+https://github.com/hyperledger/composer-tools/pull/126
+",closed,False,2018-04-11 06:49:41,2018-10-06 11:09:09
+composer-tools,CHUQIUSHI,https://github.com/hyperledger/composer-tools/issues/127,https://api.github.com/repos/hyperledger/composer-tools/issues/127,composer network start error,"when i am following the tutorial
+_https://hyperledger.github.io/composer/latest/tutorials/developer-tutorial_
+
+on the  Step Four: Deploying the business network
+when i excute：
+
+composer network start --networkName tutorial-network --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card
+
+Error: Error trying to start business network. Error: Error: 2 UNKNOWN: access denied: channel [composerchannel] creator org [Org1MSP]
+Command failed",closed,False,2018-04-08 07:08:17,2019-03-06 21:56:43
+composer-tools,siler23,https://github.com/hyperledger/composer-tools/pull/126,https://api.github.com/repos/hyperledger/composer-tools/issues/126,Fixed package.json for node-red-contrib-composer so that it will conn…,"…ect to hlfv11 with composer v0.19, fixing current connector undefined error preventing use of node-red-contrib-composer",closed,True,2018-04-05 12:16:32,2018-04-12 08:32:31
+composer-tools,awjh-ibm,https://github.com/hyperledger/composer-tools/pull/125,https://api.github.com/repos/hyperledger/composer-tools/issues/125,Adding licenses,"Adding licenses requested in https://github.com/hyperledger/composer/issues/1220
+
+Adding license checker to check these are in",closed,True,2018-04-05 10:03:45,2018-04-30 12:14:41
+composer-tools,aviralwal,https://github.com/hyperledger/composer-tools/pull/124,https://api.github.com/repos/hyperledger/composer-tools/issues/124,Update README.md,Fixed spelling error and missing quotes for composer-wallet-redis README.md,closed,True,2018-04-04 11:00:29,2018-04-25 08:37:10
+composer-tools,aviralwal,https://github.com/hyperledger/composer-tools/pull/123,https://api.github.com/repos/hyperledger/composer-tools/issues/123,Fixed error in redis README.md,Signed-off-by: aviralwal <aviralagrawal260@gmail.com>,closed,True,2018-04-04 10:53:55,2018-04-04 10:57:22
+composer-tools,aviralwal,https://github.com/hyperledger/composer-tools/pull/122,https://api.github.com/repos/hyperledger/composer-tools/issues/122,Update README.md for composer-wallet-redis,"
+Signed-off-by: aviralwal aviralagrawal260@gmail.com",closed,True,2018-04-04 10:43:32,2018-04-04 10:52:06
+composer-tools,aviralwal,https://github.com/hyperledger/composer-tools/pull/121,https://api.github.com/repos/hyperledger/composer-tools/issues/121,Update README.md,"fix of spelling error and missing quotes in JSON
+
+Signed-off-by: Aviral Agrawal <aviralagrawal260@gmail.com>",closed,True,2018-04-04 10:20:31,2018-04-04 10:38:58
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/120,https://api.github.com/repos/hyperledger/composer-tools/issues/120,Improve Error Messages to avoid confusion,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-04-03 13:28:49,2018-07-06 08:30:45
+composer-tools,awjh-ibm,https://github.com/hyperledger/composer-tools/pull/119,https://api.github.com/repos/hyperledger/composer-tools/issues/119,Adding licenses,Adding licenses based on scan in: https://github.com/hyperledger/composer/issues/1220,closed,True,2018-04-03 10:59:34,2018-04-05 09:22:42
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/118,https://api.github.com/repos/hyperledger/composer-tools/issues/118,Fix dev servers for v0.19.0,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,closed,True,2018-03-28 18:01:18,2018-03-28 18:16:21
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/117,https://api.github.com/repos/hyperledger/composer-tools/issues/117,Redis readme,,closed,True,2018-03-28 09:41:05,2018-04-25 13:53:21
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/116,https://api.github.com/repos/hyperledger/composer-tools/issues/116,Update README.md,,closed,True,2018-03-28 09:28:30,2018-03-28 09:28:40
+composer-tools,Phaserboo,https://github.com/hyperledger/composer-tools/issues/115,https://api.github.com/repos/hyperledger/composer-tools/issues/115,Align default card name to its related version: hlfv11 for the /scripts/hlfv11/createPeerAdminCard.sh,"createPeerAdminCard.sh under [/fabric-dev-servers/fabric-scripts/hlfv11/](https://github.com/hyperledger/composer-tools/blob/master/packages/fabric-dev-servers/fabric-scripts/hlfv11/createPeerAdminCard.sh) creates a card with name **hlfv1** instead of using a name aligned with its related version **hlfv11**.
+
+Some of the command line reported on the version website should then updated in order to reflect the change and maintain consistency.",closed,False,2018-03-27 15:14:38,2018-08-17 07:17:12
+composer-tools,bestbeforetoday,https://github.com/hyperledger/composer-tools/pull/114,https://api.github.com/repos/hyperledger/composer-tools/issues/114,Change default Fabric version to 1.1,Contributes to hyperledger/composer#3684,closed,True,2018-03-26 10:21:23,2018-04-11 09:46:02
+composer-tools,akshaypython,https://github.com/hyperledger/composer-tools/issues/113,https://api.github.com/repos/hyperledger/composer-tools/issues/113,Catching Error in Node-Red,"Hi,
+
+If composer node is throwing an error like **MVCC_Read_conflict** then it can be seen only on **debug console** in node-red but cannot be captured. If it can be captured then this may be use to re-submit the transaction. 
+
+There may be one solution to this problem. If `node.error(msg)` in composer node-red code can be change to `node.error(""Error"",msg)` Then already available `catch` node in node-red may be used to capture the error and may be transaction can be re-submitted using it.
+
+[https://stackoverflow.com/questions/49453283/node-red-catching-error-node-red-contrib-composer/49454492?noredirect=1#comment85913466_49454492](url)
+
+Please suggest if this can be solution and can be implemented in node-red composer nodes.
+",closed,False,2018-03-24 00:24:34,2018-10-06 11:09:07
+composer-tools,nelsonthamhc,https://github.com/hyperledger/composer-tools/issues/112,https://api.github.com/repos/hyperledger/composer-tools/issues/112,Failed to download local Hyperledger Fabric runtime,"I faced an issue after running the command ""./downloadFabric.sh"".
+
+The error is ""failed to register layer: Error processing tar file(exit status 1): invalid argument.
+
+I am running on windows 10, Ubuntu 16.04.3 LTS Xenial.
+
+Any solution for this? ",closed,False,2018-03-20 10:28:22,2018-03-27 21:49:58
+composer-tools,tanhuiya,https://github.com/hyperledger/composer-tools/issues/111,https://api.github.com/repos/hyperledger/composer-tools/issues/111,A composer-wallet-redis problem,"I follow the guideline .
+
+* Install composer-wallet-redis image and start the container.
+* export NODE_CONFIG={""composer"":{""wallet"":{""type"":""@ampretia/composer-wallet-redis"",""desc"":""Uses  a local redis instance"",""options"":{}}}}
+* composer card import admin@test-network.card
+
+I found the card still store in my local machine at path ~/.composer/card/
+How can I check whether the card exist in the redis server?",closed,False,2018-03-20 03:19:47,2018-03-23 16:51:23
+composer-tools,tanhuiya,https://github.com/hyperledger/composer-tools/issues/110,https://api.github.com/repos/hyperledger/composer-tools/issues/110,download error,">`docker run -it --link composer-wallet-redis:redis --rm redis redis-cli -h redis -p 6379 ` got error as below
+```
+Error response from daemon: could not get container for composer-wallet-redis: No such container: composer-wallet-redis.
+```
+
+>npm install -g composer-waller-redis
+```
+npm ERR! code E404
+npm ERR! 404 Not Found: composer-waller-redis@latest
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/xxx/.npm/_logs/2018-03-20T02_29_18_117Z-debug.log
+```",closed,False,2018-03-20 02:29:54,2018-03-20 02:52:42
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/109,https://api.github.com/repos/hyperledger/composer-tools/issues/109,fabric 1.1 ga,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-03-18 09:46:28,2018-04-03 09:49:39
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/108,https://api.github.com/repos/hyperledger/composer-tools/issues/108,fix check for composer version,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-03-14 08:21:00,2018-03-14 09:06:08
+composer-tools,SteveKeller,https://github.com/hyperledger/composer-tools/issues/107,https://api.github.com/repos/hyperledger/composer-tools/issues/107,Remote connection node-red to hyperledger composer,"I have a node red instance and the hyperledger composer nodes installed on my virtual maschine (vm1).
+On my second virtual maschine (vm2) I have deployed my hyperledger fabric business network with a single organization. I successful completed this tutorial 
+https://hyperledger.github.io/composer/latest/tutorials/deploy-to-fabric-single-org
+
+My fabric and composer services are running correctly. I have checked it with the composer REST API and can create new participants for example.
+
+Now I am trying to connect my node-red to my busines network card ""admin@tutorial-network"" with the node ""hyperledger-composer-out"".
+
+I have found this tutorial to connect node-red with composer. 
+https://hyperledger.github.io/composer/unstable//tutorials/nodered-tutorial
+
+When I try to create a new participant with some JSON Data, then an error message comes: Error: creating resource error Card not found: admin@tutorial-network Wrong Business Network Card specified.
+
+My guess is  that node-red and hyperledger composer has to be on the same vm, so the network card can be found. It this correct?
+
+How can node-red connect to composer without the REST API?
+
+Is there any connection.json file available to specify my connection data to my hyperledger composer for the nodes in node-red?
+
+something like this in the example of the fabric-dev-servers tools:
+
+`{
+    ""type"": ""hlfv1"",
+    ""orderers"": [
+       { ""url"" : ""grpc://localhost:7050"" }
+    ],
+    ""ca"": { ""url"": ""http://localhost:7054"", 
+            ""name"": ""ca.org1.example.com""
+    },
+    ""peers"": [
+        {
+            ""requestURL"": ""grpc://localhost:7051"",
+            ""eventURL"": ""grpc://localhost:7053""
+        }
+    ],
+    ""keyValStore"": ""${HOME}/.composer-credentials"",
+    ""channel"": ""composerchannel"",
+    ""mspID"": ""Org1MSP"",
+    ""timeout"": ""300""
+}`
+
+
+or is the only working alternativeto connect node-red remotly with hyperledger over the REST-API?
+
+Thanks for any answer!",closed,False,2018-03-09 20:56:50,2018-09-23 07:35:34
+composer-tools,EllisHenderson,https://github.com/hyperledger/composer-tools/pull/106,https://api.github.com/repos/hyperledger/composer-tools/issues/106,Changes to the hlfv1 to use composer-cli,"Updates the createPeerAdminCard script for hlfv1 to use composer-cli to check for version.
+
+Fixes issue #105 ",closed,True,2018-03-07 15:28:03,2018-03-09 09:16:42
+composer-tools,EllisHenderson,https://github.com/hyperledger/composer-tools/issues/105,https://api.github.com/repos/hyperledger/composer-tools/issues/105,Hflv1  createPeerAdminCard script doesn't use composer-cli to check version,The hlfv1 createPeerAdminCard script hasn't been updated to check composer-cli for a version number.,closed,False,2018-03-07 15:25:46,2018-03-09 09:22:08
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/104,https://api.github.com/repos/hyperledger/composer-tools/issues/104,Upgrade to Hyperledger Fabric v1.1-rc1,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,closed,True,2018-03-02 11:41:12,2018-03-02 15:02:12
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/103,https://api.github.com/repos/hyperledger/composer-tools/issues/103,Incorrect use of node6 prevented npm publish,"- Updated to use the correct version of node on publish
+- Made correction found by https://github.com/lgfa29 
+- Updated the readme to reflect the changes made
+
+@nklincoln if you could take a look when you get a moment please... ",closed,True,2018-03-01 17:32:00,2018-03-02 10:30:59
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/102,https://api.github.com/repos/hyperledger/composer-tools/issues/102,Pulls in the @ampretia/composer-wallet-redis into composer-tools,,closed,True,2018-03-01 15:48:25,2018-03-01 16:39:58
+composer-tools,vstoykov,https://github.com/hyperledger/composer-tools/issues/101,https://api.github.com/repos/hyperledger/composer-tools/issues/101,Permission problems under Fedora27 with SELinux enabled,"When I'm following the tutorial:
+
+ - https://hyperledger.github.io/composer/installing/development-tools.html
+ - https://hyperledger.github.io/composer/tutorials/developer-tutorial.html
+
+I have problems if SELinux is enabled (it's enabled by default on Fedora). As a workaround I can disable SELinux (`setenforce 0`) temporary during development with composer but this is not good.
+
+I tried to see if changing the mount options in `docker-composer.yml` file by adding `:z` can help with that problem (https://www.projectatomic.io/blog/2015/06/using-volumes-with-docker-can-cause-problems-with-selinux/) but I have mixed success.
+
+When I execute:
+```
+./startFabric.sh
+./createPeerAdminCard.sh
+```
+now works but after some time my machine become unresponsive and need to reboot.
+
+I'll continue to experiment and see if I can make it work without disabling SELinux.",closed,False,2018-02-14 10:24:22,2018-11-17 09:24:13
+composer-tools,bestbeforetoday,https://github.com/hyperledger/composer-tools/pull/100,https://api.github.com/repos/hyperledger/composer-tools/issues/100,Build tgz and zip files on `npm install`,Resolves hyperledger/composer#3375,closed,True,2018-02-09 11:14:02,2018-02-09 11:35:01
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/99,https://api.github.com/repos/hyperledger/composer-tools/issues/99,Rebuild fabric-dev-servers packages correctly,"Add new fabric-dev-servers packages built using `npm run build-archives`.
+Resolves: https://github.com/hyperledger/composer-tools/issues/98
+
+Signed-off-by: Simon Stone <sstone1@uk.ibm.com>",closed,True,2018-02-09 10:33:22,2018-02-09 10:58:47
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/issues/98,https://api.github.com/repos/hyperledger/composer-tools/issues/98,fabric-dev-servers package is huge,Contains lots of junk because it was not built using `npm run build-archives`.,closed,False,2018-02-09 10:30:43,2018-02-09 10:58:44
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/pull/97,https://api.github.com/repos/hyperledger/composer-tools/issues/97,Issue66 validate profile,I'll leave this hanging here for now in case anyone wants the standalone version,closed,True,2018-02-08 17:12:14,2018-02-21 10:50:09
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/issues/96,https://api.github.com/repos/hyperledger/composer-tools/issues/96,protobuf module shouldn't use carets in package.json,It can cause unwanted updates to modules that haven't been verified.,closed,False,2018-02-08 15:08:30,2018-09-22 09:50:10
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/issues/95,https://api.github.com/repos/hyperledger/composer-tools/issues/95,Standalone connection profile validator,"As a user, it would be nice to have a standalone tool that can report errors in my connection profile rather than my needing to go through the card import process to see if it's valid.
+
+It could also be useful to be able to validate connection profiles for fabric as well as composer too.
+
+Please add a comment if you think this would be useful.",closed,False,2018-02-08 11:26:44,2018-11-17 09:24:14
+composer-tools,bestbeforetoday,https://github.com/hyperledger/composer-tools/pull/94,https://api.github.com/repos/hyperledger/composer-tools/issues/94,Fix option to remove images in teardownAllDocker.sh script,Resolves hyperledger/composer#3295,closed,True,2018-02-01 14:07:40,2018-02-02 11:39:26
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/93,https://api.github.com/repos/hyperledger/composer-tools/issues/93,Upgrade to 1.1-alpha - DO NOT MERGE UNTIL COMPOSER 0.17.3 ready to test,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-01-29 12:41:02,2018-02-01 08:52:50
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/92,https://api.github.com/repos/hyperledger/composer-tools/issues/92,backout upgrade to alpha.,"Published composer isn’t ready for it yet.
+
+Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>",closed,True,2018-01-29 12:22:01,2018-01-29 12:33:06
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/91,https://api.github.com/repos/hyperledger/composer-tools/issues/91,Update to 1.1 alpha,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2018-01-28 15:11:55,2018-03-16 08:23:13
+composer-tools,Karl-Keller,https://github.com/hyperledger/composer-tools/issues/90,https://api.github.com/repos/hyperledger/composer-tools/issues/90,Error: creating resource error Card not found,"Using node-red (local) version 0.17.5 with playground composer (local) version 0.2.0.  After adding node-red-contrib composer version 0.0.1 via the palette, I added a composer node with 'composer card' = test@my-hello-world.  Added an injector node and at execution node-red threw the ""card not found"" error.  Inspecting the ~/.composer/cards directory  showed no business net files (?).  After reading doc's, created the connection.json and metadata.json files and zipped them into a test@my-hello-world.zip.  Still getting the error above.  Where is node-red looking for card files?",closed,False,2018-01-22 22:44:20,2018-10-06 11:09:06
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/pull/89,https://api.github.com/repos/hyperledger/composer-tools/issues/89,Fix minor issues,fix minor issues raised by @mahoney1 ,closed,True,2018-01-16 17:38:05,2018-01-17 11:20:33
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/issues/88,https://api.github.com/repos/hyperledger/composer-tools/issues/88,Add feedback into data gathering script,"1. line 65 should read 'The current version of Docker Compose'
+
+2. line 59 - might we add a '`which composer (or equivalent)` because there is another 'Composer' ""out there"" and finding out the path would be good. ",closed,False,2018-01-16 17:33:57,2018-02-08 11:22:30
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/pull/87,https://api.github.com/repos/hyperledger/composer-tools/issues/87,Update README.md with correct URL,Update README.md with correct URL,closed,True,2018-01-15 11:19:12,2018-01-15 11:42:09
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/issues/86,https://api.github.com/repos/hyperledger/composer-tools/issues/86,Fix URL in readme for data collection tool,The URL should use the raw github content link: https://raw.githubusercontent.com/hyperledger/composer-tools/master/scripts/data-collection/gatherData.sh,closed,False,2018-01-15 11:02:31,2018-01-16 17:32:53
+composer-tools,samjsmith,https://github.com/hyperledger/composer-tools/pull/85,https://api.github.com/repos/hyperledger/composer-tools/issues/85,Add a data collection shell script,"Just a simple shell script to collect data about a user's environment and dump it out into a compressed tar file in the /tmp directory
+
+Signed-off-by: Sam Smith <smithsj@uk.ibm.com>",closed,True,2018-01-11 16:44:31,2018-01-15 10:55:32
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/84,https://api.github.com/repos/hyperledger/composer-tools/issues/84,CCP Support,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-12-19 22:35:54,2018-01-28 13:46:59
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/83,https://api.github.com/repos/hyperledger/composer-tools/issues/83,should not delete existing card if doing noimport,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-12-07 14:21:01,2017-12-15 10:10:03
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/82,https://api.github.com/repos/hyperledger/composer-tools/issues/82,Add devmode support to dev servers for v11,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-12-03 20:09:51,2017-12-15 10:10:11
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/81,https://api.github.com/repos/hyperledger/composer-tools/issues/81,update to 0.16.0 of composer,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-11-28 17:29:06,2017-11-28 21:30:32
+composer-tools,mwittig,https://github.com/hyperledger/composer-tools/issues/80,https://api.github.com/repos/hyperledger/composer-tools/issues/80,Add Contribution Guidelines / Clarify need for DCO sign-off,"As there is an automatic check for DCO sign-off in commit messages as part of an pull request there should be note on contribution guidelines for this. As far as I can see, a reference to the guidelines contained in the main [composer project](https://github.com/hyperledger/composer/blob/master/CONTRIBUTING.md) should be good enough. However, what puzzles me is, that these guidelines do not contain the requirement for a ""DCO sign-off"". Maybe I have overlooked something?! Please advise.",closed,False,2017-11-28 15:41:18,2017-12-20 08:16:53
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/79,https://api.github.com/repos/hyperledger/composer-tools/issues/79,Add 1.1 tech preview to fabric dev servers,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-11-28 13:44:49,2017-11-28 21:30:40
+composer-tools,mwittig,https://github.com/hyperledger/composer-tools/pull/78,https://api.github.com/repos/hyperledger/composer-tools/issues/78,"Get All/Resolve All Feature for Retrieve Action, issue #76",See issue #76 ,closed,True,2017-11-28 13:11:24,2018-04-24 13:32:56
+composer-tools,mwittig,https://github.com/hyperledger/composer-tools/issues/77,https://api.github.com/repos/hyperledger/composer-tools/issues/77,"[node-red-contrib-composer] Error when installing plugin using ""Manage Palette""","When I try to install the plugin using the ""Manage Palette"" feature of node-red the installation fails with a general error: ""Error: stderr maxBuffer exceeded"". The work-around for me was to install the plugin from the command inside the `.node-red` user settings. 
+
+Note beyond, I am able to install other plugins via ""Manage Palette"" without problems. So, I don't think it is a general issue with my setup or the way I am using node-red.
+
+Here is how to reproduce the issue:
+
+* Install hyperledger as described in the [development guide](https://hyperledger.github.io/composer/installing/development-tools.html) - I am using Ubuntu LTS 16.04.3 (64-bit) and Node.js 8.9.1
+* Allow unprivileged users for installing global npm packages  (this one is missing in the development guide, btw!) - I used [npm-g_nosudo](https://github.com/glenpike/npm-g_nosudo) for the setup
+* Install node-red - Execute `npm install -g node-red` as  unprivileged user (no need for `--unsafe-perm` at this point)
+* Start node-red - Execute `node-red` on the command line with the user account used to run hyperledger composer and fabric
+* Try to install the plugin using ""Manage Palette""
+
+EDIT: Meanwhile, I have read the contribution guidelines of the main composer project. My understanding is that general support question should be asked on stack overflow or rocket chat first [which I have done now](https://stackoverflow.com/questions/47547554/q-error-when-installing-node-red-contrib-composer-using-manage-palette-feat). Do you want me to close the issue for now?",closed,False,2017-11-27 16:56:32,2018-01-28 19:09:30
+composer-tools,mwittig,https://github.com/hyperledger/composer-tools/issues/76,https://api.github.com/repos/hyperledger/composer-tools/issues/76,[node-red-contrib-composer] Add Get All /Resolve All feature as part of Retrieve action,"Using the ""retrieve"" action only allows for retrieving a single object instance of a given class and id. However, it would be nice to be able to retrieve _all instances of a given class_, as it is not (yet) possible to perform queries as part of the plugin. The client registry, i.e. the asset and participant registries, provide a method `getAll` and `resolveAll` to facilitate this.  
+
+If you consider my feature request, I am happy to contribute on this. Please see my initial implementation which does a getAll / resolveAll if the ""id""  is left empty as part of the node configuration.
+https://github.com/hyperledger/composer-tools/compare/1b3e15f...mwittig:master
+
+Please let me know what you think.",closed,False,2017-11-27 16:27:20,2018-09-24 16:20:05
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/75,https://api.github.com/repos/hyperledger/composer-tools/issues/75,Make Node Red Nodes Use Cards,"Updated to use cards
+Updated version of composer to 0.15
+
+contributes to hyperledger/composer-tools#74
+
+Signed-off-by: Caroline Church <caroline.church@uk.ibm.com>",closed,True,2017-11-14 10:43:04,2017-11-14 11:51:50
+composer-tools,DennisM330,https://github.com/hyperledger/composer-tools/issues/74,https://api.github.com/repos/hyperledger/composer-tools/issues/74,Node-Red Test with New Identity Card support,"Trying to test with hyperledger composer 0.15 with the new Identity Card support in 0.15. I have been unsuccessful with authorization errors in Node-Red. Does Node-Red only supported the deprecated Composer Connection Profiles at the moment? I did run the script in fabric-tools to create a connection profile, but it seems the node-red-contrib-composer nodes cannot connect to the business network.",closed,False,2017-11-13 16:49:51,2017-11-27 09:34:17
+composer-tools,EllisHenderson,https://github.com/hyperledger/composer-tools/pull/73,https://api.github.com/repos/hyperledger/composer-tools/issues/73,Start fabric changes,Updated zip file to include start fabric script changes. ,closed,True,2017-11-13 15:03:36,2017-11-13 18:37:21
+composer-tools,EllisHenderson,https://github.com/hyperledger/composer-tools/pull/72,https://api.github.com/repos/hyperledger/composer-tools/issues/72,Removed directory changes within startFabric.sh,Signed-off-by: Ellis Henderson <ellis.henderson@ibm.com>,closed,True,2017-11-13 13:20:36,2017-11-13 14:56:00
+composer-tools,EllisHenderson,https://github.com/hyperledger/composer-tools/issues/71,https://api.github.com/repos/hyperledger/composer-tools/issues/71,startFabric script changes directories and to run successfully is dependant on where you run it from,,closed,False,2017-11-13 13:13:16,2017-11-13 18:37:36
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/issues/70,https://api.github.com/repos/hyperledger/composer-tools/issues/70,Readme for composer-tools devserver is out of date,This should add in information about createPeerAdminCard.sh and the fact that you use this for 0.15.0 and createComposerProfile.sh for versions prior to that.,closed,False,2017-11-10 10:55:01,2017-11-29 13:24:23
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/69,https://api.github.com/repos/hyperledger/composer-tools/issues/69,Business network card should be a channel admin,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,closed,True,2017-11-08 21:32:51,2017-11-09 00:45:40
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/68,https://api.github.com/repos/hyperledger/composer-tools/issues/68,Delete existing business network card if required,Signed-off-by: Simon Stone <sstone1@uk.ibm.com>,closed,True,2017-11-08 20:56:11,2017-11-08 21:21:54
+composer-tools,bestbeforetoday,https://github.com/hyperledger/composer-tools/pull/67,https://api.github.com/repos/hyperledger/composer-tools/issues/67,Add keyValStore to connection profile in PeerAdmin card,"Resolves hyperledger/composer#2605
+
+This is for (temporary) compatibility with Playground since it does not (yet)
+use the new card-based AdminConnection and BusinessNetworkConnection connect API,
+and so needs to have a keyValStore property for the hlfv1 connector to work.
+Using the new card-based API, this property will be ignored, so is safe either way.",closed,True,2017-11-08 15:37:39,2018-04-11 09:46:04
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/66,https://api.github.com/repos/hyperledger/composer-tools/issues/66,Peeradmin create fix,"The composer card create command option for the connection profile is wrong.
+
+",closed,True,2017-11-07 16:26:01,2017-11-07 17:22:46
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/65,https://api.github.com/repos/hyperledger/composer-tools/issues/65,Upgrade dev server to 1.0.4,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-11-06 11:42:22,2017-11-06 14:29:55
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/64,https://api.github.com/repos/hyperledger/composer-tools/issues/64,Helper for admin cards,"I've added a new script called createPeerAdminCard.sh. This can be run in the same manner as any of the scripts such as startFabric.sh
+
+This though needs to use the composer-cli and there is a version check for this at the start. Also it uses jq that is a central part of ubuntu. (aside if thisisn't available then we just keep a copy of the certificate available)
+
+This will create a peer admin card, and import it.
+
+Therefore the typicaly dev flow would be
+
+
+$ unzip fabric-dev-servers.zip
+$ ./fabric-dev-servers/startFabric.sh
+$ ./fabric-dev-servers/createPeerAdminCard.sh
+$ composer network deploy --archiveFile ./packages/block-game-network/dist/bgn.bna --card PeerAdmin@hlfv1 -A admin -S 
+$ composer card create -n block-game --file ./_cards/admin.card -j ~/.composer-connection-profiles/hlfv1/connection.json -u admin -s adminpw
+$ composer card import --file ./_cards/admin.card 
+$ composer card list        
+$ composer network list --card admin@block-game
+
+Resolves #2484",closed,True,2017-11-06 09:47:43,2017-11-06 15:23:32
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/63,https://api.github.com/repos/hyperledger/composer-tools/issues/63,Upgrade dev server to HLF 1.0.3,"https://github.com/hyperledger/composer-tools/issues/62
+Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>",closed,True,2017-10-28 09:47:21,2017-11-06 14:29:48
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/issues/62,https://api.github.com/repos/hyperledger/composer-tools/issues/62,Move to HLF 1.0.3 for dev server,,closed,False,2017-10-27 17:27:40,2017-11-06 18:09:47
+composer-tools,chevdor,https://github.com/hyperledger/composer-tools/pull/61,https://api.github.com/repos/hyperledger/composer-tools/issues/61,Switch the doc to ASCIIDOC ,"There are many benefits for using Asciidoc over Markdown.
+It is very similar to Markdown but allows using includes for instance.
+
+This makes it easier to manage and easier to read for the users.
+
+Github unfortunately does not render the includes yet but you can check it out when rendering the files locally in your browser using https://chrome.google.com/webstore/detail/asciidoctorjs-live-previe/iaalpfgpbocpdfblpnhhgllgbdbchmia ",closed,True,2017-10-17 16:03:12,2018-01-28 20:17:50
+composer-tools,nklincoln,https://github.com/hyperledger/composer-tools/pull/60,https://api.github.com/repos/hyperledger/composer-tools/issues/60,version bump through tools,"Updated all packages prior to release
+
+Signed-off-by: Nick Lincoln <nkl199@yahoo.co.uk>",closed,True,2017-10-12 18:21:53,2017-10-12 18:31:56
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/59,https://api.github.com/repos/hyperledger/composer-tools/issues/59,update node red to latest composer,Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>,closed,True,2017-10-12 17:55:15,2017-11-28 21:30:53
+composer-tools,nklincoln,https://github.com/hyperledger/composer-tools/pull/58,https://api.github.com/repos/hyperledger/composer-tools/issues/58,bump node red,"upped to v0.14.0
+
+Signed-off-by: Nick Lincoln nick.lincoln@uk.ibm.com",closed,True,2017-10-12 17:51:46,2017-10-12 18:10:00
+composer-tools,ryjones,https://github.com/hyperledger/composer-tools/pull/57,https://api.github.com/repos/hyperledger/composer-tools/issues/57,Create DCO,DO NOT MERGE,closed,True,2017-10-03 21:28:02,2017-10-03 21:36:09
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/56,https://api.github.com/repos/hyperledger/composer-tools/issues/56,Update Composer Version,update composer version to 0.13,closed,True,2017-09-21 17:32:28,2017-09-21 17:42:07
+composer-tools,bimbost,https://github.com/hyperledger/composer-tools/issues/55,https://api.github.com/repos/hyperledger/composer-tools/issues/55,Node-Red Hyperledger query instruction,"Hi,
+
+Is it possible to execute a query instruction using the node-red-contrib-composer?",closed,False,2017-09-21 09:04:01,2017-11-27 09:36:27
+composer-tools,tkuhrt,https://github.com/hyperledger/composer-tools/pull/54,https://api.github.com/repos/hyperledger/composer-tools/issues/54,Correct typo in _loader.sh,Hyperledger spelled wrong in _loader.sh,closed,True,2017-09-16 00:24:48,2017-09-16 08:16:06
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/53,https://api.github.com/repos/hyperledger/composer-tools/issues/53,update node-red nodes,"Improve error handling
+Enable mid flow node to be able to create, update, and delete
+Resolve relationships on retrieve",closed,True,2017-09-11 08:29:32,2017-09-11 10:32:14
+composer-tools,ahmadsayed,https://github.com/hyperledger/composer-tools/pull/52,https://api.github.com/repos/hyperledger/composer-tools/issues/52,make configuration in separate node,"Hi All, 
+
+I made the small modification, in node-red-contrib-composer, in the configuration part, to avoid repeating entering configuration for each node, I hope it will be useful to be shared with the main stream 
+
+![image](https://user-images.githubusercontent.com/8686508/30007676-14b71ed8-911d-11e7-93bf-aa3076e622af.png)
+
+
+![image](https://user-images.githubusercontent.com/8686508/30007670-0004cb0c-911d-11e7-94ab-7116123687b1.png)
+
+",closed,True,2017-09-04 00:00:17,2017-09-07 20:16:54
+composer-tools,harsha544,https://github.com/hyperledger/composer-tools/pull/51,https://api.github.com/repos/hyperledger/composer-tools/issues/51,Enable Composer on ppc64le and s390x  ,"This PR is aimed to address #50 via the following changes :- 
+
+1) Tweaked  *.sh files under composer-tools/packages/fabric-dev-servers/fabric-scripts/hlfv1/ to download architecture specific docker images.
+
+2) Update docker-compose.yml to make use ""$ARCH"" variable.
+
+3) Update fabric-dev-servers.tar.gz` and `fabric-dev-servers.zip` to include top level files.
+
+Signed-off-by: Krishna Harsha Voora <krishvoor@in.ibm.com>",closed,True,2017-09-01 17:18:12,2017-09-05 08:46:33
+composer-tools,harsha544,https://github.com/hyperledger/composer-tools/issues/50,https://api.github.com/repos/hyperledger/composer-tools/issues/50,Enable Composer on ppc64le/s390x arch,,closed,False,2017-09-01 17:07:41,2017-09-05 15:22:45
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/49,https://api.github.com/repos/hyperledger/composer-tools/issues/49,Upgrade to Hyperledger Fabric v1.0.1,This pull request upgrades the artifacts to 1.0.1.,closed,True,2017-08-21 07:55:10,2017-11-06 14:43:19
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/48,https://api.github.com/repos/hyperledger/composer-tools/issues/48,Upgrade Dev Server to fabric 1.0.1,"Requires a new genesis block and create channel transaction as well.
+
+Signed-off-by: Dave Kelsey <d_kelsey@uk.ibm.com>",closed,True,2017-08-20 20:01:20,2017-08-20 20:16:09
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/47,https://api.github.com/repos/hyperledger/composer-tools/issues/47,Remove HLFv0.6 from fabric-dev-servers,"https://github.com/hyperledger/composer/issues/1535
+
+Remove the HLFv0.6 configuration and files from the fabric-dev-servers package.
+@davidkel informs me it wasn't working anyway, and we're removing all code related to Hyperledger Fabric v0.6 support.",closed,True,2017-08-19 18:09:28,2017-08-21 07:51:48
+composer-tools,mahoney1,https://github.com/hyperledger/composer-tools/issues/46,https://api.github.com/repos/hyperledger/composer-tools/issues/46,Deprecate the npm module 'node-red-contrib-hyperledger-composer' no longer used,"Some confusion for Composer users about which node-red module to use.  At the time of writing, there are two sets of nodes out there: `node-red-contrib-hyperledger-composer` (old) and `node-red-contrib-composer` (correct and valid).  So Composer users should be using are `node-red-contrib-composer` only. As (apparently) you cannot 'unpublish' the module on https://www.npmjs.com/,  it should be deprecated instead.",closed,False,2017-08-08 09:15:14,2018-10-06 11:09:05
+composer-tools,liam-grace,https://github.com/hyperledger/composer-tools/pull/45,https://api.github.com/repos/hyperledger/composer-tools/issues/45,Bump version for unstable build,,closed,True,2017-07-19 13:12:50,2017-07-19 13:38:16
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/issues/44,https://api.github.com/repos/hyperledger/composer-tools/issues/44,fabric-dev-servers v0.6 fabric doesn't work anymore,"Looks like Hyperledger fabric have deleted the fabric-peer latest tag from the repository. A workaround for now is to
+- in the directory where the fabric dev server was installed to
+- change to the directory `fabric-scripts/hlfv0.6`
+- edit the `docker-compose.yml` as follows
+
+Original
+```
+vp0:
+  image: hyperledger/fabric-peer
+```
+Change to
+```
+vp0:
+  image: hyperledger/fabric-peer:x86_64-0.6.1-preview
+```
+save the file, return to the directory where the server was install to and run startFabric.sh ",closed,False,2017-07-19 10:37:20,2017-10-12 19:49:54
+composer-tools,lg1986,https://github.com/hyperledger/composer-tools/issues/43,https://api.github.com/repos/hyperledger/composer-tools/issues/43,Downloading issues,"I am unable to download the node-red-contrib-composer palette on Node Red on Bluemix and locally. In the debug console, I receive this: 
+
+![image 120071bd2bf4db7](https://user-images.githubusercontent.com/25303901/28127615-cc95667c-66f2-11e7-9ce7-5bdeb3c0ba9d.jpg)
+
+I have downloaded xCode and am still unable to use the nodes. Any assistance on what is wrong & how to fix would be very appreciated! ",closed,False,2017-07-12 16:11:43,2018-10-06 11:09:03
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/42,https://api.github.com/repos/hyperledger/composer-tools/issues/42,Move to Hyperledger Fabric v1.0.0 (dev server),,closed,True,2017-07-11 17:36:16,2017-07-11 19:23:47
+composer-tools,DennisM330,https://github.com/hyperledger/composer-tools/issues/41,https://api.github.com/repos/hyperledger/composer-tools/issues/41,Add query support,"Now that we have queries in hyperledger composer, it would be nice to add the ability to execute a query as well.
+--
+
+
+",closed,False,2017-07-11 16:56:26,2018-10-06 11:09:04
+composer-tools,DennisM330,https://github.com/hyperledger/composer-tools/issues/40,https://api.github.com/repos/hyperledger/composer-tools/issues/40,Events error with Hyperledger Composer 0.9.1 and Hyperledger Fabric rc1,"Using hyperledger composer v0.9.1 and and hyperledger rc1, I get everything to work except for listening to event. I can successfully submit trans, create/query assets and participants. I see an error ""The event hub has not been connected to the event source"". I can see my event successfully emitted in the Docker Logs for the chaincode peer.",closed,False,2017-07-11 16:55:34,2018-06-02 16:47:33
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/39,https://api.github.com/repos/hyperledger/composer-tools/issues/39,Change key val store,,closed,True,2017-07-05 16:32:34,2017-07-05 16:50:17
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/38,https://api.github.com/repos/hyperledger/composer-tools/issues/38,Rc1 server,Merge when ready to do 0.9.1 release,closed,True,2017-07-03 11:41:23,2017-07-05 15:47:46
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/37,https://api.github.com/repos/hyperledger/composer-tools/issues/37,Enable Delete,updated to allow resource to be deleted by the output node,closed,True,2017-06-19 12:08:05,2017-06-19 13:22:07
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/issues/36,https://api.github.com/repos/hyperledger/composer-tools/issues/36,dev fabric server could check docker and docker compose versions,,closed,False,2017-06-16 18:51:16,2017-11-11 08:15:17
+composer-tools,dwakeman,https://github.com/hyperledger/composer-tools/issues/35,https://api.github.com/repos/hyperledger/composer-tools/issues/35,As a user of the composer nodes for node red I want to be able to use them with node red on Bluemix,"I have got the nodes installed locally, and I have gotten them all to work.  My understanding is that when the nodes try to establish a connection to the specified business network the code looks for the connection profile on the local file system.  With a regular node.js app I can use the COMPOSER_CONFIG environment variable rather than the local file system, but that doesn't seem to be possible with the current node-red nodes.  Also, I don't know how I would specify a valid (existing) location for KeyValStore with a node red application on Bluemix.",closed,False,2017-06-15 14:49:22,2018-11-20 23:27:01
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/34,https://api.github.com/repos/hyperledger/composer-tools/issues/34,corrected the urls and some wording,,closed,True,2017-06-15 11:54:12,2017-06-15 12:07:10
+composer-tools,davidkel,https://github.com/hyperledger/composer-tools/pull/33,https://api.github.com/repos/hyperledger/composer-tools/issues/33,Move dev servers to using fabric beta,,closed,True,2017-06-14 07:12:02,2017-07-03 11:40:53
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/32,https://api.github.com/repos/hyperledger/composer-tools/issues/32,Defect cleverer docker stop,,closed,True,2017-06-08 20:39:10,2017-06-08 20:48:01
+composer-tools,rjones-lf,https://github.com/hyperledger/composer-tools/pull/31,https://api.github.com/repos/hyperledger/composer-tools/issues/31,Create dco,,closed,True,2017-06-05 21:38:47,2017-06-05 21:40:59
+composer-tools,Jakeeyturner,https://github.com/hyperledger/composer-tools/pull/30,https://api.github.com/repos/hyperledger/composer-tools/issues/30,Deserialize received event resources,,closed,True,2017-06-05 13:46:36,2017-06-05 14:06:59
+composer-tools,rjones-lf,https://github.com/hyperledger/composer-tools/pull/29,https://api.github.com/repos/hyperledger/composer-tools/issues/29,Create dcobot,,closed,True,2017-06-02 21:32:15,2017-06-02 21:33:36
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/28,https://api.github.com/repos/hyperledger/composer-tools/issues/28,Fix SSH push,,closed,True,2017-06-01 21:19:30,2017-06-01 21:35:11
+composer-tools,fabric-composer-app,https://github.com/hyperledger/composer-tools/pull/27,https://api.github.com/repos/hyperledger/composer-tools/issues/27,Upgrade to lerna 2.0.0-rc.4,,closed,True,2017-06-01 21:06:22,2017-06-01 21:16:54
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/26,https://api.github.com/repos/hyperledger/composer-tools/issues/26,Disable broken gh-pages push,,closed,True,2017-06-01 20:24:23,2017-06-01 20:31:21
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/25,https://api.github.com/repos/hyperledger/composer-tools/issues/25,Bump to v0.0.1,,closed,True,2017-06-01 19:47:07,2017-06-01 20:09:00
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/24,https://api.github.com/repos/hyperledger/composer-tools/issues/24,"Update the README.md, and stop npm publishing. ","Updating the readme to moved git merge tags, reference all the repos.
+Stop the NPM publishing.
+
+/cc @caroline-church ",closed,True,2017-06-01 13:21:28,2017-06-01 13:49:06
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/23,https://api.github.com/repos/hyperledger/composer-tools/issues/23,Update Name,updated the name to remove hyperledger to make the name shorter,closed,True,2017-06-01 08:59:09,2017-06-01 09:52:46
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/22,https://api.github.com/repos/hyperledger/composer-tools/issues/22,Force use of npm 4 and avoid npm 5,,closed,True,2017-05-31 22:05:35,2017-05-31 22:12:42
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/21,https://api.github.com/repos/hyperledger/composer-tools/issues/21,Update the tools archives..,,closed,True,2017-05-31 13:08:59,2017-05-31 13:09:39
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/20,https://api.github.com/repos/hyperledger/composer-tools/issues/20,Remove the nodejs dependancy,removing the nodejs dependancy,closed,True,2017-05-31 08:51:52,2017-05-31 08:52:03
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/19,https://api.github.com/repos/hyperledger/composer-tools/issues/19,Update archive files,,closed,True,2017-05-30 16:59:10,2017-05-30 16:59:17
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/18,https://api.github.com/repos/hyperledger/composer-tools/issues/18,Merge in the fabric-dev-tools into lerna structure,"Merge the fabric-dev-tools into the lerna structure.
+Also added the timeout variable.",closed,True,2017-05-30 15:34:44,2017-05-30 15:48:19
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/17,https://api.github.com/repos/hyperledger/composer-tools/issues/17,Publish Node Red Nodes,Update build to publish node red nodes,closed,True,2017-05-30 11:18:12,2017-05-30 12:41:29
+composer-tools,cazfletch,https://github.com/hyperledger/composer-tools/pull/16,https://api.github.com/repos/hyperledger/composer-tools/issues/16,Node Red Nodes,Added node red nodes,closed,True,2017-05-30 09:47:56,2017-05-30 11:02:38
+composer-tools,mbwhite,https://github.com/hyperledger/composer-tools/pull/15,https://api.github.com/repos/hyperledger/composer-tools/issues/15,Update the composer tools to include the new approach to creating Fabric instances,Pull in the new script to create fabric instances. ,closed,True,2017-05-25 10:37:49,2017-05-25 10:38:45
+composer-tools,nklincoln,https://github.com/hyperledger/composer-tools/pull/14,https://api.github.com/repos/hyperledger/composer-tools/issues/14,naming changes,"Composer tools aspect of #835 within Hyperledger-Composer repro
+
+## Design of the fix
+Ensure correct naming through readme files
+
+## Validation of the fix
+inspection of output documentation",closed,True,2017-05-05 10:30:54,2017-05-05 10:31:04
+composer-tools,sstone1,https://github.com/hyperledger/composer-tools/pull/13,https://api.github.com/repos/hyperledger/composer-tools/issues/13,Empty commit to force build,,closed,True,2017-04-19 09:33:43,2017-04-28 19:19:45
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/12,https://api.github.com/repos/hyperledger/composer-tools/issues/12,add two missing files,,closed,True,2017-03-10 11:43:13,2017-03-10 11:43:28
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/11,https://api.github.com/repos/hyperledger/composer-tools/issues/11,fix the prerequist of node installation,,closed,True,2017-03-09 10:57:26,2017-03-09 10:57:38
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/10,https://api.github.com/repos/hyperledger/composer-tools/issues/10,remove the VScode plugin from the tools as it needs to be under the r…,…oot of a git repository,closed,True,2017-03-08 17:14:38,2017-03-08 17:14:52
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/9,https://api.github.com/repos/hyperledger/composer-tools/issues/9,update package name for client and server,,closed,True,2017-03-02 16:32:58,2017-03-02 16:33:04
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/8,https://api.github.com/repos/hyperledger/composer-tools/issues/8,remove the composer-atom-plugin project,,closed,True,2017-03-02 15:43:10,2017-03-02 15:43:17
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/7,https://api.github.com/repos/hyperledger/composer-tools/issues/7,change the package name to be composer-atom-plugin,,closed,True,2017-02-24 12:37:31,2017-02-24 12:37:38
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/6,https://api.github.com/repos/hyperledger/composer-tools/issues/6,update atom plugin package,,closed,True,2017-02-23 22:14:09,2017-02-23 22:14:30
+composer-tools,m-g-k,https://github.com/hyperledger/composer-tools/pull/5,https://api.github.com/repos/hyperledger/composer-tools/issues/5,Correct syntaxes filename,"Hi @dselman , file name is incorrect in master - needs updating to match Package.json. Also updating git control so local package step works",closed,True,2017-02-23 15:51:27,2017-02-27 12:42:46
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/4,https://api.github.com/repos/hyperledger/composer-tools/issues/4,update atom and vscode repository,update #3 ,closed,True,2017-02-22 17:29:45,2017-02-22 17:30:24
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/3,https://api.github.com/repos/hyperledger/composer-tools/issues/3,Add the VScode plugin to the fabric-composer/tools repository,,closed,True,2017-02-22 14:07:10,2017-02-22 14:07:53
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/issues/2,https://api.github.com/repos/hyperledger/composer-tools/issues/2,As an user I want to build and publish the Atom Plugin to atom tool for Fabric composer developers. ,This story covers build and publish tasks for the Atom plugin source code so that Fabric composer developers can install it from Atom catalog. ,closed,False,2017-02-17 15:24:41,2017-02-20 10:19:38
+composer-tools,fenglianxu,https://github.com/hyperledger/composer-tools/pull/1,https://api.github.com/repos/hyperledger/composer-tools/issues/1,add atom plugin to the tools,add initial atom plugin code,closed,True,2017-02-17 14:44:25,2017-02-17 14:46:28

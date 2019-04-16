@@ -1,0 +1,704 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,"This does not match the old signature, (which was very wrong).  The deprecated method perhaps could maintain the old version.",fb66ff5e729210ae7311b920465475748103e1a9,2019-02-28 20:07:37,261363016,"@@ -193,21 +194,65 @@ pub trait TransactionContext {
+         note = ""please use `set_state_entry` or `set_state_entries` instead""
+     )]
+     /// set_state requests that each address in the provided map be
++    /// set in validator state to its corresponding value. set_state is deprecated, please use
++    /// set_state_entry to set_state_entries instead
++    ///
++    /// # Arguments
++    ///
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
++        self.set_state_entries(entries)
++    }
++
++    /// set_state_entry requests that the provided address is set in the validator state to its
++    /// corresponding value.
++    ///
++    /// # Arguments
++    ///
++    /// * `address` - address of where to store the data
++    /// * `data` - payload is the data to store at the address
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;
++
++    /// set_state_entries requests that each address in the provided map be
+     /// set in validator state to its corresponding value.
+     ///
+     /// # Arguments
+     ///
+-    /// * `entries` - entries are a hashmap where the key is and address and value is the data
+-    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state_entries(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;
+ 
+     /// delete_state requests that each of the provided addresses be unset
++    /// in validator state. A list of successfully deleted addresses is returned.
++    /// delete_state is deprecated, please use delete_state_entry to delete_state_entries instead
++    ///
++    /// # Arguments
++    ///
++    /// * `addresses` - the addresses to delete
++    #[deprecated(
++        since = ""0.3.0"",
++        note = ""please use `delete_state_entry` or `delete_state_entries` instead""
++    )]
++    fn delete_state(&self, addresses: &[String]) -> Result<Vec<String>, ContextError> {",61,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/261363016,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r261363016,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,Shouldn't this be a single address?,fb66ff5e729210ae7311b920465475748103e1a9,2019-02-28 20:08:14,261363217,"@@ -211,15 +211,18 @@ pub trait TransactionContext {
+     ///
+     /// * `address` - address of where to store the data
+     /// * `data` - payload is the data to store at the address
+-    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<Vec<String>, ContextError>;",,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/261363217,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r261363217,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,"Is there any scenario where something isn't successfully set _without_ it being an error? If not, then the resulting list of addresses set will always be the the same list of addresses sent.  ",fb66ff5e729210ae7311b920465475748103e1a9,2019-02-28 20:08:55,261363444,"@@ -211,15 +211,18 @@ pub trait TransactionContext {
+     ///
+     /// * `address` - address of where to store the data
+     /// * `data` - payload is the data to store at the address
+-    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<Vec<String>, ContextError>;
+ 
+     /// set_state_entries requests that each address in the provided map be
+     /// set in validator state to its corresponding value.
+     ///
+     /// # Arguments
+     ///
+     /// * `entries` - entries are a hashmap where the key is an address and value is the data
+-    fn set_state_entries(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;
++    fn set_state_entries(
++        &self,
++        entries: HashMap<String, Vec<u8>>,
++    ) -> Result<Vec<String>, ContextError>;",,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/261363444,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r261363444,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,"We have already fixed get_state, I suggest also fixing delete_state.",fb66ff5e729210ae7311b920465475748103e1a9,2019-03-04 14:26:10,262078893,"@@ -193,21 +194,65 @@ pub trait TransactionContext {
+         note = ""please use `set_state_entry` or `set_state_entries` instead""
+     )]
+     /// set_state requests that each address in the provided map be
++    /// set in validator state to its corresponding value. set_state is deprecated, please use
++    /// set_state_entry to set_state_entries instead
++    ///
++    /// # Arguments
++    ///
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
++        self.set_state_entries(entries)
++    }
++
++    /// set_state_entry requests that the provided address is set in the validator state to its
++    /// corresponding value.
++    ///
++    /// # Arguments
++    ///
++    /// * `address` - address of where to store the data
++    /// * `data` - payload is the data to store at the address
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;
++
++    /// set_state_entries requests that each address in the provided map be
+     /// set in validator state to its corresponding value.
+     ///
+     /// # Arguments
+     ///
+-    /// * `entries` - entries are a hashmap where the key is and address and value is the data
+-    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state_entries(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;
+ 
+     /// delete_state requests that each of the provided addresses be unset
++    /// in validator state. A list of successfully deleted addresses is returned.
++    /// delete_state is deprecated, please use delete_state_entry to delete_state_entries instead
++    ///
++    /// # Arguments
++    ///
++    /// * `addresses` - the addresses to delete
++    #[deprecated(
++        since = ""0.3.0"",
++        note = ""please use `delete_state_entry` or `delete_state_entries` instead""
++    )]
++    fn delete_state(&self, addresses: &[String]) -> Result<Vec<String>, ContextError> {",61,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/262078893,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r262078893,agunde406
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,Changed the return type back to Ok(()),fb66ff5e729210ae7311b920465475748103e1a9,2019-03-04 14:54:26,262091527,"@@ -211,15 +211,18 @@ pub trait TransactionContext {
+     ///
+     /// * `address` - address of where to store the data
+     /// * `data` - payload is the data to store at the address
+-    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<Vec<String>, ContextError>;",,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/262091527,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r262091527,agunde406
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,Changed the return type back to Ok(()),fb66ff5e729210ae7311b920465475748103e1a9,2019-03-04 14:54:33,262091586,"@@ -211,15 +211,18 @@ pub trait TransactionContext {
+     ///
+     /// * `address` - address of where to store the data
+     /// * `data` - payload is the data to store at the address
+-    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<Vec<String>, ContextError>;
+ 
+     /// set_state_entries requests that each address in the provided map be
+     /// set in validator state to its corresponding value.
+     ///
+     /// # Arguments
+     ///
+     /// * `entries` - entries are a hashmap where the key is an address and value is the data
+-    fn set_state_entries(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;
++    fn set_state_entries(
++        &self,
++        entries: HashMap<String, Vec<u8>>,
++    ) -> Result<Vec<String>, ContextError>;",,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/262091586,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r262091586,agunde406
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,Should address here be &str?,fb66ff5e729210ae7311b920465475748103e1a9,2019-03-04 15:36:14,262111854,"@@ -193,21 +194,65 @@ pub trait TransactionContext {
+         note = ""please use `set_state_entry` or `set_state_entries` instead""
+     )]
+     /// set_state requests that each address in the provided map be
++    /// set in validator state to its corresponding value. set_state is deprecated, please use
++    /// set_state_entry to set_state_entries instead
++    ///
++    /// # Arguments
++    ///
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
++        self.set_state_entries(entries)
++    }
++
++    /// set_state_entry requests that the provided address is set in the validator state to its
++    /// corresponding value.
++    ///
++    /// # Arguments
++    ///
++    /// * `address` - address of where to store the data
++    /// * `data` - payload is the data to store at the address
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;",38,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/262111854,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r262111854,vaporos
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,Should this be a vec to match get_state_entries()?,fb66ff5e729210ae7311b920465475748103e1a9,2019-03-04 15:38:11,262112794,"@@ -152,8 +152,46 @@ impl TransactionContext for ZmqTransactionContext {
+     /// # Arguments
+     ///
+     /// * `address` - address of where to store the data
+-    /// * `payload` - payload is the data to store at the address
+-    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
++    /// * `data` - data is the data to store at the address
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError> {
++        let mut entry = TpStateEntry::new();
++        entry.set_address(address.to_string());
++        entry.set_data(data);
++
++        let mut request = TpStateSetRequest::new();
++        request.set_context_id(self.context_id.clone());
++        request.set_entries(RepeatedField::from_vec(vec![entry.clone()]));
++        let serialized = request.write_to_bytes()?;
++        let x: &[u8] = &serialized;
++
++        let mut future = self.sender.send(
++            Message_MessageType::TP_STATE_SET_REQUEST,
++            &generate_correlation_id(),
++            x,
++        )?;
++
++        let response: TpStateSetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
++        match response.get_status() {
++            TpStateSetResponse_Status::OK => Ok(()),
++            TpStateSetResponse_Status::AUTHORIZATION_ERROR => {
++                Err(ContextError::AuthorizationError(format!(
++                    ""Tried to set unauthorized address: {:?}"",
++                    entry
++                )))
++            }
++            TpStateSetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
++                String::from(""Status was not set for TpStateSetResponse""),
++            )),
++        }
++    }
++
++    /// set_state requests that each address in the provided map be
++    /// set in validator state to its corresponding value.
++    ///
++    /// # Arguments
++    ///
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state_entries(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {",,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/262112794,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r262112794,vaporos
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,Set_state_entry needs to take ownership of the address and the data to set it in the proto message. Also since the handler calling set_state_entry does not need the address anymore (nothing to compare the return type) it is fine to pass on ownership.,fb66ff5e729210ae7311b920465475748103e1a9,2019-03-05 12:55:41,262484311,"@@ -193,21 +194,65 @@ pub trait TransactionContext {
+         note = ""please use `set_state_entry` or `set_state_entries` instead""
+     )]
+     /// set_state requests that each address in the provided map be
++    /// set in validator state to its corresponding value. set_state is deprecated, please use
++    /// set_state_entry to set_state_entries instead
++    ///
++    /// # Arguments
++    ///
++    /// * `entries` - entries are a hashmap where the key is an address and value is the data
++    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
++        self.set_state_entries(entries)
++    }
++
++    /// set_state_entry requests that the provided address is set in the validator state to its
++    /// corresponding value.
++    ///
++    /// # Arguments
++    ///
++    /// * `address` - address of where to store the data
++    /// * `data` - payload is the data to store at the address
++    fn set_state_entry(&self, address: String, data: Vec<u8>) -> Result<(), ContextError>;",38,2019-03-05 13:20:50,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/262484311,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14#discussion_r262484311,agunde406
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/13,https://github.com/hyperledger/sawtooth-sdk-rust/pull/13,"Please add ""XO"" to the commit message",29ad6dc2eb6af437b85c54f2bcb27f21dc468f8f,2019-02-25 16:21:36,259903668,"@@ -14,9 +14,18 @@
+ # -----------------------------------------------------------------------------
+ 
+ [package]
+-name = ""xo_rust""
++name = ""sawtooth-xo""",5,2019-02-25 16:50:15,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/259903668,https://github.com/hyperledger/sawtooth-sdk-rust/pull/13#discussion_r259903668,agunde406
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,"I'm not sure if this should be public anymore, since SDK users should not be creating one of these directly",197970cf1d4be1e134330b13c3beb4dbcbc13531,2019-02-19 20:07:07,258208243,"@@ -181,12 +181,12 @@ pub trait Context {
+ }
+ 
+ #[derive(Clone)]
+-pub struct TransactionContext {
++pub struct ZmqContext {",,2019-02-24 00:23:43,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/258208243,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12#discussion_r258208243,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,Done,197970cf1d4be1e134330b13c3beb4dbcbc13531,2019-02-21 19:00:53,259070054,"@@ -181,12 +181,12 @@ pub trait Context {
+ }
+ 
+ #[derive(Clone)]
+-pub struct TransactionContext {
++pub struct ZmqContext {",,2019-02-24 00:23:43,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/259070054,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12#discussion_r259070054,agunde406
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,You can give this a default implementation,197970cf1d4be1e134330b13c3beb4dbcbc13531,2019-02-23 18:27:45,259588129,"@@ -163,253 +151,32 @@ impl From<ReceiveError> for ContextError {
+     }
+ }
+ 
+-#[derive(Clone)]
+-pub struct TransactionContext {
+-    context_id: String,
+-    sender: ZmqMessageSender,
+-}
+-
+-impl TransactionContext {
+-    /// Context provides an interface for getting, setting, and deleting
+-    /// validator state. All validator interactions by a handler should be
+-    /// through a Context instance.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `sender` - for client grpc communication
+-    /// * `context_id` - the context_id passed in from the validator
+-    pub fn new(context_id: &str, sender: ZmqMessageSender) -> TransactionContext {
+-        TransactionContext {
+-            context_id: String::from(context_id),
+-            sender,
+-        }
+-    }
+-
+-    /// get_state queries the validator state for data at each of the
+-    /// addresses in the given list. The addresses that have been set
+-    /// are returned.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `addresses` - the addresses to fetch
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn get_state(&mut self, addresses: Vec<String>) -> Result<Option<Vec<u8>>, ContextError> {
+-        let mut request = TpStateGetRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_addresses(RepeatedField::from_vec(addresses.to_vec()));
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_GET_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateGetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateGetResponse_Status::OK => {
+-                let entry = match response.get_entries().first() {
+-                    Some(x) => x,
+-                    None => {
+-                        return Err(ContextError::ResponseAttributeError(String::from(
+-                            ""TpStateGetResponse is missing entries."",
+-                        )));
+-                    }
+-                };
+-                match entry.get_data().len() {
+-                    0 => Ok(None),
+-                    _ => Ok(Some(Vec::from(entry.get_data()))),
+-                }
+-            }
+-            TpStateGetResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to get unauthorized address: {:?}"",
+-                    addresses
+-                )))
+-            }
+-            TpStateGetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
+-                String::from(""Status was not set for TpStateGetResponse""),
+-            )),
+-        }
+-    }
+-
+-    /// set_state requests that each address in the provided map be
+-    /// set in validator state to its corresponding value.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `address` - address of where to store the data
+-    /// * `paylaod` - payload is the data to store at the address
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn set_state(&mut self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
+-        let state_entries: Vec<TpStateEntry> = entries
+-            .iter()
+-            .map(|(address, payload)| {
+-                let mut entry = TpStateEntry::new();
+-                entry.set_address(address.to_string());
+-                entry.set_data(payload.to_vec());
+-                entry
+-            })
+-            .collect();
+-
+-        let mut request = TpStateSetRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_entries(RepeatedField::from_vec(state_entries.to_vec()));
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_SET_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateSetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateSetResponse_Status::OK => Ok(()),
+-            TpStateSetResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to set unauthorized address: {:?}"",
+-                    state_entries
+-                )))
+-            }
+-            TpStateSetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
+-                String::from(""Status was not set for TpStateSetResponse""),
+-            )),
+-        }
+-    }
++pub trait TransactionContext {
++    #[deprecated(
++        since = ""0.3.0"",
++        note = ""please use `get_state_entry`  or  `get_state_entries` instead""
++    )]
++    fn get_state(&self, addresses: &[String]) -> Result<Vec<(String, Vec<u8>)>, ContextError>;",,2019-02-24 00:23:43,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/259588129,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12#discussion_r259588129,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,"These methods could keep the original doc comments, for now",197970cf1d4be1e134330b13c3beb4dbcbc13531,2019-02-23 18:28:41,259588159,"@@ -163,253 +151,32 @@ impl From<ReceiveError> for ContextError {
+     }
+ }
+ 
+-#[derive(Clone)]
+-pub struct TransactionContext {
+-    context_id: String,
+-    sender: ZmqMessageSender,
+-}
+-
+-impl TransactionContext {
+-    /// Context provides an interface for getting, setting, and deleting
+-    /// validator state. All validator interactions by a handler should be
+-    /// through a Context instance.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `sender` - for client grpc communication
+-    /// * `context_id` - the context_id passed in from the validator
+-    pub fn new(context_id: &str, sender: ZmqMessageSender) -> TransactionContext {
+-        TransactionContext {
+-            context_id: String::from(context_id),
+-            sender,
+-        }
+-    }
+-
+-    /// get_state queries the validator state for data at each of the
+-    /// addresses in the given list. The addresses that have been set
+-    /// are returned.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `addresses` - the addresses to fetch
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn get_state(&mut self, addresses: Vec<String>) -> Result<Option<Vec<u8>>, ContextError> {
+-        let mut request = TpStateGetRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_addresses(RepeatedField::from_vec(addresses.to_vec()));
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_GET_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateGetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateGetResponse_Status::OK => {
+-                let entry = match response.get_entries().first() {
+-                    Some(x) => x,
+-                    None => {
+-                        return Err(ContextError::ResponseAttributeError(String::from(
+-                            ""TpStateGetResponse is missing entries."",
+-                        )));
+-                    }
+-                };
+-                match entry.get_data().len() {
+-                    0 => Ok(None),
+-                    _ => Ok(Some(Vec::from(entry.get_data()))),
+-                }
+-            }
+-            TpStateGetResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to get unauthorized address: {:?}"",
+-                    addresses
+-                )))
+-            }
+-            TpStateGetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
+-                String::from(""Status was not set for TpStateGetResponse""),
+-            )),
+-        }
+-    }
+-
+-    /// set_state requests that each address in the provided map be
+-    /// set in validator state to its corresponding value.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `address` - address of where to store the data
+-    /// * `paylaod` - payload is the data to store at the address
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn set_state(&mut self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
+-        let state_entries: Vec<TpStateEntry> = entries
+-            .iter()
+-            .map(|(address, payload)| {
+-                let mut entry = TpStateEntry::new();
+-                entry.set_address(address.to_string());
+-                entry.set_data(payload.to_vec());
+-                entry
+-            })
+-            .collect();
+-
+-        let mut request = TpStateSetRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_entries(RepeatedField::from_vec(state_entries.to_vec()));
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_SET_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateSetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateSetResponse_Status::OK => Ok(()),
+-            TpStateSetResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to set unauthorized address: {:?}"",
+-                    state_entries
+-                )))
+-            }
+-            TpStateSetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
+-                String::from(""Status was not set for TpStateSetResponse""),
+-            )),
+-        }
+-    }
++pub trait TransactionContext {
++    #[deprecated(
++        since = ""0.3.0"",
++        note = ""please use `get_state_entry`  or  `get_state_entries` instead""
++    )]
++    fn get_state(&self, addresses: &[String]) -> Result<Vec<(String, Vec<u8>)>, ContextError>;
+ 
+-    /// delete_state requests that each of the provided addresses be unset
+-    /// in validator state. A list of successfully deleted addresses
+-    ///  is returned.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `addresses` - the addresses to fetch
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn delete_state(
+-        &mut self,
+-        addresses: Vec<String>,
+-    ) -> Result<Option<Vec<String>>, ContextError> {
+-        let mut request = TpStateDeleteRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_addresses(RepeatedField::from_vec(addresses.clone()));
++    fn get_state_entry(&self, addresses: &str) -> Result<Option<Vec<u8>>, ContextError>;",72,2019-02-24 00:23:43,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/259588159,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12#discussion_r259588159,peterschwarz
+https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,"set_state and delete_state should mirror what we are doing w/get_state_entry/entries. In addition to the naming, get_state_entries uses a Vec and not HashMap.",197970cf1d4be1e134330b13c3beb4dbcbc13531,2019-02-23 23:13:07,259596671,"@@ -163,253 +151,32 @@ impl From<ReceiveError> for ContextError {
+     }
+ }
+ 
+-#[derive(Clone)]
+-pub struct TransactionContext {
+-    context_id: String,
+-    sender: ZmqMessageSender,
+-}
+-
+-impl TransactionContext {
+-    /// Context provides an interface for getting, setting, and deleting
+-    /// validator state. All validator interactions by a handler should be
+-    /// through a Context instance.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `sender` - for client grpc communication
+-    /// * `context_id` - the context_id passed in from the validator
+-    pub fn new(context_id: &str, sender: ZmqMessageSender) -> TransactionContext {
+-        TransactionContext {
+-            context_id: String::from(context_id),
+-            sender,
+-        }
+-    }
+-
+-    /// get_state queries the validator state for data at each of the
+-    /// addresses in the given list. The addresses that have been set
+-    /// are returned.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `addresses` - the addresses to fetch
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn get_state(&mut self, addresses: Vec<String>) -> Result<Option<Vec<u8>>, ContextError> {
+-        let mut request = TpStateGetRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_addresses(RepeatedField::from_vec(addresses.to_vec()));
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_GET_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateGetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateGetResponse_Status::OK => {
+-                let entry = match response.get_entries().first() {
+-                    Some(x) => x,
+-                    None => {
+-                        return Err(ContextError::ResponseAttributeError(String::from(
+-                            ""TpStateGetResponse is missing entries."",
+-                        )));
+-                    }
+-                };
+-                match entry.get_data().len() {
+-                    0 => Ok(None),
+-                    _ => Ok(Some(Vec::from(entry.get_data()))),
+-                }
+-            }
+-            TpStateGetResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to get unauthorized address: {:?}"",
+-                    addresses
+-                )))
+-            }
+-            TpStateGetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
+-                String::from(""Status was not set for TpStateGetResponse""),
+-            )),
+-        }
+-    }
+-
+-    /// set_state requests that each address in the provided map be
+-    /// set in validator state to its corresponding value.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `address` - address of where to store the data
+-    /// * `paylaod` - payload is the data to store at the address
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn set_state(&mut self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError> {
+-        let state_entries: Vec<TpStateEntry> = entries
+-            .iter()
+-            .map(|(address, payload)| {
+-                let mut entry = TpStateEntry::new();
+-                entry.set_address(address.to_string());
+-                entry.set_data(payload.to_vec());
+-                entry
+-            })
+-            .collect();
+-
+-        let mut request = TpStateSetRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_entries(RepeatedField::from_vec(state_entries.to_vec()));
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_SET_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateSetResponse = protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateSetResponse_Status::OK => Ok(()),
+-            TpStateSetResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to set unauthorized address: {:?}"",
+-                    state_entries
+-                )))
+-            }
+-            TpStateSetResponse_Status::STATUS_UNSET => Err(ContextError::ResponseAttributeError(
+-                String::from(""Status was not set for TpStateSetResponse""),
+-            )),
+-        }
+-    }
++pub trait TransactionContext {
++    #[deprecated(
++        since = ""0.3.0"",
++        note = ""please use `get_state_entry`  or  `get_state_entries` instead""
++    )]
++    fn get_state(&self, addresses: &[String]) -> Result<Vec<(String, Vec<u8>)>, ContextError>;
+ 
+-    /// delete_state requests that each of the provided addresses be unset
+-    /// in validator state. A list of successfully deleted addresses
+-    ///  is returned.
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `addresses` - the addresses to fetch
+-    #[allow(clippy::needless_pass_by_value)]
+-    pub fn delete_state(
+-        &mut self,
+-        addresses: Vec<String>,
+-    ) -> Result<Option<Vec<String>>, ContextError> {
+-        let mut request = TpStateDeleteRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_addresses(RepeatedField::from_vec(addresses.clone()));
++    fn get_state_entry(&self, addresses: &str) -> Result<Option<Vec<u8>>, ContextError>;
+ 
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
+-
+-        let mut future = self.sender.send(
+-            Message_MessageType::TP_STATE_DELETE_REQUEST,
+-            &generate_correlation_id(),
+-            x,
+-        )?;
+-
+-        let response: TpStateDeleteResponse =
+-            protobuf::parse_from_bytes(future.get()?.get_content())?;
+-        match response.get_status() {
+-            TpStateDeleteResponse_Status::OK => Ok(Some(Vec::from(response.get_addresses()))),
+-            TpStateDeleteResponse_Status::AUTHORIZATION_ERROR => {
+-                Err(ContextError::AuthorizationError(format!(
+-                    ""Tried to delete unauthorized address: {:?}"",
+-                    addresses
+-                )))
+-            }
+-            TpStateDeleteResponse_Status::STATUS_UNSET => {
+-                Err(ContextError::ResponseAttributeError(String::from(
+-                    ""Status was not set for TpStateDeleteResponse"",
+-                )))
+-            }
+-        }
+-    }
+-
+-    /// add_receipt_data adds a blob to the execution result for this transaction
+-    ///
+-    /// # Arguments
+-    ///
+-    /// * `data` - the data to add
+-    pub fn add_receipt_data(&mut self, data: &[u8]) -> Result<(), ContextError> {
+-        let mut request = TpReceiptAddDataRequest::new();
+-        request.set_context_id(self.context_id.clone());
+-        request.set_data(Vec::from(data));
++    fn get_state_entries(
++        &self,
++        addresses: &[String],
++    ) -> Result<Vec<(String, Vec<u8>)>, ContextError>;
+ 
+-        let serialized = request.write_to_bytes()?;
+-        let x: &[u8] = &serialized;
++    fn set_state(&self, entries: HashMap<String, Vec<u8>>) -> Result<(), ContextError>;",177,2019-02-24 00:23:43,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/pulls/comments/259596671,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12#discussion_r259596671,vaporos

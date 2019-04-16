@@ -1,0 +1,3505 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/sawtooth-seth/pull/96,https://github.com/hyperledger/sawtooth-seth/pull/96,I think this is unnecessary: it binds the devmode-rust container's port 5050 to the host's port 5050.  What was missing is the `--bind consensus...` CLI arg ,07544b0b2af05c1100ad4d75e82bf8b2347e0447,2019-03-25 20:23:12,268834289,"@@ -109,6 +109,8 @@ services:
+   devmode-rust:
+     image: hyperledger/sawtooth-devmode-engine-rust:nightly
+     container_name: devmode-engine-rust
++    ports:",,2019-03-25 21:03:26,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/268834289,https://github.com/hyperledger/sawtooth-seth/pull/96#discussion_r268834289,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/96,https://github.com/hyperledger/sawtooth-seth/pull/96,Same as above,07544b0b2af05c1100ad4d75e82bf8b2347e0447,2019-03-25 20:24:16,268834702,"@@ -114,6 +114,8 @@ services:
+   devmode-rust:
+     image: hyperledger/sawtooth-devmode-engine-rust:nightly
+     container_name: devmode-engine-rust
++    ports:",,2019-03-25 21:03:26,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/268834702,https://github.com/hyperledger/sawtooth-seth/pull/96#discussion_r268834702,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/96,https://github.com/hyperledger/sawtooth-seth/pull/96,"Accepted. It didn't seem to work until I added port 5050 to the devmode container.
+I removed it and it still works, so I rebased and pushed this.",07544b0b2af05c1100ad4d75e82bf8b2347e0447,2019-03-25 21:04:58,268850650,"@@ -109,6 +109,8 @@ services:
+   devmode-rust:
+     image: hyperledger/sawtooth-devmode-engine-rust:nightly
+     container_name: devmode-engine-rust
++    ports:",,2019-03-25 21:04:58,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/268850650,https://github.com/hyperledger/sawtooth-seth/pull/96#discussion_r268850650,danintel
+https://github.com/hyperledger/sawtooth-seth/pull/96,https://github.com/hyperledger/sawtooth-seth/pull/96,See above.,07544b0b2af05c1100ad4d75e82bf8b2347e0447,2019-03-25 21:05:07,268850699,"@@ -114,6 +114,8 @@ services:
+   devmode-rust:
+     image: hyperledger/sawtooth-devmode-engine-rust:nightly
+     container_name: devmode-engine-rust
++    ports:",,2019-03-25 21:05:07,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/268850699,https://github.com/hyperledger/sawtooth-seth/pull/96#discussion_r268850699,danintel
+https://github.com/hyperledger/sawtooth-seth/pull/88,https://github.com/hyperledger/sawtooth-seth/pull/88,"This lint is allowed by default now, so I believe you can remove all of the `#[allow(clippy::needless_pass_by_value)]` lines.
+
+https://github.com/rust-lang/rust-clippy/commit/69d09fbfc6fe10dd20cf27f737e7ff6175e2c642",20deded8b0a0d27589cbbccc5c1b4ffc5f8a5466,2018-12-10 16:23:29,240280130,"@@ -72,7 +72,7 @@ fn validate_storage_address(address: &str) -> Result<String, Error> {
+     }
+ }
+ 
+-#[allow(needless_pass_by_value)]
++#[allow(clippy::needless_pass_by_value)]",,2018-12-11 15:40:36,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/240280130,https://github.com/hyperledger/sawtooth-seth/pull/88#discussion_r240280130,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,"Looks like this line is causing issues in Jenkins atm:
+
+https://build.sawtooth.me/job/Sawtooth-Hyperledger/job/sawtooth-seth/view/change-requests/job/PR-77/7/console",60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-24 14:58:19,227827559,"@@ -238,6 +239,9 @@ def test_get_block_by_hash(self):
+         self.assertEqual(result[""stateRoot""], ""0x"" + self.state_root)
+         self.assertEqual(result[""gasUsed""], hex(self.gas))
+         self.assertEqual(result[""transactions""][0], ""0x"" + self.txn_id)
++        self.assertEqual(result[""status""], ""0x"" + self.status)",,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/227827559,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r227827559,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,Might be worth writing this as `cls.account_address_b = bytes.fromhex(cls.account_address)` so that the two definitions don't get out of sync,60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-25 19:52:52,228312343,"@@ -80,6 +80,7 @@ def setUpClass(cls):
+         # account values
+         cls.public_key = ""036d7bb6ca0fd581eb037e91042320af97508003264f08545a9db134df215f373e""
+         cls.account_address = ""434d46456b6973a678b77382fca0252629f4389f""
++        cls.account_address_b = bytes([0x43, 0x4d, 0x46, 0x45, 0x6b, 0x69, 0x73, 0xa6, 0x78, 0xb7, 0x73, 0x82, 0xfc, 0xa0, 0x25, 0x26, 0x29, 0xf4, 0x38, 0x9f])",,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/228312343,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r228312343,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,Wondering what the purpose of `setattr` is here vs just passing it into the constructor,60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-25 19:55:03,228313059,"@@ -1065,15 +1068,17 @@ def test_get_log_filter_changes(self):
+             )])],
+         ))
+ 
++        receipt = SethTransactionReceipt(
++                gas_used=self.gas,
++                return_value=self.return_value_b,
++                contract_address=self.contract_address_b,
++                status=self.status,
++                to=self.contract_address_b,
++                )
++        setattr(receipt, 'from', self.account_address_b)",37,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/228313059,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r228313059,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,good point - I missed that helper function - will fix.,60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-25 20:57:05,228331807,"@@ -80,6 +80,7 @@ def setUpClass(cls):
+         # account values
+         cls.public_key = ""036d7bb6ca0fd581eb037e91042320af97508003264f08545a9db134df215f373e""
+         cls.account_address = ""434d46456b6973a678b77382fca0252629f4389f""
++        cls.account_address_b = bytes([0x43, 0x4d, 0x46, 0x45, 0x6b, 0x69, 0x73, 0xa6, 0x78, 0xb7, 0x73, 0x82, 0xfc, 0xa0, 0x25, 0x26, 0x29, 0xf4, 0x38, 0x9f])",,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/228331807,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r228331807,benjamincburns
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,"Sadly due to a limitation of python you can't use reserved words as keyword arguments for a function. The protobuf devs [seem to be aware of that limitation, but it's as yet unresolved](https://github.com/protocolbuffers/protobuf/blob/master/python/google/protobuf/internal/python_message.py#L220-L236), and `setattr` is the only viable workaround I could find.",60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-25 21:00:13,228332803,"@@ -1065,15 +1068,17 @@ def test_get_log_filter_changes(self):
+             )])],
+         ))
+ 
++        receipt = SethTransactionReceipt(
++                gas_used=self.gas,
++                return_value=self.return_value_b,
++                contract_address=self.contract_address_b,
++                status=self.status,
++                to=self.contract_address_b,
++                )
++        setattr(receipt, 'from', self.account_address_b)",37,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/228332803,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r228332803,benjamincburns
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,"I'll add a comment to make this more clear, since I'm already going to do that `bytes.fromhex` fix you mentioned elsewhere...",60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-25 21:01:02,228333062,"@@ -1065,15 +1068,17 @@ def test_get_log_filter_changes(self):
+             )])],
+         ))
+ 
++        receipt = SethTransactionReceipt(
++                gas_used=self.gas,
++                return_value=self.return_value_b,
++                contract_address=self.contract_address_b,
++                status=self.status,
++                to=self.contract_address_b,
++                )
++        setattr(receipt, 'from', self.account_address_b)",37,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/228333062,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r228333062,benjamincburns
+https://github.com/hyperledger/sawtooth-seth/pull/77,https://github.com/hyperledger/sawtooth-seth/pull/77,"Cool, makes sense. Another option is that you could do is `SethTransactionReceipt(**{'from': self.account_address_b, ...})`, but either way works",60fdccf8cf5d65868effc491d34ef42bbc978bb0,2018-10-25 21:48:22,228346177,"@@ -1065,15 +1068,17 @@ def test_get_log_filter_changes(self):
+             )])],
+         ))
+ 
++        receipt = SethTransactionReceipt(
++                gas_used=self.gas,
++                return_value=self.return_value_b,
++                contract_address=self.contract_address_b,
++                status=self.status,
++                to=self.contract_address_b,
++                )
++        setattr(receipt, 'from', self.account_address_b)",37,2018-10-25 22:44:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/228346177,https://github.com/hyperledger/sawtooth-seth/pull/77#discussion_r228346177,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/73,https://github.com/hyperledger/sawtooth-seth/pull/73,"Not implemented upstream, see https://github.com/hyperledger/sawtooth-seth/commit/b5475d45b2a4982fd83df1c7a572c284be65cf19 for where we added it ourselves to our vendored version of Burrow. Requires adding `GetBlockHash` in a few different scattered files in Burrow, which is responsible for most of the vendored files in this PR.
+
+See https://github.com/hyperledger/burrow/issues/909",df0ba1b0c9e0b004921e1d6b5c5cfe451177de72,2018-09-11 20:56:33,216819560,"@@ -0,0 +1,1259 @@
++// TODO: How to handle BLOCKHASH changes
++// Copyright 2017 Monax Industries Limited
++//
++// Licensed under the Apache License, Version 2.0 (the ""License"");
++// you may not use this file except in compliance with the License.
++// You may obtain a copy of the License at
++//
++//    http://www.apache.org/licenses/LICENSE-2.0
++//
++// Unless required by applicable law or agreed to in writing, software
++// distributed under the License is distributed on an ""AS IS"" BASIS,
++// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++// See the License for the specific language governing permissions and
++// limitations under the License.
++
++package evm
++
++import (
++	""bytes""
++	""fmt""
++	""io/ioutil""
++	""math/big""
++	""strings""
++
++	""github.com/hyperledger/burrow/acm""
++	""github.com/hyperledger/burrow/acm/state""
++	. ""github.com/hyperledger/burrow/binary""
++	""github.com/hyperledger/burrow/crypto""
++	""github.com/hyperledger/burrow/execution/errors""
++	. ""github.com/hyperledger/burrow/execution/evm/asm""
++	""github.com/hyperledger/burrow/execution/evm/sha3""
++	""github.com/hyperledger/burrow/execution/exec""
++	""github.com/hyperledger/burrow/logging""
++	""github.com/hyperledger/burrow/permission""
++	""github.com/hyperledger/burrow/txs""
++)
++
++const (
++	dataStackCapacity = 1024
++	callStackCapacity = 100 // TODO ensure usage.
++)
++
++type EventSink interface {
++	Call(call *exec.CallEvent, exception *errors.Exception)
++	Log(log *exec.LogEvent)
++}
++
++type noopEventSink struct{}
++
++func (*noopEventSink) Call(call *exec.CallEvent, exception *errors.Exception) {}
++func (*noopEventSink) Log(log *exec.LogEvent)                                 {}
++
++type Params struct {
++	BlockHeight uint64
++	BlockHash   Word256
++	BlockTime   int64
++	GasLimit    uint64
++}
++
++type VM struct {
++	memoryProvider   func() Memory
++	params           Params
++	origin           crypto.Address
++	tx               *txs.Tx
++	stackDepth       uint64
++	nestedCallErrors []errors.NestedCall
++	eventSink        EventSink
++	logger           *logging.Logger
++	returnData       []byte
++	debugOpcodes     bool
++	dumpTokens       bool
++}
++
++func NewVM(params Params, origin crypto.Address, tx *txs.Tx, logger *logging.Logger, options ...func(*VM)) *VM {
++	vm := &VM{
++		memoryProvider: DefaultDynamicMemoryProvider,
++		params:         params,
++		origin:         origin,
++		stackDepth:     0,
++		tx:             tx,
++		eventSink:      &noopEventSink{},
++		logger:         logger.WithScope(""NewVM""),
++	}
++	for _, option := range options {
++		option(vm)
++	}
++	return vm
++}
++
++func (vm *VM) Debugf(format string, a ...interface{}) {
++	if vm.debugOpcodes {
++		vm.logger.TraceMsg(fmt.Sprintf(format, a...), ""tag"", ""DebugOpcodes"")
++	}
++}
++
++// Set EventSink destination for events - can be unset if events generation is not required
++func (vm *VM) SetEventSink(em EventSink) {
++	vm.eventSink = em
++}
++
++// CONTRACT: it is the duty of the contract writer to call known permissions
++// we do not convey if a permission is not set
++// (unlike in state/execution, where we guarantee HasPermission is called
++// on known permissions and panics else)
++// If the perm is not defined in the acc nor set by default in GlobalPermissions,
++// this function returns false.
++func HasPermission(stateWriter state.ReaderWriter, acc acm.Account, perm permission.PermFlag) bool {
++	value, _ := acc.Permissions().Base.Compose(state.GlobalAccountPermissions(stateWriter).Base).Get(perm)
++	return value
++}
++
++func (vm *VM) fireCallEvent(exception *errors.CodedError, output *[]byte, callerAddress, calleeAddress crypto.Address,
++	input []byte, value uint64, gas *uint64) {
++	// fire the post call event (including exception if applicable)
++	vm.eventSink.Call(&exec.CallEvent{
++		CallData: &exec.CallData{
++			Caller: callerAddress,
++			Callee: calleeAddress,
++			Data:   input,
++			Value:  value,
++			Gas:    *gas,
++		},
++		Origin:     vm.origin,
++		StackDepth: vm.stackDepth,
++		Return:     *output,
++	}, errors.AsException(*exception))
++}
++
++// CONTRACT state is aware of caller and callee, so we can just mutate them.
++// CONTRACT code and input are not mutated.
++// CONTRACT returned 'ret' is a new compact slice.
++// value: To be transferred from caller to callee. Refunded upon errors.CodedError.
++// gas:   Available gas. No refunds for gas.
++// code: May be nil, since the CALL opcode may be used to send value from contracts to accounts
++func (vm *VM) Call(callState *state.Cache, caller, callee *acm.MutableAccount, code, input []byte, value uint64,
++	gas *uint64) (output []byte, err errors.CodedError) {
++
++	exception := new(errors.CodedError)
++	// fire the post call event (including exception if applicable)
++	defer vm.fireCallEvent(exception, &output, caller.Address(), callee.Address(), input, value, gas)
++
++	if err = transfer(caller, callee, value); err != nil {
++		*exception = err
++		return
++	}
++
++	childCallState := state.NewCache(callState)
++
++	if len(code) > 0 {
++		vm.stackDepth += 1
++		output, err = vm.call(childCallState, caller, callee, code, input, value, gas)
++		vm.stackDepth -= 1
++		if err != nil {
++			err = errors.Call{
++				CallError:    err,
++				NestedErrors: vm.nestedCallErrors,
++			}
++			*exception = err
++			transferErr := transfer(callee, caller, value)
++			if transferErr != nil {
++				return nil, errors.Wrap(transferErr,
++					fmt.Sprintf(""error transferring value %v %s (callee) -> %s (caller)"", value, callee, caller))
++			}
++		} else {
++			// Copy any state updates from child call frame into current call frame
++			childCallState.Sync(callState)
++		}
++		if vm.stackDepth == 0 {
++			// clean up ready for next call
++			vm.nestedCallErrors = nil
++		}
++	}
++
++	return
++}
++
++// DelegateCall is executed by the DELEGATECALL opcode, introduced as off Ethereum Homestead.
++// The intent of delegate call is to run the code of the callee in the storage context of the caller;
++// while preserving the original caller to the previous callee.
++// Different to the normal CALL or CALLCODE, the value does not need to be transferred to the callee.
++func (vm *VM) DelegateCall(callState *state.Cache, caller acm.Account, callee *acm.MutableAccount, code, input []byte, value uint64, gas *uint64) (output []byte, err errors.CodedError) {
++
++	exception := new(string)
++	// fire the post call event (including exception if applicable)
++	// NOTE: [ben] hotfix for issue 371;
++	// introduce event EventStringAccDelegateCall Acc/%s/DelegateCall
++	// defer vm.fireCallEvent(exception, &output, caller, callee, input, value, gas)
++
++	// DelegateCall does not transfer the value to the callee.
++
++	childCallState := state.NewCache(callState)
++
++	if len(code) > 0 {
++		vm.stackDepth += 1
++		output, err = vm.call(childCallState, caller, callee, code, input, value, gas)
++		vm.stackDepth -= 1
++		if err != nil {
++			*exception = err.Error()
++		} else {
++			// Copy any state updates from child call frame into current call frame
++			childCallState.Sync(callState)
++		}
++	}
++
++	return
++}
++
++// Try to deduct gasToUse from gasLeft.  If ok return false, otherwise
++// set err and return true.
++func useGasNegative(gasLeft *uint64, gasToUse uint64, err *errors.CodedError) bool {
++	if *gasLeft >= gasToUse {
++		*gasLeft -= gasToUse
++		return false
++	} else if *err == nil {
++		*err = errors.ErrorCodeInsufficientGas
++	}
++	return true
++}
++
++// Just like Call() but does not transfer 'value' or modify the callDepth.
++func (vm *VM) call(callState *state.Cache, caller acm.Account, callee *acm.MutableAccount, code, input []byte, value uint64, gas *uint64) (output []byte, err errors.CodedError) {
++	vm.Debugf(""(%d) (%X) %X (code=%d) gas: %v (d) %X\n"", vm.stackDepth, caller.Address().Bytes()[:4], callee.Address(),
++		len(callee.Code()), *gas, input)
++
++	logger := vm.logger.With(""tx_hash"", vm.tx.Hash())
++
++	if vm.dumpTokens {
++		dumpTokens(vm.tx.Hash(), caller, callee, code)
++	}
++
++	var (
++		pc     int64 = 0
++		stack        = NewStack(dataStackCapacity, gas, &err)
++		memory       = vm.memoryProvider()
++	)
++
++	for {
++		// Use BaseOp gas.
++		if useGasNegative(gas, GasBaseOp, &err) {
++			return nil, err
++		}
++
++		var op = codeGetOp(code, pc)
++		vm.Debugf(""(pc) %-3d (op) %-14s (st) %-4d "", pc, op.String(), stack.Len())
++
++		switch op {
++
++		case ADD: // 0x01
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			sum := new(big.Int).Add(x, y)
++			res := stack.PushBigInt(sum)
++			vm.Debugf("" %v + %v = %v (%X)\n"", x, y, sum, res)
++
++		case MUL: // 0x02
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			prod := new(big.Int).Mul(x, y)
++			res := stack.PushBigInt(prod)
++			vm.Debugf("" %v * %v = %v (%X)\n"", x, y, prod, res)
++
++		case SUB: // 0x03
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			diff := new(big.Int).Sub(x, y)
++			res := stack.PushBigInt(diff)
++			vm.Debugf("" %v - %v = %v (%X)\n"", x, y, diff, res)
++
++		case DIV: // 0x04
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			if y.Sign() == 0 {
++				stack.Push(Zero256)
++				vm.Debugf("" %x / %x = %v\n"", x, y, 0)
++			} else {
++				div := new(big.Int).Div(x, y)
++				res := stack.PushBigInt(div)
++				vm.Debugf("" %v / %v = %v (%X)\n"", x, y, div, res)
++			}
++
++		case SDIV: // 0x05
++			x, y := stack.PopBigIntSigned(), stack.PopBigIntSigned()
++			if y.Sign() == 0 {
++				stack.Push(Zero256)
++				vm.Debugf("" %x / %x = %v\n"", x, y, 0)
++			} else {
++				div := new(big.Int).Div(x, y)
++				res := stack.PushBigInt(div)
++				vm.Debugf("" %v / %v = %v (%X)\n"", x, y, div, res)
++			}
++
++		case MOD: // 0x06
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			if y.Sign() == 0 {
++				stack.Push(Zero256)
++				vm.Debugf("" %v %% %v = %v\n"", x, y, 0)
++			} else {
++				mod := new(big.Int).Mod(x, y)
++				res := stack.PushBigInt(mod)
++				vm.Debugf("" %v %% %v = %v (%X)\n"", x, y, mod, res)
++			}
++
++		case SMOD: // 0x07
++			x, y := stack.PopBigIntSigned(), stack.PopBigIntSigned()
++			if y.Sign() == 0 {
++				stack.Push(Zero256)
++				vm.Debugf("" %v %% %v = %v\n"", x, y, 0)
++			} else {
++				mod := new(big.Int).Mod(x, y)
++				res := stack.PushBigInt(mod)
++				vm.Debugf("" %v %% %v = %v (%X)\n"", x, y, mod, res)
++			}
++
++		case ADDMOD: // 0x08
++			x, y, z := stack.PopBigInt(), stack.PopBigInt(), stack.PopBigInt()
++			if z.Sign() == 0 {
++				stack.Push(Zero256)
++				vm.Debugf("" %v %% %v = %v\n"", x, y, 0)
++			} else {
++				add := new(big.Int).Add(x, y)
++				mod := add.Mod(add, z)
++				res := stack.PushBigInt(mod)
++				vm.Debugf("" %v + %v %% %v = %v (%X)\n"", x, y, z, mod, res)
++			}
++
++		case MULMOD: // 0x09
++			x, y, z := stack.PopBigInt(), stack.PopBigInt(), stack.PopBigInt()
++			if z.Sign() == 0 {
++				stack.Push(Zero256)
++				vm.Debugf("" %v %% %v = %v\n"", x, y, 0)
++			} else {
++				mul := new(big.Int).Mul(x, y)
++				mod := mul.Mod(mul, z)
++				res := stack.PushBigInt(mod)
++				vm.Debugf("" %v * %v %% %v = %v (%X)\n"", x, y, z, mod, res)
++			}
++
++		case EXP: // 0x0A
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			pow := new(big.Int).Exp(x, y, nil)
++			res := stack.PushBigInt(pow)
++			vm.Debugf("" %v ** %v = %v (%X)\n"", x, y, pow, res)
++
++		case SIGNEXTEND: // 0x0B
++			back, popErr := stack.PopU64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			if back < Word256Length-1 {
++				stack.PushBigInt(SignExtend(back, stack.PopBigInt()))
++			}
++
++		case LT: // 0x10
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			if x.Cmp(y) < 0 {
++				stack.Push(One256)
++				vm.Debugf("" %v < %v = %v\n"", x, y, 1)
++			} else {
++				stack.Push(Zero256)
++				vm.Debugf("" %v < %v = %v\n"", x, y, 0)
++			}
++
++		case GT: // 0x11
++			x, y := stack.PopBigInt(), stack.PopBigInt()
++			if x.Cmp(y) > 0 {
++				stack.Push(One256)
++				vm.Debugf("" %v > %v = %v\n"", x, y, 1)
++			} else {
++				stack.Push(Zero256)
++				vm.Debugf("" %v > %v = %v\n"", x, y, 0)
++			}
++
++		case SLT: // 0x12
++			x, y := stack.PopBigIntSigned(), stack.PopBigIntSigned()
++			if x.Cmp(y) < 0 {
++				stack.Push(One256)
++				vm.Debugf("" %v < %v = %v\n"", x, y, 1)
++			} else {
++				stack.Push(Zero256)
++				vm.Debugf("" %v < %v = %v\n"", x, y, 0)
++			}
++
++		case SGT: // 0x13
++			x, y := stack.PopBigIntSigned(), stack.PopBigIntSigned()
++			if x.Cmp(y) > 0 {
++				stack.Push(One256)
++				vm.Debugf("" %v > %v = %v\n"", x, y, 1)
++			} else {
++				stack.Push(Zero256)
++				vm.Debugf("" %v > %v = %v\n"", x, y, 0)
++			}
++
++		case EQ: // 0x14
++			x, y := stack.Pop(), stack.Pop()
++			if bytes.Equal(x[:], y[:]) {
++				stack.Push(One256)
++				vm.Debugf("" %X == %X = %v\n"", x, y, 1)
++			} else {
++				stack.Push(Zero256)
++				vm.Debugf("" %X == %X = %v\n"", x, y, 0)
++			}
++
++		case ISZERO: // 0x15
++			x := stack.Pop()
++			if x.IsZero() {
++				stack.Push(One256)
++				vm.Debugf("" %X == 0 = %v\n"", x, 1)
++			} else {
++				stack.Push(Zero256)
++				vm.Debugf("" %X == 0 = %v\n"", x, 0)
++			}
++
++		case AND: // 0x16
++			x, y := stack.Pop(), stack.Pop()
++			z := [32]byte{}
++			for i := 0; i < 32; i++ {
++				z[i] = x[i] & y[i]
++			}
++			stack.Push(z)
++			vm.Debugf("" %X & %X = %X\n"", x, y, z)
++
++		case OR: // 0x17
++			x, y := stack.Pop(), stack.Pop()
++			z := [32]byte{}
++			for i := 0; i < 32; i++ {
++				z[i] = x[i] | y[i]
++			}
++			stack.Push(z)
++			vm.Debugf("" %X | %X = %X\n"", x, y, z)
++
++		case XOR: // 0x18
++			x, y := stack.Pop(), stack.Pop()
++			z := [32]byte{}
++			for i := 0; i < 32; i++ {
++				z[i] = x[i] ^ y[i]
++			}
++			stack.Push(z)
++			vm.Debugf("" %X ^ %X = %X\n"", x, y, z)
++
++		case NOT: // 0x19
++			x := stack.Pop()
++			z := [32]byte{}
++			for i := 0; i < 32; i++ {
++				z[i] = ^x[i]
++			}
++			stack.Push(z)
++			vm.Debugf("" !%X = %X\n"", x, z)
++
++		case BYTE: // 0x1A
++			idx, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			val := stack.Pop()
++			res := byte(0)
++			if idx < 32 {
++				res = val[idx]
++			}
++			stack.Push64(int64(res))
++			vm.Debugf("" => 0x%X\n"", res)
++
++		case SHL: //0x1B
++			shift, x := stack.PopBigInt(), stack.PopBigInt()
++
++			if shift.Cmp(Big256) >= 0 {
++				reset := big.NewInt(0)
++				stack.PushBigInt(reset)
++				vm.Debugf("" %v << %v = %v\n"", x, shift, reset)
++			} else {
++				shiftedValue := x.Lsh(x, uint(shift.Uint64()))
++				stack.PushBigInt(shiftedValue)
++				vm.Debugf("" %v << %v = %v\n"", x, shift, shiftedValue)
++			}
++
++		case SHR: //0x1C
++			shift, x := stack.PopBigInt(), stack.PopBigInt()
++
++			if shift.Cmp(Big256) >= 0 {
++				reset := big.NewInt(0)
++				stack.PushBigInt(reset)
++				vm.Debugf("" %v << %v = %v\n"", x, shift, reset)
++			} else {
++				shiftedValue := x.Rsh(x, uint(shift.Uint64()))
++				stack.PushBigInt(shiftedValue)
++				vm.Debugf("" %v << %v = %v\n"", x, shift, shiftedValue)
++			}
++
++		case SAR: //0x1D
++			shift, x := stack.PopBigInt(), stack.PopBigIntSigned()
++
++			if shift.Cmp(Big256) >= 0 {
++				reset := big.NewInt(0)
++				if x.Sign() < 0 {
++					reset.SetInt64(-1)
++				}
++				stack.PushBigInt(reset)
++				vm.Debugf("" %v << %v = %v\n"", x, shift, reset)
++			} else {
++				shiftedValue := x.Rsh(x, uint(shift.Uint64()))
++				stack.PushBigInt(shiftedValue)
++				vm.Debugf("" %v << %v = %v\n"", x, shift, shiftedValue)
++			}
++
++		case SHA3: // 0x20
++			if useGasNegative(gas, GasSha3, &err) {
++				return nil, err
++			}
++			offset, size := stack.PopBigInt(), stack.PopBigInt()
++			data, memErr := memory.Read(offset, size)
++			if memErr != nil {
++				vm.Debugf("" => Memory err: %s"", memErr)
++				return nil, firstErr(err, errors.ErrorCodeMemoryOutOfBounds)
++			}
++			data = sha3.Sha3(data)
++			stack.PushBytes(data)
++			vm.Debugf("" => (%v) %X\n"", size, data)
++
++		case ADDRESS: // 0x30
++			stack.Push(callee.Address().Word256())
++			vm.Debugf("" => %X\n"", callee.Address())
++
++		case BALANCE: // 0x31
++			addr := stack.Pop()
++			if useGasNegative(gas, GasGetAccount, &err) {
++				return nil, err
++			}
++			acc, errAcc := callState.GetAccount(crypto.AddressFromWord256(addr))
++			if errAcc != nil {
++				return nil, firstErr(err, errAcc)
++			}
++			if acc == nil {
++				return nil, firstErr(err, errors.ErrorCodeUnknownAddress)
++			}
++			balance := acc.Balance()
++			stack.PushU64(balance)
++			vm.Debugf("" => %v (%X)\n"", balance, addr)
++
++		case ORIGIN: // 0x32
++			stack.Push(vm.origin.Word256())
++			vm.Debugf("" => %X\n"", vm.origin)
++
++		case CALLER: // 0x33
++			stack.Push(caller.Address().Word256())
++			vm.Debugf("" => %X\n"", caller.Address())
++
++		case CALLVALUE: // 0x34
++			stack.PushU64(value)
++			vm.Debugf("" => %v\n"", value)
++
++		case CALLDATALOAD: // 0x35
++			offset, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			data, ok := subslice(input, offset, 32)
++			if !ok {
++				return nil, firstErr(err, errors.ErrorCodeInputOutOfBounds)
++			}
++			res := LeftPadWord256(data)
++			stack.Push(res)
++			vm.Debugf("" => 0x%X\n"", res)
++
++		case CALLDATASIZE: // 0x36
++			stack.Push64(int64(len(input)))
++			vm.Debugf("" => %d\n"", len(input))
++
++		case CALLDATACOPY: // 0x37
++			memOff := stack.PopBigInt()
++			inputOff, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			length, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			data, ok := subslice(input, inputOff, length)
++			if !ok {
++				return nil, firstErr(err, errors.ErrorCodeInputOutOfBounds)
++			}
++			memErr := memory.Write(memOff, data)
++			if memErr != nil {
++				vm.Debugf("" => Memory err: %s"", memErr)
++				return nil, firstErr(err, errors.ErrorCodeMemoryOutOfBounds)
++			}
++			vm.Debugf("" => [%v, %v, %v] %X\n"", memOff, inputOff, length, data)
++
++		case CODESIZE: // 0x38
++			l := int64(len(code))
++			stack.Push64(l)
++			vm.Debugf("" => %d\n"", l)
++
++		case CODECOPY: // 0x39
++			memOff := stack.PopBigInt()
++			codeOff, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			length, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			data, ok := subslice(code, codeOff, length)
++			if !ok {
++				return nil, firstErr(err, errors.ErrorCodeCodeOutOfBounds)
++			}
++			memErr := memory.Write(memOff, data)
++			if memErr != nil {
++				vm.Debugf("" => Memory err: %s"", memErr)
++				return nil, firstErr(err, errors.ErrorCodeMemoryOutOfBounds)
++			}
++			vm.Debugf("" => [%v, %v, %v] %X\n"", memOff, codeOff, length, data)
++
++		case GASPRICE_DEPRECATED: // 0x3A
++			stack.Push(Zero256)
++			vm.Debugf("" => %X (GASPRICE IS DEPRECATED)\n"")
++
++		case EXTCODESIZE: // 0x3B
++			addr := stack.Pop()
++			if useGasNegative(gas, GasGetAccount, &err) {
++				return nil, err
++			}
++			acc, errAcc := callState.GetAccount(crypto.AddressFromWord256(addr))
++			if errAcc != nil {
++				return nil, firstErr(err, errAcc)
++			}
++			if acc == nil {
++				if _, ok := registeredNativeContracts[addr]; !ok {
++					return nil, firstErr(err, errors.ErrorCodeUnknownAddress)
++				}
++				vm.Debugf("" => returning code size of 1 to indicated existence of native contract at %X\n"", addr)
++				stack.Push(One256)
++			} else {
++				code := acc.Code()
++				l := int64(len(code))
++				stack.Push64(l)
++				vm.Debugf("" => %d\n"", l)
++			}
++		case EXTCODECOPY: // 0x3C
++			addr := stack.Pop()
++			if useGasNegative(gas, GasGetAccount, &err) {
++				return nil, err
++			}
++			acc, errAcc := callState.GetAccount(crypto.AddressFromWord256(addr))
++			if errAcc != nil {
++				return nil, firstErr(err, errAcc)
++			}
++			if acc == nil {
++				if _, ok := registeredNativeContracts[addr]; ok {
++					vm.Debugf("" => attempted to copy native contract at %X but this is not supported\n"", addr)
++					return nil, firstErr(err, errors.ErrorCodeNativeContractCodeCopy)
++				}
++				return nil, firstErr(err, errors.ErrorCodeUnknownAddress)
++			}
++			code := acc.Code()
++			memOff := stack.PopBigInt()
++			codeOff, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			length, popErr := stack.Pop64()
++			if popErr != nil {
++				return nil, firstErr(err, popErr)
++			}
++			data, ok := subslice(code, codeOff, length)
++			if !ok {
++				return nil, firstErr(err, errors.ErrorCodeCodeOutOfBounds)
++			}
++			memErr := memory.Write(memOff, data)
++			if memErr != nil {
++				vm.Debugf("" => Memory err: %s"", memErr)
++				return nil, firstErr(err, errors.ErrorCodeMemoryOutOfBounds)
++			}
++			vm.Debugf("" => [%v, %v, %v] %X\n"", memOff, codeOff, length, data)
++
++		case RETURNDATASIZE: // 0x3D
++			stack.Push64(int64(len(vm.returnData)))
++			vm.Debugf("" => %d\n"", len(vm.returnData))
++
++		case RETURNDATACOPY: // 0x3E
++			memOff, outputOff, length := stack.PopBigInt(), stack.PopBigInt(), stack.PopBigInt()
++
++			end := new(big.Int).Add(outputOff, length)
++
++			if end.BitLen() > 64 || uint64(len(vm.returnData)) < end.Uint64() {
++				return nil, errors.ErrorCodeReturnDataOutOfBounds
++			}
++
++			data := vm.returnData
++
++			memErr := memory.Write(memOff, data)
++			if memErr != nil {
++				vm.Debugf("" => Memory err: %s"", memErr)
++				return nil, firstErr(err, errors.ErrorCodeMemoryOutOfBounds)
++			}
++			vm.Debugf("" => [%v, %v, %v] %X\n"", memOff, outputOff, length, data)
++
++		case BLOCKHASH: // 0x40",,2018-10-26 13:22:15,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/216819560,https://github.com/hyperledger/sawtooth-seth/pull/73#discussion_r216819560,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/73,https://github.com/hyperledger/sawtooth-seth/pull/73,"This is the other place we vendor a fix for incompatibilities. The newer Burrow version doesn't work without a global permissions account created, which we don't do in our unit tests.
+
+See https://github.com/hyperledger/burrow/issues/908",df0ba1b0c9e0b004921e1d6b5c5cfe451177de72,2018-09-11 20:58:58,216820325,"@@ -0,0 +1,131 @@
++// TODO: How to handle GlobalAccountPermissions changes
++package state
++
++import (
++	""github.com/hyperledger/burrow/acm""
++	""github.com/hyperledger/burrow/binary""
++	""github.com/hyperledger/burrow/crypto""
++	""github.com/hyperledger/burrow/permission""
++)
++
++type AccountGetter interface {
++	// Get an account by its address return nil if it does not exist (which should not be an error)
++	GetAccount(address crypto.Address) (acm.Account, error)
++}
++
++type BlockHashGetter interface {
++	// Get hash for block
++	GetBlockHash(int64) (binary.Word256, error)
++}
++
++type AccountIterable interface {
++	// Iterates through accounts calling passed function once per account, if the consumer
++	// returns true the iteration breaks and returns true to indicate it iteration
++	// was escaped
++	IterateAccounts(consumer func(acm.Account) (stop bool)) (stopped bool, err error)
++}
++
++type AccountUpdater interface {
++	// Updates the fields of updatedAccount by address, creating the account
++	// if it does not exist
++	UpdateAccount(updatedAccount acm.Account) error
++	// Remove the account at address
++	RemoveAccount(address crypto.Address) error
++}
++
++type StorageGetter interface {
++	// Retrieve a 32-byte value stored at key for the account at address, return Zero256 if key does not exist but
++	// error if address does not
++	GetStorage(address crypto.Address, key binary.Word256) (value binary.Word256, err error)
++}
++
++type StorageSetter interface {
++	// Store a 32-byte value at key for the account at address, setting to Zero256 removes the key
++	SetStorage(address crypto.Address, key, value binary.Word256) error
++}
++
++type StorageIterable interface {
++	// Iterates through the storage of account ad address calling the passed function once per account,
++	// if the iterator function returns true the iteration breaks and returns true to indicate it iteration
++	// was escaped
++	IterateStorage(address crypto.Address, consumer func(key, value binary.Word256) (stop bool)) (stopped bool, err error)
++}
++
++// Compositions
++
++// Read-only account and storage state
++type Reader interface {
++	AccountGetter
++	BlockHashGetter
++	StorageGetter
++}
++
++type Iterable interface {
++	AccountIterable
++	StorageIterable
++}
++
++// Read and list account and storage state
++type IterableReader interface {
++	Iterable
++	Reader
++}
++
++type Writer interface {
++	AccountUpdater
++	StorageSetter
++}
++
++// Read and write account and storage state
++type ReaderWriter interface {
++	Reader
++	Writer
++}
++
++type IterableReaderWriter interface {
++	Iterable
++	Reader
++	Writer
++}
++
++func GetConcreteAccount(getter AccountGetter, address crypto.Address) (*acm.ConcreteAccount, error) {
++	acc, err := getter.GetAccount(address)
++	if err != nil {
++		return nil, err
++	}
++	return acm.AsConcreteAccount(acc), nil
++}
++
++func GetMutableAccount(getter AccountGetter, address crypto.Address) (*acm.MutableAccount, error) {
++	acc, err := getter.GetAccount(address)
++	if err != nil {
++		return nil, err
++	}
++	return acm.AsMutableAccount(acc), nil
++}
++
++func GlobalPermissionsAccount(getter AccountGetter) acm.Account {
++	acc, err := getter.GetAccount(acm.GlobalPermissionsAddress)
++	if err != nil {
++		panic(""Could not get global permission account, but this must exist"")
++	}
++	return acc
++}
++
++// Get global permissions from the account at GlobalPermissionsAddress
++func GlobalAccountPermissions(getter AccountGetter) permission.AccountPermissions {
++	if getter == nil {
++		return permission.AccountPermissions{
++			Roles: []string{},
++		}
++	}
++
++	global := GlobalPermissionsAccount(getter)",,2018-10-26 13:22:15,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/216820325,https://github.com/hyperledger/sawtooth-seth/pull/73#discussion_r216820325,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,This should use the signing library to the extent possible: https://github.com/hyperledger/sawtooth-core/blob/master/sdk/rust/src/signing/secp256k1.rs,8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-04 22:14:43,215083827,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;",,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/215083827,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r215083827,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,I think this a typo and should say `Vec<Option<String>>`,8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-04 22:19:14,215084745,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;
++use requests::RequestHandler;
++use sawtooth_sdk::messaging::stream::MessageSender;
++use std::fs;
++use std::str::from_utf8;
++use transactions::SethTransaction;
++use transform;
++
++pub fn get_method_list<T>() -> Vec<(String, RequestHandler<T>)>
++where
++    T: MessageSender,
++{
++    vec![
++        (""personal_listAccounts"".into(), list_accounts),
++        (""personal_newAccount"".into(), new_account),
++        (""personal_unlockAccount"".into(), unlock_account),
++        (""personal_importRawKey"".into(), import_raw_key),
++    ]
++}
++
++macro_rules! except {
++    ($expr:expr, $msg:expr) => {{
++        $expr.map_err(|err| {
++            error!(""{}"", err);
++            Error {
++                code: (-32069i64).into(),
++                message: $msg.into(),
++                data: None,
++            }
++        })?
++    }};
++}
++
++#[allow(needless_pass_by_value)]
++pub fn list_accounts<T>(_: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_listAccounts"");
++
++    let accounts = client.loaded_accounts();
++    let locked_accounts = accounts.read().unwrap();
++
++    Ok(Value::Array(
++        locked_accounts
++            .iter()
++            .map(|a| transform::hex_prefix(a.address()))
++            .collect::<Vec<_>>(),
++    ))
++}
++
++#[allow(needless_pass_by_value)]
++pub fn new_account<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_newAccount"");
++
++    let args: Vec<Option<String>> = match params.parse::<Vec<Option<String>>>() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [password: String, moderator: String, permissions: String]"",
++            ));
++        }
++    };
++
++    // We get Option<Option<String>> here due the possibility of a client",82,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/215084745,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r215084745,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,Don't commit TODOs,8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-04 22:19:43,215084836,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;
++use requests::RequestHandler;
++use sawtooth_sdk::messaging::stream::MessageSender;
++use std::fs;
++use std::str::from_utf8;
++use transactions::SethTransaction;
++use transform;
++
++pub fn get_method_list<T>() -> Vec<(String, RequestHandler<T>)>
++where
++    T: MessageSender,
++{
++    vec![
++        (""personal_listAccounts"".into(), list_accounts),
++        (""personal_newAccount"".into(), new_account),
++        (""personal_unlockAccount"".into(), unlock_account),
++        (""personal_importRawKey"".into(), import_raw_key),
++    ]
++}
++
++macro_rules! except {
++    ($expr:expr, $msg:expr) => {{
++        $expr.map_err(|err| {
++            error!(""{}"", err);
++            Error {
++                code: (-32069i64).into(),
++                message: $msg.into(),
++                data: None,
++            }
++        })?
++    }};
++}
++
++#[allow(needless_pass_by_value)]
++pub fn list_accounts<T>(_: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_listAccounts"");
++
++    let accounts = client.loaded_accounts();
++    let locked_accounts = accounts.read().unwrap();
++
++    Ok(Value::Array(
++        locked_accounts
++            .iter()
++            .map(|a| transform::hex_prefix(a.address()))
++            .collect::<Vec<_>>(),
++    ))
++}
++
++#[allow(needless_pass_by_value)]
++pub fn new_account<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_newAccount"");
++
++    let args: Vec<Option<String>> = match params.parse::<Vec<Option<String>>>() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [password: String, moderator: String, permissions: String]"",
++            ));
++        }
++    };
++
++    // We get Option<Option<String>> here due the possibility of a client
++    // sending in an incomplete list of optional strings. Unnest into plain
++    // options to fix
++    let password = args.get(0).unwrap_or(&None);
++    let moderator = args.get(1).unwrap_or(&None);
++
++    // TODO: Convert to .transpose() call once it's stabilized",,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/215084836,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r215084836,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,"Are there guidelines on this somewhere? I looked at the contributing guide, and TODOs aren't mentioned. Might be worth adding in?
+
+And I can understand why we wouldn't want TODOs that are just there because someone hasn't gotten around to fixing them yet, but in this case we're blocked from using `.transpose()` until it lands in stable. Do you still think the comment shouldn't be added? If so, would it help if I just removed the `TODO` bit of the comment?",8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-04 22:42:52,215089208,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;
++use requests::RequestHandler;
++use sawtooth_sdk::messaging::stream::MessageSender;
++use std::fs;
++use std::str::from_utf8;
++use transactions::SethTransaction;
++use transform;
++
++pub fn get_method_list<T>() -> Vec<(String, RequestHandler<T>)>
++where
++    T: MessageSender,
++{
++    vec![
++        (""personal_listAccounts"".into(), list_accounts),
++        (""personal_newAccount"".into(), new_account),
++        (""personal_unlockAccount"".into(), unlock_account),
++        (""personal_importRawKey"".into(), import_raw_key),
++    ]
++}
++
++macro_rules! except {
++    ($expr:expr, $msg:expr) => {{
++        $expr.map_err(|err| {
++            error!(""{}"", err);
++            Error {
++                code: (-32069i64).into(),
++                message: $msg.into(),
++                data: None,
++            }
++        })?
++    }};
++}
++
++#[allow(needless_pass_by_value)]
++pub fn list_accounts<T>(_: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_listAccounts"");
++
++    let accounts = client.loaded_accounts();
++    let locked_accounts = accounts.read().unwrap();
++
++    Ok(Value::Array(
++        locked_accounts
++            .iter()
++            .map(|a| transform::hex_prefix(a.address()))
++            .collect::<Vec<_>>(),
++    ))
++}
++
++#[allow(needless_pass_by_value)]
++pub fn new_account<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_newAccount"");
++
++    let args: Vec<Option<String>> = match params.parse::<Vec<Option<String>>>() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [password: String, moderator: String, permissions: String]"",
++            ));
++        }
++    };
++
++    // We get Option<Option<String>> here due the possibility of a client
++    // sending in an incomplete list of optional strings. Unnest into plain
++    // options to fix
++    let password = args.get(0).unwrap_or(&None);
++    let moderator = args.get(1).unwrap_or(&None);
++
++    // TODO: Convert to .transpose() call once it's stabilized",,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/215089208,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r215089208,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,"We have `Vec<Option<String>>`, but using `.get()` wraps it's response in an `Option` as well, returning `Option<Option<String>>`.",8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-05 15:48:40,215326357,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;
++use requests::RequestHandler;
++use sawtooth_sdk::messaging::stream::MessageSender;
++use std::fs;
++use std::str::from_utf8;
++use transactions::SethTransaction;
++use transform;
++
++pub fn get_method_list<T>() -> Vec<(String, RequestHandler<T>)>
++where
++    T: MessageSender,
++{
++    vec![
++        (""personal_listAccounts"".into(), list_accounts),
++        (""personal_newAccount"".into(), new_account),
++        (""personal_unlockAccount"".into(), unlock_account),
++        (""personal_importRawKey"".into(), import_raw_key),
++    ]
++}
++
++macro_rules! except {
++    ($expr:expr, $msg:expr) => {{
++        $expr.map_err(|err| {
++            error!(""{}"", err);
++            Error {
++                code: (-32069i64).into(),
++                message: $msg.into(),
++                data: None,
++            }
++        })?
++    }};
++}
++
++#[allow(needless_pass_by_value)]
++pub fn list_accounts<T>(_: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_listAccounts"");
++
++    let accounts = client.loaded_accounts();
++    let locked_accounts = accounts.read().unwrap();
++
++    Ok(Value::Array(
++        locked_accounts
++            .iter()
++            .map(|a| transform::hex_prefix(a.address()))
++            .collect::<Vec<_>>(),
++    ))
++}
++
++#[allow(needless_pass_by_value)]
++pub fn new_account<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_newAccount"");
++
++    let args: Vec<Option<String>> = match params.parse::<Vec<Option<String>>>() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [password: String, moderator: String, permissions: String]"",
++            ));
++        }
++    };
++
++    // We get Option<Option<String>> here due the possibility of a client",82,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/215326357,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r215326357,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,"It looks like the signing library can load pem files, but can't save/generate them, unless I'm misreading it?",8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-05 15:52:20,215327889,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;",,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/215327889,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r215327889,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/72,https://github.com/hyperledger/sawtooth-seth/pull/72,"It is a convention because in-line comments are almost always the wrong place to track work that needs to be done. In this case, we could create a JIRA ticket to resolve it, but IMO I don't think it's something to even worry about. Trying to track ways that code could be written more succinctly if a particular language feature is adopted seems like a nightmare, unless there is a significant performance improvement expected.",8f6212334e94c9e9c229851023e641682c8e3b35,2018-09-19 21:02:41,218962886,"@@ -0,0 +1,266 @@
++/*
++ * Copyright 2018 Intel Corporation
++ *
++ * Licensed under the Apache License, Version 2.0 (the ""License"");
++ * you may not use this file except in compliance with the License.
++ * You may obtain a copy of the License at
++ *
++ *     http://www.apache.org/licenses/LICENSE-2.0
++ *
++ * Unless required by applicable law or agreed to in writing, software
++ * distributed under the License is distributed on an ""AS IS"" BASIS,
++ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++ * See the License for the specific language governing permissions and
++ * limitations under the License.
++ * ------------------------------------------------------------------------------
++ */
++
++use accounts::{get_key_dir, Account};
++use client::BlockKey;
++use client::ValidatorClient;
++use jsonrpc_core::{Error, Params, Value};
++use messages::seth::{
++    CreateExternalAccountTxn, EvmPermissions, SethTransaction as SethTransactionPb,
++    SethTransaction_TransactionType,
++};
++use openssl::ec::{EcGroup, EcKey};
++use openssl::nid::Nid;
++use openssl::symm::Cipher;
++use requests::RequestHandler;
++use sawtooth_sdk::messaging::stream::MessageSender;
++use std::fs;
++use std::str::from_utf8;
++use transactions::SethTransaction;
++use transform;
++
++pub fn get_method_list<T>() -> Vec<(String, RequestHandler<T>)>
++where
++    T: MessageSender,
++{
++    vec![
++        (""personal_listAccounts"".into(), list_accounts),
++        (""personal_newAccount"".into(), new_account),
++        (""personal_unlockAccount"".into(), unlock_account),
++        (""personal_importRawKey"".into(), import_raw_key),
++    ]
++}
++
++macro_rules! except {
++    ($expr:expr, $msg:expr) => {{
++        $expr.map_err(|err| {
++            error!(""{}"", err);
++            Error {
++                code: (-32069i64).into(),
++                message: $msg.into(),
++                data: None,
++            }
++        })?
++    }};
++}
++
++#[allow(needless_pass_by_value)]
++pub fn list_accounts<T>(_: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_listAccounts"");
++
++    let accounts = client.loaded_accounts();
++    let locked_accounts = accounts.read().unwrap();
++
++    Ok(Value::Array(
++        locked_accounts
++            .iter()
++            .map(|a| transform::hex_prefix(a.address()))
++            .collect::<Vec<_>>(),
++    ))
++}
++
++#[allow(needless_pass_by_value)]
++pub fn new_account<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""personal_newAccount"");
++
++    let args: Vec<Option<String>> = match params.parse::<Vec<Option<String>>>() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [password: String, moderator: String, permissions: String]"",
++            ));
++        }
++    };
++
++    // We get Option<Option<String>> here due the possibility of a client
++    // sending in an incomplete list of optional strings. Unnest into plain
++    // options to fix
++    let password = args.get(0).unwrap_or(&None);
++    let moderator = args.get(1).unwrap_or(&None);
++
++    // TODO: Convert to .transpose() call once it's stabilized",,2018-10-24 15:00:29,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/218962886,https://github.com/hyperledger/sawtooth-seth/pull/72#discussion_r218962886,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/70,https://github.com/hyperledger/sawtooth-seth/pull/70,This feels kind of unnecessary - don't all functions try their best to help?  The doc string for the function should indicate what it's for.,0d526b11844cdacc2ac56b65dfe3b5f3ff39c1ec,2018-08-31 16:14:41,214404662,"@@ -74,6 +74,128 @@ where
+     Ok(Value::String(format!(""{:#x}"", block_header.block_num)))
+ }
+ 
++/// Returns information about a block by hash.
++///
++/// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbyhash
++/// In Sawtooth, the hash is the blocks signature, which is 64 bytes vs Ethereum's 32.
++pub fn get_block_by_hash<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockByHash"");
++
++    let (block_hash, full): (String, bool) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [blockHash: DATA(64), full: BOOL]"",
++            ));
++        }
++    };
++
++    let block_hash = match block_hash.get(2..) {
++        Some(bh) => String::from(bh),
++        None => {
++            return Err(Error::invalid_params(""Invalid block hash, must have 0x""));
++        }
++    };
++
++    get_block_obj(BlockKey::Signature(block_hash), full, client)
++}
++
++/// Returns the number of transactions in a block matching the given block number.
++///
++/// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbynumber
++pub fn get_block_by_number<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockByNumber"");
++
++    let (block_num, full): (String, bool) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [blockNum: QUANTITY|TAG, full: BOOL]"",
++            ));
++        }
++    };
++
++    let block_key = match BlockKey::from_str(block_num.as_str()) {
++        Ok(k) => k,
++        Err(_) => {
++            return Err(Error::invalid_params(""Invalid block number""));
++        }
++    };
++
++    get_block_obj(block_key, full, client)
++}
++
++/// Returns the number of transactions in a block from a block matching the given block hash
++///
++/// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblocktransactioncountbyhash
++pub fn get_block_transaction_count_by_hash<T>(
++    params: Params,
++    client: ValidatorClient<T>,
++) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockTransactionCountByHash"");
++
++    let (block_hash,): (String,) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(""Takes [blockHash: DATA(64)]""));
++        }
++    };
++
++    let block_hash = match block_hash.get(2..) {
++        Some(bh) => String::from(bh),
++        None => {
++            return Err(Error::invalid_params(""Invalid block hash, must have 0x""));
++        }
++    };
++
++    get_block_transaction_count(BlockKey::Signature(block_hash), client)
++}
++
++/// Returns the number of transactions in a block
++///
++/// Block is identified by number
++pub fn get_block_transaction_count_by_number<T>(
++    params: Params,
++    client: ValidatorClient<T>,
++) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockTransactionCountByNumber"");
++
++    let (block_num,): (String,) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(""Takes [blockNum: QUANTITY|TAG]""));
++        }
++    };
++
++    let block_key = match BlockKey::from_str(block_num.as_str()) {
++        Ok(k) => k,
++        Err(_) => {
++            return Err(Error::invalid_params(""Invalid block number""));
++        }
++    };
++
++    get_block_transaction_count(block_key, client)
++}
++
++//////////////////////",,2018-08-31 18:34:41,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/214404662,https://github.com/hyperledger/sawtooth-seth/pull/70#discussion_r214404662,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/70,https://github.com/hyperledger/sawtooth-seth/pull/70,Remove TODO,0d526b11844cdacc2ac56b65dfe3b5f3ff39c1ec,2018-08-31 16:15:24,214404818,"@@ -74,6 +74,128 @@ where
+     Ok(Value::String(format!(""{:#x}"", block_header.block_num)))
+ }
+ 
++/// Returns information about a block by hash.
++///
++/// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbyhash
++/// In Sawtooth, the hash is the blocks signature, which is 64 bytes vs Ethereum's 32.
++pub fn get_block_by_hash<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockByHash"");
++
++    let (block_hash, full): (String, bool) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [blockHash: DATA(64), full: BOOL]"",
++            ));
++        }
++    };
++
++    let block_hash = match block_hash.get(2..) {
++        Some(bh) => String::from(bh),
++        None => {
++            return Err(Error::invalid_params(""Invalid block hash, must have 0x""));
++        }
++    };
++
++    get_block_obj(BlockKey::Signature(block_hash), full, client)
++}
++
++/// Returns the number of transactions in a block matching the given block number.
++///
++/// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbynumber
++pub fn get_block_by_number<T>(params: Params, client: ValidatorClient<T>) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockByNumber"");
++
++    let (block_num, full): (String, bool) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(
++                ""Takes [blockNum: QUANTITY|TAG, full: BOOL]"",
++            ));
++        }
++    };
++
++    let block_key = match BlockKey::from_str(block_num.as_str()) {
++        Ok(k) => k,
++        Err(_) => {
++            return Err(Error::invalid_params(""Invalid block number""));
++        }
++    };
++
++    get_block_obj(block_key, full, client)
++}
++
++/// Returns the number of transactions in a block from a block matching the given block hash
++///
++/// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblocktransactioncountbyhash
++pub fn get_block_transaction_count_by_hash<T>(
++    params: Params,
++    client: ValidatorClient<T>,
++) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockTransactionCountByHash"");
++
++    let (block_hash,): (String,) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(""Takes [blockHash: DATA(64)]""));
++        }
++    };
++
++    let block_hash = match block_hash.get(2..) {
++        Some(bh) => String::from(bh),
++        None => {
++            return Err(Error::invalid_params(""Invalid block hash, must have 0x""));
++        }
++    };
++
++    get_block_transaction_count(BlockKey::Signature(block_hash), client)
++}
++
++/// Returns the number of transactions in a block
++///
++/// Block is identified by number
++pub fn get_block_transaction_count_by_number<T>(
++    params: Params,
++    client: ValidatorClient<T>,
++) -> Result<Value, Error>
++where
++    T: MessageSender,
++{
++    info!(""eth_getBlockTransactionCountByNumber"");
++
++    let (block_num,): (String,) = match params.parse() {
++        Ok(t) => t,
++        Err(_) => {
++            return Err(Error::invalid_params(""Takes [blockNum: QUANTITY|TAG]""));
++        }
++    };
++
++    let block_key = match BlockKey::from_str(block_num.as_str()) {
++        Ok(k) => k,
++        Err(_) => {
++            return Err(Error::invalid_params(""Invalid block number""));
++        }
++    };
++
++    get_block_transaction_count(block_key, client)
++}
++
++//////////////////////
++// Helper Functions //
++//////////////////////
++
++/// Returns information about a block as a `json_rpc::Value` object
++///
++/// TODO: Switch to regular struct",,2018-08-31 18:34:41,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/214404818,https://github.com/hyperledger/sawtooth-seth/pull/70#discussion_r214404818,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/64,https://github.com/hyperledger/sawtooth-seth/pull/64,Do we want to remove this and the ones after it?,b0485ec2dce450d18e609e8d7950b9a87eb7e418,2018-08-21 14:11:17,211620351,"@@ -1,13 +1,202 @@
+-Copyright 2016 Intel Corporation
+ 
+-Licensed under the Apache License, Version 2.0 (the ""License"");
+-you may not use this file except in compliance with the License.
+-You may obtain a copy of the License at
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
+ 
+-    http://www.apache.org/licenses/LICENSE-2.0
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+ 
+-Unless required by applicable law or agreed to in writing, software
+-distributed under the License is distributed on an ""AS IS"" BASIS,
+-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-See the License for the specific language governing permissions and
+-limitations under the License.
++   1. Definitions.
++
++      ""License"" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      ""Licensor"" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      ""Legal Entity"" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      ""control"" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      ""You"" (or ""Your"") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      ""Source"" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      ""Object"" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      ""Work"" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      ""Derivative Works"" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      ""Contribution"" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, ""submitted""
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as ""Not a Contribution.""
++
++      ""Contributor"" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a ""NOTICE"" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an ""AS IS"" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS",187,2018-08-21 14:11:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/211620351,https://github.com/hyperledger/sawtooth-seth/pull/64#discussion_r211620351,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/64,https://github.com/hyperledger/sawtooth-seth/pull/64,"That would make sense to me.
+
+@ryjones thoughts?",b0485ec2dce450d18e609e8d7950b9a87eb7e418,2018-08-21 14:40:45,211632043,"@@ -1,13 +1,202 @@
+-Copyright 2016 Intel Corporation
+ 
+-Licensed under the Apache License, Version 2.0 (the ""License"");
+-you may not use this file except in compliance with the License.
+-You may obtain a copy of the License at
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
+ 
+-    http://www.apache.org/licenses/LICENSE-2.0
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+ 
+-Unless required by applicable law or agreed to in writing, software
+-distributed under the License is distributed on an ""AS IS"" BASIS,
+-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-See the License for the specific language governing permissions and
+-limitations under the License.
++   1. Definitions.
++
++      ""License"" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      ""Licensor"" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      ""Legal Entity"" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      ""control"" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      ""You"" (or ""Your"") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      ""Source"" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      ""Object"" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      ""Work"" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      ""Derivative Works"" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      ""Contribution"" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, ""submitted""
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as ""Not a Contribution.""
++
++      ""Contributor"" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a ""NOTICE"" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an ""AS IS"" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS",187,2018-08-21 14:40:45,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/211632043,https://github.com/hyperledger/sawtooth-seth/pull/64#discussion_r211632043,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/64,https://github.com/hyperledger/sawtooth-seth/pull/64,"According to @dcmiddle the extra boilerplate here is fine to keep, so approving this PR",b0485ec2dce450d18e609e8d7950b9a87eb7e418,2018-08-24 16:09:04,212678572,"@@ -1,13 +1,202 @@
+-Copyright 2016 Intel Corporation
+ 
+-Licensed under the Apache License, Version 2.0 (the ""License"");
+-you may not use this file except in compliance with the License.
+-You may obtain a copy of the License at
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
+ 
+-    http://www.apache.org/licenses/LICENSE-2.0
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+ 
+-Unless required by applicable law or agreed to in writing, software
+-distributed under the License is distributed on an ""AS IS"" BASIS,
+-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-See the License for the specific language governing permissions and
+-limitations under the License.
++   1. Definitions.
++
++      ""License"" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      ""Licensor"" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      ""Legal Entity"" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      ""control"" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      ""You"" (or ""Your"") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      ""Source"" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      ""Object"" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      ""Work"" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      ""Derivative Works"" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      ""Contribution"" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, ""submitted""
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as ""Not a Contribution.""
++
++      ""Contributor"" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a ""NOTICE"" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an ""AS IS"" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS",187,2018-08-24 16:09:04,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/212678572,https://github.com/hyperledger/sawtooth-seth/pull/64#discussion_r212678572,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/63,https://github.com/hyperledger/sawtooth-seth/pull/63,I think we'll want to remove this line and everything after it,21b1d5841bfff163dcac8d2bce88de52e5d20034,2018-08-20 14:06:59,211274567,"@@ -1,13 +1,202 @@
+-Copyright 2016 Intel Corporation
+ 
+-Licensed under the Apache License, Version 2.0 (the ""License"");
+-you may not use this file except in compliance with the License.
+-You may obtain a copy of the License at
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
+ 
+-    http://www.apache.org/licenses/LICENSE-2.0
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+ 
+-Unless required by applicable law or agreed to in writing, software
+-distributed under the License is distributed on an ""AS IS"" BASIS,
+-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-See the License for the specific language governing permissions and
+-limitations under the License.
++   1. Definitions.
++
++      ""License"" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      ""Licensor"" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      ""Legal Entity"" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      ""control"" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      ""You"" (or ""Your"") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      ""Source"" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      ""Object"" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      ""Work"" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      ""Derivative Works"" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      ""Contribution"" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, ""submitted""
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as ""Not a Contribution.""
++
++      ""Contributor"" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a ""NOTICE"" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an ""AS IS"" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS",187,2018-08-20 14:06:59,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/211274567,https://github.com/hyperledger/sawtooth-seth/pull/63#discussion_r211274567,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/62,https://github.com/hyperledger/sawtooth-seth/pull/62,Don't commit commented out code. Just delete it.,6318c5b592a5786e79d45fc349c9870c9b5c942d,2018-08-17 15:29:27,210947289,"@@ -279,10 +282,14 @@
+ 
+ # One entry per manual page. List of tuples
+ # (source start file, name, description, authors, manual section).
+-man_pages = [
+-    (master_doc, 'intelmaidenlane', u'Sawtooth Documentation',
+-     [author], 1)
+-]
++# Not currently used
++# man_pages = [(
++#     master_doc,
++#     'sawtooth-seth',
++#     'Sawtooth Seth Documentation',
++#     [author],
++#     1,
++# )]",,2018-08-20 17:15:52,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/210947289,https://github.com/hyperledger/sawtooth-seth/pull/62#discussion_r210947289,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/62,https://github.com/hyperledger/sawtooth-seth/pull/62,This whole introduction needs to be removed and the seth developer's guide moved up a level in the hierarchy.,6318c5b592a5786e79d45fc349c9870c9b5c942d,2018-08-17 15:35:31,210949097,"@@ -127,7 +127,7 @@ dev_mode and PoET.
+   * Dev_mode is a simplified random leader algorithm that is useful
+     for developers and test networks that require only crash fault tolerance.
+ 
+-  * PoET, short for “Proof of Elapsed Time"" is a Nakamoto-style consensus
++  * PoET, short for ""Proof of Elapsed Time"" is a Nakamoto-style consensus",,2018-08-20 17:15:52,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/210949097,https://github.com/hyperledger/sawtooth-seth/pull/62#discussion_r210949097,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/55,https://github.com/hyperledger/sawtooth-seth/pull/55,"Is a FilterId just a usize?  Otherwise, this doesn't make sense.",ea91e95b63355c05651c96b6fb00bc58db5abc4a,2018-07-16 21:05:58,202824669,"@@ -179,25 +180,20 @@ pub struct FilterEntry {
+ 
+ #[derive(Debug, Clone)]
+ pub struct FilterManager {
+-    id_ctr: Arc<Mutex<FilterId>>,
++    id_ctr: Arc<AtomicUsize>,",98,2018-07-16 21:09:36,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/202824669,https://github.com/hyperledger/sawtooth-seth/pull/55#discussion_r202824669,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/55,https://github.com/hyperledger/sawtooth-seth/pull/55,"It's hidden in the PR changes a few lines above the fold, but it's just `pub type FilterId = usize;`",ea91e95b63355c05651c96b6fb00bc58db5abc4a,2018-07-16 21:23:35,202829303,"@@ -179,25 +180,20 @@ pub struct FilterEntry {
+ 
+ #[derive(Debug, Clone)]
+ pub struct FilterManager {
+-    id_ctr: Arc<Mutex<FilterId>>,
++    id_ctr: Arc<AtomicUsize>,",98,2018-07-16 21:23:36,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/202829303,https://github.com/hyperledger/sawtooth-seth/pull/55#discussion_r202829303,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/53,https://github.com/hyperledger/sawtooth-seth/pull/53,Missing license,5d0da395b182d67335239cc572580c3a803f03b6,2018-07-11 22:01:57,201853904,"@@ -0,0 +1,16 @@
++package tests",18,2018-07-12 17:44:59,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201853904,https://github.com/hyperledger/sawtooth-seth/pull/53#discussion_r201853904,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/50,https://github.com/hyperledger/sawtooth-seth/pull/50,Should we do anything on an error here?,1efc9b9d2e5ba2966e4ee5acfd81a2d4f0847109,2018-07-11 19:44:19,201817007,"@@ -70,7 +70,12 @@ func (args *ContractList) Run(config *Config) error {
+ 	)
+ 	var i uint64
+ 	for i = 1; i < nonce; i++ {
+-		fmt.Printf(""%v: %v\n"", i, addr.Derive(i))
++		var derived = addr.Derive(i)
++		entry, err := client.Get(derived.Bytes())
++		if entry == nil || err != nil {",,2018-07-13 15:09:53,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201817007,https://github.com/hyperledger/sawtooth-seth/pull/50#discussion_r201817007,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/50,https://github.com/hyperledger/sawtooth-seth/pull/50,This should just abort on an error,1efc9b9d2e5ba2966e4ee5acfd81a2d4f0847109,2018-07-12 19:51:41,202158211,"@@ -70,7 +70,12 @@ func (args *ContractList) Run(config *Config) error {
+ 	)
+ 	var i uint64
+ 	for i = 1; i < nonce; i++ {
+-		fmt.Printf(""%v: %v\n"", i, addr.Derive(i))
++		var derived = addr.Derive(i)
++		entry, err := client.Get(derived.Bytes())
++		if entry == nil || err != nil {",,2018-07-13 15:09:54,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/202158211,https://github.com/hyperledger/sawtooth-seth/pull/50#discussion_r202158211,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/49,https://github.com/hyperledger/sawtooth-seth/pull/49,Note that this change will disappear after #38 is merged and this PR is rebased,1ffa631302949030f6dcc323c9a4b6c485fe427c,2018-07-10 18:40:05,201451905,"@@ -122,12 +123,16 @@ services:
+         - no_proxy
+     image: sawtooth-seth-rpc:${ISOLATION_ID}
+     container_name: seth-rpc
++    volumes:
++      - sawtooth:/root/.sawtooth
+     depends_on:
+       - validator
+     ports:
+       - 3030:3030
+     command: |
+       bash -c ""
+-        seth init http://rest-api:8080 &&",,2018-07-16 15:06:57,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201451905,https://github.com/hyperledger/sawtooth-seth/pull/49#discussion_r201451905,knkski
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,"Adding these proxy args should be a different commit and PR, since this change is not related to the bug fix.",01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-09 17:23:03,201083102,"@@ -21,7 +21,11 @@ services:
+       context: .
+       dockerfile: ./cli/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        args:",5,2018-07-10 08:49:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201083102,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201083102,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,"The `ports` option publishes port 3030 to the host machine, which we need in order to send requests from the host machine. `expose` will make port 3030 available to other containers in the docker network, but this is already implied by the `ports` option.",01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-09 17:53:35,201092324,"@@ -115,15 +123,20 @@ services:
+       context: .
+       dockerfile: ./rpc/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        - ISOLATION_ID=${ISOLATION_ID}
++        - http_proxy
++        - https_proxy
++        - no_proxy
+     image: sawtooth-seth-rpc:${ISOLATION_ID}
+     container_name: seth-rpc
+     volumes:
+       - ./build/debs:/build
+     depends_on:
+       - validator
++    expose:",,2018-07-10 08:49:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201092324,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201092324,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,"Was this causing any issues? Though it is a best practice to configure ports as a string in docker-compose, this should be a different commit and PR if it does not relate to the bug being fixed here.",01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-09 18:00:46,201094603,"@@ -115,15 +123,20 @@ services:
+       context: .
+       dockerfile: ./rpc/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        - ISOLATION_ID=${ISOLATION_ID}
++        - http_proxy
++        - https_proxy
++        - no_proxy
+     image: sawtooth-seth-rpc:${ISOLATION_ID}
+     container_name: seth-rpc
+     volumes:
+       - ./build/debs:/build
+     depends_on:
+       - validator
++    expose:
++      - 3030    
+     ports:
+-      - 3030:3030
++      - '3030:3030'",,2018-07-10 08:49:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201094603,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201094603,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,"Ok, I will double check. 
+
+I'm pretty sure our team was unable to standup the current sawtooth-seth repo without ISOLATION_ID: ${ISOLATION_ID} added to docker-compose-installed.yaml after docker-compose.yaml fixed for port 3030 connection refused in Seth issue.
+
+Possibly due to docker 18.03.1-ce changes landing. https://docs.docker.com/release-notes/docker-ce/#stable-releases",01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-09 22:57:25,201172918,"@@ -21,7 +21,11 @@ services:
+       context: .
+       dockerfile: ./cli/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        args:",5,2018-07-10 08:49:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201172918,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201172918,cliveb
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,Thanks. I will remove expose and test with ports only.,01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-09 22:58:39,201173152,"@@ -115,15 +123,20 @@ services:
+       context: .
+       dockerfile: ./rpc/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        - ISOLATION_ID=${ISOLATION_ID}
++        - http_proxy
++        - https_proxy
++        - no_proxy
+     image: sawtooth-seth-rpc:${ISOLATION_ID}
+     container_name: seth-rpc
+     volumes:
+       - ./build/debs:/build
+     depends_on:
+       - validator
++    expose:",,2018-07-10 08:49:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201173152,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201173152,cliveb
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,Issue I'm solving is port 3030 connection refused issue on Seth. AFAIK Hyperledger/sawtooth-seth will not standup with current stable docker 18:03.1-ce without yaml files changes on Mac 10.13.5 or Ubuntu lts 16.04 to 18.04. ,01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-09 23:10:36,201175390,"@@ -115,15 +123,20 @@ services:
+       context: .
+       dockerfile: ./rpc/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        - ISOLATION_ID=${ISOLATION_ID}
++        - http_proxy
++        - https_proxy
++        - no_proxy
+     image: sawtooth-seth-rpc:${ISOLATION_ID}
+     container_name: seth-rpc
+     volumes:
+       - ./build/debs:/build
+     depends_on:
+       - validator
++    expose:
++      - 3030    
+     ports:
+-      - 3030:3030
++      - '3030:3030'",,2018-07-10 08:49:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201175390,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201175390,cliveb
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,"Please see my revised changes, tested and revised commit message. ",01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-10 08:56:53,201265431,"@@ -21,7 +21,11 @@ services:
+       context: .
+       dockerfile: ./cli/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        args:",5,2018-07-10 08:56:53,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201265431,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201265431,cliveb
+https://github.com/hyperledger/sawtooth-seth/pull/43,https://github.com/hyperledger/sawtooth-seth/pull/43,"Compose file is invalid because of the following structure:
+```
+args:
+    args:
+    ...
+```",01f4840340240dc325e43d7bde20f6002ea7f0f4,2018-07-10 15:29:34,201388953,"@@ -21,7 +21,11 @@ services:
+       context: .
+       dockerfile: ./cli/Dockerfile-installed
+       args:
+-        ISOLATION_ID: ${ISOLATION_ID}
++        args:",5,2018-07-10 15:29:48,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/201388953,https://github.com/hyperledger/sawtooth-seth/pull/43#discussion_r201388953,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/39,https://github.com/hyperledger/sawtooth-seth/pull/39,"```
+seth-rpc_1       |    Compiling rpc v0.1.0 (file:///project/sawtooth-seth/rpc)
+seth-rpc_1       | warning: unknown lint: `needless_pass_by_value`
+seth-rpc_1       |   --> src/calls/mod.rs:17:10
+seth-rpc_1       |    |
+seth-rpc_1       | 17 | #![allow(needless_pass_by_value)]
+seth-rpc_1       |    |          ^^^^^^^^^^^^^^^^^^^^^^
+seth-rpc_1       |    |
+seth-rpc_1       |    = note: #[warn(unknown_lints)] on by default
+seth-rpc_1       |
+```
+
+Getting this warning upon running the `comp_seth_rpc` test",2bfb2d1de4ba2daedbc9f32b1331337952c6e2c9,2018-07-06 17:55:09,200727517,"@@ -14,6 +14,7 @@
+  * limitations under the License.
+  * ------------------------------------------------------------------------------
+  */
++#![allow(needless_pass_by_value)]",,2018-07-13 15:10:16,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/200727517,https://github.com/hyperledger/sawtooth-seth/pull/39#discussion_r200727517,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/37,https://github.com/hyperledger/sawtooth-seth/pull/37,This hides any other error message that would come from `client.LookupAccountNonce`. We need to check the `Account.Nonce` value in `client.LookupAccountNonce` and make sure that a valid value is returned instead of nil,6f516a419cc8ca70c4c08da321cafac259e5b344,2018-07-02 14:52:33,199524020,"@@ -81,7 +81,8 @@ func (args *AccountCreate) Run(config *Config) error {
+ 	if args.Nonce == """" {
+ 		nonce, err = client.LookupAccountNonce(priv)
+ 		if err != nil {
+-			return err
++			nonce = 0",5,2018-07-02 14:53:41,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/199524020,https://github.com/hyperledger/sawtooth-seth/pull/37#discussion_r199524020,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/37,https://github.com/hyperledger/sawtooth-seth/pull/37,Is this still fixing the same problem?,6f516a419cc8ca70c4c08da321cafac259e5b344,2018-07-02 14:53:36,199524404,"@@ -83,7 +83,10 @@ func (c *Client) Get(address []byte) (*EvmEntry, error) {
+ 	}
+ 
+ 	var data string
+-	if body.Data != nil {
++	if body.Data == nil {
++		err := fmt.Errorf(""Rest API GET received improper response"")
++		return nil, err
++	} else {",8,2018-07-02 14:53:41,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/199524404,https://github.com/hyperledger/sawtooth-seth/pull/37#discussion_r199524404,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/37,https://github.com/hyperledger/sawtooth-seth/pull/37,"yes, its the same problem which you had commented earlier, sorry i messed up git during update of commit, so i created a new PR",6f516a419cc8ca70c4c08da321cafac259e5b344,2018-07-04 05:44:11,200013075,"@@ -83,7 +83,10 @@ func (c *Client) Get(address []byte) (*EvmEntry, error) {
+ 	}
+ 
+ 	var data string
+-	if body.Data != nil {
++	if body.Data == nil {
++		err := fmt.Errorf(""Rest API GET received improper response"")
++		return nil, err
++	} else {",8,2018-07-04 05:44:11,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/200013075,https://github.com/hyperledger/sawtooth-seth/pull/37#discussion_r200013075,mithunshashidhara
+https://github.com/hyperledger/sawtooth-seth/pull/37,https://github.com/hyperledger/sawtooth-seth/pull/37,"there are log messages inside client.LookupAccountNonce for all the error scenarios that i have encountered so far, only when account creation nonce is not generated from rest-api, in other scenarios i do see nonce. this was the only solution i could come up with.",6f516a419cc8ca70c4c08da321cafac259e5b344,2018-07-04 06:08:55,200016404,"@@ -81,7 +81,8 @@ func (args *AccountCreate) Run(config *Config) error {
+ 	if args.Nonce == """" {
+ 		nonce, err = client.LookupAccountNonce(priv)
+ 		if err != nil {
+-			return err
++			nonce = 0",5,2018-07-04 06:08:55,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/200016404,https://github.com/hyperledger/sawtooth-seth/pull/37#discussion_r200016404,mithunshashidhara
+https://github.com/hyperledger/sawtooth-seth/pull/37,https://github.com/hyperledger/sawtooth-seth/pull/37,"@knkski yes this issue is fixed, i will close this PR, Thanks",6f516a419cc8ca70c4c08da321cafac259e5b344,2018-08-16 07:27:44,210499359,"@@ -83,7 +83,10 @@ func (c *Client) Get(address []byte) (*EvmEntry, error) {
+ 	}
+ 
+ 	var data string
+-	if body.Data != nil {
++	if body.Data == nil {
++		err := fmt.Errorf(""Rest API GET received improper response"")
++		return nil, err
++	} else {",8,2018-08-16 07:27:44,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/210499359,https://github.com/hyperledger/sawtooth-seth/pull/37#discussion_r210499359,mithunshashidhara
+https://github.com/hyperledger/sawtooth-seth/pull/32,https://github.com/hyperledger/sawtooth-seth/pull/32,This error message is a bit too specific for this method. There is a chance the body.Data could be nil without encountering the nonce bug,82280feae08991fecff7f3b1f257292b9f173fed,2018-05-25 15:16:32,190926393,"@@ -83,7 +83,10 @@ func (c *Client) Get(address []byte) (*EvmEntry, error) {
+ 	}
+ 
+ 	var data string
+-	if body.Data != nil {
++	if body.Data == nil {
++		err := fmt.Errorf(""please add option --nonce=0"")",,2018-06-20 07:28:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/190926393,https://github.com/hyperledger/sawtooth-seth/pull/32#discussion_r190926393,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/32,https://github.com/hyperledger/sawtooth-seth/pull/32,This error message could be improved to add more detail about what went wrong exactly,82280feae08991fecff7f3b1f257292b9f173fed,2018-05-25 15:17:00,190926544,"@@ -93,7 +96,8 @@ func (c *Client) Get(address []byte) (*EvmEntry, error) {
+ 	}
+ 
+ 	if len(buf) == 0 {
+-		return nil, nil
++		err := fmt.Errorf(""received buffer length is zero"")",,2018-06-20 07:28:17,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/190926544,https://github.com/hyperledger/sawtooth-seth/pull/32#discussion_r190926544,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/28,https://github.com/hyperledger/sawtooth-seth/pull/28,"If you look at how the cli handles this, there are separate data and key directory functions. I would do the same thing here and create a new `get_key_dir()` function that returns the key path using the `get_data_dir()` funciton.",82051922897d75664833b7761b3883da4c53272c,2018-05-04 14:58:26,186109584,"@@ -84,7 +84,7 @@ impl From<SigningError> for Error {
+ }
+ 
+ fn get_data_dir() -> PathBuf {
+-    [&env!(""HOME""), "".sawtooth""].iter().collect()
++    [&env!(""HOME""), "".sawtooth"", ""keys""].iter().collect()",5,2018-05-04 14:58:42,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/186109584,https://github.com/hyperledger/sawtooth-seth/pull/28#discussion_r186109584,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/28,https://github.com/hyperledger/sawtooth-seth/pull/28,"Agree with the idea of adding `get_key_dir()` here, and can maybe add support for environment variables in a separate PR.",82051922897d75664833b7761b3883da4c53272c,2018-05-13 18:41:57,187809803,"@@ -84,7 +84,7 @@ impl From<SigningError> for Error {
+ }
+ 
+ fn get_data_dir() -> PathBuf {
+-    [&env!(""HOME""), "".sawtooth""].iter().collect()
++    [&env!(""HOME""), "".sawtooth"", ""keys""].iter().collect()",5,2018-05-13 18:46:40,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/187809803,https://github.com/hyperledger/sawtooth-seth/pull/28#discussion_r187809803,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/21,https://github.com/hyperledger/sawtooth-seth/pull/21,Do we want to hardcode a version here? Wll sawtooth-seth-*_amd64.deb do?,183fad011b1e5456560b6fd98e7c485b1b0f9ec8,2018-03-30 18:27:55,178344558,"@@ -76,9 +76,19 @@ node ('master') {
+             sh './bin/run_tests'
+         }
+ 
++        stage (""Build documentation"") {
++            sh 'docker build . -f docs/Dockerfile -t seth-build-docs:$ISOLATION_ID'
++            sh 'docker run -v $(pwd)/docs:/project/sawtooth-seth/docs seth-build-docs:$ISOLATION_ID'
++        }
++
+         stage(""Archive Build artifacts"") {
++            sh 'docker-compose -f docker-compose-installed.yaml build'
++            sh 'docker run -v $(pwd)/build/debs:/build sawtooth-seth-cli:$ISOLATION_ID cp /debs/sawtooth-seth-cli_0.2.0_amd64.deb /build'
++            sh 'docker run -v $(pwd)/build/debs:/build sawtooth-seth-tp:$ISOLATION_ID cp /debs/sawtooth-seth-tp_0.2.0_amd64.deb /build'
++            sh 'docker run -v $(pwd)/build/debs:/build sawtooth-seth-rpc:$ISOLATION_ID cp /debs/sawtooth-seth-rpc_0.2.0_amd64.deb /build'",7,2018-03-30 21:11:59,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/178344558,https://github.com/hyperledger/sawtooth-seth/pull/21#discussion_r178344558,rberg2
+https://github.com/hyperledger/sawtooth-seth/pull/21,https://github.com/hyperledger/sawtooth-seth/pull/21,"note: Wild cards do not work here, we should look into that later.",183fad011b1e5456560b6fd98e7c485b1b0f9ec8,2018-03-30 19:34:40,178359684,"@@ -76,9 +76,19 @@ node ('master') {
+             sh './bin/run_tests'
+         }
+ 
++        stage (""Build documentation"") {
++            sh 'docker build . -f docs/Dockerfile -t seth-build-docs:$ISOLATION_ID'
++            sh 'docker run -v $(pwd)/docs:/project/sawtooth-seth/docs seth-build-docs:$ISOLATION_ID'
++        }
++
+         stage(""Archive Build artifacts"") {
++            sh 'docker-compose -f docker-compose-installed.yaml build'
++            sh 'docker run -v $(pwd)/build/debs:/build sawtooth-seth-cli:$ISOLATION_ID cp /debs/sawtooth-seth-cli_0.2.0_amd64.deb /build'
++            sh 'docker run -v $(pwd)/build/debs:/build sawtooth-seth-tp:$ISOLATION_ID cp /debs/sawtooth-seth-tp_0.2.0_amd64.deb /build'
++            sh 'docker run -v $(pwd)/build/debs:/build sawtooth-seth-rpc:$ISOLATION_ID cp /debs/sawtooth-seth-rpc_0.2.0_amd64.deb /build'",7,2018-03-30 21:11:59,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/178359684,https://github.com/hyperledger/sawtooth-seth/pull/21#discussion_r178359684,rberg2
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,When will this be re-enabled?  Perhaps leave a comment above this line to indicated why this commented code should be left here.,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-26 18:32:43,177191418,"@@ -28,4 +28,4 @@ run_docker_test seth_blockhash_test
+ run_docker_test seth_blocknum_test
+ run_docker_test seth_timestamp_test
+ run_docker_test seth_perm_test
+-run_docker_test ./rpc/comp_seth_rpc.yaml
++# run_docker_test ./rpc/comp_seth_rpc.yaml",,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177191418,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177191418,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,"Using latest here is not valid. If there are two PRs running in parallel, `latest` may not point to the image you just built (it is a race condition). That is why ISOLATION_ID is used in the other one.",be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-26 22:55:00,177259755,"@@ -64,15 +64,16 @@ node ('master') {
+         // Use a docker container to build and protogen, so that the Jenkins
+         // environment doesn't need all the dependencies.
+         stage(""Build Test Dependencies"") {
+-            sh './bin/build_all'
++            sh 'docker-compose build'
+         }
+ 
+         stage(""Run Lint"") {
+-            sh 'docker run --rm -v $(pwd):/project/sawtooth-core sawtooth-dev-go:$ISOLATION_ID run_go_fmt'
++            sh 'docker run --rm sawtooth-seth-cli:latest run_go_fmt'",,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177259755,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177259755,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,"It would be ideal if we could just fix this. If we can't, then we should at least just comment it out and leave an explanation of why. Don't delete this completely because then we will forget about it.",be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-26 22:56:51,177260086,"@@ -28,4 +28,3 @@ run_docker_test seth_blockhash_test
+ run_docker_test seth_blocknum_test
+ run_docker_test seth_timestamp_test
+ run_docker_test seth_perm_test
+-run_docker_test ./rpc/comp_seth_rpc.yaml",13,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177260086,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177260086,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,It has been added as an acceptance criteria to the story for fixing it,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 12:15:33,177401597,"@@ -28,4 +28,3 @@ run_docker_test seth_blockhash_test
+ run_docker_test seth_blocknum_test
+ run_docker_test seth_timestamp_test
+ run_docker_test seth_perm_test
+-run_docker_test ./rpc/comp_seth_rpc.yaml",13,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177401597,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177401597,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,"that's a good approach.
+Here's the Jira Peter updated: https://jira.hyperledger.org/browse/STL-1124
+",be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 15:31:25,177469471,"@@ -28,4 +28,3 @@ run_docker_test seth_blockhash_test
+ run_docker_test seth_blocknum_test
+ run_docker_test seth_timestamp_test
+ run_docker_test seth_perm_test
+-run_docker_test ./rpc/comp_seth_rpc.yaml",13,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177469471,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177469471,dcmiddle
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,Did you add a jira or some way to indicate this should be re-added?,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 15:32:12,177469794,"@@ -77,15 +77,6 @@ node ('master') {
+             sh './bin/run_tests'
+         }
+ 
+-        stage(""Create git archive"") {
+-            sh '''
+-                REPO=$(git remote show -n origin | grep Fetch | awk -F'[/.]' '{print $6}')
+-                VERSION=`git describe --dirty`
+-                git archive HEAD --format=zip -9 --output=$REPO-$VERSION.zip
+-                git archive HEAD --format=tgz -9 --output=$REPO-$VERSION.tgz
+-            '''
+-        }
+-",26,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177469794,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177469794,dcmiddle
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,Is there a Jira ticket to read docs build?,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 15:33:27,177470337,"@@ -77,11 +77,6 @@ node ('master') {
+             sh './bin/run_tests'
+         }
+ 
+-        stage (""Build documentation"") {
+-            sh 'docker build . -f sawtooth-build-docs -t sawtooth-build-docs:$ISOLATION_ID'
+-            sh 'docker run --rm -v $(pwd):/project/sawtooth-seth sawtooth-build-docs:$ISOLATION_ID'
+-        }
+-",31,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177470337,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177470337,dcmiddle
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,I already have a Docs PR that re-adds this,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 15:40:59,177472948,"@@ -77,11 +77,6 @@ node ('master') {
+             sh './bin/run_tests'
+         }
+ 
+-        stage (""Build documentation"") {
+-            sh 'docker build . -f sawtooth-build-docs -t sawtooth-build-docs:$ISOLATION_ID'
+-            sh 'docker run --rm -v $(pwd):/project/sawtooth-seth sawtooth-build-docs:$ISOLATION_ID'
+-        }
+-",31,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177472948,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177472948,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,Created story: https://jira.hyperledger.org/browse/STL-1127,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 15:54:25,177477730,"@@ -77,15 +77,6 @@ node ('master') {
+             sh './bin/run_tests'
+         }
+ 
+-        stage(""Create git archive"") {
+-            sh '''
+-                REPO=$(git remote show -n origin | grep Fetch | awk -F'[/.]' '{print $6}')
+-                VERSION=`git describe --dirty`
+-                git archive HEAD --format=zip -9 --output=$REPO-$VERSION.zip
+-                git archive HEAD --format=tgz -9 --output=$REPO-$VERSION.tgz
+-            '''
+-        }
+-",26,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177477730,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177477730,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/19,https://github.com/hyperledger/sawtooth-seth/pull/19,I've ipdated the JIRA and am putting a PR together with a fix just now @peterschwarz ,be7be169ab9e2dea0c4db16047e47773e1a6bb79,2018-03-27 19:14:39,177541113,"@@ -28,4 +28,3 @@ run_docker_test seth_blockhash_test
+ run_docker_test seth_blocknum_test
+ run_docker_test seth_timestamp_test
+ run_docker_test seth_perm_test
+-run_docker_test ./rpc/comp_seth_rpc.yaml",13,2018-03-28 17:58:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177541113,https://github.com/hyperledger/sawtooth-seth/pull/19#discussion_r177541113,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,Extra space here,5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 11:31:05,177718183,"@@ -64,35 +64,27 @@ node ('master') {
+         // Use a docker container to build and protogen, so that the Jenkins
+         // environment doesn't need all the dependencies.
+         stage(""Build Test Dependencies"") {
+-            sh './bin/build_all'
++            sh 'docker-compose build'
+         }
+ 
+         stage(""Run Lint"") {
+-            sh 'docker run --rm -v $(pwd):/project/sawtooth-core sawtooth-dev-go:$ISOLATION_ID run_go_fmt'
++            sh 'docker run --rm sawtooth-seth-cli:$ISOLATION_ID run_go_fmt'
+         }
+ 
+         // Run the tests
+         stage(""Run Tests"") {
++            sh 'export PATH=$PATH:$(pwd)'
+             sh './bin/run_tests'
+         }
+ 
+-        stage(""Create git archive"") {
+-            sh '''
+-                REPO=$(git remote show -n origin | grep Fetch | awk -F'[/.]' '{print $6}')
+-                VERSION=`git describe --dirty`
+-                git archive HEAD --format=zip -9 --output=$REPO-$VERSION.zip
+-                git archive HEAD --format=tgz -9 --output=$REPO-$VERSION.tgz
+-            '''
+-        }
+-
+         stage (""Build documentation"") {
+-            sh 'docker build . -f sawtooth-build-docs -t sawtooth-build-docs:$ISOLATION_ID'
+-            sh 'docker run --rm -v $(pwd):/project/sawtooth-seth sawtooth-build-docs:$ISOLATION_ID'
+-        }
++            sh 'docker build . -f docs/Dockerfile -t seth-build-docs:$ISOLATION_ID'
++            sh 'docker run -v $(pwd)/docs:/project/sawtooth-seth/docs seth-build-docs:$ISOLATION_ID'
++         }",,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177718183,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177718183,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,"This won't always work, you'll need to do something like `$(cd $(dirname $0) ; pwd)` instead. ",5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 11:32:21,177718445,"@@ -19,11 +19,12 @@
+ # Exit on non-zero exit code from subcommand
+ set -e
+ 
++export PATH=$PATH:$(pwd)/bin",,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177718445,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177718445,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,"Currently the PEM filename and the alias *must* be the same, so perhaps change to `{alias}.pem {alias}` as in previous examples.",5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 11:36:07,177719273,"@@ -105,13 +99,13 @@ the key file must be the same as the alias the account is imported as.
+ Now we are ready to set up the account on the network. To do this, we need to
+ use the ``seth`` command. From the prompt where you generated the key, run::
+ 
+-    # seth account import alias.pem alias
++    # seth account import alias.pem myalias",,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177719273,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177719273,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,Change to `{alias}`,5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 11:36:25,177719328,"@@ -105,13 +99,13 @@ the key file must be the same as the alias the account is imported as.
+ Now we are ready to set up the account on the network. To do this, we need to
+ use the ``seth`` command. From the prompt where you generated the key, run::
+ 
+-    # seth account import alias.pem alias
++    # seth account import alias.pem myalias
+ 
+ This will copy your key to an internal directory and create an alias for the key
+ which you will use to reference the key in future commands. Finally, to submit
+ a transaction to the network to create your account, do::
+ 
+-    # seth account create --nonce=0 --wait alias
++    # seth account create --nonce=0 --wait myalias",89,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177719328,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177719328,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,"I don't like the fact we have to repeat ourselves here, but until I have finished creating multi-stage Dockerfiles for the other components we can live with this for now...",5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 11:37:46,177719581,"@@ -0,0 +1,132 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++# Description:
++#   Builds the environment needed to build the Sawtooth Seth docs
++#   Running the image will put the Sawtooth Seth docs in
++#   sawtooth-seth/docs/build on your local machine.
++#
++# Build:
++#   $ cd sawtooth-seth
++#   $ docker build . -f docs/Dockerfile -t seth-build-docs
++#
++# Run:
++#   $ cd sawtooth-seth
++#   $ docker run -v $(pwd)/docs:/project/sawtooth-seth/docs seth-build-docs
++
++FROM ubuntu:xenial
++
++COPY . /project/sawtooth-seth
++
++ENV GOPATH=/project/sawtooth-seth/common
++ENV PATH=$PATH:/project/sawtooth-seth/common/bin:/project/sawtooth-seth/bin:/usr/lib/go-1.9/bin
++
++# Build cli and tp
++RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list \
++ && apt-get update \
++ && apt-get install -y -q \
++    git \
++    golang-1.9-go \
++    libssl-dev \
++    libzmq3-dev \
++    openssl \
++    python3 \
++    python3-grpcio-tools=1.1.3-1 \
++    python3-pip \
++    python3-sawtooth-cli \
++    software-properties-common \
++ && apt-get clean \
++ && rm -rf /var/lib/apt/lists/*
++
++RUN go get -u \
++    github.com/golang/protobuf/proto \
++    github.com/golang/protobuf/protoc-gen-go \
++    github.com/btcsuite/btcd/btcec \
++    github.com/rberg2/sawtooth-go-sdk/... \
++    github.com/jessevdk/go-flags \
++    github.com/pelletier/go-toml \
++    golang.org/x/crypto/ssh/terminal \
++    golang.org/x/crypto/ripemd160 \
++    gopkg.in/fatih/set.v0
++
++RUN seth-protogen go
++
++ENV PATH=$PATH:/project/sawtooth-seth/cli/bin
++ENV GOPATH=$GOPATH:/project/sawtooth-seth/burrow:/project/sawtooth-seth/cli
++WORKDIR /project/sawtooth-seth/cli/src/seth_cli/cli
++RUN go build -o /project/sawtooth-seth/cli/bin/seth
++
++ENV PATH=$PATH:/project/sawtooth-seth/processor/bin
++ENV GOPATH=$GOPATH:/project/sawtooth-seth/processor
++WORKDIR /project/sawtooth-seth/processor/src/seth_tp
++RUN go build -o /project/sawtooth-seth/processor/bin/seth-tp
++
++# Build RPC",77,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177719581,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177719581,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,Agreed,5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 19:41:09,177867283,"@@ -0,0 +1,132 @@
++# Copyright 2018 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++# Description:
++#   Builds the environment needed to build the Sawtooth Seth docs
++#   Running the image will put the Sawtooth Seth docs in
++#   sawtooth-seth/docs/build on your local machine.
++#
++# Build:
++#   $ cd sawtooth-seth
++#   $ docker build . -f docs/Dockerfile -t seth-build-docs
++#
++# Run:
++#   $ cd sawtooth-seth
++#   $ docker run -v $(pwd)/docs:/project/sawtooth-seth/docs seth-build-docs
++
++FROM ubuntu:xenial
++
++COPY . /project/sawtooth-seth
++
++ENV GOPATH=/project/sawtooth-seth/common
++ENV PATH=$PATH:/project/sawtooth-seth/common/bin:/project/sawtooth-seth/bin:/usr/lib/go-1.9/bin
++
++# Build cli and tp
++RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list \
++ && apt-get update \
++ && apt-get install -y -q \
++    git \
++    golang-1.9-go \
++    libssl-dev \
++    libzmq3-dev \
++    openssl \
++    python3 \
++    python3-grpcio-tools=1.1.3-1 \
++    python3-pip \
++    python3-sawtooth-cli \
++    software-properties-common \
++ && apt-get clean \
++ && rm -rf /var/lib/apt/lists/*
++
++RUN go get -u \
++    github.com/golang/protobuf/proto \
++    github.com/golang/protobuf/protoc-gen-go \
++    github.com/btcsuite/btcd/btcec \
++    github.com/rberg2/sawtooth-go-sdk/... \
++    github.com/jessevdk/go-flags \
++    github.com/pelletier/go-toml \
++    golang.org/x/crypto/ssh/terminal \
++    golang.org/x/crypto/ripemd160 \
++    gopkg.in/fatih/set.v0
++
++RUN seth-protogen go
++
++ENV PATH=$PATH:/project/sawtooth-seth/cli/bin
++ENV GOPATH=$GOPATH:/project/sawtooth-seth/burrow:/project/sawtooth-seth/cli
++WORKDIR /project/sawtooth-seth/cli/src/seth_cli/cli
++RUN go build -o /project/sawtooth-seth/cli/bin/seth
++
++ENV PATH=$PATH:/project/sawtooth-seth/processor/bin
++ENV GOPATH=$GOPATH:/project/sawtooth-seth/processor
++WORKDIR /project/sawtooth-seth/processor/src/seth_tp
++RUN go build -o /project/sawtooth-seth/processor/bin/seth-tp
++
++# Build RPC",77,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177867283,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177867283,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,"Looking at the code it seems to me that `seth account import {key-file} {alias}` writes a file called `{alias}.pem` but it doesnt matter what the `{key-file}` is called. My goal was to make the example commands easy to copy-paste in, so I'd like to avoid the brackets. But it might be better if the example key file it generates is something like ""key-file.pem""",5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-28 19:43:49,177867922,"@@ -105,13 +99,13 @@ the key file must be the same as the alias the account is imported as.
+ Now we are ready to set up the account on the network. To do this, we need to
+ use the ``seth`` command. From the prompt where you generated the key, run::
+ 
+-    # seth account import alias.pem alias
++    # seth account import alias.pem myalias",,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/177867922,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r177867922,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,"Oop, this should still be `{alias}.pem`",5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-29 13:14:57,178051158,"@@ -77,41 +73,38 @@ In order to interact with Seth, we need to create an external account on the
+ network. Creating an account is equivalent to generating a new private key that
+ Seth can understand. Seth accepts secp256k1 private keys in one of two formats:
+ 
+-- A plaintext base58 encoded private key, such as those generated by
++- A plaintext hex encoded private key, such as those generated by
+   ``sawtooth keygen``.
+ - A PEM encoded private key with or without a password, such as those generated
+   with the ``openssl`` command.
+ 
+ The following shows you how to generate a PEM encoded key that has been
+-encrypted with a password. If you would like to use a private key generated with
+-the ``sawtooth keygen`` command, it must be copied from the ``validator``
+-container where it was created.
++encrypted with a password.
+ 
+-OpenSSL is already installed in the Docker container running the Seth-RPC
+-server, so we can just connect to the container and run the command from there.
+-Do the following to start up a shell in that container::
++OpenSSL is already installed in the ``seth-cli`` Docker container, so we can just
++connect to the container and run the command from there. Do the following to
++start up a shell in that container::
+ 
+-    $ docker exec -it seth-rpc bash
++    $ docker exec -it seth-cli bash
+ 
+ You should now be logged in as root in the container. From this shell, you can
+ generate a new, password-encrypted key with the following::
+ 
+-    # openssl ecparam -genkey -name secp256k1 | openssl ec -out alias.pem -aes128
++    # openssl ecparam -genkey -name secp256k1 | openssl ec -out key-file.pem -aes128",71,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/178051158,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r178051158,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/18,https://github.com/hyperledger/sawtooth-seth/pull/18,"These also need to be the same, unless we have changed the way this works? so `{alias}.pem {alias}`",5e02f4d7fef8bcd3a6b8b530352d30b30be811ba,2018-03-29 13:15:49,178051398,"@@ -77,41 +73,38 @@ In order to interact with Seth, we need to create an external account on the
+ network. Creating an account is equivalent to generating a new private key that
+ Seth can understand. Seth accepts secp256k1 private keys in one of two formats:
+ 
+-- A plaintext base58 encoded private key, such as those generated by
++- A plaintext hex encoded private key, such as those generated by
+   ``sawtooth keygen``.
+ - A PEM encoded private key with or without a password, such as those generated
+   with the ``openssl`` command.
+ 
+ The following shows you how to generate a PEM encoded key that has been
+-encrypted with a password. If you would like to use a private key generated with
+-the ``sawtooth keygen`` command, it must be copied from the ``validator``
+-container where it was created.
++encrypted with a password.
+ 
+-OpenSSL is already installed in the Docker container running the Seth-RPC
+-server, so we can just connect to the container and run the command from there.
+-Do the following to start up a shell in that container::
++OpenSSL is already installed in the ``seth-cli`` Docker container, so we can just
++connect to the container and run the command from there. Do the following to
++start up a shell in that container::
+ 
+-    $ docker exec -it seth-rpc bash
++    $ docker exec -it seth-cli bash
+ 
+ You should now be logged in as root in the container. From this shell, you can
+ generate a new, password-encrypted key with the following::
+ 
+-    # openssl ecparam -genkey -name secp256k1 | openssl ec -out alias.pem -aes128
++    # openssl ecparam -genkey -name secp256k1 | openssl ec -out key-file.pem -aes128
+ 
+ You can use any encryption cipher by changing the final ``-aes128`` flag or omit
+-the flag and to generate a key without it being encrypted. Note that the name of
+-the key file must be the same as the alias the account is imported as.
++the flag and to generate a key without it being encrypted.
+ 
+ Now we are ready to set up the account on the network. To do this, we need to
+ use the ``seth`` command. From the prompt where you generated the key, run::
+ 
+-    # seth account import alias.pem alias
++    # seth account import key-file.pem myalias",82,2018-03-30 21:52:32,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/178051398,https://github.com/hyperledger/sawtooth-seth/pull/18#discussion_r178051398,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/15,https://github.com/hyperledger/sawtooth-seth/pull/15,Are there build artifacts that are going in here?,c5e568aea25ead762107929aaaf8eeac63c5e74c,2018-03-21 15:28:05,176124879,"@@ -20,3 +20,6 @@
+ /rpc/src/messages/*.rs
+ !/rpc/src/messages/mod.rs
+ /rpc/tests/protobuf/
++
++/contracts/*",,2018-03-21 17:19:51,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/176124879,https://github.com/hyperledger/sawtooth-seth/pull/15#discussion_r176124879,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/15,https://github.com/hyperledger/sawtooth-seth/pull/15,"The purpose of this directory is to allow user created contracts to be edited on the host and available in each container. I don't think there would be a reason for them to be committed, so I excluded it (with exception of the examples dir, where we have contracts that are associated with tests and demos)",c5e568aea25ead762107929aaaf8eeac63c5e74c,2018-03-21 15:43:33,176131097,"@@ -20,3 +20,6 @@
+ /rpc/src/messages/*.rs
+ !/rpc/src/messages/mod.rs
+ /rpc/tests/protobuf/
++
++/contracts/*",,2018-03-21 17:19:51,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/176131097,https://github.com/hyperledger/sawtooth-seth/pull/15#discussion_r176131097,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/14,https://github.com/hyperledger/sawtooth-seth/pull/14,Is there still any python in this repo?,b0bcc0b78bcc1d517d3886970936c7cb28bba3a5,2018-03-14 14:55:11,174487855,"@@ -188,6 +158,24 @@ def fix_import(contents, pkg, sub_dir=False):
+     )
+ 
+ 
++def protoc(src_dir, base_dir, pkg, language=""python""):
++    if language == ""python"":",67,2018-03-16 15:40:33,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/174487855,https://github.com/hyperledger/sawtooth-seth/pull/14#discussion_r174487855,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/14,https://github.com/hyperledger/sawtooth-seth/pull/14,"Yes, some of the RPC tests use python and require the Seth protos",b0bcc0b78bcc1d517d3886970936c7cb28bba3a5,2018-03-15 16:07:34,174839343,"@@ -188,6 +158,24 @@ def fix_import(contents, pkg, sub_dir=False):
+     )
+ 
+ 
++def protoc(src_dir, base_dir, pkg, language=""python""):
++    if language == ""python"":",67,2018-03-16 15:40:33,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/174839343,https://github.com/hyperledger/sawtooth-seth/pull/14#discussion_r174839343,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/14,https://github.com/hyperledger/sawtooth-seth/pull/14,"Possibly premature to include all of these, but I'm happy to go with it for the moment until this is moved to the `hyperledger` github org.",b0bcc0b78bcc1d517d3886970936c7cb28bba3a5,2018-03-16 11:08:38,175057714,"@@ -30,7 +30,7 @@ import (
+ 	. ""burrow/word256""
+ 
+ 	// ""github.com/tendermint/go-events""
+- 	""sawtooth_sdk/logging""
++ 	""github.com/rberg2/sawtooth-go-sdk/logging""",5,2018-03-20 19:43:40,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/175057714,https://github.com/hyperledger/sawtooth-seth/pull/14#discussion_r175057714,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/14,https://github.com/hyperledger/sawtooth-seth/pull/14,Not sure we need nodejs here,b0bcc0b78bcc1d517d3886970936c7cb28bba3a5,2018-03-16 20:24:30,175205145,"@@ -0,0 +1,60 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++FROM ubuntu:xenial
++
++COPY . /project/sawtooth-seth
++ENV GOPATH=/project/sawtooth-seth/cli
++ENV PATH=$PATH:/project/sawtooth-seth/cli/bin:/project/sawtooth-seth/bin:/usr/lib/go-1.9/bin
++WORKDIR $GOPATH/src/seth_cli/cli
++
++RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list \
++ && apt-get update \
++ && apt-get install -y -q \
++    curl \
++    git \
++    golang-1.9-go \
++    libssl-dev \
++    libzmq3-dev \
++    openssl \
++    python3 \
++    python3-grpcio-tools=1.1.3-1 \
++    python3-sawtooth-cli \
++ && curl -s -S -o /tmp/setup-node.sh https://deb.nodesource.com/setup_6.x \",36,2018-03-16 20:24:30,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/175205145,https://github.com/hyperledger/sawtooth-seth/pull/14#discussion_r175205145,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/14,https://github.com/hyperledger/sawtooth-seth/pull/14,May be removed in a future PR,b0bcc0b78bcc1d517d3886970936c7cb28bba3a5,2018-03-16 20:25:13,175205297,"@@ -0,0 +1,60 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++FROM ubuntu:xenial
++
++COPY . /project/sawtooth-seth
++ENV GOPATH=/project/sawtooth-seth/cli
++ENV PATH=$PATH:/project/sawtooth-seth/cli/bin:/project/sawtooth-seth/bin:/usr/lib/go-1.9/bin
++WORKDIR $GOPATH/src/seth_cli/cli
++
++RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list \
++ && apt-get update \
++ && apt-get install -y -q \
++    curl \
++    git \
++    golang-1.9-go \
++    libssl-dev \
++    libzmq3-dev \
++    openssl \
++    python3 \
++    python3-grpcio-tools=1.1.3-1 \
++    python3-sawtooth-cli \
++ && curl -s -S -o /tmp/setup-node.sh https://deb.nodesource.com/setup_6.x \",36,2018-03-16 20:25:13,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/175205297,https://github.com/hyperledger/sawtooth-seth/pull/14#discussion_r175205297,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/14,https://github.com/hyperledger/sawtooth-seth/pull/14,"Nevermind, it looks used",b0bcc0b78bcc1d517d3886970936c7cb28bba3a5,2018-03-16 20:45:48,175210065,"@@ -0,0 +1,60 @@
++# Copyright 2017 Intel Corporation
++#
++# Licensed under the Apache License, Version 2.0 (the ""License"");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an ""AS IS"" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++# ------------------------------------------------------------------------------
++
++FROM ubuntu:xenial
++
++COPY . /project/sawtooth-seth
++ENV GOPATH=/project/sawtooth-seth/cli
++ENV PATH=$PATH:/project/sawtooth-seth/cli/bin:/project/sawtooth-seth/bin:/usr/lib/go-1.9/bin
++WORKDIR $GOPATH/src/seth_cli/cli
++
++RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 8AA7AF1F1091A5FD \
++ && echo 'deb http://repo.sawtooth.me/ubuntu/1.0/stable xenial universe' >> /etc/apt/sources.list \
++ && apt-get update \
++ && apt-get install -y -q \
++    curl \
++    git \
++    golang-1.9-go \
++    libssl-dev \
++    libzmq3-dev \
++    openssl \
++    python3 \
++    python3-grpcio-tools=1.1.3-1 \
++    python3-sawtooth-cli \
++ && curl -s -S -o /tmp/setup-node.sh https://deb.nodesource.com/setup_6.x \",36,2018-03-16 20:45:48,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/175210065,https://github.com/hyperledger/sawtooth-seth/pull/14#discussion_r175210065,peterschwarz
+https://github.com/hyperledger/sawtooth-seth/pull/12,https://github.com/hyperledger/sawtooth-seth/pull/12,Awaiting clarification from Linux Foundation / Hyperledger on the copyright policy.,1268e66c57b6b7dfa2dc5011fa5589e0318d3b0b,2018-02-23 18:21:45,170327090,"@@ -63,9 +63,9 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth'
+-copyright = u'2015-2017, Intel Corporation'
+-author = u'Intel Corporation'
++project = u'Sawtooth Seth'
++copyright = u'2017-2018'
++author = u'Hyperledger Foundation'",,2018-03-08 21:53:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/170327090,https://github.com/hyperledger/sawtooth-seth/pull/12#discussion_r170327090,dcmiddle
+https://github.com/hyperledger/sawtooth-seth/pull/12,https://github.com/hyperledger/sawtooth-seth/pull/12,"I'll revert these for now, so we can get this merged sooner @dcmiddle ",1268e66c57b6b7dfa2dc5011fa5589e0318d3b0b,2018-03-02 15:52:02,171883751,"@@ -63,9 +63,9 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth'
+-copyright = u'2015-2017, Intel Corporation'
+-author = u'Intel Corporation'
++project = u'Sawtooth Seth'
++copyright = u'2017-2018'
++author = u'Hyperledger Foundation'",,2018-03-08 21:53:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/171883751,https://github.com/hyperledger/sawtooth-seth/pull/12#discussion_r171883751,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/12,https://github.com/hyperledger/sawtooth-seth/pull/12,sounds good,1268e66c57b6b7dfa2dc5011fa5589e0318d3b0b,2018-03-02 18:24:00,171924027,"@@ -63,9 +63,9 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth'
+-copyright = u'2015-2017, Intel Corporation'
+-author = u'Intel Corporation'
++project = u'Sawtooth Seth'
++copyright = u'2017-2018'
++author = u'Hyperledger Foundation'",,2018-03-08 21:53:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/171924027,https://github.com/hyperledger/sawtooth-seth/pull/12#discussion_r171924027,dcmiddle
+https://github.com/hyperledger/sawtooth-seth/pull/12,https://github.com/hyperledger/sawtooth-seth/pull/12,This introduction needs to be rewritten and all of these Sawtooth-specific references deleted,1268e66c57b6b7dfa2dc5011fa5589e0318d3b0b,2018-03-06 22:41:43,172685682,"@@ -44,47 +44,28 @@ in a *transaction family*. While we expect users to build custom transaction
+ families that reflect the unique requirements of their ledgers, we provide
+ several core transaction families as models\:
+ 
+-    * Validator Registry - Provides a methodology
++    * *Validator Registry* - Provides a methodology",5,2018-03-08 21:53:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/172685682,https://github.com/hyperledger/sawtooth-seth/pull/12#discussion_r172685682,aludvik
+https://github.com/hyperledger/sawtooth-seth/pull/12,https://github.com/hyperledger/sawtooth-seth/pull/12,"Agree, but that can be done in a separate pull request, with a complete documentation update/rewrite",1268e66c57b6b7dfa2dc5011fa5589e0318d3b0b,2018-03-07 15:36:24,172882148,"@@ -44,47 +44,28 @@ in a *transaction family*. While we expect users to build custom transaction
+ families that reflect the unique requirements of their ledgers, we provide
+ several core transaction families as models\:
+ 
+-    * Validator Registry - Provides a methodology
++    * *Validator Registry* - Provides a methodology",5,2018-03-08 21:53:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/172882148,https://github.com/hyperledger/sawtooth-seth/pull/12#discussion_r172882148,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/12,https://github.com/hyperledger/sawtooth-seth/pull/12,@dcmiddle I have reverted back to using the original copyright notices,1268e66c57b6b7dfa2dc5011fa5589e0318d3b0b,2018-03-07 15:43:00,172884613,"@@ -63,9 +63,9 @@
+ master_doc = 'contents'
+ 
+ # General information about the project.
+-project = u'Sawtooth'
+-copyright = u'2015-2017, Intel Corporation'
+-author = u'Intel Corporation'
++project = u'Sawtooth Seth'
++copyright = u'2017-2018'
++author = u'Hyperledger Foundation'",,2018-03-08 21:53:31,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/172884613,https://github.com/hyperledger/sawtooth-seth/pull/12#discussion_r172884613,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/11,https://github.com/hyperledger/sawtooth-seth/pull/11,Is this correct?,2d33834e78e874b0f1e175a5740340fcb11916c8,2018-03-08 18:39:58,173251050,"@@ -40,10 +40,15 @@ pub fn version<T>(_params: Params, mut _client: ValidatorClient<T>) -> Result<Va
+     Ok(Value::String(String::from(SAWTOOTH_NET_VERSION)))
+ }
+ 
+-// Since this is only for HTTP right now, there won't be any connected peers
+-pub fn peer_count<T>(_params: Params, mut _client: ValidatorClient<T>) -> Result<Value, Error> where T: MessageSender {
++// Return the number of actual Sawtooth peers
++pub fn peer_count<T>(_params: Params, mut client: ValidatorClient<T>) -> Result<Value, Error> where T: MessageSender {
+     info!(""net_peerCount"");
+-    Ok(Value::String(format!(""{:#x}"", 0)))
++    let n = match client.get_peers() {
++        Err(_) => 0,
++        Ok(n) => n + 1,",,2018-03-08 20:45:54,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/173251050,https://github.com/hyperledger/sawtooth-seth/pull/11#discussion_r173251050,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/11,https://github.com/hyperledger/sawtooth-seth/pull/11,"based on https://github.com/ethereum/wiki/wiki/JSON-RPC#net_peercount I believe it should just be `Ok(n) => n,`",2d33834e78e874b0f1e175a5740340fcb11916c8,2018-03-08 19:51:09,173271676,"@@ -40,10 +40,15 @@ pub fn version<T>(_params: Params, mut _client: ValidatorClient<T>) -> Result<Va
+     Ok(Value::String(String::from(SAWTOOTH_NET_VERSION)))
+ }
+ 
+-// Since this is only for HTTP right now, there won't be any connected peers
+-pub fn peer_count<T>(_params: Params, mut _client: ValidatorClient<T>) -> Result<Value, Error> where T: MessageSender {
++// Return the number of actual Sawtooth peers
++pub fn peer_count<T>(_params: Params, mut client: ValidatorClient<T>) -> Result<Value, Error> where T: MessageSender {
+     info!(""net_peerCount"");
+-    Ok(Value::String(format!(""{:#x}"", 0)))
++    let n = match client.get_peers() {
++        Err(_) => 0,
++        Ok(n) => n + 1,",,2018-03-08 20:45:54,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/173271676,https://github.com/hyperledger/sawtooth-seth/pull/11#discussion_r173271676,dplumb94
+https://github.com/hyperledger/sawtooth-seth/pull/9,https://github.com/hyperledger/sawtooth-seth/pull/9,"This seems unwieldy, but I don't know what the right Rust idiom should be here?",602616b1dbbeb97bba14d8bb68dc02210ab21dea,2018-02-15 19:38:15,168585559,"@@ -67,11 +67,12 @@ pub fn send_transaction<T>(params: Params, mut client: ValidatorClient<T>) -> Re
+         Error::invalid_params(""`data` not set"")))?;
+ 
+     // Optional Arguments
++    let txn_count = client.get_account(from.clone(), BlockKey::Latest).map(|a| a.unwrap().nonce).unwrap();",,2018-02-19 19:20:10,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/168585559,https://github.com/hyperledger/sawtooth-seth/pull/9#discussion_r168585559,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/9,https://github.com/hyperledger/sawtooth-seth/pull/9,The unwrap() will cause panics.  What I've done in similar expressions in other code is make sure that the last thing is a Result and then follow it with ? (shorthand for try!) which will cause the error to be returned or the value safely unwrapped.,602616b1dbbeb97bba14d8bb68dc02210ab21dea,2018-02-18 15:24:16,168955182,"@@ -67,11 +67,12 @@ pub fn send_transaction<T>(params: Params, mut client: ValidatorClient<T>) -> Re
+         Error::invalid_params(""`data` not set"")))?;
+ 
+     // Optional Arguments
++    let txn_count = client.get_account(from.clone(), BlockKey::Latest).map(|a| a.unwrap().nonce).unwrap();",,2018-02-19 19:20:10,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/168955182,https://github.com/hyperledger/sawtooth-seth/pull/9#discussion_r168955182,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/9,https://github.com/hyperledger/sawtooth-seth/pull/9,"The internal a.unwrap() should be handled as well. (If I have time during hackfest, I'll try and come up with a more concrete suggestion.)",602616b1dbbeb97bba14d8bb68dc02210ab21dea,2018-02-19 18:36:03,169148849,"@@ -67,11 +67,12 @@ pub fn send_transaction<T>(params: Params, mut client: ValidatorClient<T>) -> Re
+         Error::invalid_params(""`data` not set"")))?;
+ 
+     // Optional Arguments
++    let txn_count = client.get_account(from.clone(), BlockKey::Latest).map(|a| a.unwrap().nonce)?;",,2018-02-19 19:20:10,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169148849,https://github.com/hyperledger/sawtooth-seth/pull/9#discussion_r169148849,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/9,https://github.com/hyperledger/sawtooth-seth/pull/9,"See my _next_ update which uses `match` based on the idioms used by other calls to the client later on in the file...! It has better error handling, I think, although at a cost in verbosity.",602616b1dbbeb97bba14d8bb68dc02210ab21dea,2018-02-19 19:27:13,169156946,"@@ -67,11 +67,12 @@ pub fn send_transaction<T>(params: Params, mut client: ValidatorClient<T>) -> Re
+         Error::invalid_params(""`data` not set"")))?;
+ 
+     // Optional Arguments
++    let txn_count = client.get_account(from.clone(), BlockKey::Latest).map(|a| a.unwrap().nonce)?;",,2018-02-19 19:27:42,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169156946,https://github.com/hyperledger/sawtooth-seth/pull/9#discussion_r169156946,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,This will become inaccurate when we do a release.  Maybe we should create the 'lastest' link pointing to nighty until we start doing releases. (And maybe we start doing Seth releases soon.). Thoughts?,e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-18 15:35:28,168955549,"@@ -16,7 +16,7 @@ Documentation
+ -------------
+ 
+ Documentation for how to run and extend Sawtooth is available here:
+-https://sawtooth.hyperledger.org/docs/seth/
++https://sawtooth.hyperledger.org/docs/seth/nightly/master/introduction.html",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/168955549,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r168955549,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,"I think we should lock this to 1.0, not the minor release.  Otherwise we have to remember to update it every time a core release happens.",e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-18 15:36:15,168955573,"@@ -19,38 +19,24 @@ services:
+ 
+   seth-tp:
+     image: sawtooth-seth:latest
+-    build: ./
+-    volumes:
+-      - ./:/project/sawtooth-seth
+-    expose:
+-      - 4004
+     depends_on:
+       - validator
+     command: seth-tp -vv --connect tcp://validator:4004
+-    stop_signal: SIGKILL
+ 
+   block-info-tp:
+-    image: hyperledger/sawtooth-block-info-tp:latest
+-    expose:
+-      - 4004
++    image: hyperledger/sawtooth-block-info-tp:1.0.1",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/168955573,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r168955573,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,"This depends_on is not needed, and really has no impact since depends_on has no ability to determine when services inside a container are actually ready.",e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-18 15:40:46,168955724,"@@ -68,33 +54,24 @@ services:
+         sawtooth-validator --endpoint tcp://validator:8800 -v \
+             --bind component:tcp://eth0:4004 \
+             --bind network:tcp://eth0:8800 \
+-    \""""
+-    stop_signal: SIGKILL
++      \""""
+ 
+   rest-api:
+-    image: hyperledger/sawtooth-rest-api:latest
+-    expose:
+-      - 4004
+-      - 8080
++    image: hyperledger/sawtooth-rest-api:1.0.1
+     ports:
+       - 8080:8080
+     depends_on:
+      - validator
+     command: sawtooth-rest-api -v --connect tcp://validator:4004 --bind rest-api:8080
+-    stop_signal: SIGKILL
+ 
+-  seth:
+-    container_name: seth
++  seth-rpc:
+     image: sawtooth-seth:latest
+-    volumes:
+-      - ./:/project/sawtooth-seth
+-    expose:
+-      - 3030
+-      - 8080
+     ports:
+       - 3030:3030
+-    working_dir: ""/project/sawtooth-seth""
+-    command: ""bash -c \""
++    depends_on:",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/168955724,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r168955724,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,"True, but I think if we keep it pointed at the nightly docs until then it will be more helpful...",e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-19 13:05:41,169069657,"@@ -16,7 +16,7 @@ Documentation
+ -------------
+ 
+ Documentation for how to run and extend Sawtooth is available here:
+-https://sawtooth.hyperledger.org/docs/seth/
++https://sawtooth.hyperledger.org/docs/seth/nightly/master/introduction.html",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169069657,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r169069657,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,OK,e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-19 13:05:47,169069688,"@@ -19,38 +19,24 @@ services:
+ 
+   seth-tp:
+     image: sawtooth-seth:latest
+-    build: ./
+-    volumes:
+-      - ./:/project/sawtooth-seth
+-    expose:
+-      - 4004
+     depends_on:
+       - validator
+     command: seth-tp -vv --connect tcp://validator:4004
+-    stop_signal: SIGKILL
+ 
+   block-info-tp:
+-    image: hyperledger/sawtooth-block-info-tp:latest
+-    expose:
+-      - 4004
++    image: hyperledger/sawtooth-block-info-tp:1.0.1",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169069688,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r169069688,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,Fair enough,e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-19 13:06:56,169070061,"@@ -68,33 +54,24 @@ services:
+         sawtooth-validator --endpoint tcp://validator:8800 -v \
+             --bind component:tcp://eth0:4004 \
+             --bind network:tcp://eth0:8800 \
+-    \""""
+-    stop_signal: SIGKILL
++      \""""
+ 
+   rest-api:
+-    image: hyperledger/sawtooth-rest-api:latest
+-    expose:
+-      - 4004
+-      - 8080
++    image: hyperledger/sawtooth-rest-api:1.0.1
+     ports:
+       - 8080:8080
+     depends_on:
+      - validator
+     command: sawtooth-rest-api -v --connect tcp://validator:4004 --bind rest-api:8080
+-    stop_signal: SIGKILL
+ 
+-  seth:
+-    container_name: seth
++  seth-rpc:
+     image: sawtooth-seth:latest
+-    volumes:
+-      - ./:/project/sawtooth-seth
+-    expose:
+-      - 3030
+-      - 8080
+     ports:
+       - 3030:3030
+-    working_dir: ""/project/sawtooth-seth""
+-    command: ""bash -c \""
++    depends_on:",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169070061,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r169070061,grkvlt
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,"This URL should work now: https://sawtooth.hyperledger.org/docs/seth/releases/latest/introduction.html
+
+It links to nightly master until we do a release.",e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-19 18:31:12,169148071,"@@ -16,7 +16,7 @@ Documentation
+ -------------
+ 
+ Documentation for how to run and extend Sawtooth is available here:
+-https://sawtooth.hyperledger.org/docs/seth/
++https://sawtooth.hyperledger.org/docs/seth/nightly/master/introduction.html",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169148071,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r169148071,vaporos
+https://github.com/hyperledger/sawtooth-seth/pull/8,https://github.com/hyperledger/sawtooth-seth/pull/8,Changed now,e130374f877e0cd37a33e7c8592e5cef139027ab,2018-02-19 19:47:32,169159957,"@@ -16,7 +16,7 @@ Documentation
+ -------------
+ 
+ Documentation for how to run and extend Sawtooth is available here:
+-https://sawtooth.hyperledger.org/docs/seth/
++https://sawtooth.hyperledger.org/docs/seth/nightly/master/introduction.html",,2018-02-19 21:55:43,https://api.github.com/repos/hyperledger/sawtooth-seth/pulls/comments/169159957,https://github.com/hyperledger/sawtooth-seth/pull/8#discussion_r169159957,grkvlt

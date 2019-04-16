@@ -1,0 +1,54 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/25,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/470394742,https://github.com/hyperledger/sawtooth-sdk-go/issues/25#issuecomment-470394742,arsulegai,"@hitarshi Please refer to the file at https://github.com/hyperledger/sawtooth-sdk-go/blob/master/Dockerfile
+
+2 steps
+1. Install debs you see in this dockerfile.
+2. Go get packages seen before go generate in this dockerfile.",2019-03-07 05:50:12,2019-03-07 05:50:12
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/435937176,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-435937176,arsulegai,@vaporos ,2018-11-05 16:22:53,2018-11-05 16:22:53
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/442882857,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-442882857,agunde406,@arsulegai  looks like this pr needs to be rebased,2018-11-29 15:48:30,2018-11-29 15:48:30
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/442891726,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-442891726,arsulegai,"Ok, I will update the branch",2018-11-29 16:10:54,2018-11-29 16:10:54
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/448544908,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-448544908,arsulegai,This is rebased.,2018-12-19 10:24:56,2018-12-19 10:24:56
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/453824690,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-453824690,arsulegai,"> I also suggest working on creating those Dockerfile for building and adding unit tests you mentioned above.
+
+@agunde406 I will push another pull request to enable integration tests similar to the one in sawtooth-core for intkey python, there was no much scope for unit testing here. Enabled build for sawtooth_intkey_client along with TP also enabled gofmt check for it.",2019-01-13 12:14:15,2019-01-13 12:14:15
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/460779892,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-460779892,agunde406,"This pr needs to be rebased
+",2019-02-05 19:53:45,2019-02-05 19:53:45
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/460871539,https://github.com/hyperledger/sawtooth-sdk-go/pull/17#issuecomment-460871539,arsulegai,"> This pr needs to be rebased
+
+Done",2019-02-06 01:36:17,2019-02-06 01:36:17
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/16,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/433380192,https://github.com/hyperledger/sawtooth-sdk-go/issues/16#issuecomment-433380192,arsulegai,"**[Edit]**
+Go implementation of intkey client is available in examples/intkey_go/src/sawtooth_intkey_client
+
+**[Original answer]**
+@Kaixinguoer210 that'll be a client application in go language.
+
+There were many requests for writing a client application using sawtooth go sdk, I am working on merging this code. For time being you may find working code for intkey-go in my repository https://github.com/arsulegai/sawtooth-sdk-go/tree/intkey_go_client/examples/intkey_go/src/sawtooth_intkey_client also there's a PR raised on sawtooth-core repository for documenting how to build a client in go.",2018-10-26 11:41:45,2019-02-13 13:37:08
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/16,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/433763010,https://github.com/hyperledger/sawtooth-sdk-go/issues/16#issuecomment-433763010,Kaixinguoer210,@arsulegai Thank you very much. I will check it again.,2018-10-29 01:33:32,2018-10-29 01:33:32
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/428904081,https://github.com/hyperledger/sawtooth-sdk-go/pull/15#issuecomment-428904081,john-jam,"If we can register some handlers with the same name and a different version like this:
+  - FamilyName: my_handler | FamilyVersion: 1.0.0
+  - FamilyName: my_handler | FamilyVersion: 2.0.0
+
+You should modify the line 135 in the processor/worker.go too. You can see my commit on sawtooth-core (https://github.com/hyperledger/sawtooth-core/commit/56ab89faea2082a1820e22e89c8a18e9f3418b46) which is now obsolete since the go-sdk was removed in the core.
+It would be helpful if this PR could be merged soon :)",2018-10-11 10:26:23,2018-10-11 10:27:29
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/429191024,https://github.com/hyperledger/sawtooth-sdk-go/pull/15#issuecomment-429191024,RealDeanZhao,"@john-jam Thanks, I updated the code.",2018-10-12 03:17:10,2018-10-12 03:17:10
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/429193716,https://github.com/hyperledger/sawtooth-sdk-go/pull/15#issuecomment-429193716,boydjohnson,@rberg2 Can you add @RealDeanZhao to the whitelist?,2018-10-12 03:35:34,2018-10-12 03:35:34
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/437050609,https://github.com/hyperledger/sawtooth-sdk-go/pull/15#issuecomment-437050609,agunde406,@RealDeanZhao  can you rebase this pr to pick up some fixes that went in. ,2018-11-08 16:04:39,2018-11-08 16:04:39
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/437764527,https://github.com/hyperledger/sawtooth-sdk-go/pull/15#issuecomment-437764527,RealDeanZhao,@agunde406 Yes. It's done.,2018-11-12 05:50:36,2018-11-12 05:50:36
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/12,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/413707356,https://github.com/hyperledger/sawtooth-sdk-go/pull/12#issuecomment-413707356,rbuysse,Adds example TPs and and updates CI to build and test them.,2018-08-16 22:49:16,2018-08-16 22:49:27
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/10,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/389772819,https://github.com/hyperledger/sawtooth-sdk-go/issues/10#issuecomment-389772819,danielcooperxyz,"Looks like an issue in the serialisation of the protobuf batch. Possibly related to the recent change in generation of protobuf files?
+
+The below is output by the golang sdk, and the python sdk reports an additional char when attempting to deserialise.
+`RuntimeWarning: Unexpected end-group tag: Not all data was converted`
+
+`b'batches:<header:""signer_public_key:\\""021b4bc864eba3ed5cebbfd6ec336f13b2c0bb34cda48e254ae9f31e236f8cd8c9\\"" transaction_ids:\\""fed61d8ce9c9b7a1d77919fc262eadeafe23027286fe01abfca0c92a36900db3\\"" "" header_signature:""505b372b836f0e5c1081e8cde08786b3774dba359a9b41d9532dafbce87da186"" transactions:<header:""batcher_public_key:\\""021b4bc864eba3ed5cebbfd6ec336f13b2c0bb34cda48e254ae9f31e236f8cd8c9\\"" family_name:\\""xo\\"" family_version:\\""1.0\\"" inputs:\\""5b73496c1b31ccbbd5c4a1ec8e45be3632e5d7189eac28f4b3b1d3707ba107a390bc72\\"" nonce:\\""UKxKfgFVhmQAoXfP\\"" outputs:\\""5b73496c1b31ccbbd5c4a1ec8e45be3632e5d7189eac28f4b3b1d3707ba107a390bc72\\"" payload_sha512:\\""2136ddec0d82331a3bd417348fe1286f60c6d702d919149431b83a2268a93b910812f4861c1ecdafadc07b6b11c5f1bb0a3cb1564218492c936bdf4bb8357667\\"" signer_public_key:\\""021b4bc864eba3ed5cebbfd6ec336f13b2c0bb34cda48e254ae9f31e236f8cd8c9\\"" "" header_signature:""fed61d8ce9c9b7a1d77919fc262eadeafe23027286fe01abfca0c92a36900db3"" payload:""dGVzdGluZ19uZXcsY3JlYXRlLA=="" > > '`",2018-05-17 07:33:24,2018-05-17 07:33:24
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/10,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/389774599,https://github.com/hyperledger/sawtooth-sdk-go/issues/10#issuecomment-389774599,danielcooperxyz,Closing as posted on jira,2018-05-17 07:40:49,2018-05-17 07:40:49
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/380472530,https://github.com/hyperledger/sawtooth-sdk-go/pull/5#issuecomment-380472530,rberg2,This file will be going away as part of #4 ,2018-04-11 14:28:52,2018-04-11 14:28:52
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/380473328,https://github.com/hyperledger/sawtooth-sdk-go/pull/5#issuecomment-380473328,dcmiddle,closing as dup with #4. ,2018-04-11 14:30:59,2018-04-11 14:30:59
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/376190438,https://github.com/hyperledger/sawtooth-sdk-go/issues/2#issuecomment-376190438,boydjohnson,"https://jira.hyperledger.org/browse/STL-974 Hi, @danielcooperxyz This jira story explains what is being done.",2018-03-26 14:42:44,2018-03-26 14:42:44
+https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-go/issues/comments/376533083,https://github.com/hyperledger/sawtooth-sdk-go/issues/2#issuecomment-376533083,danielcooperxyz,"That's great thank you for the information.
+
+For any one else interested I have used https://github.com/rberg2/sawtooth-go-sdk for the time being as it is available at the moment but is **only a test**.
+
+I have not been able to build it on Windows for the moment, but using [this](https://gist.github.com/danielcooperxyz/bda847cc6e663355baae00a41e7ae1e8) Dockerfile I can get and compile the sdk.
+
+",2018-03-27 13:52:39,2018-03-27 13:52:39

@@ -1,0 +1,40 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sawtooth-sdk-rust,agunde406,https://github.com/hyperledger/sawtooth-sdk-rust/pull/18,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/18,Add implementations for the _entry methods,"All the implmentations of get/set/delete for a
+single entry can be implmented by using the
+corresponding multiple entry implementation. This
+commit defines those methods so that a dev
+implementing a TransactionContext only has to
+implement the multiple entry ones.
+
+Signed-off-by: Andrea Gunderson <agunde@bitwise.io>",closed,True,2019-04-03 18:08:46,2019-04-03 18:50:03
+sawtooth-sdk-rust,peterschwarz,https://github.com/hyperledger/sawtooth-sdk-rust/pull/17,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/17,Update ZMQ dependency,"Update the ZMQ dependency to use the original crate, which now contains the changes that necessitated the Sawtooth fork.",open,True,2019-04-02 18:22:53,2019-04-02 18:28:05
+sawtooth-sdk-rust,peterschwarz,https://github.com/hyperledger/sawtooth-sdk-rust/pull/16,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/16,"Send Disconnect Error on Shutdown, etc","Send a `DisconnectError` on Shutdown of the stream as well as when the internal receiver has been disconnected (i.e. all of it senders have dropped).  This will trigger any callers to act accordingly.
+
+Future PR's may wish to redesign this API overall, where there is a differentiation between local (i.e. directed by the same process) disconnects and remote disconnects (e.g. the validator has disappeared).",closed,True,2019-04-01 19:09:24,2019-04-02 21:15:16
+sawtooth-sdk-rust,rbuysse,https://github.com/hyperledger/sawtooth-sdk-rust/pull/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/15,Move built docs to standard location,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-03-28 21:10:31,2019-04-01 20:51:35
+sawtooth-sdk-rust,agunde406,https://github.com/hyperledger/sawtooth-sdk-rust/pull/14,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/14,Update set_state and delete_state to match get_state_entry/entries,"This PR deprecates the use of set_state and replaces it with set_state_entry and set_state_entries. Also fixes the return type of set_state_functions to match other sdks. 
+
+This PR also deprecates delete_state and replaces it with delete_state_entry and delete_state_entreis. ",closed,True,2019-02-28 18:28:54,2019-03-05 15:12:35
+sawtooth-sdk-rust,peterschwarz,https://github.com/hyperledger/sawtooth-sdk-rust/pull/13,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/13,Split handler into lib,"Additionally, update to 2018 edition",closed,True,2019-02-25 16:18:09,2019-02-25 21:24:21
+sawtooth-sdk-rust,agunde406,https://github.com/hyperledger/sawtooth-sdk-rust/pull/12,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/12,Add a Context Trait and update TransactionContext to be ZmqTransactionContext,Also updates the methods to use references as well as fix the way get_state is handled for multiple addresses.,closed,True,2019-02-19 19:47:25,2019-02-25 14:09:16
+sawtooth-sdk-rust,agunde406,https://github.com/hyperledger/sawtooth-sdk-rust/pull/11,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/11,Add a Context Trait and update TransactionContext to be ZmqContext,Also updates the methods to use references as well as fix the way get_state is handled for multiple addresses. ,closed,True,2019-02-19 19:41:07,2019-02-19 19:42:15
+sawtooth-sdk-rust,ArtemFrantsiian,https://github.com/hyperledger/sawtooth-sdk-rust/pull/10,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/10,Update secp256k1.rs,"provide constructing structs for public and private keys from bytes (Vec<u8>), not only from hex.",open,True,2019-02-19 16:36:19,2019-02-19 16:36:21
+sawtooth-sdk-rust,rbuysse,https://github.com/hyperledger/sawtooth-sdk-rust/pull/9,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/9,Fix codeowners,,closed,True,2019-02-07 16:35:37,2019-02-11 17:31:50
+sawtooth-sdk-rust,rbuysse,https://github.com/hyperledger/sawtooth-sdk-rust/pull/8,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/8,Add Dockerfile for publishing to crates,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-02-06 22:24:53,2019-02-11 17:13:48
+sawtooth-sdk-rust,boydjohnson,https://github.com/hyperledger/sawtooth-sdk-rust/pull/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/7,Make TransactionContext generic,"This does 2 things:
+- Make the TransactionContext not be tied to ZeroMQ, which is useful for testing the TransactionHandler without using the network.
+- Make the Context trait use `&self` instead of `&mut self` methods",closed,True,2019-01-25 14:49:36,2019-02-23 18:26:17
+sawtooth-sdk-rust,rbuysse,https://github.com/hyperledger/sawtooth-sdk-rust/pull/6,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/6,Add MAINTAINERS.md and CODEOWNERS,Signed-off-by: Ryan Beck-Buysse <rbuysse@bitwise.io>,closed,True,2019-01-22 22:33:11,2019-02-11 17:31:51
+sawtooth-sdk-rust,ltseeley,https://github.com/hyperledger/sawtooth-sdk-rust/pull/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/5,"Derive PartialEq, Eq, and Hash traits for Block and PeerInfo",Deriving these traits will enable consensus engines to store `Block`s and `PeerInfo`s in collections like `HashSet` and `HashMap`.,closed,True,2019-01-21 19:40:52,2019-01-21 22:24:34
+sawtooth-sdk-rust,arsulegai,https://github.com/hyperledger/sawtooth-sdk-rust/pull/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/4,Rust SDK changes for TP to get serialized txn header,"RFC text/0000-raw-txn-header.md describes in brief the need to
+have serialized transaction header sent to transaction processor.
+1. Introduce required proto changes, set EXPANDED as default.
+2. Introduces a new method for setting transaction header style.
+
+Please refer to hyperledger/sawtooth-rfcs#23 for detailed
+description.
+
+Signed-off-by: S m, Aruna <aruna.s.m@intel.com>",open,True,2019-01-18 04:20:38,2019-02-13 17:50:16
+sawtooth-sdk-rust,rbuysse,https://github.com/hyperledger/sawtooth-sdk-rust/pull/3,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/3,Add rust sdk,,closed,True,2019-01-06 00:03:54,2019-01-08 22:34:23
+sawtooth-sdk-rust,rbuysse,https://github.com/hyperledger/sawtooth-sdk-rust/pull/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/2,Add rust sdk,,closed,True,2019-01-04 21:45:54,2019-01-05 23:57:19
+sawtooth-sdk-rust,jwagantall,https://github.com/hyperledger/sawtooth-sdk-rust/pull/1,https://api.github.com/repos/hyperledger/sawtooth-sdk-rust/issues/1,Create DCO,,closed,True,2019-01-02 18:01:42,2019-01-02 18:02:20

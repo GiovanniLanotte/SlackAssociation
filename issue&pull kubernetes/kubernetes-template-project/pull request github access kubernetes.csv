@@ -1,0 +1,69 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/1,https://github.com/kubernetes/kubernetes-template-project/pull/1,philips,README: add some incubator boilerplate,,[],1,2016-09-02 00:24:59,2016-09-02 00:25:03,2016-09-02 00:25:03,True,2016-09-02 00:25:03,philips,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/4,https://github.com/kubernetes/kubernetes-template-project/pull/4,mbohlool,Update CONTRIBUTING.md with CNCF CLAs,I assume we need CNCF CLAs now that we are part of CNCF. Please double-check the links and the text. I am not sure what is the official/legal way to represent this.,[],1,2016-11-18 19:19:12,2016-11-19 01:48:20,2016-11-19 01:48:20,True,2016-11-19 01:48:20,philips,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/5,https://github.com/kubernetes/kubernetes-template-project/pull/5,mbssaiakhil,Fix typo,Fix typo in Events Code of Conduct,['spiffxp'],1,2017-08-13 11:34:05,2017-12-13 19:01:28,2017-12-13 19:01:28,True,2017-12-13 19:01:28,spiffxp,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/6,https://github.com/kubernetes/kubernetes-template-project/pull/6,krishna-mk,Update README.md with links for Slack and SIG,"Slack - pointing to (http://slack.k8s.io/)
+Mailing List - retagged
+SIG - pointing to (https://github.com/kubernetes/community/blob/master/sig-list.md)",['spiffxp'],1,2017-08-30 07:47:32,2017-12-13 19:01:03,2017-12-13 19:01:03,True,2017-12-13 19:01:03,spiffxp,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/7,https://github.com/kubernetes/kubernetes-template-project/pull/7,munnerz,Set correct project start date,"Previously the README stated the project started 2006-01-02. I wasn't so interested in the Kubernetes project back then, but I'm pretty sure it didn't exist at the time 😉 
+
+Hopefully it's okay to make PRs directly against this repo.",['spiffxp'],1,2017-09-12 16:06:53,2017-12-13 18:59:31,2017-12-13 18:59:31,True,2017-12-13 18:59:31,spiffxp,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/8,https://github.com/kubernetes/kubernetes-template-project/pull/8,spiffxp,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: kubernetes/test-infra#3851",['philips'],1,2017-10-31 23:40:25,2017-12-12 23:10:04,2017-12-12 23:15:57,True,2017-12-12 23:10:04,philips,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/10,https://github.com/kubernetes/kubernetes-template-project/pull/10,spiffxp,Add steering-committe as approvers for this repo,"To ensure that the entire kubernetes/steering-committee team doesn't need admin access to this repo, add them as approvers
+
+Fixes #9",[],1,2017-12-13 01:48:45,2017-12-13 01:50:22,2017-12-19 15:22:28,True,2017-12-13 01:50:22,philips,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/11,https://github.com/kubernetes/kubernetes-template-project/pull/11,spiffxp,Fix typo,"Followon to #10, I can't spell",[],1,2017-12-13 01:52:04,2017-12-13 01:52:23,2017-12-13 01:52:48,True,2017-12-13 01:52:23,philips,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/12,https://github.com/kubernetes/kubernetes-template-project/pull/12,dankohn,Change code-of-conduct to call by reference,This matches what kubernetes/kubernetes has.,['timothysc'],1,2017-12-13 19:45:09,2017-12-14 23:01:29,2017-12-14 23:01:30,True,2017-12-14 23:01:29,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/13,https://github.com/kubernetes/kubernetes-template-project/pull/13,spiffxp,Use kubernetes/community as source of truth for code of conduct,"One more layer of indirection, I would prefer all of our repos refer to Kubernetes' CoC, which at the moment is a redirect to CNCF's.","['philips', 'cblecker']",2,2017-12-18 17:42:16,2017-12-18 23:12:36,2017-12-18 23:29:24,True,2017-12-18 23:12:36,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/14,https://github.com/kubernetes/kubernetes-template-project/pull/14,spiffxp,"Remove incubator content, touchup existing requirements","Trying to bring this repo in alignment with the way things are today:
+- we keep talking about how incubator is / should going away, so... drop wording about it?
+- very few repos in kubernetes/ have RELEASE.md files
+- almost every repo now uses the exact code-of-conduct.md from this repo
+- [docs repos don't use the apache 2 license](https://github.com/kubernetes/community/blob/master/governance.md#repository-guidelines)
+- OWNERS files point to owners docs
+- remove reference to godep from CONTRIBUTING.md (not all repos are golang, not all golang repos have chosen to use that)
+- link to to canonical CLA instructions at https://git.k8s.io/community/CLA.md
+
+This is in the interest of making this repo a living example of a ""correct"" repo, per https://github.com/kubernetes/community/pull/1569",['cblecker'],1,2018-01-13 01:30:21,2018-01-19 17:25:33,2018-08-24 16:02:56,True,2018-01-19 17:25:33,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/15,https://github.com/kubernetes/kubernetes-template-project/pull/15,wking,OWNERS: Upstream docs moved from devel/ to guide/,Catch up with kubernetes/community#1764.,"['spiffxp', 'cblecker']",2,2018-03-28 17:17:22,2018-07-25 17:37:56,2018-07-25 20:20:30,True,2018-07-25 17:37:56,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/17,https://github.com/kubernetes/kubernetes-template-project/pull/17,AdamDang,Typo fix mimimum->minimum,"Line 3:  at mimimum
+mimimum->minimum","['smarterclayton', 'cblecker']",1,2018-04-23 11:26:02,2018-05-09 22:18:55,2018-05-09 22:18:55,True,2018-05-09 22:18:55,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/18,https://github.com/kubernetes/kubernetes-template-project/pull/18,jessfraz,add SECURITY_CONTACTS,add suggested in https://github.com/kubernetes/community/pull/2062#issuecomment-384472803 adding SECURITY_CONTACTS here.,"['philips', 'spiffxp', 'cblecker', 'michelleN']",1,2018-05-17 20:43:35,2018-05-22 22:45:23,2018-05-22 22:46:14,True,2018-05-22 22:45:23,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/19,https://github.com/kubernetes/kubernetes-template-project/pull/19,castrojo,Add a new template with more information and links to newer resources,Draft at fixing https://github.com/kubernetes/steering/issues/28,"['philips', 'cblecker']",1,2018-07-10 19:29:12,2018-07-13 21:01:28,2018-07-13 21:01:28,True,2018-07-13 21:01:28,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/20,https://github.com/kubernetes/kubernetes-template-project/pull/20,cblecker,Update Steering Committee,/assign @spiffxp ,['spiffxp'],1,2018-08-23 21:31:54,2018-08-23 22:32:03,2018-08-23 22:33:27,True,2018-08-23 22:32:03,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/21,https://github.com/kubernetes/kubernetes-template-project/pull/21,nikhita,Point to CoC in repo instead of the CNCF CoC,"Ref https://github.com/kubernetes-client/ruby/pull/18#discussion_r211828790
+
+/assign spiffxp ",['spiffxp'],1,2018-09-01 15:04:50,2018-09-01 19:45:19,2018-09-01 19:45:20,True,2018-09-01 19:45:19,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/22,https://github.com/kubernetes/kubernetes-template-project/pull/22,nikhita,Specify files which cannot include custom content,"@BenTheElder pointed out on slack that it would be nice to have a list of files which are allowed to have custom content and which do not.
+
+This PR also adds a link to the Creative Commons 4.0 license from the website repo.
+
+/committee steering
+
+/cc @BenTheElder @spiffxp @cblecker 
+/assign @spiffxp ","['spiffxp', 'cblecker']",1,2018-09-15 07:02:46,2018-09-18 17:21:11,2018-09-18 17:21:11,True,2018-09-18 17:21:11,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/23,https://github.com/kubernetes/kubernetes-template-project/pull/23,spiffxp,Update steering-committee alias per 2018 election results,ref: https://github.com/kubernetes/steering/pull/79,['philips'],1,2018-10-04 22:38:56,2018-10-04 22:53:56,2018-10-04 23:01:13,True,2018-10-04 22:53:56,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/24,https://github.com/kubernetes/kubernetes-template-project/pull/24,craigbox,Update COC link,"The existing COC link points to a page that says ""click here for the new link"".  This PR updates the content of the template to point directly to the correct (CNCF) code of conduct.
+
+/assign spiffxp","['spiffxp', 'timothysc']",1,2018-10-14 11:00:20,2018-10-14 21:40:20,2018-10-15 17:44:39,True,2018-10-14 21:40:19,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/25,https://github.com/kubernetes/kubernetes-template-project/pull/25,spiffxp,"Revert ""Update COC link""","This reverts commit 0ba8c947fcbc23cd7915ec11c27992db5dcd51fa.
+
+ref: https://github.com/kubernetes/kubernetes-template-project/pull/24#issuecomment-429947919
+ref: https://github.com/kubernetes/kubernetes/pull/65359#issuecomment-429948546
+ref: https://github.com/kubernetes/community/issues/1527",['nikhita'],1,2018-10-15 17:54:03,2018-10-16 21:50:00,2018-10-16 21:50:00,True,2018-10-16 21:50:00,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/26,https://github.com/kubernetes/kubernetes-template-project/pull/26,BenTheElder,add instructions to OWNERS,"Per discussion in #sig-testing slack, so as to not have steering suggested as approvers in every repo, project leads should be approvers instaed.
+
+~TODO: what should we put as the placeholder instead? I'm not sure if what I have is really suitable~
+Fixed, there are TODO comments now instead.
+
+cc @spiffxp 🧔
+cc @cblecker ",['philips'],1,2018-11-14 00:06:37,2018-11-14 17:26:03,2018-11-14 22:09:28,True,2018-11-14 17:26:03,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/27,https://github.com/kubernetes/kubernetes-template-project/pull/27,nikhita,Fix link to Embargo Policy,"Related: https://github.com/kubernetes/security/pull/2
+
+/assign @philips ",['philips'],1,2019-03-04 19:20:28,2019-03-04 19:26:07,2019-03-04 19:26:15,True,2019-03-04 19:26:07,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/28,https://github.com/kubernetes/kubernetes-template-project/pull/28,rlenferink,Improved link to docs in OWNERS file,"As a lot of repos are using this link now, it may be good to use the alias as well in our template repository.
+
+/cc @nikhita ","['dims', 'timothysc', 'nikhita']",1,2019-03-07 19:06:23,2019-03-11 16:11:33,2019-03-11 16:14:29,True,2019-03-11 16:11:33,k8s-ci-robot,unknown,,closed
+kubernetes-template-project,https://api.github.com/repos/kubernetes/kubernetes-template-project/pulls/29,https://github.com/kubernetes/kubernetes-template-project/pull/29,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,"['philips', 'nikhita']",1,2019-03-08 18:10:37,2019-03-10 00:49:28,2019-03-10 00:49:28,True,2019-03-10 00:49:27,k8s-ci-robot,unknown,,closed

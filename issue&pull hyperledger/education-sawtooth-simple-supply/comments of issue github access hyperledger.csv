@@ -1,0 +1,40 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/26,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/455244489,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/26#issuecomment-455244489,venkatesh-nagineni,"The problem is simple-supply-rest-api not running in my docker with the following error message
+
+TypeError: __new__() got an unexpected keyword argument 'serialized_options'
+
+Here i have docker status
+![console](https://user-images.githubusercontent.com/21661817/51334511-3c38c400-1a80-11e9-9e0a-ce016cadf42d.PNG)
+",2019-01-17 16:49:38,2019-01-17 16:49:38
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/26,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/478391551,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/26#issuecomment-478391551,pdxjohnny,What's the status on this? I'm still seeing as of 401202b27060dd5658ac3cfd7f6fbc460fc0aa2a no proxy variables are set in my environment,2019-03-31 22:31:18,2019-03-31 22:31:18
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/26,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/479663886,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/26#issuecomment-479663886,danintel,"I played around with it and found the simple-supply-rest-api container is not starting, so nothing is listening to port 8000. The container dies with this error:
+
+`simple-supply-rest-api | TypeError: __new__() got an unexpected keyword argument 'serialized_options'`
+
+The cause with protobuf. New generated code from a newer version of protoc, the protobuf compiler, is being used with old protobuf runtime. The runtime can be newer or the same (is backwards compatible), but the protobuf runtime cannot be older.
+
+I may be going out on a limb here, but I believe the protobuf library came from `repo.sawtooth.me`, used for internal Sawtooth testing and development, in file `rest_api/Dockerfile`. Again, this is just an unproven theory of mine.",2019-04-03 21:22:22,2019-04-03 21:22:22
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/25,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/446447675,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/25#issuecomment-446447675,QwertyJack,Continue for #19 ,2018-12-12 03:20:55,2018-12-12 03:20:55
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/24,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/427690837,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/24#issuecomment-427690837,RakeshDevUK,"hi Faizol, i am also getting the same error . struggling to find out the solution... ;(
+Tried all the option mentioned on various blogs to update the python protobuf version, still no luck?
+Did you find any solution ?",2018-10-07 22:01:19,2018-10-07 22:01:19
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/24,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/428820321,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/24#issuecomment-428820321,faizol,"@RakeshDevUK
+Hi,
+The problem happened as the protobuf runtime lib version supplied/installed by Dockerfile is older than protoc. So to solve the problem, just make sure that the containers update the runtime lib by modifying Dockerfile in their respective folder.
+For Dockerfile in processor folder, make sure to also install ""python3-pip"" (add to the end of line 22). Then for Dockerfile in all three folders (processor, rest_api, simple_supply_subscriber), add ""RUN pip3 install -U protobuf"" to update the installed protobuf runtime lib. 
+
+Hope that helps.",2018-10-11 04:54:28,2018-10-11 04:54:28
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/24,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/437525133,https://github.com/hyperledger/education-sawtooth-simple-supply/issues/24#issuecomment-437525133,lorepieri8,@faizol  perhaps create a pull request with the fix?,2018-11-09 23:15:07,2018-11-09 23:15:07
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/22,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/426402984,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/22#issuecomment-426402984,chenette,Closing PR. I will open another that's on the correct source branch and includes the license statement in README.md. Please see PR #23. ,2018-10-02 19:37:23,2018-10-02 20:03:07
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/419246746,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/21#issuecomment-419246746,dcmiddle,@dplumb94 do these slides need CC BY 4.0 markings?,2018-09-06 21:26:51,2018-09-06 21:26:51
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/21,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/425784250,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/21#issuecomment-425784250,chenette,"Please see PR #22, which adds PDFs with a Creative Commons (CC BY 4.0) license statement to each PDF. (It also clarifies the ZMQ ""requirement"" and fixes a typo.)  If that PR is deemed adequate, this PR can be closed.",2018-10-01 04:07:42,2018-10-01 04:07:42
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/20,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/414015053,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/20#issuecomment-414015053,ryjones,Please use the stock Apache 2 boilerplate and/or SPDX,2018-08-17 23:55:14,2018-08-17 23:55:14
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/19,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/446285558,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/19#issuecomment-446285558,danintel,"The change looks good--thanks!
+
+The commit message requires a DCO. See
+https://github.com/hyperledger/sawtooth-core/blob/master/CONTRIBUTING.md
+
+For example, 
+`Signed-off-by: yourgithublogin<your-email@somewhere.com>`",2018-12-11 17:18:46,2018-12-11 17:19:32
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/19,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/446447050,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/19#issuecomment-446447050,QwertyJack,"As the origin repo has been removed, I will make a new PR.",2018-12-12 03:17:23,2018-12-12 03:17:23
+https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/3,https://api.github.com/repos/hyperledger/education-sawtooth-simple-supply/issues/comments/393953292,https://github.com/hyperledger/education-sawtooth-simple-supply/pull/3#issuecomment-393953292,nick-drozd,"The ""Update lint"" commit looks like it does stuff other than update lint. It should at least have a commit description.",2018-06-01 17:33:52,2018-06-01 17:33:52

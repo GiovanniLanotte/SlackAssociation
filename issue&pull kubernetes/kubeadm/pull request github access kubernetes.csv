@@ -1,0 +1,516 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/72,https://github.com/kubernetes/kubeadm/pull/72,luxas,WIP: Move kubeadm over here,"This work/PR isn't done before we've merged all pending PRs into kubernetes core, but showing the progress here
+
+@kubernetes/sig-cluster-lifecycle ","['mikedanese', 'roberthbailey']",103,2016-11-28 19:18:37,2017-04-06 14:04:58,2017-04-06 14:04:59,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/81,https://github.com/kubernetes/kubeadm/pull/81,luxas,Move the CHANGELOG over here like all the other k8s repos,ref: #67 ,['mikedanese'],1,2016-12-02 07:14:04,2016-12-07 21:45:18,2016-12-07 21:45:19,True,2016-12-07 21:45:18,mikedanese,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/88,https://github.com/kubernetes/kubeadm/pull/88,luxas,Add changelog items for the third version of kubeadm,"@mikedanese PTAL and merge, here are the release notes I aggregated for the third stable version of kubeadm",['mikedanese'],1,2016-12-09 21:12:28,2016-12-12 21:12:21,2016-12-12 21:12:21,True,2016-12-12 21:12:21,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/100,https://github.com/kubernetes/kubeadm/pull/100,luxas,WIP: Initial kubeadm api proposal,"This is far from done, but posting progress on my work on the kubeadm API here.
+
+This is kind of a kubeadm-to-beta design doc which we have to discuss in detail.
+I'll improve it as we go.
+
+cc @jbeda @mikedanese @dgoodwin @errordeveloper @lukemarsden @dgoodwin @kad @roberthbailey",['mikedanese'],5,2017-01-02 14:33:32,2017-02-21 19:19:09,2017-02-21 19:19:09,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/155,https://github.com/kubernetes/kubeadm/pull/155,luxas,Update the README.md,"Add a small note about the roadmap, link to slack and the weekly meetings
+
+@lukemarsden @roberthbailey @mikedanese @errordeveloper @pires @dmmcquay @jbeda",[],1,2017-02-09 15:20:38,2017-02-09 16:37:45,2017-02-09 16:37:45,True,2017-02-09 16:37:45,pires,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/156,https://github.com/kubernetes/kubeadm/pull/156,luxas,Add a doc about the kubeadm design and phases implementation,"This document describes the functions of kubeadm and how the phases should be splitted up
+
+@lukemarsden @roberthbailey @mikedanese @errordeveloper @pires @dmmcquay @jbeda",[],1,2017-02-09 15:21:15,2017-06-13 18:08:18,2017-06-13 20:39:37,True,2017-06-13 18:08:18,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/180,https://github.com/kubernetes/kubeadm/pull/180,dgoodwin,Migrate bootkube checkpointer image.,"This is just a raw copy of the checkpointer from https://github.com/kubernetes-incubator/bootkube/tree/master/cmd/checkpoint, with preserved git history.
+
+I am proposing we first merge this in as is to make sure we get the history into the repo cleanly, then go to work on setting up the image build process.
+
+CC @luxas @aaronlevy ",[],24,2017-02-23 19:42:48,2017-02-28 17:41:04,2017-02-28 17:41:04,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/188,https://github.com/kubernetes/kubeadm/pull/188,etoews,Add a GitHub issue template,"Modeled after https://github.com/kubernetes/kubernetes/blob/master/.github/ISSUE_TEMPLATE.md
+
+",[],1,2017-03-01 23:23:23,2017-03-09 20:20:58,2017-03-09 20:20:58,True,2017-03-09 20:20:58,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/236,https://github.com/kubernetes/kubeadm/pull/236,ivan4th,Add proposal for local-cluster tool,"The proposal is mostly based on the current version of
+[kubeadm-dind-cluster](https://github.com/Mirantis/kubeadm-dind-cluster).
+
+The idea was previously discussed on sig-cluster-lifecycle (meetings, slack channel & during KubeCon).
+
+The name of the tool can be changed if necessary if it's considered too confusing (`local-cluster` can replace `hack/local-up-cluster.sh` for many use cases but it's quite different)",[],1,2017-04-11 15:51:21,2017-05-17 14:08:31,2017-05-17 14:08:31,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/270,https://github.com/kubernetes/kubeadm/pull/270,klizhentas,add e2e hacking guide,,['pipejakob'],1,2017-05-16 19:35:20,2018-01-22 17:42:20,2018-01-22 17:42:20,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/286,https://github.com/kubernetes/kubeadm/pull/286,jamiehannaford,Add triage doc,"Fixes #251. 
+
+@luxas suggested this might also be submitted to kubernetes/community. Before doing so, do folks think that 
+
+1. this doc can be abstracted,
+2. it's relevant enough to other SIGs?",[],1,2017-06-02 11:26:59,2017-06-15 07:03:19,2017-06-15 07:03:19,True,2017-06-15 07:03:19,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/316,https://github.com/kubernetes/kubeadm/pull/316,jzhoucliqr,fix typo,fix typo in the design doc.,['pipejakob'],1,2017-06-22 17:45:40,2017-06-22 18:09:42,2017-06-22 18:09:42,True,2017-06-22 18:09:42,pipejakob,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/382,https://github.com/kubernetes/kubeadm/pull/382,fisherxu,Fix typo in docs/design/design.md,Fix the `pull` in docs/design/design.md,"['jbeda', 'errordeveloper', 'mikedanese', 'luxas']",1,2017-08-12 03:44:03,2017-08-14 12:07:41,2017-08-14 12:07:41,True,2017-08-14 12:07:41,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/383,https://github.com/kubernetes/kubeadm/pull/383,mbssaiakhil,Fix typo in Events Code of Conduct,,['luxas'],1,2017-08-13 10:33:58,2017-08-14 12:06:57,2017-08-14 12:06:57,True,2017-08-14 12:06:57,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/391,https://github.com/kubernetes/kubeadm/pull/391,mbssaiakhil,Remove repo-specific Code of Conduct file,Made the last sentence uniform wrt other sentences,['pipejakob'],1,2017-08-15 13:10:57,2017-09-01 01:06:16,2017-09-01 13:59:55,True,2017-09-01 01:06:16,pipejakob,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/423,https://github.com/kubernetes/kubeadm/pull/423,luxas,Add a document with the processes of kubeadm development,"cc @kubernetes/sig-cluster-lifecycle-pr-reviews @kubernetes/kubernetes-release-managers 
+
+Fixes: #252 ",['roberthbailey'],1,2017-09-05 18:04:31,2017-09-06 18:07:46,2017-09-07 13:23:08,True,2017-09-06 18:07:46,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/424,https://github.com/kubernetes/kubeadm/pull/424,fabriziopandini,Update design doc with 1.8 features/changes,"**What this PR does / why we need it:**
+Update design doc with 1.8 features/changes
+
+**Special notes for your reviewer:**
+Still in progress, but shared to start gathering feedbacks/contributions
+Below task for this PR; please let me know if something is missing:
+
+kubeadm first level to be documented / reviewed for 1.8 
+- [x] init > in progress; see details below
+- [x] join > to do; see details below 
+- [x] Upgrade > not needed in this document, not at least initially. Upgrades will have its own doc
+- [x] Config > quoted when talking about the upload config phase
+- [x] Token > quoted when talking about token/csr
+- [x] Alpha > quoted when talking about phases
+- [x] Reset > scaffoholding/not relevant for design doc
+- [x] Version > scaffoholding/not relevant for design doc
+- [x] Completion > scaffoholding/not relevant for design doc
+
+kubeadm init phases to be documented / reviewed for 1.8
+- [x] PreFlight
+- [x] cert
+- [x] kubeconfig
+- [x] controlplanephase
+- [x] etcd
+- [x] wait
+- [x] UploadConfiguration
+- [x] MarkMaster
+- [x] BootstrapTokens  
+- [x] Addons
+- [x] Self hosting
+
+kubeadm join phases to be documented / reviewed for 1.8
+- [x] Discovery
+- [x] TLS Bootstrap 
+
+Others topics to be documented / reviewed for 1.8 ...
+- [x] UsingExternalCA
+- [x] dry-run
+- [x] feature-gates",['luxas'],1,2017-09-05 22:47:50,2017-09-13 20:14:26,2017-10-06 21:26:14,True,2017-09-13 20:14:26,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/463,https://github.com/kubernetes/kubeadm/pull/463,mbertschler,fix typo,s/kuubeadmin/kubeadmin,['luxas'],1,2017-09-24 09:06:23,2017-09-25 14:35:26,2017-09-25 14:35:26,True,2017-09-25 14:35:26,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/478,https://github.com/kubernetes/kubeadm/pull/478,fatsheep9146,Fix broken links for the design doc of bootstrap discovery.,"Fix broken links for the design doc of bootstrap discovery in design doc of kubeadm v1.7 v1.8
+
+Signed-off-by: Ziqi Zhao <zhaoziqi@qiniu.com>",['luxas'],1,2017-10-03 09:21:51,2017-10-27 20:23:25,2017-10-27 20:23:26,True,2017-10-27 20:23:25,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/499,https://github.com/kubernetes/kubeadm/pull/499,jamiehannaford,Add CoC,Just realised we don't have a Code of Conduct doc for this repo. Adding so our community expectations are explicit ✨ ,['luxas'],1,2017-10-17 13:38:35,2017-10-27 16:24:13,2017-10-27 16:24:13,True,2017-10-27 16:24:13,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/500,https://github.com/kubernetes/kubeadm/pull/500,zouyee,fix borken link,update API Aggregation link,['luxas'],1,2017-10-18 02:01:02,2017-10-27 20:40:31,2017-10-27 20:40:48,True,2017-10-27 20:40:31,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/515,https://github.com/kubernetes/kubeadm/pull/515,spiffxp,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: kubernetes/test-infra#3851",['luxas'],1,2017-10-31 23:34:40,2017-11-01 13:26:57,2017-11-01 15:24:00,True,2017-11-01 13:26:57,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/516,https://github.com/kubernetes/kubeadm/pull/516,jamiehannaford,Add script for testing pinned releases,"Fixes #264. Based on @krzyzacy's feedback, we should create a basic bash script that verifies there are matching kubeadm debs for kubernetes releases.
+
+The next steps after this are:
+
+1. add new prow jobs to test-infra that run this script from this repo
+2. add other linux distros (using `yum list` or something)
+
+Running this on ubuntu, this is the output:
+
+```
+Skipped these versions:
+ v1.5.8
+These versions do not have matching debs:
+ v1.6.12 v1.7.9 v1.6.10 v1.6.9 v1.6.8
+```
+
+Should we have debs for those releases? 
+
+/cc @luxas @timothysc @krzyzacy ",['luxas'],1,2017-11-02 12:02:02,2017-11-10 14:21:52,2017-11-10 14:21:52,True,2017-11-10 14:21:52,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/559,https://github.com/kubernetes/kubeadm/pull/559,jamiehannaford,Make script executable,"Fixes https://github.com/kubernetes/kubernetes/issues/56092
+
+/cc @luxas ",['luxas'],1,2017-11-21 11:44:19,2017-11-21 22:31:03,2017-11-21 22:31:03,True,2017-11-21 22:31:03,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/561,https://github.com/kubernetes/kubeadm/pull/561,wackxu,remove out of data changelog,"fix https://github.com/kubernetes/kubeadm/issues/560
+
+/assign @luxas ",['luxas'],1,2017-11-22 02:33:02,2017-11-22 20:23:44,2017-11-22 20:23:44,True,2017-11-22 20:23:43,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/562,https://github.com/kubernetes/kubeadm/pull/562,stewart-yu,fix typo in docs/design/design_v1.8.md,Fix some misspell.,['luxas'],1,2017-11-22 05:56:21,2017-11-22 18:10:23,2017-11-24 01:32:55,True,2017-11-22 18:10:23,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/568,https://github.com/kubernetes/kubeadm/pull/568,fabriziopandini,Create design doc v1.9 placeholder,"Create the placeholder for design doc v1.9.
+
+By having this placeholder already in place, it will be easier to spot differences/review the upcoming PR with the changes to this document",['luxas'],1,2017-11-23 15:49:45,2017-11-23 16:38:23,2017-11-23 17:08:36,True,2017-11-23 16:38:23,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/573,https://github.com/kubernetes/kubeadm/pull/573,fabriziopandini,design1.9-update,"fixes #563 Update design doc for v1.9
+
+Nb. this document will be moved into the official kubernetes.io docs after reshuffle of kubeadm reference doc will merge (https://github.com/kubernetes/website/pull/6103)",['luxas'],1,2017-11-26 09:18:54,2017-12-11 17:24:08,2017-12-15 08:12:59,True,2017-12-11 17:24:08,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/575,https://github.com/kubernetes/kubeadm/pull/575,jamiehannaford,add rpms script,/cc @luxas ,['luxas'],1,2017-11-28 11:58:58,2017-11-28 19:06:40,2017-11-28 19:06:40,True,2017-11-28 19:06:40,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/601,https://github.com/kubernetes/kubeadm/pull/601,stealthybox,Add v1.10 design doc,This is a copy of the v1.9 doc.,['luxas'],1,2017-12-19 18:17:58,2017-12-19 18:40:45,2017-12-22 18:16:01,True,2017-12-19 18:40:45,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/602,https://github.com/kubernetes/kubeadm/pull/602,stealthybox,Update milestone link in readme,On the road to v1.10 ✅ :),[],1,2017-12-19 18:29:20,2018-02-12 19:05:05,2018-02-12 19:05:05,False,,,dirty,False,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/606,https://github.com/kubernetes/kubeadm/pull/606,spiffxp,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527","['cblecker', 'luxas']",1,2017-12-20 18:33:16,2017-12-22 13:06:54,2018-01-03 00:46:52,True,2017-12-22 13:06:54,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/627,https://github.com/kubernetes/kubeadm/pull/627,mattkelly,Update v1.10 design doc preflight check description and fix consistency/grammar,"This contains two changes split into two commits (we can separate into two PRs if desired):
+
+- Update to reflect changes made in kubernetes/kubernetes#57287
+- Consistency and grammar fixes throughout the entire document:
+    - Trim trailing whitespace
+    - Change `[Error]` to `[error]` to be consistent everywhere
+    - Fix grammar for things like `does not exists` which should be `does not exist`","['stealthybox', 'luxas']",2,2017-12-26 16:12:54,2017-12-26 19:19:46,2017-12-26 19:19:46,True,2017-12-26 19:19:46,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/631,https://github.com/kubernetes/kubeadm/pull/631,stealthybox,Add Certified k8s Logo to v1.8 design doc,"See https://github.com/kubernetes/kubeadm/issues/616
+
+This uses the specifically versioned logo for the 1.8 design.",['luxas'],1,2017-12-31 04:45:34,2018-01-01 11:52:57,2018-01-01 11:52:57,True,2018-01-01 11:52:57,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/634,https://github.com/kubernetes/kubeadm/pull/634,mattkelly,Update OWNERS to merge in core k8s repo kubeadm OWNERS,"This file now includes all users in k8s.io/kubernetes/cmd/kubeadm/OWNERS.
+
+I wasn't sure if I should leave `errordeveloper` as that user does not currently exist in the [core repo OWNERS file](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/OWNERS). Should I remove them here, or update the core OWNERS file to include them?
+
+Closes #632. ",['luxas'],1,2018-01-01 16:35:06,2018-01-02 08:47:39,2018-01-13 14:06:18,True,2018-01-02 08:47:39,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/652,https://github.com/kubernetes/kubeadm/pull/652,stealthybox,Add Certified k8s Logo to v1.9 design doc,"See #616
+
+This uses the specifically versioned logo for the 1.8 design.",['luxas'],1,2018-01-08 20:24:41,2018-01-08 22:21:17,2018-01-08 22:21:17,True,2018-01-08 22:21:17,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/667,https://github.com/kubernetes/kubeadm/pull/667,tpepper,readme: update stale info,"The README.md references v1.6.  That's out of date and this represents an
+unnecessary maintenance point.  Simply refer to the milestones page.
+
+Signed-off-by: Tim Pepper <tpepper@vmware.com>","['luxas', 'dixudx']",1,2018-01-23 02:31:00,2018-02-12 19:04:29,2018-02-12 19:04:29,True,2018-02-12 19:04:29,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/682,https://github.com/kubernetes/kubeadm/pull/682,lblackstone,Link to the kubeadm code in the README,,['roberthbailey'],1,2018-01-30 19:49:40,2018-02-06 10:06:53,2018-02-06 16:23:00,True,2018-02-06 10:06:53,jamiehannaford,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/690,https://github.com/kubernetes/kubeadm/pull/690,kargakis,readme update,@kubernetes/sig-cluster-lifecycle-pr-reviews ptal,['timothysc'],1,2018-02-04 18:13:12,2018-02-08 13:09:18,2018-02-08 13:17:08,True,2018-02-08 13:09:18,jamiehannaford,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/696,https://github.com/kubernetes/kubeadm/pull/696,dankohn,Update Certified Kubernetes logo,,['luxas'],1,2018-02-09 23:12:08,2018-02-12 19:03:44,2018-02-12 19:03:44,True,2018-02-12 19:03:44,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/704,https://github.com/kubernetes/kubeadm/pull/704,jessicaochen,Update troubleshooting for create cluster failure,Provide guidance on where to look for common failure cases for kubeadm,"['timothysc', 'roberthbailey']",1,2018-02-16 21:15:49,2018-03-06 20:55:39,2018-03-06 20:59:49,True,2018-03-06 20:55:39,roberthbailey,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/723,https://github.com/kubernetes/kubeadm/pull/723,jessicaochen,Cleanup formatting in test-failures.md,"Followup cleanup from PR https://github.com/kubernetes/kubeadm/pull/704
+
+/cc @roberthbailey @xiangpengzhao ",['roberthbailey'],1,2018-03-06 21:02:46,2018-03-06 21:24:14,2018-03-07 02:17:23,True,2018-03-06 21:24:14,roberthbailey,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/746,https://github.com/kubernetes/kubeadm/pull/746,mahuihuang,fix grammar mistake,Fix grammar mistake.,"['jamiehannaford', 'xiangpengzhao']",1,2018-04-08 07:24:04,2018-04-10 15:38:24,2018-04-10 15:43:32,True,2018-04-10 15:38:24,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/757,https://github.com/kubernetes/kubeadm/pull/757,AdamDang,Typo fix in design_v1.9.md,Some small typo fixes.,['timothysc'],1,2018-04-17 05:45:44,2018-04-17 15:10:05,2018-05-01 02:27:46,True,2018-04-17 15:10:05,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/763,https://github.com/kubernetes/kubeadm/pull/763,AdamDang,some typo fixes,"Corrected all the duplicated word ""the the"" in this project.",[],3,2018-04-23 11:32:29,2018-04-23 21:34:22,2018-05-01 02:13:39,True,2018-04-23 21:34:22,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/764,https://github.com/kubernetes/kubeadm/pull/764,AdamDang,Some small typo fixes,"There are a two primary ways to extend `kubeadm`:
+a two->two
+does not exists->does not exist
+does not contains->does not contain",['stealthybox'],3,2018-04-25 05:34:05,2018-04-25 11:41:38,2018-05-01 02:10:55,True,2018-04-25 11:41:38,stealthybox,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/774,https://github.com/kubernetes/kubeadm/pull/774,AdamDang,Typo fix: does not exists->does not exist,does not exists->does not exist,['stealthybox'],2,2018-04-26 13:58:05,2018-04-26 14:05:35,2018-05-01 02:07:27,True,2018-04-26 14:05:35,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/777,https://github.com/kubernetes/kubeadm/pull/777,AdamDang,Typo fix: boostrap->bootstrap,boostrap->bootstrap,[],3,2018-04-29 05:05:17,2018-05-01 03:35:45,2018-05-01 07:42:21,True,2018-05-01 03:35:45,stealthybox,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/780,https://github.com/kubernetes/kubeadm/pull/780,stealthybox,Merge vagrant-kubeadm-testing for contributor experience,"We discussed on last week's kubeadm call, that we would like move this
+repo into the kubeadm contributor repo, so we improve our shared tooling
+and contributor experience.
+
+This vagrant environment has been shown to aide in developer ramp up for
+new contributors.
+The documentation fixes provide a happier path to discovering how to
+build the software.
+
+approved by @timothysc
+
+Fixes: https://github.com/stealthybox/vagrant-kubeadm-testing/issues/1",[],1,2018-05-01 03:33:58,2018-05-01 03:34:38,2018-05-01 03:34:41,True,2018-05-01 03:34:38,stealthybox,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/781,https://github.com/kubernetes/kubeadm/pull/781,stealthybox,Add certified-k8s logo for 1.10 and fix broken link for 1.9,Fixes: #767,['luxas'],1,2018-05-01 03:53:10,2018-05-01 07:44:03,2018-05-01 07:44:03,True,2018-05-01 07:44:02,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/795,https://github.com/kubernetes/kubeadm/pull/795,fabriziopandini,kubeadm-contrib-ux,"As discussed in Cophenanghen, the contrib experience for kubeadm should be improved, supporting a consistent approach to manual testing during each release cycle.
+
+This PR extends the first version of the kubeadm vagrant test environment from @stealthybox by adding the capability to create a set of vagrant machines starting from a cluster API spec.
+
+IMPORTANT! This PR focuses only on the final user experience and it is meant to get feedbacks on the proposed solution; all the necessary hack/ansible scripts will follow in a subsequent PRs
+
+/CC @timothysc @luxas @stealthybox @liztio @detiber @chuckha ",['stealthybox'],1,2018-05-09 17:47:03,2018-05-25 14:27:35,2018-05-25 15:04:37,True,2018-05-25 14:27:35,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/796,https://github.com/kubernetes/kubeadm/pull/796,fabriziopandini,kubeadm-contrib-hack-lib,"This PR implements the second part of https://github.com/kubernetes/kubeadm/pull/795 (2 of 3), that consists of a set of scripts that are responsible for parsing the cluster API spec and translates it into something that can be used by Vagrant and by the ansible provisioner.
+
+NB. the test guide is only drafted, and it is intended to be improved over time ;-)
+
+/CC @timothysc @luxas @stealthybox @liztio @detiber @chuckha ","['stealthybox', 'kris-nova']",1,2018-05-09 17:53:17,2018-05-25 14:28:52,2018-05-25 15:04:47,True,2018-05-25 14:28:52,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/803,https://github.com/kubernetes/kubeadm/pull/803,luxas,Update the packages publication verification script,"This PR:
+ - Adds documentation
+ - Doesn't hard-code the supported kubernetes versions so the script actually can work without maintenance (which effectively removes the usefulness of the e2e test)
+ - Adds support for rpms in the same script
+ - Improves the readability of the output
+ - Fixes https://github.com/kubernetes/kubeadm/issues/799
+
+cc @jamiehannaford @ixdy @timothysc ",['timothysc'],1,2018-05-11 18:57:26,2018-05-11 19:00:48,2018-05-11 19:00:48,True,2018-05-11 19:00:48,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/823,https://github.com/kubernetes/kubeadm/pull/823,neolit123,contributing.md: add notes about website docs and unit tests,"Fixes #686
+",['timothysc'],2,2018-05-16 14:40:30,2018-05-17 20:08:39,2018-05-17 20:08:39,True,2018-05-17 20:08:39,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/824,https://github.com/kubernetes/kubeadm/pull/824,AdamDang,Typo fix: recognise->recognize,Line 131: recognise->recognize,['luxas'],1,2018-05-16 17:15:37,2018-05-16 17:17:40,2018-05-16 17:17:40,True,2018-05-16 17:17:40,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/858,https://github.com/kubernetes/kubeadm/pull/858,fabriziopandini,Kubeadm contrib hack,@timothysc all the ansible playbooks for `kubeadm-playground` + the necessary scripts,[],2,2018-05-25 15:17:43,2018-05-25 16:21:05,2018-05-26 14:22:05,True,2018-05-25 16:21:05,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/861,https://github.com/kubernetes/kubeadm/pull/861,xlgao-zju,add SECURITY_CONTACTS file,"close #855
+
+cc @luxas @timothysc @fabriziopandini @jessfraz
+Signed-off-by: Xianglin Gao <xianglin.gxl@alibaba-inc.com>","['timothysc', 'fabriziopandini', 'luxas']",1,2018-05-27 10:03:13,2018-05-30 02:44:53,2018-05-30 02:56:47,True,2018-05-30 02:44:53,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/862,https://github.com/kubernetes/kubeadm/pull/862,fabriziopandini,small fixes and improvements on kubeadm-playground,/CC @luxas @timothysc ,['timothysc'],1,2018-05-28 11:00:24,2018-05-30 02:43:19,2018-05-30 10:27:57,True,2018-05-30 02:43:19,timothysc,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/869,https://github.com/kubernetes/kubeadm/pull/869,fabriziopandini,update owners file,"/cc @luxas @timothysc 
+
+Sets the owner file for `kubeadm/vagrant` folder equals to the current owner file in for `cmd/kubeadm` folder in main repo. 
+Let me know if you want to do more specific appointments for this folder",['luxas'],1,2018-05-29 15:17:41,2018-05-29 18:27:19,2018-05-30 10:27:46,True,2018-05-29 18:27:19,luxas,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/879,https://github.com/kubernetes/kubeadm/pull/879,mirake,Typo fix: netowrking -> networking,,['timothysc'],1,2018-06-01 14:16:09,2018-06-01 21:20:59,2018-06-02 15:55:52,True,2018-06-01 21:20:59,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/890,https://github.com/kubernetes/kubeadm/pull/890,fabriziopandini,testing-pre-releases,"This PR documents how to test pre-release versions of Kubernetes with kubeadm; which version numbers I should take care of, where to retrieve pre-compiled artefacts, how to build locally.
+
+/CC @kubernetes/sig-cluster-lifecycle-pr-reviews 
+
+This PR is part of #849 checklist","['timothysc', 'liztio']",1,2018-06-06 12:04:51,2018-06-08 20:40:59,2018-06-12 14:18:28,True,2018-06-08 20:40:59,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/891,https://github.com/kubernetes/kubeadm/pull/891,mirake,Typo fix: explicitely -> explicitly,,['fabriziopandini'],1,2018-06-06 13:06:40,2018-06-06 14:02:27,2018-09-23 12:29:01,True,2018-06-06 14:02:27,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/913,https://github.com/kubernetes/kubeadm/pull/913,fabriziopandini,kubeadm playground test pre-releases and v1alpha2 API,Adds supports for testing pre-releases and for v1alpha2 API,['timothysc'],1,2018-06-12 19:54:25,2018-06-13 15:37:29,2018-07-18 21:51:08,True,2018-06-13 15:37:29,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/943,https://github.com/kubernetes/kubeadm/pull/943,AdamDang,Typo fix: kubernets->kubernetes,Line 13: kubernets->kubernetes,"['fabriziopandini', 'luxas']",1,2018-06-21 05:19:04,2018-06-21 06:05:08,2018-06-21 06:05:08,True,2018-06-21 06:05:07,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/961,https://github.com/kubernetes/kubeadm/pull/961,ueokande,Fix self-hosting flag,`—features-gates=self-hosting` -> `--features-gates=SelfHosting`,"['timothysc', 'neolit123']",1,2018-07-02 02:29:46,2018-07-09 22:17:18,2018-07-09 22:17:18,True,2018-07-09 22:17:18,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/993,https://github.com/kubernetes/kubeadm/pull/993,wangxy518,add a note,More readable,"['stealthybox', 'fabriziopandini']",1,2018-07-16 02:47:56,2018-08-01 15:55:40,2018-08-01 15:55:41,True,2018-08-01 15:55:40,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/994,https://github.com/kubernetes/kubeadm/pull/994,chenyb4,Change ansble use 'include' instead 'import_tasks' or 'include_tasks',Signed-off-by: Yuanbin.Chen <cybing4@gmail.com>,"['kad', 'timothysc', 'stealthybox', 'luxas']",1,2018-07-16 03:51:20,2018-08-03 11:16:20,2018-08-03 11:16:20,False,,,dirty,False,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/996,https://github.com/kubernetes/kubeadm/pull/996,neolit123,Add instructions on updating command line reference docs,"Fixes #893
+",['fabriziopandini'],1,2018-07-16 15:34:46,2018-08-03 15:42:40,2018-08-03 15:42:40,True,2018-08-03 15:42:40,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1010,https://github.com/kubernetes/kubeadm/pull/1010,aojea,Disable swap in all nodes,"`kubeadm` fails with swap on https://github.com/kubernetes/kubernetes/pull/31996
+
+Added tasks to disable swap in all nodes from https://github.com/kubernetes/contrib/blob/master/ansible/roles/node/tasks/swapoff.yml
+
+","['stealthybox', 'fabriziopandini']",1,2018-07-19 15:31:45,2018-08-01 15:52:40,2018-08-01 15:52:40,True,2018-08-01 15:52:40,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1067,https://github.com/kubernetes/kubeadm/pull/1067,sebastianliu,fix taint master example,"change the example of taint master from `node-role.kubernetes.io/master:NoSchedule` to `node-role.kubernetes.io/master="""":NoSchedule`",['timothysc'],1,2018-08-20 06:15:46,2018-08-24 16:05:41,2018-08-24 16:05:42,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1068,https://github.com/kubernetes/kubeadm/pull/1068,AdamDang,Fix some typos in messages,"Fix some typos in messages:
+line 170: does not exists->does not exist
+line 222: compability->compatibility",['fabriziopandini'],2,2018-08-20 12:01:58,2018-08-20 20:12:38,2018-08-20 20:12:38,True,2018-08-20 20:12:38,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1073,https://github.com/kubernetes/kubeadm/pull/1073,wangxy518,Update README.md,the urls have been changed.,['neolit123'],1,2018-08-24 03:24:07,2018-08-24 15:43:09,2018-08-24 15:43:10,True,2018-08-24 15:43:09,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1075,https://github.com/kubernetes/kubeadm/pull/1075,AdamDang,Typo fix: trough->through,fix a typo: goes trough-> goes through,"['timothysc', 'luxas']",3,2018-08-24 09:28:52,2018-08-24 14:29:21,2018-08-24 14:29:22,True,2018-08-24 14:29:21,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1106,https://github.com/kubernetes/kubeadm/pull/1106,neolit123,verify_packages_published: highlight errors in gubernator,"Gubernator highlights lines with `fail` and `error`.
+
+Makes it possible to view the versions with missing packages
+directly on this page:
+  https://k8s-gubernator.appspot.com/build/kubernetes-jenkins/logs/periodic-kubernetes-e2e-packages-pushed/120
+
+instead of requiring to click ""Raw build-log.txt"".
+
+/assign @timothysc 
+","['timothysc', 'fabriziopandini']",1,2018-09-11 03:05:13,2018-09-11 21:23:25,2018-09-11 21:23:25,True,2018-09-11 21:23:25,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1120,https://github.com/kubernetes/kubeadm/pull/1120,tao12345666333,Enhanced code readability,Enhanced code readability and remove unused packages.,"['timothysc', 'fabriziopandini', 'bart0sh']",1,2018-09-16 15:58:34,2018-09-17 15:56:02,2018-09-17 16:18:54,True,2018-09-17 15:56:02,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1138,https://github.com/kubernetes/kubeadm/pull/1138,neolit123,add doc about managing e2e tests,"@kubernetes/sig-cluster-lifecycle-pr-reviews 
+
+long have we waited...
+pls, let me know if you find bad phrases or typos or if you think something can be organized better.
+
+fixes https://github.com/kubernetes/kubeadm/issues/868
+
+UPDATE1: fixed typos and did some copy edits.
+UPDATE2: addressed feedback from Fabrizio.
+UPDATE3: addressed feedback from Peter.
+UPDATE4: added video URL for the 1.11 cycle
+","['timothysc', 'fabriziopandini', 'bart0sh']",1,2018-09-22 03:34:16,2018-09-27 10:42:48,2018-09-27 10:42:48,True,2018-09-27 10:42:48,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1139,https://github.com/kubernetes/kubeadm/pull/1139,AdamDang,Update README.md,"Line 98: If you are developing new kubeadm futures...
+I guess here should be kubeadm features, right?","['timothysc', 'neolit123']",1,2018-09-22 09:51:40,2018-09-24 15:39:13,2018-09-24 15:39:14,True,2018-09-24 15:39:13,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1140,https://github.com/kubernetes/kubeadm/pull/1140,mirake,Fix wrong link,"
+Signed-off-by: Rui Cao <ruicao@alauda.io>",['neolit123'],1,2018-09-23 12:52:05,2018-09-24 15:40:30,2018-09-24 15:40:30,True,2018-09-24 15:40:30,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1143,https://github.com/kubernetes/kubeadm/pull/1143,AdamDang,Update cluster_api.py,typo fix: boostrap->bootstrap,['neolit123'],2,2018-09-25 02:41:00,2018-09-25 06:06:48,2018-09-25 06:06:48,True,2018-09-25 06:06:48,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1144,https://github.com/kubernetes/kubeadm/pull/1144,neolit123,move verify_packages_published to it's own folder,"also:
+- update the test README to reflect the folder change.
+- add a README in e2e/tests explaining that this folder
+contains e2e tests and have some links in there.
+- do some minor whitespace / comment cleanup in the .sh
+
+
+my idea here is to have folders under e2e that specify e2e type.
+(having this as early as possible is better!)
+
+tests/e2e/packages is what would be available now.
+tests/e2e/manifests is what's coming soon.
+
+test-infra PR on hold here:
+https://github.com/kubernetes/test-infra/pull/9565
+
+/assign @fabriziopandini 
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews 
+",['timothysc'],1,2018-09-25 18:33:53,2018-09-26 04:53:58,2018-09-26 04:53:58,True,2018-09-26 04:53:58,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1148,https://github.com/kubernetes/kubeadm/pull/1148,neolit123,e2e-docs: instruct about removing old x-on-y jobs,"as per the discussion in slack with @timothysc, old x-on-y jobs should be removed too, while old upgrade jobs should be left.
+
+this PR amends the e2e doc.
+
+/kind cleanup
+/assign @timothysc 
+
+edit: PR for test-infra will follow.
+",['timothysc'],1,2018-09-27 22:14:33,2018-10-01 01:46:35,2018-10-11 16:57:49,True,2018-10-01 01:46:35,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1149,https://github.com/kubernetes/kubeadm/pull/1149,neolit123,OWNERS: add neolit123 to reviewers,"adding self to reviewers list.
+followup from the other PR for `k/k`.
+
+https://github.com/kubernetes/kubernetes/pull/69166
+
+thanks.
+
+/kind cleanup
+/assign @timothysc 
+",['timothysc'],1,2018-09-27 22:16:49,2018-09-28 19:09:39,2018-09-28 19:09:39,True,2018-09-28 19:09:39,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1157,https://github.com/kubernetes/kubeadm/pull/1157,neolit123,add an e2e test for verifying manifest lists,"this PR adds an e2e test for verifying the manifests lists.
+on top of `verify_manifest_lists.go` there are some details on how this works.
+
+QUESTION: this basically traverses manifest lists json files until it reaches the image layers.
+currently download of the layers is skipped and only the `Content-Length` of their headers is verified.
+these can end up being quite large, so should the full download of all layers be enabled? (the toggle is called `downloadLayers`).
+
+test-infra PR to follow.
+
+/hold
+/assign @timothysc 
+/cc @dims @BenTheElder @ixdy @Random-Liu 
+","['timothysc', 'ixdy']",1,2018-10-04 01:50:45,2018-10-25 14:44:18,2018-10-25 14:56:26,True,2018-10-25 14:44:18,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1172,https://github.com/kubernetes/kubeadm/pull/1172,ereslibre,Add python3 compatibility by removing the builtin `cmp` function,,"['kad', 'stealthybox', 'fabriziopandini']",1,2018-10-16 10:39:32,2018-10-26 07:46:22,2018-10-28 06:03:54,True,2018-10-26 07:46:22,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1173,https://github.com/kubernetes/kubeadm/pull/1173,AdamDang,Fix grammar errors in some warning messages in help_utils.py,Line 52&75: does not requires->does not require,"['timothysc', 'fabriziopandini']",1,2018-10-16 11:47:49,2018-10-16 11:59:52,2018-10-16 11:59:53,True,2018-10-16 11:59:52,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1187,https://github.com/kubernetes/kubeadm/pull/1187,AdamDang,Update box.md,"There are 3 presentations for ""pre-pull"" in this doc:
+Line 10:pre-pull,
+Line 28: pre pull, 
+Line 33: prepull
+Better to use the same format: pre-pull.",['fabriziopandini'],1,2018-10-26 02:27:54,2018-10-26 06:33:23,2018-10-26 06:33:23,True,2018-10-26 06:33:23,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1193,https://github.com/kubernetes/kubeadm/pull/1193,AdamDang,correct the file name: schedler.conf->scheduler.conf,schedler.conf->schedler.conf,['timothysc'],2,2018-10-29 10:36:59,2018-10-29 12:24:07,2018-10-29 12:36:09,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1195,https://github.com/kubernetes/kubeadm/pull/1195,AdamDang,Fix the wrong file name,schedler.conf->scheduler.conf,"['neolit123', 'fabriziopandini']",1,2018-10-29 12:26:27,2018-10-31 06:53:45,2018-10-31 06:53:45,True,2018-10-31 06:53:45,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1229,https://github.com/kubernetes/kubeadm/pull/1229,xichengliudui,Delete the redundant word,Delete the redundant word ‘the’,"['timothysc', 'fabriziopandini']",1,2018-11-12 06:26:13,2018-11-12 09:52:05,2018-11-12 09:52:05,True,2018-11-12 09:52:05,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1246,https://github.com/kubernetes/kubeadm/pull/1246,xichengliudui,Delete the redundant word ‘the’,Delete the redundant word ‘the’,['timothysc'],1,2018-11-15 08:01:00,2018-11-15 15:28:58,2018-11-15 15:28:58,True,2018-11-15 15:28:58,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1293,https://github.com/kubernetes/kubeadm/pull/1293,JoeWrightss,Fix some typos,"In these article, ""api server"" and ""API server"" are not consistent. For example, in [docs/design/design_v1.9.md](https://github.com/kubernetes/kubeadm/compare/master...JoeWrightss:patch-1?expand=1#diff-21ece680a29b03664c2e243e1b7cbf37), ""api server"" has only appear once, but others are ""API server"", please keep them consistent.","['luxas', 'yagonobre']",1,2018-12-02 13:30:58,2018-12-02 19:59:12,2018-12-02 19:59:12,True,2018-12-02 19:59:11,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1313,https://github.com/kubernetes/kubeadm/pull/1313,MalloZup,WIP: enable terraform as deploy-tool on libvirt-kvm,"This pr is a proposal to use in addition to vagrant the terraform-libvirt provider which i'm co-maintainting  on https://github.com/dmacvicar/terraform-provider-libvirt.
+
+I proposing it as wip for gathering some ideas and interest first before i do the project.
+
+I wil follow the same structure as `vagrant` and tooling etc.
+
+We could do it similar to https://github.com/MalloZup/ceph-open-terrarium/tree/master/examples/libvirt with all distro supported in longterm.
+
+",[],1,2018-12-08 11:43:28,2018-12-09 10:54:48,2018-12-09 10:55:42,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1316,https://github.com/kubernetes/kubeadm/pull/1316,fabriziopandini,Officially deprecate kubeadm-playground,"As per various discussion at sig level, this PR officially deprecates kubeadm-playground in favour of kind
+
+@kubernetes/sig-cluster-lifecycle-pr-reviews","['timothysc', 'neolit123', 'luxas']",1,2018-12-10 15:47:28,2019-01-04 10:26:48,2019-01-04 12:49:34,True,2019-01-04 10:26:48,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1338,https://github.com/kubernetes/kubeadm/pull/1338,neolit123,tests/e2e/manifests: add the 'conformance' image,"Include the 'conformance' image for testing as it is bound to the k8s version and is also muli-arch.
+
+image history and details is here:
+https://console.cloud.google.com/gcr/images/google-containers/GLOBAL/conformance@sha256:ed6e06449483498ad0168f172b4e7a59154c425fc988c38c17ab14ee4b433cf4/details?tab=info
+
+min k8s version for it is `v1.13.0-alpha.2`.
+","['chuckha', 'timothysc', 'fabriziopandini']",1,2019-01-03 13:43:32,2019-01-04 09:24:55,2019-01-04 09:24:55,True,2019-01-04 09:24:55,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1342,https://github.com/kubernetes/kubeadm/pull/1342,neolit123,tests/e2e/manifests: fix bug in `conformance' image test,"Use MustParseSemantic() otherwise the pre-release will be
+discarded.
+
+---
+
+in my last PR here:
+https://github.com/kubernetes/kubeadm/pull/1338
+
+i've made a mistake of using MustParseGeneric().
+this time tested locally.
+
+/kind bug
+/area testing
+/priority important-longterm
+/assign @fabriziopandini 
+",['fabriziopandini'],1,2019-01-07 15:47:55,2019-01-07 17:27:55,2019-01-07 17:27:55,True,2019-01-07 17:27:55,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1344,https://github.com/kubernetes/kubeadm/pull/1344,kangyawei,test Update README.md,test Update README.md,[],1,2019-01-08 02:07:05,2019-01-08 02:07:22,2019-01-08 11:14:20,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1377,https://github.com/kubernetes/kubeadm/pull/1377,neolit123,update ref-documentation guide,"Update the ref-docs guide after the recent changes to not
+require placeholder files in k/k.
+
+Also clarify the HTML vs placeholder files in k/website.
+
+/kind documentation
+/priority backlog
+/assign @fabriziopandini 
+",['fabriziopandini'],1,2019-01-31 00:22:50,2019-02-01 06:58:39,2019-02-01 06:58:39,True,2019-02-01 06:58:39,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1388,https://github.com/kubernetes/kubeadm/pull/1388,neolit123,OWNERS: add neolit123 to approvers,"Add myself as approver to be able to approve PRs in this repo.
+Also focus on the work that is to be done under /tests/e2e
+with the transition to kind for testing.
+","['timothysc', 'fabriziopandini']",1,2019-02-05 23:26:08,2019-02-06 00:13:09,2019-02-06 00:13:09,True,2019-02-06 00:13:09,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1389,https://github.com/kubernetes/kubeadm/pull/1389,neolit123,kind: add simple test-cmd script and single-cp config,"Add a ""basic"" test-cmd script to be used from the
+kind deployer.
+
+Also include a single-cp config for kind.
+
+Mostly experimenting at this point.
+The directory structure is a subject to change
+once more test cases are added.
+
+test-infra job PR is here: TODO
+","['timothysc', 'fabriziopandini']",1,2019-02-06 00:08:34,2019-02-06 00:14:47,2019-02-06 00:17:17,True,2019-02-06 00:14:47,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1396,https://github.com/kubernetes/kubeadm/pull/1396,bowiesaurus,Local environment setup improvement,"2 changes here to improve getting set up for kubeadm-playground development.
+
+1. Added a stock `Pipfile` with the required `pyyaml` package and Python version to make local development less fraught with missing dependencies.
+
+2. Updated the alias for `kubeadm-playground` to make sure it allows `pipenv` to pick up on the correct path to the `Pipfile`.
+
+",[],2,2019-02-08 00:00:58,2019-02-17 16:22:26,2019-02-17 16:22:26,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1397,https://github.com/kubernetes/kubeadm/pull/1397,neolit123,add e2e test for install/uninstall DEB packages,"- test CI/latest DEBs
+- test all release DEBs from the support skew
+
+/assign @timothysc @BenTheElder 
+/area testing
+/kind feature
+/priority important-longterm
+/hold
+
+test-infra PR: https://github.com/kubernetes/test-infra/pull/11215
+
+","['timothysc', 'BenTheElder']",1,2019-02-09 20:54:24,2019-02-12 13:34:46,2019-02-12 13:34:46,True,2019-02-12 13:34:46,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1437,https://github.com/kubernetes/kubeadm/pull/1437,cloudmelon,Add definition about kubeadm,"As someone first heard about it, start from a defnition would be more friendly. Add definition about kubeadm to make things clear.",['fabriziopandini'],8,2019-03-06 22:22:20,2019-03-30 22:52:23,2019-04-01 10:33:37,False,,,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1441,https://github.com/kubernetes/kubeadm/pull/1441,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,['neolit123'],1,2019-03-08 18:07:46,2019-03-08 18:34:58,2019-03-09 00:22:06,True,2019-03-08 18:34:57,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1446,https://github.com/kubernetes/kubeadm/pull/1446,fabriziopandini,Welcome kinder!,"kinder is an example of [kind](https://github.com/kubernetes-sigs/kind) used as a library, designed for simplifying kubeadm development/local testing
+
+This PR introduces the kinder roadmap/readme file, for collecting the first round of feedback about goals/high-level features before adding the actual kinder code
+
+/kind documentation
+/priority important-longterm
+
+/assign @timothysc 
+/assign @BenTheElder 
+/assign @neolit123 
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews ","['timothysc', 'neolit123', 'BenTheElder']",1,2019-03-12 22:44:34,2019-03-13 01:30:41,2019-03-14 17:15:45,True,2019-03-13 01:30:41,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1450,https://github.com/kubernetes/kubeadm/pull/1450,fabriziopandini,kinder,"after https://github.com/kubernetes/kubeadm/pull/1446 merged, this PR adds the actual kinder code
+
+/kind feature
+/priority important-longterm
+
+/assign @timothysc 
+/assign @neolit123 
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews ","['ereslibre', 'timothysc', 'neolit123']",1,2019-03-13 21:52:30,2019-03-25 09:11:10,2019-03-25 12:22:01,True,2019-03-25 09:11:10,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1457,https://github.com/kubernetes/kubeadm/pull/1457,fabriziopandini,Update kubeadm OWNERS file,"**What type of PR is this?**
+/kind cleanup
+
+**What this PR does / why we need it**:
+Align OWNER file to what we have in K/K. More specifically
+- Graduates @rosti to approver (and reviewer) 🎉
+- Adds @ereslibre @yagonobre as reviewers 🎉
+- Removes @stealthybox & @xiangpengzhao 👋
+
+Thanks for your contributions, and hopefully we'll see you
+around again @stealthybox & @xiangpengzhao!
+
+Congrats new reviewers and approvers!
+**Does this PR introduce a user-facing change?**:
+```release-note
+NONE
+```
+/sig cluster-lifecycle
+/area kubeadm
+/priority backlog
+
+@kubernetes/sig-cluster-lifecycle
+/assign @luxas @timothysc @fabriziopandini @neolit123 ","['ereslibre', 'timothysc', 'neolit123', 'rosti', 'fabriziopandini', 'luxas']",1,2019-03-20 21:04:26,2019-03-23 15:51:06,2019-03-25 12:20:44,True,2019-03-23 15:51:06,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1458,https://github.com/kubernetes/kubeadm/pull/1458,fabriziopandini,Remove kubeadm-playground,"Considering that:
+- we are not receiving PR, issues or other users requests about kubeadm-playground since time (at least AFAIK)
+- now kinder can be used as a replacement (see https://github.com/kubernetes/kubeadm/pull/1450)
+
+This PR removes kubeadm-playground from this repository
+
+/kind cleanup
+/priority backlog
+
+/assign @timothysc
+/assign @neolit123
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews","['ereslibre', 'timothysc', 'neolit123', 'rosti']",1,2019-03-20 21:42:20,2019-03-22 12:26:21,2019-03-25 12:20:04,True,2019-03-22 12:26:21,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1459,https://github.com/kubernetes/kubeadm/pull/1459,fabriziopandini,move testing-pre-releases.md into docs folder,"This PR move `testing-pre-releases.md` into docs folder (instead of root)
+
+/kind cleanup
+/priority backlog
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews",['neolit123'],1,2019-03-20 21:53:17,2019-03-20 22:05:01,2019-03-25 12:19:17,True,2019-03-20 22:05:00,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1467,https://github.com/kubernetes/kubeadm/pull/1467,Bubblemelon,Update CONTRIBUTING doc link to kinder README,"This links the ""Building"" section of CONTRIBUTING.md to /kinder/README.md .
+
+Related issue: #1466 ","['neolit123', 'fabriziopandini', 'yagonobre']",1,2019-03-24 18:14:25,2019-03-24 18:23:06,2019-03-24 18:23:06,True,2019-03-24 18:23:06,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1475,https://github.com/kubernetes/kubeadm/pull/1475,cloudmelon,Update the definition and enrich the intro for kubeadm,"Update the definition and enrich the intro for kubeadm
+
+As requested, merge to one commit ",[],8,2019-03-30 22:53:16,,2019-03-30 22:58:22,False,,,unstable,True,open
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1482,https://github.com/kubernetes/kubeadm/pull/1482,fabriziopandini,add kinder get artifacts command,"This PR adds the new `kinder get artifacts` that allows to retrive Kubernetes build artifacts from different sources
+
+This is a useful feature and also an initial step for implementing kinder build node-variant from build artifacts, that is a piece of the puzzle for getting E2E tests on kubeadm upgrades
+
+/kind feature
+/priority important-longterm
+
+/assign @neolit123
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews",['neolit123'],1,2019-04-02 20:44:32,2019-04-02 22:17:20,2019-04-04 20:25:37,True,2019-04-02 22:17:20,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1483,https://github.com/kubernetes/kubeadm/pull/1483,fabriziopandini,update kinder docs,"This PR adds some more details to the kinder `README.md` file and updates the roadmap with what we expect to implement for getting kinder supporting E2E testing for kubeadm upgrades
+
+/kind documentation
+/priority important-longterm
+
+/assign @neolit123
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews",['neolit123'],1,2019-04-02 21:35:40,2019-04-02 21:41:19,2019-04-04 20:27:13,True,2019-04-02 21:41:19,k8s-ci-robot,unknown,,closed
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1488,https://github.com/kubernetes/kubeadm/pull/1488,fabriziopandini,build node variant from k8s builds,"This PR implements kinder build node-variant from build artifacts, that is an important piece of the puzzle for getting E2E tests on kubeadm upgrades
+
+/kind feature
+/priority important-longterm
+
+/assign @neolit123
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews",['neolit123'],1,2019-04-04 22:01:57,,2019-04-05 11:55:27,False,,,unstable,True,open
+kubeadm,https://api.github.com/repos/kubernetes/kubeadm/pulls/1489,https://github.com/kubernetes/kubeadm/pull/1489,fabriziopandini,update kinder docs,"This PR updates kinder docs with changes in https://github.com/kubernetes/kubeadm/pull/1488
+
+/kind documentation
+/priority important-longterm
+
+/assign @neolit123
+
+/cc @kubernetes/sig-cluster-lifecycle-pr-reviews",['neolit123'],1,2019-04-04 22:11:23,,2019-04-05 11:54:46,False,,,unstable,True,open

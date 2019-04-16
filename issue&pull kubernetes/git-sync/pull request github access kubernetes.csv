@@ -1,0 +1,341 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/1,https://github.com/kubernetes/git-sync/pull/1,thockin,Move git-sync to a new repo of its very own,"This just imports the existing state of contrib/git-sync into this new repo and scrubs paths for ""contrib"".  I have some further work I want to do on this sidecar, so I thought it was time to break it out.
+",['mikedanese'],2,2016-08-20 23:23:47,2016-08-22 16:27:38,2016-08-22 22:56:56,True,2016-08-22 16:27:38,mikedanese,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/2,https://github.com/kubernetes/git-sync/pull/2,thockin,Overhaul git-sync,"This is a series of cleanups, bugfixes, and enhancements to git-sync.  I will be cleaning up the demo docs and adding some tests soon.  I'd like to get this to a 1.0 tagged release and never touch it again.
+
+This can be reviewed commit-by-commit.  The git logic was tested (manually) extensively, but that doesn't mean I didn't miss something.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/2)
+
+<!-- Reviewable:end -->
+",['mikedanese'],14,2016-08-25 05:04:41,2016-09-16 16:06:01,2016-09-16 16:06:01,True,2016-09-16 16:06:01,mikedanese,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/5,https://github.com/kubernetes/git-sync/pull/5,thockin,bump to 2.0.0,"pushed to GCR
+
+Fixes #3 
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/5)
+
+<!-- Reviewable:end -->
+",['mikedanese'],1,2016-10-02 03:25:39,2016-10-02 03:27:30,2016-10-02 03:27:30,True,2016-10-02 03:27:30,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/9,https://github.com/kubernetes/git-sync/pull/9,thockin,"Better flag help, error on bad --dest, v2.0.1","<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/9)
+
+<!-- Reviewable:end -->
+",['mikedanese'],1,2016-10-08 00:21:40,2016-10-08 00:21:59,2016-10-08 00:22:00,True,2016-10-08 00:21:59,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/12,https://github.com/kubernetes/git-sync/pull/12,thockin,Fix when a tag/rev moves,"I know this used to work.  I must have broken it at some point. Manually
+verified for HEAD and a real tag.
+
+Also fix some logging so it is less chatty by default.
+
+Fixes #11
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/12)
+
+<!-- Reviewable:end -->
+",['mikedanese'],1,2016-10-13 04:48:08,2016-10-14 03:39:14,2016-10-14 03:39:14,True,2016-10-14 03:39:14,mikedanese,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/16,https://github.com/kubernetes/git-sync/pull/16,ursuad,Fixed updating from a specific branch,"This fixes #14 by fetching the revision from the correct branch.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/16)
+
+<!-- Reviewable:end -->
+",[],3,2016-10-27 10:53:23,2016-10-27 11:30:45,2016-10-27 11:30:45,False,,,dirty,False,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/17,https://github.com/kubernetes/git-sync/pull/17,ursuad,Fixed updating from a specific branch,"This fixes #14 by fetching the revision from the correct branch.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/17)
+
+<!-- Reviewable:end -->
+",[],2,2016-10-27 11:30:14,2016-10-28 14:54:35,2016-10-28 14:54:35,False,,,dirty,False,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/18,https://github.com/kubernetes/git-sync/pull/18,thockin,add a test,"@stp-ip can you say what part of this test doesn't work for you?  It passes for me.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/18)
+
+<!-- Reviewable:end -->
+",['mikedanese'],1,2016-10-27 17:21:31,2016-10-28 15:04:33,2016-10-28 16:41:11,True,2016-10-28 15:04:33,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/19,https://github.com/kubernetes/git-sync/pull/19,thockin,Fix non-master branches and tags,"This plus the test should ensure no regressions.  Git makes it tricky to do
+some things on a remote that you would think to do on a local repo.
+`ls-remote` gives me the info I need with only one test for ""HEAD"" vs anything
+else.
+
+Fixes #14 
+
+@stp-ip
+@ursuad
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/19)
+
+<!-- Reviewable:end -->
+",['mikedanese'],1,2016-10-28 15:06:48,2016-10-28 16:01:09,2016-10-28 16:01:09,True,2016-10-28 16:01:09,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/20,https://github.com/kubernetes/git-sync/pull/20,thockin,Use build template,"Faster builds and versions from tags.  Also use alpine as a base image.  We  need alpine for other architectures...
+
+Fixes #10 
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/20)
+
+<!-- Reviewable:end -->
+",['bowei'],1,2016-10-28 15:56:24,2016-10-31 08:39:34,2016-11-02 06:23:06,True,2016-10-31 08:39:34,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/21,https://github.com/kubernetes/git-sync/pull/21,thockin,Fix tag variable,"Fix small bug in Makefile
+
+<!-- Reviewable:start -->
+
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/21)
+<!-- Reviewable:end -->
+",[],1,2016-11-02 06:21:52,2016-11-02 06:22:05,2016-11-02 06:22:05,True,2016-11-02 06:22:05,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/23,https://github.com/kubernetes/git-sync/pull/23,TerraTech,Makefile: Fix bashism when building on Ubuntu + dash," Reference: https://wiki.ubuntu.com/DashAsBinSh#A.5B
+
+ Ubuntu's /bin/sh is /bin/dash and '==' triggers an error:
+ >> /bin/sh: 1: [: amd64: unexpected operator
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/23)
+<!-- Reviewable:end -->
+",[],1,2016-11-11 22:10:24,2017-02-15 16:46:10,2017-03-22 00:50:30,True,2017-02-15 16:46:10,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/24,https://github.com/kubernetes/git-sync/pull/24,TerraTech,main.go: Fixes git error: did you mean `--depth` (with two dashes ?),"re: Subject
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/git-sync/24)
+<!-- Reviewable:end -->
+",[],1,2016-11-13 08:49:27,2016-11-13 10:42:05,2016-11-13 13:48:48,True,2016-11-13 10:42:05,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/25,https://github.com/kubernetes/git-sync/pull/25,ApsOps,Remove chmod command since we can specify permissions for a Secret Volume,"- Fixed because of https://github.com/kubernetes/kubernetes/pull/28936
+
+@thockin Should we just suggest the user to set correct permissions, or should we fail unless correct permissions are set?",[],1,2016-12-19 16:25:16,2016-12-22 02:46:01,2017-01-04 09:39:57,True,2016-12-22 02:46:01,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/26,https://github.com/kubernetes/git-sync/pull/26,sourcesoft,fix typos in readme.md,,[],1,2016-12-31 12:19:53,2017-02-06 20:31:53,2017-02-06 20:31:53,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/27,https://github.com/kubernetes/git-sync/pull/27,fate-grand-order,"fix misspell ""recommended"" in main.go",,[],1,2017-01-17 07:26:39,2017-01-17 16:57:41,2017-01-17 16:57:41,True,2017-01-17 16:57:41,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/29,https://github.com/kubernetes/git-sync/pull/29,ideahitme,"clean up Dockerfile, remove ssh-wrapper.sh and set env var",Fixes #28,[],1,2017-01-26 18:05:52,2017-01-27 06:15:41,2017-01-27 08:10:36,True,2017-01-27 06:15:41,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/31,https://github.com/kubernetes/git-sync/pull/31,thockin,bump e2e timeouts,Fixes #30 ,[],1,2017-01-27 06:24:01,2017-01-27 06:44:08,2017-01-27 06:44:08,True,2017-01-27 06:44:08,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/35,https://github.com/kubernetes/git-sync/pull/35,stp-ip,Use bare name for DEST in example,"Using a path for DEST will fail in subsequent syncs #8.
+Using a bare name in examples.",[],1,2017-02-15 08:49:06,2017-02-15 09:03:57,2017-02-15 16:49:07,True,2017-02-15 09:03:57,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/37,https://github.com/kubernetes/git-sync/pull/37,sjernigan,Update ssh.md,"Adding requirement for runAsRoot and suggested configuration for defaultMode.  These are required after previous change to remove the chmod on the key.
+
+See disccussion #33 and #34 #",[],1,2017-02-17 16:09:05,2017-02-17 16:40:45,2017-02-17 16:40:46,True,2017-02-17 16:40:45,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/39,https://github.com/kubernetes/git-sync/pull/39,stp-ip,Add runAsUser to demo example,Fixes #32,[],1,2017-02-17 16:50:00,2017-02-17 16:50:12,2017-02-17 16:51:21,True,2017-02-17 16:50:12,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/41,https://github.com/kubernetes/git-sync/pull/41,VikramTiwari,Update README.md,fix file names for creating kubernetes pods and services,[],1,2017-03-02 06:10:25,2017-03-02 11:57:45,2017-03-02 11:57:49,True,2017-03-02 11:57:45,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/44,https://github.com/kubernetes/git-sync/pull/44,VikramTiwari,update pod config,"- Fixes #42
+- now uses v2.0.4 which is current latest
+
+NOTE: Hugo is not versioned on GCR hence still using the latest image.",[],1,2017-03-06 04:43:36,2017-03-06 04:45:01,2017-03-06 04:45:01,True,2017-03-06 04:45:01,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/45,https://github.com/kubernetes/git-sync/pull/45,stp-ip,[WIP] Document atomic switching and related issues,"Symlinks as used for the atomic switch might lead to issues
+in various applications.
+
+Closes: #15",[],1,2017-03-22 03:42:32,2017-09-15 17:34:28,2017-09-15 17:34:28,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/46,https://github.com/kubernetes/git-sync/pull/46,stp-ip,Update OWNERS to latest state,Use latest governance state from Kubernetes and document current maintainers.,[],1,2017-03-22 03:51:38,2017-03-22 04:29:56,2017-04-09 20:38:03,True,2017-03-22 04:29:56,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/51,https://github.com/kubernetes/git-sync/pull/51,stp-ip,Update copyright,,['stp-ip'],1,2017-03-22 04:22:30,2017-03-22 04:23:09,2017-03-22 04:26:40,True,2017-03-22 04:23:09,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/52,https://github.com/kubernetes/git-sync/pull/52,stp-ip,"Revert ""Update copyright""",Reverts kubernetes/git-sync#51,[],1,2017-03-22 04:25:31,2017-03-22 04:25:40,2017-03-22 04:27:51,True,2017-03-22 04:25:40,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/56,https://github.com/kubernetes/git-sync/pull/56,aledbf,Avoid zombie processes,,[],1,2017-03-31 18:49:35,2017-03-31 21:12:58,2017-03-31 22:08:18,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/57,https://github.com/kubernetes/git-sync/pull/57,aledbf,Avoid zombie processes,,[],1,2017-03-31 22:09:09,2017-05-23 12:38:53,2017-05-23 12:38:53,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/58,https://github.com/kubernetes/git-sync/pull/58,pieterlange,Use secure defaults (check hostkeys),Somewhat related: https://bridge.grumpy-troll.org/2017/04/golang-ssh-security/,[],2,2017-04-21 13:11:44,2017-04-25 00:51:18,2017-04-25 00:51:24,True,2017-04-25 00:51:18,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/61,https://github.com/kubernetes/git-sync/pull/61,thockin,Add a RELEASING doc,Add a short doc on cutting a release.,['stp-ip'],1,2017-05-30 04:56:28,2017-05-30 06:51:56,2017-05-30 06:51:56,True,2017-05-30 06:51:56,stp-ip,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/62,https://github.com/kubernetes/git-sync/pull/62,japettyjohn,added submodule support,Added option to init and update submodules. If depth is specified it uses shallow submodules.,[],1,2017-06-02 22:11:06,2018-04-13 17:31:57,2018-07-23 22:49:56,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/63,https://github.com/kubernetes/git-sync/pull/63,mbssaiakhil,Fix typo in Events Code of Conduct,,[],1,2017-08-13 11:30:36,2017-08-14 03:38:20,2017-08-14 03:38:20,True,2017-08-14 03:38:20,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/64,https://github.com/kubernetes/git-sync/pull/64,mbssaiakhil,Update Code of Conduct,Made the last sentence uniform wrt other sentences,[],1,2017-08-15 13:12:31,2017-08-15 15:26:28,2017-08-15 15:26:28,True,2017-08-15 15:26:28,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/66,https://github.com/kubernetes/git-sync/pull/66,thockin,Update RELEASING doc a bit,,['stp-ip'],1,2017-09-15 16:49:10,2017-09-15 16:49:44,2017-09-15 16:49:44,True,2017-09-15 16:49:44,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/67,https://github.com/kubernetes/git-sync/pull/67,thockin,Fix one-shot sync of a rev,Fixes #36 ,['stp-ip'],1,2017-09-15 17:06:24,2017-09-15 17:31:23,2017-09-15 17:31:23,True,2017-09-15 17:31:23,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/68,https://github.com/kubernetes/git-sync/pull/68,thockin,Update golang version to 1.9,Fixes #50,['stp-ip'],1,2017-09-15 17:26:30,2017-09-15 17:31:04,2017-09-15 17:31:04,True,2017-09-15 17:31:04,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/69,https://github.com/kubernetes/git-sync/pull/69,pieterlange,Flip the known_hosts enforcement to true so the git hosts actually get verified.,"Ref: #59 
+Ref: #58 ",[],1,2017-09-15 23:29:13,2017-09-18 18:18:02,2017-09-18 18:18:02,True,2017-09-18 18:18:02,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/73,https://github.com/kubernetes/git-sync/pull/73,jorianvo,Improve e2e tests,This commit will fix issue #71 and is tested on both MacOS and Ubuntu.,[],1,2017-09-21 20:43:27,2017-09-22 07:08:30,2017-09-22 09:30:28,True,2017-09-22 07:08:30,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/78,https://github.com/kubernetes/git-sync/pull/78,spiffxp,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",['cblecker'],2,2017-12-20 18:32:23,2017-12-22 23:29:17,2018-01-03 00:48:46,True,2017-12-22 23:29:17,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/79,https://github.com/kubernetes/git-sync/pull/79,thockin,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281",[],1,2017-12-22 18:02:09,2017-12-22 19:30:42,2017-12-22 19:30:42,True,2017-12-22 19:30:41,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/80,https://github.com/kubernetes/git-sync/pull/80,thockin,Pushes go to staging-k8s.gcr.io,"Context: https://github.com/kubernetes/kubernetes/pull/57824
+
+xref kubernetes/release#281",['stp-ip'],1,2018-01-17 22:20:59,2018-01-19 17:22:04,2018-01-19 17:22:05,True,2018-01-19 17:22:04,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/82,https://github.com/kubernetes/git-sync/pull/82,frankfarzan,Don't set GIT_SYNC_DEST in Dockerfile.,"I'm guessing this is an artifact of previous refactorings.
+Currently, GIT_SYNC_ROOT defaults to /git and GIT_SYNC_DEST
+defaults to leaf dir of repo.",['thockin'],1,2018-02-06 03:25:01,2018-02-06 05:01:22,2018-02-06 05:01:22,True,2018-02-06 05:01:22,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/83,https://github.com/kubernetes/git-sync/pull/83,thockin,add -- to gcloud CLI,,['stp-ip'],1,2018-02-07 05:26:08,2018-02-07 05:30:55,2018-02-07 07:58:14,True,2018-02-07 05:30:55,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/84,https://github.com/kubernetes/git-sync/pull/84,arturozv,add usage docs,"Hi, thanks for the project! 
+I've been having to check the source code to check what options does the cli have. It would be nice to have them on a more friendly format",['stp-ip'],1,2018-02-13 22:02:37,2018-09-27 15:35:56,2018-09-27 15:35:56,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/85,https://github.com/kubernetes/git-sync/pull/85,andjelx,Webhook call on sucessfull sync added,,"['stp-ip', 'thockin']",2,2018-02-15 17:04:47,2018-12-17 19:11:43,2018-12-17 19:11:43,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/86,https://github.com/kubernetes/git-sync/pull/86,wanghanlin,Update ssh.md,,['stp-ip'],1,2018-03-10 07:32:02,2018-03-30 03:53:04,2018-03-30 03:53:04,True,2018-03-30 03:53:04,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/87,https://github.com/kubernetes/git-sync/pull/87,mandrean,Run Go build-image without TTY,AFAIK it's not necessary to run the build-image with TTY and the `-t` flag can just be omitted as it breaks some CI builds trying to run `make container` when TTY isn't allowed.,[],2,2018-03-29 09:07:53,2018-03-30 03:55:22,2018-04-23 13:00:39,True,2018-03-30 03:55:22,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/88,https://github.com/kubernetes/git-sync/pull/88,thockin,"Add debug, enable pprof by flag",,['stp-ip'],1,2018-03-30 03:41:37,2018-07-02 21:36:18,2018-07-02 21:36:18,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/89,https://github.com/kubernetes/git-sync/pull/89,thockin,Use k8s GCR vanity URL,,[],1,2018-04-06 17:15:36,2018-04-06 17:15:47,2018-04-06 17:15:47,True,2018-04-06 17:15:47,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/92,https://github.com/kubernetes/git-sync/pull/92,brycecr,Add gitcookie configuration option,"Add an option to specify a git http cookie file in the k8s yaml
+that will be configured as the global git cookie file in the git-sync
+client.
+
+This is a useful access mechanism for some some hosted repositories
+where SSH and passwords are not easily available, such as Google Cloud
+Source Repositories.",['thockin'],3,2018-05-17 15:32:14,2018-06-01 21:45:07,2018-06-01 21:45:07,True,2018-06-01 21:45:07,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/94,https://github.com/kubernetes/git-sync/pull/94,stp-ip,Add security contacts,"Security contacts according to template (https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS)
+
+Fixes: #93 ",[],1,2018-05-24 15:54:06,2018-05-24 15:57:59,2018-05-24 16:55:41,True,2018-05-24 15:57:58,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/95,https://github.com/kubernetes/git-sync/pull/95,mattjmcnaughton,Fix README,"The README instructs the user to overwrite the TAG variable to set the
+tag on `make container`. However, the user should actually overwrite the
+`VERSION` variable.",[],1,2018-06-01 00:58:01,2018-06-01 15:11:25,2018-06-05 13:44:50,True,2018-06-01 15:11:25,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/96,https://github.com/kubernetes/git-sync/pull/96,mattjmcnaughton,Update kubernetes demo/config for example,"A couple of changes to make the kubernetes config work
+and follow best practices.
+
+- Use `deployment` instead of `pod`.
+- Use correct image names.
+
+After these changes, running `kubectl create -f demo/config/` creates a
+working deployment/service.",['stp-ip'],2,2018-06-05 13:44:25,2018-06-06 17:04:23,2018-08-16 12:45:04,True,2018-06-06 17:04:23,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/97,https://github.com/kubernetes/git-sync/pull/97,TimBozeman,Add chown flag.,"Hiya,
+
+Thank you for git-sync. It's pretty awesome! I just signed the CLA. Can we add a chown flag please?",[],1,2018-06-18 21:56:27,2018-06-19 16:07:44,2018-06-19 16:07:44,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/98,https://github.com/kubernetes/git-sync/pull/98,TimBozeman,Add chown flag. This could be used when the file owner needs to be different than the containers.,"Hiya,
+
+Thank you for git-sync. It's pretty awesome! I just signed the CLA. Can we add a chown flag please?",[],1,2018-06-19 16:08:31,2018-07-03 18:26:10,2018-07-03 21:59:48,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/99,https://github.com/kubernetes/git-sync/pull/99,thockin,Clean up doc on GIT_COOKIE_FILE,Was reading this doc and saw it wasn't as clear as it could be.,[],1,2018-07-02 21:36:55,2018-07-02 21:37:26,2018-07-02 21:37:26,True,2018-07-02 21:37:26,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/100,https://github.com/kubernetes/git-sync/pull/100,thockin,Update images and allow non-root use of gitcookie,@TimBozeman re #98 ,['stp-ip'],2,2018-07-03 18:22:25,2018-07-03 22:00:12,2018-07-03 22:00:12,True,2018-07-03 22:00:12,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/101,https://github.com/kubernetes/git-sync/pull/101,AndersonChoi,Rename variable wait to interval,The interval seems to be a better word than wait.,"['stp-ip', 'thockin']",14,2018-07-11 13:46:57,,2019-01-15 16:43:27,False,,,dirty,False,open
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/102,https://github.com/kubernetes/git-sync/pull/102,odracci,GIT_SYNC_BRANCH accepts either a branch or a tag,"Currently git-sync uses GIT_SYNC_REV to check-out a tag or an hash, if
+one-time is set is not necessary to lookup the hash of the tag because
+is enough to use GIT_SYNC_BRANCH to clone the repository.
+With this change is possible to clone a repository by a tag or a branch using
+GIT_SYNC_BRANCH in case one-time is set to true.",['thockin'],5,2018-07-30 21:38:02,,2019-03-18 21:46:39,False,,,dirty,False,open
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/104,https://github.com/kubernetes/git-sync/pull/104,thockin,Make the default checkout root be under HOME),Fixes #103 ,['stp-ip'],1,2018-08-08 18:36:14,2018-08-08 18:37:21,2018-08-08 19:01:56,True,2018-08-08 18:37:21,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/106,https://github.com/kubernetes/git-sync/pull/106,thockin,Clean up failed clones,"If an initial clone crashes, it can leave the git-root in a bad state
+such that git can't retry the clone.  This change forces it to clean up
+the mess and retry.
+
+Fixes #105 ",['stp-ip'],1,2018-08-20 23:18:33,2018-08-21 15:04:47,2018-08-21 15:04:47,True,2018-08-21 15:04:47,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/108,https://github.com/kubernetes/git-sync/pull/108,rlguarino,Add `ssh-extra-args` argument for git & ssh,"This CL adds a new parameter to git-sync that lets users specify extra
+arguments to pass to ssh when git is configured to clone over ssh. The
+args are appended to the list of arguments that git-sync already
+adds to the `GIT_SSH_COMMAND` environment variable.
+
+Closes #107",[],1,2018-08-22 18:45:14,2018-08-24 22:46:27,2018-08-30 17:40:35,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/109,https://github.com/kubernetes/git-sync/pull/109,recall704,add Env list to README,update doc,[],1,2018-08-27 08:24:06,2018-08-28 06:42:25,2018-08-28 06:42:26,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/110,https://github.com/kubernetes/git-sync/pull/110,diericx,Send a POST request when the symlink has updated,"Adds an ENV/Flag variable ```flSymlinkUpdatePostUrl``` that takes in a url. If this is set, whenever the symlink is updated git-sync will make a POST request to this URL.
+
+**Motivation:** When using git-sync to update the configs for a container in a pod, we found ourselves having to reload the services in the container by making a POST request or SIGHUP. Integrating this directly into git-sync makes this much more straight forward as it seems to be a common pattern. ",['thockin'],8,2018-08-29 18:04:06,2019-01-23 00:24:26,2019-01-23 00:24:27,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/112,https://github.com/kubernetes/git-sync/pull/112,jmcarp,Update example volume mount,"Since the default clone path is $HOME/git and the docker image sets $HOME to /tmp, we have to mount the volume at `/tmp/git` for the container to write files to the volume. As written, the example doesn't write to the volume.",[],2,2018-09-18 03:25:43,2018-12-17 18:57:08,2018-12-17 18:57:15,True,2018-12-17 18:57:08,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/114,https://github.com/kubernetes/git-sync/pull/114,kaarolch,Update url image,Update image repo in demo example for git-sync. Previous location's required auth to download it. ,['thockin'],1,2018-10-03 19:50:04,2018-10-04 03:57:29,2018-10-04 03:57:29,True,2018-10-04 03:57:29,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/117,https://github.com/kubernetes/git-sync/pull/117,thockin,Switch to rev-parse,"This handles non-annotated tags, which were not handled well before.  It
+does mean that we use the hash of the (annotated) tag object instead of
+the commit, but that seems OK.
+
+Added a test case.
+
+Fixes #116 ",['stp-ip'],1,2018-11-06 17:14:08,2018-11-09 18:16:37,2018-11-09 23:01:26,True,2018-11-09 18:16:37,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/118,https://github.com/kubernetes/git-sync/pull/118,thockin,bump go to 1.11,,[],1,2018-11-09 18:20:18,2018-11-09 18:20:31,2018-11-09 18:20:31,True,2018-11-09 18:20:31,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/119,https://github.com/kubernetes/git-sync/pull/119,thockin,Update the build to use manifest-lists,,['stp-ip'],2,2018-11-09 22:20:03,2018-11-09 22:20:25,2018-11-09 23:06:06,True,2018-11-09 22:20:25,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/121,https://github.com/kubernetes/git-sync/pull/121,thockin,Fix hugo demo and docs,"The hugo demo runs again.
+
+Also removed docs on need to run as root.  Pretty sure you do not need
+to.
+
+Fixes #38 
+
+xref #47",['stp-ip'],1,2018-12-17 19:46:56,2018-12-19 16:32:00,2018-12-19 16:32:01,True,2018-12-19 16:32:00,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/122,https://github.com/kubernetes/git-sync/pull/122,chris060986,Allow to build container behind a proxy,Allows to specifiy a proxy to build the container behind a proxy like cntlm.,['thockin'],6,2018-12-20 13:26:43,2019-01-23 16:27:10,2019-01-23 16:27:11,True,2019-01-23 16:27:10,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/123,https://github.com/kubernetes/git-sync/pull/123,george-angel,Add a configurable timeout to the sync process,Fixes https://github.com/kubernetes/git-sync/issues/115,['thockin'],4,2019-01-03 14:04:34,2019-01-15 16:40:24,2019-01-15 16:40:24,True,2019-01-15 16:40:24,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/124,https://github.com/kubernetes/git-sync/pull/124,thockin,fix e2e script to work with os/arch tags,Fix tests after recent changes to produce manifests modified the tag names.,[],1,2019-01-04 19:36:14,2019-01-04 19:36:21,2019-01-04 19:36:22,True,2019-01-04 19:36:21,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/125,https://github.com/kubernetes/git-sync/pull/125,xychu,"Trim "".git"" suffix in git repo URL","Both GitHub and GitLab web provides URL with "".git"" suffix,
+and `git clone`'s default behavior is to get rid of it,
+so it's better to trim it as the default destination.",[],1,2019-01-14 08:58:33,2019-01-15 16:18:18,2019-01-15 16:18:19,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/128,https://github.com/kubernetes/git-sync/pull/128,thockin,OWNERS wants 'approvers' not 'maintainers',,[],2,2019-01-15 16:40:03,2019-01-15 16:43:54,2019-01-15 16:43:55,True,2019-01-15 16:43:54,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/131,https://github.com/kubernetes/git-sync/pull/131,jacksontj,Add Webhook on git-sync update,"This is a continuation of #110. I have pulled over all the commits from that PR and addressed the majority of the comments therein.
+
+The outstanding questions I know of:
+
+- do we need multiple webhooks (array vs single): multiple seems nice and its minimal change, but no strong opinion though either way
+- https://github.com/kubernetes/git-sync/pull/110/files#r242277494 -- left as a global for now to avoid passing it through the various functions -- although it seems a bit odd it ends up being smaller/cleaner code.",['thockin'],19,2019-01-17 23:56:15,2019-01-23 00:25:40,2019-01-23 18:23:19,True,2019-01-23 00:25:40,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/132,https://github.com/kubernetes/git-sync/pull/132,jacksontj,Add flags/env-vars for additional SSH options,"This simply moves the hard-coded values into flag options, with defaults being the options they were previously.",['thockin'],4,2019-01-18 00:01:23,2019-01-22 21:54:24,2019-01-22 21:55:11,True,2019-01-22 21:54:24,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/133,https://github.com/kubernetes/git-sync/pull/133,jacksontj,Add option to allow for unlimited failures,"As it stands today git-sync will exit (which will in-turn cause the pod to die) if a git pull fails a number of times. If this failure was due to a remote (such as the git remote being unavailable, such as a github outage) it may be undesirable for your pods to churn. This add the option for the user to define `-1` as the failure limit which allows git-sync to retry indefinitely.",['thockin'],2,2019-01-18 00:02:06,2019-01-22 17:23:43,2019-01-22 18:34:19,True,2019-01-22 17:23:43,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/134,https://github.com/kubernetes/git-sync/pull/134,jacksontj,Upgrade from Godeps to dep,,[],1,2019-01-18 00:02:54,2019-01-18 00:13:45,2019-01-18 00:15:20,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/135,https://github.com/kubernetes/git-sync/pull/135,jacksontj,Add metrics to the git-sync process,"To provide metrics git-sync needs an http endpoint. This is currently done by adding a CLI flag which defines the bind address, if this is set then the http server is started. 
+
+This adds metrics for total count and latency of git-sync attempts split by status
+
+Fixes #130",['thockin'],6,2019-01-18 00:08:26,2019-01-23 16:24:11,2019-01-23 18:23:26,True,2019-01-23 16:24:10,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/137,https://github.com/kubernetes/git-sync/pull/137,jacksontj,Switch from godeps to `go mod`,"Split vendor/dep changes from #135
+
+cc @thockin @stp-ip ",['thockin'],1,2019-01-22 19:22:37,2019-01-22 21:29:57,2019-01-22 21:30:03,True,2019-01-22 21:29:57,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/138,https://github.com/kubernetes/git-sync/pull/138,jacksontj,Use depth option when doing fetches,"Previously the `depth` flag was only used for the initial clone-- so
+although you might start with a depth=10 as more commits show up you are
+always >10. With this diff we enforce that depth on each fetch, this way
+old-commits can get GCd off to reduce the size of the local checkout
+required.
+
+Related to #54",['thockin'],3,2019-01-23 00:24:34,2019-01-23 01:36:20,2019-01-23 18:23:10,True,2019-01-23 01:36:19,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/139,https://github.com/kubernetes/git-sync/pull/139,jacksontj,e2e test for #135 and #131,cc @thockin ,['thockin'],3,2019-01-23 19:06:22,2019-01-23 20:47:53,2019-01-23 21:02:11,True,2019-01-23 20:47:52,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/140,https://github.com/kubernetes/git-sync/pull/140,thockin,Clean up / document build and release,"In writing better RELEASING docs, I realized the build was repeating
+steps.  In fixing that I fixed some make deps, but realized I *still*
+can't make the build ideal.
+
+At least it is written down now...",['stp-ip'],1,2019-01-25 18:47:01,2019-01-25 21:37:02,2019-01-25 21:37:02,True,2019-01-25 21:37:01,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/141,https://github.com/kubernetes/git-sync/pull/141,thockin,Build rel tweaks,"This syncs to the latest template I maintain.  It reduces replicated work when possible.  We don't handle multiple platforms here yet, but we should.",['stp-ip'],2,2019-01-28 19:43:40,2019-01-28 20:51:45,2019-01-28 20:51:45,True,2019-01-28 20:51:45,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/142,https://github.com/kubernetes/git-sync/pull/142,EugeneChung,~ -> $HOME,"On Mac, ~ is not translated to the home directory. I guess $HOME is more portable.",['stp-ip'],1,2019-01-31 08:15:48,2019-01-31 08:39:36,2019-01-31 08:39:51,True,2019-01-31 08:39:36,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/143,https://github.com/kubernetes/git-sync/pull/143,thockin,Fix bad perms on make,"Missed this commit before, sorry!",['stp-ip'],2,2019-02-01 16:25:14,2019-02-01 18:12:27,2019-02-01 18:12:28,True,2019-02-01 18:12:27,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/144,https://github.com/kubernetes/git-sync/pull/144,thockin,Fix SSH,"* Create a git-sync user to run as, with an entry in /etc/passwd and
+writable homedir
+
+* Remove our own validation of key perms - let SSH do that.
+
+* Update docs
+
+Fixes #129 ",['stp-ip'],1,2019-02-02 01:19:38,2019-02-11 20:38:26,2019-02-11 20:38:27,True,2019-02-11 20:38:26,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/147,https://github.com/kubernetes/git-sync/pull/147,PhilippeDupont,Fix typo,,['stp-ip'],1,2019-02-14 10:07:19,2019-03-26 01:05:18,2019-03-26 01:05:18,True,2019-03-26 01:05:18,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/148,https://github.com/kubernetes/git-sync/pull/148,huanwei,rename dest,"Signed-off-by: huanwei <huan@harmonycloud.cn>
+
+fix issue #120 ",[],3,2019-02-19 07:32:28,,2019-03-05 08:02:35,False,,,dirty,False,open
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/152,https://github.com/kubernetes/git-sync/pull/152,joelsmith,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,['thockin'],1,2019-03-08 18:05:45,2019-03-08 18:13:57,2019-03-09 00:20:11,True,2019-03-08 18:13:57,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/153,https://github.com/kubernetes/git-sync/pull/153,thomasv314,Add circleci,,[],1,2019-03-11 15:26:16,2019-03-11 15:26:59,2019-03-11 15:27:03,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/154,https://github.com/kubernetes/git-sync/pull/154,thockin,Use debian-base as base image,"All of the main Kubernetes components are switching to it, since we can
+maintain it more easily.",['stp-ip'],1,2019-03-12 00:16:26,2019-03-24 13:21:06,2019-03-24 13:21:06,True,2019-03-24 13:21:06,k8s-ci-robot,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/155,https://github.com/kubernetes/git-sync/pull/155,Vampouille,Add libnss_wrapper and a wrapper to use it,"Compile libnss_wrapper from source and create a script that populate at
+runtime passwd/group databases with current running user.",[],1,2019-03-18 13:30:16,,2019-03-19 07:51:02,False,,,blocked,True,open
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/157,https://github.com/kubernetes/git-sync/pull/157,thockin,Convert to use go modules,,['stp-ip'],5,2019-03-22 17:50:05,2019-03-25 15:20:31,2019-03-25 15:20:31,False,,,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/158,https://github.com/kubernetes/git-sync/pull/158,stp-ip,Convert to use go modules,"Based on #157 
+
+This fixes a few things.
+* use vendor for tests, build etc. `-mod=vendor`
+* remove need for git in alpine container as vendor is used `-mod=vendor`
+* fix permission and GOPATH issues from package installations by removing manual installation via `go test -i` as that is discouraged since v1.10 due to the go cache afaik",['thockin'],6,2019-03-24 14:35:49,2019-03-25 15:54:45,2019-03-25 16:32:01,True,2019-03-25 15:54:45,thockin,unknown,,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/162,https://github.com/kubernetes/git-sync/pull/162,filmil,git-sync: adds flag to skip abort on first error,"Adds the flag to allow git-sync to soldier on on first failure.  This
+is useful if the git-sync lifecycle is managed by a controller that
+has its own ways of reporting sync failures.
+
+Fixes #161.",[],1,2019-04-02 01:50:50,2019-04-03 07:40:51,2019-04-03 07:40:51,False,,,dirty,False,closed
+git-sync,https://api.github.com/repos/kubernetes/git-sync/pulls/163,https://github.com/kubernetes/git-sync/pull/163,filmil,git-sync: removes special exit on first error,"Old code used to exit at any error seen on first sync attempt.  This
+didn't prove useful in practice, so removing that special case.
+
+This may make git-sync slower to recover after user fixes a
+non-retryable error, as now flMaxSyncFailures are needed before the pod
+fails.  It may make sense in practice.
+
+Fixes #161, in a different way than is proposed in PR #162.",['thockin'],1,2019-04-02 17:09:16,2019-04-03 05:05:43,2019-04-03 05:05:43,True,2019-04-03 05:05:42,k8s-ci-robot,unknown,,closed

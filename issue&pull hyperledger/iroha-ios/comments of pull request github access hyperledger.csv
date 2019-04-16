@@ -1,0 +1,655 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/iroha-ios/pull/90,https://github.com/hyperledger/iroha-ios/pull/90,// then,1ddfe9b5229b21ef19d936a8cab5c14085c85d42,2019-03-26 16:57:21,269212613,"@@ -0,0 +1,50 @@
++/**
++ * Copyright Soramitsu Co., Ltd. All Rights Reserved.
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++@import XCTest;
++@import IrohaCommunication;
++@import IrohaCrypto;
++#import ""QryResponses.pbobjc.h""
++
++static NSString * const VALID_ACCOUNT_IDENTIFIER = @""bob@gmail.com"";
++static NSString * const VALID_ASSET_IDENTIFIER = @""testcoin#gmail.com"";
++static NSString * const VALID_BALANCE = @""100"";
++
++@interface IRQueryResponseDeserializationTests : XCTestCase
++
++@end
++
++@implementation IRQueryResponseDeserializationTests
++
++- (void)testAssetResponseDeserialization {
++    // given
++    AccountAsset *accountAsset = [[AccountAsset alloc] init];
++    accountAsset.accountId = VALID_ACCOUNT_IDENTIFIER;
++    accountAsset.assetId = VALID_ASSET_IDENTIFIER;
++    accountAsset.balance = VALID_BALANCE;
++
++    AccountAssetResponse *assetResponse = [[AccountAssetResponse alloc] init];
++    [assetResponse setAccountAssetsArray:[NSMutableArray arrayWithObject:accountAsset]];
++
++    NSString *queryHash = [assetResponse.data toHexString];
++
++    QueryResponse *response = [[QueryResponse alloc] init];
++    [response setQueryHash:queryHash];
++    [response setAccountAssetsResponse:assetResponse];
++
++    // when
++
++    NSError *error = nil;
++    id<IRQueryResponse> irQueryResponse = [IRSerializationFactory deserializeQueryResponseFromData:response.data error:&error];",40,2019-03-26 17:17:45,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/269212613,https://github.com/hyperledger/iroha-ios/pull/90#discussion_r269212613,unklayman
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,The result is 'SUCCESS' by default from the very beginning of the build. No need to set it explicitly,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:10:43,260138008,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++        if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/ && checkTag == 0) {
++          stage('release') {
++            sh(script: ""pod trunk push"")
++          }
++        }
++      currentBuild.result = 'SUCCESS'",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260138008,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260138008,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"I think that Iroha and iroha-ios mainline branches have to have one-to-one correspondence. I.e., `master` and `develop` branches of Iroha repository match `master` and `develop` branches of iroha-ios. @ERussel @unklayman",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:17:01,260139159,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260139159,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260139159,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,We want to release any tagged version of the library (those commits to `master` that have Git Tag). No need to look for a specific Git commit. Just make sure there is SOME tag for this commit.,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:29:43,260141630,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)",27,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260141630,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260141630,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,Shall we just remove that?,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:30:24,260141767,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260141767,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260141767,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,Please delete commented code or leave additional comments(or TODO) in which case we may need to uncomment it. ,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:33:19,260142349,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260142349,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260142349,BulatSaif
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"```suggestion
+    catch(Exception e) {
+    print(""Exception catched: "" + e )
+```
+Or for small pipeline like this I recommend to use the [declarative-pipeline](https://jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline), there you do not need to use try/catch blocks ",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:33:21,260142356,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++        if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/ && checkTag == 0) {
++          stage('release') {
++            sh(script: ""pod trunk push"")
++          }
++        }
++      currentBuild.result = 'SUCCESS'
++    } // end try
++    catch(Exception e) {",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260142356,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260142356,BulatSaif
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"```suggestion
+echo ""SUCCESS""
+```",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:33:24,260142366,"@@ -29,6 +29,7 @@ mkdir $PROTO_GEN
+ 
+ grpc_path=$(command -v $grpc)
+ protoc --plugin=protoc-gen-grpc=$grpc_path --objc_out=${PROTO_GEN} --grpc_out=${PROTO_GEN} --proto_path=./${SCHEMA_PATH}/proto ./${SCHEMA_PATH}/proto/*.proto
+-
+ [ -d $IROHA_PATH ] && rm -rf $IROHA_PATH
+-[ -d $SCHEMA_PATH ] && rm -rf $SCHEMA_PATH
+\ No newline at end of file
++[ -d $SCHEMA_PATH ] && rm -rf $SCHEMA_PATH
++
++echo ""1111""",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260142366,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260142366,BulatSaif
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"I agree for now. But to insure we need to discuss the logic of how docker images of iroha are delivered to the users, will it be any docker images that will not match master branch of iroha but still require corresponding client library? @bakhtin ",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 06:58:06,260147488,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260147488,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260147488,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"I think what we want to achieve here is matching between version in Podspec file and release tag. This requirements come from cocopods service where we finally push Podspec file. So first question, why --tags option is used because at this point we are interested in release tags (annotated tags)? Second question, as I understood we need to produce release tag before merging to master? So, can we block pull requests to master without release tags?",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 07:15:10,260151961,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)",27,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260151961,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260151961,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,Lets run unit tests at some point before release?,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 07:16:23,260152263,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++        if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/ && checkTag == 0) {
++          stage('release') {
++            sh(script: ""pod trunk push"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260152263,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260152263,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"I think we don't need the process of proto compilation here. I wrote lib_build.sh only for purpose to automate proto files update. We want to deliver easy to use client library without any requirements to deal with iroha building process. But, maybe at this point we want to insure that built proto files are up to date.",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 07:25:10,260154390,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260154390,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260154390,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"Strange that diff shows this changes, because they already must be in master.",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 07:28:07,260155058,"@@ -68,6 +68,14 @@ - (nullable id)transform:(NSError*_Nullable*_Nullable)error {
+     return transaction;
+ }
+ 
++#pragma mark - Transaction data",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260155058,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260155058,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"Do you have tests?
+Please describe how to run it",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 09:22:56,260191970,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++        if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/ && checkTag == 0) {
++          stage('release') {
++            sh(script: ""pod trunk push"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260191970,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260191970,Stayer
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,This step is only for our CI,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 09:28:53,260194396,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260194396,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260194396,Stayer
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"> We want to release any tagged version of the library (those commits to `master` that have Git Tag). No need to look for a specific Git commit. Just make sure there is SOME tag for this commit.
+
+this method only checks if current commit was tagged. 
+Condition below checks that we in `master` tree and current commit has a tag:
+`if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/ && checkTag == 0)` ",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 09:31:34,260195533,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)",27,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260195533,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260195533,Stayer
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,build stage or commented text?,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 09:34:22,260196647,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260196647,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260196647,Stayer
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"Well, we recently discussed similar strategy for iroha-python repo. We build the code from `develop` branch and publish it as a Jenkins artifact without uploading it to Cocoapods. These libraries should work (most probably unreliably, but contain latest features) with Iroha from `develop` branch. We build Iroha Docker containers with `:develop` tag so users can evaluate latest features.
+Libraries built from `master` branch must be backward compatible with the latest (`master` branch) version of the schema defined in `*.proto` files (https://github.com/hyperledger/iroha/blob/master/shared_model/schema/endpoint.proto). The versioning of the library may not match the version of Iroha, but repository description should clearly state which version of the schema it supports.
+Regarding building from `master` branch. Every time you create a tag on Github (release) Jenkins receives an event. We can trigger the build upon receiving such event. If build is succeeded the library is published to Cocoapods. In case it is a push event into `master` branch without a tag (release), CI should just build proto files and publish Jenkins artifact without pushing it to Cocoapods
+@Stayer ",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 10:09:23,260211396,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260211396,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260211396,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"`// archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true`
+this, and the line below",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 10:11:41,260212571,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260212571,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260212571,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"Good explanation, thank you. I agree with this logic.",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 11:41:55,260247268,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260247268,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260247268,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"Sure, unit tests are bound to pod linting proccess. I just checked pod trunk push command and found that it includes linting as  part of its process. This means that unit tests must run implicitly too. So let's close the question.",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-02-26 11:49:25,260249748,"@@ -0,0 +1,42 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  grpc = ""protoc-gen-objcgrpc""
++  withEnv(['IROHA_PATH=iroha',
++          'SCHEMA_PATH=Schema',
++          'PROTOLIB_PATH=protobuf',
++          'PROTO_GEN=ProtoGen',
++          'LANG=en_US.UTF-8']) {
++    try {
++        stage('prepare') {
++          sh(script: ""command -v protoc >/dev/null 2>&1 || { echo 'protoc is required to continue...' >&2; exit 1; }"")
++          sh(script: ""command -v ${grpc} >/dev/null 2>&1 || { echo 'protoc-gen-objcgrpc is required to continue...' >&2; exit 1; }"")
++          // err = sh(script: 'command -v protoc >/dev/null 2>&1 || { echo ""protoc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          // err = sh(script: 'command -v $grpc >/dev/null 2>&1 || { echo ""protoc-gen-objcgrpc is required to continue..."" >&2; exit 1; }', returnStatus: true)
++          sh(script: ""git clone -b develop --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""rm -rf \$PROTO_GEN && mkdir \$PROTO_GEN"")
++        }
++        stage('build') {
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN --grpc_out=\$PROTO_GEN --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          // archiveArtifacts artifacts: 'ProtoGen/', fingerprint: true
++            // sh './lib-build.sh'
++        }
++        checkTag = sh(script: 'git describe --tags --exact-match ${GIT_COMMIT}', returnStatus: true)
++        if (scmVars.GIT_LOCAL_BRANCH ==~ /(master)/ && checkTag == 0) {
++          stage('release') {
++            sh(script: ""pod trunk push"")",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/260249748,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r260249748,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,Why are we checking for differences in proto files?,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-03-14 06:14:57,265431191,"@@ -0,0 +1,43 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  tree = ""develop""
++  try {
++    grpc = ""protoc-gen-objcgrpc""
++    withEnv(['IROHA_PATH=iroha',
++            'SCHEMA_PATH=Schema',
++            'PROTO_GEN=ProtoGen',
++            'LANG=en_US.UTF-8']) {
++      stage('prepare') {
++        if (scmVars.GIT_LOCAL_BRANCH == 'master' || env.CHANGE_TARGET == 'master' ) {
++          sh(script: ""git clone -b master --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""mkdir \$PROTO_GEN-iroha"")
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN-iroha --grpc_out=\$PROTO_GEN-iroha --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          difference = sh(script: ""diff -r \$PROTO_GEN-iroha \$PROTO_GEN | grep \$PROTO_GEN-iroha | awk '{print \$4}'"", returnStdout: true)",16,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/265431191,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r265431191,bakhtin
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,"As we discussed, when we release version to cocoapods we want to be sure that library sources contain last compiled proto files version.",c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-03-14 06:32:51,265434343,"@@ -0,0 +1,43 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  tree = ""develop""
++  try {
++    grpc = ""protoc-gen-objcgrpc""
++    withEnv(['IROHA_PATH=iroha',
++            'SCHEMA_PATH=Schema',
++            'PROTO_GEN=ProtoGen',
++            'LANG=en_US.UTF-8']) {
++      stage('prepare') {
++        if (scmVars.GIT_LOCAL_BRANCH == 'master' || env.CHANGE_TARGET == 'master' ) {
++          sh(script: ""git clone -b master --depth=1 https://github.com/hyperledger/iroha"")
++          sh(script: ""mkdir \$SCHEMA_PATH"")
++          sh(script: ""cp -R \$IROHA_PATH/shared_model/schema \$SCHEMA_PATH/proto"")
++          sh(script: ""mkdir \$PROTO_GEN-iroha"")
++          sh(script: ""protoc --plugin=protoc-gen-grpc=\$(command -v ${grpc}) --objc_out=\$PROTO_GEN-iroha --grpc_out=\$PROTO_GEN-iroha --proto_path=./\$SCHEMA_PATH/proto ./\$SCHEMA_PATH/proto/*.proto"")
++          difference = sh(script: ""diff -r \$PROTO_GEN-iroha \$PROTO_GEN | grep \$PROTO_GEN-iroha | awk '{print \$4}'"", returnStdout: true)",16,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/265434343,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r265434343,ERussel
+https://github.com/hyperledger/iroha-ios/pull/87,https://github.com/hyperledger/iroha-ios/pull/87,why to we need this variable?,c129ade8b60e45a3cda99db9731cf7b64765adc1,2019-03-14 06:42:51,265436219,"@@ -0,0 +1,43 @@
++node('mac_for_ios') {
++  scmVars = checkout scm
++  tree = ""develop""",,2019-04-03 06:21:20,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/265436219,https://github.com/hyperledger/iroha-ios/pull/87#discussion_r265436219,ERussel
+https://github.com/hyperledger/iroha-ios/pull/75,https://github.com/hyperledger/iroha-ios/pull/75,"In general I would use a badge like this: 
+`[![Iroha 1.0.0-rc2](https://img.shields.io/badge/Iroha-1.0.0--rc2-red.svg)](https://github.com/hyperledger/iroha/releases/tag/1.0.0_rc2)`",de7fcc164b26fac6a7a2b4b4039a2d25f89b2434,2019-01-24 09:53:24,250532169,"@@ -1,105 +1,46 @@
+-# いろはSwift (IrohaSwift)
++# Hyperledger Iroha iOS library
+ 
+-![CocoaPods](https://img.shields.io/cocoapods/v/IrohaSwift.svg)
+-![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
++### Please pay attention! Current version of the library was tested and compatible with [`iroha-v1.0.0_rc2`](https://github.com/hyperledger/iroha/releases/tag/1.0.0_rc2).",6,2019-01-24 09:53:25,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/250532169,https://github.com/hyperledger/iroha-ios/pull/75#discussion_r250532169,neewy
+https://github.com/hyperledger/iroha-ios/pull/75,https://github.com/hyperledger/iroha-ios/pull/75,"Where? Can we put these links:
+```
+* Join [Hyperledger RocketChat](https://chat.hyperledger.org) #iroha channel 
+* Use mailing list [hyperledger-iroha@lists.hyperledger.org](mailto:hyperledger-iroha@lists.hyperledger.org)
+```",de7fcc164b26fac6a7a2b4b4039a2d25f89b2434,2019-01-24 09:55:09,250532989,"@@ -1,105 +1,46 @@
+-# いろはSwift (IrohaSwift)
++# Hyperledger Iroha iOS library
+ 
+-![CocoaPods](https://img.shields.io/cocoapods/v/IrohaSwift.svg)
+-![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
++### Please pay attention! Current version of the library was tested and compatible with [`iroha-v1.0.0_rc2`](https://github.com/hyperledger/iroha/releases/tag/1.0.0_rc2).
+ 
+-## What is いろは(iroha)?  
+-いろは(iroha) is [this](https://github.com/hyperledger/iroha).
++The library was created to provide convienent interface for iOS applications to communicate with [Iroha](https://github.com/hyperledger/iroha) blockchain including sending transactions/query, streaming transaction statuses and block commits.
+ 
+-## Description  
+-いろはSwift (IrohaSwift) is client swift library for using いろは(iroha).
++## Example
+ 
+-- [Requirements](#requirements)
+-- [Installation](#installation)
+-- [Usage](#usage)
+-- [License](#license)
++For new iroha users we recommend to checkout iOS example project. It tries to establish connection with Iroha peer which should be also run locally on your computer to create new account and send some asset quantity to it. To run the project, please, go through steps below:
+ 
+-## Requirement  
+-iOS 8.0+  
+-Xcode 8.0+  
+-Swift 3.0+  
++1. Follow instructions from [Iroha documentation](https://iroha.readthedocs.io/en/latest/getting_started/) to setup and run iroha peer in [Docker](https://www.docker.com) container.
+ 
+-## Installation  
+-### CocoaPods(iOS 8+)
++2. Clone current repositary.
+ 
+-Podfile:
+-```ruby
+-platform :ios, '8.0'
+-use_frameworks!
++3. cd Example directory and run ```pod install```.
+ 
+-target 'App Name' do
+-    pod 'IrohaSwift'
+-end
+-```
++4. Open IrohaCommunication.xcworkspace in XCode
+ 
+-Then, run the following command:
++6. Build and Run IrohaExample target.
+ 
+-```bash
+-$ pod install
+-```
++7. Consider logs to see if the scenario completed successfully.
+ 
+-### Carthage
+-Write in your Cartfile:
+-```
+-github ""hyperledger/iroha-ios.git""
+-```
+-Run `carthage update`
++Feel free to experiment with example project and don't hesistate to ask any questions.",58,2019-01-24 09:55:09,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/250532989,https://github.com/hyperledger/iroha-ios/pull/75#discussion_r250532989,neewy
+https://github.com/hyperledger/iroha-ios/pull/75,https://github.com/hyperledger/iroha-ios/pull/75,Will make addition PR for this 2 comments.,de7fcc164b26fac6a7a2b4b4039a2d25f89b2434,2019-01-24 15:18:56,250647439,"@@ -1,105 +1,46 @@
+-# いろはSwift (IrohaSwift)
++# Hyperledger Iroha iOS library
+ 
+-![CocoaPods](https://img.shields.io/cocoapods/v/IrohaSwift.svg)
+-![Platform](https://img.shields.io/cocoapods/p/IrohaSwift.svg?style=flat)
++### Please pay attention! Current version of the library was tested and compatible with [`iroha-v1.0.0_rc2`](https://github.com/hyperledger/iroha/releases/tag/1.0.0_rc2).
+ 
+-## What is いろは(iroha)?  
+-いろは(iroha) is [this](https://github.com/hyperledger/iroha).
++The library was created to provide convienent interface for iOS applications to communicate with [Iroha](https://github.com/hyperledger/iroha) blockchain including sending transactions/query, streaming transaction statuses and block commits.
+ 
+-## Description  
+-いろはSwift (IrohaSwift) is client swift library for using いろは(iroha).
++## Example
+ 
+-- [Requirements](#requirements)
+-- [Installation](#installation)
+-- [Usage](#usage)
+-- [License](#license)
++For new iroha users we recommend to checkout iOS example project. It tries to establish connection with Iroha peer which should be also run locally on your computer to create new account and send some asset quantity to it. To run the project, please, go through steps below:
+ 
+-## Requirement  
+-iOS 8.0+  
+-Xcode 8.0+  
+-Swift 3.0+  
++1. Follow instructions from [Iroha documentation](https://iroha.readthedocs.io/en/latest/getting_started/) to setup and run iroha peer in [Docker](https://www.docker.com) container.
+ 
+-## Installation  
+-### CocoaPods(iOS 8+)
++2. Clone current repositary.
+ 
+-Podfile:
+-```ruby
+-platform :ios, '8.0'
+-use_frameworks!
++3. cd Example directory and run ```pod install```.
+ 
+-target 'App Name' do
+-    pod 'IrohaSwift'
+-end
+-```
++4. Open IrohaCommunication.xcworkspace in XCode
+ 
+-Then, run the following command:
++6. Build and Run IrohaExample target.
+ 
+-```bash
+-$ pod install
+-```
++7. Consider logs to see if the scenario completed successfully.
+ 
+-### Carthage
+-Write in your Cartfile:
+-```
+-github ""hyperledger/iroha-ios.git""
+-```
+-Run `carthage update`
++Feel free to experiment with example project and don't hesistate to ask any questions.",58,2019-01-24 15:18:56,https://api.github.com/repos/hyperledger/iroha-ios/pulls/comments/250647439,https://github.com/hyperledger/iroha-ios/pull/75#discussion_r250647439,ERussel

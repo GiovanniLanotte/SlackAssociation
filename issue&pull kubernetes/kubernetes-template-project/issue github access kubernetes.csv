@@ -1,0 +1,97 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+kubernetes-template-project,philips,https://github.com/kubernetes/kubernetes-template-project/pull/1,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/1,README: add some incubator boilerplate,,closed,True,2016-09-02 00:24:59,2016-09-02 00:25:03
+kubernetes-template-project,bgrant0607,https://github.com/kubernetes/kubernetes-template-project/issues/2,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/2,Document recommended repo setup,"Forked from https://github.com/kubernetes/kops/issues/644
+
+I think it would be useful to describe the recommended setup for repos in the template.
+
+For example, admin and maintainers (write) teams.
+
+And how to turn on the bot. And copy labels.
+
+And OWNERS.
+
+Etc
+
+cc @grodrigues3 
+",closed,False,2016-10-15 02:20:14,2018-07-17 01:18:19
+kubernetes-template-project,bgrant0607,https://github.com/kubernetes/kubernetes-template-project/issues/3,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/3,Please update the LICENSE with the copyright holder,"It should be ""The Kubernetes Authors"".
+
+Most repos haven't modified the boilerplate `Copyright {yyyy} {name of copyright owner}`
+",closed,False,2016-10-15 02:42:12,2016-11-22 19:46:55
+kubernetes-template-project,mbohlool,https://github.com/kubernetes/kubernetes-template-project/pull/4,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/4,Update CONTRIBUTING.md with CNCF CLAs,I assume we need CNCF CLAs now that we are part of CNCF. Please double-check the links and the text. I am not sure what is the official/legal way to represent this.,closed,True,2016-11-18 19:19:12,2016-11-19 01:48:20
+kubernetes-template-project,mbssaiakhil,https://github.com/kubernetes/kubernetes-template-project/pull/5,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/5,Fix typo,Fix typo in Events Code of Conduct,closed,True,2017-08-13 11:34:05,2017-12-13 19:01:28
+kubernetes-template-project,krishna-mk,https://github.com/kubernetes/kubernetes-template-project/pull/6,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/6,Update README.md with links for Slack and SIG,"Slack - pointing to (http://slack.k8s.io/)
+Mailing List - retagged
+SIG - pointing to (https://github.com/kubernetes/community/blob/master/sig-list.md)",closed,True,2017-08-30 07:47:32,2017-12-13 19:01:03
+kubernetes-template-project,munnerz,https://github.com/kubernetes/kubernetes-template-project/pull/7,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/7,Set correct project start date,"Previously the README stated the project started 2006-01-02. I wasn't so interested in the Kubernetes project back then, but I'm pretty sure it didn't exist at the time 😉 
+
+Hopefully it's okay to make PRs directly against this repo.",closed,True,2017-09-12 16:06:53,2017-12-13 18:59:31
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/8,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/8,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: kubernetes/test-infra#3851",closed,True,2017-10-31 23:40:25,2017-12-12 23:15:57
+kubernetes-template-project,philips,https://github.com/kubernetes/kubernetes-template-project/issues/9,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/9,add steering committee to OWNERS,cc @spiffxp ,closed,False,2017-12-13 01:41:57,2017-12-13 01:50:22
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/10,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/10,Add steering-committe as approvers for this repo,"To ensure that the entire kubernetes/steering-committee team doesn't need admin access to this repo, add them as approvers
+
+Fixes #9",closed,True,2017-12-13 01:48:45,2017-12-19 15:22:28
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/11,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/11,Fix typo,"Followon to #10, I can't spell",closed,True,2017-12-13 01:52:04,2017-12-13 01:52:48
+kubernetes-template-project,dankohn,https://github.com/kubernetes/kubernetes-template-project/pull/12,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/12,Change code-of-conduct to call by reference,This matches what kubernetes/kubernetes has.,closed,True,2017-12-13 19:45:09,2017-12-14 23:01:30
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/13,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/13,Use kubernetes/community as source of truth for code of conduct,"One more layer of indirection, I would prefer all of our repos refer to Kubernetes' CoC, which at the moment is a redirect to CNCF's.",closed,True,2017-12-18 17:42:16,2017-12-18 23:29:24
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/14,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/14,"Remove incubator content, touchup existing requirements","Trying to bring this repo in alignment with the way things are today:
+- we keep talking about how incubator is / should going away, so... drop wording about it?
+- very few repos in kubernetes/ have RELEASE.md files
+- almost every repo now uses the exact code-of-conduct.md from this repo
+- [docs repos don't use the apache 2 license](https://github.com/kubernetes/community/blob/master/governance.md#repository-guidelines)
+- OWNERS files point to owners docs
+- remove reference to godep from CONTRIBUTING.md (not all repos are golang, not all golang repos have chosen to use that)
+- link to to canonical CLA instructions at https://git.k8s.io/community/CLA.md
+
+This is in the interest of making this repo a living example of a ""correct"" repo, per https://github.com/kubernetes/community/pull/1569",closed,True,2018-01-13 01:30:21,2018-08-24 16:02:56
+kubernetes-template-project,wking,https://github.com/kubernetes/kubernetes-template-project/pull/15,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/15,OWNERS: Upstream docs moved from devel/ to guide/,Catch up with kubernetes/community#1764.,closed,True,2018-03-28 17:17:22,2018-07-25 20:20:30
+kubernetes-template-project,wking,https://github.com/kubernetes/kubernetes-template-project/issues/16,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/16,Document DCO signed-off-by requirement?,"The [CNCF charter][1] has (§11.c):
+
+> All new inbound code contributions to the CNCF shall be (i) accompanied by a Developer Certificate of Origin sign-off (http://developercertificate.org) and (ii) made under the Apache License, Version 2.0 (available at http://www.apache.org/licenses/LICENSE-2.0), such license to be in addition to, and shall not supersede, obligations undertaken under the contribution license agreement(s) provided for in (b) above.
+
+But the `CONTRIBUTING.md` file in this repository currently only mentions the CLA ~~(which is optional per-project, as discussed in §11.b)~~.  It should probably be expanded to include the DCO and Signed-off-by docs (I have [a project for including stock docs][2], or you can write your own) to comply with §11.c, ~~and may deserve a note (in the docs requested in #2?) to point out that project owners can remove the CLA requirement if they want~~ [EDIT: CLAs are [not optional][3] for Kubernetes projects].
+
+[1]: https://www.cncf.io/about/charter/
+[2]: https://github.com/wking/signed-off-by
+[3]: https://github.com/kubernetes/kubernetes-template-project/issues/16#issuecomment-377096061",closed,False,2018-03-28 17:24:05,2018-08-07 18:06:04
+kubernetes-template-project,AdamDang,https://github.com/kubernetes/kubernetes-template-project/pull/17,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/17,Typo fix mimimum->minimum,"Line 3:  at mimimum
+mimimum->minimum",closed,True,2018-04-23 11:26:02,2018-05-09 22:18:55
+kubernetes-template-project,jessfraz,https://github.com/kubernetes/kubernetes-template-project/pull/18,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/18,add SECURITY_CONTACTS,add suggested in https://github.com/kubernetes/community/pull/2062#issuecomment-384472803 adding SECURITY_CONTACTS here.,closed,True,2018-05-17 20:43:35,2018-05-22 22:46:14
+kubernetes-template-project,castrojo,https://github.com/kubernetes/kubernetes-template-project/pull/19,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/19,Add a new template with more information and links to newer resources,Draft at fixing https://github.com/kubernetes/steering/issues/28,closed,True,2018-07-10 19:29:12,2018-07-13 21:01:28
+kubernetes-template-project,cblecker,https://github.com/kubernetes/kubernetes-template-project/pull/20,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/20,Update Steering Committee,/assign @spiffxp ,closed,True,2018-08-23 21:31:54,2018-08-23 22:33:27
+kubernetes-template-project,nikhita,https://github.com/kubernetes/kubernetes-template-project/pull/21,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/21,Point to CoC in repo instead of the CNCF CoC,"Ref https://github.com/kubernetes-client/ruby/pull/18#discussion_r211828790
+
+/assign spiffxp ",closed,True,2018-09-01 15:04:50,2018-09-01 19:45:20
+kubernetes-template-project,nikhita,https://github.com/kubernetes/kubernetes-template-project/pull/22,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/22,Specify files which cannot include custom content,"@BenTheElder pointed out on slack that it would be nice to have a list of files which are allowed to have custom content and which do not.
+
+This PR also adds a link to the Creative Commons 4.0 license from the website repo.
+
+/committee steering
+
+/cc @BenTheElder @spiffxp @cblecker 
+/assign @spiffxp ",closed,True,2018-09-15 07:02:46,2018-09-18 17:21:11
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/23,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/23,Update steering-committee alias per 2018 election results,ref: https://github.com/kubernetes/steering/pull/79,closed,True,2018-10-04 22:38:56,2018-10-04 23:01:13
+kubernetes-template-project,craigbox,https://github.com/kubernetes/kubernetes-template-project/pull/24,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/24,Update COC link,"The existing COC link points to a page that says ""click here for the new link"".  This PR updates the content of the template to point directly to the correct (CNCF) code of conduct.
+
+/assign spiffxp",closed,True,2018-10-14 11:00:20,2018-10-15 17:44:39
+kubernetes-template-project,spiffxp,https://github.com/kubernetes/kubernetes-template-project/pull/25,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/25,"Revert ""Update COC link""","This reverts commit 0ba8c947fcbc23cd7915ec11c27992db5dcd51fa.
+
+ref: https://github.com/kubernetes/kubernetes-template-project/pull/24#issuecomment-429947919
+ref: https://github.com/kubernetes/kubernetes/pull/65359#issuecomment-429948546
+ref: https://github.com/kubernetes/community/issues/1527",closed,True,2018-10-15 17:54:03,2018-10-16 21:50:00
+kubernetes-template-project,BenTheElder,https://github.com/kubernetes/kubernetes-template-project/pull/26,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/26,add instructions to OWNERS,"Per discussion in #sig-testing slack, so as to not have steering suggested as approvers in every repo, project leads should be approvers instaed.
+
+~TODO: what should we put as the placeholder instead? I'm not sure if what I have is really suitable~
+Fixed, there are TODO comments now instead.
+
+cc @spiffxp 🧔
+cc @cblecker ",closed,True,2018-11-14 00:06:37,2018-11-14 22:09:28
+kubernetes-template-project,nikhita,https://github.com/kubernetes/kubernetes-template-project/pull/27,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/27,Fix link to Embargo Policy,"Related: https://github.com/kubernetes/security/pull/2
+
+/assign @philips ",closed,True,2019-03-04 19:20:28,2019-03-04 19:26:15
+kubernetes-template-project,rlenferink,https://github.com/kubernetes/kubernetes-template-project/pull/28,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/28,Improved link to docs in OWNERS file,"As a lot of repos are using this link now, it may be good to use the alias as well in our template repository.
+
+/cc @nikhita ",closed,True,2019-03-07 19:06:23,2019-03-11 16:14:29
+kubernetes-template-project,joelsmith,https://github.com/kubernetes/kubernetes-template-project/pull/29,https://api.github.com/repos/kubernetes/kubernetes-template-project/issues/29,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:10:37,2019-03-10 00:49:28

@@ -1,0 +1,131 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/65,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/477420711,https://github.com/hyperledger/sawtooth-raft/pull/65#issuecomment-477420711,vaporos,How can we test this?,2019-03-28 02:29:22,2019-03-28 02:29:22
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/65,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/477428295,https://github.com/hyperledger/sawtooth-raft/pull/65#issuecomment-477428295,pankajgoyal2,"Steps to create Sawtooth-raft network using docker-swarm
+
+1.	Create 3 physical machines with Ubuntu 18.04. Lets call those machines as node1, node2 and node3
+2.	Install docker and docker-compose in all the machines
+3.	node1 will be master node and node2 and node3 are worker nodes
+4.	open certain ports on all the nodes: 2377/tcp, 7946/udp, 7946/tcp, 4789/udp
+
+Initialize swarm
+Swarm has to be initialized on master node (node1). In order to do this, run the below command on node1:
+	docker swarm init
+The output of above command will be something like this:
+Swarm initialized: current node (bvz81updecsj6wjz393c09vti) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join \
+    --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx \
+    172.17.0.2:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+As the above output shows, worker nodes need to join the swarm by running the following command:
+ docker swarm join \
+    --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx \
+    172.17.0.2:2377
+So, run the above command on node2 and node3. This way node2 and node3 will join the swarm.
+
+Create swarm network
+Run the below command on master node (node1) to create swarm network:
+	docker network create –d overlay raftnetwork
+The above command creates a network named ‘raftnetwork’ which will be used by the docker compose file.
+
+Validator keys management
+Run the swarm/validator_keys.yaml file. This will generate the validator key pairs in /home/Ubuntu/validator_keys folder
+	docker-compose -f swarm/validator_keys.yaml up
+	docker-compose -f swarm/validator_keys.yaml down
+
+Copy /home/Ubuntu/validator_keys folder in all the other nodes to /home/Ubuntu folder.
+
+Environment variables
+On master node (node1), define the following variables in swarm/.env file:
+export TAG=1.1               <1.1/latest/nightly>
+export node1=<hostname_of_node1>
+export node2=<hostname_of_node2>
+export node3=<hostname_of_node3>
+
+Create docker containers
+Run the below command on master node (node1):
+	docker stack deploy –c swarm/raft_3_nodes.yml raft
+You can check all the services started by above command:
+	docker service ls
+The above command should show that all services are running.
+Now, all the containers should be running in respective machines. This can be checked on each node that respective containers are running.
+On master node, there is a shell conainter running. This can be used to start the intkey workload after generating the user key.
+
+At any time, the services created by stack deploy can be destroyed by:
+	docker service rm $(docker service ls -q)
+Services can be started again by running “docker stack deploy –c swarm/raft_3_nodes.yml raft”
+",2019-03-28 03:04:30,2019-03-28 03:04:30
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/65,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/477430654,https://github.com/hyperledger/sawtooth-raft/pull/65#issuecomment-477430654,vaporos,The author on the commit is 'Ubuntu' which is why the DCO is failing.,2019-03-28 03:16:16,2019-03-28 03:16:16
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/65,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/477430836,https://github.com/hyperledger/sawtooth-raft/pull/65#issuecomment-477430836,vaporos,Thanks for the nice instructions!,2019-03-28 03:17:02,2019-03-28 03:17:02
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/64,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/477578756,https://github.com/hyperledger/sawtooth-raft/pull/64#issuecomment-477578756,agunde406,@pankajgoyal2 Please add the reasoning for this change to the commit message.,2019-03-28 12:42:53,2019-03-28 12:43:01
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/58,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/475757631,https://github.com/hyperledger/sawtooth-raft/pull/58#issuecomment-475757631,vaporos,This PR needs to be rebased.,2019-03-22 19:49:12,2019-03-22 19:49:12
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/57,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/472925592,https://github.com/hyperledger/sawtooth-raft/pull/57#issuecomment-472925592,agunde406,"There are two changes in this commit. Changing cargo build from debug to release mode, and removing the logging debug option. They should be in separate commits and a reason should be provided for each. ",2019-03-14 15:41:09,2019-03-14 15:41:09
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/54,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/464875960,https://github.com/hyperledger/sawtooth-raft/pull/54#issuecomment-464875960,vaporos,@arsulegai how can I test this?,2019-02-18 20:57:42,2019-02-18 20:57:42
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/54,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/464967182,https://github.com/hyperledger/sawtooth-raft/pull/54#issuecomment-464967182,arsulegai,"> @arsulegai how can I test this?
+
+**[Note]**
+I added another commit to the same PR, to enable build and test behind proxy network.
+
+We liked the way sawtooth-raft allows us to bring up variable number of validator nodes network. So this follows similar approach.
+
+1. Bring up admin service
+$ cd sawtooth-raft/
+$ docker-compose -f admin.yaml up -d
+
+2. Bring up grafana and influxdb services
+$ cd sawtooth-raft/tests
+$ SAWTOOTH_CORE=/path/to/repository/sawtooth-core docker-compose -f grafana.yaml up -d
+
+3.  Bring up nodes as stated in sawtooth-raft documentation,
+a. For example if it's non-genesis node
+$ SAWTOOTH_CORE=/path/to/repository/sawtooth-core docker-compose -f  node-with-stats.yaml -p nongenesis up
+b. For example if it's genesis node
+$ SAWTOOTH_CORE=/path/to/repository/sawtooth-core GENESIS=1 docker-compose -f node-with-stats.yaml -p genesis up
+
+4. To access grafana, go to browser and the link http://[IP-of-the-machine]:3000.
+
+We do not need additional configuration changes for default files available in sawtooth-xxxx repositories.",2019-02-19 03:32:13,2019-02-19 03:32:13
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/54,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/466730712,https://github.com/hyperledger/sawtooth-raft/pull/54#issuecomment-466730712,arsulegai,"> This is great--so this works with a network proxy and supports Grafana.
+> From looking at the changes, the trick with Grafana is to run Telegraf in the Sawtooth Validator container.
+
+Yes, I raised a PR in sawtooth-core to default enable telegraf start tracking ""sawtooth"" processes.",2019-02-24 03:38:25,2019-02-24 03:38:25
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/54,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/474026795,https://github.com/hyperledger/sawtooth-raft/pull/54#issuecomment-474026795,arsulegai,@vaporos Could you please have a look into this PR?,2019-03-18 17:43:45,2019-03-18 17:43:45
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/54,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/477525513,https://github.com/hyperledger/sawtooth-raft/pull/54#issuecomment-477525513,arsulegai,"> The proxy support should probably be in a separate PR.
+
+Ok",2019-03-28 09:53:28,2019-03-28 09:53:28
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/51,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/457607370,https://github.com/hyperledger/sawtooth-raft/pull/51#issuecomment-457607370,rbuysse,The pull request approvals shall count as votes for the purposes of governance outlined here: https://github.com/hyperledger/sawtooth-rfcs/blob/master/text/0006-sawtooth-governance.md,2019-01-25 15:21:59,2019-01-25 15:21:59
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/47,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/455186335,https://github.com/hyperledger/sawtooth-raft/pull/47#issuecomment-455186335,arsulegai,I see it's already added to the code. Can be closed?,2019-01-17 14:16:07,2019-01-17 14:16:07
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/47,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/455215245,https://github.com/hyperledger/sawtooth-raft/pull/47#issuecomment-455215245,ltseeley,Closing due to change being made in #48 ,2019-01-17 15:35:28,2019-01-17 15:35:28
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/44,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/435176278,https://github.com/hyperledger/sawtooth-raft/pull/44#issuecomment-435176278,chenette,"Possible doc issue: In configuring_deploying.rst, under ""Verifying Raft Is running"", the doc shows a log message with the consensus engine name.  Will this PR change that message?  If so, it would be nice to update the doc in this PR.
+
+> Once the genesis block has been committed, you will see a message in the validator's logs
+> indicating that the Raft engine has been registered:
+> 
+>        Consensus engine registered: sawtooth-raft X.Y.Z
+
+See https://github.com/hyperledger/sawtooth-raft/blob/master/docs/source/configuring_deploying.rst",2018-11-01 20:29:51,2018-11-01 21:07:19
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/44,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/435180649,https://github.com/hyperledger/sawtooth-raft/pull/44#issuecomment-435180649,ltseeley,"Good catch, Anne.",2018-11-01 20:44:09,2018-11-01 20:44:09
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/44,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/435192702,https://github.com/hyperledger/sawtooth-raft/pull/44#issuecomment-435192702,ltseeley,#45 has fixing changes,2018-11-01 21:25:27,2018-11-01 21:25:27
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/42,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/431061971,https://github.com/hyperledger/sawtooth-raft/pull/42#issuecomment-431061971,aludvik,"@knkski hold off on merging until hyperledger/sawtooth-core#1903 is merged, and then merge ASAP",2018-10-18 15:50:20,2018-10-18 15:50:20
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/42,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/431063038,https://github.com/hyperledger/sawtooth-raft/pull/42#issuecomment-431063038,knkski,"@aludvik: Someone other than me will have to merge this, since I don't have write access",2018-10-18 15:53:17,2018-10-18 15:53:17
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/42,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/431069723,https://github.com/hyperledger/sawtooth-raft/pull/42#issuecomment-431069723,ltseeley,@knkski I can merge as soon as the core PR is merged (and after a passing build),2018-10-18 16:11:52,2018-10-18 16:12:06
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/33,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/423690240,https://github.com/hyperledger/sawtooth-raft/pull/33#issuecomment-423690240,peterschwarz,I don't see it run on Jenkins - is it intended to run in CI?,2018-09-21 22:46:30,2018-09-21 22:46:30
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/33,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/423990251,https://github.com/hyperledger/sawtooth-raft/pull/33#issuecomment-423990251,ltseeley,I have a follow-up PR that runs both this test and the dynamic membership one inside Docker and adds them to the CI script.,2018-09-24 14:16:23,2018-09-24 14:16:23
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/32,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/424033952,https://github.com/hyperledger/sawtooth-raft/pull/32#issuecomment-424033952,dcmiddle,"As this is only for CI purposes and not for general developer or user usage please place in a `ci` directory (also makes it consistent with sawtooth-core.
+",2018-09-24 16:16:33,2018-09-24 16:16:33
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/28,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/423346944,https://github.com/hyperledger/sawtooth-raft/pull/28#issuecomment-423346944,aludvik,Merge after this PR is merged https://github.com/hyperledger/sawtooth-core/pull/1866,2018-09-20 21:56:13,2018-09-20 21:56:13
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/27,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/422114241,https://github.com/hyperledger/sawtooth-raft/pull/27#issuecomment-422114241,aludvik,Removed debugging println,2018-09-17 18:05:54,2018-09-17 18:05:54
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/21,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/420346814,https://github.com/hyperledger/sawtooth-raft/pull/21#issuecomment-420346814,aludvik,I am going to follow this PR up with a PR to add a workload compose file.,2018-09-11 17:04:10,2018-09-11 17:04:10
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/21,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/420353910,https://github.com/hyperledger/sawtooth-raft/pull/21#issuecomment-420353910,aludvik,Removed port forwarding from the REST API containers,2018-09-11 17:27:05,2018-09-11 17:27:05
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/21,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/420380598,https://github.com/hyperledger/sawtooth-raft/pull/21#issuecomment-420380598,aludvik,Added a couple more commit for workload generation and changing settings from the admin container,2018-09-11 18:48:42,2018-09-11 18:48:42
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/21,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/420707129,https://github.com/hyperledger/sawtooth-raft/pull/21#issuecomment-420707129,aludvik,"Dropped the config change commit, because need stuff has come to light and I need to think about the right way to address them.",2018-09-12 16:12:07,2018-09-12 16:12:07
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/18,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/417469785,https://github.com/hyperledger/sawtooth-raft/pull/18#issuecomment-417469785,ltseeley,Clippy didn't complain about any of the code that's changed here.,2018-08-30 21:15:56,2018-08-30 21:15:56
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/18,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/417472675,https://github.com/hyperledger/sawtooth-raft/pull/18#issuecomment-417472675,peterschwarz,Cool,2018-08-30 21:26:55,2018-08-30 21:26:55
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/18,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/419139705,https://github.com/hyperledger/sawtooth-raft/pull/18#issuecomment-419139705,ltseeley,I did a bit of a re-write. Abstracted the queues into a separate structure that's simple and easy to use from the engine's perspective. It also obviates the `expect` that we had earlier.,2018-09-06 15:33:49,2018-09-06 15:33:49
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/9,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/408898919,https://github.com/hyperledger/sawtooth-raft/pull/9#issuecomment-408898919,aludvik,Rebased on #2 ,2018-07-30 15:12:58,2018-07-30 15:12:58
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/8,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/408134049,https://github.com/hyperledger/sawtooth-raft/pull/8#issuecomment-408134049,aludvik,Forgot to build raft locally before running the test...,2018-07-26 15:21:18,2018-07-26 15:21:18
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/2,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/403134178,https://github.com/hyperledger/sawtooth-raft/pull/2#issuecomment-403134178,aludvik,@dcmiddle addressed change requests,2018-07-06 20:08:57,2018-07-06 20:08:57
+https://api.github.com/repos/hyperledger/sawtooth-raft/issues/2,https://api.github.com/repos/hyperledger/sawtooth-raft/issues/comments/408517460,https://github.com/hyperledger/sawtooth-raft/pull/2#issuecomment-408517460,aludvik,Will need to wait for the new nightly to be published after merging https://github.com/hyperledger/sawtooth-core/pull/1779,2018-07-27 19:30:49,2018-07-27 19:30:49

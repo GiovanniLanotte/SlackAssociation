@@ -1,0 +1,56 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+hyperledger-rocket-chat-hubot,presseyt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/issues/24,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/24,e -v,,open,False,2019-03-12 16:52:26,2019-03-12 16:52:26
+hyperledger-rocket-chat-hubot,kdenhartog,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/23,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/23,added kdenhartog to experts list,Signed-off-by: Kyle Den Hartog <kdenhar@gmail.com>,closed,True,2018-12-04 22:27:24,2018-12-04 23:08:05
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/22,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/22,"Don't match on username in the message, only look at text",Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2018-09-25 21:42:44,2019-03-12 17:37:05
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/21,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/21,Add expert,Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2018-09-20 21:02:01,2018-09-20 21:08:44
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/20,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/20,Explicitly direct people to chat channels,"A number of people have started using channel names as hashtags on the mailing lists. I want to make it obvious it is an actual chat channel, not a hashtag.",closed,True,2018-07-29 22:52:03,2018-07-30 16:40:47
+hyperledger-rocket-chat-hubot,bhrionn,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/19,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/19,Test Commit,Signed-off-by: Brian Byrne <bhrionn@gmail.com>,closed,True,2018-07-27 09:33:13,2019-03-12 17:37:39
+hyperledger-rocket-chat-hubot,sumitec89,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/18,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/18,New expert,Signed-off-by: Sumit Bramhe <Sumit@Sumits-MacBook-Pro.local>,closed,True,2018-07-18 01:59:17,2018-07-18 04:07:59
+hyperledger-rocket-chat-hubot,lfhyperledgerdemo,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/17,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/17,New expert,Signed-off-by: LF DEMO <lf.hyperledger.demo@gmail.com>,closed,True,2018-05-24 23:55:42,2018-05-24 23:58:34
+hyperledger-rocket-chat-hubot,youssefga,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/issues/16,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/16,Issue with coffeescript upgrade ,"When you run``` bin/hubot ```
+you may get this error, depending on your coffeescript version
+```
+Github/hyperledger-rocket-chat-hubot/node_modules/hubot/src/brain.coffee:10:5:
+error: Can't reference 'this' before calling super in derived class constructors
+    @data =_
+```
+
+You  may try to resolve this, but there are quite a few fixes to do. Downgrading coffeescript is quick and easy:
+
+```
+npm uninstall coffeescript
+npm install -g coffee-script@1.11.1
+```
+
+I also got this error:
+`[Sat May 05 2018 00:39:50 GMT+0300 (EAT)] ERROR hubot-heroku-keepalive included, but missing HUBOT_HEROKU_KEEPALIVE_URL. `heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s | grep web.url | cut -d= -f2)`
+
+And one way to fix it is:
+`npm uninstall hubot-heroku-keepalive --save`
+
+Then go to the file: external-scripts.json and delete hubot-heroku-keepalive
+
+run `bin/hubot` and it will work fine",open,False,2018-05-04 22:10:06,2018-05-04 22:10:06
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/15,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/15,added Josh Smith as an expert,Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2018-04-19 17:06:31,2018-04-19 17:11:43
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/14,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/14,Add SPDX headers to scripts,Signed-off-by: Ry Jones <ry@walledcity.org>,closed,True,2018-04-10 04:09:14,2018-04-16 01:13:32
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/13,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/13,Change pattern for testing,Change from case-insensitive match of /test/ to case-sensitive match of /TEST HUBOT/,closed,True,2018-04-09 23:01:42,2018-04-09 23:46:50
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/12,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/12,Create LICENSE,Signed-off-by: Ry Jones <ry@walledcity.org>,closed,True,2018-04-09 22:58:32,2018-10-03 14:18:09
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/11,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/11,Create LICENSE,Signed-off-by: Ry Jones <ry@walledcity.org>,closed,True,2018-04-09 22:57:16,2018-10-03 14:18:01
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/10,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/10,Create LICENSE,,closed,True,2018-04-09 22:55:33,2018-10-03 14:18:04
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/9,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/9,#ci-pipeline added plus alphabetize experts,,closed,True,2018-04-05 22:07:23,2018-04-05 22:51:49
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/8,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/8,Update Fabric regex,Signed-off-by: Ry Jones <ry@walledcity.org>,closed,True,2018-03-30 18:07:46,2018-03-30 18:09:25
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/7,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/7,Add Fabric keyword,"Sort terms
+
+Signed-off-by: Ry Jones <ry@walledcity.org>",closed,True,2018-03-30 01:28:41,2018-03-30 17:58:41
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/6,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/6,Multiple changes,"- Add initial regular expression for Indy
+- Add new expert
+- HLF -> #fabric-questions",closed,True,2018-03-27 20:51:52,2018-03-27 21:07:18
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/5,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/5,Add Cello response,Signed-off-by: Ry Jones <ry@walledcity.org>,closed,True,2018-03-20 17:55:59,2018-03-20 18:17:26
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/4,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/4,Multiple updates,"New Fabric pattern
+Add respondTo function which determines whether to respond
+Do not respond to experts unless they also include test
+
+Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>",closed,True,2018-03-09 21:34:11,2018-03-09 22:13:17
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/3,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/3,This PR should not be merged.,This PR should not be merged.,closed,True,2018-03-09 01:02:29,2018-03-09 01:07:05
+hyperledger-rocket-chat-hubot,tkuhrt,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/2,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/2,Update README to reflect our configuration,Signed-off-by: Tracy Kuhrt <tkuhrt@linuxfoundation.org>,closed,True,2018-03-07 23:43:14,2018-03-08 00:02:54
+hyperledger-rocket-chat-hubot,ryjones,https://github.com/hyperledger/hyperledger-rocket-chat-hubot/pull/1,https://api.github.com/repos/hyperledger/hyperledger-rocket-chat-hubot/issues/1,Create DCO,,closed,True,2018-03-07 22:47:33,2018-03-07 22:48:24

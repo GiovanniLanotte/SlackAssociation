@@ -1,0 +1,243 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/96,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/475693770,https://github.com/hyperledger/sawtooth-seth/pull/96#issuecomment-475693770,danintel,"For the record, here are the exact error messages for DevMode consensus errors:
+
+```
+devmode-engine-rust | ERROR | devmode_engine_rust: | ReceiveError: TimeoutError
+devmode-engine-rust exited with code 1
+```
+
+The incomplete fix is from #92 
+
+This fix will not be needed for future Sawtooth 1.2.1, nor to backport updates to Sawtooth 1.1.x that have the sawtooth-devmode repository fix on 2019-01-08, in file sdk/examples/devmode_rust/src/main.rs to correct the default TCP port for the consensus engine from `5005` to `5050`
+https://github.com/hyperledger/sawtooth-devmode/commit/ecddd592142d9d68521cf86f70c4cea5041095d4",2019-03-22 16:45:56,2019-03-28 18:33:10
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/95,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/475423494,https://github.com/hyperledger/sawtooth-seth/pull/95#issuecomment-475423494,danintel,"For the record here are the exact log messages for apt-key proxy errors:
+
+```
+Executing: /tmp/apt-key-gpghome.E9z456VMWq/gpg.1.sh --keyserver hkp://keyserver.ubuntu.com:80 --r
+ecv-keys 44FC67F19B2466EA
+gpg: keyserver receive failed: Connection timed out
+Warning: apt-key output should not be parsed (stdout is not a terminal)
+Executing: /tmp/apt-key-gpghome.11j3dCOYV0/gpg.1.sh --keyserver hkp://p80.pool.sks-keyservers.net
+:80 --recv-keys 44FC67F19B2466EA
+gpg: keyserver receive failed: Cannot assign requested address
+```
+
+The older proxy fix, which works for Ubuntu Xenial (LTS 16), but does not work with recent Ubuntu Bionic (LTS 18) is PR https://github.com/hyperledger/sawtooth-seth/pull/29 . This fix works for both Bionic and Xenial.",2019-03-21 22:14:34,2019-03-28 22:19:48
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/95,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/475690356,https://github.com/hyperledger/sawtooth-seth/pull/95#issuecomment-475690356,danintel,"I removed the consensus fixes in `docker-compose*.yaml` for this PR and resubmitted separately as PR #96.
+Only proxy fixes remain here.",2019-03-22 16:36:09,2019-03-22 16:49:17
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/91,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/451981456,https://github.com/hyperledger/sawtooth-seth/pull/91#issuecomment-451981456,peterschwarz,Depends on https://github.com/hyperledger/burrow/issues/908 being fixed.,2019-01-07 15:55:23,2019-01-07 15:55:23
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/91,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/452650483,https://github.com/hyperledger/sawtooth-seth/pull/91#issuecomment-452650483,silasdavis,"@peterschwarz we are still waiting on a response on https://github.com/hyperledger/burrow/issues/908 before planning a fix, are you able to respond to the points there?",2019-01-09 10:37:15,2019-01-09 10:37:15
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/90,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/451199945,https://github.com/hyperledger/sawtooth-seth/pull/90#issuecomment-451199945,knkski,Closing in favor of #91 ,2019-01-03 16:38:03,2019-01-03 16:38:03
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/89,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/475364750,https://github.com/hyperledger/sawtooth-seth/pull/89#issuecomment-475364750,danintel,"You need a DCO in your commit line. Do a `git rebase -i` and `reword` your commit to have a DCO line. Something like:
+
+`Signed-off-by: momaee <your.email.here@your.domain.here.com>`",2019-03-21 19:09:22,2019-03-21 19:09:22
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/88,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/445918086,https://github.com/hyperledger/sawtooth-seth/pull/88#issuecomment-445918086,knkski,"@dplumb94: We autogenerate that file on every build, and I don't think we can change that ourselves, I think we'll have to wait for the protobuf library to make that change",2018-12-10 18:21:04,2018-12-10 18:21:04
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/87,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/443844391,https://github.com/hyperledger/sawtooth-seth/pull/87#issuecomment-443844391,knkski,"@rob-Hitchens: Thanks for your PR! It looks like you'll need to add a DCO signoff in your commit message (see https://sawtooth.hyperledger.org/docs/core/nightly/master/community/contributing.html#the-commit-process for more details).
+
+Also, has the bytecode for any of the contracts changed? The corresponding `*.txt` files alongside the `*.sol` files might need updating (see https://sawtooth.hyperledger.org/docs/seth/releases/latest/contracts.html for info on how to compile contracts).",2018-12-03 19:45:29,2018-12-03 19:45:29
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/87,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/475488648,https://github.com/hyperledger/sawtooth-seth/pull/87#issuecomment-475488648,vaporos,Closing due to lack of DCO. Please address and re-open this PR.,2019-03-22 04:17:31,2019-03-22 04:17:31
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/79,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/433847510,https://github.com/hyperledger/sawtooth-seth/pull/79#issuecomment-433847510,benjamincburns,"If it helps any, here's the full output of `docker version` and `docker-compose version` from my dev machine:
+
+`docker version`:
+```
+Client:
+ Version:           18.06.1-ce
+ API version:       1.38
+ Go version:        go1.10.3
+ Git commit:        e68fc7a
+ Built:             Tue Aug 21 17:24:51 2018
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server:
+ Engine:
+  Version:          18.06.1-ce
+  API version:      1.38 (minimum version 1.12)
+  Go version:       go1.10.3
+  Git commit:       e68fc7a
+  Built:            Tue Aug 21 17:23:15 2018
+  OS/Arch:          linux/amd64
+  Experimental:     false
+```
+
+`docker-compose version`:
+```
+docker-compose version 1.17.1, build unknown
+docker-py version: 2.5.1
+CPython version: 2.7.15rc1
+OpenSSL version: OpenSSL 1.1.0g  2 Nov 2017
+```",2018-10-29 09:46:40,2018-10-29 09:46:54
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/431065706,https://github.com/hyperledger/sawtooth-seth/pull/77#issuecomment-431065706,aludvik,"@benjamincburns Since this is a pretty substantial change (some previous transactions that were previously invalid are now valid), can you summarize the discussion from RocketChat about why this is the desired behavior, what the pros and cons are, and what use cases this support.",2018-10-18 16:00:29,2018-10-18 16:00:29
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/432480103,https://github.com/hyperledger/sawtooth-seth/pull/77#issuecomment-432480103,benjamincburns,Go formatting issues are now fixed.,2018-10-24 01:33:52,2018-10-24 01:33:52
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/432482040,https://github.com/hyperledger/sawtooth-seth/pull/77#issuecomment-432482040,benjamincburns,"@aludvik sure thing. 
+
+To be clear, this change doesn't allow for contract state updates when transaction execution fails. It simply records the transaction execution failure in the transaction receipt format that is appropriate for the transaction family.
+
+Prior to these changes there was no way for a client which submitted its transactions via Seth's RPC interface to determine whether the transaction was executed, and what the result of that execution was.
+
+Via the Ethereum RPC interface, the usual transaction flow looks like this:
+
+1. Client submits a message call transaction to a contract address via either the `eth_sendTransaction` or the `eth_sendRawTransaction` RPC call
+2. Server responds with RPC response containing transaction hash in the `result` field
+3. Client uses the transaction hash returned by the server to poll for the result of the transaction via `eth_getTransactionReceipt`.
+4. Until the transaction is mined into a block, the server always returns `null` in response to the client's `eth_getTransactionReceipt` request.
+5. When the transaction is mined into a block, regardless of whether the transaction succeeded or failed,  the server responds to `eth_getTransactionReceipt` with a valid transaction receipt.
+6. The client inspects the `status` field in `eth_getTransactionReceipt` to determine whether their transaction succeeded or failed.
+
+If no receipt is produced when a message call to a contract address fails due to a runtime error (e.g. due to the `REVERT` opcode), then the client can't tell the difference between transaction failure, and the transaction never starting.",2018-10-24 01:45:34,2018-10-24 01:46:32
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/432483005,https://github.com/hyperledger/sawtooth-seth/pull/77#issuecomment-432483005,benjamincburns,"As to what use-cases this supports, I'm working on integrating the Truffle toolsuite with Sawtooth-Seth. See the blocked tickets on the [commit-referenced Jira issue](https://jira.hyperledger.org/browse/STL-1460) for more info.",2018-10-24 01:51:11,2018-10-24 01:51:11
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/432496128,https://github.com/hyperledger/sawtooth-seth/pull/77#issuecomment-432496128,benjamincburns,Looks like I had some rust formatting issues as well - those should be fixed up now.,2018-10-24 03:06:48,2018-10-24 03:06:48
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/77,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/433541888,https://github.com/hyperledger/sawtooth-seth/pull/77#issuecomment-433541888,aludvik,"@benjamincburns Thanks for the response. Am I correct in understanding there are three types of validity with Ethereum transactions? 
+1. Totally valid - The transaction ""object"" was valid and the execution was a success
+2. Valid but failed -  The transaction ""object"" was valid but the execution failed
+3. Invalid - The transaction ""object"" was invalid because of something like a bad signature, bad payload, incorrect nonce.
+
+Is that characterization accurate? Does the nonce still get updated if the transaction execution fails?",2018-10-26 20:59:57,2018-10-26 20:59:57
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/74,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/424125401,https://github.com/hyperledger/sawtooth-seth/pull/74#issuecomment-424125401,peterschwarz,Seems like there are some format changes that should be a separate commit.,2018-09-24 21:07:43,2018-09-24 21:07:43
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/74,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/424396354,https://github.com/hyperledger/sawtooth-seth/pull/74#issuecomment-424396354,knkski,@peterschwarz @vaporos: Split the commit into clippy and fmt commits,2018-09-25 15:44:43,2018-09-25 15:44:43
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/72,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/422120854,https://github.com/hyperledger/sawtooth-seth/pull/72#issuecomment-422120854,ailisp,Also considering change this line https://github.com/hyperledger/sawtooth-seth/blob/8ffc6537265d2548649f21566a1aee4c9cc8b77c/docker-compose.yaml#L38 to `seth config init --url http://seth-rpc:3030`?,2018-09-17 18:26:51,2018-09-17 18:26:51
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/65,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416763928,https://github.com/hyperledger/sawtooth-seth/pull/65#issuecomment-416763928,dplumb94,"Got an error on build: 
+```
+error: unknown start of token: `
+   --> src/client.rs:225:95
+    |
+225 |     pub fn send_request<T, U>(&mut self, msg_type: Message_MessageType, msg: &T) -> Result<U, `>
+    |                                                                                               ^
+help: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not
+    |
+225 |     pub fn send_request<T, U>(&mut self, msg_type: Message_MessageType, msg: &T) -> Result<U, '>
+    |                                                                                               ^
+
+error: aborting due to previous error
+
+error: Could not compile `rpc`.
+
+To learn more, run the command again with --verbose.
+```
+
+Not sure if that is part of your PR or not",2018-08-28 22:41:03,2018-08-28 22:41:50
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/65,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416960782,https://github.com/hyperledger/sawtooth-seth/pull/65#issuecomment-416960782,knkski,"@dplumb94: I don't think that's due to this PR, since that's coming from a file that's unaffected by this PR. Can you try doing `git reset --hard HEAD` on this branch and seeing if that fixes it?",2018-08-29 13:50:21,2018-08-29 13:50:21
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/63,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/414351970,https://github.com/hyperledger/sawtooth-seth/pull/63#issuecomment-414351970,knkski,@ryjones: Would you be able to open this PR again from a forked repo? @rberg2 is reporting issues with the build due to it being a regular branch,2018-08-20 15:11:22,2018-08-20 15:11:22
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/62,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/414394383,https://github.com/hyperledger/sawtooth-seth/pull/62#issuecomment-414394383,knkski,"@aludvik: The documentation has been moved up a level, and the comments removed",2018-08-20 17:17:17,2018-08-20 17:17:17
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/59,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416296849,https://github.com/hyperledger/sawtooth-seth/pull/59#issuecomment-416296849,knkski,"@peterschwarz: I think we'll need to maintain it until we have the API changes corresponding to these client changes merged, otherwise we'll be in a weird state without a complete working client.",2018-08-27 17:09:45,2018-08-27 17:09:45
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/52,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403964821,https://github.com/hyperledger/sawtooth-seth/pull/52#issuecomment-403964821,vaporos,"Can we find another solution which does not rely on sleep? Not only will this likely wait too long on average, but also if it takes greater than 5 seconds on a slow system, it would fail. Better to find another approach to determining the actual state and then continue.",2018-07-10 21:02:33,2018-07-10 21:02:33
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/52,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/404286538,https://github.com/hyperledger/sawtooth-seth/pull/52#issuecomment-404286538,peterschwarz,"Given that the history here was lost, I assume this new solution is not what @vaporos's comment refers to.",2018-07-11 19:39:13,2018-07-11 19:39:13
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/48,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403921053,https://github.com/hyperledger/sawtooth-seth/pull/48#issuecomment-403921053,rberg2,The [.dockerignore](https://github.com/hyperledger/sawtooth-core/blob/master/.dockerignore) in sawtooth-core has the apache2 license text. Does that matter here?,2018-07-10 18:26:25,2018-07-10 18:26:25
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/43,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403527616,https://github.com/hyperledger/sawtooth-seth/pull/43#issuecomment-403527616,peterschwarz,"Thanks for the submission.  Could you please amend your commit message to follow more of the guidelines found in this [blog post](https://chris.beams.io/posts/git-commit/)?   Sawtooth projects, as a whole, use this format (see the [core contributor's guide](https://sawtooth.hyperledger.org/docs/core/nightly/master/community/contributing.html#the-commit-process))",2018-07-09 15:53:09,2018-07-09 15:53:09
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/43,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403563469,https://github.com/hyperledger/sawtooth-seth/pull/43#issuecomment-403563469,rberg2,"It looks like the tests are not passing on this one.
+
+```
+[jenkins-Sawtooth-Hyperledger-sawtooth-seth-PR-43-3] Running shell script
++ docker-compose -f docker-compose-installed.yaml build
+The Compose file './docker-compose-installed.yaml' is invalid because:
+services.seth-cli.build.args contains [""ISOLATION_ID=5c9c761e2ed01cfbe220f29a8ad2a834232776c50a82f00d44c8307e96b31558"", ""http_proxy"", ""https_proxy"", ""no_proxy""], which is an invalid type, it should be a string, number, or a null
+services.seth-tp.build.args contains [""ISOLATION_ID=5c9c761e2ed01cfbe220f29a8ad2a834232776c50a82f00d44c8307e96b31558"", ""http_proxy"", ""https_proxy"", ""no_proxy""], which is an invalid type, it should be a string, number, or a null
+
+```",2018-07-09 17:49:13,2018-07-09 17:49:13
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/43,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416299079,https://github.com/hyperledger/sawtooth-seth/pull/43#issuecomment-416299079,knkski,"@cliveb: Did #38 fix the issue for this PR, or is this PR still necessary?",2018-08-27 17:16:58,2018-08-27 17:16:58
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/43,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416345998,https://github.com/hyperledger/sawtooth-seth/pull/43#issuecomment-416345998,knkski,@cliveb: Thanks!,2018-08-27 19:48:51,2018-08-27 19:48:51
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/41,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/402228093,https://github.com/hyperledger/sawtooth-seth/pull/41#issuecomment-402228093,knkski,"Steps to reproduce (taken from [Getting Started documentation](https://sawtooth.hyperledger.org/docs/seth/releases/latest/seth_developers_guide/getting_started.html)):
+
+```bash
+#!/usr/bin/env bash
+
+set -eux
+
+function run() {
+    docker exec -it seth-cli bash -c ""$@""
+}
+
+run ""openssl ecparam -genkey -name secp256k1 | openssl ec -out key-file.pem""
+run ""seth account import key-file.pem myalias""
+run ""seth account create --nonce=0 --wait myalias""
+run ""seth contract create --wait myalias 6060604052341561000f57600080fd5b6102108061001e6000396000f300606060405260043610610062576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680631ab06ee514610067578063812600df146100935780639507d39a146100b6578063c20efb90146100ed575b600080fd5b341561007257600080fd5b6100916004808035906020019091908035906020019091905050610110565b005b341561009e57600080fd5b6100b4600480803590602001909190505061016a565b005b34156100c157600080fd5b6100d76004808035906020019091905050610199565b6040518082815260200191505060405180910390f35b34156100f857600080fd5b61010e60048080359060200190919050506101b5565b005b80600080848152602001908152602001600020819055507f545b620a3000f6303b158b321f06b4e95e28a27d70aecac8c6bdac4f48a9f6b38282604051808381526020018281526020019250505060405180910390a15050565b600160008083815260200190815260200160002054016000808381526020019081526020016000208190555050565b6000806000838152602001908152602001600020549050919050565b6001600080838152602001908152602001600020540360008083815260200190815260200160002081905550505600a165627a7a7230582034e2a271c9cc73ba9a4d0763f9879aabec59ec08363fd5a2d5868c3459afcba60029""
+
+ADDRESS=$(run ""seth contract list myalias | tail -n +2 | cut -d' ' -f 2 | tr -d ' \t\n\r\f'"")
+run ""seth contract call --wait myalias ${ADDRESS} 1ab06ee50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002a""
+```",2018-07-03 17:07:52,2018-07-03 17:07:52
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/39,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403079972,https://github.com/hyperledger/sawtooth-seth/pull/39#issuecomment-403079972,peterschwarz,"This should be split into a formatting change commit, and then commits for each class of clippy commits. It will make it easier to review",2018-07-06 16:16:04,2018-07-06 16:16:04
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/39,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403923840,https://github.com/hyperledger/sawtooth-seth/pull/39#issuecomment-403923840,knkski,"@peterschwarz, @dplumb94: Cut down the scope of this PR to be just formatting changes, will open a new PR after this one with clippy fixes.",2018-07-10 18:36:04,2018-07-10 18:36:04
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/38,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/402269248,https://github.com/hyperledger/sawtooth-seth/pull/38#issuecomment-402269248,dplumb94,"Thanks for the PR! You will need to sign off on your commit in order for it to get built.
+
+You can find more info on that here: [Contributing](https://sawtooth.hyperledger.org/docs/core/nightly/master/community/contributing.html#the-commit-process)",2018-07-03 19:34:12,2018-07-03 19:34:12
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/38,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/402288475,https://github.com/hyperledger/sawtooth-seth/pull/38#issuecomment-402288475,ksolo,@dplumb94 Thanks for taking a look. I updated the commit to include the sign-off. Let me know if anything else is needed.,2018-07-03 20:51:41,2018-07-03 20:51:41
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/38,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403876325,https://github.com/hyperledger/sawtooth-seth/pull/38#issuecomment-403876325,knkski,@ksolo: We've merged #47 to fix Jenkins builds. Could you rebase this PR off of master so that it can be built on Jenkins and we can merge it? Thanks!,2018-07-10 16:01:22,2018-07-10 16:01:22
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/38,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/403958179,https://github.com/hyperledger/sawtooth-seth/pull/38#issuecomment-403958179,ksolo,@knkski rebased and pushed up.,2018-07-10 20:39:20,2018-07-10 20:39:20
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/38,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416315077,https://github.com/hyperledger/sawtooth-seth/pull/38#issuecomment-416315077,cliveb,@knkski Pretty sure the underlying bug was fixed and this PR can be squashed.,2018-08-27 18:05:43,2018-08-27 18:05:43
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/37,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/399865927,https://github.com/hyperledger/sawtooth-seth/pull/37#issuecomment-399865927,mithunshashidhara,"corrected file permissions, please check.",2018-06-25 07:59:47,2018-06-25 07:59:47
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/37,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/413210647,https://github.com/hyperledger/sawtooth-seth/pull/37#issuecomment-413210647,knkski,@mithunshashidhara: This should've been fixed by #42. Are you still encountering this issue?,2018-08-15 14:13:45,2018-08-15 14:13:45
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/37,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/413452703,https://github.com/hyperledger/sawtooth-seth/pull/37#issuecomment-413452703,mithunshashidhara,reported issue fixed in PR https://github.com/hyperledger/sawtooth-seth/pull/42,2018-08-16 07:29:44,2018-08-16 07:29:44
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/36,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/398439916,https://github.com/hyperledger/sawtooth-seth/pull/36#issuecomment-398439916,cliveb,"Added Developer Certificate of Origin (DCO) to https://github.com/CertifiedTrue/ and Signed-off-by” cliveb line in each commit message after-the-PR forced signature to each commit. Unsure why DCO sign-off is missing still.  
+",2018-06-19 15:25:01,2018-06-19 15:25:01
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/36,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/398462775,https://github.com/hyperledger/sawtooth-seth/pull/36#issuecomment-398462775,dplumb94,"Hi Clive,
+
+Thanks for the PR! I see you added the signoff in your PR message. However, the DCO actually checks your commit message for the signoff, so you will need to add the signoff on your commit message instead. If the commit in your PR is your most recent commit, you should be able to do this with `git commit --amend --signoff`, and then force push it to your branch.
+
+Also see: [git commit docs](http://schacon.github.io/git/git-commit.html), [sawtooth contributing guide](https://sawtooth.hyperledger.org/docs/core/nightly/master/community/contributing.html)",2018-06-19 16:32:01,2018-06-19 16:34:38
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/36,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/399581967,https://github.com/hyperledger/sawtooth-seth/pull/36#issuecomment-399581967,cliveb,@dplumb94 please go ahead and reject PR #36 and #35. I cannot add the DCO to them or cancel them either. They are stuck in limbo. I will resubmit with proper DCO signatures.    ,2018-06-22 21:05:38,2018-06-22 21:05:38
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/35,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/398440118,https://github.com/hyperledger/sawtooth-seth/pull/35#issuecomment-398440118,cliveb,Added Developer Certificate of Origin (DCO) to https://github.com/CertifiedTrue/ and Signed-off-by” cliveb line in each commit message after-the-PR forced signature to each commit. Unsure why DCO sign-off is missing still.,2018-06-19 15:25:34,2018-06-19 15:25:34
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/33,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/394112090,https://github.com/hyperledger/sawtooth-seth/pull/33#issuecomment-394112090,dcmiddle,"I'm fine with changing the banner to be Copyright Hyperledger Sawtooth Contributors. As I understand it from the Linux Foundation staff, banners aren't actually copyright indications but are meant to facilitate tracking back to the license when the files are copied outside the project.
+It should generally be the original person who initially created the banner who changes it. In this case I'm not concerned so long as we change it from ""Hyperledger Foundation"" (which isn't a thing) to ""Hyperledger Sawtooth Contributors"". ",2018-06-02 19:42:50,2018-06-02 19:42:50
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/33,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416298000,https://github.com/hyperledger/sawtooth-seth/pull/33#issuecomment-416298000,knkski,"@daverodz / @dcmiddle: With #62 merged, is there any reason to keep this PR around or can we close it?",2018-08-27 17:13:17,2018-08-27 17:13:17
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/33,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/416690300,https://github.com/hyperledger/sawtooth-seth/pull/33#issuecomment-416690300,knkski,Closing due to inactivity. Feel free to reopen rebased off of master to fix conflicts,2018-08-28 18:22:06,2018-08-28 18:22:06
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/32,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/392236818,https://github.com/hyperledger/sawtooth-seth/pull/32#issuecomment-392236818,mithunshashidhara,"very true, we should be able to create an account without passing nonce. to add this functionality i need more time as i am new to this piece of code. this was a quick fix for someone to understand what to do in case segmentation violation happens.",2018-05-26 04:57:03,2018-05-26 04:57:03
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/28,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/388647413,https://github.com/hyperledger/sawtooth-seth/pull/28#issuecomment-388647413,grkvlt,I think we should add support for `SAWTOOTH_HOME` and `SAWTOOTH_KEYS` environment variables to most Sawtooth utilities and services. However this would be better done in the core repositories as a shared feature to use here. For the moment just use `${HOME}/.sawtooth/keys` here.,2018-05-13 18:45:11,2018-05-13 18:47:47
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/22,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/378679417,https://github.com/hyperledger/sawtooth-seth/pull/22#issuecomment-378679417,grkvlt,"There is still an issue where the RPC service does not shut down cleanly, but it does not appear to have been caused by these changes.",2018-04-04 17:24:17,2018-04-04 17:24:17
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/20,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/379824817,https://github.com/hyperledger/sawtooth-seth/pull/20#issuecomment-379824817,aludvik,"Amended to remove @nick-drozd, whose contributions were largely renaming for API stabilizations.",2018-04-09 17:09:31,2018-04-09 17:09:31
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/18,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/377391471,https://github.com/hyperledger/sawtooth-seth/pull/18#issuecomment-377391471,dplumb94,"@grkvlt Looking at the code it seems to me that seth account import {key-file} {alias} writes a file called {alias}.pem but it doesnt matter what the {key-file} is called. My goal was to make the example commands easy to copy-paste in, so I'd like to avoid the brackets. For clarity I changed the example key file to ""key-file.pem""",2018-03-29 22:26:40,2018-03-29 22:26:40
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/18,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/378567685,https://github.com/hyperledger/sawtooth-seth/pull/18#issuecomment-378567685,grkvlt,"@dplumb94 are you sure? I'll have another look at the code, i thought there was an issue with the key file being copied wrong that has not been fixed yet...",2018-04-04 11:26:57,2018-04-04 11:26:57
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/18,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/378652096,https://github.com/hyperledger/sawtooth-seth/pull/18#issuecomment-378652096,dplumb94,@grkvlt The example in this PR does function properly. I believe there is some bug affecting keys generated with `sawtooth keygen`. It appears that support for non-`.pem` keys was halfway removed. I was not able to get these keys to import properly even with the same name for the key and alias. Do you know if there is a bug registered for this already?,2018-04-04 15:56:56,2018-04-04 15:56:56
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/18,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/378734079,https://github.com/hyperledger/sawtooth-seth/pull/18#issuecomment-378734079,grkvlt,"@dplumb94 it looks like you're right, but there's another issue i forgot about, which is that the RPC server and the container running CLI commands must share the `/root/.sawtooth/keys` directory, so that the PEM files created there by `account import` commands can be read:
+- https://github.com/hyperledger/sawtooth-seth/blob/master/rpc/src/accounts.rs#L91-L120
+
+Although, it looks like there is a mismatch in key directory names - see the CLI save function:
+- https://github.com/hyperledger/sawtooth-seth/blob/master/cli/src/seth_cli/cli/data.go#L104-L140
+
+That's a bigger change to the instructions, so I'd be happy to do that in a second PR.",2018-04-04 20:27:17,2018-04-04 20:27:35
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/16,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/374733901,https://github.com/hyperledger/sawtooth-seth/pull/16#issuecomment-374733901,dplumb94,"Currently we have all the build functionality wrapped up in the docker-compose.yaml file, since running `docker-compose up --build` will automatically build all of the images before starting up containers. Additionally, `docker-compose build` can be used to just build the images without starting containers.
+
+I am wondering if this build script provides any additional functionality?
+
+Thanks!",2018-03-20 19:51:15,2018-03-20 19:52:22
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/16,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/374801059,https://github.com/hyperledger/sawtooth-seth/pull/16#issuecomment-374801059,grkvlt,"Good point @dplumb94 - I sort of forgot that `docker-compose build` was a thing. But, I would still really like a way of creating the images that I can use where they aren't constrained by needing to work with the compose file, since eventually I want to be able to build a Sawtooth plus Seth platform that is orchestrated by other tools.
+
+I don't think this does any harm, so why not? Eventually we want to create images using a two stage process anyway, to make them smaller, which would be decoupled from the compose file, so this would be a step towards that.",2018-03-21 00:18:53,2018-03-21 00:19:21
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/16,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/375032017,https://github.com/hyperledger/sawtooth-seth/pull/16#issuecomment-375032017,dplumb94,A multi-stage build approach would only need to change the Dockerfiles to toss out dependencies after the executable has been built. This wouldn't necessitate any changes to the current `docker-compose up --build` workflow,2018-03-21 17:38:04,2018-03-21 17:38:04
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/16,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/375312894,https://github.com/hyperledger/sawtooth-seth/pull/16#issuecomment-375312894,grkvlt,"A multi-stage build would involve having to uninstall golang, rustc, cargo and so on after the build, *but* you would _still_ have the previous layers from the dockerfile, so the image would still be huge. This is not the right way to create Docker images. You need a build Dockerfile that creates the executables and caches them somewhere (for core we make .deb files, here we just store the executables in a local build dir in the repo on the host), then _another_ Dockerfile will install the minimal set of required libraries and copy the executables from the host to the image.
+
+Here are the results of three Dockerfiles, `test-1` is just `ubuntu:xenial`, then `test-2` has `golang` installed, finally `test-3` has `golang` installed, then removed. Note the `test-3` is not any smaller:
+```
+REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
+test-3                     latest              1184f7b369f5        5 seconds ago       538MB
+test-2                     latest              7e37631f018d        18 seconds ago      537MB
+test-1                     latest              41d13b186bdc        25 seconds ago      112MB
+```",2018-03-22 13:51:05,2018-03-22 13:52:18
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/16,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/375368296,https://github.com/hyperledger/sawtooth-seth/pull/16#issuecomment-375368296,grkvlt,Closing after @dplumb94 suggested moving to multi-stage builds as described in https://blog.alexellis.io/mutli-stage-docker-builds/,2018-03-22 16:24:03,2018-03-22 16:24:03
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/12,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/371626882,https://github.com/hyperledger/sawtooth-seth/pull/12#issuecomment-371626882,grkvlt,"On Ubuntu 16.04.4 LTS with Docker 17.12.1-ce the image fails to build with the following error:
+```
+ ---> 37b083f402f7
+Step 7/13 : RUN mkdir /go  && go get -u     github.com/golang/protobuf/proto     github.com/golang/protobuf/protoc-gen-go     github.com/pebbe/zmq4     github.com/brianolson/cbor_go     github.com/satori/go.uuid     github.com/btcsuite/btcd/btcec     github.com/btcsuite/btcutil/base58     gopkg.in/fatih/set.v0     golang.org/x/crypto/ripemd160     github.com/jessevdk/go-flags     github.com/pelletier/go-toml     golang.org/x/crypto/ssh/terminal
+ ---> Running in 11919f5d4c1c
+package math/bits: unrecognized import path ""math/bits"" (import path does not begin with hostname)
+The command '/bin/sh -c mkdir /go  && go get -u     github.com/golang/protobuf/proto     github.com/golang/protobuf/protoc-gen-go     github.com/pebbe/zmq4     github.com/brianolson/cbor_go     github.com/satori/go.uuid     github.com/btcsuite/btcd/btcec     github.com/btcsuite/btcutil/base58     gopkg.in/fatih/set.v0     golang.org/x/crypto/ripemd160     github.com/jessevdk/go-flags     github.com/pelletier/go-toml     golang.org/x/crypto/ssh/terminal' returned a non-zero code: 1
+
+```
+/cc @dplumb94 
+",2018-03-08 21:15:27,2018-03-08 21:15:27
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/12,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/374658866,https://github.com/hyperledger/sawtooth-seth/pull/12#issuecomment-374658866,grkvlt,"@dplumb94 I think I can close this now, right?",2018-03-20 16:15:19,2018-03-20 16:15:19
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/12,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/374665391,https://github.com/hyperledger/sawtooth-seth/pull/12#issuecomment-374665391,dcmiddle,Are you looking to merge or close @grkvlt.  Sorry I had missed that you had reverted the copyright stuff. I've just updated my approval flag for the PR based on that. ,2018-03-20 16:32:23,2018-03-20 16:32:23
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/12,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/374667150,https://github.com/hyperledger/sawtooth-seth/pull/12#issuecomment-374667150,dplumb94,The build process has been changed so those Dockerfile changes shouldn't be required anymore. Do we still want to save the documentation changes?,2018-03-20 16:36:58,2018-03-20 16:36:58
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/12,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/374731684,https://github.com/hyperledger/sawtooth-seth/pull/12#issuecomment-374731684,grkvlt,Closing since superseded by #14 but will incorporate documentation changes into another PR shortly,2018-03-20 19:44:22,2018-03-20 19:44:22
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/9,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/366523753,https://github.com/hyperledger/sawtooth-seth/pull/9#issuecomment-366523753,vaporos,"Can you add this reasoning to the commit message ""changes the type to uint64 to match other occurrences and makes GetStorage return 0 for initial accesses to location, as per EVM spec for SLOAD.""? ",2018-02-18 15:26:42,2018-02-18 15:26:42
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/7,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/363139173,https://github.com/hyperledger/sawtooth-seth/pull/7#issuecomment-363139173,bogomazov,"Please, merge it",2018-02-05 16:31:05,2018-02-05 16:31:05
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/7,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/363146577,https://github.com/hyperledger/sawtooth-seth/pull/7#issuecomment-363146577,bogomazov,"Also as I cannot post issues in here. I am trying to docker-compose, but sawtooth-seth container (built with this pull request) fails with:
+<img width=""428"" alt=""screen shot 2018-02-05 at 6 50 53 pm"" src=""https://user-images.githubusercontent.com/6625496/35817313-b375331e-0aa5-11e8-97f3-2e02d72cfde5.png"">
+Any help will be appreciated.
+",2018-02-05 16:53:30,2018-02-05 16:54:09
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/7,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/363447639,https://github.com/hyperledger/sawtooth-seth/pull/7#issuecomment-363447639,grkvlt,"@boydjohnson I'll take a look at the tests, as well as checking the Docker command for @bogomazov",2018-02-06 14:58:01,2018-02-06 14:58:01
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/5,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/361975666,https://github.com/hyperledger/sawtooth-seth/pull/5#issuecomment-361975666,aludvik,@grkvlt looks like there are still some rust build issues with the rpc,2018-01-31 15:53:07,2018-01-31 15:53:07
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/4,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/358971507,https://github.com/hyperledger/sawtooth-seth/pull/4#issuecomment-358971507,dcmiddle,Hi @grkvlt sorry for the delay I probably misinterpreted your PR message. Does your FIXME mean you were coming back with another commit on this PR or were you suggesting that as future work? Was holding off on review when I saw that initially.,2018-01-19 13:51:59,2018-01-19 13:51:59
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/4,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/359895066,https://github.com/hyperledger/sawtooth-seth/pull/4#issuecomment-359895066,grkvlt,"@dcmiddle actually I don't know what the right thing to do with linking to `sawtooth-core` documentation is, I think it might be simplest to just delete the links outright? I'll make that change and then maybe you could review the PR?",2018-01-23 19:02:48,2018-01-23 19:02:48
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/4,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/359935923,https://github.com/hyperledger/sawtooth-seth/pull/4#issuecomment-359935923,dcmiddle,"Thanks @grkvlt. You could either put in an external link to the official core docs (https://sawtooth.hyperledger.org/docs/) or remove the reference entirely. 
+You can probably just remove docs/source/introduction.rst and it's reference in contents.rst",2018-01-23 21:26:05,2018-01-23 21:26:05
+https://api.github.com/repos/hyperledger/sawtooth-seth/issues/3,https://api.github.com/repos/hyperledger/sawtooth-seth/issues/comments/349680400,https://github.com/hyperledger/sawtooth-seth/pull/3#issuecomment-349680400,aludvik,@vaporos I do not believe there is any tag or branch that is compatible with the current state of seth,2017-12-06 15:48:52,2017-12-06 15:48:52

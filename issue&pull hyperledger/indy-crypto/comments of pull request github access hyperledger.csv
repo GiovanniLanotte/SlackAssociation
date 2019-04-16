@@ -1,0 +1,1391 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/indy-crypto/pull/132,https://github.com/hyperledger/indy-crypto/pull/132,Indent should use spaces.,1dc7dc7c7aa8590d2c24562796fdc1740b166d50,2018-11-05 21:27:41,230918625,"@@ -325,12 +325,13 @@ pub fn calc_teq(p_pub_key: &CredentialPrimaryPublicKey,
+     Ok(result)
+ }
+ 
+-pub fn calc_tge(p_pub_key: &CredentialPrimaryPublicKey,
++pub fn calc_tne(p_pub_key: &CredentialPrimaryPublicKey,
+                 u: &HashMap<String, BigNumber>,
+                 r: &HashMap<String, BigNumber>,
+                 mj: &BigNumber,
+                 alpha: &BigNumber,
+-                t: &HashMap<String, BigNumber>) -> Result<Vec<BigNumber>, IndyCryptoError> {
++                t: &HashMap<String, BigNumber>,
++		is_less: bool) -> Result<Vec<BigNumber>, IndyCryptoError> {",,2018-11-08 15:01:55,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/230918625,https://github.com/hyperledger/indy-crypto/pull/132#discussion_r230918625,davidlehn
+https://github.com/hyperledger/indy-crypto/pull/131,https://github.com/hyperledger/indy-crypto/pull/131,"What was the reason for this change?
+Commitments are agnostic to any signature scheme.",e57704fa6bec583940fe9abaf0c2d59df6ce84a4,2018-11-07 17:15:31,231597214,"@@ -4,8 +4,8 @@ use errors::IndyCryptoError;
+ use pair::*;
+ use cl::constants::*;
+ use cl::helpers::*;
+-use utils::commitment::*;
+-use utils::get_hash_as_int;
++use cl::commitment::get_pedersen_commitment;
++use cl::hash::get_hash_as_int;",7,2018-11-07 17:15:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/231597214,https://github.com/hyperledger/indy-crypto/pull/131#discussion_r231597214,mikelodder7
+https://github.com/hyperledger/indy-crypto/pull/131,https://github.com/hyperledger/indy-crypto/pull/131,"@mikelodder7 I can't recall the exact reason right now, but it's most likely because these functions were used only by the cl module. I wasn't really moving code (such as here) for logical structuring per se, but in order to avoid unnecessary dependencies within the bls module. For example, so long as the OpenSSL dependency was pulled in when building WASM bindings for bls, the build would fail.
+
+I can check if the build fails if I move these functions back into the utils module, and get back to you.",e57704fa6bec583940fe9abaf0c2d59df6ce84a4,2018-11-07 17:29:42,231603316,"@@ -4,8 +4,8 @@ use errors::IndyCryptoError;
+ use pair::*;
+ use cl::constants::*;
+ use cl::helpers::*;
+-use utils::commitment::*;
+-use utils::get_hash_as_int;
++use cl::commitment::get_pedersen_commitment;
++use cl::hash::get_hash_as_int;",7,2018-11-07 17:29:42,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/231603316,https://github.com/hyperledger/indy-crypto/pull/131#discussion_r231603316,aknuds1
+https://github.com/hyperledger/indy-crypto/pull/127,https://github.com/hyperledger/indy-crypto/pull/127,"I hope it's correct that `hash` corresponds to `hash2` in the old version of openssl. `hash2` is no more, leaving only `hash` in the current API, and I don't know the definition of `hash2`.",b3d505affb8b4b4282947d3bac80c3ba92e11b17,2018-09-19 15:45:31,218858456,"@@ -2,8 +2,8 @@ use errors::IndyCryptoError;
+ 
+ use int_traits::IntTraits;
+ 
+-use openssl::bn::{BigNum, BigNumRef, BigNumContext, MSB_MAYBE_ZERO};
+-use openssl::hash::{hash2, MessageDigest, Hasher};
++use openssl::bn::{BigNum, BigNumRef, BigNumContext, MsbOption};
++use openssl::hash::{hash, MessageDigest, Hasher};",7,2018-09-19 15:45:31,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/218858456,https://github.com/hyperledger/indy-crypto/pull/127#discussion_r218858456,aknuds1
+https://github.com/hyperledger/indy-crypto/pull/127,https://github.com/hyperledger/indy-crypto/pull/127,I hope it's correct that `finish` in the new API corresponds to `finish2` in the old API. ,b3d505affb8b4b4282947d3bac80c3ba92e11b17,2018-09-19 15:46:33,218858867,"@@ -414,7 +414,7 @@ impl BigNumber {
+             sha256.update(&num)?;
+         }
+ 
+-        Ok(sha256.finish2()?.to_vec())
++        Ok(sha256.finish()?.to_vec())",34,2018-09-19 15:46:33,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/218858867,https://github.com/hyperledger/indy-crypto/pull/127#discussion_r218858867,aknuds1
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"Since `sign_pop` is generating a signature, abstract this operation `<hash of message>.mul(&sign_key.group_order_element` into a separate function and use that function in both `sign` and `sign_pop`. Its better if the hash function can be passed as an argument (as type `Digest` or type `enum`). Better, generating a `POP` should be a method in the `Verkey` implementation",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-25 19:29:46,205234694,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:31,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205234694,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205234694,lovesh
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"Similar argument as above, abstract `Pair::pair(&signature.point, &gen.point)?.eq(&Pair::pair(&<message hash>, &ver_key.point)` in a different function or explicitly pass hash function as an arg or better make `verify_pop` part of `Verkey`",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-25 19:32:27,205235412,"@@ -335,7 +358,34 @@ impl Bls {
+     /// assert!(valid);
+     /// ```
+     pub fn verify(signature: &Signature, message: &[u8], ver_key: &VerKey, gen: &Generator) -> Result<bool, IndyCryptoError> {
+-        let h = Bls::_hash(message)?;
++        let h = Bls::_hash_sha2(message)?;
++        Ok(Pair::pair(&signature.point, &gen.point)?.eq(&Pair::pair(&h, &ver_key.point)?))",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205235412,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205235412,lovesh
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,Can you have a single function with logic and make `Keccak256` and `Sha256` as possible args,aa37df91e831fd554781e43143b0a92bf757246e,2018-07-25 19:33:40,205235740,"@@ -390,20 +440,27 @@ impl Bls {
+         // the C API. Verifiers can thus cache the aggregated verkey and avoid several EC point additions.
+         // The code below should be moved to such method.
+ 
+-        let msg_hash = Bls::_hash(message)?;
++        let msg_hash = Bls::_hash_sha2(message)?;
+ 
+         let lhs = Pair::pair(&multi_sig.point, &gen.point)?;
+         let rhs = Pair::pair(&msg_hash, &aggregated_verkey)?;
+ 
+         Ok(lhs.eq(&rhs))
+     }
+ 
+-    fn _hash(message: &[u8]) -> Result<PointG1, IndyCryptoError> {
++    fn _hash_sha2(message: &[u8]) -> Result<PointG1, IndyCryptoError> {
+         let mut hasher = Sha256::default();
+         hasher.input(message);
+ 
+         Ok(PointG1::from_hash(hasher.result().as_slice())?)
+     }
++
++    fn _hash_sha3(message: &[u8]) -> Result<PointG1, IndyCryptoError> {
++        let mut hasher = Keccak256::default();",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205235740,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205235740,lovesh
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"Not sure about pop is method of Verkey. As creating POP is operation similar to signing, so it closer to sign key rather Verkey. ",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-25 21:58:01,205275386,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205275386,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205275386,jovfer
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"This is the interface i imagined
+```
+impl Verkey {
+  pub fn new(sig_key) -> Self {
+  }
+  
+  pub fn gen_pop(&self) -> Signature {
+  }
+}
+```
+
+Or
+```
+impl Verkey {
+  pub fn new(sig_key) -> Self {
+  }
+  
+  pub fn new_with_pop(sig_key...) -> (Self, Signature) {
+  }
+}
+```",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-26 05:05:17,205332506,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205332506,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205332506,lovesh
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"@lovesh 
+```
+impl Verkey {
+  pub fn new(sig_key) -> Self {
+  }
+  
+  pub fn gen_pop(&self) -> Signature {
+  }
+}
+```
+It's impossible because `gen_pop` requires `SignKey` too",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-26 08:56:23,205379088,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205379088,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205379088,jovfer
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"My bad, i forgot to mention `SignKey`, lets pass `SignKey` as an arg.
+```
+pub fn gen_pop(&self, sig_key) -> Signature {
+}
+```",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-26 09:04:20,205381781,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205381781,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205381781,lovesh
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,"I believe the most reliable way is to introduce PoP as a dedicated struct:
+
+```Rust
+struct ProofOfPossession
+ProoOfPosestion::new(&VerKey, &SignKey)-> ProofOfPossession
+BLS::verify_proof_of_posession(&VerKey, &PoP)
+```",aa37df91e831fd554781e43143b0a92bf757246e,2018-07-27 09:04:22,205711250,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205711250,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205711250,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/121,https://github.com/hyperledger/indy-crypto/pull/121,Also i don't like struct BLS (it is a bad practice in rust as requires more complex imports). I suggest to make all BLS methods top level in bls module.,aa37df91e831fd554781e43143b0a92bf757246e,2018-07-27 09:06:33,205711865,"@@ -305,7 +305,30 @@ impl Bls {
+     /// Bls::sign(&message, &sign_key).unwrap();
+     /// ```
+     pub fn sign(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
+-        let point = Bls::_hash(message)?.mul(&sign_key.group_order_element)?;
++        let point = Bls::_hash_sha2(message)?.mul(&sign_key.group_order_element)?;
++        Ok(Signature {
++            point,
++            bytes: point.to_bytes()?
++        })
++    }
++
++    /// Signs the message and returns signature to provide proof of possession.
++    ///
++    /// # Arguments
++    ///
++    /// * `message` - Message to sign
++    /// * `sign_key` - Sign key
++    ///
++    /// # Example
++    ///
++    /// ```
++    /// use indy_crypto::bls::*;
++    /// let message = vec![1, 2, 3, 4, 5];
++    /// let sign_key = SignKey::new(None).unwrap();
++    /// Bls::sign_pop(&message, &sign_key).unwrap();
++    /// ```
++    pub fn sign_pop(message: &[u8], sign_key: &SignKey) -> Result<Signature, IndyCryptoError> {
++        let point = Bls::_hash_sha3(message)?.mul(&sign_key.group_order_element)?;",,2018-07-27 14:07:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/205711865,https://github.com/hyperledger/indy-crypto/pull/121#discussion_r205711865,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/119,https://github.com/hyperledger/indy-crypto/pull/119,I suggest to don't miss error message from serde serializer/deserializer here and similar places below,c6cfb2648a240da7cc74baec26e63bc475393271,2018-07-23 16:26:12,204470352,"@@ -745,7 +744,7 @@ pub extern fn indy_crypto_cl_nonce_to_json(nonce: *const c_void,
+             }
+             ErrorCode::Success
+         }
+-        Err(err) => err.to_error_code()
++        Err(_) => ErrorCode::CommonInvalidState",29,2018-07-23 16:26:41,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/204470352,https://github.com/hyperledger/indy-crypto/pull/119#discussion_r204470352,jovfer
+https://github.com/hyperledger/indy-crypto/pull/119,https://github.com/hyperledger/indy-crypto/pull/119,"For now we can't fix this as we just return error code and don't have infrastructure. We can add logging, but i believe we will fix this after solving ticket about returning of error messages",c6cfb2648a240da7cc74baec26e63bc475393271,2018-07-24 08:15:02,204662500,"@@ -745,7 +744,7 @@ pub extern fn indy_crypto_cl_nonce_to_json(nonce: *const c_void,
+             }
+             ErrorCode::Success
+         }
+-        Err(err) => err.to_error_code()
++        Err(_) => ErrorCode::CommonInvalidState",29,2018-07-24 08:15:02,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/204662500,https://github.com/hyperledger/indy-crypto/pull/119#discussion_r204662500,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/119,https://github.com/hyperledger/indy-crypto/pull/119,I mean suggestion to use trace here,c6cfb2648a240da7cc74baec26e63bc475393271,2018-07-24 09:28:12,204685104,"@@ -745,7 +744,7 @@ pub extern fn indy_crypto_cl_nonce_to_json(nonce: *const c_void,
+             }
+             ErrorCode::Success
+         }
+-        Err(err) => err.to_error_code()
++        Err(_) => ErrorCode::CommonInvalidState",29,2018-07-24 09:28:32,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/204685104,https://github.com/hyperledger/indy-crypto/pull/119#discussion_r204685104,jovfer
+https://github.com/hyperledger/indy-crypto/pull/77,https://github.com/hyperledger/indy-crypto/pull/77,I suggest to add: Ability to calculate revocation witness on cloud agent,e6b32a28bc62a74d8436539e7433ce15bb791858,2018-02-12 14:21:34,167567909,"@@ -28,6 +28,17 @@ Initial version of anoncreds protocol was implemented as part of Indy SDK (https
+ 1. FFI C API will use OpenSSL style entities handling. Entities referenced will be represent as untyped pointers. Library will provide functions for entities allocation, manipulation and deallocation. 
+ 
+ ## API 
++### API V2
++#### Reasons
++There are some significant aspects was missed in 1st generation. The new one was created to fix it:
++* Indy Crypto should have ability to work with large volume of Tails (can be larger rather RAM)
++* API should be well-mapped with main usecases with Indy Ledger.",,2018-02-14 10:02:18,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/167567909,https://github.com/hyperledger/indy-crypto/pull/77#discussion_r167567909,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/77,https://github.com/hyperledger/indy-crypto/pull/77,"1. We should rename RevocationRegistry to RevocationRegistryDef
+2. RevocationRegistryDef becomes immutable entity. We define 2 new entities that early were mutable part of RevocationRegistry:
+- RevocationRegistryAcc - accumulator. 
+- RevocationRegistryEntry - registry entry. Multiple entries can be combined to one. Each entry also contains accumulator value ",e6b32a28bc62a74d8436539e7433ce15bb791858,2018-02-12 14:24:19,167568646,"@@ -28,6 +28,17 @@ Initial version of anoncreds protocol was implemented as part of Indy SDK (https
+ 1. FFI C API will use OpenSSL style entities handling. Entities referenced will be represent as untyped pointers. Library will provide functions for entities allocation, manipulation and deallocation. 
+ 
+ ## API 
++### API V2
++#### Reasons
++There are some significant aspects was missed in 1st generation. The new one was created to fix it:
++* Indy Crypto should have ability to work with large volume of Tails (can be larger rather RAM)
++* API should be well-mapped with main usecases with Indy Ledger.
++
++#### Changes
++* `RevocationRegistry` now will be created without full `Tails` in RAM as part of returned value.",,2018-02-14 10:02:18,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/167568646,https://github.com/hyperledger/indy-crypto/pull/77#discussion_r167568646,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/67,https://github.com/hyperledger/indy-crypto/pull/67,"I want to ask for some changes to follow design and code structure. I believe we need to add is_prime method to BN entity instead of providing static non-entity related call. Now you provides different Rust API and FFI API.
+
+It will allow to expose big nums in more clean and re-usable way. FFI API can look like this:
+
+```
+let bn = null;
+ind_crypto_bn_new(bytes, &bn) 
+let is_prime = indy_crypto_bn_is_prime(bn)
+indy_crypto_free(bn)
+```
+
+it will later allow to expose complete big nums API",0dabe684a9bae00d533409e125bff571974fdb26,2018-02-08 16:41:44,166995039,"@@ -0,0 +1,78 @@
++use bn::BigNumber;
++
++use ffi::ErrorCode;
++use errors::ToErrorCode;
++use std::slice;
++
++#[no_mangle]
++pub extern fn indy_crypto_primality_check(big_endian_number: *const u8,",8,2018-02-15 15:42:58,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/166995039,https://github.com/hyperledger/indy-crypto/pull/67#discussion_r166995039,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/67,https://github.com/hyperledger/indy-crypto/pull/67,The same needs to be added to python wrapper. Just follow the same entity model as Rust API. ,0dabe684a9bae00d533409e125bff571974fdb26,2018-02-08 16:44:21,166995855,"@@ -0,0 +1,78 @@
++use bn::BigNumber;
++
++use ffi::ErrorCode;
++use errors::ToErrorCode;
++use std::slice;
++
++#[no_mangle]
++pub extern fn indy_crypto_primality_check(big_endian_number: *const u8,",8,2018-02-15 15:42:58,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/166995855,https://github.com/hyperledger/indy-crypto/pull/67#discussion_r166995855,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/67,https://github.com/hyperledger/indy-crypto/pull/67,Add `is_prime` to which `BN` entity?,0dabe684a9bae00d533409e125bff571974fdb26,2018-02-08 18:02:24,167018908,"@@ -0,0 +1,78 @@
++use bn::BigNumber;
++
++use ffi::ErrorCode;
++use errors::ToErrorCode;
++use std::slice;
++
++#[no_mangle]
++pub extern fn indy_crypto_primality_check(big_endian_number: *const u8,",8,2018-02-15 15:42:58,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/167018908,https://github.com/hyperledger/indy-crypto/pull/67#discussion_r167018908,lovesh
+https://github.com/hyperledger/indy-crypto/pull/64,https://github.com/hyperledger/indy-crypto/pull/64,Why `rctxt` and `r` are switched?,3314d3a9e050f7691521753c7517795c0474bb90,2018-01-29 13:59:01,164437449,"@@ -293,23 +341,30 @@ impl Issuer {
+         let n = p_safe.mul(&q_safe, Some(&mut ctx))?;
+         let s = random_qr(&n)?;
+         let xz = gen_x(&p, &q)?;
+-        let mut r: HashMap<String, BigNumber> = HashMap::new();
+ 
++        let mut xr = BTreeMap::new();
+         for attribute in &claim_schema.attrs {
+-            r.insert(attribute.to_owned(), s.mod_exp(&gen_x(&p, &q)?, &n, Some(&mut ctx))?);
++            xr.insert(attribute.to_string(), gen_x(&p, &q)?);
++        }
++
++        let mut r = BTreeMap::new();
++        for (key, xr_value) in xr.iter() {
++            r.insert(key.to_string(), s.mod_exp(&xr_value, &n, Some(&mut ctx))?);
+         }
+ 
+         let z = s.mod_exp(&xz, &n, Some(&mut ctx))?;
+ 
+         let rms = s.mod_exp(&gen_x(&p, &q)?, &n, Some(&mut ctx))?;
+         let rctxt = s.mod_exp(&gen_x(&p, &q)?, &n, Some(&mut ctx))?;
+ 
+-        let issuer_pr_pub_key = IssuerPrimaryPublicKey { n, s, rms, r, rctxt, z };
++        let issuer_pr_pub_key = IssuerPrimaryPublicKey { n, s, rms, rctxt, r, z };",245,2018-01-30 05:07:04,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/164437449,https://github.com/hyperledger/indy-crypto/pull/64#discussion_r164437449,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"Current names of variables and structure fields are follow to CL math paper. The only way to understand code properly is reading this paper first. Not sure that providing our own names are better way for understanding.
+
+@ashcherbakov What do you think about this?",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 06:55:38,160876755,"@@ -189,17 +189,17 @@ impl Issuer {
+         trace!(""Issuer::sign_claim: >>> prover_id: {:?}, blinded_ms: {:?}, claim_values: {:?}, issuer_pub_key: {:?}, issuer_priv_key: {:?}, rev_idx: {:?}, \
+         rev_reg_pub: {:?}, rev_reg_priv: {:?}"", prover_id, blinded_ms, claim_values, issuer_pub_key, issuer_priv_key, rev_idx, rev_reg_pub, rev_reg_priv);
+ 
+-        let m_2 = Issuer::_calc_m2(prover_id, rev_idx)?;
++        let context = Issuer::_gen_context(prover_id, rev_idx)?;",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160876755,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160876755,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"I don't see obvious advantage for ""blinding factors"" over ""blinding data"". Current name means ""the data intended to blind master secret "" What is your motivation?",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 06:59:26,160877116,"@@ -331,6 +331,7 @@ impl JsonEncodable for BlindedMasterSecret {}
+ impl<'a> JsonDecodable<'a> for BlindedMasterSecret {}
+ 
+ /// `Master Secret Blinding Data` uses by Prover for post processing of claims received from Issuer.
++/// TODO: Should be renamed `MasterSecretBlindingFactors`",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160877116,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160877116,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,I don't like renaming of these variables before we rename the structure. It just decreases code readability. ,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 07:01:52,160877362,"@@ -60,14 +60,14 @@ impl Prover {
+             ur: blinded_revocation_master_secret.as_ref().map(|d| d.ur)
+         };
+ 
+-        let master_secret_blinding_data = MasterSecretBlindingData {
++        let master_secret_blinding_factor = MasterSecretBlindingData {",5,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160877362,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160877362,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"Yes, the paper is a required read, but it is better to keep meaningful variable names in you head than not ",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 07:28:46,160880585,"@@ -189,17 +189,17 @@ impl Issuer {
+         trace!(""Issuer::sign_claim: >>> prover_id: {:?}, blinded_ms: {:?}, claim_values: {:?}, issuer_pub_key: {:?}, issuer_priv_key: {:?}, rev_idx: {:?}, \
+         rev_reg_pub: {:?}, rev_reg_priv: {:?}"", prover_id, blinded_ms, claim_values, issuer_pub_key, issuer_priv_key, rev_idx, rev_reg_pub, rev_reg_priv);
+ 
+-        let m_2 = Issuer::_calc_m2(prover_id, rev_idx)?;
++        let context = Issuer::_gen_context(prover_id, rev_idx)?;",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160880585,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160880585,lovesh
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"""blinding factor"" is the term that used in literature and is well understood by cryptographers; `data` is just a blanket term. ",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 07:30:17,160880753,"@@ -331,6 +331,7 @@ impl JsonEncodable for BlindedMasterSecret {}
+ impl<'a> JsonDecodable<'a> for BlindedMasterSecret {}
+ 
+ /// `Master Secret Blinding Data` uses by Prover for post processing of claims received from Issuer.
++/// TODO: Should be renamed `MasterSecretBlindingFactors`",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160880753,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160880753,lovesh
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"The reason for not changing `MasterSecretBlindingData` is because that would require changing wrappers and people might have code built against it, that is the reason i had added a TODO over `MasterSecretBlindingData`",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 07:31:30,160880888,"@@ -60,14 +60,14 @@ impl Prover {
+             ur: blinded_revocation_master_secret.as_ref().map(|d| d.ur)
+         };
+ 
+-        let master_secret_blinding_data = MasterSecretBlindingData {
++        let master_secret_blinding_factor = MasterSecretBlindingData {",5,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160880888,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160880888,lovesh
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"If we want to give a more meaningful name for `m2`, then probably we should call it `context_attr`, not just `context`.
+Also we must put a comment that `context_attr` == `m2` in the paper.",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 09:27:06,160901418,"@@ -189,17 +189,17 @@ impl Issuer {
+         trace!(""Issuer::sign_claim: >>> prover_id: {:?}, blinded_ms: {:?}, claim_values: {:?}, issuer_pub_key: {:?}, issuer_priv_key: {:?}, rev_idx: {:?}, \
+         rev_reg_pub: {:?}, rev_reg_priv: {:?}"", prover_id, blinded_ms, claim_values, issuer_pub_key, issuer_priv_key, rev_idx, rev_reg_pub, rev_reg_priv);
+ 
+-        let m_2 = Issuer::_calc_m2(prover_id, rev_idx)?;
++        let context = Issuer::_gen_context(prover_id, rev_idx)?;",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160901418,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160901418,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,Why is it `context` on one place and `claim_context` in other?,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 09:28:28,160901681,"@@ -388,13 +388,13 @@ impl Issuer {
+ 
+     fn _sign_primary_claim(p_pub_key: &IssuerPublicKey,
+                            p_priv_key: &IssuerPrivateKey,
+-                           m_2: &BigNumber,
++                           claim_context: &BigNumber,",76,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160901681,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160901681,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,"The problem is we have a `BigNumber` context, i renamed all to `claim_context`",13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-11 10:51:43,160921683,"@@ -388,13 +388,13 @@ impl Issuer {
+ 
+     fn _sign_primary_claim(p_pub_key: &IssuerPublicKey,
+                            p_priv_key: &IssuerPrivateKey,
+-                           m_2: &BigNumber,
++                           claim_context: &BigNumber,",76,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/160921683,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r160921683,lovesh
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,Should we mention `claim_context (m2)` attribute here?,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-22 14:34:32,162953284,"@@ -1,24 +1,29 @@
+-# Shared anoncreds math in Indy Crypto
++# Anonymous Credentials (anoncreds) crypto support
+ Initial version of anoncreds protocol was implemented as part of Indy SDK (https://github.com/hyperledger/indy-sdk). After some discussion and community requests we decided to move low level anoncreds crypto code to indy-crypto project. This should allow the crypto to be audited and shared with other projects.
+ 
+ ## Main ideas
+-1. Indy-crypto will not provide high level anoncreds protocol details and persistence. It will operate low level crypto entities only. 
++1. Indy-crypto will not provide high level anoncreds protocol details and persistence. It will support low level crypto entities only. 
+ 1. API defines 3 actors:
+     * Issuer - trust source that provides credentials to prover
+     * Prover - credentials owner that can proof and partially disclose the credentials to verifier
+     * Verifier - party that wants to check that prover has some credentials provided by issuer
+-1. The list of entities that indy-crypto operates:
+-    * Claim Schema” - a list of attributes a Claim is based on
+-    * “Claim Values” - values of attributes from Claim Schema (must be integers)
+-    * “Claim Signature” - signed by the Issuer part of the Claim
+-    * “Issuer public key” and “issuer private key”. Keys will contain 2 internal parts. One for signing primary claims and second for signing non-revocation claims. These keys are used to proof that claim was issued and doesn’t revoked by this issuer. Issuer keys have global identifier that must be known to all parties.
+-    * “Revocation registry public” and “revocation registry private”. Internally them will contain revocation keys, accumulator and accumulator tails. Public part of revocation registry must be shared by issuer in trusted place and can be used to proof that concrete claim wasn’t revoked.
+-    * “Master secret” - secret prover data that is used to proof that prover owns the claim. Prover blinds master secret be generating “blinded master secret” and “master secret blinding data” and sends “blinded master secret” to isser that uses “blinded master secret” in claim creation. It allows to use this claim by prover only.
+-    * “Proof” is complex crypto structure created by proved over multiple claims that allows to proof that prover:
+-      * Owns claims issued with specific issuer keys (identified by key id)
++1. The list of entities that indy-crypto operates on:",21,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/162953284,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r162953284,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,It is not a core object so i dont think so,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-22 14:39:54,162954852,"@@ -1,24 +1,29 @@
+-# Shared anoncreds math in Indy Crypto
++# Anonymous Credentials (anoncreds) crypto support
+ Initial version of anoncreds protocol was implemented as part of Indy SDK (https://github.com/hyperledger/indy-sdk). After some discussion and community requests we decided to move low level anoncreds crypto code to indy-crypto project. This should allow the crypto to be audited and shared with other projects.
+ 
+ ## Main ideas
+-1. Indy-crypto will not provide high level anoncreds protocol details and persistence. It will operate low level crypto entities only. 
++1. Indy-crypto will not provide high level anoncreds protocol details and persistence. It will support low level crypto entities only. 
+ 1. API defines 3 actors:
+     * Issuer - trust source that provides credentials to prover
+     * Prover - credentials owner that can proof and partially disclose the credentials to verifier
+     * Verifier - party that wants to check that prover has some credentials provided by issuer
+-1. The list of entities that indy-crypto operates:
+-    * Claim Schema” - a list of attributes a Claim is based on
+-    * “Claim Values” - values of attributes from Claim Schema (must be integers)
+-    * “Claim Signature” - signed by the Issuer part of the Claim
+-    * “Issuer public key” and “issuer private key”. Keys will contain 2 internal parts. One for signing primary claims and second for signing non-revocation claims. These keys are used to proof that claim was issued and doesn’t revoked by this issuer. Issuer keys have global identifier that must be known to all parties.
+-    * “Revocation registry public” and “revocation registry private”. Internally them will contain revocation keys, accumulator and accumulator tails. Public part of revocation registry must be shared by issuer in trusted place and can be used to proof that concrete claim wasn’t revoked.
+-    * “Master secret” - secret prover data that is used to proof that prover owns the claim. Prover blinds master secret be generating “blinded master secret” and “master secret blinding data” and sends “blinded master secret” to isser that uses “blinded master secret” in claim creation. It allows to use this claim by prover only.
+-    * “Proof” is complex crypto structure created by proved over multiple claims that allows to proof that prover:
+-      * Owns claims issued with specific issuer keys (identified by key id)
++1. The list of entities that indy-crypto operates on:",21,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/162954852,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r162954852,lovesh
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,Please put a comment that `claim_context` is denoted by `m2` in the paper,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-22 14:40:33,162955046,"@@ -340,7 +340,7 @@ impl Issuer {
+         Ok((issuer_rev_pub_key, issuer_rev_priv_key))
+     }
+ 
+-    fn _calc_m2(prover_id: &str, rev_idx: Option<u32>) -> Result<BigNumber, IndyCryptoError> {
++    fn _gen_claim_context(prover_id: &str, rev_idx: Option<u32>) -> Result<BigNumber, IndyCryptoError> {",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/162955046,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r162955046,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,Please put a comment that `challenge ` is denoted by `c_h` in the paper,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-22 14:40:51,162955127,"@@ -322,19 +322,19 @@ impl ProofBuilder {
+         values.extend_from_slice(&self.c_list);
+         values.push(nonce.to_bytes()?);
+ 
+-        let c_h = get_hash_as_int(&mut values)?;
++        let challenge = get_hash_as_int(&mut values)?;",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/162955127,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r162955127,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,Done,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-22 15:17:17,162966382,"@@ -340,7 +340,7 @@ impl Issuer {
+         Ok((issuer_rev_pub_key, issuer_rev_priv_key))
+     }
+ 
+-    fn _calc_m2(prover_id: &str, rev_idx: Option<u32>) -> Result<BigNumber, IndyCryptoError> {
++    fn _gen_claim_context(prover_id: &str, rev_idx: Option<u32>) -> Result<BigNumber, IndyCryptoError> {",,2018-01-22 15:17:19,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/162966382,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r162966382,lovesh
+https://github.com/hyperledger/indy-crypto/pull/62,https://github.com/hyperledger/indy-crypto/pull/62,Done,13508c4ac510351d6b0d71c9d42743da5e336fdb,2018-01-22 15:17:21,162966406,"@@ -322,19 +322,19 @@ impl ProofBuilder {
+         values.extend_from_slice(&self.c_list);
+         values.push(nonce.to_bytes()?);
+ 
+-        let c_h = get_hash_as_int(&mut values)?;
++        let challenge = get_hash_as_int(&mut values)?;",,2018-01-22 15:17:22,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/162966406,https://github.com/hyperledger/indy-crypto/pull/62#discussion_r162966406,lovesh
+https://github.com/hyperledger/indy-crypto/pull/43,https://github.com/hyperledger/indy-crypto/pull/43,should be CommonInvalidParam3,cca50587e9cf7238982c17916306ce8d2e71c6b6,2017-11-21 13:27:33,152273687,"@@ -0,0 +1,220 @@
++use anoncreds::*;
++use anoncreds::issuer::*;
++use anoncreds::types::*;
++
++use ffi::ErrorCode;
++use ffi::indy_crypto_init_logger;
++use errors::ToErrorCode;
++use utils::ctypes::CTypesUtils;
++
++use libc::c_char;
++
++use std::os::raw::c_void;
++use std::slice;
++
++
++/// Creates and returns claims attributes entity builder.
++///
++/// The purpose of claim attributes builder is building of claim attributes entity that
++/// represents claim attributes set.
++///
++/// Note: Claims attributes builder instance deallocation must be performed by
++/// calling indy_crypto_anoncreds_claim_attributes_builder_finalize.
++///
++/// # Arguments
++/// * `claim_attrs_builder_p` - Reference that will contain claims attributes builder instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_anoncreds_claim_attributes_builder_new(claim_attrs_builder_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_anoncreds_claim_attributes_builder_new: >>> claim_attrs_builder_p: {:?}"", claim_attrs_builder_p);
++
++    check_useful_c_ptr!(claim_attrs_builder_p, ErrorCode::CommonInvalidParam1);
++
++    let res = match ClaimAttributesBuilder::new() {
++        Ok(claim_attrs_builder) => {
++            trace!(""indy_crypto_anoncreds_claim_attributes_builder_new: claim_attrs_builder: {:?}"", claim_attrs_builder);
++            unsafe {
++                *claim_attrs_builder_p = Box::into_raw(Box::new(claim_attrs_builder)) as *const c_void;
++                trace!(""indy_crypto_anoncreds_claim_attributes_builder_new: *claim_attrs_builder_p: {:?}"", *claim_attrs_builder_p);
++            }
++            ErrorCode::Success
++        }
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_anoncreds_claim_attributes_builder_new: <<< res: {:?}"", res);
++    res
++}
++
++/// Adds new attribute to claim attributes set.
++///
++/// Note that this function returns new claim attribute builder instance pointer. The old one
++/// becomes invalid.
++///
++/// # Arguments
++/// * `claim_attrs_builder` - Claim attribute builder instance pointer
++/// * `attr` - Claim attr to add as null terminated string.
++/// * `claim_attrs_builder_p` - Reference that will contain new claims attributes builder instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_anoncreds_claim_attributes_builder_add_attr(claim_attrs_builder: *const c_void,
++                                                                      attr: *const c_char,
++                                                                      claim_attrs_builder_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_anoncreds_claim_attributes_builder_add_attr: >>> claim_attrs_builder: {:?}, attr: {:?}, claim_attrs_builder_p: {:?}"", claim_attrs_builder, attr, claim_attrs_builder_p);
++
++    check_useful_c_ptr!(claim_attrs_builder, ErrorCode::CommonInvalidParam1);
++    check_useful_c_str!(attr, ErrorCode::CommonInvalidParam2);
++    check_useful_c_ptr!(claim_attrs_builder_p, ErrorCode::CommonInvalidParam1);",65,2017-11-21 14:31:15,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/152273687,https://github.com/hyperledger/indy-crypto/pull/43#discussion_r152273687,jovfer
+https://github.com/hyperledger/indy-crypto/pull/42,https://github.com/hyperledger/indy-crypto/pull/42,Cam we have all public methods first?,0ea99c8a4a740e94b1bedeca15b922b644d8843e,2017-11-29 13:53:48,153792341,"@@ -0,0 +1,1371 @@
++use bn::BigNumber;
++use cl::*;
++use cl::constants::*;
++use errors::IndyCryptoError;
++use pair::*;
++use super::helpers::*;
++
++use std::collections::{HashMap, HashSet};
++
++/// Credentials owner that can proof and partially disclose the credentials to verifier.
++pub struct Prover {}
++
++impl Prover {
++    /// Creates a master secret.
++    ///
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::prover::Prover;
++    /// let _master_secret = Prover::new_master_secret().unwrap();
++    /// ```
++    pub fn new_master_secret() -> Result<MasterSecret, IndyCryptoError> {
++        Ok(MasterSecret {
++            ms: bn_rand(LARGE_MASTER_SECRET)?
++        })
++    }
++
++    /// Creates blinded master secret for given issuer key and master secret.
++    ///
++    /// # Arguments
++    /// * `issuer_pub_key` - Public keys
++    /// * `master_secret` - Master secret
++    ///
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::issuer::Issuer;
++    /// use indy_crypto::cl::prover::Prover;
++    /// let mut claim_schema_builder = Issuer::new_claim_schema_builder().unwrap();
++    /// claim_schema_builder.add_attr(""sex"").unwrap();
++    /// claim_schema_builder.add_attr(""name"").unwrap();
++    /// let claim_schema = claim_schema_builder.finalize().unwrap();
++    /// let (pub_key, _) = Issuer::new_keys(&claim_schema, false).unwrap();
++    /// let master_secret = Prover::new_master_secret().unwrap();
++    /// let (_blinded_master_secret, _master_secret_blinding_data) = Prover::blind_master_secret(&pub_key, &master_secret).unwrap();
++    /// ```
++    pub fn blind_master_secret(issuer_pub_key: &IssuerPublicKey,
++                               master_secret: &MasterSecret) -> Result<(BlindedMasterSecret,
++                                                                        MasterSecretBlindingData), IndyCryptoError> {
++        trace!(""Prover::blind_master_secret: >>> issuer_pub_key: {:?}, master_secret: {:?}"", issuer_pub_key, master_secret);
++
++        let blinded_primary_master_secret = Prover::_generate_blinded_primary_master_secret(&issuer_pub_key.p_key, &master_secret)?;
++
++        let blinded_revocation_master_secret = match issuer_pub_key.r_key {
++            Some(ref r_pk) => Some(Prover::_generate_blinded_revocation_master_secret(r_pk)?),
++            _ => None
++        };
++
++        let blinded_master_secret = BlindedMasterSecret {
++            u: blinded_primary_master_secret.u,
++            ur: blinded_revocation_master_secret.as_ref().map(|d| d.ur)
++        };
++
++        let master_secret_blinding_data = MasterSecretBlindingData {
++            v_prime: blinded_primary_master_secret.v_prime,
++            vr_prime: blinded_revocation_master_secret.map(|d| d.vr_prime)
++        };
++
++        trace!(""Prover::blind_master_secret: <<< blinded_master_secret: {:?}, master_secret_blinding_data: {:?}"", blinded_master_secret, master_secret_blinding_data);
++
++        Ok((blinded_master_secret, master_secret_blinding_data))
++    }
++
++    fn _generate_blinded_primary_master_secret(p_pub_key: &IssuerPrimaryPublicKey,
++                                               master_secret: &MasterSecret) -> Result<PrimaryBlindedMasterSecretData, IndyCryptoError> {
++        trace!(""Prover::_generate_blinded_primary_master_secret: >>> p_pub_key: {:?}, master_secret: {:?}"", p_pub_key, master_secret);
++
++        let mut ctx = BigNumber::new_context()?;
++        let v_prime = bn_rand(LARGE_VPRIME)?;
++
++        let u = p_pub_key.s
++            .mod_exp(&v_prime, &p_pub_key.n, Some(&mut ctx))?
++            .mul(
++                &p_pub_key.rms.mod_exp(&master_secret.ms, &p_pub_key.n, Some(&mut ctx))?,
++                None
++            )?
++            .modulus(&p_pub_key.n, Some(&mut ctx))?;
++
++        let primary_blinded_master_secret = PrimaryBlindedMasterSecretData { u, v_prime };
++
++        trace!(""Prover::_generate_blinded_primary_master_secret: <<< primary_blinded_master_secret: {:?}"", primary_blinded_master_secret);
++
++        Ok(primary_blinded_master_secret)
++    }
++
++    fn _generate_blinded_revocation_master_secret(r_pub_key: &IssuerRevocationPublicKey) -> Result<RevocationBlindedMasterSecretData, IndyCryptoError> {",167,2017-11-30 12:44:21,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/153792341,https://github.com/hyperledger/indy-crypto/pull/42#discussion_r153792341,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/42,https://github.com/hyperledger/indy-crypto/pull/42,Please create a demo test where we have multiple claims (from different issuers) and multiple sub-proofs for different claims.,0ea99c8a4a740e94b1bedeca15b922b644d8843e,2017-11-29 14:03:05,153794744,"@@ -0,0 +1,700 @@
++extern crate indy_crypto;
++
++use indy_crypto::cl::Predicate;
++use indy_crypto::cl::issuer::Issuer;
++use indy_crypto::cl::prover::Prover;
++use indy_crypto::cl::verifier::Verifier;
++
++pub const PROVER_ID: &'static str = ""CnEDk9HrMnmiHXEV1WFgbVCRteYnPqsJwrTdcZaNhFVW"";
++
++mod test {
++    use super::*;
++    use indy_crypto::ffi::ErrorCode;
++    use indy_crypto::errors::ToErrorCode;
++
++    #[test]
++    fn anoncreds_demo() {
++        // 1. Issuer creates claim schema
++        let mut claim_schema_builder = Issuer::new_claim_schema_builder().unwrap();
++        claim_schema_builder.add_attr(""name"").unwrap();
++        claim_schema_builder.add_attr(""sex"").unwrap();
++        claim_schema_builder.add_attr(""age"").unwrap();
++        claim_schema_builder.add_attr(""height"").unwrap();
++        let claim_schema = claim_schema_builder.finalize().unwrap();
++
++        // 2. Issuer creates keys
++        let (issuer_pub_key, issuer_priv_key) = Issuer::new_keys(&claim_schema, false).unwrap();
++
++        // 3. Prover creates master secret
++        let master_secret = Prover::new_master_secret().unwrap();
++
++        // 4. Prover blinds master secret
++        let (blinded_ms, master_secret_blinding_data) = Prover::blind_master_secret(&issuer_pub_key, &master_secret).unwrap();
++
++        // 5. Issuer creates claim values
++        let mut claim_values_builder = Issuer::new_claim_values_builder().unwrap();
++        claim_values_builder.add_value(""name"", ""1139481716457488690172217916278103335"").unwrap();
++        claim_values_builder.add_value(""sex"", ""5944657099558967239210949258394887428692050081607692519917050011144233115103"").unwrap();
++        claim_values_builder.add_value(""age"", ""28"").unwrap();
++        claim_values_builder.add_value(""height"", ""175"").unwrap();
++        let claim_values = claim_values_builder.finalize().unwrap();
++
++        // 6. Issuer signs claim values
++        let mut claim_signature = Issuer::sign_claim(PROVER_ID,
++                                                     &blinded_ms,
++                                                     &claim_values,
++                                                     &issuer_pub_key, &issuer_priv_key,
++                                                     None,
++                                                     None,
++                                                     None).unwrap();
++
++        // 7. Prover processes claim signature
++        Prover::process_claim_signature(&mut claim_signature, &master_secret_blinding_data, &issuer_pub_key, None).unwrap();
++
++        // 8. Verifier create sub proof request
++        let mut sub_proof_request_builder = Verifier::new_sub_proof_request().unwrap();",,2017-11-30 12:44:21,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/153794744,https://github.com/hyperledger/indy-crypto/pull/42#discussion_r153794744,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/42,https://github.com/hyperledger/indy-crypto/pull/42,Please describe what sub-proof request is (this is part of proof request related to a schema-key),0ea99c8a4a740e94b1bedeca15b922b644d8843e,2017-11-29 14:05:01,153795279,"@@ -0,0 +1,349 @@
++use cl::verifier::*;
++use cl::*;
++use errors::ToErrorCode;
++use ffi::ErrorCode;
++use utils::ctypes::CTypesUtils;
++
++use libc::c_char;
++
++use std::os::raw::c_void;
++
++/// Creates random nonce
++///
++/// Note that nonce deallocation must be performed by calling indy_crypto_cl_nonce_free
++///
++/// # Arguments
++/// * `nonce_p` - Reference that will contain nonce instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_cl_verifier_new_nonce(nonce_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_verifier_new_nonce: >>> {:?}"", nonce_p);
++
++    check_useful_c_ptr!(nonce_p, ErrorCode::CommonInvalidParam1);
++
++    let res = match Verifier::new_nonce() {
++        Ok(nonce) => {
++            trace!(""indy_crypto_cl_verifier_new_nonce: nonce: {:?}"", nonce);
++            unsafe {
++                *nonce_p = Box::into_raw(Box::new(nonce)) as *const c_void;
++                trace!(""indy_crypto_cl_verifier_new_nonce: *nonce_p: {:?}"", *nonce_p);
++            }
++            ErrorCode::Success
++        }
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_cl_verifier_new_nonce: <<< res: {:?}"", res);
++    res
++}
++
++
++/// Deallocates nonce instance.
++///
++/// # Arguments
++/// * `nonce_p` - Nonce instance pointer
++#[no_mangle]
++pub extern fn indy_crypto_cl_nonce_free(nonce: *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_nonce_free: >>> nonce: {:?}"", nonce);
++
++    check_useful_c_ptr!(nonce, ErrorCode::CommonInvalidParam1);
++
++    let nonce = unsafe { Box::from_raw(nonce as *mut Nonce); };
++    trace!(""indy_crypto_cl_nonce_free: entity: nonce: {:?}"", nonce);
++
++    let res = ErrorCode::Success;
++
++    trace!(""indy_crypto_cl_nonce_free: <<< res: {:?}"", res);
++    res
++}
++
++/// Creates and returns proof verifier.
++///
++/// Note that proof verifier deallocation must be performed by
++/// calling indy_crypto_cl_proof_verifier_finalize
++///
++/// # Arguments
++/// * `proof_verifier_p` - Reference that will contain proof verifier instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_cl_verifier_new_proof_verifier(proof_verifier_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_verifier_new_proof_verifier: >>> {:?}"", proof_verifier_p);
++
++    check_useful_c_ptr!(proof_verifier_p, ErrorCode::CommonInvalidParam1);
++
++    let res = match Verifier::new_proof_verifier() {
++        Ok(proof_verifier) => {
++            trace!(""indy_crypto_cl_verifier_new_proof_verifier: proof_verifier: {:?}"", proof_verifier);
++            unsafe {
++                *proof_verifier_p = Box::into_raw(Box::new(proof_verifier)) as *const c_void;
++                trace!(""indy_crypto_cl_verifier_new_proof_verifier: *proof_verifier_p: {:?}"", *proof_verifier_p);
++            }
++            ErrorCode::Success
++        }
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_cl_verifier_new_proof_verifier: <<< res: {:?}"", res);
++    res
++}
++
++/// Add sub proof request to proof verifier.",153,2017-11-30 12:44:21,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/153795279,https://github.com/hyperledger/indy-crypto/pull/42#discussion_r153795279,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/42,https://github.com/hyperledger/indy-crypto/pull/42,Please describe what sub-proof request is (this is part of proof request related to a particular schema-key),0ea99c8a4a740e94b1bedeca15b922b644d8843e,2017-11-29 14:05:54,153795514,"@@ -0,0 +1,633 @@
++use cl::prover::*;
++use cl::*;
++use errors::ToErrorCode;
++use ffi::ErrorCode;
++use utils::ctypes::CTypesUtils;
++
++use libc::c_char;
++
++use std::os::raw::c_void;
++
++/// Creates a master secret.
++///
++/// Note that master secret deallocation must be performed by
++/// calling indy_crypto_cl_master_secret_free
++///
++/// # Arguments
++/// * `master_secret_p` - Reference that will contain master secret instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_cl_prover_new_master_secret(master_secret_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_prover_new_master_secret: >>> {:?}"", master_secret_p);
++
++    check_useful_c_ptr!(master_secret_p, ErrorCode::CommonInvalidParam1);
++
++    let res = match Prover::new_master_secret() {
++        Ok(master_secret) => {
++            trace!(""indy_crypto_cl_prover_new_master_secret: master_secret: {:?}"", master_secret);
++            unsafe {
++                *master_secret_p = Box::into_raw(Box::new(master_secret)) as *const c_void;
++                trace!(""indy_crypto_cl_prover_new_master_secret: *master_secret_p: {:?}"", *master_secret_p);
++            }
++            ErrorCode::Success
++        }
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_cl_prover_new_master_secret: <<< res: {:?}"", res);
++    res
++}
++
++/// Deallocates master secret instance.
++///
++/// # Arguments
++/// * `master_secret` - Master secret instance pointer
++#[no_mangle]
++pub extern fn indy_crypto_cl_master_secret_free(master_secret: *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_master_secret_free: >>> master_secret: {:?}"", master_secret);
++
++    check_useful_c_ptr!(master_secret, ErrorCode::CommonInvalidParam1);
++
++    let master_secret = unsafe { Box::from_raw(master_secret as *mut MasterSecret); };
++    trace!(""indy_crypto_cl_master_secret_free: entity: master_secret: {:?}"", master_secret);
++
++    let res = ErrorCode::Success;
++    trace!(""indy_crypto_cl_master_secret_free: <<< res: {:?}"", res);
++
++    res
++}
++
++/// Creates blinded master secret for given issuer key and master secret
++///
++/// Note that blinded master secret deallocation must be performed by
++/// calling indy_crypto_cl_blinded_master_secret_free
++///
++/// Note that master secret blinding data deallocation must be performed by
++/// calling indy_crypto_cl_master_secret_blinding_data_free
++///
++/// # Arguments
++/// * `issuer_pub_key` - Reference that contain public keys instance pointer.
++/// * `master_secret` - Reference that contain master secret instance pointer.
++/// * `blinded_master_secret_p` - Reference that will contain blinded master secret instance pointer.
++/// * `master_secret_blinding_data_p` - Reference that will contain master secret blinding data instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_cl_prover_blind_master_secret(issuer_pub_key: *const c_void,
++                                                        master_secret: *const c_void,
++                                                        blinded_master_secret_p: *mut *const c_void,
++                                                        master_secret_blinding_data_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_prover_blind_master_secret: >>> issuer_pub_key: {:?}, master_secret: {:?}, blinded_master_secret_p: {:?}, master_secret_blinding_data_p: {:?}"",
++           issuer_pub_key, master_secret, blinded_master_secret_p, master_secret_blinding_data_p);
++
++    check_useful_c_reference!(issuer_pub_key, IssuerPublicKey, ErrorCode::CommonInvalidParam1);
++    check_useful_c_reference!(master_secret, MasterSecret, ErrorCode::CommonInvalidParam2);
++    check_useful_c_ptr!(blinded_master_secret_p, ErrorCode::CommonInvalidParam3);
++    check_useful_c_ptr!(master_secret_blinding_data_p, ErrorCode::CommonInvalidParam4);
++
++    trace!(""indy_crypto_cl_prover_blind_master_secret: entities: issuer_pub_key: {:?}, master_secret: {:?}, blinded_master_secret_p: {:?}, master_secret_blinding_data_p: {:?}"",
++           issuer_pub_key, master_secret, blinded_master_secret_p, master_secret_blinding_data_p);
++
++    let res = match Prover::blind_master_secret(issuer_pub_key, master_secret) {
++        Ok((blinded_master_secret, master_secret_blinding_data)) => {
++            trace!(""indy_crypto_cl_prover_blind_master_secret: blinded_master_secret: {:?}, master_secret_blinding_data: {:?}"",
++                   blinded_master_secret, master_secret_blinding_data);
++            unsafe {
++                *blinded_master_secret_p = Box::into_raw(Box::new(blinded_master_secret)) as *const c_void;
++                *master_secret_blinding_data_p = Box::into_raw(Box::new(master_secret_blinding_data)) as *const c_void;
++                trace!(""indy_crypto_cl_prover_blind_master_secret: *blinded_master_secret_p: {:?}, *master_secret_blinding_data_p: {:?}"",
++                       *blinded_master_secret_p, *master_secret_blinding_data_p);
++            }
++            ErrorCode::Success
++        }
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_cl_prover_blind_master_secret: <<< res: {:?}"", res);
++    res
++}
++
++/// Deallocates  blinded master secret instance.
++///
++/// # Arguments
++/// * `blinded_master_secret` - Blinded master secret instance pointer
++#[no_mangle]
++pub extern fn indy_crypto_cl_blinded_master_secret_free(blinded_master_secret: *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_blinded_master_secret_free: >>> blinded_master_secret: {:?}"", blinded_master_secret);
++
++    check_useful_c_ptr!(blinded_master_secret, ErrorCode::CommonInvalidParam1);
++
++    let blinded_master_secret = unsafe { Box::from_raw(blinded_master_secret as *mut MasterSecret); };
++    trace!(""indy_crypto_cl_master_secret_free: entity: blinded_master_secret: {:?}"", blinded_master_secret);
++
++    let res = ErrorCode::Success;
++
++    trace!(""indy_crypto_cl_blinded_master_secret_free: <<< res: {:?}"", res);
++    res
++}
++
++/// Deallocates master secret blinding data instance.
++///
++/// # Arguments
++/// * `master_secret_blinding_data` - Master secret instance pointer
++#[no_mangle]
++pub extern fn indy_crypto_cl_master_secret_blinding_data_free(master_secret_blinding_data: *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_master_secret_blinding_data_free: >>> master_secret_blinding_data: {:?}"", master_secret_blinding_data);
++
++    check_useful_c_ptr!(master_secret_blinding_data, ErrorCode::CommonInvalidParam1);
++
++    let master_secret_blinding_data = unsafe { Box::from_raw(master_secret_blinding_data as *mut MasterSecretBlindingData); };
++    trace!(""indy_crypto_cl_master_secret_blinding_data_free: entity: master_secret_blinding_data: {:?}"", master_secret_blinding_data);
++
++    let res = ErrorCode::Success;
++
++    trace!(""indy_crypto_cl_master_secret_blinding_data_free: <<< res: {:?}"", res);
++    res
++}
++
++/// Updates the claim signature by a master secret blinding data.
++///
++/// # Arguments
++/// * `claim_signature` - Reference that contain claim signature instance pointer.
++/// * `master_secret_blinding_data` - Reference that contain master secret blinding data instance pointer.
++/// * `issuer_pub_key` - Reference that containissuer public key instance pointer.
++/// * `rev_reg_pub` - (Optional) Reference that contain revocation registry instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_cl_prover_process_claim_signature(claim_signature: *const c_void,
++                                                            master_secret_blinding_data: *const c_void,
++                                                            issuer_pub_key: *const c_void,
++                                                            rev_reg_pub: *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_prover_process_claim_signature: >>> claim_signature: {:?}, master_secret_blinding_data: {:?}, issuer_pub_key: {:?}, rev_reg_pub: {:?}"",
++           claim_signature, master_secret_blinding_data, issuer_pub_key, rev_reg_pub);
++
++    check_useful_mut_c_reference!(claim_signature, ClaimSignature, ErrorCode::CommonInvalidParam1);
++    check_useful_c_reference!(master_secret_blinding_data, MasterSecretBlindingData, ErrorCode::CommonInvalidParam2);
++    check_useful_c_reference!(issuer_pub_key, IssuerPublicKey, ErrorCode::CommonInvalidParam3);
++    check_useful_opt_c_reference!(rev_reg_pub, RevocationRegistryPublic, ErrorCode::CommonInvalidParam4);
++
++    trace!(""indy_crypto_cl_prover_process_claim_signature: entities: claim_signature: {:?}, master_secret_blinding_data: {:?}, issuer_pub_key: {:?}, rev_reg_pub: {:?}"",
++           claim_signature, master_secret_blinding_data, issuer_pub_key, rev_reg_pub);
++
++    let res = match Prover::process_claim_signature(claim_signature,
++                                                    master_secret_blinding_data,
++                                                    issuer_pub_key,
++                                                    rev_reg_pub) {
++        Ok(()) => ErrorCode::Success,
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_cl_prover_process_claim_signature: <<< res: {:?}"", res);
++    res
++}
++
++/// Creates and returns proof builder.
++///
++/// The purpose of proof builder is building of proof entity according to the given request .
++///
++/// Note that proof builder deallocation must be performed by
++/// calling indy_crypto_cl_proof_builder_finalize
++///
++/// # Arguments
++/// * `proof_builder_p` - Reference that will contain proof builder instance pointer.
++#[no_mangle]
++pub extern fn indy_crypto_cl_prover_new_proof_builder(proof_builder_p: *mut *const c_void) -> ErrorCode {
++    trace!(""indy_crypto_cl_prover_new_proof_builder: >>> {:?}"", proof_builder_p);
++
++    check_useful_c_ptr!(proof_builder_p, ErrorCode::CommonInvalidParam1);
++
++    let res = match Prover::new_proof_builder() {
++        Ok(proof_builder) => {
++            trace!(""indy_crypto_cl_prover_new_proof_builder: proof_builder: {:?}"", proof_builder);
++            unsafe {
++                *proof_builder_p = Box::into_raw(Box::new(proof_builder)) as *const c_void;
++                trace!(""indy_crypto_cl_prover_new_proof_builder: *proof_builder_p: {:?}"", *proof_builder_p);
++            }
++            ErrorCode::Success
++        }
++        Err(err) => err.to_error_code()
++    };
++
++    trace!(""indy_crypto_cl_prover_new_proof_builder: <<< res: {:?}"", res);
++    res
++}
++
++/// Add sub proof request to proof builder which will be used fo building of proof.",411,2017-11-30 12:44:21,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/153795514,https://github.com/hyperledger/indy-crypto/pull/42#discussion_r153795514,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/42,https://github.com/hyperledger/indy-crypto/pull/42,Please describe what sub-proof request is (this is part of proof request related to a particular schema-key),0ea99c8a4a740e94b1bedeca15b922b644d8843e,2017-11-29 14:06:15,153795607,"@@ -0,0 +1,367 @@
++use bn::BigNumber;
++use cl::*;
++use cl::constants::{LARGE_E_START, ITERATION, LARGE_NONCE};
++use cl::helpers::*;
++use errors::IndyCryptoError;
++
++use std::collections::{HashMap, HashSet};
++
++/// Party that wants to check that prover has some credentials provided by issuer.
++pub struct Verifier {}
++
++impl Verifier {
++    /// Creates and returns sub proof request entity builder.
++    ///
++    /// The purpose of sub proof request builder is building of sub proof request entity that
++    /// represents requested attributes and predicates.
++    ///
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::verifier::Verifier;
++    /// use indy_crypto::cl::Predicate;
++    /// let mut sub_proof_request_builder = Verifier::new_sub_proof_request().unwrap();
++    /// sub_proof_request_builder.add_revealed_attr(""name"").unwrap();
++    ///
++    /// let predicate = Predicate::new(""age"", ""GE"", 18).unwrap();
++    /// sub_proof_request_builder.add_predicate(&predicate).unwrap();
++    ///
++    /// let _sub_proof_request = sub_proof_request_builder.finalize().unwrap();
++    /// ```
++    pub fn new_sub_proof_request() -> Result<SubProofRequestBuilder, IndyCryptoError> {",32,2017-11-30 12:44:21,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/153795607,https://github.com/hyperledger/indy-crypto/pull/42#discussion_r153795607,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/42,https://github.com/hyperledger/indy-crypto/pull/42,Please describe what sub-proof request is (this is part of proof request related to a particular schema-key),0ea99c8a4a740e94b1bedeca15b922b644d8843e,2017-11-29 14:06:50,153795740,"@@ -0,0 +1,1371 @@
++use bn::BigNumber;
++use cl::*;
++use cl::constants::*;
++use errors::IndyCryptoError;
++use pair::*;
++use super::helpers::*;
++
++use std::collections::{HashMap, HashSet};
++
++/// Credentials owner that can proof and partially disclose the credentials to verifier.
++pub struct Prover {}
++
++impl Prover {
++    /// Creates a master secret.
++    ///
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::prover::Prover;
++    /// let _master_secret = Prover::new_master_secret().unwrap();
++    /// ```
++    pub fn new_master_secret() -> Result<MasterSecret, IndyCryptoError> {
++        Ok(MasterSecret {
++            ms: bn_rand(LARGE_MASTER_SECRET)?
++        })
++    }
++
++    /// Creates blinded master secret for given issuer key and master secret.
++    ///
++    /// # Arguments
++    /// * `issuer_pub_key` - Public keys
++    /// * `master_secret` - Master secret
++    ///
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::issuer::Issuer;
++    /// use indy_crypto::cl::prover::Prover;
++    /// let mut claim_schema_builder = Issuer::new_claim_schema_builder().unwrap();
++    /// claim_schema_builder.add_attr(""sex"").unwrap();
++    /// claim_schema_builder.add_attr(""name"").unwrap();
++    /// let claim_schema = claim_schema_builder.finalize().unwrap();
++    /// let (pub_key, _) = Issuer::new_keys(&claim_schema, false).unwrap();
++    /// let master_secret = Prover::new_master_secret().unwrap();
++    /// let (_blinded_master_secret, _master_secret_blinding_data) = Prover::blind_master_secret(&pub_key, &master_secret).unwrap();
++    /// ```
++    pub fn blind_master_secret(issuer_pub_key: &IssuerPublicKey,
++                               master_secret: &MasterSecret) -> Result<(BlindedMasterSecret,
++                                                                        MasterSecretBlindingData), IndyCryptoError> {
++        trace!(""Prover::blind_master_secret: >>> issuer_pub_key: {:?}, master_secret: {:?}"", issuer_pub_key, master_secret);
++
++        let blinded_primary_master_secret = Prover::_generate_blinded_primary_master_secret(&issuer_pub_key.p_key, &master_secret)?;
++
++        let blinded_revocation_master_secret = match issuer_pub_key.r_key {
++            Some(ref r_pk) => Some(Prover::_generate_blinded_revocation_master_secret(r_pk)?),
++            _ => None
++        };
++
++        let blinded_master_secret = BlindedMasterSecret {
++            u: blinded_primary_master_secret.u,
++            ur: blinded_revocation_master_secret.as_ref().map(|d| d.ur)
++        };
++
++        let master_secret_blinding_data = MasterSecretBlindingData {
++            v_prime: blinded_primary_master_secret.v_prime,
++            vr_prime: blinded_revocation_master_secret.map(|d| d.vr_prime)
++        };
++
++        trace!(""Prover::blind_master_secret: <<< blinded_master_secret: {:?}, master_secret_blinding_data: {:?}"", blinded_master_secret, master_secret_blinding_data);
++
++        Ok((blinded_master_secret, master_secret_blinding_data))
++    }
++
++    fn _generate_blinded_primary_master_secret(p_pub_key: &IssuerPrimaryPublicKey,
++                                               master_secret: &MasterSecret) -> Result<PrimaryBlindedMasterSecretData, IndyCryptoError> {
++        trace!(""Prover::_generate_blinded_primary_master_secret: >>> p_pub_key: {:?}, master_secret: {:?}"", p_pub_key, master_secret);
++
++        let mut ctx = BigNumber::new_context()?;
++        let v_prime = bn_rand(LARGE_VPRIME)?;
++
++        let u = p_pub_key.s
++            .mod_exp(&v_prime, &p_pub_key.n, Some(&mut ctx))?
++            .mul(
++                &p_pub_key.rms.mod_exp(&master_secret.ms, &p_pub_key.n, Some(&mut ctx))?,
++                None
++            )?
++            .modulus(&p_pub_key.n, Some(&mut ctx))?;
++
++        let primary_blinded_master_secret = PrimaryBlindedMasterSecretData { u, v_prime };
++
++        trace!(""Prover::_generate_blinded_primary_master_secret: <<< primary_blinded_master_secret: {:?}"", primary_blinded_master_secret);
++
++        Ok(primary_blinded_master_secret)
++    }
++
++    fn _generate_blinded_revocation_master_secret(r_pub_key: &IssuerRevocationPublicKey) -> Result<RevocationBlindedMasterSecretData, IndyCryptoError> {
++        trace!(""Prover::_generate_blinded_revocation_master_secret: >>> r_pub_key: {:?}"", r_pub_key);
++
++        let vr_prime = GroupOrderElement::new()?;
++        let ur = r_pub_key.h2.mul(&vr_prime)?;
++
++        let revocation_blinded_master_secret = RevocationBlindedMasterSecretData { ur, vr_prime };
++
++        trace!(""Prover::_generate_blinded_revocation_master_secret: <<< revocation_blinded_master_secret: {:?}"", revocation_blinded_master_secret);
++
++        Ok(revocation_blinded_master_secret)
++    }
++
++    /// Updates the claim signature by a master secret blinding data.
++    ///
++    /// # Arguments
++    /// * `claim_signature` - Claim signature generated by Issuer
++    /// * `master_secret_blinding_data` - Master secret blinding data
++    /// * `issuer_pub_key` - Issuer public key
++    /// * `rev_reg_pub` - (Optional) Revocation registry public
++    ///
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::issuer::Issuer;
++    /// use indy_crypto::cl::prover::Prover;
++    /// let mut claim_schema_builder = Issuer::new_claim_schema_builder().unwrap();
++    /// claim_schema_builder.add_attr(""sex"").unwrap();
++    /// let claim_schema = claim_schema_builder.finalize().unwrap();
++    ///
++    /// let (pub_key, priv_key) = Issuer::new_keys(&claim_schema, false).unwrap();
++    /// let master_secret = Prover::new_master_secret().unwrap();
++    /// let (blinded_master_secret, master_secret_blinding_data) = Prover::blind_master_secret(&pub_key, &master_secret).unwrap();
++    ///
++    /// let mut claim_values_builder = Issuer::new_claim_values_builder().unwrap();
++    /// claim_values_builder.add_value(""sex"", ""5944657099558967239210949258394887428692050081607692519917050011144233115103"").unwrap();
++    /// let claim_values = claim_values_builder.finalize().unwrap();
++    ///
++    /// let mut claim_signature = Issuer::sign_claim(""CnEDk9HrMnmiHXEV1WFgbVCRteYnPqsJwrTdcZaNhFVW"",
++    ///                                           &blinded_master_secret,
++    ///                                           &claim_values,
++    ///                                           &pub_key,
++    ///                                           &priv_key,
++    ///                                           None, None, None).unwrap();
++    /// Prover::process_claim_signature(&mut claim_signature, &master_secret_blinding_data, &pub_key, None).unwrap();
++    /// ```
++    pub fn process_claim_signature(claim_signature: &mut ClaimSignature,
++                                   master_secret_blinding_data: &MasterSecretBlindingData,
++                                   issuer_pub_key: &IssuerPublicKey,
++                                   rev_reg_pub: Option<&RevocationRegistryPublic>) -> Result<(), IndyCryptoError> {
++        trace!(""Prover::process_claim_signature: >>> claim_signature: {:?}, master_secret_blinding_data: {:?}, issuer_pub_key: {:?}, rev_reg_pub: {:?}"",
++               claim_signature, master_secret_blinding_data, issuer_pub_key, rev_reg_pub);
++
++        Prover::_process_primary_claim(&mut claim_signature.p_claim, &master_secret_blinding_data.v_prime)?;
++
++        if let (&mut Some(ref mut non_revocation_claim), Some(ref vr_prime), &Some(ref r_key), Some(ref r_reg)) = (&mut claim_signature.r_claim,
++                                                                                                                   master_secret_blinding_data.vr_prime,
++                                                                                                                   &issuer_pub_key.r_key,
++                                                                                                                   rev_reg_pub) {
++            Prover::_process_non_revocation_claim(non_revocation_claim,
++                                                  vr_prime,
++                                                  &r_key,
++                                                  r_reg)?;
++        }
++
++        trace!(""Prover::process_claim_signature: <<<"");
++
++        Ok(())
++    }
++
++    fn _process_primary_claim(p_claim: &mut PrimaryClaimSignature,
++                              v_prime: &BigNumber) -> Result<(), IndyCryptoError> {
++        trace!(""Prover::_process_primary_claim: >>> p_claim: {:?}, v_prime: {:?}"", p_claim, v_prime);
++
++        p_claim.v = v_prime.add(&p_claim.v)?;
++
++        trace!(""Prover::_process_primary_claim: <<<"");
++
++        Ok(())
++    }
++
++    fn _process_non_revocation_claim(r_claim: &mut NonRevocationClaimSignature,
++                                     vr_prime: &GroupOrderElement,
++                                     r_pub_key: &IssuerRevocationPublicKey,
++                                     rev_reg: &RevocationRegistryPublic) -> Result<(), IndyCryptoError> {
++        trace!(""Prover::_process_non_revocation_claim: >>> r_claim: {:?}, vr_prime: {:?}, r_pub_key: {:?}, rev_reg: {:?}"", r_claim, vr_prime, r_pub_key, rev_reg);
++
++        let r_cnxt_m2 = BigNumber::from_bytes(&r_claim.m2.to_bytes()?)?;
++        r_claim.vr_prime_prime = vr_prime.add_mod(&r_claim.vr_prime_prime)?;
++        Prover::_test_witness_credential(&r_claim, r_pub_key, rev_reg, &r_cnxt_m2)?;
++
++        trace!(""Prover::_process_non_revocation_claim: <<<"");
++
++        Ok(())
++    }
++
++    fn _test_witness_credential(r_claim: &NonRevocationClaimSignature,
++                                r_pub_key: &IssuerRevocationPublicKey,
++                                r_reg: &RevocationRegistryPublic,
++                                r_cnxt_m2: &BigNumber) -> Result<(), IndyCryptoError> {
++        trace!(""Prover::_test_witness_credential: >>> r_claim: {:?}, r_pub_key: {:?}, r_reg: {:?}, r_cnxt_m2: {:?}"", r_claim, r_pub_key, r_reg, r_cnxt_m2);
++
++        let z_calc = Pair::pair(&r_claim.witness.g_i, &r_reg.acc.acc)?
++            .mul(&Pair::pair(&r_pub_key.g, &r_claim.witness.omega)?.inverse()?)?;
++        if z_calc != r_reg.key.z {
++            return Err(IndyCryptoError::InvalidStructure(""Issuer is sending incorrect data"".to_string()));
++        }
++        let pair_gg_calc = Pair::pair(&r_pub_key.pk.add(&r_claim.g_i)?, &r_claim.witness.sigma_i)?;
++        let pair_gg = Pair::pair(&r_pub_key.g, &r_pub_key.g_dash)?;
++        if pair_gg_calc != pair_gg {
++            return Err(IndyCryptoError::InvalidStructure(""Issuer is sending incorrect data"".to_string()));
++        }
++
++        let m2 = GroupOrderElement::from_bytes(&r_cnxt_m2.to_bytes()?)?;
++
++        let pair_h1 = Pair::pair(&r_claim.sigma, &r_pub_key.y.add(&r_pub_key.h_cap.mul(&r_claim.c)?)?)?;
++        let pair_h2 = Pair::pair(
++            &r_pub_key.h0
++                .add(&r_pub_key.h1.mul(&m2)?)?
++                .add(&r_pub_key.h2.mul(&r_claim.vr_prime_prime)?)?
++                .add(&r_claim.g_i)?,
++            &r_pub_key.h_cap
++        )?;
++        if pair_h1 != pair_h2 {
++            return Err(IndyCryptoError::InvalidStructure(""Issuer is sending incorrect data"".to_string()));
++        }
++
++        trace!(""Prover::_test_witness_credential: <<<"");
++
++        Ok(())
++    }
++
++    /// Creates and returns proof builder.
++    ///
++    /// The purpose of proof builder is building of proof entity according to the given request .
++    /// # Example
++    /// ```
++    /// use indy_crypto::cl::prover::Prover;
++    /// let _proof_builder = Prover::new_proof_builder();
++    pub fn new_proof_builder() -> Result<ProofBuilder, IndyCryptoError> {
++        Ok(ProofBuilder {
++            m1_tilde: bn_rand(LARGE_M2_TILDE)?,
++            init_proofs: HashMap::new(),
++            c_list: Vec::new(),
++            tau_list: Vec::new()
++        })
++    }
++}
++
++#[derive(Debug)]
++pub struct ProofBuilder {
++    pub m1_tilde: BigNumber,
++    pub init_proofs: HashMap<String, InitProof>,
++    pub c_list: Vec<Vec<u8>>,
++    pub tau_list: Vec<Vec<u8>>,
++}
++
++impl ProofBuilder {
++    /// Add sub proof request to proof builder which will be used fo building of proof.
++    ///
++    /// # Arguments
++    /// * `proof_builder` - Proof builder.
++    /// * `key_id` - unique claim identifier.
++    /// * `claim_signature` - Claim signature.
++    /// * `claim_values` - Claim values.
++    /// * `issuer_pub_key` - Issuer public key.
++    /// * `rev_reg_pub` - (Optional) Revocation registry public.
++    /// * `sub_proof_request` -Requested attributes and predicates.
++    /// * `claim_schema` - Claim schema.
++    pub fn add_sub_proof_request(&mut self, key_id: &str, claim_signature: &ClaimSignature, claim_values: &ClaimValues, issuer_pub_key: &IssuerPublicKey,",,2017-11-30 12:44:21,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/153795740,https://github.com/hyperledger/indy-crypto/pull/42#discussion_r153795740,ashcherbakov
+https://github.com/hyperledger/indy-crypto/pull/22,https://github.com/hyperledger/indy-crypto/pull/22,I suggest to rename it to Jenkinsfile.ci,825e00fb1024c0cba6fe7daf95c469a1a42d0525,2017-09-19 13:39:08,139694303,"@@ -1,94 +1,26 @@
+ #!groovy",,2017-09-20 07:47:54,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/139694303,https://github.com/hyperledger/indy-crypto/pull/22#discussion_r139694303,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/22,https://github.com/hyperledger/indy-crypto/pull/22,"This try/catch and testing function look redundant now. We can just content of testing function at the top level,",825e00fb1024c0cba6fe7daf95c469a1a42d0525,2017-09-19 15:05:55,139721247,"@@ -0,0 +1,100 @@
++#!groovy
++
++try {",,2017-09-20 07:47:54,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/139721247,https://github.com/hyperledger/indy-crypto/pull/22#discussion_r139721247,vimmerru
+https://github.com/hyperledger/indy-crypto/pull/22,https://github.com/hyperledger/indy-crypto/pull/22,"Order of function in the file is incorrect. Should be:
+
+top-level-function1
+top-level-function2
+middle-level-function1
+low-level-function1
+",825e00fb1024c0cba6fe7daf95c469a1a42d0525,2017-09-19 15:07:11,139721662,"@@ -0,0 +1,100 @@
++#!groovy
++
++try {
++    testing()
++} catch (err) {
++    currentBuild.result = ""FAILED""
++    throw err
++}
++
++def testing() {
++    stage('Testing') {
++        parallel([
++                'ubuntu-test' : { ubuntuTesting() },
++                'windows-test': { windowsTesting() }
++        ])
++    }
++}
++
++def getUserUid() {",,2017-09-20 07:47:54,https://api.github.com/repos/hyperledger/indy-crypto/pulls/comments/139721662,https://github.com/hyperledger/indy-crypto/pull/22#discussion_r139721662,vimmerru

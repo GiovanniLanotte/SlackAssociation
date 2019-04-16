@@ -1,0 +1,458 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/iroha-android/pull/130,https://github.com/hyperledger/iroha-android/pull/130,"Too much of nested logic. Try to divide and simplify 
+Most probably better to create several light-weight methods with names that will clarify the logic",707259fce60a0a681851cb8a3039f790a17c1209,2018-05-07 09:37:26,186374983,"@@ -29,21 +29,25 @@ public SendPresenter(SendAssetInteractor sendAssetInteractor, GetAccountInteract
+     void sendTransaction(String username, String amount) {
+         String[] data = {username, amount};
+         if (!username.isEmpty() && !amount.isEmpty()) {
+-            if (!isEnoughBalance(Long.parseLong(amount))) {
+-                fragment.didSendError(new Throwable(fragment.getString(R.string.not_enough_balance_error)));
+-            } else {
+-                getAccountInteractor.execute(username,
+-                        account -> {
+-                            if (account.getAccountId().isEmpty()) {
+-                                fragment.didSendError(new Throwable(SampleApplication.instance.getString(R.string.username_doesnt_exists)));
+-                            } else {
+-                                sendAssetInteractor.execute(data,
+-                                        () -> fragment.didSendSuccess(),
+-                                        error -> fragment.didSendError(error)
+-                                );
+-                            }
+-                        }, throwable -> fragment.didSendError(throwable));
++            if (SampleApplication.instance.account != null) {",,2018-05-12 17:48:16,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/186374983,https://github.com/hyperledger/iroha-android/pull/130#discussion_r186374983,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/130,https://github.com/hyperledger/iroha-android/pull/130,use ASSET_ID constant,707259fce60a0a681851cb8a3039f790a17c1209,2018-05-08 09:44:46,186672030,"@@ -57,7 +57,7 @@
+             UnsignedQuery accountBalanceQuery = modelQueryBuilder.creatorAccountId(username + ""@"" + DOMAIN_ID)
+                     .queryCounter(BigInteger.valueOf(QUERY_COUNTER))
+                     .createdTime(BigInteger.valueOf(currentTime))
+-                    .getAccountTransactions(username + ""@"" + DOMAIN_ID)
++                    .getAccountAssetTransactions(username + ""@"" + DOMAIN_ID, ""irh#"" + DOMAIN_ID)",,2018-05-12 17:48:16,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/186672030,https://github.com/hyperledger/iroha-android/pull/130#discussion_r186672030,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/116,https://github.com/hyperledger/iroha-android/pull/116,Why do you inject model cpypto? Does it needed? ,3c83e5bec1037f567a3d784a1f4c0a0946710181,2018-04-06 05:21:18,179662596,"@@ -0,0 +1,94 @@
++package jp.co.soramitsu.iroha.android.sample.interactor;
++
++
++import com.google.protobuf.InvalidProtocolBufferException;
++
++import java.math.BigInteger;
++import java.util.concurrent.TimeUnit;
++
++import javax.inject.Inject;
++import javax.inject.Named;
++
++import io.grpc.ManagedChannel;
++import io.reactivex.Completable;
++import io.reactivex.Scheduler;
++import iroha.protocol.BlockOuterClass;
++import iroha.protocol.CommandServiceGrpc;
++import jp.co.soramitsu.iroha.android.ByteVector;
++import jp.co.soramitsu.iroha.android.Keypair;
++import jp.co.soramitsu.iroha.android.ModelCrypto;
++import jp.co.soramitsu.iroha.android.ModelProtoTransaction;
++import jp.co.soramitsu.iroha.android.ModelTransactionBuilder;
++import jp.co.soramitsu.iroha.android.UnsignedTx;
++import jp.co.soramitsu.iroha.android.sample.PreferencesUtil;
++import jp.co.soramitsu.iroha.android.sample.injection.ApplicationModule;
++
++import static jp.co.soramitsu.iroha.android.sample.Constants.CONNECTION_TIMEOUT_SECONDS;
++import static jp.co.soramitsu.iroha.android.sample.Constants.CREATOR;
++import static jp.co.soramitsu.iroha.android.sample.Constants.DOMAIN_ID;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PRIV_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PUB_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.TX_COUNTER;
++
++public class CreateAccountInteractor extends CompletableInteractor<String> {
++
++    private final ManagedChannel channel;
++    @Inject
++    ModelCrypto crypto;",37,2018-04-09 06:05:23,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179662596,https://github.com/hyperledger/iroha-android/pull/116#discussion_r179662596,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/116,https://github.com/hyperledger/iroha-android/pull/116,Add iroha username constraints,3c83e5bec1037f567a3d784a1f4c0a0946710181,2018-04-06 05:25:32,179662963,"@@ -0,0 +1,78 @@
++<?xml version=""1.0"" encoding=""utf-8""?>
++<layout
++    android:id=""@+id/layout""
++    xmlns:android=""http://schemas.android.com/apk/res/android"">
++        <FrameLayout
++            android:layout_width=""match_parent""
++            android:layout_height=""match_parent"">
++
++            <LinearLayout
++                android:layout_width=""match_parent""
++                android:layout_height=""match_parent""
++                android:orientation=""vertical"">
++
++                <ImageView
++                    android:id=""@+id/background_image""
++                    android:layout_width=""match_parent""
++                    android:layout_height=""wrap_content""
++                    android:layout_alignParentTop=""false""
++                    android:scaleType=""centerCrop""
++                    android:src=""@drawable/background"" />
++
++            </LinearLayout>
++
++            <LinearLayout
++                android:layout_width=""match_parent""
++                android:layout_height=""match_parent""
++                android:layout_gravity=""center_horizontal""
++                android:orientation=""vertical""
++                android:paddingLeft=""16dp""
++                android:paddingRight=""16dp"">
++
++                <ImageView
++                    android:id=""@+id/logo_image""
++                    android:layout_width=""128dp""
++                    android:layout_height=""128dp""
++                    android:layout_gravity=""center_horizontal""
++                    android:layout_marginTop=""116dp""
++                    android:src=""@drawable/ic_logo"" />
++
++                <TextView
++                    android:id=""@+id/title""
++                    android:layout_width=""wrap_content""
++                    android:layout_height=""wrap_content""
++                    android:layout_gravity=""center_horizontal""
++                    android:text=""@string/registration_title""
++                    android:textColor=""@android:color/black""
++                    android:textSize=""24sp"" />
++
++                <TextView
++                    android:id=""@+id/subtitle""
++                    android:layout_width=""wrap_content""
++                    android:layout_height=""wrap_content""
++                    android:layout_gravity=""center_horizontal""
++                    android:text=""@string/registration_subtitle""
++                    android:textColor=""@color/hint"" />
++
++                <EditText
++                    android:id=""@+id/username""",,2018-04-09 06:05:23,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179662963,https://github.com/hyperledger/iroha-android/pull/116#discussion_r179662963,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/116,https://github.com/hyperledger/iroha-android/pull/116,We need it to generate keys on 55 line,3c83e5bec1037f567a3d784a1f4c0a0946710181,2018-04-06 19:26:33,179854211,"@@ -0,0 +1,94 @@
++package jp.co.soramitsu.iroha.android.sample.interactor;
++
++
++import com.google.protobuf.InvalidProtocolBufferException;
++
++import java.math.BigInteger;
++import java.util.concurrent.TimeUnit;
++
++import javax.inject.Inject;
++import javax.inject.Named;
++
++import io.grpc.ManagedChannel;
++import io.reactivex.Completable;
++import io.reactivex.Scheduler;
++import iroha.protocol.BlockOuterClass;
++import iroha.protocol.CommandServiceGrpc;
++import jp.co.soramitsu.iroha.android.ByteVector;
++import jp.co.soramitsu.iroha.android.Keypair;
++import jp.co.soramitsu.iroha.android.ModelCrypto;
++import jp.co.soramitsu.iroha.android.ModelProtoTransaction;
++import jp.co.soramitsu.iroha.android.ModelTransactionBuilder;
++import jp.co.soramitsu.iroha.android.UnsignedTx;
++import jp.co.soramitsu.iroha.android.sample.PreferencesUtil;
++import jp.co.soramitsu.iroha.android.sample.injection.ApplicationModule;
++
++import static jp.co.soramitsu.iroha.android.sample.Constants.CONNECTION_TIMEOUT_SECONDS;
++import static jp.co.soramitsu.iroha.android.sample.Constants.CREATOR;
++import static jp.co.soramitsu.iroha.android.sample.Constants.DOMAIN_ID;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PRIV_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PUB_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.TX_COUNTER;
++
++public class CreateAccountInteractor extends CompletableInteractor<String> {
++
++    private final ManagedChannel channel;
++    @Inject
++    ModelCrypto crypto;",37,2018-04-09 06:05:23,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179854211,https://github.com/hyperledger/iroha-android/pull/116#discussion_r179854211,mrZizik
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,make private,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-04 07:46:12,179051879,"@@ -0,0 +1,43 @@
++package jp.co.soramitsu.iroha.android.sample.interactor;
++
++
++import java.util.ArrayList;
++import java.util.Calendar;
++import java.util.List;
++
++import javax.inject.Inject;
++import javax.inject.Named;
++
++import io.reactivex.Completable;
++import io.reactivex.Scheduler;
++import io.reactivex.Single;
++import io.reactivex.functions.Action;
++import io.reactivex.functions.Consumer;
++import jp.co.soramitsu.iroha.android.sample.IrohaConnection;
++import jp.co.soramitsu.iroha.android.sample.history.Transaction;
++import jp.co.soramitsu.iroha.android.sample.injection.ApplicationModule;
++
++public class CreateAccountInteractor extends Interactor {
++
++    IrohaConnection irohaConnection;",,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179051879,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179051879,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,remove useless imports,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-04 07:47:02,179052034,"@@ -0,0 +1,43 @@
++package jp.co.soramitsu.iroha.android.sample.interactor;
++
++
++import java.util.ArrayList;",,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179052034,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179052034,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,Better to move these 2 methods to Interactor parent class,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:33:44,179353512,"@@ -0,0 +1,38 @@
++package jp.co.soramitsu.iroha.android.sample;
++
++import com.google.protobuf.ByteString;
++
++import java.util.Iterator;
++
++import iroha.protocol.CommandServiceGrpc;
++import iroha.protocol.Endpoint;
++import jp.co.soramitsu.iroha.android.ByteVector;
++import jp.co.soramitsu.iroha.android.UnsignedTx;
++
++public class Utils {
++
++    public static byte[] toByteArray(ByteVector blob) {",14,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179353512,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179353512,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,is not used -  delete,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:35:43,179353722,"@@ -0,0 +1,93 @@
++package jp.co.soramitsu.iroha.android.sample.interactor;
++
++
++import com.google.protobuf.InvalidProtocolBufferException;
++
++import java.math.BigInteger;
++import java.util.concurrent.TimeUnit;
++
++import javax.inject.Inject;
++import javax.inject.Named;
++
++import io.grpc.ManagedChannel;
++import io.reactivex.Completable;
++import io.reactivex.Scheduler;
++import iroha.protocol.BlockOuterClass;
++import iroha.protocol.CommandServiceGrpc;
++import jp.co.soramitsu.iroha.android.ByteVector;
++import jp.co.soramitsu.iroha.android.Keypair;
++import jp.co.soramitsu.iroha.android.ModelCrypto;
++import jp.co.soramitsu.iroha.android.ModelProtoQuery;
++import jp.co.soramitsu.iroha.android.ModelProtoTransaction;
++import jp.co.soramitsu.iroha.android.ModelQueryBuilder;
++import jp.co.soramitsu.iroha.android.ModelTransactionBuilder;
++import jp.co.soramitsu.iroha.android.UnsignedTx;
++import jp.co.soramitsu.iroha.android.sample.injection.ApplicationModule;
++
++import static jp.co.soramitsu.iroha.android.sample.Constants.CONNECTION_TIMEOUT_SECONDS;
++import static jp.co.soramitsu.iroha.android.sample.Constants.CREATOR;
++import static jp.co.soramitsu.iroha.android.sample.Constants.DOMAIN_ID;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PRIV_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PUB_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.TX_COUNTER;
++import static jp.co.soramitsu.iroha.android.sample.Utils.isTransactionSuccessful;
++import static jp.co.soramitsu.iroha.android.sample.Utils.toByteArray;
++
++public class CreateAccountInteractor extends CompletableInteractor<String> {
++
++    private final ManagedChannel channel;
++    private final ModelCrypto crypto = new ModelCrypto();
++    private final ModelTransactionBuilder txBuilder = new ModelTransactionBuilder();
++    private final ModelQueryBuilder queryBuilder = new ModelQueryBuilder();",41,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179353722,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179353722,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,is not used -  delete,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:35:47,179353728,"@@ -0,0 +1,93 @@
++package jp.co.soramitsu.iroha.android.sample.interactor;
++
++
++import com.google.protobuf.InvalidProtocolBufferException;
++
++import java.math.BigInteger;
++import java.util.concurrent.TimeUnit;
++
++import javax.inject.Inject;
++import javax.inject.Named;
++
++import io.grpc.ManagedChannel;
++import io.reactivex.Completable;
++import io.reactivex.Scheduler;
++import iroha.protocol.BlockOuterClass;
++import iroha.protocol.CommandServiceGrpc;
++import jp.co.soramitsu.iroha.android.ByteVector;
++import jp.co.soramitsu.iroha.android.Keypair;
++import jp.co.soramitsu.iroha.android.ModelCrypto;
++import jp.co.soramitsu.iroha.android.ModelProtoQuery;
++import jp.co.soramitsu.iroha.android.ModelProtoTransaction;
++import jp.co.soramitsu.iroha.android.ModelQueryBuilder;
++import jp.co.soramitsu.iroha.android.ModelTransactionBuilder;
++import jp.co.soramitsu.iroha.android.UnsignedTx;
++import jp.co.soramitsu.iroha.android.sample.injection.ApplicationModule;
++
++import static jp.co.soramitsu.iroha.android.sample.Constants.CONNECTION_TIMEOUT_SECONDS;
++import static jp.co.soramitsu.iroha.android.sample.Constants.CREATOR;
++import static jp.co.soramitsu.iroha.android.sample.Constants.DOMAIN_ID;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PRIV_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.PUB_KEY;
++import static jp.co.soramitsu.iroha.android.sample.Constants.TX_COUNTER;
++import static jp.co.soramitsu.iroha.android.sample.Utils.isTransactionSuccessful;
++import static jp.co.soramitsu.iroha.android.sample.Utils.toByteArray;
++
++public class CreateAccountInteractor extends CompletableInteractor<String> {
++
++    private final ManagedChannel channel;
++    private final ModelCrypto crypto = new ModelCrypto();
++    private final ModelTransactionBuilder txBuilder = new ModelTransactionBuilder();
++    private final ModelQueryBuilder queryBuilder = new ModelQueryBuilder();
++    private final ModelProtoTransaction protoTxHelper = new ModelProtoTransaction();
++    private final ModelProtoQuery protoQueryHelper = new ModelProtoQuery();",43,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179353728,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179353728,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,"Better to make dialog window with something like ""Transaction failed :( Try one more time""",8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:40:48,179354358,"@@ -0,0 +1,54 @@
++package jp.co.soramitsu.iroha.android.sample.registration;
++
++import android.content.Intent;
++import android.databinding.DataBindingUtil;
++import android.databinding.ViewDataBinding;
++import android.support.v4.app.ActivityOptionsCompat;
++import android.support.v7.app.AppCompatActivity;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Toast;
++
++import com.jakewharton.rxbinding2.view.RxView;
++
++import java.util.logging.Logger;
++
++import javax.inject.Inject;
++
++import jp.co.soramitsu.iroha.android.sample.MainActivity;
++import jp.co.soramitsu.iroha.android.sample.R;
++import jp.co.soramitsu.iroha.android.sample.SampleApplication;
++import jp.co.soramitsu.iroha.android.sample.databinding.ActivityRegistrationBinding;
++
++public class RegistrationActivity extends AppCompatActivity implements RegistrationView {
++
++    private ActivityRegistrationBinding binding;
++
++    @Inject
++    RegistrationPresenter registrationPresenter;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
++        SampleApplication.instance.getApplicationComponent().inject(this);
++
++        registrationPresenter.setView(this);
++
++        RxView.clicks(binding.registerButton)
++                .subscribe(view -> registrationPresenter.createAccount(binding.username.getText().toString().trim()));
++    }
++
++    @Override
++    public void didRegistrationSuccess() {
++        Intent intent = new Intent(this, MainActivity.class);
++        ActivityOptionsCompat options = ActivityOptionsCompat.
++                makeSceneTransitionAnimation(this, binding.logoImage, ""profile"");
++        startActivity(intent, options.toBundle());
++    }
++
++    @Override
++    public void didRegistrationError(Throwable error) {
++        Toast.makeText(this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();",52,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179354358,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179354358,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,card_view?,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:42:50,179354624,"@@ -0,0 +1,80 @@
++<?xml version=""1.0"" encoding=""utf-8""?>
++<layout
++    android:id=""@+id/layout""
++    xmlns:android=""http://schemas.android.com/apk/res/android""
++    xmlns:card_view=""http://schemas.android.com/apk/res-auto""
++    xmlns:tools=""http://schemas.android.com/tools"">
++        <FrameLayout
++            android:layout_width=""match_parent""
++            android:layout_height=""match_parent"">
++
++            <LinearLayout
++                android:layout_width=""match_parent""
++                android:layout_height=""match_parent""
++                android:orientation=""vertical"">
++
++                <ImageView
++                    android:id=""@+id/background_image""
++                    android:layout_width=""match_parent""
++                    android:layout_height=""wrap_content""
++                    android:layout_alignParentTop=""false""
++                    android:scaleType=""centerCrop""
++                    android:src=""@drawable/background"" />
++
++            </LinearLayout>
++
++            <LinearLayout
++                android:layout_width=""match_parent""
++                android:layout_height=""match_parent""
++                android:layout_gravity=""center_horizontal""
++                android:orientation=""vertical""
++                android:paddingLeft=""16dp""
++                android:paddingRight=""16dp"">
++
++                <ImageView
++                    android:id=""@+id/logo_image""
++                    android:layout_width=""128dp""
++                    android:layout_height=""128dp""
++                    android:layout_gravity=""center_horizontal""
++                    android:layout_marginTop=""116dp""
++                    card_view:srcCompat=""@drawable/ic_logo"" />",40,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179354624,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179354624,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,finish this activity,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:43:34,179354722,"@@ -0,0 +1,54 @@
++package jp.co.soramitsu.iroha.android.sample.registration;
++
++import android.content.Intent;
++import android.databinding.DataBindingUtil;
++import android.databinding.ViewDataBinding;
++import android.support.v4.app.ActivityOptionsCompat;
++import android.support.v7.app.AppCompatActivity;
++import android.os.Bundle;
++import android.view.View;
++import android.widget.Toast;
++
++import com.jakewharton.rxbinding2.view.RxView;
++
++import java.util.logging.Logger;
++
++import javax.inject.Inject;
++
++import jp.co.soramitsu.iroha.android.sample.MainActivity;
++import jp.co.soramitsu.iroha.android.sample.R;
++import jp.co.soramitsu.iroha.android.sample.SampleApplication;
++import jp.co.soramitsu.iroha.android.sample.databinding.ActivityRegistrationBinding;
++
++public class RegistrationActivity extends AppCompatActivity implements RegistrationView {
++
++    private ActivityRegistrationBinding binding;
++
++    @Inject
++    RegistrationPresenter registrationPresenter;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
++        SampleApplication.instance.getApplicationComponent().inject(this);
++
++        registrationPresenter.setView(this);
++
++        RxView.clicks(binding.registerButton)
++                .subscribe(view -> registrationPresenter.createAccount(binding.username.getText().toString().trim()));
++    }
++
++    @Override
++    public void didRegistrationSuccess() {
++        Intent intent = new Intent(this, MainActivity.class);
++        ActivityOptionsCompat options = ActivityOptionsCompat.
++                makeSceneTransitionAnimation(this, binding.logoImage, ""profile"");
++        startActivity(intent, options.toBundle());",47,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179354722,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179354722,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,on success save username and keys,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:44:29,179354841,"@@ -0,0 +1,28 @@
++package jp.co.soramitsu.iroha.android.sample.registration;
++
++import javax.inject.Inject;
++
++import jp.co.soramitsu.iroha.android.sample.interactor.CreateAccountInteractor;
++import lombok.Setter;
++
++public class RegistrationPresenter {
++
++    @Setter
++    private RegistrationView view;
++
++    private final CreateAccountInteractor createAccountInteractor;
++
++    @Inject
++    public RegistrationPresenter(CreateAccountInteractor createAccountInteractor) {
++        this.createAccountInteractor = createAccountInteractor;
++    }
++
++    public void createAccount(String username) {",20,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179354841,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179354841,BulatMukhutdinov
+https://github.com/hyperledger/iroha-android/pull/115,https://github.com/hyperledger/iroha-android/pull/115,pls move to gradle file,8fb1487a6397004b7f15cb35f3ed0a0fe4df0d4b,2018-04-05 05:45:02,179354893,"@@ -1,8 +1,13 @@
+ <resources>
+     <string name=""app_name"">Sample</string>
++    <string name=""iroha_ip"">199.247.30.27</string>",3,2018-04-05 05:45:26,https://api.github.com/repos/hyperledger/iroha-android/pulls/comments/179354893,https://github.com/hyperledger/iroha-android/pull/115#discussion_r179354893,BulatMukhutdinov

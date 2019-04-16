@@ -1,0 +1,1261 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/1,https://api.github.com/repos/kubernetes/k8s.io/issues/1,Add reviewable.k8s.io,"This is our configuration for running Reviewable on Kubernetes.
+",closed,True,2016-08-22 23:04:08,2016-08-22 23:13:08
+k8s.io,rmmh,https://github.com/kubernetes/k8s.io/pull/2,https://api.github.com/repos/kubernetes/k8s.io/issues/2,Add k8s.io Nginx configuration.,"README.md sketches one way to do testing. If we don't want to require a separate cluster for testing, the Makefile should be modified to use namespaces.
+",closed,True,2016-08-22 23:47:30,2016-08-23 00:25:21
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/3,https://api.github.com/repos/kubernetes/k8s.io/issues/3,Remove some over-precise leftovers,"Don't need namespace in every file - assume it is in the kubectl context.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/3)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-23 00:09:36,2016-08-23 00:31:14
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/4,https://api.github.com/repos/kubernetes/k8s.io/issues/4,"Sync k8s.io files to current site, prep canary","This launches the k8s.io site in a canary namespace with a canary IP and can
+run the test against it.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/4)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-23 04:28:48,2016-08-23 21:03:51
+k8s.io,luxas,https://github.com/kubernetes/k8s.io/issues/5,https://api.github.com/repos/kubernetes/k8s.io/issues/5,Provide the easy-to-remember url addons.k8s.io for applying addons,"Given the work we're trying to do in @kubernetes/sig-cluster-lifecycle, and given that we've chosen to use `kubectl apply -f` as the main addon applier, it would be great to have a easy-to-remember url for applying addons, like this:
+
+```
+kubectl apply -f addon(s).k8s.io/network/flannel.yaml
+kubectl apply -f addon(s).k8s.io/network/calico.yaml
+kubectl apply -f addon(s).k8s.io/network/weave.yaml
+
+kubectl apply -f addon(s).k8s.io/core/dns.yaml
+kubectl apply -f addon(s).k8s.io/core/dashboard.yaml
+kubectl apply -f addon(s).k8s.io/core/heapster.yaml
+...
+```
+
+or just 
+
+```
+kubectl apply -f addon(s).k8s.io/flannel.yaml
+kubectl apply -f addon(s).k8s.io/calico.yaml
+kubectl apply -f addon(s).k8s.io/weave.yaml
+
+kubectl apply -f addon(s).k8s.io/dns.yaml
+kubectl apply -f addon(s).k8s.io/dashboard.yaml
+kubectl apply -f addon(s).k8s.io/heapster.yaml
+...
+```
+
+This would be very user-friendly, and we should document the possible addons installable this way at the main site.
+
+The more exotic addons could (and should) be kept away from this way of installing the addons, only the most common should be here.
+
+We could just have a redirection file in this repo that points to the source of truth somewhere in the main k8s repo or at other places.
+
+@kubernetes/sig-cluster-lifecycle @thockin @pwittrock 
+",closed,False,2016-08-23 20:02:02,2017-12-18 07:57:07
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/6,https://api.github.com/repos/kubernetes/k8s.io/issues/6,Add an IP for the prod service LB,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/6)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-23 21:04:57,2016-08-23 21:17:42
+k8s.io,rmmh,https://github.com/kubernetes/k8s.io/pull/7,https://api.github.com/repos/kubernetes/k8s.io/issues/7,Make ci-test.k8s.io/e2e/123 redirect to Gubernator.,"One potential problem: deploying a new configmap changes the files in the running containers, but doesn't restart them _or_ force nginx to reload. The deployment should run `nginx -s reload` on the running pods to trigger a config reload.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/7)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-23 21:39:43,2016-08-23 21:49:27
+k8s.io,caesarxuchao,https://github.com/kubernetes/k8s.io/pull/8,https://api.github.com/repos/kubernetes/k8s.io/issues/8,Add client-go redirect,"@thockin @lavalamp @krousey 
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/8)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-25 21:21:22,2016-08-25 23:08:03
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/9,https://api.github.com/repos/kubernetes/k8s.io/issues/9,bump reviewable to 1168.1901,"Need to find a way to canary this, but I already pushed it :)
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/9)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-26 23:12:57,2016-08-26 23:13:09
+k8s.io,lavalamp,https://github.com/kubernetes/k8s.io/pull/10,https://api.github.com/repos/kubernetes/k8s.io/issues/10,add gengo,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/10)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-30 02:49:53,2016-08-30 06:25:12
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/11,https://api.github.com/repos/kubernetes/k8s.io/issues/11,Bump reviewable to 1193.1907,"Fix: balance GitHub calls among other admins for connected repositories when
+API quota gets low
+
+Fix: guesstimate GitHub burst quota usage and postpone or reassign tasks that
+might trigger an abuse warning
+
+Fix: set GitHub request timeouts based on remaining task lease time
+
+Fix: don't query /rate_limit on GitHub Enterprise instances
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/11)
+
+<!-- Reviewable:end -->
+",closed,True,2016-08-31 16:32:52,2016-08-31 16:32:57
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/12,https://api.github.com/repos/kubernetes/k8s.io/issues/12,bump to reviewable 1203.1910,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/12)
+
+<!-- Reviewable:end -->
+",closed,True,2016-09-07 06:17:28,2016-09-07 06:20:29
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/13,https://api.github.com/repos/kubernetes/k8s.io/issues/13,bump to reviewable 1243.1957,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/13)
+
+<!-- Reviewable:end -->
+",closed,True,2016-09-23 20:35:27,2016-09-23 21:45:24
+k8s.io,mikedanese,https://github.com/kubernetes/k8s.io/pull/14,https://api.github.com/repos/kubernetes/k8s.io/issues/14,add vanity domains for os packages,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/14)
+
+<!-- Reviewable:end -->
+",closed,True,2016-09-27 09:33:22,2016-09-27 16:52:10
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/15,https://api.github.com/repos/kubernetes/k8s.io/issues/15,Redirect dl.k8s.io to the kubernetes-release GCS bucket,"Idea is that scripts can use https://releases.k8s.io/downloads/release/v1.4.0/kubernetes.tar.gz rather than needing to know the GCS bucket name (kubernetes-release) or use the github URL (which doesn't have anything besides kubernetes.tar.gz).
+
+More concrete example: I want to update https://github.com/kubernetes/kubernetes/blob/master/cluster/centos/config-build.sh#L44 to use `https://releases.k8s.io/downloads/release/v${K8S_VERSION}/kubernetes-server-linux-amd64.tar.gz`.
+
+Open to bikeshedding if you have a better suggestion.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/15)
+
+<!-- Reviewable:end -->
+",closed,True,2016-09-29 00:07:53,2016-09-29 06:07:21
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/16,https://api.github.com/repos/kubernetes/k8s.io/issues/16,Add gcsweb,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/16)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-02 04:56:21,2016-10-10 21:16:46
+k8s.io,jbeda,https://github.com/kubernetes/k8s.io/pull/17,https://api.github.com/repos/kubernetes/k8s.io/issues/17,Add redirect for features URLs,"Someone will have to add a DNS alias here too but I figure this is half the work.  I'd be happy to join in in helping to admin this stuff.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/17)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-04 19:42:53,2016-10-05 05:36:01
+k8s.io,jbeda,https://github.com/kubernetes/k8s.io/issues/18,https://api.github.com/repos/kubernetes/k8s.io/issues/18,Update TLS cert for most of the aliases,"A wildcard cert would work but I'm assuming that it is hard to get one of those.  Right now the cert for k8s.io has a set of SANs:
+
+```
+k8s.io
+changelog.k8s.io
+code.k8s.io
+docs.k8s.io
+examples.k8s.io
+get.k8s.io
+issue.k8s.io
+issues.k8s.io
+jenkins.k8s.io
+pr.k8s.io
+prs.k8s.io
+rel.k8s.io
+releases.k8s.io
+slack.k8s.io
+submit-queue.k8s.io
+www.k8s.io
+```
+
+This is missing:
+
+```
+yum.k8s.io
+apt.k8s.io
+dl.k8s.io
+features.k8s.io
+feature.k8s.io
+reviewable.k8s.io
+testgrid.k8s.io
+```
+",closed,False,2016-10-04 21:47:30,2016-12-08 23:12:09
+k8s.io,jbeda,https://github.com/kubernetes/k8s.io/pull/19,https://api.github.com/repos/kubernetes/k8s.io/issues/19,Fix HTTPS in k8s.io unit test,"I'm not sure how this ever worked before.  Note that this is me running this on my mac with python 2.7.12 installed via homebrew.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/19)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-04 21:56:06,2018-02-06 00:12:59
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/20,https://api.github.com/repos/kubernetes/k8s.io/issues/20,"Fix broken test, bounce canary pods","<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/20)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-05 05:36:35,2016-10-05 12:55:08
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/21,https://api.github.com/repos/kubernetes/k8s.io/issues/21,Redirect dl.k8s.io/ci-cross/ appropriately,"x-ref https://github.com/kubernetes/test-infra/issues/670
+
+We'll soon be uploading cross-build artifacts to gs://kubernetes-release-dev/ci-cross, so we should support that on dl.k8s.io too.
+
+Tested on my own cluster, haven't pushed to the real canary,
+
+cc @mikedanese
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/21)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-07 22:18:07,2016-10-10 20:56:08
+k8s.io,techtonik,https://github.com/kubernetes/k8s.io/pull/22,https://api.github.com/repos/kubernetes/k8s.io/issues/22,Document gcsweb,"Please review. It would be also nice to get link to deployed gcsweb to see how it looks like.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/22)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-11 04:21:10,2016-10-16 03:54:58
+k8s.io,techtonik,https://github.com/kubernetes/k8s.io/issues/23,https://api.github.com/repos/kubernetes/k8s.io/issues/23,Document how to find the URL for gcsweb,"I think that the question is rather lame, but if [guidelines](https://github.com/kubernetes/k8s.io/blob/master/CONTRIBUTING.md) are true in:
+
+> We'd like this repo to demonstrate the best practices for running sites on Kubernetes.
+
+then I'd really like to know how to find URL for the `gcsweb` site, which config is located here:
+https://github.com/kubernetes/k8s.io/tree/master/gcsweb
+",closed,False,2016-10-11 04:28:38,2016-10-11 05:09:53
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/24,https://api.github.com/repos/kubernetes/k8s.io/issues/24,Gcsweb release,"Bump to v1.0.1
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/24)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-11 05:08:11,2016-10-11 05:08:25
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/25,https://api.github.com/repos/kubernetes/k8s.io/issues/25,bump to v1.0.2,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/25)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-11 23:25:49,2016-10-11 23:25:55
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/26,https://api.github.com/repos/kubernetes/k8s.io/issues/26,bump reviewable to 1273.1977,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/26)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-12 20:28:31,2016-10-12 20:28:37
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/27,https://api.github.com/repos/kubernetes/k8s.io/issues/27,bump reviewable to 1275.1985,"Already deployed
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/27)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-13 15:25:24,2016-10-13 15:25:29
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/28,https://api.github.com/repos/kubernetes/k8s.io/issues/28,Integrate changes to kubernetes/cluster/get-kube.sh into get-kube-secure.sh,"The script on https://get.k8s.io is pretty out-of-date at this point.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/28)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-13 21:20:14,2016-10-19 07:31:16
+k8s.io,spxtr,https://github.com/kubernetes/k8s.io/pull/29,https://api.github.com/repos/kubernetes/k8s.io/issues/29,Add test-infra go redirect.,"https://github.com/kubernetes/test-infra/pull/835
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/29)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-14 18:33:17,2016-10-20 05:10:10
+k8s.io,techtonik,https://github.com/kubernetes/k8s.io/pull/30,https://api.github.com/repos/kubernetes/k8s.io/issues/30,Machine readable domain inventory,"to maintain a list of all domains programmatically
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/30)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-16 04:37:07,2017-06-07 15:24:33
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/31,https://api.github.com/repos/kubernetes/k8s.io/issues/31,Proxy https://get.k8s.io to GitHub instead of including a copy,"Follow-up to suggestion on #28 from @thockin.
+
+Tested with `make test` on my private cluster.
+
+<!-- Reviewable:start -->
+
+---
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/31)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-19 21:57:37,2016-10-20 05:19:04
+k8s.io,rmmh,https://github.com/kubernetes/k8s.io/pull/32,https://api.github.com/repos/kubernetes/k8s.io/issues/32,bump gcsweb to 1.0.3,"<!-- Reviewable:start -->
+
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/32)
+
+<!-- Reviewable:end -->
+",closed,True,2016-10-19 22:28:05,2016-10-20 05:23:00
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/33,https://api.github.com/repos/kubernetes/k8s.io/issues/33,Bump reviewable to 1313.2011,"1313.2011 (min 1273.1977) 2016-10-29
+
+- New: add ?debug=latency for debugging page loading latency issues
+- Upd: switch to a new promise/coroutine framework on the server for minor
+  performance improvements
+- Upd: add prefetch and preconnect directives to the page to improve initial load
+  performance
+- Upd: add syntax highlighting for CMake
+- Fix: unreplied discussions counter for PR author no longer includes discussions
+  with unsent drafts
+- Fix: tighten up security to mitigate repo existence info leak by probing for
+  other people's permission tickets
+- Fix: determine fast-forward merge availability and ""out-of-date"" PR correctly
+- Fix: speed up permission checks in various ways, and recommend using a 2048 bit
+  RSA key for REVIEWABLE_ENCRYPTION_PRIVATE_KEYS
+- Fix: tweak queue health alerting thresholds to reduce false positives,
+  especially when running with a single instance
+- Fix: fix various task lease issues that could lead to false positive error
+  reports in Sentry
+- Fix: fix minor issues with crash overlay
+- Fix: fix minor layout issue with target branch editor in Firefox
+
+<!-- Reviewable:start -->
+
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/33)
+<!-- Reviewable:end -->
+",closed,True,2016-11-02 17:24:25,2016-11-06 20:33:12
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/34,https://api.github.com/repos/kubernetes/k8s.io/issues/34,Add redirect for go.k8s.io/partner-request,"Tested on my own cluster, not yet on canary.
+
+cc @sarahnovotny
+
+<!-- Reviewable:start -->
+---
+This change is [<img src=""https://reviewable.kubernetes.io/review_button.svg"" height=""34"" align=""absmiddle"" alt=""Reviewable""/>](https://reviewable.kubernetes.io/reviews/kubernetes/k8s.io/34)
+<!-- Reviewable:end -->
+",closed,True,2016-11-14 23:55:53,2016-11-15 18:25:42
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/35,https://api.github.com/repos/kubernetes/k8s.io/issues/35,Update reviewable release,We were 3 releases behind.,closed,True,2016-11-29 19:49:50,2016-11-29 19:52:33
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/36,https://api.github.com/repos/kubernetes/k8s.io/issues/36,add firebase URL to docs,,closed,True,2016-11-29 22:39:33,2016-11-29 22:39:49
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/37,https://api.github.com/repos/kubernetes/k8s.io/issues/37,Test https on all subdomains,"Refactored test.py a bit so that we automatically test http and https in all test cases.
+
+I've also added a Dockerfile and make rule so we can run test.py with a less-ancient version of python that actually validates the cert. This doesn't actually work without @jbeda's fix in #19, but #19 will fail with ancient python because `ssl.create_default_context()` doesn't exist. It's a mess.
+
+I've pushed the updated nginx configmap to canary but not yet prod.",closed,True,2016-12-07 21:21:22,2016-12-07 21:48:19
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/issues/38,https://api.github.com/repos/kubernetes/k8s.io/issues/38,Put gcsweb behind ingress and install a TLS cert for it,Should be pretty straightforward. It seems like using ingress has the best Let's Encrypt automation support.,closed,False,2016-12-07 21:54:48,2019-03-04 18:58:21
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/39,https://api.github.com/repos/kubernetes/k8s.io/issues/39,Bump reviewable to 1390.2098,already deployed,closed,True,2016-12-09 01:18:15,2016-12-09 01:19:04
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/40,https://api.github.com/repos/kubernetes/k8s.io/issues/40,Bump reviewable to 1394.2104,Small fix - removes some debug output.,closed,True,2016-12-09 16:14:07,2016-12-09 16:14:14
+k8s.io,deads2k,https://github.com/kubernetes/k8s.io/pull/41,https://api.github.com/repos/kubernetes/k8s.io/issues/41,add api machinery,"Add entry for `k8s.io/apimachinery` for https://github.com/kubernetes/gengo/pull/29
+
+@thockin is there any way for me to test this?",closed,True,2017-01-10 17:22:41,2017-01-10 17:46:33
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/42,https://api.github.com/repos/kubernetes/k8s.io/issues/42,Change to proxy mode for main site,I pushed this change and flipped DNS (thanks Jeff for the host-header idea),closed,True,2017-01-10 22:25:40,2017-01-10 22:28:40
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/43,https://api.github.com/repos/kubernetes/k8s.io/issues/43,Switch main site host header to real backend,pushed and activated now that the switchover is done,closed,True,2017-01-10 22:43:43,2017-01-11 08:31:13
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/44,https://api.github.com/repos/kubernetes/k8s.io/issues/44,Fix redirects for the main site,"Fixes wonky redirects, adds protocl upgrades, and adds test cases",closed,True,2017-01-11 09:04:30,2017-01-13 19:55:49
+k8s.io,deads2k,https://github.com/kubernetes/k8s.io/pull/45,https://api.github.com/repos/kubernetes/k8s.io/issues/45,add k8s.io/apiserver,Add entry for godeping k8s.io/apiserver.,closed,True,2017-01-13 18:26:35,2017-01-13 19:57:36
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/46,https://api.github.com/repos/kubernetes/k8s.io/issues/46,Bump rviewable to 1445.2150,"1445.2150 (min 1313.2023) 2017-01-15
+
+* New: support REVIEWABLE_ANALYTICS_URL to allow for tracking of major user
+  actions and customized stats. Please see the config guide for details.
+* New: enable subscription admin to restrict Reviewable users to members of a set
+  of teams. (The default is to continue to allow any GHE user to sign in.)
+* Upd: upgrade server environment to Node v6.
+* Upd: remove support for GAE_MODULE_INSTANCE, as the new GAE flex environment no
+  longer provides this value and AFAIK no other container runner provides an
+  ordinal instance number either.
+* Upd: have server log errors with full stack traces to console if Sentry
+  monitoring not set up.
+* Fix: improve workaround for Firebase stuck transaction bug. The condition will
+  now be detected earlier, reducing thrashing, and can now recover without
+  restarting the instance in many cases.
+* Fix: set correct disposition on button-initiated ""Done"" reply when the user is
+  the PR author and also a reviewer due to marking files as reviewed. (Yes, all
+  of those conditions are necessary to trigger the bug!)
+* Fix: handle mixed-case emoji tokens correctly.
+* Fix: handle a repo renaming corner case correctly (repo renamed then original
+  recreated).",closed,True,2017-01-17 16:36:06,2017-01-17 16:46:48
+k8s.io,euank,https://github.com/kubernetes/k8s.io/pull/47,https://api.github.com/repos/kubernetes/k8s.io/issues/47,www-golang: add ingress,Someone ran into this not working https://github.com/kubernetes/ingress/issues/147,closed,True,2017-01-23 04:04:38,2018-04-12 01:45:30
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/48,https://api.github.com/repos/kubernetes/k8s.io/issues/48,Bump reviewable to 1491.2156,"* Upd: tighten up security headers when serving static files:
+  X-Content-Type-Options, X-Frame-Options, and X-XSS-Protection.
+* Fix: further improve workaround for Firebase transaction flakiness.
+  Detection is now more accurate and won't restart instances unnecessarily
+  if other servers are picking up the load on affected keys.
+* Fix: controlled instance restarts are now much faster (typically 5-10
+  seconds, max 60 seconds), whereas before they often timed out only after
+  5 minutes.",closed,True,2017-01-24 17:00:06,2017-01-24 17:01:11
+k8s.io,sttts,https://github.com/kubernetes/k8s.io/pull/49,https://api.github.com/repos/kubernetes/k8s.io/issues/49,PROOF OF CONCEPT: Make go-get fetch client-go release-1.5 branch,/cc @deads2k @lavalamp @caesarxuchao,closed,True,2017-02-04 14:44:09,2017-12-23 01:16:59
+k8s.io,deads2k,https://github.com/kubernetes/k8s.io/pull/50,https://api.github.com/repos/kubernetes/k8s.io/issues/50,expose kube-aggregator and sample-apiserver,"expose kube-aggregator and sample-apiserver so they are `go get`able.
+
+@lavalamp ",closed,True,2017-02-14 19:44:33,2017-03-30 15:32:43
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/51,https://api.github.com/repos/kubernetes/k8s.io/issues/51,Add redirect for go.k8s.io/oncall,"Easier to tell folks to use https://go.k8s.io/oncall rather than trying to remember the GCS path.
+
+Already pushed and tested on canary.",closed,True,2017-02-16 21:43:26,2017-02-17 07:27:46
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/52,https://api.github.com/repos/kubernetes/k8s.io/issues/52,bump gcsweb to 1.0.4,already pushed,closed,True,2017-02-18 00:13:36,2017-02-18 00:14:42
+k8s.io,DirectXMan12,https://github.com/kubernetes/k8s.io/pull/53,https://api.github.com/repos/kubernetes/k8s.io/issues/53,www-golang: add metrics,Adds k8s.io/metrics to the go-get meta definitions.,closed,True,2017-02-23 05:50:29,2017-02-23 20:47:57
+k8s.io,fejta,https://github.com/kubernetes/k8s.io/pull/54,https://api.github.com/repos/kubernetes/k8s.io/issues/54,Add triage and history go links,,closed,True,2017-03-02 19:49:04,2017-03-02 22:55:46
+k8s.io,fejta,https://github.com/kubernetes/k8s.io/pull/55,https://api.github.com/repos/kubernetes/k8s.io/issues/55,Add triage and history go links,"@ixdy 
+
+Make go.k8s.io/test-history and go.k8s.io/triage work!",closed,True,2017-03-02 22:56:25,2017-03-03 19:45:17
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/56,https://api.github.com/repos/kubernetes/k8s.io/issues/56,Support release candidate releases on dl.k8s.io,Deployed and tested on canary namespace already.,closed,True,2017-03-24 20:33:53,2017-03-24 23:24:39
+k8s.io,mwielgus,https://github.com/kubernetes/k8s.io/pull/57,https://api.github.com/repos/kubernetes/k8s.io/issues/57,Add kubernetes/autoscaler to configmap-www-golang.yaml,cc: @MaciekPytel @fgrzadkowski ,closed,True,2017-04-21 19:05:44,2017-04-23 04:06:37
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/58,https://api.github.com/repos/kubernetes/k8s.io/issues/58,reviewable 1531.2183,,closed,True,2017-04-23 04:05:24,2017-04-23 04:05:29
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/59,https://api.github.com/repos/kubernetes/k8s.io/issues/59,Add 'git.k8s.io',,closed,True,2017-06-02 04:19:14,2017-06-03 22:55:41
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/60,https://api.github.com/repos/kubernetes/k8s.io/issues/60,Bump reviewable release,"1575.2214 (min 1549.2198) 2017-05-20
+
+* New: allow organization owners to request automatic connection of all
+  newly created repos to Reviewable. You can find the new toggles on the
+  Repositories page. You can do it for personal repos as well, but the
+  reaction to a new repo may be delayed by up to 2 minutes (since there's
+  no webhook for personal repo creation).
+* Upd: upgrade all connected repos to listen to all GitHub webhook events.
+  This process will kick off automatically within minutes of starting up
+  the new version and continue (with checkpoints) until finished, probably
+  within a few minutes and definitely in less than 30 minutes. (If you're
+  doing a rolling upgrade, it may get delayed or start right away — either
+  one is fine.) While running, the upgrade process will keep one instance
+  pretty busy so you might not want to upgrade during peak hours. If you
+  want to follow along, look for log lines with the token ""migrate1549""
+  for (minimal) status updates, and a final summary log line starting with
+  ""Migrated NNN legacy repositories"" that indicates completion. It's OK
+  even if there's a few failures, as any repo that isn't completely idle
+  will get updated the next time it sends a webhook anyway. This upgrade
+  process just hurries things along.
+* Fix: prevent occasional ""permission denied"" crash when upgrading OAuth
+  scopes on the Reviews or Repositories page.
+* Fix: prune obsolete webhooks more aggressively in case they got migrated
+  from github.com to GHE.
+
+1592.2216 (min 1549.2198) 2017-06-07
+
+* Upd: create a sample Reviewable commit status when connecting a repo so
+  that it's visible when configuring branch protection settings in GitHub
+  before creating a PR.
+* Upd: update syntax highlighting module and add Kotlin source file
+  extension mappings.
+* Fix: correctly enforce minimum version requirements; the previous logic
+  was too strict and would disallow rollbacks that should've been
+  permitted.",closed,True,2017-06-09 20:32:23,2017-06-09 20:32:41
+k8s.io,sttts,https://github.com/kubernetes/k8s.io/pull/61,https://api.github.com/repos/kubernetes/k8s.io/issues/61,Add k8s.io/apiextensions-apiserver to k8s.io golang metadata,,closed,True,2017-06-13 18:21:10,2017-07-03 12:13:34
+k8s.io,cjwagner,https://github.com/kubernetes/k8s.io/pull/62,https://api.github.com/repos/kubernetes/k8s.io/issues/62,Added go.k8s.io/test-health redirect,"Makes https://go.k8s.io/test-health redirect to velodrome Bigquery metrics dashboard at http://velodrome.k8s.io/dashboard/db/bigquery-metrics
+/cc @fejta @ixdy ",closed,True,2017-06-16 01:22:55,2017-06-16 23:47:43
+k8s.io,ericchiang,https://github.com/kubernetes/k8s.io/pull/63,https://api.github.com/repos/kubernetes/k8s.io/issues/63,Add k8s.io/api to k8s.io golang metadata,"Same fix as https://github.com/kubernetes/k8s.io/pull/61
+
+Addresses https://github.com/kubernetes/client-go/issues/226
+
+cc @caesarxuchao @lavalamp",closed,True,2017-06-28 21:01:37,2017-06-28 23:18:40
+k8s.io,fejta,https://github.com/kubernetes/k8s.io/pull/64,https://api.github.com/repos/kubernetes/k8s.io/issues/64,Create go.k8s.io/stuck-prs,/assign @ixdy @rmmh @cjwagner ,closed,True,2017-07-16 23:00:35,2017-07-18 21:00:47
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/65,https://api.github.com/repos/kubernetes/k8s.io/issues/65,Add link to PR Dashboard,Fixes https://github.com/kubernetes/community/issues/550,closed,True,2017-07-17 23:47:08,2017-07-18 19:38:25
+k8s.io,ahmetb,https://github.com/kubernetes/k8s.io/pull/66,https://api.github.com/repos/kubernetes/k8s.io/issues/66,Use https directly for redirects,"Sending people directly to https://kubernetes.io/. Also updating go.k8s.io to
+the new page directly without client-side redirect.",closed,True,2017-07-18 00:28:03,2017-07-19 19:56:29
+k8s.io,apelisse,https://github.com/kubernetes/k8s.io/pull/67,https://api.github.com/repos/kubernetes/k8s.io/issues/67,Create go-import meta for k8s.io/utils,I have absolutely no clue what I'm doing.,closed,True,2017-07-19 18:14:12,2017-07-19 18:53:07
+k8s.io,mbohlool,https://github.com/kubernetes/k8s.io/pull/68,https://api.github.com/repos/kubernetes/k8s.io/issues/68,Add k8s.io/kube-openapi to k8s.io golang metadata,"Add entry for godeping k8s.io/kube-openapi.
+
+@thockin @lavalamp ",closed,True,2017-07-20 01:08:41,2017-07-28 23:35:10
+k8s.io,sebastienvas,https://github.com/kubernetes/k8s.io/pull/69,https://api.github.com/repos/kubernetes/k8s.io/issues/69,Add istio-prow bucket to gcsweb,"As advises by k8s eng prod team, Istio team is using k8s gubernator instance, which uses gcsweb.k8s.io. For contributor to be able to see the logs, we need to add istio-prow bucket to gcsweb.k8s.io",closed,True,2017-07-27 02:03:54,2017-07-29 02:50:10
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/70,https://api.github.com/repos/kubernetes/k8s.io/issues/70,Configure nginx for netlify cutover,"Netlify will handle the kubernetes.io domain directly.  We will still
+handle k8s.io (including go-get) and all the vanity URLs, and redirect
+to kubernetes.io as needed.
+
+This required a bunch of rejiggering the nginx config, but I think it is
+clearer now.
+
+I also beefed up the tests some and covered some cases that we missed
+before.
+
+Tests pass against canary, and I pushed the nginx config to prod.",closed,True,2017-07-28 15:45:32,2017-07-28 23:09:48
+k8s.io,samuelmanzer,https://github.com/kubernetes/k8s.io/pull/71,https://api.github.com/repos/kubernetes/k8s.io/issues/71,add kubernetes/kube-state-metrics to golang metadata for k8s.io,So that we can `go get` this repo. Folks have been [confused](https://github.com/kubernetes/kube-state-metrics/issues/166) by this in the past. ,closed,True,2017-08-03 21:50:52,2017-08-04 17:40:30
+k8s.io,jbeda,https://github.com/kubernetes/k8s.io/issues/72,https://api.github.com/repos/kubernetes/k8s.io/issues/72,`k8s.io/dns` (and others) missing from golang responses,We should probably (a) have this auto generated from some list of repos someplace and (b) make sure that we keep it up to date.  But I can at least say that `k8s.io/dns` is missing.,closed,False,2017-08-05 21:56:48,2018-03-09 23:23:35
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/73,https://api.github.com/repos/kubernetes/k8s.io/issues/73,Bump reviewable to 1607.2231,,closed,True,2017-08-11 00:08:43,2017-08-11 00:11:16
+k8s.io,mbssaiakhil,https://github.com/kubernetes/k8s.io/pull/74,https://api.github.com/repos/kubernetes/k8s.io/issues/74,Fix typo in README,,closed,True,2017-08-13 09:35:54,2017-08-17 00:49:35
+k8s.io,mbssaiakhil,https://github.com/kubernetes/k8s.io/pull/75,https://api.github.com/repos/kubernetes/k8s.io/issues/75,Fix Typo in Contributor Code of Conduct,Fix Typo in Contributor Code of Conduct,closed,True,2017-08-13 09:45:15,2017-08-17 00:33:05
+k8s.io,BenTheElder,https://github.com/kubernetes/k8s.io/pull/76,https://api.github.com/repos/kubernetes/k8s.io/issues/76,add go.k8s.io/needs-ok-to-test,"this adds a short link to a github search for PRs that need an /ok-to-test from a kubernetes member
+
+/cc @fejta @spiffxp @dims",closed,True,2017-08-16 00:47:19,2017-08-18 18:08:18
+k8s.io,sttts,https://github.com/kubernetes/k8s.io/pull/77,https://api.github.com/repos/kubernetes/k8s.io/issues/77,k8s.io/configmap-www-golang.yaml: add code-generator repo,,closed,True,2017-08-16 13:15:33,2017-08-25 17:28:58
+k8s.io,cblecker,https://github.com/kubernetes/k8s.io/pull/78,https://api.github.com/repos/kubernetes/k8s.io/issues/78,Add go-import metadata for k8s.io/code-generator,@sttts @caesarxuchao @ixdy ,closed,True,2017-08-23 18:19:13,2017-08-23 18:42:52
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/79,https://api.github.com/repos/kubernetes/k8s.io/issues/79,Remove kubernetes.io proxy passthru to GitHub pages,"The https://kubernetes.io test started failing, but we've completely switched to netlify, so we don't need it anymore anyway.
+
+Already deployed and tested on canary.",closed,True,2017-08-24 23:33:16,2017-08-25 17:58:02
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/80,https://api.github.com/repos/kubernetes/k8s.io/issues/80,Add actual list of redirectors currently active,"We don't have a list of these url(s) anywhere on a single page which
+makes it harder to discover",closed,True,2017-08-28 16:58:15,2017-08-28 19:42:20
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/81,https://api.github.com/repos/kubernetes/k8s.io/issues/81,Document k8s.io and kubernetes.io vanity url(s),Make it easy for folks to discover our urls for various resources,closed,True,2017-08-28 20:42:22,2017-09-05 23:03:13
+k8s.io,JeanMertz,https://github.com/kubernetes/k8s.io/issues/82,https://api.github.com/repos/kubernetes/k8s.io/issues/82,Downloading k8s.io go packages,"I'm not sure this is the right place to ask, but it seems like the closest I can get to where the issue probably stems from, so here goes.
+
+I'm trying to make a [Homebrew](https://brew.sh) (macOS package manager) package out of a [go tool I wrote](https://github.com/blendle/kubecrt). In order to do this, I mark packages as dependencies in the package config file for Homebrew.
+
+This looks like this:
+
+```ruby
+go_resource ""github.com/spf13/pflag"" do
+  url ""https://github.com/spf13/pflag"",
+      :revision => ""e57e3eeb33f795204c1ca35f56c44f83227c6e66""
+end
+
+go_resource ""golang.org/x/crypto"" do
+  url ""https://golang.org/x/crypto"",
+      :revision => ""7d9177d70076375b9a59c8fde23d52d9c4a7ecd5""
+end
+
+go_resource ""gopkg.in/yaml.v2"" do
+  url ""https://gopkg.in/yaml.v2"",
+      :revision => ""eb3733d160e74a9c7e442f435eb3bea458e1d19f""
+end
+
+go_resource ""k8s.io/apimachinery"" do
+  url ""https://k8s.io/apimachinery"",
+      :revision => ""1168e538ea3ccf444854d1fdd5681d2d876680a7""
+end
+```
+
+When installing the dependencies using Homebrew, things work as expected, _except_ for packages prepended with `k8s.io`:
+
+```
+==> Downloading https://github.com/spf13/pflag
+######################################################################## 100.0%
+Warning: Cannot verify integrity of kubecrt--github.com-spf13-pflag-0.6.0
+A checksum was not provided for this resource
+For your reference the SHA256 is: cac4d7d9b0cf76aa2cb2277b2f3c120d35ce56fba36f050d54b828d6eefac136
+==> Downloading https://golang.org/x/crypto
+######################################################################## 100.0%
+Warning: Cannot verify integrity of kubecrt--golang.org-x-crypto-0.6.0
+A checksum was not provided for this resource
+For your reference the SHA256 is: 237552c607b93d6e682100183d059b6f104a07b5ec4958148c3db9aaf0a0a09d
+==> Downloading https://gopkg.in/yaml.v2
+######################################################################## 100.0%
+Warning: Cannot verify integrity of kubecrt--gopkg.in-yaml.v2-2.v2
+A checksum was not provided for this resource
+For your reference the SHA256 is: cb3c370a44d64e289fbc6c802b4e7eee1f4b800cd315bac15c111163b6671206
+==> Downloading https://k8s.io/apimachinery
+==> Downloading from https://kubernetes.io/apimachinery
+
+curl: (22) The requested URL returned error: 404 
+Error: Failed to download resource ""kubecrt--k8s.io-apimachinery""
+Download failed: https://k8s.io/apimachinery
+```
+
+Looking at this repository, it seems there's an Nginx instance behind `k8s.io` that does some rewriting/redirecting logic based on provided request details.
+
+Since `go get k8s.io/apimachinery` works as expected, I'm wondering if what I want to do is even possible, or not, but I just wanted to point this out, and see if there's a way to make this work.
+
+Now, after hitting this error, I went and refactored my package, so now it only depends on the official Golang package manager `dep`, and I use that to install the required dependencies. In the end, this is the way to go, but I was still interested in the above issues, and wanted to report them here, in case this is something you want to tackle.",closed,False,2017-09-23 08:20:21,2017-09-25 06:24:56
+k8s.io,nicksardo,https://github.com/kubernetes/k8s.io/pull/83,https://api.github.com/repos/kubernetes/k8s.io/issues/83,Add metadata for ingress-gce and ingress-nginx,,closed,True,2017-10-10 00:46:24,2017-10-10 03:57:51
+k8s.io,perotinus,https://github.com/kubernetes/k8s.io/pull/84,https://api.github.com/repos/kubernetes/k8s.io/issues/84,Add metadata for cluster-registry,,closed,True,2017-10-10 22:22:18,2017-10-10 23:38:31
+k8s.io,andyxning,https://github.com/kubernetes/k8s.io/pull/85,https://api.github.com/repos/kubernetes/k8s.io/issues/85,add go get setting for node-problem-detector,"Cross fix [node-problem-detector#142](https://github.com/kubernetes/node-problem-detector/issues/142)
+
+This PR will add go get meta setting for node-problem-detector.
+
+/cc @ixdy @thockin ",closed,True,2017-10-16 02:55:40,2017-10-17 00:15:12
+k8s.io,munnerz,https://github.com/kubernetes/k8s.io/pull/86,https://api.github.com/repos/kubernetes/k8s.io/issues/86,Add sample-controller redirect,"As https://github.com/kubernetes/kubernetes/pull/52753 has been merged, we need to set up go-get redirects for `k8s.io/sample-controller`.
+
+/cc @sttts ",closed,True,2017-10-19 14:29:17,2017-10-23 22:57:29
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/87,https://api.github.com/repos/kubernetes/k8s.io/issues/87,add go.k8s.io/bot-commands,I bikeshedded in my head over bot-commands vs commands and can be swayed.  I opted for commands since it's shorter,closed,True,2017-10-23 19:19:21,2017-11-03 21:34:38
+k8s.io,cjwagner,https://github.com/kubernetes/k8s.io/pull/88,https://api.github.com/repos/kubernetes/k8s.io/issues/88,Fix go.k8s.io/needs-ok-to-test regexp.,"https://go.k8s.io/needs-ok-to-testAAAAAAAAAAHHHHHHHHHHHHHHHH
+/cc @ixdy ",closed,True,2017-10-24 05:09:57,2017-10-24 20:41:27
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/89,https://api.github.com/repos/kubernetes/k8s.io/issues/89,Rename OWNERS assignees: to approvers:,"They are effectively the same, assignees is deprecated
+
+ref: kubernetes/test-infra#3851",closed,True,2017-10-31 23:33:30,2017-11-03 21:34:32
+k8s.io,apelisse,https://github.com/kubernetes/k8s.io/pull/90,https://api.github.com/repos/kubernetes/k8s.io/issues/90,Create go-import meta for k8s.io/kubectl,"Add redirection for `k8s.io/kubectl`. We will start moving some code from `k8s.io/kubernetes` into `k8s.io/kubectl`, and vendor that.",closed,True,2017-11-13 21:39:41,2017-11-14 00:52:24
+k8s.io,mml,https://github.com/kubernetes/k8s.io/issues/91,https://api.github.com/repos/kubernetes/k8s.io/issues/91,blog.k8s.io:443 providing the wrong cert,"![jfqetblz8wp](https://user-images.githubusercontent.com/3115/32810405-9c86ef2c-c94f-11e7-9316-f919df3728a0.png)
+
+cc @ixdy",closed,False,2017-11-14 23:22:41,2017-11-22 00:21:28
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/92,https://api.github.com/repos/kubernetes/k8s.io/issues/92,Redirect blog.k8s.io => blog.kubernetes.io,"TLS cert has already been updated with `blog.k8s.io`.
+
+I've already deployed this change to the canary namespace.
+
+Fixes #91.
+
+cc @mml ",closed,True,2017-11-21 19:44:02,2017-11-22 00:42:37
+k8s.io,roberthbailey,https://github.com/kubernetes/k8s.io/pull/93,https://api.github.com/repos/kubernetes/k8s.io/issues/93,Add a redirect (short link) for the cluster-api project.,"I also added documentation for another redirect that was in the nginx config but not in the README. 
+
+/cc @pipejakob ",closed,True,2017-11-28 00:17:52,2017-11-28 19:35:48
+k8s.io,sttts,https://github.com/kubernetes/k8s.io/pull/94,https://api.github.com/repos/kubernetes/k8s.io/issues/94,Add k8s.io/publishing-bot redirect,"Make go get work for github.com/kubernetes/publishing-bot.
+
+Fixes https://github.com/kubernetes/test-infra/issues/5846.",closed,True,2017-12-07 20:03:05,2017-12-07 21:50:35
+k8s.io,BenTheElder,https://github.com/kubernetes/k8s.io/issues/95,https://api.github.com/repos/kubernetes/k8s.io/issues/95,redirect prow.k8s.io to https,"https://prow.k8s.io already works, but we don't redirect to it unlike the submit-queue etc.
+/cc @cjwagner @ixdy 
+
+also possibly we might want to follow up with https://github.com/kubernetes/k8s.io/issues/38",closed,False,2017-12-13 00:26:59,2017-12-13 00:54:05
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/96,https://api.github.com/repos/kubernetes/k8s.io/issues/96,Service for searching across kubernetes git repositories,,closed,True,2017-12-15 15:31:38,2018-05-29 13:34:11
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/97,https://api.github.com/repos/kubernetes/k8s.io/issues/97,Update code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:32:47,2018-01-03 00:48:55
+k8s.io,perotinus,https://github.com/kubernetes/k8s.io/pull/98,https://api.github.com/repos/kubernetes/k8s.io/issues/98,Add the crreleases bucket to the gcsweb.k8s.io deployment,,closed,True,2017-12-21 20:58:03,2017-12-21 22:22:39
+k8s.io,cblecker,https://github.com/kubernetes/k8s.io/pull/99,https://api.github.com/repos/kubernetes/k8s.io/issues/99,Update /help-wanted to point to the right label,,closed,True,2017-12-22 01:31:42,2017-12-22 21:49:58
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/100,https://api.github.com/repos/kubernetes/k8s.io/issues/100,Convert registry to k8s.gcr.io,"This PR was auto-generated.  Please apply human expertise to review for correctness.
+
+Followup to https://github.com/kubernetes/kubernetes/pull/54174
+
+xref https://github.com/kubernetes/release/issues/281",closed,True,2017-12-22 18:01:51,2017-12-22 19:31:14
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/101,https://api.github.com/repos/kubernetes/k8s.io/issues/101,Make go-get content be automatic,"Downside is it always assumes the go-get name and the repo name are the same, and that it comes from the kubernetes org.
+
+I am not sure we should make that tradeoff.  Want to hear thoughts.
+
+Fixes #72 ",closed,True,2018-01-02 22:25:47,2018-05-10 21:00:25
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/102,https://api.github.com/repos/kubernetes/k8s.io/issues/102,Update gcsweb deployment to v1.0.6,"The main change this gives us is https://github.com/kubernetes/test-infra/pull/5942, which serves the CSS directly, rather than relying on yahooapis.com.
+
+/assign @thockin 
+cc @BenTheElder ",closed,True,2018-01-23 19:46:52,2018-01-24 00:29:48
+k8s.io,cblecker,https://github.com/kubernetes/k8s.io/pull/103,https://api.github.com/repos/kubernetes/k8s.io/issues/103,Update bot-commands link to point to prow's help page,"Prow's command page is pretty complete, and we should start using it.
+/cc fejta spiffxp cjwagner
+/assign ixdy
+/hold",closed,True,2018-02-05 06:02:30,2018-02-06 00:06:41
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/104,https://api.github.com/repos/kubernetes/k8s.io/issues/104,Fix HTTPS in k8s.io unit test,"This is a rebase of @jbeda's #19. We're no longer using an ancient version of python inside Google, so this fix is actually relevant again. :)",closed,True,2018-02-06 00:12:44,2018-02-06 05:03:56
+k8s.io,irfanurrehman,https://github.com/kubernetes/k8s.io/pull/105,https://api.github.com/repos/kubernetes/k8s.io/issues/105,Add k8s.io/federation to k8s.io golang metadata,Fixes https://github.com/kubernetes/federation/issues/230.,closed,True,2018-02-13 12:17:11,2018-02-13 19:05:33
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/106,https://api.github.com/repos/kubernetes/k8s.io/issues/106,Add support for go get k8s.io/community,,closed,True,2018-02-14 18:58:14,2018-04-24 23:26:21
+k8s.io,serathius,https://github.com/kubernetes/k8s.io/pull/107,https://api.github.com/repos/kubernetes/k8s.io/issues/107,Redirect examples to new repo,"Examples directory will be removed from main repo with https://github.com/kubernetes/kubernetes/issues/60887
+To preserve links we will redirect all new releases to new repo https://github.com/kubernetes/examples
+
+Because of different directory structure subdirectories will be dropped, and all link will point to main directory.We could try to write rules per each example, but I don't think it would be maintainable.
+
+cc @ahmetb",closed,True,2018-03-15 23:48:38,2018-04-29 15:31:32
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/108,https://api.github.com/repos/kubernetes/k8s.io/issues/108,Add k8s.io/cloud-provider-* to k8s.io golang metadata,,closed,True,2018-03-22 00:27:59,2018-03-28 00:07:21
+k8s.io,totherme,https://github.com/kubernetes/k8s.io/pull/109,https://api.github.com/repos/kubernetes/k8s.io/issues/109,Add k8s.io URL for testing_frameworks repo,"The testing_frameworks repo currently has no canonical k8s.io URL. To
+reduce the pain of potential migrations if the repo moves in the future,
+we would like a k8s.io URL to be the canonical import path.
+
+This might eventually end up being covered in the general case by #101 , but there has been no movement on that PR for over a month and in that time the testing_frameworks repo has already moved once.
+
+CCing @timothysc just in case there's anything else we should do before merging this.",closed,True,2018-03-22 14:44:42,2018-04-06 10:45:50
+k8s.io,hoegaarden,https://github.com/kubernetes/k8s.io/issues/110,https://api.github.com/repos/kubernetes/k8s.io/issues/110,Tests fail with SSL verification error,"The tests fail with the following error
+
+> ssl.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:777)
+
+(both `make test` and `make docker-test`)
+
+As far as we understand, this is because nginx uses a self signed certificate and the https client doesn't have this self signed certificate in its certificate store.",closed,False,2018-03-29 13:56:41,2018-08-26 16:28:36
+k8s.io,totherme,https://github.com/kubernetes/k8s.io/pull/111,https://api.github.com/repos/kubernetes/k8s.io/issues/111,Disable SSL certificate verification,"This tests' purpose is not to test the certificates in use. Therefore we
+can disable the certificate verification so that tests are easier
+(possible? See issue #110) to run locally with self-signed certificates.
+
+The comment
+https://github.com/kubernetes/k8s.io/pull/19#issuecomment-265556199
+suggests that when these tests were first written, certifiacte
+verification was disabled by default. So we're confident that the intent
+of the tests doesn't rely on working certificate verification.
+
+Closes: #110 
+
+CC: @hoegaarden ",closed,True,2018-03-29 14:11:29,2018-04-03 18:44:19
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/112,https://api.github.com/repos/kubernetes/k8s.io/issues/112,Add go.k8s.io/github-labels redirect,"It's an easier URI to remember than https://github.com/kubernetes/test-infra/blob/master/label_sync/labels.md and I would like to point people to it
+
+ref: kubernetes/test-infra#7349
+ref: kubernetes/kubernetes#34255",closed,True,2018-04-02 20:11:36,2018-04-02 22:10:49
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/113,https://api.github.com/repos/kubernetes/k8s.io/issues/113,Add ixdy to approvers for k8s.io,He's merged / deployed the last few PR's I've contributed to this repo,closed,True,2018-04-02 21:00:36,2018-04-05 18:24:02
+k8s.io,krousey,https://github.com/kubernetes/k8s.io/pull/114,https://api.github.com/repos/kubernetes/k8s.io/issues/114,Redirect sigs.k8s.io to github.com/kubernetes-sigs,"This provides vanity urls for the kubernetes-sigs repos that function as a ""go get"" redirect, a repo redirect, and a file redirect.
+
+Based this off of #101. I've tested the cases I implemented with `curl --insecure --header ""Host: sigs.k8s.io"" <urls>`. I wrote python tests, but I keep getting SSL errors on a lot of them. Open to advice on how best to run the tests.
+
+cc @rmmh @thockin @ixdy ",closed,True,2018-04-03 01:04:24,2018-04-04 23:13:23
+k8s.io,krousey,https://github.com/kubernetes/k8s.io/pull/115,https://api.github.com/repos/kubernetes/k8s.io/issues/115,Disable SSL verification is TARGET_IP is specified,"This allows us to still run SSL verification against the production
+endpoint, but disables it for all dev and canary tests.
+
+This is a conditional version of #111 
+
+cc @thockin ",closed,True,2018-04-03 18:07:28,2018-04-03 18:42:40
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/116,https://api.github.com/repos/kubernetes/k8s.io/issues/116,Promote new search engine for kubernetes main github repos,Etsy/Hound based Search engine maintained by @dims,closed,True,2018-04-05 21:46:02,2018-04-12 22:11:27
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/117,https://api.github.com/repos/kubernetes/k8s.io/issues/117,service for searching across kubernetes git repositories,Follow up from https://github.com/kubernetes/k8s.io/pull/96 please see response to all the comments made there,closed,True,2018-04-30 21:46:16,2018-05-01 22:48:43
+k8s.io,castrojo,https://github.com/kubernetes/k8s.io/pull/118,https://api.github.com/repos/kubernetes/k8s.io/issues/118,Add config for discuss.k8s.io prototype,See https://github.com/kubernetes/community/blob/master/keps/sig-contributor-experience/0007-20180403-community-forum.md for more information. ,closed,True,2018-05-08 15:32:11,2018-05-15 23:49:37
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/119,https://api.github.com/repos/kubernetes/k8s.io/issues/119,Make go-get content be automatic,"Replaces #101 
+
+This obsoletes the explicit list of go-get redirects which were all identity-mapped anyway.  As a result `go get k8s.io/anything` will always pull `github.com/kubernetes/anything`.
+
+Since the sigs redirect has been working, time to do this one, I think. I canaried it and it looks good. 
+
+Thanks to http://nginx.viraptor.info/ for helping find the location-match issue with healthz",closed,True,2018-05-10 21:02:11,2018-05-17 17:26:47
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/120,https://api.github.com/repos/kubernetes/k8s.io/issues/120,Remove redirection for code search,"Instead of redirect to GAE, we will use a DNS entry
+
+/assign @thockin ",closed,True,2018-05-15 16:25:50,2018-05-15 16:44:34
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/121,https://api.github.com/repos/kubernetes/k8s.io/issues/121,Switch default search urls to https://,"Added a nginx + lets-encrypt front to the houndd instance.
+
+All of the following should work. the http:// will redirect to
+https:// as well.
+
+https://cs.k8s.io | https://cs.kubernetes.io
+http://cs.k8s.io | http://cs.kubernetes.io
+
+/assign @thockin ",closed,True,2018-05-15 21:54:03,2018-05-16 00:28:58
+k8s.io,jessfraz,https://github.com/kubernetes/k8s.io/issues/122,https://api.github.com/repos/kubernetes/k8s.io/issues/122,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:38:51,2018-10-08 20:54:23
+k8s.io,krousey,https://github.com/kubernetes/k8s.io/pull/123,https://api.github.com/repos/kubernetes/k8s.io/issues/123,Update the go.k8s.io/cluster-api redirect,"We moved the repo a while ago. This should update as well.
+
+/cc @roberthbailey ",closed,True,2018-05-25 03:27:36,2018-05-25 15:36:41
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/124,https://api.github.com/repos/kubernetes/k8s.io/issues/124,Remove reviewable.k8s.io,"Reviewable was disabled for all Kubernetes repos as noted in the email to kubernetes-dev:
+https://groups.google.com/d/msg/kubernetes-dev/0RhWYvxW2XI/U8nfjKfYBQAJ
+
+The link https://reviewable.kubernetes.io/ also gives a server error.
+
+/cc @thockin ",closed,True,2018-05-26 12:24:17,2018-06-05 05:10:18
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/issues/125,https://api.github.com/repos/kubernetes/k8s.io/issues/125,community and contrib submit queue links are broken,"https://community.submit-queue.k8s.io/ and https://contrib.submit-queue.k8s.io/ give a 502 server error.
+
+/cc @cblecker ",closed,False,2018-05-26 12:31:47,2018-06-04 21:57:09
+k8s.io,AdamDang,https://github.com/kubernetes/k8s.io/pull/126,https://api.github.com/repos/kubernetes/k8s.io/issues/126,Typo fix: pubic->public,Line 15: pubic->public,closed,True,2018-05-31 15:02:02,2018-05-31 15:05:13
+k8s.io,cblecker,https://github.com/kubernetes/k8s.io/pull/127,https://api.github.com/repos/kubernetes/k8s.io/issues/127,Remove entries for SQs that don't exist anymore,fixes #125 .,closed,True,2018-06-04 21:11:37,2018-06-04 22:09:13
+k8s.io,spangenberg,https://github.com/kubernetes/k8s.io/pull/128,https://api.github.com/repos/kubernetes/k8s.io/issues/128,Remove specific redirection for cluster-api,"Cluster API exists under kubernetes-sigs and follows the default
+redirection rules. This redirection rule is not needed anymore.
+
+Fixes https://github.com/kubernetes-sigs/cluster-api/issues/118",closed,True,2018-07-19 12:37:38,2018-08-28 12:27:03
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/129,https://api.github.com/repos/kubernetes/k8s.io/issues/129,Add go.k8s.io/owners redirect,"So I can answer ""what's OWNERS?"" with a shorter uri instead
+of having to scrounge for a deep link all the time.",closed,True,2018-08-01 01:30:20,2018-08-03 18:01:15
+k8s.io,fruitboy1226,https://github.com/kubernetes/k8s.io/issues/130,https://api.github.com/repos/kubernetes/k8s.io/issues/130,get k8s.io/Kubernetes failed,"Hi,
+i met one issue when i get the kubernets from k8s.io.
+media@media-desktop:~/k8s$ go get k8s.io/kubernetes
+package k8s.io/kubernetes: unrecognized import path ""k8s.io/kubernetes"" (https fetch: Get https://k8s.io/kubernetes?go-get=1: proxyconnect tcp: EOF)
+
+is there any env setup errors? thanks very much.",closed,False,2018-08-21 07:19:39,2018-11-19 16:31:22
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/131,https://api.github.com/repos/kubernetes/k8s.io/issues/131,Redirect submit-queue.k8s.io to tide status page,"The mungegithub submit queue has been turned down in favor of tide (part of prow).
+
+We should redirect the old submit-queue status page to tide (https://github.com/kubernetes/test-infra/issues/3866#issuecomment-420037144).
+
+We still need to update DNS to point to the redirector.
+
+/assign @thockin @spiffxp ",closed,True,2018-09-10 20:23:59,2018-09-10 23:35:47
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/132,https://api.github.com/repos/kubernetes/k8s.io/issues/132,Delete redirects for kubernet.es,"We're no longer serving DNS for kubernet.es, so remove it from the redirector.
+
+/assign @thockin ",closed,True,2018-09-10 23:38:08,2018-09-10 23:38:45
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/issues/133,https://api.github.com/repos/kubernetes/k8s.io/issues/133,Use tide for PR merging,"This is a [core repository](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md#core-repositories).  As such, it [needs to use the same merge automation as the rest of the project](https://github.com/kubernetes/community/blob/master/github-management/kubernetes-repositories.md#rules-1)
+
+I have a PR open that will address this at an org-wide level: https://github.com/kubernetes/test-infra/pull/9342.  It will:
+- enable the approve plugin, to allow use of the `/approve` plugin
+- enable the blunderbuss plugin, to assign reviews based on OWNERS files
+- add all repos in the kubernetes org to tide's query
+
+Can one of the repo maintainers here drop an LGTM (or objections) on the linked PR?  Alternatively, if I hear no objections by Monday 10am PT of next week, I will merge the PR.",closed,False,2018-09-11 22:25:05,2018-09-17 17:11:16
+k8s.io,vkryachko,https://github.com/kubernetes/k8s.io/pull/134,https://api.github.com/repos/kubernetes/k8s.io/issues/134,Add android-ci bucket for gubernator.,For use by github.com/firebase/firebase-android-sdk,closed,True,2018-09-13 21:24:54,2018-09-17 18:38:32
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/135,https://api.github.com/repos/kubernetes/k8s.io/issues/135,Add go.k8s.io/good-first-issue redirect,"This would be helpful to point for new contributors.
+
+/cc @dims @justaugustus @BenTheElder @cblecker 
+/assign @ixdy ",closed,True,2018-09-21 18:01:31,2018-09-27 06:19:18
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/136,https://api.github.com/repos/kubernetes/k8s.io/issues/136,Fix broken go.k8s.io/bot-commands link,fixes https://github.com/kubernetes/test-infra/issues/9528,closed,True,2018-09-22 00:09:46,2018-09-22 00:42:18
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/137,https://api.github.com/repos/kubernetes/k8s.io/issues/137,Document blog.k8s.io and sigs.k8s.io,"This PR has the following changes:
+
+- ~~https://changelog.k8s.io currently leads to a 404 github page. This PR redirects it to https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md.~~
+
+- Add https://blog.k8s.io and https://sigs.k8s.io in the README. Should we also have blog.kubernetes.io and sigs.kubernetes.io?
+
+/cc @BenTheElder @dims @cblecker 
+/assign @ixdy ",closed,True,2018-09-23 09:00:58,2018-09-27 06:18:09
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/138,https://api.github.com/repos/kubernetes/k8s.io/issues/138,Fix tests for go.k8s.io redirects,"Ref: https://github.com/kubernetes/k8s.io/pull/135#issuecomment-424085461
+
+/cc @ixdy @BenTheElder @cblecker 
+/assign @ixdy ",closed,True,2018-09-25 08:17:26,2018-10-06 17:50:53
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/139,https://api.github.com/repos/kubernetes/k8s.io/issues/139,Add DNS configs,"This is carried over from the work-in-progress repo in prep to go live.
+
+@hh @kubernetes/k8s-infra-team ",closed,True,2018-09-28 18:07:52,2018-09-29 02:41:15
+k8s.io,justaugustus,https://github.com/kubernetes/k8s.io/issues/140,https://api.github.com/repos/kubernetes/k8s.io/issues/140,Sweep for dead links,"In reviewing https://github.com/kubernetes/community/pull/2408, I noticed that http://cherrypick.k8s.io/#/queue times out. We should sweep the nginx config for dead links and remove them.
+
+/sig contributor-experience
+/help",closed,False,2018-09-29 23:45:30,2019-02-23 00:06:54
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/141,https://api.github.com/repos/kubernetes/k8s.io/issues/141,changelog.k8s.io: add empty request URI redirect,"Follow up of https://github.com/kubernetes/k8s.io/pull/137#discussion_r219706923
+
+/cc @ixdy @cblecker @BenTheElder 
+/assign @ixdy ",closed,True,2018-10-06 18:27:37,2018-10-17 21:43:16
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/142,https://api.github.com/repos/kubernetes/k8s.io/issues/142,Add Travis,"So that we can catch test failures early: https://github.com/kubernetes/k8s.io/pull/135#issuecomment-424085461
+
+Created https://github.com/kubernetes/test-infra/pull/9731 to make sure that required contexts are enforced.
+
+/hold
+an admin needs to enable travis for this repo
+
+/cc @ixdy @cblecker @spiffxp @dims @BenTheElder 
+/assign @ixdy ",closed,True,2018-10-06 19:22:21,2018-12-07 08:52:09
+k8s.io,nikhita,https://github.com/kubernetes/k8s.io/pull/143,https://api.github.com/repos/kubernetes/k8s.io/issues/143,Add SECURITY_CONTACTS,"Fixes https://github.com/kubernetes/k8s.io/issues/122
+
+/cc @ixdy @lavalamp @mikedanese @rmmh @thockin ",closed,True,2018-10-06 19:42:56,2018-10-08 20:54:34
+k8s.io,hh,https://github.com/kubernetes/k8s.io/pull/144,https://api.github.com/repos/kubernetes/k8s.io/issues/144,[WIP] Automation/Script Updates,,closed,True,2018-10-10 19:28:53,2019-01-23 16:50:40
+k8s.io,hh,https://github.com/kubernetes/k8s.io/pull/145,https://api.github.com/repos/kubernetes/k8s.io/issues/145,[WIP] Dns.org / ideation on some literate programming / automation,"This should differ from #144 only by the addition of one or more [org-mode](https://orgmode.org/) as I ideate with some form of literate CI / Automation.
+
+Human readable Artifacts (txt, markdown, etc) to be generated during the CI run.
+
+Ie [AXFR](https://en.wikipedia.org/wiki/DNS_zone_transfer) diffs between production and canary to be verified before the merge / push to production.",closed,True,2018-10-10 19:38:27,2019-01-23 16:50:07
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/146,https://api.github.com/repos/kubernetes/k8s.io/issues/146,"Remove old DNS records, add comments",,closed,True,2018-10-22 17:39:19,2018-10-22 21:06:30
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/147,https://api.github.com/repos/kubernetes/k8s.io/issues/147,DNS: add canary,"Add canary-push capability and a glimmer of a test.  Need help with the test - anyone have time?
+
+@kubernetes/k8s-infra-team ",closed,True,2018-10-22 18:57:57,2018-11-09 03:43:05
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/148,https://api.github.com/repos/kubernetes/k8s.io/issues/148,Use custom subdomains for gubernator and testgrid,"These are DNS changes only, already deployed.
+
+https://gubernator.k8s.io and https://testgrid.k8s.io seem to work, though the gubernator PR dashboard isn't working due to some configuration issues with GitHub OAuth which @rmmh is looking into.
+
+Once that's fixed, I'll update the redirectors on k8s.io as well.
+
+/assign @thockin ",closed,True,2018-10-22 21:25:19,2018-10-22 22:15:07
+k8s.io,cblecker,https://github.com/kubernetes/k8s.io/pull/149,https://api.github.com/repos/kubernetes/k8s.io/issues/149,Bump Python image + requests version,ref [CVE-2018-18074](https://nvd.nist.gov/vuln/detail/CVE-2018-18074),closed,True,2018-10-30 01:49:24,2018-10-30 22:56:14
+k8s.io,brendandburns,https://github.com/kubernetes/k8s.io/pull/150,https://api.github.com/repos/kubernetes/k8s.io/issues/150,Add process for requesting a DNS update to the README.,@spiffxp @dims @thockin ,closed,True,2018-11-02 05:05:39,2019-01-23 01:04:59
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/151,https://api.github.com/repos/kubernetes/k8s.io/issues/151,[Umbrella issue] Automate DNS for Kubernetes assets,"Please see:
+- https://github.com/kubernetes/k8s.io/pull/139
+- https://github.com/kubernetes/k8s.io/pull/147
+
+Notes from meeting:
+
+- [Aaron] Where are we on the roadmap
+  - [Tim] Need 3 things: 1 - Tests with canaries. 2 - Figure out billing transparency. 3 - Alerts.
+- [Aaron] Where does it run?
+  -[Tim] - Google Cloud DNS
+- [Aaron] Where is OctoDNS running?
+  -[Tim] Manually / locally using a Docker build, until we have a cluster up and running on a regular basis.
+  -[Tim] To make changes, PR those changes, and those with access to the GCP project approve and run OctoDNS
+- [Brendan] Might need to track changes if people have to run it post PR merge.
+- [Aaron] - We need some docs for process
+- [Justin] - Can we automate this?
+  - [Aaron] Maybe copy Prow process for k/org
+",open,False,2018-11-08 13:59:30,2019-02-06 17:09:14
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/152,https://api.github.com/repos/kubernetes/k8s.io/issues/152,"[Umbrella Issue] Build GKE Cluster for running bots, utilities","- We need one ""alpha"" cluster that is time-boxed (30 days?)
+- Same cluster will be used for both jobs
+- New Google Group for admins :  k8s-infra-cluster-admins
+- Group will have ""GKE Admin"" access (described in [1])
+- Google Group seeded with 
+  - dims
+  - justinsb
+- Job owners will be temporarily given ""GKE Developer"" access
+- Once the Job is running, Job owners will be switched over to ""GKE Viewer"" access
+- Jobs must have images, yamls, scripts in public repositories.
+- Job owners must document how to run the jobs
+- Job logs must be made public (somehow)
+- We will store info about each job in kubernetes/k8s.io repository for easy discovery
+- Eventually, we should have enough scripts to start a new cluster with all the jobs that we need
+
+[1] https://cloud.google.com/iam/docs/understanding-roles#kubernetes_engine_roles",open,False,2018-11-08 14:04:36,2019-02-10 22:14:25
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/153,https://api.github.com/repos/kubernetes/k8s.io/issues/153,[Umbrella Issue] Setup a GCS Bucket for projects to use,"Please see
+- https://docs.google.com/document/d/1cQUAU3AeRahL8Y4R6BDiMiMV44ESPDFNyZQIlgSA5eQ/edit#heading=h.oa3xwm42jn26
+- https://github.com/kubernetes/community/pull/2695",open,False,2018-11-08 14:10:15,2019-01-18 22:14:27
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/154,https://api.github.com/repos/kubernetes/k8s.io/issues/154,Remove 'contributor' DNS record,,closed,True,2018-11-28 16:19:29,2018-11-28 19:21:08
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/155,https://api.github.com/repos/kubernetes/k8s.io/issues/155,Add DNS OWNERS,"This is the same list as the dns-admins google group, but I don't know how to sync those (new infra project needed :)",closed,True,2018-11-28 16:24:50,2018-11-28 19:05:55
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/156,https://api.github.com/repos/kubernetes/k8s.io/issues/156,[Umbrella Issue] Setup Billing/Reporting for all k8s-infra assets,"We are starting with a GKE cluster for a few jobs. Once that is setup, we will need to make sure we account for the $'s spent with appropriate billing and make sure we have enough reports going back to Google / CNCF.
+
+/assign @idvoretskyi ",open,False,2018-12-05 13:04:40,2019-02-20 19:28:14
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/157,https://api.github.com/repos/kubernetes/k8s.io/issues/157,[Umbrella Issue] Create a Image Promotion process,"Split from https://github.com/kubernetes/k8s.io/issues/153 (see that for some context)
+
+cc @javier-b-perez @mkumatag @listx",open,False,2018-12-05 13:09:57,2019-04-02 19:32:40
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/158,https://api.github.com/repos/kubernetes/k8s.io/issues/158,[Umbrella Issue] Setup a GCR Repository for projects to use,"Split from #153 (see that for some context)
+
+cc @javier-b-perez @mkumatag @listx @thockin ",open,False,2018-12-05 13:13:35,2019-03-08 17:53:12
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/159,https://api.github.com/repos/kubernetes/k8s.io/issues/159,Registry Mirroring and Attestation for Kubernetes project container images,"```
+2 issues here
+storage/serving for arbitrary artifacts (including cloud-local mirrors)
+Container registry for official images (including mirrors?)
+AI: @bburns to contemplate registry mirroring, attestation, etc
+AI: @justinsb to collab with @bburns
+```
+
+cc @justinsb @brendandburns ",open,False,2018-12-05 13:16:02,2019-01-09 16:46:38
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/issues/160,https://api.github.com/repos/kubernetes/k8s.io/issues/160,https broken on docs.k8s.io and docs.kubernetes.io redirectors,"We're currently using DNS challenges with Let's Encrypt, which basically means we create a TXT record at `_acme-challenge.SUBDOMAIN.DOMAIN.`, e.g. `_acme-challenge.docs.kubernetes.io.` for `docs.kubernetes.io`.
+
+Unfortunately, we recently added wildcard CNAME records for `*.docs.kubernetes.io` and `*.docs.k8s.io`, which means that these TXT records aren't resolving and we can't verify these domains.
+
+The certificate is expiring, and I don't have a great solution at the moment. We might need to use another challenge method, or we should probably investigate switching to a wildcart cert, now that Let's Encrypt supports those.",closed,False,2018-12-09 10:48:17,2019-01-11 22:34:27
+k8s.io,hh,https://github.com/kubernetes/k8s.io/pull/161,https://api.github.com/repos/kubernetes/k8s.io/issues/161,Add DNS post-push test,"Allows for querying of dns servers / verification that zone configuration is published.
+
+xref #151 ",closed,True,2019-01-07 11:28:22,2019-01-11 21:56:40
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/162,https://api.github.com/repos/kubernetes/k8s.io/issues/162,Create dummy A records for _acme-challenge.docs,"This prevents resolvers from following the wildcard CNAME for *.docs
+when trying to resolve the _acme-challenge.docs TXT record.
+
+This should partially address https://github.com/kubernetes/k8s.io/issues/160; I still need to update the DNS records and then re-request a cert.
+
+/assign @thockin ",closed,True,2019-01-10 23:14:39,2019-01-11 20:32:02
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/163,https://api.github.com/repos/kubernetes/k8s.io/issues/163,"The challenge subdomain is _acme-challenge, not _acme_challenge.","Followup to #162. :man_facepalming: 
+
+/assign @thockin ",closed,True,2019-01-11 21:35:05,2019-01-11 21:53:22
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/164,https://api.github.com/repos/kubernetes/k8s.io/issues/164,Update README,"Update the README in light of  test being done.
+
+I think we can activate this, but not on a Friday afternoon. :)",closed,True,2019-01-11 21:58:28,2019-01-14 18:45:53
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/165,https://api.github.com/repos/kubernetes/k8s.io/issues/165,Fix bad var name in check_zone.py,"This changed late in the dev cycle, but should have been caught
+pre-merge.
+
+Also add slightly better debug string and TODO to fix retry for new
+records (propagation delay).",closed,True,2019-01-14 18:55:34,2019-01-23 21:03:37
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/issues/166,https://api.github.com/repos/kubernetes/k8s.io/issues/166,renaming k8s-infra-team to wg-k8s-infra,"Now that our charter has landed (ref: https://github.com/kubernetes/community/pull/2830), and we're still in early days, let's rename assets from k8s-infra-team to wg-k8s-infra:
+
+**slack channel**
+- #k8s-infra-team - > wg-k8s-infra
+
+This is a transparent rename, need to ask #slack-admins
+
+**public google group**
+- https://groups.google.com/forum/#!newtopic/k8s-infra-team -> wg-k8s-infra
+
+This is a hard break, suggest e-mailing list to let them know of the move, and then doing the move.
+
+**k/community docs**
+
+update references in here once the slack channel and public google group is renamed
+
+**admin groups**
+- k8s-infra-cluster-admins@googlegroups.com -> wg-k8s-infra-cluster-admins@googlegroups.com
+- k8s-infra-dns-admins@googlegroups.com -> wg-k8s-infra-cluster-admins@googlegroups.com
+
+>@thockin we only have a few references in the extant GCP project.  If you create new google groups for k8s-infra-cluster-admins@googlegroups.com and k8s-infra-dns-admins@googlegroups.com I can replicate the config then remove the old groups.  We have some docs to update too in DNS
+
+Honestly I'm torn on this, part of me says do it so everything is the same. Part of me says k8s-infra is good enough since there are questions of whether this stays as a wg or may one day become a sig (or a committee, or who knows)
+
+/assign @spiffxp
+I'm willing to take on all but admin groups
+
+/assign @dims @thockin 
+WDYT about the admin groups?
+
+/wg k8s-infra
+/kind cleanup",open,False,2019-01-16 00:41:53,2019-04-04 19:32:05
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/167,https://api.github.com/repos/kubernetes/k8s.io/issues/167,Make go.k8s.io/oncall redirect to a bucket with no TTL,x-ref https://github.com/kubernetes/test-infra/pull/10817,closed,True,2019-01-17 23:25:43,2019-01-17 23:32:11
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/168,https://api.github.com/repos/kubernetes/k8s.io/issues/168,Fix syntax in github issue templates,"Followup to https://github.com/kubernetes/k8s.io/pull/150
+
+Trying to get issue templates to work",closed,True,2019-01-23 01:13:36,2019-01-23 01:59:29
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/169,https://api.github.com/repos/kubernetes/k8s.io/issues/169,Update OWNERS and SECURITY_CONTACTS,"This is by no means a power grab nor a voluntolding.  I'm open to all
+input, these are just initial suggestions in PR form.
+
+Reasons for root:
+- drop rmmh, not on this project
+- drop lavalamp, reduce surface area
+- push thockin, ixdy to subdirs
+- add wg-k8s-infra chairs
+- add sig-contribex tech leads (its their subproject)
+- keep mikedanese as backup non-crazy-overloaded google contact
+
+Reasons for subdirs:
+- ixdy and thockin are the only ones with experience
+  deploying these services, and also the only ones
+  who can deploy because google
+- goal is to de-google these dirs, and grow the pool",closed,True,2019-01-23 01:56:23,2019-01-23 17:58:31
+k8s.io,brendandburns,https://github.com/kubernetes/k8s.io/issues/170,https://api.github.com/repos/kubernetes/k8s.io/issues/170,[Umbrella Issue] Project artifact management task list,"This is an umbrella issue covering the tasks needed to manage, distribute and promote container images. Once this issue is complete people will have a single URL that they can use to pull each image no matter where they are in the world. Projects will have a known way to push and promote their images.
+
+Tasks:
+- [ ] Design Document describing how all this will work.
+- [ ] GCR Repository for official published images
+- [ ] GCR Repository for projects to use (#158)
+- [ ] GCS Bucket for projects to use (#153)
+- [ ] Process for image promotion (#157)
+- [ ] ECR Repository mirror for Amazon
+- [ ] ACR Repository mirror for Azure
+- [ ] HTTP Redirector for image and artifact renaming.
+",open,False,2019-01-23 16:26:00,2019-01-23 16:26:00
+k8s.io,brendandburns,https://github.com/kubernetes/k8s.io/pull/171,https://api.github.com/repos/kubernetes/k8s.io/issues/171,Add an initial artifact serving design doc.,@justinsb ,closed,True,2019-01-23 16:26:24,2019-01-24 05:32:52
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/172,https://api.github.com/repos/kubernetes/k8s.io/issues/172,Update DNS TODO list,,closed,True,2019-01-23 16:46:24,2019-01-23 23:22:54
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/173,https://api.github.com/repos/kubernetes/k8s.io/issues/173,Update README,This is mostly to verify https://github.com/kubernetes/test-infra/pull/10835,closed,True,2019-01-24 22:42:17,2019-01-26 05:17:43
+k8s.io,justinsb,https://github.com/kubernetes/k8s.io/pull/174,https://api.github.com/repos/kubernetes/k8s.io/issues/174,MVP for artifactserver / redirector service,Trivial artifactserver / 302 service.  I figure this can be a useful test for deploying onto our test cluster.,closed,True,2019-01-30 22:38:45,2019-02-26 12:28:21
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/175,https://api.github.com/repos/kubernetes/k8s.io/issues/175,We need a GSuite for sharing SIG/WG documents,"Context : https://github.com/kubernetes/community/issues/3159
+
+Some docs are in personal google accounts, we need to move them somewhere better. 
+
+Example of a problem from a slack discussion:
+```
+lavalamp [12:58 PM]
+yeah if you can make a gsuite available I'll be super happy, I'm constantly spammed by access requests from people who don't realize they just have to join a group
+```
+
+Also see https://groups.google.com/a/kubernetes.io/forum/?utm_medium=email&utm_source=footer#!msg/steering/my_roZIKuXo/I-pjrrvrDwAJ",open,False,2019-01-31 18:02:15,2019-02-10 22:01:56
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/issues/176,https://api.github.com/repos/kubernetes/k8s.io/issues/176,Automate updates for k8s.io redirector service,"Currently, changes to the k8s.io redirector service (i.e any changes to the configs under the k8s.io subdirectory) require @ixdy or @thockin to manually update the cluster, basically following something like the following process:
+
+```console
+cd k8s.io/
+kubectl -n k8s-io-canary apply -f configmap-nginx.yaml
+# pick up new configs by forcing nginx to restart
+kubectl -n k8s-io-canary scale deployment k8s-io --replicas=0
+kubectl -n k8s-io-canary scale deployment k8s-io --replicas=1
+TARGET_IP=[canary namespace service IP] make test
+
+# if tests pass, deploy to production
+kubectl -n k8s-io-prod apply -f configmap-nginx.yaml
+# pick up new configs by forcing nginx to restart
+kubectl -n k8s-io-prod scale deployment k8s-io --replicas=0
+# note we scale back to 2, not 1
+kubectl -n k8s-io-prod scale deployment k8s-io --replicas=2
+# verify everything on prod
+make test
+```
+
+There are lots of steps to automate here:
+- restarting nginx manually
+- testing on the canary namespace before updating the prod namespace
+  - ideally we test before merge even, which is currently a manual process
+- requiring a human to deploy changes (rather than automatically updating on merge)
+",open,False,2019-02-06 16:57:02,2019-03-22 06:40:00
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/177,https://api.github.com/repos/kubernetes/k8s.io/issues/177,Move slack inviter to CNCF infrastructure.,http://slack.k8s.io/ is running in a cluster which very few people have access to. We need to move this to the CNCF's GKE cluster.,open,False,2019-02-06 17:23:04,2019-02-20 17:45:02
+k8s.io,coderanger,https://github.com/kubernetes/k8s.io/pull/178,https://api.github.com/repos/kubernetes/k8s.io/issues/178,Add current offline page content for slack.k8s.io.,"And a placeholder for Slackin as we think more about that.
+
+/cc @castrojo @cblecker ",closed,True,2019-02-06 18:43:57,2019-02-06 18:51:59
+k8s.io,castrojo,https://github.com/kubernetes/k8s.io/pull/179,https://api.github.com/repos/kubernetes/k8s.io/issues/179,Update status page with more information,PR adding some things we discussed at the contrib-ex meeting. ,closed,True,2019-02-06 19:35:05,2019-02-06 19:47:19
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/180,https://api.github.com/repos/kubernetes/k8s.io/issues/180,Put GCSWeb behind Ingress,"After this rolls out through DNS, we can turn down the old Service LB.
+
+xref: #38 ",closed,True,2019-02-06 19:56:26,2019-02-06 23:17:19
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/181,https://api.github.com/repos/kubernetes/k8s.io/issues/181,Finish gcsweb service-> ingress,,closed,True,2019-02-06 23:09:44,2019-02-06 23:27:10
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/182,https://api.github.com/repos/kubernetes/k8s.io/issues/182,Use cert-manager with Let's Encrypt to enable TLS for gcsweb,"The first commit is basically following the [cert-manager setup guide](https://cert-manager.readthedocs.io/en/latest/getting-started/install.html#installing-with-regular-manifests) and installing `ClusterIssuers` for the staging and prod Let's Encrypt endpoints.
+
+The second commit then uses this setup to obtain a certificate for gcsweb and install it in the new Ingress.
+
+I haven't deployed any of this to the real cluster, but I've tested a version of it on my own deployment and cluster: http://gcsweb.ixdyland.net/gcs/kubernetes-jenkins/
+
+Fixes #38 
+(and paves the way to using this for spartakus and the k8s.io redirectors)
+
+/assign @thockin @hh 
+cc @munnerz ",closed,True,2019-02-07 08:11:00,2019-02-28 01:15:04
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/183,https://api.github.com/repos/kubernetes/k8s.io/issues/183,Run publisher-bot in CNCF infra,"https://github.com/kubernetes/publishing-bot is currently running in a OpenShift based cluster inside RedHat. We should move it to a CNCF sponsored GKE cluster.
+
+To try the bot out, we can use the kubernetes-nightly github org. To populate the repos in this org, we can use:
+```
+hack/fetch-all-latest-and-push.sh kubernetes-nightly
+```
+
+To run the bot you can use:
+```
+make build-image push-image deploy CONFIG=configs/kubernetes-nightly
+```
+
+Note that you will need to be added to get access to the github token (we use `git crypt`): 
+```
+https://github.com/kubernetes/publishing-bot/pull/147
+```
+You will also need to be added as admin in the [kubernetes-nightly github org](https://github.com/kubernetes-nightly) by @sttts. Once you are able to run the bot against `kubernetes-nightly` and the job is stable, we can promote to running the bot against `kubernetes` target-org",open,False,2019-02-09 21:30:18,2019-03-01 11:34:33
+k8s.io,BenTheElder,https://github.com/kubernetes/k8s.io/issues/184,https://api.github.com/repos/kubernetes/k8s.io/issues/184,DNS REQUEST: kind.sigs.k8s.io subproject docs,"### Type of DNS update: Create
+one of: Create, Delete, Update
+
+### Domain being modified: k8s.io
+e.g. `k8s.io`
+
+### Existing DNS Record:
+
+```yaml
+NONE
+```
+
+### New DNS Record:
+
+```yaml
+# https://github.com/kubernetes-sigs/kind docs (@bentheelder, @munnerz)
+kind.sigs:
+  type: CNAME
+  value: kindocs.netlify.com
+```
+
+### Reason for update:
+
+The SIG-Testing [kind](https://github.com/kubernetes-sigs/kind) subproject has been working on subproject documentation using tooling aligned with SIG-Docs, currently at https://kindocs.netlify.com/ under a Kubernetes-owned Netlify team. 
+
+Ideally we'd like to start using a provider independent URL, `kind.sigs.k8s.io` aligns with our current API namespace, in the future if this pattern works well other subprojects could potentially follow.
+
+The record above follows https://www.netlify.com/docs/custom-domains/#manual-no-www
+
+> If you are planning to set your site’s custom domain to a non-www subdomain, like blog.yourdomain.com, most of the above instructions won’t be as applicable to you. The things to make sure of are:
+>
+> 1. You should use a CNAME DNS record for that subdomain to point to your [your-site-name].netlify.com so you can use the CDN.
+> 2. You don’t need a www.subdomain.yourdomain.com DNS entry.
+> 3. You probably want to stick with your external DNS host. If you use Netlify DNS, you’ll be hosting yourdomain.com with us, not subdomain.yourdomain.com. Netlify DNS can only manage entire DNS zones for root domains.
+
+cc @munnerz @chenopis 
+",closed,False,2019-02-11 18:25:25,2019-02-12 21:45:09
+k8s.io,BenTheElder,https://github.com/kubernetes/k8s.io/pull/185,https://api.github.com/repos/kubernetes/k8s.io/issues/185,add kind.sigs.k8s.io,ref: #184 ,closed,True,2019-02-11 18:26:32,2019-02-12 23:49:08
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/186,https://api.github.com/repos/kubernetes/k8s.io/issues/186,Script adding a GCR staging repo,,closed,True,2019-02-11 22:44:29,2019-02-20 21:52:22
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/187,https://api.github.com/repos/kubernetes/k8s.io/issues/187,DNS test retry for propagation delay,"DNS test runs against all DNS servers, but sometimes there's a delay in
+propagation, as long as 60+ seconds.  Now the test will retry up to 2
+minutes.
+
+Also fix a bug in DNS zone config (trailing dot required).
+
+Also fix a bug in python to not throw exceptions.",closed,True,2019-02-12 21:32:36,2019-02-12 21:54:38
+k8s.io,BenTheElder,https://github.com/kubernetes/k8s.io/pull/188,https://api.github.com/repos/kubernetes/k8s.io/issues/188,switch netlify instance for kind.sigs.k8s.io,"ref: #185 #184
+
+This just clarifies the backing instance, the current DNS actually works as-is: https://kind.sigs.k8s.io/
+
+... but the domain was actually added to netlify against the https://k8s-kind.netlify.com entry which is not hosted at the same team as the https://kindocs.netlify.com for DNS verification reasons on netlify's end. Thank you @chenopis for figuring that out.
+
+/assign @thockin 
+",closed,True,2019-02-12 22:27:07,2019-02-13 18:45:42
+k8s.io,justinsb,https://github.com/kubernetes/k8s.io/issues/189,https://api.github.com/repos/kubernetes/k8s.io/issues/189,Provide firebase accounts for subproject docs,"In the cluster-api meeting today we discussed how best to do docs for subprojects, and there was a general preference for using firebase - except that it isn't free.  Is this something we can do under the CNCF wg-infra umbrella?
+
+cc @neolit123 and @davidewatson for visibility and possibly to provide some background context.",closed,False,2019-02-13 18:39:53,2019-02-27 15:17:27
+k8s.io,BenTheElder,https://github.com/kubernetes/k8s.io/pull/190,https://api.github.com/repos/kubernetes/k8s.io/issues/190,add bentheelder and alphabetize dns/ OWNERS,/assign @dims ,closed,True,2019-02-13 18:56:32,2019-02-13 19:26:09
+k8s.io,castrojo,https://github.com/kubernetes/k8s.io/pull/191,https://api.github.com/repos/kubernetes/k8s.io/issues/191,Update with latest status,Signed-off-by: Jorge O. Castro <jorgec@vmware.com>,closed,True,2019-02-20 16:10:55,2019-02-22 18:47:28
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/192,https://api.github.com/repos/kubernetes/k8s.io/issues/192,Add slack.k8s.io existing config,"These are imperfect in many ways, but worth capturing.  Before we
+convert this to new cluster it needs at least:
+
+* convert to deployment
+* token moved to a secret
+* run as non-root
+* appropriate request/limit settings
+* probably put behind an ingress with TLS",closed,True,2019-02-20 17:44:28,2019-02-22 18:47:39
+k8s.io,hh,https://github.com/kubernetes/k8s.io/issues/193,https://api.github.com/repos/kubernetes/k8s.io/issues/193,Storage Analysis for Billing,"We need to have more detailed reporting on storage, so we can detail our spend per project.
+
+I'm creating this tracking sub-issue for #156
+/cc @justinsb ",open,False,2019-02-20 19:21:42,2019-02-20 19:21:42
+k8s.io,hh,https://github.com/kubernetes/k8s.io/issues/194,https://api.github.com/repos/kubernetes/k8s.io/issues/194,Per k8s namespace billing information,"As we grow the infrastructure to include more projects, namespaces are the logical point for bucketing our infra spend. We need to research / document / implement per-namespace billing information.
+ 
+Bringing under #156.
+
+@thockin did you have information on this?",open,False,2019-02-20 19:26:57,2019-02-20 19:26:57
+k8s.io,hh,https://github.com/kubernetes/k8s.io/issues/195,https://api.github.com/repos/kubernetes/k8s.io/issues/195,Document Requirements for spending CNCF money on sigs,"I think the general guideline we discussed was, ""are the artifacts produced publicly consumed""
+
+/assign @dims ",open,False,2019-02-20 19:29:59,2019-02-20 19:30:00
+k8s.io,hh,https://github.com/kubernetes/k8s.io/issues/196,https://api.github.com/repos/kubernetes/k8s.io/issues/196,Setup group with IAM Read / Auditing Permissions,"@thockin Pair session next week, best overlap is probably 9:30-11:00am NZT Tuesday-Friday (Mon-Thu PST)?
+
+Auditing Billing umbrella / #156 ",open,False,2019-02-20 19:53:44,2019-02-20 19:53:44
+k8s.io,dims,https://github.com/kubernetes/k8s.io/pull/197,https://api.github.com/repos/kubernetes/k8s.io/issues/197,Manifests for k8s-container-image-promoter prow jobs,"Placeholders for manifests for use with https://github.com/GoogleCloudPlatform/k8s-container-image-promoter
+
+Change-Id: Ic5a0eb9be30e5bd4682faa484436fb0d543235ce",closed,True,2019-02-20 22:27:38,2019-02-22 18:55:06
+k8s.io,coderanger,https://github.com/kubernetes/k8s.io/pull/198,https://api.github.com/repos/kubernetes/k8s.io/issues/198,Update for the invite form.,/cc @castrojo @parispittman ,closed,True,2019-02-21 01:11:48,2019-02-22 04:48:01
+k8s.io,liggitt,https://github.com/kubernetes/k8s.io/pull/199,https://api.github.com/repos/kubernetes/k8s.io/issues/199,Add redirect for api review process doc,"To be used in the label description
+
+cc @spiffxp ",closed,True,2019-02-21 17:01:27,2019-02-21 18:15:19
+k8s.io,nzoueidi,https://github.com/kubernetes/k8s.io/pull/200,https://api.github.com/repos/kubernetes/k8s.io/issues/200,Fix and delete invalid links,"Fixing and deleting invalid links in readme file. This PR close #140 
+
+/sig contributor-experience
+",closed,True,2019-02-22 17:40:49,2019-02-26 22:22:01
+k8s.io,spiffxp,https://github.com/kubernetes/k8s.io/pull/201,https://api.github.com/repos/kubernetes/k8s.io/issues/201,Update slack.k8s.io image to v3 tag,"I manually updated it in cluster as part of https://github.com/kubernetes/k8s.io/pull/191#issuecomment-466504010
+
+Before I noticed https://github.com/kubernetes/k8s.io/pull/192
+
+Back in sync now",closed,True,2019-02-22 18:51:36,2019-03-15 01:24:58
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/202,https://api.github.com/repos/kubernetes/k8s.io/issues/202,Update GCR scripts,"Add a script to create prod repos and convert logic into a library to as
+to DRY.",closed,True,2019-02-22 18:59:13,2019-02-26 23:35:36
+k8s.io,listx,https://github.com/kubernetes/k8s.io/pull/203,https://api.github.com/repos/kubernetes/k8s.io/issues/203,add script to invoke the image promoter against multiple manifests,"Instead of defining this logic inline in the upcoming Prow job
+configuration [1], define it here as a script.
+
+[1]: https://github.com/kubernetes/test-infra/pull/11414",closed,True,2019-02-23 04:23:20,2019-02-27 00:06:04
+k8s.io,bartsmykla,https://github.com/kubernetes/k8s.io/issues/204,https://api.github.com/repos/kubernetes/k8s.io/issues/204,Moving Gcsweb to CNCF Infrastructure,"As one of the tasks is to moving Gcsweb to CNCF Infrastructure (https://docs.google.com/document/d/1r0nydnBoU7o_L7Hnjdc9SZrWe9zosbz64ZUUPn0XwXk)
+I would like to take this task and work on it.
+
+@thockin, @ixdy - could you maybe give me a hand with the issue?",open,False,2019-02-26 12:45:14,2019-03-13 23:49:45
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/205,https://api.github.com/repos/kubernetes/k8s.io/issues/205,Fix bug in GCR scripts,"I burned it all down and re-ran to clear lifecycle state, and found a bug.",closed,True,2019-02-27 00:42:09,2019-02-27 23:52:38
+k8s.io,dims,https://github.com/kubernetes/k8s.io/issues/206,https://api.github.com/repos/kubernetes/k8s.io/issues/206,Take inventory of the google groups we created,"- we need to document who is in which group, what is the group used for. 
+- also add a template for creating new groups",open,False,2019-03-08 17:12:42,2019-03-08 18:21:06
+k8s.io,hh,https://github.com/kubernetes/k8s.io/issues/207,https://api.github.com/repos/kubernetes/k8s.io/issues/207,Create IAM Dump scripts,"```feature
+As a external public consumer of kubernetes
+In order to have confidence in the k8s-infrastructure
+I want to be able to see a history of changes in the configuration and permissions of the CNCF GCP organization and kubernetes-public project
+
+Given a requested change to the configuration
+When the change is completed
+Then the change will show up as a commit to the k8s.io repo
+```
+
+I'm put some quick notes https://github.com/ii/org/blob/master/k8s.io/kubernetes/k8s.io/iam.dump.md and will revisit this next week.
+
+Thank you to @thockin for the pair session and for creating the necessary group and permissions for auditing.",open,False,2019-03-08 17:52:30,2019-03-08 17:57:09
+k8s.io,joelsmith,https://github.com/kubernetes/k8s.io/pull/208,https://api.github.com/repos/kubernetes/k8s.io/issues/208,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:06:37,2019-03-09 11:19:28
+k8s.io,cblecker,https://github.com/kubernetes/k8s.io/pull/209,https://api.github.com/repos/kubernetes/k8s.io/issues/209,Bump all dependencies for octodns,"Ran `./check-config.sh` successfully with this new pinned requirements file and image.
+
+/assign @thockin @BenTheElder @hh",closed,True,2019-03-26 18:17:20,2019-03-26 18:45:01
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/210,https://api.github.com/repos/kubernetes/k8s.io/issues/210,Upgrade cert-manager to v0.7.0,"It sounds like this should be a safe upgrade, just needing to apply the new `cert-manager.yaml`?
+
+/assign @munnerz ",open,True,2019-03-28 18:37:44,2019-04-05 17:21:36
+k8s.io,misterikkit,https://github.com/kubernetes/k8s.io/pull/211,https://api.github.com/repos/kubernetes/k8s.io/issues/211,Add a URL shortening service,"This defines manifests to create a shlink instance that will serve
+redirects from go.k8s.io.
+
+Shlink is the open source URL shortener with the best name and logo. It
+is also MIT licensed and readily available on docker hub. While this app
+expects to use a persistent database, we inject data from a config map
+into an ephemeral SQLITE database during pod startup.
+
+
+The container's only control is a REST endpoint under /rest/v1, but the
+only way to generate an API key is by exec-ing into the shlink
+container.
+
+See https://shlink.io/api-docs/authentication
+
+Note: This reloads config by restarting the service when the config map changes.
+
+/ref https://github.com/kubernetes/community/issues/2959",open,True,2019-03-29 02:13:15,2019-03-29 22:57:34
+k8s.io,listx,https://github.com/kubernetes/k8s.io/pull/212,https://api.github.com/repos/kubernetes/k8s.io/issues/212,fix promoter manifests to the new 1.0+ syntax,,closed,True,2019-04-02 19:52:38,2019-04-05 15:02:08
+k8s.io,hh,https://github.com/kubernetes/k8s.io/pull/213,https://api.github.com/repos/kubernetes/k8s.io/issues/213,Initial Auditing Configuration and Usage of the kubernetes.io GCP Organization,"```feature
+As an community security auditor
+I want to retrieve the iam policies and permissions for the kubernetes.io GCP organisation
+In order to  provide transparency into who can access and configure community maintained resources
+
+Given an gcloud account within the k8s-infra-gcp-auditors google group
+When ./audit.sh is run and a PR created with the resulting policy changes
+Then iam configuration can be peered reviewed / audited
+```",open,True,2019-04-03 08:36:14,2019-04-03 16:51:59
+k8s.io,thockin,https://github.com/kubernetes/k8s.io/pull/214,https://api.github.com/repos/kubernetes/k8s.io/issues/214, Add a cip-test GCRs for promoter testing,"I ran `ensure-staging-repo.sh cip-test` which produced a project ""k8s-staging-cip-test"".
+
+I ran this new `ensure-prod-repo.sh` which produced a project ""k8s-cip-test-prod"".
+
+I created a new googlegroup `k8s-infra-gcr-staging-cip-test` which includes @listx 
+",closed,True,2019-04-03 21:50:34,2019-04-04 10:18:52
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/issues/215,https://api.github.com/repos/kubernetes/k8s.io/issues/215,move k8s.io redirector behind Ingress and automate TLS using cert-manager,"The TLS cert for the k8s.io redirector expires in about a week (April 11). Let's get it automated!
+
+I've already got cert-manager set up in the cluster, so now it's just a matter of getting the redirector running behind an `Ingress` without breaking anything.
+
+Steps to get there:
+1. Teach nginx how to handle forwarded HTTPS requests from the GCP Ingress (since it won't terminate HTTPS directly in this case).
+2. Create an `Ingress` to the existing `LoadBalancer` service, using a new static IP as the existing static IP is still bound to the `LoadBalancer`. Use the existing soon-to-expire TLS cert to terminate HTTPS on the `Ingress`.
+3. Update DNS records to point to the new static IP and wait for propagation.
+4. Switch the service to `NodePort`, releasing the old static IP.
+5. Create cert-manager `Certificate` resources - use the Let's Encrypt staging endpoint for canary, and prod endpoint for prod. (Note: because of the large number of subdomains, this creates a lot of backend services at once (~50). We'll need to increase our backend service quota first.)
+6. After the TLS cert has been created (may take some time), update the `Ingress` to use the new secret. (I suggest using a new name here, since we'll be using different Let's Encrypt endpoints for canary and prod.)
+7. Switch off HTTPS support in nginx and delete the old certificate.
+8. Hopefully never think about this again. :)
+
+/assign
+cc @thockin @munnerz @nikhita ",open,False,2019-04-03 23:54:56,2019-04-04 00:09:57
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/216,https://api.github.com/repos/kubernetes/k8s.io/issues/216,Create Ingress for k8s.io redirector,"This is the first part of several PRs - basically steps 1 and 2 on https://github.com/kubernetes/k8s.io/issues/215.
+
+The bulk of this PR is new logic in the nginx config to properly upgrade HTTP to HTTPS when running behind the `Ingress`, while maintaining existing behavior for clients that connect via the `LoadBalancer` directly.
+
+/assign @thockin ",closed,True,2019-04-03 23:56:47,2019-04-04 16:30:16
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/217,https://api.github.com/repos/kubernetes/k8s.io/issues/217,Update DNS for redirector to point to Ingress IP,"This is the next part of https://github.com/kubernetes/k8s.io/issues/215 (item 3).
+
+The `Ingress` has been set up, and tests consistently pass when targeted against it.
+
+/assign @thockin ",closed,True,2019-04-04 17:31:51,2019-04-04 18:14:00
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/218,https://api.github.com/repos/kubernetes/k8s.io/issues/218,k8s.io redirector: remove/fix old sites,"This is tangentially related to #215.
+
+After looking at our DNS records, I noticed that testgrid no longer points at the redirector, so we can remove it (and not request its subdomain in our new cert).
+
+The blog now seems to be hosted on https://kubernetes.io/blog, whereas blog.kubernetes.io points at the redirector. This makes both https://blog.kubernetes.io/ and https://blog.k8s.io/ now actually go to the blog.
+
+I also added a handler for `sigs.kubernetes.io`, since that name points at the redirector, though most folks will probably be using sigs.k8s.io.
+
+/assign @thockin ",closed,True,2019-04-04 18:04:42,2019-04-04 18:15:48
+k8s.io,ixdy,https://github.com/kubernetes/k8s.io/pull/219,https://api.github.com/repos/kubernetes/k8s.io/issues/219,Enable Let's Encrypt automation for k8s.io redirector,"OK, the last sequence of changes to fix #215.
+
+Commits, in order they should be applied:
+1. Add a self-signing dummy `ClusterIssuer`. We'll use this for the canary instance of the redirector, since we can't use Let's Encrypt HTTP challenges since the domains don't point at the canary Ingress.
+2. Remove and fix old sites on the redirector. I took this from #218. These are either subdomains that no longer point at the redirector, or are redirections we were doing wrong.
+3. Create `Certificate` resources which will generate TLS certificates (saving them into a secret named `k8s-io-tls`). I manually created these lists by looking at the DNS configuration for subdomains that point at the redirector. TODO: better management of these lists.
+4. After the new TLS secrets have been created (will take some time), point the `Ingress` at them.
+  - Note that I already bumped up our backend services quota on the GCP project to 100.
+5. Switch service to `NodePort`, since we can use the `Ingress` exclusively now.
+6. Stop serving HTTPS from nginx. (I'll also delete the old secret at this point.)",open,True,2019-04-04 18:22:43,2019-04-05 17:32:31

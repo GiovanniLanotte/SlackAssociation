@@ -1,0 +1,17 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/15,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/comments/478076079,https://github.com/hyperledger/composer-concerto-tools/pull/15#issuecomment-478076079,jeromesimeon,*Note* This should be updated to Concerto 0.70.2 when published before merging.,2019-03-29 17:06:28,2019-03-29 17:06:28
+https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/13,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/comments/462782264,https://github.com/hyperledger/composer-concerto-tools/pull/13#issuecomment-462782264,jeromesimeon,thanks!,2019-02-12 14:34:31,2019-02-12 14:34:31
+https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/10,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/comments/455768450,https://github.com/hyperledger/composer-concerto-tools/pull/10#issuecomment-455768450,dselman,Can you please describe what has changed compared to the Java generator?,2019-01-19 10:33:02,2019-01-19 10:33:02
+https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/10,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/comments/455806303,https://github.com/hyperledger/composer-concerto-tools/pull/10#issuecomment-455806303,jeromesimeon,"At the moment, the changes are minimal and focus on making the generated classes Corda-serializable.
+It adds annotations to the class declarations here:
+https://github.com/hyperledger/composer-concerto-tools/blob/86b2c28776c9406d420e36009cbdcfb7c50fdb9f/lib/codegen/fromcto/corda/cordavisitor.js#L214
+
+And those depend on an additional import here:
+
+https://github.com/hyperledger/composer-concerto-tools/blob/86b2c28776c9406d420e36009cbdcfb7c50fdb9f/lib/codegen/fromcto/corda/cordavisitor.js#L134
+
+As a result, the generated Java classes will only compile as part of a Corda application.",2019-01-19 19:01:56,2019-01-19 19:01:56
+https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/10,https://api.github.com/repos/hyperledger/composer-concerto-tools/issues/comments/455806455,https://github.com/hyperledger/composer-concerto-tools/pull/10#issuecomment-455806455,jeromesimeon,"I'm expecting additional changes to be useful down the road, amongst other things:
+- Adding constructors/accessors to the class
+- Provide Corda-specific conversions for CTO types, notably `DateTime` and currency amounts, so they would be aligned with Corda-supported libraries
+- Generate classes that implement Corda-specific interfaces (e.g., for Corda state)",2019-01-19 19:04:04,2019-01-19 19:04:04

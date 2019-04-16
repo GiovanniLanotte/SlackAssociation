@@ -1,0 +1,238 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/100,https://github.com/hyperledger/indy-agent/pull/100,kukgini,fix socket error in python example on OSX Mojave(10.14.2),"Signed-off-by: kukgini <kukgini@gmail.com>
+
+on OSX Mojave, running indy-agent.py generate following error:
+```
+$ python indy-agent.py 8095
+Configure wallet connection via UI.
+===== Starting Server on: http://localhost:8095 =====
+<Request GET / >
+Error handling request
+Traceback (most recent call last):
+  File ""/usr/local/lib/python3.7/site-packages/aiohttp/web_protocol.py"", line 390, in start
+    resp = await self._request_handler(request)
+  File ""/usr/local/lib/python3.7/site-packages/aiohttp/web_app.py"", line 366, in _handle
+    resp = await handler(request)
+  File ""/usr/local/lib/python3.7/site-packages/aiohttp_jinja2/__init__.py"", line 91, in wrapped
+    context = await coro(*args)
+  File ""/Users/soominlee/D/ssi/indy/indy-agent/python/modules/admin.py"", line 70, in root
+    local_ip = socket.gethostbyname(socket.gethostname())
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+```
+It is because of that OS X can not resolve the `$HOSTNAME` by default.
+Anyway, This change can fix the problem. 
+Can you review it?",[],1,2019-04-01 05:28:33,2019-04-02 01:03:13,2019-04-02 01:03:13,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/99,https://github.com/hyperledger/indy-agent/pull/99,dbluhm,Pyref did doc rename,"Bring reference agent up to date on connection tests (DID -> did, DIDDoc -> did_doc).",[],2,2019-03-25 21:26:57,2019-04-02 17:33:05,2019-04-02 17:33:05,True,2019-04-02 17:33:05,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/98,https://github.com/hyperledger/indy-agent/pull/98,fabienpe,Pending invites bug fix + permit page reload,,[],2,2019-03-24 11:00:54,2019-03-25 21:16:46,2019-04-03 14:58:06,True,2019-03-25 21:16:46,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/97,https://github.com/hyperledger/indy-agent/pull/97,fabienpe,Fixed issue with non_secret storage of invitations.,Signed-off-by: fabienpe <fabienpe@users.noreply.github.com>,[],1,2019-03-22 19:31:32,2019-03-23 09:10:25,2019-03-23 09:10:25,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/96,https://github.com/hyperledger/indy-agent/pull/96,dhh1128,"Update test suite to expect did/did_doc, not DID/DIDDoc",Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2019-03-22 03:45:33,2019-03-25 21:07:27,2019-03-25 21:07:27,True,2019-03-25 21:07:27,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/95,https://github.com/hyperledger/indy-agent/pull/95,fabienpe,Added method to fetch all wallet records of a given type.,Signed-off-by: fabienpe <fabienpe@users.noreply.github.com>,[],1,2019-03-20 08:53:02,2019-03-20 14:20:27,2019-03-20 14:23:45,True,2019-03-20 14:20:27,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/94,https://github.com/hyperledger/indy-agent/pull/94,saholman,Added Evernym's Pi Agent to README,Signed-off-by: Spencer Holman <spencer.holman@evernym.com>,[],1,2019-03-14 18:47:17,2019-03-15 17:40:56,2019-03-15 17:40:56,True,2019-03-15 17:40:56,dhh1128,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/93,https://github.com/hyperledger/indy-agent/pull/93,fabienpe,Test win10 + Minor typos,,[],7,2019-03-14 11:09:56,2019-03-20 14:16:15,2019-03-20 14:22:21,True,2019-03-20 14:16:15,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/92,https://github.com/hyperledger/indy-agent/pull/92,dbluhm,Node agent fixes,Update node dependencies and add important disclaimer to README about the maintenance status of node agent.,[],2,2019-03-08 22:10:33,2019-03-08 22:49:01,2019-03-08 22:49:01,True,2019-03-08 22:49:01,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/91,https://github.com/hyperledger/indy-agent/pull/91,dbluhm,Fix BasicMessage text wrapping,,[],2,2019-03-08 17:32:03,2019-03-08 22:43:47,2019-03-08 22:43:47,True,2019-03-08 22:43:47,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/90,https://github.com/hyperledger/indy-agent/pull/90,swcurran,Update of Indy Cat Status - BC Gov,Signed-off-by: Stephen Curran <swcurran@gmail.com>,[],1,2019-03-06 22:56:47,2019-03-08 22:00:51,2019-03-08 22:00:51,True,2019-03-08 22:00:51,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/89,https://github.com/hyperledger/indy-agent/pull/89,michaeldboyd,Fixed broken README doc link,,[],2,2019-03-05 09:07:01,2019-03-08 22:00:07,2019-03-08 22:00:07,True,2019-03-08 22:00:07,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/88,https://github.com/hyperledger/indy-agent/pull/88,dhh1128,Add place for info about known implementations,Signed-off-by: Daniel Hardman <daniel.hardman@gmail.com>,[],1,2019-02-27 19:22:46,2019-02-27 19:36:27,2019-02-27 19:36:27,True,2019-02-27 19:36:27,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/87,https://github.com/hyperledger/indy-agent/pull/87,fabienpe,Small typos.,Signed-off-by: fabienpe <fabienpe@users.noreply.github.com>,[],1,2019-02-22 15:35:51,2019-02-27 18:01:21,2019-03-04 09:47:42,True,2019-02-27 18:01:21,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/86,https://github.com/hyperledger/indy-agent/pull/86,dbluhm,Fix connection tests,Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>,[],1,2019-02-20 23:59:45,2019-02-21 16:09:45,2019-02-21 16:09:45,True,2019-02-21 16:09:45,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/85,https://github.com/hyperledger/indy-agent/pull/85,dbluhm,Python reference agent and test suite fixes from Connectathon,,[],6,2019-02-20 18:48:55,2019-02-20 23:49:37,2019-02-20 23:49:37,True,2019-02-20 23:49:37,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/84,https://github.com/hyperledger/indy-agent/pull/84,fabienpe,Corrected nodejs/README.md to reflect content of docker-compose.yml…,"… file
+
+Signed-off-by: fabienpe <fabienpe@users.noreply.github.com>",[],2,2019-02-20 15:15:42,2019-02-21 15:58:54,2019-02-22 14:41:11,True,2019-02-21 15:58:54,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/83,https://github.com/hyperledger/indy-agent/pull/83,fabienpe,Fix _wallet_path_post_process for Windows system,Signed-off-by: fabienpe <fabienpe@users.noreply.github.com>,[],1,2019-02-20 13:08:58,2019-02-20 14:22:45,2019-02-20 14:22:45,True,2019-02-20 14:22:45,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/82,https://github.com/hyperledger/indy-agent/pull/82,cywolf,Decode sig_data as url-encoded base64; encode and decode strings as ascii,,[],1,2019-02-19 20:22:22,2019-02-20 17:15:39,2019-02-20 17:15:39,True,2019-02-20 17:15:38,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/81,https://github.com/hyperledger/indy-agent/pull/81,cywolf,Add missing attributes to generated DIDDocs,Signed-off-by: Andrew Whitehead <cywolf@gmail.com>,[],1,2019-02-19 20:17:45,2019-02-20 14:23:33,2019-02-20 14:23:33,True,2019-02-20 14:23:33,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/80,https://github.com/hyperledger/indy-agent/pull/80,dbluhm,Add tests for trustping,"Minor fixes discovered while testing trustping protocol
+
+Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>",[],1,2019-02-18 22:25:35,2019-02-19 01:45:11,2019-02-19 01:45:11,True,2019-02-19 01:45:11,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/79,https://github.com/hyperledger/indy-agent/pull/79,dbluhm,Browser extension,Add a browser extension that enables the admin interface to communicate with the agent with packed messages.,[],12,2019-02-18 21:23:50,2019-04-02 16:48:42,2019-04-02 16:48:42,True,2019-04-02 16:48:42,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/78,https://github.com/hyperledger/indy-agent/pull/78,blhagadorn,TristPingProtocol [WIP] ,"Putting this up as a work in progress for time's sake, need to format the messages correctly and add UI features according to HIPE.  Could use some fresh eyes though!",[],4,2019-02-14 22:55:14,2019-02-15 17:37:38,2019-02-15 17:41:27,True,2019-02-15 17:37:38,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/77,https://github.com/hyperledger/indy-agent/pull/77,blhagadorn,TrustPingMessages [WIP],"Still need to fine tune this as the messages aren't quite up to the HIPE nor is the UI where it should be, but for the sake of expediency I'm going to put this up for some fresh eyes to look at. ",[],2,2019-02-14 22:18:18,2019-02-14 22:31:58,2019-02-14 22:31:58,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/76,https://github.com/hyperledger/indy-agent/pull/76,blhagadorn,Trust ping messages,,[],6,2019-02-14 22:05:45,2019-02-14 22:06:22,2019-02-14 22:06:22,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/75,https://github.com/hyperledger/indy-agent/pull/75,dbluhm,Basic message tests,Add tests for BasicMessage,[],4,2019-02-14 18:26:02,2019-02-14 20:08:01,2019-02-14 20:27:03,True,2019-02-14 20:08:01,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/74,https://github.com/hyperledger/indy-agent/pull/74,TelegramSam,BasicMessage Fixes,"Cleaner UI, message formats made consistent with proposed HIPE.
+Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2019-02-14 15:58:58,2019-02-14 16:35:37,2019-02-14 17:32:11,True,2019-02-14 16:35:37,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/73,https://github.com/hyperledger/indy-agent/pull/73,cywolf,Fix message type for connection invitation to match HIPE,,[],1,2019-02-14 01:13:46,2019-02-14 13:38:05,2019-02-14 13:38:05,True,2019-02-14 13:38:05,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/72,https://github.com/hyperledger/indy-agent/pull/72,cywolf,Add id property to DIDDoc and service definitions,,[],1,2019-02-14 01:13:26,2019-02-14 13:33:13,2019-02-14 13:33:13,True,2019-02-14 13:33:13,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/71,https://github.com/hyperledger/indy-agent/pull/71,TelegramSam,Add mimetype specified in HIPE 26,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2019-02-13 23:09:48,2019-02-14 00:48:44,2019-02-14 13:34:38,True,2019-02-14 00:48:44,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/70,https://github.com/hyperledger/indy-agent/pull/70,TelegramSam,Updated key names to DID Doc Standards,"Per the Agent Call. Updated Tests Included.
+Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2019-02-13 22:46:16,2019-02-13 22:53:43,2019-02-13 22:56:12,True,2019-02-13 22:53:43,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/69,https://github.com/hyperledger/indy-agent/pull/69,dbluhm,Print sent and received messages,Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>,[],3,2019-02-13 20:40:44,2019-02-13 22:55:19,2019-02-13 22:55:19,True,2019-02-13 22:55:19,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/68,https://github.com/hyperledger/indy-agent/pull/68,dbluhm,Tests for updated connection protocol,"This is dependent on #64 and #67. This implements ""manual"" tests for connection protocol.
+
+""Manual"" tests means invite urls are copied from or pasted into the test suite to begin the protocol.",[],3,2019-02-11 23:23:33,2019-02-12 22:42:21,2019-02-14 20:27:49,True,2019-02-12 22:42:21,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/67,https://github.com/hyperledger/indy-agent/pull/67,TelegramSam,Updated Connection Protocol Support,"Update DIDDoc attribute and message format.
+Signed Response message.",[],2,2019-02-11 18:41:52,2019-02-12 16:01:21,2019-02-13 22:49:19,True,2019-02-12 16:01:20,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/66,https://github.com/hyperledger/indy-agent/pull/66,ikejeon,Added test that uses Email Transport,Added test that uses Email Transport.  This tests tic tac toe protocol and trust ping protocol,[],18,2019-02-08 19:35:27,,2019-02-11 18:54:33,False,,,dirty,False,open
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/65,https://github.com/hyperledger/indy-agent/pull/65,ikejeon,Added test for EmailTransport that tests trust ping and tic-tact-toe protocol,EmailTransport test tests Email Agent created by Daniel Hardman.  This tests tic-tac-toe protocol and trust ping,[],15,2019-02-08 19:02:47,2019-02-08 19:17:09,2019-02-08 19:17:09,False,,,dirty,False,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/64,https://github.com/hyperledger/indy-agent/pull/64,dbluhm,Test suite - test grouping and collection improvements,This Pull Request introduces a much more robust system for feature selection and definition.,[],16,2019-02-06 23:42:35,2019-02-12 22:20:35,2019-02-14 20:28:13,True,2019-02-12 22:20:35,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/63,https://github.com/hyperledger/indy-agent/pull/63,dbluhm,Pack unpack,Support communication using the pack/unpack methods in Indy-SDK,[],10,2019-02-05 20:16:14,2019-02-06 15:08:08,2019-02-06 15:09:02,True,2019-02-06 15:08:08,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/62,https://github.com/hyperledger/indy-agent/pull/62,dbluhm,[WIP] Test suite revisit,Implementing tests for connection protocol.,[],2,2019-01-22 23:47:32,2019-02-05 23:55:45,2019-02-05 23:55:45,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/61,https://github.com/hyperledger/indy-agent/pull/61,dbluhm,Implement revised connection protocol,,[],10,2019-01-21 23:57:44,2019-01-23 18:44:12,2019-02-14 20:28:55,True,2019-01-23 18:44:12,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/60,https://github.com/hyperledger/indy-agent/pull/60,xaviernopre,"FIX ""Send connection offer"" button disappearing in small screen","FIX that if the screen (or browser window) is medium or smaller, the ""Send connection offer"" button disappear. 
+
+In my first usage of the demo, I had opened 2 two browsers windows, side by side, to simultaneously see the 2 agents, and the ""Send connection offer"" button was not visible.",[],1,2019-01-16 14:21:15,2019-01-22 16:30:46,2019-01-22 16:30:46,True,2019-01-22 16:30:46,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/59,https://github.com/hyperledger/indy-agent/pull/59,xaviernopre,FIX run with Docker environment / problem with IP address of agent,"- Use local IP address for agent endpoints
+- Add output in terminal to print endpoint (usefull for scenario)
+- Add Makefile to simplify commands
+- Update README with simplified commands and more informations",[],6,2019-01-16 14:06:18,2019-03-08 22:02:49,2019-03-11 10:40:23,True,2019-03-08 22:02:49,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/58,https://github.com/hyperledger/indy-agent/pull/58,mhailstone,Properly validates all issued credentials and proofs,Also able to self issue a credential based on a credential definition the agent defines,[],2,2019-01-15 17:30:44,2019-01-22 16:39:55,2019-01-22 16:39:55,True,2019-01-22 16:39:55,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/57,https://github.com/hyperledger/indy-agent/pull/57,mhailstone,Properly validates all issued credentials and proofs,Able to self issue a credential based on a schema / credential definition you define,[],0,2019-01-15 16:02:03,2019-01-15 16:56:14,2019-01-15 16:56:14,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/56,https://github.com/hyperledger/indy-agent/pull/56,TelegramSam,Hotfix for ui wallet connection with module routing,"Fixes a bug that prevented UI wallet connections. Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2019-01-14 20:42:49,2019-01-14 21:21:33,2019-01-16 17:31:40,True,2019-01-14 21:21:33,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/55,https://github.com/hyperledger/indy-agent/pull/55,dbluhm,Mesage processing refactor,Significantly simplify message processing.,[],11,2019-01-10 20:11:28,2019-01-14 20:30:13,2019-01-16 22:58:50,True,2019-01-14 20:30:13,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/54,https://github.com/hyperledger/indy-agent/pull/54,dbluhm,Route messages in agent class,Also moved message types to relevant module definitions rather than in a central message_types.py.,[],11,2019-01-08 20:46:31,2019-01-10 18:32:52,2019-01-16 22:59:21,True,2019-01-10 18:32:52,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/53,https://github.com/hyperledger/indy-agent/pull/53,TelegramSam,Agent Wire Refactor,This refactor prepares for the pending wire refactor. Changes to the provisional protocol were necessary to bring it closer to the pending wire format and support the refactor.,[],2,2019-01-04 17:22:36,2019-01-05 19:10:53,2019-01-07 19:25:31,True,2019-01-05 19:10:53,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/52,https://github.com/hyperledger/indy-agent/pull/52,TelegramSam,Agent Wire Refactor,This refactor prepares for the pending wire refactor. Changes to the provisional protocol were necessary to bring it closer to the pending wire format and support the refactor.,[],2,2018-12-21 16:05:21,2019-01-04 17:21:51,2019-01-07 19:25:30,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/51,https://github.com/hyperledger/indy-agent/pull/51,TelegramSam,Dec 2018 Sovrin Hackaton Messaging and UI updates,"New UI for wallet persisted connections.
+New chat interface
+Pending Connections and Pairwise connections split
+Updated page title to agent name.
+Agent name now in toolbar right side.",[],14,2018-12-18 22:19:05,2018-12-21 14:47:42,2018-12-21 16:00:47,True,2018-12-21 14:47:42,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/50,https://github.com/hyperledger/indy-agent/pull/50,michaeldboyd,Added readthedocs support ,"First, I recognize that this looks like a large PR, but the changes I've made were pretty simple. 
+
+As discussed in the HIPE [0025-indy-docs-framework](https://github.com/hyperledger/indy-hipe/blob/master/text/0025-indy-docs-framework/README.md) we would like to have a centralized site for our documentation. The changes I have made are outlined in that HIPE. 
+
+Here, you will see a couple of things: 
+- within the `docs/` directory, I've added a `source/` directory for our documentation that should be hosted online, for users and contributors. With this way, the `docs/` directory can also be used for other documents that may not need to be on our user-facing documentation site. Perhaps for more technical docs meant only for maintainers.
+- Most of the files changed are just name changes because of the directory rename. 
+
+The significant files added are
+- `docs/source/conf.py` - this builds all of the documentation with sphinx
+- `docs/README.md` - instructs users on how to build the documentation locally
+Thanks for taking the time to review!
+",[],11,2018-12-18 18:18:52,2018-12-18 20:29:28,2018-12-18 20:29:28,True,2018-12-18 20:29:28,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/49,https://github.com/hyperledger/indy-agent/pull/49,dbluhm,Rename type -> @type in accordance with HIPE,Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>,[],1,2018-12-17 21:10:06,2018-12-18 19:03:31,2019-01-16 23:00:10,True,2018-12-18 19:03:31,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/48,https://github.com/hyperledger/indy-agent/pull/48,TelegramSam,Argparse and Ephemeral Wallets,"Added a command line argument for ephemeral wallets, useful in development. It was designed to never automatically delete a non-ephemeral wallet to prevent an accidental deletion. We upgraded the argument parsing to use argparse as part of this change. 
+Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2018-12-14 20:15:03,2018-12-17 19:15:38,2018-12-18 18:46:09,True,2018-12-17 19:15:37,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/47,https://github.com/hyperledger/indy-agent/pull/47,TelegramSam,UI to Admin Rename,"Moved the 'message' between agents into it's own module called BasicMessage
+Refactor the UI module to Agent.
+Invitation persistence using wallet non secrets api.
+Signed-off-by: Sam Curren <telegramsam@gmail.com>",[],1,2018-12-06 17:04:53,2018-12-12 18:24:06,2018-12-14 15:17:47,True,2018-12-12 18:24:06,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/46,https://github.com/hyperledger/indy-agent/pull/46,TelegramSam,Message Class refactor. This will make it easier to transition to @attributes in the future.,"Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2018-12-04 20:11:33,2018-12-05 16:58:36,2018-12-05 17:45:04,True,2018-12-05 16:58:36,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/45,https://github.com/hyperledger/indy-agent/pull/45,dbluhm,Turn Agent into an Object,"Replaced with more appropriately named `agent.py` and `message.py`.
+
+Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>",[],4,2018-11-28 22:13:14,2018-12-04 13:47:27,2019-01-16 22:58:26,True,2018-12-04 13:47:27,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/44,https://github.com/hyperledger/indy-agent/pull/44,TelegramSam,Thread callbacks in admin console. This demonstrates how to use threading to read error responses.,"Error responses for wallet connection problems.
+
+Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],3,2018-11-28 18:27:46,2018-12-04 17:59:48,2018-12-05 17:43:31,True,2018-12-04 17:59:48,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/43,https://github.com/hyperledger/indy-agent/pull/43,TelegramSam,Admin_WalletConnection_Family,"Added AdminWalletConnection family to contain admin messages related to agent wallet connections.
+Give Agent object awareness of modules to allow modules to prompt messages from each other.
+Abstracted javascript message sending to a sendMessage function.
+Renamed 'id' to 'ui_token' to avoid conflict with message IDs.
+Decorated id onto message, derived from send timestamp.
+
+Signed-off-by: Sam Curren <telegramsam@gmail.com>",[],1,2018-11-27 19:52:36,2018-11-28 17:07:11,2018-11-28 18:18:32,True,2018-11-28 17:07:11,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/42,https://github.com/hyperledger/indy-agent/pull/42,dbluhm,Minor clean up,Removed unneeded files and cleaned up the python ref agent readme.,[],3,2018-11-26 23:16:41,2018-11-27 20:03:42,2018-11-27 20:03:42,True,2018-11-27 20:03:42,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/41,https://github.com/hyperledger/indy-agent/pull/41,blhagadorn,Wallet CLI Arguments,https://jira.hyperledger.org/browse/IA-43,[],5,2018-11-16 00:43:53,2018-11-26 16:08:30,2018-11-26 16:08:30,True,2018-11-26 16:08:29,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/40,https://github.com/hyperledger/indy-agent/pull/40,blhagadorn,Wallet cli config,,[],13,2018-11-15 23:31:19,2018-11-15 23:36:01,2018-11-15 23:36:01,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/39,https://github.com/hyperledger/indy-agent/pull/39,blhagadorn,Wallet CLI Config,,[],13,2018-11-15 23:25:18,2018-11-15 23:30:52,2018-11-15 23:30:52,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/38,https://github.com/hyperledger/indy-agent/pull/38,blhagadorn,Add CLI Arguments for Wallet,https://jira.hyperledger.org/browse/IA-43,[],13,2018-11-15 23:06:09,2018-11-15 23:14:26,2018-11-15 23:14:26,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/37,https://github.com/hyperledger/indy-agent/pull/37,peacekeeper,Correct /offer URL in README.,Signed-off-by: Markus Sabadello <markus@danubetech.com>,[],1,2018-11-04 09:43:40,2018-11-05 23:10:35,2018-11-05 23:10:35,True,2018-11-05 23:10:35,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/36,https://github.com/hyperledger/indy-agent/pull/36,TelegramSam,"Addition of Scope markdown, and minor updates to both the python README and the repo README","Signed-off-by: Sam Curren <telegramsam@gmail.com>
+",[],1,2018-10-20 03:43:30,2018-10-22 13:26:08,2018-11-19 15:26:29,True,2018-10-22 13:26:08,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/35,https://github.com/hyperledger/indy-agent/pull/35,dbluhm,Route by message family,"This change will help with routing by message family and overall cleanliness of the code.
+
+Functions that are message handlers now only take self and Message as arguments.
+
+This will conflict with @ken-ebert's pull request; I can resolve these after his is merged.",[],6,2018-10-18 21:01:16,2018-10-30 20:53:26,2018-10-30 20:53:27,True,2018-10-30 20:53:26,TelegramSam,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/34,https://github.com/hyperledger/indy-agent/pull/34,ken-ebert,fixed init.py to use agent name in wallet creation,"Signed-off-by: Kenneth Ebert <ken@kindredlearning.com>
+
+Resolves problem where the wallet is created with the name ""wallet"" each time, ignoring the user name passed in.",[],1,2018-10-17 23:35:15,2018-10-18 22:26:53,2018-10-18 22:26:53,True,2018-10-18 22:26:53,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/33,https://github.com/hyperledger/indy-agent/pull/33,swcurran,Added docker-compose support and a README of how to use it,"Signed-off-by: Stephen Curran <swcurran@gmail.com>
+
+Dockerfile building from the von-image Docker Hub images (prebuilt with released indy-node and indy-sdk), docker-compose scripts for starting a full test environment (nodes and agents) and a manage shell script to provide shortcuts from running docker-compose (build, rebuild, start, stop, bash).
+
+Includes a ledger, ledger browser webserver and starts up two Agents on localhost ports 3000 and 3001.",[],13,2018-10-17 23:04:41,2018-12-18 23:32:50,2018-12-18 23:32:51,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/32,https://github.com/hyperledger/indy-agent/pull/32,TelegramSam,Replace frameworkless js code with Vue.js in the UI of the python ref…,"…erence agent.
+
+Signed-off-by: Sam Curren <telegramsam@gmail.com>",[],1,2018-10-17 19:05:16,2018-10-17 19:18:41,2018-10-20 03:04:05,True,2018-10-17 19:18:41,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/31,https://github.com/hyperledger/indy-agent/pull/31,trthhrtz,Connection protocol,"Implement connection protocol following the structure by mhailstone
+https://chat.hyperledger.org/channel/indy-agent?msg=FP87hvzPgWDz8W9sD + my previous internship work on the Indy Agent
+
+",[],59,2018-10-16 16:19:48,2018-10-16 17:47:49,2018-10-16 17:47:50,True,2018-10-16 17:47:49,nage,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/30,https://github.com/hyperledger/indy-agent/pull/30,trthhrtz,Connection protocol,"Implement connection protocol following the structure by mhailstone
+https://chat.hyperledger.org/channel/indy-agent?msg=FP87hvzPgWDz8W9sD",[],56,2018-10-16 04:57:02,2018-10-16 16:20:33,2018-10-16 16:20:33,False,,,dirty,False,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/29,https://github.com/hyperledger/indy-agent/pull/29,dbluhm,"Revert ""Implement connection protocol in python agent (#25)""",This reverts commit a36ff708420e8b6e8b4c2a48d5ef8ee351b2d567.,['nage'],2,2018-10-15 21:02:46,2018-10-16 17:36:33,2018-10-16 17:36:33,True,2018-10-16 17:36:33,nage,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/28,https://github.com/hyperledger/indy-agent/pull/28,trthhrtz,IA-38 python agent connection protocol,"Implement connection protocol following the structure by mhailstone
+https://chat.hyperledger.org/channel/indy-agent?msg=FP87hvzPgWDz8W9sD
+",[],110,2018-10-15 18:35:30,2018-10-16 05:00:20,2018-10-16 05:00:20,False,,,dirty,False,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/27,https://github.com/hyperledger/indy-agent/pull/27,TelegramSam,Refactor frameworkless js to vue.js,Signed-off-by: Sam Curren <sam@sovrin.org>,[],1,2018-10-13 12:16:04,2018-10-15 14:35:58,2018-10-15 14:35:58,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/26,https://github.com/hyperledger/indy-agent/pull/26,saholman,remove unused sockets.io dependency,,[],1,2018-10-11 15:14:42,2018-10-12 00:28:07,2018-10-12 00:28:07,True,2018-10-12 00:28:07,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/25,https://github.com/hyperledger/indy-agent/pull/25,dbluhm,Implement connection protocol in python agent,All credit to @trthhrtz for his excellent work implementing the connection protocol as it currently stands in the connection protocol HIPE inside of the python agent.,[],59,2018-09-27 20:14:24,2018-10-12 03:41:23,2018-10-12 03:41:23,True,2018-10-12 03:41:23,nage,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/24,https://github.com/hyperledger/indy-agent/pull/24,dbluhm,Kuzma's improvements to python agent,"This PR includes the work that @trthhrtz demoed in the Indy WG call on September 27th, 2019.
+
+Feel free to squash into a single commit.",[],73,2018-09-27 19:40:08,2018-09-27 19:49:02,2018-09-27 19:49:03,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/23,https://github.com/hyperledger/indy-agent/pull/23,saholman,All modules,,[],5,2018-09-06 16:44:39,2018-12-27 21:46:56,2018-12-27 21:46:56,False,,,dirty,False,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/22,https://github.com/hyperledger/indy-agent/pull/22,mhailstone,Simplified README for docker-compose update,,[],3,2018-08-28 22:05:51,2018-08-29 07:31:21,2018-08-29 07:31:21,True,2018-08-29 07:31:21,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/21,https://github.com/hyperledger/indy-agent/pull/21,AxelNennker,doc vs code request_nonce,"The doc and the nodejs code disagree whether the field is named request_nonce or nonce.
+The PR adjusts the documentation to the code
+
+Signed-off-by: Axel Nennker <axel.nennker@telekom.de>",[],1,2018-08-24 11:44:03,2018-08-28 21:47:30,2018-08-29 08:19:44,True,2018-08-28 21:47:30,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/20,https://github.com/hyperledger/indy-agent/pull/20,ArthurManz,NodeJS: Add Docker-Compose & Update Indy SDK to v1.6.1,Signed-off-by: ArturoManzaneda <Arturo.Manzaneda.Tudela@ing.com>,[],1,2018-08-10 14:57:04,2018-08-28 21:43:27,2018-08-29 15:46:46,True,2018-08-28 21:43:27,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/19,https://github.com/hyperledger/indy-agent/pull/19,dbluhm,Further clean up to Agent Test Suite,Signed-off-by: Daniel Bluhm <daniel.bluhm@sovrin.org>,[],1,2018-08-06 21:13:17,2018-08-08 18:37:07,2018-08-08 18:37:07,True,2018-08-08 18:37:07,nage,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/18,https://github.com/hyperledger/indy-agent/pull/18,dbluhm,Test Suite,"This is the humble beginnings of the test suite I demoed at the Agent vConference.
+
+This is far from a finished product but publishing it now will highlight what needs to change in the future.",[],14,2018-08-01 23:12:23,2018-08-02 22:14:58,2018-08-02 22:14:58,True,2018-08-02 22:14:58,nage,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/17,https://github.com/hyperledger/indy-agent/pull/17,vitalrev,Feature/docker with fresh sdk,,[],3,2018-07-13 08:32:21,2018-08-28 21:46:44,2018-08-28 21:46:44,False,,,dirty,False,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/16,https://github.com/hyperledger/indy-agent/pull/16,vitalrev,update to indy sdk 1.6,Signed-off-by: Vitalij Reicherdt <vitalij.reicherdt@commerzbank.com>,[],2,2018-07-13 08:31:40,2018-08-28 21:46:01,2018-08-28 21:46:01,False,,,dirty,False,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/15,https://github.com/hyperledger/indy-agent/pull/15,kosullivansita,Fixed small typo in the nodejs/README.md,Signed-off-by: Kevin Osullivan <kevin.osullivan@sita.aero>,[],1,2018-06-29 08:02:41,2018-07-17 20:37:58,2018-07-17 20:37:58,True,2018-07-17 20:37:58,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/14,https://github.com/hyperledger/indy-agent/pull/14,kosullivansita,Fix to typo in nodejs/README,My first commit - a small fix to the nodejs README.,[],2,2018-06-28 12:05:23,2018-06-28 13:12:17,2018-06-28 13:12:23,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/13,https://github.com/hyperledger/indy-agent/pull/13,kosullivansita,Fix to typo in nodejs/README,"My first commit - a small fix to the nodejs README.md
+Signed-off-by: Kevin O'Sullivan <kevin.osullivan@sita.aero>",[],1,2018-06-28 11:49:16,2018-06-28 12:03:04,2018-06-28 12:47:35,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/12,https://github.com/hyperledger/indy-agent/pull/12,swcurran,Tweaks to the manage script to work on Windows.,"Please verify the ""./manage open"" command in particular to try it on Mac and Unix. Should work, but needs to be verified. ",[],1,2018-06-19 18:08:33,2018-06-19 21:50:11,2018-06-19 21:50:11,True,2018-06-19 21:50:11,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/11,https://github.com/hyperledger/indy-agent/pull/11,mhailstone,Documentation folder and design document of agents,I've captured the content from a Google document where much of the discussion has been happening on agents and put it into the markdown document here for content to be tracked and changed over time.,[],2,2018-06-18 15:52:36,2018-06-25 21:02:49,2018-06-25 21:02:49,True,2018-06-25 21:02:49,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/10,https://github.com/hyperledger/indy-agent/pull/10,saholman,"additional work on proofs, ui, fixed deleted commit",Signed-off-by: Spencer Holman <spencer.a.holman@gmail.com>,[],2,2018-06-14 15:59:39,2018-06-14 16:47:50,2018-06-14 16:47:50,True,2018-06-14 16:47:50,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/9,https://github.com/hyperledger/indy-agent/pull/9,saholman,"Major UI update, able to create relationships, issue credentials and make proof requests",,[],22,2018-06-07 20:09:06,2018-06-14 15:51:29,2018-06-14 15:51:29,True,2018-06-14 15:51:29,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/8,https://github.com/hyperledger/indy-agent/pull/8,swcurran,Added docker config for nodejs agent and docs to run,Signed-off-by: Stephen Curran <swcurran@gmail.com>,[],1,2018-06-05 21:48:43,2018-06-06 23:36:50,2018-06-06 23:36:50,True,2018-06-06 23:36:49,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/7,https://github.com/hyperledger/indy-agent/pull/7,swcurran,Docker setup for running nodejs agents and instructions,,[],2,2018-06-05 21:38:54,2018-06-06 03:05:57,2018-06-06 03:05:57,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/6,https://github.com/hyperledger/indy-agent/pull/6,dbluhm,Basic Python Implementation,"While the Python implementation is far from complete, we think the functionality already present may be of use to others and also hopefully generate feedback from the community.
+
+What works in this PR:
+- [x] Sending and receiving Connections Requests
+- [x] Accepting Connection Requests and sending Response
+- [x] Proper did, vk, and pairwise creation for the above steps
+- [x] Basic web UI
+
+Changes we plan to make that also provide noteworthy information about this PR:
+- [ ] Use `nonce`s for request/response and use that as the correlating information to retrieve did and vk to decrypt received messages. Currently, dids are being sent in plain text to provide this correlation.
+- [ ] Use one endpoint for all front-end/back-end interaction and use Sovrin messages for communication. (Front end becomes a sort of agent with admin privileges on the main agent.)
+- [ ] The web framework we're using is also a point of debate and we are potentially seeking replacements. Large changes may be coming to the front-end.
+
+**RE-RESUBMIT:** Fixed a missing sign-off and more missing sign-offs in merge artefacts.",[],45,2018-05-29 04:30:45,2018-05-31 21:09:14,2018-05-31 21:09:14,True,2018-05-31 21:09:14,mhailstone,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/5,https://github.com/hyperledger/indy-agent/pull/5,dbluhm,Basic Python Implementation,"While the Python implementation is far from complete, we think the functionality already present may be of use to others and also hopefully generate feedback from the community.
+
+What works in this PR:
+- [x] Sending and receiving Connections Requests
+- [x] Accepting Connection Requests and sending Response
+- [x] Proper did, vk, and pairwise creation for the above steps
+- [x] Basic web UI
+
+Changes we plan to make that also provide noteworthy information about this PR:
+- [ ] Use `nonce`s for request/response and use that as the correlating information to retrieve did and vk to decrypt received messages. Currently, dids are being sent in plain text to provide this correlation.
+- [ ] Use one endpoint for all front-end/back-end interaction and use Sovrin messages for communication. (Front end becomes a sort of agent with admin privileges on the main agent.)
+- [ ] The web framework we're using is also a point of debate and we are potentially seeking replacements. Large changes may be coming to the front-end.
+
+**RESUBMIT:** Fixed a missing sign-off.",[],51,2018-05-29 04:14:13,2018-05-29 04:15:38,2018-05-29 04:15:39,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/4,https://github.com/hyperledger/indy-agent/pull/4,dbluhm,Basic Python Implementation,"While the Python implementation is far from complete, we think the functionality already present may be of use to others and also hopefully generate feedback from the community.
+
+What works in this PR:
+- [x] Sending and receiving Connections Requests
+- [x] Accepting Connection Requests and sending Response
+- [x] Proper did, vk, and pairwise creation for the above steps
+- [x] Basic web UI
+
+Changes we plan to make that also provide noteworthy information about this PR:
+- [ ] Use `nonce`s for request/response and use that as the correlating information to retrieve did and vk to decrypt received messages. Currently, dids are being sent in plain text to provide this correlation.
+- [ ] Use one endpoint for all front-end/back-end interaction and use Sovrin messages for communication. (Front end becomes a sort of agent with admin privileges on the main agent.)
+- [ ] The web framework we're using is also a point of debate and we are potentially seeking replacements. Large changes may be coming to the front-end.",[],53,2018-05-29 04:04:09,2018-05-29 04:06:52,2018-05-29 04:06:52,False,,,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/3,https://github.com/hyperledger/indy-agent/pull/3,saholman,Added some documentation,Signed-off-by: Spencer Holman <spencer.a.holman@gmail.com>,[],2,2018-05-09 18:41:27,2018-05-09 19:09:23,2018-05-09 19:09:23,True,2018-05-09 19:09:23,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/2,https://github.com/hyperledger/indy-agent/pull/2,saholman,Basic framework for the indy-agent nodejs implementation,Signed-off-by: Spencer Holman <spencer.a.holman@gmail.com>,[],4,2018-05-08 18:57:58,2018-05-08 20:06:39,2018-05-08 20:06:39,True,2018-05-08 20:06:39,dbluhm,unknown,,closed
+indy-agent,https://api.github.com/repos/hyperledger/indy-agent/pulls/1,https://github.com/hyperledger/indy-agent/pull/1,jwagantall,Create DCO,Enable DCO,[],1,2018-05-08 18:39:27,2018-05-08 18:42:34,2018-05-08 18:42:34,False,,,unknown,,closed

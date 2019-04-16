@@ -1,0 +1,174 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+cloud-provider-alibaba-cloud,xlgao-zju,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/1,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/1,add myself to the OWNER,"Since I am the member of  @AliyunContainerService and @kubernetes, so I'd like to add myself to the OWNER file.
+cc @cheyang",closed,True,2018-09-18 03:54:06,2018-09-26 02:26:05
+cloud-provider-alibaba-cloud,mooncak,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/2,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/2,Create README.md,"Create README.md, and please update the purpose",closed,True,2018-09-27 17:01:41,2018-10-08 07:59:34
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/3,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/3,This is an initial pull request for kubernetes Alibaba Cloud Provider ,,closed,True,2018-10-08 02:20:03,2018-10-08 03:30:25
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/4,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/4,Initial PR for kubernetes Alibaba Cloud Provider,,closed,True,2018-10-08 05:09:20,2018-10-08 07:59:11
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/5,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/5,Gofmt code,Signed-off-by: Aoxn <yaoyao.aoxn@hotmail.com>,closed,True,2018-10-08 08:46:22,2018-10-08 08:56:52
+cloud-provider-alibaba-cloud,mirake,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/6,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/6,Fix some typos,"Fix some typos:
+Seperate -> Separate
+availabe -> available
+
+Signed-off-by: Rui Cao <ruicao@alauda.io>",closed,True,2018-10-09 13:29:33,2018-10-23 11:40:18
+cloud-provider-alibaba-cloud,AdamDang,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/7,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/7,Update usage.md,Fix some typos,closed,True,2018-10-11 06:10:53,2018-11-19 05:41:14
+cloud-provider-alibaba-cloud,jia-jerry,https://github.com/kubernetes/cloud-provider-alibaba-cloud/issues/8,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/8,Why should node name has to be overriden?,"To make the controller works, we need to specify --hostname-override [region].[instanceid]. This is not required in other CCM like AWS or GCP. Why should we put this constraint?
+
+",closed,False,2018-10-11 14:29:07,2019-03-14 03:00:41
+cloud-provider-alibaba-cloud,jia-jerry,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/9,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/9,Use provider ID only,"Fix issue: #8 
+----------------
+1.  Deferentiate caller entry between NodeName and ProviderID. Refactory findInstanceByNode (in instance.go), separate it into 2 functions: findInstanceByNodeName and findInstanceByProviderID. The first just return an error,  because once providerID  is supported correctly,  the first method should **never** been called.
+2. Route Controller is refactored, using providerID instead of nodeName ",closed,True,2018-10-16 08:51:39,2019-02-13 03:14:57
+cloud-provider-alibaba-cloud,mirake,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/10,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/10,Typo fix: enpoint -> endpoint,Signed-off-by: Rui Cao <ruicao@alauda.io>,closed,True,2018-10-23 11:44:13,2018-11-19 05:44:32
+cloud-provider-alibaba-cloud,xichengliudui,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/11,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/11,Add the function name to the comment,The function name is added,closed,True,2018-11-08 06:39:39,2018-11-19 05:47:56
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/12,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/12,Add new Owner @aoxn,,closed,True,2018-11-15 06:12:48,2018-11-16 02:37:33
+cloud-provider-alibaba-cloud,xichengliudui,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/13,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/13,Delete excess code,Delete excess code,closed,True,2018-11-22 10:03:51,2018-11-22 10:14:37
+cloud-provider-alibaba-cloud,gaozhenhai,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/14,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/14,Fix log output format,Signed-off-by: gaozhenhai <gaozh1988@live.com>,closed,True,2018-11-24 14:37:00,2018-11-30 01:29:34
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/15,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/15,add zh doc,Signed-off-by: Aoxn <yaoyao.aoxn@hotmail.com>,closed,True,2018-12-03 01:41:15,2018-12-11 00:09:06
+cloud-provider-alibaba-cloud,fejta,https://github.com/kubernetes/cloud-provider-alibaba-cloud/issues/16,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/16,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-12-21 09:37:24,2018-12-29 03:40:40
+cloud-provider-alibaba-cloud,nikhita,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/17,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/17,Add CONTRIBUTING.md,"Ref: https://github.com/kubernetes/steering/issues/28
+
+The content is as per https://github.com/kubernetes/kubernetes-template-project.
+
+/assign @aoxn @cheyang @xlgao-zju ",closed,True,2018-12-27 10:05:45,2018-12-28 05:13:22
+cloud-provider-alibaba-cloud,BSWANG,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/18,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/18,Add SECURITY_CONTACTS,"fix #16
+Ref: [kubernetes/steering#28](https://github.com/kubernetes/steering/issues/28)
+template: https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+
+/assign @aoxn @cheyang @xlgao-zju",closed,True,2018-12-29 03:33:53,2018-12-29 03:40:41
+cloud-provider-alibaba-cloud,tengattack,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/19,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/19,Fix load balancer using node name to get vpc info,"Hi,
+
+I found a inconsistent problem in `EnsureLoadBalancer`, it using the node name instead of the provider id:
+```diff
+-                       i, err := c.climgr.Instances().findInstanceByNode(types.NodeName(v.Name))
++                       i, err := c.climgr.Instances().findInstanceByNode(types.NodeName(v.Spec.ProviderID))
+```
+
+It fixes my kubernetes cluster couldn't create lb properly.
+
+And it works well now.
+
+BTW, it fixes some typo :)
+
+Happy New Year!",closed,True,2018-12-30 18:18:08,2019-01-09 23:42:28
+cloud-provider-alibaba-cloud,ddbmh,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/20,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/20,need to close,,closed,True,2019-01-07 15:59:49,2019-01-08 01:49:12
+cloud-provider-alibaba-cloud,ddbmh,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/21,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/21,Update getting-started with k8s 1.13 validation,,closed,True,2019-01-07 16:20:15,2019-01-08 01:53:01
+cloud-provider-alibaba-cloud,ddbmh,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/22,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/22,Add RAM role policy usage,,closed,True,2019-01-08 08:25:21,2019-01-08 08:30:09
+cloud-provider-alibaba-cloud,ddbmh,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/23,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/23, Add LoadBalancer Annotation doc,,closed,True,2019-01-08 10:51:34,2019-01-08 10:57:05
+cloud-provider-alibaba-cloud,ddbmh,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/24,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/24, Support LoadBalancer additional tags,"**Why is this needed:**
+need to tag different SLB created by cloud provider
+
+
+**What would you like to be added:**
+
+add new annotation 
+key=service.beta.kubernetes.io/alicloud-loadbalancer-additional-resource-tags
+value=Key1=Val1,Key2=Val2,KeyNoVal1=,KeyNoVal2
+
+caution:
+1.only effective on create
+2.not deal with tag's kv length limit
+3.not deal with tag number quota
+
+
+/kind feature
+/cc @aoxn 
+",closed,True,2019-01-09 09:51:12,2019-01-31 06:54:18
+cloud-provider-alibaba-cloud,tengattack,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/25,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/25,Fix typo & pass tag env for build,"Fixes some typo here :)
+
+Refine #19",closed,True,2019-01-09 23:41:42,2019-01-31 02:12:09
+cloud-provider-alibaba-cloud,ddbmh,https://github.com/kubernetes/cloud-provider-alibaba-cloud/issues/26,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/26,Load balancer bandwidth will not change when new value equals default value,"**How to reproduce it**:
+Step 1. create a service type Loadbalancer  with an annotation
+service.beta.kubernetes.io/alicloud-loadbalancer-bandwidth=20
+Step 2. change the service with new annotation
+service.beta.kubernetes.io/alicloud-loadbalancer-bandwidth=100  (100 is default bandwidth value)
+
+**What you expected to happen**:
+slb's bandwidth need to be changed to 100, but nothing changed.
+",open,False,2019-01-11 11:09:19,2019-01-11 11:10:11
+cloud-provider-alibaba-cloud,jia-jerry,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/27,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/27,Use secured base image Alpine,Ubuntu has many vulnerabilities. Use slim one - Alpine,closed,True,2019-02-13 05:34:52,2019-03-26 13:53:46
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/28,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/28,Support reuse slb & detailed route,,closed,True,2019-02-18 09:11:02,2019-02-22 07:38:04
+cloud-provider-alibaba-cloud,joelsmith,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/29,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/29,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:52:19,2019-03-11 06:19:27
+cloud-provider-alibaba-cloud,jia-jerry,https://github.com/kubernetes/cloud-provider-alibaba-cloud/issues/30,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/30,Node should be evicted automatically,"If a VM instances is stopped/deleted, the node should be evicted automatically.",open,False,2019-03-14 03:02:39,2019-03-14 03:02:54
+cloud-provider-alibaba-cloud,jia-jerry,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/31,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/31,"Fix return value of InstanceExistsByProviderID, node could be evicted…",Fix  #30 ,open,True,2019-03-14 05:44:08,2019-03-14 10:10:45
+cloud-provider-alibaba-cloud,pangzheng,https://github.com/kubernetes/cloud-provider-alibaba-cloud/issues/32,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/32,about `kube-apiserver and kube-controller-manager MUST NOT specify the --cloud-provider flag`,"I saw that the project documentation is to configure the api and controller --cloud-provider flag , but the official kubernetes documentation says it can't be configured. Is the version problem?
+
+[running-cloud-controller](https://kubernetes.io/docs/tasks/administer-cluster/running-cloud-controller/)
+
+```
+kube-apiserver and kube-controller-manager MUST NOT specify the --cloud-provider flag. This ensures that it does not run any cloud specific loops that would be run by cloud controller manager. In the future, this flag will be deprecated and removed.
+```
+",open,False,2019-03-18 09:19:07,2019-03-18 09:19:07
+cloud-provider-alibaba-cloud,devkanro,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/33,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/33, Support configure private zone with loadbalancer,"## Description
+This PR make service with loadbalancer more powerful, we can use annotation to config aliyun private DNS service.
+
+There are some samples:
+```YAML
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: foo
+  name: foo-service
+  namespace: default
+  annotations:
+    service.beta.kubernetes.io/alicloud-loadbalancer-address-type: ""intranet""
+    service.beta.kubernetes.io/alicloud-loadbalancer-protocol-port: ""http:80""
+    service.beta.kubernetes.io/alicloud-private-zone-name: ""service.ali""
+    service.beta.kubernetes.io/alicloud-private-zone-record-name: ""foo""
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: foo
+  type: LoadBalancer
+```
+It will create new intranet SLB with a random IP, and create a `A record` bind the random IP to 'foo.service.ali'.
+If your VPC has bound with the private zone 'service.ali', you can use 'http://foo.service.ali' to access your service in VPC, not a random IP.
+
+![Snipaste_2019-03-25_16-03-06](https://user-images.githubusercontent.com/9367842/54903754-9a1dd800-4f17-11e9-932f-2a1520471893.png)
+
+## Note
+The service controller will not create private zone automatically, and users need to create it first to use those annotations.
+
+The service controller will maintain DNS record automatically when service created, updated and deleted.
+
+DNS record has caches with TTL, when you delete service and create it again, the service controller with update DNS record immediately. But, due to the cache, DNS record in ECS will not update quickly. The cache will be expired in TTL time, the default TTL is 60 second.
+
+## Annotations
+We support four annotations for configuring the private zone.
+
+- service.beta.kubernetes.io/alicloud-private-zone-name  
+The private zone name, a domain like string, ""service.ali"", ""service.k8s"" ...etc
+- service.beta.kubernetes.io/alicloud-private-zone-id  
+The private zone ID, service controller will find private zone by ID first
+- service.beta.kubernetes.io/alicloud-private-zone-record-name  
+The record name, a domain like string, ""beta.foo"", ""foo"" ...etc
+- service.beta.kubernetes.io/alicloud-private-zone-record-ttl  
+The record TTL, the default value is 60.",closed,True,2019-03-25 08:04:25,2019-03-28 07:12:43
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/34,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/34,support multi route-table.,support for multi route-table.,closed,True,2019-03-26 07:45:57,2019-03-26 09:59:17
+cloud-provider-alibaba-cloud,Brooooooklyn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/35,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/35,docs(cloud-controller-manager): fix address which would cause livenessProbe fail,,open,True,2019-03-26 09:04:43,2019-03-26 09:25:06
+cloud-provider-alibaba-cloud,qiqizjl,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/36,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/36,当使用Virtual nodes情况下无法拿到实例ID,"当使用Virtual nodes情况下无法拿到实例ID,会报错实例未找到",closed,True,2019-03-26 09:37:17,2019-03-26 09:56:32
+cloud-provider-alibaba-cloud,qiqizjl,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/37,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/37,"If it is Local mode, allow matar to join SLB","If I deploy the program to the master node and the externalTrafficPolicy is set to Local, the SLB will not add the maste to the SLB, causing the service to be abnormal.",open,True,2019-03-26 09:44:31,2019-03-27 08:36:00
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/38,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/38,withvpc accept multiple route tables,Signed-off-by: Aoxn <yaoyao.aoxn@hotmail.com>,closed,True,2019-04-01 08:08:36,2019-04-01 08:14:33
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/39,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/39,convert space to tab for Makefile,Signed-off-by: Aoxn <yaoyao.aoxn@hotmail.com>,closed,True,2019-04-01 09:46:55,2019-04-01 09:54:33
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/40,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/40,remove http Remove() implements,Signed-off-by: Aoxn <yaoyao.aoxn@hotmail.com>,closed,True,2019-04-02 07:03:02,2019-04-02 07:04:35
+cloud-provider-alibaba-cloud,aoxn,https://github.com/kubernetes/cloud-provider-alibaba-cloud/pull/41,https://api.github.com/repos/kubernetes/cloud-provider-alibaba-cloud/issues/41,vpc client refresh token,Signed-off-by: Aoxn <yaoyao.aoxn@hotmail.com>,closed,True,2019-04-02 09:04:49,2019-04-02 09:08:37

@@ -1,0 +1,178 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/indy-agent/issues/100,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/478801876,https://github.com/hyperledger/indy-agent/pull/100#issuecomment-478801876,kukgini,"This is not a solution for docker containers. It only can solve local dev environment. 
+So, This request should be discarded.",2019-04-02 01:03:13,2019-04-02 01:03:13
+https://api.github.com/repos/hyperledger/indy-agent/issues/97,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/475853883,https://github.com/hyperledger/indy-agent/pull/97#issuecomment-475853883,fabienpe,"Found additional errors, especially when UI is reloaded in browser.",2019-03-23 09:10:25,2019-03-23 09:10:25
+https://api.github.com/repos/hyperledger/indy-agent/issues/96,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/475484545,https://github.com/hyperledger/indy-agent/pull/96#issuecomment-475484545,dhh1128,This change was discussed and approved on #indy-agent here: https://chat.hyperledger.org/channel/indy-agent?msg=Xes3cnmr4TvpgFjRC,2019-03-22 03:47:10,2019-03-22 03:47:10
+https://api.github.com/repos/hyperledger/indy-agent/issues/79,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/467981729,https://github.com/hyperledger/indy-agent/pull/79#issuecomment-467981729,TelegramSam,These changes reduced the errors. Still remaining are reference complaints about the files in `concrete\`.,2019-02-27 18:44:22,2019-02-27 18:44:22
+https://api.github.com/repos/hyperledger/indy-agent/issues/78,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/464136382,https://github.com/hyperledger/indy-agent/pull/78#issuecomment-464136382,blhagadorn,Thanks to both of you as well getting me to where I was at that point and explaining and all that you did. Hopefully the next one isn't as painful....,2019-02-15 17:41:27,2019-02-15 17:41:27
+https://api.github.com/repos/hyperledger/indy-agent/issues/76,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/463819493,https://github.com/hyperledger/indy-agent/pull/76#issuecomment-463819493,blhagadorn,Closing,2019-02-14 22:06:22,2019-02-14 22:06:22
+https://api.github.com/repos/hyperledger/indy-agent/issues/66,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/462448829,https://github.com/hyperledger/indy-agent/pull/66#issuecomment-462448829,dbluhm,"There are several things we'll need to clean up from the git history before we can merge this in. Additionally, a chat about how we can make this fit better with the current structure of the test suite would be beneficial.",2019-02-11 18:54:33,2019-02-11 18:54:33
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/454897812,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-454897812,TelegramSam,This fix helps the docker scenario but at the expense of non-private network scenarios. We need a way to have the browser use the same network as the agents use to talk to each other.,2019-01-16 18:57:42,2019-01-16 18:57:42
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/454903797,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-454903797,TelegramSam,"Now that I've had a look through the problem... the code should work in Docker, as long as you don't use localhost or 127.0.0.1 in the browser for the ip. Were you using your own local machine ip?",2019-01-16 19:15:50,2019-01-16 19:15:50
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/455090561,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-455090561,xaviernopre,"@TelegramSam There were a mistake for the URL to use to access each agent. I have tried under MacOS and Linux : the URL to use is http://localhost:8094 (or 8095). I have remodeled the README, to be more Markdown compliant, and to be more simplier, for each environment (Linux and MacOS). Can you check it and give me feedbacks ? ;-)
+
+Why do you need a way to have the browser use the same network as the agents use to talk to each other ? In my case (Docker under MacOS), there is no choice : I have to open browser tabs with `localhost` and processes have to communicate with internal docker IP addresses (`172.17.0.3` for example). For this reason, I have added this output in each agent console : `Agent Offer Endpoint : ""http://172.17.0.2:8094/offer""`. And in the README, I have explained to get this URL to use the demo (i.e. send connection request). I think all is OK like this, no ?",2019-01-17 08:49:33,2019-01-17 08:49:33
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/455304604,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-455304604,dbluhm,"@xaviernopre I think the Makefile you've added is great but having it be a Makefile could introduce some confusion as the Makefile doesn't build the code but rather does docker operations. It's not as simple but I think having a shell script named ""docker-setup.sh"" that performs the operations in your Makefile would be a clearer solution. Or, perhaps, clearly labeling the Makefile by changing ""build"" to ""docker-build"" and ""start"" to ""docker-start"" could help avoid the same confusion.",2019-01-17 19:39:41,2019-01-17 19:39:41
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/456026079,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456026079,xaviernopre,"@dbluhm You're right, ""build"" and ""start"" can be confusing, I have pushed changes adding ""docker-"" prefix for each target in the Makefile",2019-01-21 10:33:56,2019-01-21 10:33:56
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/456472176,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456472176,TelegramSam,"> Why do you need a way to have the browser use the same network as the agents use to talk to each other ?
+
+I think we need this because it mimics the way Agents will generally work in the real world. Agents will generally not use a private network (like Docker provides) to communicate, and I worry that optimizing for this private network case will cause negative side effects within the codebase.",2019-01-22 16:47:08,2019-01-22 16:47:08
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/456474003,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456474003,xaviernopre,@dbluhm @TelegramSam I have pushed fixes in README for commands,2019-01-22 16:51:53,2019-01-22 16:51:53
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/456474047,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456474047,swcurran,"This sounds like the same issue we ran into. The solution in that case was
+to have 2 different environment variables, one each for the app and the
+API. That works if those addresses are the same or different - it becomes a
+config injection concern.
+
+On Tue, Jan 22, 2019, 8:47 AM Sam Curren <notifications@github.com wrote:
+
+> Why do you need a way to have the browser use the same network as the
+> agents use to talk to each other ?
+>
+> I think we need this because it mimics the way Agents will generally work
+> in the real world. Agents will generally not use a private network (like
+> Docker provides) to communicate, and I worry that optimizing for this
+> private network case will cause negative side effects within the codebase.
+>
+> —
+> You are receiving this because you are subscribed to this thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456472176>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AA-Iwq_tcWfC4WiMFn1Aww18ZJPsRoWLks5vF0CNgaJpZM4aDJC5>
+> .
+>
+",2019-01-22 16:51:59,2019-01-22 16:51:59
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/456477224,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456477224,xaviernopre,"> I think we need this because it mimics the way Agents will generally work in the real world. Agents will generally not use a private network (like Docker provides) to communicate, and I worry that optimizing for this private network case will cause negative side effects within the codebase.
+
+Perhaps there can be some little side effects, but it is very useful to be able to checkout the repo, and quickly and simply be able to run the demo ! Docker is very useful to avoid install of many softwares or libs, and in my opinion (and my knowledges), my configuration is the only that can run correctly. And in addition, I'm under MacOS, so the README instructions for Linux are not usable... ;-) . And I think that developpers (and users of this demo) can understand the limits and extrapolate for the real life ;-)",2019-01-22 16:59:55,2019-01-22 16:59:55
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/456480133,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456480133,swcurran,"Amen!
+
+On Tue, Jan 22, 2019, 8:59 AM Xavier NOPRE <notifications@github.com wrote:
+
+> I think we need this because it mimics the way Agents will generally work
+> in the real world. Agents will generally not use a private network (like
+> Docker provides) to communicate, and I worry that optimizing for this
+> private network case will cause negative side effects within the codebase.
+>
+> Perhaps there can be some little side effects, but it is very useful to be
+> able to checkout the repo, and quickly and simply be able to run the demo !
+> Docker is very useful to avoid install of many softwares or libs, and in my
+> opinion (and my knowledges), my configuration is the only that can run
+> correctly. And in addition, I'm under MacOS, so the README instructions for
+> Linux are not usable... ;-) . And I think that developpers (and users of
+> this demo) can understand the limits and extrapolate for the real life ;-)
+>
+> —
+> You are receiving this because you commented.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/indy-agent/pull/59#issuecomment-456477224>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AA-Iwp8brqpuqpl_VvUMYr3dhEkmoSYhks5vF0OLgaJpZM4aDJC5>
+> .
+>
+",2019-01-22 17:07:06,2019-01-22 17:07:06
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/458049531,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-458049531,xaviernopre,"@TelegramSam I'm back (after some days off), finally, is it OK for you ? ",2019-01-28 09:13:04,2019-01-28 09:13:04
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/460667152,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-460667152,xaviernopre,"@TelegramSam Hi :-) . I will be soon ready to do a new PR with ""dockerization"" for `vcx/wrappers/python3/demo`, but for this, I need the current PR. Is it possible to merge it ? Thanks",2019-02-05 14:55:29,2019-02-05 14:55:29
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/460784698,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-460784698,blhagadorn,"@xaviernopre Very nice! Possibly could you fork your own PR here in the meantime until this is approved, specifically just the makefile and your use of docker IP commands.  As @dbluhm mentioned regarding the use of a Makefile, it's possible to do what von-network has done, a series of scripts: https://github.com/bcgov/von-network/tree/master/scripts? 
+
+One option regarding the concerns about creating a private network, since this is a reference agent (maybe we should define if we want to learn from a reference agent and get it going quick, like @swcurran would suggest, or if your changes should be a suggested feature for learning quickly but not apart of the official documentation?).  
+
+Regardless, for projects like the Indy-SDK learning and getting started guide https://github.com/kdenhartog/indy-dev we found that a Makefile and docker commands like yours do were really helpful for your stated preference of
+> very useful to be able to checkout the repo, and quickly and simply be able to run the demo
+",2019-02-05 20:08:34,2019-02-05 20:09:06
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/461042315,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-461042315,xaviernopre,"@blhagadorn I'm not sure to good understand your comments, and don't really understand what you're waiting from me, but I will try to answer... ;-) 
+
+> @xaviernopre Very nice! Possibly could you fork your own PR here in the meantime until this is approved, specifically just the makefile and your use of docker IP commands. 
+
+Sorry, I don't understand. Which PR are you talking about ? What do you want me to do ? 
+
+> As @dbluhm mentioned regarding the use of a Makefile, it's possible to do what von-network has done, a series of scripts: https://github.com/bcgov/von-network/tree/master/scripts?
+
+In my opinion, using a Makefile is very useful, simple and standard. And it is a (re)emerging standard. For example, https://github.com/bcgov/von-network/blob/master/manage do the same but without being a standard. If you want to know available commands, you have juste to take a look at the targets in the Makefile. Conversely, with `manage`(above), you have to read many code to extract available commands. And obviously, I have all documented in the README file.
+
+> One option regarding the concerns about creating a private network, since this is a reference agent (maybe we should define if we want to learn from a reference agent and get it going quick, like @swcurran would suggest, or if your changes should be a suggested feature for learning quickly but not apart of the official documentation?).
+
+My approach is the following : I list what I'm missing trying to use a lib or trying to run a sample code. For example, following this way, I have contributed with this https://github.com/hyperledger/indy-sdk/tree/master/docs/how-tos/write-did-and-query-verkey/nodejs, https://github.com/hyperledger/indy-sdk/blob/master/samples/nodejs/src/anoncredsRevocationScenario.js, ... It is the same here, this repo is a ""reference implementation"", that can be run, and the only/better solution for me (and other future ;-) ) on MacOs, is Docker :-) . As I said, developers are able to understand that this is a reference implementation, with some adjustments for the run.
+
+> Regardless, for projects like the Indy-SDK learning and getting started guide https://github.com/kdenhartog/indy-dev we found that a Makefile and docker commands like yours do were really helpful for your stated preference of
+
+Sorry, I don't understand what you mean...",2019-02-06 14:29:10,2019-02-06 14:29:10
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/461737282,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-461737282,xaviernopre,I have resolved conflicts. Is it possible to merge this PR ? ;-),2019-02-08 09:11:29,2019-02-08 09:11:29
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/467034175,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-467034175,xaviernopre,@TelegramSam @dbluhm @swcurran @blhagadorn Why not merge this PR ? I have done this work and effort to help further developpers. I have answered your questions. Is there still a problem ? Thanks,2019-02-25 14:36:31,2019-02-25 14:36:31
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/467162893,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-467162893,dbluhm,@xaviernopre Sorry to take so long on this. I am testing out your changes now and will approve once everything checks out. Thanks for your patience!,2019-02-25 20:06:18,2019-02-25 20:06:18
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/467189224,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-467189224,dbluhm,"@xaviernopre I submitted a PR against your branch with some minor clarifications and additions. Once you review that, I think this PR is just about ready to go.",2019-02-25 21:24:53,2019-02-25 21:24:53
+https://api.github.com/repos/hyperledger/indy-agent/issues/59,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/471488736,https://github.com/hyperledger/indy-agent/pull/59#issuecomment-471488736,xaviernopre,@dbluhm Great ! 😀,2019-03-11 10:40:23,2019-03-11 10:40:23
+https://api.github.com/repos/hyperledger/indy-agent/issues/47,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/444951230,https://github.com/hyperledger/indy-agent/pull/47#issuecomment-444951230,TelegramSam,Credit should include @nhelmy who assisted with some parallel programming efforts.,2018-12-06 17:11:12,2018-12-06 17:11:12
+https://api.github.com/repos/hyperledger/indy-agent/issues/45,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/443837826,https://github.com/hyperledger/indy-agent/pull/45#issuecomment-443837826,TelegramSam,"This looks good. Are you all finished with changes, and we can approve and merge?",2018-12-03 19:26:51,2018-12-03 19:26:51
+https://api.github.com/repos/hyperledger/indy-agent/issues/41,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/439242502,https://github.com/hyperledger/indy-agent/pull/41#issuecomment-439242502,blhagadorn,@dbluhm @TelegramSam Ready for review :D ,2018-11-16 00:46:13,2018-11-16 00:46:13
+https://api.github.com/repos/hyperledger/indy-agent/issues/41,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/439954136,https://github.com/hyperledger/indy-agent/pull/41#issuecomment-439954136,TelegramSam,"Code looks good, and tested well. We need a small addition to the bottom of the readme that explains how to use the new command line options.",2018-11-19 16:27:30,2018-11-19 16:27:30
+https://api.github.com/repos/hyperledger/indy-agent/issues/41,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/441654258,https://github.com/hyperledger/indy-agent/pull/41#issuecomment-441654258,blhagadorn,Woops thank you! Added @TelegramSam ,2018-11-26 14:19:44,2018-11-26 14:19:44
+https://api.github.com/repos/hyperledger/indy-agent/issues/35,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/431186597,https://github.com/hyperledger/indy-agent/pull/35#issuecomment-431186597,dbluhm,Resolved conflicts between this and Ken's PR.,2018-10-18 22:33:51,2018-10-18 22:33:51
+https://api.github.com/repos/hyperledger/indy-agent/issues/35,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/431368347,https://github.com/hyperledger/indy-agent/pull/35#issuecomment-431368347,TelegramSam,"This looks good, but I think taking one more step would help the organization quite a bit.
+
+Message handlers are still registered individually, like this:
+
+`await msg_router.register(CONN.SEND_REQUEST, connection.request_received)`
+
+It would be nice to register a module by message family, and allow each module to route messages to the appropriate handler.
+
+This does add a small layer of complexity to routing, but better encapsulates message families within the module, and it prevents the main router from being burdened with each message type. This will be important is the number of supported message families grows.",2018-10-19 13:45:31,2018-10-19 13:45:31
+https://api.github.com/repos/hyperledger/indy-agent/issues/35,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/431481916,https://github.com/hyperledger/indy-agent/pull/35#issuecomment-431481916,dbluhm,I was going for a more incremental approach but I'll update this PR with more commits to get to routing by message family.,2018-10-19 19:58:59,2018-10-19 19:58:59
+https://api.github.com/repos/hyperledger/indy-agent/issues/35,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/431500221,https://github.com/hyperledger/indy-agent/pull/35#issuecomment-431500221,dbluhm,Implemented routing by message family. This meant I had to introduce a new message family for messages intended to be consumed by the connections module sent from the UI. I called this family `connections_ui`.,2018-10-19 21:11:30,2018-10-19 21:11:30
+https://api.github.com/repos/hyperledger/indy-agent/issues/35,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/431542947,https://github.com/hyperledger/indy-agent/pull/35#issuecomment-431542947,TelegramSam,This is a great refactor. Tested and code reviewed.,2018-10-20 02:53:53,2018-10-20 02:53:53
+https://api.github.com/repos/hyperledger/indy-agent/issues/33,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/441812563,https://github.com/hyperledger/indy-agent/pull/33#issuecomment-441812563,dbluhm,Would it possible to put all the docker related files inside of a subdirectory to keep the root folder for the python agent a little cleaner?,2018-11-26 21:51:26,2018-11-26 21:51:26
+https://api.github.com/repos/hyperledger/indy-agent/issues/33,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/442447091,https://github.com/hyperledger/indy-agent/pull/33#issuecomment-442447091,swcurran,"Will do. On vacation right now, but will fit it in, probably by tomorrow.
+
+On Mon, Nov 26, 2018, 22:51 Daniel Bluhm <notifications@github.com wrote:
+
+> Would it possible to put all the docker related files inside of a
+> subdirectory to keep the root folder for the python agent a little cleaner?
+>
+> —
+> You are receiving this because you authored the thread.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/indy-agent/pull/33#issuecomment-441812563>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/AA-Iwto0rqoAx7tONNW8P8atkTOIpzPBks5uzGJ1gaJpZM4XrB9K>
+> .
+>
+",2018-11-28 13:30:47,2018-11-28 13:30:47
+https://api.github.com/repos/hyperledger/indy-agent/issues/33,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/448412052,https://github.com/hyperledger/indy-agent/pull/33#issuecomment-448412052,swcurran,"Closing this as Overcome by Events. I don't think it's relevant at this point.
+
+I still cannot get the agents to work/communicate when loaded using this approach. I'm not sure why, but think it's better that if this capability is wanted, someone else should do it.",2018-12-18 23:32:50,2018-12-18 23:32:50
+https://api.github.com/repos/hyperledger/indy-agent/issues/31,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/430302518,https://github.com/hyperledger/indy-agent/pull/31#issuecomment-430302518,trthhrtz,@telegramsam @dbluhm ,2018-10-16 16:21:17,2018-10-16 16:21:17
+https://api.github.com/repos/hyperledger/indy-agent/issues/31,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/430310201,https://github.com/hyperledger/indy-agent/pull/31#issuecomment-430310201,TelegramSam,I have reviewed this code. There are a few more important additions than at last review.,2018-10-16 16:43:43,2018-10-16 16:43:43
+https://api.github.com/repos/hyperledger/indy-agent/issues/30,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/430102287,https://github.com/hyperledger/indy-agent/pull/30#issuecomment-430102287,trthhrtz,"@telegramsam, @dbluhm ",2018-10-16 05:06:34,2018-10-16 05:06:34
+https://api.github.com/repos/hyperledger/indy-agent/issues/29,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/430317881,https://github.com/hyperledger/indy-agent/pull/29#issuecomment-430317881,nage,It looks like some content wasn't included intentionally.  Please address encrypted.dat's contents and purpose (or just remove).,2018-10-16 17:06:44,2018-10-16 17:06:44
+https://api.github.com/repos/hyperledger/indy-agent/issues/29,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/430325721,https://github.com/hyperledger/indy-agent/pull/29#issuecomment-430325721,dbluhm,@nage removed that file (one that was removed in one of the commits in the previous PR and then reintroduced with the revert).,2018-10-16 17:28:42,2018-10-16 17:28:42
+https://api.github.com/repos/hyperledger/indy-agent/issues/28,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/430019275,https://github.com/hyperledger/indy-agent/pull/28#issuecomment-430019275,dbluhm,@trthhrtz looks like you missed a DCO sign off message on d829660,2018-10-15 21:25:39,2018-10-15 21:25:39
+https://api.github.com/repos/hyperledger/indy-agent/issues/27,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/429565943,https://github.com/hyperledger/indy-agent/pull/27#issuecomment-429565943,trthhrtz,"Great idea to use a framework!
+However I am not sure that the chosen position for the send connection offer button is the best...
+![image](https://user-images.githubusercontent.com/13679724/46908844-9847f580-cf31-11e8-9f9c-bd78c0d2cf87.png)
+",2018-10-13 18:47:53,2018-10-13 18:47:53
+https://api.github.com/repos/hyperledger/indy-agent/issues/27,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/429878217,https://github.com/hyperledger/indy-agent/pull/27#issuecomment-429878217,TelegramSam,"@trthhrtz I had to move the button to avoid complicating the UI template code. It's functional at this point, and we can clean it up as we move forward and nail things down.",2018-10-15 14:35:58,2018-10-15 14:35:58
+https://api.github.com/repos/hyperledger/indy-agent/issues/25,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/427946260,https://github.com/hyperledger/indy-agent/pull/25#issuecomment-427946260,dbluhm,@TelegramSam merged Kuzma's changes.,2018-10-08 19:06:31,2018-10-08 19:06:31
+https://api.github.com/repos/hyperledger/indy-agent/issues/20,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/412110407,https://github.com/hyperledger/indy-agent/pull/20#issuecomment-412110407,ArthurManz,"I would also like to suggest the use of a codestyle formatter, like Prettier. I found some files using single quotes and some double quotes. Plus some missing semicolons and other code style inconsistencies.
+I will summit another PR for this topic.",2018-08-10 15:04:05,2018-08-10 15:04:05
+https://api.github.com/repos/hyperledger/indy-agent/issues/17,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/406092489,https://github.com/hyperledger/indy-agent/pull/17#issuecomment-406092489,saholman,@vitalrev We can merge both of the PRs if you can change them to be compatible with the 1.5 syntax for creating wallets.  It may take some time for the node.js wrapper to be updated.,2018-07-18 22:20:40,2018-07-18 22:20:40
+https://api.github.com/repos/hyperledger/indy-agent/issues/17,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/416751660,https://github.com/hyperledger/indy-agent/pull/17#issuecomment-416751660,mhailstone,Accepted ArthurManz update with Docker and 1.6.1.,2018-08-28 21:46:44,2018-08-28 21:46:44
+https://api.github.com/repos/hyperledger/indy-agent/issues/16,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/406044815,https://github.com/hyperledger/indy-agent/pull/16#issuecomment-406044815,saholman,"@vitalrev Thank you for contributing to this project and helping get it up to indy-sdk v1.5.  It seems like we can combine the first pull request with this one, can't we.  With both pull requests merged, I'm having a few issues getting things running with the latest version of the indy-sdk.  I get the following error, 
+
+```
+create wallet failed with message: Expected String or null for pool_name: createWallet(pool_name, name, xtype, config, credentials, cb(err))
+Error: Expected String or null for pool_name: createWallet(pool_name, name, xtype, config, credentials, cb(err))
+```",2018-07-18 19:20:26,2018-07-18 19:20:26
+https://api.github.com/repos/hyperledger/indy-agent/issues/16,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/406049258,https://github.com/hyperledger/indy-agent/pull/16#issuecomment-406049258,saholman,"True, but the node.js wrapper doesn't support that yet. https://www.npmjs.com/package/indy-sdk#createwallet--poolname-name-xtype-config-credentials----void
+",2018-07-18 19:37:02,2018-07-18 19:37:02
+https://api.github.com/repos/hyperledger/indy-agent/issues/16,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/416751466,https://github.com/hyperledger/indy-agent/pull/16#issuecomment-416751466,mhailstone,Accepted ArthurManz pull request for 1.6.1.,2018-08-28 21:46:01,2018-08-28 21:46:01
+https://api.github.com/repos/hyperledger/indy-agent/issues/14,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/401029507,https://github.com/hyperledger/indy-agent/pull/14#issuecomment-401029507,kosullivansita,"Hmm - still not working, I need to go away and figure this out.",2018-06-28 13:12:17,2018-06-28 13:12:17
+https://api.github.com/repos/hyperledger/indy-agent/issues/13,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/401011417,https://github.com/hyperledger/indy-agent/pull/13#issuecomment-401011417,kosullivansita,Cancelling this PR as it was not signed. ,2018-06-28 12:03:04,2018-06-28 12:03:04
+https://api.github.com/repos/hyperledger/indy-agent/issues/12,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/398499603,https://github.com/hyperledger/indy-agent/pull/12#issuecomment-398499603,saholman,It still works fine on Mac. I don't think it works on Ubuntu. I think I need to change the order and put `open` after `xdg-open` because `open` is defined in ubuntu but it is not correct tool in this case.,2018-06-19 18:29:35,2018-06-19 18:29:35
+https://api.github.com/repos/hyperledger/indy-agent/issues/12,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/398500345,https://github.com/hyperledger/indy-agent/pull/12#issuecomment-398500345,saholman,The other additions are great!,2018-06-19 18:31:57,2018-06-19 18:31:57
+https://api.github.com/repos/hyperledger/indy-agent/issues/12,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/398501848,https://github.com/hyperledger/indy-agent/pull/12#issuecomment-398501848,saholman,@mhailstone Can you approve this PR?,2018-06-19 18:36:58,2018-06-19 18:36:58
+https://api.github.com/repos/hyperledger/indy-agent/issues/9,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/397083147,https://github.com/hyperledger/indy-agent/pull/9#issuecomment-397083147,swcurran,"@nage, @devin-fisher - can either of you push someone to review and accept this Pull Request - it would be really helpful to have out there.",2018-06-13 20:53:31,2018-06-13 20:53:31
+https://api.github.com/repos/hyperledger/indy-agent/issues/7,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/394925664,https://github.com/hyperledger/indy-agent/pull/7#issuecomment-394925664,swcurran,Cancelling this PR as it was not signed.  An additional PR is properly signed and includes the same content as this one.,2018-06-06 03:05:53,2018-06-06 03:05:53
+https://api.github.com/repos/hyperledger/indy-agent/issues/6,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/392650043,https://github.com/hyperledger/indy-agent/pull/6#issuecomment-392650043,dbluhm,"@saholman If you and Matthew could review this for us, that would be great!",2018-05-29 04:32:27,2018-05-29 04:32:27
+https://api.github.com/repos/hyperledger/indy-agent/issues/5,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/392647955,https://github.com/hyperledger/indy-agent/pull/5#issuecomment-392647955,dbluhm,Evidently merges don't add the required sign-off.... Resubmitting. Again.,2018-05-29 04:15:38,2018-05-29 04:15:38
+https://api.github.com/repos/hyperledger/indy-agent/issues/4,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/392647023,https://github.com/hyperledger/indy-agent/pull/4#issuecomment-392647023,dbluhm,Seem to have missed a sign-off... Resubmitting.,2018-05-29 04:06:52,2018-05-29 04:06:52
+https://api.github.com/repos/hyperledger/indy-agent/issues/2,https://api.github.com/repos/hyperledger/indy-agent/issues/comments/387509531,https://github.com/hyperledger/indy-agent/pull/2#issuecomment-387509531,dbluhm,Looks like a great place to start! My only comment is that we probably don't need the nested LICENSE file inside of the nodejs folder.,2018-05-08 19:07:26,2018-05-08 19:07:26

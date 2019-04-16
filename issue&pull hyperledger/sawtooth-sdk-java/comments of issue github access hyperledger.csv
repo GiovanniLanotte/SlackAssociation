@@ -1,0 +1,81 @@
+url issues,url_api comment,url_html comment,user create comment,body,created_at,updated_at
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/451003566,https://github.com/hyperledger/sawtooth-sdk-java/pull/15#issuecomment-451003566,boydjohnson,"Hey, @CarvalhoLeonardo and @arsulegai we made an XO Android example client. Do you want to take a look?",2019-01-02 22:21:23,2019-01-02 22:21:23
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/451092756,https://github.com/hyperledger/sawtooth-sdk-java/pull/15#issuecomment-451092756,CarvalhoLeonardo,"Hey, looks nice!",2019-01-03 09:34:02,2019-01-03 09:34:02
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/451092916,https://github.com/hyperledger/sawtooth-sdk-java/pull/15#issuecomment-451092916,CarvalhoLeonardo,"I'll spin up an image and review it as soon as possible!
+
+",2019-01-03 09:34:45,2019-01-03 09:34:45
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/15,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/451810403,https://github.com/hyperledger/sawtooth-sdk-java/pull/15#issuecomment-451810403,arsulegai,"> Hey, @CarvalhoLeonardo and @arsulegai we made an XO Android example client. Do you want to take a look?
+
+Awesome, need some time to review",2019-01-07 03:19:39,2019-01-07 03:19:39
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/10,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/438032933,https://github.com/hyperledger/sawtooth-sdk-java/pull/10#issuecomment-438032933,boydjohnson,@arsulegai Can you review this?,2018-11-12 21:22:20,2018-11-12 21:22:20
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/9,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/437390152,https://github.com/hyperledger/sawtooth-sdk-java/pull/9#issuecomment-437390152,boydjohnson,"@peterschwarz We could deploy to staging, but not release, would be one way.
+
+I think that is what I will do. I will work with @rbuysse and @rberg2 today to see if we can deploy this, before I merge it.",2018-11-09 15:16:12,2018-11-09 15:17:29
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/435169978,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#issuecomment-435169978,vaporos,"I'm not sure I like 'sawtooth-sdk-transaction-processor' as an artifact name, but its probably fine. Otherwise this LGTM.",2018-11-01 20:08:55,2018-11-01 20:08:55
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/435471035,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#issuecomment-435471035,boydjohnson,@CarvalhoLeonardo @arsulegai any opinions on splitting the sdk into three jars?,2018-11-02 18:36:58,2018-11-02 18:36:58
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/435681903,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#issuecomment-435681903,CarvalhoLeonardo,"> @CarvalhoLeonardo @arsulegai any opinions on splitting the sdk into three jars?
+
+   I think it is fine, I did something like this, but I would open space for a 4th module, to handle REST artifacts...",2018-11-04 16:03:27,2018-11-04 16:03:27
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/435682497,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#issuecomment-435682497,CarvalhoLeonardo,"<...>
+>     * peg the maven version used in docker files due to a inconsistency between maven 3.5.4 and jdk 8. https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class
+> <....>
+
+   I would like to suggest bumping the Java version to 11, due to this points:
+- Java 8 has many [issues](https://blog.docker.com/2018/04/improved-docker-container-integration-with-java-10/) on virtualization, corrected in java 10.
+- Java 8 will start the [EOL cycle](https://www.oracle.com/technetwork/java/eol-135779.html) next year.
+- Java 10/11 are VERY optimized for streams and multithread applications. (and I strongly advocate the use of reactive programming.)
+- The changes I've submitted where created using Java 10, so, there's no compatibility issue.
+- But, Java 10 it's [already EOLed](https://www.oracle.com/technetwork/java/eol-135779.html).
+
+My 2 cents.",2018-11-04 16:10:47,2018-11-04 16:10:47
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/435937249,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#issuecomment-435937249,boydjohnson,@arsulegai With regards to including all of the protos for every interface. I think it is fine to do so. I think it allows people to innovate where necessary.,2018-11-05 16:23:05,2018-11-05 16:23:05
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/7,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/435995841,https://github.com/hyperledger/sawtooth-sdk-java/pull/7#issuecomment-435995841,boydjohnson,@arsulegai I will make a README.md in a later PR. I don't want to hold this one up.,2018-11-05 19:05:02,2018-11-05 19:05:02
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/431500108,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-431500108,boydjohnson,@arsulegai @CarvalhoLeonardo Can you guys review this?,2018-10-19 21:11:01,2018-10-19 21:11:01
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/431500445,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-431500445,boydjohnson,"@CarvalhoLeonardo I used your bitcoinj signing method from your PR. To make a pluggable signer with the NativeSecp256k1Signer, you would implement Context.",2018-10-19 21:12:21,2018-10-19 21:12:21
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/431568312,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-431568312,CarvalhoLeonardo,"I'll keep that in mind, thank you.",2018-10-20 10:24:02,2018-10-20 10:24:02
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/432692839,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-432692839,vaporos,"Thoughts on the package being ""sawtooth.signing"" instead of the longer ""sawtooth.sdk.client.signing""? If we move this to its own module/jar file, thoughts on the package name due to that?",2018-10-24 14:55:25,2018-10-24 14:55:25
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/432709857,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-432709857,boydjohnson,"> Thoughts on the package being ""sawtooth.signing"" instead of the longer ""sawtooth.sdk.client.signing""? If we move this to its own module/jar file, thoughts on the package name due to that?
+
+@vaporos I think if it is its own module/jar, it could be ""sawtooth.signing"". I expect to do that work sometime soon.",2018-10-24 15:37:33,2018-10-24 15:37:33
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/432750876,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-432750876,CarvalhoLeonardo,"   I only did in separate packages because the inner workings on each
+scenario (server and client) are slightly different, like I commented above.
+
+On Wed, Oct 24, 2018 at 1:41 PM Boyd Johnson <notifications@github.com>
+wrote:
+
+> Thoughts on the package being ""sawtooth.signing"" instead of the longer
+> ""sawtooth.sdk.client.signing""? If we move this to its own module/jar file,
+> thoughts on the package name due to that?
+>
+> @vaporos <https://github.com/vaporos> I think if it is its own
+> module/jar, it could be ""sawtooth.signing"". I expect to do that work
+> sometime soon.
+>
+> —
+> You are receiving this because you were mentioned.
+> Reply to this email directly, view it on GitHub
+> <https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-432709857>,
+> or mute the thread
+> <https://github.com/notifications/unsubscribe-auth/ANZ9IXkBep9CGxx_TPt2LFS-ysxRJqT2ks5uoIoSgaJpZM4XxbXX>
+> .
+>
+
+
+-- 
+---------------
+""Be ashamed to die until you have won some victory for humanity.""
+*Horace Mann <http://www.quotationspage.com/quotes/Horace_Mann/>*,*(1796 -
+1859)*
+
+""During times of universal deceit, telling the truth becomes a
+revolutionary act."" - George Orwell
+<http://www.reddit.com/r/politics/comments/efl6n/during_times_of_universal_deceit_telling_the/>
+",2018-10-24 17:23:02,2018-10-24 17:23:02
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/5,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/432761825,https://github.com/hyperledger/sawtooth-sdk-java/pull/5#issuecomment-432761825,peterschwarz,I also agree with the shortening of the package names the `sdk` in `sawtooth.sdk.*` seems rather redundant overall. And `sawtooth.signing` definitely feels more appropriate for that package in general. ,2018-10-24 17:50:31,2018-10-24 17:50:31
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/4,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/428989740,https://github.com/hyperledger/sawtooth-sdk-java/pull/4#issuecomment-428989740,boydjohnson,I missed some lint. I will close until I have that fixed up.,2018-10-11 15:02:35,2018-10-11 15:02:35
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/3,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/430979081,https://github.com/hyperledger/sawtooth-sdk-java/pull/3#issuecomment-430979081,CarvalhoLeonardo,"Guys, I got a very extensive delta to commit, how can I help this work, breaking it in smaller chuncks ? Is there a how to, a document, something like that?",2018-10-18 11:51:29,2018-10-18 11:51:29
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/406012157,https://github.com/hyperledger/sawtooth-sdk-java/pull/2#issuecomment-406012157,boydjohnson,"I tested that the sdk, intkey, and xo all build using the build scripts (on Mac). Also that `intkey-tp-java` and `xo-tp-java` can start up.
+
+@rbuysse is .pylintrc and .pycodestyle necessary?",2018-07-18 17:31:09,2018-07-18 17:31:09
+https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/2,https://api.github.com/repos/hyperledger/sawtooth-sdk-java/issues/comments/406126628,https://github.com/hyperledger/sawtooth-sdk-java/pull/2#issuecomment-406126628,dcmiddle,"@rbuysse should I expect a `Dockerfile-installed` in each repo?
+In a subsequent commit can you add a BUILD.md or README.md that tells people how to use the repo. Kinda like the c++ file?",2018-07-19 01:37:24,2018-07-19 01:37:24

@@ -1,0 +1,755 @@
+pull request url html,pull request url,body,commit_id,create at,id,diff_hunk,position,update at,url,html url,user
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,why `-k`?,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 11:32:58,187589355,"@@ -26,27 +25,35 @@ matrix:
+           sources: ['llvm-toolchain-trusty-4.0']
+           packages: ['clang-4.0']
+       env:
+-        - COMPILERCC=clang-4.0
+-        - COMPILERCXX=clang++-4.0
++        - _CC=clang-4.0
++        - _CXX=clang++-4.0
+ 
+ 
+     - os: osx
+       compiler: gcc
+       env:
+-        - COMPILERCC=gcc
+-        - COMPILERCXX=g++
++        - _CC=gcc
++        - _CXX=g++
+ 
+     - os: osx
+       compiler: clang
+       env:
+-        - COMPILERCC=clang
+-        - COMPILERCXX=clang++
++        - _CC=clang
++        - _CXX=clang++
+ 
+ 
+ script:
+-  - mkdir build
+-  - cd build
+-  - export CC=$COMPILERCC; export CXX=$COMPILERCXX
+-  - cmake .. -DEDIMPL=ref10 -DHASH=sha3_brainhub -DRANDOM=dev_urandom
++  - export CC=$_CC
++  - export CXX=$_CXX
++  # build and test ed25519
++  - mkdir build && cd build
++  - cmake .. -DTESTING=ON
++  - make -j2 -k",53,2018-05-11 12:37:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187589355,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187589355,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,"Imo it's better to make it usable from top-level cmake, so it will work fine with `cmake .. -DTESTING=ON -DEXAMPLES=ON` (or even with defaults)",f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 11:36:28,187589902,"@@ -26,27 +25,35 @@ matrix:
+           sources: ['llvm-toolchain-trusty-4.0']
+           packages: ['clang-4.0']
+       env:
+-        - COMPILERCC=clang-4.0
+-        - COMPILERCXX=clang++-4.0
++        - _CC=clang-4.0
++        - _CXX=clang++-4.0
+ 
+ 
+     - os: osx
+       compiler: gcc
+       env:
+-        - COMPILERCC=gcc
+-        - COMPILERCXX=g++
++        - _CC=gcc
++        - _CXX=g++
+ 
+     - os: osx
+       compiler: clang
+       env:
+-        - COMPILERCC=clang
+-        - COMPILERCXX=clang++
++        - _CC=clang
++        - _CXX=clang++
+ 
+ 
+ script:
+-  - mkdir build
+-  - cd build
+-  - export CC=$COMPILERCC; export CXX=$COMPILERCXX
+-  - cmake .. -DEDIMPL=ref10 -DHASH=sha3_brainhub -DRANDOM=dev_urandom
++  - export CC=$_CC
++  - export CXX=$_CXX
++  # build and test ed25519
++  - mkdir build && cd build
++  - cmake .. -DTESTING=ON
++  - make -j2 -k
++  - ctest
++  - sudo make install
++  # build and execute example
++  - cd ../example/sign-verify
++  - mkdir build && cd build
++  - cmake .. -DCMAKE_BUILD_TYPE=Release",59,2018-05-11 12:37:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187589902,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187589902,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,That is incompatible change and i'm not sure that it's really necessary,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 11:38:24,187590212,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")",18,2018-05-11 12:37:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187590212,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187590212,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,?,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 11:39:18,187590357,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")
+-set(ARCHIVE_OUTPUT_DIRECTORY           ""${PROJECT_BINARY_DIR}"")
+ 
+ set(CMAKE_C_STANDARD                   11)    # force std=c11
+ set(CMAKE_C_STANDARD_REQUIRED          ON)
+ set(CMAKE_C_EXTENSIONS                 OFF)
+-set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
+ 
+ set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
+ set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+ set(CMAKE_CXX_EXTENSIONS               OFF)
+-set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
+ 
+-add_compile_options(-Wall)
+-add_compile_options(-Wextra)
+-add_compile_options(-Wpedantic)
++#add_compile_options(-Wall)
++#add_compile_options(-Wextra)
++#add_compile_options(-Wpedantic)",38,2018-05-11 12:37:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187590357,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187590357,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,"all of these (with prefix cmake/ed25519) can be just moved to functions file, like in main project",f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 11:40:43,187590581,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")
+-set(ARCHIVE_OUTPUT_DIRECTORY           ""${PROJECT_BINARY_DIR}"")
+ 
+ set(CMAKE_C_STANDARD                   11)    # force std=c11
+ set(CMAKE_C_STANDARD_REQUIRED          ON)
+ set(CMAKE_C_EXTENSIONS                 OFF)
+-set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
+ 
+ set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
+ set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+ set(CMAKE_CXX_EXTENSIONS               OFF)
+-set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
+ 
+-add_compile_options(-Wall)
+-add_compile_options(-Wextra)
+-add_compile_options(-Wpedantic)
++#add_compile_options(-Wall)
++#add_compile_options(-Wextra)
++#add_compile_options(-Wpedantic)
+ 
+-option(TESTING         ""Enable testing""      ON)
++option(TESTING         ""Enable testing""      OFF)
+ option(COVERAGE        ""Enable coverage""     OFF)
+ option(BENCHMARKING    ""Enable benchmarking"" OFF)
+ 
+-if(COVERAGE)
+-  if(CMAKE_BUILD_TYPE STREQUAL Release)
+-    message(FATAL_ERROR ""Can't collect coverage in Release mode"")
+-  endif()
+-  include(cmake/coverage.cmake)
+-endif()
++include_directories(
++  ${CMAKE_BINARY_DIR}/
++  ${CMAKE_SOURCE_DIR}/include/
++)
+ 
+ include(GNUInstallDirs)
++include(GenerateExportHeader)
+ include(cmake/dependencies.cmake)
+ include(cmake/functions.cmake)
+-enable_language(ASM)
++include(cmake/ed25519_init.cmake)
++include(cmake/ed25519_export.cmake)
++include(cmake/ed25519_target_link_libraries.cmake)
++include(cmake/ed25519_add_library.cmake)
++include(cmake/ed25519_merge_libraries.cmake)
++include(cmake/ed25519_add_test.cmake)",66,2018-05-11 12:37:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187590581,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187590581,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,That won't work for projects that use it as an external one (e.g iroha),f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 12:14:51,187596834,"@@ -89,21 +119,69 @@ ENUM(CMAKE_BUILD_TYPE ""${CMAKE_BUILD_TYPE}"" ""cmake build type""
+   Debug
+   )
+ 
++
+ if(BUILD STREQUAL ""SHARED"" AND EDIMPL STREQUAL ""amd64-64-24k"")
+   message(FATAL_ERROR
+     ""EDIMPL=amd64-64-24k implementation has no PIC fixes, ""
+     ""therefore SHARED library can not be built. ""
+     ""Use EDIMPL=amd64-64-24k-pic or BUILD=STATIC"")
+ endif()
+ 
+-include_directories(${CMAKE_SOURCE_DIR}/include)
+ 
+ add_subdirectory(lib)
+-if(BENCHMARKING)
+-  add_subdirectory(benchmark)
+-endif()
++#if(BENCHMARKING)
++#  add_subdirectory(benchmark)
++#endif()
++
++
++ed25519_merge_libraries(ed25519 ${BUILD}
++  LIBRARIES
++    ${EDIMPL}
++    ${HASH}
++    ${RANDOM}
++  VERSION
++    VERSION-${SOVERSION}-${EDIMPL}-${HASH}-${RANDOM}-${BUILD}-${CMAKE_BUILD_TYPE}
++  )
++set(_export_file ${CMAKE_BINARY_DIR}/ed25519_export.h)
++generate_export_header(ed25519
++  EXPORT_FILE_NAME ${_export_file}
++  )
++install(
++  FILES ${_export_file}",143,2018-05-11 12:37:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187596834,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187596834,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,"-k continues build even if build errors are present. I want to know which combinations have failed, e.g. all of them.",f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:48:32,187618982,"@@ -26,27 +25,35 @@ matrix:
+           sources: ['llvm-toolchain-trusty-4.0']
+           packages: ['clang-4.0']
+       env:
+-        - COMPILERCC=clang-4.0
+-        - COMPILERCXX=clang++-4.0
++        - _CC=clang-4.0
++        - _CXX=clang++-4.0
+ 
+ 
+     - os: osx
+       compiler: gcc
+       env:
+-        - COMPILERCC=gcc
+-        - COMPILERCXX=g++
++        - _CC=gcc
++        - _CXX=g++
+ 
+     - os: osx
+       compiler: clang
+       env:
+-        - COMPILERCC=clang
+-        - COMPILERCXX=clang++
++        - _CC=clang
++        - _CXX=clang++
+ 
+ 
+ script:
+-  - mkdir build
+-  - cd build
+-  - export CC=$COMPILERCC; export CXX=$COMPILERCXX
+-  - cmake .. -DEDIMPL=ref10 -DHASH=sha3_brainhub -DRANDOM=dev_urandom
++  - export CC=$_CC
++  - export CXX=$_CXX
++  # build and test ed25519
++  - mkdir build && cd build
++  - cmake .. -DTESTING=ON
++  - make -j2 -k",53,2018-05-11 13:48:32,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187618982,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187618982,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,"When you write `make install`, special `ed25519-Config.cmake` file is installed. When you write `find_package(ed25519)`, cmake locates this file and includes.
+
+This example is used to test the behavior of this file and targets defined inside.
+
+How do you write the same test within CMake?",f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:53:25,187620449,"@@ -26,27 +25,35 @@ matrix:
+           sources: ['llvm-toolchain-trusty-4.0']
+           packages: ['clang-4.0']
+       env:
+-        - COMPILERCC=clang-4.0
+-        - COMPILERCXX=clang++-4.0
++        - _CC=clang-4.0
++        - _CXX=clang++-4.0
+ 
+ 
+     - os: osx
+       compiler: gcc
+       env:
+-        - COMPILERCC=gcc
+-        - COMPILERCXX=g++
++        - _CC=gcc
++        - _CXX=g++
+ 
+     - os: osx
+       compiler: clang
+       env:
+-        - COMPILERCC=clang
+-        - COMPILERCXX=clang++
++        - _CC=clang
++        - _CXX=clang++
+ 
+ 
+ script:
+-  - mkdir build
+-  - cd build
+-  - export CC=$COMPILERCC; export CXX=$COMPILERCXX
+-  - cmake .. -DEDIMPL=ref10 -DHASH=sha3_brainhub -DRANDOM=dev_urandom
++  - export CC=$_CC
++  - export CXX=$_CXX
++  # build and test ed25519
++  - mkdir build && cd build
++  - cmake .. -DTESTING=ON
++  - make -j2 -k
++  - ctest
++  - sudo make install
++  # build and execute example
++  - cd ../example/sign-verify
++  - mkdir build && cd build
++  - cmake .. -DCMAKE_BUILD_TYPE=Release",59,2018-05-11 13:53:46,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187620449,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187620449,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,`ed25519_*` functions contain these vars as properties.,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:55:15,187621015,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")",18,2018-05-11 13:55:15,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187621015,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187621015,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,Not all compilers support these flags. (I am talking about MSVC),f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:56:04,187621262,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")
+-set(ARCHIVE_OUTPUT_DIRECTORY           ""${PROJECT_BINARY_DIR}"")
+ 
+ set(CMAKE_C_STANDARD                   11)    # force std=c11
+ set(CMAKE_C_STANDARD_REQUIRED          ON)
+ set(CMAKE_C_EXTENSIONS                 OFF)
+-set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
+ 
+ set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
+ set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+ set(CMAKE_CXX_EXTENSIONS               OFF)
+-set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
+ 
+-add_compile_options(-Wall)
+-add_compile_options(-Wextra)
+-add_compile_options(-Wpedantic)
++#add_compile_options(-Wall)
++#add_compile_options(-Wextra)
++#add_compile_options(-Wpedantic)",38,2018-05-11 13:56:04,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187621262,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187621262,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,It is hard to maintain big file and easy when you do separation like this.,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:56:33,187621402,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")
+-set(ARCHIVE_OUTPUT_DIRECTORY           ""${PROJECT_BINARY_DIR}"")
+ 
+ set(CMAKE_C_STANDARD                   11)    # force std=c11
+ set(CMAKE_C_STANDARD_REQUIRED          ON)
+ set(CMAKE_C_EXTENSIONS                 OFF)
+-set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
+ 
+ set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
+ set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+ set(CMAKE_CXX_EXTENSIONS               OFF)
+-set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
+ 
+-add_compile_options(-Wall)
+-add_compile_options(-Wextra)
+-add_compile_options(-Wpedantic)
++#add_compile_options(-Wall)
++#add_compile_options(-Wextra)
++#add_compile_options(-Wpedantic)
+ 
+-option(TESTING         ""Enable testing""      ON)
++option(TESTING         ""Enable testing""      OFF)
+ option(COVERAGE        ""Enable coverage""     OFF)
+ option(BENCHMARKING    ""Enable benchmarking"" OFF)
+ 
+-if(COVERAGE)
+-  if(CMAKE_BUILD_TYPE STREQUAL Release)
+-    message(FATAL_ERROR ""Can't collect coverage in Release mode"")
+-  endif()
+-  include(cmake/coverage.cmake)
+-endif()
++include_directories(
++  ${CMAKE_BINARY_DIR}/
++  ${CMAKE_SOURCE_DIR}/include/
++)
+ 
+ include(GNUInstallDirs)
++include(GenerateExportHeader)
+ include(cmake/dependencies.cmake)
+ include(cmake/functions.cmake)
+-enable_language(ASM)
++include(cmake/ed25519_init.cmake)
++include(cmake/ed25519_export.cmake)
++include(cmake/ed25519_target_link_libraries.cmake)
++include(cmake/ed25519_add_library.cmake)
++include(cmake/ed25519_merge_libraries.cmake)
++include(cmake/ed25519_add_test.cmake)",66,2018-05-11 13:58:17,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187621402,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187621402,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,Why?,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:57:43,187621826,"@@ -89,21 +119,69 @@ ENUM(CMAKE_BUILD_TYPE ""${CMAKE_BUILD_TYPE}"" ""cmake build type""
+   Debug
+   )
+ 
++
+ if(BUILD STREQUAL ""SHARED"" AND EDIMPL STREQUAL ""amd64-64-24k"")
+   message(FATAL_ERROR
+     ""EDIMPL=amd64-64-24k implementation has no PIC fixes, ""
+     ""therefore SHARED library can not be built. ""
+     ""Use EDIMPL=amd64-64-24k-pic or BUILD=STATIC"")
+ endif()
+ 
+-include_directories(${CMAKE_SOURCE_DIR}/include)
+ 
+ add_subdirectory(lib)
+-if(BENCHMARKING)
+-  add_subdirectory(benchmark)
+-endif()
++#if(BENCHMARKING)
++#  add_subdirectory(benchmark)
++#endif()
++
++
++ed25519_merge_libraries(ed25519 ${BUILD}
++  LIBRARIES
++    ${EDIMPL}
++    ${HASH}
++    ${RANDOM}
++  VERSION
++    VERSION-${SOVERSION}-${EDIMPL}-${HASH}-${RANDOM}-${BUILD}-${CMAKE_BUILD_TYPE}
++  )
++set(_export_file ${CMAKE_BINARY_DIR}/ed25519_export.h)
++generate_export_header(ed25519
++  EXPORT_FILE_NAME ${_export_file}
++  )
++install(
++  FILES ${_export_file}",143,2018-05-11 13:57:44,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187621826,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187621826,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,Next patches with Windows fixes will contain these flags.,f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 13:59:42,187622390,"@@ -1,51 +1,74 @@
+ cmake_minimum_required(VERSION 3.5)
++
+ set(ED25519_MAJOR_VERSION 1)
+ set(ED25519_MINOR_VERSION 3)
+ set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
++enable_language(ASM)
+ 
+ set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_C_VISIBILITY_PRESET          hidden)
++set(CMAKE_CXX_VISIBILITY_PRESET        hidden)
++set(CMAKE_VISIBILITY_INLINES_HIDDEN    TRUE)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
+ set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
+-set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
+-set(LIBRARY_OUTPUT_PATH                ""${PROJECT_BINARY_DIR}"")
+-set(ARCHIVE_OUTPUT_DIRECTORY           ""${PROJECT_BINARY_DIR}"")
+ 
+ set(CMAKE_C_STANDARD                   11)    # force std=c11
+ set(CMAKE_C_STANDARD_REQUIRED          ON)
+ set(CMAKE_C_EXTENSIONS                 OFF)
+-set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
+ 
+ set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
+ set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+ set(CMAKE_CXX_EXTENSIONS               OFF)
+-set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG"")
+-set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
+ 
+-add_compile_options(-Wall)
+-add_compile_options(-Wextra)
+-add_compile_options(-Wpedantic)
++#add_compile_options(-Wall)
++#add_compile_options(-Wextra)
++#add_compile_options(-Wpedantic)",38,2018-05-11 13:59:42,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187622390,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187622390,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/13,https://github.com/hyperledger/iroha-ed25519/pull/13,"Try to make a clean build of iroha, it doesn't work that for me",f7045784a8071b9f2b8e78b3bc9881211253cac8,2018-05-11 18:46:27,187701335,"@@ -89,21 +119,69 @@ ENUM(CMAKE_BUILD_TYPE ""${CMAKE_BUILD_TYPE}"" ""cmake build type""
+   Debug
+   )
+ 
++
+ if(BUILD STREQUAL ""SHARED"" AND EDIMPL STREQUAL ""amd64-64-24k"")
+   message(FATAL_ERROR
+     ""EDIMPL=amd64-64-24k implementation has no PIC fixes, ""
+     ""therefore SHARED library can not be built. ""
+     ""Use EDIMPL=amd64-64-24k-pic or BUILD=STATIC"")
+ endif()
+ 
+-include_directories(${CMAKE_SOURCE_DIR}/include)
+ 
+ add_subdirectory(lib)
+-if(BENCHMARKING)
+-  add_subdirectory(benchmark)
+-endif()
++#if(BENCHMARKING)
++#  add_subdirectory(benchmark)
++#endif()
++
++
++ed25519_merge_libraries(ed25519 ${BUILD}
++  LIBRARIES
++    ${EDIMPL}
++    ${HASH}
++    ${RANDOM}
++  VERSION
++    VERSION-${SOVERSION}-${EDIMPL}-${HASH}-${RANDOM}-${BUILD}-${CMAKE_BUILD_TYPE}
++  )
++set(_export_file ${CMAKE_BINARY_DIR}/ed25519_export.h)
++generate_export_header(ed25519
++  EXPORT_FILE_NAME ${_export_file}
++  )
++install(
++  FILES ${_export_file}",143,2018-05-11 18:46:28,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/187701335,https://github.com/hyperledger/iroha-ed25519/pull/13#discussion_r187701335,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,"I was forced to update minimal version because of  `cmake_parse_arguments`, which was introduced in 3.5.",44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 15:58:59,178317507,"@@ -1,20 +1,31 @@
+-cmake_minimum_required(VERSION 3.0)
++cmake_minimum_required(VERSION 3.5)",2,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178317507,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178317507,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,why is that here,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:36:05,178372658,"@@ -1,20 +1,31 @@
+-cmake_minimum_required(VERSION 3.0)
++cmake_minimum_required(VERSION 3.5)
+ set(ED25519_MAJOR_VERSION 1)
+-set(ED25519_MINOR_VERSION 2)
+-set(ED25519_PATCH_VERSION 2)
++set(ED25519_MINOR_VERSION 3)
++set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
+-SET(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+-SET(CMAKE_CXX_FLAGS ""${CMAKE_CXX_FLAGS} -std=c++14 -Wall"")
+-SET(CMAKE_CXX_FLAGS_RELEASE ""${CMAKE_CXX_FLAGS_RELEASE} -O3"")
+-SET(CMAKE_CXX_FLAGS_DEBUG   ""${CMAKE_CXX_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color"")
+-SET(CMAKE_C_FLAGS ""${CMAKE_C_FLAGS} -Wall"")
+-SET(CMAKE_C_FLAGS_RELEASE ""${CMAKE_C_FLAGS_RELEASE} -O3 -funroll-loops -fomit-frame-pointer"")
+-SET(CMAKE_C_FLAGS_DEBUG   ""${CMAKE_C_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color "")
+-SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+-SET(CMAKE_EXPORT_COMPILE_COMMANDS ""ON"")
++
++set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
++set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
++set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
++
++set(CMAKE_C_STANDARD                   11)    # force std=gnu11
++set(CMAKE_C_STANDARD_REQUIRED          ON)
++set(CMAKE_C_EXTENSIONS                 OFF)",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178372658,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178372658,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,`-Werror` maybe as well?,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:36:58,178372809,"@@ -1,20 +1,31 @@
+-cmake_minimum_required(VERSION 3.0)
++cmake_minimum_required(VERSION 3.5)
+ set(ED25519_MAJOR_VERSION 1)
+-set(ED25519_MINOR_VERSION 2)
+-set(ED25519_PATCH_VERSION 2)
++set(ED25519_MINOR_VERSION 3)
++set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
+-SET(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+-SET(CMAKE_CXX_FLAGS ""${CMAKE_CXX_FLAGS} -std=c++14 -Wall"")
+-SET(CMAKE_CXX_FLAGS_RELEASE ""${CMAKE_CXX_FLAGS_RELEASE} -O3"")
+-SET(CMAKE_CXX_FLAGS_DEBUG   ""${CMAKE_CXX_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color"")
+-SET(CMAKE_C_FLAGS ""${CMAKE_C_FLAGS} -Wall"")
+-SET(CMAKE_C_FLAGS_RELEASE ""${CMAKE_C_FLAGS_RELEASE} -O3 -funroll-loops -fomit-frame-pointer"")
+-SET(CMAKE_C_FLAGS_DEBUG   ""${CMAKE_C_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color "")
+-SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+-SET(CMAKE_EXPORT_COMPILE_COMMANDS ""ON"")
++
++set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
++set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
++set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
++
++set(CMAKE_C_STANDARD                   11)    # force std=gnu11
++set(CMAKE_C_STANDARD_REQUIRED          ON)
++set(CMAKE_C_EXTENSIONS                 OFF)
++set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -NDEBUG"")
++set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
++
++set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
++set(CMAKE_CXX_STANDARD_REQUIRED        ON)
++set(CMAKE_CXX_EXTENSIONS               OFF)
++set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -NDEBUG"")
++set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
++
++add_compile_options(-Wall)
++add_compile_options(-Wextra)
++add_compile_options(-Wpedantic)",43,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178372809,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178372809,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,maybe just remove that target then?,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:37:46,178372940,"@@ -20,7 +20,7 @@ During CMake time, users are able to choose any of these implementations using c
+ 
+ - `EDIMPL`
+     - `ref10` - portable C implementation. 
+-    - `amd64-64-24k` - optimized C and ASM implementation, works only on Linux amd64. 
++    - `amd64-64-24k` - optimized C and ASM implementation, works only on Linux amd64. **This option is likely to fail during compilation of `ed25519` library, use `amd64-64-24k-pic`.",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178372940,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178372940,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,:( add include dir,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:51:52,178376593,"@@ -1,7 +1,7 @@
+ #include <ed25519/ed25519/sha256.h>
+ #include <ed25519/ed25519/sha512.h>
+ #include <gtest/gtest.h>
+-#include ""hexutil.hpp""
++#include ""../../util/hexutil.hpp""",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178376593,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178376593,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,"D: orly?
+I have no such file",44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:52:17,178376693,"@@ -1,11 +1,11 @@
+ #ifndef ED25519_HELPERS_HPP_
+ #define ED25519_HELPERS_HPP_
+ 
+-#include <fstream>
+-#include <sstream>
+-#include <string>
+-#include <vector>
+-#include <ed25519/ed25519.h>
++#include ""../../../../../usr/include/c++/5/fstream""",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178376693,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178376693,l4l
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,This target can be used in STATIC build (theoretically). To test this I need a ci.,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:56:04,178377654,"@@ -20,7 +20,7 @@ During CMake time, users are able to choose any of these implementations using c
+ 
+ - `EDIMPL`
+     - `ref10` - portable C implementation. 
+-    - `amd64-64-24k` - optimized C and ASM implementation, works only on Linux amd64. 
++    - `amd64-64-24k` - optimized C and ASM implementation, works only on Linux amd64. **This option is likely to fail during compilation of `ed25519` library, use `amd64-64-24k-pic`.",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178377654,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178377654,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,Build will fail for most of targets and tests. I will fix all warnings as soon as CI will  be completed.,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:57:47,178378073,"@@ -1,20 +1,31 @@
+-cmake_minimum_required(VERSION 3.0)
++cmake_minimum_required(VERSION 3.5)
+ set(ED25519_MAJOR_VERSION 1)
+-set(ED25519_MINOR_VERSION 2)
+-set(ED25519_PATCH_VERSION 2)
++set(ED25519_MINOR_VERSION 3)
++set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
+-SET(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+-SET(CMAKE_CXX_FLAGS ""${CMAKE_CXX_FLAGS} -std=c++14 -Wall"")
+-SET(CMAKE_CXX_FLAGS_RELEASE ""${CMAKE_CXX_FLAGS_RELEASE} -O3"")
+-SET(CMAKE_CXX_FLAGS_DEBUG   ""${CMAKE_CXX_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color"")
+-SET(CMAKE_C_FLAGS ""${CMAKE_C_FLAGS} -Wall"")
+-SET(CMAKE_C_FLAGS_RELEASE ""${CMAKE_C_FLAGS_RELEASE} -O3 -funroll-loops -fomit-frame-pointer"")
+-SET(CMAKE_C_FLAGS_DEBUG   ""${CMAKE_C_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color "")
+-SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+-SET(CMAKE_EXPORT_COMPILE_COMMANDS ""ON"")
++
++set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
++set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
++set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
++
++set(CMAKE_C_STANDARD                   11)    # force std=gnu11
++set(CMAKE_C_STANDARD_REQUIRED          ON)
++set(CMAKE_C_EXTENSIONS                 OFF)
++set(CMAKE_C_FLAGS_RELEASE              ""${CMAKE_C_FLAGS_RELEASE} -O3 -NDEBUG"")
++set(CMAKE_C_FLAGS_DEBUG                ""${CMAKE_C_FLAGS_DEBUG} -g -O0 -fdiagnostics-color "")
++
++set(CMAKE_CXX_STANDARD                 11)    # force std=c++11
++set(CMAKE_CXX_STANDARD_REQUIRED        ON)
++set(CMAKE_CXX_EXTENSIONS               OFF)
++set(CMAKE_CXX_FLAGS_RELEASE            ""${CMAKE_CXX_FLAGS_RELEASE} -O3 -NDEBUG"")
++set(CMAKE_CXX_FLAGS_DEBUG              ""${CMAKE_CXX_FLAGS_DEBUG} -g -O0 -fdiagnostics-color"")
++
++add_compile_options(-Wall)
++add_compile_options(-Wextra)
++add_compile_options(-Wpedantic)",43,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178378073,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178378073,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,this is clion... :(,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:58:12,178378186,"@@ -1,11 +1,11 @@
+ #ifndef ED25519_HELPERS_HPP_
+ #define ED25519_HELPERS_HPP_
+ 
+-#include <fstream>
+-#include <sstream>
+-#include <string>
+-#include <vector>
+-#include <ed25519/ed25519.h>
++#include ""../../../../../usr/include/c++/5/fstream""",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178378186,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178378186,Warchant
+https://github.com/hyperledger/iroha-ed25519/pull/7,https://github.com/hyperledger/iroha-ed25519/pull/7,https://cmake.org/cmake/help/v3.3/prop_tgt/C_EXTENSIONS.html#prop_tgt:C_EXTENSIONS,44934df3ce8ad63e8546195d6cc7ca3e9749f3f3,2018-03-30 20:58:51,178378347,"@@ -1,20 +1,31 @@
+-cmake_minimum_required(VERSION 3.0)
++cmake_minimum_required(VERSION 3.5)
+ set(ED25519_MAJOR_VERSION 1)
+-set(ED25519_MINOR_VERSION 2)
+-set(ED25519_PATCH_VERSION 2)
++set(ED25519_MINOR_VERSION 3)
++set(ED25519_PATCH_VERSION 0)
+ set(SOVERSION ""${ED25519_MAJOR_VERSION}.${ED25519_MINOR_VERSION}.${ED25519_PATCH_VERSION}"")
+ project(ed25519 VERSION ${SOVERSION} LANGUAGES C CXX)
+ 
+-SET(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+-SET(CMAKE_CXX_FLAGS ""${CMAKE_CXX_FLAGS} -std=c++14 -Wall"")
+-SET(CMAKE_CXX_FLAGS_RELEASE ""${CMAKE_CXX_FLAGS_RELEASE} -O3"")
+-SET(CMAKE_CXX_FLAGS_DEBUG   ""${CMAKE_CXX_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color"")
+-SET(CMAKE_C_FLAGS ""${CMAKE_C_FLAGS} -Wall"")
+-SET(CMAKE_C_FLAGS_RELEASE ""${CMAKE_C_FLAGS_RELEASE} -O3 -funroll-loops -fomit-frame-pointer"")
+-SET(CMAKE_C_FLAGS_DEBUG   ""${CMAKE_C_FLAGS_DEBUG} -g -Wextra -O0 -fdiagnostics-color "")
+-SET(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+-SET(CMAKE_EXPORT_COMPILE_COMMANDS ""ON"")
++
++set(CMAKE_POSITION_INDEPENDENT_CODE    TRUE)
++set(CMAKE_EXPORT_COMPILE_COMMANDS      ON)
++set(CMAKE_MODULE_PATH                  ""${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules"")
++set(EXECUTABLE_OUTPUT_PATH             ""${PROJECT_BINARY_DIR}/bin"")
++
++set(CMAKE_C_STANDARD                   11)    # force std=gnu11
++set(CMAKE_C_STANDARD_REQUIRED          ON)
++set(CMAKE_C_EXTENSIONS                 OFF)",,2018-04-02 19:40:54,https://api.github.com/repos/hyperledger/iroha-ed25519/pulls/comments/178378347,https://github.com/hyperledger/iroha-ed25519/pull/7#discussion_r178378347,Warchant

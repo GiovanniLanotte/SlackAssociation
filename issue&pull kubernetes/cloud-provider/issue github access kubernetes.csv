@@ -1,0 +1,162 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/1,https://api.github.com/repos/kubernetes/cloud-provider/issues/1,Removing cloud provider dependencies to k8s.io/kubernetes,"Duplicating https://github.com/kubernetes/kubernetes/issues/69585 to track milestones more easily. 
+
+As part of a long running initiative to remove cloud providers out of kubernetes/kubernetes, it's required to remove dependencies to kubernetes/kubernetes so we can place them into a staging directory. The following dependencies need to be removed from `k8s.io/kubernetes/pkg/cloudprovider/providers`:
+
+Dependency checklist:
+- [x] `pkg/api/legacyscheme`
+- [x] `pkg/api/service` (@andrewsykim)
+- [X] `pkg/api/v1/pod` (@andrewsykim)
+- [x] `pkg/api/v1/service` (@andrewsykim)
+- [X] `pkg/apis/apps` (@andrewsykim)
+- [X] `pkg/apis/autoscaling` (@andrewsykim)
+- [x] `pkg/apis/core` (@islinwb, @dims)
+- [x] `pkg/apis/core/helper` (@islinwb, @dims)
+- [X] `pkg/apis/core/install` (@andrewsykim)
+- [X] `pkg/apis/core/pods` (@andrewsykim)
+- [x] `pkg/apis/core/v1` (@islinwb, @dims)
+- [x] `pkg/apis/core/v1/helper` (@islinwb, @andrewsykim)
+- [X] `pkg/apis/core/validation` (@andrewsykim)
+- [X] `pkg/apis/scheduling` (@andrewsykim)
+- [X] `pkg/capabilities` (@andrewsykim)
+- [X] `pkg/controller` (@stewart-yu)
+- [x] `pkg/credentialprovider` (@mcrute)
+- [x] `pkg/credentialprovider/aws` (@mcrute)
+- [X] `pkg/cloudprovider` (@cheftako) 
+- [x] `pkg/features` (@andrewsykim)
+- [X] `pkg/fieldpath` (@andrewsykim)
+- [x] `pkg/kubelet/apis` (@islinwb , @dims)
+- [x] `pkg/version` (@andrewsykim) 
+- [X] `pkg/kubelet/types`(@andrewsykim)
+- [X] `pkg/master/ports` (@andrewsykim)
+- [X] `pkg/security/apparmor`(@andrewsykim)
+- [X] `pkg/serviceaccount` (@andrewsykim)
+- [x] `pkg/util/keymutex` (@dims)
+- [X] `pkg/util/hash` (@andrewsykim)
+- [x] `pkg/util/file` (@mcrute) 
+- [ ] `pkg/util/mount` (@codenrhoden)
+- [ ] `pkg/util/node` (@cheftako)
+- [x] `pkg/util/net/sets` (@mcrute, @ashishranjan738)
+- [ ] `pkg/util/parsers` (@cheftako)
+- [x] `pkg/util/strings` (@dims)
+- [X] `pkg/util/taints` (@stewart-yu)
+- [x] `pkg/volume` (@islinwb, @andrewsykim)
+- [x] `pkg/volume/util` (@islinwb, @andrewsykim)
+- [x] `pkg/volume/util/fs` (@andrewsykim)
+- [x] `pkg/volume/util/recyclerclient` (@andrewsykim)
+- [x] `pkg/volume/util/types` (@andrewsykim)
+- [x] `pkg/volume/util/volumepathhandler` (@andrewsykim)",open,False,2019-02-12 18:32:46,2019-04-03 20:13:18
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/2,https://api.github.com/repos/kubernetes/cloud-provider/issues/2,Stage all in-tree cloud providers,"Blocked on https://github.com/kubernetes/cloud-provider/issues/1 & https://github.com/kubernetes/kubernetes/issues/69585. 
+
+Phase 1 of removing in-tree cloud providers is to stage them and publish them to their respective out-of-tree repositories. See [KEP-removing-in-tree-providers](https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/20190125-removing-in-tree-providers.md) for more details.  
+
+Note that when we stage the providers, we actually only want to stage a subdirectory which acts as the provider package that is imported by cloud-controller-manager and kube-controller-manager. For example, we want to move `k8s.io/kubernetes/pkg/cloudprovider/providers/gce` to `k8s.io/kubernetes/staging/src/k8s.io/cloud-provider/gce/provider`. Once that move is complete, we would publish `k8s.io/kubernetes/staging/src/k8s.io/cloud-provider/gce/provider` to `k8s.io/cloud-provider-gce/provider`. This allows owners of `k8s.io/cloud-provider-gce` to continue to develop other parts of the repository as long as the `provider` package is left untouched and developed through `k8s.io/kubernetes`. This is required because many providers already support out-of-tree providers so we need a way to opt into only syncing the provider code without overwriting the entire repository. Some updates will be required from publishing bot, see https://github.com/kubernetes/publishing-bot/issues/156 for more details. ",open,False,2019-02-12 18:42:15,2019-03-28 19:20:32
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/3,https://api.github.com/repos/kubernetes/cloud-provider/issues/3,GAing cloud provider node labels KEP,"Continuing the discussion from https://github.com/kubernetes/kubernetes/pull/73616/files#r253236288, we need to consider GAing common node labels applied by cloud providers. Right now they are prefixed with beta even though they are consumed by all cloud providers. 
+
+There likely needs to be a KEP for this. https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/20190130-node-os-arch-labels.md is a great example we can follow.  ",open,False,2019-02-12 18:47:49,2019-03-28 19:20:48
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/4,https://api.github.com/repos/kubernetes/cloud-provider/issues/4,Investigate alternatives for out-of-tree PersistentVolume labelling,"When we removed (alpha) Initializer support, we essentially made the PVL (persistent volume labelling) controller unusable. We should either update the controller or add another implementation that uses mutating admission webhook instead. 
+
+If we use mutating admission webhook, we should delete the PVL controller we have in-tree. 
+
+ref: https://github.com/kubernetes/kubernetes/issues/73319",open,False,2019-02-12 19:53:48,2019-03-28 19:20:59
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/5,https://api.github.com/repos/kubernetes/cloud-provider/issues/5,Improving AWS Integration docs,AWS integration docs should be updated as per https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/0019-cloud-provider-documentation.md. ,open,False,2019-02-12 19:58:57,2019-04-03 22:04:32
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/6,https://api.github.com/repos/kubernetes/cloud-provider/issues/6,Improving Azure Integration Docs,Azure integration docs should be updated as per https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/0019-cloud-provider-documentation.md ,open,False,2019-02-12 20:00:44,2019-04-03 22:04:28
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/7,https://api.github.com/repos/kubernetes/cloud-provider/issues/7,Improving GCE Integration Docs,GCE integration docs should be updated as per https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/0019-cloud-provider-documentation.md ,open,False,2019-02-12 20:01:41,2019-04-03 22:04:20
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/8,https://api.github.com/repos/kubernetes/cloud-provider/issues/8,Improving OpenStack Integration Docs,OpenStack integration docs should be updated as per https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/0019-cloud-provider-documentation.md ,open,False,2019-02-12 20:01:57,2019-04-03 22:04:14
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/9,https://api.github.com/repos/kubernetes/cloud-provider/issues/9,Improving vSphere Integration Docs,Improve vSphere integration docs as per https://github.com/kubernetes/enhancements/blob/master/keps/sig-cloud-provider/0019-cloud-provider-documentation.md ,open,False,2019-02-12 20:02:32,2019-04-03 22:04:07
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/10,https://api.github.com/repos/kubernetes/cloud-provider/issues/10,Better cloud LB names,"LBs provisioned by Kubernetes on any cloud provider uses auto-generated names based on the Service's UUID (e.g. `a44e18e4c552b11e683bb02fff13e176`) which is not very human-friendly. With https://github.com/kubernetes/kubernetes/pull/66589 merged it should be doable to have each provider set LB names based on naming requirements. 
+
+SIG CP tracking issue for https://github.com/kubernetes/kubernetes/issues/69293. 
+
+This will need a KEP reviewed by SIG network & cloud-provider.",open,False,2019-02-19 20:34:06,2019-03-28 19:22:38
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/11,https://api.github.com/repos/kubernetes/cloud-provider/issues/11,kube-controller-manager -> cloud-controller-manager migration: KEP + alpha implementation,"We need a KEP outlining how we intend to migrate existing clusters from using the kube-controller-manager to the cloud-controller-manager for the cloud provider specific parts of Kubernetes. 
+
+At KubeCON NA 2018, we discussed grouping the existing cloud controllers under 1 leader election that is shared by the kube-controller-manager and the cloud-controller-manager. For single node control planes this is not needed, but for HA control planes we need a mechanism to ensure that not more than 1 kube-controller-manager or cloud-controller-manager is running the set of cloud controllers in a cluster.",open,False,2019-02-19 20:41:13,2019-04-03 21:04:04
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/12,https://api.github.com/repos/kubernetes/cloud-provider/issues/12,Investigate usage/requirements for ClusterID ,"In https://github.com/kubernetes/kubernetes/issues/48954 & https://github.com/kubernetes/kubernetes/pull/49215 we made `ClusterID` a requirement, and added a flag `--allow-untagged-cloud` on the kube-controller-manager. The intention there was to allow clusters to get away with not setting ClusterID for a few releases but eventually make it a requirement. It seems we never followed through with cleaning up the `--allow-untagged-cloud` flag. 
+
+More interestingly, it's not exactly clear how ClusterID is being consumed by both in-tree and out-of-tree cloud providers. It seems it's critical to AWS/GCE but not really used by others. Do we still need ClusterID? Should we use a more generic approach with labels/annotations? If we need it, should we go ahead and remove the `--allow-untagged-cloud` flag? 
+
+If the plan is to continue to support ClusterID, we should at least add better documentation for how this works. 
+
+cc @justinsb @rrati ",open,False,2019-02-20 13:47:32,2019-03-28 19:23:07
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/13,https://api.github.com/repos/kubernetes/cloud-provider/issues/13,Extracting/Migrating the Credential Provider,"As part of the cloud provider extraction/migration, we should start to look into how the credential provider is going to be extracted so that the kubelet does not rely on cloud SDKs for image pulling credentials. Also to support future credential providers without adding it into the main tree. 
+
+Need to work with SIG Auth and propose a KEP to extract/migrate credential providers to move out-of-tree. 
+
+related: https://github.com/kubernetes/kubernetes/issues/68810 
+
+cc @justinsb @mcrute",open,False,2019-02-21 16:44:35,2019-03-28 19:47:50
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/14,https://api.github.com/repos/kubernetes/cloud-provider/issues/14,Investigate API Throttling in Node Controller,"ref: https://github.com/kubernetes/kubernetes/issues/75016
+
+For large clusters, we're seeing API throttling from providers becoming more common. Taking node-controller as an example, it will call a ""get node"" api request per node on every sync loop. For a 1000 node cluster that's could be 1000 get requests per minute which can result in users running out of API quotas. ",open,False,2019-03-06 17:44:13,2019-03-28 19:23:29
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/15,https://api.github.com/repos/kubernetes/cloud-provider/issues/15,Investigate API throttling in routes API calls,"The Azure provider implemented caching in front of their routes interface to overcome API rate limiting (routes controller is extremely aggressive with the way it calls APIs), we should investigate if this is a common problem across providers (especially at larger scale) and come up with a common solution if it makes sense.
+
+ref: https://github.com/kubernetes/kubernetes/issues/60646 ",open,False,2019-03-07 01:41:03,2019-03-28 19:23:34
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/16,https://api.github.com/repos/kubernetes/cloud-provider/issues/16,Finalizer Protection for Service LoadBalancers,"This is mainly a SIG Cloud Provider tracking/backlog issue, more details on the problem here https://github.com/kubernetes/kubernetes/issues/53451
+
+We have two (stale) PRs open to add finalizer protection support for cloud provider LBs:
+https://github.com/kubernetes/kubernetes/pull/54569 
+https://github.com/kubernetes/kubernetes/pull/65912 
+
+We have users who have report issues that their cloud LBs are not being deleted when they delete the corresponding Service. Adding finalizer protection would ensure the Service resource is not fully deleted until the correlating LB is also deleted. ",open,False,2019-03-07 23:01:08,2019-04-03 23:24:38
+cloud-provider,joelsmith,https://github.com/kubernetes/cloud-provider/pull/17,https://api.github.com/repos/kubernetes/cloud-provider/issues/17,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 17:52:37,2019-03-09 00:16:02
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/18,https://api.github.com/repos/kubernetes/cloud-provider/issues/18,Nodes are being registered multiple times in the cloud-controller-manager,"In some situations, the cloud-controller-manager tries to register the same node twice. I need to dig into this a bit more, but my guess is that we are receiving a 2nd update event on a node that is currently being registered. 
+
+I think one reasonable solution to this is to store a map of nodes that are currently being registered and skip registration if that node exists in the map. Delete the entry in the map after the node is done registration so it can be registered again later if desired. 
+
+Typically processing control loops twice is not an issue due to the idempotent nature of controllers, but node registration for a cloud provider can become pretty expensive so there may be some value in optimizing this. @tghartland has kindly left a detailed report of this in https://github.com/kubernetes/kubernetes/issues/75285.",open,False,2019-03-13 02:00:22,2019-04-04 15:51:54
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/19,https://api.github.com/repos/kubernetes/cloud-provider/issues/19,Remove the ovirt cloud provider,Tracking issue for https://github.com/kubernetes/kubernetes/pull/72178 which removes the ovirt cloud provider from k8s.io/kubernetes. ,open,False,2019-03-18 15:51:00,2019-03-28 19:24:49
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/20,https://api.github.com/repos/kubernetes/cloud-provider/issues/20,Remove the cloudstack cloud provider,Tracking issue for kubernetes/kubernetes#72178 which removes the cloudstack cloud provider from k8s.io/kubernetes.,open,False,2019-03-18 15:51:35,2019-03-28 19:24:54
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/21,https://api.github.com/repos/kubernetes/cloud-provider/issues/21,Remove the photon cloud provider,Tracking issue for kubernetes/kubernetes#72178 which removes the photon cloud provider from k8s.io/kubernetes.,open,False,2019-03-18 15:52:04,2019-03-28 19:25:04
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/22,https://api.github.com/repos/kubernetes/cloud-provider/issues/22,Implement KCM -> CCM Migration,"Implementation of KEP https://github.com/kubernetes/cloud-provider/issues/11 
+
+TODO (andrewsykim): add more description",closed,False,2019-03-20 20:40:19,2019-04-03 19:58:30
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/23,https://api.github.com/repos/kubernetes/cloud-provider/issues/23,API Server Network Proxy: KEP + Alpha Implementation,See https://github.com/kubernetes/enhancements/pull/872 for more details.,open,False,2019-03-20 21:07:19,2019-03-28 19:25:54
+cloud-provider,aoxn,https://github.com/kubernetes/cloud-provider/issues/24,https://api.github.com/repos/kubernetes/cloud-provider/issues/24,Investigate support for multiple route tables,"### Problem Description
+Many Cloud support multiple route tables under VPC. CCM Cloud Interface has poor support for multi-route tables. Consider ListRoutes() interface, It is confused for ListRoutes() to return which route tables`s entry.
+For example, RouteTableA has route entry [1,2,3,4],   RouteTableB has route entry [2,3,4,5]
+What result should ListRoutes() return?  Neither [1,2,3,4,5] nor [2,3,4] is good. For case [1,2,3,4,5] , CreateRoute() would not be called for entry [1] and [5] which is needed. 
+For case [2,3,4] Delete() would not be called for the similar reason.
+
+### Potential Solutions
+1. Modify exist Interface, `ListRoutes(tableid string)`. Add interface AllRouteTables() []Tables
+
+2. ListRoute() randomly return each route-table once a time. Reconcile would make sure the eventually consistency for route tables.
+",open,False,2019-03-21 01:58:59,2019-03-28 19:26:02
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/25,https://api.github.com/repos/kubernetes/cloud-provider/issues/25,Decoupling Cloud Providers from Kubernetes e2e testing framework,"In the past few releases we've been focused on migrating in-tree cloud providers (`k8s.io/kubernetes/pkg/cloudprovider/providers`) out-of-tree but we've neglected the providers that are a part of the e2e framework (`https://github.com/kubernetes/kubernetes/tree/master/test/e2e/framework/providers`) which also needs to be removed before we can stop vendoring cloud SDKs. There's a lot of refactoring needed in the e2e framework before this is possible so this will likely take a few releases.
+
+This is mainly just a tracking issue for https://github.com/kubernetes/kubernetes/issues/75604 & https://github.com/kubernetes/kubernetes/issues/75601.
+
+cc @timothysc @stevesloka @neolit123 @pohly ",open,False,2019-03-22 21:16:29,2019-04-03 18:03:32
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/26,https://api.github.com/repos/kubernetes/cloud-provider/issues/26,Define requirements for cloud config,"Each provider is doing something different with cloud config, and we don't have a consistent story for what we expect providers to do with it. We should have a discussion with the necessary stakeholders (cloud providers, api reviewers, etc) to better define what is expected for cloud config (future plans, depreciation policy, backwards compatibility, etc). Maybe the way things are today is fine (letting the provider define how cloud config is used), but we should at least document this expectation better. ",open,False,2019-03-27 15:36:43,2019-04-04 15:51:28
+cloud-provider,andrewsykim,https://github.com/kubernetes/cloud-provider/issues/27,https://api.github.com/repos/kubernetes/cloud-provider/issues/27,Track underlying cloud resources for Services,"SIG CP backlog/tracking issue for https://github.com/kubernetes/kubernetes/issues/70159 
+
+Following [Tim's comment](https://github.com/kubernetes/kubernetes/issues/70159#issuecomment-480042373) we also need to have a discussion on whether we want to document this as a best practice or enforce this across existing providers. ",open,False,2019-04-04 20:54:07,2019-04-04 20:56:09
+cloud-provider,NeilW,https://github.com/kubernetes/cloud-provider/issues/28,https://api.github.com/repos/kubernetes/cloud-provider/issues/28,Module support for cloud-provider library,"Updating the cloud provider libraries is a bit of a chore. 
+
+Really should be able to pull in all the updated module dependencies with 
+
+```
+go get k8s.io/cloud-provider@v1.14.x
+```
+
+rather than delving around in the dependency libraries. 
+
+Pulling in the staged libraries is particularly difficult as there is no dependency information between them. A go.mod containing those would be a start
+
+I use the following script as a workaround for now
+
+```
+[ $# -eq 1 ] || { echo ""Supply new version number"" >&2; exit 1; }
+
+go get k8s.io/kubernetes@v$1 \
+	k8s.io/cloud-provider@kubernetes-$1\
+	k8s.io/api@kubernetes-$1\
+	k8s.io/apimachinery@kubernetes-$1\
+	k8s.io/apiserver@kubernetes-$1\
+	k8s.io/apiextensions-apiserver@kubernetes-$1\
+	k8s.io/cloud-provider@kubernetes-$1\
+	k8s.io/csi-api@kubernetes-$1\
+	k8s.io/kube-controller-manager@kubernetes-$1 \
+	k8s.io/client-go@kubernetes-$1
+```",closed,False,2019-04-05 14:46:15,2019-04-05 15:15:15

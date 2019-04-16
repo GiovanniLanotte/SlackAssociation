@@ -1,0 +1,807 @@
+name repository,creator user,url_html issue,url_api issue,title,body,state,pull request,data open,updated at
+sample-controller,nikhita,https://github.com/kubernetes/sample-controller/pull/1,https://api.github.com/repos/kubernetes/sample-controller/issues/1,Remove README and LICENSE,"Addresses https://github.com/kubernetes/kubernetes/issues/54398.
+
+/cc @sttts @munnerz ",closed,True,2017-10-20 11:01:43,2017-12-18 12:22:15
+sample-controller,erictune,https://github.com/kubernetes/sample-controller/issues/2,https://api.github.com/repos/kubernetes/sample-controller/issues/2,Create json-schema for use in the CRDs from the go types.,"CRDs support json-schema schemas.  These CRDs don't have them.  It would be nice to show how to add them, initially maintained in parallel with the Go types, and then later generated from the Go types (pkg/apis).",closed,False,2017-12-12 03:36:58,2018-10-18 10:46:21
+sample-controller,spiffxp,https://github.com/kubernetes/sample-controller/pull/3,https://api.github.com/repos/kubernetes/sample-controller/issues/3,Add code-of-conduct.md,"Refer to kubernetes/community as authoritative source for code of conduct
+
+ref: kubernetes/community#1527",closed,True,2017-12-20 18:40:09,2017-12-20 20:19:10
+sample-controller,grantr,https://github.com/kubernetes/sample-controller/pull/4,https://api.github.com/repos/kubernetes/sample-controller/issues/4,Replace godep with dep,,closed,True,2018-01-05 23:30:36,2018-01-05 23:32:36
+sample-controller,mattmoor,https://github.com/kubernetes/sample-controller/issues/5,https://api.github.com/repos/kubernetes/sample-controller/issues/5,Example unit tests,"It would be useful to provide examples for how to test the `controller.go` code.
+",closed,False,2018-01-12 15:52:44,2018-06-21 17:56:41
+sample-controller,kargakis,https://github.com/kubernetes/sample-controller/issues/6,https://api.github.com/repos/kubernetes/sample-controller/issues/6,code-generator is missing from this repo,"1. git cloned this repo
+2. changed the types to my own
+3. removed all generated files (rm -rf pkg/client pkg/apis/prow/v1/zz_generated.deepcopy.go)
+4. ./hack/update-codegen.sh does not work because code-generator is not vendored in this repo
+5. pushd vendor/k8s.io
+6. git clone https://github.com/kubernetes/code-generator
+7. popd; ./hack/update-codegen.sh now works
+
+I didn't expect to do 5-7. I assumed that since this is a standalone repo, code generation should work ootb. Intentional?
+
+@munnerz @sttts ",closed,False,2018-01-19 10:41:42,2018-02-12 19:53:27
+sample-controller,suneeta-mall,https://github.com/kubernetes/sample-controller/issues/7,https://api.github.com/repos/kubernetes/sample-controller/issues/7,Issue with informer factory list interface,"I am trying to create a Kubernetes controller inline with how sample-controller is built. But I keep getting this 
+```
+ERROR: logging before flag.Parse: E0123 13:59:00.293146   57870 reflector.go:205] .....gok8s/client/informers/externalversions/factory.go:73: Failed to list *v1.ContainerVersion: returned object must be a list: object does not implement the List interfaces
+```
+but the runtime objects are correctly generated using https://github.com/kubernetes/code-generator with same version branch and structure of objects seems to be same.  
+
+I know this is a outside the scope of sample-controller but I have seen sample-controller giving same error but cant reproduce it with sample controller anymore.
+Now I get this error on sample controller:
+
+```
+➜  sample-controller git:(master) sample-controller --kubeconfig ~/.kube/config                          
+E0123 13:25:34.768384   53728 controller.go:236] error syncing 'default/example-foo': Operation cannot be fulfilled on foos.samplecontroller.k8s.io ""example-foo"": the object has been modified; please apply your changes to the latest version and try again
+```
+
+I am on k8s 1.9.2 and I have regenerated and verified that runtime objects of sample controller are correct as per 1.9.2. Why is the sample controller giving this error?
+
+",closed,False,2018-01-23 03:55:03,2018-07-12 16:10:01
+sample-controller,DirectXMan12,https://github.com/kubernetes/sample-controller/issues/8,https://api.github.com/repos/kubernetes/sample-controller/issues/8,"code-generator depends on APIMachinery registration package, fails to update generated code","Updating the generated clientsets (after manually vendoring `k8s.io/code-generator` due to #6) fails because the client-gen's default input directories include `k8s.io/apimachinery/pkg/apimachinery/registered`, which is not vendored in this repository.  AFAICT, it doesn't need to be vendored in this repository (since it's just for API server registration), so it should probably be an optional input directory, not a default one.  I can cross-file to k8s.io/code-generator if necessary.",closed,False,2018-01-24 21:43:59,2018-02-08 15:09:58
+sample-controller,hvishwanath,https://github.com/kubernetes/sample-controller/issues/9,https://api.github.com/repos/kubernetes/sample-controller/issues/9,README instructions gives an error while trying to run the controller,"I am just following the instructions in README. I see the following error:
+
+```
+$ go run *.go -kubeconfig=$HOME/.kube/config                                                 
+E0129 22:06:44.562026    1469 reflector.go:205] github.com/hvishwanath/sample-controller/vendor/k8s.io/client-go/informers/factory.go:87: Failed to list *v1.Deployment: the server could not find the requested resource
+E0129 22:06:45.578094    1469 reflector.go:205] github.com/hvishwanath/sample-controller/vendor/k8s.io/client-go/informers/factory.go:87: Failed to list *v1.Deployment: the server could not find the requested resource
+E0129 22:06:46.620581    1469 reflector.go:205] github.com/hvishwanath/sample-controller/vendor/k8s.io/client-go/informers/factory.go:87: Failed to list *v1.Deployment: the server could not find the requested resource
+```
+
+",closed,False,2018-01-30 06:14:42,2018-02-18 12:30:54
+sample-controller,cjhomour,https://github.com/kubernetes/sample-controller/pull/10,https://api.github.com/repos/kubernetes/sample-controller/issues/10,fix typo in README.md,,closed,True,2018-02-05 02:37:34,2018-02-05 15:25:36
+sample-controller,kminehart,https://github.com/kubernetes/sample-controller/issues/11,https://api.github.com/repos/kubernetes/sample-controller/issues/11,Better documentation on the `update-codegen` process,"I feel like I've edited everything I would need to edit to regenerate code for a new controller. My fork is here:
+
+https://github.com/kminehart/ladon-resource-manager
+
+Yet when I run `./hack/update-codegen`, I get:
+
+```
+Generating deepcopy funcs
+Generating clientset for ladoncontroller:v1alpha1 at github.com/kminehart/ladon-resource-manager/pkg/client/clientset
+Generating listers for ladoncontroller:v1alpha1 at github.com/kminehart/ladon-resource-manager/pkg/client/listers
+Generating informers for ladoncontroller:v1alpha1 at github.com/kminehart/ladon-resource-manager/pkg/client/informers
+```
+
+which looks right, but nothing is there, and the deepcopy functions are still using `Foo` and not the new identifier, `Policy`, which tells me that these files are not actually being generated.
+
+Am I missing something?
+
+I've changed all references to `k8s.io/sample-controller` to my new path, and `sample-controller` / `samplecontroller` have become `ladon-controller` / `ladoncontroller` everywhere. No mention of `sample` exists in my fork; I just can't seem to get the code to generate.
+
+If anyone can point me in the right direction I'd be happy to provide a PR with more details on the code-gen process (if I can figure it out).",closed,False,2018-03-07 15:07:17,2018-03-07 15:16:12
+sample-controller,galvesribeiro,https://github.com/kubernetes/sample-controller/issues/12,https://api.github.com/repos/kubernetes/sample-controller/issues/12,Controllers on other languages than Go,"Hello,
+
+I wonder if the controllers API is only available if using Go SDK/Client.
+
+Are all APIs used in this Go sample available on API Server so we can write on our own languages the Controllers?
+
+In case of yes, can someone point to the right doc so I can read more about it?
+
+Thank you! Really appreciate any help.",closed,False,2018-03-13 07:25:28,2018-03-13 10:41:06
+sample-controller,vncntvandriessche,https://github.com/kubernetes/sample-controller/issues/13,https://api.github.com/repos/kubernetes/sample-controller/issues/13,Simple example with detailed instructions,"The controller is complex for the untrained eye, the required steps aren't very clear to me. It would be nice to have a more simple example, with some steps to follow along the development and decision making during it's progress.
+
+This is how far I've gotten:
+According to my understanding a controller for a `CustomResource` is built using the following algorithm:
+
+# 1. Create the following directory structure:
+```
+.
+├── Gopkg.lock
+├── Gopkg.toml
+├── README.md
+├── artifacts
+│   ├── example1.yaml
+│   ├── example2.yaml
+│   ├── [...]
+│   └── example-crd.yaml
+├── generator
+│   ├── custom-boilerplate.go.txt
+│   ├── update-codegen.sh
+│   └── verify-codegen.sh
+├── main.go
+└── pkg
+    └── apis
+        └── samplecontroller/
+            ├── register.go
+            └── v1alpha1
+                ├── doc.go
+                ├── register.go
+                └── types.go
+```
+
+Next up, I'll try to explain the contents of each required file in the above skeleton...
+
+## ./Gopkg.toml
+
+Example input:
+
+```
+required = [""k8s.io/code-generator/cmd/client-gen""]
+
+[[constraint]]
+  name = ""k8s.io/apimachinery""
+  branch = ""release-1.8""
+
+[[constraint]]
+  name = ""k8s.io/client-go""
+  branch = ""release-5.0""
+
+[[constraint]]
+  name = ""k8s.io/code-generator""
+  branch = ""release-1.8""
+
+# goland/dep does not follow k8s.io/code-generator's Godeps.json and gengo's master
+# version does not work with release-1.8 k8s.io/code-generator. So we have to
+# override it.
+[[override]]
+  name = ""k8s.io/gengo""
+  revision = ""9e661e9308f078838e266cca1c673922088c0ea4""
+```
+
+The gist of this file is that it will allow you to generate the required code using the [code-generator-project](https://github.com/kubernetes/code-generator).
+
+## ./artifacts/example1.yaml
+
+```
+apiVersion: samplecontroller.k8s.io/v1alpha1
+kind: Foo
+metadata:
+  name: example-foo
+spec:
+  deploymentName: example-foo
+  replicas: 1
+```
+
+This is basically the same type of file you'd create for any other resource, but with a different api-endpoint. Refer to the explanation for the `./artifacts/example-crd.yaml `-file.
+
+## ./artifacts/example-crd.yaml
+
+```
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: foos.samplecontroller.k8s.io
+spec:
+  group: samplecontroller.k8s.io
+  version: v1alpha1
+  names:
+    kind: Foo
+    singular: foo
+    plural: foos
+  scope: Namespaced
+  validation:
+    openAPIV3Schema:
+      properties:
+        spec:
+          properties:
+            replicas:
+              type: integer
+              minimum: 1
+              maximum: 10
+```
+
+This file adds a custom resource at apiVersion `samplecontroller.k8s.io`, version `v1alpa1`, kind: `Foo`.
+[More info](https://kubernetes.io/docs/tasks/access-kubernetes-api/extend-api-custom-resource-definitions/)
+
+## ./generator/update-codegen.sh
+
+```
+#!/bin/bash
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SCRIPT_ROOT=$(dirname ${BASH_SOURCE})/..
+CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-generator 2>/dev/null || echo ../code-generator)}
+
+# generate the code with:
+# --output-base    because this script should also be able to run inside the vendor dir of
+#                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
+#                  instead of the $GOPATH directly. For normal projects this can be dropped.
+${CODEGEN_PKG}/generate-groups.sh ""deepcopy,client,informer,lister"" \
+  k8s.io/sample-controller/pkg/client k8s.io/sample-controller/pkg/apis \
+  samplecontroller:v1alpha1 \
+  --output-base ""$(dirname ${BASH_SOURCE})/../../..""
+
+# To use your own boilerplate text append:
+#   --go-header-file ${SCRIPT_ROOT}/hack/custom-boilerplate.go.txt
+```
+
+This script allows you to generate the required code too create functionality for the most common actions; In this case: `""deepcopy,client,informer,lister""`, which are common components for a `CustomResourceController`.
+
+` k8s.io/sample-controller/pkg/client k8s.io/sample-controller/pkg/apis`
+Should be swapped by your projects' ""apis""-folder location.
+
+`samplecontroller:v1alpha1` should be edited into `<yoursamplecontroller.com:youversion>`.
+
+## ./generator/verify-codegen.sh
+
+This script is primarily used for CI/CD pipelines, as it invokes the previous script and checks to see if there would have been any changes.
+
+## ./main.go, ./controller.go
+
+This is where the actual controller should live. It's responsibility would generally be (in case of a `CustomResourceController` to read events for the `CustomResource` and invoke actions based on these events.
+
+> For example: If I were to create a `CustomResource` called `Staging` and wanted to create some deployments based off-of some variables within this resource. I'd need a controller listening for events (`Watch`) and performing orchestration/cleanup when required.
+
+Some thoughts:
+- You'll need to handle exitting properly through several threads, as we need to stop some loops from running indefinitely
+- You'll need to implement workers, as you don't want events to wait for a deployment orchestration-operation to finish
+- Somehow you'll need to start watching all newly orchestrated components for changes as wel, to ensure they get re-orchestrated when something happens to them
+- ... (whatever many many options I have probably missed up until now)
+
+... Then again, there might be a lot simpler ways to approach this, but these weren't clear yet to me.
+
+## ./pkg/apis/samplecontroller/v1alpha1/register.go
+
+```
+package samplecontroller
+
+const (
+	GroupName = ""samplecontroller.k8s.io""
+)
+```
+
+Package should match the directory name used within apis & the group name should be adjusted to the name set in the `CustomResourceDefinition`.
+
+## ./pkg/apis/samplecontroller/v1alpha1/types.go
+
+```
+package v1alpha1
+
+import (
+	metav1 ""k8s.io/apimachinery/pkg/apis/meta/v1""
+)
+
+// +genclient
+// +genclient:noStatus
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// Foo is a specification for a Foo resource
+type Foo struct {
+	metav1.TypeMeta   `json:"",inline""`
+	metav1.ObjectMeta `json:""metadata,omitempty""`
+
+	Spec   FooSpec   `json:""spec""`
+	Status FooStatus `json:""status""`
+}
+
+// FooSpec is the spec for a Foo resource
+type FooSpec struct {
+	DeploymentName string `json:""deploymentName""`
+	Replicas       *int32 `json:""replicas""`
+}
+
+// FooStatus is the status for a Foo resource
+type FooStatus struct {
+	AvailableReplicas int32 `json:""availableReplicas""`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+// FooList is a list of Foo resources
+type FooList struct {
+	metav1.TypeMeta `json:"",inline""`
+	metav1.ListMeta `json:""metadata""`
+
+	Items []Foo `json:""items""`
+}
+```
+
+This is a bit harder to explain but to put it bluntly: You create a golang representation of the data described in the `CustomResourceDefinition`, with the comments starting with `// +k8s:` depicting a special role:
+They tell the `code-generator` what code to generate.
+
+The package here should match the version chosen 
+
+## ./pkg/apis/samplecontroller/v1alpha1/doc.go
+
+```
+// +k8s:deepcopy-gen=package
+
+// Package v1alpha1 is the v1alpha1 version of the API.
+// +groupName=samplecontroller.k8s.io
+package v1alpha1
+```
+
+In this case, this file serves solely to set the general settings for the `code-generator` it
+- sets the group name for the generated files
+- tells the `deepcopy-gen`erator to generate deep copy methods for each type in that package (unless the parameters above that type override it)
+
+## ./pkg/apis/samplecontroller/register.go
+
+```
+package v1alpha1
+
+import (
+	metav1 ""k8s.io/apimachinery/pkg/apis/meta/v1""
+	""k8s.io/apimachinery/pkg/runtime""
+	""k8s.io/apimachinery/pkg/runtime/schema""
+
+	samplecontroller ""k8s.io/sample-controller/pkg/apis/samplecontroller""
+)
+
+// SchemeGroupVersion is group version used to register these objects
+var SchemeGroupVersion = schema.GroupVersion{Group: samplecontroller.GroupName, Version: ""v1alpha1""}
+
+// Kind takes an unqualified kind and returns back a Group qualified GroupKind
+func Kind(kind string) schema.GroupKind {
+	return SchemeGroupVersion.WithKind(kind).GroupKind()
+}
+
+// Resource takes an unqualified resource and returns a Group qualified GroupResource
+func Resource(resource string) schema.GroupResource {
+	return SchemeGroupVersion.WithResource(resource).GroupResource()
+}
+
+var (
+	SchemeBuilder = runtime.NewSchemeBuilder(addKnownTypes)
+	AddToScheme   = SchemeBuilder.AddToScheme
+)
+
+// Adds the list of known types to Scheme.
+func addKnownTypes(scheme *runtime.Scheme) error {
+	scheme.AddKnownTypes(SchemeGroupVersion,
+		&Foo{},
+		&FooList{},
+	)
+	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
+	return nil
+}
+```
+
+I'm not sure what this file exactly fulfils but I know it is important, you'll need to ensure the:
+- package name is correct (matches the version in the `CustomResourceDefinition`)
+- the imports are relative to your project, not `samplecontroller`
+- `var SchemeGroupVersion = schema.GroupVersion{Group: samplecontroller.GroupName, Version: ""v1alpha1""}`'s `""v1alpha1""` should also be changed to match the version in the `CustomResourceDefinition`
+
+# 2. Generate the required code
+
+> Allright, this is a fine time to create a commit to run back to when everything hits the fan.
+
+## Fetch dependencies
+
+```
+dep ensure
+```
+
+## Generate required libraries based off-of your types
+
+```
+./generator/update-codegen.sh
+```
+
+## Fetch dependencies
+I'm not even sure this is actually always required, but I just like doing it...
+
+```
+dep ensure
+```
+
+# 3. Create the Controller's logic
+
+Now that all the required code has been generated we've got ourselves some nice options to perform some routine tasks:
+
+- `./pkg/client/clientset/versioned/typed/samplecontroller/v1alpha1/samplecontroller_client.go` which will act as our goto-structure to access any api-endpoint related to the `CustomResource` we created.
+- `./pkg/client/clientset/versioned/typed/samplecontroller/v1alpha1/foo.go` which will add the `.Foo(""<supply a namespacehere>"")` which in turn supplies an interface to operations like:
+  - List
+  - Get
+  - Watch
+  - ...
+
+# End
+That's it for now! I'm kind of stuck after managing to really simply listening for `added` events and printing the contents of my type.
+I want to be able to do a lot more, like create complete environments as a result of a `CustomResource` being added / altered etc... But I'm not there yet. _Any_ help is _greatly_ appreciated. ;)
+
+Please note that I am not fully fluent in golang nor am I a programmer (operations). I just want to be able to understand en grasp the usefulness of this awesome project.",closed,False,2018-03-14 15:17:39,2018-11-23 15:59:12
+sample-controller,occia,https://github.com/kubernetes/sample-controller/issues/14,https://api.github.com/repos/kubernetes/sample-controller/issues/14,tag-1.9.2 register.go bug,"From my point of view, this [function](https://github.com/kubernetes/sample-controller/blob/kubernetes-1.9.2/pkg/apis/samplecontroller/v1alpha1/register.go#L49) seems to miss the following code.
+
+    	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)",closed,False,2018-04-02 08:41:06,2018-05-15 06:23:16
+sample-controller,hochuenw,https://github.com/kubernetes/sample-controller/issues/15,https://api.github.com/repos/kubernetes/sample-controller/issues/15,Go client of one crd.,Is there a way to use go client to create one crd after this line `kubectl create -f artifacts/examples/crd.yaml`?,closed,False,2018-04-03 17:17:42,2018-04-23 17:54:42
+sample-controller,MrHohn,https://github.com/kubernetes/sample-controller/issues/16,https://api.github.com/repos/kubernetes/sample-controller/issues/16,"govet error: ""literal copies lock value from fakePtr""","From https://github.com/kubernetes/ingress-gce/pull/163.
+
+Using the auto generating scripts in hack/ with golang 1.10.1 and hit below error when running govet:
+```
+# k8s.io/ingress-gce/pkg/serviceextension/client/clientset/versioned/fake
+pkg/serviceextension/client/clientset/versioned/fake/clientset_generated.go:56: literal copies lock value from fakePtr: k8s.io/ingress-gce/vendor/k8s.io/client-go/testing.Fake
+```
+
+It seems that is also the case in this repo:
+https://github.com/kubernetes/sample-controller/blob/9d231f2a2a34c4a866e80465eb50fc7b2806eddf/pkg/client/clientset/versioned/fake/clientset_generated.go#L44-L56
+
+Should we fix the generated code or am I missing something?",closed,False,2018-04-10 00:05:56,2018-12-06 07:55:55
+sample-controller,rahulkrishnanfs,https://github.com/kubernetes/sample-controller/issues/17,https://api.github.com/repos/kubernetes/sample-controller/issues/17,Getting issue while fetching the  sample-controller,"When I do  $go get github.com/kubernetes/sample-controller
+
+I am getting the following issue 
+
+github.com/kubernetes/sample-controller
+src\github.com\kubernetes\sample-controller\controller.go:102:26: cannot use ""github.com/kubernetes/sample-controller/vendor/k8s.io/client-go/kubernetes/scheme"".Scheme (
+type *""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Scheme) as type *""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime""
+.Scheme in argument to ""k8s.io/sample-controller/pkg/client/clientset/versioned/scheme"".AddToScheme
+src\github.com\kubernetes\sample-controller\controller.go:292:27: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""githu
+b.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Object in argument to ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery
+/pkg/apis/meta/v1"".IsControlledBy:
+        *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/api
+s/meta/v1"".Object (wrong type for GetCreationTimestamp method)
+                have GetCreationTimestamp() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+                want GetCreationTimestamp() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+src\github.com\kubernetes\sample-controller\controller.go:294:19: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""githu
+b.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object in argument to c.recorder.Event:
+        *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/run
+time"".Object (wrong type for DeepCopyObject method)
+                have DeepCopyObject() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+                want DeepCopyObject() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+src\github.com\kubernetes\sample-controller\controller.go:320:18: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""githu
+b.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object in argument to c.recorder.Event:
+        *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/run
+time"".Object (wrong type for DeepCopyObject method)
+                have DeepCopyObject() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+                want DeepCopyObject() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+src\github.com\kubernetes\sample-controller\controller.go:404:29: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""githu
+b.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Object in argument to ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery
+/pkg/apis/meta/v1"".NewControllerRef:
+        *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/api
+s/meta/v1"".Object (wrong type for GetCreationTimestamp method)
+                have GetCreationTimestamp() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+                want GetCreationTimestamp() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+src\github.com\kubernetes\sample-controller\main.go:56:46: cannot use cfg (type *""github.com/kubernetes/sample-controller/vendor/k8s.io/client-go/rest"".Config) as type *
+""k8s.io/sample-controller/vendor/k8s.io/client-go/rest"".Config in argument to versioned.NewForConfig
+
+",closed,False,2018-04-29 06:44:50,2018-06-21 18:13:50
+sample-controller,barry8schneider,https://github.com/kubernetes/sample-controller/issues/18,https://api.github.com/repos/kubernetes/sample-controller/issues/18,What does operating in-cluster mean under running section of readme,"Please clarify what this mean: 
+
+https://github.com/kubernetes/sample-controller/blob/master/README.md#running
+```
+# assumes you have a working kubeconfig, not required if operating in-cluster
+$ go run *.go -kubeconfig=$HOME/.kube/config
+```
+
+- What is not required?
+- How would you operate in-cluster?
+
+
+
+",closed,False,2018-04-30 21:01:02,2018-05-30 13:54:53
+sample-controller,barry8schneider,https://github.com/kubernetes/sample-controller/issues/19,https://api.github.com/repos/kubernetes/sample-controller/issues/19,How to deploy controller into the cluster,"I am a bit confused about where the custom controller is being run from. I had assumed that the customer controller would run within the cluster, just as the deployment controller does, watching and taking action. But based on my reading the custom control is client side and lives outside of kubernetes. I have have seen one [example](https://github.com/CrunchyData/postgres-operator) running the custom control client within a Pod in the cluster. But I could not figure out the specific code to make this work.",closed,False,2018-04-30 21:14:00,2018-05-30 13:57:00
+sample-controller,gogeof,https://github.com/kubernetes/sample-controller/issues/20,https://api.github.com/repos/kubernetes/sample-controller/issues/20,[ support ] can't build from source,"## what happen?
+I want to build from source, but get these failed: 
+
+```
+# GO15VENDOREXPERIMENT=1 go build .
+# github.com/kubernetes/sample-controller
+./controller.go:102:26: cannot use ""github.com/kubernetes/sample-controller/vendor/k8s.io/client-go/kubernetes/scheme"".Scheme (type *""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Scheme) as type *""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Scheme in argument to ""k8s.io/sample-controller/pkg/client/clientset/versioned/scheme"".AddToScheme
+./controller.go:292:27: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Object in argument to ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".IsControlledBy:
+	*""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Object (wrong type for GetCreationTimestamp method)
+		have GetCreationTimestamp() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+		want GetCreationTimestamp() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+./controller.go:294:19: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object in argument to c.recorder.Event:
+	*""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object (wrong type for DeepCopyObject method)
+		have DeepCopyObject() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+		want DeepCopyObject() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+./controller.go:320:18: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object in argument to c.recorder.Event:
+	*""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object (wrong type for DeepCopyObject method)
+		have DeepCopyObject() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+		want DeepCopyObject() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/runtime"".Object
+./controller.go:404:29: cannot use foo (type *""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo) as type ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Object in argument to ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".NewControllerRef:
+	*""k8s.io/sample-controller/pkg/apis/samplecontroller/v1alpha1"".Foo does not implement ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Object (wrong type for GetCreationTimestamp method)
+		have GetCreationTimestamp() ""k8s.io/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+		want GetCreationTimestamp() ""github.com/kubernetes/sample-controller/vendor/k8s.io/apimachinery/pkg/apis/meta/v1"".Time
+./main.go:56:46: cannot use cfg (type *""github.com/kubernetes/sample-controller/vendor/k8s.io/client-go/rest"".Config) as type *""k8s.io/sample-controller/vendor/k8s.io/client-go/rest"".Config in argument to versioned.NewForConfig
+```
+
+## update by hack/update-codegen.sh still has this problem
+```
+# /bin/bash hack/update-codegen.sh 
+Generating deepcopy funcs
+Generating clientset for samplecontroller:v1alpha1 at k8s.io/sample-controller/pkg/client/clientset
+Generating listers for samplecontroller:v1alpha1 at k8s.io/sample-controller/pkg/client/listers
+Generating informers for samplecontroller:v1alpha1 at k8s.io/sample-controller/pkg/client/informers
+```
+
+## my env
+
+### go version
+```
+# go version
+go version go1.10.1 linux/amd64
+```
+
+### system version
+```
+# cat /etc/os-release 
+NAME=""Ubuntu""
+VERSION=""16.04.3 LTS (Xenial Xerus)""
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME=""Ubuntu 16.04.3 LTS""
+VERSION_ID=""16.04""
+HOME_URL=""http://www.ubuntu.com/""
+SUPPORT_URL=""http://help.ubuntu.com/""
+BUG_REPORT_URL=""http://bugs.launchpad.net/ubuntu/""
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+```",closed,False,2018-05-01 15:44:00,2018-07-20 01:33:50
+sample-controller,xianlubird,https://github.com/kubernetes/sample-controller/issues/21,https://api.github.com/repos/kubernetes/sample-controller/issues/21,How to create CustomResourceDefinition using typed client,"In this example, we have to use kubectl create the CustomResourceDefinition. But how do we create it through client-go in code ?",closed,False,2018-05-16 09:01:47,2018-09-19 16:23:22
+sample-controller,jessfraz,https://github.com/kubernetes/sample-controller/issues/22,https://api.github.com/repos/kubernetes/sample-controller/issues/22,Create a SECURITY_CONTACTS file.,"As per the email sent to kubernetes-dev[1], please create a SECURITY_CONTACTS
+file.
+
+The template for the file can be found in the kubernetes-template repository[2].
+A description for the file is in the steering-committee docs[3], you might need
+to search that page for ""Security Contacts"".
+
+Please feel free to ping me on the PR when you make it, otherwise I will see when
+you close this issue. :)
+
+Thanks so much, let me know if you have any questions.
+
+(This issue was generated from a tool, apologies for any weirdness.)
+
+[1] https://groups.google.com/forum/#!topic/kubernetes-dev/codeiIoQ6QE
+[2] https://github.com/kubernetes/kubernetes-template-project/blob/master/SECURITY_CONTACTS
+[3] https://github.com/kubernetes/community/blob/master/committee-steering/governance/sig-governance-template-short.md
+",closed,False,2018-05-24 14:43:14,2018-06-02 04:18:41
+sample-controller,cmoulliard,https://github.com/kubernetes/sample-controller/issues/23,https://api.github.com/repos/kubernetes/sample-controller/issues/23,Can't run the test : go run: cannot run *_test.go files (controller_test.go),"This command is failing when it is executed
+
+```
+go get k8s.io/sample-controller
+cd $GOPATH/src/k8s.io/sample-controller
+go build .
+./hack/update-codegen.sh 
+go run *.go -kubeconfig=$HOME/.kube/config
+go run: cannot run *_test.go files (controller_test.go)
+```
+
+We can run the test using nevertheless this command
+
+```
+go test .
+ok      k8s.io/sample-controller        0.035s
+```",closed,False,2018-06-21 09:16:59,2018-06-29 15:52:01
+sample-controller,cmoulliard,https://github.com/kubernetes/sample-controller/issues/24,https://api.github.com/repos/kubernetes/sample-controller/issues/24,How to install the controller on k8s,"Is it possible to enhance the doc in order to explain how we could build a docker image and next install the `sample-controller` on k8s, openshift ?",open,False,2018-06-21 09:18:31,2019-03-10 20:27:10
+sample-controller,NoahElzein,https://github.com/kubernetes/sample-controller/issues/25,https://api.github.com/repos/kubernetes/sample-controller/issues/25,Forgetting event upon processing functional?,I have designed a Postgres Controller based on the Sample controller. processNextWorkItem is exactly the same in my case as the sample controller. For some reason events keep looping through my queue even after being processed which leads me to believe they may not be correctly being forgotten from the queue. My synchandler also takes the same and I just added the logic for handling Postgres objects. By inserting some print statements I am able to confirm that it always exits successfully and upon returning to the processNextWorkItem function it also funishes successfully and calls the forget function. But for some reason the event is never forgotten and the next time processNextWorkItem is called it comes up with the same event. ,closed,False,2018-08-13 16:12:09,2018-08-17 18:37:04
+sample-controller,zanetworker,https://github.com/kubernetes/sample-controller/issues/26,https://api.github.com/repos/kubernetes/sample-controller/issues/26,Build error for Foo template,"I was trying to build the code with a simple `go build -o controller .` and I got the following error: 
+
+```bash 
+# k8s.io/sample-controller/pkg/client/informers/externalversions/samplecontroller/v1alpha1
+../../../k8s.io/sample-controller/pkg/client/informers/externalversions/samplecontroller/v1alpha1/foo.go:64:5: not enough arguments to return
+../../../k8s.io/sample-controller/pkg/client/informers/externalversions/samplecontroller/v1alpha1/foo.go:64:18: client.SamplecontrollerV1alpha1 undefined (type versioned.Interface has no field or method SamplecontrollerV1alpha1)
+../../../k8s.io/sample-controller/pkg/client/informers/externalversions/samplecontroller/v1alpha1/foo.go:70:5: not enough arguments to return
+../../../k8s.io/sample-controller/pkg/client/informers/externalversions/samplecontroller/v1alpha1/foo.go:70:18: client.SamplecontrollerV1alpha1 undefined (type versioned.Interface has no field or method SamplecontrollerV1alpha1)
+```
+
+This worked before like a charm. ",closed,False,2018-08-19 11:32:03,2018-09-22 20:01:25
+sample-controller,pwittrock,https://github.com/kubernetes/sample-controller/issues/27,https://api.github.com/repos/kubernetes/sample-controller/issues/27,Switch dependency management to `dep`,@sttts @nikhita WDYT of switching to `dep`?  If you are ok with it I can open a PR.,closed,False,2018-09-19 16:25:52,2018-12-10 20:00:28
+sample-controller,pwittrock,https://github.com/kubernetes/sample-controller/issues/28,https://api.github.com/repos/kubernetes/sample-controller/issues/28,Move sample-controller out of staging,"@nikhita @sttts WDYT of moving this out of staging?  None of the projects written by consumers of sample-controller will live in staging, so it might be nice to have this match their reality.",closed,False,2018-09-19 16:34:55,2019-03-14 23:11:45
+sample-controller,devdattakulkarni,https://github.com/kubernetes/sample-controller/issues/29,https://api.github.com/repos/kubernetes/sample-controller/issues/29,Preventing event circulation through workqueue,"Looking at how UpdateFunc's are setup, I was wondering why ResourceVersion check is not done when setting up UpdateFunc for Foo?
+
+Also, in the syncHandler, updateFooStatus() is called irrespective of whether an update is warranted or not. 
+
+Together these two points lead to a situation where syncHandler keeps getting triggered even after processing of an event (Foo or Deployment) is completed. This seems incorrect to me.
+
+I think we should add ResourceVersion check in the UpdateFunc for fooInformer and also maintain a flag in syncHandler to check whether updateFooStatus() is really needed to be called or not.
+
+What do you think?
+
+Here is a WIP PR that includes these fixes:
+https://github.com/kubernetes/kubernetes/pull/69749
+",open,False,2018-10-12 20:50:26,2019-01-31 02:34:04
+sample-controller,bhabermaas,https://github.com/kubernetes/sample-controller/issues/30,https://api.github.com/repos/kubernetes/sample-controller/issues/30,Using sample-controller to create a custom version - it doesn't work,"I have created a project to create a custom sample-controller. 
+1. I updated pkg/api files to setup Runner and RunnerList types to replace Foo and FooList
+2. I created new client code using update-codegen.sh
+3. I modified main.go and controller.go appropriately. 
+
+When I build and run I get the following message repeated over and over
+
+E1014 15:31:57.075937   32420 reflector.go:134] github.com/customcontroller/pkg/client/informers/externalversions/factory.go:117: Failed to list *v1alpha1.Runner: no kind ""runnerList"" is registered for version ""customcontroller.k8s.io/v1alpha1"" in scheme ""github.com/customcontroller/pkg/client/clientset/versioned/scheme/register.go:30""
+
+From this error message can you tell me what I did wrong or give me a hint where I should look ?",closed,False,2018-10-14 19:43:03,2018-11-26 12:38:38
+sample-controller,nrfox,https://github.com/kubernetes/sample-controller/issues/31,https://api.github.com/repos/kubernetes/sample-controller/issues/31,Requeue work item on syncHandler error,"When the syncHandler returns an error, I would expect the work item to be re-added to the workqueue according to [this](https://github.com/kubernetes/sample-controller/blob/master/controller.go#L199-L202) comment. The [statefulset controller](https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/statefulset/stateful_set.go#L401) and the [deployment controller](https://github.com/kubernetes/kubernetes/blob/master/pkg/controller/deployment/deployment_controller.go#L485) both requeue work items when their syncHandlers return errors so I'm guessing this is the desired behavior here as well in order to handle transient errors.
+
+By setting the resync period to 0 on the event handlers and returning an error from the syncHandler, one can see that the work item does not get requeued.
+
+[PR to fix](https://github.com/kubernetes/kubernetes/pull/70031)",closed,False,2018-10-19 18:14:41,2018-10-30 00:15:54
+sample-controller,swatisehgal,https://github.com/kubernetes/sample-controller/issues/32,https://api.github.com/repos/kubernetes/sample-controller/issues/32,Sample controller error syncing 'default/example-foo',"The sample controller is giving me the following error:
+error syncing 'default/example-foo': Operation cannot be fulfilled on foos.samplecontroller.k8s.io ""example-foo"": the object has been modified; please apply your changes to the latest version and try again, requeuing",open,False,2018-11-05 12:36:47,2019-01-09 02:14:02
+sample-controller,yhfeng666,https://github.com/kubernetes/sample-controller/issues/33,https://api.github.com/repos/kubernetes/sample-controller/issues/33,Why I can delete the CRD resource Foo but I can't find the DeleteFunc in FooInformer?,"Just as the title shows,I can create the Foo CRD and then create or delete the Foo resource I created after I build the project but I can't find the DeleteFunc in the fooinformer.Informer().AddEventHandler().",open,False,2018-11-13 10:22:09,2019-03-14 03:44:15
+sample-controller,liucimin,https://github.com/kubernetes/sample-controller/issues/34,https://api.github.com/repos/kubernetes/sample-controller/issues/34,Using sample-controller to create a custom version -but it doesn't work.,"I have created a project to create a custom sample-controller.
+
+I updated pkg/api files to setup KnightNetwork and KnightNetworkList types to replace Foo and FooList
+I created new client code using update-codegen.sh
+I modified main.go and controller.go appropriately.
+When I build and run I get the following message repeated over and over
+
+Listing and watching *v1.KnightNetwork from github.com/knight/pkg/k8s/client/informers/externalversions/factory.go:117
+E1126 13:33:58.833083      29 reflector.go:134] github.com/knight/pkg/k8s/client/informers/externalversions/factory.go:117: Failed to list *v1.KnightNetwork: no kind ""KnightnetworkList"" is registered for version ""knight.io/v1"" in scheme ""github.com/knight/pkg/k8s/client/clientset/versioned/scheme/register.go:30""
+
+From this error message can you tell me what I did wrong or give me a hint where I should look ?",closed,False,2018-11-26 14:11:46,2018-11-27 03:51:56
+sample-controller,rkamudhan,https://github.com/kubernetes/sample-controller/pull/35,https://api.github.com/repos/kubernetes/sample-controller/issues/35,Update the go get to k8s.io/sample-controller,"Referring to the issue: https://github.com/kubernetes/sample-controller/issues/20#issuecomment-398716033
+
+Sorry, we do not accept changes directly against this repository. Please see 
+CONTRIBUTING.md for information on where and how to contribute instead.
+",closed,True,2018-11-28 14:44:22,2018-11-28 15:29:51
+sample-controller,rkamudhan,https://github.com/kubernetes/sample-controller/issues/36,https://api.github.com/repos/kubernetes/sample-controller/issues/36,How to get the log message ?,"I am getting error for the log messages:
+
+```
+# ./sample-controller -kubeconfig=$HOME/.kube/config -logtostderr=true -v=2
+flag provided but not defined: -logtostderr
+Usage of ./sample-controller:
+  -kubeconfig string
+        Path to a kubeconfig. Only required if out-of-cluster.
+  -master string
+        The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.
+```
+
+How to check it ?",open,False,2018-11-28 17:53:42,2019-01-15 11:03:42
+sample-controller,xkisu,https://github.com/kubernetes/sample-controller/issues/40,https://api.github.com/repos/kubernetes/sample-controller/issues/40,Problem with codegen on Windows,"I downloaded the repo, modified the api files and codegen script to suit my needs and tried to run `update-codegen.sh` from Git Bash, but it failed with these errors.
+
+```
+Keith@DESKTOP-021AQFL MINGW64 ~/go/src/gamepod.cc/agent (master)
+$ ./hack/update-codegen.sh
+Generating deepcopy funcs
+Generating clientset for gamepod:v1alpha1 at gamepod.cc/agent/pkg/client/clientse                          t
+W1223 18:13:29.376607   33732 import_tracker.go:45] Warning: backslash used in i                          mport path 'gamepod.cc\agent\pkg\client\clientset\versioned\scheme', this is uns                          upported.
+F1223 18:13:29.441608   33732 main.go:64] Error: Failed executing generator: som                          e packages had errors:
+errors in package ""gamepod.cc\\agent\\pkg\\client\\clientset\\versioned"":
+unable to format file ""..\\..\\gamepod.cc\\agent\\pkg\\client\\clientset\\versio                          ned\\clientset.go"" (20:34: unknown escape sequence (and 3 more errors)).
+
+errors in package ""gamepod.cc\\agent\\pkg\\client\\clientset\\versioned\\fake"":
+unable to format file ""..\\..\\gamepod.cc\\agent\\pkg\\client\\clientset\\versio                          ned\\fake\\clientset_generated.go"" (20:34: unknown escape sequence (and 10 more                           errors)).
+
+errors in package ""gamepod.cc\\agent\\pkg\\client\\clientset\\versioned\\typed\\                          gamepod\\v1alpha1"":
+unable to format file ""..\\..\\gamepod.cc\\agent\\pkg\\client\\clientset\\versio                          ned\\typed\\gamepod\\v1alpha1\\gameserver.go"" (22:11: illegal character U+005C '\                          ' (and 10 more errors)).
+unable to format file ""..\\..\\gamepod.cc\\agent\\pkg\\client\\clientset\\versio                          ned\\typed\\gamepod\\v1alpha1\\gamepod_client.go"" (17:2: invalid import path: ""ga                          mepod.cc\\agent\\pkg\\client\\clientset\\versioned\\scheme"").
+
+errors in package ""gamepod.cc\\agent\\pkg\\client\\clientset\\versioned\\typed\\                          gamepod\\v1alpha1\\fake"":
+unable to format file ""..\\..\\gamepod.cc\\agent\\pkg\\client\\clientset\\versio                          ned\\typed\\gamepod\\v1alpha1\\fake\\fake_gamepod_client.go"" (19:28: unknown esca                          pe sequence (and 3 more errors)).
+
+```
+
+Where `gamepod` is my api name and `gameserver` is my CRD. Upon looking in some of the files in the error message I found out that it was using backslashes in import paths for files it generated:
+
+```
+// pkg/client/clientset/versioned/clientset.go
+
+...
+
+package versioned
+
+import (
+	flowcontrol ""k8s.io/client-go/util/flowcontrol""
+	stablev1alpha1 ""gamepod.cc\agent\pkg\client\clientset\versioned\typed\gamepod\v1alpha1""
+	discovery ""k8s.io/client-go/discovery""
+	rest ""k8s.io/client-go/rest""
+)
+
+...
+```
+
+However when I run `update-codegen.sh` with the same code on a Linux VPS it runs completely fine and generates the correct import paths so it appears this is a problem caused by the scripts not using the correct path separator under Git Bash/MSYS2. 
+
+I assume this is less of an issue with sample-controller and probably an issue with `kubernetes/code-generator` or `kubernetes/gengo` but I'm not sure where to look so I assume this is the best place to start.
+
+Here are the most relevant files:
+
+```
+// hack/update-codegen.sh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+SCRIPT_ROOT=$(dirname ${BASH_SOURCE})/..
+CODEGEN_PKG=${CODEGEN_PKG:-$(cd ${SCRIPT_ROOT}; ls -d -1 ./vendor/k8s.io/code-generator 2>/dev/null || echo ../code-generator)}
+# generate the code with:
+# --output-base    because this script should also be able to run inside the vendor dir of
+#                  k8s.io/kubernetes. The output-base is needed for the generators to output into the vendor dir
+#                  instead of the $GOPATH directly. For normal projects this can be dropped.
+${CODEGEN_PKG}/generate-groups.sh ""deepcopy,client,informer,lister"" \
+  gamepod.cc/agent/pkg/client gamepod.cc/agent/pkg/apis \
+  gamepod:v1alpha1 \
+  --output-base ""$(dirname ${BASH_SOURCE})/../../.."" \
+  --go-header-file ${SCRIPT_ROOT}/hack/boilerplate.go.txt
+```
+
+```
+// pkg/apis/gamepod/v1alpa1/types.go
+
+package v1alpa1
+
+import (
+	metav1 ""k8s.io/apimachinery/pkg/apis/meta/v1""
+)
+
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// GameServer is a specification for a Game Server resource
+type GameServer struct {
+	metav1.TypeMeta   `json:"",inline""`
+	metav1.ObjectMeta `json:""metadata,omitempty""`
+	Spec              GameServerSpec   `json:""spec""`
+	Status            GameServerStatus `json:""status""`
+}
+
+// GameServerSpec is the spec for a GameServer resource
+type GameServerSpec struct {
+	Game GameServerGame `json:""game""`
+}
+
+// GameServerGame is the spec for the Game key of the GameServer resource spec
+type GameServerGame struct {
+	Name    string `json:""name""`
+	Version string `json:""version""`
+}
+
+// GameServerStatus is the status for a GameServer resource
+type GameServerStatus struct {
+	Created bool `json:""installed""`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// GameServerList is a list of GameServer resources
+type GameServerList struct {
+	metav1.TypeMeta `json:"",inline""`
+	metav1.ListMeta `json:""metadata""`
+	Items           []GameServer `json:""items""`
+}
+```
+
+",closed,False,2018-12-24 03:26:28,2018-12-24 04:13:33
+sample-controller,rhugga,https://github.com/kubernetes/sample-controller/issues/41,https://api.github.com/repos/kubernetes/sample-controller/issues/41,Is this outdated?,"I can't for the life of me get this working. I can't even get it to build. So I assume I need godep since I see a Godep directory. (also tried using dep ensure)
+
+I've cloned sample-controller. I change to the sample-controller directory. My GOPATH=/path/to/sample-controller.
+
+`
+$pwd
+/devel/kubernetes/sample-controller
+
+$go version
+go version go1.11.5 darwin/amd64
+
+$godep version 
+godep v80 (darwin/amd64/go1.11.5)
+
+/devel/kubernetes/sample-controller $godep get 
+godep: [WARNING]: godep should only be used inside a valid go package directory and . 
+godep: [WARNING]: may not function correctly. You are probably outside of your $GOPATH.  
+godep: [WARNING]:	Current Directory: /devel/kubernetes/sample-controller . 
+godep: [WARNING]:	$GOPATH: /devel/kubernetes/sample-controller . 
+godep: Unable to find SrcRoot for package .
+
+$echo $GOPATH
+/devel/kubernetes/sample-controller
+`
+
+What am I doing wrong here. Sorry new to go and its tools.",open,False,2019-02-14 15:14:21,2019-03-04 12:52:43
+sample-controller,prometherion,https://github.com/kubernetes/sample-controller/issues/42,https://api.github.com/repos/kubernetes/sample-controller/issues/42,Informer AddFunc start processing items before it has been synced,"I'm using the `sample-controller` as a scaffold for handling CRDS: basically, I got a custom resource named `IngressClass`, just simple counter the amount of registered `Ingress` resources for each class.
+
+As the code suggests, I create the Kubernetes and custom one informers, then I instantiate a new controller passing the Informers in order to get the func `HasSynced` required by the func `cache.WaitForCacheSync`. In the end, I start both informers and start processing.
+
+Sometimes it happens that the cache seems not ready: the events related to `Ingress` need to fetch data from `IngressClass` lister but sometimes I face some error (not found) and they seem totally random.
+```
+I0225 15:32:47.299991   10670 controller.go:73] creating event broadcaster
+I0225 15:32:47.300142   10670 controller.go:90] setting up event handlers
+I0225 15:32:47.300172   10670 controller.go:143] starting IngressClass controller
+I0225 15:32:47.300178   10670 controller.go:146] waiting for informer caches to sync
+I0225 15:32:47.300654   10670 reflector.go:131] Starting reflector *v1beta1.Ingress (1m0s) from k8s.io/client-go/informers/factory.go:132
+I0225 15:32:47.300872   10670 reflector.go:169] Listing and watching *v1beta1.Ingress from k8s.io/client-go/informers/factory.go:132
+I0225 15:32:47.300673   10670 reflector.go:131] Starting reflector *v1beta1.IngressClass (1m0s) from ingress-class-controller/pkg/client/informers/externalversions/factory.go:117
+I0225 15:32:47.301450   10670 reflector.go:169] Listing and watching *v1beta1.IngressClass from ingress-class-controller/pkg/client/informers/externalversions/factory.go:117
+I0225 15:32:47.321516   10670 ingress.go:43] processing object: foo
+E0225 15:32:47.321665   10670 controller.go:106] cannot retrieve IngressClass default: ingressclass.sharding.foo.net ""default"" not found
+E0225 15:32:47.321742   10670 runtime.go:69] Observed a panic: &errors.errorString{s:""cannot retrieve IngressClass default: ingressclass.sharding.foo.net \""default\"" not found""} (cannot retrieve IngressClass default: ingressclass.sharding.fooo.net ""default"" not found)
+```
+
+It appears that the _CRD based_ lister is not yet populated with the required data: a workaround could be using multiple `enqueue<Type>` in order to get multiple `workqueue.RateLimitingInterface` and handle better this cases.",open,False,2019-02-25 15:04:50,2019-02-25 15:04:50
+sample-controller,joelsmith,https://github.com/kubernetes/sample-controller/pull/43,https://api.github.com/repos/kubernetes/sample-controller/issues/43,Update embargo doc link in SECURITY_CONTACTS and change PST to PSC,See https://github.com/kubernetes/security/issues/8 for more information,closed,True,2019-03-08 18:14:19,2019-03-09 01:23:26
+sample-controller,lianxingye,https://github.com/kubernetes/sample-controller/pull/44,https://api.github.com/repos/kubernetes/sample-controller/issues/44,update for task a,"Sorry, we do not accept changes directly against this repository. Please see
+CONTRIBUTING.md for information on where and how to contribute instead.
+",closed,True,2019-03-13 15:21:18,2019-03-13 15:22:15
+sample-controller,biblesyme,https://github.com/kubernetes/sample-controller/issues/45,https://api.github.com/repos/kubernetes/sample-controller/issues/45,import cycle not allowed,"```
+go build -o sample-controller .
+import cycle not allowed
+package k8s.io/sample-controller
+        imports flag
+        imports errors
+        imports runtime
+        imports internal/bytealg
+        imports internal/cpu
+        imports runtime
+```",open,False,2019-03-16 14:24:15,2019-03-16 14:24:15

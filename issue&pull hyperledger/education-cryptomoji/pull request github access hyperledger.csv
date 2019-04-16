@@ -1,0 +1,753 @@
+name repository,url,url html,created by,title,body,assignees,# commit,created at,updated at,closed at,is merged,merged at,merged by,mergeable state,mergeable,state
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/130,https://github.com/hyperledger/education-cryptomoji/pull/130,delventhalz,Update moji definitions with additional blocklisted characters,"Fixes #124
+
+Should reduce incidents of mojis being generated with undisplayable characters.",['delventhalz'],1,2018-09-13 20:35:11,2018-09-14 00:51:26,2018-09-14 15:49:13,False,,,blocked,True,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/117,https://github.com/hyperledger/education-cryptomoji/pull/117,delventhalz,Test updates informed by ReBootKamp students,"After spending a day working with ReBootKamp students on the part-one curriculum, a number of errors and confusing behavior from the part one tests became apparent. This PR addresses all of those issue.",['delventhalz'],10,2018-08-26 19:52:35,2018-09-14 00:51:37,2018-09-14 15:49:13,False,,,blocked,True,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/115,https://github.com/hyperledger/education-cryptomoji/pull/115,therobinkim,Client: Allow users to breed moji,"This PR should be merged only after #114 is merged. (#114 brings changes into `feat/client-breed`, and this PR will bring those changes into `staging`!)
+
+This PR incorporates initial changes from #99 and fixes from #114.",['therobinkim'],19,2018-08-16 07:33:40,2018-08-29 02:06:32,2018-08-29 02:06:43,True,2018-08-29 02:06:32,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/114,https://github.com/hyperledger/education-cryptomoji/pull/114,therobinkim,Fix <MojiListItem/> and <BreedDropdownMenu/> not rendering when no sire selected,"This PR fixes critical bugs where `<MojiListItem/>` and `<BreedDropdownMenu/>` did not render properly when the logged in user did not have any sires selected.
+
+Once this PR is approved, PR #115 should be approved as well.
+PR #99 was previously modified to target the `feat/client-breed` branch instead, so once this PR is approved and merged, PR #115 will handle bringing the changes into the `staging` branch. (Finally!)
+
+`<MojiListItem/>` is working again:
+![image](https://user-images.githubusercontent.com/7613067/44194438-a200d880-a0fb-11e8-9db4-02d546061dde.png)
+
+`<BreedDropdownMenu/>` is working again:
+![image](https://user-images.githubusercontent.com/7613067/44194448-adec9a80-a0fb-11e8-94ac-83cbd8071441.png)
+",['therobinkim'],5,2018-08-16 07:27:50,2018-08-29 02:05:39,2018-08-29 06:09:00,True,2018-08-29 02:05:39,therobinkim,dirty,False,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/113,https://github.com/hyperledger/education-cryptomoji/pull/113,delventhalz,Fix namespace typo in isValidAddress test,"Fixes #110
+
+The test that ensured isValidAddress rejected non-hex input used the wrong namespace, which meant it would reject the test address based on namespace before even looking at whether or not it was hex.
+
+_To test:_
+
+```bash
+cd code/part-two/processor/
+npm install
+npm test
+```
+
+All of the tests should pass. Then, if you modify line 121 of `code/part-two/processor/services/addressing.js` so it reads:
+
+```javascript
+  const pattern = `^${NAMESPACE}[0-9a-z]{64}$`;
+```
+
+The tests should fail correctly. Previously this error would have snuck past the tests.",['delventhalz'],1,2018-08-11 14:40:01,2018-08-15 17:54:31,2018-09-14 15:49:12,True,2018-08-15 17:54:31,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/112,https://github.com/hyperledger/education-cryptomoji/pull/112,delventhalz,Add expect for previousHash to addBlock test,"Fixes #96
+
+Ensures that students set the previousHash properly when adding blocks to the blockchain. Previously this was not checked.
+
+_To test:_
+
+```bash
+cd code/part-one/
+npm install
+npm test
+```
+
+These tests should all pass. Then if you modify line 140 of `code/part-one/blockchain.js` so it reads:
+
+```javascript
+    const block = new Block(transactions, this.getHeadBlock().previousHash);
+```
+
+This is an error, and if you run `npm test` again, it should be caught by the tests. Previously it would have been missed.",['delventhalz'],1,2018-08-11 14:20:45,2018-08-15 17:03:36,2018-09-14 15:42:50,True,2018-08-15 17:03:36,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/111,https://github.com/hyperledger/education-cryptomoji/pull/111,harshpatel,Add collab with Hack Reactor to README,"
+We will be using this link to send to students to optionally go through the course. As such, I'd love to add a shoutout/collab with Hack Reactor so that students feel a welcoming sense as they land on the sprint. ",['harshpatel'],1,2018-07-30 16:08:15,2018-07-30 18:12:56,2018-07-30 18:13:06,True,2018-07-30 18:12:56,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/109,https://github.com/hyperledger/education-cryptomoji/pull/109,delventhalz,Fix links to lecture videos in READMEs,"The lectures use a `.mp4` extension, not the `.m4v` extension.
+
+Thanks to @schaeferCode for finding this one.",['delventhalz'],1,2018-07-27 19:36:04,2018-07-27 19:50:16,2018-09-14 15:49:12,True,2018-07-27 19:50:16,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/108,https://github.com/hyperledger/education-cryptomoji/pull/108,ScottRudiger,Fix grammar in part-two client README,Signed-off-by: Scott Rudiger <scottrudiger@gmail.com>,[],1,2018-07-20 06:34:15,2018-07-24 14:09:18,2018-07-24 14:09:18,True,2018-07-24 14:09:18,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/107,https://github.com/hyperledger/education-cryptomoji/pull/107,ScottRudiger,Fix grammar in part-two client README,,[],1,2018-07-20 06:31:34,2018-07-20 06:32:12,2018-07-20 06:32:12,False,,,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/106,https://github.com/hyperledger/education-cryptomoji/pull/106,delventhalz,Add video lectures to the repo!,,['delventhalz'],4,2018-07-19 02:40:58,2018-07-26 12:30:14,2018-09-14 15:49:14,True,2018-07-26 12:30:14,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/104,https://github.com/hyperledger/education-cryptomoji/pull/104,ScottRudiger,test(signing): fix for Invalid Chai property 'hexString',"This might be more of an issue than a PR, but for every `should return a hex string` test I kept getting `Invalid Chai property: 'hexString'`.
+
+The proposed regex solves the problem for me, but it's possible I was doing something wrong and the tests are fine.",[],1,2018-07-01 22:19:51,2018-07-02 03:33:40,2018-07-09 12:22:33,False,,,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/103,https://github.com/hyperledger/education-cryptomoji/pull/103,therobinkim,Fix publish script,"Fixes #102.
+
+This PR requires a little work to test as the changes in the PR actually rely on the current status of `hyperledger:staging` (and until this PR is merged... the changes won't be on `hyperledger:staging`).
+
+So, I've tested it out on my own fork! Here are the commits that the script produced:
+* problemified: https://github.com/therobinkim/education-cryptomoji/commit/4a83e2eb8a391160760276372ee040fb179f1516
+* solutionified: https://github.com/therobinkim/education-cryptomoji/commit/146103524c3065f10dbba0efb336e71f2d3cbdb7
+
+We will be able to more accurately test this PR once it's been merged (which is a bit unfortunate).",['therobinkim'],1,2018-06-28 20:21:56,2018-07-12 19:02:17,2018-08-16 08:37:48,True,2018-07-12 19:02:16,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/101,https://github.com/hyperledger/education-cryptomoji/pull/101,delventhalz,Fix try/catch failure in TP,"By the time the function executes, the closure `handler.apply` has been reassigned, resulting in an infinite loop. This commit fixes that bug.
+
+Fixes #100",['delventhalz'],1,2018-06-28 03:34:08,2018-06-28 18:33:43,2018-09-14 15:49:12,True,2018-06-28 18:33:43,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/99,https://github.com/hyperledger/education-cryptomoji/pull/99,therobinkim,Client: Allow users to breed moji,"~This PR is not yet ready for review.~
+This PR is ready for review as of July 3.
+
+Closes #68, closes #43, closes #98.",['therobinkim'],12,2018-06-28 01:56:16,2018-08-16 06:30:35,2018-08-16 06:30:35,True,2018-08-16 06:30:35,therobinkim,dirty,False,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/97,https://github.com/hyperledger/education-cryptomoji/pull/97,delventhalz,Add lecture slides to teaching directory,,['delventhalz'],1,2018-06-24 03:56:22,2018-07-07 02:11:07,2018-09-14 15:49:11,True,2018-07-07 02:11:07,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/93,https://github.com/hyperledger/education-cryptomoji/pull/93,chenette,"Fix typos, punctuation, & grammar (plus some rewording)",Includes minor wording changes for clarity and consistency.,"['delventhalz', 'chenette']",2,2018-06-19 03:11:29,2018-07-12 16:52:50,2018-07-12 17:04:04,True,2018-07-12 16:52:50,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/92,https://github.com/hyperledger/education-cryptomoji/pull/92,delventhalz,Fix lowercase solution code tags,"Some solution code tags were erroneously lower case, which caused problems generating solution/problem code.",['delventhalz'],1,2018-06-13 17:59:10,2018-06-13 18:03:02,2018-09-14 15:35:27,True,2018-06-13 18:03:02,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/91,https://github.com/hyperledger/education-cryptomoji/pull/91,therobinkim,Client: Allow users to select/view sires,"~This PR is still in progress and not ready to be reviewed yet.~
+PR is ready to be reviewed as of June 25!
+
+Closes #73.
+
+Addresses part of #43. (Unable to view all sires yet. This feature will be addressed via a separate PR.)","['therobinkim', 'taylorpage']",9,2018-06-12 23:29:08,2018-06-28 01:54:21,2018-08-16 08:35:59,True,2018-06-28 01:54:21,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/90,https://github.com/hyperledger/education-cryptomoji/pull/90,delventhalz,Updates to documentation for clarity and correctness,"Includes a number of doc and docstring fixes, as well as some slight code clean up.",['delventhalz'],7,2018-06-10 05:11:14,2018-06-13 17:29:51,2018-09-14 15:49:12,True,2018-06-13 17:29:51,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/89,https://github.com/hyperledger/education-cryptomoji/pull/89,therobinkim,Add Bootstrap to client frontend,"In addition to adding Bootstrap, this PR also:
+
+* refactors nav bar into its own component
+* renames `<SignupLogin />` to `<Auth />` (including related frontend React Router routes)
+
+Closes #72",['therobinkim'],7,2018-06-09 18:44:43,2018-06-12 03:18:01,2018-08-16 08:34:54,True,2018-06-12 03:18:01,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/87,https://github.com/hyperledger/education-cryptomoji/pull/87,delventhalz,Fix a placeholder link in Contributing and tweak wording,,['delventhalz'],1,2018-05-24 17:16:21,2018-05-28 21:21:08,2018-09-14 15:49:11,True,2018-05-28 21:21:08,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/84,https://github.com/hyperledger/education-cryptomoji/pull/84,delventhalz,Add READMEs,"Adds READMEs to:
+- `/`
+- `code/part-one/`
+- `code/part-two/`
+- `code/part-two/client`
+- `code/part-two/processor`
+
+The READMEs should provide enough information (with docstrings and linked curriculum) for enterprising testers to attempt the sprint. Eventually video lectures and slides will be added to better supplement this information.
+
+The PR needs to get merged ASAP. So please focus on doing a quick review for egregious typos or confusing passages. Feel free to make a note of more nitpicky stuff, but this needs to be merged by Friday afternoon or we lose Memorial Day weekend for testing.
+
+Closes #78 ",['delventhalz'],6,2018-05-24 10:18:10,2018-05-25 15:54:37,2018-09-14 15:49:11,True,2018-05-25 15:54:37,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/80,https://github.com/hyperledger/education-cryptomoji/pull/80,delventhalz,Add scripts for publishing a problemified repo,"~Built on top of #79, only the last three commits are new to this PR~
+
+This PR includes two scripts.
+
+- _bin/problemify_: modifies the code in place, turning it either into solution code or problem code
+- _bin/publish_: pulls the latest commits from `upstream staging`, and pushes problemified versions to `upstream master` and `upstream solution`
+
+The basic workflow is this:
+- Once This PR is merged, I will create solution and staging branches upstream
+- All future PRs will be made against staging, not master
+- Include problemify-style comments in your code to designate solution vs problem sections
+- Periodically (such as after merging new PRs into staging) run `bin/publish`
+
+Problemify syntax:
+```javascript
+/* SOLUTION FILE */
+const fs = require('fs');
+...
+```
+^ This entire file should _only_ be included in the solution branch. It will be deleted from master. The opposite (though probably not useful) is `/* PROBLEM FILE */`.
+
+```javascript
+const hello = name => {
+  /* START PROBLEM
+  // Your code here
+
+  END PROBLEM */
+  // START SOLUTION
+  console.log(`Hello, ${name}`);
+  // END SOLUTION
+};
+```
+
+^ This function will be empty save a comment (""Your code here"") on master, and completed on solution. Note that _all_ of the problemify syntax comments will be deleted from both branches.
+
+Also note that this script errs on the side of caution. You most enter these comments exactly as written above (all caps) or they will be missed.
+
+Examples:
+- https://github.com/delventhalz/education-cryptomoji/blob/problemify-repo/code/part-two/processor/actions/create_collection.js#L1
+- https://github.com/delventhalz/education-cryptomoji/blob/problemify-repo/code/part-two/processor/services/encoding.js#L43",['delventhalz'],4,2018-05-16 14:50:28,2018-05-24 16:33:02,2018-09-14 15:49:12,True,2018-05-24 16:33:02,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/79,https://github.com/hyperledger/education-cryptomoji/pull/79,delventhalz,Finalize part two,"~Based on #74, only the commits from `e0cf623 Remove utils modules from part-two/client` are new to this PR.~
+
+Closes #76 
+
+Another big PR. No real functional changes, but a lot of structural ones:
+- docstrings are everywhere, and in more or less their final state
+- there are problemify-style solution/problem comments throughout
+- processor utils are now ""services"", and there is no generic ""helpers"" or ""constants""
+- added tests for the processor services
+-the solution code has been rejiggered a bit to be more straight forward for students, especially in the processor
+
+To run tests:
+
+```bash
+cd code/part-two/client
+npm test
+```
+
+```bash
+cd code/part-two/processor
+npm test
+```
+
+To run the components:
+
+```bash
+cd code/part-two
+docker-compose up
+```",['delventhalz'],28,2018-05-15 14:40:58,2018-05-22 03:40:16,2018-09-14 15:49:11,True,2018-05-22 03:40:16,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/74,https://github.com/hyperledger/education-cryptomoji/pull/74,delventhalz,Finalize part one,"Closes #75 
+
+A big PR. The soul of the original part-one code is still there, but much of the actual code has been shuffled around. This includes some quality-of-life improvements like expanding docstrings, tweaking tests, etc, but also includes some major functionality changes:
+
+- part-one now has a signing module
+- the signing module for both parts use the `secp256k1` module directly as Sawtooth signing SDK is a little convoluted, and we don't want to introduce it in part-one (the the modules should match)
+- transactions now get signed
+- all validation functionality has been moved to a separate module
+- all mining functionality has been moved to a separate extra credit module
+
+One notable thing _not_ in this PR: an updated README for part-one. These will be updated once the learning materials are finalized.
+
+To test, remove `.skip` from line 14 of `code/part-one/tests/04-ExtraCredit-Mining.js`, then run:
+```bash
+cd code/part-one/
+npm test
+```",['delventhalz'],30,2018-05-13 02:37:30,2018-05-20 05:18:18,2018-09-14 15:49:11,True,2018-05-20 05:18:18,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/71,https://github.com/hyperledger/education-cryptomoji/pull/71,therobinkim,Allow clients to create/view their own collections,Closes #41.,['therobinkim'],7,2018-05-08 05:15:54,2018-05-12 17:59:56,2018-08-16 08:34:14,True,2018-05-12 17:59:56,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/70,https://github.com/hyperledger/education-cryptomoji/pull/70,taylorpage,Create sign up and login component,Creation of a new component that allows users to login using their current private key or the ability to generate a new private and public key for a new account. The private and public key are moved from the current component to the App component for the ability of use in other components. The app component now displays the public key as well as a logout button that removes the keys from state as well as local storage.,['taylorpage'],13,2018-05-05 22:15:41,2018-05-08 04:19:00,2018-05-08 05:26:58,True,2018-05-08 04:19:00,taylorpage,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/69,https://github.com/hyperledger/education-cryptomoji/pull/69,delventhalz,Refactor client services and add tests,"A significant rewrite of client services API in order to better accommodate testing, and with a mind towards student implementation. Includes complete test coverage for all modules students will be expected to implement (plus the signing module will be pre-filled out).
+
+Test these modules with `npm test`.
+
+There are currently no tests for the requests module, and likely won't be any (it won't be provided as stub functions to students). You can test it pretty easily by starting up the components with `docker-compose up`, and then pasting the following code into `client/source/index.jsx` and loading `localhost:8000` in your browser:
+
+```javascript
+import { createKeys } from './services/signing.js'
+import * as reqs from './services/requests.js'
+
+const { privateKey, publicKey } = createKeys()
+console.log('PUBLIC KEY:', publicKey)
+let myMoji = null
+
+reqs.submitPayloads(privateKey, { action: 'CREATE_COLLECTION' })
+  .then(() => reqs.submitPayloads(createKeys().privateKey, { action: 'CREATE_COLLECTION' }))
+  .then(() => reqs.getCollections())
+  .then(collections => console.log('COLLECTIONS:', collections))
+  .then(() => reqs.getCollections(publicKey))
+  .then(collection => console.log('COLLECTION:', collection))
+  .then(() => reqs.getMoji())
+  .then(moji => console.log('MOJI:', moji))
+  .then(() => reqs.getMoji(publicKey))
+  .then(moji => {
+    myMoji = moji
+    console.log('MY MOJI:', moji)
+  })
+  .then(() => reqs.getMoji(publicKey, myMoji[0].dna))
+  .then(moji => console.log('ONE MOJI:', moji))
+  .then(() => reqs.submitPayloads(privateKey, { action: 'SELECT_SIRE', sire: myMoji[0].address }))
+  .then(() => reqs.getSires())
+  .then(sires => console.log('SIRES:', sires))
+  .then(() => reqs.getSires(publicKey))
+  .then(sire => console.log('SIRE:', sire))
+  .then(() => reqs.submitPayloads(privateKey, { action: 'CREATE_OFFER', moji: [myMoji[1].address] }))
+  .then(() => reqs.getOffers())
+  .then(offers => console.log('OFFERS:', offers))
+  .then(() => reqs.getOffers(publicKey))
+  .then(offers => console.log('MY OFFERS:', offers))
+  .then(moji => reqs.getOffers(publicKey, [myMoji[1].address]))
+  .then(offer => console.log('ONE OFFER:', offer))
+  .catch(err => console.log(err.response ? err.response.data.error : err))
+```",['delventhalz'],35,2018-04-30 06:22:08,2018-05-05 18:19:46,2018-09-14 15:49:10,True,2018-05-05 18:19:46,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/67,https://github.com/hyperledger/education-cryptomoji/pull/67,therobinkim,Replace dummy data,"Refactors frontend routes from `/browse/:address` to:
+
+* `/moji/:address`
+* `/collection/:publicKey`
+* `/offer/:address`
+
+Also allows for viewing of all collections at `/collection/` and all offers at `/offer`.
+
+This PR does not allow for the creation of collections, offers (and responses to offers), selection of sires, or breeding of emoji.
+
+Closes #52.",['therobinkim'],16,2018-04-28 16:39:39,2018-05-03 18:19:35,2018-08-16 08:34:23,True,2018-05-03 18:19:35,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/59,https://github.com/hyperledger/education-cryptomoji/pull/59,delventhalz,Fix Apache redirecting away from bundle.js,"Apache is erroneously redirecting bundle.js to index.html, making it impossible to load the web app. This fixes that problem.
+
+Test by running `docker-compose up --build`, and then attempting the following:
+
+_Curl commands_
+- `curl localhost:8000`
+- `curl localhost:8000/bundle.js`
+- `curl localhost:8000/api/blocks`
+
+_URLs in browser_
+- `http://localhost:8000`
+- `http://localhost:8000/api/blocks`",['delventhalz'],1,2018-04-24 18:51:34,2018-04-24 18:57:49,2018-09-14 15:49:12,True,2018-04-24 18:57:49,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/58,https://github.com/hyperledger/education-cryptomoji/pull/58,therobinkim,Creates parseAddress client module,"This module will help the React frontend determine whether it should render a `<Collection />`, `<Moji />`, `<Offer />`, etc component.
+
+I also refactored a bunch of the constants.
+
+NOTE: I'm making this PR a little early before I've had a chance to test the code. In fact, I couldn't think of a quick way to the test the code (as I can't just run `node` and then `require('./parseDna')` from within the Node REPL as Node keeps recognizing `import` as a syntax error..), so I'm open to suggestions!
+
+Also, do we want to refactor the constants out even further such that they're stored in one place, and both the `/client` and `/processor` pull constants from the same place?",['therobinkim'],6,2018-04-18 15:01:33,2018-04-24 21:23:08,2018-06-28 19:02:42,True,2018-04-24 21:23:08,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/55,https://github.com/hyperledger/education-cryptomoji/pull/55,delventhalz,Implement ACCEPT_RESPONSE action,"~The PR is based on PRs #50, #53, and #54. Only the last three commits should be considered for review purposes.~
+
+Implements the ACCEPT_RESPONSE action, completing the transaction processor functionality, including tests for each feature. Test by running `npm test` from the processor directory.
+
+Closes #20 ",['delventhalz'],3,2018-04-16 20:37:28,2018-04-30 09:22:29,2018-09-14 15:49:13,True,2018-04-30 09:22:28,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/54,https://github.com/hyperledger/education-cryptomoji/pull/54,delventhalz,Implement ADD_RESPONSE action,"Based on #50 and #53, only the last three commits are a part of this PR.
+
+Adds tests for and implements the ADD_RESPONSE action. Tests can be be run with `npm test` from the processor directory.
+
+Closes #19 ",['delventhalz'],3,2018-04-16 03:59:19,2018-04-17 02:48:43,2018-09-14 15:49:13,True,2018-04-17 02:48:43,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/53,https://github.com/hyperledger/education-cryptomoji/pull/53,delventhalz,Implement CANCEL_OFFER action,"Based off of PR #49 and PR #50, only the last three commits are a part of this PR for review purposes.
+
+Implements the CANCEL_OFFER action, with tests. 
+
+Closes #18 
+
+### Run Tests
+```bash
+cd code/part-two/processor/
+npm test
+```
+
+### Manually Test
+Follow the steps in PR #50, as far as creating a collection. Then copy the offer address from state:
+```bash
+curl localhost:8000/api/state
+```
+
+And paste it into your Node REPL:
+
+```javascript
+submit({action: 'CANCEL_OFFER', moji: ['<pasteOfferAddressHere>']}).then(r => console.log(r)).catch(e => console.log(e))
+```
+
+If you query state again, you should see that there is no longer an offer in state.",['delventhalz'],3,2018-04-14 23:04:34,2018-04-17 02:46:11,2018-09-14 15:49:13,True,2018-04-17 02:46:11,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/51,https://github.com/hyperledger/education-cryptomoji/pull/51,therobinkim,Add Offer(s) and Response(s) views that work with dummy data,"Users cannot yet respond to offers nor accept/reject responses.
+
+Signed-off-by: Robin Kim <therobinkim@gmail.com>",['therobinkim'],1,2018-04-14 17:00:17,2018-04-14 20:14:47,2018-08-16 08:34:36,True,2018-04-14 20:14:47,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/50,https://github.com/hyperledger/education-cryptomoji/pull/50,delventhalz,Implement CREATE_OFFER action,"~Based off of PR #48 and PR #49, only the last two commits are a part of this PR for review purposes.~
+
+Implements the CREATE_OFFER action, with tests. 
+
+Closes #17 
+
+### Run Tests
+```bash
+cd code/part-two/processor/
+npm test
+```
+
+### Manually Test
+Follow the steps in PR #48, as far as creating a collection. Then copy a moji address from state:
+```bash
+curl localhost:8000/api/state
+```
+
+And paste it into your Node REPL:
+
+```javascript
+submit({action: 'CREATE_OFFER', moji: ['<pasteMojiAddressHere>']}).then(r => console.log(r)).catch(e => console.log(e))
+```
+
+If you query state again, you should see that there is an offer in state with an address beginning with `5f4d7602`. If you decode the data, you should see that it lists the public key of its owner, and address of the moji being offered:
+```javascript
+Buffer.from('<pasteDataStringHere>', 'base64').toString()
+```",['delventhalz'],3,2018-04-14 16:22:44,2018-04-17 02:44:38,2018-09-14 15:49:13,True,2018-04-17 02:44:38,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/49,https://github.com/hyperledger/education-cryptomoji/pull/49,delventhalz,Implement BREED_MOJI action,"~Based on PR #48, only the last two commits are actually a part of this PR.~
+
+Allows you to breed two cryptomoji.
+
+Closes #16 
+
+### Run Tests
+```bash
+cd code/part-two/processor/
+npm test
+```
+
+### Manually Test
+Follow the steps in PR #48, then from your Node REPL:
+
+```javascript
+const keys2 = createKeys()
+const submit2 = getSubmitter(keys2.privateKey)
+submit2({action: 'CREATE_COLLECTION'}).then(r => console.log(r)).catch(e => console.log(e))
+```
+
+Then check state for the address of one of new collection's moji:
+```bash
+curl localhost:8000/api/state
+```
+
+Then, using that address, and the address of the moji you already selected as a sire:
+```javascript
+submit2({action: 'BREED_MOJI', sire: '<pasteAddressHere>', breeder: '<pasteBreederAddressHere>'}).then(r => console.log(r)).catch(e => console.log(e))
+```
+
+If you query state again, you should see that the new collection now has four moji. If you decode the state of that moji, you should see that it lists the address of its sire and breeder:
+```javascript
+Buffer.from('<pasteDataStringHere>', 'base64').toString()
+```",['delventhalz'],3,2018-04-14 05:39:39,2018-04-16 02:44:45,2018-09-14 15:49:13,True,2018-04-16 02:44:45,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/48,https://github.com/hyperledger/education-cryptomoji/pull/48,delventhalz,Implement SELECT_SIRE action,"Includes some bug fixes, and an update to npm 5.8 as well. Adds new tests for the SELECT_SIRE action and implements it.
+
+Closes #15 
+
+### Run Tests
+```bash
+cd code/part-two/processor/
+npm test
+```
+
+### Manually Test
+
+Modify `code/part-two/client/source/services/transactions.js`:
+- Replace `import` with `const`
+- Replace `from 'XXXX';` with `= require('XXXX');`
+- Remove `export`
+- Add `module.exports = { createKeys, getSubmitter };`
+
+Now from the terminal:
+```bash
+cd code/part-two/processor/
+npm install
+node
+```
+
+Now, from the node REPL:
+```javascript
+const { createKeys, getSubmitter } = require('./source/services/transactions')
+const keys = createKeys()
+const submit = getSubmitter(keys.privateKey)
+submit({action: 'CREATE_COLLECTION'}).then(r => console.log(r)).catch(e => console.log(e))
+```
+
+Now, in a separate terminal run:
+```bash
+curl localhost:8000/api/state
+```
+
+Copy one of the moji addresses (they begin with `5f4d7601`), and paste it into this command back in the node REPL:
+```javascript
+submit({action: 'SELECT_SIRE', sire: '<pasteAddressHere>'}).then(r => console.log(r)).catch(e => console.log(e))
+```
+
+Go back to your other tab and curl state again:
+```bash
+curl localhost:8000/api/state
+```
+
+You should now see a sire listing with an address beginning with `5f4d7603`. You can decode the data by copying it into the Node REPL if you like:
+```javascript
+Buffer.from('<pasteDataStringHere>', 'base64').toString()
+```
+
+There should be an owner that matches your public key, and a sire that matches the cryptomoji address you copied in.",['delventhalz'],10,2018-04-14 00:38:34,2018-04-14 20:25:00,2018-09-14 15:49:13,True,2018-04-14 20:25:00,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/47,https://github.com/hyperledger/education-cryptomoji/pull/47,delventhalz,Add a module to parse cryptomoji DNA,"The module has a single method: `parseDna`. It takes a hexadecimal dna string and converts it into an object with two keys:
+
+- **view**: a string with the actual kaomoji characters to display
+- **tags**: an array of strings with tags associates with this cryptomoji
+
+Closes #13 ",['delventhalz'],5,2018-04-08 02:44:59,2018-04-10 20:54:55,2018-04-10 21:11:46,True,2018-04-10 20:54:55,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/39,https://github.com/hyperledger/education-cryptomoji/pull/39,delventhalz,Add client services for reading state and submitting transactions ,"Closes #22. Adds two modules to assist the client in interacting with the Sawtooth blockchain:
+
+## services/requests
+
+Includes four methods for fetching state. Each operates in a vaguely RESTful manner, retrieving all resources if no identifier is passed in, or one specific resource if there is an id. All are Promise based.
+
+### Methods:
+
+#### getCollections
+
+- **getCollections()** - fetch all collections
+- **getCollections(publicKey)** - fetch one collection
+
+#### getMoji
+
+- **getMoji()** - fetch all moji
+- **getMoji(address)** - fetch one moji
+- **getMoji({ owner: publicKey })** - fetch all moji owned by one collection
+- **getMoji({ owner: publicKey, dna: dnaString })** - fetch one moji
+
+#### getOffers
+
+- **getOffers()** - fetch all offers
+- **getOffers(address)** - fetch one offers
+- **getOffers({ owner: publicKey })** - fetch all offers owned by one collection
+- **getOffers({ owner: publicKey, moji: [addressesOrDna] })** - fetch one offer
+
+#### getSires
+
+- **getSires()** - fetch all sires (returns whole moji, not just address)
+- **getSires(publicKey)** - fetch the sire belonging to a particular owner
+
+## services/transactions
+
+Has three methods which can be used to build and submit transactions.
+
+### Methods
+
+#### createKeys()
+
+Creates a new private/public key pair, and returns them in an object with the keys `privateKey` and `publicKey`. Both are represented as hexadecimal strings.
+
+#### getPublicKey(privateKey)
+
+Takes a private key as a hex string, and returns its public key, also as a hex string.
+
+#### getSubmitter(privateKey)
+
+Takes a private key and returns a function which can be used to submit transactions. This function accepts two parameters. First, the payload or payloads you are going to submit (an object or an array of objects). The second is an optional boolean, specifying whether the returned Promise should wait to resolve until the transaction(s) are committed. It defaults to true.
+
+### Example
+
+```javascript
+const { privateKey, publicKey } = transactions.createKeys();
+
+const submit = transactions.getSubmitter(privateKey);
+
+submit({ action: 'CREATE_COLLECTION' })
+  .then(() => requests.getCollections(publicKey)
+  .then(myCollection => console.log(myCollection)
+```
+
+## Testing
+
+I am not entirely sure how ES6 modules get plugged into the front end yet, so there is probably an easier way to test it, but I tested these files with Node. This required making some modifications:
+
+- `import XXXX from YYYY;` -> `const XXXX = require(YYYY);`
+- `api/XXXX` -> `http://localhost:8000/api/XXXX`
+- `export` -> delete 
+- add all exported functions to Node exports: `module.exports = { XXXX, YYYY };`
+
+Once you make those swaps, you can:
+
+```bash
+cd code/part-two/
+docker-compose up --build
+```
+
+Then in a new tab:
+
+```bash
+cd client/
+npm install
+node
+```
+
+Then from the node console:
+
+```javascript
+const requests = require('./source/services/requests');
+const transactions = require('./source/services/transactions');
+```
+
+Then you can mess around with the two services to your heart's content. Keep in mind you won't be able to successfully send any transactions other than create collection, or fetch any data other than collections because the TP doesn't have those features yet. Once PR #37 is merged, you will be able to fetch Moji data as well.",['delventhalz'],11,2018-04-07 13:48:57,2018-04-07 19:00:55,2018-09-14 15:49:11,True,2018-04-07 19:00:55,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/38,https://github.com/hyperledger/education-cryptomoji/pull/38,therobinkim,Simplify React frontend,"This is a follow up to #35.
+
+The big changes are:
+* Upgrade from React 16.2 to React 16.13.1 to take advantage of the new lifecycle methods like `static getDerivedPropsFromState()` (and not use soon-to-be-deprecated lifecycle methods like `componentWillReceiveProps()`). https://medium.com/@baphemot/whats-new-in-react-16-3-d2c9b7b6193b
+* `<BrowserRouter />` is being used instead of `<HashRouter />` from React Router 4 now.
+* You can ONLY see a collection or ONLY see the details of a moji, but not BOTH at the same time. Why? Just to keep the code & cognitive overhead easier/simpler.
+* `<MojiDetails />` component has been renamed to `<Moji />`.
+* `<Browse />` component has been created, and it determines whether `<Collection />` component or `<Moji />` component is rendered. (It will soon have the option to display the upcoming `<Offer />` component.
+
+What's not changed:
+* `live-server` is still used bc it's working fine for me, and I didn't want to slow myself down during this curriculum development phase. Happy to get rid of it later.",['therobinkim'],4,2018-04-07 01:46:30,2018-04-12 21:13:46,2018-08-16 08:34:36,True,2018-04-12 21:13:46,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/37,https://github.com/hyperledger/education-cryptomoji/pull/37,delventhalz,Add Moji Creation to CREATE_COLLECTION action,"Unfortunately, neither the BlockInfo transaction family, nor the BatchInjector API is usable without hacks, making it inappropriate for a curriculum for novice engineers. This is disappointing, but an opportunity to remove some complexity from the app. 
+
+This means that Cryptomoji will no longer be created by the block publisher and distributed by lottery. Instead, each collection will get three Cryptomoji at signup. Furthermore, there will be no limit to how often moji may be bred or sired.
+
+This PR adds the Moji creation part of that functionality. It can be tested with `npm test`, or by using the same `submit.js` script detailed in PR #32.
+
+Closes #11 
+Closes #12  
+",['delventhalz'],4,2018-04-02 06:24:30,2018-04-07 17:55:47,2018-09-14 15:49:11,True,2018-04-07 17:55:46,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/36,https://github.com/hyperledger/education-cryptomoji/pull/36,taylorpage,Add tests for intro app,"Add tests for the intro app classes and refactor based on comments from previous pull request
+
+Closes #34",['taylorpage'],9,2018-03-31 03:58:15,2018-05-05 16:28:28,2018-05-05 16:28:28,True,2018-05-05 16:28:28,taylorpage,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/35,https://github.com/hyperledger/education-cryptomoji/pull/35,therobinkim,Set up React hello world frontend,"More than happy to target this pull request to a separate branch, make corrections based on feedback, and/or hand off what I have so far. I won't be able to make any changes until Saturday late morning.
+
+![image](https://user-images.githubusercontent.com/7613067/38135200-77c6723c-33dc-11e8-882f-bde2a30c13b8.png)
+
+What works so far (all with dummy data):
+
+* User types in a collection address and sees a list of moji addresses that belong to that collection.
+* User clicks on a moji address and sees all available information about that specific moji.
+* User refreshes/closes-and-reopens the browser at the URL they're at when they're browsing the dummy data collection and mojis, and they will return to the same rendered view.
+
+The dependencies currently installed are:
+
+* React 16.3
+* React Router 4.2.2
+* Webpack 4
+
+Some more details:
+
+* React Router v4 `<HashRouter>` is currently used instead of `<BrowserRouter>` as `live-server`'s refreshes were resulting in 404 (?) errors with `<BrowserRouter>`. Everything works fine with `<HashRouter>`.
+* Redux is not being used yet.
+* Webpack 4 is set up with a bare minimal configuration.
+
+Closes #26 ",['therobinkim'],6,2018-03-30 10:46:00,2018-04-07 01:34:52,2018-04-07 01:34:52,True,2018-04-07 01:34:52,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/33,https://github.com/hyperledger/education-cryptomoji/pull/33,lsavage92,Update intro app,"Update the introductory blockchain application
+- Added a Transaction class
+- Mine pending transactions into blocks instead of generic data hash
+- Ability to look up address balances
+- Update comments to reflect these changes
+
+Closes #25 ",[],9,2018-03-20 22:41:32,2018-03-31 01:44:32,2018-03-31 03:54:24,True,2018-03-31 01:44:32,taylorpage,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/32,https://github.com/hyperledger/education-cryptomoji/pull/32,delventhalz,Add Create Collection to TP w/tests,"The TP now handles its first action: `CREATE_COLLECTION`. This can be tested with the included unit tests, run from `code/part-two/processor/` by using the command:
+```
+`npm test`
+```
+
+Closes #10 
+
+----------
+
+A full integration test is a little tougher. Nothing automated yet, maybe not ever (would be Docker based, perhaps not HR friendly). It can be done manually, but it's not for the faint of heart. Read on if you want to put your transaction processor through to the test for realsies.
+
+From the `code/part-two` directory, start up the docker components:
+```
+docker-compose up
+```
+
+Now navigate to the `processor/` directory, and install the dependencies if you haven't already:
+```
+cd processor/
+npm install
+```
+
+Now. Create a file called `submit.js`. It should look something like this:
+```
+'use strict';
+
+const createHash = require('crypto').createHash;
+const request = require('request');
+const secp256k1 = require('sawtooth-sdk/signing/secp256k1');
+const proto = require('sawtooth-sdk/protobuf');
+const { FAMILY_NAME, FAMILY_VERSION, NAMESPACE } = require('./utils/constants');
+const { encode } = require('./utils/helpers');
+
+const API_URL = 'http://localhost:8008/batches';
+const context = new secp256k1.Secp256k1Context();
+const privateKey = context.newRandomPrivateKey();
+const publicKeyHex = context.getPublicKey(privateKey).asHex();
+
+console.log('PUBLIC KEY:', publicKeyHex);
+
+const createTxn = encodedPayload => {
+  const header = proto.TransactionHeader.encode({
+    signerPublicKey: publicKeyHex,
+    batcherPublicKey: publicKeyHex,
+    familyName: FAMILY_NAME,
+    familyVersion: FAMILY_VERSION,
+    inputs: [NAMESPACE],
+    outputs: [NAMESPACE],
+    nonce: (Math.random() * 10 ** 18).toString(36),
+    payloadSha512: createHash('sha512').update(encodedPayload).digest('hex')
+  }).finish();
+
+  return proto.Transaction.create({
+    header,
+    payload: encodedPayload,
+    headerSignature: context.sign(header, privateKey)
+  });
+};
+
+const createBatch = txns => {
+  if (!Array.isArray(txns)) txns = [ txns ];
+
+  const header = proto.BatchHeader.encode({
+    signerPublicKey: publicKeyHex,
+    transactionIds: txns.map(txn => txn.headerSignature)
+  }).finish();
+
+  return proto.Batch.create({
+    header,
+    headerSignature: context.sign(header, privateKey),
+    transactions: txns
+  });
+};
+
+const encodeBatches = batches => {
+  if (!Array.isArray(batches)) batches = [ batches ];
+  return proto.BatchList.encode({ batches }).finish();
+};
+
+const postBatchList = batchList => {
+  return new Promise((resolve, reject) => {
+    request({
+      url: API_URL,
+      method: 'POST',
+      body: batchList,
+      headers: { 'Content-Type': 'application/octet-stream' }
+    }, (err, response) => {
+      if (err) return reject(err);
+      resolve(JSON.parse(response.body));
+    });
+  });
+};
+
+const submitPayload = payload => {
+  const encoded = encode(payload);
+  const txn = createTxn(encoded);
+  const batch = createBatch(txn);
+  const batchList = encodeBatches(batch);
+  return postBatchList(batchList);
+};
+
+submitPayload({action: 'CREATE_COLLECTION'})
+  .then(res => console.log('RESPONSE:\n', res))
+  .catch(err => console.log('ERROR:\n', err));
+```
+
+Now install request, but don't save it:
+```
+npm install request --no-save
+```
+
+Run the script:
+```
+node submit.js
+```
+
+You should see a JSON response with a link. You can curl it:
+```
+curl http://localhost:8008/batch_statuses?id=fd9007b3f2896930281064b9445a61b7fe908707ff0f2b64ab87677ac342f91977c0ea5d167da8e8226281571eb79fce6845254650b8934c7c1abf09cbcb0477
+```
+
+You should see that the transaction is committed. You could also check state:
+```
+curl localhost:8008/state
+```
+
+You should see an entry with the `5f4d76` prefix in its address. For one final trick, copy the data, and start the node REPL:
+```
+node
+```
+
+And then copy and paste that data string into a Buffer to decode it:
+```
+Buffer.from(""eyJrZXkiOiIwMjZlMjRlOTNiZWVlYzE0MTgwOWZjMThhY2IxZTczZmQ0NDY1NGI0N2VjOTNiOGJjZmYxNDg5YmM4ZGU4MWI1N2QiLCJtb2ppIjpbXX0="", 'base64').toString()
+```
+
+You should see a JSON string with your public key and an empty moji array.",['delventhalz'],8,2018-03-19 06:10:42,2018-03-23 05:49:07,2018-09-14 15:49:13,True,2018-03-23 05:49:07,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/31,https://github.com/hyperledger/education-cryptomoji/pull/31,ryjones,Remove spurious files,"Update readme to correct project name
+
+Signed-off-by: Ry Jones <ry@walledcity.org>",[],1,2018-03-18 05:05:35,2018-03-18 19:15:06,2018-03-18 19:15:06,True,2018-03-18 19:15:05,ryjones,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/30,https://github.com/hyperledger/education-cryptomoji/pull/30,delventhalz,"Remove .DS_Store, update .gitignore",Remove `.DS_Store` and update `.gitignore` with some commonly ignored files.,['delventhalz'],2,2018-03-17 17:50:32,2018-03-18 15:32:09,2018-09-14 15:49:12,True,2018-03-18 15:32:09,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/29,https://github.com/hyperledger/education-cryptomoji/pull/29,delventhalz,Update Contributing Guide to only require one approval,"With the size of team we have, I think two approvals is unlikely, and I'd like to officially reduce it to one.",['delventhalz'],1,2018-03-17 13:53:24,2018-03-17 17:20:59,2018-09-14 15:49:11,True,2018-03-17 17:20:59,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/28,https://github.com/hyperledger/education-cryptomoji/pull/28,delventhalz,Add basic docker compose structure and components,"The PR puts the components in place to run the cryptomoji app, including the Sawtooth validator and REST API, as well as Dockerfiles for the custom client and transaction processor. After installing docker, simply `cd code/part-two/` and then `docker-compose up`. Full instructions are included in `code/part-two/README.md`.
+
+Closes #27 ",['delventhalz'],5,2018-03-10 20:54:20,2018-03-17 17:36:47,2018-03-17 17:42:17,True,2018-03-17 17:36:47,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/24,https://github.com/hyperledger/education-cryptomoji/pull/24,therobinkim,Create initial repo structure,"Git doesn't track empty directories, so I put a markdown file in each directory that I thought we would want to use. Let me know if you'd like me to rename these explanatory files to something other than `README.md` (I couldn't think of a better name). I'm also happy to modify this PR to put a single document in the root directory that explains my suggested directory structure instead of adding all of these markdown files everywhere.
+
+* `/assets` contains static assets (eg, images)
+* `/code` contains student-facing code AND solution code
+* `/reading` contains student-facing instructions
+* `/teaching` contains staff-facing instructions and materials
+
+Closes #9 .
+
+Signed-off-by: Robin Kim <therobinkim@gmail.com>",[],1,2018-03-08 17:52:41,2018-03-10 18:03:18,2018-08-16 08:34:03,True,2018-03-10 18:03:18,therobinkim,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/23,https://github.com/hyperledger/education-cryptomoji/pull/23,delventhalz,Add ESLint File,"To simplify ESLint usage, adds a JSON formatted copy of Hack Reactor's Style Guide ESLint to the root project directory.
+
+Also adds a rule for an 80-character limit, and tweaks the Readme.",['delventhalz'],2,2018-03-07 19:31:40,2018-03-11 01:44:46,2018-09-14 15:49:10,True,2018-03-11 01:44:46,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/21,https://github.com/hyperledger/education-cryptomoji/pull/21,taylorpage,Create basic blockchain sprint and solution files,"Creates a solid basis for starting the intro sprint by creating:
+- Basic blockchain constructors (block, blockchain)
+- A small sprint with comments guiding the construction of the solution
+- The sprint solution
+
+Signed-off-by: Taylor Page <jonathantaylorpage@gmail.com>",['taylorpage'],6,2018-03-07 02:06:46,2018-03-12 14:59:26,2018-05-24 23:02:22,True,2018-03-12 14:59:26,taylorpage,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/8,https://github.com/hyperledger/education-cryptomoji/pull/8,delventhalz,Add a basic contributing guide,"Adds a contributing guide to the repo to help unify future work. In particular it outlines:
+- PR workflow and acceptance criteria
+- Commit message style guide
+- JavaScript style guide
+
+Feel free to leave requests for change to any points you'd like to have further discussion on (and obviously for any typos or anything. I would love to get PR approvals from as many folks as possible for this one.",['delventhalz'],1,2018-02-26 17:59:37,2018-03-05 14:27:59,2018-09-14 15:49:11,True,2018-03-05 14:27:59,delventhalz,unknown,,closed
+education-cryptomoji,https://api.github.com/repos/hyperledger/education-cryptomoji/pulls/1,https://github.com/hyperledger/education-cryptomoji/pull/1,ryjones,Create DCO,,[],1,2018-02-15 20:34:51,2018-02-15 20:38:54,2018-02-15 20:38:54,False,,,unknown,,closed
