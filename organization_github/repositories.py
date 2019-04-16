@@ -64,11 +64,11 @@ class Repositories:
     def get_name_file_issue(self):
         return self._name_file_issue
 
-    def get_name_file_comment_issue(self):
+    def get_name_file_comments_issue(self):
         return self._name_file_comment_issue
 
     def get_name_file_pull_request(self):
         return self._name_file_pull_request
 
-    def get__name_file_comment_pull_request(self):
+    def get_name_file_comments_pull_request(self):
         return self._name_file_comment_pull_request
